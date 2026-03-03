@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samu CyberLocker</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Samu CyberLocker</h1>
+      <p>Archivio locale personale - Cybersecurity</p>
+    </header>
+
+    <main>
+      <aside id="sidebar">
+        <div class="toolbar">
+          <input id="search" type="text" placeholder="Cerca file..." />
+        </div>
+        <div id="tree"></div>
+      </aside>
+
+      <section id="viewer">
+        <div id="viewer-meta"></div>
+        <article id="content">
+          <p>Seleziona un file dal filesystem a sinistra.</p>
+        </article>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

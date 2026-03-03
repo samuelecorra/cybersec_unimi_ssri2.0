@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="510px"
+   height="295px"
+   viewBox="0 0 510 295"
+   enable-background="new 0 0 510 295"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs96" />
+<g
+   id="g96">
+	<path
+   fill="none"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   d="M142,147.063"
+   id="path1" />
+	<g
+   id="g69">
+		<rect
+   x="145"
+   y="1.5"
+   fill="#65A8A1"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   width="220"
+   height="293"
+   id="rect1" />
+		<g
+   id="g55">
+			<rect
+   x="160"
+   y="16.5"
+   fill="#FFFFFF"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   width="190"
+   height="165"
+   id="rect2" />
+			
+			<g
+   id="g34">
+				<rect
+   x="176"
+   y="62.5"
+   fill="#F99DCB"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   width="160"
+   height="42"
+   id="rect22" /><text
+   xml:space="preserve"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;line-height:1;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-linejoin:bevel;stroke-miterlimit:2;stroke-dashoffset:24.4717"
+   x="255.73145"
+   y="87.509003"
+   id="text96-9"><tspan
+     id="tspan96-4"
+     x="255.43144"
+     y="87.509003"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:semi-condensed;font-size:12px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed';letter-spacing:0px">Unità di controllo</tspan></text>
+				
+			</g>
+			<g
+   id="g54">
+				<rect
+   x="175"
+   y="122.5"
+   fill="#F99DCB"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   width="160"
+   height="42"
+   id="rect34" /><text
+   xml:space="preserve"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;line-height:1;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-linejoin:bevel;stroke-miterlimit:2;stroke-dashoffset:24.4717"
+   x="254.92749"
+   y="147.5"
+   id="text96-9-8"><tspan
+     id="tspan96-4-2"
+     x="254.62749"
+     y="147.5"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:semi-condensed;font-size:12px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed';letter-spacing:0px">Unità aritmetico-logica</tspan></text>
+				
+			</g>
+		<text
+   xml:space="preserve"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:semi-condensed;font-size:12px;line-height:1.3;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;white-space:pre;inline-size:96.4082;fill:#000000;stroke-linejoin:bevel;stroke-miterlimit:2;stroke-dashoffset:24.4717"
+   x="254.76099"
+   y="43.18124"
+   id="text96"
+   transform="translate(0,-6)"><tspan
+     x="254.76099"
+     y="43.18124"
+     id="tspan2">Unità centrale
+</tspan><tspan
+     x="254.76099"
+     y="58.781239"
+     id="tspan5">di elaborazione<tspan
+   y="58.781239"
+   id="tspan10"> </tspan></tspan></text></g>
+		<g
+   id="g65">
+			<rect
+   x="160"
+   y="233.5"
+   fill="#FFFFFF"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   width="190"
+   height="45"
+   id="rect55" /><text
+   xml:space="preserve"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;line-height:1;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-linejoin:bevel;stroke-miterlimit:2;stroke-dashoffset:24.4717"
+   x="254.92749"
+   y="260.336"
+   id="text96-9-5"><tspan
+     id="tspan96-4-5"
+     x="254.62749"
+     y="260.336"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:semi-condensed;font-size:12px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed';letter-spacing:0px">Unità di memoria</tspan></text>
+			
+		</g>
+		<g
+   id="g68">
+			<g
+   id="g66">
+				<line
+   fill="none"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   x1="244"
+   y1="182.5"
+   x2="244"
+   y2="224.5"
+   id="line65" />
+				<polygon
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   points="244,230.5 239,224.5 244,224.5 249,224.5     "
+   id="polygon65" />
+			</g>
+			<g
+   id="g67">
+				<line
+   fill="none"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   x1="266"
+   y1="232.5"
+   x2="266"
+   y2="190.5"
+   id="line66" />
+				<polygon
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   points="265.998,184.5 270.999,190.5 265.998,190.5       260.998,190.5     "
+   id="polygon66" />
+			</g>
+		</g>
+	</g>
+	<g
+   id="g82">
+		<g
+   id="g70">
+			<line
+   fill="none"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   x1="86"
+   y1="146.5"
+   x2="136"
+   y2="146.5"
+   id="line69" />
+			<polygon
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   points="142,146.5 136,151.5 136,146.5 136,141.5    "
+   id="polygon69" />
+		</g>
+		
+	</g>
+	<g
+   id="g95">
+		<g
+   id="g83">
+			<line
+   fill="none"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   x1="365"
+   y1="145.5"
+   x2="415"
+   y2="145.5"
+   id="line82" />
+			<polygon
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   points="421,145.5 415,150.5 415,145.5 415,140.5    "
+   id="polygon82" />
+		</g>
+		
+		<rect
+   x="424"
+   y="113.5"
+   fill="none"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   width="85"
+   height="65"
+   id="rect94" />
+	<text
+   xml:space="preserve"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;line-height:1.3;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;white-space:pre;inline-size:48.0436;display:inline;fill:#000000;stroke-linejoin:bevel;stroke-miterlimit:2;stroke-dashoffset:24.4717"
+   x="466.38989"
+   y="143.75488"
+   id="text96-9-5-7-5"
+   transform="translate(0,-2.0041029)"><tspan
+     x="466.38989"
+     y="143.75488"
+     id="tspan12"><tspan
+   style="font-stretch:semi-condensed;-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed'"
+   id="tspan11">Unità di</tspan>
+</tspan><tspan
+     x="466.38989"
+     y="159.35489"
+     id="tspan14"><tspan
+       style="font-stretch:semi-condensed;-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed'"
+       id="tspan13">output</tspan></tspan></text></g>
+<g
+   id="g99"><g
+     id="g81">
+			
+			<rect
+   x="1"
+   y="114.5"
+   fill="none"
+   stroke="#000000"
+   stroke-width="2"
+   stroke-miterlimit="10"
+   width="85"
+   height="65"
+   id="rect80" />
+		</g><text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;line-height:1.3;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;white-space:pre;inline-size:58.9554;display:inline;fill:#000000;stroke-linejoin:bevel;stroke-miterlimit:2;stroke-dashoffset:24.4717"
+     x="43.157982"
+     y="144.75488"
+     id="text96-9-5-7"
+     transform="translate(0,-2.0041029)"><tspan
+       x="43.157982"
+       y="144.75488"
+       id="tspan16"><tspan
+   style="font-stretch:semi-condensed;-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed'"
+   id="tspan15">Unità di</tspan>
+</tspan><tspan
+       x="43.157982"
+       y="160.35489"
+       id="tspan18"><tspan
+         style="font-stretch:semi-condensed;-inkscape-font-specification:'DejaVu Sans Bold Semi-Condensed'"
+         id="tspan17">input</tspan></tspan></text></g></g>
+</svg>

@@ -1,0 +1,5 @@
+# **Intro Modulo 3 - Cifrature Asimmetriche**
+
+Il **Modulo 3 – Cifrature Asimmetriche** introduce un cambiamento fondamentale rispetto alla cifratura simmetrica: qui la sicurezza non si basa più su una chiave segreta condivisa, ma su una **coppia di chiavi**, una **pubblica** e una **privata**. Questo paradigma consente di risolvere problemi cruciali come la distribuzione delle chiavi e l’autenticazione dell’identità.
+
+Nel corso del modulo verranno analizzate le **principali tecniche di cifratura asimmetrica moderne**, tra cui **RSA**, **Diffie-Hellman** ed **Elliptic Curve Cryptography (ECC)**. Verranno inoltre illustrate le modalità di **cifratura, decifratura e firma digitale**, e verranno confrontati i **livelli di sicurezza** offerti da ciascun metodo in relazione all’efficienza computazionale e alla resistenza agli attacchi crittografici.
