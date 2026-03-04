@@ -1,7 +1,9 @@
 import { memo, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import rehypeHighlight from 'rehype-highlight';
+import rehypeKatex from 'rehype-katex';
 import { getParentPath } from '../utils/tree.js';
 
 function Viewer({ content, currentFile, loading }) {
@@ -68,8 +70,8 @@ function Viewer({ content, currentFile, loading }) {
   return (
     <article className="viewer-content markdown-body">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeHighlight]}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex, rehypeHighlight]}
         components={components}
       >
         {content}

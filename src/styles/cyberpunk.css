@@ -734,6 +734,56 @@ body {
 .hljs-type { color: var(--neon-purple) !important; }
 .hljs-meta { color: var(--text-muted) !important; }
 
+/* ── KaTeX Math ── */
+.katex {
+  font-size: 1.1em;
+  color: var(--neon-yellow);
+}
+
+.katex-display {
+  margin: 1.2em 0;
+  padding: 16px 20px;
+  background: rgba(240, 240, 0, 0.03);
+  border-left: 3px solid var(--neon-yellow);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.katex-display > .katex {
+  font-size: 1.2em;
+}
+
+.katex .katex-html {
+  color: var(--neon-yellow);
+}
+
+.katex .mord.text {
+  color: var(--text-primary);
+}
+
+.katex .mrel {
+  color: var(--neon-cyan);
+}
+
+.katex .mbin {
+  color: var(--neon-magenta);
+}
+
+.katex .mopen,
+.katex .mclose {
+  color: var(--text-primary);
+}
+
+.katex-display::-webkit-scrollbar {
+  height: 4px;
+}
+
+.katex-display::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   :root {
