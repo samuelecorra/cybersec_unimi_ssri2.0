@@ -48,11 +48,22 @@ function Viewer({ content, currentFile, loading }) {
   if (!currentFile) {
     return (
       <div className="viewer-empty">
-        <div className="viewer-empty-icon">⬡</div>
+        <div className="viewer-empty-icon">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+            <polygon points="36,2 66,19 66,53 36,70 6,53 6,19" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.04" />
+            <polygon points="36,10 58,23 58,49 36,62 14,49 14,23" stroke="currentColor" strokeWidth="1" fill="currentColor" fillOpacity="0.06" opacity="0.6" />
+            <polygon points="36,18 50,27 50,45 36,54 22,45 22,27" stroke="currentColor" strokeWidth="0.8" fill="currentColor" fillOpacity="0.08" opacity="0.3" />
+            <circle cx="36" cy="36" r="3" fill="currentColor" opacity="0.8" />
+          </svg>
+        </div>
         <h2>Samu CyberLocker</h2>
-        <p>Seleziona un file dalla sidebar per iniziare.</p>
+        <p className="viewer-empty-subtitle">Knowledge Vault System</p>
+        <div className="viewer-empty-divider"></div>
         <p className="viewer-empty-hint">
-          Usa la barra di ricerca per trovare lezioni specifiche.
+          Seleziona un file dalla sidebar per iniziare
+        </p>
+        <p className="viewer-empty-hint">
+          <kbd>Ctrl</kbd> + <kbd>K</kbd> per cercare
         </p>
       </div>
     );

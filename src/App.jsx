@@ -89,10 +89,28 @@ export default function App() {
             onClick={() => setSidebarOpen(o => !o)}
             title={sidebarOpen ? 'Chiudi sidebar' : 'Apri sidebar'}
           >
-            {sidebarOpen ? '◀' : '▶'}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              {sidebarOpen ? (
+                <>
+                  <rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.3" />
+                  <line x1="5" y1="1" x2="5" y2="13" stroke="currentColor" strokeWidth="1.3" />
+                </>
+              ) : (
+                <>
+                  <rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.3" />
+                  <line x1="5" y1="1" x2="5" y2="13" stroke="currentColor" strokeWidth="1.3" opacity="0.4" />
+                  <path d="M7.5 5.5L9.5 7L7.5 8.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                </>
+              )}
+            </svg>
           </button>
           <h1 className="logo">
-            <span className="logo-icon">⬡</span> Samu CyberLocker
+            <svg className="logo-hex" width="22" height="24" viewBox="0 0 22 24" fill="none">
+              <polygon points="11,1 21,6.5 21,17.5 11,23 1,17.5 1,6.5" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.08" />
+              <polygon points="11,5 17,8.5 17,15.5 11,19 5,15.5 5,8.5" stroke="currentColor" strokeWidth="0.8" fill="currentColor" fillOpacity="0.06" opacity="0.6" />
+              <circle cx="11" cy="12" r="2" fill="currentColor" />
+            </svg>
+            <span className="logo-text">Samu CyberLocker</span>
           </h1>
         </div>
         <SearchBar query={searchQuery} onChange={setSearchQuery} />
