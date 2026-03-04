@@ -1,0 +1,139 @@
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import tree from 'virtual:lesson-tree';
+import searchIndex from 'virtual:lesson-search';
+import Sidebar from './components/Sidebar.jsx';
+import Viewer from './components/Viewer.jsx';
+import Breadcrumb from './components/Breadcrumb.jsx';
+import Navigation from './components/Navigation.jsx';
+import SearchBar from './components/SearchBar.jsx';
+import { flattenFiles } from './utils/tree.js';
+import { useLocalStorage } from './hooks/useLocalStorage.js';
+
+export default function App() {
+  const [currentFile, setCurrentFile] = useLocalStorage('cyberlocker:currentFile', null);
+  const [expandedDirs, setExpandedDirs] = useLocalStorage('cyberlocker:expandedDirs', {});
+  const [content, setContent] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const allFiles = useMemo(() => flattenFiles(tree), []);
+
+  const currentIndex = useMemo(
+    () => allFiles.findIndex(f => f === currentFile),
+    [allFiles, currentFile]
+  );
+
+  const filteredResults = useMemo(() => {
+    if (!searchQuery.trim()) return null;
+    const q = searchQuery.toLowerCase();
+    return searchIndex.filter(item => {
+      if (item.path.toLowerCase().includes(q)) return true;
+      if (item.headings.some(h => h.toLowerCase().includes(q))) return true;
+      if (item.preview.toLowerCase().includes(q)) return true;
+      return false;
+    });
+  }, [searchQuery]);
+
+  const loadFile = useCallback(async (filePath) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/file?path=${encodeURIComponent(filePath)}`);
+      if (!res.ok) throw new Error('Failed to load');
+      const text = await res.text();
+      setContent(text);
+      setCurrentFile(filePath);
+    } catch (err) {
+      setContent(`# Errore\n\nImpossibile caricare il file: ${filePath}\n\n${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  }, [setCurrentFile]);
+
+  useEffect(() => {
+    if (currentFile) {
+      loadFile(currentFile);
+    }
+  }, []);
+
+  const handleFileSelect = useCallback((filePath) => {
+    loadFile(filePath);
+    setSearchQuery('');
+  }, [loadFile]);
+
+  const handlePrev = useCallback(() => {
+    if (currentIndex > 0) {
+      handleFileSelect(allFiles[currentIndex - 1]);
+    }
+  }, [currentIndex, allFiles, handleFileSelect]);
+
+  const handleNext = useCallback(() => {
+    if (currentIndex < allFiles.length - 1) {
+      handleFileSelect(allFiles[currentIndex + 1]);
+    }
+  }, [currentIndex, allFiles, handleFileSelect]);
+
+  const toggleDir = useCallback((dirPath) => {
+    setExpandedDirs(prev => ({
+      ...prev,
+      [dirPath]: !prev[dirPath],
+    }));
+  }, [setExpandedDirs]);
+
+  return (
+    <div className="app">
+      <header className="header">
+        <div className="header-left">
+          <button
+            className="sidebar-toggle"
+            onClick={() => setSidebarOpen(o => !o)}
+            title={sidebarOpen ? 'Chiudi sidebar' : 'Apri sidebar'}
+          >
+            {sidebarOpen ? '◀' : '▶'}
+          </button>
+          <h1 className="logo">
+            <span className="logo-icon">⬡</span> Samu CyberLocker
+          </h1>
+        </div>
+        <SearchBar query={searchQuery} onChange={setSearchQuery} />
+        <div className="header-right">
+          <span className="file-count">{allFiles.length} files</span>
+        </div>
+      </header>
+
+      <div className="main">
+        {sidebarOpen && (
+          <Sidebar
+            tree={tree}
+            currentFile={currentFile}
+            expandedDirs={expandedDirs}
+            onToggleDir={toggleDir}
+            onSelectFile={handleFileSelect}
+            searchResults={filteredResults}
+            searchQuery={searchQuery}
+          />
+        )}
+        <div className="content-area">
+          {currentFile && (
+            <div className="content-header">
+              <Breadcrumb path={currentFile} onNavigate={handleFileSelect} />
+              <Navigation
+                onPrev={handlePrev}
+                onNext={handleNext}
+                hasPrev={currentIndex > 0}
+                hasNext={currentIndex < allFiles.length - 1}
+                currentIndex={currentIndex}
+                total={allFiles.length}
+              />
+            </div>
+          )}
+          <Viewer
+            content={content}
+            currentFile={currentFile}
+            loading={loading}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
