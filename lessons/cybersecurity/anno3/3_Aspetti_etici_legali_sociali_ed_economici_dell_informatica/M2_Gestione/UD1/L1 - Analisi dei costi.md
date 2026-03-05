@@ -17,7 +17,7 @@ L’**analisi dei costi**, intesa come studio di tale struttura, è finalizzata 
 
 Le informazioni fornite dalla **contabilità generale**, ossia dal bilancio, risultano funzionali soprattutto ad analisi che riguardano l’impresa nel suo complesso o singole divisioni. Tuttavia, la contabilità generale non è in grado di fornire informazioni sufficientemente **disaggregate**, né di evidenziare le responsabilità specifiche delle singole unità organizzative elementari o dei singoli prodotti.
 
-![](Pasted%20image%2020260209221322.png)
+![](imgs/Pasted%20image%2020260209221322.png)
 
 La **contabilità analitica**, detta anche direzionale o interna, è stata introdotta proprio per superare tale limite, almeno con riferimento all’analisi delle prestazioni connesse ai costi. Essa consente di ripartire i costi complessivi dell’impresa tra le singole unità organizzative e tra i diversi prodotti o linee di prodotto, secondo specifiche fasi logiche.
 

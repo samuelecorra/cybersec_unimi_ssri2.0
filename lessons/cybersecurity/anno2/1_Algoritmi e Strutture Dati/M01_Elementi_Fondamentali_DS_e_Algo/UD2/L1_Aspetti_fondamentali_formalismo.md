@@ -241,7 +241,7 @@ Se `tipoelem` è un tipo di dato primitivo, il vettore viene allocato in **n cel
 
 > Questa disposizione garantisce **accesso diretto** agli elementi, con costo costante $O(1)$.
 
-![Pasted image 20251026114850](../../imgs/Pasted%20image%2020251026114850.png)
+![Pasted image 20251026114850](../UD1/imgs/Pasted%20image%2020251026114850.png)
 
 ---
 
@@ -260,7 +260,7 @@ In entrambi i casi, ogni riga (o colonna) è un **vettore**.
 Esempio:  
 Una matrice $m[n,2]$ memorizzata per colonne occupa posizioni contigue per ciascuna colonna.
 
-![Pasted image 20251026114812](../../imgs/Pasted%20image%2020251026114812.png)
+![Pasted image 20251026114812](../UD1/imgs/Pasted%20image%2020251026114812.png)
 
 ---
 

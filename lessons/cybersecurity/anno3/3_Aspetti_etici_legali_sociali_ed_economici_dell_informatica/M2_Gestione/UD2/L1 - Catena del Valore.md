@@ -6,7 +6,7 @@ Nel suo contributo fondamentale _Competitive Advantage: Creating and Sustaining 
 
 La catena del valore costituisce quindi uno **strumento di analisi** che si fonda sull’individuazione di **nove categorie gerarchiche di attività generatrici di valore**, collegate tra loro secondo modalità caratteristiche e valide, in linea generale, per qualsiasi tipologia di impresa.
 
-![](Pasted%20image%2020260209222529.png)
+![](imgs/Pasted%20image%2020260209222529.png)
 
 Come evidenziato nella rappresentazione grafica, tali attività sono aggregabili in **attività primarie** e **attività di supporto**. Ai fini dell’analisi del vantaggio competitivo è necessario attribuire i costi complessivi alle singole attività. Inoltre, viene esplicitamente introdotto il concetto di **margine**, poiché il valore totale creato dall’impresa è dato dalla somma del valore generato dalle singole attività e dal margine, inteso come differenza tra valore percepito dal cliente e costi sostenuti, assimilabile al markup che contribuisce alla definizione del prezzo di vendita.
 
@@ -16,7 +16,7 @@ Come evidenziato nella rappresentazione grafica, tali attività sono aggregabili
 
 Per formulare una strategia efficace, il management deve innanzitutto comprendere **l’ambiente competitivo** in cui l’impresa opera. In ogni settore, considerando il segmento di mercato servito e l’area geografica di riferimento, la singola impresa deve identificare i concorrenti attuali e potenziali.
 
-![](Pasted%20image%2020260209222347.png)
+![](imgs/Pasted%20image%2020260209222347.png)
 
 La formulazione della strategia richiede pertanto:
 

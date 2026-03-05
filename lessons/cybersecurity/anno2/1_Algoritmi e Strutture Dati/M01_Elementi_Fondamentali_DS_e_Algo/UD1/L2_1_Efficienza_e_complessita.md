@@ -78,7 +78,7 @@ int minimo_iterativo(int* array, int j, int k) {
 
 #### **Analisi passo-passo**
 
-![Pasted image 20251025212411](../../imgs/Pasted%20image%2020251025212411.png)
+![Pasted image 20251025212411](imgs/Pasted%20image%2020251025212411.png)
 
 1. La dichiarazione della funzione/procedura che dir si voglia ha costo unitario;
 
@@ -147,7 +147,7 @@ int minimo_ricorsivo(int* array, int j, int k) {
 
 #### **Analisi passo-passo**
 
-![Pasted image 20251025215145](../../imgs/Pasted%20image%2020251025215145.png)
+![Pasted image 20251025215145](imgs/Pasted%20image%2020251025215145.png)
 #### **Caso base (n = 1)**
 
 Se l’array contiene un solo elemento, sfociamo nel caso base, dunque la funzione esegue poche operazioni fisse:  un confronto, un assegnamento, un ritorno.

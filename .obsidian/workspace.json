@@ -1,0 +1,228 @@
+{
+  "main": {
+    "id": "7c79c1cac039c35e",
+    "type": "split",
+    "children": [
+      {
+        "id": "542eabd27297b774",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "48564515ae964f07",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nuova scheda"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b81e47ed6fce281e",
+    "type": "split",
+    "children": [
+      {
+        "id": "cada35c04f2f3512",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a124e698169b32ca",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Esplora risorse"
+            }
+          },
+          {
+            "id": "c8a1364654a11af5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Ricerca"
+            }
+          },
+          {
+            "id": "fbf9033751eb2f6a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Segnalibri"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6126a7f85e1957b3",
+    "type": "split",
+    "children": [
+      {
+        "id": "020f4a1ed231f6a5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c9eee90847b1ddaa",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Riferimenti"
+            }
+          },
+          {
+            "id": "64c9d08ec77fb664",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Collegamenti in uscita"
+            }
+          },
+          {
+            "id": "d507d48fc97c038f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etichette"
+            }
+          },
+          {
+            "id": "662f24dc5e749055",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Tutte le proprietà"
+            }
+          },
+          {
+            "id": "a9e1f7104fa650d3",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Struttura"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false,
+      "bases:Crea nuova Base": false
+    }
+  },
+  "active": "a124e698169b32ca",
+  "lastOpenFiles": [
+    "rename_modules.py",
+    "lessons/cybersecurity/anno1/1_Analisi 1/M8_Limiti/UD4 - Argomenti avanzati/L1 - Errori comuni nel calcolo dei limiti e strumenti avanzati.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/imgs/Pasted image 20251125055027.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/imgs/Pasted image 20251125054812.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/imgs/Pasted image 20251125054923.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/imgs/Pasted image 20251125054603.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L4 - Applicazioni ed esempi delle regole attive.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L3 - Proprietà delle regole attive.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L2 - Caratteristiche evolute delle regole attive.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L0 - Intro UD1.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L1 - Basi di dati attive e trigger.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/imgs",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/Intro M9.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/imgs/Pasted image 20251125054408.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/imgs/Pasted image 20251125054011.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/imgs/Pasted image 20251125054337.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/L2 - DTD e XML Schema.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/L3 - XQuery.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/L1 - Introduzione a XML.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/L0 - Intro UD1.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/imgs",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/Intro M8.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/imgs/Pasted image 20251125053530.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/imgs/Pasted image 20251125053518.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/imgs/Pasted image 20251125053250.png",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L0 - Intro UD3.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L3_1 - Protocollo di commit a due fasi.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L3_2 - Protocollo di commit a due fasi – Gestione dei guasti e ottimizzazioni.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L2 - Controllo di concorrenza.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/L1 - Introduzione alle basi di dati distribuite.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L1 - Ottimizzazione, concorrenza e atomicità.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/imgs",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/L2 -  Frammentazione e allocazione dei dati.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/L3 - Accesso ai dati distribuiti.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/L0 - Intro UD2.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/imgs",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD1/imgs",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD1/L0 - Intro UD1.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD1/L1 - Architettura Client-Server.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M07_Architetture_Distribuite/Intro M7.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/esercizi/E1 - domande ed esercizi.md"
+  ]
+}

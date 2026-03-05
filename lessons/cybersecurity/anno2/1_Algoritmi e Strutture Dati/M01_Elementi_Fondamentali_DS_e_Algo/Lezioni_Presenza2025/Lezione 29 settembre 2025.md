@@ -115,7 +115,7 @@ E così via, fino a completare tutte le posizioni.
 
 ## **Implementazione e calcolo dell'efficienza come tempo di esecuzione**
 
-![Pasted image 20251108151752](../../imgs/Pasted%20image%2020251108151752.png)
+![Pasted image 20251108151752](../UD1/imgs/Pasted%20image%2020251108151752.png)
 
 1) Si nota sin da subito che la variabile $n$ è un assegnamento esterno ai cicli ergo viene eseguito in tutto l'algoritmo una sola volta. Di conseguenza: $$T_1 = C_1 \ \cdot \ 1 = C_1$$
 2) Il ciclo for come ormai dovrebbe essere assodato prevede che la variabile di ciclo sia inizializzata una volta sola, e quindi $$j = 1 \ ha \ costo \ C, costante$$

@@ -24,7 +24,7 @@ Sulla base di tale classificazione è possibile definire alcune grandezze di sin
 - **Costo pieno industriale**, ottenuto sommando al costo di conversione il costo dei materiali diretti;
 - **Costo pieno aziendale**, che si ottiene aggiungendo al costo pieno industriale i costi di periodo.
 
-![](Pasted%20image%2020260209221515.png)
+![](imgs/Pasted%20image%2020260209221515.png)
 
 ---
 
@@ -34,11 +34,11 @@ Una seconda classificazione dei costi si basa sul **comportamento dei costi al v
 
 I **costi fissi** sono quei costi che, all’interno di un intervallo significativo di variazione del livello di attività e nel breve periodo, rimangono costanti nel loro ammontare complessivo. Nel lungo periodo, tuttavia, anche i costi fissi possono subire variazioni. In particolare, quando l’aumento del volume produttivo rende necessario l’utilizzo di nuovi impianti, il costo fisso cresce in modo discontinuo. Considerata la capacità produttiva massima di un impianto, la produzione può aumentare solo attraverso l’attivazione di impianti aggiuntivi; l’affiancamento di un secondo, terzo o ulteriore impianto determina un incremento immediato dei costi fissi, dando luogo a un andamento “a gradini”.
 
-![](Pasted%20image%2020260209221601.png)
+![](imgs/Pasted%20image%2020260209221601.png)
 
 Questo fenomeno non riguarda esclusivamente gli impianti produttivi, ma si estende anche ai costi di struttura. Ad esempio, al crescere delle dimensioni dell’impresa si rende necessario un ampliamento delle funzioni amministrative, con conseguente aumento dei costi fissi.
 
-![](Pasted%20image%2020260209221635.png)
+![](imgs/Pasted%20image%2020260209221635.png)
 
 I **costi variabili** comprendono tutte le altre voci di costo. Nella prassi, tale categoria viene spesso assimilata ai costi proporzionali al volume produttivo. Tuttavia, questa interpretazione deriva da motivazioni di carattere storico e non riflette il comportamento reale dei costi nella maggior parte delle imprese. In passato, infatti, i costi variabili erano prevalentemente costituiti da materiali diretti e lavoro diretto, che risultavano sostanzialmente proporzionali al volume di produzione, almeno in assenza di garanzie salariali.
 
@@ -53,7 +53,7 @@ La presenza di determinanti del costo diverse dal volume produttivo impone alle 
 
 È inoltre rilevante considerare l’effetto dell’apprendimento sui costi variabili. All’aumentare dei volumi di produzione, le economie di apprendimento consentono una riduzione del costo variabile unitario grazie alla maggiore efficienza nello svolgimento dei cicli produttivi.
 
-![](Pasted%20image%2020260209221738.png)
+![](imgs/Pasted%20image%2020260209221738.png)
 
 Accanto ai costi fissi e variabili si collocano i **costi semivariabili**, che presentano un andamento intermedio e possono essere rappresentati mediante una curva spezzata.
 
@@ -72,4 +72,4 @@ L’evitabilità di un costo dipende in particolare da due fattori:
 
 Nel breve periodo, il comportamento delle principali tipologie di costo può essere sintetizzato come segue:
 
-![](Pasted%20image%2020260209221855.png)
+![](imgs/Pasted%20image%2020260209221855.png)

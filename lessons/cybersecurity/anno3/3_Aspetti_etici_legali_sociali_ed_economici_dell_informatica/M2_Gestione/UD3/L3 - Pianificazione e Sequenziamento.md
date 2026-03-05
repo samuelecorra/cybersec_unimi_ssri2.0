@@ -47,7 +47,7 @@ Alla WBS vengono tipicamente associati:
 
 Un esempio tipico di WBS è quello relativo alla **personalizzazione di un software off-the-shelf per analisi finanziarie**. In questo caso:
 
-![](Pasted%20image%2020260209224618.png)
+![](imgs/Pasted%20image%2020260209224618.png)
 
 - il livello 0 rappresenta il progetto nel suo complesso;
 - il livello 1 scompone il progetto in fasi principali (ad esempio: progettazione, programmazione, testing e transizione);
@@ -85,7 +85,7 @@ Diventa quindi fondamentale distinguere chiaramente tra:
 
 Esistono diverse modalità organizzative per attribuire autorità e responsabilità nei progetti:
 
-![](Pasted%20image%2020260209224802.png)
+![](imgs/Pasted%20image%2020260209224802.png)
 
 - **Struttura a matrice debole**:  
    l’autorità è detenuta dal manager funzionale, mentre il project manager svolge prevalentemente un ruolo di coordinamento e controllo.

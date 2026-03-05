@@ -39,7 +39,7 @@ L’**output** principale di questa fase è rappresentato da due strutture ad al
 
 La **Product Function Structure (PFS)** è una rappresentazione ad albero che descrive le **funzioni principali** che il progetto deve realizzare. Essa scompone il prodotto o sistema finale in funzioni sempre più specifiche, evidenziando cosa il prodotto deve fare, indipendentemente da come tali funzioni verranno realizzate.
 
-![](Pasted%20image%2020260209224430.png)
+![](imgs/Pasted%20image%2020260209224430.png)
 
 La PFS consente di:
 
@@ -53,7 +53,7 @@ La PFS consente di:
 
 La **Product Breakdown Structure (PBS)** è anch’essa una rappresentazione ad albero, ma descrive gli **output principali** che il progetto deve sviluppare per realizzare le funzioni individuate. In questo caso, l’attenzione è posta sugli **elementi costitutivi del prodotto o sistema**, piuttosto che sulle funzioni astratte.
 
-![](Pasted%20image%2020260209224522.png)
+![](imgs/Pasted%20image%2020260209224522.png)
 
 La PBS consente di:
 

@@ -53,7 +53,7 @@ La concorrenza perfetta è una forma di mercato caratterizzata da:
 - massimizzazione del profitto come unico obiettivo.
     
 
-![](Pasted%20image%2020260209211241.png)
+![](imgs/Pasted%20image%2020260209211241.png)
 
 Le imprese sono **price taker**, ossia non sono in grado di influenzare il prezzo, che è determinato dall’incontro tra domanda e offerta. La curva di domanda per la singola impresa è **infinitamente elastica** e coincide con il prezzo di mercato, che è uguale al ricavo medio e al ricavo marginale.
 
@@ -149,7 +149,7 @@ Il comportamento delle imprese dipende dalle reazioni attese dei rivali e dal te
 
 ---
 
-![](Pasted%20image%2020260209211400.png)
+![](imgs/Pasted%20image%2020260209211400.png)
 
 
 ---
@@ -240,7 +240,7 @@ La condizione di entrata misura il **grado in cui le imprese incumbent** possono
 
 L’applicazione congiunta dei tre criteri fondamentali — **sostituibilità tra i prodotti**, **interdipendenza tra i venditori** e **facilità di entrata nel mercato** — consente di ricondurre le diverse strutture di mercato a uno schema di classificazione unificato, che può essere riassunto nella tabella seguente.
 
-![](Pasted%20image%2020260209211730.png)
+![](imgs/Pasted%20image%2020260209211730.png)
 
 I tre criteri sono misurati, rispettivamente, attraverso:
 

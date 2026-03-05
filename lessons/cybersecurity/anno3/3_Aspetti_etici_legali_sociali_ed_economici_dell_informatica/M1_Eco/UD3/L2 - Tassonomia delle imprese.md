@@ -4,7 +4,7 @@
 
 La prima slide introduce due dimensioni fondamentali che caratterizzano il funzionamento delle imprese moderne.
 
-![](Pasted%20image%2020260209214650.png)
+![](imgs/Pasted%20image%2020260209214650.png)
 
 Da un lato vi sono le **prescrizioni di funzionamento**, che possono essere più o meno **vaghe**. Con prescrizioni vaghe si intende un insieme di regole e vincoli non rigidamente definiti, che lasciano ampi margini di discrezionalità all’azione manageriale e organizzativa. Questo aspetto è tipico delle forme d’impresa più complesse, in cui non è possibile definire ex ante in modo dettagliato ogni comportamento o decisione.
 
@@ -115,9 +115,9 @@ Esistono anche le **partecipazioni incrociate**, in cui due società detengono r
 
 Le partecipazioni fanno sì che le imprese del gruppo agiscano in modo coordinato, come se fossero un’unica entità economica, adottando strategie e azioni comuni.
 
-![](Pasted%20image%2020260209214858.png)
+![](imgs/Pasted%20image%2020260209214858.png)
 
-![](Pasted%20image%2020260209214940.png)
+![](imgs/Pasted%20image%2020260209214940.png)
 
 ---
 

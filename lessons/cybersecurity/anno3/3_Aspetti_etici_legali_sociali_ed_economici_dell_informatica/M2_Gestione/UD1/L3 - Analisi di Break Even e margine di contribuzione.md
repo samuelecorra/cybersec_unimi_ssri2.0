@@ -12,7 +12,7 @@ I **costi semivariabili** presentano una componente fissa e una componente varia
 
 La rappresentazione grafica dei costi evidenzia che:
 
-![](Pasted%20image%2020260209222027.png)
+![](imgs/Pasted%20image%2020260209222027.png)
 
 - i costi fissi rimangono costanti al variare dei volumi;
 - i costi variabili crescono linearmente con i volumi;
@@ -30,7 +30,7 @@ Il **costo totale** è dato dalla somma del costo variabile totale e del costo f
 
 L’**analisi di break-even**, detta anche **analisi costi-volumi-prezzi**, è uno strumento utile per rappresentare la variazione del risultato economico dell’impresa in funzione dei volumi di vendita. In particolare, essa consente di:
 
-![](Pasted%20image%2020260209222056.png)
+![](imgs/Pasted%20image%2020260209222056.png)
 
 - individuare il **punto di pareggio** (_break-even point – BEP_);
 - confrontare differenti ipotesi di prezzo e di costo dei prodotti, al fine di identificare la soluzione più conveniente dal punto di vista dell’impresa.

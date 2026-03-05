@@ -87,7 +87,7 @@ Porter schematizza le forze che agiscono su un settore attraverso cinque element
 
 Il modello individua cinque forze che, nel loro insieme, determinano l’intensità concorrenziale del settore:
 
-![](Pasted%20image%2020260209212210.png)
+![](imgs/Pasted%20image%2020260209212210.png)
 
 1. **La rivalità tra i competitori operanti nel settore**  
     Rappresenta il livello di competizione diretta tra le imprese già presenti nel mercato.

@@ -4,7 +4,7 @@
 
 I criteri di valutazione degli investimenti in condizioni deterministiche possono essere classificati sulla base dell’utilizzo o meno di **valori attualizzati**. In particolare, è possibile distinguere tra:
 
-![](Pasted%20image%2020260209222952.png)
+![](imgs/Pasted%20image%2020260209222952.png)
 
 - **criteri basati sui flussi di cassa scontati (Discounted Cash Flow – DCF)**, che tengono conto del valore economico del tempo;
 - **criteri non basati sui flussi di cassa scontati (Non Discounted Cash Flow – Non DCF)**, che trascurano l’attualizzazione.
@@ -125,7 +125,7 @@ $$
 
 Considerando il NPV come funzione del tasso di sconto $\sigma$, è possibile rappresentare graficamente il confronto tra due investimenti alternativi. Anche assumendo lo stesso orizzonte temporale $T$ e lo stesso investimento iniziale $I_0$, i profili di NPV possono essere molto diversi.
 
-![](Pasted%20image%2020260209223509.png)
+![](imgs/Pasted%20image%2020260209223509.png)
 
 In tali casi può verificarsi una discordanza tra i criteri NPV e IRR:
 

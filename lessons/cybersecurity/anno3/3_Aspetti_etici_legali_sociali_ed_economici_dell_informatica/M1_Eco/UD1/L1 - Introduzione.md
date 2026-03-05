@@ -113,4 +113,4 @@ Si assume che la domanda di mercato sia data dalla **somma delle domande individ
 
 Nel caso di **beni normali**, ossia beni per i quali la domanda varia nella stessa direzione del reddito, è possibile dimostrare matematicamente che la **curva della domanda ha pendenza negativa**. Ciò significa che, a parità delle altre condizioni, la quantità domandata aumenta quando il prezzo diminuisce e diminuisce quando il prezzo aumenta.
 
-![](Pasted%20image%2020260209210944.png)
+![](imgs/Pasted%20image%2020260209210944.png)

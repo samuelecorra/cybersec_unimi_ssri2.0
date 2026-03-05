@@ -311,4 +311,4 @@ In questa lezione abbiamo introdotto i principi fondamentali dell’**Internet P
 
 ---
 
-![](ironmath-demo/programma/4.%20Università%20STEM/cybersecurity/anno2/5_Reti%20di%20Calcolatori/M2_Protocolli_rete_TCP_IP/UD2/imgs/DAMNO_M2_U2_L1_D.pdf)
+![](imgs/DAMNO_M2_U2_L1_D.pdf)

@@ -16,7 +16,7 @@ $$
 
 L’obiettivo fondamentale di questo indicatore è verificare che il **tempo di recupero del capitale investito** sia inferiore a un **tempo-soglia prefissato**. Di conseguenza, nel confronto tra due investimenti alternativi, si tende a privilegiare quello con **tempo di pay-back minore**.
 
-![](Pasted%20image%2020260209223818.png)
+![](imgs/Pasted%20image%2020260209223818.png)
 
 Tuttavia, il criterio del pay-back **non è sempre adeguato**. Si consideri, ad esempio, il confronto tra due investimenti alternativi A e B con uguale investimento iniziale ma diversa distribuzione temporale dei flussi di cassa. In tale situazione, può accadere che il tempo di pay-back risulti identico per entrambi (ad esempio pari a tre anni), rendendo gli investimenti indistinguibili secondo questo criterio.
 
@@ -36,7 +36,7 @@ Nel caso del pay-back attualizzato, i flussi di cassa attualizzati devono eguagl
 
 È infatti possibile che, secondo il criterio del pay-back (anche nella versione attualizzata), venga preferito un investimento che recupera prima il capitale iniziale, ma che **genera un valore economico complessivamente inferiore** rispetto a un’alternativa con ritorni più elevati nel lungo periodo.
 
-![](Pasted%20image%2020260209223934.png)
+![](imgs/Pasted%20image%2020260209223934.png)
 
 In generale, il **tempo di pay-back**, sia attualizzato sia non attualizzato:
 
@@ -62,7 +62,7 @@ dove:
 - il numeratore è rappresentato dalla **media dei Margini Operativi Lordi (MOL)** previsti sull’orizzonte temporale considerato;
 - il denominatore è l’**investimento iniziale**.
 
-![](Pasted%20image%2020260209224011.png)
+![](imgs/Pasted%20image%2020260209224011.png)
 
 Ad esempio, se l’investimento iniziale è pari a 20 e il MOL medio previsto è pari a 20, il ROI risulta:
 

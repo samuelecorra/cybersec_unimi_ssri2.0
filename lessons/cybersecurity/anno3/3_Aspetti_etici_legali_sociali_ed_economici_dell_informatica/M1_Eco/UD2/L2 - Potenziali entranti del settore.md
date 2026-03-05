@@ -23,7 +23,7 @@ Le **economie di scala** costituiscono una rilevante barriera all’entrata, poi
 
 Nel **breve periodo**, la relazione tra costi unitari e volumi produttivi assume una forma a **U**, poiché l’impianto produttivo è dato e esiste un **livello ottimale di produzione** che minimizza i costi unitari. Nel **lungo periodo**, invece, si assume che l’impresa possa modificare la dimensione dell’impianto: la curva dei costi unitari di lungo periodo è data dall’**inviluppo delle curve di breve periodo** ed è tipicamente **decrescente**, mostrando come volumi produttivi più elevati comportino costi unitari più bassi.
 
-![](Pasted%20image%2020260209212443.png)
+![](imgs/Pasted%20image%2020260209212443.png)
 
 Tuttavia, all’aumentare della scala produttiva crescono anche i **costi fissi**, la cui incidenza sui costi unitari diventa rilevante. Ne consegue che una riduzione indesiderata dei volumi produttivi può provocare un **forte aumento dei costi unitari**, rendendo particolarmente rischiosa l’entrata nel settore.
 
