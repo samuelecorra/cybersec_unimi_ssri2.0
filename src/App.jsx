@@ -3,6 +3,7 @@ import tree from 'virtual:lesson-tree';
 import searchIndex from 'virtual:lesson-search';
 import Sidebar from './components/Sidebar.jsx';
 import Viewer from './components/Viewer.jsx';
+import BrowseView from './components/BrowseView.jsx';
 import Breadcrumb from './components/Breadcrumb.jsx';
 import Navigation from './components/Navigation.jsx';
 import SearchBar from './components/SearchBar.jsx';
@@ -16,6 +17,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [browsePath, setBrowsePath] = useState([]);
+  const [viewMode, setViewMode] = useLocalStorage('cyberlocker:viewMode', 'browse'); // 'browse' | 'viewer'
 
   const allFiles = useMemo(() => flattenFiles(tree), []);
 
@@ -59,7 +62,18 @@ export default function App() {
   const handleFileSelect = useCallback((filePath) => {
     loadFile(filePath);
     setSearchQuery('');
+    setViewMode('viewer');
   }, [loadFile]);
+
+  const handleBrowse = useCallback((path) => {
+    setBrowsePath(path);
+  }, []);
+
+  const handleBackToBrowse = useCallback(() => {
+    setViewMode('browse');
+    setCurrentFile(null);
+    setContent('');
+  }, [setCurrentFile]);
 
   const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
@@ -132,24 +146,41 @@ export default function App() {
           />
         )}
         <div className="content-area">
-          {currentFile && (
-            <div className="content-header">
-              <Breadcrumb path={currentFile} onNavigate={handleFileSelect} />
-              <Navigation
-                onPrev={handlePrev}
-                onNext={handleNext}
-                hasPrev={currentIndex > 0}
-                hasNext={currentIndex < allFiles.length - 1}
-                currentIndex={currentIndex}
-                total={allFiles.length}
+          {viewMode === 'viewer' && currentFile ? (
+            <>
+              <div className="content-header">
+                <div className="content-header-left">
+                  <button className="browse-return-btn" onClick={handleBackToBrowse} title="Torna alla navigazione">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M9 2L4 7L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  <Breadcrumb path={currentFile} onNavigate={handleFileSelect} />
+                </div>
+                <Navigation
+                  onPrev={handlePrev}
+                  onNext={handleNext}
+                  hasPrev={currentIndex > 0}
+                  hasNext={currentIndex < allFiles.length - 1}
+                  currentIndex={currentIndex}
+                  total={allFiles.length}
+                />
+              </div>
+              <Viewer
+                content={content}
+                currentFile={currentFile}
+                loading={loading}
               />
-            </div>
+            </>
+          ) : (
+            <BrowseView
+              tree={tree}
+              browsePath={browsePath}
+              onBrowse={handleBrowse}
+              onSelectFile={handleFileSelect}
+              currentFile={currentFile}
+            />
           )}
-          <Viewer
-            content={content}
-            currentFile={currentFile}
-            loading={loading}
-          />
         </div>
       </div>
     </div>
