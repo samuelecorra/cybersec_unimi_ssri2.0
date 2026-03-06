@@ -7,6 +7,11 @@ const VIRTUAL_SEARCH = 'virtual:lesson-search';
 const RESOLVED_TREE = '\0' + VIRTUAL_TREE;
 const RESOLVED_SEARCH = '\0' + VIRTUAL_SEARCH;
 
+// Extensions to copy to dist for static hosting
+const STATIC_EXTS = new Set([
+  '.md', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp',
+]);
+
 function scanDir(dir, base = '') {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   const result = [];
@@ -61,14 +66,34 @@ function buildSearchIndex(lessonsPath, files) {
   return index;
 }
 
+/** Recursively copy .md and image files from src to dest */
+function copyStaticFiles(srcDir, destDir) {
+  const entries = fs.readdirSync(srcDir, { withFileTypes: true });
+  for (const entry of entries) {
+    const srcPath = path.join(srcDir, entry.name);
+    const destPath = path.join(destDir, entry.name);
+    if (entry.isDirectory()) {
+      copyStaticFiles(srcPath, destPath);
+    } else {
+      const ext = path.extname(entry.name).toLowerCase();
+      if (STATIC_EXTS.has(ext)) {
+        fs.mkdirSync(path.dirname(destPath), { recursive: true });
+        fs.copyFileSync(srcPath, destPath);
+      }
+    }
+  }
+}
+
 export default function lessonsPlugin() {
   let lessonsPath;
+  let outDir;
 
   return {
     name: 'vite-plugin-lessons',
 
     configResolved(config) {
       lessonsPath = path.resolve(config.root, LESSONS_DIR);
+      outDir = path.resolve(config.root, config.build.outDir);
     },
 
     resolveId(id) {
@@ -89,63 +114,60 @@ export default function lessonsPlugin() {
       }
     },
 
+    // Dev server: serve lesson files statically at /lessons/...
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        if (req.url?.startsWith('/api/file?path=')) {
-          const filePath = decodeURIComponent(req.url.replace('/api/file?path=', ''));
-          const safePath = path.normalize(filePath).replace(/\.\./g, '');
-          const fullPath = path.join(lessonsPath, safePath);
+        const prefix = '/lessons/';
+        if (!req.url?.startsWith(prefix)) return next();
 
-          if (!fullPath.startsWith(lessonsPath)) {
-            res.statusCode = 403;
-            res.end('Forbidden');
-            return;
-          }
+        const filePath = decodeURIComponent(req.url.slice(prefix.length));
+        const safePath = path.normalize(filePath).replace(/\.\.\\/g, '').replace(/\.\.\//g, '');
+        const fullPath = path.join(lessonsPath, safePath);
 
-          try {
-            const content = fs.readFileSync(fullPath, 'utf-8');
-            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-            res.end(content);
-          } catch {
-            res.statusCode = 404;
-            res.end('Not found');
-          }
+        if (!fullPath.startsWith(lessonsPath)) {
+          res.statusCode = 403;
+          res.end('Forbidden');
           return;
         }
 
-        if (req.url?.startsWith('/api/image?path=')) {
-          const imgPath = decodeURIComponent(req.url.replace('/api/image?path=', ''));
-          const safePath = path.normalize(imgPath).replace(/\.\./g, '');
-          const fullPath = path.join(lessonsPath, safePath);
-
-          if (!fullPath.startsWith(lessonsPath)) {
-            res.statusCode = 403;
-            res.end('Forbidden');
-            return;
-          }
-
-          try {
-            const data = fs.readFileSync(fullPath);
-            const ext = path.extname(fullPath).toLowerCase();
-            const mime = {
-              '.png': 'image/png',
-              '.jpg': 'image/jpeg',
-              '.jpeg': 'image/jpeg',
-              '.gif': 'image/gif',
-              '.svg': 'image/svg+xml',
-              '.webp': 'image/webp',
-            }[ext] || 'application/octet-stream';
-            res.setHeader('Content-Type', mime);
-            res.end(data);
-          } catch {
-            res.statusCode = 404;
-            res.end('Not found');
-          }
-          return;
+        try {
+          const ext = path.extname(fullPath).toLowerCase();
+          const mimeTypes = {
+            '.md': 'text/plain; charset=utf-8',
+            '.png': 'image/png',
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.gif': 'image/gif',
+            '.svg': 'image/svg+xml',
+            '.webp': 'image/webp',
+          };
+          const contentType = mimeTypes[ext] || 'application/octet-stream';
+          const data = fs.readFileSync(fullPath);
+          res.setHeader('Content-Type', contentType);
+          res.setHeader('Cache-Control', 'no-cache');
+          res.end(data);
+        } catch {
+          res.statusCode = 404;
+          res.end('Not found');
         }
-
-        next();
       });
+    },
+
+    // Build: copy .md + images into dist/lessons/
+    closeBundle() {
+      const destDir = path.join(outDir, 'lessons');
+      console.log('Copying lesson files to dist/lessons/ ...');
+      copyStaticFiles(lessonsPath, destDir);
+      // Count copied files
+      let count = 0;
+      (function countFiles(dir) {
+        if (!fs.existsSync(dir)) return;
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+          if (entry.isDirectory()) countFiles(path.join(dir, entry.name));
+          else count++;
+        }
+      })(destDir);
+      console.log(`Copied ${count} lesson files to dist/lessons/`);
     },
   };
 }

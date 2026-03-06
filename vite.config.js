@@ -2,7 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import lessonsPlugin from './vite-plugin-lessons.js';
 
+const isGHPages = process.env.GITHUB_ACTIONS === 'true';
+
 export default defineConfig({
+  base: isGHPages ? '/samu-cyberlocker/' : '/',
   plugins: [
     react(),
     lessonsPlugin(),

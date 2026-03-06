@@ -1364,7 +1364,10 @@ body::before {
   border-radius: var(--radius);
   border: 1px solid var(--border-color);
   margin: 1em 0;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 16px var(--glow-magenta),
+    0 0 40px rgba(255, 0, 170, 0.15),
+    0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* ── Highlight.js Override ── */

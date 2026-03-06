@@ -41,7 +41,9 @@ export default function App() {
   const loadFile = useCallback(async (filePath) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/file?path=${encodeURIComponent(filePath)}`);
+      const base = import.meta.env.BASE_URL;
+      const url = `${base}lessons/${filePath}`;
+      const res = await fetch(url);
       if (!res.ok) throw new Error('Failed to load');
       const text = await res.text();
       setContent(text);

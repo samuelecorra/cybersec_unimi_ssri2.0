@@ -14,10 +14,19 @@ function Viewer({ content, currentFile, loading }) {
     () => ({
       img: ({ src, alt, ...props }) => {
         if (src && !src.startsWith("http") && !src.startsWith("data:")) {
-          const resolvedPath = dirPath ? `${dirPath}/${src}` : src;
+          // Decode %20 etc. first, then resolve relative path (../)
+          const decoded = decodeURIComponent(src);
+          const parts = dirPath ? `${dirPath}/${decoded}`.split("/") : decoded.split("/");
+          const resolved = [];
+          for (const p of parts) {
+            if (p === "..") resolved.pop();
+            else if (p && p !== ".") resolved.push(p);
+          }
+          const resolvedPath = resolved.join("/");
+          const base = import.meta.env.BASE_URL;
           return (
             <img
-              src={`/api/image?path=${encodeURIComponent(resolvedPath)}`}
+              src={`${base}lessons/${encodeURI(resolvedPath)}`}
               alt={alt || ""}
               className="md-image"
               loading="lazy"
