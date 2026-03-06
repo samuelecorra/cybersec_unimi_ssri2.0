@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-03-05T17:20:49.228Z",
+  "generatedAt": "2026-03-05T22:45:05.407Z",
   "root": "lessons/cybersecurity",
-  "totalFiles": 2736,
+  "totalFiles": 2794,
   "files": [
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L1 - Rette.md",
@@ -690,12 +690,12 @@
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L2 - Equivalenze asintotiche.md",
-      "size": 3647,
+      "size": 3844,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L3 - Il piccolo-o.md",
-      "size": 4408,
+      "size": 4732,
       "ext": ".md"
     },
     {
@@ -10970,7 +10970,7 @@
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M1/UD1/L1 - Proprietà del software.md",
-      "size": 11952,
+      "size": 11396,
       "ext": ".md"
     },
     {
@@ -11437,6 +11437,296 @@
       "path": "anno3/5_Progettazione_di_Software_Sicuro/SchedaInsegnamentoPSS.pdf",
       "size": 145374,
       "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l1/Lezione1.pdf",
+      "size": 99854,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l2/Lezione2.pdf",
+      "size": 76681,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/Esercizi/Counter.java",
+      "size": 1364,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/Esercizi/Examples.java",
+      "size": 8564,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/Esercizi/PositiveCounter.java",
+      "size": 961,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/Esercizi/PositiveCounterWithInvariant.java",
+      "size": 989,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/Esercizi/SumProductExamples.java",
+      "size": 538,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/javaEsami/java/GiocoDello8.java",
+      "size": 1014,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/javaEsami/java/KnightTour.java",
+      "size": 1286,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/javaEsami/java/Sokoban.java",
+      "size": 1623,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/Lezione3.pdf",
+      "size": 972469,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/testoEsami/testoEsami/esercizioGiocoOttoJML.pdf",
+      "size": 105290,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/testoEsami/testoEsami/esercizioKnightTourJML.pdf",
+      "size": 85764,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/testoEsami/testoEsami/esercizioSokobanJML.pdf",
+      "size": 157187,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l4/CounterAssert.java",
+      "size": 984,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l4/Lezione4.pdf",
+      "size": 998892,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/classiDatestare.zip",
+      "size": 1758,
+      "ext": ".zip"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/classiTicTacToePerCopertura.zip",
+      "size": 1418,
+      "ext": ".zip"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/copertureEsempioPerCoverage.zip",
+      "size": 1820,
+      "ext": ".zip"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/copertureEsempioPerCoverageConLazy.zip",
+      "size": 2624,
+      "ext": ".zip"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/EsempioPerCoverage.java",
+      "size": 420,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/EsempioPerCoverageConLazy.java",
+      "size": 172,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/eserciziJUnit.pdf",
+      "size": 203726,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/eserciziJUnitFileJava.zip",
+      "size": 904,
+      "ext": ".zip"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/esercizioCoperturaTicTacToe.pdf",
+      "size": 75802,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/Lezione5.pdf",
+      "size": 1009945,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/SumClass.java",
+      "size": 596,
+      "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/testDiEsempio.zip",
+      "size": 1897,
+      "ext": ".zip"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/testSum.zip",
+      "size": 1551,
+      "ext": ".zip"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l6/6DbCJML.pdf",
+      "size": 738780,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l6/jmldbc.pdf",
+      "size": 186696,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l6/tutorialJML.PDF",
+      "size": 1534604,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l1/l1.md",
+      "size": 38922,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l1/PRODOTTO-PROCESSO.pdf",
+      "size": 1424028,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l10/aspetti di sicurezza.pdf",
+      "size": 622105,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l10/l10.md",
+      "size": 36440,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l11/AnalisiStatica.pdf",
+      "size": 1572673,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l11/java_checklist.pdf",
+      "size": 70336,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l11/l11.md",
+      "size": 24179,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l12/DevOps and Code ManagementITA.pdf",
+      "size": 2243216,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l12/l12.md",
+      "size": 18998,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l2/INGEGNERIA DEI REQUISITI.pdf",
+      "size": 3032933,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l2/l2.md",
+      "size": 38762,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/l3_4_5.md",
+      "size": 40616,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/MODELLI DI SISTEMA.pdf",
+      "size": 2791104,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l6/6DbCJML.pdf",
+      "size": 738780,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l6/jmldbc.pdf",
+      "size": 186696,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l6/l6.md",
+      "size": 35385,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l6/tutorialJML.PDF",
+      "size": 1534604,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l7/FSMinJava.pdf",
+      "size": 180669,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l7/implementation.pdf",
+      "size": 1952182,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l7/JavaSecuritypartedue.pdf",
+      "size": 282641,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l7/l7.md",
+      "size": 35648,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l7/SicurezzainJavaAppletOstili.pdf",
+      "size": 257686,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l8/l8.md",
+      "size": 32280,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l8/TESTING.pdf",
+      "size": 923234,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l9/CriteriCopertura.pdf",
+      "size": 1752820,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l9/l9.md",
+      "size": 21628,
+      "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/imgs/Lezione10b_Spoofing2021Fingerprint_Carvalho_Tihanyi.pdf",
