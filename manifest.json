@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-03-05T22:45:05.407Z",
+  "generatedAt": "2026-03-12T21:18:18.493Z",
   "root": "lessons/cybersecurity",
-  "totalFiles": 2794,
+  "totalFiles": 2827,
   "files": [
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L1 - Rette.md",
@@ -11439,9 +11439,19 @@
       "ext": ".pdf"
     },
     {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l1/l1.md",
+      "size": 23148,
+      "ext": ".md"
+    },
+    {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l1/Lezione1.pdf",
       "size": 99854,
       "ext": ".pdf"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l2/l2.md",
+      "size": 28726,
+      "ext": ".md"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l2/Lezione2.pdf",
@@ -11475,7 +11485,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/javaEsami/java/GiocoDello8.java",
-      "size": 1014,
+      "size": 1058,
       "ext": ".java"
     },
     {
@@ -11487,6 +11497,11 @@
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/javaEsami/java/Sokoban.java",
       "size": 1623,
       "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/l3.md",
+      "size": 27322,
+      "ext": ".md"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/Lezione3.pdf",
@@ -11512,6 +11527,11 @@
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l4/CounterAssert.java",
       "size": 984,
       "ext": ".java"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l4/l4.md",
+      "size": 18325,
+      "ext": ".md"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l4/Lezione4.pdf",
@@ -11540,12 +11560,12 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/EsempioPerCoverage.java",
-      "size": 420,
+      "size": 447,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/EsempioPerCoverageConLazy.java",
-      "size": 172,
+      "size": 183,
       "ext": ".java"
     },
     {
@@ -11564,13 +11584,18 @@
       "ext": ".pdf"
     },
     {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/l5.md",
+      "size": 25612,
+      "ext": ".md"
+    },
+    {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/Lezione5.pdf",
       "size": 1009945,
       "ext": ".pdf"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/SumClass.java",
-      "size": 596,
+      "size": 620,
       "ext": ".java"
     },
     {
@@ -11594,13 +11619,153 @@
       "ext": ".pdf"
     },
     {
+      "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l6/l6.md",
+      "size": 41661,
+      "ext": ".md"
+    },
+    {
       "path": "anno3/5.1_PSS_corso_aggiornato/laboratorio/l6/tutorialJML.PDF",
       "size": 1534604,
       "ext": ".pdf"
     },
     {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306151258.png",
+      "size": 271344,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306164926.png",
+      "size": 194887,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306210914.png",
+      "size": 667358,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306211148.png",
+      "size": 134047,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306211718.png",
+      "size": 135845,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306211756.png",
+      "size": 140273,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306211810.png",
+      "size": 126194,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306211835.png",
+      "size": 156750,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306211952.png",
+      "size": 435603,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306212041.png",
+      "size": 313933,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306212311.png",
+      "size": 72182,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306212329.png",
+      "size": 100932,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306212344.png",
+      "size": 97406,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306212550.png",
+      "size": 178544,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306212918.png",
+      "size": 318221,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306213626.png",
+      "size": 192225,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306213719.png",
+      "size": 475346,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306213728.png",
+      "size": 53712,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306213738.png",
+      "size": 250047,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306213824.png",
+      "size": 178576,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306213856.png",
+      "size": 187566,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306213922.png",
+      "size": 16222,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306214031.png",
+      "size": 54621,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306214134.png",
+      "size": 54382,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306214146.png",
+      "size": 54551,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306214203.png",
+      "size": 54519,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260306214214.png",
+      "size": 82925,
+      "ext": ".png"
+    },
+    {
       "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l1/l1.md",
-      "size": 38922,
+      "size": 40429,
       "ext": ".md"
     },
     {
@@ -11615,7 +11780,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l10/l10.md",
-      "size": 36440,
+      "size": 41483,
       "ext": ".md"
     },
     {
@@ -11630,7 +11795,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l11/l11.md",
-      "size": 24179,
+      "size": 28032,
       "ext": ".md"
     },
     {
@@ -11640,7 +11805,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/teoria/l12/l12.md",
-      "size": 18998,
+      "size": 22565,
       "ext": ".md"
     },
     {
