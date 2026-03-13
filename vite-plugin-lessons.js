@@ -29,7 +29,7 @@ function scanDir(dir, base = '') {
   }
   result.sort((a, b) => {
     if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
-    return a.name.localeCompare(b.name, 'it');
+    return a.name.localeCompare(b.name, 'it', { numeric: true });
   });
   return result;
 }
