@@ -1,6 +1,7 @@
 .DS_Store
 .vscode/
 .vite/
+.obsidian/
 node_modules/
 dist/
 *.old.html
