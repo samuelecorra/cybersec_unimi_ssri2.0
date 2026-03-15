@@ -1,1 +1,7 @@
-{}
+{
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs",
+  "readableLineLength": true
+}
