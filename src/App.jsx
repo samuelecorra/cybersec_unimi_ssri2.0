@@ -16,7 +16,7 @@ export default function App() {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [browsePath, setBrowsePath] = useState([]);
   const [viewMode, setViewMode] = useLocalStorage('cyberlocker:viewMode', 'browse'); // 'browse' | 'viewer'
 
