@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/l3_4_5.md",
+                "file": "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l8/l8.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "l3_4_5"
+              "title": "l8"
             }
           }
         ]
@@ -186,23 +186,33 @@
   },
   "active": "48564515ae964f07",
   "lastOpenFiles": [
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/photo_2026-03-17_20-46-23.jpg",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317200756.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317195435.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317194352.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/MODELLI DI SISTEMA.pdf",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/l3_4_5.md",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317161425.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l9/l9.md",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050610.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050606.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050535.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050517.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050503.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050125.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050026.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318045749.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318045654.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318045618.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l9/CriteriCopertura.pdf",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l8/l8.md",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l7/l7.md",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l7/FSMinJava.pdf",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l11/l11.md",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/tutorialJML.PDF",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/jmldbc.pdf",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/6DbCJML.pdf",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/l6.md",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317021704.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317021649.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317021632.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317021622.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317021610.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260317021549.png",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/codici/intro_jml.java",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/codici",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/intro_jml.java",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/laboratorio.iml",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/l3.iml",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/l3_4_5.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l2/l2.md",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l2/INGEGNERIA DEI REQUISITI.pdf",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l1/l1.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l6/l6.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/l5.md",
@@ -210,13 +220,6 @@
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l2/l2.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l1/l1.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/l3.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l6",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l4",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l2",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l1",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio",
     "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L6 - Progettazione fisica e gestione delle interrogazioni.md",
     "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L5 - Organizzazione di file - Strutture ad albero (B e B+).md",
     "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L4 - Organizzazione di file - Gestione delle tuple nelle pagine.md",
@@ -227,10 +230,6 @@
     "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/Intro M5.md",
     "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L7 - I ripetitori e i bridge.md",
     "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD9/L1 - Sicurezza IP (IPsec).md",
-    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L9 - Tecnologia di commutazione.md",
-    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L8 - Gli switch.md",
-    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L6 - Server, bus e stazioni di lavoro --.md",
-    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L5 - Schede, connettori e hub.md",
-    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L4 - Hardware di rete.md"
+    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L9 - Tecnologia di commutazione.md"
   ]
 }

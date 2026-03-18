@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="l5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/copertureEsempioPerCoverage.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/classiTicTacToePerCopertura.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/testSum.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/copertureEsempioPerCoverageConLazy.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/eserciziJUnitFileJava.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/testDiEsempio.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/classiDatestare.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

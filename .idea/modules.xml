@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lessons/cybersecurity/anno3/5_Progettazione_di_Software_Sicuro/5_Progettazione_di_Software_Sicuro.iml" filepath="$PROJECT_DIR$/lessons/cybersecurity/anno3/5_Progettazione_di_Software_Sicuro/5_Progettazione_di_Software_Sicuro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/javaEsami/javaEsami.iml" filepath="$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/javaEsami/javaEsami.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/l3.iml" filepath="$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/l3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/laboratorio.iml" filepath="$PROJECT_DIR$/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/laboratorio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/samu-cyberlocker.iml" filepath="$PROJECT_DIR$/.idea/samu-cyberlocker.iml" />
+    </modules>
+  </component>
+</project>
