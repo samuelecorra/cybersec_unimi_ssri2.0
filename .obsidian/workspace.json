@@ -185,6 +185,11 @@
   },
   "active": "48564515ae964f07",
   "lastOpenFiles": [
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/NaturalSet.java",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/ProduttoreConsumatore.java",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/produttore_consumatore.java",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/e1.java",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi",
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD4/L1 - Processi cooperanti.md",
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/L5 - Schedulazione dei thread.md",
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs/photo_2026-03-19_16-49-44.jpg",
@@ -218,18 +223,13 @@
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l7/FSMinJava.pdf",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l11/l11.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/tutorialJML.PDF",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/jmldbc.pdf",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/6DbCJML.pdf",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/l6.md",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/codici/intro_jml.java",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/codici",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/l3_4_5.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l2/l2.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l1/l1.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l6/l6.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/l5.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l4/l4.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l2/l2.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l1/l1.md"
+    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l2/l2.md"
   ]
 }
