@@ -128,6 +128,8 @@ Il comportamento di un processo nel tempo si può rappresentare con un **grafo o
     
 - gli **archi** rappresentano le possibili **transizioni** tra stati.
 
+![](imgs/Pasted%20image%2020260319131424.png)
+
 Le transizioni principali sono:
 
 - **New → Ready**: il processo è pronto a partire;
@@ -168,6 +170,8 @@ Il PCB è ciò che permette al sistema operativo di **sospendere e riprendere** 
 
 I processi vengono organizzati in **code**, una per ogni stato:
 
+![](imgs/Pasted%20image%2020260319131502.png)
+
 $$  
 \begin{cases}  
 \textbf{Coda dei pronti (Ready Queue):}~ & \text{processi pronti a usare la CPU.} \\\\  
@@ -177,6 +181,8 @@ $$
 $$
 
 Le transizioni tra code rappresentano **il ciclo di vita dinamico** dei processi all’interno del sistema operativo.
+
+![](imgs/Pasted%20image%2020260319131515.png)
 
 ---
 ### **10. Sintesi finale**

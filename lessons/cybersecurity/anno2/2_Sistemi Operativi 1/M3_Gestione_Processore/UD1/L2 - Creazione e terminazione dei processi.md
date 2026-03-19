@@ -120,6 +120,8 @@ Da queste relazioni nasce una struttura gerarchica detta **albero dei processi**
     
 - gli archi rappresentano relazioni padre–figlio.
 
+![](imgs/Pasted%20image%2020260319133910.png)
+
 Il **processo radice** (root) è spesso il primo processo generato dal sistema operativo (es. `init` in UNIX o `System` in Windows).
 
 ---

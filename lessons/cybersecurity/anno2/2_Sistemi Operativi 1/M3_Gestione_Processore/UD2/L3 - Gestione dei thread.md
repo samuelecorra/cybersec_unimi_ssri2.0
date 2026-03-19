@@ -130,6 +130,8 @@ La comunicazione avviene di norma tramite **variabili condivise**, ma può anche
 I **processi leggeri (LWP)** rappresentano una **via di mezzo tra thread e processi**.  
 Sono usati nei modelli **molti-a-molti** e **a due livelli** per collegare i thread utente con i thread kernel.
 
+![](imgs/Pasted%20image%2020260319152351.png)
+
 Un LWP agisce come un **processore virtuale**:  
 fa da ponte tra i thread gestiti in spazio utente e quelli riconosciuti dal sistema operativo.
 

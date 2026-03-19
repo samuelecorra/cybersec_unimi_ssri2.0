@@ -33,6 +33,8 @@ Esistono quattro modelli principali:
 
 In questo modello, **più thread utente** sono mappati su **un solo thread kernel**.
 
+![](imgs/Pasted%20image%2020260319145731.png)
+
 $$  
 \begin{cases}  
 \textbf{Vantaggi:}~ & \text{gestione veloce, nessun intervento del kernel, basso overhead.} \\\\  
@@ -48,6 +50,8 @@ Il principale **problema** è la **serializzazione** dei thread: solo uno può e
 
 In questo modello, **ogni thread utente** corrisponde a **un thread kernel**.
 
+![](imgs/Pasted%20image%2020260319151211.png)
+
 $$  
 \begin{cases}  
 \textbf{Vantaggi:}~ & \text{vera concorrenza, sfruttamento del multiprocessore, indipendenza tra thread.} \\\\  
@@ -62,6 +66,8 @@ Ogni thread può essere schedulato dal kernel su un processore differente.
 #### **3.3. Modello molti-a-molti**
 
 Qui **più thread utente** vengono mappati su **più thread kernel**, con **numero flessibile e dinamico** di associazioni.
+
+![](imgs/Pasted%20image%2020260319151312.png)
 
 $$  
 \begin{cases}  
@@ -80,6 +86,8 @@ $$
 - alcuni thread utente sono mappati **direttamente su thread kernel** (come nel modello 1:1),
     
 - altri passano attraverso un livello di gestione intermedio (come nel modello molti-a-molti).
+
+![](imgs/Pasted%20image%2020260319151328.png)
 
 $$  
 \begin{cases}  

@@ -48,6 +48,8 @@ In applicazioni come un **server web**, questi limiti diventano critici: mentre 
 La soluzione consiste nel permettere **più flussi di controllo nello stesso processo**.  
 Nasce così il concetto di **thread**, anche detto **processo leggero** (_lightweight process_).
 
+![](imgs/Pasted%20image%2020260319145100.png)
+
 #### **4.1. Definizione**
 
 Un **thread** è un **flusso di controllo dell’esecuzione di istruzioni** all’interno di un processo.  

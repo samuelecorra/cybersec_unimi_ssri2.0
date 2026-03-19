@@ -113,6 +113,8 @@ $$
 
 La tecnica principale è lo **swapping**, ossia lo spostamento temporaneo dei processi tra memoria centrale e memoria di massa:
 
+![](imgs/Pasted%20image%2020260319154257.png)
+
 $$  
 \begin{cases}  
 \textbf{Swapping out:}~ & \text{rimozione di processi dalla memoria centrale;} \\\\  

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l8/l8.md",
+                "file": "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD4/L3 - Comunicazione con memoria condivisa.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "l8"
+              "title": "L3 - Comunicazione con memoria condivisa"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 505.5,
-    "collapsed": true
+    "width": 505.5
   },
   "right": {
     "id": "6126a7f85e1957b3",
@@ -186,19 +185,35 @@
   },
   "active": "48564515ae964f07",
   "lastOpenFiles": [
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l9/l9.md",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050610.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050606.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050535.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050517.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050503.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050125.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318050026.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318045749.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318045654.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/imgs/Pasted image 20260318045618.png",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l9/CriteriCopertura.pdf",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD4/L1 - Processi cooperanti.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/L5 - Schedulazione dei thread.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs/photo_2026-03-19_16-49-44.jpg",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs/photo_2026-03-19_16-46-41.jpg",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/L4 - Schedulazione per sistemi in tempo reale.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs/photo_2026-03-19_16-31-11.jpg",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/L3 - Politiche di schedulazione.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs/Pasted image 20260319161308.png",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/L2 - Criteri di valutazione della schedulazione.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs/photo_2026-03-19_16-05-19.jpg",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/L1 - Livelli di schedulazione e attivazione dei processi.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs/Pasted image 20260319154257.png",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD2/L3 - Gestione dei thread.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD2/imgs/Pasted image 20260319152351.png",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD2/L2 - Modelli multi-thread.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD2/imgs/Pasted image 20260319151328.png",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD2/imgs/Pasted image 20260319151312.png",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD2/imgs/Pasted image 20260319151211.png",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD2/L1 - Thread.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD2/imgs",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L3 - Sospensione e riattivazione dei processi.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L2 - Creazione e terminazione dei processi.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L1 - Concetto di processo.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L0 - Intro UD1.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/imgs",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l8/l8.md",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l9/l9.md",
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l9/CriteriCopertura.pdf",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l7/l7.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l7/FSMinJava.pdf",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l11/l11.md",
@@ -208,9 +223,6 @@
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/l6.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/codici/intro_jml.java",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/codici",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/intro_jml.java",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/laboratorio.iml",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/l3.iml",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/l3_4_5.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l2/l2.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l1/l1.md",
@@ -218,18 +230,6 @@
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/l5.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l4/l4.md",
     "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l2/l2.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l1/l1.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l3/l3.md",
-    "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L6 - Progettazione fisica e gestione delle interrogazioni.md",
-    "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L5 - Organizzazione di file - Strutture ad albero (B e B+).md",
-    "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L4 - Organizzazione di file - Gestione delle tuple nelle pagine.md",
-    "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L3 - Organizzazione di file -Strutture hash-based.md",
-    "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L2 - Organizzazione di file - Strutture sequenziali.md",
-    "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L1 - Moduli per l’accesso ai dati e gestione della memoria.md",
-    "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L0 - Intro UD1.md",
-    "dist/lessons/cybersecurity/anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/Intro M5.md",
-    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L7 - I ripetitori e i bridge.md",
-    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD9/L1 - Sicurezza IP (IPsec).md",
-    "dist/lessons/cybersecurity/anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L9 - Tecnologia di commutazione.md"
+    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l1/l1.md"
   ]
 }

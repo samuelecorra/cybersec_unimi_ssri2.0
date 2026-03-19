@@ -98,6 +98,8 @@ L’analisi si basa sulla **Teoria delle Code**, studiando grandezze come:
     
 - utilizzo medio delle risorse.
 
+![](imgs/photo_2026-03-19_16-05-19.jpg)
+
 Si ottengono stime **statistiche** del comportamento del sistema, spesso più realistiche di quelle analitiche ma al prezzo di una maggiore complessità.
 
 ---

@@ -45,6 +45,8 @@ Supponiamo tre processi con i seguenti tempi di CPU:
 |P2|3|2|
 |P3|3|3|
 
+![](imgs/Pasted%20image%2020260319161308.png)
+
 Con ordine di arrivo P1 → P2 → P3:  
 $$  
 \text{Tempo medio di attesa} = \frac{(0 + 24 + 27)}{3} = 17  

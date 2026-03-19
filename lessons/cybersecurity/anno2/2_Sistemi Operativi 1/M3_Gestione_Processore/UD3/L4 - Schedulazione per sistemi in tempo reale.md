@@ -30,6 +30,9 @@ $$
 #### **2.1. Sistemi in tempo reale stretto (Hard Real-Time)**
 
 In un sistema _hard real-time_ è **obbligatorio** che ogni processo termini **entro un tempo massimo garantito** dall’attivazione.  
+
+![](imgs/photo_2026-03-19_16-31-11.jpg)
+
 Il mancato rispetto della scadenza rappresenta **un errore di sistema**.
 
 Esempi:

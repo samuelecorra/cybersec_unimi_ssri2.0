@@ -29,6 +29,8 @@ L’esecuzione dei thread può essere gestita secondo due approcci principali:
 Questa modalità si applica ai **thread gestiti interamente nello spazio utente**, chiamati anche **thread user-level**.  
 Non coinvolgono direttamente il kernel, e la loro gestione è affidata a una **libreria dei thread** (ad esempio POSIX Threads, _pthreads_).
 
+![](imgs/photo_2026-03-19_16-46-41.jpg)
+
 ---
 #### **3.1. Nome tecnico**
 
@@ -56,6 +58,8 @@ poiché il kernel non è consapevole dei singoli thread utente, **se un thread e
 
 In questo caso i thread sono **conosciuti e gestiti direttamente dal sistema operativo**.  
 Ogni thread ha una **struttura di controllo nel kernel (TCB)** e può essere schedulato **indipendentemente** dagli altri thread del processo.
+
+![](imgs/photo_2026-03-19_16-49-44.jpg)
 
 ---
 #### **4.1. Nome tecnico**
