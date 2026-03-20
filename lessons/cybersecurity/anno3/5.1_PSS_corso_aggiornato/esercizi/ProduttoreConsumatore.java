@@ -35,7 +35,6 @@ public class ProduttoreConsumatore {
         al massimo maggiore di un’unità al numero di 1 presenti nel buffer
         prima dell’esecuzione del metodo.  */
 
-    // Facciamo il costruttore:
     int[] buffer;
     int indice;
 
