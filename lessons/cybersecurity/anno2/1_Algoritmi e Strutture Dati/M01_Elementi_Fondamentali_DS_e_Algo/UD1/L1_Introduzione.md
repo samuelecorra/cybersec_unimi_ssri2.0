@@ -1,4 +1,3 @@
-
 Ogni grande impresa dell’informatica comincia da qui: dal capire come pensano le macchine e come ragiona un problema.  
 Il Modulo 1 è la porta d’ingresso in questo mondo: ci insegna a guardare un programma non più come una sequenza di comandi, ma come una strategia di pensiero.  
 Un algoritmo, in fondo, è solo questo: un piano chiaro per arrivare da un punto A a un punto B nel modo più intelligente possibile.  
@@ -36,51 +35,111 @@ Capire questa differenza è ciò che distingue chi “usa” la programmazione d
 
 ### 2. Esempio: trovare il minimo in un intervallo di un array
 
-Prendiamo un esempio concreto.  
-Abbiamo un array di numeri, a, e vogliamo sapere qual è il valore minimo compreso tra le posizioni j e k.  
-Il problema è chiaro: vogliamo il numero più piccolo in quella porzione.  
+Prendiamo un esempio concreto.
+
+Abbiamo un array di numeri, $a$, e vogliamo sapere qual è il valore minimo compreso tra le posizioni $j$ e $k$.
+
+Il problema è chiaro: vogliamo il numero più piccolo in quella porzione. 
 Ora serve l’algoritmo, cioè il metodo per arrivarci.
 
-  
+I possibili approcci sono due:
   
 
-### Versione iterativa (passo dopo passo)
+#### 2.1 - Versione iterativa (passo dopo passo)
 
-1. Si suppone che il primo elemento a[j] sia il minimo.  
-      
+1. Si suppone che il primo elemento a[j] sia il minimo. Questo è uno step manuale di inizializzazione che serve per progredire coi successivi!
     
-2. Si scorrono tutti gli altri, da a[j+1] fino ad a[k].  
-      
+2. Si scorrono tutti gli altri, da a[j+1] fino ad a[k].    
     
-3. Ogni volta che si trova un elemento più piccolo, si aggiorna il minimo.  
-      
+3. Ogni volta che si trova un elemento più piccolo, si aggiorna il minimo.    
     
 4. Alla fine del ciclo, il valore più basso rimasto è il minimo assoluto.  
-      
-    
+
+```c
+#include <stdio.h>
+
+int minimo_iterativo(int* array, int j, int k) {
+
+    int min = array[j]; // Accedo al primo elemento e lo ipotizzo come minimo
+
+    int i; // Dichiaro la variabile di ciclo
+
+    for (i = j + 1; i <= k; i++) { // Ciclo dal secondo elemento fino all'ultimo
+        // Uso un ternary operator per snellire il codice:
+        min = array[i] < min ? array[i] : min;
+    }
+    return min;
+}
+
+int main() { // Ora possiamo utilizzare la funzione appena creata:
+
+    int numeri[6] = {10, 4, 2000, 20, 13, 2004};
+    int j = 0;
+    int k = 5;
+
+    int minimo = minimo_iterativo(numeri, j, k);
+
+    printf("Il minimo dell'array e': %.2d\n", minimo);
+}
+```
 
 Questo modo di ragionare è sequenziale: passo dopo passo, sempre nello stesso schema.  
 È semplice, lineare, intuitivo: come guardare tutti i numeri in fila finché non si trova il più piccolo.
 
-### Versione ricorsiva (divide et impera)
+#### 2.2 - Versione ricorsiva (divide et impera)
 
 La ricorsione funziona come uno specchio: la funzione chiama se stessa su un problema un po’ più piccolo, finché non arriva a un caso così semplice da poter dare subito la risposta.
 
 In questo caso:
 
 - Se c’è un solo elemento, è per forza il minimo.  
-      
     
 - Altrimenti si calcola il minimo nel sottoproblema (dall’indice j+1 a k) e lo si confronta con a[j].  
       
-    
 - Il più piccolo tra i due è il minimo finale.  
-      
-    
 
 La ricorsione funziona se — e solo se — ogni chiamata riduce il problema e c’è un caso base chiaro che fa terminare la catena.  
 È come scendere una scala togliendo un gradino ogni volta: se togli sempre un gradino, prima o poi tocchi terra.
 
+```c
+#include <stdio.h>
+
+int minimo_ricorsivo(int* array, int j, int k) {
+
+    int min;
+
+    if (j == k) { // Caso base: se l'array ha un solo elemento...
+        min = array[j];
+    } else {
+        // Caso ricorsivo:
+        min = minimo_ricorsivo(array, j+1, k);
+        min = array[j] < min ? array[j] : min;
+    }
+    return min;
+}
+
+int main() { // Ora possiamo utilizzare la funzione appena creata:
+
+    int numeri[6] = {20, 46, 92, 15, 13, 2004};
+    int j = 0;
+    int k = 5;
+
+    int minimo = minimo_ricorsivo(numeri, j, k);
+
+    printf("Il minimo dell'array e': %.2d\n", minimo);
+}
+```
+
+Simuliamo cosa accadrebbe eseguendo il programma:
+
+- Alla prima chiamata, finiamo sin da subito nel ramo else, che "esclude" il primo elemento, avanzando di 1 e chiamando ricorsivamente la funzione sui numeri dal secondo al sesto;
+- Ora dunque, annidati di 1 livello, entriamo per la seconda volta nel ramo else, escludendo anche il secondo elemento e riducendo il dominio del sottoproblema a { 92, 15, 13, 2004 };
+- Si continua ad annidarsi in continue chiamate ricorsive finché non si arriva ad escludere tutti i numeri tranne 2004, che viene settato quindi a minimo dal ramo if;
+- A questo punto, avendo inizializzato finalmente la variabile min, iniziamo a risalire e togliere annidamenti un passo alla volta.
+- Il primo step di risalita consiste dunque nell'andare a eseguire l'istruzione dopo l'ultima chiamata ricorsiva che aveva portato al caso base, ovvero quella con l'operatore ternario.
+- Confrontiamo dunque penultimo e ultimo elemento, decidendo che 13 è il nuovo minimo trovato nel sottoproblema;
+- Risaliamo ancora, confrontando 13 e 15, ergo la variabile min rimane invariata;
+- Tutti i successivi confronti durante la risalita danno falso come esito: alla fine, il minimo trovato è 13!
 ---
 
 ### 3. Iterazione e ricorsione: due modi per pensare

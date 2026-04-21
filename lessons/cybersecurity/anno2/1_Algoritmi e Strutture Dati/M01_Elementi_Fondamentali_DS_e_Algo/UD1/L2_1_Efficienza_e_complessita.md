@@ -11,7 +11,6 @@ Impareremo che:
 - possiamo descrivere questa efficienza con una funzione chiamata **$T(n)$**, che lega il tempo di calcolo alla dimensione dei dati d’ingresso;
     
 - grazie a $T(n)$, possiamo finalmente confrontare due algoritmi e capire _chi vince la corsa_ in termini di risorse.
-    
 
 È l’inizio della **scienza della complessità**: il punto in cui la programmazione smette di essere arte e diventa analisi quantitativa.
 
@@ -71,10 +70,13 @@ int minimo_iterativo(int* array, int j, int k) {
     for (i = j + 1; i <= k; i++) {
         min = array[i] < min ? array[i] : min;
     }
-
     return min;
 }
 ```
+
+E' chiaro che in questo scenario l'input non è altro che la dimensione dell'array, ovvero il numero totale di elementi da confrontare.
+
+---
 
 #### **Analisi passo-passo**
 
@@ -97,6 +99,7 @@ int minimo_iterativo(int* array, int j, int k) {
     
 6. A fine ciclo, un `return` con costo unitario
 
+---
 
 Se indichiamo con $(c_1, c_2, \dots)$ i costi elementari di ciascun blocco, 
 possiamo procedere con un otteniamo una formula del tipo:
@@ -118,11 +121,10 @@ $b = c_1 + c_2 - c_4 + c_5$
 Possiamo snellire la funzione 
 $$T(n)=an+b$$
 
-dove (a) e (b) sono costanti positive.  
+dove $a$ e $b$ sono costanti positive.  
 In pratica, **il tempo di calcolo cresce linearmente con n**.  
 Se raddoppio la dimensione dell’array, raddoppia anche il numero di operazioni.  
 È un algoritmo di **complessità lineare**.
-
 
 ---
 
@@ -145,9 +147,12 @@ int minimo_ricorsivo(int* array, int j, int k) {
 }
 ```
 
+---
+
 #### **Analisi passo-passo**
 
 ![Pasted image 20251025215145](imgs/Pasted%20image%2020251025215145.png)
+
 #### **Caso base (n = 1)**
 
 Se l’array contiene un solo elemento, sfociamo nel caso base, dunque la funzione esegue poche operazioni fisse:  un confronto, un assegnamento, un ritorno.
@@ -159,8 +164,8 @@ Il problema è che bisogna estendere la validità per qualsiasi n.
 #### **Caso generale (n > 1)**
 
 Concentriamoci subito sul punto più critico, ovvero la reinvocazione della funzione.
-		Dal momento che si continuerà a richiamare finché non si avrà j == k, possiamo dedurre
-		che verrà richiamata per un totale di n-1 volte. Questo implica che: 
+
+Dal momento che si continuerà a richiamare finché non si avrà $j == k$, possiamo dedurre che verrà richiamata per un totale di $n-1$ volte. Questo implica che: 
 
 - una chiamata ricorsiva su $(n − 1)$ elementi → costa $T(n − 1)$;
 
@@ -184,25 +189,27 @@ $$
 
 #### **Metodo delle sostituzioni successive**
 
-Vogliamo valutare $T(n)$, ma ciò appare complicato.
-La chiave risiede nell'applicare il metodo delle sostituzioni successive.
-Per $n>1$:  
+Vogliamo valutare $T(n)$, ma ciò appare complicato, in quanto la ricorsività ci mette davanti a uno scenario in cui anche a destra dell'uguale troviamo un $T$.
+La chiave risiede nell'applicare il cosiddetto metodo delle sostituzioni successive.
+
+Per $n>1$, la situazione di partenza sappiamo essere:
 
 $$T(n) = T(n-1) + d$$
 
-Ora sviluppo $T(n-1)$, cioè la stessa formula, ma con $n-1$ al posto di $n$:
+Niente timore: se sappiamo esprimere $T(n)$ con la parte destra dell'equazione, allora possiamo esprimere e sviluppare anche $T(n-1)$, cioè la stessa formula, ma con $n-1$ al posto di $n$:
 
 $$  
 T(n-1) = T(n-2) + d  
 $$
 
-Quindi, sostituendolo in cima nell'oroginale, ottengo: 
+Quindi ora possiamo sostituirlo in cima nell'oroginale. Quel che ottengo è: 
 
 $$  
-T(n) = [T(n-2) + d] + d = T(n-2) + 2d  
+T(n) = [ \ T(n-2) + d \ ] + d = T(n-2) + 2d  
 $$
 
 ---
+
 Ancora una volta, sostituisco $T(n-2)$:
 
 $$  
@@ -212,11 +219,12 @@ $$
 Quindi:  
 
 $$  
-T(n) = [T(n-3) + d] + 2d = T(n-3) + 3d  
+T(n) = [ \ T(n-3) + d \ ] + 2d = T(n-3) + 3d  
 $$
 
 ---
-Puoi notare il **pattern**:  
+
+E' il momento di notare il **pattern**:  
 dopo $k$ sostituzioni, si ottiene
 
 $$  
@@ -224,22 +232,27 @@ T(n) = T(n-k) + kd
 $$
 
 ---
-La condizione base è $T(1) = c$, quindi smetto di sostituire quando $n - k = 1$, cioè $k = n - 1$.
 
-Sostituendo:
+Però attenzione, la ricorsività a una certa si dovrà pur fermare, se l'algoritmo è corretto e non si continua all'infinito.
+
+La condizione base è $T( n = 1) = c$, quindi smetto di sostituire quando $n - k = 1$, cioè quando $k = n - 1$.
+
+Da questa osservazione possiamo eseguire un'astuta sostituzione algebrica:
 
 $$  
 T(n) = T(1) + (n-1)d  
 $$
 
 ---
-Poiché $T(1) = c$:
+
+Poiché $T(1) = c$, lo scriviamo esplicitamente:
 
 $$  
 T(n) = c + (n-1)d  
 $$
 
 ---
+
 Sviluppiamo la parentesi e poi ridefiniamo:
 
 $$  
@@ -249,7 +262,7 @@ $$
 $$T(n) = a n + b$$
 
 Questo ci porta a concludere che:
-La versione ricorsiva, dunque, **ha la stessa efficienza** della versione iterativa: entrambe crescono linearmente con n.
+La versione ricorsiva, dunque, **ha la stessa efficienza** della versione iterativa: entrambe crescono linearmente con $n$.
 
 ---
 
@@ -264,7 +277,6 @@ Ecco perché si parla di:
 - **caso peggiore (worst case)**: quando deve percorrere tutti i passi possibili;
     
 - **caso medio (average case)**: il comportamento “statisticamente tipico”.
-    
 
 In genere si studia il **caso pessimo**, perché fornisce una garanzia: sappiamo che _mai_ andrà peggio di così.
 
@@ -277,7 +289,6 @@ Immaginiamo due regole per creare password sicure di 8 caratteri.
 - **Regola 1:** 8 caratteri qualsiasi (lettere maiuscole/minuscole, numeri, simboli).
     
 - **Regola 2:** 8 caratteri, ma con l’obbligo di avere almeno una minuscola, una maiuscola, un numero e un simbolo.
-    
 
 Prima di procedere:
 Definiamo le dimensioni delle classi di caratteri:

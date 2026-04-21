@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "542eabd27297b774",
+        "id": "4f5d77c7e9c65b2e",
         "type": "tabs",
         "children": [
           {
-            "id": "48564515ae964f07",
+            "id": "aa33fc745208772e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD4/L3 - Comunicazione con memoria condivisa.md",
+                "file": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L2_1_Efficienza_e_complessita.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "L3 - Comunicazione con memoria condivisa"
+              "title": "L2_1_Efficienza_e_complessita"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 505.5
+    "width": 505.5,
+    "collapsed": true
   },
   "right": {
     "id": "6126a7f85e1957b3",
@@ -183,8 +184,13 @@
       "bases:Crea nuova Base": false
     }
   },
-  "active": "48564515ae964f07",
+  "active": "aa33fc745208772e",
   "lastOpenFiles": [
+    "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L1_Introduzione.md",
+    "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L2_1_Efficienza_e_complessita.md",
+    "lessons/cybersecurity/anno2/4_Basi Di Dati/M03_SQL/UD1/L2 - Schemi, Tabelle e Vincoli.md",
+    "README.md",
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD4/L3 - Comunicazione con memoria condivisa.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/Rubik2D.class",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/OraDiPunta.class",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/UndirectedGraph.class",
@@ -195,7 +201,6 @@
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/OraDiPunta.java",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/UndirectedGraph.java",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/Fila.java",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/esercizi/Ostello.java",
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD4/L1 - Processi cooperanti.md",
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/L5 - Schedulazione dei thread.md",
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD3/imgs/photo_2026-03-19_16-49-44.jpg",
@@ -226,10 +231,6 @@
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l6/l6.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l3_4_5/l3_4_5.md",
     "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l2/l2.md",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l1/l1.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l6/l6.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l5/l5.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l4/l4.md",
-    "dist/lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/laboratorio/l2/l2.md"
+    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l1/l1.md"
   ]
 }
