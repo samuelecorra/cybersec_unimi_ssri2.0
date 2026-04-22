@@ -1,9 +1,58 @@
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# Editors / IDEs
 .vscode/
-.vite/
+.idea/
 .obsidian/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+*.sublime-workspace
+
+# Node / Vite
 node_modules/
 dist/
+.vite/
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Legacy cleanup patterns
 *.old.html
 *.old.js
 *.old.css
