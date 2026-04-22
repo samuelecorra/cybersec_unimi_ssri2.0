@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/L2_Programmare_con_Liste.md",
+                "file": "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M2_Architettura_dei_SO/UD1/L1 - Funzioni di un sistema operativo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "L2_Programmare_con_Liste"
+              "title": "L1 - Funzioni di un sistema operativo"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 505.5,
-    "collapsed": true
+    "width": 505.5
   },
   "right": {
     "id": "6126a7f85e1957b3",
@@ -186,6 +185,8 @@
   },
   "active": "aa33fc745208772e",
   "lastOpenFiles": [
+    "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L1_Introduzione.md",
+    "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/L2_Programmare_con_Liste.md",
     "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/L1_Liste.md",
     "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/L1_Pile.md",
     "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L0 - Intro UD2.md",
@@ -198,7 +199,6 @@
     "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/imgs/Pasted image 20251108151752.png",
     "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/imgs/Pasted image 20260422041142.png",
     "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/3_switch_colori/esempio1.c",
-    "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L1_Introduzione.md",
     "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L0 - Intro UD1.md",
     "lessons/cybersecurity/anno2/4_Basi Di Dati/M03_SQL/UD1/L2 - Schemi, Tabelle e Vincoli.md",
     "README.md",
@@ -230,7 +230,6 @@
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L3 - Sospensione e riattivazione dei processi.md",
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L2 - Creazione e terminazione dei processi.md",
     "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L1 - Concetto di processo.md",
-    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L0 - Intro UD1.md",
-    "lessons/cybersecurity/anno3/5.1_PSS_corso_aggiornato/teoria/l8/l8.md"
+    "lessons/cybersecurity/anno2/2_Sistemi Operativi 1/M3_Gestione_Processore/UD1/L0 - Intro UD1.md"
   ]
 }
