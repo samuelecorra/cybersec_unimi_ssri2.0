@@ -34,6 +34,7 @@ int main() {
                 colori_bandiera[i] = colori_bandiera[k];
                 colori_bandiera[k] = temp;
                 k++;
+                i++; // arriva di sicuro un bianco, quindi incrementiamo anche i, anche se non necessario!
                 break;
             }
             case 1: {   // bianco

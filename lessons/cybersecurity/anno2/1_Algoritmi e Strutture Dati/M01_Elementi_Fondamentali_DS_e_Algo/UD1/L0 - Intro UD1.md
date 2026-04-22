@@ -1,5 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Formalismo per la misura del tempo di calcolo**
-
+# **Lezione 0 - Intro Unità Didattica 1 - Formalismo per la misura del tempo di calcolo**
 
 Ogni algoritmo, per quanto brillante, deve fare i conti con un limite: il tempo.  
 Questa unità ci insegna a guardarlo negli occhi.
@@ -10,7 +9,3 @@ Capiremo che “tempo di calcolo” non vuol dire guardare un orologio, ma capir
 
 Questa unità è come imparare a “sentire” il ritmo di un algoritmo: quando accelera, quando rallenta, quando si incastra.  
 Una volta compreso questo ritmo, potremo finalmente parlare la lingua dell’informatica con consapevolezza — la lingua di chi non si limita a usare la tecnologia, ma la comprende dall’interno.
-
-
----
-
