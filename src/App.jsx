@@ -49,7 +49,8 @@ export default function App() {
       setContent(text);
       setCurrentFile(filePath);
     } catch (err) {
-      setContent(`# Errore\n\nImpossibile caricare il file: ${filePath}\n\n${err.message}`);
+      setCurrentFile(null);
+      setViewMode('browse');
     } finally {
       setLoading(false);
     }

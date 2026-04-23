@@ -1,5 +1,3 @@
-# **Obiettivi del modulo 2**
-
 ## **Lezione 1: Liste**
 
 ---
@@ -17,7 +15,6 @@ Sono fondamentali perché:
 - consentono **inserimenti e cancellazioni** ovunque nella sequenza;
     
 - rendono esplicita la relazione di **successione** tra elementi.
-    
 
 #### **Caratteristiche principali**
 

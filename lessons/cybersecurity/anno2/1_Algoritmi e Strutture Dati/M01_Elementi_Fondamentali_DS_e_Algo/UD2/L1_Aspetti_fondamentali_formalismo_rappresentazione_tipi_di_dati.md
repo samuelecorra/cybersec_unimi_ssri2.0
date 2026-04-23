@@ -1,5 +1,5 @@
 
-## **Lezione 1 – Aspetti fondamentali del formalismo**
+## **Lezione 1 – Aspetti fondamentali del formalismo per la rappresentazione dei tipi di dati**
 
 ---
 
