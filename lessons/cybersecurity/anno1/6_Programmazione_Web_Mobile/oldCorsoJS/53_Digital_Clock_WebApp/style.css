@@ -1,0 +1,47 @@
+body {
+    background-color: hotpink;
+    margin: 0;
+    background-image: url(background2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+@font-face {
+  font-family: "Glitch Goblin";
+  src: local("Glitch Goblin");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* evita flash di testo invisibile */
+}
+
+#containerPrincipessa {
+    background-color: rgb(217, 29, 170);
+    padding: 20px;
+    color: lightpink;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 10px, 10px, 20px rgba(194, 33, 175, 0.1);
+}
+
+#containerOrologio {
+    font-family: "Glitch Goblin";
+    display: flex; /* ci permette di visualizzare il nostro div 
+    come un contenitore flessibile */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* viewport height, altezza della finestra */
+}
+
+#orologio {
+    font-family: "Glitch Goblin";
+    font-size: 7rem;
+    text-align: center;
+    color: lightpink;
+    text-shadow: 2px 2px 0 rgba(194, 33, 175, 0.5);
+    backdrop-filter: blur(1px);
+    width: 100%;
+    background-color: hsla(312, 71%, 48%, 0.234);
+}
+

@@ -1,0 +1,9 @@
+{
+    "name": "Principessa",
+    "age": 20,
+    "isStudent": true,
+    "classe": "5A",
+    "indirizzo": "Scienze Umane",
+    "colorePreferito": "rosa",
+    "marchePossedute": ["Chanel", "Adidas", "Prada"]
+}

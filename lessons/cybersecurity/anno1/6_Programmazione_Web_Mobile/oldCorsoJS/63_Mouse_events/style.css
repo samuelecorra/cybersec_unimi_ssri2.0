@@ -1,0 +1,13 @@
+#box {
+    background-color: rgba(49, 213, 49, 0.736);
+    width: 300px;
+    height: 300px;
+    font-size: 4.5rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#bottone {
+    font-size: 3rem;
+}

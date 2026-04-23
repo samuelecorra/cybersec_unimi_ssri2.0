@@ -1,0 +1,46 @@
+.slider {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slider img {
+    width: 100%;
+    display: none;
+}
+
+img.displaySlide {
+    display: block;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.slider button {
+    position: absolute; /* Fa in modo che i pulsanti siano posizionati sopra le immagini */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    color: lightpink;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.slider button:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.previous {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+@keyframes fade {
+    from{opacity: .5}
+    to {opacity: 1}
+}

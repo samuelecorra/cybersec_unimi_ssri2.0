@@ -1,0 +1,26 @@
+[{
+    "nome": "CyberGenio",
+    "eta": 21,
+    "titolo": "Ingegnere",
+    "relazione": true
+}, {
+    "nome": "Principessa",
+    "eta": 20,
+    "titolo": "Studentessa",
+    "relazione": true
+}, {
+    "nome": "Floopaloo",
+    "eta": 25,
+    "titolo": "Re della Foresta",
+    "relazione": true
+}, {
+    "nome": "Marinette",
+    "eta": 16,
+    "titolo": "Eroina",
+    "relazione": false
+}, {
+    "nome": "Adrien",
+    "eta": 18,
+    "titolo": "Eroe",
+    "relazione": false
+}]

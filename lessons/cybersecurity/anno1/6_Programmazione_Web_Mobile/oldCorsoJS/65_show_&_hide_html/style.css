@@ -1,0 +1,15 @@
+#bottone {
+    width: 300px;
+    font-size: 4rem;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: hotpink;
+}
+
+#bottone:hover {
+    background-color: lightpink;
+}
+
+#bottone:active {
+    background-color: deeppink;
+}

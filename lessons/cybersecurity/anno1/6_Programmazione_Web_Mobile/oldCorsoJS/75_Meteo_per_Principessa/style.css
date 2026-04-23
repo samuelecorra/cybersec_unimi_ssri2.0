@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(170, 255, 255, 0.816);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#titolo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+    font-family: Verdana;
+    color: rgb(240, 85, 162);
+    font-style: italic;
+}
+
+.formMeteo {
+    margin: 20px;
+}
+
+.inputCitta {
+    padding: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 2px solid #54f69aa8;
+    border-radius: 10px;
+    margin: 10px;
+    width: 300px;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #16ab32a8;
+    color: white;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #4cd1d1;
+}
+
+.card {
+    background: linear-gradient(180deg, rgba(47, 177, 233, 0.8), rgba(219, 161, 35, 0.6));
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 50px;
+    margin: 10px;
+    box-shadow: 2px 2px 5px rgba(35, 15, 65, 0.1);
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.displayCitta h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.displayCitta, .displayTemperatura {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 0%, 0.75);
+    margin-bottom: 25px;
+}
+
+.displayUmidita {
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.displayDescrizione {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.displayIcona {
+    margin: 0px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+#icona {
+    width: 80px;
+    height: 80px;
+    margin: auto;    
+}
+
+.displayErrore {
+    color: rgb(252, 100, 18);
+    font-weight: bold;
+    font-size: 2.5rem;
+}

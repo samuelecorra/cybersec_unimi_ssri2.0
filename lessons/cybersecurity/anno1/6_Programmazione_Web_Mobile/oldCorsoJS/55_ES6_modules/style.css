@@ -1,0 +1,10 @@
+body {
+    background-color: hotpink;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: "Glitch Goblin", cursive;
+}

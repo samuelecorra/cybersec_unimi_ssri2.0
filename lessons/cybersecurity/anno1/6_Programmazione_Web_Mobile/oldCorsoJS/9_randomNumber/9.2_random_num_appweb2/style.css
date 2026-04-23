@@ -1,0 +1,32 @@
+body {
+    font-family: Verdana;
+    font-size: 2em;
+    text-align: center;
+}
+
+h1 {
+    color: hotpink;
+}
+
+#bottoneGeneratore {
+    background-color: lightcoral;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#bottoneGeneratore:hover {
+    background-color: darkmagenta;
+    box-shadow: 5px 5px 5px rgba(239, 83, 219, 0.5);
+}
+
+.risultati {
+    display: block;
+    margin-top: 20px;
+    font-size: 3em;
+    color: rgb(203, 52, 137);
+}
+

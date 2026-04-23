@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e77ae7;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #e931c8;
+}
+
+#bottonePerEsito {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1em;
+    font-style: italic;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+#bottonePerEsito:hover {
+    background-color: #d82c8a;
+}

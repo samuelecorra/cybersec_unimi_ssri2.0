@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SassoCartaForbiceXPrincipessa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1> Ciao Principessa, questo è il tuo Sasso Carta Forbice personalizzatissimo!</h1>
+    
+    <div class="scelte">
+        <button class="mieiBottoni" onclick="gioca('sasso')">✊</button>
+        <button class="mieiBottoni" onclick="gioca('carta')">✋</button>
+        <button class="mieiBottoni" onclick="gioca('forbice')">✌️</button>
+    </div>
+
+    <div id="displayGiocatore">Principessa ha scelto:</div>
+    <div id="displayComputer">Il computer ha scelto:</div>
+    <div id="risultato"></div>
+
+    <div class="displayPunteggio">Punteggio della Principessa:
+        <span id="punteggioPrincipessa">0</span>
+    </div>
+
+    <div class="displayPunteggio">Punteggio del Computer:
+        <span id="punteggioComputer">0</span>
+    </div>
+    
+    <script src="index.js"></script>
+</body>
+</html>

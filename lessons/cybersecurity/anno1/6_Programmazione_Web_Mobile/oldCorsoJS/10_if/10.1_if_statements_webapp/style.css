@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e77ae7;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #e931c8;
+}
+
+#risultato {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+#contenitoreEtà {
+    margin: 0 auto;
+    max-width: 400px;
+    background-color: #fff;
+    border: 1px solid #e931c8;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#labelEtà {
+    font-weight: bold;
+    color: #e931c8;
+}
+
+#inserisciEtà {
+    border: 1px solid #e931c8;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#bottoneInvio {
+    background-color: #e931c8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#bottoneInvio:hover {
+    background-color: #d82c8a;
+}

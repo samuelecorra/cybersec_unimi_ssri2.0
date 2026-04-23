@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.8rem;
+    color: hotpink;
+}
+
+.scelte {
+    margin-bottom: 30px;
+}
+
+.scelte button {
+    font-size: 7.5rem;
+    width: 160px;
+    margin: 0px 10px;
+    border-radius: 250px;
+    background-color: hotpink;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    
+}
+
+.scelte button:hover {
+    background-color: lightpink;
+    box-shadow: 0 0 10px rgb(225, 18, 122);
+    font-weight: bold;
+}
+
+#displayGiocatore, #displayComputer {
+    font-size: 2.5rem;
+}
+
+#risultato {
+    font-size: 5rem;
+    margin: 30px 0px;
+}
+
+.testoVittoria{
+    color: green;
+    font-weight: bold;
+}
+
+.testoSconfitta , #punteggioComputer {
+    color: red;
+    font-weight: bold;
+}
+
+.testoPareggio {
+    color: lightseagreen;
+    font-weight: bold;
+}
+
+.displayPunteggio {
+    font-size: 2rem;
+}
+
+#punteggioPrincipessa{
+    color: lightpink;
+    font-weight: bold;
+}
+
+#punteggioComputer {
+    color: darkslategrey;
+    font-weight: bold;
+}

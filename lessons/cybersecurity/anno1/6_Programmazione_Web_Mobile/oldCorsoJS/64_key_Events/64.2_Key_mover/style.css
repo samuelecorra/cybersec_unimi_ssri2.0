@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+}
+
+#scatola {
+    background-color: aquamarine;
+    width: 300px;
+    height: 300px;
+    font-size: 7.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}

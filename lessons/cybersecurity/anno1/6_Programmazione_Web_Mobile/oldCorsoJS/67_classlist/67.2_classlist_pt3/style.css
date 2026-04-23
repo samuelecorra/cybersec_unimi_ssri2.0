@@ -1,0 +1,25 @@
+#bottonePrincipessa {
+    font-size: 4rem;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.attivato {
+    background-color: hotpink;
+    color: white;
+} /* classe che aggiungiamo dinamicamente con JS. */
+
+/* invece della pseudo-classe hover, stavolta la definiamo come VERA CLASSE: */
+.hover {
+    background-color: lightpink;
+    box-shadow: 0 0 10px rgb(225, 18, 122);
+    font-weight: bold;
+} /* e aggiungiamola con JS! */
+
+.disabilitato {
+    background-color: lightgray;
+    color: darkgray;
+    cursor: not-allowed;
+}

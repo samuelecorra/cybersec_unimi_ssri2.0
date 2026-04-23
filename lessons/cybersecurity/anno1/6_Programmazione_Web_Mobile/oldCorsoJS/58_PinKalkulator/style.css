@@ -1,0 +1,93 @@
+body {
+    background-color: hotpink;
+    
+    font-family: "Glitch Goblin", cursive;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color:lightpink;
+    text-shadow: 5px 5px 10px purple;
+}
+
+#calcolatrice {
+    background-color: deeppink;
+    margin: auto;
+    height: 77vh;
+    border: 20px solid purple;
+    border-radius: 15px;
+    max-width: 500px;
+    overflow: hidden;
+    box-shadow: 20px 20px 30px rgba(242, 25, 155, 0.737);
+}
+
+#displayContainer {
+    background-color: pink;  /* rosa chiaro */
+    height: 120px;
+    border-bottom: 20px solid purple;
+    padding: 15px 20px;   /* solo laterale, non top/bottom */
+
+    display: flex;             /* attiva flexbox */
+    align-items: center;       /* centra verticalmente il contenuto */
+    justify-content: center;   /* se vuoi anche centrare orizzontalmente */
+}
+#display {
+    background-color: #444;    /* grigio scuro */
+    width: 100%;
+    height: 100px;
+    border-radius: 10px;
+    border: none;
+    font-size: 3rem;
+    text-align: right;
+    color: rgb(239, 44, 122);
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.4);
+    padding: 10px;
+    font-family: "Glitch Goblin";
+    letter-spacing: 10  px;
+}
+
+
+
+#tasti{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 25px;
+}
+
+button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    border: none;
+    background-color: rgb(65, 62, 62);
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "Glitch Goblin";
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: hotpink;
+    color: white;
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+.operatorBTN {
+    background-color: rgb(222, 127, 19);
+}
+
+.operatorBTN:hover {
+    background-color: rgb(136, 10, 81);
+    color: white;
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
+button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}

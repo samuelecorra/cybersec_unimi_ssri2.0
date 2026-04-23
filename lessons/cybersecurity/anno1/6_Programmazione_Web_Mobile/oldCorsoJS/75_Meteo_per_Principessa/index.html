@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteo per Principessa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 id="titolo">Benvenuta Principessa! Inserisci la città e controlla se c'è bel tempo!</h1>
+    <form class="formMeteo">
+        <input type="text" class="inputCitta" placeholder="Inserisci nome città">
+        <button id="bottone" type="submit">Elabora Meteo</button>
+    </form>
+
+    <div class="card" style="display: none;">
+        <h1 class="displayCitta">Miami</h1>
+        <p class="displayTemperatura">30°</p>
+        <p class="displayUmidita">Umidità: 70%</p>
+        <p class="displayDescrizione">Sereno</p>
+        <p class="displayIcona"><img id="icona" src="icone/sunny.png" alt="Icona Soleggiato"></p>
+        <p class="displayErrore">Per favore inserisci una città valida.</p>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
