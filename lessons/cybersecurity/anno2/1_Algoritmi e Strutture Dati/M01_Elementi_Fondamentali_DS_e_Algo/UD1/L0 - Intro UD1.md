@@ -1,5 +1,7 @@
 # **Lezione 0 - Intro Unità Didattica 1 - Formalismo per la misura del tempo di calcolo**
 
+---
+
 Ogni algoritmo, per quanto brillante, deve fare i conti con un limite: il tempo.  
 Questa unità ci insegna a guardarlo negli occhi.
 

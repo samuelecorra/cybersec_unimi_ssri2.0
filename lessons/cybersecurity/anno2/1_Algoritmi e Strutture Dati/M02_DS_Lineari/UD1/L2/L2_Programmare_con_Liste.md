@@ -1,4 +1,4 @@
-## **Lezione 2: Programmare con le liste**
+# **Lezione 2 - Programmare con le liste**
 
 ---
 
@@ -104,7 +104,6 @@ In un linguaggio come C, però, devi concretizzarlo usando **puntatori** perché
 - ogni passaggio è _by value_;
     
 - per condividere strutture complesse, devi sempre lavorare sugli indirizzi.
-    
 
 ---
 

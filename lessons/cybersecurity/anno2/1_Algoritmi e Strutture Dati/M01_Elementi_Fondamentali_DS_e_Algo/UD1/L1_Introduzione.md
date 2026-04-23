@@ -1,4 +1,6 @@
-# **Lezione 1 – Algoritmi, problemi computazionali e primi strumenti di rappresentazione**
+# **M1 UD1 Lezione 1 – Algoritmi, problemi computazionali e primi strumenti di rappresentazione**
+
+---
 
 Questa prima lezione è la nostra “accensione del motore”.  
 Ci dà le basi per capire che cosa sia davvero un algoritmo, come si collega al concetto di problema computazionale, e quali strumenti minimi servono per rappresentare i dati su cui operiamo.  

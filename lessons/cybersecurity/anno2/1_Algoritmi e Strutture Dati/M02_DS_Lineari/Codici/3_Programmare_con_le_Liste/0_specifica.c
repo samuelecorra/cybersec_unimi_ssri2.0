@@ -7,8 +7,16 @@ typedef struct _cella {
     struct _cella *next, *prev;
 } cella;
 
+// Abbiamo due opzioni se vogliamo passare by reference i nodi/liste:
+
+// 1. Aliasiamo i puntatori a cella: per modificare il contenuto dei NODI basta passare by value
+// (il puntatore è già un riferimento). Solo quando dobbiamo modificare il puntatore
+// stesso nel chiamante (es. creaListaVuota) serve un livello in più: lista *L.
 typedef cella* posizione;
 typedef cella* lista;
+// 2. Aliasiamo i nodi NON come puntatori, e useremo l'& nelle varie funzioni per passare by reference.
+// Però, in questo caso, se dimentichiamo anche un solo &, rischiamo di passare per valore!
+
 
 
 // ========== Utilities ==========

@@ -1,5 +1,7 @@
 # **Intro Modulo 1**
 
+---
+
 Ogni grande impresa dell’informatica comincia da qui: dal capire come pensano le macchine e come ragiona un problema.  
 Il Modulo 1 è la porta d’ingresso in questo mondo: ci insegna a guardare un programma non più come una sequenza di comandi, ma come una strategia di pensiero.  
 Un algoritmo, in fondo, è solo questo: un piano chiaro per arrivare da un punto A a un punto B nel modo più intelligente possibile.  

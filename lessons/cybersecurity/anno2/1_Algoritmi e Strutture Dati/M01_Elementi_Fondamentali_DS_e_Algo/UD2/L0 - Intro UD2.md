@@ -1,5 +1,7 @@
 # **Lezione 0 - Intro Unità Didattica 2 - Formalismo per la rappresentazione dei tipi di dati**
 
+---
+
 Gli obiettivi di quest'unità sono:
 
 - Conoscere l’esistenza delle diverse modalità di **organizzazione dell’informazione**

@@ -1,4 +1,6 @@
-# **Lezione 2 – Costruzione di un tipo di dato**
+# **M1 UD2 Lezione 2 – Costruzione di un tipo di dato**
+
+---
 
 ### **1. Introduzione**
 
