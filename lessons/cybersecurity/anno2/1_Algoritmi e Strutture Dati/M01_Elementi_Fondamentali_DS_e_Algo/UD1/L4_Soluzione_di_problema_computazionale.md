@@ -1,4 +1,4 @@
-## **Lezione 4 – Soluzione di un semplice problema computazionale**
+# **Lezione 4 – Soluzione di un semplice problema computazionale**
 
 ### **1. Introduzione generale**
 
@@ -15,7 +15,7 @@ L’obiettivo finale è mostrare **quando un algoritmo può essere considerato o
 
 ### **2. Il problema: l’ordinamento dei colori**
 
-Il problema è noto come **problema della bandiera olandese**, introdotto da Dijkstra, che era nato a Rotterdam.  
+Il problema è noto come **problema della bandiera olandese**, introdotto da Dijkstra, che era nato a Rotterdam.
 È un ottimo esempio perché unisce chiarezza logica e analisi rigorosa. Noi per semplicità prenderemo in esame la bandiera italiana. Non cambia assolutamente nada, come potete intuire, teste di rapa...
 
 #### **Formulazione**

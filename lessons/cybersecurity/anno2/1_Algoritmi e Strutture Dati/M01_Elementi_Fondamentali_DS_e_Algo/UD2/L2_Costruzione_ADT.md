@@ -1,4 +1,4 @@
-## **Lezione 2 – Costruzione di un tipo di dato**
+# **Lezione 2 – Costruzione di un tipo di dato**
 
 ### **1. Introduzione**
 
@@ -22,7 +22,6 @@ Si vuole costruire un **tipo di dato astratto** chiamato **mapping** (_memoria a
 - un **dominio** $D$,
     
 - e un **codominio** $C$.
-    
 
 Formalmente, un mapping è una **funzione parziale** che associa elementi di $D$ a elementi di $C$.
 
@@ -53,7 +52,6 @@ Questo tipo di struttura è alla base di moltissime applicazioni informatiche:
 - database chiave–valore,
     
 - array associativi nei linguaggi moderni (come in Python o JavaScript).
-    
 
 ---
 
@@ -66,9 +64,8 @@ Il mapping deve consentire tre operazioni principali:
 2. **Assegnamento** di un valore a una chiave
     
 3. **Calcolo** del valore associato a una chiave
-    
 
-### In breve:
+#### **In breve:**
 
 |Operazione|Descrizione|Output|
 |---|---|---|
@@ -93,7 +90,6 @@ La **specifica sintattica** descrive i _nomi dei tipi di dato_ e le _operazioni 
 - `booleano`
     
 - `Λ` → mapping vuoto (Lambda)
-    
 
 #### **Operazioni specifiche**
 
@@ -102,7 +98,6 @@ La **specifica sintattica** descrive i _nomi dei tipi di dato_ e le _operazioni 
 - `assegna(mapping, dominio, codominio) → mapping`
     
 - `calcola(mapping, dominio) → codominio × booleano`
-    
 
 ---
 
@@ -150,7 +145,6 @@ La **specifica semantica** definisce il comportamento logico delle operazioni.
 - Sia il dominio $D$ che il codominio $C$ sono rappresentati come **interi**.
     
 - Il mapping sarà rappresentato come **vettore di interi**, in cui ogni indice rappresenta una chiave.
-    
 
 ---
 
@@ -171,13 +165,12 @@ La **specifica semantica** definisce il comportamento logico delle operazioni.
 #### **Codice globale**
 
 ```c
-
 #include <stdio.h>
 
 #define UNDEFINED 0
 #define DIM 100 // massima dimensione del dominio
 #define TRUE 1
-#define FALSE 0  
+#define FALSE 0
 typedef short boolean;
 typedef int mapping;
 mapping *M;  
@@ -191,8 +184,6 @@ void crea(mapping *M) {
     }
 }
 
-  
-
 void assegna(mapping *M, int chiave_dom, int valore_codom) {
     M[chiave_dom] = valore_codom;
 }
@@ -208,85 +199,10 @@ boolean calcola(mapping *M, int chiave_dom, int *valore_codom) {
 }
 
 ```
-### **8. Implementazione delle operazioni**
-
-#### **Funzione `crea()`**
-
-```c
-
-void crea(mapping *M) {
-    int i;
-    M = (mapping *) malloc(DIM * sizeof(mapping));
-    
-    for (i = 0; i < DIM; i++) {
-        M[i] = UNDEFINED;
-    }
-}
-
-```
-
-**Analisi logica:**
-
-- Alloca dinamicamente un vettore di `DIM` interi.
-    
-- Inizializza ogni posizione a `UNDEFINED`.
-    
-- Rappresenta quindi il mapping vuoto Λ.
-    
 
 ---
 
-#### **Funzione `assegna()`**
-
-```c
-
-void assegna(mapping *M, int chiave_dom, int valore_codom) {
-    M[chiave_dom] = valore_codom;
-}
-
-```
-
-**Analisi logica:**
-
-- Assegna al dominio `d` il valore `c`.
-    
-- Sostituisce il precedente valore se già esistente.
-    
-- Costo computazionale: $O(1)$ (accesso diretto).
-    
-
----
-
-#### **Funzione `calcola()`**
-
-```c
-
-boolean calcola(mapping *M, int chiave_dom, int *valore_codom) {
-
-    if (M[chiave_dom] != UNDEFINED) {
-        *valore_codom = M[chiave_dom];
-        return TRUE;
-    } else {
-        return FALSE;
-    }
-}
-
-```
-
-**Analisi logica:**
-
-- Controlla se esiste un valore associato a `d`.
-    
-- Se sì, restituisce `TRUE` e memorizza il valore in `*c`.
-    
-- Se no, restituisce `FALSE`.
-    
-- Anche qui la complessità è **O(1)**.
-    
-
----
-
-### **9. Analisi complessiva**
+### **8. Analisi complessiva**
 
 |Operazione|Significato|Complessità|Descrizione|
 |---|---|---|---|
@@ -306,7 +222,6 @@ Il tipo di dato `mapping` rappresenta una **struttura dati associativa semplice*
 - il formalismo matematico (dominio, codominio, funzione)
     
 - si traduca in un modello computazionale (vettore indicizzato).
-    
 
 L’approccio sarà poi generalizzato per costruire:
 
@@ -315,7 +230,6 @@ L’approccio sarà poi generalizzato per costruire:
 - dizionari dinamici,
     
 - e altre strutture più efficienti per domini di grandi dimensioni.
-    
 
 ---
 

@@ -1,17 +1,4 @@
-Ogni grande impresa dell’informatica comincia da qui: dal capire come pensano le macchine e come ragiona un problema.  
-Il Modulo 1 è la porta d’ingresso in questo mondo: ci insegna a guardare un programma non più come una sequenza di comandi, ma come una strategia di pensiero.  
-Un algoritmo, in fondo, è solo questo: un piano chiaro per arrivare da un punto A a un punto B nel modo più intelligente possibile.  
-Ma non tutti i piani si equivalgono: alcuni sono eleganti, rapidi, geniali; altri lenti, goffi, dispendiosi.
-
-Questo modulo ci aiuterà a capire la differenza.  
-Scopriremo cosa significa “efficienza”, come si può misurare il tempo che un algoritmo impiega, e perché certi metodi “buoni” funzionano mille volte meglio di altri, anche se all’apparenza fanno la stessa cosa.  
-Inizieremo a dare un linguaggio ai concetti di velocità, ordine e logica, costruendo le basi per tutto ciò che verrà dopo: le strutture dati, i paradigmi di progettazione e, in definitiva, la capacità di pensare in modo computazionale.
-
-Il Modulo 1 non è un manuale tecnico: è il punto in cui la curiosità incontra la matematica e la mente impara a ragionare come una macchina — senza mai smettere di essere umana.
-
----
-
-## **Lezione 1 – Algoritmi, problemi computazionali e primi strumenti di rappresentazione**
+# **Lezione 1 – Algoritmi, problemi computazionali e primi strumenti di rappresentazione**
 
 Questa prima lezione è la nostra “accensione del motore”.  
 Ci dà le basi per capire che cosa sia davvero un algoritmo, come si collega al concetto di problema computazionale, e quali strumenti minimi servono per rappresentare i dati su cui operiamo.  
@@ -19,7 +6,7 @@ In pratica, impariamo a distinguere il “cosa voglio ottenere” (il problema) 
 
 ---
 
-### 1. Algoritmo, problema e rappresentazione
+### **1. Algoritmo, problema e rappresentazione**
 
 Ogni volta che ci si trova davanti a un compito da risolvere — ordinare, cercare, calcolare, scegliere — si è davanti a un problema computazionale: una relazione tra dati in ingresso e risultato desiderato.  
 L’algoritmo è la strategia, la sequenza chiara e finita di operazioni che, passo dopo passo, permette di ottenere la risposta giusta.  
@@ -33,7 +20,7 @@ Capire questa differenza è ciò che distingue chi “usa” la programmazione d
 
 ---
 
-### 2. Esempio: trovare il minimo in un intervallo di un array
+### **2. Esempio: trovare il minimo in un intervallo di un array**
 
 Prendiamo un esempio concreto.
 
@@ -45,7 +32,7 @@ Ora serve l’algoritmo, cioè il metodo per arrivarci.
 I possibili approcci sono due:
   
 
-#### 2.1 - Versione iterativa (passo dopo passo)
+#### **2.1 - Versione iterativa (passo dopo passo)**
 
 1. Si suppone che il primo elemento a[j] sia il minimo. Questo è uno step manuale di inizializzazione che serve per progredire coi successivi!
     
@@ -86,7 +73,7 @@ int main() { // Ora possiamo utilizzare la funzione appena creata:
 Questo modo di ragionare è sequenziale: passo dopo passo, sempre nello stesso schema.  
 È semplice, lineare, intuitivo: come guardare tutti i numeri in fila finché non si trova il più piccolo.
 
-#### 2.2 - Versione ricorsiva (divide et impera)
+#### **2.2 - Versione ricorsiva (divide et impera)**
 
 La ricorsione funziona come uno specchio: la funzione chiama se stessa su un problema un po’ più piccolo, finché non arriva a un caso così semplice da poter dare subito la risposta.
 
@@ -142,7 +129,7 @@ Simuliamo cosa accadrebbe eseguendo il programma:
 - Tutti i successivi confronti durante la risalita danno falso come esito: alla fine, il minimo trovato è 13!
 ---
 
-### 3. Iterazione e ricorsione: due modi per pensare
+### **3. Iterazione e ricorsione: due modi per pensare**
 
 Un ciclo iterativo e una funzione ricorsiva fanno spesso la stessa cosa, ma parlano due linguaggi diversi.  
 L’iterazione è “meccanica”: fa ripetere una sequenza finché una condizione è vera.  
@@ -153,17 +140,17 @@ Un buon programmatore deve saper scegliere la forma che rende più trasparente i
 
 ---
 
-### 4. I tipi di dato: i mattoni della rappresentazione
+### **4. I tipi di dato: i mattoni della rappresentazione**
 
 Ogni algoritmo ha bisogno di “contenitori” per conservare e manipolare le informazioni: i tipi di dato.  
-In C — il linguaggio di riferimento di questo corso — questi mattoni sono numerici (come int, float, double), logici (boolean), e strutturati (come gli array, che raccolgono più elementi dello stesso tipo).
+In C — il linguaggio di riferimento di questo corso — questi mattoni sono numerici (come int, float, double), logici (boolean, tramite libreria), e strutturati (come gli array, che raccolgono più elementi dello stesso tipo).
 
 Nel nostro esempio, l’array a rappresenta l’insieme dei numeri in ingresso, e la variabile m memorizza il risultato, cioè il minimo trovato.  
 La scelta del tipo di dato non è mai neutra: influenza la chiarezza, la precisione e persino l’efficienza dell’algoritmo.
 
 ---
 
-### 5. Cosa bisogna metabolizzare ASAP
+### **5. Cosa bisogna metabolizzare ASAP**
 
 - Un problema computazionale è la relazione tra dati in ingresso e risultato atteso.  
       
@@ -178,8 +165,6 @@ La scelta del tipo di dato non è mai neutra: influenza la chiarezza, la precisi
       
     
 - I tipi di dato sono il linguaggio con cui rappresentiamo tutto ciò che un algoritmo manipola: numeri, condizioni, insiemi di elementi.  
-      
-    
 
 In sintesi, questa lezione ci ha fornito la grammatica minima del pensiero computazionale:  
 sapere cosa significa “risolvere un problema”, come tradurre quella risoluzione in una forma eseguibile, e con quali strumenti rappresentare i dati del mondo digitale.

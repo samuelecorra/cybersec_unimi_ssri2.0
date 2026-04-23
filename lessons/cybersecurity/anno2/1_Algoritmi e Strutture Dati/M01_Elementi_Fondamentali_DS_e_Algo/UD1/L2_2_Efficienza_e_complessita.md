@@ -1,4 +1,4 @@
-## **Lezione 2 – Efficienza e Complessità (parte 2)**
+# **Lezione 2 – Efficienza e Complessità (parte 2)**
 
 ### **1. Introduzione: perché serve un nuovo linguaggio per l’efficienza**
 
@@ -48,7 +48,7 @@ $$
 
 ---
 
-##### 🔹 In sintesi
+##### 🔹 **In sintesi**
 
 | Simbolo    | Significato                                                      |
 | ---------- | ---------------------------------------------------------------- |
@@ -412,7 +412,7 @@ perché in analisi della complessità **conta solo il ramo più costoso**.
 
 ---
 
-#### \*\*Esempio 2 – Un ciclo semplice e un nested for
+#### **Esempio 2 – Un ciclo semplice e un nested for**
 
 Supponiamo che un programma contenga in sequenza due blocchi for, ma con una differenza: il primo è un ciclo semplice, mentre il secondo è un ciclo annidato (nested loop).
 

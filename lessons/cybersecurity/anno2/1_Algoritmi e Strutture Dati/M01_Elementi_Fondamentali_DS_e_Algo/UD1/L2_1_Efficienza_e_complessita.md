@@ -1,4 +1,4 @@
-## **Lezione 2 – Efficienza e complessità (parte 1)**
+# **Lezione 2 – Efficienza e complessità (parte 1)**
 
 Finora abbiamo capito _che cosa_ sia un algoritmo.  
 Ora arriva la domanda decisiva: **quanto è buono un algoritmo?**  
@@ -428,5 +428,3 @@ abbiamo imparato a guardare gli algoritmi come sistemi che consumano risorse, e 
 
 Nella prossima parte approfondiremo **le notazioni asintotiche** — il linguaggio simbolico che ci permette di esprimere in modo elegante come si comporta $T(n)$ quando n cresce all’infinito.  
 È il momento in cui le lettere greche diventano il nostro nuovo alfabeto di precisione.
-
----
