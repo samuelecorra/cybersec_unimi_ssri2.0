@@ -56,19 +56,3 @@
 *.jar       binary
 *.so        binary
 *.dylib     binary
-*.png filter=lfs diff=lfs merge=lfs -text
-*.PNG filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.JPG filter=lfs diff=lfs merge=lfs -text
-*.jpeg filter=lfs diff=lfs merge=lfs -text
-*.JPEG filter=lfs diff=lfs merge=lfs -text
-*.pdf filter=lfs diff=lfs merge=lfs -text
-*.PDF filter=lfs diff=lfs merge=lfs -text
-*.png !text !filter !merge !diff
-*.PNG !text !filter !merge !diff
-*.jpg !text !filter !merge !diff
-*.JPG !text !filter !merge !diff
-*.jpeg !text !filter !merge !diff
-*.JPEG !text !filter !merge !diff
-*.pdf !text !filter !merge !diff
-*.PDF !text !filter !merge !diff
