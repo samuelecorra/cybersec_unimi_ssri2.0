@@ -1,5 +1,6 @@
 # **Intro Modulo 2**
 
+---
 
 - Capire quali informazioni possono essere rappresentate tramite **tipi di dato lineari**
     
@@ -8,7 +9,6 @@
 - Comprendere come diverse **realizzazioni** influenzano l’efficienza
     
 - Saper scegliere la **struttura più adatta** in base al contesto
-    
 
 ---
 
@@ -24,6 +24,3 @@ $$
 Capire come organizzarli, gestirli e ottimizzarli significa imparare a **pensare come la memoria del calcolatore**: ordinata, efficiente e scalabile.
 
 Da qui derivano tutte le strutture fondamentali dei linguaggi di programmazione: **liste, pile e code**.
-
----
-

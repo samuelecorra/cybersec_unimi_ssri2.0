@@ -1,4 +1,4 @@
-## **Lezione 2: Programmare con le pile**
+# **M2 UD2 Lezione 2 - Programmare con le pile**
 
 ---
 
@@ -96,7 +96,6 @@ Apri un browser, poi:
 2. apri una finestra “Preferenze” (evento 2),
     
 3. e dentro quella apri un “Avviso di sicurezza” (evento 3).
-    
 
 Ora l’interfaccia gestisce solo **l’ultima finestra aperta** (la più in cima).  
 Chiudi l’avviso → torni alle preferenze → poi alla scheda.
@@ -106,7 +105,6 @@ Chiudi l’avviso → torni alle preferenze → poi alla scheda.
 - nessuna finestra _chiama_ l’altra,
     
 - semplicemente _si sovrappongono_ in modo temporaneo.
-    
 
 **Event-driven:** sì (le aperture sono eventi).  
 **LIFO:** sì (l’ultima aperta viene chiusa per prima).  
@@ -125,7 +123,6 @@ Immagina un tecnico informatico che lavora da solo, ma riceve richieste telefoni
 - Ogni volta che ne arriva una nuova, il tecnico la mette **sopra le altre** e la affronta subito (è quella più recente e “calda”).
     
 - Quando la finisce, toglie il post-it e torna a quella sotto.
-    
 
 ➡️ Questo è un **sistema event-driven LIFO perfetto**:
 
@@ -134,7 +131,6 @@ Immagina un tecnico informatico che lavora da solo, ma riceve richieste telefoni
 - Il tecnico li gestisce in ordine inverso (LIFO).
     
 - Non c’è nessuna gerarchia: le chiamate non dipendono l’una dall’altra.
-    
 
 ---
 
@@ -150,7 +146,6 @@ In tutti questi esempi:
     
 - La pila serve **solo per sospendere e riprendere** lavori,  
     non per rappresentare _chiamate annidate_.
-    
 
 È un uso **operativo**, non **semantico** della pila.
 #### **Obiettivo Principale:**
@@ -160,7 +155,6 @@ Scrivere una procedura `C` che simuli l’esecuzione di questi lavori per un cer
 1. la lista (pila) dei lavori rimasti in attesa,
     
 2. e il numero totale di lavori completati.
-    
 
 ---
 

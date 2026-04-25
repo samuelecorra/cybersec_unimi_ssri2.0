@@ -1,4 +1,4 @@
-## **Lezione 2: Programmare con le code**
+# **Lezione 2 - Programmare con le code**
 
 ---
 
@@ -19,7 +19,6 @@ Consideriamo un sistema formato da:
 - un **servente**, ovvero un’unità di calcolo che esegue un lavoro per volta;
     
 - una **lista di lavori in attesa**, gestita come una **coda FIFO**.
-    
 
 Ogni lavoro richiede un **tempo fisso** per essere completato.  
 Il servente preleva il **primo lavoro disponibile** (il più vecchio nella coda) e lo esegue.
@@ -31,7 +30,6 @@ Scrivere una procedura `C` che simuli il comportamento del sistema per un interv
 1. la lista (coda) dei lavori rimasti in attesa;
     
 2. il numero totale di lavori completati.
-    
 
 ---
 
@@ -40,8 +38,8 @@ Scrivere una procedura `C` che simuli il comportamento del sistema per un interv
 #### **Schema logico**
 
 $$  
-\text{Arrivo lavoro} ;\longrightarrow; \text{Inserimento in coda} ;\longrightarrow;  
-\text{Servente preleva testa} ;\longrightarrow; \text{Esecuzione lavoro}  
+\text{Arrivo lavoro} \longrightarrow \text{Inserimento in coda} \longrightarrow  
+\text{Servente preleva testa} \longrightarrow \text{Esecuzione lavoro}  
 $$
 
 #### **Esempio**
@@ -88,14 +86,12 @@ All’interno di un ciclo `while` saranno gestite tre attività principali:
 2. **Arrivo di nuovi lavori**, che vengono accodati in $L$
     
 3. **Gestione del servente**, che preleva e svolge il lavoro in testa
-    
 
 Si assume l’esistenza di una **lista temporale di eventi** che supporta due operatori:
 
 - `eventoSucc(t)` → restituisce il prossimo evento temporale
     
 - `inserisciEvento(id_evento, t)` → inserisce un evento ordinato per tempo
-    
 
 ---
 
@@ -178,7 +174,6 @@ void servente(evento *E, coda *L, int *nL, tempo t) {
 - La coda $L$ non si svuota mai (benchmark server)
     
 - Il ciclo `while` viene eseguito $n$ volte
-    
 
 #### **Costo delle operazioni**
 
@@ -189,7 +184,6 @@ void servente(evento *E, coda *L, int *nL, tempo t) {
     - Estrazione evento: $O(1)$
         
     - Inserimento in lista ordinata: $O(n)$
-        
 
 #### **Complessità totale**
 
@@ -247,7 +241,6 @@ $$
 - Accesso sequenziale: per leggere $a_3$, occorre passare da $a_1$ e $a_2$
     
 - Inserimenti e cancellazioni possibili ovunque
-    
 
 ---
 
@@ -266,7 +259,6 @@ $$
     - `fuoripila()` → rimuove dalla cima
         
 - Utile per gestire **chiamate ricorsive**, **undo/redo**, **backtracking**
-    
 
 ---
 
@@ -285,7 +277,6 @@ $$
     - `fuoricoda()` → rimuove dalla testa
         
 - Modella sistemi a **servizio sequenziale** (processi, reti, eventi)
-    
 
 ---
 
@@ -352,6 +343,3 @@ CODA:   (head) [a1] -> [a2] -> [a3] (tail)
 > Hai padroneggiato le tre fondamenta operative della memoria logica:  
 > **la lista (libertà)**, **la pila (disciplina)** e **la coda (giustizia)**.  
 > Da qui in avanti — Modulo 3 e successivi — costruiremo su queste basi il vero linguaggio della macchina.
-
----
-

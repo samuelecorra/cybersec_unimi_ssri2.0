@@ -1,4 +1,4 @@
-# **Lezione 2 - Programmare con le liste**
+# **M2 UD1 Lezione 2 - Programmare con le liste**
 
 ---
 
@@ -9,7 +9,7 @@ Riprendendo lo schema introdotto nel Modulo 1, ora applichiamo i concetti teoric
 
 ---
 
-### **2. Differenze tra specifica sintattica/semantica
+### **2. Differenze tra specifica sintattica/semantica**
 
 Di seguito allego gli screenshots della scorsa lezione riguardanti l'idea implementativa e di specifica che avevamo suggerito per la lista:
 
@@ -28,9 +28,8 @@ typedef cella posizione, lista;
 per indicare _astrattamente_ che **una lista** e una **posizione** sono “oggetti del tipo cella”, ossia strutture composte da:
 
 - un valore (`tipoelem elemento`);
-    
 - due collegamenti (`next`, `prev`).
-    
+
 Ma attenzione:  
 in **logica algoritmica** questa è solo un’**astrazione matematica**.  
 Non si sta ancora parlando di _come_ quei valori vengono gestiti in memoria.
@@ -58,7 +57,7 @@ void creaLista(lista L) { ... }
 ```
 
 tu stai passando **una copia della struct** `cella`, **non un riferimento** alla lista vera.  
-➡️ Tutte le modifiche fatte dentro la funzione **non escono** dalla funzione.  
+➡️ Tutte le modifiche fatte dentro la funzione **non escono** dalla funzione.
 
 ---
 
@@ -72,8 +71,7 @@ typedef struct _cella {
     struct _cella *next, *prev;
 } cella;
 
-typedef cella* posizione;
-typedef cella* lista;
+typedef cella* posizione, lista;
 ```
 
 Ora `posizione` e `lista` **non sono più copie**, ma **indirizzi**:  
@@ -83,7 +81,7 @@ modificando `*L` dentro una funzione, **modifichi la lista reale in memoria**.
 
 ---
 
-#### 🧩 **Perché la specifica del prof resta utile
+#### 🧩 **Perché la specifica del prof resta utile**
 
 La parte di teoria non vuole spiegare come implementare in C, ma **astrazione dei tipi di dato**.  
 Quando si scrive nella specifica:
@@ -100,18 +98,36 @@ sta solo dicendo **“che forma logica ha la funzione”** (input → output).
 In un linguaggio come C, però, devi concretizzarlo usando **puntatori** perché:
 
 - il linguaggio non ha il concetto di _riferimento_ come in C++ o Java;
-    
 - ogni passaggio è _by value_;
-    
 - per condividere strutture complesse, devi sempre lavorare sugli indirizzi.
 
 ---
 
-### **3. Implementazione passo passo
+### **3. Implementazione passo passo**
 
 Dunque, con l'ausilio di VSCode, in vista dell'esercizio che sta per venire, iniziamo a mettere in atto il tutto. Come anticipato, serve innanzitutto:
 
-![4_vs1.png](imgs/4_vs1.png)
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct _cella {
+    int elem;
+    struct _cella *next, *prev;
+} cella;
+
+// Abbiamo due opzioni se vogliamo passare by reference i nodi/liste:
+
+// 1. Aliasiamo i puntatori a cella: per modificare il contenuto dei NODI basta passare by value
+// (il puntatore è già un riferimento). Solo quando dobbiamo modificare il puntatore
+// stesso nel chiamante (es. creaListaVuota) serve un livello in più: lista *L.
+typedef cella* posizione; // sinonimo di nodo
+typedef cella* lista;
+
+// 2. Aliasiamo i nodi NON come puntatori, e useremo l'& nelle varie funzioni per passare by reference.
+// Però, in questo caso, se dimentichiamo anche un solo &, rischiamo di passare per valore!
+```
 
 Ed ecco pronta la struttura minima: ora è tempo di scribacchiare tutte le funzioni che ci serviranno:
 
@@ -142,17 +158,28 @@ j) inslista:            (tipoelem, posizione, lista) → lista
 k) canclista:           (posizione, lista) → lista
 ```
 
-Andiamo con ordine.
+Andiamo con ordine. Come vedrete ho rinominato le funzioni per renderle più facilmente comprensibili: la semantica per noi studenti ha più importanza rispetto alla sinteticità, anche a discapito della verbosità!
 
 ---
 
 #### **a. creaListaVuota**
+
 La prima funzione, per semplicità, ci risparmia tre righe di codice che diventano ripetitive ogni volta che dobbiamo creare una lista.
 Quindi nel main ci basterà dichiarare il nome della lista e poi chiamare la funzione per settarla in maniera del tutto minimale, ergo vuota ma linkata:
 
-![5_vs2.png](imgs/5_vs2.png)
+```c
+// ========== Utilities ==========
 
-![6_vs3.png](imgs/6_vs3.png)
+void creaListaVuota(lista *L) {
+    *L = malloc(sizeof(cella)); // alloco spazio per la sentinella assegnandolo al puntatore alla lista
+    if (!*L) {
+        perror("malloc"); // gestione dell'errore di allocazione
+        exit(1);
+    }
+    (*L)->next = *L; // Se va a buon fine l'allocazione, inizializzo i campi della sentinella
+    (*L)->prev = *L;
+}
+```
 
 - `lista` è un **alias di `cella*`**, cioè un **puntatore a nodo**.
 - Di conseguenza, `lista *L` è un **puntatore a un puntatore** (`cella **`).
@@ -166,15 +193,11 @@ Questo è **call by reference**: vogliamo che la funzione possa **modificare la 
 Vediamo cosa accade **passo per passo**:
 
 1. `malloc(sizeof(cella))`  
-    → chiede al sistema operativo un blocco di memoria **grande quanto una `struct cella`**.  
-    Supponiamo che venga allocato all’indirizzo `0x7ffc1234`.
-    
+   → chiede al sistema operativo un blocco di memoria **grande quanto una `struct cella`**.  
+   Supponiamo che venga allocato all’indirizzo `0x7ffc1234`.
 2. `*L = malloc(...);`
-    
-    - `L` è un **puntatore a puntatore**, quindi `*L` è la **variabile originale** del main (il “vero” `lista L`).
-        
-    - Assegniamo a quella variabile l’indirizzo appena creato (`0x7ffc1234`).
-        
+   - `L` è un **puntatore a puntatore**, quindi `*L` è la **variabile originale** del main (il “vero” `lista L`).
+   - Assegniamo a quella variabile l’indirizzo appena creato (`0x7ffc1234`).
 
 📍 **Effetto:**  
 nel `main`, ora `L` (cioè la lista) **punta a una nuova cella allocata dinamicamente**, che fungerà da sentinella.
@@ -182,28 +205,33 @@ nel `main`, ora `L` (cioè la lista) **punta a una nuova cella allocata dinamica
 Successivamente, impostiamo i campi dei puntatori interni della sentinella:
 
 - `(*L)` = la **sentinella stessa** (cioè la cella allocata);
-    
 - `(*L)->next = *L;` → il campo `next` punta alla sentinella stessa;
-    
 - `(*L)->prev = *L;` → idem per `prev`.
-    
 
 📍 **Effetto finale:**  
 La lista forma un **anello circolare** di un solo nodo.  
-Questo rappresenta perfettamente una **lista vuota.
+Questo rappresenta perfettamente una \*\*lista vuota.
 
 ---
+
 ##### **Cosa accade nel `main`**
+
 ```c
-lista L;
+int main(void) {
+    lista L;
+    creaListaVuota(&L);
+    // oppure se non avessimo voluto usare l'ampersand, avremmo potuto fare:
+    lista *indirizzoLista = &L;
+    creaListaVuota(indirizzoLista); // Ma capite bene che è molto più snello usare & direttamente!
+}
 ```
 
 - Poiché `lista` è un alias di `cella*`, questa riga dichiara una **variabile puntatore**.  
-    In memoria, `L` è una **cella di stack** che può contenere un **indirizzo** (ma al momento è **non inizializzata**).
+   In memoria, `L` è una **cella di stack** che può contenere un **indirizzo** (ma al momento è **non inizializzata**).
 
-|Variabile|Tipo|Contenuto iniziale|Significato|
-|---|---|---|---|
-|`L`|`cella*`|indefinito (spazzatura)|non punta ancora a nulla|
+| Variabile | Tipo     | Contenuto iniziale      | Significato              |
+| --------- | -------- | ----------------------- | ------------------------ |
+| `L`       | `cella*` | indefinito (spazzatura) | non punta ancora a nulla |
 
 ```c
 creaListaVuota(&L);
@@ -212,11 +240,11 @@ creaListaVuota(&L);
 Ecco il punto cruciale:
 
 - Passiamo **l’indirizzo di `L`** (`&L`), non `L` stesso.  
-    Questo significa che dentro la funzione `creaListaVuota`, il parametro `L` **punta alla cella di stack** dove vive la variabile `L` del main.
-    
-|Funzione|Parametro|Tipo effettivo|Contenuto|
-|---|---|---|---|
-|`creaListaVuota`|`L`|`cella **`|indirizzo di `L` (in stack)|
+   Questo significa che dentro la funzione `creaListaVuota`, il parametro `L` **punta alla cella di stack** dove vive la variabile `L` del main.
+
+| Funzione         | Parametro | Tipo effettivo | Contenuto                   |
+| ---------------- | --------- | -------------- | --------------------------- |
+| `creaListaVuota` | `L`       | `cella **`     | indirizzo di `L` (in stack) |
 
 Quando la funzione fa:
 
@@ -225,14 +253,14 @@ Quando la funzione fa:
 ```
 
 - `*L` significa “la variabile `L` del main”.
-    
 - Le assegniamo l’indirizzo della nuova cella allocata.
-    
-|Variabile|Tipo|Contenuto dopo la chiamata|Significato|
-|---|---|---|---|
-|`L` (main)|`cella*`|indirizzo della sentinella (heap)|la lista ora esiste|
+
+| Variabile  | Tipo     | Contenuto dopo la chiamata        | Significato         |
+| ---------- | -------- | --------------------------------- | ------------------- |
+| `L` (main) | `cella*` | indirizzo della sentinella (heap) | la lista ora esiste |
 
 ---
+
 Recap...
 Immagina tre livelli di memoria:
 
@@ -249,60 +277,116 @@ Si noti che questa tecnica verrà riproposta praticamente in maniera identica ov
 ---
 
 #### **b. isListaVuota**
-Chiaramente non sempre però vorremo modificare la lista creata: supponiamo di volere una funzione di utility che ci conferma se la lista è vuota o meno.
-E' semplice, controlliamo il campo next della sentinella che gli passiamo. Va bene una copia, in quanto il controllo "se ne infischia che sia l'originale o meno"! Ergo si può benissimo passare by value!
 
-![7_vs4.png](imgs/7_vs4.png)
+Chiaramente non sempre però vorremo modificare la lista creata: supponiamo di volere una funzione di utility che ci conferma se la lista è vuota o meno.
+Passiamo per riferimento o per valore? In questo caso allora passiamo per valore, e all'interno
+della funzione la -> dereferenzia e accede al campo next in un colpo solo;
+evitiamo così di scrivere (\*L).next, che sarebbe più verboso e meno leggibile.
+
+```c
+// D'ora in avanti non dovremo più passare per riferimento!
+bool isListaVuota(lista L) {
+    return L->next == L;
+}
+```
 
 ---
 
 #### **c/d. primoNodo e ultimoNodo**
-Valgono considerazioni del tutto analoghe per le prossime due funzioni: 
 
-![8_vs5.png](imgs/8_vs5.png)
+Valgono considerazioni del tutto analoghe per le prossime due funzioni:
+
+```c
+posizione primoNodo(lista L)   { return L->next; }
+posizione ultimoNodo(lista L)  { return L->prev; }
+```
 
 ---
-#### **e/f. successivoDi e precedenteDi**
-Idem con queste due
 
-![9_vs6.png](imgs/9_vs6.png)
+#### **e/f. successivoDi e precedenteDi**
+
+Idem con queste due:
+
+```c
+posizione successivoDi(posizione p) { return p->next; }
+posizione precedenteDi(posizione p) { return p->prev; }
+```
 
 ---
 
 #### **g. fineLista**
+
 Ricordiamo che sia posizione che lista sono puntatori. Se li confrontiamo, stiamo chiedendo:
 "L’indirizzo di memoria del nodo richiesto è lo stesso indirizzo della sentinella?"
 In altre parole:
 
 - Se **il puntatore `p` e il puntatore `L` contengono lo stesso indirizzo**,  
-    allora stiamo puntando **allo stesso nodo in memoria**;
+   allora stiamo puntando **allo stesso nodo in memoria**;
 - Quindi siamo **tornati alla sentinella**, ossia **alla fine della lista**.
 
-![10_vs7.png](imgs/10_vs7.png)
+```c
+bool fineLista(posizione p, lista L) { return p == L; }
+```
 
 ---
 
-#### **h. leggiElemLista
+#### **h. leggiElemLista**
 
-![11_vs8.png](imgs/11_vs8.png)
-
----
-
-#### **i. sovrascriviElemLista
-
-![12_vs9.png](imgs/12_vs9.png)
-
----
-
-#### **j. insElemInLista
-
-![13_vs10.png](imgs/13_vs10.png)
+```c
+// Se leggiamo la sentinella, dobbiamo notificarlo
+int leggiElemLista(posizione p, lista L) {
+    if (fineLista(p, L)) { // fineLista ritorna bool quindi basta e avanza come condizione
+        fprintf(stderr, "Attenzione: sentinella raggiunta!\n");
+    }
+    return p->elem; // l'arrow operator è più comodo di dereferenziare e poi accedere al campo (*p).elem è più verboso di p->elem
+}
+```
 
 ---
 
-#### **k. cancElemLista
+#### **i. sovrascriviElemLista**
 
-![14_vs11.png](imgs/14_vs11.png)
+```c
+void sovrascriviElemLista(int x, posizione p, lista L) {
+    if (fineLista(p, L)) {
+        fprintf(stderr, "Attenzione: scrittura sulla sentinella non consentita!\n");
+        exit(1);
+    }
+    p->elem = x;
+}
+```
+
+---
+
+#### **j. insElemInListaPrimaDi**
+
+```c
+void insElemInListaPrimaDi(int x, posizione p) {
+    posizione n = malloc(sizeof(cella)); // creo un nodo
+    if (!n) { perror("errore nell'allocazione dinamica!"); exit(1); }
+    n->elem = x;
+    // Come già visto nella lezione di teoria M02_DS_Lineari\UD1\L1\L1_Liste.md,
+    // ci sono in tutto 4 re-link dei puntatori da aggiornare per inserire n prima di p:
+    n->next = p;
+    n->prev = p->prev;
+
+    p->prev->next = n;
+    p->prev = n;
+}
+```
+
+---
+
+#### **k. cancElemLista**
+
+```c
+void cancElemLista(posizione p) {
+    // Stavolta è più easy: solo 2 re-link, poi liberiamo la memoria della cella cancellata.
+    p->prev->next = p->next;
+    p->next->prev = p->prev;
+    free(p);
+}
+```
 
 ---
 
@@ -316,8 +400,8 @@ Il **rango di un elemento** di una lista è la **somma del suo valore** e dei **
 
 Se la lista $L$ è composta da $n$ elementi $a_1, a_2, \dots, a_n$, il rango dell’elemento $a_i$ è:
 
-$$  
-r_i = a_i + a_{i+1} + a_{i+2} + \dots + a_n  
+$$
+r_i = a_i + a_{i+1} + a_{i+2} + \dots + a_n
 $$
 
 Da cui deduciamo che:
@@ -330,9 +414,9 @@ Scrivere una procedura che, data la lista iniziale $L$ di interi, produca una nu
 
 **Esempio:**
 
-|Lista L|5|3|2|1|
-|---|---|---|---|---|
-|Lista R|11|6|3|1|
+| Lista L | 5   | 3   | 2   | 1   |
+| ------- | --- | --- | --- | --- |
+| Lista R | 11  | 6   | 3   | 1   |
 
 ---
 
@@ -340,8 +424,8 @@ Scrivere una procedura che, data la lista iniziale $L$ di interi, produca una nu
 
 #### **Rappresentazione matematica**
 
-$$  
-r_i = \sum_{j=i}^{n} a_j  
+$$
+r_i = \sum_{j=i}^{n} a_j
 $$
 
 Per calcolare tutti i ranghi, è sufficiente **scandire la lista dall’ultimo elemento verso il primo**, mantenendo in una variabile la somma progressiva degli elementi già visitati.
@@ -349,17 +433,12 @@ Per calcolare tutti i ranghi, è sufficiente **scandire la lista dall’ultimo e
 #### **Idea operativa**
 
 1. Si parte dall’ultimo elemento della lista $L$
-    
 2. Si tiene una variabile accumulatrice `a` con la somma dei valori letti
-    
 3. A ogni passo:
-    
-    - si aggiorna `a` sommando il valore corrente
-        
-    - si inserisce il risultato **in testa** alla nuova lista $R$
-        
+   - si aggiorna `a` sommando il valore corrente
+   - si inserisce il risultato **in testa** alla nuova lista $R$
+
 4. Al termine, $R$ conterrà tutti i ranghi in ordine corretto
-    
 
 > È un approccio _bottom-up_: risaliamo la lista partendo dalla fine e costruendo in parallelo la nuova.
 
@@ -369,23 +448,26 @@ Per calcolare tutti i ranghi, è sufficiente **scandire la lista dall’ultimo e
 
 - La lista di input $L$ ha dimensione $n$: è necessario scandire tutti gli elementi almeno una volta
 
-    $$\Omega(n)$$
-    
-- Ogni passo richiede una somma e un’inserzione 
+  $$\Omega(n)$$
 
-    $$O(1)$$
+- Ogni passo richiede una somma e un’inserzione
+
+  $$O(1)$$
+
+Ergo, a livello di eventi contabili, sono necessarie $n-1$ somme per poter calcolare il rango di ogni singolo elemento, quindi anche qui otteniamo una limitazione inferiore di $\Omega(n)$.
+Perché proprio $n-1$? Perché se abbiamo $n$ elementi, per calcolare il rango del primo elemento dobbiamo sommare tutti gli altri $n-1$ elementi, per il secondo elemento dobbiamo sommare $n-2$ elementi, e così via fino all'ultimo elemento che ha rango uguale al suo valore (quindi nessuna somma da fare). Infatti, se la lista avesse un solo elemento, otterremmo $0$ somme da fare, se ne avesse due, otterremmo $1$ somma da fare, e così via.
 
 **Complessità complessiva:**
 
-$$  
-O(n)  
+$$
+O(n)
 $$
 
 ---
 
 Prima di entrare nel vivo della lezione, è bene però capire come fare effettivamente a popolare la lista vuota creata dalla nostra funzione per poi poter andare a lavorarci.
 
-$$ Vogliamo \ la  \ lista\  L = \{ \ 9, 8, 7, 6, 5, 4, 3, 2, 1 \ \}$$
+$$ Vogliamo \ la \ lista\ L = \{ \ 9, 8, 7, 6, 5, 4, 3, 2, 1 \ \}$$
 
 Cosicché risulti la lista di rango:
 
@@ -393,17 +475,26 @@ $$R = \{ \ 45, 36, 28, 21, 15, 10, 6, 3, 1 \ \}$$
 
 ---
 
-Graficamente, dopo la chiamata di 
+Graficamente, dopo la chiamata di
 
-![16_vs13.png](imgs/16_vs13.png)
+```c
+int main(void) {
+    lista L;
+    creaListaVuota(&L);
+    // ...
+}
+```
 
-per ora abbiamo questo:
+avremo, a livello grafico questo:
 
 ![17_notes1.jpg](imgs/17_notes1.jpg)
 
 Ci servirà una variabile ausiliaria di coda (tail), che indichi l'ultimo elemento attuale della lista e che all'occorrenza aggiorneremo per procedere con l'algoritmo:
 
-![18_vs14.png](imgs/18_vs14.png)
+```c
+cella *ultimoEl = L; // all’inizio l’ultimo è la sentinella
+```
+
 Visivamente è come se:
 
 ![19_notes2.jpg](imgs/19_notes2.jpg)
@@ -415,15 +506,38 @@ Per ogni cella che creeremo ad ogni iterazione nell'heap, vogliamo poterci rifer
 ![20_notes3.jpg](imgs/20_notes3.jpg)
 
 Inseriremo le celle a partire dalla prima fino all'ultima, il che è una buona prassi.
-In altre parole, le inseriamo in coda: la prima inserita si pone dopo la sentinella, la seconda dopo la prima... 
+In altre parole, le inseriamo in coda: la prima inserita si pone dopo la sentinella, la seconda dopo la prima...
 Vediamo la prima iterazione, ovvero quella con $i = 9$:
 
-![21_vs15.png](imgs/21_vs15.png)
+```c
+int main(void) {
+    lista L;
+    creaListaVuota(&L);
+    // oppure se non avessimo voluto usare l'ampersand, avremmo potuto fare:
+    lista *indirizzoLista = &L;
+   
+    creaListaVuota(indirizzoLista); // Ma capite bene che è molto più snello usare & direttamente!
+
+    cella *ultimoEl = L; // all’inizio l’ultimo è la sentinella
+
+    for (int i = 9; i >= 1; --i) {
+        cella *new = malloc(sizeof(cella));
+        new->elem = i;
+
+        new->next = L; // inserimento in coda
+        new->prev = ultimoEl;
+
+        ultimoEl->next = new;
+        L->prev = new;
+
+        ultimoEl = new;
+    }
+```
 
 Dopo aver salvato il dato i nel campo elem, dobbiamo ricordare che:
 
-1) Essendo che aggiungiamo le celle sempre una dopo l'altra, la successiva della nuova aggiunta è sempre la sentinella perché è quella che viene dopo l'ultima
-2) La nuova cella aggiunta diventa la nuova ultima, quindi la sua precedente non è altro che l'ex ultima, che finora è salvata in tail, e per ora è sempre la sentinella
+1. Essendo che aggiungiamo le celle sempre una dopo l'altra, la successiva della nuova aggiunta è sempre la sentinella perché è quella che viene dopo l'ultima
+2. La nuova cella aggiunta diventa la nuova ultima, quindi la sua precedente non è altro che l'ex ultima, che finora è salvata in tail/ultimoEl, e per ora è sempre la sentinella
 
 ![22_notes4.jpg](imgs/22_notes4.jpg)
 
@@ -448,9 +562,23 @@ Ci ritroviamo dunque con una situazione del genere
 Infine aggiorniamo la coda affinché punti al nuovo nodo;
 
 ---
+
 Vediamo ora la seconda iterazione, quella con $i = 8$:
 
-![25_vs16.png](imgs/25_vs16.png)
+```c
+for (int i = 9; i >= 1; --i) {
+        cella *new = malloc(sizeof(cella));
+        new->elem = i;
+
+        new->next = L; // inserimento in coda
+        new->prev = ultimoEl;
+
+        ultimoEl->next = new;
+        L->prev = new;
+
+        ultimoEl = new;
+    }
+```
 
 E' facile convincersi che dopo aver aggiornato i campi del new siamo in questa situazione, abbiamo fillato correttamente la nuova cella e dobbiamo aggiornare il resto:
 
@@ -477,12 +605,46 @@ Attenzione: nel ciclo inseriamo in coda, quindi si aggiorna tail->next e non L->
 
 Ricapitolando: per ora, siamo riusciti a costruire e popolare la lista con le sottostanti righe di codice:
 
-![30_vs17.png](imgs/30_vs17.png)
+```c
+// ========== Demo ==========
+
+
+
+int main(void) {
+    lista L;
+    creaListaVuota(&L);
+    // oppure se non avessimo voluto usare l'ampersand, avremmo potuto fare:
+    lista *indirizzoLista = &L;
+    creaListaVuota(indirizzoLista); // Ma capite bene che è molto più snello usare & direttamente!
+
+    cella *ultimoEl = L; // all’inizio l’ultimo è la sentinella
+
+    for (int i = 9; i >= 1; --i) {
+        cella *new = malloc(sizeof(cella));
+        new->elem = i;
+
+        new->next = L; // inserimento in coda
+        new->prev = ultimoEl;
+
+        ultimoEl->next = new;
+
+        L->prev = new;
+
+        ultimoEl = new;
+    }
+```
 
 Per sincerarci del successo, facciamo un po' di debug e stampiamo a schermo il risultato:
 già qui ci rendiamo conto che le funzioni permettono di ciclare molto più comodamente la lista inizializzata!!!
 
-![31_vs18.png](imgs/31_vs18.png)
+```c
+// Stampa di debug: L { sentinella -> 9 -> ... -> 1 -> sentinella }
+    printf("Lista originale L: { Sentinella -> ");
+    for (posizione p = primoNodo(L); p != L; p = successivoDi(p)) {
+        printf("%d -> ", p->elem);
+    }
+    printf("Sentinella }\n");
+```
 
 Otteniamo:
 
@@ -499,18 +661,18 @@ Ora passiamo a capire come manipolare i dati che abbiamo in questa struttura per
 lista rangoIterativo(lista L) {
     lista R;
     creaListaVuota(&R);
-  
+
     posizione p = ultimoNodo(L);
     int acc = leggiElemLista(p, L);
     insElemInLista(acc, primoNodo(R));  // inserisco il rango dell'ultimo elemento
-    
+   
     p = precedenteDi(p);
     while (!fineLista(p, L)) {
         acc += leggiElemLista(p, L);
         insElemInLista(acc, primoNodo(R));  // inserisco il rango corrente
         p = precedenteDi(p);
     }
-  
+
     return R;
 }
 ```
@@ -518,11 +680,8 @@ lista rangoIterativo(lista L) {
 #### **Spiegazione passo passo**
 
 1. Si inizializza la variabile `accumulatrice acc` con l’ultimo valore della lista $L$
-    
 2. Si crea una lista vuota $R$ e si inserisce il primo rango
-    
 3. Si risale la lista: per ogni elemento precedente, si aggiorna `a` e si inserisce in testa a $R$
-    
 
 ---
 
@@ -535,8 +694,8 @@ $\rightarrow$ La lista va scandita tutta, per come abbiamo stabilito che l'algor
 Il corpo del ciclo `while` contiene **5 operatori di lista**, ciascuno con costo $O(1)$.  
 Dato che il ciclo viene eseguito $n$ volte:
 
-$$  
-T(n) = 5n = O(n)  
+$$
+T(n) = 5n = O(n)
 $$
 
 > L’algoritmo `rangoIterativo` è **lineare** e **ottimo**, perché raggiunge il limite inferiore teorico del problema.
@@ -562,7 +721,6 @@ int rangoRicorsivo(posizione p, lista L) {
 }
 ```
 
-
 #### **Esempio di chiamata**
 
 ```c
@@ -579,9 +737,7 @@ for (posizione p = primoNodo(L); !fineLista(p, L); p = successivoDi(p)) {
 #### **Spiegazione logica**
 
 - **Caso base:** quando si arriva all’ultimo elemento, il rango coincide con il suo valore
-    
 - **Caso ricorsivo:** per ogni elemento precedente, si richiama la funzione sul successore e poi si aggiunge il proprio valore
-    
 
 > La funzione non costruisce direttamente la lista $R$, ma calcola il rango di ciascun elemento.
 
@@ -591,19 +747,19 @@ for (posizione p = primoNodo(L); !fineLista(p, L); p = successivoDi(p)) {
 
 Ogni chiamata ricorsiva elabora un solo elemento e genera una nuova chiamata fino alla fine della lista.
 
-$$  
-T(n) = T(n - 1) + O(1) \Rightarrow O(n)  
+$$
+T(n) = T(n - 1) + O(1) \Rightarrow O(n)
 $$
 
 ---
 
 ### **7. Ottimalità e confronto**
 
-|Algoritmo|Tipo|Complessità|Descrizione|
-|---|---|---|---|
-|`rango_i`|Iterativo|O(n)|costruisce la lista R con un ciclo|
-|`rango_r`|Ricorsivo|O(n)|calcola i ranghi tramite chiamate ricorsive|
-|Problema del rango|—|Ω(n)|richiede di scandire tutta la lista|
+| Algoritmo          | Tipo      | Complessità | Descrizione                                 |
+| ------------------ | --------- | ----------- | ------------------------------------------- |
+| `rango_i`          | Iterativo | O(n)        | costruisce la lista R con un ciclo          |
+| `rango_r`          | Ricorsivo | O(n)        | calcola i ranghi tramite chiamate ricorsive |
+| Problema del rango | —         | Ω(n)        | richiede di scandire tutta la lista         |
 
 > Entrambi gli algoritmi sono **ottimi**, poiché raggiungono la complessità minima teorica $\Omega(n)$.
 
@@ -612,13 +768,9 @@ $$
 ### **8. Osservazioni conclusive**
 
 - Questa è la **prima applicazione pratica** del tipo di dato lista
-    
 - Tutte le operazioni usano **solo operatori formali** (`crealista`, `leggilista`, `predlista`, ecc.)
-    
 - Si segue lo **schema di soluzione computazionale** visto nel Modulo 1
-    
 - Iterazione e ricorsione hanno stessa complessità $O(n)$, ma diversa gestione della memoria (stack vs loop)
-    
 
 ---
 

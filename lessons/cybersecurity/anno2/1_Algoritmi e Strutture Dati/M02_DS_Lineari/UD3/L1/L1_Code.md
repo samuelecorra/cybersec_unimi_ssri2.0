@@ -1,5 +1,4 @@
-
-## **Lezione 1: Code**
+# **Lezione 1 - Code**
 
 ---
 
@@ -23,7 +22,6 @@ Una **coda** è una sequenza di elementi dello stesso tipo, nella quale è possi
 - **aggiungere** un elemento alla **fine** (operazione di accodamento);
     
 - **rimuovere** un elemento dall’**inizio** (operazione di estrazione).
-    
 
 Politica di accesso:  
 
@@ -53,7 +51,6 @@ Dove:
 - `Q` è una coda di elementi $a_i$ di tipo `tipoelem`
     
 - `b` è un valore booleano
-    
 
 ---
 
@@ -119,7 +116,6 @@ Un vettore circolare è un array in cui:
 - la **posizione 0** è considerata il **successore** della posizione `maxlung - 1`;
     
 - due cursori (`testa` e `fondo`) indicano rispettivamente **inizio** e **fine** della coda.
-    
 
 In questo modo, quando si raggiunge la fine dell’array, si “ricomincia” da zero senza spreco di spazio.
 
@@ -130,7 +126,6 @@ In questo modo, quando si raggiunge la fine dell’array, si “ricomincia” da
 - **Inserimento**: si incrementa il cursore `fondo` di 1 modulo `maxlung`
     
 - **Cancellazione**: si incrementa il cursore `testa` di 1 modulo `maxlung`
-    
 
 $$
 \text{nuovo indice} = (\text{indice attuale} + 1) \bmod \text{maxlung}
@@ -145,7 +140,6 @@ Se:
 - `testa = i`
     
 - `lung = n`
-    
 
 Allora l’ultimo elemento si trova in posizione:
 
@@ -156,7 +150,6 @@ $$
 - **Cancellazione:** `testa++`, `lung--`
     
 - **Inserzione:** scrittura in `(i + n - 1) % maxlung`, poi `lung++`
-    
 
 ---
 
@@ -212,7 +205,6 @@ void incoda(tipoelem a, coda *Q) {
 - Il limite principale è la **dimensione fissa** della coda
     
 - Un valore eccessivo di `maxlung` può causare **spreco di memoria**
-    
 
 ---
 
@@ -228,6 +220,3 @@ void incoda(tipoelem a, coda *Q) {
 > La coda è la struttura della **giustizia informatica**:  
 > chi arriva prima, viene servito per primo.  
 > Da essa derivano sistemi di simulazione, scheduler di CPU e code di rete — pilastri dell’elaborazione moderna.
-
-
----

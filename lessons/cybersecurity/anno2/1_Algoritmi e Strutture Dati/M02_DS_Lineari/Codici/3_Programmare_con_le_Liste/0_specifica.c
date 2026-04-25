@@ -12,21 +12,25 @@ typedef struct _cella {
 // 1. Aliasiamo i puntatori a cella: per modificare il contenuto dei NODI basta passare by value
 // (il puntatore è già un riferimento). Solo quando dobbiamo modificare il puntatore
 // stesso nel chiamante (es. creaListaVuota) serve un livello in più: lista *L.
-typedef cella* posizione;
+typedef cella* posizione; // sinonimo di nodo
 typedef cella* lista;
 // 2. Aliasiamo i nodi NON come puntatori, e useremo l'& nelle varie funzioni per passare by reference.
 // Però, in questo caso, se dimentichiamo anche un solo &, rischiamo di passare per valore!
 
 
-
 // ========== Utilities ==========
 
 void creaListaVuota(lista *L) {
-    *L = malloc(sizeof(cella));
-    (*L)->next = *L;
+    *L = malloc(sizeof(cella)); // alloco spazio per la sentinella assegnandolo al puntatore alla lista
+    if (!*L) {
+        perror("malloc"); // gestione dell'errore di allocazione
+        exit(1);
+    }
+    (*L)->next = *L; // Se va a buon fine l'allocazione, inizializzo i campi della sentinella
     (*L)->prev = *L;
 }
 
+// D'ora in avanti non dovremo più passare per riferimento!
 bool isListaVuota(lista L) {
     return L->next == L;
 }
@@ -37,14 +41,15 @@ posizione ultimoNodo(lista L)  { return L->prev; }
 posizione successivoDi(posizione p) { return p->next; }
 posizione precedenteDi(posizione p) { return p->prev; }
 
-bool fineLista(posizione p, lista L) { return p == L; } 
+
+bool fineLista(posizione p, lista L) { return p == L; }
 
 // Se leggiamo la sentinella, dobbiamo notificarlo
 int leggiElemLista(posizione p, lista L) {
-    if (fineLista(p, L)) {
+    if (fineLista(p, L)) { // fineLista ritorna bool quindi basta e avanza come condizione
         fprintf(stderr, "Attenzione: sentinella raggiunta!\n");
     }
-    return p->elem;
+    return p->elem; // l'arrow operator è più comodo di dereferenziare e poi accedere al campo (*p).elem è più verboso di p->elem
 }
 
 void sovrascriviElemLista(int x, posizione p, lista L) {
@@ -55,11 +60,13 @@ void sovrascriviElemLista(int x, posizione p, lista L) {
     p->elem = x;
 }
 
-void insElemInListaPrimaDellaPosizionePassata(int x, posizione p) {
-    posizione n = malloc(sizeof(cella));
+void insElemInListaPrimaDi(int x, posizione p) {
+    posizione n = malloc(sizeof(cella)); // creo un nodo
     if (!n) { perror("malloc"); exit(1); }
     n->elem = x;
 
+    // Come già visto nella lezione di teoria M02_DS_Lineari\UD1\L1\L1_Liste.md,
+    // ci sono in tutto 4 re-link dei puntatori da aggiornare per inserire n prima di p:
     n->next = p;
     n->prev = p->prev;
 
@@ -68,11 +75,13 @@ void insElemInListaPrimaDellaPosizionePassata(int x, posizione p) {
 }
 
 void cancElemLista(posizione p) {
+    // Stavolta è più easy: solo 2 re-link, poi liberiamo la memoria della cella cancellata.
     p->prev->next = p->next;
     p->next->prev = p->prev;
     free(p);
 }
 
+// -------------------------------------------------------------------------------------------
 
 lista rangoIterativo(lista L) {
     lista R;
@@ -81,11 +90,11 @@ lista rangoIterativo(lista L) {
     posizione p = ultimoNodo(L);
     int acc = leggiElemLista(p, L);
 
-    insElemInListaPrimaDellaPosizionePassata(acc, primoNodo(R));  // inserisco il rango dell'ultimo elemento
+    insElemInListaPrimaDi(acc, primoNodo(R));  // inserisco il rango dell'ultimo elemento
     p = precedenteDi(p);
     while (!fineLista(p, L)) {
         acc += leggiElemLista(p, L);
-        insElemInListaPrimaDellaPosizionePassata(acc, primoNodo(R));  // inserisco il rango corrente
+        insElemInListaPrimaDi(acc, primoNodo(R));  // inserisco il rango corrente
         p = precedenteDi(p);
     }
 
@@ -111,8 +120,11 @@ int rangoRicorsivo(posizione p, lista L) {
 int main(void) {
     lista L;
     creaListaVuota(&L);
+    // oppure se non avessimo voluto usare l'ampersand, avremmo potuto fare:
+    lista *indirizzoLista = &L;
+    creaListaVuota(indirizzoLista); // Ma capite bene che è molto più snello usare & direttamente!
 
-    cella *ultimoEl = L;                      // all’inizio l’ultimo è la sentinella
+    cella *ultimoEl = L; // all’inizio l’ultimo è la sentinella
 
     for (int i = 9; i >= 1; --i) {
         cella *new = malloc(sizeof(cella));
@@ -163,7 +175,7 @@ int main(void) {
         // Calcolo i ranghi e li inserisco in R
         for (posizione p = primoNodo(L); !fineLista(p, L); p = successivoDi(p)) {
             int rango = rangoRicorsivo(p, L);
-            insElemInListaPrimaDellaPosizionePassata(rango, R);  // inserisco in coda
+            insElemInListaPrimaDi(rango, primoNodo(R));  // inserisco in coda
         }
 
         // Stampa di debug: R { sentinella -> ... -> ... -> sentinella }
@@ -183,7 +195,7 @@ int main(void) {
         // Calcolo i ranghi e li inserisco in R
         for (posizione p = primoNodo(L); !fineLista(p, L); p = successivoDi(p)) {
             int rango = rangoRicorsivo(p, L);
-            insElemInListaPrimaDellaPosizionePassata(rango, R);  // inserisco in coda
+            insElemInListaPrimaDi(rango, primoNodo(R));  // inserisco in coda
         }
 
         // Stampa di debug: R { sentinella -> ... -> ... -> sentinella }

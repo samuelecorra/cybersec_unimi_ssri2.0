@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Liste**
+# **Lezione 0 - Intro Unità Didattica 1 - Liste**
 
 ---
 

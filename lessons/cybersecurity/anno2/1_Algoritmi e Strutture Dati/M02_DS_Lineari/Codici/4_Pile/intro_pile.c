@@ -51,7 +51,7 @@ void sovrascriviElemLista(int x, posizione p, lista L) {
     p->elem = x;
 }
 
-void insElemInListaPrimaDellaPosizionePassata(int x, posizione p) {
+void insElemInListaPrimaDi(int x, posizione p) {
     posizione n = malloc(sizeof(cella));
     if (!n) { perror("malloc"); exit(1); }
     n->elem = x;
@@ -126,7 +126,7 @@ void poppaDallaCima(pila P) {
 void pushaInCima(int x, pila P) {
     // Inseriamo un nuovo nodo PRIMA della posizione passata.
     // Se P è vuota, primoNodo(P) == sentinella: va benissimo.
-    insElemInListaPrimaDellaPosizionePassata(x, primoNodo(P));
+    insElemInListaPrimaDi(x, primoNodo(P));
 }
 
 // (opzionale) Svuota la pila e libera anche la sentinella
@@ -184,8 +184,6 @@ void stampaPila(pila P) {
     }
     printf("\n\n");
 }
-
-
 
 
 // Facciamo una demo per le nostre geniali elucubrazioni:
