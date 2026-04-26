@@ -1,4 +1,4 @@
-## **Lezione 5: Alberi Binari**
+# **M3 UD1 Lezione 5 - Alberi Binari**
 
 ---
 
@@ -20,7 +20,6 @@ Un **albero binario** è una struttura $T = (N, r)$ dove:
 - $r$ è la radice;
     
 - ogni nodo $u \in N$ ha **al più due figli**, detti **sinistro** e **destro**.
-    
 
 > In simboli:  
 > $\forall u \in N,\ |\text{figli}(u)| \leq 2$
@@ -36,25 +35,15 @@ Questo mostra come **l’ordine** (sinistra/destra) sia parte integrante della d
 
 Immaginiamo tre alberi $T_1$, $T_2$, $T_3$ con gli stessi nodi:
 
-```
-T1              T2              T3
-  1               1               1
- /|\             / \             / \
-2 3 4           2   3           3   2
-     \             \               \
-      5             4               4
-                     \
-                      5               5
-```
+![](imgs/Pasted%20image%2020260425192502.png)
 
 - Considerati come **alberi ordinati**, $T_1 = T_2 = T_3$.
     
 - Tuttavia:
     
-    - $T_1$ **non è binario**, perché il nodo 1 ha tre figli.
+    - $T_1$ **non è binario**, perché il nodo 2 non è distinto tra destro e sinistro!
         
     - $T_2$ e $T_3$ **sono binari**, ma differiscono nella posizione del nodo 2 (figlio sinistro in $T_2$, destro in $T_3$).
-        
 
 ---
 
@@ -75,7 +64,6 @@ Un albero binario condivide molti operatori con l’albero ordinato:
 - `legginodo`
     
 - `scrivinodo`
-    
 
 > Questi operatori sono **sintatticamente e semanticamente identici** alle loro controparti per gli alberi ordinati.  
 > Per questo non è necessario ridefinirli completamente.
@@ -112,7 +100,6 @@ con sottoalbero sinistro T e destro U.
 - Se $T = \Lambda$, allora `u` **non ha figlio sinistro**.
     
 - Se $U = \Lambda$, allora `u` **non ha figlio destro**.
-    
 
 > L’operatore `foglia` è **ridondante**, poiché un nodo è foglia se e solo se `sinistrovuoto(u, T)` e `destrovuoto(u, T)` sono entrambi veri.
 
@@ -122,15 +109,22 @@ con sottoalbero sinistro T e destro U.
 
 ```c
 void binvisita(nodo u, binalbero T) {
+
     { esame anticipato di u → previsita };
+    
     if (!sinistrovuoto(u, T))
         binvisita(figliosinistro(u, T), T);
+        
     { esame simmetrico di u → invisita };
+    
     if (!destrovuoto(u, T))
         binvisita(figliodestro(u, T), T);
+        
     { esame differito di u → postvisita };
 }
 ```
+
+Come si può notare i tre momenti sono mutuamente esclusivi!
 
 ---
 
@@ -161,7 +155,8 @@ Ogni nodo contiene:
 - un **puntatore al figlio sinistro** (`sx`);
     
 - un **puntatore al figlio destro** (`dx`).
-    
+
+![](imgs/Pasted%20image%2020260425193124.png)
 
 #### **Struttura in C**
 
@@ -251,8 +246,7 @@ binalbero costrbinalbero(binalbero T, binalbero U) {
     - sistemare i puntatori alla radice del sottoalbero da cancellare;
         
     - liberare la memoria di tutte le celle, effettuando una **binvisita**.  
-        → **Complessità totale: O(n)**.
-        
+        → **Complessità totale: $O(n)$**.
 
 > ⚠️ Attenzione: molti operatori **non verificano la precondizione** $T \neq \Lambda$, lasciando all’utente il controllo dell’integrità dei dati.
 

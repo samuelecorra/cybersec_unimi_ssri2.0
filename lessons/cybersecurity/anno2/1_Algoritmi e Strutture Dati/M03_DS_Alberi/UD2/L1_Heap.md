@@ -1,5 +1,4 @@
-
-## **Lezione 1: Coda di priorità**
+# **M3 UD2 Lezione 1 - Coda di priorità**
 
 ---
 
@@ -16,12 +15,12 @@ In altre parole, non si tratta di una coda “classica” FIFO, ma di una strutt
 
 #### **Operatori fondamentali**
 
-|Operatore|Tipo|Descrizione|
-|---|---|---|
-|`creaprioricoda()`|→ prioricoda|Crea una nuova coda di priorità vuota|
-|`inserisci(x, C)`|tipoelem × prioricoda → prioricoda|Inserisce l’elemento `x` nella coda `C`|
-|`min(C)`|prioricoda → tipoelem|Restituisce il valore minimo della coda|
-|`cancellamin(C)`|prioricoda → prioricoda|Rimuove l’elemento minimo dalla coda|
+| Operatore          | Tipo                               | Descrizione                             |
+| ------------------ | ---------------------------------- | --------------------------------------- |
+| `creaprioricoda()` | → prioricoda                       | Crea una nuova coda di priorità vuota   |
+| `inserisci(x, C)`  | tipoelem × prioricoda → prioricoda | Inserisce l’elemento `x` nella coda `C` |
+| `min(C)`           | prioricoda → tipoelem              | Restituisce il valore minimo della coda |
+| `cancellamin(C)`   | prioricoda → prioricoda            | Rimuove l’elemento minimo dalla coda    |
 
 ---
 
@@ -52,20 +51,16 @@ Una coda di priorità con ( n ) elementi può essere realizzata anche tramite **
 #### **a) Lista ordinata**
 
 - L’inserimento è costoso, perché deve mantenere l’ordine:  
-    $$ O(n) $$
-    
+   $$ O(n) $$
 - Gli operatori `min` e `cancellamin` sono invece immediati:  
-    $$ O(1) $$
-    
+   $$ O(1) $$
 
 #### **b) Lista non ordinata**
 
 - L’inserimento è veloce:  
-    $$ O(1) $$
-    
+   $$ O(1) $$
 - Ma la ricerca e rimozione del minimo richiedono una scansione completa:  
-    $$ O(n) $$
-    
+   $$ O(n) $$
 
 In entrambi i casi, la complessità **non è ottimale** per insiemi di grandi dimensioni.
 
@@ -73,7 +68,8 @@ In entrambi i casi, la complessità **non è ottimale** per insiemi di grandi di
 
 ### **4. Verso una soluzione efficiente – l’Heap**
 
-Per migliorare l’efficienza, possiamo rappresentare la coda di priorità con un **vettore Heap**.  
+Per migliorare l’efficienza, possiamo rappresentare la coda di priorità con un **vettore Heap**.
+Per intenderci, in italiano "heap" possiamo tradurlo con "cumulo" o "mucchio", che suggerisce come gli elementi siano organizzati in una struttura ad albero, ma con una disposizione particolare che garantisce l'efficienza delle operazioni di inserimento e cancellazione del minimo.
 In questo modo, l’insieme degli elementi può essere interpretato come un **albero binario quasi completo**, dove ogni nodo segue la **proprietà di ordinamento**:
 
 > Ogni nodo contiene un valore **maggiore o uguale** di quello del suo **padre** (per uno heap min, vale l’opposto).
@@ -82,14 +78,11 @@ In questo modo, l’insieme degli elementi può essere interpretato come un **al
 
 ### **5. Proprietà strutturali dello Heap**
 
-Un vettore ( H ) rappresenta uno heap se, e solo se, l’albero ( B ) da esso derivato soddisfa le seguenti condizioni:
+Un vettore $H$ rappresenta uno heap se, e solo se, l’albero $B$ da esso derivato soddisfa le seguenti condizioni:
 
-1. Se ( h ) è il livello massimo, ci sono esattamente ( 2^{h-1} ) nodi ai livelli inferiori.
-    
+1. Se $h$ è il livello massimo, ci sono esattamente $2^{h-1}$ nodi ai livelli inferiori.
 2. Tutte le foglie al livello massimo sono **addossate a sinistra**.
-    
 3. Ogni nodo contiene un valore **maggiore** di quello del padre.
-    
 
 ---
 
@@ -97,34 +90,51 @@ Un vettore ( H ) rappresenta uno heap se, e solo se, l’albero ( B ) da esso de
 
 Sia la coda:
 
-$$  
-C = {5, 10, 8, 11, 13, 12, 9, 18, 3, 6}  
+$$
+C = {5, 10, 8, 11, 13, 12, 9, 18, 3, 6}
 $$
 
-L’albero binario associato ( B ) (heap) verifica tutte le proprietà:
+L’albero binario associato $B$ (heap) verifica tutte le proprietà:
 
 ![[Pasted image 20251018183441.png]]
+
 L’albero è quasi completo, con tutte le foglie a sinistra e ogni nodo maggiore del suo padre.
 
 ---
 
 ### **7. Correlazione tra vettore e albero**
 
-Dalle proprietà 1 e 2, si ricava che i **nodi di livello k** occupano le **prime n posizioni** del vettore ( H ), con le seguenti relazioni:
+Dalle proprietà 1 e 2, si ricava che i **nodi di livello $k$** occupano le **prime $n$ posizioni** del vettore $H$, con le seguenti relazioni:
 
-$$  
-\text{figliosinistro}(i) = 2i  
+$$
+\text{figliosinistro}(i) = 2i
 $$
 
-$$  
-\text{figliodestro}(i) = 2i + 1  
+$$
+\text{figliodestro}(i) = 2i + 1
 $$
 
-$$  
-\text{padre}(i) = \left\lfloor \frac{i}{2} \right\rfloor  
+$$
+\text{padre}(i) = \left\lfloor \frac{i}{2} \right\rfloor
 $$
 
-(Il vettore è indicizzato da 1.)
+---
+
+Dalle precedenti considerazioni si deduce che:
+
+- Il figlio sinistro di $i$ non esiste se $2i > n$.
+- Il figlio destro di $i$ non esiste se $2i + 1 > n$.
+- Il padre di $i$ non esiste se $i = 1$ (radice).
+
+- Interessante poi come il padre di $i$ sia sempre in posizione $\left\lfloor \frac{i}{2} \right\rfloor$, il che implica che i nodi più vicini alla radice (con indice più basso) sono quelli con valori più piccoli, mentre i nodi più lontani (con indice più alto) tendono ad avere valori più grandi, a causa della proprietà di ordinamento dello heap.
+
+Ipotizziamo che il vettore $H$ sia indicizzato a partire da 1.
+
+Sotto quest'ipotesi, allora:
+
+- Per realizzare gli operatori `min` e `cancellamin` e `inserisci` è molto più semplice e conveniente andare ad operare sull'albero $B$ piuttosto che sul vettore $H$, perché l'albero ci permette di visualizzare meglio la struttura e le relazioni tra i nodi, mentre il vettore è più adatto per l'implementazione effettiva in memoria.
+
+- Ad esempio, per `min(C)`, basta leggere il valore alla radice dell'albero $B$, che corrisponde alla posizione 1 del vettore $H$.
 
 ---
 
@@ -141,9 +151,7 @@ Restituisce il valore minimo della coda:
 #### **b) cancellamin(C)**
 
 1. Sostituisce la radice con la foglia più a destra del livello massimo (per mantenere le proprietà 1 e 2).
-    
 2. Fa “scendere” la nuova radice tramite **scambi padre–figlio** fino a ristabilire la proprietà 3.
-    
 
 **Complessità:** $O(\log n)$
 
@@ -154,9 +162,7 @@ Restituisce il valore minimo della coda:
 #### **c) inserisci(x, C)**
 
 1. Inserisce l’elemento `x` come **foglia più a destra**.
-    
 2. Lo fa “salire” tramite **scambi padre–figlio** fino a rispettare la proprietà 3.
-    
 
 **Complessità:** $O(\log n)$
 
@@ -166,11 +172,11 @@ Restituisce il valore minimo della coda:
 
 ### **9. Sintesi operativa**
 
-|Operatore|Descrizione|Complessità|
-|---|---|---|
-|`min`|Lettura della radice|O(1)|
-|`inserisci`|Inserimento + risalita|O(log n)|
-|`cancellamin`|Sostituzione + discesa|O(log n)|
+| Operatore     | Descrizione            | Complessità |
+| ------------- | ---------------------- | ----------- |
+| `min`         | Lettura della radice   | O(1)        |
+| `inserisci`   | Inserimento + risalita | O(log n)    |
+| `cancellamin` | Sostituzione + discesa | O(log n)    |
 
 ---
 

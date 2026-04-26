@@ -1,6 +1,4 @@
-# **Obiettivi del modulo 3**
-
-## **Lezione 1: Alberi — Specifiche**
+# **M3 UD1 Lezione 1: Alberi - Specifiche**
 
 ---
 
@@ -13,7 +11,6 @@ Per lavorare bene con gli alberi servono due cose:
 - un **vocabolario preciso** (radice, padre, figli, fratelli, livello, sottoalbero);
     
 - una **specifica formale** degli **operatori** (creazione, interrogazione, selezione, modifica).
-    
 
 ---
 
@@ -24,9 +21,12 @@ Sia dato un insieme finito e **ordinato** di nodi. Se l’insieme non è vuoto:
 - un nodo speciale è scelto come **radice**;
     
 - i rimanenti nodi sono partizionati in **sottoinsiemi disgiunti** (i **sottoalberi** della radice), ognuno con il proprio ordinamento interno.
-    
 
 Una struttura così costruita è un **albero ordinato** (o semplicemente **albero**).
+
+![](imgs/albero_genealogico_marquez.png)
+
+![](imgs/albero_decisionale_ordinare_numeri.png)
 
 ---
 
@@ -47,7 +47,10 @@ Una struttura così costruita è un **albero ordinato** (o semplicemente **alber
 - **Sottoalbero:** un albero i cui nodi sono tutti discendenti di un certo nodo (incluso il nodo stesso come nuova radice).
     
 - **Albero vuoto:** indicato con Λ.
-    
+
+Più formalmente:
+
+![](imgs/terminologia_alberi_formale.png)
 
 ---
 
@@ -220,7 +223,8 @@ post:
 - `inssottoalbero(a, c, T, U)` → la radice di **U** diventa il **fratello** che **segue** `a` tra i figli dello **stesso padre**.
     
 - `cancsottoalbero(a, T)` → elimina `a` e tutto ciò che sta sotto `a`.
-    
+
+![](imgs/esempio_specifica.png)
 
 ---
 

@@ -1,5 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Alberi**
-
+# **Lezione 0 - Intro Unità Didattica 1 - Alberi**
 
 ---
 
@@ -14,7 +13,6 @@
 - Identificare le **caratteristiche degli alberi binari**
     
 - Comprendere l’uso degli **alberi di decisione** per analizzare la **complessità dei problemi**
-    
 
 ---
 
@@ -30,7 +28,6 @@ Gli alberi permettono di rappresentare informazioni **organizzate per livelli**,
 - gli **organigrammi** aziendali,
     
 - o gli **alberi di espressione** usati nei linguaggi di programmazione.
-    
 
 Durante l’unità vedremo:
 
@@ -39,10 +36,5 @@ Durante l’unità vedremo:
 - come cambiano le **prestazioni** a seconda della rappresentazione;
     
 - e come gli **alberi binari** possono diventare strumenti per **analizzare decisioni e complessità**.
-    
 
 > Se le liste erano la sequenza, l’albero è la **struttura del pensiero**: un sistema logico che si espande in ogni direzione mantenendo coerenza e ordine. 🌱
-
-
----
-

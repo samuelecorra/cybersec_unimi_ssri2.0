@@ -1,4 +1,4 @@
-## **Lezione 3: Alberi – Realizzazioni**
+# **M3 UD1 Lezione 3 - Alberi - Realizzazioni**
 
 ---
 
@@ -16,7 +16,6 @@ Le tre realizzazioni classiche sono:
 2. **Liste dei figli**
     
 3. **Puntatori padre / primofiglio / fratello (p/p/f)**
-    
 
 ---
 
@@ -31,7 +30,6 @@ Le tre realizzazioni classiche sono:
 - L’elemento $T[u]$ contiene **il cursore del padre** del nodo $u$.
     
 - Se $u$ è la radice, allora $T[u] = 0$ (o un valore nullo).
-    
 
 $$
 T[u] = 
@@ -41,6 +39,12 @@ v, & \text{se } v \text{ è il padre di } u \\
 \end{cases}
 $$
 
+Vediamo graficamente....
+
+Sia dato un albero di sei nodi al quale corrisponde un vettore da 0 a 5.
+Il padre della radice è autoreferenziale di default:
+
+![](imgs/Pasted%20image%2020260425184033.png)
 
 ---
 
@@ -54,9 +58,8 @@ $$
     - trovare tutti i figli di un nodo richiede di **scandire tutto il vettore**;
         
     - anche determinare il livello o cancellare un sottoalbero è complesso.
-        
-- La relazione fra fratelli non è esplicita: è nota solo se imposta manualmente.
     
+- La relazione fra fratelli non è esplicita: è nota solo se imposta manualmente.
 
 > **Conclusione:** questa rappresentazione è semplice ma poco efficiente per operazioni discendenti.  
 > Non è una buona realizzazione per alberi dinamici.
@@ -74,23 +77,12 @@ $$
 - Per ogni nodo $u$, si associa una lista $L_u$ dei suoi figli immediati.
     
 - Il vettore $T$ contiene i puntatori a queste liste.
-    
 
 $$  
 T[u] = L_u  
 $$
 
----
-
-#### **Esempio operativo**
-
-Se il nodo $u = 3$ ha come figli i nodi $1$ e $5$, allora la sua lista dei figli sarà:
-
-$$  
-L_3 = [1, 5]  
-$$
-
-e nel vettore avremo $T[3] = L_3$.
+![](imgs/Pasted%20image%2020260425191057.png)
 
 ---
 
@@ -101,7 +93,6 @@ Possiamo ridefinire gli operatori dell’albero in funzione di quelli della list
 - $primofiglio(u, T) = leggilista(primolista(L_u), L_u)$
     
 - $succfratello(u, T)$ → scorrimento successivo nella lista $L_u$
-    
 
 ---
 
@@ -110,14 +101,12 @@ Possiamo ridefinire gli operatori dell’albero in funzione di quelli della list
 - Accesso rapido e ordinato a tutti i figli di un nodo.
     
 - È immediata la nozione di **precedenza fra fratelli** (grazie all’ordine della lista).
-    
 
 #### **Svantaggi**
 
 - L’operatore `padre(u, T)` richiede di cercare in tutte le liste: **O(n)** nel caso peggiore.
     
 - Anche `succfratello(u, T)` può richiedere un attraversamento multiplo.
-    
 
 > **Conclusione:** migliora l’accesso discendente ma peggiora quello ascendente.  
 > È un modello bilanciato solo in parte, utile per strutture statiche.
@@ -135,7 +124,6 @@ Per rendere efficienti **tutti** gli operatori principali, si introduce in ogni 
 2. **primofiglio:** riferimento al primo dei figli;
     
 3. **fratello:** riferimento al fratello successivo (se esiste).
-    
 
 Ogni nodo dunque “sa”:
 
@@ -144,7 +132,8 @@ Ogni nodo dunque “sa”:
 - chi è il suo primo discendente,
     
 - e chi viene dopo di lui nella stessa generazione.
-    
+
+![](imgs/Pasted%20image%2020260425191256.png)
 
 ---
 
@@ -153,7 +142,6 @@ Ogni nodo dunque “sa”:
 - Tutti gli operatori principali (`padre`, `primofiglio`, `succfratello`) hanno **complessità O(1)**.
     
 - Le operazioni di inserimento o spostamento di sottoalberi diventano dirette e veloci.
-    
 
 #### **Svantaggi**
 
@@ -164,7 +152,6 @@ Ogni nodo dunque “sa”:
     - e aggiornare i puntatori;
         
     - complessità **O(n)** nel caso peggiore.
-        
 
 > **Conclusione:** è la **migliore realizzazione** generale per alberi dinamici.  
 > Equilibra accesso rapido, semplicità e efficienza complessiva.
@@ -200,6 +187,10 @@ post: T' è ottenuto da T scrivendo il valore a nel nodo u
 |**Vettore dei padri**|Rapida risalita verso la radice|Difficoltà nel visitare i figli|$O(n)$ discendente|
 |**Liste dei figli**|Accesso ordinato ai figli|Ricerca del padre costosa|$O(n)$ ascendente|
 |**Puntatori p/p/f**|Tutti gli operatori $O(1)$|Solo `cancsottoalbero` è $O(n)$|Ottimale|
+
+Per aggiornare più rapidamente i puntatori risulta utile aggiungere un puntatore al fratello precedente.
+
+Risulta anche necessario fare il free della memoria usata!
 
 ---
 

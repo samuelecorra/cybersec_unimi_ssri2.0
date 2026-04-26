@@ -1,4 +1,4 @@
-## **Lezione 2: Alberi – Algoritmi di visita**
+# **M3 UD1 Lezione 2: Alberi - Algoritmi di visita**
 
 ---
 
@@ -20,7 +20,6 @@ Gli alberi si possono visitare secondo tre schemi principali, detti anche **visi
 - **Postvisita** → si visitano tutti i figli e **poi** il nodo corrente.
     
 - **Invisita** → si visita una parte dei figli, **poi** il nodo, e infine i rimanenti (utile per alberi binari).
-    
 
 > Ogni nodo viene toccato una sola volta, rispettando la gerarchia e l’ordine dei figli.
 
@@ -40,6 +39,8 @@ $$
 
 L’ordine segue il flusso **dall’alto verso il basso**: prima il nodo padre, poi i figli in sequenza.
 
+![](imgs/previsita.png)
+
 #### **Esempio intuitivo**
 
 1. Esamina la radice.
@@ -47,7 +48,6 @@ L’ordine segue il flusso **dall’alto verso il basso**: prima il nodo padre, 
 2. Scendi nel primo figlio.
     
 3. Continua a esplorare ricorsivamente i figli di ogni nodo.
-    
 
 ---
 
@@ -83,6 +83,8 @@ $$
 
 È un approccio **bottom-up**: prima si scende fino alle foglie, poi si risale esaminando i padri.
 
+![](imgs/postvisita.png)
+
 #### **Implementazione**
 
 ```c
@@ -116,6 +118,8 @@ $$
 
 Questo schema corrisponde alla **invisita classica per alberi binari**:  
 visita del figlio sinistro → nodo → figlio destro.
+
+![](imgs/invisita.png)
 
 #### **Implementazione ($i = 1$)**
 
@@ -159,11 +163,9 @@ $$
     
 - **Passo induttivo:** per $n > 1$, la visita richiama sé stessa su ciascun sottoalbero, coprendo $n - 1$ nodi in totale.  
     Poiché ogni chiamata comporta un numero costante di operazioni, si ha:
-    
     $$  
     T(n) = T(k) + T(n - k - 1) + O(1) \Rightarrow O(n)  
     $$
-    
 
 ---
 

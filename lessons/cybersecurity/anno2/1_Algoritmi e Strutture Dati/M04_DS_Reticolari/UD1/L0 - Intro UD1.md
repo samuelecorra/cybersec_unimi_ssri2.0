@@ -1,5 +1,6 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Grafi: definizione e applicazioni**
+# **Lezione 0 - Intro Unità Didattica 1 - Grafi: definizione e applicazioni**
 
+---
 
 I **grafi** rappresentano una delle strutture dati più versatili e affascinanti dell’informatica.  
 Con essi possiamo modellare qualunque insieme di **relazioni tra oggetti**, da una rete di computer a una mappa stradale, da un circuito logico a un social network.  
@@ -17,9 +18,5 @@ Nel corso di questa unità didattica impareremo a:
 - utilizzare **gli operatori fondamentali** per creare, esplorare e manipolare un grafo;
     
 - conoscere **le principali realizzazioni** dei grafi, sia tramite **matrici di adiacenza** sia tramite **liste o insiemi di adiacenza**.
-    
 
 > In breve, i grafi sono la lingua universale delle connessioni: ci permettono di tradurre la complessità del mondo reale in strutture logiche, esplorabili e calcolabili.
-
----
-

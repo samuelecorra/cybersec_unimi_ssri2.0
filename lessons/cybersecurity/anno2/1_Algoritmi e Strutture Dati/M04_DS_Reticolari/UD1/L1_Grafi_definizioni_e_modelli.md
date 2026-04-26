@@ -1,24 +1,4 @@
-Con il Modulo 4 entriamo in una nuova dimensione della rappresentazione dei dati: quella **reticolare**.  
-Dopo aver studiato strutture lineari (liste, pile, code) e gerarchiche (alberi, heap), ci troviamo ora davanti a un modello più generale e flessibile, capace di **rappresentare relazioni complesse e non unidirezionali** tra gli elementi: le **reti**.
-
-Una **struttura reticolare** (o rete) consente di descrivere situazioni in cui un elemento può essere connesso a **più altri elementi in modo arbitrario**, non soltanto secondo una gerarchia o una sequenza.  
-Questo approccio è alla base di moltissimi sistemi reali: dalle **reti informatiche** alle **mappe concettuali**, dai **grafi di connessione** nei social network agli **algoritmi di ricerca di percorsi ottimali**.
-
-Nel corso di questo modulo impareremo a:
-
-- riconoscere **quando** una rete è la struttura adatta a modellare un problema;
-    
-- conoscere gli **operatori fondamentali** che ne permettono la manipolazione;
-    
-- comprendere **come la scelta della realizzazione** (matrice, liste di adiacenza, ecc.) influenzi **l’efficienza** delle operazioni.
-    
-
-> In sintesi, il Modulo 4 ci insegnerà a pensare come **architetti delle connessioni**: a progettare strutture che non si limitano a contenere dati, ma li **collegano** in modo intelligente e strategico.
-
-
----
-
-## **Lezione 1: Grafi – Definizioni e modelli**
+# **M4 UD1 Lezione 1 - Grafi - Definizioni e modelli**
 
 ---
 
@@ -34,7 +14,6 @@ Gli obiettivi principali sono:
 - comprendere la differenza tra **grafi orientati** e **non orientati**;
     
 - introdurre esempi pratici di modellazione di problemi reali.
-    
 
 ---
 
@@ -51,7 +30,6 @@ dove:
 - $N$ è un insieme finito di **nodi** o **vertici**;
     
 - $A$ è un insieme finito di **coppie ordinate** di nodi, dette **archi**.
-    
 
 Se indichiamo con $n$ il numero di nodi e con $m$ il numero di archi, allora:
 

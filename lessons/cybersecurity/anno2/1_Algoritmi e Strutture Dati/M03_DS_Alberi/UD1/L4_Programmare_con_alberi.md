@@ -1,4 +1,4 @@
-## **Lezione 4: Programmare con gli alberi**
+# **M3 UD1 Lezione 4 - Programmare con gli alberi**
 
 ---
 
@@ -11,14 +11,12 @@ Affronteremo due problemi classici:
 1. **Calcolo della profondità di un albero ordinato**
     
 2. **Calcolo della distanza di ogni nodo dalla radice**
-    
 
 In entrambi i casi, lo scopo è mostrare **come scegliere la visita corretta** (postvisita o previsita) in base alla direzione con cui l’informazione deve propagarsi:
 
 - **dalle foglie verso la radice** → postvisita
     
 - **dalla radice verso le foglie** → previsita
-    
 
 ---
 
@@ -35,7 +33,6 @@ Per determinare il livello massimo, bisogna:
 - identificare ogni foglia (`foglia(u, T)`),
     
 - effettuando almeno **un confronto per nodo**.
-    
 
 Applicando il **metodo degli eventi contabili**, segue che:
 
@@ -99,7 +96,6 @@ int maxProf(nodo u, albero T) {
     - seleziona la massima,
         
     - restituisce `max + 1`, cioè il livello corrente.
-        
 
 ---
 
@@ -110,7 +106,6 @@ int maxProf(nodo u, albero T) {
 - Ogni chiamata ricorsiva esegue **solo operazioni a costo costante** (se l’albero è realizzato con puntatori padre/primofiglio/fratello).
     
 - Ogni nodo è visitato una sola volta.
-    
 
 $$  
 T(n) = O(n)  
@@ -167,12 +162,12 @@ void distanzaNodo(nodo u, albero T, int *D) {
 
     nodo v;
 
-    if (u == radice(T))
+    if (u == radice(T)) // aggiorno l'etichetta d(u)
         D[u] = 0;
     else
         D[u] = 1 + D[padre(u)];
 
-    v = primofiglio(u, T);
+    v = primofiglio(u, T); // effettuo la previsita
     while (!finefratelli(v, T)) {
         distanzaNodo(v, T, D);
         v = succfratello(v, T);
@@ -189,7 +184,6 @@ void distanzaNodo(nodo u, albero T, int *D) {
 - Si effettua una **previsita**, trasmettendo l’informazione verso i figli.
     
 - Si assume di poter accedere al vettore delle distanze $D$ tramite l’indice del nodo $u$.
-    
 
 ---
 
@@ -198,7 +192,6 @@ void distanzaNodo(nodo u, albero T, int *D) {
 - Ad ogni chiamata vengono fatte **operazioni a costo costante**.
     
 - Ogni nodo viene visitato una sola volta.
-    
 
 $$  
 T(n) = O(n)  

@@ -1,4 +1,4 @@
-## **Lezione 6: Programmare con gli alberi binari**
+# **M3 UD1 Lezione 6 - Programmare con gli alberi binari**
 
 ---
 
@@ -71,7 +71,6 @@ int profondita(nodo u, binalbero T) {
     3. Si prende il **massimo tra i due**;
         
     4. Si ritorna `max + 1` per tener conto del livello corrente.
-        
 
 #### **Osservazioni**
 
@@ -80,7 +79,6 @@ int profondita(nodo u, binalbero T) {
 - L’informazione fluisce dai figli verso il padre.
     
 - Complessità complessiva: ogni nodo è visitato una sola volta.
-    
 
 $$  
 T(n) = O(n)  
@@ -139,9 +137,8 @@ void distanzaNodo(nodo u, binalbero T, int *D) {
     - la distanza si ottiene aggiungendo 1 alla distanza del padre;
         
     - poi si prosegue ricorsivamente verso il figlio sinistro e destro.
-        
-- Si assume che sia possibile accedere al vettore delle distanze `D` tramite l’indice corrispondente al nodo `u`.
     
+- Si assume che sia possibile accedere al vettore delle distanze `D` tramite l’indice corrispondente al nodo `u`.
 
 ---
 
@@ -167,10 +164,10 @@ $$
 
 ### **7. Sintesi finale**
 
-|Problema|Tipo di visita|Direzione dell’informazione|Complessità|Osservazioni|
-|---|---|---|---|---|
-|**Profondità dell’albero binario**|Postvisita|Dalle foglie alla radice|O(n)|Calcola il livello massimo|
-|**Distanza dei nodi dalla radice**|Previsita|Dalla radice alle foglie|O(n)|Calcola tutti i livelli|
+| Problema                           | Tipo di visita | Direzione dell’informazione | Complessità | Osservazioni               |
+| ---------------------------------- | -------------- | --------------------------- | ----------- | -------------------------- |
+| **Profondità dell’albero binario** | Postvisita     | Dalle foglie alla radice    | $O(n)$      | Calcola il livello massimo |
+| **Distanza dei nodi dalla radice** | Previsita      | Dalla radice alle foglie    | $O(n)$      | Calcola tutti i livelli    |
 
 ---
 
