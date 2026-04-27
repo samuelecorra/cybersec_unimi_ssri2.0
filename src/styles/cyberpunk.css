@@ -1901,3 +1901,80 @@ body::before {
     padding: 10px 16px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   WEB LESSON VIEWER  (HTML / JS / CSS triplet)
+   ═══════════════════════════════════════════════════════════════ */
+
+.web-lesson-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.web-lesson-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 12px 20px 0;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.web-lesson-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 18px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.web-lesson-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.web-lesson-tab.active {
+  color: var(--tab-color, var(--neon-cyan));
+  background: var(--bg-mid);
+  border-color: var(--border-color);
+  border-bottom-color: var(--bg-mid);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--tab-color, var(--neon-cyan)) 20%, transparent);
+}
+
+.web-lesson-tab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.web-lesson-tab.active .web-lesson-tab-dot {
+  opacity: 1;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.web-lesson-code {
+  flex: 1;
+  margin: 0 !important;
+  padding: 24px 28px !important;
+  overflow: auto;
+  font-family: var(--font-mono) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.65 !important;
+  background: var(--bg-darker) !important;
+  border-radius: 0 !important;
+  tab-size: 2;
+}

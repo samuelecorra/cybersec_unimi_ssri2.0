@@ -3,6 +3,7 @@ import tree from 'virtual:lesson-tree';
 import searchIndex from 'virtual:lesson-search';
 import Sidebar from './components/Sidebar.jsx';
 import Viewer from './components/Viewer.jsx';
+import WebLessonViewer from './components/WebLessonViewer.jsx';
 import BrowseView from './components/BrowseView.jsx';
 import Breadcrumb from './components/Breadcrumb.jsx';
 import Navigation from './components/Navigation.jsx';
@@ -57,16 +58,22 @@ export default function App() {
   }, [setCurrentFile]);
 
   useEffect(() => {
-    if (currentFile) {
+    if (currentFile && !currentFile.endsWith('.html')) {
       loadFile(currentFile);
     }
   }, []);
 
   const handleFileSelect = useCallback((filePath) => {
-    loadFile(filePath);
+    if (filePath.endsWith('.html')) {
+      setCurrentFile(filePath);
+      setContent('');
+      setViewMode('viewer');
+    } else {
+      loadFile(filePath);
+    }
     setSearchQuery('');
     setViewMode('viewer');
-  }, [loadFile]);
+  }, [loadFile, setCurrentFile]);
 
   const handleBrowse = useCallback((path) => {
     setBrowsePath(path);
@@ -169,11 +176,15 @@ export default function App() {
                   total={allFiles.length}
                 />
               </div>
-              <Viewer
-                content={content}
-                currentFile={currentFile}
-                loading={loading}
-              />
+              {currentFile?.endsWith('.html') ? (
+                <WebLessonViewer filePath={currentFile} />
+              ) : (
+                <Viewer
+                  content={content}
+                  currentFile={currentFile}
+                  loading={loading}
+                />
+              )}
             </>
           ) : (
             <BrowseView

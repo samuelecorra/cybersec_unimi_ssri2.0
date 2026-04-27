@@ -10,6 +10,7 @@ const RESOLVED_SEARCH = '\0' + VIRTUAL_SEARCH;
 // Extensions to copy to dist for static hosting
 const STATIC_EXTS = new Set([
   '.md', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp',
+  '.html', '.js', '.css',
 ]);
 
 function scanDir(dir, base = '') {
@@ -18,9 +19,15 @@ function scanDir(dir, base = '') {
   for (const entry of entries) {
     const rel = base ? `${base}/${entry.name}` : entry.name;
     if (entry.isDirectory()) {
-      const children = scanDir(path.join(dir, entry.name), rel);
-      if (children.length > 0) {
-        result.push({ type: 'dir', name: entry.name, path: rel, children });
+      const subDir = path.join(dir, entry.name);
+      const subNames = fs.readdirSync(subDir);
+      if (subNames.includes('index.html')) {
+        result.push({ type: 'web-lesson', name: entry.name, path: `${rel}/index.html` });
+      } else {
+        const children = scanDir(subDir, rel);
+        if (children.length > 0) {
+          result.push({ type: 'dir', name: entry.name, path: rel, children });
+        }
       }
     } else if (entry.name.endsWith('.md')) {
       const stat = fs.statSync(path.join(dir, entry.name));
@@ -28,7 +35,9 @@ function scanDir(dir, base = '') {
     }
   }
   result.sort((a, b) => {
-    if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
+    const aLeaf = a.type !== 'dir';
+    const bLeaf = b.type !== 'dir';
+    if (aLeaf !== bLeaf) return aLeaf ? 1 : -1;
     return a.name.localeCompare(b.name, 'it', { numeric: true });
   });
   return result;
@@ -36,7 +45,7 @@ function scanDir(dir, base = '') {
 
 function flattenFiles(tree, list = []) {
   for (const node of tree) {
-    if (node.type === 'file') {
+    if (node.type === 'file' || node.type === 'web-lesson') {
       list.push(node.path);
     } else if (node.children) {
       flattenFiles(node.children, list);
@@ -48,6 +57,7 @@ function flattenFiles(tree, list = []) {
 function buildSearchIndex(lessonsPath, files) {
   const index = [];
   for (const filePath of files) {
+    if (!filePath.endsWith('.md')) continue;
     try {
       const fullPath = path.join(lessonsPath, filePath);
       const content = fs.readFileSync(fullPath, 'utf-8');
@@ -133,12 +143,15 @@ export default function lessonsPlugin() {
         try {
           const ext = path.extname(fullPath).toLowerCase();
           const mimeTypes = {
-            '.md': 'text/plain; charset=utf-8',
-            '.png': 'image/png',
-            '.jpg': 'image/jpeg',
+            '.md':   'text/plain; charset=utf-8',
+            '.html': 'text/plain; charset=utf-8',
+            '.js':   'text/plain; charset=utf-8',
+            '.css':  'text/plain; charset=utf-8',
+            '.png':  'image/png',
+            '.jpg':  'image/jpeg',
             '.jpeg': 'image/jpeg',
-            '.gif': 'image/gif',
-            '.svg': 'image/svg+xml',
+            '.gif':  'image/gif',
+            '.svg':  'image/svg+xml',
             '.webp': 'image/webp',
           };
           const contentType = mimeTypes[ext] || 'application/octet-stream';

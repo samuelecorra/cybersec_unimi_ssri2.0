@@ -10,7 +10,7 @@ function formatSegment(name) {
   return name
     .replace(/^\d+_/, '')
     .replace(/_/g, ' ')
-    .replace(/\.md$/, '');
+    .replace(/\.(md|html)$/, '');
 }
 
 function Breadcrumb({ path, onNavigate }) {

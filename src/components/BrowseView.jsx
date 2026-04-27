@@ -55,16 +55,16 @@ const HomeIcon = () => (
 );
 
 function countFilesInNode(node) {
-  if (node.type === 'file') return 1;
+  if (node.type === 'file' || node.type === 'web-lesson') return 1;
   if (!node.children) return 0;
   return node.children.reduce((sum, c) => sum + countFilesInNode(c), 0);
 }
 
 function formatName(name) {
   return name
-    .replace(/^\d+_/, '')     // remove leading number prefix like "1_"
-    .replace(/_/g, ' ')       // underscores to spaces
-    .replace(/\.md$/, '');    // remove .md extension
+    .replace(/^\d+_/, '')          // remove leading number prefix like "1_"
+    .replace(/_/g, ' ')            // underscores to spaces
+    .replace(/\.(md|html)$/, '');  // remove .md / .html extension
 }
 
 function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
@@ -87,7 +87,7 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
   }, [tree, browsePath]);
 
   const dirs = currentNodes.filter(n => n.type === 'dir');
-  const files = currentNodes.filter(n => n.type === 'file');
+  const files = currentNodes.filter(n => n.type === 'file' || n.type === 'web-lesson');
   const isRoot = browsePath.length === 0;
   const isYearLevel = browsePath.length === 1;
 
@@ -102,7 +102,7 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
 
   const displayNodes = effectiveRoot.autoSkip && isRoot ? effectiveRoot.nodes : currentNodes;
   const displayDirs = displayNodes.filter(n => n.type === 'dir');
-  const displayFiles = displayNodes.filter(n => n.type === 'file');
+  const displayFiles = displayNodes.filter(n => n.type === 'file' || n.type === 'web-lesson');
 
   // Determine if these dirs are "years" (anno1, anno2, anno3)
   const isYearsView = isRoot && effectiveRoot.autoSkip &&

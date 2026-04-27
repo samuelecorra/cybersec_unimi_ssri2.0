@@ -83,7 +83,7 @@ function FileTree({ nodes, currentFile, expandedDirs, onToggleDir, onSelectFile,
               title={node.path}
             >
               <FileIcon active={isActive} />
-              <span className="tree-name">{node.name.replace(/\.md$/, '')}</span>
+              <span className="tree-name">{node.name.replace(/\.(md|html)$/, '')}</span>
               {node.size != null && (
                 <span className="tree-size">{formatSize(node.size)}</span>
               )}
@@ -96,7 +96,7 @@ function FileTree({ nodes, currentFile, expandedDirs, onToggleDir, onSelectFile,
 }
 
 function countFiles(node) {
-  if (node.type === 'file') return 1;
+  if (node.type === 'file' || node.type === 'web-lesson') return 1;
   if (!node.children) return 0;
   return node.children.reduce((sum, child) => sum + countFiles(child), 0);
 }
