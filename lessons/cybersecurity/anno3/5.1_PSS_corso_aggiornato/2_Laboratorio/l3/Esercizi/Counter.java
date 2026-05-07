@@ -21,17 +21,22 @@ public class Counter {
 	}
 
 	//@ ensures counter == \old(counter) - 1;
+	//@ ensures getCounter() == \old(getCounter()) - 1;
 	public void decr() {
 		counter--;
 	}
 
 	//Solo i metodi puri possono essere utilizzati nelle precondizioni e nelle postcondizioni.
 	//Un metodo puro e' un metodo che non modifica lo stato del programma.
-	//Per identificare un metodo come puro lo si puo' dichiarare con il modificatore "pure". 
+	//Per identificare un metodo come puro lo si puo' dichiarare con il modificatore "pure".
+	//In questo primo esempio, il "Getter", ovvero il metodo che deve solo recuperare il valore di
+	// di un variabile della classe, è puro al 100%, in quanto non ha istruzioni che manipolano valori
+	// ma ritorna solamente il valore invariato:
 	public /*@ pure @*/ int getCounter() {
 		return counter;
 	}
 
+	// A questo punto possiamo tranquillamente iniziare a scrivere il nostro programma principale:
 	public static void main(String[] args) {
 		Counter c = new Counter();
 		c.incr();

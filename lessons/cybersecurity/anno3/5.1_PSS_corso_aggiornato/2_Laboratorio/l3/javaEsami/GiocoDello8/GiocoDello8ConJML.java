@@ -1,4 +1,3 @@
-
 public class GiocoDello8ConJML {
 	private int[][] board;
 
@@ -13,7 +12,7 @@ public class GiocoDello8ConJML {
 		board[2][0] = 4;
 		board[2][1] = 7;
 		board[2][2] = 8;
-	}
+	
 
 	
 	public void move(int i, int j, int h, int k) {

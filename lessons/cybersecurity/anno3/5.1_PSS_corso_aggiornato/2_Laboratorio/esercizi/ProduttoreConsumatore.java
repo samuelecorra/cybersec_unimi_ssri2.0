@@ -33,7 +33,11 @@ public class ProduttoreConsumatore {
         • Nel buffer non c’è mai un 1 dopo uno 0.
         • Il numero di 1 nel buffer dopo l’esecuzione del metodo è uguale o
         al massimo maggiore di un’unità al numero di 1 presenti nel buffer
-        prima dell’esecuzione del metodo.  */
+        prima dell’esecuzione del metodo.  
+        
+        Invece, per il metodo consume, scrivere le seguenti postcondizioni:
+        
+        - Il buffer con*/
 
     int[] buffer;
     int indice;
@@ -46,7 +50,7 @@ public class ProduttoreConsumatore {
 
     /* @ ensures (\forall int i; 0 <= i && i < buffer.length; buffer[i] == 0 || buffer[i] == 1);
        @ ensures !(\exists int i; i>=0 && i<buffer.length-1; buffer[i]==0 && buffer[i+1]==1);
-       @ ensures (\sum int i; 0 <= i && i < buffer.length; buffer[i]) == \old(\sum int i; 0 <= i && i < buffer.length; buffer[i]) + (produced ? 1 : 0); */
+       @ ensures (\sum int i; 0 <= i && i < buffer.length; buffer[i]) == \old(\sum int i; 0 <= i && i < buffer.length; buffer[i]) + (\result ? 1 : 0); */
     public boolean produce() {
         if (indice < buffer.length) {
             buffer[indice] = 1;
@@ -58,7 +62,7 @@ public class ProduttoreConsumatore {
     
     /* @ ensures (\forall int i; 0 <= i && i < buffer.length; buffer[i] == 0 || buffer[i] == 1);
        @ ensures !(\exists int i; i>=0 && i<buffer.length-1; buffer[i]==0 && buffer[i+1]==1);
-       @ ensures (\sum int i; 0 <= i && i < buffer.length; buffer[i]) == \old(\sum int i; 0 <= i && i < buffer.length; buffer[i]) - (consumed ? 1 : 0); */
+       @ ensures (\sum int i; 0 <= i && i < buffer.length; buffer[i]) == \old(\sum int i; 0 <= i && i < buffer.length; buffer[i]) - (\result ? 1 : 0); */
     public boolean consume() {
         if (indice > 0) {
             indice--;

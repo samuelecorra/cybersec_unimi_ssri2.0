@@ -1,27 +1,40 @@
 public class Examples {
 
+	// ESEMPIO 1: MASSIMO TRA INTERI, CON E SENZA VIOLAZIONI
+
 	//Precondizione: i parametri di input devono essere non negativi
 	//@ requires  a>= 0 && b >=0;
 	//Postcondizione: il risultato deve essere il massimo tra i due parametri
 	//@ ensures (a >= b && \result == a) || (b > a && \result == b);
-	//oppure, in modo equivalente
+	//oppure, in modo equivalente, ma con l'implicazione logica che migliora la semantica:
 	//@ ensures (a >= b ==> \result == a) && (b > a ==> \result == b);
+	// Ricordiamo che la dicitura \result si riferisce al valore ritornato dal metodo!
 	static int maxPositiveIntegers(int a, int b) {
 		return Math.max(a, b);
 	}
 	
-
-	//Versione di maxPositiveIntegers che puo' far violare la
-	//postcondizione quando a>b
+	// Versione di maxPositiveIntegers che puo' far violare la
+	// postcondizione quando a>b
 	//@ requires a >= 0 && b >=0;
 	//@ ensures (a >= b && \result == a) || (b > a && \result == b);
 	static int maxPositiveIntegersWrong(int a, int b) {
-		return Math.max(a, b) + (a>b?1:0);
-	}
+		return Math.max(a, b) + (a>b?1:0); // se a>b viene ritornato a+1 che non è quel che vogliamo!
+	} // N.B.: questo errore è chiaramente a scopo d'esempio e di facile individuazione, ma gli errori
+	// peggiori che vedremo in futuro sono molto più subdoli. ATTENZIONE SEMPRE!
+
+	//------------------------------------------------------------------------------------------------
+
+	// ESEMPIO 2: Cercare un elemento in un array ordinato
 
 	//Precondizione: l'array deve essere diverso da null e ordinato.
 	//Postcondizione: se l'elemento e' presente deve ritornarne l'indice, altrimenti
 	//                deve ritornare -1.
+
+	// Cerchiamo di capire la riga 35:
+	// Per ogni indice compreso tra primo e PENULTIMO; prendiamo tale indice per accedere all'elemento
+	// i-esimo entro il range consentito, e ci assicuriamo che sia minore o uguale dell'iesimo+1
+	// ATTENZIONE: si considerano gli indici fino al penultimo così il penultimo si confronta con
+	// l'ultimo e non si rischia di accedere a ultimo+1, sforando e producendo non pochi problemi!
 	/*@ requires arr != null &&
 	  @          (\forall int i; i >= 0 && i < arr.length - 1; arr[i] <= arr[i + 1]);
 	  @
