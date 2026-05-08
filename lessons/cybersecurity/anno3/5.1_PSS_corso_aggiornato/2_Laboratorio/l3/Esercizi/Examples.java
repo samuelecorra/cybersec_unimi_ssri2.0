@@ -24,17 +24,23 @@ public class Examples {
 
 	//------------------------------------------------------------------------------------------------
 
-	// ESEMPIO 2: Cercare un elemento in un array ordinato
+	// ESEMPIO 2: RICERCA BINARIA IN ARRAY GIA' ORDINATO, CON E SENZA VIOLAZIONI
 
 	//Precondizione: l'array deve essere diverso da null e ordinato.
 	//Postcondizione: se l'elemento e' presente deve ritornarne l'indice, altrimenti
 	//                deve ritornare -1.
 
-	// Cerchiamo di capire la riga 35:
+	// Cerchiamo di capire la pre:
 	// Per ogni indice compreso tra primo e PENULTIMO; prendiamo tale indice per accedere all'elemento
 	// i-esimo entro il range consentito, e ci assicuriamo che sia minore o uguale dell'iesimo+1
 	// ATTENZIONE: si considerano gli indici fino al penultimo così il penultimo si confronta con
 	// l'ultimo e non si rischia di accedere a ultimo+1, sforando e producendo non pochi problemi!
+
+	// La post invece enuncia:
+	// NON esiste un indice compreso tra il primo e l'ultimo, il cui valore sia la key cercata, se al contempo
+	// (&&) il risultato restituito dal metodo è -1; OPPURE, dovrà per forza esistere un indice in range la cui
+	// chiave è quella cercata se al contempo viene restituito dal metodo tale indice!
+
 	/*@ requires arr != null &&
 	  @          (\forall int i; i >= 0 && i < arr.length - 1; arr[i] <= arr[i + 1]);
 	  @
@@ -114,8 +120,16 @@ public class Examples {
 		return -1;
 	}
 
+	//-----------------------------------------------------------------------------
+
+	// ESEMPIO 3: RICERCA DELL'UNICO VALORE VERO IN UN ARRAY:
+
 	//Precondizione: ci deve essere un solo elemento dell'array che vale true.
-	//Postcondizione: il risultato deve essere l'indice dell'elemento che vale true.
+	//Postcondizione: il risultato deve essere l'indice dell'elemento che vale true,
+	// quindi nell'ensures stiamo assicurando che l'elemento in posizione \result sia true, 
+	// e implicitamente stiamo anche assicurando che tale indice sia compreso tra 0 e arrBool.length-1,
+	// altrimenti non avrebbe senso accedere a arrBool[\result]!
+	
 	/*@ 
 	  @ requires (\num_of int i; i >= 0 && i < arrBool.length; arrBool[i]) == 1; 
 	  @
