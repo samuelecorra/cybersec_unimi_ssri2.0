@@ -124,18 +124,27 @@ public class Examples {
 
 	// ESEMPIO 3: RICERCA DELL'UNICO VALORE VERO IN UN ARRAY:
 
-	//Precondizione: ci deve essere un solo elemento dell'array che vale true.
+	// NOTA BENE: Ho modificato la versione originale della docente, che chiedeva con commento inline
+	// durante il passaggio parametri che l'array non fosse null: tale scrittura dava problemi con il parser
+	// di OpenJML. Mettere una requires aggiuntiva risolve il tutto molto semplicemente!
+
+	//Precondizione: ci deve essere un solo elemento dell'array che vale true. (e l'array mai null!)
+
 	//Postcondizione: il risultato deve essere l'indice dell'elemento che vale true,
 	// quindi nell'ensures stiamo assicurando che l'elemento in posizione \result sia true, 
 	// e implicitamente stiamo anche assicurando che tale indice sia compreso tra 0 e arrBool.length-1,
 	// altrimenti non avrebbe senso accedere a arrBool[\result]!
 	
-	/*@ 
-	  @ requires (\num_of int i; i >= 0 && i < arrBool.length; arrBool[i]) == 1; 
+	// Come scriviamo comodamente la pre? Se un solo elemento è true/1, allora la sommatoria di 1 con tutti gli altri false/0
+	// darà per forza 1, altrimenti violazione!
+	/*@
+	  @ requires arrBool != null;
+	  @ requires (\num_of int i; i >= 0 && i < arrBool.length; arrBool[i]) == 1;
 	  @
 	  @ ensures arrBool[\result];
 	  @*/
-	public static int getTrueIndex(/*@ non_null @*/boolean[] arrBool) {
+	// se accedendo troviamo true, l'indice è giusto...
+	public static int getTrueIndex(boolean[] arrBool) {
 		for(int i = 0; i < arrBool.length; i++) {
 			if(arrBool[i]) {
 				return i;
@@ -144,11 +153,19 @@ public class Examples {
 		return -1;
 	}
 
-	//La postcondizione richiede che il risultato sia il massimo elemento dell'array.
-	/*@ 
+	//-----------------------------------------------------------------------------
+
+	// ESEMPIO 4: RICERCA DEL MASSIMO E DEL MINIMO VALORE IN UN ARRAY:	
+
+	//La postcondizione richiede che il risultato RITORNATO DAL METODO sia effettivamente il massimo elemento dell'array.
+
+	// Attenzione: nella parentesi iniziamo a scrivere \max, per poi scorrere tutti gli indici validi in range; per ogni indice accendiamo
+	// all'[i]-esimo elemento. E' su tale istruzione di accesso che JML li confronta tutti e ne prende il massimo!
+	/*@
+	  @ requires arr != null;
 	  @ ensures \result == (\max int i; i >=0 && i < arr.length; arr[i]);
 	  @*/
-	public static int getMaxArr(/*@ non_null @*/int[] arr) {
+	public static int getMaxArr(int[] arr) {
 		int max = Integer.MIN_VALUE;
 		for(int i = 0; i < arr.length; i++) {
 			max = Math.max(max, arr[i]);
@@ -157,16 +174,23 @@ public class Examples {
 	}
 
 	//La postcondizione richiede che il risultato sia il minimo elemento dell'array.
-	/*@ 
+
+	// Valgono considerazioni del tutto analoghe rispetto al passaggio sopra!
+	/*@
+	  @ requires arr != null;
 	  @ ensures \result == (\min int i; i >=0 && i < arr.length; arr[i]);
 	  @*/
-	public static int getMinArr(/*@ non_null @*/int[] arr) {
+	public static int getMinArr(int[] arr) {
 		int min = Integer.MAX_VALUE;
 		for(int i = 0; i < arr.length; i++) {
 			min = Math.min(min, arr[i]);
 		}
 		return min;
 	}
+
+	//-------------------------------------------------------------------------------------------------
+
+	// Da qui in avanti confermiamo solo le nostre elucubrazioni... Tengo integrale quel che ha scritto la docente:
 
 	private static String printArray(int[] arr) {
 		StringBuilder sb = new StringBuilder();
@@ -180,6 +204,8 @@ public class Examples {
 		sb.append("}");
 		return sb.toString();
 	}
+	
+	//-------------------------------------------------------------------------------------------------
 
 	public static void main(String[] args) {
 		//maxPositiveIntegers soddisfa sempre la postcondizione
