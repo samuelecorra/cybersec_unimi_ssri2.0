@@ -1,4 +1,5 @@
 public class Counter {
+	
 	//Le specifiche dei metodi  prendono la visibilita' del metodo.
 	//Inoltre non possono accedere a campi con visibilita' inferiore.
 	//Poiche' incr() e decr sono public, anche le loro specifiche sono
@@ -11,6 +12,16 @@ public class Counter {
 
 	Counter() {
 		counter = 0;
+	}
+
+	//Solo i metodi puri possono essere utilizzati nelle precondizioni e nelle postcondizioni.
+	//Un metodo puro e' un metodo che non modifica lo stato del programma.
+	//Per identificare un metodo come puro lo si puo' dichiarare con il modificatore "pure".
+	//In questo primo esempio, il "Getter", ovvero il metodo che deve solo recuperare il valore di
+	// di un variabile della classe, è puro al 100%, in quanto non ha istruzioni che manipolano valori
+	// ma ritorna solamente il valore invariato:
+	public /*@ pure @*/ int getCounter() {
+		return counter;
 	}
 
 	//le due postcondizioni sono equivalenti
@@ -26,20 +37,10 @@ public class Counter {
 		counter--;
 	}
 
-	//Solo i metodi puri possono essere utilizzati nelle precondizioni e nelle postcondizioni.
-	//Un metodo puro e' un metodo che non modifica lo stato del programma.
-	//Per identificare un metodo come puro lo si puo' dichiarare con il modificatore "pure".
-	//In questo primo esempio, il "Getter", ovvero il metodo che deve solo recuperare il valore di
-	// di un variabile della classe, è puro al 100%, in quanto non ha istruzioni che manipolano valori
-	// ma ritorna solamente il valore invariato:
-	public /*@ pure @*/ int getCounter() {
-		return counter;
-	}
-
 	// A questo punto possiamo tranquillamente iniziare a scrivere il nostro programma principale:
 	public static void main(String[] args) {
 		Counter c = new Counter();
-		c.incr();
-		c.decr();
+		c.incr(); // non viola nulla
+		c.decr(); // idem!
 	}
 }
