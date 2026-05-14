@@ -52,6 +52,10 @@ __pycache__/
 .venv/
 venv/
 
+# Java / Maven
+target/
+*.class
+
 # Legacy cleanup patterns
 *.old.html
 *.old.js
