@@ -1,0 +1,33 @@
+{
+    "folders": [
+        {
+            "name": "01 — Esempi Base JUnit",
+            "path": "01_esempi-base-junit"
+        },
+        {
+            "name": "02 — SumClass",
+            "path": "02_sumclass"
+        },
+        {
+            "name": "03 — Esercizi JUnit",
+            "path": "03_esercizi-junit"
+        },
+        {
+            "name": "04 — Copertura Lazy",
+            "path": "04_copertura-lazy"
+        },
+        {
+            "name": "05 — Copertura Non-Lazy",
+            "path": "05_copertura-non-lazy"
+        },
+        {
+            "name": "06 — Esercizio Copertura TicTacToe",
+            "path": "06_esercizio-copertura-tictactoe"
+        }
+    ],
+    "settings": {
+        "java.import.maven.enabled": true,
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.compile.nullAnalysis.mode": "disabled"
+    }
+}
