@@ -24,6 +24,8 @@ Soluzione integrale di entrambi i compiti (**Parte A** + **Compito B**), redatta
 
 ## Esercizio 1 — Andamento CWND e SSTHRESH (TCP)
 
+> **Riferimento di teoria**: [M2/UD5/L9 — Flusso e congestione TCP](../../M2_Protocolli_rete_TCP_IP/UD5/L9%20-%20Flusso%20e%20congestione%20TCP.md)
+
 ### Inquadramento teorico
 
 TCP coordina due meccanismi:
@@ -136,6 +138,8 @@ Caratteristiche chiave del grafico:
 
 ## Esercizio 2 — Datagrammi UDP del sensore di temperatura
 
+> **Riferimento di teoria**: [M2/UD6/L1 — User Datagram Protocol (UDP)](../../M2_Protocolli_rete_TCP_IP/UD6/L1%20-%20User%20Datagram%20Protocol%20(UDP).md)
+
 ### Inquadramento teorico
 
 UDP (RFC 768) è un protocollo di livello di trasporto **senza connessione** e **inaffidabile**. L’intestazione è fissa, $8$ byte:
@@ -231,6 +235,8 @@ Header lungo $8$ byte (4 campi da 2 byte) + payload da $2$ byte $\Rightarrow$ Le
 ---
 
 ## Esercizio 3 — Progetto di inter-rete (subnetting)
+
+> **Riferimento di teoria**: [M2/UD2/L4 — Progetto di inter-reti](../../M2_Protocolli_rete_TCP_IP/UD2/L4%20-%20Progetto%20di%20inter-reti.md) (subnetting FLSM/VLSM) · [M2/UD3/L1 — Introduzione all'instradamento IP](../../M2_Protocolli_rete_TCP_IP/UD3/L1%20-%20Introduzione%20all%E2%80%99instradamento%20IP.md) (tabella di routing, ARP, hop)
 
 ### Topologia
 
@@ -376,6 +382,8 @@ Stesso procedimento: ad ogni hop, **gli indirizzi IP source/destination del pacc
 
 ## Esercizio 1 — Chat UDP fra due peer con fork()
 
+> **Riferimento di teoria**: [M4/UD1/L4 — Funzioni di comunicazione via socket](../../M4_Tecniche_programmazione_distribuita/UD1/L4%20-%20Funzioni%20di%20comunicazione%20via%20socket.md) (`sendto`/`recvfrom`) · [M4/UD1/L2 — Creazione di un socket](../../M4_Tecniche_programmazione_distribuita/UD1/L2%20-%20Creazione%20di%20un%20socket.md)
+
 ### Inquadramento teorico
 
 Per una comunicazione peer-to-peer in tempo reale UDP è la scelta naturale:
@@ -479,6 +487,8 @@ main(argv)
 
 ## Esercizio 2 — UDP vs TCP, sicurezza, multipeer
 
+> **Riferimento di teoria**: [M2/UD6/L2 — UDP e TCP a confronto](../../M2_Protocolli_rete_TCP_IP/UD6/L2%20-%20UDP%20e%20TCP%20a%20confronto.md)
+
 ### 1. Vantaggi e svantaggi di UDP rispetto a TCP nel contesto della chat
 
 | Aspetto | TCP | UDP |
@@ -562,6 +572,8 @@ Per una piccola chat di gruppo su LAN la soluzione (b) è elegante; per una chat
 ---
 
 ## Esercizio 3 (8 pt) — Query DNS non autoritativa
+
+> **Riferimento di teoria**: [M3/UD1/L4 — Risoluzione dei nomi](../../M3_Protocolli_applicativi/UD1/L4%20-%20Risoluzione%20dei%20nomi.md) (resolver, RR, cache vs autoritativo) · [M3/UD1/L2 — Caratteristiche del DNS](../../M3_Protocolli_applicativi/UD1/L2%20-%20Caratteristiche%20del%20DNS.md)
 
 ### Inquadramento teorico
 
@@ -661,6 +673,8 @@ example.com.            136     IN      A       96.7.128.175
 ---
 
 ## Esercizio 3 (4 pt) — Regola di firewall TCP
+
+> **Riferimento di teoria**: [M2/UD2/L1 — Internet Protocol (IP)](../../M2_Protocolli_rete_TCP_IP/UD2/L1%20-%20Internet%20Protocol%20(IP).md) (§1.6 instradamento e filtraggio dei pacchetti)
 
 ### Inquadramento
 
