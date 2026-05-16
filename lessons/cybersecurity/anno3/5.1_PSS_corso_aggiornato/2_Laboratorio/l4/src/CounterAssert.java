@@ -34,4 +34,3 @@ public class CounterAssert {
 		c.decr();
 	}
 }
-
