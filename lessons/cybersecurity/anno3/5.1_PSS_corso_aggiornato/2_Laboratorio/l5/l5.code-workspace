@@ -23,6 +23,10 @@
         {
             "name": "06 — Esercizio Copertura TicTacToe",
             "path": "06_esercizio-copertura-tictactoe"
+        },
+        {
+            "name": "07 — Esercizio Magazzino JML+JUnit",
+            "path": "07_esercizio-magazzino-jml-junit"
         }
     ],
     "settings": {

@@ -15,6 +15,7 @@
         <module>04_copertura-lazy</module>
         <module>05_copertura-non-lazy</module>
         <module>06_esercizio-copertura-tictactoe</module>
+        <module>07_esercizio-magazzino-jml-junit</module>
     </modules>
 
     <properties>
