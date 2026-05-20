@@ -1,5 +1,7 @@
 # **Lezione 4: Multiplexing digitale**
 
+---
+
 ### **1. Origine del multiplexing digitale**
 
 Il **multiplexing digitale** nasce nei **Laboratori Bell**, dove fu sviluppato il primo sistema **T-carrier**, progettato per trasportare **più comunicazioni digitali su un unico cavo**.
@@ -89,6 +91,8 @@ $$
 Il **TDM (Time Division Multiplexing)** è la tecnica su cui si basano tutti i sistemi T-carrier.  
 Il multiplexer riceve più flussi digitali e li inserisce **uno dopo l’altro** in un’unica sequenza, separandoli logicamente nel tempo.  
 A destinazione, un **demultiplexer** esegue l’operazione inversa, ricostruendo i flussi originali.
+
+![](imgs/Pasted%20image%2020260519192819.png)
 
 In altre parole, TDM è come un **autobus digitale**: ogni utente sale al proprio turno e scende alla fermata corretta.
 

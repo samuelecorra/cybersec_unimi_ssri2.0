@@ -177,7 +177,8 @@ L’Ethernet a bus con hub e repeater aveva due grandi limiti:
 1. **Collisioni frequenti**, che aumentavano con il numero di nodi;
     
 2. **Scalabilità ridotta**, perché non si potevano aggiungere segmenti oltre i limiti fisici imposti dalla regola 5-4-3.
-    
+
+![](imgs/Pasted%20image%2020260520175205.png)
 
 Per superare questi problemi, sono stati introdotti gli **switch Ethernet**, che segmentano il traffico e **eliminano le collisioni** dividendo la rete in **domini indipendenti** (tema che verrà ripreso nei moduli successivi).
 

@@ -1,5 +1,6 @@
-
 # **Lezione 1: Strutturazione gerarchica delle reti locali e protocollo VTP**
+
+---
 
 ### **1. Strutturazione gerarchica delle reti**
 

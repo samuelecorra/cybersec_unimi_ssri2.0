@@ -1,6 +1,8 @@
 
 # **Lezione 1: Data Link e Modello ISO/OSI**
 
+---
+
 ### **1. Introduzione al modello ISO/OSI**
 
 Il **modello ISO/OSI (Open Systems Interconnection)** è un modello concettuale a **sette livelli**, sviluppato dall’**ISO (International Organization for Standardization)** per descrivere **come due sistemi informatici comunicano** attraverso una rete.

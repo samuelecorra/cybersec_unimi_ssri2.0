@@ -50,11 +50,13 @@ In altre parole, **la lunghezza minima del frame** deve essere tale da coprire q
 
 Lo standard **IEEE 802.3** definisce che il tempo massimo di andata e ritorno ($2T$) in una rete Ethernet classica non deve superare **51,2 μs**, che corrisponde a una distanza massima di **2500 metri** tra due host.
 
-A **10 Mbps**, trasmettere un singolo bit richiede $0,1\ \mu s$, quindi per trasmettere un frame minimo di **512 bit (64 byte)** servono esattamente **51,2 μs**.
+A **10 Mbps**, trasmettere un singolo bit richiede:
 
-$$  
-t_{frame\_min} = 512\ \text{bit} \times 0.1\ \mu s/\text{bit} = 51.2\ \mu s  
-$$
+$$t_{prop} = \frac{numerobit}{throughput} = \frac{1}{10\ \text{Mbps}} = 0.1\ \mu s$$
+
+Ma allora possiamo facilmente ricavare la lunghezza minima del frame:
+
+$$\text{Lunghezza minima} = \frac{51.2\ \mu s}{0.1\ \mu s/bit} = 512\ \text{bit} = 64\ \text{byte}$$
 
 👉 **Conclusione:**  
 per garantire che una collisione sia sempre rilevata, **un frame Ethernet deve essere lungo almeno 64 byte**.

@@ -1,5 +1,7 @@
 # **Lezione 2: Il modello OSI semplificato**
 
+---
+
 ### **1. Dalla teoria alla pratica**
 
 Il **modello ISO/OSI** nasce come schema teorico ideale, con **sette livelli distinti** e **sei interfacce** tra un livello e l’altro.  

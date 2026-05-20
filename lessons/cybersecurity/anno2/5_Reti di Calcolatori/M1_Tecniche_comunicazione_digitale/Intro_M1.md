@@ -1,0 +1,5 @@
+Il primo modulo introduce le **basi fisiche e logiche della comunicazione digitale**, ossia il modo in cui l’informazione viene trasformata in segnali elettrici o ottici e trasmessa lungo un canale.  
+Si parte dai **principi fondamentali della trasmissione digitale** — campionamento, codifica e modulazione — per arrivare ai concetti di **banda, rumore, velocità di trasmissione e sincronizzazione**.
+
+Il modulo analizza inoltre **le principali tecnologie di comunicazione locale**, come Ethernet e Wi-Fi, e **la rete telefonica digitale**, mostrando come il passaggio dall’analogico al digitale abbia reso possibili le moderne reti dati.  
+L’obiettivo è fornire una visione chiara di **come un segnale informatico diventi comunicazione reale**, e di quali scelte ingegneristiche ne determinino l’affidabilità e l’efficienza.

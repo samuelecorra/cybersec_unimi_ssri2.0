@@ -1,6 +1,8 @@
 
 # **Lezione 1: Introduzione al livello Data Link**
 
+---
+
 ### **1. Perché servono gli standard**
 
 Le reti di calcolatori esistono solo grazie all’esistenza di **standard comuni**: regole condivise che permettono a dispositivi e software di produttori diversi di comunicare senza problemi.  

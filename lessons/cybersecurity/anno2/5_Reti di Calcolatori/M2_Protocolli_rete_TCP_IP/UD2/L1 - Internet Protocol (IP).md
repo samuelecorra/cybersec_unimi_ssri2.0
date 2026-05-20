@@ -1,7 +1,6 @@
+# **Lezione 1: Internet Protocol (IP)**
 
 ---
-
-# **Lezione 1: Internet Protocol (IP)**
 
 ### **1. Introduzione generale**
 

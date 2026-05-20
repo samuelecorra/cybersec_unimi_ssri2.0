@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Richiami sulla trasmissione digitale**
+# **Lezione 0: Intro Unità Didattica 1 - Richiami sulla trasmissione digitale**
 
 
 Questa prima unità riprende i **fondamenti teorici della trasmissione digitale**, indispensabili per comprendere come le reti informatiche scambiano informazioni in modo affidabile.  

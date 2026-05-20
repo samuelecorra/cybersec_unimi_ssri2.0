@@ -1,5 +1,7 @@
 # **Lezione 3: La rete mobile**
 
+---
+
 ### **1. Dalle radio mobili ai telefoni cellulari**
 
 Le **reti mobili** nascono come evoluzione delle prime comunicazioni radio.  

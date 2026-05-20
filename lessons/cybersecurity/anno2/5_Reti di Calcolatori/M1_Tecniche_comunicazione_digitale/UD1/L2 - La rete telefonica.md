@@ -1,5 +1,7 @@
 # **Lezione 2: La rete telefonica**
 
+---
+
 ### **1. Comunicazione analogica**
 
 Prima della rivoluzione digitale, la comunicazione si basava su **segnali analogici**, cioè grandezze fisiche che **variano in modo continuo nel tempo**.

@@ -108,7 +108,6 @@ In pratica, il frame viene assemblato “al volo” al momento della trasmission
 - La seconda copia avviene **al massimo rate** del bus interno.
     
 - La tecnica può essere usata anche in ricezione, dove prende il nome di **Scatter-Read**.
-    
 
 In sintesi:
 
