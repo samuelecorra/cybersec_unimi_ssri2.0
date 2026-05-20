@@ -1,5 +1,7 @@
 # **Lezione 2: Topologie ridondanti e problemi di broadcast**
 
+---
+
 ### **1. Il concetto di topologia ridondante**
 
 Una **topologia ridondante** è una rete che prevede **più percorsi alternativi** tra due nodi.  
