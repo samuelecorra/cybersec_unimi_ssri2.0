@@ -34,7 +34,7 @@ Gli standard di rete non vengono imposti da un singolo ente, ma sono il risultat
     
 - **ISO (International Organization for Standardization)** → definisce il modello **OSI** e altri standard internazionali;
     
-- **ITU-T (International Telecommunication Union – Telecommunication Standardization Sector)**, erede del **CCITT**, che si occupa delle telecomunicazioni;
+- **ITU-T (International Telecommunication Union – Telecommunication Standardization Sector)**, erede del **CCITT** (Comité Consultatif International Téléphonique et Télégraphique), che si occupa delle telecomunicazioni;
     
 - **ATM Forum**, focalizzato sugli standard per le reti **Asynchronous Transfer Mode**.
     
