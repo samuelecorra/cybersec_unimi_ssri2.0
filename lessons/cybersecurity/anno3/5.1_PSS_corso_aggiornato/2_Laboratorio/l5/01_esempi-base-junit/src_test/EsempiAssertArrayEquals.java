@@ -16,12 +16,12 @@ public class EsempiAssertArrayEquals {
 	}
 
 	//Sort.selectionSortWrong contiene un fault, ma il seguente test
-	//non genera nessun failure
+	//non genera nessun failure (guardare classe originale per capirne il motivo!)
 	@Test
 	public void selectionSortWrongTest1() {
 		int[] arrInput = {3, 5, 2, 6};
 		int[] expectedArrOutput = {2, 3, 5, 6};
-		assertArrayEquals(expectedArrOutput, Sort.selectionSortWrong(arrInput));//ok anche se il
+		assertArrayEquals(expectedArrOutput, Sort.selectionSortWrong(arrInput));//ok
 	}
 
 	//Sort.selectionSortWrong contiene un fault, ed il seguente test

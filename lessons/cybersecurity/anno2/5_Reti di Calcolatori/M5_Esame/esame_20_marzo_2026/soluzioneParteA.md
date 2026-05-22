@@ -559,7 +559,3 @@ Con questa configurazione:
 | **Cosa falsifica** | Soprattutto **option 3 (gateway)** e **option 6 (DNS)** del `DHCPOFFER`/`DHCPACK` |
 | **Cosa ottiene** | MITM completo: vede/altera tutto il traffico in chiaro, fa phishing via DNS spoofing, raccoglie credenziali |
 | **Contromisura semplice** | **DHCP Snooping** sullo switch: porte trusted = solo verso server DHCP vero; porte untrusted = niente OFFER/ACK in uscita |
-
----
-
-*Fine della Parte A.*

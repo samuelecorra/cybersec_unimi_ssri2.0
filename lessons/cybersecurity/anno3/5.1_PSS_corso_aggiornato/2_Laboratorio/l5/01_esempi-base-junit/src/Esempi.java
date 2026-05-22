@@ -1,10 +1,14 @@
 public class Esempi {
+
+	// Questo è un metodo fittizio (foo/pippo/pluto/nomeRandom) che serve per mostrare solo un flow esecutivo ramificato.
 	public static boolean foo(int a, int b) {
 		if(a > b)
 			return true;
 		else
 			return false;
 	}
+
+	//---------------------------------------------------------------------------------------------------------------------------
 
 	public static int max(int a, int b) {
 		return Math.max(a, b);
@@ -14,6 +18,9 @@ public class Esempi {
 		return Math.max(a, b) + 1;
 	}
 
+	//---------------------------------------------------------------------------------------------------------------------------
+
+	// Classico esempio di algoritmo di Euclide che serve per calcolare il massimo comune divisore (MCD) di due numeri interi.
 	public static int euclideMCD(int a, int b) {
 		int numA = a;
 		int numB = b;
@@ -39,6 +46,8 @@ public class Esempi {
 		}
 		return numA;
 	}
+
+	//---------------------------------------------------------------------------------------------------------------------------
 
 	/**
 	 * Dice se n e' un numero di Fibonacci.
