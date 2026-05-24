@@ -1,5 +1,7 @@
 # **M3 UD5 Lezione 6 - Transazioni atomiche**
 
+---
+
 ### **1. Introduzione**
 
 La lezione conclusiva di questa unità affronta il concetto di **transazione atomica**, uno dei principi fondamentali della sincronizzazione nei sistemi complessi.  
@@ -8,6 +10,7 @@ Le transazioni atomiche garantiscono che una sequenza di operazioni venga esegui
 Sono particolarmente importanti nei **sistemi concorrenti e distribuiti**, nei quali più processi possono modificare contemporaneamente risorse condivise o basi di dati.
 
 ---
+
 ### **2. Definizione di transazione**
 
 Una **transazione** è un insieme di istruzioni che, nel loro complesso, realizzano **un’unica funzione logica**.  
@@ -28,9 +31,10 @@ commit
 In questo esempio, o entrambe le scritture (`write`) vengono completate correttamente, oppure **nessuna modifica** diventa permanente.
 
 ---
+
 ### **3. Atomicità**
 
-L’**atomicità** di una transazione garantisce che la sequenza di operazioni sia trattata come **un’unica operazione indivisibile**:
+L'**atomicità** di una transazione garantisce che la sequenza di operazioni sia trattata come **un'unica operazione indivisibile**:
 
 $$  
 \begin{cases}  
@@ -42,7 +46,17 @@ $$
 In altri termini, **o tutto o nulla**:  
 le modifiche diventano effettive solo se la transazione termina con successo.
 
+#### **3.1. Due requisiti per il commit**
+
+Una transazione esegue il **commit** — e quindi rende gli effetti permanenti — solo se entrambe queste condizioni sono soddisfatte:
+
+1. **tutte** le operazioni della transazione sono state **completate correttamente**;
+2. l'esecuzione è avvenuta **senza interferenza** da parte di altri processi (le operazioni intermedie non sono state alterate da operazioni concorrenti).
+
+Se anche una sola di queste condizioni viene meno, la transazione termina con **abort**, deve essere effettuato un **rollback** allo stato precedente e gli eventuali risultati intermedi prodotti devono essere annullati: il sistema non deve subire alcun effetto residuo dalla transazione fallita.
+
 ---
+
 ### **4. Tipologie di archivi**
 
 Per comprendere come le transazioni vengano gestite, è necessario distinguere i tipi di **memoria** coinvolti.
@@ -57,7 +71,10 @@ $$
 
 Le transazioni atomiche si appoggiano su **archivi stabili**, che consentono di **recuperare lo stato precedente** in caso di errore o crash di sistema.
 
+> 📌 **Focus dell'analisi.** Nella trattazione che segue ci concentriamo sulla realizzazione delle transazioni atomiche per informazioni memorizzate in **archivi volatili**: è infatti su questo tipo di memoria che si concentrano i problemi più delicati di consistenza e di ripristino dopo un guasto.
+
 ---
+
 ### **5. Transazioni atomiche individuali**
 
 Quando una singola transazione deve essere garantita come atomica, il sistema operativo utilizza due tecniche principali:
@@ -70,6 +87,7 @@ $$
 $$
 
 ---
+
 ### **6. Logging (Write-Ahead Logging)**
 
 #### **6.1. Concetto**
@@ -101,13 +119,26 @@ $$
 \end{cases}  
 $$
 
-In caso di fallimento:
+> 💡 **Idempotenza di undo e redo.** Una proprietà essenziale è che entrambe le operazioni sono **idempotenti**: applicarle **una o più volte produce sempre lo stesso risultato**. Questo permette al sistema di rieseguire il recupero in modo sicuro anche se viene interrotto a sua volta da un nuovo crash.
 
-- se il log contiene `<T_i starts>` ma non `<T_i commits>` → **undo**
-    
-- se il log contiene entrambi → **redo**
+##### **Due scenari di fallimento**
+
+Il recupero dal log avviene secondo lo scenario di fallimento:
+
+**A) Abort della singola transazione** (errore interno alla transazione, es. divisione per zero, violazione di vincolo):
+
+- Il log conterrà `<T_i starts>` **ma non** `<T_i commits>`;
+- Il sistema applica **`undo`** per riportare i dati allo stato precedente l'inizio della transazione.
+
+**B) Fallimento dell'intero sistema** (crash hardware, guasto di rete, kernel panic):
+
+Per **ciascuna transazione** registrata nel log si verifica lo stato:
+
+- se contiene `<T_i starts>` **ma non** `<T_i commits>` → la transazione era in corso e non si è completata → **undo**;
+- se contiene **sia** `<T_i starts>` **sia** `<T_i commits>` → la transazione si era completata correttamente, ma le modifiche potrebbero non essere state ancora propagate stabilmente → **redo** per riprodurre gli effetti.
 
 ---
+
 ### **7. Check Pointing (punti di verifica)**
 
 #### **7.1. Problema del log**
@@ -119,10 +150,8 @@ Un log molto lungo può rendere il ripristino estremamente lento, perché il sis
 Il **check pointing** riduce i tempi di recupero salvando periodicamente su memoria stabile:
 
 - i record del log più recenti,
-    
 - i dati modificati,
-    
-- e un marcatore `<checkpoint>` che identifica l’ultimo stato coerente del sistema.
+- e un marcatore `<checkpoint>` che identifica l'ultimo stato coerente del sistema.
 
 #### **7.3. Ripristino basato su checkpoint**
 
@@ -136,6 +165,7 @@ $$
 $$
 
 ---
+
 ### **8. Transazioni atomiche concorrenti**
 
 Finora abbiamo considerato una singola transazione.  
@@ -144,6 +174,7 @@ In un sistema reale, però, **più transazioni atomiche possono essere eseguite 
 Questo principio prende il nome di **serializzabilità**.
 
 ---
+
 ### **9. Serializzabilità**
 
 #### **9.1. Concetto**
@@ -157,6 +188,7 @@ $$
 L’obiettivo è dunque garantire la **coerenza globale** dei dati anche in presenza di transazioni concorrenti.
 
 ---
+
 ### **10. Tecniche per la serializzabilità**
 
 Esistono due livelli principali di controllo:
@@ -168,7 +200,19 @@ $$
 \end{cases}  
 $$
 
-I principali approcci operativi sono:
+#### **10.1. A livello di transazione: limiti del parallelismo**
+
+Trattare ogni transazione come una sezione critica (es. con un semaforo di mutua esclusione globale) garantisce la serializzazione, ma **riduce drasticamente il parallelismo**: anche quando le transazioni sono attivate da processi diversi, **un processo alla volta** può accedere alle risorse informative condivise. Inoltre, durante la sezione critica vengono protette **tutte** le operazioni della transazione — incluse le **elaborazioni interne** (calcoli sui valori letti per generare i valori da scrivere) — anche se in realtà altre transazioni potrebbero accedere agli stessi dati senza conflitto.
+
+#### **10.2. A livello di operazioni: schedulazione seriale vs serializzabile**
+
+Si distinguono due tipi di schedulazione concorrente:
+
+- **Concorrente seriale**: una transazione esegue *tutte* le sue operazioni prima che l'altra inizi. Es. $T_0$ legge A, scrive A, legge B, scrive B; poi $T_1$ esegue le sue operazioni. È **corretto** ma rinuncia al parallelismo.
+- **Concorrente serializzabile**: si **serializzano solo le operazioni strettamente in conflitto** (quelle sugli stessi dati e con accesso non compatibile). Esempio: le operazioni di $T_1$ sul record A devono avvenire dopo quelle di $T_0$ su A, ma le operazioni sul record B di $T_1$ **non devono attendere** le operazioni di $T_0$ su B, perché logicamente disgiunte. Si ottiene così il **massimo parallelismo** compatibile con la consistenza.
+
+I principali approcci operativi per realizzare schedulazioni serializzabili sono:
+
 $$  
 \begin{cases}  
 \text{Protocolli basati su lock (blocco)} \\\\  
@@ -177,6 +221,7 @@ $$
 $$
 
 ---
+
 ### **11. Protocolli basati su lock**
 
 #### **11.1. Concetto di lock**
@@ -194,39 +239,48 @@ $$
 **Tipi di lock:**
 
 - **condiviso (shared):** più transazioni possono leggere contemporaneamente;
-    
 - **esclusivo (exclusive):** una sola transazione può leggere o scrivere.
 
 ---
+
 #### **11.2. Protocollo di lock di base**
 
-1. Una transazione $T_i$ richiede un lock su un dato $Q$.
-    
-2. Se il lock è libero → accesso concesso.
-    
-3. Se il lock è occupato:
-    
-    - se $T_i$ chiede un lock esclusivo → attende;
-        
-    - se $T_i$ chiede un lock condiviso → può accedere solo se il lock è già condiviso.
+Quando una transazione $T_i$ vuole accedere al dato $Q$:
 
-Questo protocollo **non garantisce sempre la serializzabilità**.
+1. richiede un lock su $Q$;
+2. se il lock è **libero** → accesso concesso;
+3. se il lock è **già detenuto** da un'altra transazione, occorre distinguere quattro casi:
+
+| Lock richiesto da $T_i$ | Lock detenuto su $Q$ | Esito |
+| --- | --- | --- |
+| Esclusivo | Esclusivo | $T_i$ **attende** |
+| Esclusivo | Condiviso | $T_i$ **attende** |
+| Condiviso | Esclusivo | $T_i$ **attende** |
+| Condiviso | Condiviso | $T_i$ **accede** (es. due letture concorrenti) |
+
+L'idea è che le **letture** sono compatibili tra loro, mentre **scritture** e **letture-vs-scritture** richiedono mutua esclusione per preservare la consistenza.
+
+Questo protocollo base, tuttavia, **non garantisce sempre la serializzabilità** — può portare a schedulazioni in cui le operazioni si intrecciano in modo non equivalente ad alcun ordine seriale.
 
 ---
+
 #### **11.3. Protocollo di lock a due fasi (2PL)**
 
 Il **Two-Phase Locking (2PL)** garantisce la serializzabilità grazie a una regola semplice:
 
 $$  
 \begin{cases}  
-\textbf{Fase di crescita:}~ & \text{la transazione può ottenere lock, ma non rilasciarli.} \\\\  
-\textbf{Fase di contrazione:}~ & \text{la transazione può rilasciare lock, ma non acquisirne di nuovi.}  
+\textbf{Fase di crescita (growing):}~ & \text{la transazione può ottenere lock, ma non rilasciarli.} \\\\  
+\textbf{Fase di contrazione (shrinking):}~ & \text{la transazione può rilasciare lock, ma non acquisirne di nuovi.}  
 \end{cases}  
 $$
 
-Questa tecnica assicura un ordine coerente delle operazioni, ma **non previene gli stalli (deadlock)**.
+In altre parole: una volta che la transazione ha iniziato a **rilasciare** lock, non può più chiederne di nuovi — c'è un "punto di non ritorno" oltre il quale può solo liberarli.
+
+Questa tecnica **assicura la serializzabilità** (le operazioni risultano sempre equivalenti a un ordine seriale), ma **può lasciare aperta la strada a situazioni di stallo (deadlock)** se due transazioni cercano di acquisire lock incrociati durante le rispettive fasi di crescita.
 
 ---
+
 ### **12. Protocolli basati su timestamp**
 
 #### **12.1. Concetto di timestamp**
@@ -237,6 +291,13 @@ Essa è **univoca** e stabilisce la **priorità temporale** della transazione.
 $$  
 TS(T_i) < TS(T_j) \Rightarrow T_i \text{ è più vecchia di } T_j  
 $$
+
+La marca viene tipicamente assegnata dal sistema operativo e può essere:
+
+- il valore del **clock di sistema** al momento dell'attivazione della transazione;
+- un **contatore progressivo** che numera univocamente le transazioni in ordine di arrivo.
+
+Ogni operazione di **read** o **write** in conflitto verrà eseguita nell'**ordine definito dalle marche di tempo**, garantendo così una serializzazione coerente.
 
 #### **12.2. Tipi di timestamp**
 
@@ -265,9 +326,18 @@ $$
 \end{cases}  
 $$
 
-In questo modo, l’ordine di serializzazione tra due transazioni in conflitto è **determinato dai rispettivi timestamp**.
+##### **Motivazione dei roll-back**
+
+Le tre condizioni di roll-back hanno significati ben precisi:
+
+- **Lettura negata** ($TS(T_i) < W\text{-timestamp}(Q)$): $T_i$ sta tentando di leggere un valore di $Q$ che **è già stato sovrascritto** da una transazione più recente. La lettura sarebbe quindi su un valore obsoleto — $T_i$ deve fare roll-back.
+- **Scrittura negata vs R-timestamp** ($TS(T_i) < R\text{-timestamp}(Q)$): $T_i$ sta producendo un valore di $Q$ che **era già stato necessario** a una transazione più recente, la quale aveva già letto $Q$ assumendo che $T_i$ non avrebbe più scritto. Se permettessimo la scrittura, violeremmo l'ipotesi della lettura precedente.
+- **Scrittura negata vs W-timestamp** ($TS(T_i) < W\text{-timestamp}(Q)$): $T_i$ sta tentando di scrivere su $Q$ un valore che sarebbe **ormai obsoleto** (già sovrascritto da una transazione più recente). La scrittura non avrebbe senso e va annullata.
+
+In questo modo, l'ordine di serializzazione tra due transazioni in conflitto è **determinato dai rispettivi timestamp** assegnati al momento dell'attivazione, garantendo una serializzazione corretta delle operazioni elementari, **elevato parallelismo** e **massima concorrenza** nel sistema — riducendo al minimo le serializzazioni superflue.
 
 ---
+
 ### **13. Sintesi finale**
 
 $$  
@@ -281,6 +351,7 @@ $$
 $$
 
 ---
+
 ### **14. Conclusione**
 
 Le **transazioni atomiche** rappresentano la massima espressione della sincronizzazione nei sistemi operativi e nei database.  
@@ -288,4 +359,4 @@ Esse garantiscono che i dati rimangano **consistenti e affidabili** anche in pre
 
 Attraverso meccanismi come **logging**, **check pointing**, **locking** e **timestamp**,  
 i sistemi moderni assicurano che ogni gruppo di operazioni si comporti **come un’unica unità logica**,  
-mantendendo la coerenza del sistema anche nelle condizioni più complesse.
+mantenendo la coerenza del sistema anche nelle condizioni più complesse.

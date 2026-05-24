@@ -1,5 +1,7 @@
 # **M3 UD5 Lezione 5 - Problemi della Starvation e del Deadlock**
 
+---
+
 ### **1. Introduzione**
 
 La sincronizzazione tra processi, pur essendo indispensabile per la correttezza di un sistema operativo, può generare **problemi gravi di blocco** se non è gestita correttamente.  
@@ -56,6 +58,20 @@ while (true) {
 }
 ```
 
+##### **Esempio narrativo: il processo R "scavalcato"**
+
+Vediamo passo per passo come la starvation si manifesta:
+
+1. **P** ottiene la risorsa.
+2. Arrivano **Q**, **R**, **Z** che la richiedono; vengono accodati nell'ordine `[Q, R, Z]`.
+3. P rilascia → la risorsa va a **Q** (primo in coda). La coda diventa `[R, Z]`.
+4. Mentre Q usa la risorsa, arriva **T**. La politica di ordinamento lo posiziona **prima** di R: la coda diventa `[T, R, Z]`.
+5. Q rilascia → la risorsa va a **T**, non a R.
+6. Mentre T usa la risorsa, arriva **W**, anch'esso ordinato prima di R: coda `[W, R, Z]`.
+7. T rilascia → la risorsa va a **W**, non a R.
+
+Se questa dinamica continua indefinitamente — nuovi processi che vengono posizionati sempre **prima** di R — il processo R (ed eventualmente Z) **non otterrà mai la risorsa**: è entrato in **starvation**. Una politica equa come **FIFO** avrebbe evitato questa situazione, garantendo che ogni processo prima o poi raggiunga la testa della coda.
+
 ---
 #### **2.4. Soluzione alla starvation**
 
@@ -94,7 +110,20 @@ Di conseguenza, nessuno può rilasciare ciò che gli altri stanno aspettando —
 
 Un deadlock si verifica quando si formano **catene di attesa circolare** tra processi che non rilasciano le risorse.
 
-Esempio:
+##### **Esempio canonico: due processi, due risorse**
+
+Il caso più semplice (e più didattico) coinvolge **due processi** P e Q e **due risorse** R e S, entrambe gestite in mutua esclusione:
+
+1. Il processo **P** ottiene la risorsa **R** (esclusivamente sua).
+2. Nel frattempo il processo **Q** ottiene la risorsa **S** (esclusivamente sua).
+3. **P** ora richiede anche **S** → si pone in attesa, perché S è detenuta da Q.
+4. **Q** ora richiede anche **R** → si pone in attesa, perché R è detenuta da P.
+
+Entrambi i processi sono ora bloccati: **ciascuno detiene la risorsa che l'altro aspetta**. L'attesa è **circolare** e **nessuno la risolverà mai** senza un intervento esterno.
+
+##### **Esempio generalizzato: ciclo a N processi**
+
+Lo schema si generalizza a $N$ processi in un'attesa ciclica:
 
 $$  
 \begin{cases}  
@@ -161,6 +190,10 @@ $$
 
 - In molti sistemi generali (es. UNIX, Linux), il deadlock **non viene gestito esplicitamente**, poiché è raro e complesso da controllare.  
     Si preferisce affidarsi a **riavvii** o **terminazioni selettive** dei processi bloccati.
+- Questo approccio "ostrich" (a testa nella sabbia) è **giustificato pragmaticamente** solo quando:
+  - la **probabilità** che si verifichi un deadlock è **molto bassa**;
+  - le attività svolte dai processi coinvolti **non sono critiche** (riavviarle non comporta perdite gravi).
+- In contesti **critici** (sistemi real-time, sistemi medici, controllo industriale) ignorare il problema è **inaccettabile**: i processi rimarrebbero indefinitamente bloccati con conseguenze potenzialmente dannose.
 
 ---
 ### **4. Sintesi finale**

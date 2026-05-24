@@ -1,5 +1,7 @@
 # **M1 UD3 Lezione 2 - Tecniche di sostituzione della pagina (parte 2)**
 
+---
+
 ### **1. Introduzione**
 
 Quando la memoria è piena e un processo richiede una pagina non presente in RAM, il sistema operativo deve scegliere **quale pagina rimuovere** per far posto a quella nuova.  

@@ -1,5 +1,7 @@
 # **M3 UD3 Lezione 5 - Schedulazione dei thread**
 
+---
+
 ### **1. Introduzione**
 
 Finora abbiamo studiato la schedulazione dei **processi**, ma nei sistemi moderni — dove un singolo processo può contenere **più thread di esecuzione** — diventa necessario gestire anche la **schedulazione dei thread**.
@@ -58,6 +60,14 @@ poiché il kernel non è consapevole dei singoli thread utente, **se un thread e
 
 In questo caso i thread sono **conosciuti e gestiti direttamente dal sistema operativo**.  
 Ogni thread ha una **struttura di controllo nel kernel (TCB)** e può essere schedulato **indipendentemente** dagli altri thread del processo.
+
+Questa modalità si applica a **tutti gli scenari** in cui i thread sono visibili al kernel:
+
+- thread implementati nativamente a livello di **kernel**;
+- thread di livello utente **mappati su thread kernel** (modelli 1:1 o molti-a-molti);
+- modelli con o senza **Lightweight Processes** (LWP) come intermediari.
+
+In ognuno di questi casi, il sistema operativo dispone di un **unico schedulatore** capace di gestire non solo i singoli processi ma anche, automaticamente, i thread che vivono al loro interno: si ha quindi una **visione unificata** della contesa del processore a livello di sistema.
 
 ![](imgs/photo_2026-03-19_16-49-44.jpg)
 

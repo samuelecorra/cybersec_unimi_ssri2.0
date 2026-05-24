@@ -1,5 +1,7 @@
 # **M3 UD4 Lezione 7 - Comunicazione con socket**
 
+---
+
 ### **1. Introduzione**
 
 Concludiamo l’unità dedicata alla **comunicazione tra processi** affrontando il meccanismo più potente e flessibile di tutti: la **comunicazione tramite socket**.  
@@ -10,6 +12,15 @@ Il loro scopo è rendere possibile la **comunicazione bidirezionale** e **asincr
 
 ---
 ### **2. Modello della comunicazione mediante socket**
+
+#### **2.0. La metafora dei "due tronconi": pipe spezzata in due**
+
+L'idea-chiave per capire i socket è quella di **generalizzare la pipe** a un ambiente distribuito. In un ambiente con due macchine separate **non esiste più una memoria centrale comune**, quindi il meccanismo della pipe (canale FIFO in RAM) non è applicabile direttamente. Lo si **spezza in due tronconi**:
+
+- un **troncone di ingresso** vive nella memoria del SO sulla **macchina del mittente** — dove il processo P scrive i messaggi;
+- un **troncone di uscita** vive nella memoria del SO sulla **macchina del ricevente** — da cui il processo Q legge i messaggi in ordine FIFO.
+
+Il **trasferimento tra i due tronconi** è garantito dalla **rete informatica** che collega le macchine. La rete prende i messaggi da un estremo e li deposita nell'altro, in modo **trasparente** ai processi applicativi.
 
 La comunicazione con socket si basa sul paradigma **client–server**:
 
@@ -29,8 +40,15 @@ $$
 Ogni connessione tra client e server è identificata da due elementi:
 
 - **indirizzo IP** della macchina ospite;
-    
 - **numero di porta** che individua il servizio specifico.
+
+##### **Esempio numerico**
+
+Se un client `X` deve raggiungere un web server in ascolto sulla macchina con IP `161.25.19.x`, il socket di ascolto del server è identificato dalla coppia `(161.25.19.x, 80)` — dove `80` è la porta standard HTTP. Le risposte dal server arrivano al client su una porta dinamica del lato client (es. `1625`), assegnata automaticamente.
+
+##### **Identificazione del mittente: implicita nella porta**
+
+Una conseguenza importante: nei messaggi inviati via socket **non serve specificare mittente e destinatario** all'interno del payload, perché **sono già univocamente identificati dalla coppia di porte** che definisce il canale. Tutto il payload del messaggio è quindi disponibile per i **dati applicativi**.
 
 ---
 #### **2.2. Esempi di porte note**
@@ -50,15 +68,17 @@ mentre le successive vengono assegnate dinamicamente per connessioni temporanee.
 ---
 ### **3. Architettura del socket**
 
-Un socket è un **endpoint di comunicazione**: un’interfaccia logica che collega un processo al canale di rete.  
+Un socket è un **endpoint di comunicazione**: un'interfaccia logica che collega un processo al canale di rete.  
 Ogni connessione è definita da una **coppia di socket**: uno sul lato client e uno sul lato server.
+
+#### **3.1. Mono- vs bi-direzionalità**
+
+Ciascun singolo socket (troncone) realizza un canale di comunicazione **monodirezionale**: il flusso dei dati va in una sola direzione, dal mittente al ricevente. La **coppia di socket** tra i due processi P e Q — uno per ciascuna direzione — costituisce nel complesso un **canale bidirezionale**.
 
 In pratica, un socket fornisce:
 
-- un **canale di comunicazione bidirezionale**;
-    
+- un **canale di comunicazione** (mono o, in coppia, bidirezionale);
 - un **indirizzo logico** (IP + porta);
-    
 - un **protocollo di trasporto** (es. TCP o UDP).
 
 ---

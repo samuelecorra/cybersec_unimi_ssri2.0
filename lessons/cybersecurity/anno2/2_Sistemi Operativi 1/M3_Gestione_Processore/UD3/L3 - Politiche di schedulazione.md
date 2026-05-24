@@ -1,5 +1,7 @@
 # **M3 UD3 Lezione 3 - Politiche di schedulazione**
 
+---
+
 ### **1. Introduzione**
 
 Dopo aver analizzato i criteri di valutazione della schedulazione, questa lezione descrive le **principali politiche e algoritmi** che i sistemi operativi adottano per assegnare la CPU ai processi.
@@ -67,6 +69,10 @@ $$
 Seleziona il processo con **minor tempo di esecuzione stimato**.  
 Minimizza il tempo medio di attesa, ma richiede di conoscere o stimare la durata dei processi.
 
+##### **Ordinamento indipendente dall'arrivo**
+
+Diversamente dal FCFS, l'ordine della coda **non dipende dall'ordine temporale di arrivo**: a parità di processi pronti, troveremo sempre la coda ordinata per **tempo di elaborazione crescente**. Esempio: processi P (20 ut), Q (10 ut), R (30 ut) — qualunque sia l'ordine di ingresso, la coda risulta sempre `Q → P → R`.
+
 #### **4.2. Varianti**
 
 $$  
@@ -78,7 +84,15 @@ $$
 
 #### **4.3. Predizione del tempo di CPU**
 
-Il tempo di esecuzione futuro può essere stimato con una **media esponenziale** basata sui tempi passati:
+Poiché conoscere esattamente a priori il tempo richiesto da un processo è quasi sempre **impossibile**, si ricorre a **tecniche di predizione** basate sul comportamento passato del processo. Le due strategie tipiche sono:
+
+##### **a) Media semplice sulle iterazioni precedenti**
+
+Si stima il tempo di uso del processore come **media aritmetica** dei tempi rilevati nelle iterazioni passate del processo (semplice ma poco reattivo ai cambiamenti recenti di comportamento).
+
+##### **b) Media esponenziale**
+
+Più sofisticata: dà **maggior peso** ai burst recenti, pur tenendo conto della storia passata:
 
 $$  
 \tau_{n+1} = \alpha \cdot t_n + (1 - \alpha) \cdot \tau_n  
@@ -87,10 +101,8 @@ $$
 dove:
 
 - $t_n$ è il tempo di esecuzione effettivo più recente,
-    
 - $\tau_n$ è la stima precedente,
-    
-- $\alpha \in [0, 1]$ è un coefficiente di adattamento.
+- $\alpha \in [0, 1]$ è un coefficiente di adattamento (più $\alpha$ è alto, più la stima si adatta rapidamente al comportamento recente).
 
 #### **4.4. Vantaggi e limiti**
 
@@ -124,17 +136,30 @@ $$
 
 #### **5.3. Problema della starvation**
 
-I processi con priorità bassa rischiano di **non essere mai eseguiti** se arrivano processi di priorità più alta in continuazione.
+I processi con priorità bassa rischiano di **non essere mai eseguiti** se arrivano processi di priorità più alta in continuazione (entrano in _starvation_, "stato di fame": vorrebbero la CPU ma non riescono mai a ottenerla).
 
-**Soluzione:** applicare una politica di **aging (invecchiamento)** che aumenta progressivamente la priorità dei processi che attendono da molto tempo.
+##### **Soluzione: aging (invecchiamento)**
+
+Si applica una politica di **aging**, che modifica dinamicamente le priorità mentre i processi restano in attesa. Sono possibili due varianti speculari:
+
+- **decremento progressivo** della priorità dei processi a priorità più alta che hanno già usato la CPU;
+- **incremento progressivo** della priorità dei processi in starvation, finché non diventano competitivi con i processi a priorità alta.
+
+In entrambi i casi, il processo finalmente porta a termine la propria quota di CPU. **Una volta soddisfatto**, le priorità modificate dall'aging vengono **riportate ai valori iniziali** — in modo **progressivo** o **immediato**, a seconda dell'implementazione — per ripristinare i rapporti di rilevanza originali tra i processi.
 
 ---
 ### **6. Round Robin (RR)**
 
 #### **6.1. Descrizione**
 
-È una politica **pre-emptive** tipica dei sistemi _time-sharing_.  
+È una politica **pre-emptive** tipica dei sistemi _time-sharing_, sostanzialmente simile al FCFS con l'aggiunta della **pre-emption** allo scadere del quanto.  
 Ogni processo riceve un **quanto di tempo (time slice)**, dopodiché viene sospeso e rimesso in coda.
+
+##### **Analogia: la "lancetta" che gira**
+
+Immaginiamo un **indicatore rotante** (una lancetta) che scandisce ciclicamente i processi in coda, in senso orario, indicando ogni volta quale processo deve usare la CPU. Quando il processo corrente rilascia il processore (perché ha esaurito il quanto, o ha avviato un I/O), la lancetta si sposta sul **primo processo in stato Ready** incontrato — **saltando** quelli in stato di Wait.
+
+Esempio: processi P, Q, R, S, T con Q e T in Wait. Mentre P è Running, Q resta saltato; quando P rilascia, la lancetta passa a R, poi S. Se nel frattempo Q diventa Ready (la sua risorsa è arrivata), **non viene servito subito**: dovrà comunque attendere il proprio turno nella rotazione ciclica.
 
 #### **6.2. Caratteristiche**
 
@@ -145,7 +170,11 @@ $$
 \end{cases}  
 $$
 
-Un valore empirico accettabile è tale che **l’80% delle richieste CPU** si completi all’interno di un quanto di tempo.
+Un valore empirico accettabile è tale che **l'80% delle richieste CPU** si completi all'interno di un quanto di tempo.
+
+##### **Distribuzione uniforme e dipendenza dal numero di processi pronti**
+
+Il RR garantisce una **distribuzione uniforme del tempo di elaborazione** tra i processi pronti. La **velocità percepita** da ciascun processo dipende fortemente da **quanti processi pronti** ci sono nel sistema: di fatto, ogni processo riceve circa **1/N** della capacità computazionale, dove N è il numero di processi nella coda Ready. Anche il **tempo di turnaround** dipende direttamente dalla durata del quanto di tempo scelto.
 
 ---
 ### **7. Coda a più livelli (MLQ – Multilevel Queue)**
@@ -186,9 +215,13 @@ $$
 \begin{cases}  
 \textbf{Politica di promozione:}~ & \text{i processi che attendono troppo salgono di priorità.} \\\\  
 \textbf{Politica di degradazione:}~ & \text{i processi che usano troppo la CPU scendono di priorità.} \\\\  
-\textbf{Politica di allocazione:}~ & \text{definisce come distribuire la CPU tra le code.}  
+\textbf{Politica di allocazione:}~ & \text{definisce a quale coda assegnare i processi quando nascono.}  
 \end{cases}  
 $$
+
+##### **Quanti di tempo crescenti tra le code**
+
+Una scelta tipica è assegnare alla **coda a priorità più elevata** un **quanto di tempo molto breve** — per garantire una rotazione veloce e tempi di risposta bassi per i processi interattivi. Scendendo verso le code a priorità più bassa, il quanto **si allunga progressivamente**: i processi meno rilevanti evolvono più lentamente, ma consumano anche meno tempo di gestione (meno context switch), preservando l'efficienza globale.
 
 Questa struttura dinamica permette al sistema di adattarsi al **comportamento reale dei processi**, bilanciando reattività e produttività.
 
@@ -214,6 +247,18 @@ $$
 \textbf{Load sharing:}~ & \text{i processi vengono distribuiti per bilanciare il carico.}  
 \end{cases}  
 $$
+
+##### **Matrice dei casi tipici**
+
+La scelta dipende dalla **combinazione** delle caratteristiche hardware (omogeneità dei processori, presenza di memoria locale, accessibilità delle periferiche):
+
+| Processori | Memoria | Periferiche | Strategia tipica |
+| --- | --- | --- | --- |
+| Omogenei | Solo condivisa | Accessibili da tutti | **Coda unica** o **una coda per processore** (entrambe in memoria condivisa) |
+| Omogenei | Condivisa + locale | Accessibili da tutti | Coda per processore, **collocabile nella memoria locale** per velocizzare l'accesso |
+| Omogenei | Solo condivisa | **Periferiche specializzate** (solo alcune CPU vi accedono) | **Coda dedicata per i processori specializzati** + coda generale per gli altri |
+| Omogenei | Condivisa + locale | Periferiche specializzate | Idem, ma la coda specializzata può stare nella **memoria locale** dei processori dedicati |
+| Eterogenei | — | — | Una **coda per ciascun processore**, oppure **una per ciascun gruppo omogeneo** |
 
 #### **9.3. Tipi di multiprocessamento**
 

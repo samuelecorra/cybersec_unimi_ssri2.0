@@ -1,4 +1,6 @@
-## **M3 UD2 Lezione 3 - Gestione dei thread**
+# **M3 UD2 Lezione 3 - Gestione dei thread**
+
+---
 
 ### **1. Introduzione**
 
@@ -73,12 +75,13 @@ Può essere richiesta dal thread stesso o da un altro thread dello stesso proces
 
 $$  
 \begin{cases}  
-\textbf{Cancellazione asincrona:}~ & \text{terminazione immediata del thread target.} \\\\  
-\textbf{Cancellazione differita:}~ & \text{il thread verifica periodicamente se può terminare (punti di cancellazione).}  
+\textbf{Cancellazione asincrona:}~ & \text{terminazione immediata del thread target — il thread viene "ucciso" subito.} \\\\  
+\textbf{Cancellazione differita (a punti di controllo):}~ & \text{il thread verifica in opportuni punti se può terminare.} \\\\
+\textbf{Cancellazione differita (naturale):}~ & \text{il thread completa la sua computazione e viene rimosso dal sistema.}
 \end{cases}  
 $$
 
-La modalità differita è preferita, poiché garantisce **terminazione ordinata** e **rilascio sicuro delle risorse**.
+La modalità differita è preferita rispetto all'asincrona, poiché garantisce **terminazione ordinata** e **rilascio sicuro delle risorse**: il thread può portare a termine eventuali operazioni critiche (commit di transazioni, rilascio di lock, chiusura di file) prima di terminare effettivamente.
 
 ---
 #### **4.2. Punti di cancellazione**
@@ -120,7 +123,17 @@ $$
 \end{cases}  
 $$
 
-La comunicazione avviene di norma tramite **variabili condivise**, ma può anche sfruttare **meccanismi di segnalazione** (signal o eventi) forniti dal sistema operativo.
+La comunicazione avviene di norma tramite **variabili condivise** (la stessa memoria centrale del processo), ma può anche sfruttare **meccanismi di segnalazione** (signal o eventi) forniti dal sistema operativo, o **meccanismi più sofisticati** che vedremo in dettaglio nella prossima unità.
+
+##### **Comunicazione tra thread di processi diversi**
+
+Quando due processi multi-thread vogliono comunicare, è il **thread mittente** del processo sorgente a invocare l'operazione, e può scegliere come destinatario:
+
+- **tutti i thread** del processo destinatario;
+- un **sottoinsieme** di essi;
+- un **thread specifico** del destinatario.
+
+Questa granularità nella selezione del destinatario è ciò che distingue la comunicazione intra-processo (sempre disponibile via memoria condivisa) dalla comunicazione inter-processo (che richiede primitive di IPC fornite dal SO).
 
 ---
 ### **6. Processi leggeri (Lightweight Processes – LWP)**
@@ -145,6 +158,12 @@ $$
 \end{cases}  
 $$
 
+L'idea centrale è il **disaccoppiamento**: il LWP separa la **gestione del parallelismo dei thread a livello utente** dal **mappaggio e dall'esecuzione effettiva a livello kernel**. In questo modo:
+
+- l'applicazione a livello utente **non deve curarsi** dei problemi di gestione del parallelismo a livello sistema;
+- i thread utenti vedono il LWP come un **processore virtuale unico** e dedicato;
+- il LWP viene poi **replicato opportunamente** sui thread kernel disponibili, garantendo un'**attivazione efficiente** in base alle condizioni operative dell'intero sistema (numero di CPU disponibili, carico, priorità).
+
 Questo meccanismo permette di mantenere **alta efficienza** (gestione rapida in user mode) e **vera concorrenza** (grazie al controllo kernel).
 
 ---
@@ -167,3 +186,11 @@ La gestione dei thread rappresenta il **cuore del parallelismo moderno**:
 consente di creare, coordinare e terminare flussi di esecuzione multipli all’interno dello stesso processo, garantendo flessibilità e prestazioni elevate.
 
 I **Lightweight Processes** completano questa architettura fungendo da intermediari efficienti tra **user space** e **kernel space**, permettendo di sfruttare appieno le potenzialità del multi-threading su sistemi multiprocessore.
+
+---
+
+### **9. Anticipazione: dalle prossime lezioni in poi**
+
+Nel seguito vedremo gli aspetti di **comunicazione tra i processi**, di **sincronizzazione tra i processi** e di **scheduling dei processi** sul processore.
+
+> 💡 **Nota importante.** Si farà esplicito riferimento ai **processi**, ma le osservazioni, i metodi e le tecniche descritte funzionano altrettanto bene per **supportare e gestire i thread** — sia quando sono gestiti **a livello utente** (all'interno del singolo processo), sia quando sono gestiti **direttamente a livello kernel**. La trattazione che faremo è quindi generale, e i meccanismi visti sono **applicabili indistintamente** a entrambe le unità di esecuzione.

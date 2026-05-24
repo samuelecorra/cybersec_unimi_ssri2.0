@@ -1,4 +1,6 @@
-# **Lezione 0 - Intro Unità Didattica 4 – Comunicazione tra processi**
+# **Lezione 0 - Intro Unità Didattica 4 - Comunicazione tra processi**
+
+---
 
 Dopo aver studiato la schedulazione e la sincronizzazione, affrontiamo ora un aspetto altrettanto cruciale: **la comunicazione tra processi**.  
 In un sistema operativo moderno, i processi raramente operano in modo isolato: spesso devono **cooperare**, **scambiarsi dati** o **sincronizzare le proprie azioni** per portare a termine un compito comune.

@@ -1,11 +1,22 @@
 # **M3 UD4 Lezione 6 - Comunicazione con file e pipe**
 
+---
+
 ### **1. Introduzione**
 
-In questa lezione concludiamo l’unità sulla **comunicazione tra processi**, analizzando due meccanismi fondamentali dei sistemi operativi:  
+In questa lezione concludiamo l'unità sulla **comunicazione tra processi**, analizzando due meccanismi fondamentali dei sistemi operativi:  
 la **comunicazione tramite file condivisi** e quella tramite **pipe** (_condotte_).
 
 Entrambi i metodi permettono a più processi di **scambiarsi informazioni** senza condividere direttamente la memoria, ma scrivendo e leggendo dati attraverso un intermediario gestito dal **file system** o dal **kernel**.
+
+#### **1.1. Idea unificante: la pipe è un file in memoria centrale**
+
+L'obiettivo di questa famiglia di tecniche è **astrarre la comunicazione** portandola dallo spazio di memoria centrale condivisa (modelli precedenti) allo spazio della **memoria di massa**. La **pipe** è essenzialmente un caso speciale: **un file collocato in memoria centrale** anziché su disco, per migliorarne la rapidità di accesso.
+
+In entrambi i casi le **funzioni utilizzate sono le stesse**: le tipiche **primitive del file system** del SO (`open`, `read`, `write`, `close`, ...). Cambia soltanto **dove vivono i dati**:
+
+- **File condivisi**: dati su **memoria di massa**, accesso più lento ma persistente;
+- **Pipe**: dati in **memoria centrale**, accesso veloce ma volatile, con ordinamento **FIFO** forzato.
 
 ---
 ### **2. Comunicazione mediante file condivisi**

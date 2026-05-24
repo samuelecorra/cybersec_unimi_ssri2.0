@@ -1,5 +1,7 @@
 # **M3 UD6 Lezione 3 - Tecniche per evitare il Deadlock**
 
+---
+
 ### **1. Introduzione**
 
 Dopo aver visto come **prevenire** il deadlock rimuovendo a priori una delle condizioni di Coffman,  
@@ -13,14 +15,22 @@ $$
 In pratica, il sistema non vieta le situazioni potenzialmente rischiose, ma **analizza ogni richiesta in tempo reale**, concedendola solo se il sistema rimane in **uno stato sicuro**.
 
 ---
-### **2. Principio dell’evitamento**
+### **2. Principio dell'evitamento**
 
-L’evitamento del deadlock consiste nel:
+#### **2.1. Obiettivi rispetto alla prevenzione**
 
-- **verificare a priori** se l’allocazione di una risorsa può causare deadlock;
-    
+L'approccio dell'evitamento mira a **superare i limiti** delle tecniche di prevenzione, che pur garantendo l'assenza di deadlock tendono a essere **rigide** e a portare a sottoutilizzo delle risorse. Gli obiettivi specifici sono:
+
+- **aumentare lo sfruttamento delle risorse** rispetto al caso della prevenzione;
+- ottenere un'**alta efficienza** del sistema;
+- mantenere una **semplicità di gestione** ragionevole, senza sovraccaricare il sistema di elaborazione con attività di gestione a scapito del lavoro utile.
+
+#### **2.2. Meccanismo**
+
+L'evitamento del deadlock consiste nel:
+
+- **verificare a priori** se l'allocazione di una risorsa può causare deadlock;
 - **accettare** solo le richieste che mantengono il sistema in **stato sicuro**;
-    
 - **bloccare temporaneamente** le richieste che porterebbero a uno stato non sicuro.
 
 $$  
@@ -28,7 +38,7 @@ $$
 \text{Stato non sicuro} \Rightarrow \text{deadlock possibile}  
 $$
 
-L’obiettivo è quindi **massimizzare l’efficienza** senza sacrificare la **sicurezza del sistema**.
+L'obiettivo è quindi **massimizzare l'efficienza** senza sacrificare la **sicurezza del sistema**.
 
 ---
 ### **3. Informazioni necessarie**
@@ -89,6 +99,15 @@ $$
 
 Ogni nuova richiesta viene concessa solo se mantiene il sistema in uno stato sicuro;  
 altrimenti il processo viene **messo in attesa**.
+
+##### **Attenzione: "stato non sicuro" non significa "deadlock"**
+
+Lo **stato sicuro** è una condizione **più restrittiva** del puro "essere fuori dal deadlock":
+
+- da uno **stato sicuro** abbiamo la **certezza** che non si entrerà mai in deadlock;
+- da uno **stato non sicuro** **non possiamo dire nulla a priori**: il sistema **potrebbe** non cadere mai in deadlock (se i processi rilasciano le risorse "al momento giusto"), oppure **potrebbe** entrarvi.
+
+L'evitamento è quindi una strategia **conservativa**: rifiuta tutte le transizioni che porterebbero in stato non sicuro, anche quelle che in pratica non genererebbero un deadlock effettivo. Il prezzo della sicurezza assoluta è qualche richiesta rifiutata in più del necessario.
 
 ---
 ### **5. Algoritmo del grafo di allocazione delle risorse**
@@ -169,19 +188,19 @@ $$
 \end{cases}  
 $$
 
+> 💡 **Perché un vettore temporaneo `Work`?** Si usa una copia delle disponibilità reali per **simulare** le allocazioni durante la verifica, senza alterare lo stato effettivo del sistema. Solo al termine della verifica (positiva) si decide se rendere effettive le modifiche.
+
 #### **7.2. Passaggi operativi**
 
 1. Inizializzazione:  
     $$Work = Available, \quad Finish[i] = false \text{ per tutti i processi.}$$
-    
 2. Cerca un processo $P_i$ tale che:  
     $$Finish[i] = false \quad \text{e} \quad Need_i \leq Work$$
-    
-3. Se trovato, simula la sua terminazione:  
+    Se **nessun processo** soddisfa le condizioni del passo 2, vai al passo 4.
+3. Se trovato, simula la sua terminazione (allocazione fittizia delle risorse necessarie, completamento e rilascio):  
     $$Work = Work + Allocation_i, \quad Finish[i] = true$$  
     e torna al passo 2.
-    
-4. Se per tutti i processi $Finish[i] = true$, allora **lo stato è sicuro**.
+4. Se per tutti i processi $Finish[i] = true$, allora **lo stato è sicuro**. Altrimenti, lo stato è **non sicuro**.
 
 ---
 ### **8. Algoritmo di richiesta delle risorse**
@@ -227,4 +246,6 @@ $$
 ### **10. Conclusione**
 
 Le tecniche di **evitamento del deadlock** non vietano le richieste di risorse, ma le **controllano dinamicamente** per garantire che il sistema rimanga sempre in **uno stato sicuro**.  
-L’**algoritmo del banchiere**, pur essendo computazionalmente costoso, rappresenta il modello più elegante e generale per evitare deadlock nei sistemi reali.
+L'**algoritmo del banchiere**, pur essendo computazionalmente costoso, rappresenta il modello più elegante e generale per evitare deadlock nei sistemi reali.
+
+> ✅ **Garanzia del banchiere.** L'algoritmo garantisce che **se un processo è in grado di ottenere tutte le risorse richieste senza creare condizioni di deadlock, allora le ottiene effettivamente e può procedere nella sua esecuzione**. Le richieste vengono rifiutate (o messe in attesa) **solo** quando soddisfarle porterebbe ad uno stato non sicuro — quindi l'algoritmo non è inutilmente avversario, è "giusto" nel concedere ciò che è concedibile in sicurezza.

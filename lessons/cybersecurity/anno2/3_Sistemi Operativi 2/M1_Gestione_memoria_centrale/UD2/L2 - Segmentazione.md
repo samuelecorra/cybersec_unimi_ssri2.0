@@ -1,5 +1,7 @@
 # **M1 UD2 Lezione 2 - Segmentazione**
 
+---
+
 ### **1. Introduzione**
 
 La **segmentazione** è una tecnica di gestione della memoria centrale che nasce per superare i limiti concettuali della **paginazione**.  

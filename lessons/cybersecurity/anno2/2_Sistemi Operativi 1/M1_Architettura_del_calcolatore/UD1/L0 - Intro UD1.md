@@ -1,4 +1,6 @@
-# Lezione 0 - Intro Unità Didattica 1 – Architettura e funzionamento dei sistemi di elaborazione
+# Lezione 0 - Intro Unità Didattica 1 - Architettura e funzionamento dei sistemi di elaborazione
+
+---
 
 ### 1. Introduzione
 

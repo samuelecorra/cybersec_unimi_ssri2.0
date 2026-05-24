@@ -1,5 +1,7 @@
 # **Lezione 0 - Intro Unità Didattica 3 - Memoria virtuale**
 
+---
+
 Questa unità introduce il concetto di **memoria virtuale**, una delle innovazioni più importanti nei sistemi operativi moderni.  
 L’idea centrale è permettere ai processi di **vedere uno spazio di memoria molto più grande** di quello fisicamente disponibile, caricando in RAM solo le parti effettivamente necessarie all’esecuzione.
 

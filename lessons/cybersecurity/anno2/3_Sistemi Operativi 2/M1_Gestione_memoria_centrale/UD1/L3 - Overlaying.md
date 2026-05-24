@@ -1,5 +1,7 @@
 # **M1 UD1 Lezione 3 - Overlaying**
 
+---
+
 ### **1. Introduzione**
 
 La tecnica dell’**overlaying** nasce per superare un limite strutturale dei sistemi più datati: la **memoria centrale fisica** disponibile può essere inferiore alla dimensione del **programma logico** da eseguire.  

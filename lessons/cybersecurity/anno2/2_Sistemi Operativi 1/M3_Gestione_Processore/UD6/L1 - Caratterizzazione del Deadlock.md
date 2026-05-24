@@ -1,5 +1,7 @@
 # **M3 UD6 Lezione 1 - Caratterizzazione del Deadlock**
 
+---
+
 ### **1. Introduzione**
 
 Dopo aver affrontato la sincronizzazione dei processi, analizziamo ora uno dei problemi più pericolosi dei sistemi operativi: il **deadlock**, chiamato anche **stallo**.  
@@ -43,10 +45,19 @@ In questo caso, **nessun processo può progredire** e il sistema entra in **stal
 Esempio intuitivo:
 
 - Il processo $P_1$ ha la **risorsa R1** e richiede la **R2**.
-    
 - Il processo $P_2$ ha la **risorsa R2** e richiede la **R1**.
 
 Né $P_1$ né $P_2$ possono procedere, e il sistema resta bloccato.
+
+#### **3.1. Analogia visiva: due auto nella strettoia**
+
+Un'analogia efficace è quella di **due automobili** che, provenendo da direzioni opposte, vogliono attraversare contemporaneamente una **strada con una strettoia** (risorsa condivisa usabile solo in mutua esclusione). Senza una regola di precedenza che le sincronizzi:
+
+- entrambe le auto **iniziano a occupare** la strettoia da estremi opposti;
+- arrivate al punto di incrocio, **nessuna delle due** può proseguire perché l'altra le blocca il passaggio;
+- nessuna delle due vuole (o può, per i propri vincoli) tornare indietro.
+
+Il risultato è uno **stallo perfetto**: il sistema (in questo caso, il traffico stradale) **resta bloccato** finché un agente esterno non interviene per risolverlo.
 
 ---
 ### **4. Condizioni necessarie per il verificarsi del deadlock**
@@ -78,13 +89,12 @@ $$
 
 Dove:
 
-- $V$ è l’insieme dei nodi, suddiviso in:
-    
-    - processi del sistema $P = {P_1, P_2, ..., P_n}$
-        
-    - risorse del sistema $R = {R_1, R_2, ..., R_m}$
-        
-- $E$ è l’insieme degli archi che rappresentano relazioni di **richiesta** e **assegnazione**.
+- $V$ è l'insieme dei nodi, suddiviso in:
+  - processi del sistema $P = \{P_1, P_2, \dots, P_n\}$
+  - risorse del sistema $R = \{R_1, R_2, \dots, R_m\}$
+- $E$ è l'insieme degli archi che rappresentano relazioni di **richiesta** e **assegnazione**.
+
+> 💡 **Risorse con più istanze.** Una risorsa $R_j$ può esistere in **più istanze identiche** (es. 2 stampanti dello stesso modello). Anche in questo caso, viene rappresentata da un **unico nodo** $R_j$ nel grafo — eventualmente con dei "puntini" interni che indicano il numero di istanze disponibili. Le assegnazioni a processi diversi sono comunque archi distinti che escono dal medesimo nodo.
 
 #### **5.2. Tipi di archi**
 
@@ -118,6 +128,22 @@ $$
 
 In alcuni casi, un grafo può contenere un **ciclo** ma non rappresentare un vero deadlock,  
 ad esempio quando una risorsa ha **più istanze disponibili**.
+
+##### **Esempio: ciclo con risorsa a due istanze**
+
+Supponiamo che la risorsa $R_2$ esista in **2 istanze**. Una delle due è coinvolta nel ciclo $P_1 \to R_1 \to P_3 \to R_2 \to P_1$. L'altra istanza è detenuta da un processo **$P_4$ esterno al ciclo**, che non è in attesa di nessuna risorsa.
+
+In questa configurazione, anche se il grafo presenta un ciclo:
+
+- Quando $P_4$ termina la propria computazione, **rilascia la sua istanza** di $R_2$;
+- Tale istanza può essere **assegnata a $P_3$**, che era in attesa proprio di $R_2$;
+- $P_3$ può procedere, rilasciare $R_1$, e a sua volta sbloccare $P_1$;
+- Il ciclo si scioglie senza che si verifichi alcun deadlock.
+
+##### **Conclusione utile**
+
+- **Risorse a istanza singola**: la **presenza di un ciclo** nel grafo è **condizione necessaria e sufficiente** per il deadlock.
+- **Risorse a più istanze**: la presenza di un ciclo è **condizione necessaria ma non sufficiente** — bisogna analizzare anche la distribuzione delle istanze fuori dal ciclo per determinare se il deadlock è effettivo.
 
 ---
 ### **7. Metodi di gestione del deadlock**

@@ -1,5 +1,7 @@
 # **M1 UD1 Lezione 4 - Swapping**
 
+---
+
 ### **1. Introduzione**
 
 La tecnica dello **swapping** rappresenta un ulteriore passo avanti nella gestione della memoria centrale rispetto al semplice partizionamento.  

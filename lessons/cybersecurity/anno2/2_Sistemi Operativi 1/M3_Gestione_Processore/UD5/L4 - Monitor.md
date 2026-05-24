@@ -1,5 +1,7 @@
 # **M3 UD5 Lezione 4 - Monitor**
 
+---
+
 ### **1. Introduzione**
 
 Nelle lezioni precedenti abbiamo visto come la sincronizzazione possa essere realizzata con **semafori**.  
@@ -82,8 +84,12 @@ monitor BufferCondiviso {
 
 #### **5.1. Accesso controllato**
 
-All’interno del monitor, il sistema di sincronizzazione è **implicito**:  
+All'interno del monitor, il sistema di sincronizzazione è **implicito**:  
 il compilatore genera automaticamente le chiamate ai meccanismi di blocco e sblocco.
+
+##### **Implementazione: variabile condizione associata**
+
+Per realizzare la mutua esclusione, il compilatore associa al monitor una **variabile condizione** che rappresenta lo **stato di uso** del monitor (libero o occupato). Concettualmente, questa variabile **coincide con un semaforo binario**: viene inizializzata a `1` (libero) e viene manipolata automaticamente all'ingresso e all'uscita di ogni entry procedure.
 
 $$  
 \begin{cases}  
@@ -94,6 +100,19 @@ $$
 
 Quando il processo corrente esce da una **entry procedure**,  
 il sistema operativo **riattiva automaticamente** uno dei processi sospesi.
+
+##### **Esempio narrativo: due processi P e Q sullo stesso monitor**
+
+1. Stato iniziale: condizione = `1` (monitor libero).
+2. Arriva **P** e chiama una entry procedure del monitor. La condizione passa a `0`, P **entra** nella sezione critica.
+3. Arriva **Q** e prova a chiamare un'altra entry procedure dello stesso monitor. Trovando la condizione = `0`, **non può procedere**: il sistema attiva automaticamente una primitiva di **`wait`** che pone Q nella **coda di attesa** del monitor.
+4. **P** termina la propria entry procedure. Il sistema automaticamente:
+    - rilascia il monitor;
+    - vede che esiste un processo pendente (Q) ed esegue una primitiva di **`signal`** per **risvegliarlo**;
+    - cede a Q l'uso del monitor.
+5. **Q** procede nella propria computazione. Al termine, rilascia il monitor e **ripristina la condizione a `1`** (libero) — pronto per i prossimi processi.
+
+Il programmatore non scrive **nessuna** delle chiamate a `wait` e `signal` di accesso al monitor: sono **completamente generate dal compilatore** a partire dal costrutto `monitor`.
 
 ---
 #### **5.2. Condizioni di sincronizzazione**
@@ -160,8 +179,10 @@ $$
 ---
 ### **8. Conclusione**
 
-Il **monitor** rappresenta il naturale passo successivo nell’evoluzione dei meccanismi di sincronizzazione.  
+Il **monitor** rappresenta il naturale passo successivo nell'evoluzione dei meccanismi di sincronizzazione.  
 Mentre i semafori richiedono al programmatore di gestire manualmente la correttezza del codice,  
 il monitor **sposta la responsabilità al linguaggio e al compilatore**, garantendo che solo un processo alla volta acceda alle risorse condivise.
 
 Si tratta dunque di un **approccio di alto livello**, che riduce gli errori, aumenta la leggibilità del codice e offre una sincronizzazione intrinsecamente sicura.
+
+> ⚠️ **Limite residuo: bypass del monitor.** Il monitor garantisce un uso corretto delle risorse condivise **solo per i programmi che effettivamente lo utilizzano**. Se un programma "scorretto" cerca di accedere **direttamente** alla risorsa — bypassando le entry procedure del monitor — **non c'è alcuna garanzia** che la gestione resti corretta. La protezione del monitor è quindi limitata al **perimetro del costrutto**: la disciplina d'accesso deve essere rispettata da tutti i programmi che condividono la risorsa.

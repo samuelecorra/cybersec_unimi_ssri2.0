@@ -1,5 +1,7 @@
 # **M3 UD3 Lezione 1 - Livelli di schedulazione e attivazione dei processi**
 
+---
+
 ### **1. Introduzione**
 
 La **schedulazione** è il meccanismo attraverso cui il **sistema operativo decide quale processo deve usare la CPU** in un determinato momento.  
@@ -34,6 +36,12 @@ $$
 \end{cases}  
 $$
 
+I termini "breve / medio / lungo" si riferiscono alla **durata** rispetto all'evoluzione della computazione dei processi:
+
+- **breve termine**: tempi tipicamente **al di sotto del secondo**;
+- **lungo termine**: tempi tipicamente **nell'ordine dei minuti**;
+- **medio termine**: una via di mezzo tra i due.
+
 ---
 ### **4. Schedulazione a breve termine (short-term scheduling)**
 
@@ -42,25 +50,35 @@ $$
 È il livello più vicino all’hardware e il più frequente.  
 Il **CPU scheduler** ordina i processi che sono già **in memoria centrale** e nello stato di **pronto all’esecuzione (Ready)**.
 
-Il processo posto in cima alla lista sarà quello scelto dal **dispatcher**, che effettuerà il **cambio di contesto (context switch)** per metterlo in esecuzione.
+Il processo posto in cima alla lista sarà quello scelto dal **dispatcher**, che effettuerà il **cambio di contesto (context switch)** per metterlo in esecuzione. Il processo precedentemente in esecuzione viene messo tra quelli che saranno **successivamente rischedulati** per riottenere il processore — non appena disporrà di **tutte le risorse informative e fisiche** che gli servono per l'evoluzione della computazione.
 
 #### **4.2. Caratteristiche principali**
 
-- Eseguita molto frequentemente, tipicamente **ogni 100 ms** circa.
+- Eseguita molto frequentemente, tipicamente **ogni 100 ms** circa, per dare l'impressione di evoluzione parallela di tutti i processi.
     
 - Deve essere **estremamente veloce**, per non introdurre ritardi di gestione.
     
-- Usa algoritmi semplici per minimizzare l’overhead.
+- Usa algoritmi semplici per minimizzare l'overhead.
 
-Questo tipo di schedulazione è tipico dei sistemi _time-sharing_, dove la CPU passa rapidamente da un processo all’altro per mantenere alta la reattività.
+##### **Motivazione della semplicità degli algoritmi**
+
+Il punto chiave è che il **carico di lavoro indotto dall'esecuzione stessa dell'algoritmo di scheduling deve essere minimo**. Sarebbe un controsenso avere una schedulazione "ideale" ma passare, per esempio, il **90% del tempo della CPU** nel calcolarla anziché nell'eseguire i processi applicativi. La CPU deve essere usata in larga parte per **lavoro utile**, non per gestione: di qui la scelta di algoritmi **molto semplici** per lo short-term.
+
+Questo tipo di schedulazione è tipico dei sistemi _time-sharing_, dove la CPU passa rapidamente da un processo all'altro per mantenere alta la reattività.
 
 ---
 ### **5. Schedulazione a lungo termine (long-term scheduling)**
 
 #### **5.1. Funzione**
 
-Il **job scheduler** seleziona **quali processi ammettere in memoria centrale** per l’esecuzione, tra quelli che sono stati attivati o caricati nel sistema.  
+Il **job scheduler** seleziona **quali processi ammettere in memoria centrale** per l'esecuzione, tra quelli che sono stati attivati o caricati nel sistema.  
 In pratica, determina **quanti e quali processi potranno entrare nello stato di pronto**.
+
+##### **Dove stanno i processi non ancora caricati**
+
+Quando un sistema attiva molti processi, non tutti possono stare efficientemente in memoria centrale (sarebbe penalizzato lo spazio di ciascuno e si sovraccaricherebbe la gestione della memoria virtuale). I processi attivati ma non ancora caricati vengono quindi tenuti in **appositi spazi di memoria di massa**.
+
+Il long-term scheduler sceglie tra questi quali **portare in memoria centrale** e mettere nello stato **Ready**. In questo modo, lo **short-term scheduler opera solo su un sottoinsieme** dei processi attivi nel sistema — precisamente quelli che il long-term ha già caricato in RAM.
 
 #### **5.2. Obiettivo**
 
@@ -78,18 +96,26 @@ Una combinazione equilibrata massimizza l’utilizzo complessivo del processore.
 
 #### **5.3. Frequenza e complessità**
 
-- Viene eseguito **poco frequentemente**, in genere ogni pochi minuti.
+- Viene eseguito **poco frequentemente**, in genere ogni pochi minuti — per non sovraccaricare il sistema con un algoritmo complesso eseguito troppo spesso.
     
-- Può essere **assente** in sistemi con carico costante.
+- Può essere **assente** o ridotto al minimo in sistemi con carico costante.
     
-- Usa **algoritmi complessi**, poiché lavora su tempi lunghi e strategie globali.
+- Usa **algoritmi complessi**, poiché deve tener conto della **predizione del comportamento dei processi** ed eseguire un **bilanciamento ottimale** tra le varie esigenze del sistema.
 
 ---
 ### **6. Schedulazione a medio termine (medium-term scheduling)**
 
 #### **6.1. Motivazioni**
 
-In un sistema attivo, si possono verificare problemi come:  
+Il medium-term nasce come **mediazione** tra short-term e long-term: combina la **rapidità ed efficienza** dello short-term con la **capacità di previsione del comportamento** dei processi tipica del long-term, attenuando i limiti di entrambi (lo short-term ha poca visione, il long-term è troppo lento).
+
+Anche dopo una buona selezione iniziale del long-term, le prestazioni possono non restare ottimali:
+
+- la **previsione** del comportamento dei processi può non essere eccellente;
+- i processi possono **cambiare il loro modo di comportarsi** durante l'esecuzione, vanificando le predizioni iniziali;
+- nel tempo può accumularsi un **numero eccessivo di processi in memoria centrale**: l'alta concorrenza riduce le prestazioni globali a causa del sovraccarico nella gestione della memoria.
+
+In un sistema attivo, si possono quindi verificare problemi come:  
 $$  
 \begin{cases}  
 \textbf{1.}~ & \text{Troppi processi concorrenti che rallentano il sistema.} \\\\  
@@ -111,18 +137,27 @@ $$
 
 #### **6.3. Soluzione: swapping**
 
-La tecnica principale è lo **swapping**, ossia lo spostamento temporaneo dei processi tra memoria centrale e memoria di massa:
+La tecnica principale è lo **swapping**, ossia lo spostamento temporaneo dei processi — anche **parzialmente eseguiti** — tra memoria centrale e una **memoria di massa temporanea** (_swap area_):
 
-![](imgs/Pasted%20image%2020260319154257.png)
+![Swapping out e swapping in tra memoria centrale e memoria di massa](imgs/Pasted%20image%2020260319154257.png)
 
 $$  
 \begin{cases}  
-\textbf{Swapping out:}~ & \text{rimozione di processi dalla memoria centrale;} \\\\  
-\textbf{Swapping in:}~ & \text{reintroduzione di processi precedentemente sospesi.}  
+\textbf{Swapping out:}~ & \text{spostamento di un processo dalla RAM alla swap area su memoria di massa;} \\\\  
+\textbf{Swapping in:}~ & \text{reintroduzione del processo dalla swap area nella memoria centrale.}  
 \end{cases}  
 $$
 
-In questo modo si mantiene un **gruppo dinamico di processi attivi**, adattato al carico di lavoro corrente e alla disponibilità di risorse.
+##### **Meccanica operativa**
+
+Sostanzialmente, il medium-term scheduler interviene così:
+
+- i processi entrano nella **coda dei pronti** in memoria centrale e vengono lavorati dallo short-term;
+- quando opportuno (es. carico eccessivo, bilanciamento da rivedere), un processo può essere **scaricato in memoria di massa** anche se è solo **parzialmente eseguito** (swap-out);
+- il medium-term provvederà **successivamente** a **ricaricarlo** in memoria centrale (swap-in), rimettendolo nella coda dei pronti;
+- gli altri processi continuano la propria evoluzione normalmente.
+
+In questo modo il medium-term **adatta dinamicamente** l'insieme dei processi selezionato dal long-term alle **effettive caratteristiche del carico di lavoro** rilevate durante l'esecuzione, mantenendo un bilanciamento ottimale tra CPU-bound e I/O-bound e uno sfruttamento elevato del processore.
 
 ---
 ### **7. Tipologie di attivazione**

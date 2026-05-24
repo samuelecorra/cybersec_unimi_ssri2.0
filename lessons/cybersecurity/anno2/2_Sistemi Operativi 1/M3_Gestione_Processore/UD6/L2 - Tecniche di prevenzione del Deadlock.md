@@ -1,5 +1,7 @@
 # **M3 UD6 Lezione 2 - Tecniche di prevenzione del Deadlock**
 
+---
+
 ### **1. Introduzione**
 
 La **prevenzione del deadlock** consiste nel progettare il sistema in modo che **almeno una** delle quattro condizioni di Coffman **non possa mai verificarsi**.  
@@ -79,8 +81,17 @@ Queste tecniche, seppur efficaci, introducono due problemi:
 Si può eliminare questa condizione **consentendo al sistema di rilasciare forzatamente** le risorse di un processo,  
 a patto che il loro stato possa essere **ripristinato successivamente**.
 
+##### **Requisito di ripristinabilità**
+
+Il pre-rilascio è applicabile solo a risorse il cui **stato di uso al momento del rilascio anticipato è ripristinabile**. Detto in modo più diretto: la risorsa, quando le verrà restituita al processo originario, deve poter essere riportata **esattamente nello stato in cui era stata tolta** — come se la pre-emption non fosse mai avvenuta dal punto di vista logico della computazione.
+
+Solo a queste condizioni si può rilassare il vincolo "no pre-emption" senza compromettere la consistenza:
+
+- ✅ **Applicabile**: CPU (stato salvato nel PCB), pagine di memoria (swap), buffer ripopolabili.
+- ❌ **NON applicabile**: stampanti a metà di un job (perderebbero parte dell'output), connessioni di rete con stato transazionale aperto, dispositivi che modificano fisicamente il mondo esterno.
+
 $$  
-\text{Pre-emption possibile solo per risorse ripristinabili (es. CPU, memoria).}  
+\text{Pre-emption possibile solo per risorse il cui stato è ripristinabile (es. CPU, memoria).}  
 $$
 
 #### **4.2. Tecniche operative (1)**
@@ -112,12 +123,16 @@ Queste soluzioni richiedono **complessità di gestione elevata**, ma sono molto 
 
 #### **5.1. Principio**
 
-Per evitare l’attesa circolare, è sufficiente **imporre un ordine totale sulle risorse**.  
-Ogni processo deve richiedere le risorse **seguendo quell’ordine**, senza mai “tornare indietro”.
+Per evitare l'attesa circolare, è sufficiente **imporre un ordinamento globale e univoco** su tutti i tipi di risorse del sistema.  
+Ogni processo deve richiedere le risorse **seguendo strettamente quell'ordine**, senza mai "tornare indietro".
 
 $$  
 R_1 < R_2 < R_3 < ... < R_n  
 $$
+
+##### **Perché funziona**
+
+Se ogni processo richiede risorse solo in **ordine crescente** dell'indice, è **impossibile** che si formi una catena ciclica di attese: in un ipotetico ciclo $P_1 \to R_a \to P_2 \to R_b \to \dots \to P_1$, avremmo necessariamente sia $a < b$ sia $b < a$ — una contraddizione. L'ordinamento totale **rompe per costruzione** la quarta condizione di Coffman.
 
 #### **5.2. Tecnica operativa (1)**
 
@@ -128,16 +143,20 @@ $$
 \end{cases}  
 $$
 
-#### **5.3. Tecnica operativa (2)**
+#### **5.3. Tecnica operativa (2): riordino forzato**
+
+Se un processo si trova a voler richiedere una risorsa **con indice più basso** di altre già possedute (violando l'ordinamento), deve eseguire un riordino:
 
 $$  
 \begin{cases}  
 \text{Se un processo detiene risorse } R_i \text{ con } i \ge j, \text{ allora deve:} \\\\  
-\text{1. rilasciare tutte le risorse } R_i \\  
-\text{2. richiedere tutte le istanze di } R_j \text{ (vecchie + nuove)} \\\\  
-\text{3. richiedere poi le risorse } R_i \text{ con } i > j  
+\text{1. rilasciare tutte le istanze di } R_i \text{ con } i \ge j \\\\
+\text{2. richiedere tutte le istanze di } R_j \text{ (vecchie possedute + nuove)} \\\\  
+\text{3. richiedere poi le risorse } R_i \text{ con } i > j \text{ che servono ancora}  
 \end{cases}  
 $$
+
+In pratica, il processo si "ripiega" temporaneamente all'indietro, ma poi riprende a chiedere le risorse **sempre nell'ordine crescente** previsto dal protocollo — preservando l'invariante che impedisce l'attesa circolare.
 
 Questo metodo **rompe la catena circolare delle attese**, eliminando la possibilità di deadlock.
 

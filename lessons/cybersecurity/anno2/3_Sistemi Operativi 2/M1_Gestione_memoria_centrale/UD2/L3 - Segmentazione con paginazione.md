@@ -1,5 +1,7 @@
 # **M1 UD2 Lezione 3 - Segmentazione con paginazione**
 
+---
+
 ### **1. Introduzione**
 
 La **segmentazione con paginazione** combina i vantaggi delle due tecniche precedenti — **segmentazione** e **paginazione** — eliminandone i rispettivi limiti.  

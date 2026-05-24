@@ -1,5 +1,7 @@
 # **M3 UD4 Lezione 4 - Comunicazione con scambio di messaggi**
 
+---
+
 ### **1. Introduzione**
 
 La **comunicazione con scambio di messaggi** rappresenta un’alternativa diretta alla **memoria condivisa**:  
@@ -51,11 +53,13 @@ $$
 
 $$  
 \begin{cases}  
-\textbf{Illimitata:}~ & \text{nessuna attesa, ma uso inefficiente della memoria.} \\\\  
-\textbf{Limitata:}~ & \text{possibile attesa del mittente se il buffer è pieno.} \\\\  
-\textbf{Nulla:}~ & \text{comunicazione diretta, senza memorizzazione intermedia.}  
+\textbf{Illimitata:}~ & \text{il processo può inviare quanti messaggi vuole, senza mai bloccarsi sull'invio.} \\\\  
+\textbf{Limitata:}~ & \text{il mittente deve attendere se il numero di messaggi pendenti raggiunge il limite.} \\\\  
+\textbf{Nulla (rendezvous):}~ & \text{nessun buffer; il mittente deve sempre aspettare un ricevente pronto.}  
 \end{cases}  
 $$
+
+Il caso **nullo** è particolarmente significativo: senza alcun buffer intermedio, il sistema **forza una sincronizzazione obbligatoria** tra mittente e destinatario — il messaggio passa solo nell'istante in cui entrambi i processi sono presenti contemporaneamente all'operazione di scambio (modello _rendezvous_).
 
 ---
 ### **4. Funzioni di comunicazione**
@@ -69,10 +73,12 @@ send(Q, messaggio)
 ```
 
 - Deposita il messaggio in un buffer libero.
-    
+- Se ci sono buffer liberi, il mittente prosegue **senza attendere** l'arrivo del ricevente.
 - Se non ci sono buffer disponibili, **il mittente viene sospeso** finché non se ne libera uno.
 
-👉 È detta **primitiva bloccante**, perché il processo rimane in attesa del completamento dell’invio.
+> 💡 Il mittente **non specifica se stesso** come argomento: il SO sa che il mittente è il **processo in esecuzione** al momento della chiamata, cioè proprio chi sta eseguendo la `send`.
+
+👉 È detta **primitiva bloccante**, perché il processo può rimanere in attesa del completamento dell'invio se mancano buffer.
 
 ---
 #### **4.2. Ricezione bloccante**
@@ -81,9 +87,10 @@ send(Q, messaggio)
 receive(P, messaggio)
 ```
 
-- Estrae un messaggio dal buffer.
-    
+- Estrae un messaggio dal buffer (proveniente dal mittente `P`) e lo deposita nella variabile `messaggio` nello spazio di indirizzamento del ricevente.
 - Se non ci sono messaggi disponibili, **il processo destinatario viene sospeso** finché non ne arriva uno.
+
+> 💡 Anche qui il destinatario **non specifica se stesso**: il SO sa che il destinatario è il processo che sta eseguendo la `receive`.
 
 👉 Anche questa è una **primitiva bloccante**, perché il destinatario attende un messaggio valido.
 
@@ -199,15 +206,33 @@ $$
 ---
 ### **8. Implementazione**
 
-Nell’implementazione reale:
+Nell'implementazione reale:
 
 - il **sistema operativo gestisce i buffer di messaggi**, allocandoli e liberandoli dinamicamente;
-    
 - i **messaggi vengono trasferiti tramite system call** (es. `send()`, `recv()`);
-    
 - nei sistemi distribuiti, lo scambio avviene su **canali di rete affidabili o non affidabili** (es. TCP o UDP).
 
-L’efficienza dipende dalla **dimensione dei buffer**, dal **numero di processi concorrenti** e dalla **politica di gestione della coda** (FIFO, priorità, ecc.).
+#### **8.1. Struttura interna di un buffer**
+
+Ogni buffer del sistema operativo è strutturato tipicamente in **tre campi**:
+
+$$
+\begin{cases}
+\textbf{Mittente:} & \text{identificatore del processo che ha inviato il messaggio} \\\\
+\textbf{Destinatario:} & \text{identificatore del processo a cui il messaggio è destinato} \\\\
+\textbf{Messaggio:} & \text{il contenuto effettivo dei dati da trasmettere}
+\end{cases}
+$$
+
+Esempio: se il processo P invia un messaggio al processo Q, nel buffer verranno memorizzati `(P, Q, informazione)`. Il SO scorre i buffer cercando quelli destinati al processo che esegue una `receive`, e gliene consegna uno secondo la politica di coda adottata.
+
+#### **8.2. Fattori che influenzano l'efficienza**
+
+L'efficienza dipende dalla **dimensione dei buffer**, dal **numero di processi concorrenti** e dalla **politica di gestione della coda** (FIFO, priorità, ecc.).
+
+##### **Sincronizzazione gestita trasparentemente dal SO**
+
+Un vantaggio importante rispetto alla memoria condivisa: **non c'è memoria visibile direttamente ai processi**. La sincronizzazione necessaria a garantire la **consistenza** dei messaggi — che un messaggio in lettura non venga alterato da una scrittura concorrente — è gestita **direttamente dal sistema operativo** in modo trasparente per i processi applicativi.
 
 ---
 ### **9. Sintesi finale**

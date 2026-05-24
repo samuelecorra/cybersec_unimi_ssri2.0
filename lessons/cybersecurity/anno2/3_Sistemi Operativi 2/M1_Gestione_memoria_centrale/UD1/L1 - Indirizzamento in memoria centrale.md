@@ -1,5 +1,7 @@
 # **M1 UD1 Lezione 1 - Indirizzamento in memoria centrale**
 
+---
+
 ### **1. Introduzione**
 
 Il sistema operativo deve gestire in modo efficiente la **memoria centrale**, garantendo che ogni processo possa accedere soltanto alle proprie aree e che il codice venga caricato e collegato correttamente.  

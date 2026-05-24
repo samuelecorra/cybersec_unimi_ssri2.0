@@ -1,5 +1,7 @@
 # **M1 UD2 Lezione 1 - Paginazione (parte 2)**
 
+---
+
 ### **1. Introduzione**
 
 Nella prima parte abbiamo visto i principi della **paginazione** e il ruolo della **MMU** nel tradurre automaticamente gli indirizzi logici in indirizzi fisici.  

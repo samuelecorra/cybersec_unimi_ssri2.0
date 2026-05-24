@@ -1,4 +1,4 @@
-# M1 UD1 Lezione 1 - Macchina di von Neumann – Architettura e funzionamento
+# **M1 UD1 Lezione 1 - Macchina di von Neumann - Architettura e funzionamento**
 
 Iniziamo subito ripercorrendo le nozioni di base...
 
@@ -66,7 +66,12 @@ $$
 \end{cases}  
 $$
 
-Durante la fase di **fetch**, l’indirizzo dell’istruzione corrente è memorizzato in un registro speciale chiamato **Program Counter (PC)**.  
+Durante la fase di **fetch**, l’indirizzo dell’istruzione successiva è memorizzato in un registro speciale chiamato **Program Counter (PC)**. La CPU, guardando la memoria centrale, preleva tale valore e lo pone in un suo registro, il **CIR**, ovvero Current Instruction Register. 
+
+Fatto ciò, la Control Unit si occupa di decodificare e gestire l'istruzione ricevuta. Se l'istruzione è ammissibile, allora la CU attiva l'opportuna ALU capace di eseguire l'operazione interessata e provvede anche ad attivare il trasferimento del contenuto dei registri contenenti gli operandi di tale operazione. 
+Il risultato sarà posto in un registro specificato dall'operazione stessa. Questa è la fase di execute.
+
+E' un ciclo pseudo infinito.
 Dopo ogni istruzione, il **PC** viene incrementato, così che la CPU possa passare automaticamente all’istruzione successiva.
 
 #### **3.2. Flusso sequenziale**

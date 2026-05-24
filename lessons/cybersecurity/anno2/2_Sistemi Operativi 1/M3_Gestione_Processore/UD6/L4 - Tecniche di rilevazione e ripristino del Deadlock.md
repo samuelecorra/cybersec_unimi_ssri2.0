@@ -1,5 +1,7 @@
 # **M3 UD6 Lezione 4 - Tecniche di rilevazione e ripristino del Deadlock**
 
+---
+
 ### **1. Introduzione**
 
 Dopo aver studiato la **prevenzione** e l’**evitamento** del deadlock, concludiamo l’analisi affrontando il caso in cui **il deadlock si sia già verificato**.  
@@ -41,11 +43,13 @@ $$
 
 Quando ogni risorsa ha **una sola istanza**, la rilevazione può essere effettuata tramite il **grafo di attesa** (_wait-for graph_).
 
-Questo grafo è derivato dal grafo di allocazione delle risorse, ma **contiene solo processi** come nodi.
+Questo grafo è **derivato dal grafo di allocazione delle risorse**, ma è una sua semplificazione: **contiene solo i processi** come nodi, e gli archi rappresentano **dipendenze dirette** tra processi.
 
 $$  
 P_i \rightarrow P_j \quad \text{se } P_i \text{ è in attesa di una risorsa posseduta da } P_j  
 $$
+
+**Esempio di costruzione**: se la risorsa $R_1$ è posseduta dal processo $P_1$ ed è richiesta da $P_2$, nel grafo wait-for compare un arco $P_2 \to P_1$.
 
 #### **3.2. Regola di rilevazione**
 
@@ -53,9 +57,9 @@ $$
 \text{Se il grafo di attesa contiene un ciclo} \Rightarrow \text{si è verificato un deadlock.}  
 $$
 
-- I processi coinvolti nel ciclo sono **bloccati reciprocamente**.
-    
-- L’analisi del grafo è quindi sufficiente per individuare i **processi in stallo**.
+- I processi coinvolti **in ciascun ciclo** del grafo sono **tutti** in deadlock — bloccati reciprocamente sull'attesa delle risorse.
+- Possono esistere **più cicli** indipendenti nello stesso grafo, ciascuno individuante un insieme di processi in stallo.
+- L'analisi del grafo è quindi sufficiente per individuare con precisione i **processi in stallo**.
 
 ---
 ### **4. Rilevazione per sistemi con istanze multiple**
@@ -97,8 +101,17 @@ true, & \text{se } Allocation[i] = 0
 \end{cases}  
 $$
 
-L’algoritmo è simile a quello del banchiere, ma non verifica la sicurezza:  
+L'algoritmo è simile a quello del banchiere, ma non verifica la sicurezza:  
 **identifica solo gli stati già bloccati**.
+
+##### **Identificazione dei processi in deadlock**
+
+Quando l'algoritmo termina:
+
+- se **tutti i processi** hanno $Finish[i] = true$, allora **nessuno** è in deadlock;
+- altrimenti, **tutti i processi** $P_i$ per cui $Finish[i] = false$ alla fine sono **coinvolti nel deadlock**.
+
+In altre parole, il vettore $Finish$ "etichetta" automaticamente l'intero insieme dei processi bloccati senza bisogno di ulteriori analisi.
 
 ---
 ### **5. Frequenza di rilevazione**
@@ -114,11 +127,14 @@ $$
 \end{cases}  
 $$
 
-#### **Trade-off**
+#### **5.1. Trade-off**
 
-- Rilevazione frequente → risposta rapida ma costo elevato.
-    
-- Rilevazione rara → efficienza maggiore ma rischio di accumulare molti processi bloccati.
+- **Rilevazione immediata** (ogni volta che si sta per creare un arco di attesa nel grafo delle richieste):
+  - **Vantaggi**: il deadlock viene scoperto **subito**, coinvolgendo **pochi processi e poche risorse** → l'intervento di ripristino è mirato e tocca poche entità, creando il minimo impatto sulla prosecuzione delle altre applicazioni.
+  - **Svantaggi**: il **carico computazionale di gestione** può diventare notevole, perché l'algoritmo di verifica viene attivato molto frequentemente.
+- **Rilevazione periodica** (a intervalli di tempo predefiniti):
+  - **Vantaggi**: **minor sovraccarico** computazionale del sistema operativo.
+  - **Svantaggi**: la rilevazione è **più tardiva**, e nel frattempo il numero di processi e risorse coinvolti nello stallo può **crescere**, rendendo il ripristino più costoso quando avviene.
 
 ---
 ### **6. Ripristino del deadlock**
@@ -179,9 +195,21 @@ $$
 
 Una volta scelta la vittima:
 
-- si effettua un **rollback** (ripristino) all’ultimo stato coerente del processo;
-    
-- il rollback può essere **totale** (riavvio completo) o **parziale** (solo fino al punto sicuro).
+- si **sottrae** la risorsa contesa al processo vittima;
+- si effettua un **rollback** del suo stato di esecuzione per garantirne la consistenza.
+
+Sono possibili due granularità di rollback:
+
+$$
+\begin{cases}
+\textbf{Rollback parziale:} & \text{si riporta il processo all'ultimo \textbf{stato sicuro} salvato} \\\\
+& \text{(prima dell'acquisizione della risorsa sottratta).} \\\\
+\textbf{Rollback totale (complessivo):} & \text{si annullano \textbf{tutti} gli effetti del processo, riportandolo all'inizio} \\\\
+& \text{(soluzione più drastica ma sempre sicura).}
+\end{cases}
+$$
+
+La scelta dipende dalla disponibilità di **checkpoint intermedi**: senza checkpoint si può solo fare rollback totale; con checkpoint si possono ripristinare punti più recenti, minimizzando il lavoro perso.
 
 #### **8.3. Problema della starvation**
 

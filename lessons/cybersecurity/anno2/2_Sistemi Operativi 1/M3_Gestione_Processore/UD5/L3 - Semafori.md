@@ -1,5 +1,7 @@
 # **M3 UD5 Lezione 3 - Semafori**
 
+---
+
 ### **1. Introduzione**
 
 Dopo aver studiato le **variabili di lock** e le **istruzioni atomiche**, possiamo ora innalzare il livello di astrazione introducendo un nuovo strumento fondamentale: il **semaforo**.  
@@ -66,6 +68,20 @@ criticalSection(); // sezione critica
 release(S);        // rilascio risorsa
 ```
 
+#### **4.1. Esempio narrativo: flusso di acquire/release**
+
+Seguiamo un'evoluzione tipica passo per passo:
+
+1. Stato iniziale: $S = 1$ (risorsa libera).
+2. Arriva il processo **P**, esegue `acquire(S)` → $S$ diventa $0$, **P entra nella sezione critica**.
+3. Arriva il processo **Q**, esegue `acquire(S)` → $S = 0$, **Q viene accodato** in attesa.
+4. Arriva il processo **R**, esegue `acquire(S)` → ancora $S = 0$, **R accodato**.
+5. Arriva il processo **T**, esegue `acquire(S)` → **T accodato**.
+6. P termina la sezione critica ed esegue `release(S)`. Esistono processi in coda: la risorsa **non torna libera**, ma viene **ceduta direttamente al primo processo** in coda secondo la politica adottata (es. Q).
+7. Q esce dalla coda di attesa e procede nella sua computazione. R e T restano in coda.
+
+In questo modo, le funzioni di sistema garantiscono che **al più un processo** stia nella sezione critica in ogni istante, e gli altri vengano risvegliati ordinatamente uno dopo l'altro.
+
 ---
 ### **5. Implementazione**
 
@@ -99,8 +115,18 @@ $$
 \end{cases}  
 $$
 
-Lo **scheduler** decide l’ordine con cui i processi accedono alla risorsa,  
-secondo la politica adottata (tipicamente FIFO).
+Lo **scheduler** decide l'ordine con cui i processi accedono alla risorsa, secondo la politica adottata sullo specifico semaforo:
+
+$$
+\begin{cases}
+\textbf{FIFO (First-In, First-Out):} & \text{ordine di arrivo nella coda — politica più comune;} \\\\
+\textbf{Priorità:} & \text{ottiene la risorsa il processo con priorità più alta;} \\\\
+\textbf{Earliest Deadline First:} & \text{tipica di ambienti real-time — viene servito prima chi ha scadenza più vicina;} \\\\
+\textbf{Altre politiche:} & \text{a seconda delle caratteristiche della risorsa gestita.}
+\end{cases}
+$$
+
+Quando `release(S)` viene invocata, lo scheduler **estrae il primo processo** dalla coda secondo la politica, lo riattiva e lo pone nello stato **Ready**: a quel punto rientrerà in competizione con gli altri processi pronti per ottenere il processore e proseguire la propria computazione.
 
 ---
 ### **6. Semaforo generalizzato**
@@ -140,8 +166,20 @@ release(printer);      // libera la stampante
 ```
 
 - Quando due processi stanno stampando, il terzo rimane sospeso.
-    
 - Al rilascio, il sistema operativo riattiva il primo processo in attesa.
+
+##### **Esempio narrativo: semaforo generalizzato con 3 risorse**
+
+Sequenza tipica con $S = 3$ (es. 3 risorse omogenee disponibili):
+
+1. **P** esegue `acquire(S)` → $S = 2$, P procede.
+2. **Q** esegue `acquire(S)` → $S = 1$, Q procede.
+3. **R** esegue `acquire(S)` → $S = 0$, R procede.
+4. **T** esegue `acquire(S)` → **non ci sono più risorse**, T viene **sospeso e accodato**.
+5. **Q** termina ed esegue `release(S)` → la risorsa liberata viene **direttamente ceduta a T**, che esce dalla coda e procede.
+6. $S$ resta a $0$ (sono ancora tre i processi attivi: P, R, T).
+
+Solo quando un processo rilascia la risorsa **senza che ci siano processi in coda**, il valore di $S$ torna effettivamente positivo.
 
 ---
 ### **7. Vantaggi dei semafori**
@@ -172,6 +210,8 @@ $$
 ### **9. Conclusione**
 
 I **semafori** rappresentano la **prima astrazione di alto livello** per la sincronizzazione nei sistemi operativi.  
-Permettono di gestire in modo corretto ed efficiente la **mutua esclusione**, senza dover scrivere codice a basso livello o preoccuparsi dell’atomicità delle istruzioni.
+Permettono di gestire in modo corretto ed efficiente la **mutua esclusione**, senza dover scrivere codice a basso livello o preoccuparsi dell'atomicità delle istruzioni.
 
-Nelle prossime lezioni vedremo come i semafori si evolvano ulteriormente in strutture più complesse come **monitor** e **transazioni atomiche**, che consentono un controllo ancora più fine e sicuro dei processi concorrenti.
+> ⚠️ **Limite residuo: responsabilità del programmatore.** I semafori garantiscono **corretto funzionamento solo se le funzioni `acquire` e `release` vengono effettivamente chiamate** prima e dopo ogni sezione critica. Se un programmatore **dimentica** di chiamarle (o le chiama in modo errato — ad es. release senza acquire, o acquire senza release corrispondente), processi possono ancora **violare la mutua esclusione** ed entrare nella sezione critica senza autorizzazione. La gestione corretta della disciplina del semaforo resta quindi un onere del programmatore.
+
+Nelle prossime lezioni vedremo come i semafori si evolvano ulteriormente in strutture più complesse come **monitor** e **transazioni atomiche**, che consentono un controllo ancora più fine e sicuro dei processi concorrenti — riducendo ulteriormente il margine di errore del programmatore.

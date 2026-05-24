@@ -1,4 +1,6 @@
-# **Lezione 0 - Intro Unità Didattica 1 – Struttura dei sistemi operativi**
+# **Lezione 0 - Intro Unità Didattica 1 - Struttura dei sistemi operativi**
+
+---
 
 ### **1. Introduzione**
 

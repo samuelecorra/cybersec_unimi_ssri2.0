@@ -1,5 +1,7 @@
 # **M3 UD5 Lezione 2 - Variabili di lock**
 
+---
+
 ### **1. Introduzione**
 
 Nella lezione precedente abbiamo visto come la concorrenza possa portare a conflitti quando più processi accedono a **risorse condivise** senza coordinamento.  
@@ -55,7 +57,8 @@ $$
 \end{cases}  
 $$
 
-L’algoritmo impone che i processi **si alternino obbligatoriamente**, anche se uno di essi non ha bisogno della risorsa.  
+L'algoritmo impone che i processi **si alternino obbligatoriamente**, anche se uno di essi non ha bisogno della risorsa: se $P_0$ vuole entrare due volte di seguito ma $P_1$ non ne ha bisogno, $P_0$ deve comunque **aspettare** che $P_1$ esegua almeno una volta la propria sezione critica per "passargli" il turno. Questo viola il requisito di **progresso**: la decisione di chi entra dovrebbe spettare solo ai processi che vogliono effettivamente entrare.
+
 Questa limitazione viene eliminata negli algoritmi successivi.
 
 ---
@@ -87,19 +90,33 @@ public void leavingCriticalSection(int t) {
 
 $$  
 \begin{cases}  
-\textbf{Mutua esclusione:}~ & \text{non garantita in tutti i casi.} \\\\  
+\textbf{Mutua esclusione:}~ & \text{garantita.} \\\\  
+\textbf{Alternanza forzata:}~ & \text{eliminata (un processo può rientrare se l'altro non è interessato).} \\\\
 \textbf{Progresso:}~ & \text{non garantito.} \\\\  
-\textbf{Problema:}~ & \text{possibile attesa infinita (busy waiting reciproco).}  
+\textbf{Problema:}~ & \text{possibile attesa infinita (deadlock o starvation reciproci).}  
 \end{cases}  
 $$
 
-I due processi potrebbero rimanere **bloccati entrambi**, se impostano contemporaneamente i loro flag prima che uno entri nella sezione critica.
+L'algoritmo 2 **migliora** rispetto al primo perché un processo può entrare nella sezione critica quando vuole, **senza dover attendere il turno** dell'altro se questo non sta cercando di entrare. Tuttavia:
+
+- se **entrambi** i processi settano il proprio `flag = true` quasi contemporaneamente, **prima** di entrare nel `while`, ciascuno vede il flag dell'altro a `true` e **attende per sempre**: **deadlock**;
+- in scenari meno gravi, un processo (es. $P_0$) potrebbe sempre vincere la "corsa" sull'altro ($P_1$), che subisce **starvation**.
 
 ---
 #### **3.3. Algoritmo 3 – Peterson**
 
-L’**Algoritmo di Peterson** combina **flag di intenzione** e **variabile di turno**, risolvendo i limiti precedenti.  
+L'**Algoritmo di Peterson** combina **flag di intenzione** e **variabile di turno**, risolvendo i limiti precedenti.  
 È una delle soluzioni più note ed eleganti per la mutua esclusione a due processi.
+
+##### **Logica di funzionamento**
+
+L'idea chiave per evitare il deadlock dell'algoritmo 2 è **cedere cortesemente il turno all'altro processo** prima di tentare l'ingresso:
+
+1. il processo che vuole entrare imposta la variabile `turn` con l'**identificatore dell'altro** (gesto di cortesia);
+2. poi setta il proprio `flag = true` (dichiarazione di volontà);
+3. attende finché **entrambe** le condizioni sono vere: «l'altro vuole entrare **AND** è il turno dell'altro».
+
+Se **due processi** invocano la procedura quasi contemporaneamente, **l'ultimo dei due** che esegue l'assegnamento a `turn` sovrascrive il valore precedente; di conseguenza `turn` indicherà l'identità dell'altro processo, e **il primo arrivato passa** (perché vedrà `turn` puntato a sé). Questo elegante meccanismo elimina la possibilità di stallo reciproco.
 
 ```java
 private volatile boolean flag0 = false, flag1 = false;
@@ -157,31 +174,33 @@ Quando termina, deve **rilasciarlo**.
 ---
 #### **4.2. Implementazione con disabilitazione delle interruzioni**
 
-Un approccio elementare consiste nel **disabilitare temporaneamente le interruzioni hardware** durante l’accesso alla sezione critica:
+##### **Perché serve l'atomicità**
+
+Anche con una semplice variabile `lock`, l'operazione di acquisizione richiede una **sequenza di tre passi**: (1) leggere il valore corrente, (2) decidere cosa fare, (3) modificare il valore se la risorsa era libera. Questa sequenza **non è atomica** in un sistema time-sharing: un'interruzione tra il passo 1 e il passo 3 potrebbe permettere a un altro processo di "infilarsi" in mezzo, leggere lo stesso `lock = 0` e acquisire anch'esso la risorsa — **violando la mutua esclusione**.
+
+##### **Soluzione: disabilitare le interruzioni**
+
+Un approccio elementare consiste nel **disabilitare temporaneamente le interruzioni hardware** per rendere atomica l'intera sequenza:
 
 - **Acquisizione della risorsa:**
-    
     1. Disabilito le interruzioni.
-        
     2. Controllo la variabile `lock`.
-        
-    3. Se `lock = 0`, la imposto a `1` e procedo.
-        
+    3. Se `lock = 0`, la imposto a `1`, riabilito le interruzioni e procedo.
     4. Se `lock = 1`, riabilito le interruzioni e attendo.
-        
 - **Rilascio della risorsa:**
-    
+
     ```c
     lock = 0;
     ```
 
-Questo metodo garantisce **mutua esclusione**, ma è pericoloso nei sistemi multiprocessore: disabilitare le interruzioni su un core **non blocca gli altri**.
+Questo metodo garantisce **mutua esclusione**, ma è **non scalabile** nei sistemi multiprocessore: disabilitare le interruzioni su un core **non blocca gli altri core**, che potrebbero comunque accedere alla variabile `lock`. Inoltre, disabilitare globalmente le interruzioni di tutti i processori sarebbe inaccettabile dal punto di vista delle prestazioni complessive del sistema.
 
 ---
 ### **5. Supporto hardware – Istruzioni atomiche**
 
-I moderni processori offrono **istruzioni atomiche** per implementare i lock in modo efficiente e sicuro, senza disabilitare le interruzioni.  
-Una delle più note è **TEST-AND-SET**.
+Per superare i limiti della disabilitazione delle interruzioni (in particolare la **non scalabilità** ai sistemi multiprocessore), i moderni processori offrono **istruzioni macchina atomiche** che permettono di implementare i lock in modo efficiente e sicuro, **senza** dover toccare le interruzioni.
+
+Essendo istruzioni macchina (non sequenze), sono **per definizione indivisibili**: nessuna interruzione né accesso da altri core può "spezzarne" l'esecuzione. Una delle più note è **TEST-AND-SET**.
 
 #### **5.1. Istruzione TEST-AND-SET**
 
@@ -237,4 +256,6 @@ Le **variabili di turno** e le **variabili di lock** rappresentano le fondamenta
 Gli algoritmi software, come quello di Peterson, mostrano la logica della cooperazione ordinata;  
 i **lock hardware**, invece, offrono soluzioni efficienti per architetture reali.
 
-Nelle lezioni successive vedremo come questi principi vengano generalizzati nei **semafori**, che estendono il concetto di lock a più processi e operazioni di attesa condizionata.
+> ⚠️ **Avvertenza importante.** Tutti gli approcci visti in questa lezione operano **a livello di istruzione** (variabili di turno, lock, test-and-set). Sono **strumenti di basso livello** che richiedono **enorme attenzione da parte del programmatore** per essere usati correttamente: un singolo errore (un'assegnazione fuori ordine, un flag dimenticato, una condizione mal scritta) può facilmente introdurre race condition, deadlock o starvation difficili da diagnosticare.
+
+Nelle lezioni successive vedremo come questi principi vengano generalizzati nei **semafori**, che estendono il concetto di lock a più processi e operazioni di attesa condizionata — fornendo astrazioni di **più alto livello** che riducono il margine di errore del programmatore.

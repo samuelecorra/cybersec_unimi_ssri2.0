@@ -1,5 +1,7 @@
 # **M2 UD1 Lezione 4 - Interfacce dei sistemi operativi**
 
+---
+
 ### **1. Introduzione: perché parlare di interfacce**
 
 In questa lezione analizziamo un aspetto generale ma fondamentale dei sistemi operativi: le **interfacce**.
@@ -52,15 +54,15 @@ Il funzionamento dell’interprete dei comandi può essere descritto attraverso 
 
 1. **Fetch (acquisizione)**
     
-    La Shell rimane in attesa che l’utente digiti una sequenza di caratteri tramite tastiera.
+    La Shell rimane in **attesa infinita** che l’utente digiti una sequenza di caratteri tramite tastiera.
     
-    L’acquisizione termina quando l’utente segnala la fine del comando, tipicamente premendo il tasto _Return_.
+    L’acquisizione termina **solo quando l'utente segnala la fine del comando**, tipicamente premendo il tasto *Return* (carriage return).
     
 2. **Decode (decodifica)**
     
-    Il comando viene analizzato:
+    Il comando viene analizzato per essere certi che sia un **comando ammissibile** per il sistema:
     
-    - si verifica che il nome del comando esista,
+    - si verifica che il nome simbolico del comando **esista**,
         
     - si controlla la correttezza sintattica,
         
@@ -68,9 +70,9 @@ Il funzionamento dell’interprete dei comandi può essere descritto attraverso 
     
 3. **Execute (esecuzione)**
     
-    Se il comando è ammissibile, la Shell ne avvia l’esecuzione creando un **processo ausiliario**.
+    Se il comando è ammissibile, la Shell ne avvia l’esecuzione creando un **processo ausiliario** che esegue il comando richiesto.
 
-Al termine dell’esecuzione, il controllo ritorna alla Shell, che riprende il suo stato di attesa.
+Al termine dell’esecuzione del processo ausiliario, il **controllo ritorna alla Shell**, che si rimette in attesa ciclica di un nuovo comando dall'utente.
 
 Questo schema è concettualmente **molto simile al ciclo fetch–decode–execute della macchina di Von Neumann**, applicato però ai comandi dell’utente anziché alle istruzioni macchina.
 
@@ -159,11 +161,11 @@ L’interfaccia programmativa è l’interfaccia attraverso cui i **programmi ap
 
 Queste richieste prendono il nome di:
 
-- **chiamate di sistema** (_system call_),
+- **chiamate di sistema** (*system call*),
     
-- **chiamate supervisore** (_supervisor call_),
+- **chiamate supervisore** (*supervisor call*),
     
-- **chiamate monitor** (_monitor call_).
+- **chiamate monitor** (*monitor call*).
 
 ---
 #### **5.2 Obiettivi dell’interfaccia programmativa**
@@ -183,27 +185,36 @@ Una chiamata di sistema **assomiglia a una chiamata di procedura**, ma **non pu�
 ---
 ### **6. Perché non basta una chiamata di procedura**
 
-Supponiamo che una funzione di sistema F sia composta da:
+#### **6.1. Lo scenario in memoria centrale**
 
-- una prima parte di **controllo** (verifica dei permessi),
+Immaginiamo la memoria centrale del nostro calcolatore con:
+
+- il **programma applicativo** caricato in una sua zona, che desidera chiamare una procedura di sistema;
+- il **sistema operativo** caricato nella **zona di memoria centrale a lui riservata**;
+- la **funzione F** del SO che vogliamo invocare, posta a un **certo indirizzo** all'interno della zona occupata dal sistema operativo.
+
+#### **6.2. Il problema dei controlli bypassabili**
+
+Supponiamo che la funzione di sistema F sia composta da:
+
+- una prima parte di **controllo** (verifica dell'ammissibilità della chiamata da parte di quel particolare processo / utente),
     
-- una seconda parte di **esecuzione effettiva**.
+- una seconda parte di **esecuzione effettiva** del comando desiderato.
 
-Se un programma applicativo potesse chiamare direttamente F:
+Se un programma applicativo potesse chiamare direttamente F come una normale chiamata di procedura, potrebbe capitare che un **"programmatore sveglio"**:
 
-- un programmatore potrebbe individuare l’indirizzo della funzione,
-    
-- bypassare la parte di controllo,
-    
-- accedere direttamente all’esecuzione.
+- individui l'**indirizzo** dove si trova la procedura F in memoria centrale,
+- **bypassi la parte di controllo** saltando direttamente all'indirizzo della fase di esecuzione,
+- attivi così la procedura di sistema **anche nei casi in cui ciò non sia lecito**.
 
-Questo renderebbe impossibile garantire la sicurezza del sistema.
+Questo renderebbe impossibile garantire la sicurezza del sistema: serve dunque un **meccanismo diverso** per supportare la chiamata di sistema ed evitare situazioni di questo tipo — un meccanismo che **forzi l'accesso e lo controlli**.
 
 ---
 ### **7. Il meccanismo della trap (interruzione software)**
+
 #### **7.1 Concetto generale**
 
-Per evitare accessi diretti alle funzioni di sistema, si utilizza un meccanismo basato su una **interruzione software**, detta **trap**.
+Per evitare accessi diretti alle funzioni di sistema, si utilizza un meccanismo basato su una **interruzione attivata via software**, detta **trap**.
 
 La trap:
 
@@ -213,40 +224,42 @@ La trap:
     
 - forza il passaggio di controllo al sistema.
 
+Dal punto di vista del processore, **è come se fosse arrivata un'interruzione da una periferica**: in realtà è il sistema stesso che attiva al suo interno l'interruzione. A tale interruzione il SO **associa una risposta specifica**, predisposta proprio per gestire le chiamate di sistema.
+
 ---
 #### **7.2 Funzionamento dettagliato**
 
 Il meccanismo avviene nel seguente modo:
 
-1. Il programma applicativo carica nei registri:
+1. Il programma applicativo carica nei **registri del processore**:
     
-    - l’identificatore della funzione richiesta,
+    - le **informazioni che identificano** la procedura di sistema desiderata (es. un numero identificativo);
         
-    - i parametri necessari.
+    - i **parametri** necessari all'esecuzione della procedura.
 
-2. Il programma esegue un’istruzione di **trap**.
+2. Il programma esegue un'**istruzione di trap** (chiamata dell'interruzione generata da software).
     
-3. Il processore genera un’interruzione software.
+3. Il processore attiva un'**interruzione software**, esattamente come gestirebbe un interrupt hardware da periferica.
     
-4. Il sistema operativo intercetta l’interruzione e attiva la **routine di risposta alla trap**.
+4. Il sistema operativo intercetta l'interruzione e attiva la **routine di risposta alla trap** — il vero e proprio **"interprete dei comandi" delle system call** (l'analogo, lato programmi, della Shell lato utenti).
     
 5. Questa routine:
     
-    - consulta una tabella interna delle funzioni di sistema,
+    - consulta una **tabella interna del SO** in cui sono elencate **tutte le funzioni di sistema** e i loro **indirizzi** di memorizzazione nello spazio riservato al sistema;
         
-    - individua la funzione richiesta,
+    - individua la funzione richiesta dal numero identificativo;
         
-    - ne verifica l’ammissibilità,
+    - ne verifica l'ammissibilità;
         
-    - invoca la funzione di sistema F.
+    - **invoca la funzione di sistema F**.
     
-6. Al termine:
+6. Sequenza di ritorno (tre livelli):
     
-    - il controllo ritorna alla routine della trap,
+    - la funzione F termina e restituisce il controllo alla **routine della trap** (l'interprete delle system call);
         
-    - la trap termina,
+    - la routine della trap termina e restituisce il controllo all'**istruzione di trap** del programma;
         
-    - il controllo torna al programma applicativo.
+    - il **programma applicativo** riprende l'esecuzione dall'istruzione successiva alla trap.
 
 ---
 ### **8. Vantaggio fondamentale del disaccoppiamento**
@@ -257,13 +270,27 @@ Il punto chiave è che:
     
 - **è il sistema operativo stesso a chiamarla**, in risposta alla trap.
 
-Questo disaccoppiamento:
+Questo disaccoppiamento garantisce che il programma applicativo possa **solo "dire il nome"** della funzione desiderata, e **mai accedere direttamente alle istruzioni** che la implementano, se non per il tramite obbligato dell'**interprete dei comandi della trap** previsto dal sistema operativo.
 
-- impedisce l’accesso diretto alle istruzioni di sistema,
+Le conseguenze pratiche sono:
+
+- impedisce l'accesso diretto alle istruzioni di sistema (nessun salto a indirizzi interni del SO);
     
-- garantisce l’esecuzione dei controlli,
+- garantisce l'esecuzione di **tutti i controlli** previsti dalla funzione F (non sono bypassabili);
     
-- protegge il sistema operativo.
+- protegge l'**integrità** del sistema operativo.
+
+#### **8.1 Simmetria con la Shell**
+
+Vale la pena notare la **simmetria architetturale** tra le due interfacce:
+
+$$
+\begin{cases}
+\textbf{Shell:}~ & \text{interprete dei comandi degli utenti, esegue Fetch-Decode-Execute sui comandi testuali/grafici.} \\\\
+\textbf{Routine di trap:}~ & \text{interprete dei comandi dei programmi (system call),} \\\\
+& \text{esegue verifica e dispatch tramite la tabella delle funzioni di sistema.}
+\end{cases}
+$$
 
 ---
 ### **9. Riepilogo finale**

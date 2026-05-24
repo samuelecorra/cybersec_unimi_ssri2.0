@@ -1,5 +1,6 @@
 # **Lezione 0 - Intro Unità Didattica 2 - Tecniche di base di secondo livello**
 
+---
 
 Questa unità introduce le **tecniche evolute di gestione della memoria**, che superano i limiti del partizionamento, dell’overlaying e dello swapping.  
 L’obiettivo è fornire una **visione virtuale e flessibile della memoria**, svincolando completamente i processi dalle dimensioni fisiche della RAM.

@@ -1,4 +1,7 @@
 # **Intro al Modulo 1**
+
+---
+
 ### **1. Introduzione**
 
 Questo primo modulo ha lo scopo di **riprendere e focalizzare i concetti fondamentali dell’architettura del calcolatore**, ma in un’ottica nuova: quella del **sistema operativo** che ne governa il funzionamento.  

@@ -1,5 +1,7 @@
 # **M3 UD5 Lezione 1 - Processi concorrenti**
 
+---
+
 ### **1. Introduzione**
 
 Questa lezione introduce uno dei concetti più delicati dei sistemi operativi: la **concorrenza**.  
@@ -13,7 +15,7 @@ Quando due o più processi accedono **simultaneamente a una risorsa condivisa**,
 
 Il concetto di **concorrenza** indica la possibilità che più processi vengano eseguiti _apparentemente_ nello stesso momento (in realtà, spesso alternandosi rapidamente sulla CPU).
 
-Durante l’esecuzione concorrente, i processi possono condividere:
+Durante l'esecuzione concorrente, i processi possono condividere:
 
 $$  
 \begin{cases}  
@@ -23,6 +25,20 @@ $$
 $$
 
 Poiché queste risorse non possono essere usate da più processi _allo stesso tempo_ senza rischi, il sistema operativo deve garantire un **accesso controllato e in mutua esclusione**.
+
+#### **2.1. Esempio intuitivo: la stampante condivisa**
+
+Immaginiamo due processi P e Q che vogliono stampare contemporaneamente sulla stessa stampante. Senza alcuna sincronizzazione, il tabulato potrebbe diventare un'**alternanza caotica** di porzioni di stampa di P e di Q:
+
+```text
+[riga 1 di P]
+[riga 1 di Q]
+[riga 2 di P]
+[riga 2 di Q]
+...
+```
+
+Il risultato sarebbe **illeggibile per entrambi**. La soluzione corretta è **sincronizzare** i due processi così che la risorsa condivisa venga utilizzata in modo da produrre **prima tutta l'uscita di P** e **poi tutta l'uscita di Q** (o viceversa), mantenendo le due stampe **chiaramente separate**.
 
 ---
 ### **3. Il problema del produttore–consumatore**
@@ -67,6 +83,16 @@ while (1) {
 
 Il problema nasce quando entrambi i processi tentano di aggiornare `count` nello stesso momento.
 
+##### **Perché la sequenza non è atomica**
+
+L'istruzione C `count++` (o `count--`) viene tradotta dal compilatore in **tre istruzioni macchina distinte**:
+
+1. **Load**: carica il valore di `count` in un registro del processore;
+2. **Inc/Dec**: incrementa o decrementa il registro;
+3. **Store**: scrive il valore aggiornato del registro nella variabile `count`.
+
+Le singole istruzioni macchina sono atomiche, ma **la sequenza nel suo insieme non lo è**: in un sistema **time-sharing**, può capitare un'**interruzione** (es. scadenza del quanto di tempo) **tra le tre istruzioni**, sospendendo il processo a metà dell'operazione logica. Se nel frattempo viene schedulato l'altro processo che opera sulla stessa variabile, i registri dei due processi finiscono a riflettere uno **stato inconsistente** della memoria.
+
 Esecuzione possibile:
 
 |Passo|Operazione|Effetto|
@@ -102,6 +128,11 @@ $$
 \end{cases}  
 $$
 
+##### **Precisazioni sul progresso e sull'attesa limitata**
+
+- **Progresso**: se nessun processo è attualmente nella sezione critica e più candidati vogliono entrare, la **decisione su chi entra spetta soltanto** a quei processi che **stanno cercando di entrare** — non possono interferire i processi che non stanno tentando l'accesso. Inoltre, la decisione non può essere rimandata indefinitamente.
+- **Attesa limitata**: senza questa condizione, un processo potrebbe rimanere sempre escluso dall'ingresso nella sezione critica (entrando in **starvation**). Dopo un numero **finito di tentativi falliti**, un processo deve poter entrare nella propria sezione critica, garantendo così che **tutti i processi** abbiano prima o poi accesso alla risorsa.
+
 Questi principi costituiscono la base per ogni **algoritmo di sincronizzazione**.
 
 ---
@@ -110,10 +141,35 @@ Questi principi costituiscono la base per ogni **algoritmo di sincronizzazione**
 La sincronizzazione non serve solo per evitare conflitti, ma anche per **coordinare processi cooperanti** che lavorano insieme per uno stesso obiettivo.
 
 $$  
-\text{Processi cooperanti} \Rightarrow \text{necessità di sincronizzare l’evoluzione della loro computazione.}  
+\text{Processi cooperanti} \Rightarrow \text{necessità di sincronizzare l'evoluzione della loro computazione.}  
 $$
 
-Un esempio tipico è proprio il **produttore–consumatore**, dove la sincronizzazione è indispensabile per mantenere il corretto equilibrio tra produzione e consumo.
+#### **5.1. Due modi di sincronizzare, due obiettivi diversi**
+
+Va distinto chiaramente:
+
+$$
+\begin{cases}
+\textbf{Sincronizzazione tra processi concorrenti:}~ & \text{i processi competono per risorse condivise;} \\\\
+& \text{obiettivo = garantire la consistenza delle risorse.} \\\\
+\textbf{Sincronizzazione tra processi cooperanti:}~ & \text{i processi collaborano verso un obiettivo comune;} \\\\
+& \text{obiettivo = coordinare l'evoluzione della loro computazione.}
+\end{cases}
+$$
+
+#### **5.2. Esempio: segnalazione tra processi cooperanti**
+
+Consideriamo due processi cooperanti P1 e P2 che, pur essendo logicamente concorrenti sul processore (quindi a priori indipendenti nell'ordine di esecuzione), devono sincronizzarsi a un certo punto della loro computazione:
+
+- P1 esegue una porzione di computazione e, una volta completata, **invia una segnalazione di sincronizzazione** a P2;
+- P2 esegue la propria porzione di computazione fino a un certo punto in cui, **prima di proseguire**, vuole essere certo che P1 abbia completato la propria parte;
+- P2 quindi **attende il segnale di sincronizzazione** da P1;
+- una volta ricevuto il segnale, P2 può proseguire con la **certezza** che P1 abbia già svolto le operazioni che lo precedono nel punto di sincronismo;
+- P1, dopo aver inviato il segnale, prosegue normalmente con il resto della propria computazione.
+
+Questo schema **vincola l'ordine relativo** di alcune sezioni dei due processi senza richiedere mutua esclusione su risorse condivise: serve a **stabilire una relazione di precedenza** ("P1 deve finire X prima che P2 possa iniziare Y").
+
+Un esempio classico più strutturato è il **produttore–consumatore**, dove la sincronizzazione è indispensabile per mantenere il corretto equilibrio tra produzione e consumo.
 
 ---
 ### **6. Sintesi finale**

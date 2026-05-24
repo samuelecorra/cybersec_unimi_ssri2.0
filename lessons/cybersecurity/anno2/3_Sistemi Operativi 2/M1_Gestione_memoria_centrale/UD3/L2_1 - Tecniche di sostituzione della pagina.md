@@ -1,5 +1,7 @@
 # **M1 UD3 Lezione 2 - Tecniche di sostituzione della pagina (parte 1)**
 
+---
+
 ### **1. Introduzione**
 
 La **gestione delle pagine** è il cuore operativo della **memoria virtuale**.  

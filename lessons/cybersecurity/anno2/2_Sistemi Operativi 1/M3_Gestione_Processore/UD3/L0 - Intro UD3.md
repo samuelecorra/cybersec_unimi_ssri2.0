@@ -1,4 +1,6 @@
-# **Lezione 0 - Intro Unità Didattica 3 – Schedulazione**
+# **Lezione 0 - Intro Unità Didattica 3 - Schedulazione**
+
+---
 
 ### **1. Introduzione**
 

@@ -1,5 +1,7 @@
 # **M1 UD2 Lezione 1 - Paginazione (parte 1)**
 
+---
+
 ### **1. Introduzione**
 
 La **paginazione** è una tecnica avanzata di gestione della memoria centrale introdotta per superare i limiti delle soluzioni precedenti, come l’**overlaying** e lo **swapping**.  

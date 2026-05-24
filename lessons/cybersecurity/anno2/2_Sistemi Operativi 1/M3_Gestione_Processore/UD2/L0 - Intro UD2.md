@@ -1,4 +1,6 @@
-# Lezione 0 - Intro Unità 2 - Thread
+# **Lezione 0 - Intro Unità 2 - Thread**
+
+---
 
 ### **1. Introduzione**
 

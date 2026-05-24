@@ -1,5 +1,7 @@
 # **M3 UD4 Lezione 5 - Comunicazione con mailbox**
 
+---
+
 ### **1. Introduzione**
 
 La **comunicazione tramite mailbox** rappresenta un’evoluzione del modello a **scambio di messaggi**.  
@@ -121,9 +123,22 @@ $$
 \begin{cases}  
 \textbf{Illimitata:}~ & \text{comunicazione asincrona, il mittente non si blocca mai.} \\\\  
 \textbf{Nulla:}~ & \text{comunicazione sincrona, mittente e destinatario devono essere entrambi pronti.} \\\\  
-\textbf{Limitata:}~ & \text{comunicazione bufferizzata, asincrona ma con limiti di coda.}  
+\textbf{Limitata:}~ & \text{comunicazione bufferizzata: asincrona finché c'è spazio, sincrona quando il buffer è pieno.}  
 \end{cases}  
 $$
+
+#### **5.1. Esempio narrativo: mailbox M di capacità 2**
+
+Per visualizzare il comportamento bufferizzato:
+
+1. il processo P invia → trova spazio, depone, **procede** (asincrono);
+2. il processo Q invia → trova ancora spazio, depone, **procede** (asincrono);
+3. il processo R vuole inviare → **non c'è spazio**, viene **bloccato** in attesa che qualcuno svuoti la mailbox (sincrono);
+4. il processo T esegue `receive` → preleva il messaggio di P e procede;
+5. ora il processo R può finalmente depositare il suo messaggio e procedere;
+6. il processo V esegue `receive` → preleva il messaggio di Q.
+
+Se un processo tenta `receive` su una mailbox **vuota**, si pone in attesa che arrivi un messaggio (sincronizzazione lato ricevente).
 
 ---
 ### **6. Caratteristiche e problemi**
@@ -180,7 +195,40 @@ $$
 \end{cases}  
 $$
 
-In ogni caso, la comunicazione effettiva avviene **tra due processi per volta** (un mittente e un destinatario), anche se la mailbox è condivisa da molti.
+In ogni caso, la comunicazione effettiva avviene **tra due processi per volta** (un mittente e un destinatario), anche se la mailbox è condivisa da molti — semplicemente **non è identificato a priori** quale dei mittenti invia il messaggio che verrà letto, o quale dei riceventi lo riceverà.
+
+#### **9.1. Molti a uno (più client → un server)**
+
+Più processi mittenti depositano messaggi nella mailbox; **un unico processo ricevente** li preleva e li elabora.
+
+- Se il ricevente esegue `receive` quando la mailbox è vuota, **si pone in attesa** finché non arriva un messaggio;
+- quando un messaggio arriva, il ricevente lo estrae e procede nella sua computazione.
+
+> 🎯 **Applicazione tipica.** È il caso di un **processo che serve una coda di richieste** avanzate da più processi client (es. un singolo _worker_ che gestisce un job queue, un server applicativo single-threaded).
+
+#### **9.2. Uno a molti (un client → più server omogenei)**
+
+Una mailbox è condivisa da **più processi riceventi** in grado di erogare lo stesso servizio. Essi si pongono **in attesa** sulla mailbox e vengono ordinati secondo la politica scelta (FIFO, priorità, …).
+
+- Quando un mittente P invia un messaggio alla mailbox, P depone e procede;
+- il messaggio viene consegnato al **primo processo ricevente in attesa** secondo la politica adottata, che viene estratto dalla coda e procede;
+- gli altri riceventi restano in attesa di messaggi successivi.
+
+> 🎯 **Applicazione tipica.** Sistemi con **processi di servizio multipli, indifferenti tra loro** dal punto di vista della capacità di erogare il servizio: il client lancia la richiesta senza preoccuparsi di chi la servirà concretamente (es. _load balancing_ implicito tramite pool di worker).
+
+#### **9.3. Molti a molti (più client ↔ più server)**
+
+La mailbox è condivisa sia da **più mittenti** sia da **più riceventi**.
+
+Esempio narrativo del flusso:
+
+1. il processo P invia un messaggio → c'è spazio, P depone;
+2. essendoci un ricevente T in attesa, il messaggio viene **immediatamente consegnato** a T, che esce dalla coda e procede;
+3. P stesso, dopo aver fatto la sua invio, potrebbe rientrare nel ciclo come ricevente o restare libero;
+4. arriva il processo Q che invia → un altro ricevente in attesa preleva il messaggio e procede;
+5. e così via.
+
+> 🎯 **Applicazione tipica.** Pool di **processi server omogenei** che servono richieste provenienti da una **moltitudine di client**: è il paradigma sottostante a molte architetture distribuite (worker pool + client pool su una stessa coda di messaggi).
 
 ---
 ### **10. Sintesi finale**

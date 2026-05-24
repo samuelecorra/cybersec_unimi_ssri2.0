@@ -1,4 +1,6 @@
-# Intro al Modulo 3
+# **Intro al Modulo 3**
+
+---
 
 ### **1. Cosa faremo**
 

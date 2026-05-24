@@ -1,4 +1,6 @@
-# Lezione 0 - Intro Unità Didattica 6 - Deadlock
+# **Lezione 0 - Intro Unità Didattica 6 - Deadlock**
+
+---
 
 ### **Introduzione**
 

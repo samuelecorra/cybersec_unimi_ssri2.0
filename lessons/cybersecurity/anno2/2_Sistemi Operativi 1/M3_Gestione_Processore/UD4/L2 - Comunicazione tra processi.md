@@ -1,5 +1,7 @@
 # **M3 UD4 Lezione 2 - Comunicazione tra processi**
 
+---
+
 ### **1. Introduzione**
 
 Nei sistemi operativi moderni, la comunicazione tra processi (_InterProcess Communication_, o IPC) rappresenta il **cuore della cooperazione** tra attività concorrenti.  
@@ -59,10 +61,18 @@ $$
 Può essere:
 
 - **Fisico**, come un bus o una rete di trasmissione;
-    
 - **Logico**, come una pipe, un socket o una coda di messaggi.
 
-Il canale stabilisce il **flusso dei dati** e definisce la **direzione** della comunicazione (unidirezionale o bidirezionale).
+> ⚠️ **Nota terminologica.** Il "canale di comunicazione" inteso a livello di **procedure di sistema per l'IPC** non va confuso con il canale di comunicazione visto in precedenza per la connessione delle **periferiche**: stesso termine, contesti diversi.
+
+##### **Direzionalità del canale**
+
+Il canale stabilisce il **flusso dei dati** e definisce la **direzione** della comunicazione:
+
+- **Monodirezionale**: i dati fluiscono in **una sola direzione**, dal mittente al ricevente;
+- **Bidirezionale**: i dati possono fluire in entrambe le direzioni sullo stesso canale.
+
+Anche se il sistema supportasse **solo** canali monodirezionali, è comunque possibile realizzare uno scambio bidirezionale **combinando due canali monodirezionali** orientati in versi opposti.
 
 ---
 ### **5. Caratteristiche della comunicazione**
@@ -89,28 +99,66 @@ In particolare, un sistema operativo deve trovare un equilibrio tra **prestazion
 ---
 ### **6. Implementazione della comunicazione**
 
-I meccanismi concreti per realizzare la comunicazione tra processi possono essere diversi.  
-I principali metodi implementativi sono:
+I meccanismi concreti per realizzare la comunicazione tra processi si dividono in due grandi famiglie a seconda che mittente e ricevente debbano **conoscersi reciprocamente**.
+
+#### **6.1. Comunicazione diretta**
+
+Nella comunicazione **diretta**, ciascuno dei due processi conosce esplicitamente l'altro: serve un'**identificazione univoca** del mittente e del ricevente.
+
+##### **Memoria condivisa nello spazio dei processi**
+
+Due processi P e Q che vogliono comunicare condividono una **porzione di memoria** posta nel loro **spazio di indirizzamento**: il processo che vuole scrivere ha accesso in scrittura, l'altro ha accesso in lettura. È la tecnica più semplice e veloce.
+
+##### **Buffer nel sistema operativo (message passing)**
+
+Senza usare memoria nello spazio dei processi, P e Q comunicano attraverso **funzioni di sistema operativo** che usano **buffer interni al SO**: il mittente deposita il messaggio in un buffer, il ricevente lo estrae. Anche qui mittente e ricevente sono noti.
+
+#### **6.2. Comunicazione indiretta**
+
+A volte è utile **disaccoppiare** mittente e ricevente, ad esempio per:
+
+- consentire a **più mittenti** di essere gestiti da un unico ricevente;
+- consentire a un **messaggio di un mittente** di essere ricevuto da **più possibili riceventi** (broadcast);
+- **riattivare** un processo coinvolto nella comunicazione dopo una sua terminazione anticipata per errore, senza perdere lo stato della comunicazione.
+
+In questi casi i due processi **non si conoscono a priori**: vengono usate strutture dati intermedie gestite dal SO.
+
+##### **Mailbox**
+
+Mittente e ricevente si scambiano messaggi depositandoli e prelevandoli da una **struttura "casella postale"** nel sistema operativo. Né il mittente conosce direttamente il destinatario, né viceversa: ciascuno vede solo la mailbox.
+
+##### **File su disco**
+
+Estensione del concetto di memoria condivisa: anziché usare memoria centrale, il processo P scrive le informazioni in un **file su memoria di massa**, e il processo Q le legge da quel file. Indipendenza temporale tra le due operazioni.
+
+##### **Pipe**
+
+Variante con **buffer ordinato sequenzialmente FIFO** in memoria centrale del SO: P **accoda** i messaggi a un estremo, Q li **estrae** dall'estremo opposto in ordine first-in-first-out.
+
+##### **Socket**
+
+Generalizzazione delle pipe per **sistemi distribuiti**: P e Q possono risiedere su **macchine diverse** ed eventualmente con **sistemi operativi diversi**. P deposita il messaggio in un estremo della socket, Q lo estrae dall'estremo opposto sull'altra macchina; la **rete** garantisce in modo **trasparente** il trasferimento.
+
+> 💡 I socket funzionano **sia in ambiente distribuito sia sulla stessa macchina**: nel secondo caso i due tronconi vivono nello stesso host, ma l'interfaccia di programmazione resta identica.
 
 $$  
 \begin{cases}  
-\textbf{1. Memoria condivisa (Shared Memory):}~ & \text{i processi leggono e scrivono in un’area comune della memoria.} \\\\  
-\textbf{2. Messaggi (Message Passing):}~ & \text{i processi si scambiano messaggi attraverso primitive di invio/ricezione.} \\\\  
-\textbf{3. Mailbox (Code di messaggi):}~ & \text{i messaggi vengono depositati in “caselle” gestite dal sistema operativo.} \\\\  
-\textbf{4. File e Pipe:}~ & \text{i dati sono scritti e letti in un flusso continuo, utile per la comunicazione sequenziale.} \\\\  
-\textbf{5. Socket:}~ & \text{per la comunicazione tra processi distribuiti su nodi di rete differenti.}  
+\textbf{Dirette (mittente e ricevente noti):}~ & \text{memoria condivisa, buffer di sistema (message passing).} \\\\  
+\textbf{Indirette (disaccoppiate):}~ & \text{mailbox, file su disco, pipe, socket.}  
 \end{cases}  
 $$
 
-#### **6.1. Scelta del meccanismo**
+#### **6.3. Scelta del meccanismo**
 
 La scelta tra questi metodi dipende dal **contesto applicativo**:
 
 - Se i processi operano sullo stesso sistema → **memoria condivisa o pipe**.
-    
 - Se operano su macchine diverse → **socket o messaggistica remota**.
-    
-- Se serve una comunicazione asincrona → **mailbox** o **code di messaggi**.
+- Se serve una comunicazione asincrona o disaccoppiata → **mailbox** o **code di messaggi**.
+
+#### **6.4. Validità anche per i thread**
+
+Tutti i meccanismi visti per la comunicazione tra processi **valgono anche per la comunicazione tra thread**, con un vantaggio rilevante: i thread di uno stesso processo **condividono nativamente lo spazio di memoria**, quindi la memoria condivisa è di fatto gratuita (non richiede setup esplicito tramite il SO).
 
 ---
 ### **7. Sintesi finale**

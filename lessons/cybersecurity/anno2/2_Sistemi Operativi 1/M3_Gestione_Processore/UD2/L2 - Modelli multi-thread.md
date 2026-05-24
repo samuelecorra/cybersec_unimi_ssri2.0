@@ -1,4 +1,6 @@
-## **M3 UD2 Lezione 2 - Modelli multi-thread**
+# **M3 UD2 Lezione 2 - Modelli multi-thread**
+
+---
 
 ### **1. Introduzione**
 
@@ -43,7 +45,7 @@ $$
 $$
 
 È una soluzione **semplice ma limitata**, adatta solo a sistemi con un singolo processore o applicazioni che non richiedono I/O intensivo.  
-Il principale **problema** è la **serializzazione** dei thread: solo uno può essere effettivamente in esecuzione alla volta.
+Il principale **problema** è la **serializzazione** dei thread: solo uno può essere effettivamente in esecuzione alla volta. Conseguenza importante: anche su un'**architettura multiprocessore**, pur essendo concettualmente separati i flussi dei singoli thread, **di fatto l'esecuzione risulta serializzata** poiché il thread di livello kernel è uno solo.
 
 ---
 #### **3.2. Modello uno-a-uno**
@@ -60,7 +62,7 @@ $$
 $$
 
 Questo modello è usato da molti sistemi moderni (ad esempio Windows e Linux), poiché bilancia semplicità e parallelismo reale.  
-Ogni thread può essere schedulato dal kernel su un processore differente.
+Ogni thread può essere schedulato dal kernel su un processore differente, **massimizzando la parallelizzazione effettiva** e permettendo anche **parallelismo fisico** in caso di più processori disponibili. Inoltre, **evita il problema** della sospensione dell'intera applicazione durante un'operazione di I/O di un singolo thread: il blocco rimane confinato al solo thread richiedente.
 
 ---
 #### **3.3. Modello molti-a-molti**
@@ -76,22 +78,31 @@ $$
 \end{cases}  
 $$
 
-È un compromesso tra i due modelli precedenti: mantiene l’efficienza dei thread utente, ma consente al kernel di distribuire il carico su più CPU.
+È un compromesso tra i due modelli precedenti: mantiene l'efficienza dei thread utente, ma consente al kernel di distribuire il carico su più CPU.
+
+##### **Motivazione storica**
+
+Questo modello nasce per **superare un limite pratico** del modello 1:1: in molti sistemi il **numero massimo di thread kernel** che si possono creare è **forzatamente limitato**, perché generare un thread a livello kernel comporta un overhead non trascurabile e troppi kernel thread degraderebbero le prestazioni. Mappando **N thread utente su M thread kernel** (con M < N), si risolve simultaneamente il problema del parallelismo e quello del contenimento del numero di kernel thread attivi.
 
 ---
 #### **3.4. Modello a due livelli**
 
-È una **variante del molti-a-molti**, in cui:
+È una **variante del molti-a-molti** in cui i **thread utente vengono raggruppati in sottoinsiemi separati**, e **ciascun sottoinsieme** è mappato indipendentemente su un **proprio gruppo di thread kernel** (con cardinalità eventualmente diverse).
 
-- alcuni thread utente sono mappati **direttamente su thread kernel** (come nel modello 1:1),
-    
-- altri passano attraverso un livello di gestione intermedio (come nel modello molti-a-molti).
+##### **Esempio del docente**
+
+Supponiamo di avere un processo con **5 thread utente**, suddivisi in due sottoinsiemi:
+
+- un primo sottoinsieme di **4 thread utente** mappato su un gruppo di thread kernel;
+- un secondo sottoinsieme di **1 thread utente** mappato su un singolo thread kernel.
+
+In questo modo si **specializzano i gruppi** di thread utente, dando a ciascuno un'opportunità diversa di esecuzione, tempo di risposta e prontezza, in base alle **esigenze specifiche** dei thread del processo.
 
 ![](imgs/Pasted%20image%2020260319151328.png)
 
 $$  
 \begin{cases}  
-\textbf{Vantaggi:}~ & \text{massima flessibilità, consente scelte dinamiche di mappaggio.} \\\\  
+\textbf{Vantaggi:}~ & \text{massima flessibilità, consente scelte dinamiche di mappaggio e specializzazione dei gruppi.} \\\\  
 \textbf{Svantaggi:}~ & \text{implementazione complessa e maggiore overhead gestionale.}  
 \end{cases}  
 $$
@@ -108,8 +119,7 @@ I thread possono organizzarsi secondo **diversi modelli cooperativi**, a seconda
 ---
 #### **4.1. Thread simmetrici**
 
-Tutti i thread hanno lo **stesso ruolo e priorità**.  
-Condividono le stesse risorse e collaborano in modo paritario per completare il lavoro complessivo.
+Tutti i thread hanno lo **stesso ruolo e priorità**: sono **tutti uguali, tutti capaci di risolvere l'applicazione**. Le richieste che pervengono al processo possono essere trattate da **uno qualunque** di essi, dato che sono **equivalenti** tra loro.
 
 $$  
 \text{Esempio: thread simmetrici in un server web che gestiscono richieste indipendenti.}  
@@ -118,13 +128,18 @@ $$
 Questo modello è il più semplice da implementare, ma può diventare inefficiente se i thread non si bilanciano bene nei tempi di lavoro.
 
 ---
-#### **4.2. Thread gerarchici**
 
-In questo modello esiste una **relazione di dipendenza** tra thread:  
-alcuni thread gestiscono altri thread, in modo analogo alla gerarchia padre–figlio nei processi.
+#### **4.2. Thread gerarchici (coordinatore + lavoratori)**
+
+In questo modello — noto anche come pattern **boss/worker** o **manager/worker** — esiste un **thread coordinatore** e un insieme di **thread lavoratori**:
+
+1. il **coordinatore** è l'**unico abilitato a ricevere le richieste** dal mondo esterno;
+2. una volta ricevuta una richiesta, la **comprende** ed effettua eventuali **manipolazioni preliminari**;
+3. la **assegna** quindi a uno specifico **thread lavoratore** del gruppo, scegliendo quale in base a criteri propri;
+4. il **lavoratore** esegue le attività richieste e produce i risultati raggiunti.
 
 $$  
-\text{Esempio: thread principale che crea e coordina thread secondari per gestire moduli diversi di un’applicazione.}  
+\text{Esempio: web server con un coordinatore che fa accept() sulle connessioni e le distribuisce ai worker che servono le richieste.}  
 $$
 
 Questo approccio migliora il **controllo** e la **modularità**, ma richiede meccanismi di sincronizzazione accurati per evitare deadlock o starvation.
@@ -132,14 +147,20 @@ Questo approccio migliora il **controllo** e la **modularità**, ma richiede mec
 ---
 #### **4.3. Thread in pipeline**
 
-I thread cooperano **sequenzialmente**, come le stazioni di una catena di montaggio:  
-il risultato di un thread diventa l’input del successivo.
+I thread cooperano **sequenzialmente**, come le stazioni di una catena di montaggio: il risultato di un thread diventa l'input del successivo.
+
+Più precisamente, le richieste che pervengono al processo vengono elaborate così:
+
+1. il **primo thread** della pipeline prende **una richiesta alla volta** dal mondo esterno;
+2. esegue su di essa una **elaborazione parziale**, producendo una **risposta intermedia** che diventa una nuova "richiesta" per lo stadio successivo;
+3. propaga il risultato al **secondo thread**, che a sua volta esegue un'altra elaborazione parziale e propaga al terzo, e così via;
+4. i thread sono **connessi in cascata** uno sull'altro fino a quando l'**ultimo** completa l'elaborazione e rilascia i risultati ai richiedenti.
 
 $$  
 \text{Esempio: un sistema di elaborazione video dove thread diversi gestiscono acquisizione, elaborazione e compressione.}  
 $$
 
-Questo modello è molto usato nei sistemi **streaming** e nei **filtri dati**, perché permette di sfruttare parallelismo e modularità insieme.
+Questo modello è molto usato nei sistemi **streaming** e nei **filtri dati**, perché permette di sfruttare parallelismo e modularità insieme: mentre uno stadio elabora la richiesta N, lo stadio precedente sta già lavorando sulla richiesta N+1.
 
 ---
 ### **5. Sintesi finale**

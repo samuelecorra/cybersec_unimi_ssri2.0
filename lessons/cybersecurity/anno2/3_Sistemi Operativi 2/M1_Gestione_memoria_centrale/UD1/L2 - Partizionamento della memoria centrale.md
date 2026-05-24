@@ -1,5 +1,7 @@
 # **M1 UD1 Lezione 2 - Partizionamento della memoria centrale**
 
+---
+
 ### **1. Introduzione**
 
 Dopo aver studiato come avviene il collegamento tra indirizzi logici e fisici, questa lezione introduce una delle prime tecniche di gestione della memoria: il **partizionamento**.  

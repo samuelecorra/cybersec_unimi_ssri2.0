@@ -1,5 +1,7 @@
 # **M1 UD3 Lezione 1 - Concetti e tecniche fondamentali della memoria virtuale**
 
+---
+
 ### **1. Introduzione**
 
 La **memoria virtuale** rappresenta una delle evoluzioni più importanti nella gestione della memoria centrale.

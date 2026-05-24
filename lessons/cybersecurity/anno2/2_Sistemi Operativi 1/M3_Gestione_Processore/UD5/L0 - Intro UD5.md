@@ -1,5 +1,7 @@
 # **Lezione 0 - Intro Unità Didattica 5 – Sincronizzazione dei processi**
 
+---
+
 Dopo aver analizzato i diversi meccanismi di **comunicazione tra processi**, ci concentriamo ora su un aspetto altrettanto cruciale: la **sincronizzazione**.  
 Quando più processi vengono eseguiti **contemporaneamente** — cioè in **concorrenza** — possono accedere alle **stesse risorse** (file, variabili, memoria, dispositivi).  
 Per evitare **incoerenze** e **conflitti** è necessario coordinare il loro comportamento.

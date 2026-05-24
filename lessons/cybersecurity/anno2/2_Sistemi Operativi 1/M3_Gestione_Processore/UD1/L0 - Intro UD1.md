@@ -1,5 +1,7 @@
 # **Lezione 0 - Intro Unità Didattica 1 – Processi**
 
+---
+
 ### **1. Introduzione**
 
 Il **processo** è l’unità fondamentale di attività di un sistema operativo: rappresenta **un programma in esecuzione**, dotato di uno stato, di risorse e di un proprio spazio di memoria.  
