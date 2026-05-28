@@ -1,154 +1,252 @@
 # **M2 UD1 Lezione 2 - Realizzazione del sottosistema di I/O (parte 2)**
 
+---
+
 ### **1. Introduzione**
 
-Questa seconda parte approfondisce gli aspetti **interni al kernel** relativi alla realizzazione del sottosistema di ingresso/uscita.  
-Dopo aver esaminato le funzioni di gestione logica (schedulazione, buffer, cache, spooling, ecc.), ci concentriamo ora su:
+Questa seconda parte approfondisce gli aspetti relativi alle **strutture dati** e all'**implementazione** del sottosistema di ingresso/uscita.
 
-- le **strutture dati del kernel** usate per rappresentare le operazioni di I/O,
-    
-- e sulle **tecniche per ottimizzare le prestazioni complessive** del sistema di ingresso/uscita.
+Dopo aver visto le funzioni generali di gestione delle periferiche, l'attenzione si sposta su:
+
+- strutture dati mantenute dal kernel;
+- informazioni specifiche dei processi utente;
+- realizzazione di una richiesta di I/O;
+- ottimizzazione delle prestazioni complessive del sottosistema.
+
+> 📌 La realizzazione del sottosistema di I/O richiede strutture dati condivise nel kernel e strutture specifiche per ogni processo, collegate tra loro tramite puntatori e descrittori.
 
 ---
 
 ### **2. Strutture dati del kernel**
 
-Il kernel mantiene specifiche **strutture di controllo** che permettono di coordinare e monitorare le richieste di I/O.  
-Esse costituiscono il collegamento tra i **processi utente**, i **driver dei dispositivi** e i **meccanismi hardware di trasferimento**.
+All'interno della gestione dell'I/O vengono create diverse strutture dati a supporto delle operazioni sui dispositivi.
 
-#### **Principali strutture**
+Nel kernel, in memoria centrale, viene mantenuta una tabella che descrive:
 
-1. **Code di richieste I/O**
-    
-    - Contengono le operazioni pendenti per ciascun dispositivo.
-        
-    - Sono gestite secondo la politica di schedulazione scelta (FIFO, priorità, deadline...).
-    
-2. **Descrittori dei dispositivi**
-    
-    - Rappresentano l’interfaccia logica verso ciascuna periferica.
-        
-    - Contengono informazioni su stato, tipo, driver associato e permessi di accesso.
-    
-3. **Buffer e strutture di caching**
-    
-    - Utilizzati per immagazzinare temporaneamente dati in transito.
-        
-    - Migliorano l’efficienza riducendo la necessità di accessi diretti al dispositivo.
-    
-4. **Tabelle di controllo dei driver**
-    
-    - Collegano le richieste logiche del sistema operativo con le funzioni hardware effettive.
-        
-    - Ogni driver registra in queste tabelle le proprie funzioni operative (open, read, write, close, ecc.).
+- tutti i file aperti;
+- tutte le periferiche in uso;
+- le risorse attualmente occupate;
+- le operazioni lecite su ciascuna risorsa;
+- i puntatori alle procedure del sistema operativo che implementano tali operazioni.
+
+#### **2.1. Tabella globale dei file e delle periferiche aperte**
+
+La tabella globale del kernel consente al sistema operativo di sapere quali risorse sono in uso e come devono essere gestite.
+
+Per ogni file o periferica aperta vengono conservati:
+
+- stato della risorsa;
+- tipo di risorsa;
+- diritti o operazioni consentite;
+- riferimenti al driver o alle routine di gestione;
+- informazioni necessarie per completare letture, scritture e controlli.
+
+> 💡 La tabella globale evita di duplicare informazioni comuni quando più processi usano la stessa risorsa.
+
+#### **2.2. Buffer, cache e spooling nel kernel**
+
+Sempre nello spazio del kernel vengono conservati:
+
+- buffer per la gestione bufferizzata delle periferiche;
+- aree di cache per dati già letti;
+- riferimenti e strutture per la gestione dello spooling;
+- code di richieste pendenti;
+- informazioni di stato dei driver.
+
+Queste strutture permettono di separare la richiesta logica del processo dall'effettiva interazione fisica con la periferica.
 
 ---
 
-### **3. Realizzazione di una richiesta di I/O**
+### **3. Strutture dati del processo utente**
 
-Il ciclo di vita di una richiesta di I/O attraversa vari livelli del sistema operativo, dal processo utente fino al dispositivo fisico.
+Ogni processo mantiene una propria **tabella dei file aperti**.
 
-#### **Fasi operative**
+Questa tabella contiene informazioni elementari specifiche del processo e puntatori alla tabella globale mantenuta dal sistema operativo.
 
-1. Il **processo utente** invoca un’operazione di I/O (es. lettura da file, scrittura su dispositivo).
-    
-2. La richiesta attraversa i **livelli di astrazione del kernel**:
-    
-    - livello **indipendente dal dispositivo**,
-        
-    - livello **dipendente dal dispositivo**,
-        
-    - e infine il **driver specifico**.
-        
-3. La richiesta viene **inserita nella coda del dispositivo** corrispondente.
-    
-4. Il driver **traduce la richiesta** in comandi hardware e avvia il trasferimento (via polling, interrupt o DMA).
-    
-5. Al completamento dell’operazione, il **dispositivo segnala un interrupt** alla CPU.
-    
-6. Il kernel **gestisce l’interrupt**, aggiorna le strutture dati e **notifica il processo richiedente**.
+#### **3.1. Informazioni specifiche del processo**
 
-#### **Sintesi del flusso**
+Nello spazio utente o nelle strutture associate al processo vengono mantenute informazioni specifiche come:
 
-$$  
-\text{Processo utente} \longrightarrow \text{Kernel} \longrightarrow \text{Driver} \longrightarrow \text{Dispositivo} \longrightarrow \text{Interrupt di completamento}  
+- descrittori usati dal processo;
+- posizione corrente nella risorsa, quando rilevante;
+- modalità con cui il processo ha aperto la risorsa;
+- puntatori alle strutture globali del kernel.
+
+Questo consente a processi diversi di condividere una stessa risorsa mantenendo comunque una visione specifica e indipendente.
+
+> 📌 Due processi possono usare la stessa risorsa condivisa, ma ciascuno conserva le proprie informazioni locali di accesso.
+
+---
+
+### **4. Realizzazione di una richiesta di I/O**
+
+Una richiesta di ingresso/uscita viene attivata da un processo tramite una **chiamata di sistema**.
+
+Da quel momento il sistema operativo valuta se può rispondere immediatamente oppure se deve accedere realmente alla periferica.
+
+#### **4.1. Risposta immediata del sistema operativo**
+
+In alcuni casi il sistema operativo può completare la richiesta senza interpellare la periferica.
+
+Questo accade, per esempio, quando:
+
+- l'informazione richiesta è già presente in cache;
+- la periferica è già nota come guasta e non ancora riparata;
+- l'operazione può essere risolta usando informazioni già disponibili nel kernel.
+
+Nel primo caso, il sistema operativo restituisce direttamente i dati richiesti. Nel secondo caso, termina immediatamente la richiesta segnalando l'impossibilità di completarla.
+
+$$
+\text{richiesta I/O} =
+\begin{cases}
+\text{risposta da cache o kernel} & \text{se risolvibile immediatamente} \\
+\text{accesso alla periferica} & \text{se serve trasferimento fisico}
+\end{cases}
 $$
 
-Ogni passaggio introduce **overhead** di sistema (context switch, copia dati, gestione interrupt), che va minimizzato per migliorare le prestazioni.
+> ✅ Se la risposta è già disponibile nel kernel, evitare l'accesso alla periferica riduce drasticamente il tempo di completamento.
+
+#### **4.2. Accesso effettivo alla periferica**
+
+Se la richiesta non può essere soddisfatta immediatamente, il sistema operativo deve accedere fisicamente alla periferica.
+
+La richiesta attraversa i livelli del sottosistema di I/O:
+
+1. livello **device independent**;
+2. livello **device dependent**;
+3. gestione del **canale di comunicazione**;
+4. periferica fisica.
+
+La periferica riceve la richiesta e, dopo un certo tempo, la soddisfa. La gestione del canale di comunicazione gestisce le interruzioni, acquisisce le informazioni restituite e le passa ai livelli superiori.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **4.3. Completamento della richiesta**
+
+Quando il risultato torna ai livelli superiori, il sistema operativo completa l'operazione:
+
+- aggiorna le strutture dati interne;
+- risveglia o notifica il processo richiedente;
+- restituisce i dati in caso di completamento positivo;
+- restituisce una segnalazione di errore in caso di fallimento.
+
+Il risultato viene presentato in modo standard, indipendente dalla specifica periferica e, a livello più alto, anche dalla tipologia del dispositivo.
+
+> 📌 Il processo vede una risposta uniforme; la complessità del dispositivo, del driver e del canale resta nascosta nel kernel.
 
 ---
 
-### **4. Prestazioni dell’I/O (1)**
+### **5. Prestazioni dell'I/O**
 
-La gestione dell’I/O è uno dei fattori più determinanti per le **prestazioni complessive di un sistema operativo**.  
-Ogni operazione di I/O implica:
+Le prestazioni del sottosistema di ingresso/uscita sono fondamentali per le prestazioni dell'intero sistema di elaborazione.
 
-- **esecuzione dei driver**,
-    
-- **schedulazione dei processi in attesa**,
-    
-- **cambi di contesto** dovuti agli interrupt,
-    
-- **copia dei dati** tra aree utente, kernel e periferiche.
+La gestione dell'I/O è critica perché coinvolge:
 
-Questi passaggi possono generare rallentamenti significativi se non gestiti in modo ottimale.
+- esecuzione dei driver;
+- schedulazione dei processi;
+- gestione delle interruzioni;
+- cambiamenti di contesto;
+- copie di dati;
+- accessi a periferiche spesso molto più lente della CPU.
 
----
+#### **5.1. Esecuzione efficiente dei driver**
 
-### **5. Prestazioni dell’I/O (2) – Strategie di ottimizzazione**
+I driver devono essere eseguiti in modo efficiente perché si trovano nel percorso critico tra richiesta del processo e completamento dell'operazione fisica.
 
-Per migliorare le prestazioni del sottosistema I/O, il sistema operativo può adottare varie strategie di ottimizzazione.
+Un driver lento o mal progettato può rallentare l'intero sistema, anche quando la periferica non è il solo collo di bottiglia.
 
-#### **a. Ridurre i cambi di contesto**
+#### **5.2. Schedulazione e bilanciamento CPU/I-O**
 
-- Minimizzare le transizioni tra modalità **utente/kernel** e i passaggi di CPU tra processi.
-    
-- Utilizzare **interrupt differiti** o **coalescing** per gestire più eventi con un’unica attivazione.
+La schedulazione dei processi influenza fortemente le prestazioni dell'I/O.
 
-#### **b. Ridurre le copie di dati**
+Il sistema deve bilanciare:
 
-- Implementare meccanismi di **zero-copy I/O**, che evitano duplicazioni inutili tra buffer utente e kernel.
-    
-- Utilizzare **DMA (Direct Memory Access)** per trasferire dati direttamente tra memoria e dispositivo, bypassando la CPU.
+- attività di elaborazione;
+- attività di ingresso/uscita;
+- presenza di processi pronti;
+- attese dovute a periferiche.
 
-#### **c. Ridurre la frequenza degli interrupt**
+L'obiettivo è mantenere il processore impegnato mentre le periferiche operano, evitando sia CPU inattiva sia code eccessive sulle periferiche.
 
-- Accorpare più eventi in un’unica notifica (“**interrupt batching**”).
-    
-- Usare **polling temporizzato** nei casi in cui la frequenza di eventi è molto alta, riducendo l’overhead da interrupt.
-
-#### **d. Aumentare la concorrenza**
-
-- Permettere l’esecuzione parallela di più richieste su dispositivi diversi o su canali multipli dello stesso dispositivo.
-    
-- Implementare **code multiple di I/O** e **pipeline di trasferimento** per massimizzare il throughput.
-
-#### **e. Gestione delle periferiche a livello più basso**
-
-- Eseguire parte delle funzioni di I/O **direttamente nei driver** o **nel microcodice hardware**, riducendo il carico del kernel.
-    
-- Introdurre controllori **intelligenti** in grado di gestire autonomamente il flusso dei dati.
-
-#### **f. Bilanciamento complessivo delle prestazioni**
-
-- L’obiettivo finale è **equilibrare il carico** tra CPU, memoria e I/O, evitando che un componente diventi il collo di bottiglia del sistema.
+> 💡 Un buon sistema operativo sovrappone computazione e I/O: mentre un processo aspetta la periferica, un altro può usare la CPU.
 
 ---
 
-### **6. Sintesi finale**
+### **6. Strategie di ottimizzazione**
 
-- Il **sottosistema di I/O** è composto da strutture dati interne al kernel che gestiscono code, buffer, driver e dispositivi.
-    
-- Una richiesta di I/O attraversa più livelli software, generando inevitabilmente overhead.
-    
-- Le **prestazioni complessive** dipendono da come il sistema minimizza:
-    
-    - i cambi di contesto,
-        
-    - le copie di dati,
-        
-    - la frequenza degli interrupt.
-    
-- Le strategie di ottimizzazione mirano ad aumentare la **concorrenza**, migliorare la **distribuzione del carico** e **ridurre la latenza** complessiva delle operazioni di I/O.
+Per migliorare le prestazioni del sottosistema di I/O si possono adottare diverse strategie.
 
-In conclusione, un sistema operativo efficiente deve saper **coordinare CPU, memoria e dispositivi** come un’unica architettura integrata, bilanciando continuamente il rapporto tra **elaborazione, trasferimento e reattività**.
+#### **6.1. Ridurre i cambiamenti di contesto**
+
+Troppi cambiamenti di contesto, spesso causati da interruzioni frequenti o da una schedulazione non adeguata, degradano le prestazioni globali.
+
+Il sistema può ridurli operando sulla schedulazione dei processi e sulla gestione delle periferiche.
+
+#### **6.2. Ridurre le copie di dati**
+
+La copiatura dei dati tra periferica, kernel e spazio utente può essere costosa.
+
+Per ridurre questo overhead, il sistema può:
+
+- minimizzare gli spostamenti in memoria;
+- usare caching;
+- evitare accessi fisici ripetuti alla periferica;
+- adottare meccanismi che riducano passaggi intermedi non necessari.
+
+#### **6.3. Ridurre la frequenza delle interruzioni**
+
+Le interruzioni sono necessarie per notificare eventi delle periferiche, ma una frequenza eccessiva può provocare molti cambiamenti di contesto e molto overhead.
+
+Ridurre la frequenza delle interruzioni consente di diminuire il costo della gestione asincrona dell'I/O.
+
+#### **6.4. Aumentare la concorrenza**
+
+Aumentare la concorrenza nell'accesso alle periferiche permette di ridurre i tempi morti e mantenere nel sistema un numero adeguato di processi pronti all'esecuzione.
+
+La concorrenza può riguardare:
+
+- richieste su periferiche diverse;
+- trasferimenti sovrapposti;
+- code indipendenti;
+- gestione parallela di elaborazione e I/O.
+
+#### **6.5. Portare la gestione a livello più basso**
+
+È opportuno portare la gestione delle periferiche al livello più basso possibile, quando questo consente di nascondere i dettagli e scegliere la soluzione più adatta alla specifica periferica.
+
+Questo può significare spostare parte della gestione:
+
+- nei driver;
+- nei controller;
+- nel firmware o microcodice della periferica.
+
+#### **6.6. Bilanciare le prestazioni del sistema**
+
+L'ottimizzazione deve considerare l'intero sistema, bilanciando il carico del processore con la quantità di richieste di ingresso/uscita.
+
+Un sistema efficiente deve evitare che:
+
+- la CPU resti inattiva in attesa delle periferiche;
+- le periferiche siano sottoutilizzate;
+- le interruzioni saturino il processore;
+- le copie di dati diventino il collo di bottiglia.
+
+> ⚠️ Ottimizzare solo la CPU o solo le periferiche non basta: le prestazioni dipendono dall'equilibrio tra elaborazione, memoria e I/O.
+
+---
+
+### **7. Sintesi finale**
+
+> ✅ La realizzazione del sottosistema di I/O si basa su strutture dati del kernel, strutture specifiche dei processi, livelli di driver e meccanismi di completamento delle richieste.
+
+In questa parte sono stati analizzati:
+
+- tabelle globali del kernel per file e periferiche aperte;
+- tabelle dei file aperti specifiche dei processi;
+- buffer, cache e strutture di spooling;
+- percorso di una richiesta di I/O;
+- casi in cui il sistema operativo può rispondere immediatamente;
+- accesso effettivo alla periferica tramite i livelli di driver;
+- fattori critici di prestazione: cambi di contesto, copie di dati, interruzioni, concorrenza e bilanciamento del carico.
+
+L'obiettivo complessivo è garantire una gestione efficiente, uniforme e affidabile delle periferiche, senza compromettere le prestazioni globali del sistema.

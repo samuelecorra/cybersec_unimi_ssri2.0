@@ -1,148 +1,198 @@
 # **M2 UD2 Lezione 2 - Organizzazione del disco**
 
+---
+
 ### **1. Introduzione**
 
-La **configurazione e organizzazione del disco** rappresentano un passaggio fondamentale per rendere una memoria di massa utilizzabile dal sistema operativo.  
-Ogni disco deve essere inizializzato, partizionato e formattato prima di poter ospitare un file system o altre strutture logiche.  
-Inoltre, è necessario prevedere meccanismi di **gestione dei blocchi difettosi** e un’**area di swap** per il supporto alla multiprogrammazione.
+La **configurazione e organizzazione del disco** sono passaggi fondamentali per rendere una memoria di massa utilizzabile dal sistema operativo.
+
+Un disco deve essere inizializzato, suddiviso e preparato per contenere un file system, un'area di swap o altre strutture logiche. Inoltre, il sistema deve gestire i blocchi difettosi e organizzare l'accesso efficiente alle informazioni.
+
+In questa lezione vengono trattati:
+
+- configurazione del disco;
+- struttura interna del disco;
+- blocco di avvio;
+- gestione dei blocchi difettosi;
+- uso del disco come area di swap.
 
 ---
 
 ### **2. Configurazione del disco**
 
-La configurazione di un disco avviene in tre fasi principali:
+Per configurare un disco sono tipicamente necessari tre passi:
 
-#### **a. Formattazione fisica (a basso livello)**
+1. **formattazione fisica**;
+2. **partizionamento**;
+3. **formattazione logica**.
 
-Questa operazione suddivide il disco in **settori** che il **controller** può leggere e scrivere.
+> 📌 La configurazione trasforma un supporto fisico in uno o più dischi logici utilizzabili dal sistema operativo.
 
-Ogni settore è composto da:
+#### **2.1. Formattazione fisica**
 
-- **Header:** contiene identificativi e informazioni di controllo.
-    
-- **Zona dati:** contiene il contenuto effettivo del settore.
-    
-- **Terminatore:** indica la fine del settore.
+La **formattazione fisica**, detta anche **formattazione a basso livello**, divide il disco in settori gestiti direttamente dal controller.
 
-Per garantire l’affidabilità, ogni settore include un **checksum** usato per la **rilevazione e correzione degli errori**.
+Ogni settore contiene:
 
----
+- un'**intestazione** (*header*), con informazioni di controllo;
+- una zona per i **dati veri e propri**;
+- un **terminatore**.
 
-#### **b. Partizionamento**
+Nel terminatore viene tipicamente inserito un codice di controllo per verificare la presenza di errori nei dati memorizzati ed eventualmente correggerli.
 
-Il **partizionamento** divide il disco in più aree indipendenti, ognuna delle quali può essere gestita come se fosse un **disco separato**.
+#### **2.2. Partizionamento**
 
-- Ogni **partizione** può contenere un proprio file system o essere destinata ad altri scopi (es. area di swap).
-    
-- Un disco può essere gestito anche come **unica partizione** nel caso di sistemi semplici.
+Il **partizionamento** suddivide il disco in porzioni gestite separatamente dal sistema operativo come dischi logici.
 
----
+Un disco può contenere:
 
-#### **c. Formattazione logica (ad alto livello)**
+- una sola partizione;
+- più partizioni, ciascuna con organizzazione e scopo diverso.
 
-La formattazione logica costruisce le **strutture dati del file system** all’interno di una partizione.  
-In questa fase vengono creati:
+Ogni partizione può essere destinata a un file system, a un'area di swap o ad altri usi specializzati.
 
-- la **tabella di allocazione dei file**,
-    
-- la **struttura delle directory**,
-    
-- e lo **spazio riservato per i metadati**.
+#### **2.3. Formattazione logica**
 
-In alternativa, una partizione può essere utilizzata come **disco grezzo (raw disk)**, cioè accessibile direttamente senza file system.  
-Questa modalità è tipica per **database** o **aree di swap dedicate**, dove si preferisce un accesso più rapido e privo di overhead.
+La **formattazione logica**, detta anche **formattazione ad alto livello**, crea all'interno della partizione il **file system**.
 
----
+Il file system contiene le strutture dati che permettono di reperire le informazioni usando posizioni logiche, non più direttamente posizioni fisiche.
 
-### **3. Il blocco di avvio (Boot Block)**
+In alternativa, una partizione può essere formattata per l'uso come **disco grezzo** (*raw disk*), cioè senza file system. Questo è tipico delle aree di swap dedicate.
 
-Il **blocco di avvio** è un’area del disco che contiene **il codice necessario per l’avvio del sistema operativo** o di una sua parte.
-
-- Nei sistemi tradizionali, è il **primo settore** del disco (Master Boot Record – MBR).
-    
-- Nei sistemi moderni (UEFI), è sostituito dalla **tabella GPT** e da una partizione di boot separata.
-
-La presenza del boot block consente al sistema di **caricare il kernel in memoria** e avviare la fase di inizializzazione del sistema operativo.
+> 💡 Il file system offre flessibilità e astrazione; il raw disk riduce l'overhead quando serve accesso diretto e veloce.
 
 ---
 
-### **4. Blocchi difettosi (Bad Blocks)**
+### **3. Struttura interna del disco**
 
-I **blocchi difettosi** sono settori del disco che risultano **illeggibili o danneggiati**.  
-Possono comparire già durante la produzione o a seguito dell’usura del supporto.
+Un disco organizzato per l'uso del sistema operativo contiene alcune aree fondamentali:
 
-#### **Gestione manuale**
+- blocco di avvio;
+- blocchi con informazioni di organizzazione;
+- blocchi dati;
+- strutture per directory e sottodirectory.
 
-Durante la **formattazione logica**, l’amministratore può **escludere manualmente** i blocchi difettosi, marcandoli come inutilizzabili.
+#### **3.1. Boot block**
 
-#### **Gestione automatica**
+Il **blocco di avvio** (*boot block*) contiene il sistema operativo o, più spesso, una sua parte iniziale: un caricatore che provvede poi a caricare il resto del sistema operativo.
 
-I moderni dischi implementano tecniche di **rimappatura automatica** dei settori danneggiati, tra cui:
+Questo blocco viene usato nella fase di avvio della macchina per inizializzare il caricamento del sistema.
 
-- **Sector sparing:** il blocco difettoso viene sostituito con un settore di riserva.
-    
-- **Sector forwarding:** il controller devia le richieste verso un settore alternativo.
-    
-- **Sector slipping:** i blocchi successivi vengono spostati per compensare il settore guasto.
+#### **3.2. Informazioni di organizzazione**
 
-Queste soluzioni sono gestite a livello di **firmware del disco**, e risultano trasparenti al sistema operativo.
+Nei blocchi successivi sono presenti le informazioni essenziali sull'organizzazione del disco.
 
----
+Queste strutture indicano:
 
-### **5. Uso dell’area di swap**
+- dove si trovano i blocchi;
+- come reperire i blocchi concatenati che costituiscono i file;
+- come gestire metadati, directory e sottodirectory.
 
-L’**area di swap** è uno spazio su disco utilizzato dal sistema operativo per **gestire l’eccesso di memoria** quando la RAM non è sufficiente.
+I dettagli di queste strutture dipendono dal file system e vengono approfonditi nella gestione del file system.
 
-#### **Funzione principale**
-
-Supporta i meccanismi di:
-
-- **Multiprogrammazione**, consentendo a più processi di coesistere in memoria virtuale.
-    
-- **Multitasking**, permettendo la sospensione e ripresa dei processi.
-
-#### **Contenuto dell’area di swap**
-
-A seconda del tipo di gestione della memoria:
-
-- Può contenere **interi processi** (nei sistemi con solo swapping).
-    
-- Può contenere **pagine** di processo (nei sistemi con paginazione).
-    
-- Può contenere **segmenti** di processo (nei sistemi con segmentazione).
-
-#### **Posizione**
-
-L’area di swap può essere:
-
-- una **partizione dedicata**, gestita come **disco grezzo (raw)**;
-    
-- oppure un **file speciale** all’interno del file system, più flessibile ma leggermente meno efficiente.
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
-### **6. Strutturazione dell’area di swap**
+### **4. Blocchi difettosi**
 
-L’area di swap è suddivisa in **blocchi** e **mappe di allocazione**.
+Un disco può contenere **blocchi difettosi** (*bad blocks*), cioè blocchi che non riescono a conservare correttamente le informazioni.
 
-- La **mappa di swap** definisce l’ordine e la posizione dei blocchi assegnati a ciascun processo, costruendo lo **spazio di indirizzamento virtuale**.
-    
-- I **blocchi di swap** rappresentano le unità effettive di memoria secondaria riservate ai processi.
+Questi blocchi devono essere esclusi dall'uso normale, altrimenti potrebbero causare perdita o corruzione dei dati.
 
-Un’implementazione efficiente della mappa di swap è essenziale per ridurre la frammentazione e ottimizzare i tempi di scambio con la memoria principale.
+#### **4.1. Gestione manuale**
+
+Durante la formattazione logica, i blocchi difettosi possono essere individuati e rimossi manualmente dall'insieme dei blocchi disponibili.
+
+#### **4.2. Sector sparing**
+
+Nel **sector sparing**, il disco mantiene un insieme di settori di riserva non assegnati all'uso normale.
+
+Quando viene trovato un settore difettoso, questo viene logicamente sostituito con uno dei settori di riserva.
+
+> 📌 Nel sector sparing il settore guasto resta escluso e viene rimpiazzato da un settore di ricambio.
+
+#### **4.3. Sector forwarding**
+
+Nel **sector forwarding**, i blocchi di riserva vengono mantenuti in una zona dedicata, spesso in fondo al disco.
+
+Quando durante la formattazione viene incontrato un blocco difettoso, le richieste dirette a quel blocco vengono deviate verso un blocco di riserva.
+
+#### **4.4. Sector slipping**
+
+Nel **sector slipping**, quando viene trovato un blocco difettoso, quel blocco viene saltato e i blocchi successivi vengono fatti "slittare" in avanti, usando la zona di riserva.
+
+In questo modo si conserva una maggiore continuità logica nella sequenza dei blocchi utilizzabili.
+
+> ⚠️ La gestione dei bad blocks deve essere trasparente per i livelli superiori: file system e applicazioni non devono accedere a blocchi fisicamente inaffidabili.
+
+---
+
+### **5. Area di swap**
+
+L'**area di swap** è una zona del disco usata per supportare multiprogrammazione e multitasking, contenendo parti della memoria virtuale del sistema.
+
+A seconda della tecnica di gestione della memoria, l'area di swap può contenere:
+
+- interi processi, nei sistemi basati solo su swapping;
+- pagine di processo, nei sistemi con paginazione;
+- segmenti di processo, nei sistemi con segmentazione.
+
+#### **5.1. Partizione dedicata**
+
+L'area di swap può essere una partizione dedicata gestita come **raw disk**.
+
+In questo caso l'accesso è molto rapido, perché il gestore della memoria virtuale mantiene direttamente una mappa delle informazioni necessarie e accede ai blocchi senza attraversare tutte le funzioni del file system.
+
+Il limite è che la dimensione dell'area di swap è fissa. Se la partizione si esaurisce, non è possibile contenere ulteriori processi o porzioni di memoria virtuale.
+
+#### **5.2. File di swap**
+
+In alternativa, lo swap può essere realizzato come un normale file all'interno del file system.
+
+Questa soluzione è più flessibile, perché il file può crescere finché esiste spazio disponibile nel file system. Tuttavia è più lenta, perché l'accesso ai blocchi deve passare attraverso le funzioni di gestione del file system.
+
+$$
+\text{swap} =
+\begin{cases}
+\text{partizione raw} & \text{più veloce, dimensione fissa} \\
+\text{file nel file system} & \text{più flessibile, accesso più lento}
+\end{cases}
+$$
+
+> ⚠️ La partizione dedicata migliora le prestazioni, ma riduce la flessibilità; il file di swap è più adattabile, ma introduce overhead.
+
+---
+
+### **6. Strutturazione dell'area di swap**
+
+L'area di swap è strutturata tramite:
+
+- una **mappa**;
+- un insieme di **blocchi**.
+
+La mappa definisce l'ordine con cui i blocchi devono essere considerati per ricostruire lo spazio di indirizzamento del processo.
+
+In particolare, nella mappa si trovano gli indici che individuano i blocchi all'interno del disco. I blocchi vengono letti nell'ordine definito dalla mappa.
+
+Questa organizzazione consente anche di gestire blocchi di dimensione diversa, se il sistema lo prevede.
+
+> 💡 La mappa dello swap separa l'ordine logico dello spazio del processo dalla posizione fisica dei blocchi sul disco.
 
 ---
 
 ### **7. Sintesi finale**
 
-|Concetto|Descrizione|
-|---|---|
-|**Formattazione fisica**|Divide il disco in settori gestibili dal controller|
-|**Partizionamento**|Suddivide il disco in aree logiche indipendenti|
-|**Formattazione logica**|Crea le strutture del file system o usa il disco in modalità raw|
-|**Blocco di avvio**|Contiene il codice per l’avvio del sistema operativo|
-|**Blocchi difettosi**|Gestiti manualmente o automaticamente (sparing, forwarding, slipping)|
-|**Area di swap**|Spazio disco per pagine, segmenti o interi processi|
-|**Mappa di swap**|Definisce la corrispondenza tra memoria virtuale e blocchi fisici|
+> ✅ L'organizzazione del disco definisce come il supporto fisico viene trasformato in una struttura logica utilizzabile dal sistema operativo.
 
-In sintesi, la corretta **organizzazione del disco** è il prerequisito per garantire **affidabilità, efficienza e continuità operativa** del sistema di memorizzazione.
+In questa lezione sono stati analizzati:
+
+- **formattazione fisica**, che suddivide il disco in settori;
+- **partizionamento**, che crea dischi logici separati;
+- **formattazione logica**, che crea il file system o prepara un raw disk;
+- **boot block**, usato per avviare il caricamento del sistema operativo;
+- gestione dei **blocchi difettosi** tramite esclusione, sparing, forwarding e slipping;
+- uso dell'**area di swap** come partizione dedicata o file;
+- struttura dello swap tramite mappa e blocchi.
+
+La corretta organizzazione del disco è necessaria per garantire affidabilità, efficienza e supporto alla memoria virtuale.

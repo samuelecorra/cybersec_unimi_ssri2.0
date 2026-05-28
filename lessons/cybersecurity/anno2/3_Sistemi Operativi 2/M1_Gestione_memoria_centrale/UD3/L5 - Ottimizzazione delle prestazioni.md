@@ -1,225 +1,235 @@
 # **M1 UD3 Lezione 5 - Ottimizzazione delle prestazioni**
 
+---
+
 ### **1. Introduzione**
 
-Dopo aver analizzato le principali tecniche di gestione della memoria virtuale, questa lezione affronta le **strategie di ottimizzazione** adottate dai sistemi operativi per migliorare l’efficienza complessiva dell’uso della memoria centrale.  
-Le prestazioni dipendono fortemente da fattori come la **dimensione delle pagine**, la **struttura del programma**, e l’**efficienza della traduzione degli indirizzi** da virtuali a fisici.
+Questa lezione affronta alcuni aspetti diretti a **ottimizzare le prestazioni della memoria virtuale**.
 
-Le tecniche trattate includono:
+Le prestazioni dipendono da molti fattori: numero di page fault, dimensione delle pagine, costo della traduzione degli indirizzi, struttura del programma e presenza di pagine che non possono essere scaricate senza conseguenze operative.
 
-- **Prepaginazione**
-    
-- **Scelta della dimensione ottimale delle pagine**
-    
-- **Translation Look-aside Buffer (TLB)**
-    
-- **Tabelle invertite delle pagine**
-    
-- **Strutturazione del programma**
-    
-- **Pagine residenti per dispositivi di I/O e per processi real-time**
+Le tecniche trattate sono:
+
+- **prepaginazione**;
+- scelta della **dimensione ottimale delle pagine**;
+- uso efficiente del **Translation Lookaside Buffer** (**TLB**);
+- uso di **tabelle invertite delle pagine**;
+- **strutturazione del programma** per migliorare la località;
+- mantenimento di **pagine residenti** per dispositivi di I/O e processi in tempo reale.
 
 ---
 
 ### **2. Prepaginazione**
 
-#### **Concetto**
+La **prepaginazione** consiste nel caricare in memoria centrale alcune pagine logiche **in anticipo** rispetto alla loro effettiva necessità.
 
-La **prepaginazione** consiste nel **caricare in anticipo** in memoria centrale alcune pagine che il processo probabilmente userà a breve, invece di attendere che si verifichi un _page fault_.
+L'obiettivo è evitare che, poco dopo, il processo generi un page fault per una pagina che si poteva prevedere sarebbe servita.
 
-#### **Obiettivo**
+> 📌 La prepaginazione cerca di trasformare più caricamenti reattivi causati da page fault in un caricamento anticipato e più efficiente.
 
-Ridurre il numero di _page fault_ durante:
+#### **2.1. Esempio operativo**
 
-- l’attivazione iniziale del processo;
-    
-- o la sua **riattivazione** dopo un periodo di sospensione (ad esempio dopo uno _swap-in_).
+Quando si verifica un page fault, invece di caricare soltanto la pagina richiesta, il sistema può caricare anche una o più pagine immediatamente successive.
 
-#### **Vantaggi**
+Questa scelta si basa sull'ipotesi di **località di esecuzione**: se il processo sta accedendo a una certa zona di memoria, è probabile che a breve acceda anche a pagine vicine.
 
-- Migliore **temporal locality**, poiché le pagine appartenenti alla località attuale vengono caricate insieme.
-    
-- Riduzione dei _fault_ iniziali, che normalmente si verificano all’avvio del processo.
+#### **2.2. Effetto sul working set**
 
-Nel **modello del Working Set**, vengono caricate **tutte le pagine appartenenti al working set corrente**, garantendo così una ripresa più fluida dell’esecuzione.
+Nel modello del working set, l'obiettivo è portare in memoria centrale tutte le pagine del **working set corrente**, così che il processo le trovi già residenti durante la propria esecuzione.
 
----
+Questo riduce:
 
-### **3. Dimensione della pagina**
+- il numero di page fault;
+- il tempo di gestione degli interrupt o trap generati dai page fault;
+- il costo globale delle operazioni di I/O verso l'area di swap.
 
-La **dimensione della pagina** è un parametro critico che influenza direttamente il numero di _page fault_, l’efficienza della tabella delle pagine e la quantità di memoria sprecata per frammentazione.
-
-#### **Pagine grandi**
-
-**Vantaggi:**
-
-- Meno pagine totali da gestire → tabella delle pagine più piccola.
-    
-- Tempo di I/O minore per caricamento/scrittura di ciascuna pagina.
-
-**Svantaggi:**
-
-- Maggiore **frammentazione interna**.
-    
-- Parte della memoria caricata può restare inutilizzata.
-    
-- Minor livello di dettaglio nella gestione della località.
-    
-- Possibile **aumento dei page fault**, perché una singola pagina grande può contenere dati poco correlati.
-
-#### **Pagine piccole**
-
-**Vantaggi:**
-
-- Maggiore **risoluzione** della memoria virtuale.
-    
-- Minore frammentazione interna.
-    
-- Migliore sfruttamento della località spaziale.
-
-**Svantaggi:**
-
-- Tabella delle pagine più grande.
-    
-- Tempo di I/O maggiore per caricamento/scrittura di più pagine.
-    
-- Maggior overhead di gestione da parte del sistema operativo.
-
-#### **Conclusione**
-
-La dimensione ottimale è un **compromesso** tra:
-
-- riduzione del numero di pagine,
-    
-- contenimento della frammentazione,
-    
-- e minimizzazione del tempo medio di accesso alla memoria.
-
+> ⚠️ La prepaginazione è utile solo se la previsione è corretta. Se vengono caricate pagine che il processo non userà, si spreca memoria centrale e banda di I/O.
 
 ---
 
-### **4. Translation Look-aside Buffer (TLB)**
+### **3. Dimensione ottimale della pagina**
 
-#### **Definizione**
+La dimensione della pagina è un parametro critico. Dipende dall'hardware, in particolare dal sistema di generazione degli indirizzi e dalla **Memory Management Unit** (**MMU**).
 
-La **TLB (Translation Look-aside Buffer)** è una **cache associativa** ad alta velocità che memorizza un sottoinsieme delle corrispondenze più recenti tra **indirizzi virtuali e fisici**.
+Una volta definita a livello hardware, il sistema operativo deve adeguarsi: non può modificarla liberamente. Tuttavia, questa scelta influenza fortemente l'efficienza della gestione della memoria virtuale.
 
-#### **Estensione della TLB**
+> 📌 Il dimensionamento della pagina è un compromesso tra granularità, dimensione delle tabelle, frammentazione interna, costo di I/O e sfruttamento della località.
 
-La capacità effettiva della TLB è data da:
+#### **3.1. Pagine grandi**
 
-$$  
-\text{Estensione} = (\text{Numero di voci TLB}) \times (\text{Dimensione pagina})  
+Con pagine grandi:
+
+- il numero totale di pagine del sistema diminuisce;
+- le tabelle delle pagine sono più piccole;
+- la MMU e il sistema operativo gestiscono meno voci;
+- le operazioni di caricamento e scaricamento possono essere più efficienti perché trasferiscono blocchi grandi;
+- aumenta però la **frammentazione interna**;
+- diminuisce la risoluzione con cui il sistema può scegliere quali porzioni caricare o scaricare.
+
+Il rischio è caricare automaticamente molta memoria non usata, soprattutto se la località del processo è piccola rispetto alla dimensione della pagina.
+
+#### **3.2. Pagine piccole**
+
+Con pagine piccole:
+
+- aumenta il numero totale di pagine;
+- le tabelle delle pagine diventano più grandi;
+- diminuisce la frammentazione interna;
+- aumenta la granularità con cui si rappresenta la località;
+- si carica meno memoria inutilizzata;
+- possono però aumentare le operazioni di I/O necessarie per caricare molte pagine.
+
+#### **3.3. Compromesso**
+
+La scelta ottimale deve bilanciare:
+
+$$
+\text{prestazioni} = f(\text{dimensione tabelle}, \text{frammentazione}, \text{I/O}, \text{località})
 $$
 
-#### **Effetto sulle prestazioni**
-
-- Maggiore estensione → minori _page fault_.
-    
-- Riduzione del tempo medio di accesso alla memoria, grazie alla traduzione immediata degli indirizzi più frequenti.
-
-#### **Strategie di ottimizzazione**
-
-- **Aumentare la dimensione della TLB.**
-    
-- **Aumentare la dimensione della pagina.**
-    
-- **Usare pagine di dimensione eterogenea**, per bilanciare efficienza e granularità.
+Pagine grandi semplificano la gestione ma possono sprecare memoria; pagine piccole riducono lo spreco ma aumentano overhead e dimensione delle strutture di traduzione.
 
 ---
 
-### **5. Tabella invertita delle pagine**
+### **4. Translation Lookaside Buffer**
 
-#### **Concetto**
+Il **Translation Lookaside Buffer** (**TLB**) è una memoria associativa che contiene le traduzioni più recentemente effettuate tra pagine logiche e frame fisici.
 
-Invece di mantenere una tabella delle pagine separata per ciascun processo, il sistema può utilizzare una **tabella unica** che elenca tutte le **pagine fisiche** attualmente presenti in memoria.
+Quando una traduzione è presente nel TLB, la MMU può evitare di consultare la tabella delle pagine in memoria, riducendo il tempo medio di accesso.
 
-Ogni voce della tabella contiene la coppia:
+#### **4.1. Copertura del TLB**
 
-$$  
-\text{TabellaInvertita[PaginaFisica]} = (\text{Processo}, \text{PaginaLogica})  
+La **copertura** del TLB indica quanta memoria virtuale può essere tradotta direttamente tramite le voci presenti nel TLB.
+
+Se:
+
+- $E$ è il numero di voci del TLB;
+- $P$ è la dimensione di una pagina;
+
+allora:
+
+$$
+\text{copertura TLB} = E \cdot P
 $$
 
-#### **Vantaggi**
+Maggiore è la copertura, maggiore è la porzione di spazio utile del processo che può beneficiare di traduzioni rapide.
 
-- Riduzione significativa della **memoria fisica necessaria** per mantenere le tabelle.
-    
-- Migliore **scalabilità** nei sistemi con molti processi.
-    
-- Le **tabelle esterne** vengono consultate solo in caso di _page fault_.
+#### **4.2. Strategie di ottimizzazione**
+
+Per aumentare la copertura del TLB si può:
+
+- aumentare il numero di voci del TLB;
+- aumentare la dimensione delle pagine;
+- usare pagine di dimensione eterogenea, riducendo alcuni effetti negativi della frammentazione interna.
+
+> 💡 Un TLB con maggiore copertura riduce i miss di traduzione e quindi abbassa il tempo medio di accesso alla memoria.
+
+---
+
+### **5. Tabelle invertite delle pagine**
+
+Per gestire in modo efficiente l'accesso alle tabelle delle pagine, si può usare una **tabella invertita delle pagine**.
+
+Nelle tabelle tradizionali, per ogni pagina logica di un processo si memorizza il frame fisico corrispondente. Nella tabella invertita si fa il contrario: per ogni frame fisico si memorizza quale processo e quale pagina logica si trovano in quel frame.
+
+#### **5.1. Struttura**
+
+Ogni voce della tabella invertita è indicizzata dal numero di pagina fisica e contiene:
+
+$$
+\text{TabellaInvertita}[\text{frame fisico}] = (\text{processo}, \text{pagina logica})
+$$
+
+#### **5.2. Traduzione**
+
+Per tradurre un indirizzo, il sistema cerca nella tabella invertita la coppia:
+
+$$
+(\text{processo corrente}, \text{pagina logica richiesta})
+$$
+
+L'indice della voce trovata identifica il frame fisico che contiene la pagina logica del processo corrente.
+
+#### **5.3. Vantaggio**
+
+La tabella invertita riduce la quantità di memoria fisica necessaria per mantenere le strutture di traduzione, soprattutto nei sistemi con spazi virtuali molto grandi.
+
+Se la pagina desiderata non è presente nella tabella, viene generato un page fault e il sistema può usare le tabelle esterne o le informazioni su disco per risolvere l'indirizzamento.
+
+> ⚠️ La tabella invertita riduce lo spazio occupato dalle tabelle, ma richiede una ricerca efficiente della coppia processo-pagina logica, spesso tramite memoria associativa o hashing.
 
 ---
 
 ### **6. Strutturazione del programma**
 
-Una **buona strutturazione del codice** riduce il numero di _page fault_ e la dimensione del working set.
+Il numero di page fault può essere ridotto anche tramite una **strutturazione intelligente del programma**.
 
-#### **Buone pratiche**
+Se un programma ha forte località, il suo working set è più piccolo e risulta più facile mantenerlo interamente in memoria centrale.
 
-- Suddividere il codice in **moduli coesi**, ciascuno con alta località interna.
-    
-- Utilizzare **strutture dati** che migliorino la contiguità in memoria.
-    
-- Organizzare il flusso del programma in modo che le **pagine correlate vengano richiamate insieme**.
+#### **6.1. Località e struttura**
 
-#### **Ruolo di compilatori e linker**
+Una buona località può essere favorita da:
 
-Gli strumenti di compilazione cercano di **preservare la località**:
+- organizzazione strutturata del codice;
+- uso ordinato di frasi condizionali e cicliche;
+- modularizzazione coerente del programma;
+- organizzazione attenta delle strutture dati;
+- disposizione in memoria di codice e dati usati insieme.
 
-- dispongono il codice in memoria in modo da **evitare salti frequenti** tra pagine lontane;
-    
-- minimizzano il rischio di accessi disordinati che causerebbero _page fault_ ricorrenti.
+#### **6.2. Ruolo di compilatore e linker**
+
+Compilatore e linker possono sfruttare la struttura del programma per produrre codice con maggiore località, riducendo accessi frequenti a pagine lontane.
+
+> 💡 Un programma ben strutturato non migliora solo la leggibilità: può ridurre il working set e quindi il numero di page fault durante l'esecuzione.
 
 ---
 
 ### **7. Pagine residenti per dispositivi di I/O**
 
-Per i **dispositivi di input/output**, i _page fault_ possono compromettere la corretta gestione dei buffer di comunicazione.  
-Per evitarli, si mantengono **pagine residenti** (non sostituibili) dedicate ai buffer I/O.
+In alcuni casi è utile o necessario mantenere alcune pagine **residenti** in memoria centrale, cioè non eleggibili per la sostituzione.
 
-#### **Soluzioni possibili**
+Un caso importante riguarda i buffer usati dai dispositivi di **ingresso/uscita**.
 
-1. **Buffer nello spazio di indirizzi del sistema operativo**  
-    → I dati vengono copiati dal buffer OS alle variabili del processo.
-    
-2. **Buffer nello spazio di indirizzi del processo**  
-    → Le pagine dei buffer vengono rese **residenti permanentemente** in memoria centrale.
+Se un buffer contiene dati da inviare a una periferica o dati ricevuti da una periferica, un page fault su quel buffer potrebbe interrompere o ritardare l'operazione di I/O.
 
-Questo garantisce trasferimenti di dati **continui e senza interruzioni**, evitando che un _page fault_ interrompa un’operazione I/O critica.
+#### **7.1. Buffer residenti**
+
+Per evitare il problema, le pagine che contengono buffer di I/O possono essere mantenute residenti in memoria centrale.
+
+Una soluzione consiste nel collocare i buffer nello spazio di indirizzamento del sistema operativo. Quando i dati devono essere trasferiti nelle variabili del processo, il sistema operativo effettua poi il trasferimento verso lo spazio del processo.
+
+> 📌 I buffer di I/O devono spesso rimanere residenti perché le periferiche richiedono disponibilità continua dei dati durante il trasferimento.
 
 ---
 
 ### **8. Pagine residenti per processi in tempo reale**
 
-I **processi in tempo reale** devono rispettare **vincoli temporali stringenti**.  
-L’uso della memoria virtuale, con possibili _page fault_, può rendere impossibile garantire tali vincoli.
+Anche i processi in **tempo reale** possono richiedere pagine residenti.
 
-#### **Soluzione**
+In questi sistemi, il tempo necessario a caricare una pagina mancante può portare al mancato rispetto dei vincoli temporali imposti all'esecuzione del processo.
 
-- Mantenere **residenti in memoria** le pagine **critiche** del processo.
-    
-- In questo modo, non sarà necessario sostituire pagine durante l’esecuzione, evitando ritardi imprevisti.
+Per questo motivo può essere utile mantenere in memoria centrale:
 
-#### **Esempio**
+- alcune pagine critiche;
+- oppure, nei casi più stringenti, tutte le pagine del processo.
 
-Nei sistemi embedded o di controllo industriale, il caricamento da disco di una pagina mancante potrebbe introdurre ritardi di millisecondi — inaccettabili per processi con _deadlines_ precise.
+In questo modo non sarà necessario effettuare sostituzioni per caricare le pagine critiche durante l'esecuzione, riducendo i tempi di completamento delle operazioni.
+
+> ⚠️ Nei processi real-time, un page fault non è solo un rallentamento: può causare la violazione di una deadline.
 
 ---
 
 ### **9. Sintesi finale**
 
-Per ottimizzare le prestazioni della memoria virtuale, il sistema operativo adotta una combinazione di strategie:
+> ✅ L'ottimizzazione della memoria virtuale combina tecniche hardware, politiche del sistema operativo e scelte di organizzazione del programma.
 
-1. **Prepaginazione** → riduce i _page fault_ iniziali.
-    
-2. **Scelta della dimensione ottimale delle pagine** → equilibrio tra frammentazione, I/O e gestione.
-    
-3. **Uso efficiente della TLB** → riduce i tempi di traduzione degli indirizzi.
-    
-4. **Tabelle invertite** → riducono lo spazio di memoria per le strutture di gestione.
-    
-5. **Strutturazione del programma** → favorisce la località e minimizza i _page fault_.
-    
-6. **Pagine residenti** → garantiscono stabilità nei processi I/O e real-time.
+Le principali tecniche viste sono:
 
-Insieme, queste tecniche consentono di ottenere un sistema **stabile, veloce e prevedibile**, anche in condizioni di carico elevato.
+- **prepaginazione**, per caricare in anticipo le pagine probabilmente necessarie;
+- scelta della **dimensione della pagina**, bilanciando tabelle, frammentazione, I/O e località;
+- uso efficiente del **TLB**, aumentando la copertura delle traduzioni rapide;
+- **tabelle invertite**, per ridurre la memoria necessaria alle strutture di traduzione;
+- **strutturazione del programma**, per aumentare la località e ridurre il working set;
+- **pagine residenti**, per buffer di I/O e processi in tempo reale.
+
+L'obiettivo complessivo è ridurre page fault, tempi di traduzione, trasferimenti inutili e ritardi non prevedibili.

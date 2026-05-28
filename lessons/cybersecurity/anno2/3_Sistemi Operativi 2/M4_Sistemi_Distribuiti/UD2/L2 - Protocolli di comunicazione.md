@@ -1,234 +1,468 @@
 # **M4 UD2 Lezione 2 - Protocolli di comunicazione**
 
+---
+
 ### **1. Introduzione**
 
-Nei sistemi distribuiti, la comunicazione tra nodi avviene attraverso **protocolli di rete**, ossia insiemi di **regole e procedure** che definiscono il formato, l’ordine e la gestione dei messaggi trasmessi.  
-L’obiettivo è garantire che la comunicazione sia **affidabile, efficiente e indipendente** dall’hardware o dal sistema operativo utilizzato.
+Questa lezione studia come realizzare le comunicazioni in rete attraverso opportuni **protocolli di comunicazione**.
 
-Questa lezione analizza:
+I protocolli servono a rendere trasparenti:
 
-- i **problemi** tipici della comunicazione in rete,
-    
-- il **modello teorico ISO/OSI**,
-    
-- e i **modelli reali** TCP/IP e UDP/IP, fino ai protocolli applicativi.
+- le differenze tra macchine;
+- le differenze tra sistemi operativi;
+- le differenze di rappresentazione dei dati;
+- i dettagli fisici della rete;
+- le modalita' concrete di trasmissione.
 
----
+L'obiettivo e' fornire ai processi un ambiente di comunicazione uniforme, anche quando le macchine coinvolte sono eterogenee.
 
-### **2. Problemi della comunicazione in rete**
-
-La comunicazione in rete è resa complessa da vari fattori:
-
-- **Comunicazione asincrona:** i nodi non sono sincronizzati nel tempo.
-    
-- **Probabilità di errore:** pacchetti persi, duplicati o corrotti.
-    
-- **Eterogeneità degli ambienti:** differenze hardware, software, e di rappresentazione dei dati.
+> 📌 Un protocollo di comunicazione svolge per la rete un ruolo analogo a quello di un driver: nasconde i dettagli della periferica e offre servizi omogenei.
 
 ---
 
-### **3. Obiettivi dei protocolli di comunicazione**
+### **2. Problemi della comunicazione distribuita**
 
-Per affrontare questi problemi, i protocolli perseguono alcuni obiettivi fondamentali:
+La comunicazione in un ambiente distribuito presenta diversi problemi.
 
-1. **Semplificazione della progettazione:** astrazione del livello fisico e logico.
-    
-2. **Ambiente omogeneo di comunicazione:** interoperabilità tra sistemi diversi.
-    
-3. **Virtualizzazione delle comunicazioni:** visione unificata delle risorse di rete.
-    
-4. **Gestione efficiente dei canali e dei flussi.**
-    
-5. **Gestione degli errori e dei guasti.**
+#### **2.1. Comunicazione asincrona**
 
----
+I processi che comunicano su macchine diverse non evolvono necessariamente in modo sincronizzato.
 
-### **4. Soluzione generale**
+La comunicazione puo' richiedere tempo e il mittente non deve restare bloccato inutilmente in attesa del completamento.
 
-La soluzione adottata dai sistemi operativi è la definizione di un **sottosistema di comunicazione stratificato**, composto da:
+I protocolli devono quindi supportare modalita' di comunicazione che permettano ai processi di continuare a evolvere.
 
-- **Protocolli di rete** che fungono da **driver di comunicazione**,
-    
-- Strati (layer) dedicati a **funzioni specifiche**,
-    
-- Comunicazione **tra strati equivalenti** nei nodi partecipanti,
-    
-- **Protocolli specifici** per ciascun livello.
+#### **2.2. Errori e guasti**
 
----
+Durante la comunicazione possono verificarsi:
 
-### **5. Il modello teorico ISO/OSI**
+- perdita di messaggi;
+- corruzione dei dati;
+- duplicazione di pacchetti;
+- ritardi;
+- guasti di nodi;
+- guasti di collegamenti.
 
-Il modello **ISO/OSI (Open Systems Interconnection)**, proposto dall’**International Standards Organization**, rappresenta una **struttura teorica a sette strati**, ognuno con compiti ben definiti.
+Il protocollo deve tener conto della probabilita' di errore e aumentare la probabilita' di successo della comunicazione.
 
-#### **5.1 Gli strati del modello ISO/OSI**
+#### **2.3. Eterogeneita'**
 
-1. **Strato fisico (Physical layer)**
-    
-    - Gestisce i dettagli **meccanici ed elettrici** della trasmissione dei bit.
-    
-2. **Strato di collegamento dati (Data Link layer)**
-    
-    - Gestisce l’invio e la ricezione dei pacchetti.
-        
-    - Si occupa di **rilevazione e correzione degli errori**.
-    
-3. **Strato di rete (Network layer)**
-    
-    - Stabilisce e gestisce le **connessioni logiche** tra nodi.
-        
-    - Si occupa dell’**instradamento** dei pacchetti.
-        
-    - Gestisce **indirizzamento in uscita** e **decodifica in entrata**.
-    
-4. **Strato di trasporto (Transport layer)**
-    
-    - Suddivide i messaggi in pacchetti e mantiene il loro **ordine corretto**.
-        
-    - Effettua **controllo del flusso** e **gestione degli errori a livello di messaggio**.
-    
-5. **Strato di sessione (Session layer)**
-    
-    - Gestisce l’**apertura, mantenimento e chiusura** delle sessioni di comunicazione.
-        
-    - Coordina i protocolli di comunicazione tra processi.
-    
-6. **Strato di presentazione (Presentation layer)**
-    
-    - Risolve le differenze di **formato e rappresentazione** tra sistemi eterogenei.
-        
-    - Esegue la **conversione dei dati** e gestisce le modalità di trasmissione:
-        
-        - _semi-duplex_ (un solo flusso alla volta),
-            
-        - _full-duplex_ (flussi bidirezionali simultanei).
-    
-7. **Strato di applicazione (Application layer)**
-    
-    - Fornisce l’interfaccia per le applicazioni utente:
-        
-        - **trasferimento file**,
-            
-        - **connessioni remote**,
-            
-        - **posta elettronica**,
-            
-        - **basi di dati distribuite**.
+Le macchine in rete possono essere diverse per:
+
+- hardware;
+- sistema operativo;
+- rappresentazione dei dati;
+- protocolli disponibili;
+- formato delle informazioni.
+
+Il protocollo deve permettere l'integrazione di questi sistemi in un ambiente comune.
+
+> ⚠️ In un sistema distribuito non basta inviare bit: bisogna garantire che il destinatario possa interpretarli correttamente.
 
 ---
 
-### **6. Pila ISO/OSI**
+### **3. Obiettivi dei protocolli**
 
-Il modello può essere visualizzato come una **pila di protocolli**, dove ogni strato offre servizi allo strato superiore e utilizza quelli dello strato inferiore:
+I protocolli di comunicazione perseguono diversi obiettivi.
 
+#### **3.1. Semplificazione delle applicazioni**
+
+Le applicazioni non devono conoscere i dettagli fisici della rete.
+
+Devono potersi appoggiare a uno strato di gestione che offra operazioni di comunicazione astratte.
+
+#### **3.2. Ambiente omogeneo**
+
+Il protocollo deve creare una visione omogenea della comunicazione tra macchine anche eterogenee.
+
+#### **3.3. Virtualizzazione della rete**
+
+La comunicazione in rete viene virtualizzata.
+
+Il processo applicativo vede una comunicazione logica con un altro processo, non l'insieme di cavi, schede, router, pacchetti e conversioni necessarie per realizzarla.
+
+#### **3.4. Efficienza**
+
+Il protocollo deve gestire la comunicazione in modo efficiente, riducendo overhead, tempi di attesa e uso inutile della banda.
+
+#### **3.5. Gestione di errori e guasti**
+
+Il protocollo deve rilevare, correggere o mascherare errori quando possibile.
+
+> ✅ L'obiettivo e' rendere trasparenti i dettagli fisici della rete e fornire un servizio di comunicazione affidabile o almeno controllato.
+
+---
+
+### **4. Protocolli come driver di rete**
+
+La soluzione e' introdurre protocolli di comunicazione organizzati in strati.
+
+Il sottosistema di comunicazione in rete viene strutturato come il driver di una periferica complessa.
+
+Ogni strato:
+
+- offre servizi allo strato superiore;
+- usa servizi dello strato inferiore;
+- comunica logicamente con lo strato equivalente sulla macchina remota.
+
+La comunicazione reale scende lungo la pila del mittente, attraversa la rete e risale lungo la pila del destinatario.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 💡 La stratificazione permette di isolare problemi diversi: trasmissione fisica, instradamento, controllo del flusso, formato dei dati e servizi applicativi.
+
+---
+
+### **5. Modello ISO/OSI**
+
+Il modello teorico di riferimento e' il modello **ISO/OSI**.
+
+ISO indica l'**International Standards Organization**.
+
+OSI significa **Open Systems Interconnection**.
+
+Il modello e' stato definito per interconnettere sistemi aperti ed eterogenei.
+
+Il suo scopo e' chiarire come strutturare astrattamente la comunicazione in rete.
+
+Il modello prevede una pila di sette strati:
+
+1. fisico;
+2. collegamento dati;
+3. rete;
+4. trasporto;
+5. sessione;
+6. presentazione;
+7. applicazione.
+
+---
+
+### **6. Strato fisico**
+
+Lo **strato fisico** gestisce la trasmissione dei bit sul mezzo fisico.
+
+Si occupa degli aspetti:
+
+- meccanici;
+- elettrici;
+- fisici;
+- di connessione.
+
+Definisce, per esempio:
+
+- come devono essere realizzate le interconnessioni;
+- quali segnali rappresentano i bit;
+- come i bit vengono trasmessi sul canale.
+
+> 📌 Lo strato fisico non interpreta messaggi: trasmette bit.
+
+---
+
+### **7. Strato di collegamento dati**
+
+Lo **strato di collegamento dati** gestisce l'invio e la ricezione della singola porzione di messaggio di lunghezza controllata.
+
+Questa porzione puo' essere vista come un pacchetto o frame.
+
+Lo strato si occupa di:
+
+- invio del pacchetto sul collegamento;
+- ricezione del pacchetto;
+- rilevazione degli errori;
+- eventuale correzione o ritrasmissione;
+- controllo della correttezza locale della trasmissione.
+
+---
+
+### **8. Strato di rete**
+
+Lo **strato di rete** gestisce la connessione logica e l'instradamento dei pacchetti nella rete.
+
+Si occupa di:
+
+- determinare l'indirizzo di destinazione;
+- scegliere il percorso;
+- inoltrare pacchetti;
+- decodificare gli indirizzi dei pacchetti in ingresso;
+- stabilire se un pacchetto e' destinato alla macchina corrente.
+
+> 📌 Lo strato di rete decide dove devono andare i pacchetti.
+
+---
+
+### **9. Strato di trasporto**
+
+Lo **strato di trasporto** crea un servizio di comunicazione tra processi indipendente dai dettagli della rete sottostante.
+
+Si occupa di:
+
+- prendere messaggi di lunghezza variabile;
+- dividerli in pacchetti;
+- inviare i pacchetti;
+- mantenere l'ordine;
+- controllare il flusso;
+- gestire errori a livello di messaggio;
+- ricostruire il messaggio al destinatario.
+
+Al di sopra dello strato di trasporto, i processi possono vedere uno scambio di messaggi piu' astratto e indipendente dalla struttura fisica della rete.
+
+---
+
+### **10. Strato di sessione**
+
+Lo **strato di sessione** gestisce la comunicazione a livello di sessione tra processi.
+
+Si occupa di:
+
+- apertura della sessione;
+- mantenimento della sessione;
+- chiusura della sessione;
+- ordinamento dei messaggi della sessione;
+- gestione degli errori relativi alla sessione.
+
+La sessione rappresenta il contesto logico entro cui due processi cooperano.
+
+---
+
+### **11. Strato di presentazione**
+
+Lo **strato di presentazione** risolve le differenze di formato nella rappresentazione delle informazioni.
+
+Macchine diverse possono rappresentare in modo diverso:
+
+- numeri;
+- caratteri;
+- stringhe;
+- strutture dati;
+- formati binari.
+
+Lo strato di presentazione effettua conversioni per rendere comprensibili i dati al destinatario.
+
+Gestisce inoltre modalita' di comunicazione come:
+
+- **semi-duplex**, una direzione alla volta;
+- **full-duplex**, entrambe le direzioni contemporaneamente.
+
+> 💡 Sopra lo strato di presentazione, lo scambio dei messaggi diventa indipendente dalla sintassi interna delle singole macchine.
+
+---
+
+### **12. Strato di applicazione**
+
+Lo **strato di applicazione** fornisce servizi di rete direttamente utilizzabili dalle applicazioni.
+
+Esempi:
+
+- trasferimento di file;
+- connessione remota;
+- posta elettronica;
+- basi di dati distribuite;
+- servizi web;
+- risoluzione dei nomi.
+
+Questo strato offre protocolli standard per applicazioni distribuite comuni.
+
+---
+
+### **13. Visione complessiva della pila ISO/OSI**
+
+La pila ISO/OSI costruisce livelli di astrazione crescenti.
+
+Gli strati bassi, dal fisico al trasporto, creano un ambiente di rete omogeneo e indipendente dalle strutture fisiche.
+
+Gli strati superiori, dalla sessione all'applicazione, costruiscono un ambiente piu' astratto per la cooperazione tra applicazioni.
+
+```text
++----------------------+
+| 7. Applicazione      |
+| 6. Presentazione     |
+| 5. Sessione          |
+| 4. Trasporto         |
+| 3. Rete              |
+| 2. Collegamento dati |
+| 1. Fisico            |
++----------------------+
 ```
-+-----------------------+
-| 7. Applicazione       |
-| 6. Presentazione      |
-| 5. Sessione           |
-| 4. Trasporto          |
-| 3. Rete               |
-| 2. Collegamento dati  |
-| 1. Fisico             |
-+-----------------------+
-```
 
-Ogni messaggio, scendendo la pila, viene **incapsulato** con informazioni di controllo proprie di ciascun livello.
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
-### **7. Modelli reali**
+### **14. Incapsulamento dei messaggi**
 
-Nella pratica, il modello ISO/OSI è stato semplificato per creare protocolli più **efficienti e diffusi**: i modelli **TCP/IP** e **UDP/IP**.
+Nel modello a strati, il messaggio viene composto progressivamente.
 
-#### **7.1 Caratteristiche generali**
+I dati applicativi vengono arricchiti con informazioni di servizio man mano che scendono lungo la pila.
 
-- Obiettivo: maggiore **efficienza e semplicità**.
-    
-- Limite: minore astrazione e separazione logica tra i livelli.
+Ogni strato aggiunge informazioni utili alla propria funzione.
 
----
+Per esempio:
 
-### **8. Protocollo Internet (IP)**
+- lo strato applicativo aggiunge informazioni applicative;
+- lo strato di presentazione aggiunge informazioni di formato;
+- lo strato di sessione aggiunge informazioni di sessione;
+- lo strato di trasporto aggiunge informazioni per ordinamento e controllo del flusso;
+- lo strato di rete aggiunge informazioni di indirizzamento e instradamento;
+- lo strato di collegamento dati aggiunge header e chiusure per controllare il singolo pacchetto.
 
-- Appartiene allo **strato di rete**.
-    
-- Si occupa di:
-    
-    - **Gestione e instradamento dei pacchetti**,
-        
-    - **Indirizzamento logico** dei nodi.
-    
-- Non garantisce l’affidabilità: si limita a **trasmettere pacchetti best-effort** (senza controllo degli errori).
+Al destinatario avviene il processo inverso: ogni strato rimuove e interpreta le informazioni corrispondenti.
 
----
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-### **9. Protocolli di trasporto**
-
-#### **9.1 UDP – User Datagram Protocol**
-
-- **Non affidabile** e **senza connessione** (_connectionless_).
-    
-- Adatto a comunicazioni veloci dove la perdita di pacchetti è tollerabile (streaming, DNS, videoconferenze).
-
-#### **9.2 TCP – Transmission Control Protocol**
-
-- **Affidabile** e **orientato alla connessione** (_connection-oriented_).
-    
-- Garantisce:
-    
-    - consegna dei pacchetti in ordine,
-        
-    - controllo del flusso,
-        
-    - ritrasmissione in caso di errore.
-    
-- Utilizzato in applicazioni che richiedono **integrità e sequenzialità dei dati** (HTTP, FTP, e-mail).
+> 📌 L'incapsulamento permette a ogni strato di aggiungere il proprio controllo senza modificare il contenuto logico gestito dagli strati superiori.
 
 ---
 
-### **10. Relazione tra ISO/OSI e TCP/IP**
+### **15. Modelli reali**
 
-Il modello TCP/IP **integra e semplifica** i sette strati ISO/OSI in quattro livelli principali:
+Il modello ISO/OSI e' teorico, chiaro e gerarchico.
 
-|ISO/OSI|TCP/IP|Funzione principale|
-|---|---|---|
-|7. Applicazione|Applicazione|Servizi utente e protocolli applicativi|
-|5–6|Presentazione / Sessione|Incorporate nel livello applicativo|
-|4|Trasporto|TCP, UDP|
-|3|Rete|IP|
-|1–2|Accesso rete|Ethernet, Wi-Fi, driver fisici|
+I modelli reali usati nelle reti moderne sono piu' semplici ed efficienti.
 
----
+Devono essere:
 
-### **11. Protocolli applicativi**
+- rapidi nell'incapsulamento;
+- rapidi nell'invio;
+- piu' semplici da implementare;
+- piu' adatti alle reti reali.
 
-Appartengono allo **strato di applicazione** e utilizzano TCP o UDP per la trasmissione:
+Il prezzo e' una minore separazione astratta tra gli strati rispetto al modello ISO/OSI.
 
-|Protocollo|Funzione|Tipo di trasporto|
-|---|---|---|
-|**Telnet / SSH**|Accesso remoto ai sistemi|TCP|
-|**FTP / SFTP**|Trasferimento di file|TCP|
-|**HTTP / HTTPS**|Navigazione web|TCP|
-|**SMTP**|Posta elettronica|TCP|
-|**DNS**|Risoluzione dei nomi|UDP|
+I modelli reali principali sono basati su:
+
+- IP;
+- TCP;
+- UDP;
+- protocolli applicativi.
 
 ---
 
-### **12. Sintesi finale**
+### **16. Protocollo IP**
 
-|Aspetto|Descrizione sintetica|
+Il **protocollo Internet**, o **IP**, corrisponde sostanzialmente allo strato di rete.
+
+Si occupa di:
+
+- gestire pacchetti;
+- indirizzare pacchetti;
+- instradare pacchetti nella rete.
+
+IP fornisce un servizio di base per portare pacchetti verso una destinazione.
+
+Non garantisce, da solo, affidabilita' completa.
+
+---
+
+### **17. TCP e UDP**
+
+Sopra IP si colloca lo strato di trasporto.
+
+I protocolli principali sono:
+
+- TCP;
+- UDP.
+
+#### **17.1. UDP**
+
+**UDP**, User Datagram Protocol, gestisce comunicazioni senza connessione.
+
+E' per definizione non affidabile.
+
+Questo significa che non garantisce:
+
+- consegna;
+- ordine;
+- assenza di duplicazioni;
+- correzione automatica degli errori.
+
+Le applicazioni che usano UDP devono sapere che la comunicazione non e' garantita e, se necessario, devono gestire autonomamente gli errori.
+
+#### **17.2. TCP**
+
+**TCP**, Transmission Control Protocol, e' orientato alla connessione.
+
+E' affidabile perche' tenta di recuperare gli errori della comunicazione, quando possibile.
+
+Gestisce:
+
+- apertura della connessione;
+- ordinamento dei dati;
+- controllo del flusso;
+- rilevazione delle perdite;
+- ritrasmissione;
+- chiusura della connessione.
+
+> ✅ TCP privilegia affidabilita' e ordine; UDP privilegia semplicita' e rapidita'.
+
+---
+
+### **18. Relazione tra ISO/OSI e TCP/IP**
+
+Nel modello reale:
+
+- IP corrisponde sostanzialmente allo strato di rete;
+- TCP e UDP corrispondono allo strato di trasporto;
+- i livelli fisico e collegamento dati non sono definiti in modo unico dal modello TCP/IP;
+- sessione e presentazione non sono strati standard separati;
+- molte funzioni superiori vengono inglobate nei protocolli applicativi.
+
+| ISO/OSI | Modello reale |
 |---|---|
-|**Problemi di comunicazione**|Asincronia, errori, eterogeneità|
-|**Obiettivi dei protocolli**|Efficienza, virtualizzazione, astrazione|
-|**ISO/OSI**|Modello teorico a 7 strati|
-|**TCP/IP – UDP/IP**|Implementazioni reali, più semplici e diffuse|
-|**Protocolli applicativi**|Servizi di alto livello (FTP, HTTP, DNS, ecc.)|
+| Applicazione | Protocolli applicativi |
+| Presentazione | Inclusa nell'applicazione o nelle librerie |
+| Sessione | Inclusa nell'applicazione o in TCP |
+| Trasporto | TCP / UDP |
+| Rete | IP |
+| Collegamento dati | Ethernet, Wi-Fi, tecnologie locali |
+| Fisico | Mezzi e dispositivi fisici |
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
-### **13. Conclusione**
+### **19. Protocolli applicativi**
 
-I **protocolli di comunicazione** sono la base del funzionamento delle reti distribuite:  
-essi permettono di **astrarre la complessità dell’hardware** e di garantire comunicazioni **uniformi, affidabili e scalabili** tra sistemi eterogenei.  
-Dal modello teorico ISO/OSI ai protocolli reali come TCP/IP e UDP, la loro evoluzione riflette il costante equilibrio tra **astrazione concettuale e efficienza pratica**.
+A livello applicativo esistono protocolli specializzati, costruiti sopra TCP/IP o UDP/IP.
+
+Esempi:
+
+| Protocollo | Funzione |
+|---|---|
+| **Telnet** | Connessione remota non sicura |
+| **SSH** | Connessione remota sicura |
+| **FTP** | Trasferimento file |
+| **SFTP** | Trasferimento file sicuro |
+| **HTTP** | Accesso a siti web |
+| **HTTPS** | Accesso sicuro a siti web |
+| **SMTP / POP / IMAP** | Servizi di posta elettronica |
+| **DNS** | Risoluzione dei nomi |
+
+Le versioni sicure, come SSH, SFTP e HTTPS, aggiungono meccanismi di protezione alla comunicazione.
+
+---
+
+### **20. Sintesi**
+
+| Aspetto | Descrizione |
+|---|---|
+| **Problemi** | Asincronia, errori, guasti, eterogeneita' |
+| **Obiettivi** | Astrazione, omogeneita', efficienza, gestione errori |
+| **Protocolli** | Driver stratificati della comunicazione di rete |
+| **ISO/OSI** | Modello teorico a sette strati |
+| **Strati bassi** | Rendono omogenea la rete fisica |
+| **Strati alti** | Forniscono servizi applicativi standard |
+| **Incapsulamento** | Ogni strato aggiunge informazioni di controllo |
+| **IP** | Instradamento dei pacchetti |
+| **UDP** | Trasporto semplice, senza connessione, non affidabile |
+| **TCP** | Trasporto affidabile, orientato alla connessione |
+| **Applicativi** | SSH, FTP, HTTP, posta, DNS |
+
+---
+
+### **21. Conclusione**
+
+I protocolli di comunicazione permettono di costruire un ambiente di rete astratto, omogeneo e utilizzabile da applicazioni distribuite.
+
+Il modello ISO/OSI chiarisce teoricamente la separazione degli strati e delle responsabilita'.
+
+I modelli reali, basati su IP, TCP, UDP e protocolli applicativi, sacrificano parte della purezza del modello teorico per ottenere maggiore efficienza e semplicita' operativa.

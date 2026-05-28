@@ -1,210 +1,214 @@
 # **M2 UD2 Lezione 4 - Memoria terziaria**
 
+---
+
 ### **1. Introduzione**
 
-La **memoria terziaria** rappresenta il livello più esterno e capiente della **gerarchia di memorizzazione**.  
-È utilizzata per archiviare **grandi volumi di dati** a basso costo, che vengono acceduti **raramente** o solo in operazioni di backup, archiviazione o trasferimento.
+La **memoria terziaria** estende lo spazio di memoria di massa per contenere quantità di informazioni molto più ampie di quelle gestibili con i normali dischi permanentemente connessi al sistema.
 
-Questa lezione descrive:
+Si basa sull'uso di supporti rimovibili, conservabili separatamente dal sistema di elaborazione e collegabili solo quando serve leggere, aggiornare o depositare informazioni.
 
-- le **periferiche di archiviazione terziaria**,
-    
-- le loro **caratteristiche principali**,
-    
-- e le **tecniche di gestione** adottate dai sistemi operativi per integrarle nella struttura complessiva della memoria.
+In questa lezione vengono trattati:
+
+- obiettivi della memoria terziaria;
+- periferiche per l'archiviazione terziaria;
+- caratteristiche richieste ai supporti;
+- gestione dei dispositivi fisici;
+- problemi di denominazione dei file;
+- gestione gerarchica della memoria.
+
+> 📌 La memoria terziaria serve ad archiviare grandissimi volumi di dati a costo molto basso, accettando una frequenza di accesso ridotta e tempi di accesso più elevati.
 
 ---
 
 ### **2. Obiettivi della memoria terziaria**
 
-L’uso di memorie terziarie è motivato da tre principali obiettivi:
+#### **2.1. Grandi quantità di informazione**
 
-1. **Gestire grandissimi volumi di dati**
-    
-    - Tipicamente attraverso **supporti removibili**, che possono essere archiviati, trasportati o sostituiti.
-    
-2. **Ridurre i costi di memorizzazione**
-    
-    - I dispositivi terziari hanno un **costo per unità di memoria molto più basso** rispetto ai dischi magnetici o SSD.
-    
-3. **Affrontare basse frequenze di accesso**
-    
-    - Sono pensate per dati **non usati frequentemente**, dove la **latenza di accesso elevata** non costituisce un problema.
+La memoria terziaria si rende necessaria quando le informazioni da conservare sono troppo numerose per essere mantenute nei normali sistemi di memoria di massa.
+
+Invece di usare solo dispositivi permanentemente connessi al calcolatore, si usano supporti rimovibili che possono essere archiviati in grandi quantità e collegati quando necessario.
+
+#### **2.2. Basso costo per unità di informazione**
+
+Un obiettivo fondamentale è ottenere un costo unitario per informazione memorizzata molto basso.
+
+Questo permette di archiviare grandi quantità di dati a costi contenuti, soprattutto quando i dati sono consultati raramente.
+
+#### **2.3. Bassa frequenza di accesso**
+
+La memoria terziaria è conveniente quando la frequenza con cui si accede alle informazioni è bassa.
+
+Il supporto può rimanere scollegato dal sistema e venire riconnesso solo quando serve manipolare o aggiornare i dati.
+
+> ⚠️ La memoria terziaria non è pensata per accessi frequenti o interattivi: privilegia capacità e costo rispetto alla latenza.
 
 ---
 
 ### **3. Periferiche di archiviazione terziaria**
 
-Le periferiche appartenenti alla memoria terziaria comprendono diverse tecnologie, ognuna con vantaggi e limiti specifici.
+Le periferiche tipiche per la memoria terziaria sono dispositivi rimovibili.
 
-#### **3.1 Dischi rimovibili**
+#### **3.1. Dischi rimovibili**
 
-- **Dischetti (floppy disk)** – ormai obsoleti, di bassa capacità e lenta velocità.
-    
-- **Dischi magnetici** – dischi rigidi rimovibili, di grande capacità ma minor affidabilità meccanica.
-    
-- **Dischi magneto-ottici** – combinano scrittura magnetica e lettura ottica.
-    
-- **Dischi ottici** – CD, DVD, Blu-Ray, ampiamente usati per distribuzione o archiviazione.
-    
-- **Dischi a cambiamento di fase** – sfruttano variazioni fisiche del materiale per rappresentare i dati (es. riscrivibili).
+Esempi:
 
-#### **3.2 Nastri magnetici**
+- dischetti;
+- dischi magnetici rimovibili;
+- dischi ottici;
+- altri supporti removibili.
 
-- Supporti a **lunghezza lineare** con **accesso sequenziale**.
-    
-- Ancora oggi impiegati per **backup di grandi sistemi** o archiviazioni di lunga durata.
-    
-- Offrono un **costo per GB estremamente basso**, ma tempi di accesso molto elevati.
+Questi dispositivi possono essere collegati al sistema solo quando servono e conservati separatamente per lunghi periodi.
 
-#### **3.3 Memorizzazione olografica**
+#### **3.2. Nastri magnetici**
 
-- Tecnologia sperimentale basata sulla **registrazione tridimensionale della luce**.
-    
-- Potenziale capacità e densità di memorizzazione molto superiori ai dischi ottici tradizionali.
+I **nastri magnetici** sono supporti storicamente importanti per backup e archiviazione di grandi quantità di dati.
 
-#### **3.4 Sistemi meccanici microelettronici (MEMS)**
+Offrono costi molto bassi per unità di informazione, ma accesso tipicamente sequenziale.
 
-- Sistemi basati su **microattuatori** e **microstrutture mobili**, con densità paragonabile agli hard disk ma con minor consumo energetico e maggior miniaturizzazione.
+#### **3.3. Tecnologie emergenti**
+
+Esistono anche tecnologie più recenti o sperimentali che possono diventare interessanti per l'archiviazione terziaria, ma non sempre sono ancora mature per un uso ampio e diffuso.
 
 ---
 
-### **4. Caratteristiche delle memorie terziarie**
+### **4. Caratteristiche richieste**
 
-Le principali caratteristiche da considerare per i dispositivi di memoria terziaria sono:
+Le periferiche per la memorizzazione terziaria devono possedere alcune caratteristiche fondamentali.
 
-1. **Velocità**
-    
-    - Definita in termini di:
-        
-        - **Larghezza di banda (bandwidth):** quantità di dati trasferibili nell’unità di tempo.
-            
-        - **Latenza di accesso:** tempo necessario per raggiungere il dato richiesto.
-    
-2. **Affidabilità**
-    
-    - Determinata dalla qualità del supporto, dal numero di cicli di riscrittura e dalle condizioni ambientali.
-    
-3. **Costo**
-    
-    - Generalmente il **più basso per unità di capacità** tra tutte le classi di memoria.
-        
-    - Si paga però in termini di **tempo di accesso** e **frequenza di utilizzo**.
+#### **4.1. Velocità**
 
----
+Devono essere ragionevolmente veloci, con:
 
-### **5. Gestione della memoria terziaria (1)**
+- buona larghezza di banda;
+- latenza di accesso sufficientemente contenuta rispetto all'uso previsto.
 
-La gestione di questi dispositivi si articola su due livelli principali:
+La velocità è importante, ma non è il requisito dominante come nei dischi usati frequentemente.
 
-1. **Gestione dei dispositivi fisici**
-    
-    - Include il controllo dei supporti, il montaggio e lo smontaggio, la verifica dell’integrità fisica e la sincronizzazione con il sistema operativo.
-    
-2. **Astrazione virtuale**
-    
-    - Fornisce una rappresentazione logica del dispositivo, rendendolo compatibile con il file system o con altre interfacce software.
+#### **4.2. Affidabilità**
+
+La caratteristica fondamentale è l'**affidabilità**.
+
+I supporti devono poter essere:
+
+- scollegati dal sistema;
+- conservati per lungo tempo;
+- riletti dopo lunghi periodi;
+- eventualmente aggiornati o manipolati senza perdita delle informazioni.
+
+> 📌 Nella memoria terziaria l'affidabilità a lungo termine è essenziale: il supporto deve conservare correttamente i dati anche fuori dal sistema di elaborazione.
+
+#### **4.3. Costo**
+
+Il costo deve essere basso, così da permettere la realizzazione di grandi archivi a costi contenuti.
+
+Il basso costo è accettabile proprio perché la frequenza di accesso è ridotta.
 
 ---
 
-### **6. Gestione della memoria terziaria (2)**
+### **5. Gestione della memoria terziaria**
 
-#### **Dischi rimovibili**
+La gestione della memoria terziaria richiede due livelli:
 
-- Possono essere gestiti come:
-    
-    - **Dispositivi grezzi (raw device)** → accesso diretto ai blocchi fisici.
-        
-    - **File system dedicato** → gestione strutturata dei file e delle directory.
-    
-- Permettono **uso condiviso tra processi** e **accesso diretto o sequenziale**, a seconda della tecnologia.
+- gestione del dispositivo fisico, come per qualunque periferica;
+- costruzione di un'astrazione virtuale che renda il supporto utilizzabile dal sistema operativo e dalle applicazioni.
 
-#### **Nastri magnetici**
+#### **5.1. Dischi rimovibili**
 
-- Sempre gestiti come **dispositivi grezzi**.
-    
-- Consentono solo **uso esclusivo** da parte di un processo alla volta.
-    
-- L’accesso è **strettamente sequenziale**, con tempi di posizionamento elevati.
+I dischi rimovibili possono essere mostrati al sistema in due modi:
 
----
+- come **dispositivo grezzo**, cioè come insieme di blocchi;
+- come supporto strutturato con un **file system**.
 
-### **7. Gestione della memoria terziaria (3)**
+Durante il periodo in cui sono montati nel sistema, possono spesso essere condivisi tra più processi.
 
-#### **Denominazione dei file nei supporti rimovibili**
+L'accesso può essere:
 
-Un problema rilevante nella gestione dei supporti terziari è la **denominazione univoca dei file**.
+- diretto, come nei dischi fissi;
+- sequenziale, se la tecnologia o l'organizzazione lo richiede.
 
-**Sfida:**  
-Garantire che un file mantenga un nome univoco anche quando il supporto viene rimosso o sostituito.
+#### **5.2. Nastri magnetici**
 
-**Problemi principali:**
+I nastri magnetici sono gestiti tipicamente come dispositivi grezzi, senza una struttura di file system complessa.
 
-- Necessità di **includere un identificativo del supporto** nel nome del file.
-    
-- **Portabilità** dei supporti tra sistemi diversi.
-    
-- **Mancanza di standard omogenei** per l’identificazione universale dei supporti.
+I file vengono collocati uno dopo l'altro sul supporto.
 
-**Standard parziali esistenti:**
+Caratteristiche principali:
 
-- **CD audio**
-    
-- **CD-ROM / DVD** (standard ISO 9660, UDF)
+- uso esclusivo da parte di un processo alla volta;
+- accesso sequenziale;
+- tempi di posizionamento elevati;
+- buona convenienza per archiviazione e backup.
 
-Negli altri casi, la denominazione univoca è lasciata all’**interpretazione dell’applicativo** o alla **responsabilità dell’utente**.
+> ⚠️ Nei nastri magnetici l'accesso sequenziale è una conseguenza della natura del supporto: raggiungere un dato può richiedere lo scorrimento di una lunga porzione del nastro.
 
 ---
 
-### **8. Gestione della memoria terziaria (4)**
+### **6. Denominazione dei file**
 
-#### **Gestione della memorizzazione gerarchica (HSM – Hierarchical Storage Management)**
+Uno dei problemi principali nella gestione della memoria terziaria è la **denominazione univoca dei file**.
 
-Il sistema di **memorizzazione gerarchica** estende la gerarchia di memoria per includere la memoria terziaria.  
-Si tratta di una **integrazione automatica** tra i livelli di archiviazione (RAM → disco → jukebox → nastro).
+Poiché i supporti sono rimovibili, un file deve poter essere identificato in modo univoco anche quando il supporto viene spostato da un sistema a un altro.
 
-**Principi di funzionamento:**
+#### **6.1. Problema della portabilità**
 
-- I **file piccoli e frequentemente usati** restano su **dischi magnetici** (livello secondario).
-    
-- I **file grandi, vecchi o raramente usati** vengono **spostati automaticamente** in dispositivi di memoria terziaria (es. jukebox ottici o nastri).
+La portabilità del supporto rende necessario identificare:
 
-**Vantaggi:**
+- il supporto fisico;
+- il file system eventualmente contenuto nel supporto;
+- il singolo file all'interno del supporto.
 
-- Riduzione del costo complessivo di archiviazione.
-    
-- Gestione trasparente per l’utente.
-    
-- Ottimizzazione dello spazio su disco e del throughput del sistema.
+Attualmente non esiste una soluzione completamente omogenea e universale per tutti i tipi di supporto rimovibile.
 
----
+#### **6.2. Soluzioni parziali**
 
-### **9. Sintesi finale**
+Esistono alcuni standard per specifiche classi di dispositivi, per esempio nel mondo dei CD-ROM o dei DVD.
 
-|Aspetto|Descrizione|
-|---|---|
-|**Obiettivo**|Gestire grandi volumi di dati a basso costo|
-|**Dispositivi principali**|Dischi rimovibili, nastri magnetici, sistemi ottici, olografici e MEMS|
-|**Caratteristiche chiave**|Larghezza di banda, latenza, affidabilità, costo|
-|**Gestione fisica**|Controllo e sincronizzazione dei supporti|
-|**Gestione virtuale**|Integrazione con il file system|
-|**Accesso**|Diretto (dischi) o sequenziale (nastri)|
-|**Denominazione file**|Necessaria identificazione univoca del supporto|
-|**HSM (Hierarchical Storage Management)**|Sposta automaticamente i file meno usati su supporti più lenti e capienti|
+Negli altri casi, l'identificazione univoca è spesso lasciata:
+
+- all'applicazione;
+- al sistema di archiviazione;
+- all'utente.
+
+> ⚠️ Senza una denominazione univoca del supporto e dei file, diventa difficile integrare informazioni archiviate su supporti diversi in un unico spazio logico coerente.
 
 ---
 
-### **10. Conclusione del modulo**
+### **7. Gestione gerarchica della memoria**
 
-Con questa lezione si conclude il **Modulo 2 – Gestione dell’ingresso/uscita**.  
-Abbiamo esplorato:
+Un modo per realizzare l'astrazione della memoria terziaria è la **gestione gerarchica della memoria** (*Hierarchical Storage Management*, **HSM**).
 
-- la **struttura dei sottosistemi di I/O**,
-    
-- la **realizzazione del sottosistema nel kernel**,
-    
-- la **gestione delle memorie di massa** (dischi e RAID),
-    
-- e la **memoria terziaria** come estensione della gerarchia.
+L'obiettivo è estendere la visione del file system della memoria secondaria per incorporare anche la memoria terziaria, fornendo una visione omogenea a utenti e programmi.
 
-Queste conoscenze forniscono una visione completa dell’**architettura I/O nei sistemi operativi moderni**, dove l’efficienza, la sicurezza e la scalabilità della gestione dei dati sono elementi chiave per l’intero sistema.
+#### **7.1. Integrazione nel file system**
+
+La gestione gerarchica richiede di assegnare una denominazione univoca ai supporti terziari, così da integrare la porzione di file system presente su questi dispositivi nel file system globale del sistema.
+
+#### **7.2. Migrazione dei file**
+
+In un sistema HSM:
+
+- i file piccoli e usati frequentemente restano sui dischi magnetici o sui supporti secondari più veloci;
+- i file grandi, vecchi o poco usati vengono spostati su dispositivi terziari, per esempio dischi ottici in un jukebox o nastri.
+
+Questa organizzazione consente di mantenere veloci i dati più usati e ridurre il costo dei dati meno usati.
+
+> 💡 L'HSM nasconde all'utente la migrazione dei file tra livelli diversi: l'utente vede un unico spazio logico, mentre il sistema decide dove collocare fisicamente i dati.
+
+---
+
+### **8. Sintesi finale**
+
+> ✅ La memoria terziaria estende la capacità di archiviazione usando supporti rimovibili, economici e affidabili, adatti a dati consultati raramente.
+
+In questa lezione sono stati analizzati:
+
+- obiettivi della memoria terziaria: grande capacità, basso costo e bassa frequenza di accesso;
+- supporti tipici: dischi rimovibili, dischi ottici e nastri magnetici;
+- caratteristiche richieste: velocità sufficiente, elevata affidabilità e basso costo;
+- gestione dei dischi rimovibili come raw device o file system;
+- gestione dei nastri come dispositivi sequenziali e dedicati;
+- problema della denominazione univoca dei file;
+- gestione gerarchica della memoria per integrare memoria secondaria e terziaria.
+
+La memoria terziaria completa la gerarchia di memorizzazione offrendo grande capacità a basso costo, a prezzo di tempi di accesso più elevati e gestione più complessa.

@@ -1,171 +1,315 @@
 # **M3 UD2 Lezione 6 - Manutenzione del file system**
 
+---
+
 ### **1. Introduzione**
 
-La **manutenzione del file system** comprende tutte le attività necessarie a **garantire integrità, affidabilità e disponibilità** dei dati nel tempo.  
-Un file system efficiente non deve soltanto archiviare informazioni, ma anche **preservarne la consistenza** e permettere il **ripristino** dopo guasti o danneggiamenti.
+Questa lezione affronta il problema della **manutenzione del file system**, necessaria per garantire:
 
-Gli aspetti principali trattati in questa lezione sono:
+- conservazione delle informazioni;
+- consistenza dei dati;
+- possibilita' di ripristino dopo errori o guasti.
 
-- la **gestione degli errori**,
-    
-- la **coerenza tra dati e metadati**,
-    
-- e le **tecniche di backup e ripristino**.
+Il file system deve infatti mantenere nel tempo uno stato corretto, anche quando si verificano malfunzionamenti, interruzioni improvvise o danneggiamenti del supporto fisico.
+
+Gli aspetti principali sono:
+
+- errori nel file system;
+- coerenza tra dati e metadati;
+- backup;
+- restore;
+- file system transazionali, logging e journaling.
+
+> 📌 La manutenzione serve a mantenere il file system in uno stato corretto e recuperabile anche dopo condizioni anomale.
 
 ---
 
 ### **2. Errori nel file system**
 
-I **malfunzionamenti** di un file system possono derivare da due principali categorie di cause:
+Gli errori nel file system possono derivare da due categorie principali.
 
-#### **2.1 Danneggiamenti della struttura dati (consistenza)**
+#### **2.1. Danneggiamenti logici**
 
-- Si verificano quando la **struttura logica del file system** (directory, indici, tabelle FAT, i-node, ecc.) viene alterata in modo anomalo.
-    
-- Possono causare:
-    
-    - perdita di riferimenti ai file,
-        
-    - incongruenze tra dimensioni e contenuti,
-        
-    - errori di allocazione o duplicazione dei blocchi.
+I danneggiamenti logici riguardano le strutture dati del file system.
 
-#### **2.2 Danneggiamenti del supporto fisico**
+Possono essere:
 
-- Si riferiscono a **guasti hardware o degrado** del dispositivo di memorizzazione.
-    
-- Esempi tipici:
-    
-    - settori danneggiati su disco,
-        
-    - guasti del controller,
-        
-    - rottura o usura del supporto magnetico/ottico.
+- accidentali;
+- dovuti a crash;
+- causati da errori software;
+- volontari, per esempio a seguito di azioni malevole.
 
-Tali errori possono compromettere **definitivamente** l’accesso ai dati se non vengono rilevati e corretti tempestivamente.
+Esempi di inconsistenza logica sono:
+
+- metadati non allineati ai dati;
+- blocchi marcati liberi ma ancora appartenenti a un file;
+- blocchi assegnati a piu' file;
+- directory non coerenti con i descrittori;
+- dimensioni dei file non coerenti con i blocchi allocati.
+
+#### **2.2. Danneggiamenti fisici**
+
+I danneggiamenti fisici riguardano il supporto di memorizzazione.
+
+Esempi:
+
+- settori danneggiati;
+- guasti del disco;
+- guasti del controller;
+- malfunzionamenti non recuperabili;
+- distruzione fisica del sistema informativo.
+
+In entrambi i casi, il sistema operativo deve tentare di preservare o ricostruire uno stato consistente del file system.
+
+> ⚠️ Un file system puo' diventare inconsistente sia per errori nelle strutture logiche sia per guasti del supporto fisico.
 
 ---
 
 ### **3. Coerenza del file system**
 
-La **coerenza** (o **consistenza**) del file system è la proprietà che assicura la **corrispondenza tra dati e metadati**, sia in memoria centrale che su disco.
+La **coerenza** e' la proprieta' per cui dati e metadati rappresentano uno stato corretto del file system.
 
-#### **3.1 Problematica**
+In particolare, deve esserci allineamento tra:
 
-Durante le operazioni di lettura e scrittura, i dati e i metadati possono trovarsi in **stati intermedi non coerenti**, specialmente in caso di:
+- informazioni presenti in memoria centrale durante l'uso del file system;
+- informazioni memorizzate stabilmente sul disco.
 
-- interruzioni improvvise di alimentazione,
-    
-- crash del sistema operativo,
-    
-- errori del driver o del controller del disco.
+Il problema nasce perche' molte operazioni del file system aggiornano piu' strutture.
 
-#### **3.2 Meccanismi di mantenimento**
+Per esempio, creare un file puo' richiedere:
 
-Per garantire la consistenza si impiegano:
+- aggiornamento della directory;
+- allocazione dei blocchi;
+- aggiornamento della lista libera;
+- aggiornamento del descrittore del file;
+- scrittura dei dati.
 
-1. **Controllore della coerenza (consistency checker)**
-    
-    - Analizza periodicamente la struttura del file system.
-        
-    - Rileva e corregge incongruenze tra i blocchi e i metadati.
-        
-    - Esempi: _fsck_ (UNIX/Linux), _chkdsk_ (Windows).
-        
-2. **Scritture sincrone dei dati e dei metadati critici**
-    
-    - I dati fondamentali (es. i-node, directory, tabelle) vengono scritti **immediatamente e in modo coordinato** su disco.
-        
-    - Riduce la probabilità di perdita in caso di interruzione del sistema.
+Se il sistema si interrompe a meta' dell'operazione, alcune strutture possono risultare aggiornate e altre no.
+
+> 📌 La coerenza richiede che dati e metadati descrivano lo stesso stato del file system.
 
 ---
 
-### **4. Backup e ripristino**
+### **4. Controllore della coerenza**
 
-#### **4.1 Backup: definizione e scopo**
+Per garantire l'allineamento dei valori, il sistema puo' introdurre un **controllore della coerenza**.
 
-Il **backup** consiste nel creare una **copia di sicurezza** dei dati e dei metadati, con l’obiettivo di poter **recuperare informazioni** in caso di perdita o danneggiamento.
+Il controllore verifica che le strutture del file system siano compatibili tra loro.
 
-Serve a contrastare eventi come:
+Controlla, per esempio:
 
-- malfunzionamenti hardware,
-    
-- guasti improvvisi,
-    
-- errori umani,
-    
-- disastri fisici (incendi, allagamenti, ecc.).
+- se i blocchi indicati dai descrittori esistono davvero;
+- se la lista dei blocchi liberi non contiene blocchi occupati;
+- se un blocco non e' assegnato contemporaneamente a piu' file;
+- se le directory puntano a descrittori validi;
+- se le dimensioni dei file corrispondono ai blocchi allocati.
 
-#### **4.2 Tipologie di backup**
+Quando rileva una incoerenza, puo':
 
-1. **Backup completo**
-    
-    - Copia **tutti i file e i metadati** presenti nel sistema.
-        
-    - Garantisce la massima sicurezza, ma richiede **molto tempo e spazio**.
-    
-2. **Backup incrementale**
-    
-    - Copia **solo i file modificati** dopo l’ultimo backup.
-        
-    - È più rapido e compatto, ma il **ripristino** richiede l’unione di più copie.
+- correggerla automaticamente;
+- segnalare l'errore;
+- isolare blocchi o file danneggiati;
+- richiedere intervento amministrativo.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> ✅ Il controllore della coerenza serve a riportare le strutture del file system a uno stato interpretabile e corretto.
 
 ---
 
-#### **4.3 Ripristino (Restore)**
+### **5. Scrittura sincrona dei dati critici**
 
-Il **ripristino** è l’operazione inversa del backup:  
-consiste nel **ricaricare i dati e i metadati** dal supporto di backup verso la memoria di massa principale, per riportare il sistema a uno stato coerente precedente al guasto.
+Per dati e metadati critici, il sistema non puo' sempre aspettare il normale scaricamento periodico su disco.
 
-- Può essere **totale** (ripristino dell’intero sistema) o **parziale** (ripristino di specifici file o directory).
-    
-- È essenziale che il backup includa **metadati e strutture di controllo**, non solo i contenuti dei file.
+Alcune informazioni devono essere salvate in modo **sincrono**, cioe' immediatamente e in ordine controllato.
 
----
+Questo vale soprattutto per:
 
-### **5. File system con journaling**
+- metadati di allocazione;
+- directory;
+- descrittori dei file;
+- informazioni sulla lista libera;
+- strutture di controllo del file system.
 
-Nei **file system moderni** viene adottato un approccio basato sulla **registrazione delle operazioni** (_log-based_ o _transaction-oriented file system_), noto come **journaling**.
+La scrittura sincrona riduce il rischio che, dopo un crash, il disco contenga uno stato incompleto o non interpretabile.
 
-#### **5.1 Principio di funzionamento**
-
-- Ogni operazione di scrittura o modifica del file system viene prima **registrata in un log** (journal).
-    
-- Solo dopo la registrazione, l’operazione viene effettivamente eseguita.
-    
-- In caso di crash o guasto, il sistema può **ricostruire uno stato coerente** rileggendo il journal e completando o annullando le operazioni incomplete.
-
-#### **5.2 Vantaggi**
-
-- Garantisce un **elevato livello di affidabilità e consistenza**.
-    
-- Permette un **ripristino rapido** dopo interruzioni improvvise.
-    
-- Riduce la necessità di controlli completi del file system all’avvio.
-
-#### **5.3 Esempi di file system con journaling**
-
-- **ext3 / ext4** (Linux)
-    
-- **NTFS** (Windows)
-    
-- **HFS+ e APFS** (macOS)
+> ⚠️ La scrittura sincrona migliora la sicurezza dello stato su disco, ma puo' ridurre le prestazioni perche' obbliga ad attendere il completamento dell'I/O.
 
 ---
 
-### **6. Sintesi finale**
+### **6. Backup**
 
-|Aspetto|Descrizione|Tecniche principali|
+Il **backup** e' il salvataggio di sicurezza di dati e metadati.
+
+Serve a conservare una copia delle informazioni per superare:
+
+- guasti del sistema;
+- malfunzionamenti transitori non risolvibili;
+- perdita accidentale di dati;
+- danneggiamenti volontari;
+- catastrofi con distruzione del sistema informativo.
+
+Un backup deve includere non solo i dati dei file, ma anche le informazioni necessarie a ricostruire correttamente il file system.
+
+---
+
+### **7. Backup completo**
+
+Il **backup completo** salva tutte le informazioni contenute nella memoria di massa.
+
+Vantaggi:
+
+- e' semplice da gestire;
+- contiene uno stato completo del sistema;
+- rende il ripristino piu' diretto.
+
+Svantaggi:
+
+- richiede molto tempo;
+- richiede molto spazio;
+- puo' essere costoso se eseguito frequentemente.
+
+> 📌 Il backup completo e' il punto di riferimento da cui puo' partire un successivo ripristino.
+
+---
+
+### **8. Backup incrementale**
+
+Il **backup incrementale** salva solo le informazioni modificate dall'ultimo backup.
+
+Rispetto al backup completo:
+
+- e' piu' rapido;
+- occupa meno spazio;
+- riduce il carico sul sistema.
+
+Il ripristino, pero', e' piu' complesso.
+
+Per ricostruire lo stato finale bisogna partire da un backup completo e poi applicare, nell'ordine corretto, tutti i backup incrementali successivi.
+
+Formalmente:
+
+$$
+\text{stato ripristinato} =
+\text{backup completo} +
+\sum \text{backup incrementali successivi}
+$$
+
+> ⚠️ Il backup incrementale migliora le prestazioni del salvataggio, ma rende piu' articolata la procedura di restore.
+
+---
+
+### **9. Restore**
+
+Il **restore** e' l'operazione di ripristino.
+
+Consiste nel ricaricare dati e metadati nella memoria di massa principale prendendoli dal supporto su cui erano stati salvati, spesso una memoria terziaria o un sistema esterno di backup.
+
+L'obiettivo e' riportare il file system a uno stato:
+
+- precedente al guasto;
+- coerente;
+- utilizzabile dai processi.
+
+Il restore puo' essere:
+
+- **totale**, se ricostruisce l'intero file system;
+- **parziale**, se recupera solo alcuni file, directory o porzioni di dati.
+
+> ✅ Backup e restore permettono la sopravvivenza delle informazioni anche quando il file system originario non e' piu' affidabile.
+
+---
+
+### **10. File system transazionali**
+
+Per rendere backup e ripristino piu' efficienti, si possono introdurre file system orientati alle **transazioni**.
+
+Una transazione e' una sequenza di operazioni che deve essere trattata come un'unita' logica.
+
+Una transazione deve risultare:
+
+- completata interamente;
+- oppure non applicata.
+
+Non deve rimanere visibile uno stato intermedio.
+
+Nel file system, una transazione puo' rappresentare, per esempio:
+
+- creazione di un file;
+- cancellazione di un file;
+- aggiornamento di un descrittore;
+- modifica della lista libera;
+- scrittura di dati e metadati collegati.
+
+---
+
+### **11. Logging**
+
+Nei sistemi basati su **logging**, le operazioni vengono registrate in un log.
+
+Il log conserva le informazioni necessarie a capire quali transazioni:
+
+- erano iniziate;
+- sono state completate;
+- sono rimaste incomplete al momento del guasto.
+
+Dopo un crash, il sistema analizza il log e puo':
+
+- ripetere le transazioni completate ma non ancora consolidate su disco;
+- annullare o ignorare le transazioni incomplete;
+- riportare il file system a uno stato consistente precedente o successivo, ma comunque corretto.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 💡 Il logging permette di ricostruire lo stato corretto osservando la storia recente delle operazioni.
+
+---
+
+### **12. Journaling**
+
+Il **journaling** e' una tecnica basata sulla registrazione delle attivita' del file system in un journal.
+
+Prima di modificare stabilmente le strutture principali del file system, il sistema registra nel journal le operazioni da eseguire.
+
+In caso di guasto, il journal consente di stabilire quali operazioni erano complete e quali no.
+
+Questo rende possibile:
+
+- completare operazioni gia' registrate correttamente;
+- annullare operazioni incomplete;
+- evitare controlli completi lunghi dell'intero file system;
+- ridurre i tempi di recupero dopo un crash.
+
+Il journaling puo' riguardare:
+
+- solo i metadati;
+- dati e metadati.
+
+> 📌 Il journaling non sostituisce il backup: protegge soprattutto dalla perdita di coerenza dopo crash, non dalla distruzione fisica del supporto.
+
+---
+
+### **13. Sintesi**
+
+| Aspetto | Problema | Tecnica di gestione |
 |---|---|---|
-|**Errori del file system**|Danneggiamento logico o fisico delle strutture|Controlli di coerenza, manutenzione periodica|
-|**Coerenza**|Allineamento tra dati e metadati in memoria e su disco|Consistency checker, scritture sincrone|
-|**Backup e ripristino**|Copia e recupero dei dati dopo guasti|Backup completo e incrementale|
-|**Journaling**|Registrazione preventiva delle operazioni|Log-based recovery, file system transazionali|
+| **Errori logici** | Strutture dati incoerenti | Controllore della coerenza |
+| **Errori fisici** | Supporto danneggiato | Backup, restore, isolamento guasti |
+| **Coerenza** | Dati e metadati non allineati | Scritture sincrone, verifiche |
+| **Backup completo** | Salvataggio dell'intero sistema | Copia totale di dati e metadati |
+| **Backup incrementale** | Salvataggio efficiente | Copia delle sole modifiche |
+| **Restore** | Recupero dopo guasto | Ricostruzione da backup |
+| **Logging** | Recupero dello stato recente | Analisi e ripetizione/annullamento transazioni |
+| **Journaling** | Consistenza dopo crash | Registro delle operazioni del file system |
 
 ---
 
-### **7. Conclusione**
+### **14. Conclusione**
 
-La manutenzione del file system è essenziale per garantire la **sicurezza e l’affidabilità dei dati**.  
-Attraverso controlli di coerenza, procedure di backup e tecniche di journaling, il sistema operativo può **prevenire la perdita di informazioni**, **limitare i danni da guasti fisici** e **ripristinare rapidamente la normalità operativa**.
+La manutenzione del file system ha lo scopo di garantire che le informazioni restino conservate e consistenti anche in presenza di errori o guasti.
+
+La coerenza richiede l'allineamento tra dati e metadati in memoria centrale e su disco.
+
+Backup e restore permettono di recuperare uno stato corretto dopo perdita o danneggiamento delle informazioni.
+
+Logging e journaling migliorano la capacita' del file system di recuperare rapidamente uno stato consistente dopo interruzioni improvvise, riducendo il rischio che operazioni parziali lascino strutture incoerenti.

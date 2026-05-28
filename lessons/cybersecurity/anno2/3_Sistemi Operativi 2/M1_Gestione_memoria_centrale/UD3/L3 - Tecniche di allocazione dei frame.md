@@ -1,172 +1,213 @@
 # **M1 UD3 Lezione 3 - Tecniche di allocazione dei frame**
 
+---
+
 ### **1. Introduzione**
 
-La gestione della **memoria virtuale** non riguarda solo la scelta di **quale pagina sostituire**, ma anche **quante pagine assegnare a ciascun processo**.  
-Questa decisione, chiamata **allocazione dei frame**, influenza in modo diretto le prestazioni complessive del sistema e la frequenza di _page fault_.
+La gestione della **memoria virtuale** non riguarda solo la scelta di **quale pagina sostituire**, ma anche **quanti frame assegnare a ciascun processo**.
+
+Questa decisione, chiamata **allocazione dei frame**, influenza in modo diretto l'evoluzione della computazione del processo, soprattutto dal punto di vista della velocità.
+
+> 📌 Il numero di frame assegnati a un processo influenza la frequenza dei **page fault**: più frame sono disponibili, minore è la probabilità che una pagina richiesta non sia già in memoria centrale.
 
 ---
 
-### **2. Il problema dell’allocazione**
+### **2. Il problema dell'allocazione**
 
-Ogni processo necessita di un certo numero di **frame fisici** per eseguire le proprie istruzioni.  
-Un numero troppo basso di frame provoca numerosi _page fault_, mentre un numero eccessivo sottrae risorse agli altri processi.
+Ogni processo necessita di un certo numero di **frame fisici** per eseguire le proprie istruzioni e accedere ai propri dati. Un numero troppo basso di frame provoca numerosi page fault, mentre un numero eccessivo sottrae risorse agli altri processi.
 
-#### **Osservazione**
+All'aumentare del numero di frame assegnati a un processo:
 
-- All’aumentare del numero di frame assegnati a un processo,  
-    → **diminuisce la probabilità di page fault**  
-    → **diminuisce il tempo medio di accesso alla memoria**.
-    
-- Tuttavia, la memoria fisica totale è limitata, quindi il sistema deve stabilire **criteri di distribuzione ottimale**.
+- diminuisce la frequenza delle mancanze di pagina;
+- aumenta la probabilità che gli accessi avvengano verso pagine già presenti in memoria centrale;
+- diminuisce il **tempo medio di accesso alla memoria**;
+- migliora la velocità di avanzamento della computazione del processo.
 
-#### **Domande principali**
+Il problema diventa quindi stabilire:
 
-1. Quanti frame assegnare a ciascun processo?
-    
-2. L’allocazione deve essere **uguale per tutti (omogenea)** o **dipendere da parametri specifici (eterogenea)**?
+1. **quanti frame allocare** a ogni processo;
+2. se usare un criterio uguale per tutti i processi;
+3. se l'allocazione debba dipendere da caratteristiche specifiche, come dimensione o priorità.
+
+> ⚠️ Allocare più frame a un processo riduce i suoi page fault, ma riduce anche i frame disponibili per gli altri processi.
 
 ---
 
-### **3. Vincoli per l’allocazione dei frame**
+### **3. Vincoli per l'allocazione dei frame**
 
-L’allocazione dei frame non può essere arbitraria: esistono vincoli tecnici e fisici.
+L'allocazione dei frame non può essere arbitraria: deve rispettare vincoli architetturali, fisici e gestionali.
 
-#### **a. Numero minimo di frame**
+#### **3.1. Numero minimo di frame**
 
-- Ogni processo deve disporre di un numero minimo di frame per poter essere eseguito.
-    
-- Questo numero dipende dall’**architettura hardware** e dal **set di istruzioni** della CPU.  
-    Alcune istruzioni possono infatti riferirsi a più pagine contemporaneamente.
+Ogni processo caricato in memoria centrale deve ricevere un **numero minimo di frame** per poter essere eseguito.
 
-#### **b. Frame disponibili**
+Questo minimo dipende tipicamente dall'**architettura fisica** del sistema e dal set di istruzioni della CPU. Alcune istruzioni possono infatti richiedere accessi contemporanei a più pagine, per esempio per codice, operandi e destinazione del risultato.
 
-- Il numero totale di frame allocabili dipende dalla **memoria centrale fisica installata**.
+> 📌 Un processo non può ricevere meno frame del minimo richiesto dall'architettura: sotto quella soglia l'esecuzione non è garantita.
 
-#### **c. Frame allocati**
+#### **3.2. Numero di frame disponibili**
 
-- Indichiamo con ( f_i ) il numero di frame assegnati al processo ( P_i ).
-    
-- Alcuni frame possono essere **condivisi** tra processi (ad esempio, librerie comuni).  
-    In tal caso:
-    
-    - ( r_j ) = frame condivisi dal gruppo di processi ( G_j ).
-        
-    - ( d ) = frame fisici ancora disponibili.
+Il numero totale di frame allocabili dipende dalla quantità di **memoria centrale fisica installata**.
 
-#### **Vincolo generale**
+Il sistema operativo può inoltre voler mantenere un certo numero di frame liberi per rispondere rapidamente a nuove richieste dei processi. Questi frame liberi costituiscono una riserva operativa utile per ridurre il costo immediato di alcuni page fault.
 
-$$  
-\sum_i f_i - \sum_j r_j \le d  
+#### **3.3. Frame condivisi tra processi**
+
+Se più processi condividono alcune pagine, tali frame non devono essere contati più volte nel totale effettivamente occupato. Le pagine condivise vengono fisicamente caricate una sola volta, anche se appartengono allo spazio virtuale di più processi.
+
+Sia:
+
+- $P_i$ un processo;
+- $F_i$ il numero di frame assegnati al processo $P_i$;
+- $G_j$ un gruppo di processi che condividono pagine;
+- $S_j$ il numero di frame condivisi dal gruppo $G_j$;
+- $D$ il numero totale di frame fisici disponibili per l'allocazione.
+
+Il vincolo generale è:
+
+$$
+\sum_i F_i - \sum_j S_j \le D
 $$
 
-Il totale dei frame assegnati, al netto di quelli condivisi, **non deve superare** il numero di frame fisici disponibili.
+Il termine $\sum_j S_j$ evita di contare più volte frame che sono fisicamente condivisi tra processi dello stesso gruppo.
+
+> ✅ Il numero totale effettivo di frame assegnati ai processi, al netto delle condivisioni, non può superare i frame disponibili nella memoria centrale fisica.
 
 ---
 
-### **4. Tipi di allocazione**
+### **4. Ambito dell'allocazione**
 
-L’allocazione può essere effettuata in due modalità principali:
+L'insieme dei frame da cui il sistema operativo può effettuare l'allocazione costituisce un vincolo importante. Si distinguono due approcci principali.
 
-- **Allocazione globale:**  
-    il sistema sceglie i frame da qualunque area della memoria fisica, senza distinzioni tra processi.
-    
-- **Allocazione locale:**  
-    ogni processo utilizza solo i frame già assegnati al proprio spazio; le sostituzioni avvengono **internamente**.
+#### **4.1. Allocazione globale**
+
+Nell'**allocazione globale**, tutti i frame disponibili possono essere assegnati a tutti i processi. Il sistema operativo può quindi scegliere frame da un insieme comune e redistribuirli in modo più flessibile.
+
+Questa tecnica permette un adattamento dinamico al carico di lavoro, ma può generare interferenza tra processi: un processo può ricevere più frame a discapito di un altro.
+
+#### **4.2. Allocazione locale**
+
+Nell'**allocazione locale**, gli algoritmi operano su un sottoinsieme di frame già assegnato a un processo. Le sostituzioni e le decisioni di gestione restano interne a quel sottoinsieme.
+
+Il processo non può cercare frame al di fuori di quelli preassegnati.
+
+> ⚠️ L'allocazione locale limita l'interferenza tra processi, ma può essere rigida: un processo con molti page fault non può ottenere automaticamente frame inutilizzati da altri processi.
 
 ---
 
 ### **5. Allocazione omogenea**
 
-Nel modello più semplice, ogni processo riceve **lo stesso numero di frame**, indipendentemente dalla sua dimensione o priorità.
+Nell'**allocazione omogenea**, tutti i processi ricevono la stessa quantità di frame.
 
-Sia:
+Se:
 
-- $( m )$ = numero totale di frame disponibili;
-    
-- $( n )$ = numero di processi attivi;
-    
-- $( f_i )$ = frame assegnati al processo ( P_i ).
+- $D$ è il numero totale di frame disponibili per i processi;
+- $n$ è il numero di processi attivi;
+- $F_i$ è il numero di frame assegnati al processo $P_i$;
 
-Allora:
+allora:
 
-$$  
-f_i = \frac{m}{n}  
+$$
+F_i = \frac{D}{n}
 $$
 
-#### **Caratteristiche**
+#### **5.1. Vantaggi**
 
-- **Semplice da implementare**, equa dal punto di vista della distribuzione.
-    
-- Tuttavia, può risultare **inefficiente** se i processi hanno dimensioni molto diverse.
+Il criterio è semplice da implementare ed è equo dal punto di vista formale, perché ogni processo riceve la stessa quota di memoria fisica.
+
+#### **5.2. Svantaggi**
+
+Il limite principale è che i processi possono avere dimensioni molto diverse. Un processo grande può richiedere più memoria centrale per ridurre il numero di page fault, mentre un processo piccolo può ricevere più frame di quelli realmente utili.
+
+> ⚠️ L'allocazione omogenea è semplice, ma ignora le esigenze effettive dei processi.
 
 ---
 
 ### **6. Allocazione proporzionale alla dimensione**
 
-In questo caso, il numero di frame assegnati a ciascun processo è proporzionale alla **dimensione del suo spazio di memoria virtuale**.
+Nell'**allocazione proporzionale alla dimensione**, il numero di frame assegnati a ciascun processo è proporzionale alla dimensione del suo spazio di memoria virtuale.
 
-Sia:
+Se:
 
-- $( m )$ = numero totale di frame disponibili;
-    
-- $( s_i )$ = dimensione (in pagine) dello spazio virtuale del processo $( P_i )$;
-    
-- $( f_i )$ = frame assegnati a $( P_i )$.
+- $D$ è il numero totale di frame disponibili;
+- $s_i$ è la dimensione, in pagine, dello spazio virtuale del processo $P_i$;
+- $\sum_k s_k$ è la dimensione complessiva degli spazi virtuali dei processi considerati;
+- $F_i$ è il numero di frame assegnati a $P_i$;
 
-La formula è:
+allora:
 
-$$  
-f_i = m \cdot \frac{s_i}{\sum_i s_i}  
+$$
+F_i = D \cdot \frac{s_i}{\sum_k s_k}
 $$
 
-#### **Caratteristiche**
+Il rapporto:
 
-- I processi più grandi ricevono più frame, riducendo i loro _page fault_.
-    
-- Garantisce una distribuzione **più equilibrata e proporzionata** alle esigenze effettive.
-    
-- Tuttavia, i processi piccoli potrebbero risultare **penalizzati**, ricevendo pochi frame.
+$$
+\frac{s_i}{\sum_k s_k}
+$$
+
+indica la percentuale di memoria virtuale complessiva riconducibile al processo $P_i$. La stessa percentuale viene usata per assegnare i frame fisici.
+
+#### **6.1. Vantaggi**
+
+I processi più grandi ricevono più frame, riducendo il numero di page fault dovuti alla maggiore ampiezza del loro spazio di indirizzamento.
+
+#### **6.2. Svantaggi**
+
+I processi piccoli possono risultare penalizzati se ricevono troppo pochi frame rispetto al loro comportamento reale. La dimensione dello spazio virtuale, infatti, non coincide necessariamente con il working set effettivamente usato durante una fase della computazione.
+
+> 💡 La dimensione del processo è un criterio utile, ma non sempre descrive bene quante pagine il processo sta usando davvero in un certo momento.
 
 ---
 
 ### **7. Allocazione proporzionale alla priorità**
 
-Qui l’allocazione è basata sulla **priorità logica** del processo.  
-I processi più importanti o critici ricevono più frame rispetto a quelli secondari.
+Nell'**allocazione proporzionale alla priorità**, il numero di frame assegnati dipende dalla priorità logica del processo.
 
-Sia:
+L'idea è che un processo con priorità più alta debba evolvere più rapidamente. Per ottenere questo risultato, gli si assegna un numero maggiore di frame, così da ridurre i page fault e il tempo medio di accesso alla memoria.
 
-- $( m )$ = numero totale di frame disponibili;
-    
-- $( p_i )$ = priorità del processo $( P_i )$ (espressa come numero positivo);
-    
-- $( f_i )$ = frame assegnati a $( P_i )$.
+Assumendo una logica positiva, in cui un valore di priorità più alto indica maggiore importanza, siano:
 
-La formula diventa:
+- $D$ il numero totale di frame disponibili;
+- $q_i$ la priorità del processo $P_i$;
+- $\sum_k q_k$ la somma delle priorità dei processi considerati;
+- $F_i$ il numero di frame assegnati a $P_i$.
 
-$$  
-f_i = m \times \frac{p_i}{\sum_i p_i}  
+Allora:
+
+$$
+F_i = D \cdot \frac{q_i}{\sum_k q_k}
 $$
 
-#### **Caratteristiche**
+Il rapporto:
 
-- Permette di favorire i processi con **alta priorità** (es. processi di sistema o in tempo reale).
-    
-- Può però generare **starvation** per i processi a bassa priorità se la memoria è scarsa.
+$$
+\frac{q_i}{\sum_k q_k}
+$$
+
+determina la quota di frame totali da assegnare al processo $P_i$.
+
+#### **7.1. Vantaggi**
+
+Questo criterio favorisce i processi più importanti, per esempio processi di sistema, interattivi o real-time, permettendo loro di ridurre i page fault e avanzare più rapidamente.
+
+#### **7.2. Svantaggi**
+
+I processi a bassa priorità possono ricevere pochi frame e subire un aumento dei page fault. In condizioni di memoria scarsa, questo può rallentare fortemente la loro esecuzione.
+
+> ⚠️ L'allocazione proporzionale alla priorità migliora il comportamento dei processi importanti, ma può penalizzare quelli con priorità bassa.
 
 ---
 
 ### **8. Sintesi finale**
 
-- L’**allocazione dei frame** influenza direttamente la frequenza dei _page fault_ e quindi le prestazioni del sistema.
-    
-- Esistono tre principali strategie:
-    
-    1. **Omogenea:** distribuzione uguale per tutti i processi.
-        
-    2. **Proporzionale alla dimensione:** più memoria ai processi più grandi.
-        
-    3. **Proporzionale alla priorità:** più memoria ai processi più importanti.
-    
-- Ogni sistema operativo adotta una combinazione di queste tecniche, adattandola dinamicamente in base al **carico di lavoro**, alla **memoria disponibile** e al **livello di priorità dei processi**.
+> ✅ L'allocazione dei frame stabilisce quanti frame fisici assegnare ai processi e influenza direttamente frequenza dei page fault, tempo medio di accesso alla memoria e velocità della computazione.
+
+Le principali strategie viste sono:
+
+- **allocazione omogenea**, in cui tutti i processi ricevono lo stesso numero di frame;
+- **allocazione proporzionale alla dimensione**, in cui i frame sono distribuiti in base alla dimensione dello spazio virtuale;
+- **allocazione proporzionale alla priorità**, in cui i processi più importanti ricevono più frame;
+- distinzione tra **allocazione globale** e **allocazione locale**, che determina da quale insieme di frame il sistema operativo può attingere.
+
+Ogni criterio presenta vantaggi e svantaggi. La scelta dipende dalla memoria fisica disponibile, dal numero di processi, dalla loro dimensione, dalla loro priorità e dal grado di isolamento desiderato tra processi.

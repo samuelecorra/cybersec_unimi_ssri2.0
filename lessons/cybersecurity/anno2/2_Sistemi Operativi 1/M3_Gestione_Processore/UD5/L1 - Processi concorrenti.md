@@ -11,17 +11,18 @@ Quando due o più processi accedono **simultaneamente a una risorsa condivisa**,
 È per questo che la **sincronizzazione** diventa essenziale.
 
 ---
+
 ### **2. Concorrenza e risorse condivise**
 
 Il concetto di **concorrenza** indica la possibilità che più processi vengano eseguiti _apparentemente_ nello stesso momento (in realtà, spesso alternandosi rapidamente sulla CPU).
 
 Durante l'esecuzione concorrente, i processi possono condividere:
 
-$$  
-\begin{cases}  
-\textbf{Risorse fisiche:}~ & \text{come stampanti, dischi, CPU o dispositivi di I/O.} \\\\  
-\textbf{Risorse informative:}~ & \text{come variabili in memoria, file o buffer.}  
-\end{cases}  
+$$
+\begin{cases}
+\textbf{Risorse fisiche:}~ & \text{come stampanti, dischi, CPU o dispositivi di I/O.} \\\\
+\textbf{Risorse informative:}~ & \text{come variabili in memoria, file o buffer.}
+\end{cases}
 $$
 
 Poiché queste risorse non possono essere usate da più processi _allo stesso tempo_ senza rischi, il sistema operativo deve garantire un **accesso controllato e in mutua esclusione**.
@@ -41,6 +42,7 @@ Immaginiamo due processi P e Q che vogliono stampare contemporaneamente sulla st
 Il risultato sarebbe **illeggibile per entrambi**. La soluzione corretta è **sincronizzare** i due processi così che la risorsa condivisa venga utilizzata in modo da produrre **prima tutta l'uscita di P** e **poi tutta l'uscita di Q** (o viceversa), mantenendo le due stampe **chiaramente separate**.
 
 ---
+
 ### **3. Il problema del produttore–consumatore**
 
 Per capire i rischi della concorrenza, consideriamo l’esempio classico del **problema del produttore–consumatore**.
@@ -48,21 +50,34 @@ Per capire i rischi della concorrenza, consideriamo l’esempio classico del **p
 #### **3.1. Descrizione**
 
 - Il **produttore** genera dati e li inserisce in un buffer.
-    
 - Il **consumatore** preleva i dati dallo stesso buffer per elaborarli.
 
 Se entrambi accedono contemporaneamente alla **variabile `count`** (che rappresenta il numero di elementi nel buffer), senza un’adeguata sincronizzazione, il valore di `count` può diventare incoerente.
 
 ---
+
 #### **3.2. Codice esemplificativo**
 
 **Produttore:**
 
 ```c
+// Definiamo le variabili su cui operiamo nell'esempio, altrimenti
+// non si capisce nada....
+#define BUFFER_SIZE 10
+int buffer[BUFFER_SIZE]; // buffer condiviso
+// Supponiamo che nextProduced sia una variabile che contiene il prossimo elemento da produrre
+
+int count = 0; // numero di elementi nel buffer
+int in = 0;   // indice di inserimento
+int out = 0;  // indice di estrazione
+
+
 while (1) {
-    while (count == BUFFER_SIZE); // attesa se buffer pieno
-    buffer[in] = nextProduced;
-    in = (in + 1) % BUFFER_SIZE;
+    while (count == BUFFER_SIZE){
+        do_nothing(); // attesa se buffer pieno
+    }; // Quando il buffer non è pieno usciamo dal ciclo di attesa!
+    buffer[in] = nextProduced; // inserimento del dato nel buffer
+    in = (in + 1) % BUFFER_SIZE; // aggiornamento dell'indice di inserimento, il modulo serve a farlo tornare a 0 quando raggiunge BUFFER_SIZE così da mantenere il buffer circolare e inserire i nuovi dati al posto di quelli vecchi che sono stati consumati, evitando anche out of bounds
     count++; // incremento del contatore
 }
 ```
@@ -79,6 +94,7 @@ while (1) {
 ```
 
 ---
+
 #### **3.3. Condizione di race (corse critiche)**
 
 Il problema nasce quando entrambi i processi tentano di aggiornare `count` nello stesso momento.
@@ -95,14 +111,14 @@ Le singole istruzioni macchina sono atomiche, ma **la sequenza nel suo insieme n
 
 Esecuzione possibile:
 
-|Passo|Operazione|Effetto|
-|:--|:--|:--|
-|S0|Produttore legge `count = 5`|`register1 = 5`|
-|S1|Produttore incrementa `register1`|`register1 = 6`|
-|S2|Consumatore legge `count = 5`|`register2 = 5`|
-|S3|Consumatore decrementa `register2`|`register2 = 4`|
-|S4|Produttore scrive `count = register1`|`count = 6`|
-|S5|Consumatore scrive `count = register2`|`count = 4`|
+| Passo | Operazione                             | Effetto         |
+| :---- | :------------------------------------- | :-------------- |
+| S0    | Produttore legge `count = 5`           | `register1 = 5` |
+| S1    | Produttore incrementa `register1`      | `register1 = 6` |
+| S2    | Consumatore legge `count = 5`          | `register2 = 5` |
+| S3    | Consumatore decrementa `register2`     | `register2 = 4` |
+| S4    | Produttore scrive `count = register1`  | `count = 6`     |
+| S5    | Consumatore scrive `count = register2` | `count = 4`     |
 
 Il risultato finale (`count = 4`) è **errato**:  
 entrambi i processi hanno aggiornato la stessa variabile senza coordinarsi.
@@ -111,6 +127,7 @@ Questo è un classico esempio di **race condition**, o _condizione di corsa_:
 il risultato dipende **dall’ordine imprevedibile di esecuzione** delle istruzioni concorrenti.
 
 ---
+
 ### **4. Sezione critica**
 
 Una **sezione critica** è la parte di codice in cui un processo accede a una risorsa condivisa.  
@@ -120,12 +137,12 @@ Se due processi eseguono simultaneamente la loro sezione critica sulla stessa ri
 
 Ogni soluzione al problema della concorrenza deve garantire tre condizioni fondamentali:
 
-$$  
-\begin{cases}  
-\textbf{Mutua esclusione:}~ & \text{solo un processo per volta può eseguire la sezione critica.} \\\\  
-\textbf{Progresso:}~ & \text{se nessun processo è nella sezione critica, uno dei candidati deve poter entrare.} \\\\  
-\textbf{Attesa limitata:}~ & \text{un processo non deve essere rimandato indefinitamente.}  
-\end{cases}  
+$$
+\begin{cases}
+\textbf{Mutua esclusione:}~ & \text{solo un processo per volta può eseguire la sezione critica.} \\\\
+\textbf{Progresso:}~ & \text{se nessun processo è nella sezione critica, uno dei candidati deve poter entrare.} \\\\
+\textbf{Attesa limitata:}~ & \text{un processo non deve essere rimandato indefinitamente.}
+\end{cases}
 $$
 
 ##### **Precisazioni sul progresso e sull'attesa limitata**
@@ -136,12 +153,13 @@ $$
 Questi principi costituiscono la base per ogni **algoritmo di sincronizzazione**.
 
 ---
+
 ### **5. Sincronizzazione e cooperazione**
 
 La sincronizzazione non serve solo per evitare conflitti, ma anche per **coordinare processi cooperanti** che lavorano insieme per uno stesso obiettivo.
 
-$$  
-\text{Processi cooperanti} \Rightarrow \text{necessità di sincronizzare l'evoluzione della loro computazione.}  
+$$
+\text{Processi cooperanti} \Rightarrow \text{necessità di sincronizzare l'evoluzione della loro computazione.}
 $$
 
 #### **5.1. Due modi di sincronizzare, due obiettivi diversi**
@@ -172,18 +190,20 @@ Questo schema **vincola l'ordine relativo** di alcune sezioni dei due processi s
 Un esempio classico più strutturato è il **produttore–consumatore**, dove la sincronizzazione è indispensabile per mantenere il corretto equilibrio tra produzione e consumo.
 
 ---
+
 ### **6. Sintesi finale**
 
-$$  
-\begin{cases}  
-\textbf{Concorrenza:}~ & \text{esecuzione simultanea o alternata di processi.} \\\\  
-\textbf{Rischio:}~ & \text{corse critiche dovute all’accesso simultaneo alle risorse condivise.} \\\\  
-\textbf{Sezione critica:}~ & \text{porzione di codice che deve essere eseguita in mutua esclusione.} \\\\  
-\textbf{Soluzione:}~ & \text{tecniche di sincronizzazione basate su mutua esclusione, progresso e attesa limitata.}  
-\end{cases}  
+$$
+\begin{cases}
+\textbf{Concorrenza:}~ & \text{esecuzione simultanea o alternata di processi.} \\\\
+\textbf{Rischio:}~ & \text{corse critiche dovute all’accesso simultaneo alle risorse condivise.} \\\\
+\textbf{Sezione critica:}~ & \text{porzione di codice che deve essere eseguita in mutua esclusione.} \\\\
+\textbf{Soluzione:}~ & \text{tecniche di sincronizzazione basate su mutua esclusione, progresso e attesa limitata.}
+\end{cases}
 $$
 
 ---
+
 ### **7. Conclusione**
 
 La concorrenza è inevitabile nei sistemi multitasking, ma anche potenzialmente pericolosa.  

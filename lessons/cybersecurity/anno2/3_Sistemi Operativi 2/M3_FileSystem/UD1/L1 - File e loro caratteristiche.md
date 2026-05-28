@@ -1,217 +1,314 @@
 # **M3 UD1 Lezione 1 - File e loro caratteristiche**
 
-### **1. Introduzione al File System**
+---
 
-Il **file system** è il componente del sistema operativo che fornisce una **visione logica e astratta** dei dispositivi fisici di memorizzazione, permettendo di organizzare, gestire e trasferire informazioni in modo uniforme e indipendente dall’hardware.
+### **1. Introduzione al file system**
 
-#### **Funzioni principali**
+Il **file system** è l'astrazione del sistema operativo che permette di accedere alle risorse informative e fisiche in modo **logico**, invece che tramite la loro posizione fisica nei dispositivi.
 
-- Astrazione dei dispositivi fisici di memorizzazione e trasferimento.
-    
-- Visione omogenea dei diversi dispositivi.
-    
-- Supporto alla **memorizzazione di lungo termine** e al **trasferimento dei dati**.
-    
-- Gestione di:
-    
-    - **Informazioni** (dati e programmi) → _file_
-        
-    - **Metainformazioni** (descrittori, strutture di gestione) → _directory_
+Fornisce una visione uniforme dei dispositivi di memorizzazione e trasferimento delle informazioni, così che dati e programmi possano essere reperiti tramite nomi, directory e posizioni logiche.
 
-Il file system costituisce quindi il **livello logico superiore** della gerarchia di memoria, dove le informazioni vengono organizzate in **file** e **directory** per consentirne l’accesso efficiente e sicuro.
+In questa lezione vengono analizzati:
+
+- concetto di file system;
+- concetto di file;
+- tipi di file;
+- struttura dei file;
+- attributi e descrittori;
+- operazioni sui file;
+- uso dei file;
+- metodi di accesso.
+
+> 📌 Il file system nasconde la posizione fisica delle informazioni e offre a utenti e programmi una visione logica, omogenea e persistente dei dati.
 
 ---
 
-### **2. Aggregazione di informazioni**
+### **2. File system**
 
-Le informazioni vengono raggruppate in strutture logiche:
+Il file system è una visione logica dei dispositivi di memorizzazione e di trasferimento delle informazioni.
 
-- **Array** → insieme di $( N )$ elementi **omogenei**.
-    
-- **Record** → insieme di $( K )$ elementi **eterogenei** (di tipi diversi).
+I suoi obiettivi principali sono:
 
-I file possono essere visti come **collezioni di elementi omogenei** (dati) o come **insiemi di record** (strutture complesse).
+- fornire un accesso omogeneo a dispositivi diversi;
+- supportare la memorizzazione di lungo termine;
+- supportare il trasferimento di informazioni verso l'esterno e dall'esterno;
+- semplificare la progettazione dei programmi applicativi;
+- semplificare l'uso del sistema da parte degli utenti.
 
----
+Il file system consiste nella gestione di:
 
-### **3. Concetto di File**
-
-Un **file** è una sequenza di elementi **omogenei** (caratteri, byte, record) di **numero non definito a priori**, che rappresenta un’unità logica di informazione.
-
-Ogni file è identificato da un **nome** e gestito dal file system attraverso un **descrittore** che ne registra attributi e posizione.
-
----
-
-### **4. Tipi di File**
-
-#### **4.1 File di dati**
-
-- **Numerici**
-    
-- **Alfabetici (character)**
-    
-- **Binari (byte)**
-
-#### **4.2 File di programmi**
-
-- Contengono istruzioni eseguibili o codice sorgente.
-
-#### **4.3 Classificazioni comuni per estensione**
-
-|Tipo|Estensione|Descrizione|
-|---|---|---|
-|**Eseguibile**|`.exe`, `.com`, `.bin`|Programma eseguibile|
-|**Oggetto**|`.obj`, `.o`|File compilato ma non linkato|
-|**Sorgente**|`.c`, `.cc`, `.java`, `.asm`, `.pas`|Codice sorgente|
-|**Batch / Script**|`.bat`, `.sh`|Sequenza automatica di comandi|
-|**Testo**|`.txt`, `.doc`|File di testo o documento|
-|**Elaborazione testi**|`.wp`, `.rtf`, `.tex`|Formati formattati|
-|**Libreria**|`.lib`, `.a`, `.so`, `.dll`|Raccolta di moduli o funzioni|
-|**Grafico**|`.jpg`, `.gif`, `.png`, `.bmp`, `.ps`, `.pdf`|Immagini e grafici|
-|**Archivio**|`.zip`, `.tar`, `.gz`, `.rar`|Dati compressi o archiviati|
-|**Multimedia**|`.mp3`, `.mpeg`, `.mov`, `.avi`|Audio e video|
+- **file**, cioè collezioni di dati e programmi;
+- **directory**, cioè metainformazioni usate per organizzare i file in sottoinsiemi logici.
 
 ---
 
-### **5. Struttura dei File**
+### **3. Aggregazione delle informazioni**
 
-I file possono presentare differenti livelli di organizzazione:
+Nei linguaggi di programmazione esistono diversi costruttori per aggregare informazioni.
 
-1. **Senza struttura**
-    
-    - Sequenza di byte o parole senza formattazione (es. file binari).
-    
-2. **Struttura semplice**
-    
-    - Sequenza di **linee di testo** a lunghezza fissa o variabile.
-    
-3. **Struttura complessa**
-    
-    - Documenti formattati o **file rilocabili/eseguibili**, che includono informazioni aggiuntive per il caricamento e l’uso dinamico.
+#### **3.1. Array**
 
----
+Un **array** raccoglie $N$ elementi omogenei, tutti dello stesso tipo base.
 
-### **6. Attributi dei File**
+La quantità di elementi è nota a priori:
 
-Ogni file è descritto da un insieme di **attributi** (metadati) memorizzati nella directory o nel descrittore del file.
+$$
+\text{array} = \{e_0, e_1, \dots, e_{N-1}\}
+$$
 
-#### **Principali attributi**
+#### **3.2. Record**
 
-- **Nome** → identificatore simbolico del file.
-    
-- **Identificatore** → numero univoco interno assegnato dal sistema operativo.
-    
-- **Tipo** → formato o scopo del file.
-    
-- **Locazione** → posizione fisica nei dispositivi di memoria.
-    
-- **Dimensione** → numero totale di byte o record.
-    
-- **Date** → creazione, ultimo accesso, ultima modifica.
-    
-- **Proprietario** → utente o processo che detiene i diritti di accesso.
-    
-- **Protezione** → permessi di lettura, scrittura, esecuzione.
-    
-- **Formato** → struttura logica dei dati.
+Un **record** raccoglie campi potenzialmente eterogenei.
 
-L’insieme di questi attributi costituisce il **descrittore del file**.
+Ogni campo può avere un tipo diverso, ma il numero dei campi e la loro struttura sono definiti a priori.
+
+#### **3.3. File**
+
+Un **file** è un costruttore che raccoglie elementi omogenei, tutti dello stesso tipo base, ma in quantità non definita a priori.
+
+A differenza dell'array, il numero di elementi del file si conosce solo quando l'oggetto viene creato e usato.
+
+> 📌 Un file è una sequenza di elementi omogenei di lunghezza variabile, gestita come unità logica persistente.
 
 ---
 
-### **7. Operazioni sui File**
+### **4. Concetto di file**
 
-Il file system fornisce un insieme di **operazioni fondamentali** che permettono di creare, modificare e gestire i file.
+Un file è una sequenza di elementi logici. Ogni elemento ha una posizione nella sequenza, tipicamente numerata a partire da $0$.
 
-|Operazione|Descrizione|
-|---|---|
-|**Creazione**|Crea un nuovo file vuoto.|
-|**Scrittura**|Inserisce o aggiorna i dati all’interno del file.|
-|**Lettura**|Estrae dati dal file.|
-|**Riposizionamento (seek)**|Sposta il puntatore all’interno del file.|
-|**Cancellazione**|Rimuove definitivamente il file.|
-|**Troncamento**|Elimina parte del contenuto, mantenendo il file.|
-|**Accodamento**|Aggiunge dati in coda.|
-|**Modifica attributi**|Cambia proprietà (es. permessi o proprietario).|
-|**Blocco / sblocco**|Gestisce l’accesso concorrente (file sharing).|
+Il tipo base degli elementi può essere:
 
----
+- numerico;
+- alfabetico;
+- binario;
+- definito dal programmatore;
+- una struttura più complessa;
+- codice programma.
 
-### **8. Uso dei File**
-
-#### **8.1 Apertura**
-
-Quando un file viene aperto, il sistema operativo:
-
-- verifica i **permessi di accesso**;
-    
-- individua il **descrittore del file** nel file system;
-    
-- determina la **locazione fisica** sui dispositivi;
-    
-- controlla eventuali **condivisioni o lock attivi**;
-    
-- inizializza le strutture di gestione nella **tabella dei file aperti**.
-
-#### **8.2 Lettura e scrittura**
-
-- Ogni file aperto possiede un **puntatore all’elemento corrente**, che indica la posizione del prossimo byte o record da leggere/scrivere.
-    
-- Il sistema accede ai dati tramite la **tabella dei file aperti**, che contiene:
-    
-    - la posizione dei blocchi del file,
-        
-    - il puntatore di posizione corrente,
-        
-    - e le informazioni di blocco o accesso condiviso.
-
-#### **8.3 Chiusura**
-
-Alla chiusura del file:
-
-- vengono **aggiornati gli attributi** e le informazioni di gestione;
-    
-- si **rilasciano eventuali lock** o risorse condivise;
-    
-- e vengono **rimosse le informazioni temporanee** dalla tabella dei file aperti.
+Il file system associa a ogni file un nome simbolico, una posizione logica nel sistema e un insieme di metadati utili alla gestione.
 
 ---
 
-### **9. Metodi di accesso**
+### **5. Tipi di file**
 
-I file possono essere letti e scritti secondo diverse modalità, a seconda della natura del supporto e delle necessità applicative.
+I file possono contenere dati o programmi. Spesso il tipo viene indicato anche tramite l'estensione nel nome.
 
-#### **Accesso sequenziale**
+Esempi comuni:
 
-- Utilizzato nei dispositivi a **nastro**.
-    
-- I dati vengono letti in ordine, uno dopo l’altro.
-    
-- Semplice ma inefficiente per accessi casuali.
+- file eseguibili: `.exe`, `.com`, `.bin`;
+- file oggetto: `.obj`, `.o`;
+- codice sorgente: `.c`, `.cc`, `.java`;
+- file batch o script: `.bat`, `.sh`;
+- testo puro: `.txt`;
+- testo formattato o documenti: `.doc`;
+- librerie: `.lib`, `.a`, `.so`, `.dll`;
+- immagini: `.jpg`, `.gif`, `.png`;
+- documenti impaginati: `.pdf`;
+- archivi: `.zip`, `.arc`, `.tar`, `.gz`;
+- file multimediali: audio e video.
 
-#### **Accesso diretto**
-
-- Tipico dei **dischi magnetici o SSD**.
-    
-- Consente di accedere direttamente a qualsiasi blocco conoscendone l’indice o l’indirizzo.
-
-#### **Accesso indicizzato**
-
-- Si basa su una **struttura di indice** che collega i record alle loro posizioni fisiche.
-    
-- Consente sia accessi sequenziali che diretti, con efficienza intermedia.
+> 💡 L'estensione non è il contenuto del file: è una convenzione utile a sistema operativo, applicazioni e utenti per riconoscere il tipo di informazione.
 
 ---
 
-### **10. Sintesi finale**
+### **6. Struttura dei file**
 
-|Concetto|Descrizione|
-|---|---|
-|**File System**|Fornisce una visione logica e unificata dei dispositivi di memoria|
-|**File**|Insieme di dati omogenei gestiti come un’unica unità|
-|**Attributi**|Informazioni descrittive sul file|
-|**Operazioni**|Creazione, lettura, scrittura, cancellazione, modifica|
-|**Uso**|Apertura, accesso tramite tabella, chiusura|
-|**Metodi di accesso**|Sequenziale, diretto, indicizzato|
+Un file può avere strutture diverse a seconda delle informazioni che contiene.
 
-In sintesi, il **file system** è il meccanismo attraverso cui il sistema operativo offre una rappresentazione **astratta, strutturata e sicura dei dati**, consentendo un accesso efficiente e controllato alle risorse permanenti del sistema.
+#### **6.1. File senza struttura**
+
+Il file può essere una semplice sequenza di elementi del tipo base predefinito, senza struttura interna visibile al sistema operativo.
+
+Questo approccio lascia all'applicazione il compito di interpretare il contenuto.
+
+#### **6.2. Struttura semplice**
+
+Il file può essere organizzato in elementi semplici, come linee a lunghezza fissa o variabile.
+
+Questa soluzione è tipica dei file di testo.
+
+#### **6.3. Struttura complessa**
+
+Il file può avere una struttura complessa, con:
+
+- intestazione iniziale;
+- informazioni sul contenuto;
+- metadati interni;
+- dati organizzati secondo un formato specifico.
+
+Esempi sono documenti formattati, archivi, file eseguibili e formati multimediali.
+
+---
+
+### **7. Attributi dei file**
+
+Un file è caratterizzato da informazioni che ne supportano l'uso semplice ed efficiente. Queste informazioni sono dette **attributi**.
+
+Attributi tipici:
+
+- **nome**, cioè identificatore simbolico del file;
+- **identificatore**, cioè numero o riferimento interno al sistema;
+- **tipo**, che caratterizza il contenuto;
+- **locazione**, cioè posizione fisica in memoria di massa;
+- **dimensione**;
+- **data di creazione**;
+- **data di ultimo accesso**;
+- **data di ultima modifica**;
+- **proprietario**;
+- **protezioni**, cioè permessi di lettura, scrittura, esecuzione o accesso;
+- **formato**, cioè struttura interna del file.
+
+L'insieme di questi attributi costituisce il **descrittore del file**.
+
+> 📌 Il descrittore del file raccoglie le informazioni necessarie per sapere com'è fatto il file, dove si trova, chi può usarlo e come è stato usato.
+
+---
+
+### **8. Operazioni sui file**
+
+Il file system rende disponibili diverse operazioni.
+
+Le più tipiche sono:
+
+- **creazione**, per creare un nuovo file;
+- **scrittura**, per inserire o modificare dati;
+- **lettura**, per recuperare dati;
+- **posizionamento**, per scegliere l'elemento da leggere o scrivere;
+- **cancellazione**, per rimuovere il file;
+- **troncamento**, per eliminare parte del contenuto mantenendo il file;
+- **accodamento**, per aggiungere nuovi elementi in coda;
+- **modifica degli attributi**;
+- **blocco**, per gestire l'uso condiviso o mutuamente esclusivo.
+
+---
+
+### **9. Apertura del file**
+
+L'**apertura** di un file è fondamentale per predisporre l'ambiente di gestione.
+
+Durante l'apertura, il sistema operativo:
+
+1. verifica le autorizzazioni del processo;
+2. identifica il descrittore del file nel file system;
+3. individua la locazione del file nei dispositivi fisici;
+4. predispone le strutture per reperire i blocchi che contengono i dati;
+5. verifica eventuali conflitti di condivisione;
+6. inizializza la tabella dei file aperti.
+
+#### **9.1. Apertura e condivisione**
+
+Se un file è usato da più processi, il sistema operativo deve controllare se le modalità richieste sono compatibili.
+
+Esempio:
+
+- più processi possono leggere lo stesso file contemporaneamente;
+- una scrittura può richiedere mutua esclusione rispetto ad altre letture o scritture.
+
+Se un processo chiede di aprire in scrittura un file già letto da altri processi, può essere sospeso finché gli altri processi non terminano l'uso del file.
+
+> ⚠️ L'apertura non serve solo a trovare il file: serve anche a verificare permessi, inizializzare strutture e gestire conflitti di accesso condiviso.
+
+---
+
+### **10. Puntatore all'elemento corrente**
+
+Quando un file è aperto, il sistema operativo gestisce un **puntatore all'elemento corrente**.
+
+Gli elementi logici del file hanno una posizione:
+
+$$
+0, 1, 2, \dots, n-1
+$$
+
+All'apertura, il puntatore viene posizionato all'inizio del file.
+
+#### **10.1. Lettura**
+
+L'operazione di lettura legge l'elemento nella posizione indicata dal puntatore corrente.
+
+Dopo la lettura, il puntatore avanza automaticamente alla posizione successiva.
+
+#### **10.2. Scrittura**
+
+L'operazione di scrittura scrive nella posizione indicata dal puntatore corrente.
+
+Anche in questo caso, il puntatore viene poi spostato automaticamente verso la posizione successiva.
+
+> 💡 Il puntatore corrente permette a letture e scritture sequenziali di procedere senza specificare ogni volta la posizione dell'elemento.
+
+---
+
+### **11. Tabella dei file aperti e chiusura**
+
+Le operazioni di lettura e scrittura usano la **tabella dei file aperti**.
+
+Questa tabella conserva:
+
+- riferimento al descrittore;
+- posizione dei blocchi nei dispositivi fisici;
+- puntatore all'elemento corrente;
+- informazioni su lock e condivisione;
+- dati temporanei necessari alla gestione efficiente.
+
+#### **11.1. Chiusura**
+
+Al termine dell'uso, la **chiusura** del file:
+
+- aggiorna le informazioni di gestione;
+- salva eventuali modifiche agli attributi;
+- rilascia lock o uso condiviso;
+- consente ad altri processi di proseguire;
+- elimina le informazioni temporanee dalla tabella dei file aperti.
+
+---
+
+### **12. Metodi di accesso**
+
+Il metodo di accesso agli elementi di un file dipende dalle caratteristiche del sistema operativo e del dispositivo fisico.
+
+#### **12.1. Accesso sequenziale**
+
+Nell'**accesso sequenziale**, si parte dall'elemento iniziale e si procede ordinatamente fino all'ultimo elemento.
+
+Se si vuole tornare a un elemento precedente, occorre riavvolgere il file all'inizio e ripercorrere la sequenza.
+
+Questa tecnica è tipica dei nastri magnetici.
+
+#### **12.2. Accesso diretto**
+
+Nell'**accesso diretto**, tipico dei dischi, è possibile accedere direttamente al blocco o settore desiderato conoscendone la posizione.
+
+Non è necessario scandire tutto il supporto dall'inizio.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **12.3. Accesso indicizzato**
+
+Nell'**accesso indicizzato**, tipico di grandi file e basi di dati, viene costruito un indice che rappresenta sinteticamente porzioni del file.
+
+La ricerca avviene prima sull'indice. Una volta individuata la voce rilevante, l'indice fornisce la posizione della porzione del file dati in cui si trova l'informazione cercata.
+
+Questo permette di conservare nell'indice solo una parte compatta dell'informazione, per esempio una chiave come un cognome, lasciando nel file dati il resto delle informazioni associate.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 📌 L'accesso indicizzato accelera la ricerca perché evita di scandire direttamente tutti gli elementi del file dati.
+
+---
+
+### **13. Sintesi finale**
+
+> ✅ Il file system fornisce un'astrazione logica delle informazioni, organizzandole in file e directory indipendentemente dalla loro posizione fisica.
+
+In questa lezione sono stati analizzati:
+
+- concetto di file system;
+- file come sequenza di elementi omogenei di lunghezza non nota a priori;
+- tipi di file e uso delle estensioni;
+- strutture possibili dei file;
+- attributi e descrittore;
+- operazioni fondamentali;
+- apertura, condivisione, puntatore corrente e chiusura;
+- metodi di accesso sequenziale, diretto e indicizzato.
+
+Il file è quindi l'unità logica fondamentale con cui il sistema operativo rende persistenti e accessibili dati e programmi.

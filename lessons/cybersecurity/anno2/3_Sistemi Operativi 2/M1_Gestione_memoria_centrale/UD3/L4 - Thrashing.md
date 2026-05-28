@@ -1,186 +1,244 @@
 # **M1 UD3 Lezione 4 - Thrashing**
 
+---
+
 ### **1. Introduzione**
 
-Il **thrashing** è una condizione di grave degrado delle prestazioni in un sistema con **memoria virtuale**.  
-Si verifica quando un processo dispone di **troppi pochi frame** e genera _page fault_ così frequenti da passare **più tempo a caricare e scaricare pagine** che a eseguire istruzioni utili.
+Il **thrashing** è una condizione di grave degrado delle prestazioni in un sistema con **memoria virtuale**.
 
-In pratica, il sistema entra in un circolo vizioso di **paginazione continua**, consumando gran parte del tempo di CPU in operazioni di I/O anziché in elaborazione effettiva.
+Si verifica quando un processo dispone di **troppi pochi frame** e genera page fault così frequenti da passare **più tempo a gestire la paginazione** che a eseguire istruzioni utili.
+
+In pratica, il sistema entra in un circolo vizioso di caricamenti e scaricamenti continui, consumando gran parte del tempo di CPU in operazioni di gestione della memoria invece che in elaborazione effettiva.
+
+> 📌 Il thrashing è una forma di "paginazione spazzatura": il sistema lavora molto per spostare pagine, ma produce poca o nessuna evoluzione utile dei processi.
 
 ---
 
 ### **2. Definizione del fenomeno**
 
-Il termine _thrashing_ (letteralmente “paginazione spazzatura”) indica una **situazione di sovraccarico da paginazione**.
+Il thrashing è legato allo spreco di tempo nella gestione della paginazione a causa di un'elevata frequenza di richieste di cambiamento di pagina.
 
-#### **Condizione tipica**
+#### **2.1. Condizione tipica**
 
-- Il numero di frame assegnati a un processo è **insufficiente** a contenere le pagine attivamente utilizzate.
-    
-- Ogni volta che una nuova pagina è richiesta, un’altra deve essere rimossa → continua alternanza tra caricamenti e scaricamenti.
-    
-- Il sistema operativo trascorre più tempo nella **gestione delle mancanze di pagina** che nell’esecuzione dei processi.
+Il fenomeno compare quando:
 
-#### **Effetto**
+- il numero di frame assegnati a un processo è insufficiente;
+- le pagine attivamente usate dal processo non riescono a stare contemporaneamente in memoria centrale;
+- ogni nuova pagina richiesta provoca la rimozione di un'altra pagina che servirà poco dopo;
+- il sistema operativo trascorre più tempo a gestire page fault che a eseguire il processo.
 
-- Grave **perdita di prestazioni**.
-    
-- Diminuzione del **grado di multiprogrammazione efficace**.
-    
-- Aumento del **tempo medio di risposta** per tutti i processi.
+#### **2.2. Effetto sulle prestazioni**
+
+Le conseguenze sono:
+
+- grave perdita delle prestazioni globali;
+- aumento del tempo medio di risposta;
+- riduzione della computazione utile;
+- uso del processore concentrato sulla gestione delle pagine.
+
+> ⚠️ Il sintomo critico del thrashing non è solo l'aumento dei page fault, ma il fatto che il sistema smette di progredire utilmente perché la CPU lavora quasi solo per la paginazione.
 
 ---
 
 ### **3. Cause principali del thrashing**
 
-1. **Multiprogrammazione eccessiva**
-    
-    - Troppi processi caricati in memoria contemporaneamente riducono il numero di frame disponibili per ciascuno.
-    
-2. **Schedulazione a lungo termine non controllata**
-    
-    - L’algoritmo di schedulazione può introdurre nuovi processi per aumentare lo sfruttamento della CPU,  
-	    ma ciò provoca un **sovraccarico della memoria** e un aumento dei _page fault_.
-    
-1. **Politiche di allocazione inefficaci**
-    
-    - Una distribuzione errata dei frame (ad esempio troppo equa o troppo rigida) può ridurre la capacità dei processi di mantenere le proprie “zone di lavoro”.
+#### **3.1. Multiprogrammazione eccessiva**
+
+La prima causa è il tentativo di garantire un grado di multiprogrammazione troppo alto, cioè caricare molti processi in memoria centrale dando pochi frame a ciascuno.
+
+Per aumentare il numero di processi residenti in memoria, il sistema tende a ridurre i frame assegnati a ogni processo. Se questa riduzione scende sotto il numero di frame necessari a contenere la località attiva dei processi, i page fault aumentano rapidamente.
+
+#### **3.2. Schedulazione a lungo termine non controllata**
+
+Lo schedulatore a lungo termine può cercare di introdurre nuovi processi ogni volta che osserva il processore inattivo, con l'obiettivo di incrementare lo sfruttamento della CPU.
+
+Il problema è che il processore può apparire inattivo non perché manchino processi, ma perché i processi già caricati stanno aspettando continuamente operazioni di paginazione.
+
+> ⚠️ Se l'inattività della CPU è causata da page fault continui, caricare nuovi processi peggiora il problema: aumenta la multiprogrammazione ma riduce ulteriormente i frame disponibili per ciascun processo.
+
+#### **3.3. Andamento uso CPU e multiprogrammazione**
+
+All'inizio, aumentando il grado di multiprogrammazione aumenta anche l'utilizzo del processore, perché ci sono più processi pronti a essere eseguiti.
+
+Oltre una certa soglia, però, i processi ricevono troppo pochi frame. La percentuale di tempo spesa nella gestione della paginazione cresce, mentre la percentuale di tempo dedicata alla computazione utile diminuisce drasticamente.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Quando l'utilizzo utile della CPU comincia a diminuire bruscamente, il sistema è entrato in thrashing.
 
 ---
 
 ### **4. Strategie per evitare il thrashing**
 
-Per prevenire o gestire il thrashing, il sistema operativo può intervenire su due piani:
+Il thrashing può essere evitato a priori intervenendo sulle politiche di schedulazione e sulle politiche di allocazione dei frame.
 
-#### **a. Politiche di schedulazione**
+#### **4.1. Politiche di schedulazione**
 
-- Limitare il numero di processi attivi in memoria.
-    
-- Evitare di caricare nuovi processi quando i frame allocati ai processi esistenti diventano troppo pochi.
-    
-- In caso di sovraccarico, **sospendere o rimuovere temporaneamente** alcuni processi dalla memoria (swapping out).
+Una politica di schedulazione può impedire il thrashing limitando il caricamento di nuovi processi quando il numero di frame allocati ai processi diventa troppo basso.
 
-#### **b. Politiche di allocazione**
+In questo caso, i nuovi processi possono essere attivati logicamente ma lasciati nell'area di swap, senza portarli subito in memoria centrale.
 
-- Adottare **allocazioni locali** (anziché globali) per evitare che un processo sottragga frame ad altri.
-    
-- Restringere l’insieme dei frame eleggibili per la sostituzione, preservando la stabilità dei processi già in esecuzione.
+Il sistema operativo può quindi:
 
----
+- limitare il numero di processi residenti;
+- sospendere temporaneamente processi già caricati;
+- evitare di aumentare la multiprogrammazione quando la memoria è già sotto pressione.
 
-### **5. Modello di località**
+#### **4.2. Politiche di allocazione**
 
-Il concetto chiave per comprendere e prevenire il thrashing è quello di **località di riferimento**.
+Un'altra strategia consiste nell'usare politiche di allocazione dei frame che impediscano al thrashing di propagarsi tra processi.
 
-Un processo, durante la sua esecuzione, tende a riferirsi ripetutamente a un insieme ristretto di pagine: variabili, istruzioni e strutture dati vicine nel codice.  
-Questo insieme prende il nome di **località**.
+In particolare, si può restringere l'insieme dei frame eleggibili per lo scaricamento. Se un processo genera un page fault, anziché sottrarre frame ad altri processi, si può usare una politica di **allocazione locale**, confinando la sostituzione all'interno del processo stesso.
 
-#### **Definizione**
-
-Durante l’esecuzione, ogni processo attraversa una sequenza di _località_:
-
-- un gruppo di pagine utilizzate intensivamente per un certo periodo;
-    
-- successivamente, un altro gruppo per una fase diversa del programma.
-
-#### **Obiettivo del sistema operativo**
-
-Garantire che, in ogni momento, il processo disponga di **abbastanza frame** per contenere **tutta la località attiva**, riducendo così le mancanze di pagina.
+> 💡 L'allocazione locale non elimina necessariamente i page fault del processo che ha pochi frame, ma evita che quel processo tolga risorse agli altri e provochi thrashing globale.
 
 ---
 
-### **6. Prevenzione del thrashing**
+### **5. Prevenzione basata sulla località**
 
-Per prevenire il thrashing, il sistema deve **identificare e mantenere** per ogni processo il numero di frame necessario a contenere la sua località corrente.
+Oltre a evitare il thrashing con vincoli rigidi, il sistema può prevenirlo osservando il comportamento dei processi.
 
-Poiché non è possibile conoscere esattamente il comportamento futuro dei processi, si utilizzano **approssimazioni dinamiche**, tra cui:
+Un processo presenta una **località di esecuzione**: in un certo intervallo di tempo tende ad accedere frequentemente ad alcune zone di memoria, sia di codice sia di dati.
 
-1. **Working Set Model** (insieme di pagine di lavoro)
-    
-2. **Page-Fault Frequency (PFF)** (frequenza delle mancanze di pagina)
+Prevenire il thrashing significa identificare un numero di frame sufficiente a contenere la località attiva del processo durante la sua esecuzione.
 
----
+> 📌 Una località è l'insieme di pagine che un processo usa intensamente in una fase della computazione.
 
-### **7. Working Set Model**
+Esistono due approssimazioni principali di questo approccio:
 
-#### **Definizione**
-
-Il **Working Set (WS)** di un processo rappresenta l’insieme delle pagine che sono state utilizzate **più recentemente** durante una finestra temporale di ampiezza $( \Delta )$.
-
-- $( \Delta )$: finestra temporale (in numero di riferimenti o intervalli di tempo).
-    
-- $( WS )$: insieme delle $( \Delta )$ pagine più recentemente referenziate.
-
-#### **Comportamento**
-
-- Se una pagina è in uso attivo, **rimane nel WS**.
-    
-- Se una pagina non viene più usata, **esce dal WS** dopo $( \Delta )$ riferimenti dall’ultimo utilizzo.
-
-#### **Interpretazione**
-
-Il WS rappresenta la **località di lavoro** del processo.  
-Per evitare thrashing, il sistema deve assegnare a ogni processo **almeno** tanti frame quanti sono necessari a contenere il suo working set.
+1. **Working Set Model**, basato sull'insieme delle pagine usate recentemente;
+2. **Page-Fault Frequency**, basato sulla frequenza osservata dei page fault.
 
 ---
 
-### **8. Algoritmo di allocazione basato sul Working Set**
+### **6. Working Set Model**
+
+Il **Working Set** di un processo rappresenta l'insieme delle pagine usate più recentemente durante una finestra temporale di ampiezza $\Delta$.
+
+#### **6.1. Definizione**
+
+Sia $\Delta$ l'ampiezza della finestra del working set. All'istante $t$, il working set del processo $P_i$ è:
+
+$$
+WS_i(t,\Delta)=\{p \mid p \text{ è stata referenziata da } P_i \text{ nell'intervallo } [t-\Delta,t]\}
+$$
+
+Se una pagina è in uso attivo, allora si trova nel working set. Se invece non viene più usata, dopo $\Delta$ periodi di tempo dal suo ultimo utilizzo esce dal working set.
+
+#### **6.2. Esempio su stringa di riferimento**
+
+Considerando una stringa di riferimento, il working set cambia a seconda dell'istante osservato e della finestra $\Delta$.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+In un certo istante $t_1$, il working set può contenere le pagine usate negli ultimi $\Delta$ riferimenti, per esempio $\{1,2,5,6,7\}$. In un istante successivo $t_2$, la località può essere cambiata e il working set può ridursi, per esempio a $\{3,4\}$.
+
+> 💡 Il working set non misura la dimensione totale del processo, ma la sua località attiva in un intervallo recente.
+
+---
+
+### **7. Allocazione basata sul Working Set**
+
+Per evitare il thrashing, il sistema dovrebbe assegnare a ogni processo abbastanza frame da contenere il suo working set.
 
 Sia:
 
-- $( m )$: numero totale di frame fisici disponibili;
-    
-- $( f_i )$: frame allocati al processo $( P_i )$;
-    
-- $( WS_i(t) )$: working set del processo $( P_i )$ all’istante $( t )$.
+- $M$ il numero totale di frame fisici disponibili;
+- $F_i$ il numero di frame da allocare al processo $P_i$;
+- $WS_i(t,\Delta)$ il working set del processo $P_i$ all'istante $t$.
 
-Ad ogni nuovo processo da caricare, il sistema calcola:
+Idealmente, per un processo $P_i$ si dovrebbe avere:
 
-$$  
-f_i = \max_t(WS_i(t))  
+$$
+F_i \ge |WS_i(t,\Delta)|
 $$
 
-Se la somma dei frame richiesti eccede la memoria disponibile:
+per ogni fase significativa della sua esecuzione.
 
-$$  
-\sum_{k=1}^{i} f_k > m  
+Se si volesse garantire il contenimento del working set lungo tutta l'esecuzione, si potrebbe allocare:
+
+$$
+F_i = \max_t |WS_i(t,\Delta)|
 $$
 
-→ viene scelto un **processo vittima ( P_v )** da sospendere o scaricare in swap,  
-per liberare frame e prevenire il thrashing globale.
+#### **7.1. Vincolo globale**
+
+Per mantenere tutti i working set in memoria centrale, deve valere:
+
+$$
+\sum_i |WS_i(t,\Delta)| \le M
+$$
+
+Se la somma dei frame richiesti dai working set dei processi eccede $M$, non è possibile contenere simultaneamente tutti i working set in memoria centrale.
+
+In questo caso il sistema deve scegliere un processo da sospendere o scaricare, liberando frame per evitare il thrashing.
+
+> ⚠️ Il Working Set Model è semplice dal punto di vista logico, ma complesso da realizzare in pratica perché richiede di stimare dinamicamente il working set dei processi.
 
 ---
 
-### **9. Page-Fault Frequency (PFF)**
+### **8. Page-Fault Frequency**
 
-La **frequenza dei page fault** è un altro parametro utile per il controllo dinamico del thrashing.
+Una buona approssimazione alternativa è la tecnica della **Page-Fault Frequency** (**PFF**), basata sull'osservazione della frequenza dei page fault.
 
-#### **Principio**
+Le prestazioni di un processo cambiano in funzione del numero di frame disponibili:
 
-- Se la frequenza dei _page fault_ per un processo è **troppo alta**, significa che ha **troppi pochi frame** → il sistema deve **allocargliene di più**.
-    
-- Se la frequenza è **troppo bassa**, il processo sta utilizzando **più frame del necessario** → il sistema può **deallocarne alcuni**.
-    
-- Se mancano frame liberi, il sistema **sospende un processo** per liberarne.
+- più frame vengono concessi, più basso tende a essere il tasso di page fault;
+- meno frame vengono concessi, più alta tende a essere la probabilità di page fault.
 
-#### **Vantaggio**
+#### **8.1. Soglie superiore e inferiore**
 
-Il PFF consente un **adattamento continuo** e dinamico, in base al comportamento effettivo dei processi.
+Il sistema definisce:
+
+- una soglia superiore accettabile $U$;
+- una soglia inferiore accettabile $L$.
+
+La frequenza di page fault del processo deve rimanere tra questi due limiti:
+
+$$
+L \le PFF_i \le U
+$$
+
+#### **8.2. Regola di controllo**
+
+Se la frequenza di page fault supera il limite superiore, il processo ha troppo pochi frame e il sistema prova ad allocargliene altri:
+
+$$
+PFF_i > U \Rightarrow F_i \leftarrow F_i + k
+$$
+
+Se la frequenza di page fault scende sotto il limite inferiore, il processo ha più frame del necessario e il sistema può deallocarne alcuni:
+
+$$
+PFF_i < L \Rightarrow F_i \leftarrow F_i - k
+$$
+
+> 📌 La PFF mantiene il processo in una zona operativa accettabile: né troppi page fault, né spreco di frame.
+
+#### **8.3. Mancanza di frame liberi**
+
+Se un processo supera la soglia superiore ma non ci sono frame liberi da assegnare, il sistema può sospendere un processo per liberare frame.
+
+Questo permette di caricare nuove pagine in memoria centrale senza dover sempre scaricare pagine vecchie a causa della mancanza di frame disponibili.
 
 ---
 
-### **10. Sintesi finale**
+### **9. Sintesi finale**
 
-- Il **thrashing** si verifica quando il sistema passa più tempo nella gestione della paginazione che nell’esecuzione utile.
-    
-- È causato da **allocazione insufficiente di frame** e **multiprogrammazione eccessiva**.
-    
-- Le strategie di prevenzione si basano sul concetto di **località di riferimento**.
-    
-- Le principali tecniche di controllo sono:
-    
-    - il **Working Set Model**, che calcola il numero minimo di frame necessari per contenere la località;
-        
-    - la **Page-Fault Frequency**, che regola dinamicamente l’allocazione in base alla frequenza delle mancanze di pagina.
-        
-- Entrambe le tecniche permettono al sistema operativo di **stabilizzare l’uso della memoria**, evitando la degradazione dovuta al thrashing.
+> ✅ Il thrashing si verifica quando il sistema passa più tempo nella gestione della paginazione che nell'esecuzione utile dei processi.
+
+Le cause principali sono:
+
+- multiprogrammazione eccessiva;
+- assegnazione di troppi pochi frame ai processi;
+- schedulazione a lungo termine che introduce nuovi processi anche quando la memoria è già sotto pressione;
+- politiche di allocazione che permettono interferenza e sottrazione di frame tra processi.
+
+Le tecniche di gestione viste sono:
+
+- limitare il caricamento di nuovi processi;
+- usare allocazione locale per confinare la sostituzione;
+- stimare la località tramite **Working Set**;
+- controllare dinamicamente l'allocazione tramite **Page-Fault Frequency**.
+
+Entrambe le tecniche mirano a garantire che ogni processo disponga di abbastanza frame per contenere la propria località attiva, evitando che il sistema degeneri in paginazione continua.

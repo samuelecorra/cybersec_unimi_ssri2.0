@@ -1,186 +1,268 @@
 # **M3 UD1 Lezione 3 - Condivisione dei file e protezione (parte 2)**
 
+---
+
 ### **1. Introduzione**
 
-Questa seconda parte della lezione completa il tema della **condivisione dei file** nei sistemi operativi, concentrandosi su:
+Questa seconda parte approfondisce due aspetti fondamentali della condivisione dei file:
 
-- la **coerenza** delle informazioni in caso di accessi concorrenti o guasti,
-    
-- e i meccanismi di **protezione e controllo dell’accesso** ai file.
+- **coerenza** delle informazioni;
+- **protezione** dagli accessi impropri.
 
-L’obiettivo è comprendere come il sistema operativo garantisca la **consistenza e la sicurezza dei dati condivisi** in ambienti multiutente e distribuiti.
+Quando un file system è distribuito su macchine diverse e più processi possono accedere allo stesso file, il sistema operativo deve garantire che i dati letti abbiano significato compiuto e che solo utenti autorizzati possano eseguire certe operazioni.
+
+> 📌 La condivisione richiede due garanzie: i dati devono restare coerenti e gli accessi devono rispettare i diritti concessi agli utenti.
 
 ---
 
 ### **2. Coerenza dei file condivisi**
 
-La **coerenza** definisce il modo in cui un file condiviso deve essere gestito affinché le informazioni rimangano **consistenti** tra tutti gli utenti o processi che lo utilizzano.
+La **coerenza** definisce le modalità di accesso e aggiornamento di un file condiviso, in modo che le informazioni osservate dai processi siano consistenti.
 
-#### **2.1 Obiettivi**
+Un elemento letto da un processo non deve essere parzialmente modificato da un altro processo, perché in quel caso potrebbe non avere significato e portare a errori di elaborazione.
 
-- Evitare conflitti durante modifiche simultanee.
-    
-- Garantire che gli aggiornamenti ai file siano **visibili** secondo regole ben definite.
+#### **2.1. Obiettivo**
 
-#### **2.2 Modalità di aggiornamento**
+L'obiettivo è stabilire quando le modifiche effettuate da un processo diventano visibili agli altri processi.
 
-Un sistema può adottare diverse **politiche di visibilità delle modifiche**:
+Le politiche possibili sono diverse:
 
-1. **Aggiornamenti immediatamente visibili**  
-    Le modifiche a un file condiviso diventano visibili **subito** per tutti gli utenti.  
-    → massima coerenza, ma rischio di rallentamento e conflitti.
-    
-2. **Aggiornamenti visibili alla chiusura del file**  
-    Le modifiche vengono rese visibili **solo al termine della sessione** del processo che ha eseguito le scritture.  
-    → riduce il rischio di conflitti, ma può generare differenze temporanee tra copie del file.
-    
-3. **Aggiornamenti visibili nelle sessioni successive**  
-    Le modifiche vengono applicate solo **dopo una nuova apertura del file**.  
-    → garantisce stabilità durante l’uso, ma ritarda la propagazione degli aggiornamenti.
-    
-4. **File condivisi immutabili**  
-    I file non possono essere modificati, solo letti o copiati.  
-    → soluzione ideale per file statici (ad esempio librerie, eseguibili, o documentazione condivisa).
+- modifiche immediatamente visibili;
+- modifiche visibili alla chiusura del file;
+- modifiche visibili solo nelle sessioni successive;
+- file condivisi immutabili.
 
 ---
 
-### **3. Coerenza in caso di guasti**
+### **3. Modalità di aggiornamento**
 
-Nei **sistemi distribuiti o di rete**, la coerenza dei file può essere compromessa da **guasti locali o di comunicazione**.
+#### **3.1. Modifiche immediatamente visibili**
 
-#### **3.1 Tipologie di guasto**
+In questa politica, ogni modifica apportata a un file condiviso diventa subito visibile agli altri processi che accedono al file.
 
-- **Guasti locali del client** → il nodo che accede al file si interrompe o perde la connessione.
-    
-- **Guasti locali del server** → perdita temporanea o permanente del nodo che ospita il file.
-    
-- **Guasti di rete** → interruzioni o degrado nella comunicazione tra nodi.
+È una semantica forte, ma richiede sincronizzazione accurata per evitare letture di stati intermedi.
 
-#### **3.2 Strategie di gestione**
+#### **3.2. Modifiche visibili alla chiusura**
 
-Per mantenere l’integrità e la disponibilità dei dati, il sistema deve gestire:
+In questa politica, le modifiche diventano visibili quando il processo che sta scrivendo chiude il file.
 
-1. **Rilevamento del guasto**
-    
-    - Monitoraggio continuo dei nodi e dei collegamenti di rete.
-        
-    - Meccanismi di _timeout_ e messaggi di verifica (heartbeat).
-    
-2. **Ripristino (recovery)**
-    
-    - Operazioni di rollback o ripristino dallo stato precedente.
-        
-    - Uso di copie temporanee o journaling per recuperare lo stato coerente.
-    
-3. **Sopravvivenza con capacità limitate**
-    
-    - Il sistema continua a funzionare in modo parziale fino al ripristino completo.
-        
-    - Alcuni nodi possono operare in modalità _read-only_.
-    
-4. **Tolleranza ai guasti mediante ridondanza**
-    
-    - Repliche dei dati su più nodi (mirroring, RAID, backup).
-        
-    - Meccanismi di sincronizzazione automatica per garantire consistenza.
+Finché il file resta aperto in scrittura, gli altri processi possono continuare a vedere una versione precedente o non aggiornata.
+
+#### **3.3. Modifiche visibili solo agli accessi successivi**
+
+Una variante più conservativa rende visibili le modifiche solo ai processi che aprono il file dopo la chiusura da parte dello scrittore.
+
+I processi che stavano già accedendo al file continuano a vedere la vecchia versione.
+
+#### **3.4. File immutabili**
+
+All'estremo opposto, i file condivisi possono essere definiti **immutabili**.
+
+In questo caso, durante l'uso condiviso il file non può essere modificato.
+
+$$
+\text{visibilità delle modifiche} =
+\begin{cases}
+\text{immediata} & \text{massima propagazione, più sincronizzazione} \\
+\text{alla chiusura} & \text{aggiornamento visibile a fine uso} \\
+\text{agli accessi successivi} & \text{stabilità per chi ha già aperto il file} \\
+\text{immutabilità} & \text{nessuna modifica ammessa}
+\end{cases}
+$$
+
+> ⚠️ La scelta della semantica di coerenza influenza direttamente ciò che i processi possono osservare durante accessi concorrenti.
 
 ---
 
-### **4. Protezione dei file**
+### **4. Coerenza in caso di guasti**
 
-L’obiettivo della **protezione** è impedire accessi non autorizzati e garantire la **consistenza logica e semantica** dei dati rispetto agli accessi leciti.
+Il problema della coerenza non riguarda solo il funzionamento normale, ma anche i guasti.
 
-#### **4.1 Scopi della protezione**
+In un ambiente di rete possono verificarsi:
 
-- Prevenire modifiche o letture improprie.
-    
-- Salvaguardare la riservatezza e l’integrità dei dati.
-    
-- Garantire un accesso coerente con le regole di sicurezza del sistema.
+- guasti del client;
+- guasti del server;
+- guasti della rete;
+- disconnessioni tra client e server.
 
-#### **4.2 Tecniche di protezione**
+#### **4.1. Esempio di incoerenza**
 
-1. **Protezione fisica**  
-    Limitazione dell’accesso fisico ai dispositivi di memorizzazione.
-    
-2. **Permessi sulle operazioni**  
-    Assegnazione di privilegi specifici ai singoli utenti o gruppi per ciascun file:
+Supponiamo che il meccanismo di scrittura preveda:
 
-|Operazione|Significato|
-|---|---|
-|**Lettura (r)**|Permette di leggere il contenuto del file|
-|**Scrittura (w)**|Permette di modificarne il contenuto|
-|**Esecuzione (x)**|Permette di eseguire il file (se programma)|
-|**Cancellazione (d)**|Permette di eliminare il file|
-|**Accodamento (a)**|Permette di aggiungere dati in fondo al file|
+1. copia del file dal server al client;
+2. modifica locale sul client;
+3. reinvio del file modificato al server.
 
----
+Se durante questo processo si guasta il server o la rete, può crearsi una situazione incoerente: il client possiede una versione modificata, mentre il server conserva una versione diversa.
 
-### **5. Controllo dell’accesso**
+> ⚠️ Nei sistemi distribuiti, un guasto durante una modifica può lasciare copie divergenti dello stesso file.
 
-Il **controllo dell’accesso** stabilisce _chi_ può compiere _quali operazioni_ su una determinata risorsa.
+#### **4.2. Gestione dei guasti**
 
-#### **5.1 Principio base**
+Il sistema deve:
 
-L’accesso è consentito solo se l’identità del richiedente corrisponde a una **autorizzazione registrata** nel sistema.
+- rilevare le situazioni di guasto;
+- garantire l'uso in mutua esclusione quando necessario;
+- ripristinare uno stato coerente;
+- permettere eventuale sopravvivenza con capacità operative limitate;
+- fornire tolleranza ai guasti tramite ridondanza, quando richiesta.
 
-#### **5.2 Modelli principali**
-
-1. **Access Control List (ACL)**
-    
-    - Ogni file mantiene una **lista di controllo degli accessi** con l’elenco degli utenti e i permessi associati.
-        
-    - Offre **grande flessibilità**, ma può diventare **complessa da gestire** nei sistemi con molti utenti.
-    
-2. **Versione semplificata dell’ACL**
-    
-    - Modello **proprietario / gruppo / universo**, usato in UNIX.
-        
-    - Ogni file è associato a tre livelli di permessi distinti:
-        
-        - **Owner** (proprietario del file)
-            
-        - **Group** (utenti appartenenti allo stesso gruppo)
-            
-        - **Others** (tutti gli altri utenti)
-    
-3. **Capability List (Lista delle capacità)**
-    
-    - Rappresenta il punto di vista opposto:  
-        per ogni utente si memorizza **l’elenco delle risorse accessibili** e i permessi associati.
-        
-    - Più compatta e utile in sistemi distribuiti.
-    
-1. **Password individuali o di gruppo**
-    
-    - Alcuni file o directory possono essere protetti da **password dedicate**, richieste ogni volta che si tenta l’accesso.
-        
-    - Metodo semplice ma meno scalabile, adatto a sistemi piccoli o locali.
+La tolleranza completa può essere ottenuta duplicando le informazioni su più macchine, in modo che la presenza del guasto sia trasparente e le operazioni possano continuare.
 
 ---
 
-### **6. Sintesi finale**
+### **5. Stato del file system**
 
-|Aspetto|Descrizione|
-|---|---|
-|**Coerenza**|Mantiene consistenza delle informazioni tra utenti e nodi|
-|**Modalità di aggiornamento**|Immediata, alla chiusura, post-sessione, immutabile|
-|**Guasti gestiti**|Client, server, rete|
-|**Protezione**|Evita accessi impropri e garantisce la sicurezza dei dati|
-|**Permessi principali**|Lettura, scrittura, esecuzione, cancellazione, accodamento|
-|**Controllo accessi**|Basato su ACL, modello UNIX, capability o password|
+Per gestire la coerenza in caso di guasti, è fondamentale introdurre il concetto di **stato del file system**.
+
+Lo stato del file system raccoglie le informazioni necessarie per capire se il sistema si trova in una configurazione corretta e coerente.
+
+Queste informazioni permettono di:
+
+- riconoscere aggiornamenti incompleti;
+- rilevare inconsistenze;
+- ripristinare lo stato corretto dopo un guasto;
+- gestire errori derivanti dall'uso distribuito dei file.
+
+> 📌 Lo stato del file system è la base per decidere se le informazioni memorizzate sono coerenti e recuperabili dopo un guasto.
 
 ---
 
-### **7. Conclusione dell’unità**
+### **6. Protezione dei file**
 
-Con questa lezione si conclude l’**Unità 1 – Interfaccia del file system**.  
-Abbiamo visto come il sistema operativo:
+Il secondo problema fondamentale della condivisione è la **protezione**.
 
-- gestisca la **struttura logica** di file e directory,
-    
-- realizzi la **condivisione controllata** delle informazioni,
-    
-- e garantisca la **protezione e coerenza** dei dati, anche in presenza di accessi simultanei o guasti.
+Proteggere un file significa impedire accessi impropri da parte di processi o utenti che non hanno diritto a vedere, modificare o usare certe informazioni.
 
-Questi principi costituiscono le basi per comprendere le **strutture interne e i meccanismi di implementazione del file system**, che verranno approfonditi nelle unità successive.
+L'obiettivo è garantire la consistenza delle informazioni rispetto agli accessi, evitando che un processo acceda a dati che non gli devono essere visibili o modificabili.
+
+#### **6.1. Protezione fisica**
+
+Una prima tecnica è impedire fisicamente l'accesso alla macchina su cui si trova il file.
+
+Questa soluzione può avere senso in sistemi isolati, ma è difficilmente applicabile in sistemi connessi in rete.
+
+#### **6.2. Permessi sulle risorse**
+
+Nei sistemi moderni è più opportuno definire permessi di uso sulle risorse informative.
+
+Per ogni file si stabilisce quali operazioni siano lecite per:
+
+- un utente;
+- un gruppo;
+- un processo;
+- classi di utenti.
+
+---
+
+### **7. Autenticazione e autorizzazione**
+
+La protezione richiede due passaggi.
+
+#### **7.1. Autenticazione**
+
+Il sistema identifica l'utente, verificando che corrisponda a uno degli utenti ammessi.
+
+#### **7.2. Assegnazione dei diritti**
+
+Dopo l'autenticazione, all'utente viene associato un insieme di diritti predefiniti.
+
+I processi dell'utente ereditano tali diritti, eventualmente ridotti dal sistema operativo o dal gestore secondo politiche specifiche.
+
+Quando un processo prova ad accedere a un file, il sistema verifica:
+
+- identità dell'utente;
+- identità o contesto del processo;
+- autorizzazioni concesse;
+- operazione richiesta.
+
+> ✅ Il controllo degli accessi dipende dall'identità autenticata e dai diritti autorizzati in precedenza dal gestore del sistema.
+
+---
+
+### **8. Access Control List**
+
+Una tecnica molto usata è la **Access Control List** (**ACL**).
+
+Per ogni risorsa del sistema, quindi per ogni file, viene definita una lista degli utenti che possono usare quella risorsa.
+
+Per ciascun utente vengono indicate le operazioni consentite.
+
+#### **8.1. Gruppi**
+
+Nella lista possono comparire anche gruppi di utenti, ai quali vengono concessi globalmente determinati permessi.
+
+#### **8.2. Vantaggi e limiti**
+
+Le ACL sono molto flessibili, perché permettono di definire permessi specifici per molti utenti e gruppi.
+
+Il limite è che la lista può diventare lunga e difficile da gestire, con un costo amministrativo elevato.
+
+> ⚠️ Le ACL sono flessibili, ma possono diventare pesanti da mantenere quando utenti, gruppi e file sono numerosi.
+
+---
+
+### **9. ACL compatta: proprietario, gruppo, universo**
+
+Spesso viene usata una forma compatta di ACL.
+
+In questa versione si definiscono solo i diritti per:
+
+- **proprietario** del file;
+- **gruppo** a cui appartiene il proprietario;
+- **universo**, cioè tutti gli altri utenti del sistema.
+
+I processi del proprietario, i processi degli utenti appartenenti al gruppo e i processi degli altri utenti sono soggetti ai vincoli associati a queste tre categorie.
+
+> 💡 Il modello proprietario-gruppo-universo sacrifica parte della flessibilità delle ACL complete, ma rende la gestione molto più semplice.
+
+---
+
+### **10. Capability List**
+
+Una soluzione opposta alle ACL è la **capability list**.
+
+Invece di associare a ogni file la lista degli utenti autorizzati, si associa a ogni utente o processo l'elenco delle risorse a cui può accedere.
+
+Per ciascuna risorsa vengono indicate anche le operazioni consentite.
+
+$$
+\text{ACL}: \text{file} \rightarrow \{(\text{utente}, \text{permessi})\}
+$$
+
+$$
+\text{Capability}: \text{utente/processo} \rightarrow \{(\text{file}, \text{permessi})\}
+$$
+
+> 📌 ACL e capability list rappresentano due viste duali del controllo accessi: una centrata sulla risorsa, l'altra sul soggetto.
+
+---
+
+### **11. Protezione tramite password**
+
+Una terza tecnica consiste nell'associare a ciascun file o risorsa una password.
+
+L'accesso viene consentito solo se il processo è in grado di fornire la password corretta.
+
+Questa tecnica è semplice, ma può essere meno gestibile in sistemi complessi, soprattutto quando molte risorse devono avere password diverse o quando serve revocare selettivamente i diritti.
+
+---
+
+### **12. Sintesi finale**
+
+> ✅ La condivisione dei file produce due problemi centrali: garantire la coerenza delle informazioni e proteggere i dati da accessi indebiti.
+
+In questa lezione sono stati analizzati:
+
+- semantiche di coerenza dei file condivisi;
+- visibilità immediata, alla chiusura, agli accessi successivi o immutabilità;
+- problemi di coerenza in caso di guasti di client, server o rete;
+- stato del file system come supporto al ripristino;
+- protezione dei file;
+- autenticazione e autorizzazione;
+- access control list;
+- modello compatto proprietario-gruppo-universo;
+- capability list;
+- protezione tramite password.
+
+Questi meccanismi permettono di usare file condivisi mantenendo dati consistenti e accessi controllati.

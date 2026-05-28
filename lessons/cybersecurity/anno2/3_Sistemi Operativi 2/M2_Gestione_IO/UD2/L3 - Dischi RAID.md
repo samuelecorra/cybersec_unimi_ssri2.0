@@ -1,240 +1,266 @@
 # **M2 UD2 Lezione 3 - Dischi RAID**
 
+---
+
 ### **1. Introduzione**
 
-Il termine **RAID** (Redundant Array of Inexpensive Disks) indica una tecnologia che consente di **aggregare più dischi fisici** in un’unica unità logica, con l’obiettivo di **migliorare le prestazioni, l’affidabilità o entrambe**.
+I **dischi RAID** sono gruppi di dischi fisici gestiti in modo integrato per apparire al sistema operativo come un unico disco logico con caratteristiche migliori.
 
-Un sistema RAID gestisce in modo coordinato un gruppo di dischi in modo che appaiano al sistema operativo come **un solo disco virtuale**, dotato di:
+Il termine **RAID** indica un **array ridondante di dischi a basso costo** (*Redundant Array of Inexpensive Disks*).
 
-- **maggiore tolleranza ai guasti**,
-    
-- **prestazioni più elevate**,
-    
-- e, in molti casi, **riduzione dei costi complessivi** grazie all’uso di dischi standard a basso costo.
+Gli obiettivi principali sono:
 
----
+- aumentare la capacità complessiva usando più dischi economici;
+- migliorare l'affidabilità tramite ridondanza;
+- migliorare le prestazioni tramite parallelismo;
+- combinare affidabilità e prestazioni in configurazioni ibride.
 
-### **2. Obiettivi del RAID**
-
-Gli obiettivi principali dell’architettura RAID sono due:
-
-1. **Aumentare l’affidabilità (ridondanza)**  
-    tramite **replicazione o codici di correzione degli errori**.
-    
-2. **Aumentare le prestazioni**  
-    sfruttando il **parallelismo di accesso** tra più dischi.
+> 📌 Un RAID combina più dischi fisici per ottenere un disco logico più capiente, più affidabile o più veloce rispetto ai singoli dischi.
 
 ---
 
-### **3. Ridondanza e affidabilità**
+### **2. Obiettivi dei sistemi RAID**
 
-La **ridondanza** consiste nell’introdurre **informazioni duplicate o di controllo** per garantire la sopravvivenza dei dati in caso di guasto di uno o più dischi.
+#### **2.1. Grande capacità a costo ridotto**
 
-#### **Forme di ridondanza**
+Il primo obiettivo è costruire unità di memoria di massa di grande capacità senza dover acquistare dischi singoli molto grandi e costosi.
 
-- **Replicazione dei dati:** mantenimento di più copie identiche degli stessi dati.
-    
-- **Informazioni di correzione:** aggiunta di bit o blocchi di parità.
-    
-- **Codici ECC (Error Correcting Codes):** codici speciali per rilevare e correggere errori di lettura o scrittura.
+La somma delle capacità di più dischi piccoli può raggiungere la capacità di un disco di grandi dimensioni con un costo complessivamente inferiore.
 
-#### **Parametri di affidabilità**
+#### **2.2. Ridondanza e affidabilità**
 
-- **MTTF (Mean Time To Failure):** tempo medio al guasto di un singolo disco.
-    
-- **MTTR (Mean Time To Repair):** tempo medio di riparazione o sostituzione.
-    
-- **MTTDL (Mean Time To Data Loss):** tempo medio alla perdita dei dati complessivi del sistema RAID.
+Il secondo obiettivo è introdurre **ridondanza** nella memorizzazione.
 
-L’obiettivo è **massimizzare il MTTDL**, cioè la durata complessiva del sistema prima di una perdita irreversibile dei dati.
+La ridondanza può essere ottenuta tramite:
 
----
+- replicazione completa dei dati;
+- informazioni ridondanti di controllo;
+- codici per la rilevazione e correzione degli errori;
+- bit o blocchi di parità.
 
-### **4. Parallelismo e prestazioni**
+Queste informazioni permettono di ricostruire dati persi o corrotti a causa di guasti del disco o errori di memorizzazione.
 
-Il **parallelismo** consente di aumentare la velocità complessiva del sistema RAID dividendo i dati in **più parti distribuite** sui dischi.
+#### **2.3. Parallelismo negli accessi**
 
-#### **Data striping**
+Il terzo obiettivo è migliorare le prestazioni tramite **parallelismo**.
 
-I dati vengono “**spezzati**” e scritti in modo alternato su dischi diversi.
-
-Due modalità principali:
-
-- **Bit-level striping:** distribuzione dei singoli bit tra più dischi.
-    
-- **Block-level striping:** distribuzione di blocchi di dati interi (più efficiente nei sistemi moderni).
-
-Il risultato è un **aumento della velocità di trasferimento**, poiché più dischi operano in parallelo.
+Distribuendo i dati di uno stesso file su più dischi, i dischi possono operare contemporaneamente e fornire globalmente una quantità maggiore di dati per unità di tempo.
 
 ---
 
-### **5. Livelli di RAID**
+### **3. Affidabilità nei RAID**
 
-I sistemi RAID sono classificati in **livelli numerici (RAID 0, 1, 2, ... 6)**, ciascuno caratterizzato da un diverso equilibrio tra prestazioni, ridondanza e costo.
+Per valutare l'affidabilità di un sistema RAID si considera il tempo medio tra i guasti dell'intero array, legato al guasto dei singoli dischi e al tempo necessario per ripararli.
 
----
+Parametri importanti:
 
-#### **RAID 0 – Striping (senza ridondanza)**
+- **MTTF** (*Mean Time To Failure*): tempo medio al guasto;
+- **MTTR** (*Mean Time To Repair*): tempo medio di riparazione;
+- **MTTDL** (*Mean Time To Data Loss*): tempo medio prima della perdita irreversibile dei dati.
 
-- **Descrizione:** i dati vengono suddivisi in blocchi e distribuiti su più dischi (block-level striping).
-    
-- **Obiettivo:** aumentare le **prestazioni** grazie all’accesso parallelo.
-    
-- **Tolleranza ai guasti:** assente – il guasto di un solo disco comporta la **perdita totale dei dati**.
-    
-- **Vantaggi:**
-    
-    - throughput elevato,
-        
-    - utilizzo completo dello spazio disponibile.
-    
-- **Svantaggi:**
-    
-    - nessuna ridondanza o protezione dei dati.
+> ⚠️ L'affidabilità di un RAID non dipende solo dal fatto che un disco possa guastarsi, ma anche da quanto rapidamente il sistema viene riparato prima che avvenga un ulteriore guasto critico.
 
 ---
 
-#### **RAID 1 – Mirroring (duplicazione)**
+### **4. Data striping**
 
-- **Descrizione:** ogni disco ha un duplicato esatto.
-    
-- **Obiettivo:** garantire **massima affidabilità** replicando i dati su due o più dischi.
-    
-- **Tolleranza ai guasti:** elevata — i dati restano accessibili anche in caso di guasto di un disco.
-    
-- **Vantaggi:**
-    
-    - sicurezza e disponibilità dei dati,
-        
-    - tempi di lettura migliorati (si può leggere da più copie).
-    
-- **Svantaggi:**
-    
-    - costo elevato (serve il doppio dello spazio).
+La tecnica usata per ottenere parallelismo è il **data striping**, cioè la distribuzione dei dati su più dischi.
 
----
+#### **4.1. Striping a livello di bit**
 
-#### **RAID 2 – Codici di correzione (ECC)**
+Nel **bit-level striping**, i singoli bit vengono distribuiti tra i dischi.
 
-- **Descrizione:** i dati vengono suddivisi a livello di bit e associati a **codici di correzione degli errori (Hamming o simili)**.
-    
-- **Tolleranza ai guasti:** molto alta, poiché gli errori possono essere rilevati e corretti.
-    
-- **Vantaggi:**
-    
-    - alta affidabilità teorica.
-    
-- **Svantaggi:**
-    
-    - complessità elevata e inefficienza pratica.
-    
-- **Uso:** raro nei sistemi moderni, sostituito da soluzioni più semplici (RAID 3 o 5).
+Per esempio, il primo bit di un byte può essere memorizzato sul primo disco, il secondo bit sul secondo disco, il terzo sul terzo e così via.
+
+#### **4.2. Striping a livello di blocco**
+
+Nel **block-level striping**, i dati vengono distribuiti a blocchi:
+
+- il primo blocco viene memorizzato sul primo disco;
+- il secondo blocco sul secondo disco;
+- il terzo blocco sul terzo disco;
+- poi la distribuzione continua ciclicamente.
+
+> 💡 Lo striping aumenta il parallelismo perché più dischi partecipano contemporaneamente alla lettura o scrittura dello stesso file.
 
 ---
 
-#### **RAID 3 – Parità a bit alternati**
+### **5. RAID 0**
 
-- **Descrizione:** i dati vengono distribuiti a livello di bit su più dischi, mentre un disco separato memorizza la **parità** (bit-interleaved parity).
-    
-- **Tolleranza ai guasti:** perdita di un solo disco tollerata.
-    
-- **Vantaggi:**
-    
-    - elevata velocità nei trasferimenti sequenziali di grandi blocchi.
-    
-- **Svantaggi:**
-    
-    - scarsa efficienza con accessi concorrenti a piccoli blocchi (il disco di parità è un collo di bottiglia).
+Il **RAID 0** è il livello più semplice orientato alle prestazioni.
 
----
+Il file viene diviso in blocchi o porzioni, ciascuna memorizzata su un disco diverso. Questo permette di leggere e scrivere più parti del file in parallelo.
 
-#### **RAID 4 – Parità a blocchi alternati**
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-- **Descrizione:** simile al RAID 3, ma la distribuzione avviene a **livello di blocco** anziché di bit.
-    
-- **Parità:** mantenuta su un disco dedicato (block-interleaved parity).
-    
-- **Vantaggi:**
-    
-    - migliore parallelismo rispetto a RAID 3,
-        
-    - facile ricostruzione dei dati.
-    
-- **Svantaggi:**
-    
-    - disco di parità ancora singolo → rischio di saturazione e rallentamento.
+#### **5.1. Caratteristiche**
+
+- usa striping;
+- aumenta il parallelismo;
+- migliora la velocità di accesso;
+- non introduce ridondanza.
+
+> ⚠️ RAID 0 non tollera guasti: se un disco si rompe, una parte dei dati diventa indisponibile e l'intero array può risultare inutilizzabile.
 
 ---
 
-#### **RAID 5 – Parità distribuita**
+### **6. RAID 1**
 
-- **Descrizione:** i blocchi di parità non sono concentrati su un solo disco, ma **distribuiti** tra tutti i dischi (block-interleaved distributed parity).
-    
-- **Tolleranza ai guasti:** può sopportare la perdita di **un disco**.
-    
-- **Vantaggi:**
-    
-    - ottimo compromesso tra prestazioni, capacità e sicurezza,
-        
-    - elevata scalabilità e bilanciamento del carico.
-    
-- **Svantaggi:**
-    
-    - ricostruzione dei dati più lenta in caso di guasto.
+Il **RAID 1** è diretto a garantire tolleranza ai guasti tramite **mirroring**.
 
----
+Ogni disco viene duplicato da un disco identico che contiene una copia speculare di tutte le informazioni.
 
-#### **RAID 6 – Doppia parità (P + Q redundancy)**
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-- **Descrizione:** estensione del RAID 5 che aggiunge **una seconda informazione di parità** (P e Q) per tollerare **fino a due guasti simultanei**.
-    
-- **Vantaggi:**
-    
-    - massima sicurezza dei dati.
-    
-- **Svantaggi:**
-    
-    - overhead più alto in termini di calcolo e spazio.
-    
-- **Uso:** tipico di sistemi server e ambienti enterprise.
+#### **6.1. Caratteristiche**
+
+- garantisce elevata tolleranza al guasto di un singolo disco;
+- mantiene una copia completa dei dati;
+- richiede ridondanza fisica del 100%;
+- può migliorare le letture, perché è possibile leggere da una delle copie.
+
+> 📌 RAID 1 sacrifica capacità per affidabilità: metà dello spazio fisico viene usato per la copia ridondante.
 
 ---
 
-#### **RAID 0+1 e RAID 1+0 (ibridi)**
+### **7. RAID 2**
 
-- **RAID 0+1:**
-    
-    - crea prima un array con striping (RAID 0), poi lo duplica (RAID 1).
-        
-    - prestazioni elevate, ma meno tollerante ai guasti (un guasto può rendere inutilizzabile un intero gruppo).
-    
-- **RAID 1+0 (RAID 10):**
-    
-    - unisce mirroring e striping, ma in ordine inverso: prima duplicazione, poi distribuzione.
-        
-    - unisce **affidabilità del RAID 1** e **prestazioni del RAID 0**.
-        
-    - più resistente ai guasti rispetto a 0+1.
+Il **RAID 2** riduce il costo della ridondanza completa usando **codici correttori di errore**.
+
+Invece di duplicare tutti i dati, introduce informazioni ridondanti che permettono di rilevare e correggere errori.
+
+Per esempio, per proteggere dati distribuiti su quattro dischi, possono essere necessari alcuni dischi aggiuntivi contenenti codici di correzione.
+
+#### **7.1. Limiti**
+
+RAID 2 non introduce un parallelismo particolarmente vantaggioso come RAID 0 e richiede elaborazione per calcolare, verificare e usare i codici correttori.
+
+> ⚠️ RAID 2 riduce la duplicazione completa, ma aumenta la complessità di calcolo e gestione.
 
 ---
 
-### **6. Sintesi finale**
+### **8. RAID 3**
 
-|Livello|Ridondanza|Prestazioni|Tolleranza ai guasti|Note|
-|---|---|---|---|---|
-|**RAID 0**|❌ Nessuna|🔹 Alta|❌ Nessuna|Solo prestazioni|
-|**RAID 1**|✅ Completa|🔸 Media|✅ Alta|Dati duplicati|
-|**RAID 2**|✅ ECC|🔸 Media|✅ Alta|Obsoleto|
-|**RAID 3**|✅ Parità su 1 disco|🔸 Alta sequenziale|✅ Media|Bottleneck su disco di parità|
-|**RAID 4**|✅ Parità a blocchi|🔸 Buona|✅ Media|Parità concentrata|
-|**RAID 5**|✅ Parità distribuita|🔹 Alta|✅ Alta|Ottimo compromesso|
-|**RAID 6**|✅ Doppia parità|🔸 Media|✅ Molto alta|Enterprise|
-|**RAID 10**|✅ Mirroring + Striping|🔹 Alta|✅ Alta|Bilanciato e affidabile|
+Il **RAID 3** usa parità dedicata a livello di bit o gruppi di bit.
+
+Invece di usare codici correttori complessi, calcola un bit di parità per proteggere i dati distribuiti sui dischi. La parità viene memorizzata su un disco aggiuntivo.
+
+#### **8.1. Ricostruzione**
+
+In caso di guasto di un disco, i bit mancanti possono essere ricostruiti combinando:
+
+- i bit presenti sugli altri dischi dati;
+- il bit di parità;
+- la posizione del disco guasto.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **8.2. Distribuzione per gruppi di bit**
+
+La distribuzione può anche raggruppare i bit di ogni byte. Per esempio, usando quattro dischi dati, un byte da 8 bit può essere diviso in gruppi da 2 bit per disco.
+
+Questo aumenta il parallelismo nell'accesso alle informazioni.
+
+> 💡 RAID 3 semplifica la ridondanza rispetto agli ECC, ma concentra la parità su un disco dedicato.
 
 ---
 
-### **7. Conclusione**
+### **9. RAID 4**
 
-Le **architetture RAID** rappresentano una soluzione fondamentale per migliorare **prestazioni, affidabilità e disponibilità dei dati** nei sistemi di memorizzazione.  
-La scelta del livello più adatto dipende dal **compromesso desiderato** tra velocità, sicurezza e costo.  
-Nei sistemi moderni, i livelli **RAID 5, RAID 6 e RAID 10** sono i più diffusi grazie alla loro **scalabilità e resilienza**.
+Il **RAID 4** opera a livello di blocchi, non più a livello di bit o gruppi di bit.
+
+I blocchi di dati vengono distribuiti sui dischi dati, mentre un disco dedicato conserva la parità calcolata bit per bit sui blocchi corrispondenti.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **9.1. Ricostruzione**
+
+Se un blocco o un disco dati si guasta, il contenuto può essere ricostruito combinando:
+
+- i blocchi corrispondenti sugli altri dischi;
+- il blocco di parità presente sul disco di ridondanza.
+
+#### **9.2. Limite**
+
+Il limite di RAID 4 è che il disco di parità viene usato in molte operazioni, diventando un collo di bottiglia.
+
+> ⚠️ RAID 3 e RAID 4 concentrano la parità su un solo disco: questo disco rischia di limitare le prestazioni globali.
+
+---
+
+### **10. RAID 5**
+
+Il **RAID 5** distribuisce le informazioni di parità su tutti i dischi, evitando che esista un unico disco di parità.
+
+In pratica, quella che in RAID 4 era una zona concentrata su un disco viene spezzata in porzioni distribuite tra i vari dischi.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **10.1. Caratteristiche**
+
+- usa striping a blocchi;
+- distribuisce la parità;
+- tollera il guasto di un disco;
+- migliora il parallelismo rispetto a RAID 4;
+- evita il collo di bottiglia del disco di parità dedicato.
+
+> ✅ RAID 5 è un buon compromesso tra capacità, prestazioni e tolleranza al guasto di un disco.
+
+---
+
+### **11. RAID 6**
+
+Il **RAID 6** estende RAID 5 introducendo ridondanza aggiuntiva per tollerare guasti multipli.
+
+Usa tecniche di codifica più robuste, capaci di rilevare e correggere errori dovuti al guasto di due dischi.
+
+Per esempio, alcune tecniche permettono di proteggere gruppi di bit dati con pochi bit ridondanti aggiuntivi, consentendo il recupero anche in presenza di guasti doppi.
+
+#### **11.1. Caratteristiche**
+
+- tollera fino a due guasti simultanei;
+- aumenta l'affidabilità;
+- richiede più ridondanza e più calcolo rispetto a RAID 5.
+
+> ⚠️ RAID 6 migliora la sopravvivenza ai guasti multipli, ma aumenta overhead di spazio e di calcolo.
+
+---
+
+### **12. RAID 0+1 e RAID 1+0**
+
+Esistono configurazioni ibride che combinano striping e mirroring.
+
+#### **12.1. RAID 0+1**
+
+Nel **RAID 0+1**, prima si crea uno striping su un gruppo di dischi, poi l'intero gruppo viene duplicato con mirroring.
+
+In caso di guasto di un disco, può essere considerato non accessibile l'intero gruppo a cui quel disco appartiene.
+
+#### **12.2. RAID 1+0**
+
+Nel **RAID 1+0**, o **RAID 10**, prima si crea il mirroring di ciascun disco, poi le coppie mirror vengono collegate tramite striping.
+
+Se un disco si guasta, solo quel disco viene sostituito logicamente dalla sua copia nella coppia. Il resto dello stripe continua a essere accessibile.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 📌 RAID 1+0 è in genere più robusto di RAID 0+1, perché protegge ogni disco singolarmente prima di applicare lo striping.
+
+---
+
+### **13. Sintesi finale**
+
+> ✅ Le tecniche RAID combinano più dischi per ridurre i costi, aumentare l'affidabilità tramite ridondanza e migliorare le prestazioni tramite parallelismo.
+
+I livelli principali sono:
+
+- **RAID 0**, striping senza ridondanza, orientato alle prestazioni;
+- **RAID 1**, mirroring completo, orientato all'affidabilità;
+- **RAID 2**, codici correttori di errore;
+- **RAID 3**, parità dedicata a livello di bit o gruppi di bit;
+- **RAID 4**, parità dedicata a livello di blocchi;
+- **RAID 5**, parità distribuita;
+- **RAID 6**, ridondanza sufficiente per tollerare guasti multipli;
+- **RAID 0+1** e **RAID 1+0**, combinazioni di striping e mirroring.
+
+La scelta del livello RAID dipende dal compromesso desiderato tra costo, capacità utile, prestazioni e tolleranza ai guasti.

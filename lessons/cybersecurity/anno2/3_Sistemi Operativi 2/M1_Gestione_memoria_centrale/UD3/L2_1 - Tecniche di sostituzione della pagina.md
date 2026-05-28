@@ -52,22 +52,43 @@ Il sistema operativo coordina queste componenti per eseguire la traduzione logic
 
 ### **4. Gestione del page fault**
 
-Quando un processo tenta di accedere a una pagina **non presente in memoria fisica**, si verifica una **mancanza di pagina** (_page fault_).  
+Quando un processo tenta di accedere a una pagina **non presente in memoria fisica**, si verifica una **mancanza di pagina** (*page fault*).  
 Questo evento genera una **trap** (interruzione software) gestita dal sistema operativo.
 
-#### **Sequenza di gestione del page fault**
+#### **4.1. Esempio narrativo: pagina presente vs pagina assente**
 
-1. Il processore rileva che la pagina richiesta non è presente nella tabella delle pagine.
-    
+Per chiarire il meccanismo, consideriamo due scenari:
+
+##### **Caso A — accesso a una pagina presente (es. pagina logica 2)**
+
+1. Il processore genera un indirizzo nella **pagina logica 2**;
+2. l'indirizzo viene inviato alla **MMU**;
+3. la MMU consulta la **tabella delle pagine** e trova che la pagina 2 è caricata: il **bit di validità** è impostato a **valido**, e la pagina è nel **frame 6**;
+4. la MMU compone l'indirizzo fisico nel frame 6 e completa l'accesso normalmente.
+
+##### **Caso B — accesso a una pagina assente (es. pagina logica 1)**
+
+1. Il processore genera un indirizzo nella **pagina logica 1**;
+2. l'indirizzo viene inviato alla MMU;
+3. la MMU consulta la tabella delle pagine e trova il **bit di validità a "invalido"**;
+4. la MMU **non può procedere** alla generazione dell'accesso → solleva una **trap di page fault** verso il processore.
+
+> 📌 Nota: la pagina **esiste comunque nell'area di swap**, perché l'area di swap contiene **lo spazio di indirizzamento completo** del processo. Va solo "portata" in RAM.
+
+#### **4.2. Sequenza di gestione del page fault**
+
+1. Il processore rileva che la pagina richiesta non è presente nella tabella delle pagine (bit di validità a *invalido*).
 2. La **MMU** genera una **trap (page fault)**.
-    
-3. Il **sistema operativo** identifica la pagina mancante e la localizza nell’**area di swap**.
-    
-4. La pagina viene **caricata in un frame libero** della memoria fisica.
-    
-5. La **tabella delle pagine** del processo viene **aggiornata** con il nuovo mapping.
-    
-6. L’istruzione che aveva generato il fault viene **riattivata** e riprende l’esecuzione normalmente.
+3. Parte la **routine di risposta all'interruzione** del sistema operativo.
+4. Il SO **localizza** la pagina mancante nell'**area di swap**.
+5. Il SO trova un **frame libero** in memoria fisica.
+6. La pagina viene **caricata** dall'area di swap nel frame libero.
+7. La **tabella delle pagine** viene **aggiornata**: bit di validità a *valido* e numero di frame assegnato.
+8. Il processo viene **riattivato** ripristinando il Program Counter dallo stack.
+
+##### **Il dettaglio chiave: ripresa dell'istruzione fallita**
+
+All'attivazione della trap, sullo **stack** era stato salvato **l'indirizzo dell'istruzione** in memoria centrale che aveva generato l'accesso fallito. Quando la routine di gestione del page fault termina, il PC viene ripristinato a tale indirizzo: il processore **ri-esegue esattamente l'istruzione** che era fallita, ora completabile perché la pagina è in RAM.
 
 Il tutto avviene in modo **trasparente per il processo**, che non percepisce la mancanza temporanea della pagina.
 
@@ -79,7 +100,7 @@ Il tempo di accesso alla memoria dipende dalla probabilità che si verifichi una
 
 Sia:
 
-- $( p )$ = probabilità di mancanza di pagina (_page fault rate_),
+- $( p )$ = probabilità di mancanza di pagina (*page fault rate*),
     
 - $( m_a )$ = tempo medio di accesso alla memoria centrale fisica,
     
@@ -104,27 +125,33 @@ $$
 ### **6. Scaricamento della pagina**
 
 Quando la memoria è piena e si deve caricare una nuova pagina, il sistema operativo deve decidere **quale pagina rimuovere**.  
-La scelta dipende dal suo stato di modifica.
+La scelta dipende dal suo stato di modifica, tracciato tramite il **bit di modifica** (*dirty bit*) gestito dalla **MMU** e associato a ciascuna pagina fisica.
 
 #### **a. Frame non modificata**
 
-- La pagina non è cambiata rispetto alla copia su disco.
-    
-- Il frame può essere **semplicemente rimosso** dalla memoria fisica.
+- Il dirty bit è a 0: la pagina **non è cambiata** dall'ultimo caricamento (è stata solo letta o eseguita).
+- Il contenuto **coincide** con la copia presente nell'area di swap.
+- Il frame può quindi essere **semplicemente rimosso** dalla memoria fisica, senza alcun salvataggio.
 
 #### **b. Frame modificata**
 
-- La pagina è stata alterata durante l’esecuzione.
-    
-- Prima di essere rimossa, deve essere **scritta su disco** (nell’area di swap) per non perdere i dati aggiornati.
-    
-- Alcuni sistemi utilizzano un **buffer delle pagine modificate**, che raccoglie temporaneamente le scritture prima del salvataggio effettivo, riducendo i tempi di attesa.
+- Il dirty bit è a 1: la pagina è stata **alterata** durante l'esecuzione.
+- Prima di essere rimossa, deve essere **scritta nell'area di swap** per non perdere i dati aggiornati.
+
+##### **Ottimizzazione: buffer delle pagine modificate**
+
+Il processo di scaricamento può essere **lento** (richiede I/O su disco), e il sistema potrebbe dover attendere molto tempo prima di liberare il frame. Per velocizzare, alcuni sistemi operativi adottano una soluzione a due passi:
+
+1. il contenuto del frame da scaricare viene prima **copiato in un buffer** nella memoria centrale del SO;
+2. la pagina fisica **viene immediatamente liberata** appena completata la copia, e può essere riutilizzata subito;
+3. il SO provvede poi al salvataggio del buffer nell'area di swap "**con calma**", in background.
+
+In questo modo la liberazione del frame non è bloccata dal tempo di I/O su disco.
 
 #### **c. Frame residenti**
 
-- Alcune pagine, come quelle del **kernel** o strutture critiche del sistema operativo, **non possono essere rimosse** dalla memoria.
-    
-- Esse sono dette **residenti** e restano sempre in RAM.
+- Alcune pagine, come quelle del **kernel** o strutture critiche del sistema operativo, **non possono mai essere rimosse** dalla memoria.
+- Esse sono dette **residenti** e restano sempre in RAM perché contengono informazioni di **uso estremamente frequente** da parte del sistema operativo.
 
 ---
 

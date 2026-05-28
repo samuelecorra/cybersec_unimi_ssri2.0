@@ -1,139 +1,284 @@
-# **M3 UD2 Lezione 3 - Realizzazione dei file – Gestione dell’astrazione dei file (parte 1)**
+# **M3 UD2 Lezione 3 - Realizzazione dei file - Gestione dell'astrazione dei file (parte 1)**
+
+---
 
 ### **1. Introduzione**
 
-Questa lezione introduce le **modalità di memorizzazione dei file** nelle memorie di massa, mettendo in relazione la **visione logica** (astratta) del file con la **visione fisica** (reale) sui dispositivi di memorizzazione.
+Questa lezione introduce la **realizzazione dei file** dal punto di vista dell'astrazione fornita dal sistema operativo.
 
-L’obiettivo è comprendere come il sistema operativo realizzi il **mappaggio tra gli elementi logici del file e i blocchi fisici del disco**, mantenendo efficienza e coerenza nella gestione dei dati.
+L'obiettivo e' capire come un file, visto dall'utente come una sequenza di **record logici**, possa essere memorizzato su una memoria di massa che invece lavora con **blocchi fisici**.
+
+Il problema centrale e' quindi il **mappaggio** tra:
+
+- la visione logica del file, definita dal programma applicativo;
+- la visione fisica del supporto di memoria di massa;
+- una visione intermedia omogenea, detta **byte stream**.
+
+> 📌 Il file system deve nascondere i dettagli fisici del disco e mostrare al programma una sequenza logica di informazioni.
 
 ---
 
 ### **2. Visione logica del file**
 
-La **visione logica** considera il file come una **sequenza ordinata di elementi omogenei**, detti **record logici**.
+Dal punto di vista del programma, un file e' una **sequenza di elementi omogenei** detti **record logici**.
 
-- Gli elementi hanno **dimensione fissa o variabile** e sono organizzati in un insieme coerente.
-    
-- Il numero di record non è limitato a priori.
+Il numero dei record non e' noto a priori e dipende dal contenuto effettivo del file.
 
-In termini astratti:
+La sequenza puo' essere rappresentata come:
 
-$$  
-\text{File logico} = { R_1, R_2, \dots, R_n }  
+$$
+\text{file logico} = \{r_0, r_1, r_2, \dots, r_N\}
 $$
 
-dove ciascun $( R_i )$ è un record logico tipizzato.
+Ogni record logico ha un tipo base definito dal programma applicativo.
+
+Se ogni record ha dimensione pari a \(L\) byte:
+
+$$
+|r_i| = L \text{ byte}
+$$
+
+Il sistema operativo non deve imporre vincoli sulla scelta di questo tipo base: il programmatore deve poter definire record piccoli, grandi o strutturati senza dipendere direttamente dalla dimensione dei blocchi fisici del disco.
 
 ---
 
 ### **3. Visione fisica del file**
 
-La **visione fisica** rappresenta come il file è effettivamente memorizzato nel dispositivo di massa.  
-I dati sono organizzati in un insieme ordinato di **blocchi fisici** di dimensione fissa ( F ) (in byte).
+La memoria di massa non memorizza direttamente record logici tipizzati. Dal punto di vista fisico, il disco e' organizzato in **blocchi fisici**.
 
-$$  
-\text{File fisico} = { B_1, B_2, \dots, B_m }  
+Ogni blocco fisico ha dimensione fissa \(F\), determinata dalle caratteristiche del supporto e del sistema:
+
+$$
+|b_j| = F \text{ byte}
 $$
 
-Ogni blocco fisico contiene una o più unità logiche (record o byte) del file.
+Un file memorizzato su disco e' quindi rappresentato come una sequenza ordinata di blocchi fisici:
+
+$$
+\text{file fisico} = \{b_0, b_1, b_2, \dots, b_M\}
+$$
+
+Questi blocchi devono essere letti o scritti nell'ordine corretto per ricostruire il contenuto del file.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> ⚠️ La visione logica e la visione fisica non coincidono: i record logici dipendono dal programma, i blocchi fisici dipendono dal dispositivo.
 
 ---
 
-### **4. Mappaggio tra visione logica e visione fisica**
+### **4. Problema del mappaggio**
 
-Il **mappaggio** è la funzione che collega i **record logici** alla loro **posizione fisica** nel supporto di memoria.
+Il problema da risolvere e' come mappare la sequenza di record logici sulla sequenza di blocchi fisici.
 
-#### **Parametri fondamentali**
+I parametri fondamentali sono:
 
-- **L:** dimensione del record logico (in byte)
-    
-- **F:** dimensione del blocco fisico (in byte)
+- \(L\): dimensione del record logico;
+- \(F\): dimensione del blocco fisico.
 
-#### **Casi possibili**
-
-1. **Un record logico per blocco fisico**
-    
-    - Se $( L < F )$ → si genera **sfrido** (spazio inutilizzato).
-        
-    - Se $( L > F )$ → il record non può essere contenuto in un singolo blocco.
-    
-2. **Più record logici per blocco fisico**
-    
-    - Numero massimo di record per blocco:  
-        $$  
-        K = \max{ n \ | \ nL \leq F }  
-        $$
-        
-    - Se $( KL < F )$ → rimane una piccola parte di spazio inutilizzato (sfrido).
+Una soluzione ingenua consiste nel provare a collocare direttamente i record logici nei blocchi fisici.
 
 ---
 
-### **5. Visione logica omogenea del file: il Byte Stream**
+### **5. Un record logico per blocco fisico**
 
-Per evitare sprechi di spazio e semplificare la gestione, la maggior parte dei sistemi operativi moderni adotta una visione **omogenea** del file come **flusso continuo di byte (byte stream)**.
+La prima soluzione possibile e' memorizzare **un record logico in un blocco fisico**.
 
-#### **Caratteristiche del byte stream**
+Se il record logico e' piu' piccolo del blocco fisico:
 
-- Il file è trattato come una sequenza di **byte non tipizzati**:  
-    $$  
-    \text{File} = { b_1, b_2, b_3, \dots, b_N }  
-    $$
-    
-- Ogni byte è un’unità minima di informazione.
-    
-- Il sistema operativo non si preoccupa del significato semantico dei dati (testo, immagine, programma, ecc.).
+$$
+L < F
+$$
 
-Questo approccio rende **uniforme la gestione** dei file di qualsiasi tipo, lasciando l’interpretazione dei dati ai **processi utente o alle applicazioni**.
+il record occupa solo una parte del blocco. La porzione rimanente resta inutilizzata e produce **sfrido**.
 
----
+$$
+\text{sfrido} = F - L
+$$
 
-### **6. Mappaggio con byte stream**
+Piu' il record logico e' piccolo rispetto al blocco fisico, maggiore e' lo spreco di spazio su disco.
 
-Il mappaggio tra visione logica e fisica, attraverso il modello a **byte stream**, si realizza in due passaggi.
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **6.1 Dalla visione logica a quella a byte stream**
+Se invece il record logico e' piu' grande del blocco fisico:
 
-- Si **rimuove la tipizzazione** dei record logici.
-    
-- Il file viene considerato come una sequenza di byte.
+$$
+L > F
+$$
 
-#### **6.2 Dalla visione a byte stream alla visione fisica**
+il record non puo' essere contenuto in un singolo blocco.
 
-- I byte vengono **raggruppati in blocchi fisici** di dimensione ( F ).
-    
-- Si ottiene una corrispondenza diretta tra:
-    
-    - blocchi logici (gruppi di byte),
-        
-    - e blocchi fisici del dispositivo.
+Questa soluzione diventa quindi inaccettabile, perche' farebbe dipendere la definizione del tipo base del file da un limite fisico del dispositivo.
+
+> ⚠️ Un file system non deve esporre al programmatore il vincolo fisico della dimensione del blocco.
 
 ---
 
-### **7. Vantaggi del modello a byte stream**
+### **6. Piu' record logici per blocco fisico**
 
-- **Universalità:** ogni file può essere rappresentato come sequenza di byte.
-    
-- **Assenza di sfridi:** poiché il tipo base (byte) è sempre sottomultiplo della dimensione del blocco fisico ( F ).
-    
-- **Semplicità di gestione:** il file system può utilizzare algoritmi uniformi per tutti i tipi di file.
-    
-- **Compatibilità:** il byte stream è alla base dei file system più diffusi (es. UNIX, NTFS, ext4).
+Una seconda soluzione consiste nel memorizzare **piu' record logici nello stesso blocco fisico**.
+
+Se ogni record occupa \(L\) byte, il numero di record memorizzabili in un blocco e':
+
+$$
+K \cdot L \le F
+$$
+
+cioe':
+
+$$
+K = \left\lfloor \frac{F}{L} \right\rfloor
+$$
+
+In questo modo si riduce lo spreco rispetto alla soluzione precedente.
+
+Resta pero' possibile uno sfrido finale:
+
+$$
+\text{sfrido} = F - K \cdot L
+$$
+
+Inoltre, il problema principale non viene risolto: se \(L > F\), nessun record logico puo' comunque essere contenuto in un blocco fisico.
+
+> 📌 Inserire piu' record in un blocco migliora l'uso dello spazio, ma non elimina il vincolo tra record logico e blocco fisico.
 
 ---
 
-### **8. Sintesi finale**
+### **7. Visione intermedia: byte stream**
 
-|Concetto|Descrizione|
-|---|---|
-|**Visione logica**|File come sequenza di record logici tipizzati|
-|**Visione fisica**|File come insieme ordinato di blocchi fisici|
-|**Mappaggio**|Collegamento tra record logici e blocchi fisici|
-|**Byte stream**|Flusso omogeneo di byte non tipizzati|
-|**Vantaggi**|Nessuno sfrido, semplicità, universalità|
+Per superare questi limiti si introduce una visione logica omogenea del file: il **byte stream**, cioe' il **flusso di byte**.
+
+In questa rappresentazione, qualunque file viene visto come una sequenza di byte:
+
+$$
+S = \{c_0, c_1, c_2, \dots, c_Q\}
+$$
+
+Il tipo base non e' piu' il record logico definito dal programma, ma sempre e solo il **byte**.
+
+La tipizzazione del file viene rimossa a livello del file system:
+
+- il programma continua a interpretare gruppi di byte come record logici;
+- il sistema operativo gestisce solo una sequenza uniforme di byte;
+- il disco conserva gruppi di byte dentro blocchi fisici.
+
+> 💡 Il byte stream separa l'interpretazione dei dati dalla loro memorizzazione fisica.
 
 ---
 
-### **9. Conclusione**
+### **8. Dalla visione logica al byte stream**
 
-La rappresentazione dei file come **flussi di byte** consente al sistema operativo di gestire i dati in modo **astratto, uniforme e indipendente** dal tipo di contenuto.  
-Questo modello semplifica l’organizzazione fisica dei file e rappresenta la base per le **strategie di allocazione dello spazio su disco**, che verranno approfondite nella **parte 2 della lezione**.
+Il primo passaggio consiste nel trasformare il file logico in un byte stream.
+
+Ogni record logico viene visto come la sequenza dei byte che lo compongono.
+
+Se ogni record ha dimensione \(L\), allora:
+
+- il record \(r_0\) corrisponde ai primi \(L\) byte del byte stream;
+- il record \(r_1\) corrisponde ai successivi \(L\) byte;
+- il record \(r_2\) corrisponde ai successivi \(L\) byte;
+- e cosi' via.
+
+Formalmente:
+
+$$
+r_i \longleftrightarrow S[iL, (i+1)L - 1]
+$$
+
+La sequenza dei record logici viene quindi linearizzata in una sequenza continua di byte.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> ✅ Rimuovere la tipizzazione e' sempre possibile, perche' ogni struttura dati e' comunque rappresentata in memoria come una sequenza di byte.
+
+---
+
+### **9. Dal byte stream ai blocchi fisici**
+
+Il secondo passaggio consiste nel memorizzare il byte stream nei blocchi fisici del disco.
+
+Il byte stream viene diviso in gruppi di \(F\) byte, dove \(F\) e' la dimensione del blocco fisico.
+
+- i primi \(F\) byte vengono memorizzati nel blocco fisico \(b_0\);
+- i successivi \(F\) byte vengono memorizzati nel blocco fisico \(b_1\);
+- i successivi \(F\) byte vengono memorizzati nel blocco fisico \(b_2\);
+- l'ultimo gruppo viene memorizzato nell'ultimo blocco del file.
+
+Formalmente:
+
+$$
+b_j \longleftrightarrow S[jF, (j+1)F - 1]
+$$
+
+Questa operazione e' sempre possibile, perche' il byte e' l'unita' elementare con cui si compone il blocco fisico.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 📌 Il file system non deve piu' mappare record logici su blocchi fisici, ma byte stream su blocchi fisici.
+
+---
+
+### **10. Ricostruzione dei record logici**
+
+Resta da capire come far riapparire al programma i record logici a partire dal byte stream.
+
+Il meccanismo concettuale e' una **finestra** di dimensione \(L\) byte sovrapposta al byte stream.
+
+La finestra mostra solo \(L\) byte alla volta:
+
+$$
+\text{finestra}_i = S[iL, (i+1)L - 1]
+$$
+
+Questi byte vengono interpretati dal programma come il record logico \(r_i\).
+
+Spostando la finestra di \(L\) byte si ottiene il record successivo.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 💡 La finestra non cambia il contenuto del byte stream: cambia solo il gruppo di byte che viene interpretato come record logico corrente.
+
+---
+
+### **11. Ricostruzione del byte stream dai blocchi fisici**
+
+Per ricostruire il byte stream a partire dalla memoria di massa, il sistema operativo deve conoscere:
+
+- quali blocchi fisici appartengono al file;
+- dove si trovano sul disco;
+- in quale ordine devono essere letti.
+
+L'ordine dei blocchi e' essenziale, perche' definisce l'ordine dei byte nel byte stream.
+
+Se il sistema legge i blocchi nell'ordine sbagliato, il byte stream ricostruito non corrisponde al file logico originario.
+
+> ⚠️ La gestione dei file richiede quindi strutture dati capaci di ricordare la sequenza dei blocchi fisici associati a ciascun file.
+
+---
+
+### **12. Sintesi**
+
+La realizzazione dell'astrazione dei file richiede tre livelli:
+
+| Livello | Visione | Unita' gestita |
+|---|---|---|
+| **Logico applicativo** | File come sequenza di record logici | Record di \(L\) byte |
+| **Logico omogeneo** | File come byte stream | Byte |
+| **Fisico** | File come sequenza di blocchi su disco | Blocchi di \(F\) byte |
+
+Il byte stream e' il livello intermedio che consente al sistema operativo di:
+
+- nascondere la struttura fisica del disco;
+- evitare vincoli diretti tra record logico e blocco fisico;
+- rappresentare in modo uniforme file di tipo diverso;
+- ricostruire i record logici tramite finestre di interpretazione;
+- ricostruire il byte stream leggendo i blocchi fisici nell'ordine corretto.
+
+---
+
+### **13. Conclusione**
+
+La gestione dell'astrazione dei file si basa sulla separazione tra **interpretazione logica** e **memorizzazione fisica**.
+
+Il programma vede record logici tipizzati, il sistema operativo gestisce un byte stream e il disco conserva blocchi fisici.
+
+Il problema operativo diventa quindi ricordare **quali blocchi fisici compongono il file** e **in quale ordine devono essere letti o scritti**. Questo introduce il tema della gestione dell'allocazione dei blocchi, che viene approfondito nelle lezioni successive.

@@ -26,41 +26,44 @@ La segmentazione, pur offrendo una visione logica coerente con la struttura del 
 
 ### **3. Principio della segmentazione con paginazione**
 
-La tecnica fonde le caratteristiche di entrambe:
+La tecnica fonde le caratteristiche di entrambe, sfruttando il meglio di ciascuna:
 
 #### **a. Dalla paginazione eredita:**
 
-- la **semplicità** di gestione della memoria;
-    
-- la **rapidità** nel trovare frame liberi;
-    
-- l’assenza di **frammentazione esterna**.
+- la **gestione semplice ed efficiente** della memoria;
+- la **facile individuazione dei frame liberi** in memoria centrale;
+- la **libertà nella scelta del frame** in cui caricare una pagina (qualsiasi frame libero va bene, essendo tutti uguali);
+- l'**assenza nativa di frammentazione esterna**.
 
 #### **b. Dalla segmentazione eredita:**
 
 - la **tipizzazione logica** delle sezioni di memoria;
-    
-- il controllo degli **accessi e delle operazioni consentite**;
-    
-- la possibilità di **condividere porzioni di memoria** tra processi.
+- il **controllo degli accessi** e della **liceità delle operazioni** in base al tipo del segmento;
+- la possibilità di **condividere porzioni di memoria** tra processi in modo semplice ed efficiente.
 
 ---
 
 ### **4. Struttura logico-fisica**
 
-- La **memoria fisica** è divisa in **pagine fisiche (frame)**.
-    
-- Lo **spazio logico del processo** è diviso in **segmenti logici**, e **ogni segmento è ulteriormente suddiviso in pagine logiche**.
+- La **memoria fisica** è divisa in **pagine fisiche (frame)**, tutte di **uguale dimensione**.
+- Lo **spazio logico del processo** è considerato uno spazio **bidimensionale** diviso in **segmenti logici** (ciascuno tipizzato).
+- **Ogni segmento è ulteriormente suddiviso in pagine logiche** tutte della stessa dimensione, che coincide con quella delle pagine fisiche.
 
 #### **Caratteristiche**
 
 - I **segmenti** contengono dati o codice di **diverso tipo** (tipizzazione).
-    
 - Le **pagine** di un segmento rappresentano porzioni omogenee dello spazio logico interno a quel segmento.
-    
 - I segmenti possono avere **dimensioni diverse**, ma le pagine sono **tutte della stessa dimensione**, così come i frame fisici.
-    
 - **Ogni pagina logica di un segmento** è caricata in **un frame fisico**.
+
+#### **4.1. Differenza chiave rispetto alla segmentazione pura**
+
+Nella segmentazione con paginazione **non viene più caricato l'intero segmento** in memoria centrale: viene caricata **solo la singola pagina del segmento che serve**, ponendola in una pagina fisica disponibile.
+
+Poiché la pagina logica ha **esattamente la stessa dimensione** della pagina fisica, l'operazione di caricamento è:
+
+- **molto più rapida ed efficiente** rispetto al caso della segmentazione pura (dove si dovevano spostare segmenti interi, potenzialmente grandi);
+- **priva di sprechi**: nessuno spazio inutilizzato rimane nel frame, perché pagina logica e fisica coincidono perfettamente.
 
 ---
 
@@ -76,27 +79,45 @@ $$
 
 dove:
 
-- ( s ) = numero del segmento,
-    
-- ( p ) = numero della pagina all’interno del segmento,
-    
-- ( d ) = spiazzamento (offset) all’interno della pagina.
+- $s$ = numero del segmento (talvolta chiamato **selettore**),
+- $p$ = numero della pagina all'interno del segmento,
+- $d$ = spiazzamento (offset) all'interno della pagina.
 
 #### **Indirizzo fisico**
 
-L’indirizzo fisico generato dalla MMU è:
+L'indirizzo fisico generato dalla MMU è:
 
 $$  
 \text{Indirizzo fisico} = (f, d)  
 $$
 
-dove ( f ) è il numero del **frame fisico** che contiene la pagina richiesta.
+dove $f$ è il numero del **frame fisico** che contiene la pagina richiesta.
 
-In questo modo, la traduzione avviene in due passaggi:
+#### **Schema completo della doppia traduzione**
 
-1. dalla **tabella dei segmenti** alla **tabella delle pagine del segmento**;
-    
-2. dalla **tabella delle pagine** al **frame fisico** effettivo.
+La traduzione avviene in **due passaggi** ben distinti:
+
+$$
+\begin{array}{c}
+\text{CPU genera indirizzo logico } (s, p, d) \\\\
+\downarrow \\\\
+\text{Passo 1: si usa } s \text{ come selettore nella tabella dei segmenti} \\\\
+\downarrow \\\\
+\text{Si ottiene il riferimento alla tabella delle pagine specifica del segmento } s \\\\
+\downarrow \\\\
+\text{Passo 2: si usa } p \text{ come indice nella tabella delle pagine del segmento} \\\\
+\downarrow \\\\
+\text{Si ottiene il numero di frame fisico } f \\\\
+\downarrow \\\\
+\text{Indirizzo fisico: } (f, d) \;\longrightarrow\; \text{accesso alla cella di memoria}
+\end{array}
+$$
+
+In sintesi:
+
+1. **Selettore → Tabella dei segmenti**: il sistema mantiene **l'insieme di tutte le tabelle dei segmenti** caricate; il selettore individua quella del segmento desiderato.
+2. **Tabella delle pagine del segmento**: ogni segmento ha la **propria tabella delle pagine** (a differenza della paginazione pura dove ce n'è una sola per processo); essa mappa le pagine logiche del segmento sui frame fisici della RAM.
+3. **Combinazione con lo spiazzamento**: il frame $f$ e lo spiazzamento $d$ vengono uniti per generare l'indirizzo fisico effettivo della cella.
 
 ---
 
@@ -116,7 +137,10 @@ Questo modello fornisce **flessibilità logica** e **efficienza fisica**, risult
 
 #### **(1) Caricamento**
 
-Le pagine necessarie nell’immediato futuro vengono caricate in memoria centrale.  
+In memoria centrale vengono caricate **solo le pagine necessarie nell'immediato futuro** per i processi nello stato di **pronto**.
+
+> 📌 **Differenza chiave rispetto alla segmentazione pura**: nella segmentazione pura si caricava sempre l'intero segmento; qui invece **solo le pagine di ciascun segmento che effettivamente servono** vengono caricate — un'evoluzione che incrementa drasticamente l'efficienza dell'uso della memoria centrale.
+
 Le pagine appartenenti a un segmento possono trovarsi in **frame non contigui**, esattamente come nella paginazione.
 
 #### **(2) Area di swap**
@@ -157,12 +181,25 @@ Tutto il processo è **automatico e trasparente** per l’utente.
 La **Memory Management Unit** fornisce supporto specifico alla segmentazione con paginazione:
 
 - effettua la **doppia traduzione** (segmento → pagina → frame);
-    
 - mantiene o punta alle **tabelle dei segmenti e delle pagine**;
-    
-- garantisce il controllo degli accessi, i permessi e la protezione dei segmenti;
-    
-- gestisce i **page fault**, segnalando al sistema operativo quando è necessario caricare una pagina non presente.
+- garantisce il controllo degli accessi, i permessi e la protezione dei segmenti.
+
+#### **Due tipi di trap distinte**
+
+La MMU genera due trap diverse a seconda del tipo di errore:
+
+$$
+\begin{cases}
+\textbf{Page fault:} & \text{la \textbf{pagina} richiesta non è caricata in memoria centrale.} \\\\
+& \text{Il SO risponde caricando la pagina mancante dall'area di swap,} \\\\
+& \text{poi l'operazione che era fallita viene completata. } \\\\
+\textbf{Segmentation violation:} & \text{si accede a un indirizzo \textbf{fuori dai limiti} del segmento} \\\\
+& \text{(violazione dello spazio consentito). Errore di programmazione:} \\\\
+& \text{tipicamente il processo viene terminato dal SO.}
+\end{cases}
+$$
+
+Le due trap riflettono la **duplice natura** della tecnica: il **page fault** è ereditato dalla paginazione, la **segmentation violation** dalla segmentazione.
 
 ---
 
@@ -171,11 +208,16 @@ La **Memory Management Unit** fornisce supporto specifico alla segmentazione con
 - La **segmentazione con paginazione** integra i vantaggi delle due tecniche precedenti:  
     → tipizzazione logica (segmentazione)  
     → efficienza e assenza di frammentazione (paginazione).
-    
 - È **configurata implicitamente** dal programmatore e **gestita automaticamente** dal sistema operativo.
-    
 - Permette di creare **spazi logici più grandi** della memoria fisica reale.
-    
 - È **efficiente**, poiché muove solo piccole porzioni di memoria (pagine).
-    
 - **Elimina la frammentazione** mantenendo la coerenza semantica tra i segmenti del programma.
+
+#### **9.1. Le quattro proprietà chiave**
+
+In conclusione, la segmentazione con paginazione si distingue per **quattro proprietà fondamentali**:
+
+1. **Spazio logico > spazio fisico**: come paginazione e segmentazione pure, crea uno spazio logico più grande di quello fisico assegnato al processo.
+2. **Tipizzazione semantica**: come la segmentazione pura, consente di associare un tipo (e quindi un controllo della liceità degli accessi) a ciascun segmento.
+3. **Configurazione implicita + gestione automatica**: la struttura in segmenti è definita implicitamente dal programmatore tramite programmazione modulare; tutto il resto è in carico al SO.
+4. **Gestione efficiente senza frammentazione**: la realizzazione tramite paginazione garantisce caricamento/scaricamento rapidi delle pagine e, soprattutto, **elimina la frammentazione** della segmentazione pura — tutte le pagine sono utilizzate completamente, e non c'è più bisogno di selezionare frame sovradimensionati per contenere segmenti grandi.

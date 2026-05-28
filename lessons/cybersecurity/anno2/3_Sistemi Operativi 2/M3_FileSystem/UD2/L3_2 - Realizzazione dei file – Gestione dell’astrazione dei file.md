@@ -1,143 +1,326 @@
-# **M3 UD2 Lezione 3 - Realizzazione dei file – Gestione dell’astrazione dei file (parte 2)**
+# **M3 UD2 Lezione 3 - Realizzazione dei file - Gestione dell'astrazione dei file (parte 2)**
+
+---
 
 ### **1. Introduzione**
 
-Dopo aver analizzato la rappresentazione logica e fisica dei file, questa seconda parte si concentra sulle **operazioni fondamentali** che costituiscono la gestione dell’astrazione dei file:  
-**apertura, lettura, scrittura, posizionamento (seek) e chiusura.**
+Questa seconda parte analizza come il sistema operativo gestisce concretamente l'**astrazione dei file** attraverso le operazioni fondamentali:
 
-Queste operazioni consentono al sistema operativo di **mediare tra l’utente e la memoria di massa**, mantenendo la coerenza dei dati e la corretta gestione delle risorse.
+- apertura;
+- lettura;
+- scrittura;
+- posizionamento su un record logico;
+- chiusura.
 
----
+Queste operazioni vengono interpretate attraverso il modello introdotto nella lezione precedente:
 
-### **2. Apertura**
+- il programma vede un file come sequenza di **record logici**;
+- il file system usa una visione intermedia come **byte stream**;
+- la memoria di massa conserva il contenuto in **blocchi fisici**.
 
-L’apertura di un file è il **primo passo di qualsiasi operazione di accesso**.  
-Serve a stabilire un **collegamento logico** tra il file richiesto e le strutture di gestione interne del sistema operativo.
-
-#### **Fasi dell’apertura**
-
-1. **Identificazione del file**  
-    Il sistema localizza il file all’interno del file system, partendo dal suo nome e dal percorso (path).
-    
-2. **Verifica dei permessi**  
-    Controlla che l’utente disponga delle **autorizzazioni necessarie** (lettura, scrittura, esecuzione).
-    
-3. **Caricamento delle informazioni di gestione**
-    
-    - Recupera i **metadati** dalla directory o dal descrittore del file.
-        
-    - Inizializza una **voce nella tabella dei file aperti** del sistema e una nel processo.
-    
-4. **Restituzione del riferimento**  
-    L’operazione restituisce un **file descriptor** o **handle**, usato dal processo per riferirsi al file durante le operazioni successive.
+> 📌 Ogni operazione sui file puo' essere letta come uno spostamento o una modifica della finestra di interpretazione sul byte stream.
 
 ---
 
-### **3. Lettura**
+### **2. Modello di riferimento**
 
-L’operazione di **lettura** consente di trasferire dati dal file (memoria di massa) alla memoria centrale del processo.
+Si consideri un file logico composto da record di dimensione \(L\) byte:
 
-#### **Procedura**
+$$
+\text{file logico} = \{r_0, r_1, r_2, \dots, r_N\}
+$$
 
-1. Il sistema utilizza il **file descriptor** per identificare il file.
-    
-2. Recupera il **puntatore alla posizione corrente** nel file.
-    
-3. Calcola il **blocco fisico corrispondente** e lo legge dal dispositivo di memoria.
-    
-4. Trasferisce i dati nel **buffer utente**.
-    
-5. Aggiorna il **puntatore di posizione** per la successiva operazione.
+Il file system traduce questa visione in un byte stream:
 
-#### **Note**
+$$
+S = \{c_0, c_1, c_2, \dots, c_Q\}
+$$
 
-- In caso di lettura oltre la fine del file (EOF), il sistema restituisce un **valore nullo o errore**.
-    
-- Nei file system avanzati, le letture possono essere **precaricate (prefetch)** per ottimizzare le prestazioni.
+e memorizza il byte stream in blocchi fisici di dimensione \(F\):
 
----
+$$
+\text{file fisico} = \{b_0, b_1, b_2, \dots, b_M\}
+$$
 
-### **4. Scrittura**
+La corrispondenza tra record logico e byte stream e':
 
-L’operazione di **scrittura** trasferisce dati dalla memoria centrale del processo verso la memoria di massa.
+$$
+r_i \longleftrightarrow S[iL, (i+1)L - 1]
+$$
 
-#### **Procedura**
+La corrispondenza tra byte stream e blocchi fisici e':
 
-1. Il sistema individua la **posizione fisica del blocco** in cui scrivere.
-    
-2. Se necessario, **alloca nuovi blocchi** o aggiorna la mappa di allocazione.
-    
-3. I dati vengono **copiati nel buffer del sistema operativo**.
-    
-4. Il contenuto viene poi **scritto effettivamente su disco**, in modo sincrono o asincrono.
-    
-5. Il **puntatore di posizione** viene aggiornato in base ai byte scritti.
+$$
+b_j \longleftrightarrow S[jF, (j+1)F - 1]
+$$
 
-#### **Osservazioni**
-
-- La scrittura può essere **ritardata** per motivi di efficienza, accumulando più operazioni prima del commit.
-    
-- In caso di errore o interruzione improvvisa, il **journaling** (nei file system moderni) permette di ripristinare la coerenza.
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
-### **5. Posizionamento (Seek)**
+### **3. Apertura del file**
 
-L’operazione di **seek** consente di spostare il **puntatore corrente** di lettura/scrittura all’interno del file, senza eseguire trasferimenti di dati.
+L'operazione di **apertura** prepara l'accesso al file.
 
-#### **Modalità tipiche**
+Dal punto di vista del file logico, il processo non ha ancora letto o scritto alcun record: si sta semplicemente posizionando sul primo elemento logico.
 
-- Spostamento **assoluto** → rispetto all’inizio del file.
-    
-- Spostamento **relativo** → rispetto alla posizione corrente.
-    
-- Spostamento **dalla fine** → utile per accodare nuovi dati.
+Il puntatore al record corrente viene inizializzato a:
 
-#### **Funzioni principali**
+$$
+i = 0
+$$
 
-- Permette **accesso diretto** ai dati in qualsiasi punto del file.
-    
-- Migliora le prestazioni nei sistemi che supportano **file di grandi dimensioni o accesso casuale**.
+Dal punto di vista del byte stream, il sistema si prepara a interpretare il file a partire dal byte zero:
 
----
+$$
+\text{posizione iniziale nel byte stream} = 0
+$$
 
-### **6. Chiusura**
+La finestra di interpretazione di ampiezza \(L\) viene quindi posta sui primi \(L\) byte del byte stream:
 
-La **chiusura del file** segna la fine delle operazioni di accesso da parte di un processo.
+$$
+\text{finestra}_0 = S[0, L - 1]
+$$
 
-#### **Fasi**
+Dal punto di vista fisico, l'apertura richiede di conoscere:
 
-1. **Aggiornamento dei metadati**
-    
-    - Vengono salvati i dati relativi a dimensione, timestamp, e posizione finale del puntatore.
-    
-2. **Scrittura del contenuto residuo (flush)**
-    
-    - Eventuali byte ancora presenti nel buffer vengono **scritti definitivamente su disco**.
-    
-3. **Rilascio delle strutture di gestione**
-    
-    - Le voci del file nelle **tabelle dei file aperti** (di sistema e di processo) vengono **rimosse o marcate come libere**.
+- l'elenco dei blocchi fisici che compongono il file;
+- la loro posizione sul disco;
+- l'ordine con cui devono essere letti o scritti.
 
-#### **Importanza**
+In particolare, il sistema deve sapere qual e' il primo blocco fisico da considerare.
 
-La chiusura garantisce la **consistenza dei dati** e libera le **risorse di memoria** utilizzate per la gestione del file.
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> ✅ Aprire un file significa preparare le strutture necessarie per iniziare da record logico 0, byte 0 e primo blocco fisico della sequenza.
 
 ---
 
-### **7. Sintesi operativa**
+### **4. Lettura**
 
-|Operazione|Funzione principale|Risultato|
-|---|---|---|
-|**Apertura**|Inizializza il collegamento tra processo e file|Ritorna un file descriptor|
-|**Lettura**|Trasferisce dati dal file al buffer utente|Aggiorna il puntatore|
-|**Scrittura**|Trasferisce dati dal buffer al file|Aggiorna e alloca blocchi se necessario|
-|**Seek**|Riposiziona il puntatore corrente|Nessun trasferimento di dati|
-|**Chiusura**|Libera risorse e aggiorna i metadati|File salvato e buffer svuotati|
+L'operazione di **lettura** restituisce al programma il record logico corrente.
+
+Supponiamo che il file sia appena stato aperto. La finestra e' posizionata sul primo gruppo di \(L\) byte, ma il byte stream non e' ancora materializzato in memoria centrale.
+
+Quando il processo richiede la lettura:
+
+1. il sistema controlla se i byte della finestra sono gia' disponibili in memoria centrale;
+2. se non lo sono, richiama il livello basso del file system;
+3. il livello basso legge dal disco il blocco fisico necessario;
+4. i byte letti riempiono la porzione corrispondente del byte stream;
+5. gli \(L\) byte nella finestra vengono interpretati come record logico;
+6. il record viene restituito al programma.
+
+Per la prima lettura:
+
+$$
+r_0 = S[0, L - 1]
+$$
+
+Se questi byte si trovano nel primo blocco fisico, il sistema carica \(b_0\) in memoria centrale e rende disponibile la prima porzione del byte stream.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Al termine della lettura:
+
+- il puntatore al record logico corrente avanza;
+- la finestra sul byte stream viene spostata di \(L\) byte.
+
+$$
+i \leftarrow i + 1
+$$
+
+$$
+\text{finestra}_{i+1} = S[(i+1)L, (i+2)L - 1]
+$$
+
+> 📌 La lettura non lavora direttamente sui record fisici: carica blocchi fisici, ricostruisce byte del byte stream e poi interpreta la finestra come record logico.
 
 ---
 
-### **8. Conclusione**
+### **5. Letture successive**
 
-La gestione dell’astrazione dei file si basa su un insieme di **operazioni standardizzate** che il sistema operativo fornisce per **manipolare in modo sicuro ed efficiente i file**.  
-Attraverso apertura, lettura, scrittura, posizionamento e chiusura, il sistema mantiene la **coerenza tra la rappresentazione logica e quella fisica dei dati**, completando così il ciclo di vita di un file all’interno del file system.
+Una lettura successiva parte dalla nuova posizione della finestra.
+
+Se tutti i byte necessari al record corrente sono gia' presenti in memoria centrale, l'operazione puo' essere completata senza nuovi accessi al disco.
+
+Se invece la finestra attraversa una porzione del byte stream non ancora caricata, il sistema deve leggere un altro blocco fisico.
+
+Per esempio, se il secondo record logico richiede byte che si trovano in parte nel blocco gia' caricato e in parte nel blocco successivo, il sistema:
+
+- usa i byte gia' disponibili;
+- carica il blocco fisico successivo;
+- completa la finestra;
+- restituisce il record logico.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 💡 Una singola lettura logica puo' richiedere zero, uno o piu' accessi fisici, a seconda di quali byte siano gia' presenti in memoria centrale.
+
+---
+
+### **6. Scrittura**
+
+La **scrittura** segue una logica analoga, ma in direzione opposta.
+
+Il programma fornisce un record logico da scrivere. Il sistema lo interpreta come una sequenza di \(L\) byte e li colloca nella finestra corrente del byte stream.
+
+Subito dopo l'apertura, la prima scrittura riempie:
+
+$$
+S[0, L - 1]
+$$
+
+cioe' la porzione del byte stream corrispondente al record logico \(r_0\).
+
+Non e' detto pero' che il sistema scriva immediatamente su disco. Se il blocco fisico ha dimensione \(F\), puo' essere inefficiente scrivere un blocco quando e' stata riempita solo una sua parte.
+
+Per questo il sistema puo' mantenere temporaneamente i byte in memoria centrale e rimandare la scrittura fisica fino a quando e' disponibile un gruppo completo di \(F\) byte.
+
+> ⚠️ Scrivere subito ogni record logico sul disco puo' produrre troppi accessi fisici, soprattutto quando piu' record condividono lo stesso blocco fisico.
+
+---
+
+### **7. Scrittura differita dei blocchi**
+
+La scrittura effettiva su disco avviene quando il byte stream contiene abbastanza byte per riempire un blocco fisico.
+
+Quando sono disponibili i primi \(F\) byte:
+
+$$
+S[0, F - 1]
+$$
+
+il sistema puo' scrivere il primo blocco fisico:
+
+$$
+b_0 \leftarrow S[0, F - 1]
+$$
+
+Se una scrittura logica supera il limite del blocco fisico, i byte eccedenti non vengono scritti nello stesso blocco, ma appartengono al blocco successivo.
+
+Per esempio:
+
+- una parte del record puo' completare \(b_0\);
+- la parte restante puo' iniziare \(b_1\).
+
+La porzione eccedente resta quindi in memoria finche' non ci sono abbastanza byte per scrivere il blocco fisico successivo.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 📌 Il sistema ragiona per blocchi fisici quando scrive sul disco, anche se il programma ragiona per record logici.
+
+---
+
+### **8. Avanzamento dopo la scrittura**
+
+Dopo ogni scrittura logica:
+
+- il puntatore al record logico corrente avanza;
+- la finestra sul byte stream si sposta di \(L\) byte;
+- il sistema verifica se e' possibile scrivere uno o piu' blocchi fisici completi.
+
+Formalmente:
+
+$$
+i \leftarrow i + 1
+$$
+
+$$
+\text{finestra}_{i+1} = S[(i+1)L, (i+2)L - 1]
+$$
+
+Se dopo alcune scritture il secondo gruppo di \(F\) byte e' completo, il sistema puo' scrivere:
+
+$$
+b_1 \leftarrow S[F, 2F - 1]
+$$
+
+Se invece resta una porzione finale minore di \(F\), questa non puo' costituire un blocco fisico completo e viene mantenuta temporaneamente fino a nuove scritture o fino alla chiusura del file.
+
+> ⚠️ L'ultima porzione incompleta del byte stream deve essere gestita con attenzione, perche' potrebbe dover essere salvata esplicitamente alla chiusura.
+
+---
+
+### **9. Posizionamento**
+
+L'operazione di **posizionamento** permette di spostarsi su un record logico specifico senza leggere o scrivere tutti i record precedenti.
+
+Supponiamo di essere posizionati sul record logico 1 e di voler eseguire un seek sul record logico 3.
+
+Dal punto di vista logico:
+
+$$
+i \leftarrow 3
+$$
+
+Dal punto di vista del byte stream, la finestra viene spostata al byte:
+
+$$
+3L
+$$
+
+La nuova finestra e':
+
+$$
+\text{finestra}_3 = S[3L, 4L - 1]
+$$
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Se l'operazione successiva e' una lettura, il sistema dovra' caricare dai blocchi fisici i byte necessari a riempire quella finestra.
+
+Se l'operazione successiva e' una scrittura, il sistema collochera' nella finestra i byte del nuovo record logico e poi li salvera' nei blocchi fisici corrispondenti.
+
+> 💡 Il seek cambia solo la posizione corrente; il trasferimento fisico dei dati avviene con la successiva lettura o scrittura.
+
+---
+
+### **10. Chiusura**
+
+L'operazione di **chiusura** termina l'uso del file da parte del processo.
+
+Se il file e' stato usato solo in lettura, la chiusura libera le strutture dati impiegate per la gestione:
+
+- descrittori aperti;
+- buffer;
+- informazioni sulla posizione corrente;
+- riferimenti ai blocchi caricati.
+
+Se il file e' stato usato in scrittura, la chiusura deve anche salvare su disco eventuali byte del byte stream non ancora scritti.
+
+In particolare, se esiste una porzione finale incompleta:
+
+$$
+|S_{\text{residuo}}| < F
+$$
+
+il sistema deve comunque forzarne la scrittura nel blocco fisico corrispondente, aggiornando anche le strutture dati del file system.
+
+> ✅ La chiusura garantisce che le modifiche rimaste temporaneamente in memoria centrale vengano rese persistenti su memoria di massa.
+
+---
+
+### **11. Sintesi operativa**
+
+| Operazione | Livello logico | Byte stream | Livello fisico |
+|---|---|---|---|
+| **Apertura** | Posizione sul primo record | Finestra sul byte 0 | Individuazione del primo blocco |
+| **Lettura** | Restituzione del record corrente | Riempimento e interpretazione della finestra | Lettura dei blocchi necessari |
+| **Scrittura** | Scrittura del record corrente | Inserimento dei byte nella finestra | Scrittura dei blocchi completi |
+| **Posizionamento** | Spostamento al record scelto | Spostamento della finestra a \(iL\) | Preparazione dei blocchi corrispondenti |
+| **Chiusura** | Termine dell'uso del file | Flush dell'eventuale residuo | Salvataggio e rilascio strutture |
+
+---
+
+### **12. Conclusione**
+
+La gestione dell'astrazione dei file consiste nel mostrare al programma una sequenza ordinata di record logici, mentre internamente il sistema operativo lavora su byte stream e blocchi fisici.
+
+Le operazioni di apertura, lettura, scrittura, posizionamento e chiusura permettono di mantenere coerente questa astrazione:
+
+- la finestra sul byte stream rende visibile il record logico corrente;
+- i blocchi fisici vengono caricati o scritti solo quando necessario;
+- la chiusura salva eventuali dati residui e libera le strutture di gestione.
+
+In questo modo la sequenza ordinata dei blocchi fisici viene resa visibile come una sequenza ordinata di elementi logici del file.

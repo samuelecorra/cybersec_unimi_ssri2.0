@@ -1,200 +1,367 @@
-# **M4 UD4 Lezione 1 - Struttura e funzioni**
+# **M4 UD4 Lezione 1 - File system distribuiti**
+
+---
 
 ### **1. Introduzione**
 
-Nei sistemi distribuiti, i **file system** permettono di accedere e condividere **risorse informative e fisiche** su più macchine connesse in rete.  
-L’obiettivo principale è fornire all’utente una **visione unificata e trasparente** dei dati, indipendentemente dalla loro effettiva posizione.
+In questa lezione vengono presentate la struttura e le funzioni di un **file system distribuito**.
 
-Un file system distribuito deve quindi garantire:
+L'obiettivo e' capire come gestire l'accesso alle risorse informative e fisiche presenti sulle diverse macchine di un'architettura distribuita.
 
-- **trasparenza d’accesso**,
-    
-- **efficienza nella gestione delle risorse**,
-    
-- **consistenza e affidabilità** delle informazioni condivise.
+Un file system per ambienti distribuiti deve consentire:
 
----
+- condivisione di file collocati su macchine diverse;
+- accesso alle risorse informative e fisiche del sistema;
+- visione globale e astratta dell'insieme delle risorse;
+- trasparenza della posizione fisica dei file;
+- gestione efficiente degli accessi.
 
-### **2. File system di rete e file system distribuito**
-
-#### **2.1 File system di rete (NFS – Network File System)**
-
-Un **file system di rete** è l’insieme dei file system presenti sulle diverse macchine della rete.  
-Ogni nodo può **montare localmente** un file system remoto e accedere ai file come se fossero locali.
-
-**Caratteristiche principali:**
-
-- Collezione di file system indipendenti.
-    
-- Montaggio manuale dei file system remoti.
-    
-- **Problema:** l’utente deve conoscere la **topologia della rete** e la **posizione fisica delle risorse**.
+> 📌 L'utente dovrebbe accedere a un file usando la sua posizione logica nel file system, senza dover sapere su quale macchina sia fisicamente memorizzato.
 
 ---
 
-#### **2.2 File system distribuito (DFS – Distributed File System)**
+### **2. Obiettivi di un file system distribuito**
 
-Un **file system distribuito** integra i file system delle varie macchine in un **unico file system globale**, fornendo un accesso uniforme e trasparente.
+Gli obiettivi principali sono:
 
-**Obiettivi:**
+- fornire una visione unitaria delle risorse distribuite;
+- nascondere la posizione fisica delle informazioni;
+- permettere accessi locali e remoti con la stessa interfaccia;
+- supportare condivisione, replica e migrazione dei file;
+- migliorare prestazioni e tolleranza ai guasti.
 
-- **Omogeneità di visione:** ogni nodo vede la stessa struttura logica dei file.
-    
-- **Trasparenza dell’allocazione:** l’utente non deve sapere su quale macchina si trova il file.
-    
-- **Accesso unificato:** i file appaiono come parte di un’unica gerarchia logica.
+La trasparenza e' l'aspetto centrale.
 
----
+Un processo non dovrebbe dover distinguere tra:
 
-### **3. Nomi dei file**
-
-#### **3.1 Identificazione nei diversi modelli**
-
-- Nei **file system di rete**, un file è identificato da:
-    $$
-    \text{nome macchina} + \text{percorso del file sul file system remoto}  
-    $$
-    
-    Il file system remoto è “montato” su un punto del file system locale.
-    
-- Nei **file system distribuiti**, ogni file ha un **nome univoco** all’interno del **file system globale**, indipendente dalla macchina in cui si trova.
+- file locale;
+- file remoto;
+- file replicato;
+- file migrato da una macchina a un'altra.
 
 ---
 
-#### **3.2 Trasparenza del nome e della locazione**
+### **3. File system di rete e file system distribuiti**
 
-Un file può essere:
+I file system per architetture distribuite si dividono in due grandi categorie:
 
-- **mappato automaticamente** a un indirizzo **locale o remoto**;
-    
-- **visibile** oppure **invisibile** nella sua locazione fisica.
+- **file system di rete**;
+- **file system distribuiti** in senso stretto.
 
-**Tipologie di trasparenza:**
-
-- **Trasparenza della posizione:** l’utente non deve conoscere la posizione del file.
-    
-- **Trasparenza della locazione:** l’accesso non cambia anche se il file viene spostato.
-
-I sistemi distribuiti possono anche gestire:
-
-- **repliche dei file** (copie identiche su nodi diversi),
-    
-- **migrazione dei file** (spostamento dinamico dei file nella rete).
+Entrambi permettono la condivisione di file delocalizzati, ma differiscono nel livello di trasparenza offerto.
 
 ---
 
-### **4. Accesso ai file**
+### **4. File system di rete**
 
-#### **4.1 File system di rete**
+Un **file system di rete** e' una collezione dei file system delle singole macchine connesse in rete.
 
-- L’accesso avviene tramite **servizi remoti**, spesso implementati mediante **RPC (Remote Procedure Call)**.
-    
-- È possibile effettuare:
-    
-    - **copiatura locale** del file,
-        
-    - **aggiornamento locale**,
-        
-    - **salvataggio remoto**.
+Ogni macchina mantiene il proprio file system locale e puo' montare porzioni di file system remoti.
 
-#### **4.2 File system distribuito**
+In questo modello:
 
-- L’accesso appare **locale**, anche se le operazioni possono essere eseguite **da remoto in modo trasparente**.
-    
-- Il sistema si occupa di inoltrare automaticamente le richieste ai nodi corretti.
+- la struttura della rete rimane visibile;
+- l'utente puo' percepire dove si trova una risorsa;
+- l'accesso remoto avviene tramite montaggio o servizi remoti;
+- la visione globale e' ottenuta componendo file system distinti.
+
+> ⚠️ Il limite principale e' che la localizzazione delle risorse rimane almeno in parte visibile agli utenti e ai processi.
 
 ---
 
-### **5. Gestione della cache**
+### **5. File system distribuito**
 
-Per migliorare le prestazioni, i sistemi distribuiti utilizzano **cache locali** sui client.
+Un **file system distribuito** integra i file system delle singole macchine in un unico file system globale.
 
-#### **5.1 Locazione**
+In questo caso il sistema fornisce:
 
-- Le cache possono essere **sul client** o **sul server**.
+- una visione omogenea su tutte le macchine;
+- un unico spazio dei nomi;
+- accesso trasparente alle risorse;
+- allocazione nascosta dei file;
+- indipendenza dalla posizione fisica.
 
-#### **5.2 Politiche di aggiornamento**
+La struttura interna sulle varie macchine non dovrebbe essere visibile.
 
-|Strategia|Descrizione|
+> ✅ In un vero file system distribuito, l'utente vede un unico file system astratto, non una collezione di file system remoti montati.
+
+---
+
+### **6. Identificazione delle risorse**
+
+Uno dei problemi principali e' l'identificazione delle risorse, cioe' la gestione dei **nomi dei file**.
+
+Ogni file deve avere un identificatore che consenta al sistema di individuarlo.
+
+Nei sistemi distribuiti si vuole ottenere un identificatore:
+
+- unico;
+- stabile;
+- indipendente dalla posizione fisica;
+- utilizzabile da tutte le macchine.
+
+---
+
+### **7. Nomi nei file system di rete**
+
+In un file system di rete, il nome puo' includere:
+
+- nome della macchina;
+- percorso del file su quella macchina;
+- punto di montaggio locale del file system remoto.
+
+Un file remoto puo' quindi essere individuato attraverso una forma logica del tipo:
+
+$$
+\text{macchina} + \text{percorso locale del file}
+$$
+
+Oppure, dopo il montaggio, puo' essere raggiunto usando un percorso locale che attraversa il punto di montaggio.
+
+In questo caso la rete e la locazione fisica rimangono ancora concettualmente visibili.
+
+---
+
+### **8. Nomi nei file system distribuiti**
+
+In un file system distribuito il nome del file e' unico nell'intero sistema.
+
+Il processo usa il nome logico del file.
+
+Il sistema operativo distribuito provvede poi a mappare automaticamente quel nome:
+
+- su un indirizzo locale, se il file e' sulla stessa macchina;
+- su un indirizzo remoto, se il file si trova su un'altra macchina.
+
+Questa mappatura e' trasparente per il processo richiedente.
+
+---
+
+### **9. Trasparenza della locazione**
+
+La locazione fisica del file puo' essere:
+
+- **visibile**, se compare nel nome o nel percorso;
+- **invisibile**, se il sistema la nasconde completamente.
+
+La trasparenza della locazione e' importante per due motivi:
+
+- permette di spostare file senza cambiare i programmi;
+- permette di replicare file senza modificare i nomi usati dagli utenti.
+
+Replica e migrazione diventano molto piu' semplici quando il nome non dipende dalla posizione fisica.
+
+---
+
+### **10. Accesso ai file in un file system di rete**
+
+Nel file system di rete l'accesso ai file remoti puo' avvenire in due modi principali.
+
+Il primo consiste nell'usare servizi remoti del sistema operativo, spesso realizzati tramite **RPC**.
+
+In questo caso il processo invoca operazioni sui file:
+
+- open;
+- read;
+- write;
+- close.
+
+Queste operazioni vengono eseguite remotamente sulla macchina che possiede il file.
+
+Il secondo modo consiste nel copiare localmente il file:
+
+1. il file viene trasferito sul client;
+2. il processo lo manipola localmente;
+3. il file modificato viene salvato di nuovo in remoto.
+
+Questa soluzione richiede attenzione alla mutua esclusione e alla consistenza, soprattutto se piu' processi possono modificare lo stesso file.
+
+---
+
+### **11. Accesso ai file in un file system distribuito**
+
+Nel file system distribuito l'accesso appare come una normale richiesta al sistema operativo.
+
+Il processo non decide se l'operazione debba essere locale o remota.
+
+Il servizio di file system:
+
+- riceve la richiesta;
+- individua la posizione effettiva del file;
+- decide se operare localmente;
+- oppure inoltra la richiesta a un'altra macchina;
+- restituisce il risultato al processo.
+
+Tutto questo avviene in modo trasparente.
+
+> 📌 L'interfaccia resta unica: cambia solo la realizzazione interna dell'accesso.
+
+---
+
+### **12. Caching dei file**
+
+Per migliorare le prestazioni si introducono tecniche di **caching**.
+
+La cache mantiene copie di file o porzioni di file remoti, evitando di accedere ogni volta alla macchina che contiene l'originale.
+
+La cache puo' trovarsi:
+
+- sulla singola macchina client;
+- su una macchina della sottorete;
+- su file server distribuiti nel sistema.
+
+Il caching riduce:
+
+- traffico di rete;
+- tempo di accesso;
+- carico sui server.
+
+---
+
+### **13. Politiche di aggiornamento della cache**
+
+Le principali politiche di aggiornamento sono:
+
+| Politica | Comportamento |
 |---|---|
-|**Write-through**|Ogni modifica viene subito scritta anche nel server remoto.|
-|**Delayed-write**|Le modifiche vengono accumulate e scritte periodicamente.|
-|**Write-on-close**|Le modifiche vengono inviate solo quando il file viene chiuso.|
+| **Write-through** | Ogni scrittura in cache viene completata solo quando e' stata scritta anche su memoria di massa o sul server |
+| **Scrittura ritardata** | La scrittura locale viene separata dall'aggiornamento remoto, che avviene successivamente |
+| **Write-on-close** | Le modifiche vengono propagate solo alla chiusura del file |
 
-#### **5.3 Consistenza della cache**
+La scelta incide sul compromesso tra:
 
-Due modalità principali di verifica:
-
-- **Client-initiated:** il client chiede al server se la copia locale è aggiornata.
-    
-- **Server-initiated:** il server notifica ai client le modifiche effettuate altrove.
-
-La scelta della **dimensione della cache** influisce su prestazioni e coerenza.
+- prestazioni;
+- coerenza;
+- traffico di rete;
+- rischio di perdita di aggiornamenti in caso di guasto.
 
 ---
 
-### **6. Stato del file server**
+### **14. Consistenza della cache**
 
-#### **6.1 File server senza stato (stateless)**
+L'uso della cache introduce il problema della consistenza.
 
-- Ogni richiesta è **autonoma** e contiene tutte le informazioni necessarie.
-    
-- Il server **non conserva alcuna informazione** tra due richieste successive.
-    
-- **Vantaggi:** semplicità e maggiore tolleranza ai guasti.
-    
-- **Svantaggi:** ridotta efficienza, poiché ogni richiesta deve essere completa.
+Se piu' macchine conservano copie dello stesso file, il sistema deve garantire che le copie non evolvano in modo incoerente.
 
-#### **6.2 File server con stato (stateful)**
+La verifica della consistenza puo' essere:
 
-- Il server mantiene **informazioni sullo stato delle connessioni**:
-    
-    - file aperti,
-        
-    - puntatori di lettura/scrittura,
-        
-    - identificatori di sessione.
-    
-- **Vantaggi:** maggiore efficienza e riduzione del traffico di rete.
-    
-- **Svantaggi:** complessità di gestione e minor tolleranza ai guasti.
+- **attivata dal client**, che chiede al server se la propria copia e' ancora valida;
+- **attivata dal server**, che notifica o invalida le copie conservate dai client.
+
+Un altro parametro critico e' la dimensione della cache.
+
+Una cache troppo piccola riduce poco il traffico di rete.
+
+Una cache troppo grande puo' occupare spazio inutilmente e complicare la gestione della consistenza.
 
 ---
 
-### **7. Replica dei file**
+### **15. Stato del file server**
 
-La **replicazione dei file** consiste nel mantenere **copie identiche** dello stesso file su più nodi della rete.
+Per migliorare la gestione degli accessi si puo' introdurre il concetto di **stato** del file server.
 
-**Scopi principali:**
+Lo stato e' l'insieme delle informazioni che descrivono l'uso di un file aperto, ad esempio:
 
-- **Ridondanza**, per aumentare l’affidabilità e la disponibilità.
-    
-- **Migliori prestazioni**, grazie alla riduzione dei tempi di accesso.
-    
-- **Trasparenza:** l’utente non percepisce la presenza di repliche.
-    
-- **Aggiornamento:** può essere gestito in modo:
-    
-    - sincrono (tutte le copie sempre identiche),
-        
-    - asincrono (sincronizzazione periodica).
+- file aperti;
+- posizione corrente;
+- diritti di accesso;
+- informazioni di sessione;
+- dati necessari a completare letture e scritture successive.
+
+Esistono due modelli:
+
+- file server senza stato;
+- file server con stato.
 
 ---
 
-### **8. Sintesi finale**
+### **16. File server senza stato**
 
-|Tema|File system di rete|File system distribuito|
+Un file server **senza stato** non mantiene informazioni persistenti sulle operazioni precedenti.
+
+Ogni richiesta di lettura o scrittura viene gestita in modo indipendente.
+
+Ogni richiesta deve quindi contenere tutte le informazioni necessarie:
+
+- nome del file;
+- posizione da leggere o scrivere;
+- operazione richiesta;
+- dati o parametri dell'accesso.
+
+Il vantaggio e' la semplicita' e una maggiore tolleranza ai guasti.
+
+Lo svantaggio e' il costo: a ogni richiesta il server deve tradurre il nome simbolico e reperire le informazioni fisiche necessarie.
+
+---
+
+### **17. File server con stato**
+
+Un file server **con stato** conserva informazioni sugli accessi in corso.
+
+L'operazione di `open` crea lo stato di uso del file.
+
+Le operazioni successive possono usare direttamente le informazioni gia' memorizzate, senza ripetere ogni volta tutta la traduzione del nome e il reperimento dei metadati.
+
+Questo rende l'accesso piu' efficiente.
+
+Il limite e' che il server deve gestire:
+
+- accessi concorrenti;
+- guasti;
+- recupero dello stato;
+- coerenza tra piu' processi.
+
+---
+
+### **18. Replica dei file**
+
+La replica consiste nel mantenere piu' copie dello stesso file su macchine diverse.
+
+Serve a migliorare:
+
+- **tolleranza ai guasti**, perche' se una copia non e' disponibile se ne puo' usare un'altra;
+- **prestazioni**, perche' processi diversi possono accedere a copie diverse;
+- **tempo di accesso**, perche' le copie possono essere piu' vicine ai processi richiedenti.
+
+La replicazione dovrebbe essere invisibile agli utenti.
+
+L'utente continua a usare lo stesso nome logico del file, mentre il sistema sceglie quale copia utilizzare.
+
+---
+
+### **19. Problema della consistenza delle repliche**
+
+La replica introduce un problema essenziale: tutte le copie devono restare coerenti.
+
+Se una copia viene modificata, il sistema deve evitare che altre copie rimangano obsolete o divergano.
+
+Per questo servono politiche di aggiornamento e sincronizzazione.
+
+> ⚠️ La replica aumenta disponibilita' e prestazioni, ma rende piu' complessa la consistenza.
+
+---
+
+### **20. Sintesi**
+
+| Aspetto | File system di rete | File system distribuito |
 |---|---|---|
-|**Struttura**|Collezione di FS indipendenti|Integrazione in un unico FS globale|
-|**Trasparenza**|Limitata: visibile la macchina remota|Totale: visione unica per l’utente|
-|**Accesso**|Tramite RPC e montaggi remoti|Locale con servizi remoti trasparenti|
-|**Gestione cache**|Lato client, manuale|Automatica e trasparente|
-|**Server**|Stateless (NFS)|Stateful o ibrido (DFS evoluti)|
+| Visione | Collezione di file system remoti | Unico file system globale |
+| Struttura della rete | Visibile | Nascosta |
+| Nome del file | Puo' includere macchina o montaggio | Unico nel sistema globale |
+| Accesso | RPC, montaggio remoto, copia locale | Servizio trasparente del sistema operativo |
+| Locazione | Spesso visibile | Trasparente |
+| Replica e migrazione | Piu' difficili da nascondere | Naturalmente supportate dalla trasparenza |
 
 ---
 
-### **9. Conclusione**
+### **21. Conclusione**
 
-Il **file system distribuito** rappresenta l’evoluzione naturale dei file system di rete.  
-Permette di ottenere un’unica visione coerente e trasparente dei dati, migliorando **usabilità, efficienza e affidabilità**.  
-I concetti chiave – **trasparenza**, **replicazione** e **gestione dello stato** – sono fondamentali per comprendere i moderni **DFS**, come quelli utilizzati nei sistemi **cloud e data center**.
+I file system di rete e i file system distribuiti hanno lo stesso obiettivo generale: permettere la condivisione di file in un'architettura distribuita.
+
+La differenza fondamentale e' il livello di trasparenza.
+
+Il file system di rete mostra ancora la struttura delle macchine e dei file system remoti.
+
+Il file system distribuito, invece, mira a fornire una visione unica, omogenea e indipendente dalla locazione fisica delle risorse.
+
+Per ottenere questa visione deve gestire nomi globali, accessi remoti, cache, stato del server, replica e consistenza delle informazioni.

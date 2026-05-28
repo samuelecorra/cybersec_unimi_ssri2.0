@@ -1,141 +1,322 @@
 # **M3 UD3 Lezione 1 - Concetti fondamentali della protezione**
 
+---
+
 ### **1. Introduzione**
 
-La **protezione** è una delle funzioni fondamentali del sistema operativo e ha lo scopo di **difendere le risorse** da accessi non autorizzati, errati o malevoli.  
-Ogni sistema operativo deve garantire che le sue risorse — fisiche o informative — siano utilizzate **solo da chi ne possiede l’autorizzazione**.
+Questa lezione introduce i concetti fondamentali della **protezione delle risorse** nell'ambito del file system e, piu' in generale, del sistema operativo.
 
-In termini generali:
+La protezione ha lo scopo di impedire accessi non autorizzati alle risorse del sistema.
 
-- le **regole** specificano _chi può fare cosa_ sulle risorse;
-    
-- i **meccanismi** sono gli strumenti tecnici che **impongono il rispetto di tali regole**.
+Gli accessi da evitare possono essere:
 
----
+- accessi errati compiuti accidentalmente;
+- accessi non autorizzati compiuti intenzionalmente;
+- accessi malevoli diretti a danneggiare dati, processi o strutture del sistema.
 
-### **2. Obiettivo della protezione**
-
-L’obiettivo è **definire e far rispettare le autorizzazioni** che stabiliscono:
-
-- **chi** può accedere a una risorsa,
-    
-- **quali operazioni** può eseguire su di essa.
-
-Questo garantisce **integrità, riservatezza e correttezza** nell’uso delle risorse del sistema.
+> 📌 Proteggere una risorsa significa stabilire chi puo' usarla, come puo' usarla e con quali limiti.
 
 ---
 
-### **3. Tipologie di risorse**
+### **2. Obiettivi della protezione**
 
-Le risorse che devono essere protette si dividono in due categorie principali:
+L'obiettivo della protezione e' definire e far rispettare le **autorizzazioni** relative all'uso delle risorse.
 
-#### **3.1 Risorse fisiche**
+Per ogni risorsa, il sistema deve stabilire:
 
-- CPU
-    
-- Memoria centrale
-    
-- Periferiche di ingresso/uscita
+- quali soggetti possono accedervi;
+- quali operazioni possono eseguire;
+- in quali condizioni l'accesso e' consentito;
+- come impedire accessi non ammessi.
 
-#### **3.2 Risorse informative**
+Nel file system, questo significa controllare l'uso di file, directory e strutture informative.
 
-- File e directory
-    
-- Strutture di comunicazione tra processi
-    
-- Meccanismi di sincronizzazione (semafori, pipe, ecc.)
-
-Ogni risorsa è caratterizzata da:
-
-- un **identificativo univoco**,
-    
-- un **insieme di operazioni lecite** che possono essere eseguite su di essa.
+Nel sistema operativo in generale, il problema si estende anche alle risorse fisiche e alle strutture di comunicazione tra processi.
 
 ---
 
-### **4. Principio di minima conoscenza**
+### **3. Regole e meccanismi**
 
-Il **principio di minima conoscenza** (o _least privilege principle_) stabilisce che:
+La protezione distingue tra **regole** e **meccanismi**.
 
-> Un processo deve poter accedere **solo alle risorse strettamente necessarie** per la propria computazione.
+#### **3.1. Regole**
 
-Questo principio riduce la possibilità di **abusi, errori o attacchi**, limitando il danno potenziale in caso di compromissione del processo.
+Le regole definiscono:
+
+- chi puo' usare una risorsa;
+- quali operazioni puo' eseguire;
+- quali vincoli devono essere rispettati.
+
+Le regole esprimono quindi la politica di protezione.
+
+#### **3.2. Meccanismi**
+
+I meccanismi sono gli strumenti tecnici usati per imporre le regole.
+
+Esempi di meccanismi sono:
+
+- controlli di accesso;
+- domini di protezione;
+- matrici di accesso;
+- liste di controllo degli accessi;
+- capability;
+- revoca dei diritti.
+
+> 💡 Le regole dicono cosa deve essere permesso; i meccanismi realizzano concretamente quel controllo.
 
 ---
 
-### **5. Domini di protezione**
+### **4. Risorse da proteggere**
 
-Un **dominio di protezione** definisce un **insieme di risorse** e le **operazioni lecite** su di esse, associate a un determinato processo.
+Il sistema operativo deve proteggere tutte le risorse messe a disposizione dei processi per realizzare la computazione.
 
-Formalmente:
+Le risorse si dividono in due grandi categorie.
 
-$$  
-\text{Dominio} = \langle \text{Oggetto}, \text{Diritti} \rangle  
+#### **4.1. Risorse fisiche**
+
+Sono risorse hardware o direttamente legate all'hardware, per esempio:
+
+- processore;
+- memoria centrale;
+- periferiche;
+- dispositivi di ingresso/uscita.
+
+#### **4.2. Risorse informative**
+
+Sono risorse logiche o informative, per esempio:
+
+- file;
+- directory;
+- strutture di comunicazione tra processi;
+- strutture di sincronizzazione;
+- aree condivise;
+- metadati del file system.
+
+Ogni risorsa e' caratterizzata da:
+
+- un identificativo;
+- un insieme di operazioni che possono essere eseguite su di essa.
+
+> ⚠️ La protezione non riguarda solo i file: riguarda qualunque risorsa che un processo potrebbe usare in modo improprio.
+
+---
+
+### **5. Principio di minima conoscenza**
+
+La definizione della protezione si basa sul **principio di minima conoscenza**, collegato al principio del minimo privilegio.
+
+Un processo deve poter accedere solo alle risorse strettamente necessarie alla propria computazione.
+
+In questo modo:
+
+- si riduce la possibilita' di errori accidentali;
+- si limita il danno causabile da un processo compromesso;
+- si impedisce l'uso improprio di risorse non necessarie;
+- si protegge il sistema e gli altri processi.
+
+> ✅ Un processo non dovrebbe poter vedere o usare risorse che non gli servono.
+
+---
+
+### **6. Dominio di protezione**
+
+Un **dominio di protezione** descrive l'insieme delle risorse e delle operazioni lecite che un processo puo' effettuare quando opera in quel dominio.
+
+Formalmente, un dominio e' un insieme di coppie:
+
+$$
+D = \{(o_1, R_1), (o_2, R_2), \dots, (o_n, R_n)\}
 $$
 
 dove:
 
-- **Oggetto** → la risorsa da proteggere,
-    
-- **Diritti** → le operazioni consentite su quella risorsa (lettura, scrittura, esecuzione, ecc.).
+- \(o_i\) e' un oggetto, cioe' una risorsa da proteggere;
+- \(R_i\) e' l'insieme dei diritti ammessi su quell'oggetto.
 
-Un processo autorizzato ad accedere a un dominio può **eseguire soltanto le operazioni definite dai diritti associati** a quel dominio.
+I diritti indicano le operazioni lecite, per esempio:
 
----
+- lettura;
+- scrittura;
+- esecuzione;
+- stampa;
+- cancellazione;
+- modifica degli attributi;
+- cambiamento di dominio.
 
-### **6. Associazione tra processi e domini**
-
-L’associazione tra processi e domini può avvenire secondo due modalità:
-
-#### **6.1 Associazione statica**
-
-- Il processo mantiene **sempre lo stesso dominio** per tutta la durata della sua esecuzione.
-    
-- È più semplice da implementare ma meno flessibile.
-
-#### **6.2 Associazione dinamica**
-
-- Il processo può **cambiare dominio di protezione** durante l’esecuzione.
-    
-- Ogni cambio di dominio avviene **solo se il processo possiede i diritti necessari** per eseguire tale operazione.
-    
-- Permette maggiore **flessibilità e sicurezza** nei sistemi multiutente.
+> 📌 Un dominio di protezione e' una collezione di autorizzazioni: oggetto piu' diritti ammessi su quell'oggetto.
 
 ---
 
-### **7. Revoca dei diritti d’accesso**
+### **7. Rappresentazione dei domini**
 
-La **revoca** consiste nella **rimozione parziale o totale dei diritti di accesso** concessi in precedenza.
+Dal punto di vista grafico, un dominio puo' essere visto come un insieme di regole.
 
-Le principali modalità di revoca sono:
+Ogni regola associa:
 
-|Tipo di revoca|Descrizione|
+- una risorsa;
+- un insieme di operazioni consentite.
+
+Due domini possono essere:
+
+- **disgiunti**, se non hanno risorse o diritti in comune;
+- **intersecati**, se condividono almeno una risorsa con almeno un diritto comune.
+
+Per esempio, due domini possono entrambi consentire l'uso della stessa risorsa in stampa.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 💡 L'intersezione tra domini indica che processi operanti in domini diversi possono avere alcune autorizzazioni comuni.
+
+---
+
+### **8. Associazione tra processo e dominio**
+
+Quando un processo viene attivato, gli deve essere associato un dominio di protezione.
+
+Questa associazione stabilisce:
+
+- quali risorse puo' usare;
+- quali operazioni puo' eseguire su ciascuna risorsa;
+- quali cambiamenti di dominio puo' eventualmente richiedere.
+
+L'associazione puo' essere:
+
+- statica;
+- dinamica.
+
+---
+
+### **9. Associazione statica**
+
+Nell'associazione **statica**, il dominio viene scelto all'attivazione del processo e resta invariato per tutta la sua esecuzione.
+
+Vantaggi:
+
+- realizzazione semplice;
+- controllo immediato;
+- minore complessita' di gestione.
+
+Limiti:
+
+- poca flessibilita';
+- il processo potrebbe conservare diritti che gli servono solo in alcune fasi;
+- puo' essere difficile applicare rigorosamente il principio di minima conoscenza.
+
+---
+
+### **10. Associazione dinamica**
+
+Nell'associazione **dinamica**, il dominio associato al processo puo' cambiare durante l'esecuzione.
+
+Il cambiamento puo' avvenire:
+
+- su richiesta del processo;
+- su richiesta del gestore del sistema;
+- su richiesta di altri processi autorizzati;
+- per modifica delle regole associate al dominio.
+
+In quest'ultimo caso, l'identificativo simbolico del dominio puo' restare lo stesso, ma cambiano i diritti contenuti nel dominio.
+
+> 📌 Nell'associazione dinamica puo' cambiare il dominio del processo oppure possono cambiare le regole associate al dominio.
+
+---
+
+### **11. Cambiamento di dominio**
+
+Il cambiamento di dominio e' esso stesso un'operazione soggetta a protezione.
+
+Un processo puo' passare da un dominio \(D_i\) a un dominio \(D_j\) solo se possiede il diritto di effettuare tale cambiamento.
+
+In questo modello, il dominio puo' essere trattato come una risorsa.
+
+Se nel dominio \(D_i\) compare la risorsa \(D_j\) con il diritto di cambiamento, allora il processo puo' richiedere il passaggio a \(D_j\).
+
+Formalmente:
+
+$$
+(D_j, \text{switch}) \in D_i
+$$
+
+Se questa coppia appartiene a \(D_i\), il processo operante in \(D_i\) puo' invocare il cambiamento ed entrare in \(D_j\).
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> ⚠️ Anche il passaggio da un dominio a un altro deve essere autorizzato esplicitamente.
+
+---
+
+### **12. Modifica delle caratteristiche di un dominio**
+
+Le caratteristiche di un dominio possono cambiare nel tempo.
+
+Il sistema puo':
+
+- aggiungere nuovi diritti;
+- revocare diritti esistenti;
+- modificare le operazioni consentite su una risorsa;
+- cambiare l'insieme delle risorse visibili nel dominio.
+
+Queste operazioni devono essere controllate, perche' modificano direttamente le autorizzazioni dei processi che operano in quel dominio.
+
+---
+
+### **13. Revoca dei diritti**
+
+La **revoca** consiste nella rimozione di diritti concessi in precedenza.
+
+La revoca puo' essere classificata secondo piu' criteri.
+
+#### **13.1. Revoca immediata o ritardata**
+
+La revoca e' **immediata** se ha effetto appena viene richiesta.
+
+E' **ritardata** se viene applicata solo dopo il completamento di alcune operazioni gia' in corso.
+
+#### **13.2. Revoca selettiva o generale**
+
+La revoca e' **selettiva** se riguarda un singolo processo o utente.
+
+E' **generale** se riguarda tutti i processi o tutti gli utenti che possiedono quel diritto.
+
+#### **13.3. Revoca parziale o totale**
+
+La revoca e' **parziale** se rimuove solo alcuni diritti.
+
+E' **totale** se elimina completamente la possibilita' di usare una risorsa.
+
+#### **13.4. Revoca temporanea o permanente**
+
+La revoca e' **temporanea** se sospende un diritto solo per un certo periodo.
+
+E' **permanente** se rimuove definitivamente il diritto.
+
+> ✅ La revoca permette di adattare nel tempo le autorizzazioni e di reagire a errori, cambiamenti organizzativi o situazioni di rischio.
+
+---
+
+### **14. Sintesi**
+
+| Concetto | Descrizione |
 |---|---|
-|**Immediata / Ritardata**|La revoca può avere effetto subito o dopo un certo tempo.|
-|**Selettiva / Generale**|Può riguardare uno specifico utente/processo o tutti gli utenti.|
-|**Parziale / Totale**|Può revocare solo alcune operazioni o tutte le autorizzazioni.|
-|**Temporanea / Permanente**|I diritti possono essere sospesi per un periodo o rimossi definitivamente.|
-
-La possibilità di **revocare dinamicamente i permessi** è fondamentale per mantenere la sicurezza del sistema in ambienti in continua evoluzione.
-
----
-
-### **8. Sintesi finale**
-
-|Concetto|Descrizione sintetica|
-|---|---|
-|**Protezione**|Difesa delle risorse da accessi non autorizzati|
-|**Obiettivo**|Definire chi può accedere a cosa e in che modo|
-|**Risorse fisiche**|CPU, memoria, periferiche|
-|**Risorse informative**|File, strutture di comunicazione, semafori|
-|**Principio di minima conoscenza**|Ogni processo accede solo alle risorse necessarie|
-|**Dominio di protezione**|Insieme di risorse e diritti leciti|
-|**Associazione dominio-processo**|Statica o dinamica|
-|**Revoca dei diritti**|Immediata, selettiva, parziale o temporanea|
+| **Protezione** | Difesa delle risorse da accessi non autorizzati, accidentali o malevoli |
+| **Regole** | Specificano chi puo' usare cosa e in che modo |
+| **Meccanismi** | Strumenti che impongono il rispetto delle regole |
+| **Risorse fisiche** | Processore, memoria centrale, periferiche |
+| **Risorse informative** | File, directory, strutture di comunicazione e sincronizzazione |
+| **Principio di minima conoscenza** | Ogni processo accede solo alle risorse strettamente necessarie |
+| **Dominio di protezione** | Insieme di coppie oggetto-diritti |
+| **Associazione processo-dominio** | Statica o dinamica |
+| **Cambiamento di dominio** | Operazione lecita solo se autorizzata |
+| **Revoca** | Rimozione immediata/ritardata, selettiva/generale, parziale/totale, temporanea/permanente |
 
 ---
 
-### **9. Conclusione**
+### **15. Conclusione**
 
-La **protezione delle risorse** è un aspetto essenziale della sicurezza nei sistemi operativi.  
-Attraverso il concetto di **dominio di protezione**, l’adozione del **principio di minima conoscenza** e la possibilità di **revoca dinamica dei permessi**, il sistema riesce a **prevenire accessi impropri**, a **limitare i danni** derivanti da errori o intrusioni, e a mantenere **l’integrità complessiva del sistema**.
+La protezione delle risorse definisce quali operazioni un processo puo' effettuare sulle risorse fisiche e informative del sistema.
+
+Il modello dei domini di protezione permette di rappresentare formalmente queste autorizzazioni come insiemi di coppie oggetto-diritti.
+
+L'associazione tra processi e domini puo' essere statica o dinamica, e il cambiamento di dominio deve essere a sua volta autorizzato.
+
+La revoca dei diritti completa il modello, permettendo di modificare nel tempo le autorizzazioni con granularita' diversa.

@@ -1,170 +1,223 @@
 # **M2 UD1 Lezione 2 - Realizzazione del sottosistema di I/O (parte 1)**
 
+---
+
 ### **1. Introduzione**
 
-Il sottosistema di **ingresso/uscita (I/O)** comprende l’insieme dei meccanismi software che permettono al sistema operativo di gestire le operazioni tra CPU, memoria e periferiche in modo efficiente, ordinato e trasparente.
+Questa lezione introduce alcuni aspetti relativi alla **realizzazione del sottosistema di ingresso/uscita**, cioè al modo in cui i principi generali di gestione delle periferiche vengono tradotti in componenti concreti del sistema operativo.
 
-La sua realizzazione si basa su un insieme di **funzioni di gestione** e **strutture dati** che cooperano per ottimizzare il flusso dei dati e garantire l’affidabilità del sistema.
+Gli aspetti principali sono:
 
-Le principali funzioni di gestione del sottosistema I/O sono:
+- gestione e ordinamento delle richieste di I/O;
+- strutture di supporto alla comunicazione con le periferiche;
+- bufferizzazione;
+- caching;
+- spooling;
+- locking dei dispositivi;
+- gestione degli errori.
 
-- **Schedulazione delle operazioni**
-    
-- **Bufferizzazione**
-    
-- **Caching**
-    
-- **Spooling**
-    
-- **Locking**
-    
-- **Gestione degli errori**
+> 📌 Il sottosistema di I/O deve trasformare periferiche lente, diverse e spesso condivise in risorse gestibili in modo ordinato, efficiente e affidabile.
 
 ---
 
 ### **2. Schedulazione delle richieste di I/O**
 
-Ogni periferica può ricevere **più richieste simultanee** da processi differenti.  
-Il sistema operativo deve quindi **mantenere e gestire una coda di richieste** per ciascun dispositivo, ordinandole in modo da **ottimizzare l’utilizzo complessivo delle risorse**.
+Per mantenere una gestione efficiente delle periferiche è spesso opportuno raccogliere e ordinare le richieste provenienti dai vari processi.
 
-#### **Obiettivi**
+La **schedulazione delle richieste di I/O** ha l'obiettivo di mantenere e gestire la coda delle richieste per una periferica, scegliendo l'ordine di esecuzione più opportuno per massimizzare l'efficienza d'uso della risorsa.
 
-- Migliorare l’efficienza complessiva del sistema I/O.
-    
-- Minimizzare i tempi di attesa e di accesso ai dispositivi.
-    
-- Evitare conflitti e sovrapposizioni nelle operazioni.
+#### **2.1. Obiettivi**
 
-#### **Principali politiche di schedulazione**
+La schedulazione permette di:
 
-1. **FIFO (First In, First Out)** – le richieste vengono servite nell’ordine di arrivo.
-    
-2. **Per priorità** – le richieste più importanti vengono servite prima.
-    
-3. **Per scadenza (deadline)** – le richieste con vincoli temporali ravvicinati hanno precedenza.
-    
-4. **Politiche miste** – combinazioni dinamiche dei criteri precedenti, a seconda del tipo di dispositivo.
+- ottimizzare l'uso della periferica;
+- ridurre tempi di attesa e tempi morti;
+- evitare conflitti tra richieste;
+- servire le richieste secondo criteri coerenti con le esigenze del sistema.
+
+#### **2.2. Politiche possibili**
+
+Le politiche possono essere analoghe a quelle usate per la schedulazione dei processi:
+
+- **FIFO**, in cui le richieste vengono servite nell'ordine di arrivo;
+- **priorità**, in cui le richieste più importanti vengono servite prima;
+- **scadenze**, in cui hanno precedenza le richieste con vincoli temporali;
+- politiche miste o specifiche per la periferica.
+
+> 💡 Ordinare le richieste non serve solo a essere equi: serve anche a usare meglio periferiche lente o con tempi di accesso molto variabili.
 
 ---
 
 ### **3. Bufferizzazione**
 
-La **bufferizzazione** consiste nel **memorizzare temporaneamente i dati** durante il trasferimento tra memoria e periferiche.  
-Serve ad adattare **le differenze di velocità e di formato** tra sorgente e destinazione.
+La **bufferizzazione** consiste nell'immagazzinare temporaneamente i dati trasferiti con una periferica.
 
-#### **Funzioni principali**
+Il suo scopo principale è adattare le velocità della sorgente e della destinazione della comunicazione, soprattutto quando una delle due è molto più veloce dell'altra.
 
-- Adattare **velocità diverse** tra CPU/memoria e dispositivi I/O.
-    
-- Adattare **dimensioni diverse dei blocchi di dati** in trasferimento.
-    
-- Garantire la **consistenza semantica** dei dati trasferiti:  
-    anche se i valori in memoria cambiano prima del completamento dell’operazione, la periferica utilizza comunque **i dati originali al momento della chiamata**.
+#### **3.1. Adattamento delle velocità**
 
-#### **Vantaggi**
+Se l'unità centrale è più veloce della periferica, il processo può scrivere i dati in un buffer in memoria centrale. Successivamente il sottosistema di I/O provvede a inoltrarli alla periferica con la velocità compatibile con il dispositivo.
 
-- Riduzione dei tempi di attesa per il processo.
-    
-- Maggiore parallelismo tra elaborazione e trasferimento dati.
-    
-- Migliore efficienza complessiva del sistema.
+Viceversa, la periferica può depositare le proprie risposte in un'area tampone, da cui il sistema operativo estrae i dati e li consegna al processo richiedente.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **3.2. Adattamento delle dimensioni**
+
+La bufferizzazione consente anche di adattare le dimensioni dei dati trasferiti.
+
+Alcune periferiche lavorano a carattere, altre a blocchi. Il buffer permette di trasformare più trasferimenti piccoli in un trasferimento più grande, oppure di suddividere un blocco in unità più piccole visibili al processo.
+
+#### **3.3. Semantica della copia**
+
+Un ulteriore vantaggio è il supporto alla **semantica della copia**.
+
+I dati in trasferimento vengono "fotografati" al momento della richiesta di I/O. Anche se successivamente il processo modifica le proprie strutture dati, la periferica trasferirà i valori presenti nel buffer al momento della richiesta.
+
+> 📌 La bufferizzazione disaccoppia processo e periferica: adatta velocità, dimensioni dei dati e momento effettivo del trasferimento.
 
 ---
 
 ### **4. Caching**
 
-Il **caching** è una tecnica di ottimizzazione che consiste nel **conservare una copia dei dati** letti da una periferica in **memoria veloce**, in modo da riutilizzarli rapidamente senza accedere nuovamente al dispositivo fisico.
+Il **caching** consiste nel conservare all'interno del sistema di elaborazione una copia dei dati letti da una periferica.
 
-#### **Scopi principali**
+Quando un processo richiede un'informazione, il sistema operativo controlla prima se essa è già presente nella cache.
 
-- Ridurre il tempo medio di accesso ai dati.
-    
-- Evitare letture ripetute da periferiche lente o ad alta latenza.
-    
-- Sfruttare la **località temporale**: i dati recentemente letti sono probabilmente richiesti di nuovo a breve.
+#### **4.1. Cache hit**
 
-#### **Effetto**
+Se l'informazione è presente nella cache, viene restituita direttamente al processo senza accedere fisicamente alla periferica.
 
-L’uso della cache **riduce il carico complessivo** sul sottosistema I/O, migliorando sensibilmente le prestazioni percepite dai processi.
+Questo riduce il tempo di accesso, perché una lettura in memoria centrale è molto più veloce di un accesso al canale e alla periferica.
+
+#### **4.2. Cache miss**
+
+Se l'informazione non è presente nella cache, il sistema operativo:
+
+1. accede fisicamente alla periferica;
+2. recupera il dato richiesto;
+3. salva una copia nella cache;
+4. restituisce l'informazione al processo.
+
+In questo modo, richieste successive dello stesso dato potranno essere servite più rapidamente.
+
+#### **4.3. Coerenza della cache**
+
+Il sistema deve garantire che l'informazione posta nella cache sia aggiornata rispetto a quella memorizzata nella periferica.
+
+Se il contenuto della periferica cambia, la copia in cache deve essere invalidata o aggiornata. In caso contrario, successive letture potrebbero restituire dati obsoleti.
+
+> ⚠️ La cache migliora le prestazioni solo se il sistema mantiene la coerenza tra copia in memoria e dato reale sulla periferica.
 
 ---
 
 ### **5. Spooling**
 
-Lo **spooling** (Simultaneous Peripheral Operations On-Line) è una forma particolare di bufferizzazione usata per **periferiche lente o condivise**, come stampanti o plotter.
+Lo **spooling** è una tecnica usata per periferiche lente o che devono essere condivise in mutua esclusione, come le stampanti.
 
-#### **Principio**
+Lo scopo è bufferizzare l'output destinato a una periferica, separando completamente la richiesta di scrittura vista dal processo dall'effettiva scrittura fisica eseguita dal sistema operativo.
 
-- I dati in uscita vengono **accumulati in un buffer temporaneo** su disco o in memoria.
-    
-- Il processo scrivente può continuare l’esecuzione senza attendere il completamento effettivo dell’operazione fisica.
-    
-- Un **processo dedicato di spooler** si occupa di gestire in coda le operazioni di output.
+#### **5.1. Funzionamento**
 
-#### **Vantaggi**
+Quando un processo vuole scrivere su una periferica lenta o dedicata, non scrive direttamente sul dispositivo. Produce invece l'uscita desiderata e la deposita in un'area di memoria centrale o, se troppo grande, in una memoria di massa chiamata **area di spooling**.
 
-- Disaccoppiamento tra **velocità logica** del processo e **velocità reale** del dispositivo.
-    
-- Possibilità di servire **più processi contemporaneamente**, grazie alla gestione in coda.
-    
-- Migliore utilizzo delle periferiche condivise.
+Per il processo, l'operazione di scrittura è completata quando i dati sono stati memorizzati nell'area di spooling.
+
+Successivamente, il sistema operativo preleva i dati dall'area di spooling e li invia fisicamente alla periferica.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **5.2. Vantaggi**
+
+Lo spooling consente di:
+
+- evitare che il processo resti sospeso a lungo in attesa della periferica;
+- gestire periferiche lente;
+- accodare richieste di più processi;
+- separare la velocità del processo dalla velocità reale del dispositivo;
+- centralizzare l'uso di periferiche che richiedono mutua esclusione.
+
+> 📌 Lo spooling fa vedere al processo una scrittura già completata, mentre la scrittura fisica viene completata successivamente dal sistema operativo.
 
 ---
 
-### **6. Locking (prenotazione dei dispositivi)**
+### **6. Locking dei dispositivi**
 
-Il **locking** serve a garantire che una periferica **non venga utilizzata simultaneamente da più processi**, prevenendo conflitti e corruzioni di dati.
+Alcune periferiche devono essere usate in **mutua esclusione**. In questi casi si usa un meccanismo di **locking**, cioè di prenotazione del dispositivo.
 
-#### **Principio**
+#### **6.1. Prenotazione**
 
-- Quando un processo deve accedere a un dispositivo, **lo prenota** (lock).
-    
-- Finché la periferica resta bloccata, **nessun altro processo** può utilizzarla.
-    
-- Al termine dell’operazione, il processo **rilascia il lock**, rendendo il dispositivo nuovamente disponibile.
+Quando un processo richiede una periferica dedicata:
 
-#### **Esempio**
+1. prova a prenotarla;
+2. se la periferica è occupata, viene sospeso;
+3. viene inserito in una coda di attesa;
+4. quando arriva il suo turno, torna nello stato di ready-to-run;
+5. la periferica gli viene assegnata finché non termina l'uso.
 
-Durante la stampa di un documento, la stampante viene “bloccata” dal processo spooler; altri processi devono attendere il rilascio prima di poter inviare nuovi lavori.
+Al termine dell'operazione, il processo rilascia la periferica, che può essere assegnata a un altro processo già in coda o a un processo che la richiederà successivamente.
+
+> ⚠️ Il locking è necessario per periferiche non condivisibili: senza mutua esclusione, richieste concorrenti potrebbero produrre output corrotti o comportamenti incoerenti.
 
 ---
 
 ### **7. Gestione degli errori**
 
-Durante le operazioni di I/O possono verificarsi **malfunzionamenti** o **guasti** dei dispositivi.  
-Il sistema operativo deve rilevare e gestire tali eventi in modo **robusto e non distruttivo**.
+Un insieme fondamentale di funzioni del sottosistema di I/O riguarda il riconoscimento e il trattamento degli errori.
 
-#### **Tipologie di errori**
+Gli errori possono essere:
 
-1. **Guasti permanenti:**  
-    difetti fisici irreparabili del dispositivo (es. rottura del disco, guasto meccanico).  
-    → Richiedono isolamento e notifica all’amministratore.
-    
-2. **Malfunzionamenti transitori:**  
-    errori temporanei dovuti a rumore elettrico, timeout o sovraccarico del bus.  
-    → Possono essere risolti ripetendo l’operazione o eseguendo un reset.
+- **malfunzionamenti transitori**, che possono scomparire ripetendo l'operazione;
+- **guasti permanenti**, che rendono impossibile completare correttamente l'operazione.
 
-#### **Strategie di gestione**
+#### **7.1. Malfunzionamenti transitori**
 
-- Registrazione dell’errore nei log di sistema.
-    
-- Tentativi di **recupero automatico** o **riavvio dell’operazione**.
-    
-- In casi critici, **disattivazione temporanea del dispositivo** o del driver.
+Un malfunzionamento temporaneo può riguardare il canale di comunicazione, il cavo, l'interfaccia o la periferica.
+
+Il sistema operativo deve riconoscere che l'operazione non è andata a buon fine analizzando le informazioni restituite dall'interfaccia. Può quindi:
+
+1. ripetere l'operazione richiesta;
+2. resettare il canale di comunicazione;
+3. riconfigurare la periferica;
+4. tentare nuovamente il trasferimento.
+
+Se dopo una sequenza di ripetizioni e riconfigurazioni il malfunzionamento persiste, l'errore deve essere trattato come guasto permanente.
+
+#### **7.2. Guasti permanenti**
+
+I guasti permanenti includono situazioni fisiche non risolvibili tramite semplice ripetizione del comando:
+
+- cavo di connessione staccato;
+- periferica spenta;
+- periferica rotta;
+- interfaccia fisica di comunicazione guasta;
+- canale di comunicazione non funzionante.
+
+In questi casi ripetere indefinitamente il comando non risolve il problema.
+
+#### **7.3. Segnalazione al processo**
+
+Quando viene rilevato un guasto permanente, il sistema operativo deve:
+
+- ricordare che la periferica è guasta;
+- evitare ulteriori tentativi inutili finché il dispositivo o il canale non vengono riparati;
+- segnalare l'evento al processo che aveva richiesto l'operazione.
+
+Se l'applicazione prevede una gestione propria dell'errore, può decidere di continuare con prestazioni degradate o senza quella periferica. Se invece la periferica è vitale o l'applicazione non gestisce il caso, il sistema operativo può abortire il processo e segnalare l'errore all'utente.
+
+> ✅ Una gestione robusta dell'I/O deve distinguere tra errori recuperabili e guasti permanenti, evitando sia l'abbandono prematuro sia tentativi infiniti inutili.
 
 ---
 
 ### **8. Sintesi finale**
 
-Le funzioni di gestione del sottosistema I/O costituiscono la base per una comunicazione efficiente e sicura tra CPU e periferiche:
+Le funzioni principali della realizzazione del sottosistema di I/O sono:
 
-|Funzione|Scopo principale|
-|---|---|
-|**Schedulazione**|Ordina e ottimizza le richieste I/O|
-|**Bufferizzazione**|Adatta velocità e dimensioni tra sorgente e destinazione|
-|**Caching**|Riduce i tempi di accesso ai dati|
-|**Spooling**|Disaccoppia processi e periferiche lente o condivise|
-|**Locking**|Garantisce accesso in mutua esclusione|
-|**Gestione errori**|Mantiene l’affidabilità del sistema|
+- **schedulazione**, per ordinare le richieste e usare meglio le periferiche;
+- **bufferizzazione**, per adattare velocità, dimensioni e semantica dei dati trasferiti;
+- **caching**, per ridurre accessi ripetuti a periferiche lente;
+- **spooling**, per disaccoppiare processi e periferiche lente o dedicate;
+- **locking**, per garantire mutua esclusione sui dispositivi non condivisibili;
+- **gestione degli errori**, per riconoscere malfunzionamenti transitori e guasti permanenti.
 
-Queste tecniche costituiscono la base logica e funzionale su cui si costruisce l’intero **sottosistema di I/O**, che sarà approfondito nella prossima parte della lezione con l’analisi delle **strutture dati del kernel** e delle **prestazioni del sistema I/O**.
+Queste tecniche costituiscono la base funzionale del sottosistema di I/O e preparano l'analisi delle strutture dati del kernel e delle prestazioni nella parte successiva.

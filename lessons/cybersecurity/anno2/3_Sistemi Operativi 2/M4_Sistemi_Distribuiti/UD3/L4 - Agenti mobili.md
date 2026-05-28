@@ -1,107 +1,126 @@
 # **M4 UD3 Lezione 4 - Agenti mobili**
 
+---
+
 ### **1. Introduzione**
 
-L’evoluzione dei sistemi distribuiti ha portato verso modelli computazionali sempre più **astratti e flessibili**, capaci di rappresentare entità autonome che interagiscono e cooperano all’interno della rete.  
-Uno di questi modelli è quello basato sugli **agenti mobili**, che innalza il livello di astrazione della computazione secondo i principi dell’**ingegneria del software orientata agli oggetti**.
+Questa lezione introduce brevemente un'ulteriore tecnica per realizzare la computazione in un ambiente distribuito: gli **agenti mobili**.
+
+L'obiettivo non e' approfondire in modo completo il modello ad agenti, ma citarne l'esistenza e chiarire il ruolo che puo' avere nella distribuzione della computazione.
+
+La trattazione dettagliata degli agenti e degli agenti mobili appartiene ai corsi specifici dell'area dell'ingegneria del software.
+
+> 📌 In questa sede gli agenti mobili vengono introdotti come tecnica aggiuntiva per spostare computazione e comportamento in un sistema distribuito.
 
 ---
 
-### **2. Obiettivi**
+### **2. Obiettivo del modello ad agenti**
 
-- Innalzare il livello di astrazione nella rappresentazione della computazione.
-    
-- Descrivere la computazione tramite **tecnologie orientate agli oggetti**, dotate di **autonomia e capacità di azione**.
-    
-- Integrare concetti di **mobilità** e **cooperazione** all’interno di un ambiente distribuito.
+L'obiettivo fondamentale del modello ad agenti e' **innalzare il livello di astrazione della computazione**.
 
----
+Invece di vedere solo programmi messi in esecuzione come processi o thread, il modello ad agenti descrive la computazione tramite entita' software piu' autonome.
 
-### **3. Modello computazionale ad oggetti**
+Queste entita':
 
-Nel paradigma orientato agli oggetti:
+- racchiudono risorse;
+- espongono operazioni;
+- interagiscono con l'ambiente;
+- possono cooperare con altre entita';
+- possono decidere come evolvere.
 
-- Gli **oggetti** sono **collezioni di dati** (stato) e di **procedure (metodi)** per la loro gestione.
-    
-- Ogni oggetto **incapsula** i propri attributi e le proprie operazioni, fornendo un’interfaccia ben definita al mondo esterno.
-    
-- In un sistema operativo distribuito, i **programmi** possono essere rappresentati da **processi** o **thread**, che implementano e gestiscono gli oggetti attivi.
-
-Questo modello costituisce la base per la costruzione di **agenti software**, che estendono il concetto di oggetto aggiungendo autonomia decisionale e capacità di movimento.
+Il modello prende ispirazione dalla tecnologia a oggetti, ma aggiunge l'idea di comportamento attivo.
 
 ---
 
-### **4. Agenti software**
+### **3. Richiamo al modello a oggetti**
 
-Un **agente** è un’entità software caratterizzata da quattro proprietà fondamentali:
+Nel modello a oggetti, un oggetto e' una collezione di:
 
-1. **Autonomia** – è in grado di prendere decisioni ed eseguire azioni senza intervento diretto dell’utente.
-    
-2. **Inserimento in un ambiente** – opera in un contesto distribuito, interagendo con altri agenti o risorse.
-    
-3. **Proattività** – agisce in modo autonomo per raggiungere obiettivi prefissati.
-    
-4. **Cooperazione** – può comunicare e collaborare con altri agenti per svolgere compiti complessi.
+- dati;
+- metodi per gestire, usare e accedere a quei dati.
 
-Gli agenti, in questo senso, rappresentano un’estensione naturale del modello a oggetti, in cui ogni entità non è solo passiva ma **attiva, intelligente e collaborativa**.
+L'oggetto incapsula le proprie caratteristiche interne e mostra all'esterno solo un'interfaccia di alto livello.
 
----
+I programmi vengono ancora realizzati specificando l'interazione tra oggetti, processi o thread.
 
-### **5. Agenti mobili**
-
-Gli **agenti mobili** costituiscono una specializzazione ulteriore:  
-sono **agenti software capaci di muoversi** dinamicamente all’interno di un sistema distribuito.
-
-#### **Caratteristiche principali**
-
-- **Mobilità:** possono migrare tra nodi diversi della rete.
-    
-- **Interazione locale:** una volta arrivati su una macchina remota, possono interagire con i suoi servizi e risorse.
-    
-- **Scoperta di risorse:** esplorano il sistema distribuito per identificare risorse disponibili, servizi attivi o altre entità con cui cooperare.
-
-#### **Esempio concettuale**
-
-Un agente mobile può:
-
-1. Avviarsi su un nodo sorgente.
-    
-2. Spostarsi su un nodo remoto per elaborare dati locali.
-    
-3. Restituire il risultato al nodo di origine o a un altro nodo.
-
-Questo riduce il traffico di rete e consente di **avvicinare il calcolo ai dati**, invece di trasferire grandi quantità di dati al calcolo.
+> 💡 Il modello a oggetti incapsula dati e metodi; il modello ad agenti aggiunge autonomia e capacita' di azione.
 
 ---
 
-### **6. Vantaggi degli agenti mobili**
+### **4. Agente software**
 
-- **Efficienza:** il codice si sposta verso i dati, riducendo la quantità di informazioni trasmesse.
-    
-- **Scalabilità:** più agenti possono cooperare e bilanciare dinamicamente il carico tra nodi.
-    
-- **Flessibilità:** si adattano ai cambiamenti dell’ambiente distribuito (nuove risorse, nodi non disponibili).
-    
-- **Affidabilità:** in caso di guasti, gli agenti possono migrare verso nodi sani, garantendo continuità.
-    
-- **Modularità:** ogni agente incapsula il proprio comportamento e le proprie politiche decisionali.
+Un **agente** e' un'entita' software autonoma.
+
+Rispetto a un normale programma o a una semplice collezione di oggetti, un agente e':
+
+- attivo;
+- proattivo;
+- capace di operare in un ambiente;
+- capace di decidere come evolvere;
+- capace di interagire con il mondo esterno;
+- capace di cooperare con altri agenti o servizi.
+
+Un agente non si limita quindi a essere chiamato passivamente, ma puo' svolgere azioni in funzione dei propri obiettivi e dell'ambiente in cui opera.
+
+> ✅ Un agente e' un'entita' software che possiede una certa autonomia operativa.
 
 ---
 
-### **7. In sintesi**
+### **5. Agente mobile**
 
-|Concetto|Descrizione|
+Un **agente mobile** e' un agente dotato della capacita' di muoversi all'interno di un sistema distribuito.
+
+Puo' spostarsi tra macchine diverse per:
+
+- cercare risorse;
+- individuare servizi;
+- avvicinarsi ai dati;
+- eseguire localmente parte della computazione;
+- interagire con le singole macchine della rete.
+
+L'agente mobile non attende soltanto che le risorse gli vengano fornite: puo' decidere dove andare a reperirle.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 📌 L'agente mobile e' un agente capace di decidere come e dove muoversi nella rete per svolgere la propria computazione.
+
+---
+
+### **6. Differenza rispetto a processi e oggetti**
+
+Un processo tradizionale viene eseguito su una macchina e interagisce con altri processi tramite comunicazione e sincronizzazione.
+
+Un oggetto incapsula dati e metodi, ma normalmente non decide autonomamente dove spostarsi.
+
+Un agente mobile combina:
+
+- incapsulamento;
+- autonomia;
+- capacita' di azione;
+- mobilita' nel sistema distribuito.
+
+Questa combinazione consente di descrivere la computazione a un livello piu' alto rispetto alla semplice attivazione di processi remoti.
+
+---
+
+### **7. Sintesi**
+
+| Concetto | Descrizione |
 |---|---|
-|**Agente**|Entità software autonoma, proattiva e cooperante|
-|**Agente mobile**|Agente con capacità di spostarsi tra nodi del sistema distribuito|
-|**Obiettivi**|Innalzare l’astrazione, integrare l’approccio orientato agli oggetti|
-|**Applicazioni**|Ricerca di risorse, gestione distribuita, automazione, cloud computing|
+| **Oggetto** | Collezione di dati e metodi con interfaccia astratta |
+| **Agente** | Entita' software autonoma, attiva e proattiva |
+| **Agente mobile** | Agente capace di spostarsi tra nodi di un sistema distribuito |
+| **Obiettivo** | Innalzare il livello di astrazione della computazione distribuita |
+| **Uso nel corso** | Citazione introduttiva a completamento delle tecniche di distribuzione |
 
 ---
 
 ### **8. Conclusione**
 
-Gli **agenti mobili** rappresentano un passo evolutivo nella progettazione dei sistemi distribuiti:  
-spostano il focus dall’esecuzione centralizzata alla **computazione distribuita intelligente**, in cui il software diventa capace di **muoversi, adattarsi e cooperare**.
+Gli agenti mobili rappresentano una tecnica ulteriore per gestire la computazione in un ambiente distribuito.
 
-Questo paradigma è alla base di tecnologie moderne come i **microservizi dinamici**, le **architetture di agenti intelligenti** e i **sistemi autonomi cloud-native**.
+Un agente e' un'entita' software autonoma capace di operare e cooperare.
+
+Un agente mobile aggiunge la capacita' di spostarsi nella rete, decidendo dove reperire risorse e servizi necessari alla propria computazione.
+
+Nel contesto di questo corso e' sufficiente conoscerne il ruolo generale, senza approfondire i dettagli progettuali e implementativi propri dell'ingegneria del software.
