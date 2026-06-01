@@ -270,6 +270,8 @@ Il metodo di accesso agli elementi di un file dipende dalle caratteristiche del 
 
 Nell'**accesso sequenziale**, si parte dall'elemento iniziale e si procede ordinatamente fino all'ultimo elemento.
 
+![](imgs/Pasted%20image%2020260601063849.png)
+
 Se si vuole tornare a un elemento precedente, occorre riavvolgere il file all'inizio e ripercorrere la sequenza.
 
 Questa tecnica è tipica dei nastri magnetici.
@@ -280,7 +282,7 @@ Nell'**accesso diretto**, tipico dei dischi, è possibile accedere direttamente 
 
 Non è necessario scandire tutto il supporto dall'inizio.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601064342.png)
 
 #### **12.3. Accesso indicizzato**
 
@@ -290,7 +292,7 @@ La ricerca avviene prima sull'indice. Una volta individuata la voce rilevante, l
 
 Questo permette di conservare nell'indice solo una parte compatta dell'informazione, per esempio una chiave come un cognome, lasciando nel file dati il resto delle informazioni associate.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601064353.png)
 
 > 📌 L'accesso indicizzato accelera la ricerca perché evita di scandire direttamente tutti gli elementi del file dati.
 

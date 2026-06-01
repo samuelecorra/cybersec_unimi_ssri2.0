@@ -66,6 +66,8 @@ Per chiarire il meccanismo, consideriamo due scenari:
 3. la MMU consulta la **tabella delle pagine** e trova che la pagina 2 è caricata: il **bit di validità** è impostato a **valido**, e la pagina è nel **frame 6**;
 4. la MMU compone l'indirizzo fisico nel frame 6 e completa l'accesso normalmente.
 
+![](imgs/Pasted%20image%2020260531234745.png)
+
 ##### **Caso B — accesso a una pagina assente (es. pagina logica 1)**
 
 1. Il processore genera un indirizzo nella **pagina logica 1**;
@@ -74,6 +76,8 @@ Per chiarire il meccanismo, consideriamo due scenari:
 4. la MMU **non può procedere** alla generazione dell'accesso → solleva una **trap di page fault** verso il processore.
 
 > 📌 Nota: la pagina **esiste comunque nell'area di swap**, perché l'area di swap contiene **lo spazio di indirizzamento completo** del processo. Va solo "portata" in RAM.
+
+![](imgs/Pasted%20image%2020260531235127.png)
 
 #### **4.2. Sequenza di gestione del page fault**
 

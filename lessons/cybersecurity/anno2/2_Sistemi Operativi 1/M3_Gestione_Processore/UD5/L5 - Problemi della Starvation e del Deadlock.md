@@ -119,6 +119,8 @@ Il caso più semplice (e più didattico) coinvolge **due processi** P e Q e **du
 3. **P** ora richiede anche **S** → si pone in attesa, perché S è detenuta da Q.
 4. **Q** ora richiede anche **R** → si pone in attesa, perché R è detenuta da P.
 
+![](imgs/Pasted%20image%2020260529181457.png)
+
 Entrambi i processi sono ora bloccati: **ciascuno detiene la risorsa che l'altro aspetta**. L'attesa è **circolare** e **nessuno la risolverà mai** senza un intervento esterno.
 
 ##### **Esempio generalizzato: ciclo a N processi**

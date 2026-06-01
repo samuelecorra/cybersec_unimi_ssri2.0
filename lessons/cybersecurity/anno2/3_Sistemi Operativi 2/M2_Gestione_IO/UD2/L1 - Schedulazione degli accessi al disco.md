@@ -68,7 +68,7 @@ Le richieste vengono mantenute in una coda di attesa e viene sempre servita la r
 
 Se la testina parte dal cilindro 53 e le richieste sono distribuite su cilindri distanti, FCFS può costringere la testina a muoversi avanti e indietro seguendo un andamento a zig-zag.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601045729.png)
 
 Nell'esempio discusso a lezione, il movimento complessivo della testina arriva a **640 cilindri**, perché l'ordine di arrivo non tiene conto della posizione fisica delle richieste.
 
@@ -99,7 +99,7 @@ In altre parole, viene scelta la richiesta più vicina alla posizione corrente.
 
 Seguendo questa strategia, la testina riduce gli spostamenti perché si dirige sempre verso la richiesta più vicina tra quelle pendenti.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601045850.png)
 
 Nell'esempio discusso, il movimento complessivo della testina scende a **236 cilindri**, con un risparmio considerevole rispetto ai **640 cilindri** di FCFS.
 
@@ -129,7 +129,7 @@ Quando la testina arriva a un estremo del disco, inverte la direzione e continua
 
 Supponiamo che la testina si trovi al cilindro 53 e si stia muovendo verso il cilindro 0. L'algoritmo serve le richieste incontrate andando verso 0, poi inverte la direzione e serve le richieste andando verso il cilindro massimo.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601050315.png)
 
 Nell'esempio discusso, il movimento complessivo è di **236 cilindri**. Il vantaggio è che non occorre ricalcolare ogni volta quale richiesta sia più vicina: la direzione di scansione determina l'ordine.
 
@@ -162,7 +162,7 @@ In SCAN, dopo l'inversione vicino a un estremo, la testina torna subito a servir
 
 C-SCAN evita questa asimmetria trattando il disco come se fosse scandito circolarmente.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601050733.png)
 
 #### **7.2. Valutazione**
 
@@ -187,6 +187,8 @@ Un miglioramento di SCAN e C-SCAN consiste nell'evitare di arrivare necessariame
 #### **8.1. LOOK**
 
 Con **LOOK**, la testina si muove come in SCAN, ma inverte direzione quando raggiunge l'ultima richiesta pendente nella direzione corrente, senza proseguire fino all'estremo fisico del disco.
+
+![](imgs/Pasted%20image%2020260601050720.png)
 
 #### **8.2. C-LOOK**
 

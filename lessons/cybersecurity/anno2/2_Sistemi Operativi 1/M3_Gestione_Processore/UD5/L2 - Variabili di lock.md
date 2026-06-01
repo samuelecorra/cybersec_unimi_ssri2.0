@@ -10,6 +10,7 @@ In questa lezione studiamo come ottenere la **mutua esclusione** — ossia l’a
 Si tratta di approcci a **livello di istruzioni**, cioè implementazioni **software o hardware** molto vicine alla CPU, che costituiscono la base dei meccanismi di sincronizzazione più complessi (come semafori e monitor).
 
 ---
+
 ### **2. Variabile di turno**
 
 #### **2.1. Concetto**
@@ -17,15 +18,16 @@ Si tratta di approcci a **livello di istruzioni**, cioè implementazioni **softw
 Una **variabile di turno** è una variabile condivisa che indica **a quale processo spetta l’uso della risorsa** in un dato momento.  
 Serve a **sincronizzare due processi concorrenti**, garantendo che accedano alla loro **sezione critica** in modo alternato.
 
-$$  
-\text{turn} =  
-\begin{cases}  
-0, & \text{se è il turno del processo } P_0; \\\\  
-1, & \text{se è il turno del processo } P_1.  
-\end{cases}  
+$$
+\text{turn} =
+\begin{cases}
+0, & \text{se è il turno del processo } P_0; \\\\
+1, & \text{se è il turno del processo } P_1.
+\end{cases}
 $$
 
 ---
+
 ### **3. Algoritmi basati su variabile di turno**
 
 #### **3.1. Algoritmo 1 – Turno rigido**
@@ -34,27 +36,33 @@ Il primo algoritmo assegna il turno a un solo processo per volta.
 
 **Codice Java (semplificato):**
 
+N.B.: la chiamata del metodo `Thread.yield()` simula un'attesa attiva, cedendo la CPU ad altri processi. Yield infatti cede il controllo al thread scheduler, permettendo ad altri thread di eseguire. In questo contesto, viene usato per evitare un ciclo di attesa busy-waiting che consumerebbe risorse CPU inutilmente.
+
+N.B.: volatile è una keyword in Java che garantisce la visibilità immediata delle modifiche alla variabile `turn` tra i thread. Senza `volatile`, un thread potrebbe leggere una versione obsoleta di `turn` a causa di ottimizzazioni del compilatore o della cache, portando a comportamenti errati nella sincronizzazione.
+
 ```java
 private volatile int turn = 0;
 
+// il parametro t specifica il processo che sta operando:
 public void enteringCriticalSection(int t) {
-    while (turn != t)
-        Thread.yield(); // attesa attiva
+    while (turn != t) // se il processo in esecuzione non ha il turno, attende
+        Thread.yield();
+    // quando esce dal ciclo, significa che turn == t, quindi il processo può entrare nella sezione critica, ma qui non c'è nulla da fare perché è un esempio semplificato; in un caso reale, qui ci sarebbe il codice della sezione critica
 }
 
 public void leavingCriticalSection(int t) {
-    turn = 1 - t;
+    turn = 1 - t; // cede il turno all'altro processo (se t è 0, lo imposta a 1; se t è 1, lo imposta a 0)
 }
 ```
 
 **Analisi:**
 
-$$  
-\begin{cases}  
-\textbf{Mutua esclusione:}~ & \text{garantita.} \\\\  
-\textbf{Progresso:}~ & \text{non garantito.} \\\\  
-\textbf{Alternanza:}~ & \text{stretta — i processi si alternano rigidamente.}  
-\end{cases}  
+$$
+\begin{cases}
+\textbf{Mutua esclusione:}~ & \text{garantita.} \\\\
+\textbf{Progresso:}~ & \text{non garantito.} \\\\
+\textbf{Alternanza:}~ & \text{stretta — i processi si alternano rigidamente.}
+\end{cases}
 $$
 
 L'algoritmo impone che i processi **si alternino obbligatoriamente**, anche se uno di essi non ha bisogno della risorsa: se $P_0$ vuole entrare due volte di seguito ma $P_1$ non ne ha bisogno, $P_0$ deve comunque **aspettare** che $P_1$ esegua almeno una volta la propria sezione critica per "passargli" il turno. Questo viola il requisito di **progresso**: la decisione di chi entra dovrebbe spettare solo ai processi che vogliono effettivamente entrare.
@@ -62,6 +70,7 @@ L'algoritmo impone che i processi **si alternino obbligatoriamente**, anche se u
 Questa limitazione viene eliminata negli algoritmi successivi.
 
 ---
+
 #### **3.2. Algoritmo 2 – Flag di stato**
 
 Qui si usano **flag booleani** per indicare l’intenzione di entrare nella sezione critica.
@@ -72,11 +81,11 @@ private volatile boolean flag0 = false, flag1 = false;
 public void enteringCriticalSection(int t) {
     if (t == 0) {
         flag0 = true;
-        while (flag1 == true)
+        while (flag1 == true) // Se però anche l'altro processo vuole entrare, attende finché non è più interessato
             Thread.yield();
     } else {
         flag1 = true;
-        while (flag0 == true)
+        while (flag0 == true) // Specularmente...
             Thread.yield();
     }
 }
@@ -88,13 +97,13 @@ public void leavingCriticalSection(int t) {
 
 **Analisi:**
 
-$$  
-\begin{cases}  
-\textbf{Mutua esclusione:}~ & \text{garantita.} \\\\  
+$$
+\begin{cases}
+\textbf{Mutua esclusione:}~ & \text{garantita.} \\\\
 \textbf{Alternanza forzata:}~ & \text{eliminata (un processo può rientrare se l'altro non è interessato).} \\\\
-\textbf{Progresso:}~ & \text{non garantito.} \\\\  
-\textbf{Problema:}~ & \text{possibile attesa infinita (deadlock o starvation reciproci).}  
-\end{cases}  
+\textbf{Progresso:}~ & \text{non garantito.} \\\\
+\textbf{Problema:}~ & \text{possibile attesa infinita (deadlock o starvation reciproci).}
+\end{cases}
 $$
 
 L'algoritmo 2 **migliora** rispetto al primo perché un processo può entrare nella sezione critica quando vuole, **senza dover attendere il turno** dell'altro se questo non sta cercando di entrare. Tuttavia:
@@ -103,6 +112,7 @@ L'algoritmo 2 **migliora** rispetto al primo perché un processo può entrare ne
 - in scenari meno gravi, un processo (es. $P_0$) potrebbe sempre vincere la "corsa" sull'altro ($P_1$), che subisce **starvation**.
 
 ---
+
 #### **3.3. Algoritmo 3 – Peterson**
 
 L'**Algoritmo di Peterson** combina **flag di intenzione** e **variabile di turno**, risolvendo i limiti precedenti.  
@@ -116,7 +126,7 @@ L'idea chiave per evitare il deadlock dell'algoritmo 2 è **cedere cortesemente 
 2. poi setta il proprio `flag = true` (dichiarazione di volontà);
 3. attende finché **entrambe** le condizioni sono vere: «l'altro vuole entrare **AND** è il turno dell'altro».
 
-Se **due processi** invocano la procedura quasi contemporaneamente, **l'ultimo dei due** che esegue l'assegnamento a `turn` sovrascrive il valore precedente; di conseguenza `turn` indicherà l'identità dell'altro processo, e **il primo arrivato passa** (perché vedrà `turn` puntato a sé). Questo elegante meccanismo elimina la possibilità di stallo reciproco.
+Se **due processi** invocano la procedura quasi contemporaneamente, **l'ultimo dei due** che esegue l'assegnamento a `turn` sovrascrive il valore precedente; di conseguenza `turn` indicherà l'identità dell'altro processo, e **il primo arrivato passa** (perché vedrà `turn` puntato a sé). Questo elegante meccanismo elimina la possibilità di stallo reciproco, perdipiù garantendo la precedenza del primo arrivato temporalmente.
 
 ```java
 private volatile boolean flag0 = false, flag1 = false;
@@ -143,35 +153,37 @@ public void leavingCriticalSection(int t) {
 
 **Analisi:**
 
-$$  
-\begin{cases}  
-\textbf{Mutua esclusione:}~ & \text{garantita.} \\\\  
-\textbf{Progresso:}~ & \text{garantito.} \\\\  
-\textbf{Attesa limitata:}~ & \text{rispettata.}  
-\end{cases}  
+$$
+\begin{cases}
+\textbf{Mutua esclusione:}~ & \text{garantita.} \\\\
+\textbf{Progresso:}~ & \text{garantito.} \\\\
+\textbf{Attesa limitata:}~ & \text{rispettata.}
+\end{cases}
 $$
 
 Questo algoritmo rappresenta una **soluzione software perfetta** per due processi, ma non scala facilmente a un numero maggiore di processi.
 
 ---
+
 ### **4. Variabile di lock**
 
 #### **4.1. Concetto**
 
 Una **variabile di lock** è una variabile condivisa che rappresenta **lo stato di una risorsa**:
 
-$$  
-\text{lock} =  
-\begin{cases}  
-0, & \text{risorsa libera;} \\  
-1, & \text{risorsa occupata (in uso da un processo).}  
-\end{cases}  
+$$
+\text{lock} =
+\begin{cases}
+0, & \text{risorsa libera;} \\
+1, & \text{risorsa occupata (in uso da un processo).}
+\end{cases}
 $$
 
 Quando un processo vuole entrare nella sua **sezione critica**, deve prima **acquisire il lock**.  
 Quando termina, deve **rilasciarlo**.
 
 ---
+
 #### **4.2. Implementazione con disabilitazione delle interruzioni**
 
 ##### **Perché serve l'atomicità**
@@ -183,19 +195,20 @@ Anche con una semplice variabile `lock`, l'operazione di acquisizione richiede u
 Un approccio elementare consiste nel **disabilitare temporaneamente le interruzioni hardware** per rendere atomica l'intera sequenza:
 
 - **Acquisizione della risorsa:**
-    1. Disabilito le interruzioni.
-    2. Controllo la variabile `lock`.
-    3. Se `lock = 0`, la imposto a `1`, riabilito le interruzioni e procedo.
-    4. Se `lock = 1`, riabilito le interruzioni e attendo.
+  1. Disabilito le interruzioni.
+  2. Controllo la variabile `lock`.
+  3. Se `lock = 0`, la imposto a `1`, riabilito le interruzioni e procedo.
+  4. Se `lock = 1`, riabilito le interruzioni e attendo.
 - **Rilascio della risorsa:**
 
-    ```c
-    lock = 0;
-    ```
+  ```c
+  lock = 0;
+  ```
 
 Questo metodo garantisce **mutua esclusione**, ma è **non scalabile** nei sistemi multiprocessore: disabilitare le interruzioni su un core **non blocca gli altri core**, che potrebbero comunque accedere alla variabile `lock`. Inoltre, disabilitare globalmente le interruzioni di tutti i processori sarebbe inaccettabile dal punto di vista delle prestazioni complessive del sistema.
 
 ---
+
 ### **5. Supporto hardware – Istruzioni atomiche**
 
 Per superare i limiti della disabilitazione delle interruzioni (in particolare la **non scalabilità** ai sistemi multiprocessore), i moderni processori offrono **istruzioni macchina atomiche** che permettono di implementare i lock in modo efficiente e sicuro, **senza** dover toccare le interruzioni.
@@ -204,11 +217,11 @@ Essendo istruzioni macchina (non sequenze), sono **per definizione indivisibili*
 
 #### **5.1. Istruzione TEST-AND-SET**
 
-- Legge la variabile `lock`.
-    
+- Legge la variabile `lock`, ponendola per sicurezza in un flag interno al processore.
 - Imposta `lock = 1`.
-    
 - Restituisce il **vecchio valore** di `lock` in un flag interno.
+
+Questa sequenza prescinde dal valore di `lock` al momento della chiamata: se `lock` era `0`, la funzione lo imposta a `1` e restituisce `0`, permettendo al processo di entrare; se `lock` era già `1`, la funzione restituisce `1`, indicando che la risorsa è occupata.
 
 ```c
 boolean TestAndSet(boolean *lock) {
@@ -232,24 +245,25 @@ lock = false;
 **Funzionamento:**
 
 - Se `lock` era `false`, la funzione lo imposta a `true` e il processo entra.
-    
 - Se `lock` era `true`, il processo resta in attesa.
 
 L’operazione è **atomica**, quindi nessun altro processo può leggere e modificare `lock` contemporaneamente.
 
 ---
+
 ### **6. Sintesi finale**
 
-$$  
-\begin{cases}  
-\textbf{Variabile di turno:}~ & \text{definisce a chi spetta usare la risorsa (Peterson).} \\\\  
-\textbf{Variabile di lock:}~ & \text{definisce se la risorsa è libera o occupata.} \\\\  
-\textbf{Implementazioni:}~ & \text{software (turni) o hardware (istruzioni atomiche).} \\\\  
-\textbf{Obiettivo:}~ & \text{realizzare la mutua esclusione in modo efficiente e sicuro.}  
-\end{cases}  
+$$
+\begin{cases}
+\textbf{Variabile di turno:}~ & \text{definisce a chi spetta usare la risorsa (Peterson).} \\\\
+\textbf{Variabile di lock:}~ & \text{definisce se la risorsa è libera o occupata.} \\\\
+\textbf{Implementazioni:}~ & \text{software (turni) o hardware (istruzioni atomiche).} \\\\
+\textbf{Obiettivo:}~ & \text{realizzare la mutua esclusione in modo efficiente e sicuro.}
+\end{cases}
 $$
 
 ---
+
 ### **7. Conclusione**
 
 Le **variabili di turno** e le **variabili di lock** rappresentano le fondamenta di tutti i meccanismi di sincronizzazione.  

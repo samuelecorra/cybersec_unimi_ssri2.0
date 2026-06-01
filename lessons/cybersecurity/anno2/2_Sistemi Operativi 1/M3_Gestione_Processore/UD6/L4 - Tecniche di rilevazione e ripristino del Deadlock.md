@@ -43,6 +43,8 @@ $$
 
 Quando ogni risorsa ha **una sola istanza**, la rilevazione può essere effettuata tramite il **grafo di attesa** (_wait-for graph_).
 
+![](imgs/Pasted%20image%2020260529211827.png)
+
 Questo grafo è **derivato dal grafo di allocazione delle risorse**, ma è una sua semplificazione: **contiene solo i processi** come nodi, e gli archi rappresentano **dipendenze dirette** tra processi.
 
 $$  

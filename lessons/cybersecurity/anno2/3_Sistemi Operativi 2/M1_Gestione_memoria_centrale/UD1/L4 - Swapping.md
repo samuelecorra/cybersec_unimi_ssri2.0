@@ -63,6 +63,8 @@ Questo ciclo consente di mantenere in RAM solo i processi attivi, aumentando cos
 
 In ogni istante, la memoria centrale è composta da:
 
+![](imgs/Pasted%20image%2020260531210251.png)
+
 - uno **spazio per il sistema operativo** (sempre residente);
 - uno **spazio per i processi applicativi** in stato **ready** o **running**.
 

@@ -97,6 +97,8 @@ dove $f$ è il numero del **frame fisico** che contiene la pagina richiesta.
 
 La traduzione avviene in **due passaggi** ben distinti:
 
+![](imgs/Pasted%20image%2020260531232511.png)
+
 $$
 \begin{array}{c}
 \text{CPU genera indirizzo logico } (s, p, d) \\\\

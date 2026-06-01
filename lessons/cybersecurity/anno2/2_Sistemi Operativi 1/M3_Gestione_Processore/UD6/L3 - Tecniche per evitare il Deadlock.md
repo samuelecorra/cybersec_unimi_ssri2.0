@@ -8,6 +8,7 @@ Dopo aver visto come **prevenire** il deadlock rimuovendo a priori una delle con
 ci concentriamo ora su un approccio più flessibile: **l’evitamento del deadlock** (_deadlock avoidance_).
 
 L’idea di base è semplice ma potente:  
+
 $$  
 \text{Prima di concedere una risorsa, il sistema verifica se la richiesta può portare a deadlock.}  
 $$
@@ -34,7 +35,7 @@ L'evitamento del deadlock consiste nel:
 - **bloccare temporaneamente** le richieste che porterebbero a uno stato non sicuro.
 
 $$  
-\text{Stato sicuro} \Rightarrow \text{nessun deadlock} \  
+\text{Stato sicuro} \Rightarrow \text{nessun deadlock} \ | \   
 \text{Stato non sicuro} \Rightarrow \text{deadlock possibile}  
 $$
 
@@ -74,6 +75,8 @@ In tale sequenza, le risorse richieste da ciascun processo $P_i$ possono essere 
 - le risorse attualmente **disponibili**, più
     
 - quelle **rilasciate dai processi precedenti** della sequenza.
+
+![](imgs/Pasted%20image%2020260529205323.png)
 
 ---
 #### **4.2. Esempio di sequenza sicura**
@@ -118,6 +121,7 @@ L’**algoritmo del grafo di allocazione delle risorse** estende il modello graf
 introducendo gli **archi di prenotazione** (_claim edges_), che rappresentano **richieste future**.
 
 Ogni arco $P_i \rightarrow R_j$ può assumere tre stati:  
+
 $$  
 \begin{cases}  
 \textbf{Arco di richiesta:} & \text{il processo richiede la risorsa.} \\\\  
@@ -125,6 +129,8 @@ $$
 \textbf{Arco di prenotazione:} & \text{il processo potrebbe richiederla in futuro.}  
 \end{cases}  
 $$
+
+![](imgs/Pasted%20image%2020260529205607.png)
 
 ---
 #### **5.2. Funzionamento**
@@ -138,6 +144,8 @@ Quando un processo richiede una risorsa:
 3. Il sistema verifica che **non si crei un ciclo** nel grafo.
 
 Se si forma un ciclo → **lo stato diventa non sicuro** → la richiesta viene **negata**.
+
+![](imgs/Pasted%20image%2020260529205637.png)
 
 ---
 #### **5.3. Limite dell’algoritmo**
@@ -167,6 +175,8 @@ $$
 ---
 #### **6.3. Strutture dati principali**
 
+Dove m = risorse e n = processi
+
 $$  
 \begin{cases}  
 \textbf{Available}[1..m]~ & \text{vettore delle risorse disponibili.} \\\\  
@@ -192,15 +202,36 @@ $$
 
 #### **7.2. Passaggi operativi**
 
-1. Inizializzazione:  
+L'algoritmo non esegue realmente i processi e non modifica subito lo stato del sistema: costruisce una **simulazione** per verificare se esiste almeno un ordine in cui tutti i processi possono terminare. L'idea è chiedersi: "con le risorse disponibili adesso, riesco a far completare un processo? Se sì, dopo il suo completamento recupero le risorse che occupava e provo con gli altri".
+
+1. **Inizializzazione della simulazione:**  
     $$Work = Available, \quad Finish[i] = false \text{ per tutti i processi.}$$
-2. Cerca un processo $P_i$ tale che:  
+    
+    `Work` rappresenta le risorse disponibili nella simulazione. All'inizio coincide con `Available`, perché nessun processo è ancora stato fatto terminare virtualmente.  
+    `Finish[i] = false` significa invece che il processo $P_i$ non è ancora stato inserito nella sequenza sicura simulata.
+
+2. **Ricerca di un processo che possa completare:**  
+    si cerca un processo $P_i$ non ancora concluso nella simulazione e le cui richieste residue possano essere soddisfatte con le risorse attualmente indicate da `Work`:  
+    
     $$Finish[i] = false \quad \text{e} \quad Need_i \leq Work$$
-    Se **nessun processo** soddisfa le condizioni del passo 2, vai al passo 4.
-3. Se trovato, simula la sua terminazione (allocazione fittizia delle risorse necessarie, completamento e rilascio):  
-    $$Work = Work + Allocation_i, \quad Finish[i] = true$$  
-    e torna al passo 2.
-4. Se per tutti i processi $Finish[i] = true$, allora **lo stato è sicuro**. Altrimenti, lo stato è **non sicuro**.
+    
+    La condizione $Need_i \leq Work$ va letta componente per componente: per ogni tipo di risorsa, il fabbisogno residuo di $P_i$ deve essere minore o uguale alle risorse disponibili nella simulazione.  
+    
+    Se **nessun processo** soddisfa questa condizione, l'algoritmo non riesce piu' a proseguire e passa al punto 4.
+
+3. **Simulazione del completamento del processo trovato:**  
+    se esiste un processo $P_i$ che puo' terminare, l'algoritmo immagina di concedergli le risorse residue, farlo completare e poi recuperare tutte le risorse che aveva gia' allocate:  
+    
+    $$Work = Work + Allocation_i, \quad Finish[i] = true$$
+    
+    L'aumento di `Work` non deriva dalle risorse appena concesse, ma dal fatto che, una volta terminato, $P_i$ rilascia le risorse indicate da `Allocation_i`.  
+    A questo punto $P_i$ viene marcato come completato nella simulazione e l'algoritmo torna al punto 2 per cercare un altro processo completabile.
+
+4. **Valutazione finale dello stato:**  
+    se alla fine tutti i processi hanno `Finish[i] = true`, allora e' stata trovata una sequenza in cui ogni processo puo' terminare: lo **stato è sicuro**.  
+    Se invece almeno un processo rimane con `Finish[i] = false`, significa che la simulazione si e' bloccata prima di completare tutti i processi: lo **stato è non sicuro**.
+
+> 📌 L'obiettivo dell'algoritmo non e' scegliere quale processo eseguire davvero, ma verificare se esiste almeno una sequenza teorica di completamento che garantisca l'assenza di deadlock.
 
 ---
 ### **8. Algoritmo di richiesta delle risorse**

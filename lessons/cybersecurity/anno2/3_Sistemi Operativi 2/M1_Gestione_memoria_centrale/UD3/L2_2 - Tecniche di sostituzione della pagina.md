@@ -32,9 +32,11 @@ Durante questo processo, il sistema operativo:
 
 Supponiamo che un processo richieda l'accesso a un indirizzo contenuto in una pagina logica non valida, cioè non presente in memoria centrale ma disponibile nell'area di swap. Se tutti i frame fisici sono occupati, il caricamento non può essere effettuato direttamente.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601000433.png)
 
 Il sistema operativo deve quindi liberare prima un frame fisico, rimuovendo una pagina già presente in memoria centrale. Solo dopo questa operazione la nuova pagina può essere caricata dall'area di swap.
+
+![](imgs/Pasted%20image%2020260601000944.png)
 
 > ⚠️ Quando non esistono frame liberi, un page fault non richiede solo il caricamento della pagina mancante: richiede anche una decisione di sostituzione.
 
@@ -132,7 +134,9 @@ La pagina più vecchia viene considerata meno utile e quindi rimossa per prima.
 
 Con una stringa di riferimento e tre frame assegnati al processo, le prime tre pagine richieste occupano i tre frame liberi. Alla quarta pagina richiesta, se nessuno dei frame è libero, FIFO sostituisce la pagina caricata per prima.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601001347.png)
+
+Dall'immagine: quando viene richiesta la pag.7 - supponendo di assegnare 3 frame a questo processo - verrà occupata il primo frame; poi, quando viene richiesta la pag.0,  si occupa il frame 2; quando viene richiesta la pagina 1, si occupa il terzo frame. All'arrivo della richiesta della pag.2, viene scaricata la 7 e sostituita dalla 2, proprio perché la 7 era la prima arrivata.
 
 Se successivamente viene richiesta una pagina già presente in memoria, non avviene alcuna sostituzione. Se invece viene richiesta una nuova pagina non presente, viene rimossa la più vecchia tra quelle rimaste in RAM.
 
@@ -154,7 +158,7 @@ dove $F$ è l'insieme dei frame candidati e $\text{prossimo\_uso}(p)$ indica la 
 
 La scelta è ottima perché rimuove la pagina che servirà più tardi rispetto alle altre, minimizzando il numero di page fault.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601002125.png)
 
 #### **7.2. Limite pratico**
 
@@ -178,13 +182,15 @@ LRU approssima la politica ottima usando il passato recente come indicazione del
 
 Con tre frame, dopo il caricamento iniziale delle prime pagine, quando arriva una nuova richiesta non presente, LRU sceglie come vittima la pagina a cui si è acceduto più anticamente.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601002425.png)
 
 Se una pagina viene referenziata, diventa automaticamente la più recente e quindi non è candidata immediata alla sostituzione.
 
 #### **8.3. Implementazione con contatore o orologio**
 
 Per realizzare LRU è possibile introdurre un **orologio logico** o un contatore. Non serve conoscere l'ora assoluta: è sufficiente un valore crescente che rappresenti il passare del tempo.
+
+![](imgs/Pasted%20image%2020260601003130.png)
 
 Ogni voce della tabella delle pagine conserva, oltre al riferimento al frame fisico, il valore del contatore corrispondente all'ultimo accesso. Quando la pagina viene referenziata, il valore viene aggiornato.
 
@@ -252,7 +258,7 @@ La politica **Second Chance** concede a una pagina una seconda possibilità prim
 
 Le pagine vengono esaminate ciclicamente, a partire da una posizione corrente, in modo simile a un meccanismo round-robin. Il sistema cerca la prima pagina con bit di riferimento pari a $0$.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601003537.png)
 
 #### **10.1. Funzionamento**
 

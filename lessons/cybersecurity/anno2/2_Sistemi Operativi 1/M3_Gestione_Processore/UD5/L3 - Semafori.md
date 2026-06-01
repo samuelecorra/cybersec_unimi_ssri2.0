@@ -4,7 +4,7 @@
 
 ### **1. Introduzione**
 
-Dopo aver studiato le **variabili di lock** e le **istruzioni atomiche**, possiamo ora innalzare il livello di astrazione introducendo un nuovo strumento fondamentale: il **semaforo**.  
+Dopo aver studiato le **variabili di lock** e le **istruzioni atomiche** come test and set, possiamo ora innalzare il livello di astrazione introducendo un nuovo strumento fondamentale: il **semaforo**.  
 Il semaforo è una **funzione del sistema operativo** che consente di **sincronizzare i processi** e **controllare l’accesso alle risorse condivise** in modo sicuro e strutturato.
 
 L’idea alla base è semplice:  
@@ -13,6 +13,8 @@ un semaforo è una **variabile intera protetta**, su cui agiscono due sole opera
 - `acquire(S)` (o `wait`, `P`) – per richiedere l’uso della risorsa;
     
 - `release(S)` (o `signal`, `V`) – per rilasciare la risorsa.
+
+Le lettere **P** e **V** sono le denominazioni storiche introdotte da **Edsger W. Dijkstra**, l'informatico che ideò il concetto di semaforo. Il significato esatto delle iniziali non è mai stato chiarito in modo definitivo dall'autore, ma secondo l'interpretazione più diffusa derivano dai termini olandesi _Proberen_ ("tentare") e _Verhogen_ ("incrementare"). In letteratura moderna si preferiscono generalmente i nomi più intuitivi `wait/signal` oppure `acquire/release`, ma le sigle `P` e `V` sono ancora molto utilizzate nei testi classici di Sistemi Operativi.
 
 Queste operazioni sono **atomiche**, cioè non possono essere interrotte: il sistema operativo garantisce che non si verifichino condizioni di corsa o incoerenze durante la loro esecuzione.
 
@@ -73,11 +75,23 @@ release(S);        // rilascio risorsa
 Seguiamo un'evoluzione tipica passo per passo:
 
 1. Stato iniziale: $S = 1$ (risorsa libera).
+
+![](imgs/Pasted%20image%2020260529171623.png)
+
 2. Arriva il processo **P**, esegue `acquire(S)` → $S$ diventa $0$, **P entra nella sezione critica**.
+
+![](imgs/Pasted%20image%2020260529171749.png)
+
 3. Arriva il processo **Q**, esegue `acquire(S)` → $S = 0$, **Q viene accodato** in attesa.
 4. Arriva il processo **R**, esegue `acquire(S)` → ancora $S = 0$, **R accodato**.
 5. Arriva il processo **T**, esegue `acquire(S)` → **T accodato**.
+
+![](imgs/Pasted%20image%2020260529172113.png)
+
 6. P termina la sezione critica ed esegue `release(S)`. Esistono processi in coda: la risorsa **non torna libera**, ma viene **ceduta direttamente al primo processo** in coda secondo la politica adottata (es. Q).
+
+![](imgs/Pasted%20image%2020260529172233.png)
+
 7. Q esce dalla coda di attesa e procede nella sua computazione. R e T restano in coda.
 
 In questo modo, le funzioni di sistema garantiscono che **al più un processo** stia nella sezione critica in ogni istante, e gli altri vengano risvegliati ordinatamente uno dopo l'altro.

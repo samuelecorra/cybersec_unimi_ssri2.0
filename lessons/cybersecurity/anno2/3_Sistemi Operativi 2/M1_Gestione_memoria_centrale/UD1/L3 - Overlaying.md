@@ -97,6 +97,8 @@ Quando un programma richiama una funzione appartenente a un overlay non ancora p
 
 Tipicamente, in memoria centrale durante l'overlaying troviamo quattro elementi convivere:
 
+![](imgs/Pasted%20image%2020260531204429.png)
+
 $$
 \begin{cases}
 \textbf{Parte comune del programma:} & \text{codice e dati sempre residenti (incluso heap e stack).} \\\\

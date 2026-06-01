@@ -71,10 +71,14 @@ $$
 
 Supponiamo di avere 4 processi $P$, $Q$, $R$, $S$ e di aver diviso la memoria centrale in 4 partizioni (più lo spazio per il sistema operativo). Se ciascun processo entra nella partizione corrispondente, tutto procede regolarmente.
 
+![](imgs/Pasted%20image%2020260531193042.png)
+
 **Cosa succede però se le partizioni sono tutte occupate?**
 
 - Se arriva un nuovo processo $T$, questo dovrà **attendere** che si liberi una partizione di dimensioni adeguate.
 - Se arriva un processo **più grande** della partizione massima disponibile, **non potrà mai essere eseguito** con quel partizionamento — è un limite strutturale della tecnica.
+
+---
 
 A seconda della modalità con cui vengono create e gestite, distinguiamo due principali tipologie di partizionamento:
 

@@ -44,6 +44,8 @@ $$
 \underbrace{600h}_{\text{indirizzo fisico}} = \underbrace{500h}_{\text{base}} + \underbrace{100h}_{\text{logico}}
 $$
 
+![](imgs/Pasted%20image%2020260529214033.png)
+
 #### **2.3. Riferimenti simbolici nella scrittura del programma**
 
 Durante la scrittura del codice — sia in **linguaggio ad alto livello** sia in **assembly simbolico** — il programmatore **non utilizza mai riferimenti numerici assoluti fisici** alle celle di memoria. Si usano sempre **nomi simbolici** (es. il nome di una procedura, di una variabile), che saranno poi tradotti dal compilatore e dal linker in indirizzi numerici.
@@ -75,6 +77,8 @@ Per capire **dove** può avvenire il binding, è utile prima richiamare il fluss
 $$
 \text{Sorgente} \;\longrightarrow\; \text{Compilatore/Assemblatore} \;\longrightarrow\; \text{Oggetti} \;\longrightarrow\; \text{Linker} \;\longrightarrow\; \text{Eseguibile} \;\longrightarrow\; \text{Loader} \;\longrightarrow\; \text{RAM} \;\longrightarrow\; \text{Esecuzione}
 $$
+
+![](imgs/Pasted%20image%2020260529214250.png)
 
 In dettaglio:
 

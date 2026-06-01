@@ -78,6 +78,8 @@ Il **blocco di avvio** (*boot block*) contiene il sistema operativo o, più spes
 
 Questo blocco viene usato nella fase di avvio della macchina per inizializzare il caricamento del sistema.
 
+![](imgs/Pasted%20image%2020260601051808.png)
+
 #### **3.2. Informazioni di organizzazione**
 
 Nei blocchi successivi sono presenti le informazioni essenziali sull'organizzazione del disco.
@@ -89,8 +91,6 @@ Queste strutture indicano:
 - come gestire metadati, directory e sottodirectory.
 
 I dettagli di queste strutture dipendono dal file system e vengono approfonditi nella gestione del file system.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
@@ -178,6 +178,8 @@ In particolare, nella mappa si trovano gli indici che individuano i blocchi all'
 Questa organizzazione consente anche di gestire blocchi di dimensione diversa, se il sistema lo prevede.
 
 > 💡 La mappa dello swap separa l'ordine logico dello spazio del processo dalla posizione fisica dei blocchi sul disco.
+
+![](imgs/Pasted%20image%2020260601052630.png)
 
 ---
 

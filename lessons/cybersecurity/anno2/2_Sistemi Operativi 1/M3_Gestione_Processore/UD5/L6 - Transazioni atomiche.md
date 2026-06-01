@@ -209,7 +209,12 @@ Trattare ogni transazione come una sezione critica (es. con un semaforo di mutua
 Si distinguono due tipi di schedulazione concorrente:
 
 - **Concorrente seriale**: una transazione esegue *tutte* le sue operazioni prima che l'altra inizi. Es. $T_0$ legge A, scrive A, legge B, scrive B; poi $T_1$ esegue le sue operazioni. È **corretto** ma rinuncia al parallelismo.
-- **Concorrente serializzabile**: si **serializzano solo le operazioni strettamente in conflitto** (quelle sugli stessi dati e con accesso non compatibile). Esempio: le operazioni di $T_1$ sul record A devono avvenire dopo quelle di $T_0$ su A, ma le operazioni sul record B di $T_1$ **non devono attendere** le operazioni di $T_0$ su B, perché logicamente disgiunte. Si ottiene così il **massimo parallelismo** compatibile con la consistenza.
+
+![](imgs/Pasted%20image%2020260529183901.png)
+
+- **Concorrente serializzabile**: si **serializzano solo le operazioni strettamente in conflitto** (quelle sugli stessi dati e con accesso non compatibile). Esempio: le operazioni di $T_1$ sul record A devono avvenire dopo quelle di $T_0$ su A, ma **non devono attendere** le operazioni di $T_0$ su B, perché logicamente disgiunte. Si ottiene così il **massimo parallelismo** compatibile con la consistenza.
+
+![](imgs/Pasted%20image%2020260529183919.png)
 
 I principali approcci operativi per realizzare schedulazioni serializzabili sono:
 

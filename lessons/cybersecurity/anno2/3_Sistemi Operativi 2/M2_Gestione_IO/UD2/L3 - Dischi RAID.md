@@ -85,13 +85,17 @@ Nel **block-level striping**, i dati vengono distribuiti a blocchi:
 
 ---
 
+Possiamo allora costruire una gerarchia di livelli di raid a seconda delle tecniche di striping dei blocchi o di replicazione introdotte per garantire un'alto livello di tolleranza ai guasti e quindi affidabilità del sistema.
+
+![](imgs/Pasted%20image%2020260601053707.png)
+
 ### **5. RAID 0**
 
 Il **RAID 0** è il livello più semplice orientato alle prestazioni.
 
 Il file viene diviso in blocchi o porzioni, ciascuna memorizzata su un disco diverso. Questo permette di leggere e scrivere più parti del file in parallelo.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601054318.png)
 
 #### **5.1. Caratteristiche**
 
@@ -110,7 +114,7 @@ Il **RAID 1** è diretto a garantire tolleranza ai guasti tramite **mirroring**.
 
 Ogni disco viene duplicato da un disco identico che contiene una copia speculare di tutte le informazioni.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601054342.png)
 
 #### **6.1. Caratteristiche**
 
@@ -130,6 +134,8 @@ Il **RAID 2** riduce il costo della ridondanza completa usando **codici corretto
 Invece di duplicare tutti i dati, introduce informazioni ridondanti che permettono di rilevare e correggere errori.
 
 Per esempio, per proteggere dati distribuiti su quattro dischi, possono essere necessari alcuni dischi aggiuntivi contenenti codici di correzione.
+
+![](imgs/Pasted%20image%2020260601054614.png)
 
 #### **7.1. Limiti**
 
@@ -153,7 +159,7 @@ In caso di guasto di un disco, i bit mancanti possono essere ricostruiti combina
 - il bit di parità;
 - la posizione del disco guasto.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601054656.png)
 
 #### **8.2. Distribuzione per gruppi di bit**
 
@@ -171,7 +177,7 @@ Il **RAID 4** opera a livello di blocchi, non più a livello di bit o gruppi di 
 
 I blocchi di dati vengono distribuiti sui dischi dati, mentre un disco dedicato conserva la parità calcolata bit per bit sui blocchi corrispondenti.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601055002.png)
 
 #### **9.1. Ricostruzione**
 
@@ -194,7 +200,7 @@ Il **RAID 5** distribuisce le informazioni di parità su tutti i dischi, evitand
 
 In pratica, quella che in RAID 4 era una zona concentrata su un disco viene spezzata in porzioni distribuite tra i vari dischi.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601055553.png)
 
 #### **10.1. Caratteristiche**
 
@@ -216,6 +222,8 @@ Usa tecniche di codifica più robuste, capaci di rilevare e correggere errori do
 
 Per esempio, alcune tecniche permettono di proteggere gruppi di bit dati con pochi bit ridondanti aggiuntivi, consentendo il recupero anche in presenza di guasti doppi.
 
+![](imgs/Pasted%20image%2020260601055603.png)
+
 #### **11.1. Caratteristiche**
 
 - tollera fino a due guasti simultanei;
@@ -236,13 +244,15 @@ Nel **RAID 0+1**, prima si crea uno striping su un gruppo di dischi, poi l'inter
 
 In caso di guasto di un disco, può essere considerato non accessibile l'intero gruppo a cui quel disco appartiene.
 
+![](imgs/Pasted%20image%2020260601055716.png)
+
 #### **12.2. RAID 1+0**
 
 Nel **RAID 1+0**, o **RAID 10**, prima si crea il mirroring di ciascun disco, poi le coppie mirror vengono collegate tramite striping.
 
 Se un disco si guasta, solo quel disco viene sostituito logicamente dalla sua copia nella coppia. Il resto dello stripe continua a essere accessibile.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601055517.png)
 
 > 📌 RAID 1+0 è in genere più robusto di RAID 0+1, perché protegge ogni disco singolarmente prima di applicare lo striping.
 

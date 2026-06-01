@@ -29,7 +29,8 @@ Serve dunque un meccanismo che **forzi automaticamente l’uso corretto** della 
 ---
 ### **3. Obiettivo del monitor**
 
-L’obiettivo del **monitor** è proprio questo:  
+L’obiettivo del **monitor** è proprio questo:
+
 $$  
 \text{Innalzare il livello di astrazione della sincronizzazione, garantendone la correttezza.}  
 $$
@@ -82,6 +83,8 @@ monitor BufferCondiviso {
 ---
 ### **5. Realizzazione e funzionamento**
 
+![](imgs/Pasted%20image%2020260529174049.png)
+
 #### **5.1. Accesso controllato**
 
 All'interno del monitor, il sistema di sincronizzazione è **implicito**:  
@@ -102,6 +105,8 @@ Quando il processo corrente esce da una **entry procedure**,
 il sistema operativo **riattiva automaticamente** uno dei processi sospesi.
 
 ##### **Esempio narrativo: due processi P e Q sullo stesso monitor**
+
+![](imgs/Pasted%20image%2020260529175657.png)
 
 1. Stato iniziale: condizione = `1` (monitor libero).
 2. Arriva **P** e chiama una entry procedure del monitor. La condizione passa a `0`, P **entra** nella sezione critica.

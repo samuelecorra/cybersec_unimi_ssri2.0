@@ -124,7 +124,7 @@ Supponiamo che lo spazio di indirizzamento del processo sia diviso in pagine num
 L'**indirizzo fisico** sarà allora dato dal numero della **pagina fisica** in cui la pagina logica 1 è stata caricata, più lo **stesso spiazzamento $d$** dall'inizio di quella pagina fisica (lo spiazzamento è invariato rispetto a quello logico).
 
 ##### **Schema di traduzione effettuato dalla MMU**
-
+ 
 $$
 \begin{array}{c}
 \text{CPU genera indirizzo logico } (p, d) \\\\
@@ -136,6 +136,8 @@ $$
 \text{Indirizzo fisico } (f, d) \;\longrightarrow\; \text{accesso alla cella di memoria}
 \end{array}
 $$
+
+![](imgs/Pasted%20image%2020260531215645.png)
 
 ---
 

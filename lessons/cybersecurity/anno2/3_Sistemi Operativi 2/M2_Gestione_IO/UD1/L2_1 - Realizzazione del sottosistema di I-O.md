@@ -60,8 +60,6 @@ Se l'unità centrale è più veloce della periferica, il processo può scrivere 
 
 Viceversa, la periferica può depositare le proprie risposte in un'area tampone, da cui il sistema operativo estrae i dati e li consegna al processo richiedente.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 #### **3.2. Adattamento delle dimensioni**
 
 La bufferizzazione consente anche di adattare le dimensioni dei dati trasferiti.

@@ -29,6 +29,8 @@ Nel kernel, in memoria centrale, viene mantenuta una tabella che descrive:
 - le operazioni lecite su ciascuna risorsa;
 - i puntatori alle procedure del sistema operativo che implementano tali operazioni.
 
+![](imgs/Pasted%20image%2020260601044656.png)
+
 #### **2.1. Tabella globale dei file e delle periferiche aperte**
 
 La tabella globale del kernel consente al sistema operativo di sapere quali risorse sono in uso e come devono essere gestite.
@@ -83,6 +85,8 @@ Questo consente a processi diversi di condividere una stessa risorsa mantenendo 
 Una richiesta di ingresso/uscita viene attivata da un processo tramite una **chiamata di sistema**.
 
 Da quel momento il sistema operativo valuta se può rispondere immediatamente oppure se deve accedere realmente alla periferica.
+
+![](imgs/Pasted%20image%2020260601044748.png)
 
 #### **4.1. Risposta immediata del sistema operativo**
 

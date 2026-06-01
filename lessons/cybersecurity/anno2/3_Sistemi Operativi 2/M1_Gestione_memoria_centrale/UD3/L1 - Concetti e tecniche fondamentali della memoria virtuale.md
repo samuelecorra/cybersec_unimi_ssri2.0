@@ -85,6 +85,8 @@ Ogni processo $P_1, P_2, \dots, P_k$ vorrà utilizzare uno spazio di memoria per
 
 Per realizzare la memoria virtuale, lo spazio di indirizzamento di ciascun processo viene suddiviso in **porzioni logiche** (pagine o segmenti), che vengono poi **mappate** in modo controllato sui **frame fisici** della memoria centrale.
 
+![](imgs/Pasted%20image%2020260531234221.png)
+
 #### **Principi di funzionamento**
 
 1. Lo **spazio logico del processo** è diviso in pagine o segmenti.

@@ -37,6 +37,8 @@ Ognuna di queste strategie mira a trovare un equilibrio tra **rapidità di acces
 
 La **Translation Look-Aside Buffer (TLB)** è una **memoria associativa** ad alta velocità situata all'interno della **MMU**, specializzata nel contenere le **ultime corrispondenze** tra pagine logiche e pagine fisiche cui si è acceduto, in modo da ritrovarle rapidamente.
 
+![](imgs/Pasted%20image%2020260531221727.png)
+
 #### **Funzionamento (con i tre scenari)**
 
 Il processore genera un indirizzo logico costituito da numero di pagina logica $p$ e spiazzamento $d$. La MMU procede così:
@@ -59,6 +61,8 @@ Riduce drasticamente il tempo medio di accesso alla memoria: nella **maggior par
 
 Per ridurre le dimensioni complessive della tabella, è possibile organizzarla in **più livelli**.  
 La forma più comune è la **tabella delle pagine a due livelli**.
+
+![](imgs/Pasted%20image%2020260531222220.png)
 
 #### **Funzionamento**
 
@@ -89,11 +93,15 @@ Se durante una traduzione la **sotto-tabella necessaria non è presente** nella 
 
 Questa idea può essere **estesa gerarchicamente a tre o più livelli**, fondamentale negli spazi a 64 bit dove anche una tabella a due livelli sarebbe enorme.
 
+![](imgs/Pasted%20image%2020260531223429.png)
+
 ---
 
 ### **5. Tabella delle pagine con hashing**
 
 Nei sistemi con spazio di indirizzamento molto grande (soprattutto a 64 bit), si adotta un approccio basato su **funzioni di hash**.
+
+![](imgs/Pasted%20image%2020260531222412.png)
 
 #### **Motivazione (località)**
 
@@ -192,6 +200,8 @@ La **MMU** si fa carico di:
 
 In alcuni casi, più processi possono condividere porzioni di codice o dati comuni (ad esempio librerie di sistema o moduli condivisi).  
 La paginazione semplifica questa operazione: **più tabelle delle pagine possono puntare alla stessa pagina fisica**, mantenendo però i propri permessi di accesso.
+
+![](imgs/Pasted%20image%2020260531224137.png)
 
 #### **Esempio: editor condiviso tra più utenti**
 

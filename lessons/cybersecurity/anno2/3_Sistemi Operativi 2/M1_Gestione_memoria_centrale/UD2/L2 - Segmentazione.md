@@ -53,6 +53,8 @@ La differenza è che, qui, **le porzioni non hanno dimensione fissa**.
 
 #### **Struttura logica e fisica**
 
+![](imgs/Pasted%20image%2020260531224955.png)
+
 - La **memoria fisica** è suddivisa in **segmenti fisici (frame)**: una struttura **monodimensionale**.
     
 - Lo **spazio logico** del processo è diviso in **segmenti logici (segmenti)**: una struttura **bidimensionale**, dove ogni segmento rappresenta un’unità funzionale distinta del programma.
@@ -102,6 +104,10 @@ In pratica, all'indirizzo base del frame del segmento viene sommato lo spiazzame
 
 Lo schema della MMU per la segmentazione include un **controllo aggiuntivo rispetto alla paginazione**, perché ogni segmento ha una **dimensione propria** che funge da limite:
 
+![](imgs/Pasted%20image%2020260531230016.png)
+
+---
+
 $$
 \begin{array}{c}
 \text{CPU genera indirizzo logico } (s, d) \\\\
@@ -125,6 +131,8 @@ La **dimensione del segmento** (il *limite*) è quindi parte integrante del mecc
 #### **Mapping bidimensionale → lineare**
 
 In memoria centrale ogni segmento logico viene caricato in una porzione lineare della RAM. La tabella dei segmenti **conserva gli accoppiamenti di posizione** che trasformano la struttura **bidimensionale** dello spazio di indirizzamento del processo (più segmenti, ciascuno con il proprio indirizzamento lineare) nella struttura **lineare** della memoria centrale (un unico vettore di indirizzi).
+
+![](imgs/Pasted%20image%2020260531230608.png)
 
 ---
 
@@ -222,6 +230,8 @@ La MMU garantisce quindi la **sicurezza e l'integrità** dello spazio di memoria
 ##### **Confronto con la paginazione: l'esempio dell'editor**
 
 Riprendiamo l'esempio dell'editor condiviso tra due utenti che modificano due file diversi:
+
+![](imgs/Pasted%20image%2020260531231320.png)
 
 | Aspetto | Paginazione | Segmentazione |
 | --- | --- | --- |

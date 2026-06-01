@@ -107,9 +107,29 @@ L'istruzione C `count++` (o `count--`) viene tradotta dal compilatore in **tre i
 2. **Inc/Dec**: incrementa o decrementa il registro;
 3. **Store**: scrive il valore aggiornato del registro nella variabile `count`.
 
+In codice simil-assembly, inc e dec potrebbero essere rappresentati così:
+
+count++
+
+```assembly
+LOAD R1, count   ; R1 = count
+INC R1           ; R1 = R1 + 1
+STORE count, R1  ; count = R1
+```
+
+count--
+
+```assembly
+LOAD R2, count   ; R2 = count
+DEC R2           ; R2 = R2 - 1
+STORE count, R2  ; count = R2
+```
+
 Le singole istruzioni macchina sono atomiche, ma **la sequenza nel suo insieme non lo è**: in un sistema **time-sharing**, può capitare un'**interruzione** (es. scadenza del quanto di tempo) **tra le tre istruzioni**, sospendendo il processo a metà dell'operazione logica. Se nel frattempo viene schedulato l'altro processo che opera sulla stessa variabile, i registri dei due processi finiscono a riflettere uno **stato inconsistente** della memoria.
 
-Esecuzione possibile:
+Proponiamo di seguito un'esecuzione possibile, supponendo che l'interrupt sopraggiunga tra INC R1 e STORE count, R1, ovvero nel momento in cui solo il registro è incrementato ma `count` non è ancora aggiornato. Essendo count letta anche dal consumatore, dal passaggio S2 in poi, il consumatore lavora con un valore di `count` che non riflette l'incremento del produttore, portando a un risultato errato.
+
+Infatti prima o poi arriverà la rischedulazione, al che passiamo ad S4 ed S5, dove emerge l'incongruenza:
 
 | Passo | Operazione                             | Effetto         |
 | :---- | :------------------------------------- | :-------------- |
@@ -184,6 +204,8 @@ Consideriamo due processi cooperanti P1 e P2 che, pur essendo logicamente concor
 - P2 quindi **attende il segnale di sincronizzazione** da P1;
 - una volta ricevuto il segnale, P2 può proseguire con la **certezza** che P1 abbia già svolto le operazioni che lo precedono nel punto di sincronismo;
 - P1, dopo aver inviato il segnale, prosegue normalmente con il resto della propria computazione.
+
+![](imgs/Pasted%20image%2020260529163403.png)
 
 Questo schema **vincola l'ordine relativo** di alcune sezioni dei due processi senza richiedere mutua esclusione su risorse condivise: serve a **stabilire una relazione di precedenza** ("P1 deve finire X prima che P2 possa iniziare Y").
 

@@ -62,7 +62,7 @@ All'inizio, aumentando il grado di multiprogrammazione aumenta anche l'utilizzo 
 
 Oltre una certa soglia, però, i processi ricevono troppo pochi frame. La percentuale di tempo spesa nella gestione della paginazione cresce, mentre la percentuale di tempo dedicata alla computazione utile diminuisce drasticamente.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601005809.png)
 
 Quando l'utilizzo utile della CPU comincia a diminuire bruscamente, il sistema è entrato in thrashing.
 
@@ -98,9 +98,11 @@ In particolare, si può restringere l'insieme dei frame eleggibili per lo scaric
 
 Oltre a evitare il thrashing con vincoli rigidi, il sistema può prevenirlo osservando il comportamento dei processi.
 
+![](imgs/Pasted%20image%2020260601010208.png)
+
 Un processo presenta una **località di esecuzione**: in un certo intervallo di tempo tende ad accedere frequentemente ad alcune zone di memoria, sia di codice sia di dati.
 
-Prevenire il thrashing significa identificare un numero di frame sufficiente a contenere la località attiva del processo durante la sua esecuzione.
+**Prevenire il thrashing significa identificare un numero di frame sufficiente a contenere la località attiva del processo durante la sua esecuzione.**
 
 > 📌 Una località è l'insieme di pagine che un processo usa intensamente in una fase della computazione.
 
@@ -129,7 +131,7 @@ Se una pagina è in uso attivo, allora si trova nel working set. Se invece non v
 
 Considerando una stringa di riferimento, il working set cambia a seconda dell'istante osservato e della finestra $\Delta$.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601010333.png)
 
 In un certo istante $t_1$, il working set può contenere le pagine usate negli ultimi $\Delta$ riferimenti, per esempio $\{1,2,5,6,7\}$. In un istante successivo $t_2$, la località può essere cambiata e il working set può ridursi, per esempio a $\{3,4\}$.
 
@@ -153,7 +155,7 @@ $$
 F_i \ge |WS_i(t,\Delta)|
 $$
 
-per ogni fase significativa della sua esecuzione.
+dove $|WS_i(t,\Delta)|$ è la dimensione o cardinalità del working set, cioè il numero di pagine attivamente usate dal processo in quel momento, e questo vale per ogni fase significativa della sua esecuzione.
 
 Se si volesse garantire il contenimento del working set lungo tutta l'esecuzione, si potrebbe allocare:
 
@@ -182,6 +184,8 @@ In questo caso il sistema deve scegliere un processo da sospendere o scaricare, 
 Una buona approssimazione alternativa è la tecnica della **Page-Fault Frequency** (**PFF**), basata sull'osservazione della frequenza dei page fault.
 
 Le prestazioni di un processo cambiano in funzione del numero di frame disponibili:
+
+![](imgs/Pasted%20image%2020260601010911.png)
 
 - più frame vengono concessi, più basso tende a essere il tasso di page fault;
 - meno frame vengono concessi, più alta tende a essere la probabilità di page fault.

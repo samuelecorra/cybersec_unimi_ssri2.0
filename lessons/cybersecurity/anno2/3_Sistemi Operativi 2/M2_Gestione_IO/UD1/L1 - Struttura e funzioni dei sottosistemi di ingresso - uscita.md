@@ -153,8 +153,6 @@ La gestione delle periferiche è organizzata in livelli, ciascuno con un compito
 
 Questa organizzazione permette di separare il collegamento fisico, le specificità del dispositivo e l'interfaccia astratta esposta al sistema operativo.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ---
 
 ### **6. Gestione del canale di comunicazione**

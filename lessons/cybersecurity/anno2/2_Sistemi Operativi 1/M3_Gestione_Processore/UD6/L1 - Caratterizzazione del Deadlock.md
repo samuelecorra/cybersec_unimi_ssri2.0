@@ -53,6 +53,8 @@ Né $P_1$ né $P_2$ possono procedere, e il sistema resta bloccato.
 
 Un'analogia efficace è quella di **due automobili** che, provenendo da direzioni opposte, vogliono attraversare contemporaneamente una **strada con una strettoia** (risorsa condivisa usabile solo in mutua esclusione). Senza una regola di precedenza che le sincronizzi:
 
+![](imgs/Pasted%20image%2020260529193312.png)
+
 - entrambe le auto **iniziano a occupare** la strettoia da estremi opposti;
 - arrivate al punto di incrocio, **nessuna delle due** può proseguire perché l'altra le blocca il passaggio;
 - nessuna delle due vuole (o può, per i propri vincoli) tornare indietro.
@@ -111,15 +113,17 @@ $$
 #### **6.1. Sistema senza deadlock**
 
 $$  
-P_1 \rightarrow R_1 \rightarrow P_2  
+P_1 \rightarrow R_1 \rightarrow P_2  \rightarrow R_3 \rightarrow P_3
 $$
 
 Il grafo **non contiene cicli** → nessun deadlock.
 
+![](imgs/Pasted%20image%2020260529193437.png)
+
 #### **6.2. Sistema con deadlock**
 
 $$  
-P_1 \rightarrow R_1 \rightarrow P_2 \rightarrow R_2 \rightarrow P_1  
+P_1 \rightarrow R_1 \rightarrow P_2 \rightarrow R_3 \rightarrow P_3 \rightarrow R_2 \rightarrow P_1  
 $$
 
 È presente un **ciclo chiuso**: ogni processo attende una risorsa detenuta da un altro → **deadlock attivo**.
@@ -132,6 +136,8 @@ ad esempio quando una risorsa ha **più istanze disponibili**.
 ##### **Esempio: ciclo con risorsa a due istanze**
 
 Supponiamo che la risorsa $R_2$ esista in **2 istanze**. Una delle due è coinvolta nel ciclo $P_1 \to R_1 \to P_3 \to R_2 \to P_1$. L'altra istanza è detenuta da un processo **$P_4$ esterno al ciclo**, che non è in attesa di nessuna risorsa.
+
+![](imgs/Pasted%20image%2020260529193805.png)
 
 In questa configurazione, anche se il grafo presenta un ciclo:
 

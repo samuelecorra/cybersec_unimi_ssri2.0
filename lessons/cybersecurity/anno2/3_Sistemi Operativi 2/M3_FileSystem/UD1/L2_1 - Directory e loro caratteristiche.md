@@ -35,6 +35,8 @@ Per ogni file viene conservato il suo **descrittore**, cioè l'insieme delle inf
 
 Il descrittore del file è quindi il tipo base degli elementi contenuti nella directory.
 
+![](imgs/Pasted%20image%2020260601065327.png)
+
 > 📌 Una directory può essere vista come un file il cui tipo base è il descrittore di file.
 
 Il tipo esatto del descrittore dipende dallo specifico sistema operativo.
@@ -93,6 +95,8 @@ La struttura più semplice è il **direttorio a singolo livello**.
 
 In questo modello, su un disco esiste un unico direttorio che contiene tutti i descrittori dei file presenti.
 
+![](imgs/Pasted%20image%2020260601065508.png)
+
 #### **5.1. Caratteristiche**
 
 È una soluzione tipica di vecchi sistemi monoutente con piccola memoria di massa.
@@ -123,6 +127,8 @@ La directory a due livelli introduce una prima soluzione per piccoli sistemi mul
 
 Il direttorio di livello più alto contiene riferimenti ai direttori associati ai singoli utenti. Per ogni utente viene creato un sottodirettorio con i file relativi a quell'utente.
 
+![](imgs/Pasted%20image%2020260601065704.png)
+
 #### **6.1. Vantaggi**
 
 Questa soluzione:
@@ -146,11 +152,15 @@ Restano però alcuni limiti:
 
 Nei sistemi operativi moderni si vuole una visione logica del file system indipendente dal singolo utente.
 
+![](imgs/Pasted%20image%2020260601070720.png)
+
 I file vengono raggruppati secondo criteri logici: progetto, funzione, tipo di contenuto, applicazione, utente o qualsiasi altra classificazione utile.
+
+![](imgs/Pasted%20image%2020260601070731.png)
 
 La struttura naturale per rappresentare queste suddivisioni gerarchiche è un **albero**.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601070742.png)
 
 #### **7.1. Radice e sottodirectory**
 
@@ -202,7 +212,7 @@ La struttura ad albero può essere generalizzata introducendo un **grafo aciclic
 
 In un grafo aciclico è possibile condividere file o directory, permettendo che lo stesso elemento sia raggiungibile tramite percorsi diversi.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601070928.png)
 
 #### **9.1. Condivisione**
 
@@ -223,6 +233,8 @@ Questo evita che algoritmi di ricerca, visita o cancellazione restino intrappola
 ### **10. Directory a grafo generale**
 
 La generalizzazione ulteriore è la directory a **grafo generale**, in cui sono ammessi anche cicli.
+
+![](imgs/Pasted%20image%2020260601071019.png)
 
 Questo modello è molto flessibile, ma introduce problemi gestionali significativi.
 

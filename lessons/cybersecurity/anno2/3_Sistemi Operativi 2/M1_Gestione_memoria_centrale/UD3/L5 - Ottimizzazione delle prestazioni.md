@@ -198,6 +198,8 @@ Per evitare il problema, le pagine che contengono buffer di I/O possono essere m
 
 Una soluzione consiste nel collocare i buffer nello spazio di indirizzamento del sistema operativo. Quando i dati devono essere trasferiti nelle variabili del processo, il sistema operativo effettua poi il trasferimento verso lo spazio del processo.
 
+![](imgs/Pasted%20image%2020260601014635.png)
+
 > 📌 I buffer di I/O devono spesso rimanere residenti perché le periferiche richiedono disponibilità continua dei dati durante il trasferimento.
 
 ---

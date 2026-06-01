@@ -33,6 +33,8 @@ In questa situazione:
 - il disco 3 ha il proprio file system;
 - l'utente o il programma deve sapere su quale disco si trova il file desiderato.
 
+![](imgs/Pasted%20image%2020260601071900.png)
+
 Non esiste quindi una visione unica di tutta la memoria di massa. Il reperimento logico avviene solo all'interno del singolo disco, mantenendo visibile all'utente una parte della struttura fisica del sistema.
 
 > ⚠️ Se i file system restano separati disco per disco, l'utente deve conoscere la collocazione fisica del file, perdendo parte dell'astrazione offerta dal file system.
@@ -45,6 +47,8 @@ Quando i dischi sono molto grandi, spesso non è pratico gestirli come un'unica 
 
 Si suddivide allora il disco in porzioni dette **partizioni**, ciascuna gestibile in modo più semplice ed efficiente.
 
+![](imgs/Pasted%20image%2020260601072038.png)
+
 #### **3.1. Definizione**
 
 Una **partizione** è l'astrazione di un dispositivo fisico di memoria di massa.
@@ -54,6 +58,8 @@ Un disco può essere organizzato in modi diversi:
 - una sola partizione sull'intero disco;
 - più partizioni sullo stesso disco;
 - una partizione logica distribuita su più dischi, vista come un unico insieme.
+
+![](imgs/Pasted%20image%2020260601072058.png)
 
 #### **3.2. File system nelle partizioni**
 
