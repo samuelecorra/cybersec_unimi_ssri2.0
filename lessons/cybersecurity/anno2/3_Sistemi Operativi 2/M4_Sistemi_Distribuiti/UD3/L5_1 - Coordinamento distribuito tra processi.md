@@ -10,12 +10,12 @@ In particolare, si studia come ordinare gli eventi e come usare questo ordinamen
 
 - sincronizzazione tra processi;
 - mutua esclusione;
-- atomicita' delle attivita';
+- atomicità delle attività;
 - gestione della concorrenza.
 
-La sincronizzazione distribuita generalizza i concetti gia' visti nel caso di una singola macchina, ma introduce difficolta' aggiuntive.
+La sincronizzazione distribuita generalizza i concetti già visti nel caso di una singola macchina, ma introduce difficoltà aggiuntive.
 
-> 📌 In un sistema distribuito il coordinamento dipende dalla capacita' di costruire una visione coerente dell'ordine degli eventi.
+> 📌 In un sistema distribuito il coordinamento dipende dalla capacità di costruire una visione coerente dell'ordine degli eventi.
 
 ---
 
@@ -23,9 +23,9 @@ La sincronizzazione distribuita generalizza i concetti gia' visti nel caso di un
 
 La soluzione ideale sarebbe creare un **ordinamento totale** di tutti gli eventi del sistema distribuito.
 
-Un ordinamento totale permetterebbe di stabilire, per qualunque coppia di eventi, quale evento e' avvenuto prima.
+Un ordinamento totale permetterebbe di stabilire, per qualunque coppia di eventi, quale evento è avvenuto prima.
 
-Questo pero' non e' facilmente realizzabile in un sistema distribuito, perche' mancano due strumenti fisici fondamentali:
+Questo però non è facilmente realizzabile in un sistema distribuito, perchè mancano due strumenti fisici fondamentali:
 
 - un orologio comune;
 - una memoria comune.
@@ -34,13 +34,13 @@ Senza un orologio unico non esiste un tempo assoluto condiviso.
 
 Senza una memoria comune non esiste un punto centrale in cui osservare direttamente lo stato globale.
 
-> ⚠️ In un sistema distribuito non si puo' associare facilmente a ogni evento un istante assoluto valido per tutto il sistema.
+> ⚠️ In un sistema distribuito non si può associare facilmente a ogni evento un istante assoluto valido per tutto il sistema.
 
 ---
 
 ### **3. Ordinamento parziale**
 
-Poiche' l'ordinamento totale non e' sempre disponibile, ci si accontenta di un **ordinamento parziale**.
+Poichè l'ordinamento totale non è sempre disponibile, ci si accontenta di un **ordinamento parziale**.
 
 Un ordinamento parziale stabilisce l'ordine solo tra eventi che hanno una relazione causale o logica.
 
@@ -60,7 +60,7 @@ $$
 A \rightarrow B
 $$
 
-e significa che l'evento \(A\) e' accaduto prima dell'evento \(B\).
+e significa che l'evento $A$ è accaduto prima dell'evento $B$.
 
 Questa relazione rappresenta un vincolo causale o logico tra eventi.
 
@@ -72,7 +72,7 @@ La relazione "accaduto prima" viene definita con tre regole fondamentali.
 
 #### **5.1. Eventi nello stesso processo**
 
-Se \(A\) e \(B\) sono due eventi dello stesso processo e \(A\) avviene prima di \(B\), allora:
+Se $A$ e $B$ sono due eventi dello stesso processo e $A$ avviene prima di $B$, allora:
 
 $$
 A \rightarrow B
@@ -82,13 +82,13 @@ L'ordine locale del processo definisce quindi una relazione di precedenza.
 
 #### **5.2. Invio e ricezione di un messaggio**
 
-Se \(A\) e' l'evento di trasmissione di un messaggio e \(B\) e' l'evento di ricezione dello stesso messaggio, allora:
+Se $A$ è l'evento di trasmissione di un messaggio e $B$ è l'evento di ricezione dello stesso messaggio, allora:
 
 $$
 A \rightarrow B
 $$
 
-La ricezione non puo' avvenire prima dell'invio.
+La ricezione non può avvenire prima dell'invio.
 
 #### **5.3. Transitivita'**
 
@@ -110,15 +110,15 @@ $$
 A \rightarrow C
 $$
 
-La relazione e' quindi transitiva.
+La relazione è quindi transitiva.
 
 ---
 
 ### **6. Eventi concorrenti**
 
-La relazione "accaduto prima" non e' riflessiva.
+La relazione "accaduto prima" non è riflessiva.
 
-Un evento non e' in relazione di precedenza con se stesso.
+Un evento non è in relazione di precedenza con se stesso.
 
 Inoltre, se due eventi non sono collegati dalla relazione, vengono considerati **concorrenti**.
 
@@ -130,13 +130,13 @@ Due eventi concorrenti:
 
 Se invece due eventi sono in relazione "accaduto prima", allora possono influenzarsi o almeno esiste un ordine che deve essere rispettato.
 
-> 📌 Gli eventi concorrenti non sono ordinabili tramite causalita': nessuno dei due e' necessariamente prima dell'altro.
+> 📌 Gli eventi concorrenti non sono ordinabili tramite causalità: nessuno dei due è necessariamente prima dell'altro.
 
 ---
 
 ### **7. Esempio di ordinamento parziale**
 
-Si considerino tre processi \(P\), \(Q\) e \(R\), ciascuno con propri eventi.
+Si considerino tre processi $P$, $Q$ e $R$, ciascuno con propri eventi.
 
 All'interno dello stesso processo, gli eventi sono ordinati localmente:
 
@@ -144,15 +144,15 @@ $$
 P_0 \rightarrow P_1 \rightarrow P_2
 $$
 
-Non e' detto pero' che esista una relazione tra \(P_0\) e \(Q_0\), oppure tra \(P_1\) e \(Q_1\).
+Non è detto però che esista una relazione tra $P_0$ e $Q_0$, oppure tra $P_1$ e $Q_1$.
 
-Se pero' un messaggio stabilisce che:
+Se però un messaggio stabilisce che:
 
 $$
 P_1 \rightarrow Q_2
 $$
 
-e nel processo \(Q\):
+e nel processo $Q$:
 
 $$
 Q_2 \rightarrow Q_3
@@ -164,7 +164,7 @@ $$
 Q_3 \rightarrow R_4
 $$
 
-allora per transitivita':
+allora per transitività:
 
 $$
 P_1 \rightarrow R_4
@@ -187,7 +187,7 @@ Un **orologio logico** non misura necessariamente il tempo fisico reale.
 
 Serve a numerare gli eventi in modo coerente con la relazione "accaduto prima".
 
-L'orologio logico deve evolvere in modo monotono, cioe' deve aumentare nel tempo.
+L'orologio logico deve evolvere in modo monotono, cioè deve aumentare nel tempo.
 
 ---
 
@@ -197,17 +197,17 @@ Quando un processo genera un evento locale, incrementa il proprio orologio logic
 
 Quando invia un messaggio, allega al messaggio la propria marca di tempo.
 
-Quando un processo riceve un messaggio con marca di tempo \(N\), aggiorna il proprio orologio a un valore maggiore di \(N\).
+Quando un processo riceve un messaggio con marca di tempo $N$, aggiorna il proprio orologio a un valore maggiore di $N$.
 
-Una regola tipica e':
+Una regola tipica è:
 
 $$
 C_i \leftarrow \max(C_i, N) + 1
 $$
 
-In questo modo, l'evento di ricezione avra' una marca maggiore dell'evento di invio.
+In questo modo, l'evento di ricezione avrà una marca maggiore dell'evento di invio.
 
-> ✅ L'orologio logico viene forzato ad avanzare quando riceve informazioni da un altro processo, cosi' da rispettare la causalita'.
+> ✅ L'orologio logico viene forzato ad avanzare quando riceve informazioni da un altro processo, così da rispettare la causalità.
 
 ---
 
@@ -224,22 +224,22 @@ Esistono due soluzioni:
 
 ### **11. Generazione centralizzata**
 
-Nella soluzione centralizzata, un unico processo e' autorizzato a generare marche di tempo univoche per tutto il sistema distribuito.
+Nella soluzione centralizzata, un unico processo è autorizzato a generare marche di tempo univoche per tutto il sistema distribuito.
 
 Vantaggi:
 
-- semplicita';
-- unicita' garantita;
+- semplicità;
+- unicità garantita;
 - visione unica dell'evoluzione delle marche.
 
 Svantaggi:
 
 - collo di bottiglia;
-- rallentamento perche' tutti devono richiedere la marca al generatore;
+- rallentamento perchè tutti devono richiedere la marca al generatore;
 - scarsa tolleranza ai guasti;
 - problemi se il generatore diventa irraggiungibile.
 
-> ⚠️ La centralizzazione semplifica l'unicita', ma introduce un singolo punto critico.
+> ⚠️ La centralizzazione semplifica l'unicità, ma introduce un singolo punto critico.
 
 ---
 
@@ -253,12 +253,12 @@ $$
 \text{marca globale} = (\text{marca locale}, \text{identificatore macchina})
 $$
 
-La marca locale puo' essere basata su:
+La marca locale può essere basata su:
 
 - un orologio fisico locale;
 - un orologio logico locale.
 
-Gli orologi fisici delle macchine possono avere velocita' diverse, quindi non sono perfettamente sincronizzati.
+Gli orologi fisici delle macchine possono avere velocità diverse, quindi non sono perfettamente sincronizzati.
 
 Per questo si preferisce usare orologi logici, sincronizzati indirettamente tramite le interazioni tra processi.
 
@@ -285,7 +285,7 @@ Nel metodo centralizzato esiste un processo coordinatore.
 Il coordinatore:
 
 - riceve le richieste di ingresso in sezione critica;
-- decide quale processo puo' entrare;
+- decide quale processo può entrare;
 - mantiene una coda dei processi in attesa;
 - concede l'accesso a un processo alla volta.
 
@@ -303,7 +303,7 @@ Svantaggi:
 - collo di bottiglia;
 - prestazioni limitate;
 - scarsa tolleranza ai guasti;
-- vulnerabilita' se il coordinatore muore o diventa irraggiungibile.
+- vulnerabilità se il coordinatore muore o diventa irraggiungibile.
 
 ---
 
@@ -311,31 +311,31 @@ Svantaggi:
 
 Nel metodo distribuito non esiste un coordinatore unico.
 
-Quando un processo \(P\) vuole entrare nella sezione critica:
+Quando un processo $P$ vuole entrare nella sezione critica:
 
 1. genera una marca di tempo;
 2. invia la richiesta a tutti i processi coinvolti nella stessa sezione critica;
 3. attende le risposte.
 
-Quando un processo \(Q\) riceve la richiesta di \(P\), decide come rispondere in base al proprio stato.
+Quando un processo $Q$ riceve la richiesta di $P$, decide come rispondere in base al proprio stato.
 
-#### **15.1. Q e' gia' in sezione critica**
+#### **15.1. Q è già in sezione critica**
 
-Se \(Q\) e' gia' nella sezione critica, ritarda la risposta.
+Se $Q$ è già nella sezione critica, ritarda la risposta.
 
-In questo modo impedisce a \(P\) di entrare finche' la sezione critica e' occupata.
+In questo modo impedisce a $P$ di entrare finchè la sezione critica è occupata.
 
 #### **15.2. Q non vuole entrare**
 
-Se \(Q\) non e' in sezione critica e non vuole entrarvi, risponde subito concedendo a \(P\) il permesso.
+Se $Q$ non è in sezione critica e non vuole entrarvi, risponde subito concedendo a $P$ il permesso.
 
-#### **15.3. Q vuole entrare ma non e' ancora entrato**
+#### **15.3. Q vuole entrare ma non è ancora entrato**
 
-Se \(Q\) vuole entrare ma non e' ancora entrato, confronta la propria marca di tempo con quella di \(P\).
+Se $Q$ vuole entrare ma non è ancora entrato, confronta la propria marca di tempo con quella di $P$.
 
-Se la marca di \(Q\) e' maggiore di quella di \(P\), allora \(P\) ha fatto richiesta prima e \(Q\) risponde subito.
+Se la marca di $Q$ è maggiore di quella di $P$, allora $P$ ha fatto richiesta prima e $Q$ risponde subito.
 
-Se la marca di \(Q\) e' minore, allora \(Q\) ha priorita' e ritarda la risposta a \(P\).
+Se la marca di $Q$ è minore, allora $Q$ ha priorità e ritarda la risposta a $P$.
 
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
@@ -343,7 +343,7 @@ Se la marca di \(Q\) e' minore, allora \(Q\) ha priorita' e ritarda la risposta 
 
 ---
 
-### **16. Proprieta' del metodo distribuito**
+### **16. Proprietà del metodo distribuito**
 
 Il metodo distribuito consente una soluzione:
 
@@ -352,13 +352,13 @@ Il metodo distribuito consente una soluzione:
 - con buona tolleranza ai guasti rispetto alla centralizzazione;
 - non dipendente da un unico coordinatore.
 
-Il costo e' un numero maggiore di messaggi, perche' ogni richiesta deve essere comunicata ai processi coinvolti.
+Il costo è un numero maggiore di messaggi, perchè ogni richiesta deve essere comunicata ai processi coinvolti.
 
 ---
 
 ### **17. Passaggio del token**
 
-Un'altra tecnica e' il **passaggio del token**.
+Un'altra tecnica è il **passaggio del token**.
 
 I processi sono organizzati in un anello logico.
 
@@ -397,8 +397,8 @@ Quando un processo riceve il token:
 
 Il coordinamento distribuito richiede di ordinare gli eventi in assenza di un orologio globale e di una memoria comune.
 
-La relazione "accaduto prima" permette di costruire un ordinamento parziale basato su ordine locale, invio/ricezione dei messaggi e transitivita'.
+La relazione "accaduto prima" permette di costruire un ordinamento parziale basato su ordine locale, invio/ricezione dei messaggi e transitività.
 
 Le marche di tempo e gli orologi logici consentono di usare questo ordinamento per realizzare meccanismi di sincronizzazione.
 
-La mutua esclusione puo' essere realizzata con coordinatore centralizzato, algoritmi distribuiti basati su timestamp o passaggio del token.
+La mutua esclusione può essere realizzata con coordinatore centralizzato, algoritmi distribuiti basati su timestamp o passaggio del token.

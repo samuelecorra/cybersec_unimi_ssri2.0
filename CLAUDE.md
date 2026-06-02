@@ -21,7 +21,8 @@ YOU MUST extract the subject and file dynamically from the prompt. Do not assume
 ## Markdown Enrichment & Content Rules
 
 - Section Hierarchy: Strictly use `### **N. Title**`, `#### **N.M. Title**`, and `##### **N.M.X. Title**`.
-- Mathematical Notation: Render formulas and systems using standard LaTeX block format `$$...$$` with `\begin{cases}` where matching definitions.
+- Mathematical Notation: Render formulas according to the canonical Markdown/MathJax style: use `$...$` for inline math, for example `$L$`, and `$$...$$` for display math. Do not use `\(...\)` for inline formulas. Render systems with `\begin{cases}` where matching definitions.
+- Italian Orthography: Write proper accented characters (`è`, `é`, `ò`, `à`, `ù`, `ì`) instead of apostrophe transliterations such as `e'`, `perche'`, `puo'`, `piu'`, `unita'`.
 - Visual Callouts: Emphasize key notes strictly using markdown blockquotes with exact emojis:
   - `> 📌` for critical core concepts or definitions.
   - `> ⚠️` for warnings, edge cases, or frequent exam pitfalls.

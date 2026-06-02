@@ -20,6 +20,9 @@ $RECYCLE.BIN/
 .vscode/
 .idea/
 .obsidian/
+.claude/
+.claudian/
+copilot/
 *.swp
 *.swo
 .project

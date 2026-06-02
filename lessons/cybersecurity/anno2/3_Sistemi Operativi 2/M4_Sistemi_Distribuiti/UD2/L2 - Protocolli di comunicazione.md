@@ -12,9 +12,9 @@ I protocolli servono a rendere trasparenti:
 - le differenze tra sistemi operativi;
 - le differenze di rappresentazione dei dati;
 - i dettagli fisici della rete;
-- le modalita' concrete di trasmissione.
+- le modalità concrete di trasmissione.
 
-L'obiettivo e' fornire ai processi un ambiente di comunicazione uniforme, anche quando le macchine coinvolte sono eterogenee.
+L'obiettivo è fornire ai processi un ambiente di comunicazione uniforme, anche quando le macchine coinvolte sono eterogenee.
 
 > 📌 Un protocollo di comunicazione svolge per la rete un ruolo analogo a quello di un driver: nasconde i dettagli della periferica e offre servizi omogenei.
 
@@ -28,9 +28,9 @@ La comunicazione in un ambiente distribuito presenta diversi problemi.
 
 I processi che comunicano su macchine diverse non evolvono necessariamente in modo sincronizzato.
 
-La comunicazione puo' richiedere tempo e il mittente non deve restare bloccato inutilmente in attesa del completamento.
+La comunicazione può richiedere tempo e il mittente non deve restare bloccato inutilmente in attesa del completamento.
 
-I protocolli devono quindi supportare modalita' di comunicazione che permettano ai processi di continuare a evolvere.
+I protocolli devono quindi supportare modalità di comunicazione che permettano ai processi di continuare a evolvere.
 
 #### **2.2. Errori e guasti**
 
@@ -43,9 +43,9 @@ Durante la comunicazione possono verificarsi:
 - guasti di nodi;
 - guasti di collegamenti.
 
-Il protocollo deve tener conto della probabilita' di errore e aumentare la probabilita' di successo della comunicazione.
+Il protocollo deve tener conto della probabilità di errore e aumentare la probabilità di successo della comunicazione.
 
-#### **2.3. Eterogeneita'**
+#### **2.3. Eterogeneità**
 
 Le macchine in rete possono essere diverse per:
 
@@ -89,13 +89,13 @@ Il protocollo deve gestire la comunicazione in modo efficiente, riducendo overhe
 
 Il protocollo deve rilevare, correggere o mascherare errori quando possibile.
 
-> ✅ L'obiettivo e' rendere trasparenti i dettagli fisici della rete e fornire un servizio di comunicazione affidabile o almeno controllato.
+> ✅ L'obiettivo è rendere trasparenti i dettagli fisici della rete e fornire un servizio di comunicazione affidabile o almeno controllato.
 
 ---
 
 ### **4. Protocolli come driver di rete**
 
-La soluzione e' introdurre protocolli di comunicazione organizzati in strati.
+La soluzione è introdurre protocolli di comunicazione organizzati in strati.
 
 Il sottosistema di comunicazione in rete viene strutturato come il driver di una periferica complessa.
 
@@ -107,23 +107,25 @@ Ogni strato:
 
 La comunicazione reale scende lungo la pila del mittente, attraversa la rete e risale lungo la pila del destinatario.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 > 💡 La stratificazione permette di isolare problemi diversi: trasmissione fisica, instradamento, controllo del flusso, formato dei dati e servizi applicativi.
 
 ---
 
 ### **5. Modello ISO/OSI**
 
-Il modello teorico di riferimento e' il modello **ISO/OSI**.
+Il modello teorico di riferimento è il modello **ISO/OSI**.
 
 ISO indica l'**International Standards Organization**.
 
 OSI significa **Open Systems Interconnection**.
 
-Il modello e' stato definito per interconnettere sistemi aperti ed eterogenei.
+![](imgs/Pasted%20image%2020260602032539.png)
 
-Il suo scopo e' chiarire come strutturare astrattamente la comunicazione in rete.
+Il modello è stato definito per interconnettere sistemi aperti ed eterogenei.
+
+Il suo scopo è chiarire come strutturare astrattamente la comunicazione in rete.
+
+![](imgs/Pasted%20image%2020260602032611.png)
 
 Il modello prevede una pila di sette strati:
 
@@ -162,7 +164,7 @@ Definisce, per esempio:
 
 Lo **strato di collegamento dati** gestisce l'invio e la ricezione della singola porzione di messaggio di lunghezza controllata.
 
-Questa porzione puo' essere vista come un pacchetto o frame.
+Questa porzione può essere vista come un pacchetto o frame.
 
 Lo strato si occupa di:
 
@@ -184,7 +186,7 @@ Si occupa di:
 - scegliere il percorso;
 - inoltrare pacchetti;
 - decodificare gli indirizzi dei pacchetti in ingresso;
-- stabilire se un pacchetto e' destinato alla macchina corrente.
+- stabilire se un pacchetto è destinato alla macchina corrente.
 
 > 📌 Lo strato di rete decide dove devono andare i pacchetti.
 
@@ -204,7 +206,7 @@ Si occupa di:
 - gestire errori a livello di messaggio;
 - ricostruire il messaggio al destinatario.
 
-Al di sopra dello strato di trasporto, i processi possono vedere uno scambio di messaggi piu' astratto e indipendente dalla struttura fisica della rete.
+Al di sopra dello strato di trasporto, i processi possono vedere uno scambio di messaggi più astratto e indipendente dalla struttura fisica della rete.
 
 ---
 
@@ -238,7 +240,7 @@ Macchine diverse possono rappresentare in modo diverso:
 
 Lo strato di presentazione effettua conversioni per rendere comprensibili i dati al destinatario.
 
-Gestisce inoltre modalita' di comunicazione come:
+Gestisce inoltre modalità di comunicazione come:
 
 - **semi-duplex**, una direzione alla volta;
 - **full-duplex**, entrambe le direzioni contemporaneamente.
@@ -270,21 +272,9 @@ La pila ISO/OSI costruisce livelli di astrazione crescenti.
 
 Gli strati bassi, dal fisico al trasporto, creano un ambiente di rete omogeneo e indipendente dalle strutture fisiche.
 
-Gli strati superiori, dalla sessione all'applicazione, costruiscono un ambiente piu' astratto per la cooperazione tra applicazioni.
+Gli strati superiori, dalla sessione all'applicazione, costruiscono un ambiente più astratto per la cooperazione tra applicazioni.
 
-```text
-+----------------------+
-| 7. Applicazione      |
-| 6. Presentazione     |
-| 5. Sessione          |
-| 4. Trasporto         |
-| 3. Rete              |
-| 2. Collegamento dati |
-| 1. Fisico            |
-+----------------------+
-```
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260602033208.png)
 
 ---
 
@@ -307,7 +297,7 @@ Per esempio:
 
 Al destinatario avviene il processo inverso: ogni strato rimuove e interpreta le informazioni corrispondenti.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260602033821.png)
 
 > 📌 L'incapsulamento permette a ogni strato di aggiungere il proprio controllo senza modificare il contenuto logico gestito dagli strati superiori.
 
@@ -315,18 +305,18 @@ Al destinatario avviene il processo inverso: ogni strato rimuove e interpreta le
 
 ### **15. Modelli reali**
 
-Il modello ISO/OSI e' teorico, chiaro e gerarchico.
+Il modello ISO/OSI è teorico, chiaro e gerarchico.
 
-I modelli reali usati nelle reti moderne sono piu' semplici ed efficienti.
+I modelli reali usati nelle reti moderne sono più semplici ed efficienti.
 
 Devono essere:
 
 - rapidi nell'incapsulamento;
 - rapidi nell'invio;
-- piu' semplici da implementare;
-- piu' adatti alle reti reali.
+- più semplici da implementare;
+- più adatti alle reti reali.
 
-Il prezzo e' una minore separazione astratta tra gli strati rispetto al modello ISO/OSI.
+Il prezzo è una minore separazione astratta tra gli strati rispetto al modello ISO/OSI.
 
 I modelli reali principali sono basati su:
 
@@ -349,7 +339,7 @@ Si occupa di:
 
 IP fornisce un servizio di base per portare pacchetti verso una destinazione.
 
-Non garantisce, da solo, affidabilita' completa.
+Non garantisce, da solo, affidabilità completa.
 
 ---
 
@@ -366,7 +356,7 @@ I protocolli principali sono:
 
 **UDP**, User Datagram Protocol, gestisce comunicazioni senza connessione.
 
-E' per definizione non affidabile.
+È per definizione non affidabile.
 
 Questo significa che non garantisce:
 
@@ -375,13 +365,13 @@ Questo significa che non garantisce:
 - assenza di duplicazioni;
 - correzione automatica degli errori.
 
-Le applicazioni che usano UDP devono sapere che la comunicazione non e' garantita e, se necessario, devono gestire autonomamente gli errori.
+Le applicazioni che usano UDP devono sapere che la comunicazione non è garantita e, se necessario, devono gestire autonomamente gli errori.
 
 #### **17.2. TCP**
 
-**TCP**, Transmission Control Protocol, e' orientato alla connessione.
+**TCP**, Transmission Control Protocol, è orientato alla connessione.
 
-E' affidabile perche' tenta di recuperare gli errori della comunicazione, quando possibile.
+È affidabile perchè tenta di recuperare gli errori della comunicazione, quando possibile.
 
 Gestisce:
 
@@ -392,7 +382,7 @@ Gestisce:
 - ritrasmissione;
 - chiusura della connessione.
 
-> ✅ TCP privilegia affidabilita' e ordine; UDP privilegia semplicita' e rapidita'.
+> ✅ TCP privilegia affidabilità e ordine; UDP privilegia semplicità e rapidità.
 
 ---
 
@@ -416,7 +406,7 @@ Nel modello reale:
 | Collegamento dati | Ethernet, Wi-Fi, tecnologie locali |
 | Fisico | Mezzi e dispositivi fisici |
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260602033917.png)
 
 ---
 
@@ -445,8 +435,8 @@ Le versioni sicure, come SSH, SFTP e HTTPS, aggiungono meccanismi di protezione 
 
 | Aspetto | Descrizione |
 |---|---|
-| **Problemi** | Asincronia, errori, guasti, eterogeneita' |
-| **Obiettivi** | Astrazione, omogeneita', efficienza, gestione errori |
+| **Problemi** | Asincronia, errori, guasti, eterogeneità |
+| **Obiettivi** | Astrazione, omogeneità, efficienza, gestione errori |
 | **Protocolli** | Driver stratificati della comunicazione di rete |
 | **ISO/OSI** | Modello teorico a sette strati |
 | **Strati bassi** | Rendono omogenea la rete fisica |
@@ -463,6 +453,6 @@ Le versioni sicure, come SSH, SFTP e HTTPS, aggiungono meccanismi di protezione 
 
 I protocolli di comunicazione permettono di costruire un ambiente di rete astratto, omogeneo e utilizzabile da applicazioni distribuite.
 
-Il modello ISO/OSI chiarisce teoricamente la separazione degli strati e delle responsabilita'.
+Il modello ISO/OSI chiarisce teoricamente la separazione degli strati e delle responsabilità.
 
-I modelli reali, basati su IP, TCP, UDP e protocolli applicativi, sacrificano parte della purezza del modello teorico per ottenere maggiore efficienza e semplicita' operativa.
+I modelli reali, basati su IP, TCP, UDP e protocolli applicativi, sacrificano parte della purezza del modello teorico per ottenere maggiore efficienza e semplicità operativa.

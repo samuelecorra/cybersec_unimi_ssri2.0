@@ -8,34 +8,34 @@ Questa seconda parte approfondisce ulteriori aspetti del coordinamento tra proce
 
 Gli argomenti principali sono:
 
-- atomicita' delle transazioni distribuite;
+- atomicità delle transazioni distribuite;
 - protocollo di commit a due fasi;
 - gestione della concorrenza;
 - protocolli bloccanti per i lock;
 - elezione del coordinatore.
 
-> 📌 Dopo l'ordinamento degli eventi e la mutua esclusione, il coordinamento distribuito deve garantire atomicita', concorrenza corretta e continuita' dei coordinatori.
+> 📌 Dopo l'ordinamento degli eventi e la mutua esclusione, il coordinamento distribuito deve garantire atomicità, concorrenza corretta e continuità dei coordinatori.
 
 ---
 
-### **2. Atomicita' nelle transazioni distribuite**
+### **2. Atomicità nelle transazioni distribuite**
 
-L'**atomicita'** richiede che una sequenza di azioni venga vista come indivisibile.
+L'**atomicità** richiede che una sequenza di azioni venga vista come indivisibile.
 
 Nel caso delle transazioni, questo significa che una transazione deve:
 
 - completarsi interamente;
 - oppure non produrre alcun effetto permanente.
 
-In un ambiente distribuito, la transazione puo' coinvolgere piu' macchine.
+In un ambiente distribuito, la transazione può coinvolgere più macchine.
 
-Bisogna quindi estendere i concetti gia' visti per una singola macchina al caso in cui la transazione sia spezzata in piu' parti distribuite.
+Bisogna quindi estendere i concetti già visti per una singola macchina al caso in cui la transazione sia spezzata in più parti distribuite.
 
 ---
 
 ### **3. Coordinatori locali**
 
-In ogni macchina e' presente un **coordinatore locale** delle transazioni.
+In ogni macchina è presente un **coordinatore locale** delle transazioni.
 
 Il coordinatore locale deve:
 
@@ -45,7 +45,7 @@ Il coordinatore locale deve:
 - raccogliere i risultati;
 - decidere come gestire il risultato complessivo.
 
-Se tutte le sotto-transazioni vengono completate correttamente, la transazione globale puo' essere confermata.
+Se tutte le sotto-transazioni vengono completate correttamente, la transazione globale può essere confermata.
 
 Se anche una sola parte fallisce, la transazione globale deve essere annullata.
 
@@ -62,9 +62,9 @@ Il protocollo coinvolge:
 - il coordinatore della macchina da cui parte la transazione;
 - i coordinatori locali dei siti coinvolti.
 
-Supponiamo che la transazione \(T\) inizi sulla macchina \(S_i\), con coordinatore \(C_i\).
+Supponiamo che la transazione $T$ inizi sulla macchina $S_i$, con coordinatore $C_i$.
 
-Tutti i siti attivati dalla transazione devono cooperare per decidere se \(T\) puo' essere chiusa con commit o deve essere abortita.
+Tutti i siti attivati dalla transazione devono cooperare per decidere se $T$ può essere chiusa con commit o deve essere abortita.
 
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
@@ -72,7 +72,7 @@ Tutti i siti attivati dalla transazione devono cooperare per decidere se \(T\) p
 
 ### **5. Prima fase: prepare**
 
-Quando tutte le sotto-transazioni hanno terminato localmente la parte assegnata, il coordinatore \(C_i\) avvia la prima fase.
+Quando tutte le sotto-transazioni hanno terminato localmente la parte assegnata, il coordinatore $C_i$ avvia la prima fase.
 
 Il coordinatore:
 
@@ -90,11 +90,11 @@ prepare T
 
 che chiede di preparare il completamento della transazione.
 
-Quando una macchina \(S_j\) riceve il messaggio, il suo coordinatore locale \(C_j\) decide se il commit locale e' possibile.
+Quando una macchina $S_j$ riceve il messaggio, il suo coordinatore locale $C_j$ decide se il commit locale è possibile.
 
 #### **5.1. Commit non possibile**
 
-Se il commit locale non e' possibile, \(C_j\):
+Se il commit locale non è possibile, $C_j$:
 
 - registra nel proprio log:
 
@@ -110,7 +110,7 @@ abort T
 
 #### **5.2. Commit possibile**
 
-Se il commit locale e' possibile, \(C_j\):
+Se il commit locale è possibile, $C_j$:
 
 - registra nel proprio log:
 
@@ -124,22 +124,22 @@ ready T
 ready T
 ```
 
-> 📌 Nella prima fase ogni sito dichiara se e' pronto a completare la propria parte della transazione.
+> 📌 Nella prima fase ogni sito dichiara se è pronto a completare la propria parte della transazione.
 
 ---
 
 ### **6. Seconda fase: decisione**
 
-Nella seconda fase, il coordinatore \(C_i\) raccoglie le risposte.
+Nella seconda fase, il coordinatore $C_i$ raccoglie le risposte.
 
-Puo' decidere:
+Può decidere:
 
 - commit;
 - abort.
 
 #### **6.1. Decisione di commit**
 
-Se \(C_i\) riceve `ready T` da tutte le macchine coinvolte, allora decide il commit globale.
+Se $C_i$ riceve `ready T` da tutte le macchine coinvolte, allora decide il commit globale.
 
 Registra nel proprio log:
 
@@ -192,13 +192,13 @@ L'uso dei log consente di ricostruire lo stato della transazione dopo un guasto.
 
 Il timeout consente al coordinatore di prendere una decisione anche quando alcune risposte non arrivano in tempo.
 
-> ⚠️ Il 2PC migliora la consistenza, ma puo' introdurre attese se un partecipante o il coordinatore non risponde.
+> ⚠️ Il 2PC migliora la consistenza, ma può introdurre attese se un partecipante o il coordinatore non risponde.
 
 ---
 
 ### **8. Gestione della concorrenza**
 
-In un ambiente distribuito, piu' processi o transazioni possono richiedere accesso alle stesse risorse.
+In un ambiente distribuito, più processi o transazioni possono richiedere accesso alle stesse risorse.
 
 Per gestire la concorrenza servono:
 
@@ -223,12 +223,12 @@ I protocolli bloccanti gestiscono l'accesso alle risorse tramite lock.
 
 Garantiscono che una risorsa sia usata in modo corretto, un processo o una transazione alla volta quando necessario.
 
-Il blocco puo' essere:
+Il blocco può essere:
 
-- **esclusivo**, quando solo un processo puo' usare la risorsa;
-- **condiviso**, quando piu' processi possono usarla contemporaneamente senza compromettere la consistenza.
+- **esclusivo**, quando solo un processo può usare la risorsa;
+- **condiviso**, quando più processi possono usarla contemporaneamente senza compromettere la consistenza.
 
-La replicazione locale dei dati puo' essere usata per migliorare la velocita' di accesso.
+La replicazione locale dei dati può essere usata per migliorare la velocità di accesso.
 
 ---
 
@@ -240,7 +240,7 @@ Caratteristiche:
 
 - i dati non sono replicati;
 - esiste un unico responsabile globale dei lock;
-- la richiesta e' semplice;
+- la richiesta è semplice;
 - un processo invia richiesta e attende risposta;
 - al termine rilascia la risorsa.
 
@@ -256,7 +256,7 @@ Svantaggi:
 - gestione degli stalli complicata;
 - dipendenza da un singolo coordinatore.
 
-> ⚠️ Il coordinatore centralizzato e' semplice, ma vulnerabile e poco scalabile.
+> ⚠️ Il coordinatore centralizzato è semplice, ma vulnerabile e poco scalabile.
 
 ---
 
@@ -275,20 +275,20 @@ Vantaggi:
 
 - prestazioni migliori rispetto al coordinatore unico;
 - carico distribuito;
-- responsabilita' vicina alla risorsa.
+- responsabilità vicina alla risorsa.
 
 Svantaggi:
 
-- gestione degli stalli piu' complessa;
-- per rilevare uno stallo puo' essere necessario interrogare piu' macchine.
+- gestione degli stalli più complessa;
+- per rilevare uno stallo può essere necessario interrogare più macchine.
 
 ---
 
 ### **12. Coordinatore a maggioranza**
 
-Nel protocollo a maggioranza, i dati sono replicati su piu' macchine.
+Nel protocollo a maggioranza, i dati sono replicati su più macchine.
 
-Se esistono \(N\) copie della risorsa, esistono \(N\) gestori locali del lock.
+Se esistono $N$ copie della risorsa, esistono $N$ gestori locali del lock.
 
 Per ottenere il lock globale, il processo deve ottenere il consenso da una maggioranza:
 
@@ -298,15 +298,15 @@ $$
 
 lock locali.
 
-Il processo richiedente puo' iniziare interrogando una maggioranza di coordinatori.
+Il processo richiedente può iniziare interrogando una maggioranza di coordinatori.
 
-Se non ottiene abbastanza autorizzazioni, puo' interrogare altri coordinatori finche' non raggiunge il numero necessario.
+Se non ottiene abbastanza autorizzazioni, può interrogare altri coordinatori finchè non raggiunge il numero necessario.
 
 Vantaggi:
 
-- non e' necessario contattare tutti i coordinatori;
+- non è necessario contattare tutti i coordinatori;
 - maggiore tolleranza ai guasti;
-- la risorsa puo' restare disponibile anche se alcune copie non rispondono.
+- la risorsa può restare disponibile anche se alcune copie non rispondono.
 
 Svantaggi:
 
@@ -316,30 +316,30 @@ Svantaggi:
 
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 Nel lock a maggioranza la risorsa e' concessa quando si ottiene il consenso della maggioranza delle copie.
+> 📌 Nel lock a maggioranza la risorsa è concessa quando si ottiene il consenso della maggioranza delle copie.
 
 ---
 
 ### **13. Protocollo polarizzato**
 
-Il protocollo polarizzato e' una variante del coordinatore a maggioranza.
+Il protocollo polarizzato è una variante del coordinatore a maggioranza.
 
 Anche qui:
 
 - i dati sono replicati;
 - ogni macchina ha un responsabile locale dei lock.
 
-La differenza e' che le richieste vengono trattate diversamente in base al tipo di accesso.
+La differenza è che le richieste vengono trattate diversamente in base al tipo di accesso.
 
 #### **13.1. Accesso condiviso**
 
-Se il lock richiesto e' condiviso, basta una richiesta locale.
+Se il lock richiesto è condiviso, basta una richiesta locale.
 
 Questo riduce il sovraccarico per operazioni di lettura o comunque compatibili.
 
 #### **13.2. Accesso esclusivo**
 
-Se il lock richiesto e' esclusivo, serve una richiesta globale.
+Se il lock richiesto è esclusivo, serve una richiesta globale.
 
 Bisogna ottenere la certezza che nessun altro processo acceda alla risorsa in conflitto.
 
@@ -351,13 +351,13 @@ Vantaggi:
 Svantaggi:
 
 - overhead simile alla maggioranza per scritture;
-- difficolta' di gestione degli stalli.
+- difficoltà di gestione degli stalli.
 
 > 💡 Il protocollo polarizzato sfrutta l'asimmetria tra lettura condivisa e scrittura esclusiva.
 
 ---
 
-### **14. Necessita' di eleggere un coordinatore**
+### **14. Necessità di eleggere un coordinatore**
 
 Molte tecniche distribuite richiedono processi di coordinamento.
 
@@ -369,32 +369,32 @@ I coordinatori possono servire per:
 - gestione dell'ingresso/uscita;
 - coordinamento delle transazioni.
 
-Se un coordinatore muore, diventa irraggiungibile o non e' piu' usabile, bisogna eleggere un nuovo coordinatore.
+Se un coordinatore muore, diventa irraggiungibile o non è più usabile, bisogna eleggere un nuovo coordinatore.
 
 ---
 
 ### **15. Algoritmo del bullo**
 
-Nell'**algoritmo del bullo**, ogni processo ha una priorita'.
+Nell'**algoritmo del bullo**, ogni processo ha una priorità.
 
-Il processo con priorita' piu' alta tra quelli disponibili deve diventare coordinatore.
+Il processo con priorità più alta tra quelli disponibili deve diventare coordinatore.
 
-Quando un processo \(P\) si accorge che il coordinatore non funziona:
+Quando un processo $P$ si accorge che il coordinatore non funziona:
 
-1. invia un messaggio di elezione a tutti i processi con priorita' piu' alta;
-2. attende una risposta entro un timeout \(T\).
+1. invia un messaggio di elezione a tutti i processi con priorità più alta;
+2. attende una risposta entro un timeout $T$.
 
-Se non riceve risposta, \(P\) elegge se stesso coordinatore e informa tutti.
+Se non riceve risposta, $P$ elegge se stesso coordinatore e informa tutti.
 
-Se riceve risposta, significa che un processo con priorita' maggiore e' attivo.
+Se riceve risposta, significa che un processo con priorità maggiore è attivo.
 
-Allora \(P\) attende l'identificatore del nuovo coordinatore.
+Allora $P$ attende l'identificatore del nuovo coordinatore.
 
 Se dopo un timeout non riceve l'identificatore del nuovo coordinatore, fa ripartire l'algoritmo.
 
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> ✅ Nell'algoritmo del bullo vince il processo attivo con priorita' piu' alta.
+> ✅ Nell'algoritmo del bullo vince il processo attivo con priorità più alta.
 
 ---
 
@@ -406,20 +406,20 @@ La comunicazione procede in modo unidirezionale lungo l'anello.
 
 L'elezione costruisce una lista dei processi attivi.
 
-Quando un processo \(P\) rileva che il coordinatore non funziona:
+Quando un processo $P$ rileva che il coordinatore non funziona:
 
 1. crea una lista attiva vuota;
 2. invia al processo successivo un messaggio di elezione con la lista.
 
 Quando un processo riceve un messaggio di elezione:
 
-- se e' il primo messaggio di elezione che riceve, crea o aggiorna la lista attiva includendo se stesso e inoltra il messaggio;
+- se è il primo messaggio di elezione che riceve, crea o aggiorna la lista attiva includendo se stesso e inoltra il messaggio;
 - se il messaggio non contiene il proprio identificatore, aggiunge il predecessore o il proprio identificatore alla lista e inoltra;
-- se il messaggio contiene il proprio identificatore, la lista e' completa.
+- se il messaggio contiene il proprio identificatore, la lista è completa.
 
-Quando la lista attiva e' completa, ogni processo puo' determinare il nuovo coordinatore scegliendo il processo con priorita' piu' alta.
+Quando la lista attiva è completa, ogni processo può determinare il nuovo coordinatore scegliendo il processo con priorità più alta.
 
-Se il processo stesso e' quello a priorita' piu' alta, diventa coordinatore.
+Se il processo stesso è quello a priorità più alta, diventa coordinatore.
 
 Altrimenti sa quale processo ha assunto il ruolo.
 
@@ -431,15 +431,15 @@ Altrimenti sa quale processo ha assunto il ruolo.
 
 | Tema | Tecnica | Scopo |
 |---|---|---|
-| **Atomicita'** | Commit a due fasi | Confermare o annullare globalmente una transazione |
+| **Atomicità** | Commit a due fasi | Confermare o annullare globalmente una transazione |
 | **2PC - fase 1** | Prepare | Verificare se i siti sono pronti |
 | **2PC - fase 2** | Commit/abort | Diffondere la decisione finale |
 | **Concorrenza** | Protocolli di lock | Garantire accesso corretto alle risorse |
 | **Lock centralizzato** | Coordinatore unico | Semplice ma fragile |
-| **Lock multipli** | Coordinatori locali | Migliori prestazioni, stalli piu' complessi |
+| **Lock multipli** | Coordinatori locali | Migliori prestazioni, stalli più complessi |
 | **Lock a maggioranza** | Consenso della maggioranza delle copie | Tolleranza ai guasti con dati replicati |
 | **Protocollo polarizzato** | Letture locali, scritture globali | Ridurre overhead in lettura |
-| **Algoritmo del bullo** | Priorita' piu' alta | Eleggere coordinatore |
+| **Algoritmo del bullo** | Priorità più alta | Eleggere coordinatore |
 | **Algoritmo dell'anello** | Lista attiva su anello logico | Eleggere coordinatore in modo cooperativo |
 
 ---
@@ -448,8 +448,8 @@ Altrimenti sa quale processo ha assunto il ruolo.
 
 Il coordinamento distribuito richiede tecniche diverse a seconda del problema.
 
-L'atomicita' delle transazioni viene gestita con il commit a due fasi, che coordina la decisione tra tutti i siti coinvolti.
+L'atomicità delle transazioni viene gestita con il commit a due fasi, che coordina la decisione tra tutti i siti coinvolti.
 
 La concorrenza viene gestita tramite protocolli di lock centralizzati, distribuiti, a maggioranza o polarizzati.
 
-Quando un coordinatore non e' piu' disponibile, algoritmi come il bullo e l'anello permettono di eleggerne uno nuovo e mantenere il sistema operativo.
+Quando un coordinatore non è più disponibile, algoritmi come il bullo e l'anello permettono di eleggerne uno nuovo e mantenere il sistema operativo.

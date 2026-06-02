@@ -220,7 +220,7 @@ Il processo specifica un nome di file. Il sistema operativo:
 5. crea o aggiorna la tabella globale dei file aperti;
 6. crea un elemento nella tabella dei file aperti del processo.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601104018.png)
 
 Il blocco di controllo del file contiene le informazioni essenziali per sapere dove reperire i blocchi fisici dei dati nella memoria di massa.
 
@@ -229,6 +229,8 @@ Il blocco di controllo del file contiene le informazioni essenziali per sapere d
 ### **8. Lettura e scrittura**
 
 Quando il processo esegue una lettura o una scrittura, usa le strutture create durante l'apertura.
+
+![](imgs/Pasted%20image%2020260601104218.png)
 
 Nella tabella dei file aperti del processo si trova il puntatore alla posizione corrente nel file e il riferimento alla tabella globale dei file aperti.
 
@@ -253,6 +255,8 @@ $$
 ### **9. File system virtuale**
 
 Il file system può essere distribuito su più dischi fisici o persino su macchine remote.
+
+![](imgs/Pasted%20image%2020260601104446.png)
 
 Il processo, però, dovrebbe poter usare un'unica interfaccia senza sapere dove si trovano fisicamente i file.
 

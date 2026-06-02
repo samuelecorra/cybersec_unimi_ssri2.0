@@ -6,7 +6,7 @@
 
 Questa lezione introduce brevemente un'ulteriore tecnica per realizzare la computazione in un ambiente distribuito: gli **agenti mobili**.
 
-L'obiettivo non e' approfondire in modo completo il modello ad agenti, ma citarne l'esistenza e chiarire il ruolo che puo' avere nella distribuzione della computazione.
+L'obiettivo non è approfondire in modo completo il modello ad agenti, ma citarne l'esistenza e chiarire il ruolo che può avere nella distribuzione della computazione.
 
 La trattazione dettagliata degli agenti e degli agenti mobili appartiene ai corsi specifici dell'area dell'ingegneria del software.
 
@@ -16,16 +16,16 @@ La trattazione dettagliata degli agenti e degli agenti mobili appartiene ai cors
 
 ### **2. Obiettivo del modello ad agenti**
 
-L'obiettivo fondamentale del modello ad agenti e' **innalzare il livello di astrazione della computazione**.
+L'obiettivo fondamentale del modello ad agenti è **innalzare il livello di astrazione della computazione**.
 
-Invece di vedere solo programmi messi in esecuzione come processi o thread, il modello ad agenti descrive la computazione tramite entita' software piu' autonome.
+Invece di vedere solo programmi messi in esecuzione come processi o thread, il modello ad agenti descrive la computazione tramite entità software più autonome.
 
-Queste entita':
+Queste entità:
 
 - racchiudono risorse;
 - espongono operazioni;
 - interagiscono con l'ambiente;
-- possono cooperare con altre entita';
+- possono cooperare con altre entità;
 - possono decidere come evolvere.
 
 Il modello prende ispirazione dalla tecnologia a oggetti, ma aggiunge l'idea di comportamento attivo.
@@ -34,7 +34,7 @@ Il modello prende ispirazione dalla tecnologia a oggetti, ma aggiunge l'idea di 
 
 ### **3. Richiamo al modello a oggetti**
 
-Nel modello a oggetti, un oggetto e' una collezione di:
+Nel modello a oggetti, un oggetto è una collezione di:
 
 - dati;
 - metodi per gestire, usare e accedere a quei dati.
@@ -43,15 +43,15 @@ L'oggetto incapsula le proprie caratteristiche interne e mostra all'esterno solo
 
 I programmi vengono ancora realizzati specificando l'interazione tra oggetti, processi o thread.
 
-> 💡 Il modello a oggetti incapsula dati e metodi; il modello ad agenti aggiunge autonomia e capacita' di azione.
+> 💡 Il modello a oggetti incapsula dati e metodi; il modello ad agenti aggiunge autonomia e capacità di azione.
 
 ---
 
 ### **4. Agente software**
 
-Un **agente** e' un'entita' software autonoma.
+Un **agente** è un'entità software autonoma.
 
-Rispetto a un normale programma o a una semplice collezione di oggetti, un agente e':
+Rispetto a un normale programma o a una semplice collezione di oggetti, un agente è:
 
 - attivo;
 - proattivo;
@@ -60,17 +60,17 @@ Rispetto a un normale programma o a una semplice collezione di oggetti, un agent
 - capace di interagire con il mondo esterno;
 - capace di cooperare con altri agenti o servizi.
 
-Un agente non si limita quindi a essere chiamato passivamente, ma puo' svolgere azioni in funzione dei propri obiettivi e dell'ambiente in cui opera.
+Un agente non si limita quindi a essere chiamato passivamente, ma può svolgere azioni in funzione dei propri obiettivi e dell'ambiente in cui opera.
 
-> ✅ Un agente e' un'entita' software che possiede una certa autonomia operativa.
+> ✅ Un agente è un'entità software che possiede una certa autonomia operativa.
 
 ---
 
 ### **5. Agente mobile**
 
-Un **agente mobile** e' un agente dotato della capacita' di muoversi all'interno di un sistema distribuito.
+Un **agente mobile** è un agente dotato della capacità di muoversi all'interno di un sistema distribuito.
 
-Puo' spostarsi tra macchine diverse per:
+Può spostarsi tra macchine diverse per:
 
 - cercare risorse;
 - individuare servizi;
@@ -78,11 +78,11 @@ Puo' spostarsi tra macchine diverse per:
 - eseguire localmente parte della computazione;
 - interagire con le singole macchine della rete.
 
-L'agente mobile non attende soltanto che le risorse gli vengano fornite: puo' decidere dove andare a reperirle.
+L'agente mobile non attende soltanto che le risorse gli vengano fornite: può decidere dove andare a reperirle.
 
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 L'agente mobile e' un agente capace di decidere come e dove muoversi nella rete per svolgere la propria computazione.
+> 📌 L'agente mobile è un agente capace di decidere come e dove muoversi nella rete per svolgere la propria computazione.
 
 ---
 
@@ -96,10 +96,10 @@ Un agente mobile combina:
 
 - incapsulamento;
 - autonomia;
-- capacita' di azione;
-- mobilita' nel sistema distribuito.
+- capacità di azione;
+- mobilità nel sistema distribuito.
 
-Questa combinazione consente di descrivere la computazione a un livello piu' alto rispetto alla semplice attivazione di processi remoti.
+Questa combinazione consente di descrivere la computazione a un livello più alto rispetto alla semplice attivazione di processi remoti.
 
 ---
 
@@ -108,7 +108,7 @@ Questa combinazione consente di descrivere la computazione a un livello piu' alt
 | Concetto | Descrizione |
 |---|---|
 | **Oggetto** | Collezione di dati e metodi con interfaccia astratta |
-| **Agente** | Entita' software autonoma, attiva e proattiva |
+| **Agente** | Entità software autonoma, attiva e proattiva |
 | **Agente mobile** | Agente capace di spostarsi tra nodi di un sistema distribuito |
 | **Obiettivo** | Innalzare il livello di astrazione della computazione distribuita |
 | **Uso nel corso** | Citazione introduttiva a completamento delle tecniche di distribuzione |
@@ -119,8 +119,8 @@ Questa combinazione consente di descrivere la computazione a un livello piu' alt
 
 Gli agenti mobili rappresentano una tecnica ulteriore per gestire la computazione in un ambiente distribuito.
 
-Un agente e' un'entita' software autonoma capace di operare e cooperare.
+Un agente è un'entità software autonoma capace di operare e cooperare.
 
-Un agente mobile aggiunge la capacita' di spostarsi nella rete, decidendo dove reperire risorse e servizi necessari alla propria computazione.
+Un agente mobile aggiunge la capacità di spostarsi nella rete, decidendo dove reperire risorse e servizi necessari alla propria computazione.
 
-Nel contesto di questo corso e' sufficiente conoscerne il ruolo generale, senza approfondire i dettagli progettuali e implementativi propri dell'ingegneria del software.
+Nel contesto di questo corso è sufficiente conoscerne il ruolo generale, senza approfondire i dettagli progettuali e implementativi propri dell'ingegneria del software.

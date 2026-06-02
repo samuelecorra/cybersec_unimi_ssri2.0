@@ -27,7 +27,9 @@ Gli aspetti principali sono:
 
 La chiamata di procedura remota ha come obiettivo l'esecuzione di una procedura su una macchina remota rispetto a quella su cui si trova il processo chiamante.
 
-La procedura remota viene usata perche' sulla macchina remota si trovano:
+![](imgs/Pasted%20image%2020260602034947.png)
+
+La procedura remota viene usata perché sulla macchina remota si trovano:
 
 - risorse informative necessarie;
 - risorse fisiche necessarie;
@@ -39,6 +41,9 @@ Il resto del processo rimane sulla macchina originaria.
 Solo l'elaborazione relativa alla procedura viene attivata in remoto.
 
 > 💡 Con la RPC non si sposta tutto il processo: si sposta l'attivazione di una procedura.
+>
+> Un esempio banalissimo del quale usufruiamo giornalmente è la chiamata a un servizio web: il nostro browser attiva una procedura remota su un server web, che elabora la richiesta e restituisce una risposta, in genere servendoci una pagina html. Non si può fare altrimenti, perché la homepage del sito che vogliamo vedere
+> la possiede solo il server, non il nostro computer. La RPC è la tecnica che permette di attivare quella procedura remota e ricevere la risposta.
 
 ---
 
@@ -50,11 +55,11 @@ Dal punto di vista del processo chiamante, la RPC deve apparire simile a:
 - una chiamata a una funzione di libreria;
 - una chiamata a una funzione del sistema operativo.
 
-Il processo chiamante e' l'entita' attiva: sta eseguendo la computazione e decide di attivare una procedura.
+Il processo chiamante è l'entità attiva: sta eseguendo la computazione e decide di attivare una procedura.
 
-La procedura chiamata e' un'entita' passiva: viene eseguita solo quando qualcuno la invoca.
+La procedura chiamata è un'entità passiva: viene eseguita solo quando qualcuno la invoca.
 
-La differenza fondamentale e' che l'attivazione non avviene nello stesso spazio locale, ma tramite comunicazione tra macchine.
+La differenza fondamentale è che l'attivazione non avviene nello stesso spazio locale, ma tramite comunicazione tra macchine.
 
 ---
 
@@ -83,7 +88,7 @@ La macchina remota esegue la procedura e invia un messaggio di risposta con:
 
 ### **5. Demone remoto**
 
-Sulla macchina remota e' presente un processo di servizio, spesso chiamato **demone**.
+Sulla macchina remota è presente un processo di servizio, spesso chiamato **demone**.
 
 Il demone:
 
@@ -95,41 +100,41 @@ Il demone:
 
 Il processo locale, quando vuole eseguire una procedura remota, chiede al proprio sistema operativo di connettersi al demone sulla macchina remota.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-> ✅ Il demone e' il punto di ingresso della macchina remota per le richieste RPC.
+> ✅ Il demone è il punto di ingresso della macchina remota per le richieste RPC.
 
 ---
 
 ### **6. Stub e corpo della procedura**
 
-Ogni procedura remota e' associata a una interfaccia, spesso chiamata **stub**.
+Ogni procedura remota è associata a una interfaccia, spesso chiamata **stub**.
 
 Lo stub definisce:
 
 - nome della procedura;
 - parametri richiesti;
 - tipo del valore eventualmente restituito;
-- modalita' di conversione dei parametri;
+- modalità di conversione dei parametri;
 - struttura dei messaggi.
 
 Il corpo della procedura contiene invece il codice effettivo da eseguire.
 
 Quando il demone riceve una richiesta, usa lo stub per interpretarla e attiva il corpo della procedura.
 
-Per ogni procedura remota puo' esistere una interfaccia specifica, cosi' da attivare individualmente le diverse procedure disponibili.
+Per ogni procedura remota può esistere una interfaccia specifica, così da attivare individualmente le diverse procedure disponibili.
 
-> 💡 Lo stub e' il terminale remotizzato della procedura: permette di invocare codice remoto con una forma simile alla chiamata locale.
+> 💡 Lo stub è il terminale remotizzato della procedura: permette di invocare codice remoto con una forma simile alla chiamata locale.
 
 ---
 
 ### **7. Esecuzione di una RPC**
 
-L'esecuzione di una chiamata di procedura remota puo' essere descritta in piu' passi.
+L'esecuzione di una chiamata di procedura remota può essere descritta in più passi.
+
+![](imgs/Pasted%20image%2020260602035809.png)
 
 #### **7.1. Richiesta del processo applicativo**
 
-Il processo applicativo sulla macchina client richiede al kernel l'esecuzione remota di una procedura \(X\).
+Il processo applicativo sulla macchina client richiede al kernel l'esecuzione remota di una procedura $X$.
 
 Dal punto di vista del programma, questa richiesta appare come una chiamata normale.
 
@@ -137,7 +142,7 @@ Dal punto di vista del programma, questa richiesta appare come una chiamata norm
 
 Il kernel client deve capire dove si trova la procedura desiderata e come contattarla.
 
-Per questo puo' interrogare un componente di accoppiamento tra client e procedura remota.
+Per questo può interrogare un componente di accoppiamento tra client e procedura remota.
 
 Questo componente associa:
 
@@ -167,13 +172,11 @@ Se la procedura produce un risultato, questo viene inviato tramite un messaggio 
 
 Il kernel consegna infine il risultato al processo chiamante.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ---
 
 ### **8. Vantaggi della RPC**
 
-Il vantaggio principale della RPC e' la trasparenza.
+Il vantaggio principale della RPC è la trasparenza.
 
 L'accesso a funzioni remote viene presentato come accesso a funzioni locali.
 
@@ -192,7 +195,7 @@ Questo semplifica la programmazione distribuita e permette di usare risorse remo
 
 ### **9. Rappresentazione dei dati**
 
-Un problema fondamentale e' la rappresentazione dei dati.
+Un problema fondamentale è la rappresentazione dei dati.
 
 Macchine diverse possono usare convenzioni diverse per rappresentare:
 
@@ -205,9 +208,9 @@ Macchine diverse possono usare convenzioni diverse per rappresentare:
 
 Quando i parametri vengono inviati da una macchina all'altra, devono essere rappresentati in modo comprensibile da entrambe.
 
-Per questo si usa spesso una **rappresentazione esterna dei dati**, cioe' uno standard comune.
+Per questo si usa spesso la cosiddetta XDR, eXternal Data Representation, **rappresentazione esterna dei dati**, cioè uno standard comune.
 
-Il processo e':
+Il processo è:
 
 1. conversione dal formato locale al formato esterno;
 2. invio sulla rete;
@@ -219,7 +222,7 @@ Il processo e':
 
 ### **10. Semantica della chiamata remota**
 
-Un altro problema e' definire la semantica della chiamata.
+Un altro problema è definire la semantica della chiamata.
 
 In una chiamata locale, se la procedura viene invocata, viene eseguita nel processo.
 
@@ -236,22 +239,22 @@ Occorre quindi stabilire cosa significa "eseguire" una RPC.
 
 ---
 
-### **11. Semantica al piu' una volta**
+### **11. Semantica al più una volta**
 
-Con la semantica **al piu' una volta**, la procedura remota viene eseguita:
+Con la semantica **al più una volta**, la procedura remota viene eseguita:
 
 - zero volte;
 - oppure una sola volta.
 
-Non viene mai eseguita piu' di una volta.
+Non viene mai eseguita più di una volta.
 
 Questa semantica richiede uno storico delle richieste.
 
-Lo storico permette al server di capire se una richiesta e' gia' stata servita.
+Lo storico permette al server di capire se una richiesta è già stata servita.
 
 Se arriva una richiesta duplicata, il server evita di rieseguire la procedura.
 
-> 📌 Con la semantica al piu' una volta, il chiamante deve eventualmente accorgersi del mancato completamento e ripetere la richiesta.
+> 📌 Con la semantica al più una volta, il chiamante deve eventualmente accorgersi del mancato completamento e ripetere la richiesta.
 
 ---
 
@@ -259,19 +262,19 @@ Se arriva una richiesta duplicata, il server evita di rieseguire la procedura.
 
 Con la semantica **esattamente una volta**, si vuole garantire che la procedura venga eseguita una e una sola volta.
 
-Questa semantica e' piu' forte.
+Questa semantica è più forte.
 
 Richiede:
 
-- unicita' delle richieste;
+- unicità delle richieste;
 - rilevazione dei duplicati;
 - garanzia di esecuzione;
 - gestione affidabile delle risposte;
 - eventuale recupero in caso di errore.
 
-In pratica, e' piu' complessa da realizzare, soprattutto in presenza di guasti.
+In pratica, è più complessa da realizzare, soprattutto in presenza di guasti.
 
-> ⚠️ "Esattamente una volta" e' l'obiettivo piu' naturale per il programmatore, ma e' difficile da garantire in un ambiente distribuito reale.
+> ⚠️ "Esattamente una volta" è l'obiettivo più naturale per il programmatore, ma è difficile da garantire in un ambiente distribuito reale.
 
 ---
 
@@ -294,11 +297,11 @@ Le operazioni possono essere:
 - chiusura remota;
 - accesso a metadati.
 
-Il file puo' rimanere sul server e le singole operazioni vengono eseguite remotamente.
+Il file può rimanere sul server e le singole operazioni vengono eseguite remotamente.
 
-In alternativa, in alcuni casi il server puo' inviare dati o porzioni del file al client.
+In alternativa, in alcuni casi il server può inviare dati o porzioni del file al client.
 
-> 💡 Un file system distribuito puo' essere visto come un insieme di operazioni locali trasformate in RPC verso il file server.
+> 💡 Un file system distribuito può essere visto come un insieme di operazioni locali trasformate in RPC verso il file server.
 
 ---
 
@@ -306,7 +309,7 @@ In alternativa, in alcuni casi il server puo' inviare dati o porzioni del file a
 
 La RPC nasce in un contesto di programmazione procedurale.
 
-Nei linguaggi orientati agli oggetti, l'estensione naturale e' la **Remote Method Invocation** (**RMI**).
+Nei linguaggi orientati agli oggetti, l'estensione naturale è la **Remote Method Invocation** (**RMI**).
 
 In RMI non si invoca una procedura remota, ma un **metodo** appartenente a un **oggetto remoto**.
 
@@ -322,14 +325,14 @@ L'invocazione del metodo remoto permette di accedere alle risorse dell'oggetto r
 
 ### **15. RMI in ambienti a oggetti**
 
-Un esempio tipico e' Java.
+Un esempio tipico è Java.
 
-Un client puo' invocare un metodo di un oggetto che si trova:
+Un client può invocare un metodo di un oggetto che si trova:
 
 - in un'altra macchina virtuale sulla stessa macchina;
 - su un computer remoto connesso in rete.
 
-Il client vede localmente uno stub, cioe' una interfaccia standard dell'oggetto remoto.
+Il client vede localmente uno stub, cioè una interfaccia standard dell'oggetto remoto.
 
 L'ambiente di esecuzione si occupa di:
 
@@ -339,52 +342,52 @@ L'ambiente di esecuzione si occupa di:
 - ricevere risultati;
 - restituirli al client come se fossero prodotti da un oggetto locale.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260602040730.png)
 
 ---
 
 ### **16. Differenza tra RPC e RMI**
 
-La differenza principale e' il livello di astrazione.
+La differenza principale è il livello di astrazione.
 
 Nella RPC:
 
 - si invoca una procedura;
-- la gestione della connessione e delle operazioni e' piu' vicina al programmatore;
-- il paradigma e' procedurale.
+- la gestione della connessione e delle operazioni è più vicina al programmatore;
+- il paradigma è procedurale.
 
 Nella RMI:
 
 - si invoca un metodo;
-- la posizione dell'oggetto e' resa meno rilevante;
-- l'ambiente di programmazione gestisce in modo piu' trasparente ricerca, attivazione e risultati;
-- il paradigma e' orientato agli oggetti.
+- la posizione dell'oggetto è resa meno rilevante;
+- l'ambiente di programmazione gestisce in modo più trasparente ricerca, attivazione e risultati;
+- il paradigma è orientato agli oggetti.
 
-| Aspetto | RPC | RMI |
-|---|---|---|
-| Paradigma | Procedurale | Orientato agli oggetti |
-| Entita' invocata | Procedura | Metodo di oggetto remoto |
-| Astrazione | Minore | Maggiore |
-| Gestione localizzazione | Piu' esplicita | Piu' trasparente |
-| Esempio | Servizi remoti procedurali | Java RMI |
+| Aspetto                 | RPC                        | RMI                      |
+| ----------------------- | -------------------------- | ------------------------ |
+| Paradigma               | Procedurale                | Orientato agli oggetti   |
+| Entità invocata         | Procedura                  | Metodo di oggetto remoto |
+| Astrazione              | Minore                     | Maggiore                 |
+| Gestione localizzazione | Più esplicita              | Più trasparente          |
+| Esempio                 | Servizi remoti procedurali | Java RMI                 |
 
 ---
 
 ### **17. Sintesi**
 
-| Aspetto | Descrizione |
-|---|---|
-| **Obiettivo** | Eseguire una procedura su una macchina remota |
-| **Processo chiamante** | Entita' attiva che richiede l'esecuzione |
-| **Procedura remota** | Entita' passiva attivata su richiesta |
-| **Demone** | Processo remoto in ascolto delle richieste |
-| **Stub** | Interfaccia remotizzata della procedura |
-| **Accoppiatore** | Aiuta a individuare porta e demone della procedura |
-| **Messaggi** | Trasportano richiesta, parametri e risultati |
-| **Dati** | Richiedono rappresentazione esterna se le macchine sono eterogenee |
-| **Semantica al piu' una volta** | Zero o una esecuzione, mai duplicata |
-| **Semantica esattamente una volta** | Una sola esecuzione garantita |
-| **RMI** | Estensione a oggetti della RPC |
+| Aspetto                             | Descrizione                                                        |
+| ----------------------------------- | ------------------------------------------------------------------ |
+| **Obiettivo**                       | Eseguire una procedura su una macchina remota                      |
+| **Processo chiamante**              | Entità attiva che richiede l'esecuzione                            |
+| **Procedura remota**                | Entità passiva attivata su richiesta                               |
+| **Demone**                          | Processo remoto in ascolto delle richieste                         |
+| **Stub**                            | Interfaccia remotizzata della procedura                            |
+| **Accoppiatore**                    | Aiuta a individuare porta e demone della procedura                 |
+| **Messaggi**                        | Trasportano richiesta, parametri e risultati                       |
+| **Dati**                            | Richiedono rappresentazione esterna se le macchine sono eterogenee |
+| **Semantica al più una volta**      | Zero o una esecuzione, mai duplicata                               |
+| **Semantica esattamente una volta** | Una sola esecuzione garantita                                      |
+| **RMI**                             | Estensione a oggetti della RPC                                     |
 
 ---
 

@@ -54,7 +54,7 @@ $$
 b_j \longleftrightarrow S[jF, (j+1)F - 1]
 $$
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601191423.png)
 
 ---
 
@@ -76,7 +76,7 @@ $$
 \text{posizione iniziale nel byte stream} = 0
 $$
 
-La finestra di interpretazione di ampiezza \(L\) viene quindi posta sui primi \(L\) byte del byte stream:
+La finestra di interpretazione di ampiezza $L$ viene quindi posta sui primi $L$ byte del byte stream:
 
 $$
 \text{finestra}_0 = S[0, L - 1]
@@ -90,7 +90,7 @@ Dal punto di vista fisico, l'apertura richiede di conoscere:
 
 In particolare, il sistema deve sapere qual e' il primo blocco fisico da considerare.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601192131.png)
 
 > ✅ Aprire un file significa preparare le strutture necessarie per iniziare da record logico 0, byte 0 e primo blocco fisico della sequenza.
 
@@ -100,15 +100,15 @@ In particolare, il sistema deve sapere qual e' il primo blocco fisico da conside
 
 L'operazione di **lettura** restituisce al programma il record logico corrente.
 
-Supponiamo che il file sia appena stato aperto. La finestra e' posizionata sul primo gruppo di \(L\) byte, ma il byte stream non e' ancora materializzato in memoria centrale.
+Supponiamo che il file sia appena stato aperto. La finestra è posizionata sul primo gruppo di $L$ byte, ma il byte stream non è ancora materializzato in memoria centrale.
 
 Quando il processo richiede la lettura:
 
-1. il sistema controlla se i byte della finestra sono gia' disponibili in memoria centrale;
+1. il sistema controlla se i byte della finestra sono già disponibili in memoria centrale;
 2. se non lo sono, richiama il livello basso del file system;
 3. il livello basso legge dal disco il blocco fisico necessario;
 4. i byte letti riempiono la porzione corrispondente del byte stream;
-5. gli \(L\) byte nella finestra vengono interpretati come record logico;
+5. gli $L$ byte nella finestra vengono interpretati come record logico;
 6. il record viene restituito al programma.
 
 Per la prima lettura:
@@ -117,14 +117,14 @@ $$
 r_0 = S[0, L - 1]
 $$
 
-Se questi byte si trovano nel primo blocco fisico, il sistema carica \(b_0\) in memoria centrale e rende disponibile la prima porzione del byte stream.
+Se questi byte si trovano nel primo blocco fisico, il sistema carica $b_0$ in memoria centrale e rende disponibile la prima porzione del byte stream.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601192811.png)
 
 Al termine della lettura:
 
 - il puntatore al record logico corrente avanza;
-- la finestra sul byte stream viene spostata di \(L\) byte.
+- la finestra sul byte stream viene spostata di $L$ byte.
 
 $$
 i \leftarrow i + 1
@@ -153,7 +153,7 @@ Per esempio, se il secondo record logico richiede byte che si trovano in parte n
 - completa la finestra;
 - restituisce il record logico.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601193749.png)
 
 > 💡 Una singola lettura logica puo' richiedere zero, uno o piu' accessi fisici, a seconda di quali byte siano gia' presenti in memoria centrale.
 
@@ -163,7 +163,7 @@ Per esempio, se il secondo record logico richiede byte che si trovano in parte n
 
 La **scrittura** segue una logica analoga, ma in direzione opposta.
 
-Il programma fornisce un record logico da scrivere. Il sistema lo interpreta come una sequenza di \(L\) byte e li colloca nella finestra corrente del byte stream.
+Il programma fornisce un record logico da scrivere. Il sistema lo interpreta come una sequenza di $L$ byte e li colloca nella finestra corrente del byte stream.
 
 Subito dopo l'apertura, la prima scrittura riempie:
 
@@ -171,13 +171,15 @@ $$
 S[0, L - 1]
 $$
 
-cioe' la porzione del byte stream corrispondente al record logico \(r_0\).
+cioè la porzione del byte stream corrispondente al record logico $r_0$.
 
-Non e' detto pero' che il sistema scriva immediatamente su disco. Se il blocco fisico ha dimensione \(F\), puo' essere inefficiente scrivere un blocco quando e' stata riempita solo una sua parte.
+![](imgs/Pasted%20image%2020260601194507.png)
 
-Per questo il sistema puo' mantenere temporaneamente i byte in memoria centrale e rimandare la scrittura fisica fino a quando e' disponibile un gruppo completo di \(F\) byte.
+Non è detto però che il sistema scriva immediatamente su disco. Se il blocco fisico ha dimensione $F$, può essere inefficiente scrivere un blocco quando è stata riempita solo una sua parte.
 
-> ⚠️ Scrivere subito ogni record logico sul disco puo' produrre troppi accessi fisici, soprattutto quando piu' record condividono lo stesso blocco fisico.
+Per questo il sistema può mantenere temporaneamente i byte in memoria centrale e rimandare la scrittura fisica fino a quando è disponibile un gruppo completo di $F$ byte.
+
+> ⚠️ Scrivere subito ogni record logico sul disco può produrre troppi accessi fisici, soprattutto quando più record condividono lo stesso blocco fisico.
 
 ---
 
@@ -185,13 +187,13 @@ Per questo il sistema puo' mantenere temporaneamente i byte in memoria centrale 
 
 La scrittura effettiva su disco avviene quando il byte stream contiene abbastanza byte per riempire un blocco fisico.
 
-Quando sono disponibili i primi \(F\) byte:
+Quando sono disponibili i primi $F$ byte:
 
 $$
 S[0, F - 1]
 $$
 
-il sistema puo' scrivere il primo blocco fisico:
+il sistema può scrivere il primo blocco fisico:
 
 $$
 b_0 \leftarrow S[0, F - 1]
@@ -201,12 +203,12 @@ Se una scrittura logica supera il limite del blocco fisico, i byte eccedenti non
 
 Per esempio:
 
-- una parte del record puo' completare \(b_0\);
-- la parte restante puo' iniziare \(b_1\).
+- una parte del record può completare $b_0$;
+- la parte restante può iniziare $b_1$.
 
 La porzione eccedente resta quindi in memoria finche' non ci sono abbastanza byte per scrivere il blocco fisico successivo.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601195137.png)
 
 > 📌 Il sistema ragiona per blocchi fisici quando scrive sul disco, anche se il programma ragiona per record logici.
 
@@ -217,8 +219,8 @@ La porzione eccedente resta quindi in memoria finche' non ci sono abbastanza byt
 Dopo ogni scrittura logica:
 
 - il puntatore al record logico corrente avanza;
-- la finestra sul byte stream si sposta di \(L\) byte;
-- il sistema verifica se e' possibile scrivere uno o piu' blocchi fisici completi.
+- la finestra sul byte stream si sposta di $L$ byte;
+- il sistema verifica se è possibile scrivere uno o più blocchi fisici completi.
 
 Formalmente:
 
@@ -230,15 +232,19 @@ $$
 \text{finestra}_{i+1} = S[(i+1)L, (i+2)L - 1]
 $$
 
-Se dopo alcune scritture il secondo gruppo di \(F\) byte e' completo, il sistema puo' scrivere:
+Se dopo alcune scritture il secondo gruppo di $F$ byte è completo, il sistema può scrivere:
 
 $$
 b_1 \leftarrow S[F, 2F - 1]
 $$
 
-Se invece resta una porzione finale minore di \(F\), questa non puo' costituire un blocco fisico completo e viene mantenuta temporaneamente fino a nuove scritture o fino alla chiusura del file.
+Se invece resta una porzione finale minore di $F$, questa non può costituire un blocco fisico completo e viene mantenuta temporaneamente fino a nuove scritture o fino alla chiusura del file.
 
-> ⚠️ L'ultima porzione incompleta del byte stream deve essere gestita con attenzione, perche' potrebbe dover essere salvata esplicitamente alla chiusura.
+![](imgs/Pasted%20image%2020260601195832.png)
+
+> ⚠️ L'ultima porzione incompleta del byte stream deve essere gestita con attenzione, perché potrebbe dover essere salvata esplicitamente alla chiusura.
+
+![](imgs/Pasted%20image%2020260601200242.png)
 
 ---
 
@@ -260,17 +266,17 @@ $$
 3L
 $$
 
-La nuova finestra e':
+La nuova finestra è:
 
 $$
 \text{finestra}_3 = S[3L, 4L - 1]
 $$
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601200708.png)
 
-Se l'operazione successiva e' una lettura, il sistema dovra' caricare dai blocchi fisici i byte necessari a riempire quella finestra.
+Se l'operazione successiva è una lettura, il sistema dovrà caricare dai blocchi fisici i byte necessari a riempire quella finestra.
 
-Se l'operazione successiva e' una scrittura, il sistema collochera' nella finestra i byte del nuovo record logico e poi li salvera' nei blocchi fisici corrispondenti.
+Se l'operazione successiva è una scrittura, il sistema collocherà nella finestra i byte del nuovo record logico e poi li salverà nei blocchi fisici corrispondenti.
 
 > 💡 Il seek cambia solo la posizione corrente; il trasferimento fisico dei dati avviene con la successiva lettura o scrittura.
 
@@ -280,14 +286,14 @@ Se l'operazione successiva e' una scrittura, il sistema collochera' nella finest
 
 L'operazione di **chiusura** termina l'uso del file da parte del processo.
 
-Se il file e' stato usato solo in lettura, la chiusura libera le strutture dati impiegate per la gestione:
+Se il file è stato usato solo in lettura, la chiusura libera le strutture dati impiegate per la gestione:
 
 - descrittori aperti;
 - buffer;
 - informazioni sulla posizione corrente;
 - riferimenti ai blocchi caricati.
 
-Se il file e' stato usato in scrittura, la chiusura deve anche salvare su disco eventuali byte del byte stream non ancora scritti.
+Se il file è stato usato in scrittura, la chiusura deve anche salvare su disco eventuali byte del byte stream non ancora scritti.
 
 In particolare, se esiste una porzione finale incompleta:
 
@@ -303,13 +309,13 @@ il sistema deve comunque forzarne la scrittura nel blocco fisico corrispondente,
 
 ### **11. Sintesi operativa**
 
-| Operazione | Livello logico | Byte stream | Livello fisico |
-|---|---|---|---|
-| **Apertura** | Posizione sul primo record | Finestra sul byte 0 | Individuazione del primo blocco |
-| **Lettura** | Restituzione del record corrente | Riempimento e interpretazione della finestra | Lettura dei blocchi necessari |
-| **Scrittura** | Scrittura del record corrente | Inserimento dei byte nella finestra | Scrittura dei blocchi completi |
-| **Posizionamento** | Spostamento al record scelto | Spostamento della finestra a \(iL\) | Preparazione dei blocchi corrispondenti |
-| **Chiusura** | Termine dell'uso del file | Flush dell'eventuale residuo | Salvataggio e rilascio strutture |
+| Operazione         | Livello logico                   | Byte stream                                  | Livello fisico                          |
+| ------------------ | -------------------------------- | -------------------------------------------- | --------------------------------------- |
+| **Apertura**       | Posizione sul primo record       | Finestra sul byte $0$                        | Individuazione del primo blocco         |
+| **Lettura**        | Restituzione del record corrente | Riempimento e interpretazione della finestra | Lettura dei blocchi necessari           |
+| **Scrittura**      | Scrittura del record corrente    | Inserimento dei byte nella finestra          | Scrittura dei blocchi completi          |
+| **Posizionamento** | Spostamento al record scelto     | Spostamento della finestra a $iL$            | Preparazione dei blocchi corrispondenti |
+| **Chiusura**       | Termine dell'uso del file        | Flush dell'eventuale residuo                 | Salvataggio e rilascio strutture        |
 
 ---
 

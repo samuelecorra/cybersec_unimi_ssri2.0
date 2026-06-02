@@ -29,7 +29,9 @@
   - `### **N. Title**`
   - `#### **N.M. Title**`
   - `##### **N.M.X. Title**`
-- Render mathematical formulas and systems using standard LaTeX block format with double dollar signs, using `\begin{cases}` for matching definitions or piecewise systems.
+- Render mathematical formulas according to the canonical Markdown/MathJax style: use `$...$` for inline math, for example `$L$`, and `$$...$$` for display math. Do not use `\(...\)` for inline formulas.
+- Render mathematical systems using standard LaTeX block format with double dollar signs, using `\begin{cases}` for matching definitions or piecewise systems.
+- Write Italian text with proper accented characters (`è`, `é`, `ò`, `à`, `ù`, `ì`) instead of apostrophe transliterations such as `e'`, `perche'`, `puo'`, `piu'`, `unita'`.
 - Do not use ASCII art, pseudo-diagrams, or code blocks to recreate visual material.
 
 ## Visual Callouts

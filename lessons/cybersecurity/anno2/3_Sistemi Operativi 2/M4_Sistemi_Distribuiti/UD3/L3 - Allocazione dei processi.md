@@ -13,7 +13,7 @@ Le due famiglie fondamentali di tecniche sono:
 - allocazione statica;
 - allocazione dinamica.
 
-> 📌 L'allocazione dei processi cerca di eseguire ogni processo sulla macchina piu' adatta alla sua computazione.
+> 📌 L'allocazione dei processi cerca di eseguire ogni processo sulla macchina più adatta alla sua computazione.
 
 ---
 
@@ -28,7 +28,7 @@ La macchina migliore dipende da:
 - carico computazionale delle macchine;
 - risorse informative necessarie;
 - risorse fisiche necessarie;
-- compatibilita' hardware e software;
+- compatibilità hardware e software;
 - costo di accesso alle risorse.
 
 Un processo dovrebbe essere attivato sulla macchina che consente di eseguire meglio la sua specifica computazione.
@@ -57,11 +57,11 @@ Il sistema deve usare in modo efficiente:
 
 La gestione dell'allocazione non deve diventare troppo costosa.
 
-Il sistema deve evitare di sprecare risorse di elaborazione per una gestione piu' complessa del necessario.
+Il sistema deve evitare di sprecare risorse di elaborazione per una gestione più complessa del necessario.
 
 #### **2.5. Realizzare tolleranza ai guasti**
 
-L'allocazione puo' contribuire alla tolleranza ai guasti.
+L'allocazione può contribuire alla tolleranza ai guasti.
 
 Se una macchina si guasta, i processi possono essere spostati o riattivati su altre macchine.
 
@@ -90,7 +90,7 @@ Il sistema:
 3. assegna i processi ai nodi;
 4. attiva i processi sulle macchine scelte.
 
-Questa tecnica e' adatta quando l'insieme dei processi e' noto prima dell'attivazione.
+Questa tecnica è adatta quando l'insieme dei processi è noto prima dell'attivazione.
 
 ---
 
@@ -100,34 +100,34 @@ Nell'allocazione statica **incrementale**, i processi non vengono creati tutti n
 
 Quando arriva un nuovo gruppo di processi:
 
-1. l'allocazione dei processi gia' attivi viene considerata congelata;
+1. l'allocazione dei processi già attivi viene considerata congelata;
 2. il sistema decide dove allocare solo i nuovi processi;
 3. i nuovi processi vengono attivati sulle macchine scelte.
 
-> 📌 Nell'approccio incrementale non si spostano i processi gia' attivi: si decide solo la collocazione dei nuovi.
+> 📌 Nell'approccio incrementale non si spostano i processi già attivi: si decide solo la collocazione dei nuovi.
 
 ---
 
 ### **6. Funzioni obiettivo**
 
-Per l'allocazione statica e' necessario definire una **funzione obiettivo** da ottimizzare.
+Per l'allocazione statica è necessario definire una **funzione obiettivo** da ottimizzare.
 
 La funzione obiettivo esprime cosa il sistema considera una buona allocazione.
 
 #### **6.1. Sfruttamento dei processori**
 
-Una funzione obiettivo puo' mirare allo sfruttamento dei processori.
+Una funzione obiettivo può mirare allo sfruttamento dei processori.
 
 Esempi:
 
-- minimizzare il tempo totale di inattivita';
-- bilanciare i tempi di inattivita' tra processori;
+- minimizzare il tempo totale di inattività;
+- bilanciare i tempi di inattività tra processori;
 - ridurre la latenza media dei processi;
 - aumentare il throughput complessivo.
 
 #### **6.2. Efficienza della gestione**
 
-Un'altra funzione obiettivo puo' mirare a ridurre il costo della gestione.
+Un'altra funzione obiettivo può mirare a ridurre il costo della gestione.
 
 Esempi:
 
@@ -138,7 +138,7 @@ Esempi:
 
 #### **6.3. Ottimizzazione multiobiettivo**
 
-Se piu' obiettivi sono importanti, si puo' usare una tecnica di ottimizzazione multiobiettivo.
+Se più obiettivi sono importanti, si può usare una tecnica di ottimizzazione multiobiettivo.
 
 In questo caso si cerca di ottimizzare una combinazione di obiettivi.
 
@@ -148,7 +148,7 @@ $$
 F = \alpha \cdot \text{carico} + \beta \cdot \text{costo comunicazione} + \gamma \cdot \text{latenza}
 $$
 
-dove \(\alpha\), \(\beta\) e \(\gamma\) pesano l'importanza dei diversi obiettivi.
+dove $\alpha$, $\beta$ e $\gamma$ pesano l'importanza dei diversi obiettivi.
 
 ---
 
@@ -162,7 +162,7 @@ Non tutti i processi possono essere allocati ovunque.
 
 Alcuni processi devono essere collocati su una macchina specifica.
 
-Per esempio, un processo che controlla una periferica locale puo' dover essere eseguito sulla macchina a cui la periferica e' collegata.
+Per esempio, un processo che controlla una periferica locale può dover essere eseguito sulla macchina a cui la periferica è collegata.
 
 #### **7.2. Vincoli di esclusione**
 
@@ -170,15 +170,15 @@ Alcuni processi non devono mai essere collocati su certe macchine.
 
 Le cause possono essere:
 
-- incompatibilita' hardware;
-- incompatibilita' software;
+- incompatibilità hardware;
+- incompatibilità software;
 - assenza di librerie;
 - assenza di sistema operativo adatto;
 - politiche di sicurezza.
 
 #### **7.3. Vincoli legati alle risorse**
 
-La posizione delle risorse informative o fisiche puo' condizionare l'allocazione.
+La posizione delle risorse informative o fisiche può condizionare l'allocazione.
 
 Esempi:
 
@@ -187,13 +187,13 @@ Esempi:
 - periferica utilizzabile solo localmente;
 - file o servizi disponibili solo su un nodo.
 
-#### **7.4. Incompatibilita' tra processi**
+#### **7.4. Incompatibilità tra processi**
 
 Alcuni processi applicativi possono essere incompatibili tra loro se collocati sulla stessa macchina.
 
 L'algoritmo deve quindi cercare una soluzione che ottimizzi la funzione obiettivo rispettando tutti i vincoli.
 
-> ⚠️ L'allocazione non e' solo un problema di prestazioni: e' un problema di ottimizzazione vincolata.
+> ⚠️ L'allocazione non è solo un problema di prestazioni: è un problema di ottimizzazione vincolata.
 
 ---
 
@@ -201,23 +201,23 @@ L'algoritmo deve quindi cercare una soluzione che ottimizzi la funzione obiettiv
 
 Gli algoritmi di allocazione possono essere classificati secondo diversi criteri.
 
-#### **8.1. Modalita' di ricerca**
+#### **8.1. Modalità di ricerca**
 
 Gli algoritmi possono essere:
 
 - **deterministici**, se esplorano lo spazio delle soluzioni in modo definito;
 - **euristici**, se cercano una buona soluzione senza garantire l'esplorazione completa.
 
-Gli approcci euristici sono utili quando lo spazio delle soluzioni e' molto grande o ci sono molti vincoli.
+Gli approcci euristici sono utili quando lo spazio delle soluzioni è molto grande o ci sono molti vincoli.
 
-#### **8.2. Modalita' di esecuzione**
+#### **8.2. Modalità di esecuzione**
 
 Gli algoritmi possono essere:
 
 - **centralizzati**, se una macchina decide per tutto il sistema distribuito;
-- **distribuiti**, se piu' macchine eseguono parti dell'algoritmo e cooperano nella scelta.
+- **distribuiti**, se più macchine eseguono parti dell'algoritmo e cooperano nella scelta.
 
-#### **8.3. Qualita' della soluzione**
+#### **8.3. Qualità della soluzione**
 
 Gli algoritmi possono cercare:
 
@@ -228,14 +228,14 @@ Spesso ci si accontenta di una soluzione subottima per ridurre il costo della ri
 
 #### **8.4. Ambito di azione**
 
-L'allocazione puo' essere:
+L'allocazione può essere:
 
 - **globale**, se considera tutta la rete;
 - **locale**, se considera una singola macchina o un sottoinsieme.
 
 #### **8.5. Attivazione sender o receiver**
 
-L'algoritmo puo' essere attivato:
+L'algoritmo può essere attivato:
 
 - dal processore **emittente**, che vuole liberarsi di un processo;
 - dal processore **ricevente**, che valuta se accettare un processo.
@@ -244,11 +244,11 @@ L'algoritmo puo' essere attivato:
 
 ### **9. Allocazione dinamica**
 
-Nell'**allocazione dinamica**, la collocazione dei processi puo' cambiare durante la loro vita.
+Nell'**allocazione dinamica**, la collocazione dei processi può cambiare durante la loro vita.
 
-L'allocazione non e' permanente.
+L'allocazione non è permanente.
 
-Il sistema puo' rimettere in discussione la posizione di uno o piu' processi e riallocarli su altri processori.
+Il sistema può rimettere in discussione la posizione di uno o più processi e riallocarli su altri processori.
 
 Questa tecnica serve ad adattarsi a:
 
@@ -262,7 +262,7 @@ Questa tecnica serve ad adattarsi a:
 
 ### **10. Allocazione dinamica totale e parziale**
 
-L'allocazione dinamica puo' essere:
+L'allocazione dinamica può essere:
 
 - totale;
 - parziale.
@@ -271,13 +271,13 @@ L'allocazione dinamica puo' essere:
 
 Viene rivalutata l'allocazione di tutti i processi contemporaneamente.
 
-E' piu' completa, ma piu' costosa.
+È più completa, ma più costosa.
 
 #### **10.2. Allocazione parziale**
 
 Viene rivalutata solo l'allocazione di un sottoinsieme di processi.
 
-Il sottoinsieme puo' essere scelto secondo una regola, per esempio:
+Il sottoinsieme può essere scelto secondo una regola, per esempio:
 
 - processi su macchine sovraccariche;
 - processi con elevata latenza;
@@ -288,7 +288,7 @@ Il sottoinsieme puo' essere scelto secondo una regola, per esempio:
 
 ### **11. Attivazione dell'allocazione dinamica**
 
-L'allocazione dinamica puo' essere attivata in tre modi principali.
+L'allocazione dinamica può essere attivata in tre modi principali.
 
 #### **11.1. Periodica**
 
@@ -310,9 +310,9 @@ Esempi:
 
 #### **11.3. Volontaria**
 
-La riallocazione puo' essere richiesta direttamente da uno o piu' processi tramite una chiamata al sistema operativo.
+La riallocazione può essere richiesta direttamente da uno o più processi tramite una chiamata al sistema operativo.
 
-> 📌 L'allocazione dinamica permette di adattare il sistema mentre i processi sono gia' in esecuzione.
+> 📌 L'allocazione dinamica permette di adattare il sistema mentre i processi sono già in esecuzione.
 
 ---
 
@@ -344,9 +344,9 @@ Si devono ancora rispettare:
 
 ### **13. Problema della migrazione dei processi**
 
-Il problema fondamentale dell'allocazione dinamica e' la **migrazione dei processi**.
+Il problema fondamentale dell'allocazione dinamica è la **migrazione dei processi**.
 
-Se un processo deve essere spostato da una macchina a un'altra, ci sono due possibilita':
+Se un processo deve essere spostato da una macchina a un'altra, ci sono due possibilità:
 
 - terminare il processo e riavviarlo da zero sulla nuova macchina;
 - congelare lo stato della computazione, trasferirlo e riattivarlo sulla macchina destinataria.
@@ -360,9 +360,9 @@ La seconda soluzione richiede di trasferire:
 - contesto di esecuzione;
 - informazioni sulle risorse usate.
 
-Bisogna inoltre garantire compatibilita' tra macchina sorgente e macchina destinazione.
+Bisogna inoltre garantire compatibilità tra macchina sorgente e macchina destinazione.
 
-> ⚠️ La migrazione e' complessa perche' deve preservare lo stato di evoluzione del processo.
+> ⚠️ La migrazione è complessa perchè deve preservare lo stato di evoluzione del processo.
 
 ---
 
@@ -405,10 +405,10 @@ $$
 
 ### **16. Conclusione**
 
-L'allocazione dei processi in un ambiente distribuito serve a collocare ogni processo sulla macchina piu' adatta.
+L'allocazione dei processi in un ambiente distribuito serve a collocare ogni processo sulla macchina più adatta.
 
 L'allocazione statica decide la collocazione all'attivazione e la mantiene fissa.
 
-L'allocazione dinamica puo' modificare la collocazione durante l'esecuzione, adattandosi a carico, guasti e disponibilita' delle risorse.
+L'allocazione dinamica può modificare la collocazione durante l'esecuzione, adattandosi a carico, guasti e disponibilità delle risorse.
 
-La scelta tra le due tecniche dipende dal compromesso tra flessibilita', costo di gestione e costo di migrazione.
+La scelta tra le due tecniche dipende dal compromesso tra flessibilità, costo di gestione e costo di migrazione.

@@ -26,7 +26,7 @@ Dal punto di vista logico, il direttorio contiene un riferimento al primo descri
 
 La realizzazione concreta dei puntatori dipende dalla soluzione adottata dal file system.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601104921.png)
 
 #### **2.1. Caratteristiche**
 
@@ -133,7 +133,7 @@ In questo caso si usa ancora una lista per conservare i descrittori, ma non si c
 
 Si aggiunge una tabella di hash che permette di individuare rapidamente la porzione di lista in cui cercare.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601110003.png)
 
 #### **6.1. Funzionamento**
 

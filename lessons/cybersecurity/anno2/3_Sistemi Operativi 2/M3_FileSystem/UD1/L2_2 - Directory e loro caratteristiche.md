@@ -96,6 +96,8 @@ Si sceglie un file system primario, la cui radice diventa la radice dell'intero 
 
 Quella directory diventa il **punto di montaggio**.
 
+![](imgs/Pasted%20image%2020260601083113.png)
+
 > 📌 Il punto di montaggio è il punto dell'albero principale in cui viene collegata la radice di un altro file system.
 
 #### **5.1. Accesso a file nel file system principale**

@@ -6,10 +6,10 @@
 
 In questa lezione viene esteso il problema del **deadlock** al caso di un **sistema distribuito**.
 
-Nel caso di una singola macchina il sistema operativo puo' osservare direttamente lo stato delle risorse e dei processi. In un ambiente distribuito, invece, ogni macchina possiede solo una vista **locale**:
+Nel caso di una singola macchina il sistema operativo può osservare direttamente lo stato delle risorse e dei processi. In un ambiente distribuito, invece, ogni macchina possiede solo una vista **locale**:
 
 - conosce i processi e le risorse presenti sul proprio sito;
-- puo' avere informazioni incomplete sulle attese che coinvolgono altre macchine;
+- può avere informazioni incomplete sulle attese che coinvolgono altre macchine;
 - riceve aggiornamenti con ritardi dovuti alla rete.
 
 Per questo motivo la gestione dello stallo distribuito deve affrontare due aspetti:
@@ -21,9 +21,9 @@ Per questo motivo la gestione dello stallo distribuito deve affrontare due aspet
 
 ### **2. Prevenzione dello stallo**
 
-La prevenzione dello stallo in ambiente distribuito puo' essere ottenuta estendendo le tecniche gia' viste per la macchina singola.
+La prevenzione dello stallo in ambiente distribuito può essere ottenuta estendendo le tecniche già viste per la macchina singola.
 
-L'idea generale e':
+L'idea generale è:
 
 > 📌 Imporre regole sull'assegnazione delle risorse in modo che non possa formarsi una catena ciclica di attese.
 
@@ -45,19 +45,19 @@ $$
 R_1 < R_2 < R_3 < \dots < R_n
 $$
 
-Un processo puo' ottenere una nuova risorsa solo se questa ha identificatore maggiore delle risorse che gia' possiede.
+Un processo può ottenere una nuova risorsa solo se questa ha identificatore maggiore delle risorse che già possiede.
 
-Formalmente, se un processo detiene una risorsa $R_i$, puo' richiedere una risorsa $R_j$ solo se:
+Formalmente, se un processo detiene una risorsa $R_i$, può richiedere una risorsa $R_j$ solo se:
 
 $$
 R_i < R_j
 $$
 
-Questa regola impedisce la formazione di cicli, perche' le attese possono procedere solo in una direzione dell'ordinamento.
+Questa regola impedisce la formazione di cicli, perchè le attese possono procedere solo in una direzione dell'ordinamento.
 
-> ✅ Il vantaggio e' la semplicita': la tecnica generalizza direttamente il caso centralizzato.
+> ✅ Il vantaggio è la semplicità: la tecnica generalizza direttamente il caso centralizzato.
 
-> ⚠️ Il limite e' che l'ordinamento globale deve essere condiviso e mantenuto coerente in tutto il sistema distribuito.
+> ⚠️ Il limite è che l'ordinamento globale deve essere condiviso e mantenuto coerente in tutto il sistema distribuito.
 
 ---
 
@@ -73,23 +73,23 @@ Il coordinatore centrale:
 - valuta se l'assegnazione richiesta mantiene il sistema in uno stato sicuro;
 - concede la risorsa solo se non si rischia di arrivare a uno stallo.
 
-Questa soluzione e' teoricamente corretta, ma introduce problemi pratici:
+Questa soluzione è teoricamente corretta, ma introduce problemi pratici:
 
 - il coordinatore diventa un **collo di bottiglia**;
 - tutte le richieste devono passare da un unico punto;
-- un guasto del coordinatore puo' compromettere il servizio;
+- un guasto del coordinatore può compromettere il servizio;
 - le prestazioni si riducono a causa della centralizzazione.
 
 ---
 
-### **5. Prevenzione con priorita' e rollback**
+### **5. Prevenzione con priorità e rollback**
 
-Un approccio diverso assegna a ogni processo una **priorita'**.
+Un approccio diverso assegna a ogni processo una **priorità**.
 
 La tecnica classica di rilascio anticipato prevede che, se:
 
 - un processo $P$ possiede una risorsa;
-- un processo $Q$ con priorita' maggiore richiede quella risorsa;
+- un processo $Q$ con priorità maggiore richiede quella risorsa;
 
 allora:
 
@@ -97,7 +97,7 @@ allora:
 - $P$ effettua rollback;
 - la risorsa viene assegnata a $Q$.
 
-Questo rompe possibili attese cicliche, ma puo' generare **starvation**: un processo a bassa priorita' potrebbe essere continuamente interrotto.
+Questo rompe possibili attese cicliche, ma può generare **starvation**: un processo a bassa priorità potrebbe essere continuamente interrotto.
 
 Per evitare questo problema si usano le **marche di tempo**.
 
@@ -107,16 +107,16 @@ Per evitare questo problema si usano le **marche di tempo**.
 
 A ogni processo viene associata una marca di tempo.
 
-La marca rappresenta l'anzianita' del processo:
+La marca rappresenta l'anzianità del processo:
 
-- marca piu' piccola: processo piu' vecchio;
-- marca piu' grande: processo piu' giovane.
+- marca più piccola: processo più vecchio;
+- marca più grande: processo più giovane.
 
-L'obiettivo e' dare progressivamente vantaggio ai processi piu' vecchi, evitando che vengano continuamente penalizzati.
+L'obiettivo è dare progressivamente vantaggio ai processi più vecchi, evitando che vengano continuamente penalizzati.
 
 > 📌 Per evitare starvation, quando un processo effettua rollback non deve ricevere una nuova marca: deve conservare la marca originaria.
 
-In questo modo, dopo ogni rollback, il processo mantiene la propria anzianita' e prima o poi riuscira' ad avanzare.
+In questo modo, dopo ogni rollback, il processo mantiene la propria anzianità e prima o poi riuscirà ad avanzare.
 
 ---
 
@@ -129,17 +129,17 @@ Supponiamo che:
 - la risorsa sia detenuta dal processo $P$;
 - il processo $Q$ chieda quella risorsa.
 
-Il comportamento e':
+Il comportamento è:
 
 | Condizione | Azione |
 |---|---|
-| $Q$ e' piu' vecchio di $P$ | $Q$ attende |
-| $Q$ e' piu' giovane di $P$ | $Q$ effettua rollback |
+| $Q$ è più vecchio di $P$ | $Q$ attende |
+| $Q$ è più giovane di $P$ | $Q$ effettua rollback |
 
 Quindi:
 
-- un processo vecchio puo' aspettare un processo giovane;
-- un processo giovane non puo' aspettare un processo vecchio e viene fatto morire.
+- un processo vecchio può aspettare un processo giovane;
+- un processo giovane non può aspettare un processo vecchio e viene fatto morire.
 
 > ✅ Lo schema evita la starvation se il processo riavviato conserva la marca originaria.
 
@@ -154,17 +154,17 @@ Supponiamo ancora che:
 - la risorsa sia detenuta dal processo $P$;
 - il processo $Q$ chieda quella risorsa.
 
-Il comportamento e':
+Il comportamento è:
 
 | Condizione | Azione |
 |---|---|
-| $Q$ e' piu' giovane di $P$ | $Q$ attende |
-| $Q$ e' piu' vecchio di $P$ | $Q$ forza il rollback di $P$ |
+| $Q$ è più giovane di $P$ | $Q$ attende |
+| $Q$ è più vecchio di $P$ | $Q$ forza il rollback di $P$ |
 
 Quindi:
 
 - un processo giovane aspetta un processo vecchio;
-- un processo vecchio puo' interrompere un processo giovane.
+- un processo vecchio può interrompere un processo giovane.
 
 Anche in questo caso la starvation viene evitata mantenendo invariata la marca di tempo dopo il rollback.
 
@@ -185,10 +185,10 @@ Se nel grafo esiste un ciclo, allora esiste uno stallo.
 
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-In ambiente distribuito il problema e' piu' complesso perche':
+In ambiente distribuito il problema è più complesso perchè:
 
 - ogni macchina possiede un proprio grafo locale;
-- uno stallo puo' coinvolgere processi posti su macchine diverse;
+- uno stallo può coinvolgere processi posti su macchine diverse;
 - nessun nodo possiede automaticamente il grafo globale completo.
 
 ---
@@ -197,11 +197,11 @@ In ambiente distribuito il problema e' piu' complesso perche':
 
 Ogni macchina mantiene un proprio **grafo di attesa locale**.
 
-Se in un grafo locale esiste un ciclo, allora lo stallo e' sicuramente presente almeno su quella macchina.
+Se in un grafo locale esiste un ciclo, allora lo stallo è sicuramente presente almeno su quella macchina.
 
-Se invece non esistono cicli locali, non si puo' concludere che il sistema sia libero da stallo.
+Se invece non esistono cicli locali, non si può concludere che il sistema sia libero da stallo.
 
-Infatti uno stallo puo' comparire solo nel grafo ottenuto come unione dei grafi locali:
+Infatti uno stallo può comparire solo nel grafo ottenuto come unione dei grafi locali:
 
 $$
 G_{globale} = G_1 \cup G_2 \cup \dots \cup G_n
@@ -228,12 +228,12 @@ Il coordinatore:
 
 Questa soluzione richiede di distinguere tra:
 
-- il **grafo reale**, cioe' lo stato effettivo del sistema in un certo istante;
-- il **grafo costruito**, cioe' il grafo posseduto dal coordinatore sulla base dei messaggi ricevuti.
+- il **grafo reale**, cioè lo stato effettivo del sistema in un certo istante;
+- il **grafo costruito**, cioè il grafo posseduto dal coordinatore sulla base dei messaggi ricevuti.
 
-I due grafi possono differire perche' i messaggi impiegano tempo ad arrivare.
+I due grafi possono differire perchè i messaggi impiegano tempo ad arrivare.
 
-Un algoritmo corretto deve garantire due proprieta':
+Un algoritmo corretto deve garantire due proprietà:
 
 - se esiste uno stallo, prima o poi deve essere segnalato;
 - se viene segnalato uno stallo, il sistema deve essere effettivamente in stallo.
@@ -242,21 +242,21 @@ Un algoritmo corretto deve garantire due proprieta':
 
 ### **12. Aggiornamento del grafo centralizzato**
 
-Il grafo globale centralizzato puo' essere aggiornato in due modi.
+Il grafo globale centralizzato può essere aggiornato in due modi.
 
 Nel primo modo, ogni macchina invia un messaggio al coordinatore ogni volta che:
 
 - viene inserito un arco nel grafo locale;
 - viene rimosso un arco dal grafo locale.
 
-Questa soluzione e' precisa, ma puo' produrre molto traffico di rete.
+Questa soluzione è precisa, ma può produrre molto traffico di rete.
 
 Nel secondo modo, ogni macchina invia un aggiornamento dopo un certo numero di modifiche locali.
 
 In questo caso:
 
 - si riduce il numero di messaggi;
-- il grafo globale puo' essere meno aggiornato;
+- il grafo globale può essere meno aggiornato;
 - il coordinatore lavora su una fotografia approssimata dello stato reale.
 
 Il coordinatore analizza poi il grafo globale e cerca eventuali cicli.
@@ -289,9 +289,9 @@ Il nodo $P_{ex}$ indica che l'attesa coinvolge una risorsa o un processo present
 
 Nel grafo locale possono verificarsi due casi.
 
-Se esiste un ciclo che **non coinvolge** $P_{ex}$, allora lo stallo e' sicuramente locale.
+Se esiste un ciclo che **non coinvolge** $P_{ex}$, allora lo stallo è sicuramente locale.
 
-Se invece esiste un ciclo che **coinvolge** $P_{ex}$, allora c'e' solo una possibilita' di stallo.
+Se invece esiste un ciclo che **coinvolge** $P_{ex}$, allora c'è solo una possibilità di stallo.
 
 In questo caso bisogna verificare se l'attesa esterna prosegue su altre macchine fino a chiudere davvero un ciclo globale.
 
@@ -304,7 +304,7 @@ Quindi:
 
 ### **15. Riduzione dei messaggi nel rilevamento distribuito**
 
-Il rilevamento distribuito puo' generare molti messaggi.
+Il rilevamento distribuito può generare molti messaggi.
 
 Per ridurre il sovraccarico si assegna a ogni processo un identificatore univoco nel sistema distribuito.
 
@@ -314,11 +314,11 @@ $$
 id(P_{precedente}) < id(P_{successivo})
 $$
 
-dove $P_{precedente}$ e' il processo che precede $P_{ex}$ nel ciclo e $P_{successivo}$ e' quello che lo segue.
+dove $P_{precedente}$ è il processo che precede $P_{ex}$ nel ciclo e $P_{successivo}$ è quello che lo segue.
 
 Se la condizione non vale, la macchina non avvia il rilevamento e lascia che un'altra macchina individui l'eventuale stallo.
 
-> 💡 Questa regola evita che piu' siti avviino contemporaneamente rilevamenti ridondanti dello stesso ciclo.
+> 💡 Questa regola evita che più siti avviino contemporaneamente rilevamenti ridondanti dello stesso ciclo.
 
 ---
 
@@ -344,15 +344,15 @@ I processi che stavano interagendo con la vittima possono dover effettuare a lor
 
 In ambiente distribuito possono comparire **falsi cicli**.
 
-Un falso ciclo e' un ciclo presente nel grafo costruito dall'algoritmo, ma non realmente presente nello stato effettivo del sistema.
+Un falso ciclo è un ciclo presente nel grafo costruito dall'algoritmo, ma non realmente presente nello stato effettivo del sistema.
 
-Questo puo' accadere a causa di:
+Questo può accadere a causa di:
 
 - ritardi nella trasmissione dei messaggi;
 - acquisizioni e rilasci di risorse avvenuti mentre il grafo veniva aggiornato;
 - informazioni locali arrivate al coordinatore in ordine diverso da quello reale.
 
-Il rischio e' eseguire rollback inutili.
+Il rischio è eseguire rollback inutili.
 
 Per ridurre questo problema:
 
@@ -360,7 +360,7 @@ Per ridurre questo problema:
 - si possono usare marche di tempo uniche;
 - nel grafo globale devono essere inserite solo richieste non immediatamente soddisfacibili.
 
-Una richiesta puo' quindi essere identificata come:
+Una richiesta può quindi essere identificata come:
 
 $$
 \text{richiesta} = (\text{timestamp}, \text{id processo})
@@ -385,7 +385,7 @@ $$
 
 ### **19. Conclusione**
 
-Il deadlock in ambiente distribuito richiede tecniche piu' complesse rispetto al caso centralizzato.
+Il deadlock in ambiente distribuito richiede tecniche più complesse rispetto al caso centralizzato.
 
 La prevenzione cerca di impedire la formazione dello stallo tramite ordinamenti, controllo centralizzato o marche di tempo.
 
@@ -393,4 +393,4 @@ Il rilevamento costruisce invece una vista locale o globale delle attese e cerca
 
 La gestione, infine, rompe lo stallo scegliendo una vittima e applicando rollback coordinati.
 
-> 📌 La difficolta' principale non e' solo individuare un ciclo, ma farlo usando informazioni distribuite, ritardate e potenzialmente non perfettamente allineate.
+> 📌 La difficoltà principale non è solo individuare un ciclo, ma farlo usando informazioni distribuite, ritardate e potenzialmente non perfettamente allineate.

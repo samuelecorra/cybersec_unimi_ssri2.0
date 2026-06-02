@@ -6,7 +6,7 @@
 
 In questa lezione viene studiato come supportare la comunicazione tra processi in un **ambiente distribuito**.
 
-L'obiettivo e' estendere al caso di piu' calcolatori connessi in rete le tecniche gia' viste per processi residenti su una singola macchina.
+L'obiettivo è estendere al caso di più calcolatori connessi in rete le tecniche già viste per processi residenti su una singola macchina.
 
 Le tecniche considerate sono:
 
@@ -15,7 +15,7 @@ Le tecniche considerate sono:
 - file;
 - socket.
 
-La differenza fondamentale rispetto al caso locale e' che in un ambiente distribuito **non esiste una memoria centrale condivisa** tra tutte le macchine.
+La differenza fondamentale rispetto al caso locale è che in un ambiente distribuito **non esiste una memoria centrale condivisa** tra tutte le macchine.
 
 Quindi le informazioni non possono essere semplicemente depositate in una zona comune di memoria: devono essere trasferite dal sistema operativo della macchina del mittente al sistema operativo della macchina del ricevente.
 
@@ -27,23 +27,23 @@ Nel caso di una singola macchina, due processi possono comunicare usando struttu
 
 In ambiente distribuito, invece:
 
-- il processo mittente puo' trovarsi su una macchina $M_1$;
-- il processo ricevente puo' trovarsi su una macchina $M_2$;
+- il processo mittente può trovarsi su una macchina $M_1$;
+- il processo ricevente può trovarsi su una macchina $M_2$;
 - i buffer, le mailbox o i file possono trovarsi su $M_1$, su $M_2$ o su una terza macchina.
 
-Il compito del sistema operativo e' rendere questa differenza il piu' possibile trasparente.
+Il compito del sistema operativo è rendere questa differenza il più possibile trasparente.
 
-> 📌 La comunicazione distribuita e' una comunicazione locale estesa con il trasferimento fisico delle informazioni attraverso la rete.
+> 📌 La comunicazione distribuita è una comunicazione locale estesa con il trasferimento fisico delle informazioni attraverso la rete.
 
 ---
 
 ### **3. Scambio di messaggi**
 
-Lo scambio di messaggi in ambiente distribuito e' concettualmente analogo a quello su una singola macchina.
+Lo scambio di messaggi in ambiente distribuito è concettualmente analogo a quello su una singola macchina.
 
 Un processo $P$ invia un messaggio a un processo $Q$.
 
-La differenza e' che i buffer usati per depositare i messaggi possono trovarsi su macchine diverse.
+La differenza è che i buffer usati per depositare i messaggi possono trovarsi su macchine diverse.
 
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
@@ -62,7 +62,7 @@ Quando $Q$ vuole leggere il messaggio:
 
 1. il sistema operativo trasferisce il messaggio da $M_1$ a $M_2$;
 2. il messaggio viene reso disponibile sulla macchina del ricevente;
-3. $Q$ puo' prelevarlo.
+3. $Q$ può prelevarlo.
 
 Questa soluzione mantiene il deposito iniziale vicino al mittente, ma richiede un trasferimento al momento della ricezione.
 
@@ -74,21 +74,21 @@ In una seconda soluzione, il processo $P$ invia il messaggio usando una primitiv
 
 In questo caso:
 
-- l'invio include gia' il trasferimento remoto;
+- l'invio include già il trasferimento remoto;
 - il messaggio viene collocato sulla macchina del ricevente;
 - $Q$ lo legge localmente dal buffer di $M_2$.
 
-Questa soluzione rende piu' semplice la ricezione, perche' il messaggio e' gia' vicino al destinatario.
+Questa soluzione rende più semplice la ricezione, perchè il messaggio è già vicino al destinatario.
 
 ---
 
 ### **6. Mailbox in ambiente distribuito**
 
-La mailbox e' un canale di comunicazione indiretto.
+La mailbox è un canale di comunicazione indiretto.
 
 Il processo mittente non comunica direttamente con il ricevente, ma deposita il messaggio in una casella logica.
 
-In ambiente distribuito la mailbox puo' essere collocata:
+In ambiente distribuito la mailbox può essere collocata:
 
 - sulla macchina del mittente;
 - sulla macchina del ricevente;
@@ -118,7 +118,7 @@ Il trasferimento remoto avviene in modo trasparente rispetto ai processi.
 
 ### **8. Mailbox sulla macchina del ricevente**
 
-La mailbox puo' anche essere collocata sulla macchina del ricevente.
+La mailbox può anche essere collocata sulla macchina del ricevente.
 
 In questo caso:
 
@@ -140,7 +140,7 @@ Il processo mittente scrive nel file le informazioni da comunicare.
 
 Il processo ricevente legge dal file le informazioni scritte.
 
-Questo modello e' analogo al caso della singola macchina, ma il file puo' trovarsi su una macchina diversa da quella di uno o entrambi i processi.
+Questo modello è analogo al caso della singola macchina, ma il file può trovarsi su una macchina diversa da quella di uno o entrambi i processi.
 
 ---
 
@@ -156,7 +156,7 @@ Il processo $P$ scrive il messaggio nel file locale.
 
 Il processo $Q$ effettua una lettura remota del file, ottenendo il messaggio.
 
-La lettura puo' essere realizzata:
+La lettura può essere realizzata:
 
 - tramite operazioni esplicite su file remoto;
 - tramite montaggio del file system remoto;
@@ -166,14 +166,14 @@ La lettura puo' essere realizzata:
 
 ### **11. File sulla macchina del ricevente o su server terzo**
 
-Il file puo' trovarsi anche sulla macchina del ricevente.
+Il file può trovarsi anche sulla macchina del ricevente.
 
 In questo caso:
 
 - $P$ effettua una scrittura remota;
 - $Q$ effettua una lettura locale.
 
-Una terza possibilita' e' usare un server dedicato $S$.
+Una terza possibilità è usare un server dedicato $S$.
 
 In questo scenario:
 
@@ -187,7 +187,7 @@ Il processo $Q$ legge dallo stesso file, sempre sul server.
 
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-Questa soluzione e' tipica dei sistemi in cui si usa una risorsa condivisa stabile per scambiare informazioni tra processi distribuiti.
+Questa soluzione è tipica dei sistemi in cui si usa una risorsa condivisa stabile per scambiare informazioni tra processi distribuiti.
 
 ---
 
@@ -200,7 +200,7 @@ Nel caso locale, due processi sulla stessa macchina possono usare un socket come
 - il mittente scrive sulla porta;
 - il ricevente legge dalla stessa porta.
 
-In ambiente distribuito il concetto e' esteso alla rete.
+In ambiente distribuito il concetto è esteso alla rete.
 
 Il processo $P$ sulla macchina $M_1$ scrive sul socket.
 
@@ -226,13 +226,13 @@ Il sistema operativo si occupa di:
 
 Il processo ricevente legge i messaggi dalla porta del socket man mano che arrivano.
 
-> ✅ I socket sono il meccanismo piu' diretto per costruire comunicazioni client/server tra processi su macchine diverse.
+> ✅ I socket sono il meccanismo più diretto per costruire comunicazioni client/server tra processi su macchine diverse.
 
 ---
 
 ### **14. Ruolo del sistema operativo**
 
-La realizzazione della comunicazione distribuita e' responsabilita' del sistema operativo.
+La realizzazione della comunicazione distribuita è responsabilità del sistema operativo.
 
 Il sistema operativo deve:
 
@@ -263,4 +263,4 @@ Le tecniche di comunicazione tra processi possono essere estese all'ambiente dis
 
 Messaggi, mailbox, file e socket permettono di trasferire informazioni tra processi residenti su macchine diverse.
 
-Il sistema operativo si occupa della remotizzazione delle operazioni e del trasferimento dei dati, cercando di fornire ai processi una visione il piu' possibile uniforme rispetto al caso locale.
+Il sistema operativo si occupa della remotizzazione delle operazioni e del trasferimento dei dati, cercando di fornire ai processi una visione il più possibile uniforme rispetto al caso locale.

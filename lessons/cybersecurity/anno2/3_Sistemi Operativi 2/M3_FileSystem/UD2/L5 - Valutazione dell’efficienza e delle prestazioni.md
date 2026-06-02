@@ -6,10 +6,10 @@
 
 Questa lezione approfondisce la valutazione del file system da due punti di vista:
 
-- **efficienza**, cioe' uso ottimale delle risorse;
-- **prestazioni**, cioe' uso rapido delle risorse.
+- **efficienza**, cioè uso ottimale delle risorse;
+- **prestazioni**, cioè uso rapido delle risorse.
 
-L'obiettivo e' capire quali scelte di progettazione permettono di ridurre gli sprechi di spazio, diminuire i tempi di accesso e migliorare la qualita' complessiva della gestione dei file.
+L'obiettivo è capire quali scelte di progettazione permettono di ridurre gli sprechi di spazio, diminuire i tempi di accesso e migliorare la qualità complessiva della gestione dei file.
 
 > 📌 Efficienza e prestazioni sono collegate, ma non coincidono: la prima riguarda quanto bene si usano le risorse, la seconda quanto rapidamente vengono usate.
 
@@ -33,11 +33,11 @@ Un file system efficiente deve usare lo spazio disponibile evitando sprechi e st
 
 ### **3. Frammentazione e uso dello spazio**
 
-Uno dei problemi principali per l'efficienza e' la frammentazione.
+Uno dei problemi principali per l'efficienza è la frammentazione.
 
 #### **3.1. Frammentazione interna**
 
-La **frammentazione interna** e' lo spazio non usato all'interno di un blocco gia' assegnato a un file.
+La **frammentazione interna** è lo spazio non usato all'interno di un blocco già assegnato a un file.
 
 Se un file non riempie completamente l'ultimo blocco allocato, la parte rimanente del blocco resta inutilizzata.
 
@@ -49,11 +49,11 @@ $$
 
 #### **3.2. Frammentazione esterna**
 
-La **frammentazione esterna** e' lo spazio libero che esiste sul disco ma non e' facilmente utilizzabile a causa della disposizione dei blocchi gia' allocati.
+La **frammentazione esterna** è lo spazio libero che esiste sul disco ma non è facilmente utilizzabile a causa della disposizione dei blocchi già allocati.
 
-Questo problema e' particolarmente evidente nelle tecniche che richiedono blocchi contigui.
+Questo problema è particolarmente evidente nelle tecniche che richiedono blocchi contigui.
 
-> ⚠️ La frammentazione riduce il rendimento dello spazio su disco e puo' rendere piu' costose le operazioni di allocazione.
+> ⚠️ La frammentazione riduce il rendimento dello spazio su disco e può rendere più costose le operazioni di allocazione.
 
 ---
 
@@ -63,11 +63,11 @@ Per migliorare l'efficienza si possono adottare scelte progettuali mirate.
 
 #### **4.1. Cluster di dimensione variabile**
 
-L'uso di cluster di dimensione diversa permette di adattare l'unita' di allocazione alla dimensione effettiva dei file.
+L'uso di cluster di dimensione diversa permette di adattare l'unità di allocazione alla dimensione effettiva dei file.
 
-Cluster piu' piccoli riducono la frammentazione interna per file piccoli.
+Cluster più piccoli riducono la frammentazione interna per file piccoli.
 
-Cluster piu' grandi possono essere convenienti per file grandi e accessi sequenziali, perche' riducono il numero di riferimenti da gestire.
+Cluster più grandi possono essere convenienti per file grandi e accessi sequenziali, perchè riducono il numero di riferimenti da gestire.
 
 #### **4.2. Dimensionamento di blocchi, puntatori e metadati**
 
@@ -78,7 +78,7 @@ La dimensione dei blocchi, dei puntatori e dei metadati deve essere scelta in fu
 - numero atteso di file;
 - dimensione media dei file;
 - tipo di carico di lavoro;
-- modalita' prevalente di accesso.
+- modalità prevalente di accesso.
 
 Per esempio, in una File Allocation Table il numero di bit usati per identificare un blocco deve essere adeguato alla dimensione del disco.
 
@@ -93,17 +93,17 @@ Le tabelle di gestione possono essere allocate:
 - **staticamente**, riservando spazio fisso;
 - **dinamicamente**, adattando lo spazio alle esigenze effettive.
 
-L'allocazione statica e' semplice e rapida, ma puo' sprecare spazio.
+L'allocazione statica è semplice e rapida, ma può sprecare spazio.
 
-L'allocazione dinamica e' piu' flessibile, ma richiede una gestione piu' complessa.
+L'allocazione dinamica è più flessibile, ma richiede una gestione più complessa.
 
-> 💡 L'efficienza migliora quando le strutture di gestione sono dimensionate sul modo reale in cui il file system verra' usato.
+> 💡 L'efficienza migliora quando le strutture di gestione sono dimensionate sul modo reale in cui il file system verrà usato.
 
 ---
 
 ### **5. Prestazioni del file system**
 
-Le **prestazioni** riguardano la rapidita' con cui il file system usa le risorse.
+Le **prestazioni** riguardano la rapidità con cui il file system usa le risorse.
 
 Dipendono da:
 
@@ -112,17 +112,17 @@ Dipendono da:
 - supporti hardware disponibili;
 - memoria centrale usata per cache e buffer;
 - numero di copie dei dati tra livelli diversi;
-- modalita' sincrona o asincrona delle operazioni.
+- modalità sincrona o asincrona delle operazioni.
 
-Un file system con buone prestazioni deve ridurre il tempo speso nella gestione e lasciare piu' tempo all'esecuzione utile dei processi.
+Un file system con buone prestazioni deve ridurre il tempo speso nella gestione e lasciare più tempo all'esecuzione utile dei processi.
 
 ---
 
 ### **6. Algoritmi e strutture dati semplici**
 
-Una prima tecnica per migliorare le prestazioni e' usare algoritmi semplici ed efficienti.
+Una prima tecnica per migliorare le prestazioni è usare algoritmi semplici ed efficienti.
 
-Se la gestione del file system richiede troppo tempo di elaborazione, il processore viene impegnato nella gestione anziche' nell'esecuzione dei processi applicativi.
+Se la gestione del file system richiede troppo tempo di elaborazione, il processore viene impegnato nella gestione anziché nell'esecuzione dei processi applicativi.
 
 Le strutture dati devono quindi permettere accessi rapidi:
 
@@ -132,34 +132,34 @@ Le strutture dati devono quindi permettere accessi rapidi:
 - bitmap efficienti;
 - indici dei blocchi.
 
-> ✅ Una struttura dati piu' adatta al tipo di accesso puo' ridurre drasticamente il tempo necessario a reperire metadati e blocchi.
+> ✅ Una struttura dati più adatta al tipo di accesso può ridurre drasticamente il tempo necessario a reperire metadati e blocchi.
 
 ---
 
 ### **7. Cache del disco**
 
-Un supporto hardware importante e' la **cache a bordo del disco**.
+Un supporto hardware importante è la **cache a bordo del disco**.
 
-Il disco puo' conservare in una propria memoria interna i blocchi letti o scritti piu' recentemente.
+Il disco può conservare in una propria memoria interna i blocchi letti o scritti più recentemente.
 
-Se una richiesta successiva riguarda un blocco gia' presente nella cache del disco:
+Se una richiesta successiva riguarda un blocco già presente nella cache del disco:
 
 - non serve accedere fisicamente al piatto del disco;
 - si riducono gli spostamenti della testina;
 - si riduce la latenza di rotazione;
 - il tempo di accesso diminuisce.
 
-Questa tecnica e' utile quando i blocchi usati piu' recentemente sono anche quelli usati piu' frequentemente.
+Questa tecnica è utile quando i blocchi usati più recentemente sono anche quelli usati più frequentemente.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601220944.png)
 
-> 📌 Leggere dalla cache del disco e' molto piu' rapido che posizionare fisicamente le testine e attendere la rotazione del disco.
+> 📌 Leggere dalla cache del disco è molto più rapido che posizionare fisicamente le testine e attendere la rotazione del disco.
 
 ---
 
 ### **8. Cache di pagina e buffer cache**
 
-Il sistema operativo puo' mantenere in memoria centrale una **cache di pagina** per conservare informazioni provenienti dal disco o dirette verso il disco.
+Il sistema operativo può mantenere in memoria centrale una **cache di pagina** per conservare informazioni provenienti dal disco o dirette verso il disco.
 
 Durante una lettura:
 
@@ -182,7 +182,7 @@ Se cache di pagina e buffer cache sono separate, possono verificarsi copie aggiu
 
 ### **9. Cache unificata**
 
-Per ridurre le copie, il sistema operativo puo' usare una **cache unificata**.
+Per ridurre le copie, il sistema operativo può usare una **cache unificata**.
 
 Invece di mantenere:
 
@@ -196,7 +196,7 @@ In lettura, i dati vengono scritti una volta dal gestore della periferica e poi 
 
 In scrittura, i dati scritti dal processo possono essere usati direttamente dal sistema operativo per completare l'operazione sul disco.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260601221134.png)
 
 > ✅ La cache unificata evita duplicazioni inutili e riduce i tempi di copiatura tra aree di memoria diverse.
 
@@ -206,21 +206,21 @@ In scrittura, i dati scritti dal processo possono essere usati direttamente dal 
 
 La cache deve essere gestita con politiche di sostituzione.
 
-Una tecnica classica e' **LRU**:
+Una tecnica classica è **LRU**:
 
 $$
 \text{LRU} = \text{Least Recently Used}
 $$
 
-cioe' viene eliminata dalla cache l'informazione usata meno recentemente.
+cioè viene eliminata dalla cache l'informazione usata meno recentemente.
 
-Si possono anche usare priorita' di paginazione:
+Si possono anche usare priorità di paginazione:
 
-- metadati importanti possono avere priorita' maggiore;
-- blocchi di file usati frequentemente possono restare piu' a lungo;
-- dati temporanei o gia' consumati possono essere rimossi prima.
+- metadati importanti possono avere priorità maggiore;
+- blocchi di file usati frequentemente possono restare più a lungo;
+- dati temporanei o già consumati possono essere rimossi prima.
 
-> 💡 La cache e' efficace solo se contiene informazioni che verranno riusate prima di essere eliminate.
+> 💡 La cache è efficace solo se contiene informazioni che verranno riusate prima di essere eliminate.
 
 ---
 
@@ -228,7 +228,7 @@ Si possono anche usare priorita' di paginazione:
 
 Le tecniche di ingresso/uscita mediate da cache permettono di ridurre gli accessi fisici al disco.
 
-Il sistema puo':
+Il sistema può:
 
 - accumulare richieste;
 - riordinare accessi per ridurre gli spostamenti della testina;
@@ -245,14 +245,14 @@ Le **scritture asincrone** permettono al processo di continuare l'esecuzione sen
 
 Il processo scrive in un buffer del sistema operativo e considera conclusa l'operazione.
 
-Successivamente, il sistema operativo completa la scrittura sul disco quando e' opportuno.
+Successivamente, il sistema operativo completa la scrittura sul disco quando è opportuno.
 
 Questo consente di:
 
-- raggruppare piu' scritture;
-- scegliere un ordine piu' efficiente;
+- raggruppare più scritture;
+- scegliere un ordine più efficiente;
 - ridurre il tempo di attesa del processo;
-- mantenere piu' fluida l'esecuzione.
+- mantenere più fluida l'esecuzione.
 
 > ⚠️ La scrittura asincrona migliora le prestazioni, ma richiede attenzione alla coerenza in caso di guasto prima del salvataggio effettivo.
 
@@ -266,39 +266,39 @@ Oltre a LRU, si possono usare tecniche specializzate.
 
 Con il **free-behind**, un'informazione viene rimossa dalla cache subito dopo essere stata usata.
 
-Questa tecnica e' utile quando si prevede che il dato appena letto non verra' piu' riusato, per esempio in una scansione sequenziale di un file molto grande.
+Questa tecnica è utile quando si prevede che il dato appena letto non verrà più riusato, per esempio in una scansione sequenziale di un file molto grande.
 
 #### **13.2. Read-ahead**
 
 Con il **read-ahead**, il sistema legge anticipatamente dal disco blocchi successivi a quelli richiesti.
 
-Se il processo sta leggendo sequenzialmente, e' probabile che richieda presto i blocchi immediatamente successivi.
+Se il processo sta leggendo sequenzialmente, è probabile che richieda presto i blocchi immediatamente successivi.
 
 Il sistema li porta quindi in memoria centrale prima della richiesta esplicita.
 
-> 📌 Il read-ahead riduce i tempi di attesa futuri; il free-behind libera subito spazio quando il riuso e' improbabile.
+> 📌 Il read-ahead riduce i tempi di attesa futuri; il free-behind libera subito spazio quando il riuso è improbabile.
 
 ---
 
 ### **14. Memoria virtuale unificata e RAM disk**
 
-Un'altra tecnica per migliorare le prestazioni e' realizzare una **memoria virtuale unificata** che includa non solo la memoria centrale, ma anche la memoria di massa.
+Un'altra tecnica per migliorare le prestazioni è realizzare una **memoria virtuale unificata** che includa non solo la memoria centrale, ma anche la memoria di massa.
 
-In questo modello, le informazioni vengono gestite in uno spazio astratto uniforme, riducendo la necessita' di passare esplicitamente tra buffer separati.
+In questo modello, le informazioni vengono gestite in uno spazio astratto uniforme, riducendo la necessità di passare esplicitamente tra buffer separati.
 
-Una realizzazione particolare e' il **RAM disk**.
+Una realizzazione particolare è il **RAM disk**.
 
 Un RAM disk usa una porzione di memoria centrale come se fosse un disco.
 
-Questo offre tempi di accesso molto bassi, perche' le operazioni avvengono in RAM.
+Questo offre tempi di accesso molto bassi, perchè le operazioni avvengono in RAM.
 
-Il limite e' che:
+Il limite è che:
 
-- la dimensione e' normalmente ridotta;
+- la dimensione è normalmente ridotta;
 - i dati sono volatili se non vengono salvati altrove;
-- la memoria usata dal RAM disk non e' disponibile per altri scopi.
+- la memoria usata dal RAM disk non è disponibile per altri scopi.
 
-Il RAM disk e' utile quando bisogna gestire un numero limitato di file di dimensioni limitate con accesso molto rapido.
+Il RAM disk è utile quando bisogna gestire un numero limitato di file di dimensioni limitate con accesso molto rapido.
 
 ---
 
@@ -321,6 +321,6 @@ La valutazione di un file system richiede di distinguere tra efficienza e presta
 
 L'efficienza mira a usare bene lo spazio e a ridurre lo spreco di risorse.
 
-Le prestazioni mirano a ridurre i tempi di accesso e a rendere piu' rapido l'uso delle informazioni.
+Le prestazioni mirano a ridurre i tempi di accesso e a rendere più rapido l'uso delle informazioni.
 
-Le tecniche piu' importanti sono il dimensionamento accurato delle strutture, la riduzione della frammentazione, l'uso intelligente delle cache, le scritture asincrone, il read-ahead, il free-behind e, quando opportuno, una memoria virtuale unificata o un RAM disk.
+Le tecniche più importanti sono il dimensionamento accurato delle strutture, la riduzione della frammentazione, l'uso intelligente delle cache, le scritture asincrone, il read-ahead, il free-behind e, quando opportuno, una memoria virtuale unificata o un RAM disk.

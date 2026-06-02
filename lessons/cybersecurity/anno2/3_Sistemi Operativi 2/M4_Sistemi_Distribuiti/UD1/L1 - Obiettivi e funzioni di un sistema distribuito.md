@@ -4,23 +4,23 @@
 
 ### **1. Introduzione**
 
-Questa lezione introduce i **sistemi distribuiti**, cioe' l'estensione delle caratteristiche dei sistemi operativi al caso in cui piu' sistemi di elaborazione cooperano attraverso una rete.
+Questa lezione introduce i **sistemi distribuiti**, cioè l'estensione delle caratteristiche dei sistemi operativi al caso in cui più sistemi di elaborazione cooperano attraverso una rete.
 
 Gli aspetti principali sono:
 
 - architetture di elaborazione distribuite;
 - sistemi operativi di rete;
 - sistemi operativi distribuiti;
-- obiettivi e funzionalita' di questi sistemi;
-- robustezza, trasparenza, mobilita' e scalabilita'.
+- obiettivi e funzionalità di questi sistemi;
+- robustezza, trasparenza, mobilità e scalabilità.
 
-> 📌 Un sistema distribuito deve permettere a piu' macchine interconnesse di cooperare come parte di un unico ambiente di elaborazione.
+> 📌 Un sistema distribuito deve permettere a più macchine interconnesse di cooperare come parte di un unico ambiente di elaborazione.
 
 ---
 
 ### **2. Architettura di elaborazione distribuita**
 
-Un'**architettura di elaborazione distribuita** e' costituita da un insieme di sistemi di elaborazione interconnessi tramite una rete.
+Un'**architettura di elaborazione distribuita** è costituita da un insieme di sistemi di elaborazione interconnessi tramite una rete.
 
 Ogni sistema di elaborazione, o nodo, possiede almeno:
 
@@ -32,18 +32,16 @@ Ogni sistema di elaborazione, o nodo, possiede almeno:
 Le periferiche possono essere:
 
 - locali a un singolo sistema;
-- condivise tra piu' sistemi;
-- globali, cioe' accessibili da tutti i sistemi della rete.
+- condivise tra più sistemi;
+- globali, cioè accessibili da tutti i sistemi della rete.
 
-La rete stessa puo' essere vista come una periferica per ciascun sistema di elaborazione, perche' consente lo scambio di informazioni con altri nodi.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+La rete stessa può essere vista come una periferica per ciascun sistema di elaborazione, perchè consente lo scambio di informazioni con altri nodi.
 
 ---
 
-### **3. Eterogeneita'**
+### **3. Eterogeneità**
 
-Una caratteristica fondamentale dei sistemi distribuiti e' l'**eterogeneita'**.
+Una caratteristica fondamentale dei sistemi distribuiti è l'**eterogeneità**.
 
 I nodi possono differire per:
 
@@ -52,25 +50,25 @@ I nodi possono differire per:
 - sistemi operativi;
 - rappresentazione dei dati;
 - periferiche disponibili;
-- capacita' di calcolo;
-- velocita' di connessione.
+- capacità di calcolo;
+- velocità di connessione.
 
-Questa eterogeneita' rende piu' complessa la gestione del sistema.
+Questa eterogeneità rende più complessa la gestione del sistema.
 
 Il sistema operativo deve tenerne conto per garantire:
 
 - cooperazione tra macchine;
-- interoperabilita';
+- interoperabilità;
 - integrazione delle risorse;
 - comunicazione corretta tra processi su nodi diversi.
 
-> ⚠️ In un sistema distribuito non si puo' assumere che tutte le macchine rappresentino dati e risorse nello stesso modo.
+> ⚠️ In un sistema distribuito non si può assumere che tutte le macchine rappresentino dati e risorse nello stesso modo.
 
 ---
 
 ### **4. Siti, host, nodi, client e server**
 
-Un'architettura distribuita e' costituita da un insieme di **siti**, cioe' locazioni in cui sono installate macchine.
+Un'architettura distribuita è costituita da un insieme di **siti**, cioè locazioni in cui sono installate macchine.
 
 Le macchine possono essere chiamate:
 
@@ -79,12 +77,12 @@ Le macchine possono essere chiamate:
 - nodi;
 - sistemi di elaborazione.
 
-Ogni macchina puo' agire come:
+Ogni macchina può agire come:
 
 - **server**, quando eroga un servizio;
 - **client**, quando usa un servizio.
 
-La stessa macchina puo' essere server in alcune interazioni e client in altre.
+La stessa macchina può essere server in alcune interazioni e client in altre.
 
 > 💡 Client e server non identificano necessariamente macchine diverse: descrivono il ruolo assunto in una specifica interazione.
 
@@ -96,14 +94,14 @@ Le architetture distribuite offrono diversi vantaggi rispetto a un singolo siste
 
 #### **5.1. Integrazione dei sottosistemi**
 
-Molte organizzazioni possiedono gia' sottosistemi installati in siti diversi.
+Molte organizzazioni possiedono già sottosistemi installati in siti diversi.
 
 Interconnetterli permette di:
 
-- conservare gli investimenti gia' fatti;
+- conservare gli investimenti già fatti;
 - far comunicare utenti e processi;
 - condividere informazioni;
-- integrare servizi gia' esistenti.
+- integrare servizi già esistenti.
 
 #### **5.2. Condivisione delle risorse**
 
@@ -116,49 +114,49 @@ Questo evita duplicazioni inutili e migliora lo sfruttamento globale del sistema
 
 #### **5.3. Parallelismo della computazione**
 
-Avendo piu' sistemi di elaborazione, una computazione puo' essere suddivisa tra piu' processori.
+Avendo più sistemi di elaborazione, una computazione può essere suddivisa tra più processori.
 
 Questo permette un parallelismo fisico reale.
 
-Se il problema e' decomponibile, il tempo di elaborazione puo' diminuire.
+Se il problema è decomponibile, il tempo di elaborazione può diminuire.
 
 #### **5.4. Vicinanza agli utenti**
 
-La capacita' di elaborazione puo' essere portata vicino agli utenti.
+La capacità di elaborazione può essere portata vicino agli utenti.
 
-Questo migliora l'interazione e consente interfacce piu' ricche, anche multimediali, con un livello di astrazione piu' elevato.
+Questo migliora l'interazione e consente interfacce più ricche, anche multimediali, con un livello di astrazione più elevato.
 
 #### **5.5. Downsizing**
 
-Il **downsizing** consiste nel ridurre complessita' e costo dei singoli componenti acquistati, scegliendo macchine piu' piccole ma cooperanti.
+Il **downsizing** consiste nel ridurre complessità e costo dei singoli componenti acquistati, scegliendo macchine più piccole ma cooperanti.
 
-Invece di usare un unico sistema centrale costoso, si usano piu' componenti specializzati e dimensionati sulle esigenze reali.
+Invece di usare un unico sistema centrale costoso, si usano più componenti specializzati e dimensionati sulle esigenze reali.
 
-#### **5.6. Affidabilita' e disponibilita'**
+#### **5.6. Affidabilità e disponibilità**
 
-Un'architettura distribuita puo' aumentare:
+Un'architettura distribuita può aumentare:
 
-- affidabilita';
+- affidabilità;
 - tolleranza ai guasti;
-- disponibilita' complessiva.
+- disponibilità complessiva.
 
-Se una macchina si guasta, alcune attivita' possono essere spostate su altre macchine.
+Se una macchina si guasta, alcune attività possono essere spostate su altre macchine.
 
 Se una connessione si interrompe, connessioni ridondanti possono permettere comunque l'instradamento delle comunicazioni.
 
 #### **5.7. Scalabilita'**
 
-Un sistema distribuito puo' crescere nel tempo.
+Un sistema distribuito può crescere nel tempo.
 
-E' possibile aggiungere:
+È possibile aggiungere:
 
 - nodi;
 - servizi;
 - funzioni;
 - periferiche;
-- capacita' di calcolo.
+- capacità di calcolo.
 
-Questo consente di adattare il sistema alla crescita degli utenti e dei carichi senza eliminare cio' che e' gia' stato acquistato.
+Questo consente di adattare il sistema alla crescita degli utenti e dei carichi senza eliminare ciò che è già stato acquistato.
 
 ---
 
@@ -189,7 +187,7 @@ Un **sistema operativo di rete** consente l'interazione tra componenti di un sis
 
 In questo modello:
 
-- il processo sa che una risorsa e' remota;
+- il processo sa che una risorsa è remota;
 - l'utente spesso deve sapere dove si trova la risorsa;
 - il sistema operativo supporta il reperimento e l'uso della risorsa, ma non nasconde completamente la distribuzione.
 
@@ -212,7 +210,7 @@ Un sistema operativo di rete deve supportare:
 
 #### **7.2. Accesso a file remoti**
 
-Nel sistema operativo di rete, l'accesso a file remoti puo' avvenire come:
+Nel sistema operativo di rete, l'accesso a file remoti può avvenire come:
 
 - trasferimento da remoto a locale;
 - trasferimento da locale a remoto;
@@ -226,7 +224,7 @@ Nel caso del montaggio, un file server remoto rende visibile localmente una part
 
 ### **8. Sistemi operativi distribuiti**
 
-Un **sistema operativo distribuito** ha un obiettivo piu' ambizioso.
+Un **sistema operativo distribuito** ha un obiettivo più ambizioso.
 
 Deve nascondere l'intera architettura fisica distribuita e far apparire l'insieme delle macchine come un unico sistema di elaborazione.
 
@@ -250,11 +248,11 @@ Gli utenti e i processi vedono risorse identificate univocamente, senza dover co
 - il formato interno;
 - il modo concreto di accesso.
 
-Questo consente anche di modificare la struttura hardware senza informare gli utenti, perche' il sistema operativo filtra e nasconde tali cambiamenti.
+Questo consente anche di modificare la struttura hardware senza informare gli utenti, perchè il sistema operativo filtra e nasconde tali cambiamenti.
 
 #### **8.2. Complessita'**
 
-I sistemi operativi distribuiti sono piu' complessi dei sistemi operativi di rete.
+I sistemi operativi distribuiti sono più complessi dei sistemi operativi di rete.
 
 Devono infatti realizzare la trasparenza a livello globale, coordinando nodi diversi e risorse distribuite.
 
@@ -266,11 +264,11 @@ Un sistema operativo distribuito deve gestire la **migrazione dei dati**.
 
 La migrazione dei dati consiste nello spostare informazioni tra macchine diverse.
 
-Puo' avvenire in diversi modi.
+Può avvenire in diversi modi.
 
 #### **9.1. Copia, elaborazione e salvataggio**
 
-Il sistema puo':
+Il sistema può:
 
 1. copiare un file da una macchina remota a una macchina locale;
 2. elaborarlo localmente;
@@ -280,17 +278,17 @@ Il tutto avviene in modo trasparente per il processo.
 
 #### **9.2. Copia parziale**
 
-In alternativa, il sistema puo' copiare solo porzioni del file.
+In alternativa, il sistema può copiare solo porzioni del file.
 
-Questo approccio e' simile alla paginazione:
+Questo approccio è simile alla paginazione:
 
 - non si trasferisce tutto lo spazio informativo;
 - si trasferiscono solo le parti necessarie;
 - il sistema carica progressivamente le porzioni richieste.
 
-#### **9.3. Compatibilita' dei dati**
+#### **9.3. Compatibilità dei dati**
 
-La migrazione dei dati deve affrontare il problema della compatibilita' di rappresentazione.
+La migrazione dei dati deve affrontare il problema della compatibilità di rappresentazione.
 
 Macchine diverse possono rappresentare diversamente:
 
@@ -318,7 +316,7 @@ Le forme principali sono:
 
 ### **11. Chiamata di procedura remota**
 
-La migrazione di una procedura puo' essere realizzata mediante **Remote Procedure Call**.
+La migrazione di una procedura può essere realizzata mediante **Remote Procedure Call**.
 
 In questo caso:
 
@@ -327,21 +325,19 @@ In questo caso:
 - un processo remoto esegue effettivamente la procedura;
 - i risultati vengono restituiti tramite scambio di messaggi.
 
-La RPC e' utile quando:
+La RPC è utile quando:
 
-- l'hardware remoto e' preferibile;
-- il software remoto e' piu' adatto;
+- l'hardware remoto è preferibile;
+- il software remoto è più adatto;
 - la risorsa necessaria esiste solo in remoto;
 - i dati remoti sono troppo grandi da trasferire;
 - i dati non devono essere spostati per motivi di protezione o riservatezza.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **12. Migrazione dei processi e agenti mobili**
 
-Invece di spostare una singola procedura, si puo' spostare l'intero processo.
+Invece di spostare una singola procedura, si può spostare l'intero processo.
 
 La **migrazione dei processi** trasferisce:
 
@@ -351,7 +347,7 @@ La **migrazione dei processi** trasferisce:
 - ambiente di esecuzione;
 - contesto necessario alla ripresa della computazione.
 
-Una forma moderna e' costituita dagli **agenti mobili**, entita' software che si spostano tra nodi per eseguire compiti in prossimita' delle risorse.
+Una forma moderna è costituita dagli **agenti mobili**, entità software che si spostano tra nodi per eseguire compiti in prossimità delle risorse.
 
 #### **12.1. Obiettivi**
 
@@ -365,13 +361,13 @@ La migrazione dei processi serve a:
 
 #### **12.2. Costo di gestione**
 
-La migrazione non e' sempre conveniente.
+La migrazione non è sempre conveniente.
 
 Spostare un processo richiede tempo.
 
 Se il tempo di migrazione supera il guadagno ottenuto, lo spostamento non conviene.
 
-> ⚠️ La migrazione e' utile solo se il beneficio supera il costo di trasferimento e riconfigurazione.
+> ⚠️ La migrazione è utile solo se il beneficio supera il costo di trasferimento e riconfigurazione.
 
 ---
 
@@ -381,7 +377,7 @@ Un sistema operativo distribuito deve fornire un **file system distribuito**.
 
 Il file system globale deve essere visto nello stesso modo da qualunque macchina.
 
-Questo puo' avvenire montando file system remoti in modo omogeneo e trasparente, come se fossero dischi locali.
+Questo può avvenire montando file system remoti in modo omogeneo e trasparente, come se fossero dischi locali.
 
 Il sistema deve inoltre rendere trasparente l'uso di risorse fisiche distribuite.
 
@@ -397,7 +393,7 @@ Servizi distribuiti come la posta elettronica devono essere disponibili nello st
 
 ### **14. Robustezza dei sistemi distribuiti**
 
-Un sistema distribuito puo' essere piu' robusto di un singolo sistema di elaborazione, ma solo se il sistema operativo gestisce correttamente guasti e malfunzionamenti.
+Un sistema distribuito può essere più robusto di un singolo sistema di elaborazione, ma solo se il sistema operativo gestisce correttamente guasti e malfunzionamenti.
 
 Le funzioni principali sono:
 
@@ -410,18 +406,18 @@ Le funzioni principali sono:
 
 ### **15. Rilevamento dei guasti**
 
-Il rilevamento dei guasti puo' essere effettuato tramite:
+Il rilevamento dei guasti può essere effettuato tramite:
 
 - monitoraggio periodico;
 - handshaking tra macchine;
 - timeout sulle richieste;
 - computazioni duplicate con confronto dei risultati.
 
-Se una macchina non risponde a un controllo periodico o non risponde entro un tempo massimo, puo' essere considerata non disponibile.
+Se una macchina non risponde a un controllo periodico o non risponde entro un tempo massimo, può essere considerata non disponibile.
 
-Se due computazioni duplicate producono risultati diversi, il sistema puo' rilevare un possibile errore dovuto a guasto.
+Se due computazioni duplicate producono risultati diversi, il sistema può rilevare un possibile errore dovuto a guasto.
 
-> 📌 Il timeout e' una tecnica semplice per sospettare l'indisponibilita' di una macchina o connessione.
+> 📌 Il timeout è una tecnica semplice per sospettare l'indisponibilità di una macchina o connessione.
 
 ---
 
@@ -429,17 +425,15 @@ Se due computazioni duplicate producono risultati diversi, il sistema puo' rilev
 
 In applicazioni critiche non basta rilevare l'errore: bisogna mascherarlo.
 
-Il mascheramento puo' essere ottenuto tramite:
+Il mascheramento può essere ottenuto tramite:
 
 - duplicazione delle risorse;
 - computazioni replicate;
 - votazione a maggioranza.
 
-Con la votazione, la stessa computazione viene eseguita su piu' macchine.
+Con la votazione, la stessa computazione viene eseguita su più macchine.
 
-Il risultato accettato e' quello scelto dalla maggioranza.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+Il risultato accettato è quello scelto dalla maggioranza.
 
 > ✅ Il mascheramento permette di continuare l'elaborazione anche se una parte del sistema produce risultati errati.
 
@@ -449,7 +443,7 @@ Il risultato accettato e' quello scelto dalla maggioranza.
 
 Quando viene rilevato un guasto, il sistema deve riconfigurarsi.
 
-La riconfigurazione puo' richiedere:
+La riconfigurazione può richiedere:
 
 - esclusione di un collegamento guasto;
 - esclusione di una macchina guasta;
@@ -458,7 +452,7 @@ La riconfigurazione puo' richiedere:
 - sostituzione temporanea di risorse non disponibili;
 - accettazione di prestazioni degradate.
 
-L'obiettivo e' continuare a erogare il servizio, anche se con funzionalita' o prestazioni ridotte.
+L'obiettivo è continuare a erogare il servizio, anche se con funzionalità o prestazioni ridotte.
 
 ---
 
@@ -470,11 +464,11 @@ Il ripristino richiede:
 
 - informare le altre macchine;
 - aggiornare le tabelle;
-- reinserire il nodo o collegamento nelle attivita' operative;
+- reinserire il nodo o collegamento nelle attività operative;
 - garantire la consistenza delle informazioni nei vari siti;
 - completare servizi rimasti sospesi.
 
-Per esempio, messaggi di posta non consegnati a causa di un'interruzione devono essere completati quando la connettivita' torna disponibile.
+Per esempio, messaggi di posta non consegnati a causa di un'interruzione devono essere completati quando la connettività torna disponibile.
 
 ---
 
@@ -483,12 +477,12 @@ Per esempio, messaggi di posta non consegnati a causa di un'interruzione devono 
 La progettazione di un sistema operativo per architetture distribuite deve garantire:
 
 - trasparenza dell'allocazione delle risorse;
-- mobilita' dell'utente;
-- mobilita' della computazione;
-- mobilita' dei dati;
+- mobilità dell'utente;
+- mobilità della computazione;
+- mobilità dei dati;
 - tolleranza ai guasti;
-- scalabilita' delle architetture;
-- scalabilita' delle funzioni.
+- scalabilità delle architetture;
+- scalabilità delle funzioni.
 
 La trasparenza deve riguardare:
 
@@ -498,7 +492,7 @@ La trasparenza deve riguardare:
 - file;
 - servizi.
 
-L'obiettivo e' evitare che programmatori e utenti debbano conoscere dettagli non necessari sulla localizzazione fisica delle risorse.
+L'obiettivo è evitare che programmatori e utenti debbano conoscere dettagli non necessari sulla localizzazione fisica delle risorse.
 
 > 💡 Come il file system nasconde la posizione fisica dei file sui dischi locali, il sistema operativo distribuito deve nascondere la posizione delle risorse nella rete.
 
@@ -510,13 +504,13 @@ L'obiettivo e' evitare che programmatori e utenti debbano conoscere dettagli non
 |---|---|
 | **Architettura distribuita** | Insieme di nodi interconnessi tramite rete |
 | **Eterogeneita'** | Differenze hardware, software e di rappresentazione dei dati |
-| **Vantaggi** | Integrazione, condivisione, parallelismo, downsizing, affidabilita', scalabilita' |
+| **Vantaggi** | Integrazione, condivisione, parallelismo, downsizing, affidabilità, scalabilità |
 | **Sistema operativo di rete** | Supporta risorse remote ma lascia visibile la rete |
 | **Sistema operativo distribuito** | Nasconde la rete e mostra un unico sistema logico |
 | **Migrazione dei dati** | Spostamento trasparente di file o porzioni di file |
 | **Migrazione computazionale** | RPC, migrazione di processi, agenti mobili |
 | **Robustezza** | Rilevamento, mascheramento, riconfigurazione, ripristino |
-| **Progettazione** | Trasparenza, mobilita', tolleranza ai guasti, scalabilita' |
+| **Progettazione** | Trasparenza, mobilità, tolleranza ai guasti, scalabilità |
 
 ---
 
@@ -524,6 +518,6 @@ L'obiettivo e' evitare che programmatori e utenti debbano conoscere dettagli non
 
 I sistemi distribuiti estendono il modello del sistema operativo a un insieme di macchine interconnesse.
 
-Il sistema operativo deve permettere cooperazione, condivisione e comunicazione tra nodi, gestendo al tempo stesso eterogeneita', guasti e localizzazione remota delle risorse.
+Il sistema operativo deve permettere cooperazione, condivisione e comunicazione tra nodi, gestendo al tempo stesso eterogeneità, guasti e localizzazione remota delle risorse.
 
-La differenza fondamentale e' tra sistemi operativi di rete, che supportano l'uso di risorse remote lasciando visibile la rete, e sistemi operativi distribuiti, che nascondono la distribuzione e fanno apparire l'intera architettura come un unico sistema.
+La differenza fondamentale è tra sistemi operativi di rete, che supportano l'uso di risorse remote lasciando visibile la rete, e sistemi operativi distribuiti, che nascondono la distribuzione e fanno apparire l'intera architettura come un unico sistema.
