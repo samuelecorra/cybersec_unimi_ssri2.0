@@ -25,7 +25,7 @@ La soluzione ideale sarebbe creare un **ordinamento totale** di tutti gli eventi
 
 Un ordinamento totale permetterebbe di stabilire, per qualunque coppia di eventi, quale evento è avvenuto prima.
 
-Questo però non è facilmente realizzabile in un sistema distribuito, perchè mancano due strumenti fisici fondamentali:
+Questo però non è facilmente realizzabile in un sistema distribuito, perché mancano due strumenti fisici fondamentali:
 
 - un orologio comune;
 - una memoria comune.
@@ -40,7 +40,7 @@ Senza una memoria comune non esiste un punto centrale in cui osservare direttame
 
 ### **3. Ordinamento parziale**
 
-Poichè l'ordinamento totale non è sempre disponibile, ci si accontenta di un **ordinamento parziale**.
+Poiché l'ordinamento totale non è sempre disponibile, ci si accontenta di un **ordinamento parziale**.
 
 Un ordinamento parziale stabilisce l'ordine solo tra eventi che hanno una relazione causale o logica.
 
@@ -90,7 +90,7 @@ $$
 
 La ricezione non può avvenire prima dell'invio.
 
-#### **5.3. Transitivita'**
+#### **5.3. Transitività**
 
 Se:
 
@@ -170,7 +170,7 @@ $$
 P_1 \rightarrow R_4
 $$
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260602063115.png)
 
 > 💡 Anche senza orologio globale, la propagazione dei messaggi permette di costruire vincoli di ordine tra eventi su macchine diverse.
 
@@ -220,6 +220,8 @@ Esistono due soluzioni:
 - generazione centralizzata;
 - generazione distribuita.
 
+![](imgs/Pasted%20image%2020260602063407.png)
+
 ---
 
 ### **11. Generazione centralizzata**
@@ -235,7 +237,7 @@ Vantaggi:
 Svantaggi:
 
 - collo di bottiglia;
-- rallentamento perchè tutti devono richiedere la marca al generatore;
+- rallentamento perché tutti devono richiedere la marca al generatore;
 - scarsa tolleranza ai guasti;
 - problemi se il generatore diventa irraggiungibile.
 
@@ -337,8 +339,6 @@ Se la marca di $Q$ è maggiore di quella di $P$, allora $P$ ha fatto richiesta p
 
 Se la marca di $Q$ è minore, allora $Q$ ha priorità e ritarda la risposta a $P$.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 > ✅ Il metodo distribuito usa le marche di tempo per decidere quale richiesta ha precedenza.
 
 ---
@@ -369,8 +369,6 @@ Quando un processo riceve il token:
 - se vuole entrare nella sezione critica, trattiene il token e accede alla risorsa;
 - quando termina, passa il token al processo successivo;
 - se non vuole entrare, passa subito il token al processo successivo.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 📌 Nel metodo a token, il possesso del token equivale al permesso di usare la sezione critica.
 

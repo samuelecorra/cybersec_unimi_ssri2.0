@@ -66,8 +66,6 @@ Supponiamo che la transazione $T$ inizi sulla macchina $S_i$, con coordinatore $
 
 Tutti i siti attivati dalla transazione devono cooperare per decidere se $T$ può essere chiusa con commit o deve essere abortita.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ---
 
 ### **5. Prima fase: prepare**
@@ -79,7 +77,7 @@ Il coordinatore:
 1. aggiunge al proprio log una registrazione di preparazione, per esempio:
 
 ```text
-prepare T
+<prepare T>
 ```
 
 2. invia a tutte le macchine coinvolte un messaggio:
@@ -314,8 +312,6 @@ Svantaggi:
 - molti messaggi per ottenere e rilasciare il lock;
 - algoritmi di stallo da modificare per gestire la maggioranza.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 > 📌 Nel lock a maggioranza la risorsa è concessa quando si ottiene il consenso della maggioranza delle copie.
 
 ---
@@ -391,8 +387,6 @@ Se riceve risposta, significa che un processo con priorità maggiore è attivo.
 Allora $P$ attende l'identificatore del nuovo coordinatore.
 
 Se dopo un timeout non riceve l'identificatore del nuovo coordinatore, fa ripartire l'algoritmo.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > ✅ Nell'algoritmo del bullo vince il processo attivo con priorità più alta.
 

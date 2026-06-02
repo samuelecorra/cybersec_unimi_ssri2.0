@@ -45,8 +45,6 @@ Un processo $P$ invia un messaggio a un processo $Q$.
 
 La differenza è che i buffer usati per depositare i messaggi possono trovarsi su macchine diverse.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ---
 
 ### **4. Buffer sulla macchina del mittente**
@@ -57,6 +55,8 @@ Supponiamo che:
 - il processo $Q$ sia sulla macchina $M_2$.
 
 In una prima soluzione, il messaggio viene depositato in un buffer del sistema operativo della macchina $M_1$.
+
+![](imgs/Pasted%20image%2020260602194327.png)
 
 Quando $Q$ vuole leggere il messaggio:
 
@@ -71,6 +71,8 @@ Questa soluzione mantiene il deposito iniziale vicino al mittente, ma richiede u
 ### **5. Buffer sulla macchina del ricevente**
 
 In una seconda soluzione, il processo $P$ invia il messaggio usando una primitiva che deposita direttamente il messaggio in un buffer della macchina $M_2$.
+
+![](imgs/Pasted%20image%2020260602194337.png)
 
 In questo caso:
 
@@ -106,6 +108,8 @@ Supponiamo che:
 
 Il processo $P$ invia il messaggio alla mailbox locale.
 
+![](imgs/Pasted%20image%2020260602195112.png)
+
 Quando $Q$ vuole ricevere il messaggio:
 
 1. accede alla mailbox remota;
@@ -119,6 +123,8 @@ Il trasferimento remoto avviene in modo trasparente rispetto ai processi.
 ### **8. Mailbox sulla macchina del ricevente**
 
 La mailbox può anche essere collocata sulla macchina del ricevente.
+
+![](imgs/Pasted%20image%2020260602195125.png)
 
 In questo caso:
 
@@ -154,6 +160,8 @@ Supponiamo che:
 
 Il processo $P$ scrive il messaggio nel file locale.
 
+![](imgs/Pasted%20image%2020260602200547.png)
+
 Il processo $Q$ effettua una lettura remota del file, ottenendo il messaggio.
 
 La lettura può essere realizzata:
@@ -175,6 +183,8 @@ In questo caso:
 
 Una terza possibilità è usare un server dedicato $S$.
 
+![](imgs/Pasted%20image%2020260602200602.png)
+
 In questo scenario:
 
 - $P$ opera su $M_1$;
@@ -184,8 +194,6 @@ In questo scenario:
 Il processo $P$ scrive sul file posto sul server.
 
 Il processo $Q$ legge dallo stesso file, sempre sul server.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 Questa soluzione è tipica dei sistemi in cui si usa una risorsa condivisa stabile per scambiare informazioni tra processi distribuiti.
 
@@ -197,6 +205,8 @@ I socket sono un meccanismo di comunicazione basato su una **porta virtuale**.
 
 Nel caso locale, due processi sulla stessa macchina possono usare un socket come canale di comunicazione:
 
+![](imgs/Pasted%20image%2020260602200634.png)
+
 - il mittente scrive sulla porta;
 - il ricevente legge dalla stessa porta.
 
@@ -207,6 +217,8 @@ Il processo $P$ sulla macchina $M_1$ scrive sul socket.
 Il sistema operativo trasferisce il messaggio alla controparte del socket sulla macchina $M_2$.
 
 Il processo $Q$ legge dalla porta del socket sulla propria macchina.
+
+![](imgs/Pasted%20image%2020260602200649.png)
 
 ---
 

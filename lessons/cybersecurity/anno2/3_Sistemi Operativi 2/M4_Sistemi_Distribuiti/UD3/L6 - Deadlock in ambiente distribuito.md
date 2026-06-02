@@ -183,9 +183,7 @@ Nel grafo:
 
 Se nel grafo esiste un ciclo, allora esiste uno stallo.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-In ambiente distribuito il problema è più complesso perchè:
+In ambiente distribuito il problema è più complesso perché:
 
 - ogni macchina possiede un proprio grafo locale;
 - uno stallo può coinvolgere processi posti su macchine diverse;
@@ -200,6 +198,8 @@ Ogni macchina mantiene un proprio **grafo di attesa locale**.
 Se in un grafo locale esiste un ciclo, allora lo stallo è sicuramente presente almeno su quella macchina.
 
 Se invece non esistono cicli locali, non si può concludere che il sistema sia libero da stallo.
+
+![](imgs/Pasted%20image%2020260602192311.png)
 
 Infatti uno stallo può comparire solo nel grafo ottenuto come unione dei grafi locali:
 
@@ -223,8 +223,6 @@ Il coordinatore:
 - costruisce il grafo di attesa globale;
 - cerca cicli nel grafo globale;
 - segnala lo stallo quando viene individuato un ciclo.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 Questa soluzione richiede di distinguere tra:
 
@@ -259,6 +257,8 @@ In questo caso:
 - il grafo globale può essere meno aggiornato;
 - il coordinatore lavora su una fotografia approssimata dello stato reale.
 
+![](imgs/Pasted%20image%2020260602192514.png)
+
 Il coordinatore analizza poi il grafo globale e cerca eventuali cicli.
 
 ---
@@ -281,13 +281,13 @@ $$
 
 Il nodo $P_{ex}$ indica che l'attesa coinvolge una risorsa o un processo presente su un'altra macchina.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ---
 
 ### **14. Cicli con il nodo P_ex**
 
 Nel grafo locale possono verificarsi due casi.
+
+![](imgs/Pasted%20image%2020260602193024.png)
 
 Se esiste un ciclo che **non coinvolge** $P_{ex}$, allora lo stallo è sicuramente locale.
 
