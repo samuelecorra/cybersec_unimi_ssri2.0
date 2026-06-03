@@ -172,4 +172,8 @@ $$
     - Funzione identità → non è one-way.
         
     - $x^2 \bmod n$ → pre-image ok, ma second pre-image debole.
+
+---
+
+> 💡 **Prossimo passo per l'esame:** ora conosci la definizione formale di one-wayness. L'appello 250704 chiede di applicarla a $H(x) = \text{DES}_k(x)$ in tre scenari distinti ($k$ variabile, fisso noto, fisso ignoto) — argomento da **15 punti**. Vai a [UD4 / L1 – H(x)=DES_k(x): analisi one-wayness](../UD4_Approfondimenti_Esame/L1%20-%20H%28x%29%3DDES_k%28x%29%20-%20analisi%20one-wayness.md) per la trattazione completa dei tre casi.
         

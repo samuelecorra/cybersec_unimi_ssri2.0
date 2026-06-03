@@ -176,3 +176,7 @@ Tali quantità sono **computazionalmente proibitive**, quindi l’algoritmo è c
 - La **sicurezza** dipende dalla robustezza della funzione hash e dalla segretezza della chiave.
     
 - L’uso di un **output troncato** è accettabile purché sufficientemente lungo (≥ n/2).
+
+---
+
+> 💡 **Prossimo passo per l’esame:** ora sai perché HMAC è sicuro. Gli appelli 230124 e 250905 propongono uno schema MAC personalizzato (AES diretto per messaggi corti, AES(h(m)) per messaggi lunghi) e chiedono di trovarne l’attacco — argomento da **15–20 punti**. Vai a [UD4 / L2 – MAC personalizzato AES+hash: attacco per collisione](../UD4_Approfondimenti_Esame/L2%20-%20MAC%20personalizzato%20AES%2Bhash%20-%20attacco%20per%20collisione.md) per la dimostrazione della forgery con una sola query.
