@@ -66,6 +66,7 @@ YOU MUST extract the subject and file dynamically from the prompt. Do not assume
 
 - M1 UD1: [PENDING]
 
-### Crittografia [NEXT FOCUS]
+### Crittografia [IN PROGRESS]
 
-- M1 UD1: [PENDING]
+- M7_Appelli_Svolti/UD3_Anno_2025: [COMPLETED] — creati L0 (intro) + L1-L6 (6 appelli 2025 con soluzioni complete passo-passo)
+- M1 UD1 (teoria): [NEXT TASK]
