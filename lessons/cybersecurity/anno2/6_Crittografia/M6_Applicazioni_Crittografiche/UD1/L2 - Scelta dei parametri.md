@@ -170,3 +170,7 @@ Questa tecnica produce **parametri robusti** per l’accordo di chiavi Diffie-He
 - Esiste una **procedura efficiente** per trovarli con probabilità elevata.
     
 - Per garantire sicurezza, i valori di $p$ devono essere grandi (≥ 2048 bit) e i generatori scelti con cura per evitare sottogruppi deboli.
+
+---
+
+> 💡 **Prossimo passo per l'esame:** ora conosci il criterio teorico per i generatori. L'appello 230922 chiede di **dimostrare numericamente** che $g=10$ è radice primitiva di $\mathbb{Z}_{19}^*$ (~4 punti). Vai a [UD5 / L1 – Verifica numerica che g è radice primitiva di Z_p](../UD5_Approfondimenti_Esame/L1%20-%20Verifica%20numerica%20radice%20primitiva.md) per i due metodi svolti passo-passo (enumerazione completa delle potenze e criterio efficiente con fattorizzazione di p-1).
