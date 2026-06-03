@@ -296,3 +296,7 @@ Un cifrario simmetrico si fonda su **cinque elementi essenziali**:
     
 
 La combinazione di **sostituzione e trasposizione** costituisce la base della **crittografia classica**, da cui evolveranno tutti i cifrari moderni.
+
+---
+
+> 💡 **Prossimo passo per l'esame:** ora che conosci i cifrari a trasposizione (Rail Fence, colonne), sei pronto per la loro formalizzazione algebrica e per imparare a **comporre due permutation cipher** — un argomento che vale **15 punti** nell'appello 2024. Vai a [UD4 / L2 – Composizione di cifrari a permutazione](../UD4_Approfondimenti_Esame/L2%20-%20Composizione%20di%20cifrari%20a%20permutazione.md) dopo aver completato anche L3 e L4 di questa unità.

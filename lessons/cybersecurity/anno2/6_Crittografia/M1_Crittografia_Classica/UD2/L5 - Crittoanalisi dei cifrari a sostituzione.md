@@ -258,3 +258,7 @@ $$
     
 
 💡 _Conclusione:_ la crittografia classica ci ha mostrato come dalla pura linguistica e statistica si sia passati alla **matematizzazione della sicurezza** — il passo decisivo verso la crittografia moderna.
+
+---
+
+> 💡 **Prossimo passo per l'esame:** hai appena visto l'OTP e la cifratura XOR su singoli bit. Ora sei pronto per generalizzare il concetto di sostituzione all'**alfabeto binario di n bit** — un argomento che vale **30 punti** negli appelli 2024 e 2025. Vai a [UD4 / L1 – Cifrari a sostituzione su parole binarie di n bit](../UD4_Approfondimenti_Esame/L1%20-%20Cifrari%20a%20sostituzione%20su%20parole%20binarie%20di%20n%20bit.md) per completare la preparazione su questo argomento!

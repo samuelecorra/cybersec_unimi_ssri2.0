@@ -196,3 +196,7 @@ In questa lezione abbiamo studiato i principali **cifrari a sostituzione monoalf
 
 Tutti questi metodi si basano su un **principio comune**:  
 a ogni simbolo del messaggio in chiaro corrisponde **una sola** lettera nel messaggio cifrato.
+
+---
+
+> 💡 **Prossimo passo per l'esame:** ora che conosci i cifrari a sostituzione su alfabeto di 26 lettere, sei pronto per la loro generalizzazione al caso binario — un argomento che vale **30 punti** negli appelli 2024 e 2025. Vai a [UD4 / L1 – Cifrari a sostituzione su parole binarie di n bit](../UD4_Approfondimenti_Esame/L1%20-%20Cifrari%20a%20sostituzione%20su%20parole%20binarie%20di%20n%20bit.md) dopo aver completato anche L4 e L5 di questa unità.
