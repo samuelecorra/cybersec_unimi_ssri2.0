@@ -171,3 +171,7 @@ che conferma la **correttezza matematica** del processo di verifica.
 - Lo schema è utilizzabile **solo per la generazione di firme** (non per la cifratura).
     
 - La sicurezza del DSS dipende dalla **casualità di $r$** e dalla **robustezza della funzione hash** utilizzata.
+
+---
+
+> 💡 **Prossimo passo per l'esame:** ora conosci le formule di firma e verifica DSA. Gli appelli 230622, 240624 e 240220 chiedono cosa succede quando δ=0 nella firma prodotta — argomento da **10 punti** per appello. Vai a [UD4 / L1 – DSA: firma (a,0) e caso δ=0](../UD4_Approfondimenti_Esame/L1%20-%20DSA%20-%20firma%20%28a%2C0%29%20e%20caso%20delta%3D0.md) per la dimostrazione completa della rottura della chiave privata e la risposta alla domanda "bisogna rigenerare r?".
