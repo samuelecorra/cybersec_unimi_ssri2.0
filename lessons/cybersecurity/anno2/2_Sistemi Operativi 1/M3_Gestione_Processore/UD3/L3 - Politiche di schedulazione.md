@@ -252,13 +252,13 @@ $$
 
 La scelta dipende dalla **combinazione** delle caratteristiche hardware (omogeneità dei processori, presenza di memoria locale, accessibilità delle periferiche):
 
-| Processori | Memoria | Periferiche | Strategia tipica |
-| --- | --- | --- | --- |
-| Omogenei | Solo condivisa | Accessibili da tutti | **Coda unica** o **una coda per processore** (entrambe in memoria condivisa) |
-| Omogenei | Condivisa + locale | Accessibili da tutti | Coda per processore, **collocabile nella memoria locale** per velocizzare l'accesso |
-| Omogenei | Solo condivisa | **Periferiche specializzate** (solo alcune CPU vi accedono) | **Coda dedicata per i processori specializzati** + coda generale per gli altri |
-| Omogenei | Condivisa + locale | Periferiche specializzate | Idem, ma la coda specializzata può stare nella **memoria locale** dei processori dedicati |
-| Eterogenei | — | — | Una **coda per ciascun processore**, oppure **una per ciascun gruppo omogeneo** |
+| Processori | Memoria            | Periferiche                                                 | Strategia tipica                                                                          |
+| ---------- | ------------------ | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Omogenei   | Solo condivisa     | Accessibili da tutti                                        | **Coda unica** o **una coda per processore** (entrambe in memoria condivisa)              |
+| Omogenei   | Condivisa + locale | Accessibili da tutti                                        | Coda per processore, **collocabile nella memoria locale** per velocizzare l'accesso       |
+| Omogenei   | Solo condivisa     | **Periferiche specializzate** (solo alcune CPU vi accedono) | **Coda dedicata per i processori specializzati** + coda generale per gli altri            |
+| Omogenei   | Condivisa + locale | Periferiche specializzate                                   | Idem, ma la coda specializzata può stare nella **memoria locale** dei processori dedicati |
+| Eterogenei | —                  | —                                                           | Una **coda per ciascun processore**, oppure **una per ciascun gruppo omogeneo**           |
 
 #### **9.3. Tipi di multiprocessamento**
 

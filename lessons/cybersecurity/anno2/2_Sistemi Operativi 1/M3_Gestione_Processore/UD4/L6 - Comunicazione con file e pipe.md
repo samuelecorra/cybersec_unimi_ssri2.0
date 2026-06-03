@@ -4,7 +4,7 @@
 
 ### **1. Introduzione**
 
-In questa lezione concludiamo l'unità sulla **comunicazione tra processi**, analizzando due meccanismi fondamentali dei sistemi operativi:  
+In questa lezione analizziamo due meccanismi fondamentali dei sistemi operativi:  
 la **comunicazione tramite file condivisi** e quella tramite **pipe** (_condotte_).
 
 Entrambi i metodi permettono a più processi di **scambiarsi informazioni** senza condividere direttamente la memoria, ma scrivendo e leggendo dati attraverso un intermediario gestito dal **file system** o dal **kernel**.

@@ -1,5 +1,7 @@
 # **Lezione 3: Protocollo di Spanning Tree (STP)**
 
+---
+
 ### **1. Il problema dei loop di livello 2**
 
 A differenza dei protocolli di rete come **IP**, i protocolli di livello 2 (come **Ethernet**) **non possiedono un campo TTL (Time To Live)** all’interno dell’intestazione dei frame.  

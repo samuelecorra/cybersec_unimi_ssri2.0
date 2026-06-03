@@ -1,5 +1,7 @@
 # **Lezione 6: Switched Ethernet**
 
+---
+
 ### **1. Dall’Ethernet condivisa all’Ethernet commutata**
 
 Le prime reti Ethernet utilizzavano un **mezzo condiviso** (cavo coassiale o hub), dove tutti i nodi ricevevano tutti i frame.  

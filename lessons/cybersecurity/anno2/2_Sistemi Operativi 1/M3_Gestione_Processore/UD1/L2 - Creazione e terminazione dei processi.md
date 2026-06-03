@@ -255,7 +255,7 @@ $$
 \end{cases}  
 $$
 
-In questi casi viene tipicamente invocata la funzione di sistema **`abort()`**, che gestisce la terminazione con anomalie del comportamento del processo, eventualmente attivando il **post-mortem debugging** (visto nella lezione precedente).
+In questi casi viene tipicamente invocata la funzione di sistema **`abort()`**, che gestisce la terminazione con anomalie del comportamento del processo, eventualmente attivando il **post-mortem debugging**.
 
 ##### **Terminazione a cascata**
 

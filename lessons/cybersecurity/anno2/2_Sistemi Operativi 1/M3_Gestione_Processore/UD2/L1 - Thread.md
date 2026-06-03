@@ -55,7 +55,7 @@ $$
 \begin{cases}  
 \textbf{Problema 1:}~ & \text{ogni processo ha un solo flusso di controllo (un solo thread).} \\\\  
 \textbf{Problema 2:}~ & \text{durante un’operazione di I/O, la CPU rimane inutilizzata.} \\\\  
-\textbf{Problema 3:}~ & \text{la comunicazione tra processi richiede passaggi complessi e lenti (IPC).}  
+\textbf{Problema 3:}~ & \text{la comunicazione tra processi richiede passaggi complessi e lenti (IPC, Inter Process Communication).}  
 \end{cases}  
 $$
 
