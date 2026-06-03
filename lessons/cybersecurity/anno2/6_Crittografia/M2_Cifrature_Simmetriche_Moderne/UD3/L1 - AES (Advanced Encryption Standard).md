@@ -177,3 +177,7 @@ Abbiamo visto:
 
 ➡️ Dal **2001**, l’AES è lo **standard di cifratura simmetrica** riconosciuto a livello mondiale.  
 Opera su **blocchi da 128 bit** e supporta **chiavi di 128, 192 o 256 bit**, combinando **efficienza** e **sicurezza elevata**.
+
+---
+
+> 💡 **Prossimo passo per l’esame:** dopo aver completato le lezioni L1–L4 di questa unità, studia la variante AES-X che aggiunge XOR con una seconda chiave — argomento da **20 punti** negli appelli 2023 e 2025. Vai a [UD5 / L2 – AES-X: key whitening e analisi sicurezza KPT](../UD5_Approfondimenti_Esame/L2%20-%20AES-X%20-%20key%20whitening%20e%20analisi%20sicurezza%20KPT.md) per capire perché la doppia chiave non aggiunge sicurezza sotto known-plaintext attack.

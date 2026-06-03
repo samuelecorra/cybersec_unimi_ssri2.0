@@ -256,3 +256,7 @@ In sintesi:
 - Tutti i **cifrari a blocchi moderni** (come AES) adottano le **stesse modalità standard**.
     
 - La **scelta della modalità** influisce direttamente su **sicurezza, prestazioni e propagazione degli errori**.
+
+---
+
+> 💡 **Prossimo passo per l'esame:** ora conosci la struttura OFB ($w_t = E_K(w_{t-1})$, $c_t = m_t \oplus w_t$). Gli appelli 230907 e 230908 chiedono una **dimostrazione formale step-by-step** per dedurre l'intero keystream dato un blocco plaintext noto — argomento da **30 punti**. Vai a [UD5 / L3 – Modalità OFB personalizzata: deduzione formale del keystream](../UD5_Approfondimenti_Esame/L3%20-%20Modalità%20OFB%20personalizzata%20-%20deduzione%20formale%20del%20keystream.md) per la dimostrazione completa.

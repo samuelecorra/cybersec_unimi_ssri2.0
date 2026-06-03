@@ -180,3 +180,7 @@ Abbiamo visto:
 
 In sintesi, la rete di Feistel rappresenta il **cuore concettuale** di gran parte dei cifrari simmetrici moderni,  
 permettendo di combinare sicurezza teorica e implementazione pratica.
+
+---
+
+> 💡 **Prossimo passo per l'esame:** ora conosci la struttura XOR + funzione di round di Feistel. Agli esami il professore costruisce cifrari *toy* non-standard con hash e XOR, chiedendo decifratura e CPA attack — argomento da **35 punti**. Vai a [UD5 / L1 – Cifrari non-standard XOR+hash: decifratura e CPA attack](../UD5_Approfondimenti_Esame/L1%20-%20Cifrari%20non-standard%20XOR%2Bhash%20-%20decifratura%20e%20CPA%20attack.md) per essere pronto a questi esercizi!
