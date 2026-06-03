@@ -331,3 +331,7 @@ Oltre agli attacchi matematici, RSA può essere vulnerabile anche a **side-chann
     - **Fisici** (basati su tempi, potenza o radiazioni elettromagnetiche)
         
 - Una corretta implementazione e un’adeguata lunghezza delle chiavi sono **essenziali per mantenere RSA sicuro**.
+
+---
+
+> 💡 **Prossimo passo per l’esame:** ora conosci CCA, Common Modulus e Low Exponent. Gli appelli 240708 e 250715 chiedono di analizzare la variante **Double-RSA** — due cifrature RSA in cascata con esponenti diversi — e spiegarne la sicurezza effettiva (**10 punti**). Vai a [UD5 / L1 – Double-RSA: analisi di sicurezza](../UD5_Approfondimenti_Esame/L1%20-%20Double-RSA%20-%20analisi%20di%20sicurezza.md) per la dimostrazione completa di equivalenza con RSA singolo.
