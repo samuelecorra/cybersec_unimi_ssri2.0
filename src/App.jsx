@@ -134,16 +134,23 @@ export default function App() {
               <polygon points="11,5 17,8.5 17,15.5 11,19 5,15.5 5,8.5" stroke="currentColor" strokeWidth="0.8" fill="currentColor" fillOpacity="0.06" opacity="0.6" />
               <circle cx="11" cy="12" r="2" fill="currentColor" />
             </svg>
-            <span className="logo-text">Samu CyberLocker</span>
+            <span className="logo-text hidden sm:inline">Samu CyberLocker</span>
           </h1>
         </div>
         <SearchBar query={searchQuery} onChange={setSearchQuery} />
-        <div className="header-right">
+        <div className="header-right hidden sm:flex">
           <span className="file-count">{allFiles.length} files</span>
         </div>
       </header>
 
       <div className="main">
+        {sidebarOpen && (
+          <div
+            className="sidebar-backdrop"
+            onClick={() => setSidebarOpen(false)}
+            aria-hidden="true"
+          />
+        )}
         {sidebarOpen && (
           <Sidebar
             tree={tree}

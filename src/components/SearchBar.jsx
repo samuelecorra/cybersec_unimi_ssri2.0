@@ -19,7 +19,7 @@ function SearchBar({ query, onChange }) {
   }, [onChange]);
 
   return (
-    <div className="search-bar">
+    <div className="search-bar min-w-0">
       <span className="search-icon">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
           <circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" strokeWidth="1.5" />
@@ -29,7 +29,7 @@ function SearchBar({ query, onChange }) {
       <input
         ref={inputRef}
         type="text"
-        className="search-input"
+        className="search-input min-w-0"
         placeholder="Cerca lezioni… (Ctrl+K)"
         value={query}
         onChange={(e) => onChange(e.target.value)}

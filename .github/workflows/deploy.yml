@@ -17,6 +17,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Playwright is a dev-only validation tool (scripts/mobile-overflow-check.mjs);
+      # the production build never needs its browsers, so skip the heavy download in CI.
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
     steps:
       - uses: actions/checkout@v4
 

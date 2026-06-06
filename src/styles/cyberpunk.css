@@ -1,9 +1,20 @@
 /* ═══════════════════════════════════════════════════════════════
    CYBERLOCKER — Enhanced Cyberpunk Theme v2
    Neon-lit, glassmorphic, high-tech knowledge vault
+
+   Tailwind v4 provides the responsive layout engine (utilities layer);
+   the cyberpunk theme below lives in @layer legacy so responsive Tailwind
+   utilities added in the JSX reliably win the cascade over the theme rules.
+   Tailwind preflight is intentionally NOT imported, to preserve the
+   markdown list markers and heading sizes defined under .markdown-body.
    ═══════════════════════════════════════════════════════════════ */
 
+@layer theme, base, legacy, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@600;700;800&display=swap");
+
+@layer legacy {
 
 /* ── CSS Variables ── */
 :root {
@@ -64,8 +75,11 @@ body {
   color: var(--text-primary);
   overflow: hidden;
   height: 100vh;
+  height: 100dvh; /* iOS: account for the dynamic Safari toolbar */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 /* Scanline overlay */
@@ -101,6 +115,7 @@ body::before {
   position: relative;
   z-index: 1;
   height: 100vh;
+  height: 100dvh; /* iOS: account for the dynamic Safari toolbar */
 }
 
 /* ── App Layout ── */
@@ -108,6 +123,7 @@ body::before {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh; /* iOS: account for the dynamic Safari toolbar */
 }
 
 /* ── Header ── */
@@ -953,8 +969,11 @@ body::before {
 .viewer-content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden; /* page-level safety net: long content never scrolls the whole doc */
   padding: 36px 44px;
   max-width: 900px;
+  width: 100%;
+  min-width: 0;
   margin: 0 auto;
 }
 
@@ -965,6 +984,19 @@ body::before {
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.01em;
+  /* Break long words / URLs / inline tokens instead of pushing the page wider */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+}
+
+/* Long inline code & links must never force horizontal page scroll */
+.markdown-body p,
+.markdown-body li,
+.markdown-body a,
+.markdown-body .inline-code {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .markdown-body h1,
@@ -1867,14 +1899,54 @@ body::before {
   font-weight: 500;
 }
 
+/* Backdrop behind the mobile sidebar overlay (hidden on desktop) */
+.sidebar-backdrop {
+  display: none;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   :root {
-    --sidebar-width: 260px;
+    --sidebar-width: 82vw;
+  }
+
+  .header {
+    padding: 0 12px;
+    gap: 10px;
+  }
+
+  /* Main becomes the positioning context for the sidebar overlay */
+  .main {
+    position: relative;
+  }
+
+  /* Sidebar slides over the content instead of squeezing it */
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 200;
+    max-width: 320px;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.55);
+  }
+
+  .sidebar-backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 150;
+    background: rgba(3, 3, 12, 0.55);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+  }
+
+  .content-area {
+    width: 100%;
   }
 
   .viewer-content {
-    padding: 20px;
+    padding: 18px 16px;
   }
 
   .content-header {
@@ -1882,6 +1954,21 @@ body::before {
     align-items: flex-start;
     gap: 8px;
     padding: 8px 16px;
+  }
+
+  /* Tame heading & math sizes so nothing pushes past the viewport */
+  .markdown-body h1 {
+    font-size: 1.5rem;
+  }
+  .markdown-body h2 {
+    font-size: 1.25rem;
+  }
+  .markdown-body h3 {
+    font-size: 1.08rem;
+  }
+
+  .katex-display {
+    padding: 12px 14px;
   }
 
   .browse-grid {
@@ -1978,3 +2065,5 @@ body::before {
   border-radius: 0 !important;
   tab-size: 2;
 }
+
+} /* ── end @layer legacy ── */
