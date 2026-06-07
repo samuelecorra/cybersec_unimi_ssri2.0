@@ -7,7 +7,7 @@
 // the new files sit at the same depth under 6_Crittografia/), plus a source tag.
 //
 // Idempotent: re-running overwrites the generated files.
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from 'fs';
 import { join } from 'path';
 
 const CRYPTO = 'c:/Users/nabis/samu-cyberlocker/lessons/cybersecurity/anno2/6_Crittografia';
@@ -22,7 +22,11 @@ const MODULES = {
   M6: { dir: 'M6_Applicazioni_Crittografiche',   ud: 'UD6_Esercizi_Appelli', title: 'Applicazioni Crittografiche' },
 };
 
-// Exams in chronological order. q maps Domanda number -> [moduleKey, topic slug].
+// q maps Domanda number -> [moduleKey, topic slug]. Gli appelli 2024/2025 sono
+// elencati per primi per preservare la numerazione esistente delle unità
+// per-modulo; gli appelli 2023 sono accodati in fondo (ogni file porta comunque
+// il tag [AAAA-MM-GG], quindi l'anno resta evidente).
+// NB: 230908 (08/09/2023) ha testo identico a 230907 → escluso per non duplicare.
 const EXAMS = [
   { ud: 'UD2_Anno_2024', file: 'L1 - Appello 17 gennaio 2024.md', iso: '2024-01-17', label: '17 gennaio 2024',
     q: { 1: ['M1', 'Sostituzione su blocchi binari'], 2: ['M2', 'AES'], 3: ['M4', 'Funzioni hash'], 4: ['M3', 'El-Gamal'] } },
@@ -50,6 +54,21 @@ const EXAMS = [
     q: { 1: ['M1', 'Cifrario affine'], 2: ['M2', 'Double DES e meet-in-the-middle'], 3: ['M4', 'Funzioni MAC'], 4: ['M6', 'Secret Sharing'] } },
   { ud: 'UD3_Anno_2025', file: 'L6 - Appello 19 settembre 2025.md', iso: '2025-09-19', label: '19 settembre 2025',
     q: { 1: ['M1', 'Cifrari classici attacchi e resistenza'], 2: ['M2', 'DES doppio e AES-X'], 3: ['M5', 'Firma DSS'], 4: ['M6', 'Secret Sharing'] } },
+  // ── Appelli 2023 (accodati per preservare la numerazione 2024/2025) ──
+  { ud: 'UD1_Anno_2023', file: 'L1 - Appello 24 gennaio 2023.md', iso: '2023-01-24', label: '24 gennaio 2023',
+    q: { 1: ['M1', 'Cifrari classici attacchi e resistenza'], 2: ['M4', 'MAC AES-hash con attacco di collisione'], 3: ['M5', 'Firma DSS'], 4: ['M6', 'Secret Sharing'] } },
+  { ud: 'UD1_Anno_2023', file: 'L2 - Appello 16 febbraio 2023.md', iso: '2023-02-16', label: '16 febbraio 2023',
+    q: { 1: ['M1', 'Vigenere IC e MIC'], 2: ['M2', 'Cifrario a blocchi hash e XOR'], 3: ['M2', 'Modalita operative del DES'], 4: ['M3', 'El-Gamal'] } },
+  { ud: 'UD1_Anno_2023', file: 'L3 - Appello 22 giugno 2023.md', iso: '2023-06-22', label: '22 giugno 2023',
+    q: { 1: ['M1', 'Cifrario affine e doppia cifratura'], 2: ['M2', 'Modalita operative del DES'], 3: ['M3', 'RSA correttezza e fattorizzazione da phi'], 4: ['M5', 'Firma DSS e caso (a,0)'] } },
+  { ud: 'UD1_Anno_2023', file: 'L4 - Appello 7 luglio 2023.md', iso: '2023-07-07', label: '7 luglio 2023',
+    q: { 1: ['M1', 'Cifrari classici attacchi e resistenza'], 2: ['M2', 'Cifrario a blocchi hash e XOR'], 3: ['M6', 'Certificati digitali'], 4: ['M3', 'El-Gamal'] } },
+  { ud: 'UD1_Anno_2023', file: 'L5 - Appello 12 luglio 2023.md', iso: '2023-07-12', label: '12 luglio 2023',
+    q: { 1: ['M1', 'Hill'], 2: ['M2', 'Feistel a 2 round'], 3: ['M3', 'Parametri RSA e cenni ECC'], 4: ['M6', 'Diffie-Hellman'] } },
+  { ud: 'UD1_Anno_2023', file: 'L6 - Appello 7 settembre 2023.md', iso: '2023-09-07', label: '7 settembre 2023',
+    q: { 1: ['M1', 'Playfair'], 2: ['M2', 'Modalita OFB con keystream riusato'], 3: ['M4', 'MAC e HMAC'], 4: ['M6', 'Secret Sharing'] } },
+  { ud: 'UD1_Anno_2023', file: 'L8 - Appello 22 settembre 2023.md', iso: '2023-09-22', label: '22 settembre 2023',
+    q: { 1: ['M1', 'Hill'], 2: ['M2', 'Meet-in-the-middle e AES-X'], 3: ['M3', 'RSA vs fattorizzazione e ottimizzazioni'], 4: ['M6', 'Diffie-Hellman'] } },
 ];
 
 // Pre-existing broken prerequisite links in the M7 source (wrong filenames):
@@ -70,6 +89,9 @@ const PATHFIX = [
 
 // Encode only the chars that break Markdown link parsing (space + parens).
 const encUrl = (p) => p.replace(/ /g, '%20').replace(/\(/g, '%28').replace(/\)/g, '%29');
+
+// ISO date (aaaa-mm-gg) -> Italian date (gg-mm-aaaa) for filenames.
+const itDate = (iso) => { const [y, m, d] = iso.split('-'); return `${d}-${m}-${y}`; };
 
 // Fix broken filenames, then regenerate every link URL from its authoritative
 // code-span path  [`PATH`](...)  so the URL always matches a real file.
@@ -128,11 +150,17 @@ for (const mod of Object.keys(MODULES)) {
   const items = perModule[mod] || [];
   const dir = join(CRYPTO, meta.dir, meta.ud);
   mkdirSync(dir, { recursive: true });
+  // Clean stale files first so chronological renumbering doesn't leave orphans
+  for (const old of readdirSync(dir)) if (old.endsWith('.md')) rmSync(join(dir, old));
+
+  // Chronological order (oldest first); 2-digit numeric prefix keeps the
+  // filesystem/IDE sort correct while the [gg-mm-aaaa] tag shows the Italian date.
+  items.sort((a, b) => a.iso.localeCompare(b.iso));
 
   const indexLines = [];
   items.forEach((it, idx) => {
     const n = idx + 1;
-    const fname = `L${n} - [${it.iso}] ${asciiSlug(it.slug)}.md`;
+    const fname = `${String(n).padStart(2, '0')} - [${itDate(it.iso)}] ${asciiSlug(it.slug)}.md`;
     const backRel = `../../M7_Appelli_Svolti/${it.examUd}/${enc(it.examFile)}`;
     const header =
 `# ${it.slug} — Esercizio d'esame
@@ -144,7 +172,7 @@ for (const mod of Object.keys(MODULES)) {
 
 `;
     writeFileSync(join(dir, fname), header + fixLinks(it.section) + '\n', 'utf8');
-    indexLines.push(`${n}. [${it.slug}](${enc(fname)}) — appello ${it.label}, Domanda ${it.qn}`);
+    indexLines.push(`${n}. [${it.slug}](${encUrl(fname)}) — appello ${it.label}, Domanda ${it.qn}`);
     totalFiles++;
   });
 
@@ -160,7 +188,7 @@ for (const mod of Object.keys(MODULES)) {
 
 ${indexLines.join('\n')}
 `;
-  writeFileSync(join(dir, 'L0 - Intro.md'), intro, 'utf8');
+  writeFileSync(join(dir, '00 - Intro.md'), intro, 'utf8');
   summary.push(`${mod} (${meta.dir}/${meta.ud}): ${items.length} esercizi`);
 }
 

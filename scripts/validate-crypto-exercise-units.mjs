@@ -60,7 +60,7 @@ const MODS = [
 
 // Build a lookup of every source section text -> true, for fidelity matching.
 const allSections = [];
-for (const ud of ['UD2_Anno_2024', 'UD3_Anno_2025']) {
+for (const ud of ['UD1_Anno_2023', 'UD2_Anno_2024', 'UD3_Anno_2025']) {
   for (const f of readdirSync(join(M7, ud)).filter((x) => /^L[1-9].*\.md$/.test(x))) {
     const secs = extractDomande(readFileSync(join(M7, ud, f), 'utf8'));
     for (const n of Object.keys(secs)) allSections.push(fixLinks(secs[n]));
@@ -72,7 +72,7 @@ const problems = [];
 
 for (const [mdir, ud] of MODS) {
   const dir = join(CRYPTO, mdir, ud);
-  for (const f of readdirSync(dir).filter((x) => /^L[1-9].*\.md$/.test(x))) {
+  for (const f of readdirSync(dir).filter((x) => /^\d{2} - \[/.test(x))) {
     const full = join(dir, f);
     const content = readFileSync(full, 'utf8');
 

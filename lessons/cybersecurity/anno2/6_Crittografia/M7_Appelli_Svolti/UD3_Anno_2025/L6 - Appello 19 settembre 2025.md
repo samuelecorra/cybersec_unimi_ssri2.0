@@ -65,7 +65,7 @@ _Esempio:_ attacchi adaptativi su blocchi di ECB, acronimo che significa Electro
 
 **4. Chosen Ciphertext Attack (CCA):**
 
-L'avversario può scegliere testi cifrati arbitrari e ottenere i corrispondenti testi in chiaro decifrati (accesso a un oracolo di decifratura). È il modello di attacco più forte.
+L'avversario può scegliere testi cifrati arbitrari e ottenere i corrispondenti testi in chiaro decifrati (accesso a un oracolo di decifratura). È il modello di attacco più forte. Attenzione: si presuppone che non possa però chiedere la decrittazione del cyphertext challenge, ovvero proprio di quello che desidera attaccare; l'attacco si appoggia sulla decrittazione di testi *simili*, con tecniche come il padding, che gli forniscono indizi sulla chiave.
 
 _Esempio:_ padding oracle attack su TLS (POODLE, BEAST).
 

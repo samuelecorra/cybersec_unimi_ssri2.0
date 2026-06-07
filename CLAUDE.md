@@ -69,5 +69,6 @@ YOU MUST extract the subject and file dynamically from the prompt. Do not assume
 ### Crittografia [IN PROGRESS]
 
 - M7_Appelli_Svolti/UD3_Anno_2025: [COMPLETED] — creati L0 (intro) + L1-L6 (6 appelli 2025 con soluzioni complete passo-passo)
-- Unità extra "Esercizi_Appelli" per modulo: [COMPLETED] — per ogni modulo M1-M6 creata una UD nuova (n+1) che accorpa, un file per esercizio, tutte le domande degli appelli M7 di quel solo modulo (52 esercizi: M1=11, M2=13, M3=8, M4=9, M5=3, M6=8). Copie verbatim con tag fonte; link prerequisiti corretti. Generate da `scripts/build-crypto-exercise-units.mjs` (+ validate). NB: gli stessi link restano rotti nei sorgenti M7 (difetti preesistenti, non ancora propagati).
+- M7_Appelli_Svolti/UD1_Anno_2023: [COMPLETED] — creati L0 + L1-L8 (8 appelli 2023 risolti da zero dai PDF in `Temi d'esame`; L7=08/09 è rimando a L6=07/09, contenuto identico).
+- Unità "Esercizi_Appelli" per modulo: [COMPLETED] — per ogni modulo M1-M6 una UD che accorpa, un file per esercizio, tutte le domande degli appelli M7 (2023+2024+2025) di quel solo modulo (80 esercizi: M1=18, M2=20, M3=13, M4=11, M5=5, M6=13). Generate da `scripts/build-crypto-exercise-units.mjs` (+ validate). **Naming**: `NN - [gg-mm-aaaa] Titolo.md` (prefisso numerico zero-padded per ordine cronologico + data italiana; intro `00 - Intro.md`). Modifiche di contenuto vanno fatte nel SORGENTE M7 (le copie si rigenerano e sovrascrivono). NB: alcuni link prerequisiti restano rotti nei sorgenti M7 (difetti preesistenti).
 - M1 UD1 (teoria): [NEXT TASK]
