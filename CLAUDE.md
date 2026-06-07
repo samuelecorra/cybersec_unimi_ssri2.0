@@ -69,4 +69,5 @@ YOU MUST extract the subject and file dynamically from the prompt. Do not assume
 ### Crittografia [IN PROGRESS]
 
 - M7_Appelli_Svolti/UD3_Anno_2025: [COMPLETED] — creati L0 (intro) + L1-L6 (6 appelli 2025 con soluzioni complete passo-passo)
+- Unità extra "Esercizi_Appelli" per modulo: [COMPLETED] — per ogni modulo M1-M6 creata una UD nuova (n+1) che accorpa, un file per esercizio, tutte le domande degli appelli M7 di quel solo modulo (52 esercizi: M1=11, M2=13, M3=8, M4=9, M5=3, M6=8). Copie verbatim con tag fonte; link prerequisiti corretti. Generate da `scripts/build-crypto-exercise-units.mjs` (+ validate). NB: gli stessi link restano rotti nei sorgenti M7 (difetti preesistenti, non ancora propagati).
 - M1 UD1 (teoria): [NEXT TASK]
