@@ -52,7 +52,7 @@ _Esempio:_ durante la Seconda Guerra Mondiale, i crittografi alleati conoscevano
 
 L'avversario può scegliere messaggi in chiaro arbitrari e ottenere i corrispondenti testi cifrati (accesso a un oracolo di cifratura). È più potente del KPA perché può testare ipotesi specifiche.
 
-_Esempio:_ attacchi adaptativi su blocchi di ECB.
+_Esempio:_ attacchi adaptativi su blocchi di ECB, acronimo che significa Electronic Codebook, un modo di operare dei cifrari a blocchi che è vulnerabile a CPA.
 
 **4. Chosen Ciphertext Attack (CCA):**
 
