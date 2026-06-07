@@ -1385,6 +1385,17 @@ body::before {
   border: 1px solid var(--border-color);
 }
 
+/* Table cells must NOT inherit the aggressive word-break from .markdown-body:
+   on narrow viewports it would shrink short columns to 1 character per line.
+   Keep words intact (min-column-width = widest word), break only genuinely
+   long tokens; the .table-wrapper handles any residual horizontal scroll. */
+.markdown-body th,
+.markdown-body td {
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
+
 .markdown-body tr:hover td {
   background: var(--bg-hover);
 }
