@@ -51,26 +51,36 @@ $$8! = 40320$$
 
 #### Parte b — Dimensione della tabella e generalizzazione (10 punti)
 
-**Rappresentazione tabellare del cifrario:**
+**Rappresentazione tabellare del cifrario.** La tabella elenca, per ciascuno degli 8 input possibili, il corrispondente output. Il cifrario dato ("somma 1 modulo $2^3$") in forma tabellare è:
 
-Il cifrario descritto (somma di 1 modulo $2^3$) è la permutazione:
-$$000 \to 001,\ 001 \to 010,\ 010 \to 011,\ 011 \to 100,\ 100 \to 101,\ 101 \to 110,\ 110 \to 111,\ 111 \to 000$$
+| Input $m$ | Output $E(m)$ |
+|:---:|:---:|
+| 000 | 001 |
+| 001 | 010 |
+| 010 | 011 |
+| 011 | 100 |
+| 100 | 101 |
+| 101 | 110 |
+| 110 | 111 |
+| 111 | 000 |
 
-Per descrivere completamente un cifrario a sostituzione su parole di 3 bit in forma tabellare, la tabella deve contenere:
-- **Tutte le $2^3 = 8$ righe**: una per ciascun possibile valore di input.
-- Per ogni riga, l'output corrispondente: un valore di **3 bit**.
+**Dimensione della tabella in bit.** La domanda chiede quanti **bit** servono per memorizzare questa tabella. Il punto chiave è che la **colonna degli input è implicita** e non va memorizzata: se si concorda di elencare le righe nell'**ordine canonico** (riga $i$ = input $i$, cioè $000, 001, 010, \ldots, 111$), sapere "a quale riga siamo" equivale già a conoscere l'input. Basta quindi memorizzare la sola **colonna degli output**:
 
-**Dimensione della tabella:**
+- numero di righe: $2^3 = 8$ (un output per ciascun input);
+- bit per riga (solo output): $3$.
 
-La tabella ha $2^3$ righe × 3 bit per riga = $8 \times 3 = 24$ bit.
+$$\text{dimensione} = 2^3 \times 3 = 8 \times 3 = 24 \text{ bit}$$
+
+> 💡 **Perché non si contano anche le colonne di input?** Perché l'input è ricavabile dalla **posizione della riga**: memorizzarlo sarebbe ridondante (non aggiunge informazione). Se invece si volessero memorizzare *esplicitamente entrambe le colonne* (input **e** output), servirebbero $2^3 \times (3 + 3) = 8 \times 6 = 48$ bit; ma i 24 bit della colonna input si ricavano gratis dall'ordinamento, perciò la risposta compatta e attesa è **24 bit** (sola colonna output).
 
 **Generalizzazione a parole di $n$ bit:**
 
-- Numero di righe: $2^n$ (tutti i possibili input)
-- Bit per riga: $n$ (ogni output è di $n$ bit)
-- **Dimensione totale:** $n \cdot 2^n$ bit
+- numero di righe: $2^n$ (tutti i possibili input);
+- bit per riga: $n$ (ogni output è di $n$ bit).
 
-**Verifica con $n=3$:** $3 \cdot 2^3 = 3 \cdot 8 = 24$ bit. ✓
+$$\boxed{\text{dimensione tabella} = n \cdot 2^n \text{ bit}}$$
+
+**Verifica con $n=3$:** $3 \cdot 2^3 = 3 \cdot 8 = 24$ bit ✓ (e $2n \cdot 2^n = 48$ bit nella variante che memorizza anche la colonna input).
 
 > 💡 Per confronto, una chiave DES (56 bit) rappresenta un'S-box parziale, mentre la specifica completa delle 8 S-box del DES richiede molto più spazio ($8 \times 64 \times 4 = 2048$ bit, ma non tutte le S-box del DES sono permutazioni complete).
 
