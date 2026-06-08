@@ -68,7 +68,7 @@ Testo cifrato:
 L’alfabeto cifrante in questo caso può essere rappresentato come segue:
 
 | **Alfabeto in chiaro** | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z |  
-|-------------------------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|  
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | **Alfabeto cifrante** | O | C | T | M | B | W | L | A | K | J | D | X | I | N | E | Y | S | U | P | F | Z | R | Q | H | V | G |
 
 ➡️ La **chiave segreta** in questo tipo di cifrario è proprio **l’ordine dell’alfabeto cifrante**.
@@ -87,7 +87,7 @@ Frase chiave:
 L’alfabeto cifrante risultante diventa:
 
 | **Alfabeto in chiaro** | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z |  
-|-------------------------|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|  
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | **Alfabeto cifrante** | J | U | L | I | S | C | A | E | R | T | V | W | X | Y | Z | B | D | F | G | H | K | M | N | O | P | Q |
 
 Questa tecnica permette di **derivare l’intero alfabeto cifrante** a partire da una sola parola chiave condivisa tra mittente e destinatario.

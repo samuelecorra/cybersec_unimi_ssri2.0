@@ -47,7 +47,7 @@ $$
 
 #### **Tabella comparativa per piccoli valori di n**
 
-| $n$ | $|\Sigma_n| = 2^n$ | $(2^n)!$ | Ordine di grandezza |
+| $n$ | $\lvert\Sigma_n\rvert = 2^n$ | $(2^n)!$ | Ordine di grandezza |
 |-----|-------------------|----------|---------------------|
 | 1   | 2                 | 2! = 2   | 2 |
 | 2   | 4                 | 4! = 24  | $\approx 10^1$ |
