@@ -72,8 +72,8 @@ La forma più comune è la **tabella delle pagine a due livelli**.
 
 #### **Esempio concettuale**
 
-$$  
-\text{Indirizzo logico} = (\text{Indice}_1, \text{Indice}_2, \text{Offset})  
+$$
+\text{Indirizzo logico} = (\text{Indice}_1, \text{Indice}_2, \text{Offset})
 $$
 
 - **Indice₁** → seleziona una voce nella tabella esterna.
@@ -136,12 +136,12 @@ La **tabella invertita** rappresenta un approccio completamente diverso: invece 
 
 #### **Struttura**
 
-$$  
-\text{TabellaInversa[PaginaFisica]} =  
-\begin{cases}  
-(\text{Processo}, \text{PaginaLogica}), & \text{se caricata} \\\\  
-\text{---}, & \text{se non caricata}  
-\end{cases}  
+$$
+\text{TabellaInversa[PaginaFisica]} =
+\begin{cases}
+(\text{Processo}, \text{PaginaLogica}), & \text{se caricata} \\\\
+\text{---}, & \text{se non caricata}
+\end{cases}
 $$
 
 Ogni voce indica **quale processo** e **quale pagina logica** si trovano in una determinata **pagina fisica**.
@@ -182,11 +182,11 @@ Un processo non ha quindi alcun modo di accedere a pagine fisiche di altri proce
 
 Se si vuole una **granularità maggiore** — ad esempio distinguere tra pagine **leggibili**, **scrivibili** ed **eseguibili** all'interno dello stesso processo — si introducono **bit di protezione** in ciascuna voce della tabella.
 
-|Tipo di accesso|Descrizione|
-|---|---|
-|**Lettura/Scrittura**|La pagina può essere letta e modificata.|
-|**Sola Lettura**|La pagina può solo essere letta.|
-|**Sola Esecuzione**|La pagina contiene codice eseguibile ma non modificabile.|
+| Tipo di accesso       | Descrizione                                               |
+| --------------------- | --------------------------------------------------------- |
+| **Lettura/Scrittura** | La pagina può essere letta e modificata.                  |
+| **Sola Lettura**      | La pagina può solo essere letta.                          |
+| **Sola Esecuzione**   | La pagina contiene codice eseguibile ma non modificabile. |
 
 La **MMU** si fa carico di:
 
