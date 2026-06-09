@@ -21,15 +21,17 @@ Ogni simbolo del testo cifrato deve dipendere da **più simboli del testo in chi
 
 Esempio semplificato su caratteri:
 
-$$  
-y_n = \sum_{i=1}^{k} m_{n+i} \pmod{26}  
 $$
+y_n = \sum_{i=1}^{k} m_{n+i} \pmod{26}
+$$
+
+Ovvero, per cifrare i caratteri $m_i$ del plaintext, si calcola la media di $k$ caratteri successivi, ottenendo il carattere cifrato $y_n$.
 
 In ambito binario, la diffusione si realizza tramite **permutazioni** dei bit, cioè cambiando il loro ordine secondo una regola determinata dalla chiave.  
 Per un blocco di $n$ bit, lo **spazio delle chiavi** possibili per la permutazione è:
 
-$$  
-n!  
+$$
+n!
 $$
 
 Questa operazione è realizzata da una **P-box** (_Permutation box_).
@@ -47,8 +49,8 @@ Si ottiene tramite un meccanismo di **sostituzione**: ogni parola binaria viene 
 
 Per $n$ bit, lo spazio delle chiavi possibili è:
 
-$$  
-2^n!  
+$$
+2^n!
 $$
 
 Questa operazione è realizzata da una **S-box** (_Substitution box_).
@@ -61,8 +63,8 @@ Questa operazione è realizzata da una **S-box** (_Substitution box_).
 
 Ogni **round** di un cifrario di Feistel divide il blocco di input in due parti:
 
-$$  
-(L_{i-1}, R_{i-1})  
+$$
+(L_{i-1}, R_{i-1})
 $$
 
 e applica una **funzione F** (dipendente dalla sottochiave $K_i$) a una delle due metà, combinandola con l’altra tramite XOR:
@@ -71,23 +73,24 @@ e applica una **funzione F** (dipendente dalla sottochiave $K_i$) a una delle du
 
 #### **Cifratura**
 
-$$  
-\begin{cases}  
-L_i = R_{i-1} \\\\  
-R_i = L_{i-1} \oplus F(K_i, R_{i-1})  
-\end{cases}  
+$$
+\begin{cases}
+L_i = R_{i-1} \\\\
+R_i = L_{i-1} \oplus F(K_i, R_{i-1})
+\end{cases}
 $$
 
 #### **Decifratura**
 
-$$  
-\begin{cases}  
-R_{i-1} = L_i \\\\  
-L_{i-1} = R_i \oplus F(K_i, L_i)  
-\end{cases}  
+$$
+\begin{cases}
+R_{i-1} = L_i \\\\
+L_{i-1} = R_i \oplus F(K_i, L_i)
+\end{cases}
 $$
 
-Il punto chiave è che **la funzione round F non deve essere invertibile**,  
+Il punto chiave è che, dal momento che per la decifratura, per calcolarci $L_{i-1}$, ci basta sostituire $R_{i-1}$ con $L_i$, allora non siamo vincolati dalla funzione $f$, che dunque può benissimo non soddisfare alcun tipo di iniettività.  
+Ergo, allora possiamo affermare che **la funzione round F non deve essere invertibile**,  
 poiché l’intera struttura di Feistel **garantisce l’invertibilità complessiva**.  
 Questo rende l’algoritmo efficiente e versatile.
 
@@ -98,20 +101,20 @@ Questo rende l’algoritmo efficiente e versatile.
 Indichiamo con $w_0$ lo **stato iniziale** (il plaintext).  
 A ogni round si applica una trasformazione $g$ dipendente dalla sottochiave $k_i$:
 
-$$  
-w_i = g(w_{i-1}, k_i)  
+$$
+w_i = g(w_{i-1}, k_i)
 $$
 
 Nel cifrario di Feistel, $g$ opera nel modo seguente:
 
-$$  
-w_i = (L_i, R_i) = g((L_{i-1}, R_{i-1}), k_i)  
+$$
+w_i = (L_i, R_i) = g((L_{i-1}, R_{i-1}), k_i)
 $$
 
 dove
 
-$$  
-L_i = R_{i-1}, \quad R_i = L_{i-1} \oplus f(R_{i-1}, K_i)  
+$$
+L_i = R_{i-1}, \quad R_i = L_{i-1} \oplus f(R_{i-1}, K_i)
 $$
 
 ---
@@ -119,20 +122,15 @@ $$
 ### **5. Parametri fondamentali di una rete Feistel**
 
 - **Dimensione del blocco:**  
-    Blocchi grandi aumentano la sicurezza ma riducono la velocità.
-    
+   Blocchi grandi aumentano la sicurezza ma riducono la velocità.
 - **Dimensione della chiave:**  
-    Chiavi più grandi garantiscono maggiore sicurezza ma aumentano i tempi di elaborazione.
-    
+   Chiavi più grandi garantiscono maggiore sicurezza ma aumentano i tempi di elaborazione.
 - **Numero di round:**  
-    Tutte le fasi hanno la stessa struttura, e un numero maggiore di round accresce la robustezza contro la crittoanalisi.
-    
+   Tutte le fasi hanno la stessa struttura, e un numero maggiore di round accresce la robustezza contro la crittoanalisi.
 - **Schedulazione della chiave:**  
-    A partire da una chiave iniziale $K$ vengono generate tante **sottochiavi $K_i$** quanti sono i round.
-    
+   A partire da una chiave iniziale $K$ vengono generate tante **sottochiavi $K_i$** quanti sono i round.
 - **Funzione round $f$:**  
-    Più è complessa e non lineare, più la cifratura è resistente agli attacchi.
-    
+   Più è complessa e non lineare, più la cifratura è resistente agli attacchi.
 
 ---
 
@@ -141,16 +139,12 @@ $$
 **Durante la cifratura:**
 
 - È sufficiente implementare un solo round e ripeterlo più volte.
-    
 - Lo stesso codice viene riutilizzato per ogni round.
-    
 
 **Durante la decifratura:**
 
 - Si usa **lo stesso algoritmo** impiegato per la cifratura.
-    
 - Cambia solo l’ordine delle sottochiavi (inverso).
-    
 
 Questo consente **efficienza e simmetria** nell’implementazione.
 
@@ -159,9 +153,7 @@ Questo consente **efficienza e simmetria** nell’implementazione.
 ### **7. Esempi di cifrari di Feistel**
 
 - **DES (Data Encryption Standard)**
-    
 - **Blowfish**
-    
 
 Entrambi utilizzano la struttura a rete di Feistel come base della loro sicurezza.
 
@@ -172,15 +164,12 @@ Entrambi utilizzano la struttura a rete di Feistel come base della loro sicurezz
 Abbiamo visto:
 
 - Le caratteristiche fondamentali dei **cifrari di Feistel**.
-    
 - Come la loro struttura realizzi concretamente i **principi di confusione e diffusione** enunciati da Shannon.
-    
 - Il motivo per cui **la cifratura è sempre invertibile**, indipendentemente dalla specifica funzione $f$ adottata.
-    
 
 In sintesi, la rete di Feistel rappresenta il **cuore concettuale** di gran parte dei cifrari simmetrici moderni,  
 permettendo di combinare sicurezza teorica e implementazione pratica.
 
 ---
 
-> 💡 **Prossimo passo per l'esame:** ora conosci la struttura XOR + funzione di round di Feistel. Agli esami il professore costruisce cifrari *toy* non-standard con hash e XOR, chiedendo decifratura e CPA attack — argomento da **35 punti**. Vai a [UD5 / L1 – Cifrari non-standard XOR+hash: decifratura e CPA attack](../UD5_Approfondimenti_Esame/L1%20-%20Cifrari%20non-standard%20XOR%2Bhash%20-%20decifratura%20e%20CPA%20attack.md) per essere pronto a questi esercizi!
+> 💡 **Prossimo passo per l'esame:** ora conosci la struttura XOR + funzione di round di Feistel. Agli esami il professore costruisce cifrari _toy_ non-standard con hash e XOR, chiedendo decifratura e CPA attack — argomento da **35 punti**. Vai a [UD5 / L1 – Cifrari non-standard XOR+hash: decifratura e CPA attack](../UD5_Approfondimenti_Esame/L1%20-%20Cifrari%20non-standard%20XOR%2Bhash%20-%20decifratura%20e%20CPA%20attack.md) per essere pronto a questi esercizi!
