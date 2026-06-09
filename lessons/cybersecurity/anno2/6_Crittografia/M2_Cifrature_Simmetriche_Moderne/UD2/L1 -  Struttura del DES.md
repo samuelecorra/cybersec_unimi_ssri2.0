@@ -204,6 +204,8 @@ Input binario: `101110`
     
     Il bilanciamento riduce quindi la possibilità di **crittanalisi lineare** e rende l’output indistinguibile dal rumore casuale.
     
+> 📌 Storicamente le S-box del DES furono una delle parti più controverse dello standard: erano tabelle fisse e hardcoded, indipendenti dalla chiave, ma i criteri con cui erano state scelte non vennero pubblicati subito. Questo alimentò il sospetto che l’intervento della NSA avesse introdotto una trapdoor o indebolito il cifrario, soprattutto insieme alla riduzione della chiave effettiva a 56 bit. Le ricostruzioni successive, in particolare l’articolo di Don Coppersmith del 1994, mostrarono invece che le S-box erano state progettate per rafforzare DES contro la crittanalisi differenziale, una tecnica nota al gruppo IBM già negli anni ’70 ma non ancora pubblica nella letteratura accademica.
+
 
 ---
 
