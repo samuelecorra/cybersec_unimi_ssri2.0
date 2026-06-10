@@ -90,15 +90,15 @@ L'avversario conosce: $(P, C)$ e $(P', C')$ con la stessa chiave $K = K_0 \| K_1
 
 Scriviamo le due equazioni di cifratura:
 
-$$C = (P \oplus K_0) \boxplus K_1 \tag{1}$$
+$$C = (P \oplus K_0) \boxplus K_1 \quad \text{(1)}$$
 
-$$C' = (P' \oplus K_0) \boxplus K_1 \tag{2}$$
+$$C' = (P' \oplus K_0) \boxplus K_1 \quad \text{(2)}$$
 
 Sottraiamo (2) da (1) in aritmetica modulo $2^{64}$:
 
 $$C \boxminus C' = [(P \oplus K_0) \boxplus K_1] \boxminus [(P' \oplus K_0) \boxplus K_1]$$
 
-$$C \boxminus C' = (P \oplus K_0) \boxminus (P' \oplus K_0) \tag{3}$$
+$$C \boxminus C' = (P \oplus K_0) \boxminus (P' \oplus K_0) \quad \text{(3)}$$
 
 > ⚠️ **Trappola classica:** non è possibile semplificare ulteriormente in modo diretto perché le operazioni $\oplus$ e $\boxplus$ non sono distributive tra loro. La sottrazione modulo $2^{64}$ si cancella, ma il risultato $(P \oplus K_0) \boxminus (P' \oplus K_0)$ non si semplifica in $P \boxminus P'$ a causa dell'interazione tra XOR e addizione modulare.
 

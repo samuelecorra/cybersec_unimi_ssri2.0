@@ -352,7 +352,7 @@ $\gcd(7, 40) = 1$ ✓ (l'inverso esiste)
 **Back-substitution (Euclide esteso):**
 
 Partiamo dall'ultimo resto non nullo e risaliamo:
-$$1 = 5 - 2 \cdot 2 \tag{dall'ultima riga}$$
+$$1 = 5 - 2 \cdot 2 \quad \text{(dall'ultima riga)}$$
 
 Sostituiamo $2 = 7 - 1 \cdot 5$:
 $$1 = 5 - 2 \cdot (7 - 1 \cdot 5) = 5 - 2 \cdot 7 + 2 \cdot 5 = 3 \cdot 5 - 2 \cdot 7$$

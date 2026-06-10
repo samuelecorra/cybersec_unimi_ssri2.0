@@ -95,9 +95,9 @@ Dalla funzione affine $c = a \cdot p + b \pmod{26}$, usiamo due coppie per costr
 
 Usiamo la coppia 1 ($p=22, c=1$) e la coppia 2 ($p=11, c=6$):
 
-$$22a + b \equiv 1 \pmod{26} \tag{1}$$
+$$22a + b \equiv 1 \pmod{26} \quad \text{(1)}$$
 
-$$11a + b \equiv 6 \pmod{26} \tag{2}$$
+$$11a + b \equiv 6 \pmod{26} \quad \text{(2)}$$
 
 **Sottrazione (1) - (2):**
 
