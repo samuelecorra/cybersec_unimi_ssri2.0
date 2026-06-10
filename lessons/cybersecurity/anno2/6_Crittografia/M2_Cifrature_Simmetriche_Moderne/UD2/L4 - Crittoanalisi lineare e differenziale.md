@@ -73,13 +73,200 @@ Questa coppia è caratterizzata da:
     
 - **Differenza in output:** $\Delta = S(B) \oplus S(B^*)$
 
-![](imgs/Pasted%20image%2020260222114727.png)
+A questo punto l'intuizione di Biham e Shamir fu che alcune differenze in input producono differenze in output con probabilità significativamente maggiore di altre, a causa della struttura delle S-box. Coostruirono quindi una tabella che conteneva tutte le possibili configurazioni di differenze in input e output, e le loro probabilità associate. Questa tabella è nota come **differential distribution table (DDT)**.
 
-Conoscendo $\delta$ e $\Delta$, si possono costruire le **differential distribution tables (DDT)**, che contano quante coppie di input producono la stessa coppia di differenze $(\delta, \Delta)$
+Una tabella avrà per forza di cose $2^6 = 64$ righe (per tutte le possibili differenze in input) e $2^4 = 16$ colonne (per tutte le possibili differenze in output). Ogni cella della tabella conterrà il numero di coppie di input che producono quella specifica combinazione di differenza in input e differenza in output.
+
+---
+
+In questo esempio, per i fini puramente illustrativi, consideriamo solo le prime 5/64 righe che indicano il profilo XOR della S-Box 1.
+
+Usiamo δ = `000001` = **1 in decimale** = **riga 1** della tabella. ✓
+
+![](imgs/telegram-cloud-photo-size-4-5857263596000185975-x%201.jpg)
+
+##### Step 1 — Costruire le 64 coppie
+
+Per ogni B da `000000` a `111111`, calcolo `B* = B ⊕ 000001`. Ovvero, vado a ricavarmi tutti i valori per i quali otteniamo questa differenza in input. In questo specifico caso, questo significa che B* è sempre semplicemente B con **l'ultimo bit flippato**:
+
+|B (bin)|B (dec)|B* = B ⊕ 000001 (bin)|B* (dec)|
+|---|---|---|---|
+|`000000`|0|`000001`|1|
+|`000001`|1|`000000`|0|
+|`000010`|2|`000011`|3|
+|`000011`|3|`000010`|2|
+|`000100`|4|`000101`|5|
+|...|...|...|...|
+|`111110`|62|`111111`|63|
+|`111111`|63|`111110`|62|
+
+Nota: le coppie si ripetono speculari — (0,1) e (1,0) sono la stessa coppia. Ma le contiamo comunque tutte e 64 perché B scorre tutti i 64 valori.
+
+---
+
+##### Step 2 — Passare le coppie alla S-Box e calcolare Δ
+
+Per ogni coppia calcolo `S(B)`, `S(B*)`, poi `Δ = S(B) ⊕ S(B*)`:
+
+|B|S(B)|B*|S(B*)|Δ = S(B) ⊕ S(B*)|
+|---|---|---|---|---|
+|`000000`|`1110`|`000001`|`0000`|`1110 ⊕ 0000 = 1110`|
+|`000001`|`0000`|`000000`|`1110`|`0000 ⊕ 1110 = 1110`|
+|`000010`|`0100`|`000011`|`1111`|`0100 ⊕ 1111 = 1011`|
+|`000011`|`1111`|`000010`|`0100`|`1111 ⊕ 0100 = 1011`|
+|...|...|...|...|...|
+
+Nota l'effetto della simmetria: la coppia (0,1) e la coppia (1,0) producono **lo stesso Δ** — per questo i valori nella tabella sono sempre pari.
+
+---
+
+##### Step 3 — Contare le occorrenze di ogni Δ
+
+Conto le 64 occorrenze di Δ:
+
+|Δ|`0000`|`0001`|`0010`|`0011`|`0100`|`0101`|`0110`|`0111`|
+|---|---|---|---|---|---|---|---|---|
+|**#**|0|0|0|6|0|2|4|4|
+
+|Δ|`1000`|`1001`|`1010`|`1011`|`1100`|`1101`|`1110`|`1111`|
+|---|---|---|---|---|---|---|---|---|
+|**#**|0|10|12|4|10|6|2|4|
+
+Verifica: 6+2+4+4+10+12+4+10+6+2+4 = **64** ✓
+
+Questa è esattamente la **riga 1** della tabella Output XOR dello screenshot qui sotto.
+
+![](imgs/telegram-cloud-photo-size-4-5857263596000185975-x%202.jpg)
+
+Legenda della tabella:
+
+- **Riga** = valore di δ in decimale (0, 1, 2, 3, 4...)
+- **Colonna** = valore di Δ in esadecimale (0=`0000`, A=`1010`, F=`1111`...)
+- **Cella (δ, Δ)** = numero di coppie su 64 con quella coppia di differenze
+
+Esempio di lettura: cella (riga 1, colonna A) = **12** → su 64 coppie con δ=`000001`, ben 12 producono Δ=`1010`.
+
+---
+
+##### 5. Importanza crittografica
+
+#### Non tutti i Δ sono raggiungibili
+
+Nella riga 1, le colonne 0, 1, 2, 4, 8 valgono **0**. Su 16 possibili valori di Δ, solo alcuni sono effettivamente raggiungibili. L'attaccante che conosce δ può escludere a priori tutti i Δ impossibili.
+
+#### La distribuzione non è uniforme — ci sono picchi
+
+- Δ=`1010` appare **12/64** volte → probabilità **18.75%**
+- Δ=`1001` e `1100` appaiono **10/64** volte → probabilità **15.6%**
+
+In una S-Box perfettamente sicura questi valori sarebbero tutti uguali. I picchi sono esattamente ciò che un attaccante sfrutta per fare previsioni statistiche sulla chiave.
+
+#### I valori sono sempre pari
+
+Come si vede dall'esempio nello Step 2, le coppie sono sempre speculari — (B, B*) e (B*, B) producono sempre lo stesso Δ. Quindi ogni Δ viene contato un numero pari di volte, sempre.
+
+#### La riga 0 è sempre (64, 0, 0, …, 0)
+
+Se δ=0 allora B=B*, quindi S(B)=S(B*), quindi Δ=0 sempre.
+
+---
+
+Ora colleghiamo quanto detto col vero schema DES:
+
+---
+
+##### Come funziona il round di DES (promemoria)
+
+Prima capiamo lo schema:
+
+- **A** = 32 bit di input al round (metà del blocco)
+- **J** = 48 bit di chiave di round (la sottochiave)
+- **E(A)** = espansione di A da 32 a 48 bit (funzione fissa, senza chiave)
+- **B = E(A) ⊕ J** = i 48 bit che entrano nelle S-Box
+- Le S-Box producono 32 bit → permutazione P → output del round
+
+Ogni S-Box riceve 6 bit di B. Chiamiamo quei 6 bit semplicemente **B** per la singola S-Box.
 
 ![](imgs/Pasted%20image%2020260222114807.png)
 
-In particolare:
+---
+
+##### Il punto cruciale: cosa dipende dalla chiave e cosa no
+
+L'attaccante conosce A ed E (che è pubblica), quindi conosce **E(A)**. Ma **non conosce J**.
+
+Quindi B = E(A) ⊕ J è **sconosciuto** perché J è sconosciuto.
+
+Ora supponiamo di avere **due plaintext** A e A* con differenza nota. I loro input alle S-Box sono:
+
+```
+B  = E(A)  ⊕ J
+B* = E(A*) ⊕ J
+```
+
+Calcoliamo δ = B ⊕ B*:
+
+```
+δ = B ⊕ B*
+  = (E(A) ⊕ J) ⊕ (E(A*) ⊕ J)
+  = E(A) ⊕ E(A*)
+```
+
+**La J si cancella!** Poiché E è pubblica e A, A* sono noti, δ è **completamente calcolabile dall'attaccante** senza conoscere la chiave.
+
+---
+
+##### Ora entra in gioco il Profilo XOR
+
+L'attaccante conosce δ e, osservando i ciphertext, riesce a ricavare anche Δ (la differenza in output della S-Box). Quindi sa sia δ che Δ.
+
+Dal Profilo XOR della S-Box, la cella `(δ, Δ)` contiene un insieme di possibili input `{s_i1, s_i2, ..., s_ij}` — cioè i valori di B compatibili con quella coppia (δ, Δ). Questo insieme si chiama **$S^δ_Δ$** nella slide.
+
+> Ricorda: B = E(A) ⊕ J, quindi J = B ⊕ E(A).
+
+Per ogni candidato `s_ik` nell'insieme, la chiave corrispondente sarebbe:
+
+```
+J = s_ik ⊕ E(A)    oppure equivalentemente    J = s_ik ⊕ E(A*)
+```
+
+Entrambe le formule devono dare lo stesso J — ed è proprio per questo che nella slide scrive l'insieme come:
+
+```
+{ s_i1 ⊕ E , ... , s_ij ⊕ E } = { s_i1 ⊕ E* , ... , s_ij ⊕ E* }
+```
+
+---
+
+## Cosa ha guadagnato l'attaccante?
+
+Senza questo attacco, la chiave J è a 48 bit → $2^{48}$ possibilità.
+
+Con una sola coppia (A, A*) e il profilo XOR, la chiave è ristretta a pochissimi candidati — quanti ne ha la cella `(δ, Δ)` del profilo, che tipicamente sono 0, 2, 4, o al massimo 12-16 su 64.
+
+Con **molte coppie** con lo stesso δ, l'intersezione degli insiemi candidati si restringe sempre di più fino a isolare la chiave vera.
+
+---
+
+##### Schema riassuntivo dell'attacco
+
+```
+Scelgo molte coppie (A, A*) con E(A) ⊕ E(A*) = δ fissato
+              ↓
+δ è noto senza conoscere J   ← la chiave si cancella!
+              ↓
+Osservo i ciphertext → ricavo Δ per ogni coppia
+              ↓
+Consulto il Profilo XOR: cella (δ, Δ) → insieme S^δ_Δ di candidati per B
+              ↓
+Per ogni candidato s_ik: la chiave sarebbe J = s_ik ⊕ E(A)
+              ↓
+Con più coppie interseco gli insiemi → i candidati falsi vengono eliminati
+              ↓
+Rimane (idealmente) un solo J → chiave trovata!
+```
+
+Ricordiamo che:
 
 - $\delta$ **non dipende dalla chiave**;
     
@@ -134,17 +321,21 @@ $$
 
 #### **3.2 Approssimazione lineare**
 
-Una funzione booleana $f : \Sigma^n \to \Sigma$ può essere descritta dalla sua **tabella di verità**:
+Una funzione booleana $f : \Sigma^n \to \Sigma$ che prende in input stringhe di $n$ bit e li mappa in un singolo bit. Tale funzione può essere descritta dalla sua **tabella di verità**:
 
 $$  
 (f(a_0), f(a_1), \dots, f(a_{2^n - 1}))  
 $$
 
-Una funzione $h$ è **lineare** se:
+dove $a_i$ è la rappresentazione binaria di $i$.
+
+Una funzione $h$ in $n$ variabili è **lineare** se possiamo rappresentarla come combinazione XOR di alcune variabili di input, che chiameremo $s_1, s_2, \dots, s_n$:
 
 $$  
 h(s) = a_1 s_1 \oplus a_2 s_2 \oplus \dots \oplus a_n s_n  
 $$
+
+dove 
 
 Un’approssimazione lineare $h^*$ è quella con **distanza minima** da $f$, cioè con il **minimo numero di differenze**.
 
@@ -162,9 +353,15 @@ ossia da 6 bit in ingresso a 4 bit in uscita.
 
 Può essere vista come 4 **funzioni booleane**:
 
+$$f_i : \Sigma^6 \to \Sigma$$
+
+Ciascuna di queste funzioni potrà **MAPPARE** i $2^6$ input in un singolo bit di output.
+La precedente scrittura è equivalente a rappresentare S come un **vettore** di 4 funzioni booleane:
+
 $$  
-S(s) = (f_4(s), f_3(s), f_2(s), f_1(s))  
+S(s) = (f_4(s), f_3(s), f_2(s), f_1(s)) \ dove \ s=(s_1, s_2, s_3, s_4, s_5, s_6)
 $$
+
 
 Per ciascuna S-box si costruisce una **tabella delle distanze**, dove:
 
@@ -184,7 +381,7 @@ Esempio:
 
 ![](imgs/Pasted%20image%2020260222115603.png)
 
-Data una funzione booleana e la sua approssimazione e d è il numero di valori in input per i quale la funzione differisce dalla sua approssimazione, posso valutare qual è la probabilità che l ed f siano uguali. Tale valore è dato da $(2^n - d) / 2^n$ ossia i casi favorevoli su tutti i casi possibili. Il caso peggiore si ha quando la migliore approssimazione l differisce di circa la metà per tutti i possibili valori, ovvero quando $d$ è circa $2^{n-1}$.
+Data una funzione booleana e la sua approssimazione e $d$ è il numero di valori in input per i quale la funzione differisce dalla sua approssimazione, posso valutare qual è la probabilità che $l$ ed $f$ siano uguali. Tale valore è dato da $(2^n - d) / 2^n$ ossia i casi favorevoli su tutti i casi possibili. Il caso peggiore si ha quando la migliore approssimazione l differisce di circa la metà per tutti i possibili valori, ovvero quando $d$ è circa $2^{n-1}$.
 
 ---
 
