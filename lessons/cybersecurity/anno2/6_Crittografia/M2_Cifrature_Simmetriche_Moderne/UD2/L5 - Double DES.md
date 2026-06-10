@@ -42,7 +42,7 @@ $$
 
 In tal caso, la doppia cifratura sarebbe **equivalente a una singola cifratura**, e il vantaggio di sicurezza sarebbe nullo.
 
-Tuttavia, **DES non forma un gruppo** rispetto alla composizione di cifrature:
+Tuttavia, **DES non forma un gruppo** rispetto alla composizione di cifrature (dimostrato nel 1992):
 
 - Ogni chiave genera una **permutazione** sull’insieme dei $2^{64}$ blocchi possibili.
     
@@ -123,7 +123,7 @@ per ogni k2 ∈ {0,1}^56:
         
     - $2^{56}$ decifrature per cercare la corrispondenza
         
-    - $2^{56}$ ricerche (con complessità $O(1)$ se si usa una hash table)
+    - $2^{56}$ ricerche (con complessità $O(1)$ se si usa una hash table, oppure $O(\log(2^{56}))$ con una struttura ordinata, ovvero $O(56)$, trascurabile rispetto a $2^{56}$)
         
 
 👉 Complessità totale: **$O(2^{57})$** operazioni circa.  

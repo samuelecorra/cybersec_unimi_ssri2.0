@@ -65,6 +65,8 @@ K_{3,0} & K_{3,1} & K_{3,2} & K_{3,3}
 \end{bmatrix}  
 $$
 
+LA CHIAVE VEDE I PRIMI 4 BYTE NELLA 1A COLONNA, I SECONDI 4 NELLA SECONDA ETC...
+
 ---
 
 ### **4. Blocco di input e matrice di stato**
@@ -83,7 +85,7 @@ S_{3,0} & S_{3,1} & S_{3,2} & S_{3,3}
 \end{bmatrix}  
 $$
 
-Ogni colonna rappresenta una **word** (32 bit).
+Ogni colonna rappresenta una **word** (32 bit). QUINDI I BYTE SONO ORDINATI COLONNA X COLONNA!
 
 L’input viene copiato nella **matrice di stato**, su cui avvengono tutte le operazioni.  
 Al termine della cifratura, la **matrice di stato finale** viene copiata nel **blocco di output** (testo cifrato).
@@ -102,6 +104,8 @@ $$
 $$
 
 ![](imgs/Pasted%20image%2020260222173403.png)
+
+**Notazione `r + 4c`** AES lavora internamente con una matrice di stato 4×4, ma i byte in ingresso e in uscita sono **array lineari**. Nel diagramma input e output appaiono come matrici 4×4, ma è solo una rappresentazione visiva per mostrare la corrispondenza con la state matrix — la necessità stessa della formula `r + 4c` conferma che sotto sono flat array. La formula converte una posizione bidimensionale (riga `r`, colonna `c`) in un indice lineare, perché AES riempie la matrice **per colonne**: prima scorre tutta la colonna 0 (indici 0–3), poi la colonna 1 (4–7), e così via. Per raggiungere la cella `[r, c]` bisogna quindi saltare `c` colonne intere (4 byte ciascuna) più `r` righe → `r + 4c`.
 
 ---
 
@@ -127,6 +131,33 @@ I valori dei byte sono quindi espressi in **esadecimale** (da 00 a FF).
 
 ### **6. Operazioni sui byte nel campo finito GF(2⁸)**
 
+**Ripasso: campi finiti e GF(2⁸)** Un **campo finito** (o campo di Galois) è un insieme con un numero finito di elementi in cui sono definite addizione e moltiplicazione, e ogni elemento non nullo ha il suo inverso — le operazioni non "escono mai" dall'insieme. Il caso più semplice è GF(2) = {0, 1}, dove l'addizione è XOR e la moltiplicazione è AND. AES lavora però su byte, quindi serve un campo con 2⁸ = **256 elementi**: GF(2⁸). Gli elementi non sono interi normali da 0 a 255, ma **polinomi a coefficienti in {0,1}** di grado al massimo 7 — ogni bit del byte rappresenta un coefficiente. Ad esempio `0x57` = `01010111` corrisponde al polinomio x⁶ + x⁴ + x² + x + 1. Le operazioni si fanno su questi polinomi **modulo un polinomio irriducibile** fisso (in AES è x⁸ + x⁴ + x³ + x + 1), che garantisce che il risultato stia sempre dentro i 256 elementi del campo — esattamente come il modulo in aritmetica classica tiene i numeri dentro un certo range.
+
+Un polinomio irriducibile è un polinomio che non può essere fattorizzato in polinomi di grado inferiore con coefficienti nel campo.
+
+Esempio in $GF(2)$:
+
+$x^2 + x = x(x+1)$ → riducibile, si fattorizza
+
+$x^2 + x + 1$ → irriducibile, non ha radici in $\{0,1\}$ e non si fattorizza
+
+Come verifichi che non ha radici? Provi tutti gli elementi del campo:
+
+$x=0 \rightarrow 0 + 0 + 1 = 1 \neq 0$
+$x=1 \rightarrow 1 + 1 + 1 = 1 \neq 0$ (perché $2 \mod 2 = 0$)
+
+Nessuna radice → irriducibile.
+
+![](imgs/Pasted%20image%2020260610143716.png)
+
+![](imgs/Pasted%20image%2020260610143735.png)
+
+![](imgs/Pasted%20image%2020260610144423.png)
+
+![](imgs/Pasted%20image%2020260610143753.png)
+
+---
+
 L’AES esegue le sue operazioni nel Galois Field **campo finito $GF(2^8)$**, che contiene 256 elementi.
 
 #### **Addizione**
@@ -137,16 +168,23 @@ $$
 \{57\} \oplus \{83\} = \{d4\}  
 $$
 
-In forma polinomiale:  
+In aritmetica normale `1 + 1 = 2`, c'è riporto e esci dall'insieme. In GF(2) `1 + 1 = 0` — il riporto non esiste perché i coefficienti sono modulo 2, e XOR cattura esattamente questo: due bit uguali si annullano.
+
+_Conseguenza diretta: in GF(2⁸) non esistono riporti — sommare due byte è letteralmente uno XOR bit a bit, perché ogni coefficiente del polinomio è modulo 2 e non "trabocca" mai sul bit successivo._
+
+---
+
+In forma polinomiale, la somma di poco fa diventa:
+
 $$  
-( x^6 + x^4 + x^2 + x + 1 ) \oplus ( x^7 + x + 1 ) = x^7 + x^6 + x^4 + 1  
+( x^6 + x^4 + x^2 + x + 1 ) \oplus ( x^7 + x + 1 ) = x^7 + x^6 + x^4 + x^2  
 $$
 
 ---
 
 #### **Moltiplicazione**
 
-La moltiplicazione tra due elementi di $GF(2^8)$ corrisponde alla **moltiplicazione dei polinomi modulo un polinomio irriducibile** di grado 8.
+La moltiplicazione tra due elementi di $GF(2^8)$ corrisponde alla **moltiplicazione dei polinomi modulo un polinomio irriducibile** di grado 8 (ce ne sono 30, e in aritmetica modulare sono l'analogo dei numeri primi in aritmetica classica).
 
 Il polinomio irriducibile scelto da AES è:
 
@@ -158,6 +196,74 @@ Esempio:
 $$  
 \{57\} \cdot \{83\} = \{c1\}  
 $$
+
+---
+
+##### **Algoritmo generico di moltiplicazione in GF(2⁸)**
+
+Per calcolare $a(x) \cdot b(x) \bmod m(x)$ in $GF(2^8)$:
+
+**Fase 1 — Moltiplicazione polinomiale**
+
+Moltiplica $a(x)$ e $b(x)$ nel modo classico, ma con **coefficienti modulo 2** (XOR, niente riporti). Il risultato $p(x)$ può avere dunque un grado fino a 14.
+
+**Fase 2 — Riduzione iterativa**
+
+Finché $\deg(p) \geq 8$, individua il termine di grado massimo $x^k$ ($k \geq 8$) e applica:
+
+$$p(x) \;\leftarrow\; p(x) \oplus x^{k-8} \cdot m(x)$$
+
+Poiché $x^{k-8} \cdot m(x)$ ha esattamente grado $k$, lo XOR annulla $x^k$ e introduce solo termini di grado inferiore. Ripetere finché $\deg(p) < 8$.
+
+> 💡 In GF(2), $m(x) = 0$ per definizione del campo, quindi $x^8 = x^4 + x^3 + x + 1$. Ogni riduzione "abbassa" il grado sostituendo $x^k$ con $x^{k-8}(x^4 + x^3 + x + 1)$.
+
+---
+
+##### **Esecuzione su $\{57\} \cdot \{83\}$**
+
+**Conversione in polinomi:**
+
+$$\{57\}_{16} = 0101\;0111_2 \;\longrightarrow\; x^6 + x^4 + x^2 + x + 1$$
+
+$$\{83\}_{16} = 1000\;0011_2 \;\longrightarrow\; x^7 + x + 1$$
+
+**Fase 1 — Prodotto:**
+
+Sviluppo $(x^6 + x^4 + x^2 + x + 1)(x^7 + x + 1)$:
+
+| $a(x)$ | $\times\; x^7$ | $\times\; x$ | $\times\; 1$ |
+|--------|---------------|-------------|-------------|
+| $x^6$  | $x^{13}$      | $x^7$       | $x^6$       |
+| $x^4$  | $x^{11}$      | $x^5$       | $x^4$       |
+| $x^2$  | $x^9$         | $x^3$       | $x^2$       |
+| $x$    | $x^8$         | $x^2$       | $x$         |
+| $1$    | $x^7$         | $x$         | $1$         |
+
+Raccogliendo e annullando i gradi duplicati (mod 2: $x^7 \oplus x^7 = 0$, $x^2 \oplus x^2 = 0$, $x \oplus x = 0$):
+	
+$$p(x) = x^{13} + x^{11} + x^9 + x^8 + x^6 + x^5 + x^4 + x^3 + 1$$
+
+**Fase 2 — Riduzione mod $m(x) = x^8 + x^4 + x^3 + x + 1$:**
+
+**Passo 1** — $\deg = 13$, uso $x^5 \cdot m(x) = x^{13} + x^9 + x^8 + x^6 + x^5$:
+
+$$\bigl(x^{13} + x^{11} + x^9 + x^8 + x^6 + x^5 + x^4 + x^3 + 1\bigr)$$
+$$\oplus \bigl(x^{13} + x^9 + x^8 + x^6 + x^5\bigr)$$
+$$= x^{11} + x^4 + x^3 + 1$$
+
+**Passo 2** — $\deg = 11$, uso $x^3 \cdot m(x) = x^{11} + x^7 + x^6 + x^4 + x^3$:
+
+$$\bigl(x^{11} + x^4 + x^3 + 1\bigr) \oplus \bigl(x^{11} + x^7 + x^6 + x^4 + x^3\bigr) = x^7 + x^6 + 1$$
+
+$\deg = 7 < 8$ → riduzione completata.
+
+**Risultato:**
+
+$$x^7 + x^6 + 1 = 1100\;0001_2 = \{c1\}_{16} \;\checkmark$$
+
+> ✅ Due passi di riduzione bastano: il prodotto di due byte (grado ≤ 7) ha grado ≤ 14, quindi occorrono al più 7 riduzioni (una per ogni grado da 14 a 8), ma nella pratica spesso bastano 1–3 passi come in questo esempio.
+
+---
 
 ![](imgs/Pasted%20image%2020260222174241.png)
 
