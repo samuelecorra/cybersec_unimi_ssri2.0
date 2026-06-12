@@ -127,33 +127,36 @@ L’uso della crittografia asimmetrica si riassume in tre grandi categorie:
 
 ### **6. Cifrari simmetrici vs asimmetrici**
 
-|Aspetto|Cifratura simmetrica|Cifratura asimmetrica|
-|---|---|---|
-|**Velocità**|Molto elevata (es. DES 100–1000× più veloce di RSA)|Più lenta, richiede calcoli matematici complessi|
-|**Distribuzione chiavi**|Complessa (serve canale sicuro o KDC)|Semplificata (chiave pubblica liberamente distribuibile)|
-|**Applicazioni tipiche**|Comunicazioni tra utenti noti, singolo utente|Comunicazioni aperte, autenticazione, firma digitale|
+| Aspetto                  | Cifratura simmetrica                                           | Cifratura asimmetrica                                    |
+| ------------------------ | -------------------------------------------------------------- | -------------------------------------------------------- |
+| **Velocità**             | Molto elevata (es. DES 100–1000× più veloce di RSA)            | Più lenta, richiede calcoli matematici complessi         |
+| **Distribuzione chiavi** | Complessa (serve canale sicuro o KDC, Key Distribution Center) | Semplificata (chiave pubblica liberamente distribuibile) |
+| **Applicazioni tipiche** | Comunicazioni tra utenti noti, singolo utente                  | Comunicazioni aperte, autenticazione, firma digitale     |
 
 #### **Cifrari ibridi**
 
-In pratica, si combinano i due approcci:
+In pratica, si combinano i due approcci per risolvere i problemi legati alla velocità:
 
-1. Si genera una **chiave di sessione simmetrica $k$**.
+1. Supponiamo che Bob voglia comunicare con Alice in maniera sicura. Egli genera una **chiave di sessione simmetrica $k$**.
     
-2. Si cifra $k$ con la chiave pubblica del destinatario:  
+2. Poi Bob cifra $k$ con la chiave pubblica del destinatario:  
     $$  
     C_1 \leftarrow \text{CIFRA}(k_{pub}, k)  
     $$
     
-3. Si cifra il messaggio $M$ con la chiave $k$:  
+3. D'ora in avanti Bob può avvalersi di un cifrario simmetrico qualsiasi, nel quale ci sarà una procedura di encryption $E$.  Bob può cifrare quindi il messaggio $M$ con la chiave $k$:  
     $$  
     C_2 \leftarrow E(k, M)  
     $$
     
-4. Si inviano entrambi:  
+4. A questo punto Bob, sul canale insicuro, può spedire sia la prima parte $C_1$ contenente la cifratura asimmetrica della chiave di sessione sia la seconda parte contenente il cyphertext vero e proprio $C_2$
+
+5. Alice ora è in grado di recuperare la chiave simmetrica $k$ con la sua chiave privata asimmetrica; dopodiché, i due utenti potranno finalmente usare l'algoritmo di decifratura simmetrica per leggere il messaggio stesso.
     $$  
     (C_1, C_2)  
     $$
-    
+
+![](imgs/Pasted%20image%2020260612104002.png)
 
 Questo metodo unisce la **sicurezza dell’asimmetrica** alla **velocità della simmetrica**.
 
@@ -161,7 +164,7 @@ Questo metodo unisce la **sicurezza dell’asimmetrica** alla **velocità della 
 
 ### **7. Fondamenti matematici: funzioni one-way e trapdoor**
 
-I cifrari asimmetrici moderni si basano su **problemi matematici difficili**, come quelli studiati in **teoria dei numeri**.
+I cifrari asimmetrici contemporanei a chiave pubblica godono di una certa asimmetria visibile anche nel modo in cui le procedure di enc/dec possono venire applicate. Tali cifrari si basano su **problemi matematici difficili**, come quelli studiati in **teoria dei numeri**.
 
 Il concetto chiave è quello di **funzione one-way**:
 

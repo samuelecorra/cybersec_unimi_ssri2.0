@@ -41,13 +41,21 @@ Il valore $r$ è detto **resto** o **$a \bmod n$**.
 
 Due numeri $a$ e $b$ sono **congruenti modulo $n$** se lasciano lo stesso resto nella divisione per $n$:
 
-$$  
-a \equiv b \pmod{n} \quad \Longleftrightarrow \quad a \bmod n = b \bmod n  
+$$
+a \equiv b \pmod{n} \;\iff\; a \bmod n = b \bmod n \;\iff\; n \mid (a - b)
 $$
 
-Equivale a dire che la loro differenza è un multiplo di $n$:  
-$$  
-n \mid (a - b)  
+> 📌 Il simbolo $\mid$ si legge "divide": $n \mid (a-b)$ significa che $a-b$ è un multiplo intero di $n$. Le tre condizioni nella definizione sono equivalenti — scegliere $a-b$ o $b-a$ è indifferente, perché se $n$ divide $a-b$ divide anche $-(a-b) = b-a$.
+
+#### **Proprietà fondamentali delle congruenze**
+
+1) **Simmetria**: $a \equiv b \pmod{n} \iff b \equiv a \pmod{n}$ — discende direttamente dalla definizione: se $n \mid (a-b)$ allora $n \mid (b-a)$.
+
+2) **Transitività**: se $a \equiv b \pmod{n}$ e $b \equiv c \pmod{n}$, allora $a \equiv c \pmod{n}$.
+
+3) **Compatibilità con le operazioni**: se $a \equiv b \pmod{n}$ e $c \equiv d \pmod{n}$, allora:
+$$
+a + c \equiv b + d \pmod{n} \qquad a \cdot c \equiv b \cdot d \pmod{n}
 $$
 
 #### **Esempi**

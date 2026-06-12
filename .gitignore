@@ -20,6 +20,7 @@ $RECYCLE.BIN/
 .vscode/
 .idea/
 .obsidian/
+!.obsidian/snippets/
 .claude/
 .claudian/
 copilot/

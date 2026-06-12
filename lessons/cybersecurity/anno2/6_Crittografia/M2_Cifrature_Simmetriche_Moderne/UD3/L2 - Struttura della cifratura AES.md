@@ -12,11 +12,7 @@ La chiave può avere diverse lunghezze:
 
 ![](imgs/Pasted%20image%2020260222172644.png)
 
-|Variante AES|Lunghezza chiave (Nk)|Blocchi (Nb)|Round (Nr)|
-|---|---|---|---|
-|AES-128|4 word = 128 bit|4|10|
-|AES-192|6 word = 192 bit|4|12|
-|AES-256|8 word = 256 bit|4|14|
+![](imgs/Pasted%20image%2020260610215234.png)
 
 > Ogni **word** corrisponde a 32 bit = 4 byte.
 
@@ -40,19 +36,23 @@ La chiave può avere diverse lunghezze:
 
 ### **3. Struttura della chiave**
 
-La chiave è una matrice di byte di **4 righe e Nk colonne**, dove:
+La chiave è una matrice di byte di **4 righe (perché ogni riga è fissata a una 4byte-word) e Nk colonne**. Abbiamo già visto prima i valori di Nk, ma ripropongo:
 
-![](imgs/Pasted%20image%2020260222173029.png)
+Nk = number of 32bit words in the key, e quindi:
 
 $$  
-Nk = \frac{\text{lunghezza chiave in bit}}{32}  
+Nk = \frac{\text{lunghezza chiave in bit}}{\text{lunghezza word in bit}} = \frac{\text{lunghezza chiave in bit}}{32}
 $$
 
-|Chiave|Byte totali|Nk|
-|---|---|---|
-|128 bit|16 byte|4|
-|192 bit|24 byte|6|
-|256 bit|32 byte|8|
+| Chiave  | Byte totali | Nk  |
+| ------- | ----------- | --- |
+| 128 bit | 16 byte     | 4   |
+| 192 bit | 24 byte     | 6   |
+| 256 bit | 32 byte     | 8   |
+
+Ergo, per AES 128 avremo:
+
+![](imgs/Pasted%20image%2020260222173029.png)
 
 **Esempio di chiave (128 bit):**
 
@@ -71,7 +71,7 @@ LA CHIAVE VEDE I PRIMI 4 BYTE NELLA 1A COLONNA, I SECONDI 4 NELLA SECONDA ETC...
 
 ### **4. Blocco di input e matrice di stato**
 
-Il **blocco di testo in chiaro** (128 bit = 16 byte) è rappresentato anch’esso come una matrice 4×4 di byte:
+Il **blocco di testo in chiaro** (128 bit = 16 byte) è rappresentato anch’esso come una matrice 4×Nb ergo 4x4
 
 ![](imgs/Pasted%20image%2020260222173130.png)
 
@@ -92,11 +92,10 @@ Al termine della cifratura, la **matrice di stato finale** viene copiata nel **b
 
 $$
 \begin{aligned}
-S_{r,c} &\leftarrow in_{r+4c} \\
+S_{r,c} &\leftarrow in_{r+4c} \\\\
 out_{r+4c} &\leftarrow S_{r,c}
 \end{aligned}
 $$
-
 
 dove:  
 $$  
@@ -284,31 +283,128 @@ $$
 b(x) = b_3x^3 + b_2x^2 + b_1x + b_0  
 $$
 
-Le **addizioni** e **moltiplicazioni** tra word avvengono modulo $x^4 + 1$:
+Le **addizioni** e **moltiplicazioni** tra word avvengono modulo $x^4 + 1$ (vedere appendice seguente per capirne il motivo).
+
+Partiamo dall'addizione, che è molto più easy e concisa, senza bisogno di rimaneggiamenti complessi:
 
 $$  
-d(x) = a(x) \cdot b(x) \mod (x^4 + 1)  
+a(x)+b(x) = (a_3 \oplus b_3) +(a_2 \oplus b_2) +(a_1 \oplus b_1) +(a_0 \oplus b_0)
 $$
 
-![](imgs/Pasted%20image%2020260222175021.png)
+#### **7.1. Calcolo dei coefficienti $c_i$: la convoluzione polinomiale**
 
-![](imgs/Pasted%20image%2020260222175216.png)
+Il prodotto di due polinomi di grado $\leq 3$ è in generale un polinomio di grado $\leq 6$:
+
+$$
+c(x) = a(x) \cdot b(x) \mod (x^4+1) = c_6x^6 + c_5x^5 + c_4x^4 + c_3x^3 + c_2x^2 + c_1x + c_0
+$$
+
+Ogni coefficiente $c_i$ si ottiene **sommando (XOR) tutte le coppie di fattori $a_j \cdot b_k$ tali che $j + k = i$**:
+
+$$
+c_i = \bigoplus_{j+k=i} a_j \cdot b_k
+$$
+
+In soldoni, otterremo:
+
+$$
+\begin{aligned}
+c_0 &= a_0 \cdot b_0 \\\\
+c_1 &= (a_1 \cdot b_0) \oplus (a_0 \cdot b_1) \\\\
+c_2 &= (a_2 \cdot b_0) \oplus (a_1 \cdot b_1) \oplus (a_0 \cdot b_2) \\\\
+c_3 &= (a_3 \cdot b_0) \oplus (a_2 \cdot b_1) \oplus (a_1 \cdot b_2) \oplus (a_0 \cdot b_3) \\\\
+c_4 &= (a_3 \cdot b_1) \oplus (a_2 \cdot b_2) \oplus (a_1 \cdot b_3) \\\\
+c_5 &= (a_3 \cdot b_2) \oplus (a_2 \cdot b_3) \\\\
+c_6 &= a_3 \cdot b_3
+\end{aligned}
+$$
+
+Questa è la classica **convoluzione** di due sequenze finanziate — lo stesso meccanismo che si usa per moltiplicare manualmente due numeri cifra per cifra. Ogni prodotto $a_j \cdot b_k$ qui va inteso come **moltiplicazione in $GF(2^8)$** (cioè con il suo polinomio irriducibile $m(x)$), non come moltiplicazione intera.
 
 ---
 
-### **8. Polinomi utilizzati da AES**
+> 📌 **Perché il modulo $x^4 + 1$?**
+> Il modulo si sceglie di grado 4 perché le word hanno esattamente 4 byte (4 coefficienti, gradi 0–3): per restare all'interno dello spazio a 4 coefficienti, occorre ridurre il polinomio prodotto (grado ≤ 6) a grado ≤ 3, e ciò richiede un modulo di grado **4**.
+> Il +1 invece non è arbitrario: con $x^4 + 1$ si ottiene la regola di riduzione $x^4 \equiv -1 \equiv 1$ in $GF(2)$ (poiché in caratteristica 2, $-1 = 1$), quindi $x^{4+k} \equiv x^k$ (moltiplicando ad ambi i membri per $x^k$). Questo significa che i termini di grado 4, 5, 6 **si ripiegano semplicemente** sulle posizioni 0, 1, 2, rendendo la riduzione banale: $d_i = c_i \oplus c_{i+4}$. Ovvero, all'atto pratico...
 
-AES utilizza in particolare i seguenti polinomi per la **trasformazione MixColumns**:
+Applicando la riduzione modulo $x^4 + 1$ (con $x^4 \equiv 1$):
 
-$$  
-a(x) = \{03\}x^3 + \{01\}x^2 + \{01\}x + \{02\}  
+$$
+d_0 = c_0 \oplus c_4, \quad d_1 = c_1 \oplus c_5, \quad d_2 = c_2 \oplus c_6, \quad d_3 = c_3
 $$
 
-$$  
-a^{-1}(x) = \{0b\}x^3 + \{0d\}x^2 + \{09\}x + \{0e\}  
+> **Nota:** $x^4+1$ non è irriducibile su $GF(2)$ (si fattorizza come $(x+1)^4$), quindi l'algebra sulle word forma un **anello**, non un campo — ma per MixColumns è sufficiente.
+
+---
+
+Ora che abbiamo le equazioni dei 4  $d_i$, ci basta riscriverli sostituendo i vari $c_i$ per come li abbiamo calcolati prima.
+
+Quello che otteniamo è il seguente sistema:
+
+$$
+\begin{cases}
+d_0 = (a_0 \cdot b_0) \oplus (a_3 \cdot b_1) \oplus (a_2 \cdot b_2) \oplus (a_1 \cdot b_3) \\\\
+d_1 = (a_1 \cdot b_0) \oplus (a_0 \cdot b_1) \oplus (a_3 \cdot b_2) \oplus (a_2 \cdot b_3) \\\\
+d_2 = (a_2 \cdot b_0) \oplus (a_1 \cdot b_1) \oplus (a_0 \cdot b_2) \oplus (a_3 \cdot b_3) \\\\
+d_3 = (a_3 \cdot b_0) \oplus (a_2 \cdot b_1) \oplus (a_1 \cdot b_2) \oplus (a_0 \cdot b_3)
+\end{cases}
 $$
 
-Questi polinomi **non sono irriducibili**, ma sono scelti perché garantiscono **l’invertibilità** della trasformazione e una **buona diffusione dei bit** (effetto valanga).
+#### **7.2. Dalla formula al sistema: la matrice circolante**
+
+Il sistema nei $d_i$ ha una struttura che si può leggere in modo algoritmico. Fissata una riga, ad esempio:
+
+$$
+d_0 = (a_0 \cdot b_0) \oplus (a_3 \cdot b_1) \oplus (a_2 \cdot b_2) \oplus (a_1 \cdot b_3)
+$$
+
+i pedici di $a$ che compaiono sono, nell'ordine delle colonne $b_0, b_1, b_2, b_3$: $0, 3, 2, 1$. Nella riga successiva ($d_1$) diventano $1, 0, 3, 2$ — uno **shift ciclico** di 1. Ogni riga è la precedente shiftata a destra di una posizione.
+
+Questo pattern è quello di una **matrice circolante**: una matrice in cui la prima riga definisce tutto e le successive si ottengono per rotazione. Il risultato è:
+
+$$
+\begin{bmatrix} d_0 \\ d_1 \\ d_2 \\ d_3 \end{bmatrix}
+=
+\begin{bmatrix}
+a_0 & a_3 & a_2 & a_1 \\
+a_1 & a_0 & a_3 & a_2 \\
+a_2 & a_1 & a_0 & a_3 \\
+a_3 & a_2 & a_1 & a_0
+\end{bmatrix}
+\begin{bmatrix} b_0 \\ b_1 \\ b_2 \\ b_3 \end{bmatrix}
+$$
+
+> 💡 **Come costruire la matrice senza memorizzarla**: la prima colonna (o riga) è sempre $[a_0, a_1, a_2, a_3]^T$; ogni riga successiva è lo shift ciclico verso destra della precedente. Non serve ricordarsi la matrice — basta conoscere la regola di shift.
+
+> ✅ Il vantaggio pratico è enorme: MixColumns si riduce a **moltiplicare un vettore di byte per una matrice circolante**, operazione parallelizzabile ed efficiente in hardware.
+
+---
+
+### **8. Implicazioni della matrice + $x^4+1$**
+
+Prima di procedere, è necessario chiarire il collegamento tra i due livelli di aritmetica che abbiamo visto:
+
+> 📌 I prodotti $a_j \cdot b_k$ che compaiono nel sistema dei $d_i$ **sono moltiplicazioni in $GF(2^8)$** — cioè esattamente l’aritmetica byte-level della sezione 6. I due livelli si annidano: i coefficienti del polinomio-word sono byte di $GF(2^8)$, e la loro moltiplicazione scalare usa l’aritmetica di $GF(2^8)$. L’anello $GF(2^8)[x]/(x^4+1)$ vive quindi sopra $GF(2^8)$.
+
+Detto questo, rimane un problema strutturale: $x^4+1$ **non è irriducibile** su $GF(2)$ — si fattorizza come $(x+1)^4$. Questo significa che $GF(2^8)[x]/(x^4+1)$ è un **anello**, non un campo, e in un anello **non tutti gli elementi hanno inverso moltiplicativo**: esistono divisori di zero.
+
+La condizione esatta perché un polinomio $a(x) \in GF(2^8)[x]$ abbia inverso in questo anello è:
+
+$$
+\gcd(a(x),\ x^4+1) = 1 \quad \text{in } GF(2^8)[x]
+$$
+
+Solo i polinomi **coprimi** con $x^4+1$ sono invertibili. Questo vincolo diventa concreto quando, nella prossima lezione, incontreremo una delle fasi di cifratura di AES chiamata **MixColumns**: essa opera su ogni colonna della matrice di stato (che è esattamente una word da 4 byte) moltiplicandola — nell'anello $GF(2^8)[x]/(x^4+1)$ — per un polinomio fisso $a(x)$. Poiché AES deve essere invertibile (serve la decifratura), quel polinomio $a(x)$ deve avere un inverso nell'anello, e quindi deve soddisfare la condizione di coprimalità. AES sceglie:
+
+$$
+a(x) = \{03\}x^3 + \{01\}x^2 + \{01\}x + \{02\}
+$$
+
+$$
+a^{-1}(x) = \{0b\}x^3 + \{0d\}x^2 + \{09\}x + \{0e\}
+$$
+
+> 💡 Questi polinomi soddisfano $\gcd(a(x), x^4+1) = 1$ in $GF(2^8)[x]$, garantendo l’invertibilità. Sono stati inoltre scelti perché massimizzano la **diffusione dei bit**: la matrice circolante che inducono ha **branch number = 5** (il massimo possibile per una trasformazione 4×4), il che significa che ogni bit di output dipende da tutti e 4 i byte di input — effetto valanga ottimale.
 
 ---
 
