@@ -33,7 +33,16 @@ $$
 
 #### **Teorema dei numeri primi**
 
-Approssimazione asintotica:  
+Il **teorema dei numeri primi** afferma che $\pi(x)$ cresce asintoticamente come $\frac{x}{\ln x}$. In forma di limite:
+
+$$
+\lim_{x \to \infty} \frac{\pi(x)}{x / \ln x} = 1
+$$
+
+Questo significa che, per valori molto grandi di $x$, il rapporto tra il numero reale di primi fino a $x$ e la quantità $\frac{x}{\ln x}$ tende a $1$. Quindi $\frac{x}{\ln x}$ non dà esattamente il numero di primi, ma diventa una stima sempre più proporzionata al valore reale.
+
+In notazione asintotica:
+
 $$  
 \pi(x) \sim \frac{x}{\ln x}  
 $$
@@ -42,10 +51,20 @@ $$
 
 $$  
 \pi(10^{10}) = 455{,}052{,}511 \  
-\frac{10^{10}}{\ln 10^{10}} \approx 434{,}294{,}482  
+\frac{10^{10}}{\ln 10^{10}} \approx 434{,}294{,}481.9  
 $$
 
 L’errore relativo è circa del **4%**, confermando l’accuratezza dell’approssimazione.
+
+Per avere anche un controllo esplicito, non solo asintotico, vale il seguente limite superiore e inferiore: per ogni $x \ge 17$,
+
+$$
+\frac{x}{\ln x} < \pi(x) < 1.25506 \cdot \frac{x}{\ln x}
+$$
+
+Questa disuguaglianza dice che, da $17$ in poi, $\frac{x}{\ln x}$ è una stima per difetto del numero di primi fino a $x$, mentre $1.25506 \cdot \frac{x}{\ln x}$ fornisce una stima per eccesso. In altre parole, $\pi(x)$ resta intrappolata tra due quantità proporzionali a $\frac{x}{\ln x}$.
+
+> ✅ Il teorema dei numeri primi descrive il comportamento limite di $\pi(x)$; la disuguaglianza per $x \ge 17$ dà invece un intervallo concreto entro cui si trova il numero reale di primi.
 
 ---
 
@@ -67,6 +86,40 @@ $$
 
 Se si scelgono solo numeri **dispari**, i tentativi medi si dimezzano → circa **178 prove**.
 
+La stessa stima si può rendere più precisa se non scegliamo un intero casuale generico fino a $2^{512}$, ma scegliamo un numero **dispari di esattamente 512 bit**, quindi nel range:
+
+$$
+[2^{511}, 2^{512}]
+$$
+
+Il numero stimato di primi in questo intervallo si ottiene sottraendo la stima dei primi fino a $2^{511}$ dalla stima dei primi fino a $2^{512}$:
+
+$$
+\frac{2^{512}}{\ln 2^{512}} - \frac{2^{511}}{\ln 2^{511}}
+$$
+
+Questa quantità va poi divisa per il numero di candidati dispari nel range. Nell’intervallo $[2^{511}, 2^{512}]$ ci sono circa $2^{511}$ interi, e circa metà sono dispari, quindi i candidati dispari sono circa:
+
+$$
+\frac{2^{511}}{2}
+$$
+
+La probabilità che un candidato dispari scelto in quel range sia primo è quindi:
+
+$$
+\frac{
+\frac{2^{512}}{\ln 2^{512}} - \frac{2^{511}}{\ln 2^{511}}
+}{
+2^{511}/2
+}
+\approx
+\frac{1}{177.79}
+$$
+
+Quindi servono in media circa **178 tentativi dispari** anche ragionando direttamente sul range dei numeri a 512 bit.
+
+> 💡 Scegliere un numero dispari di 512 bit equivale a fissare il bit più significativo a $1$ per garantire la lunghezza, fissare il bit meno significativo a $1$ per garantire che sia dispari, e scegliere casualmente i **510 bit centrali**.
+
 #### **Esempio 2 – Numeri di 1024 bit**
 
 - $\ln 2^{1024} \approx 709.78$
@@ -74,7 +127,65 @@ Se si scelgono solo numeri **dispari**, i tentativi medi si dimezzano → circa 
 - $P(\text{primo}) \approx \frac{1}{709.78}$
     
 - In media servono circa **710 prove**, o **355** se si scelgono solo numeri dispari.
-    
+
+Per RSA questo caso è più interessante, perché spesso si scelgono primi grandi, ad esempio di **1024 bit**. Se scegliamo un intero casuale in:
+
+$$
+[2, 2^{1024}]
+$$
+
+la probabilità che sia primo è circa:
+
+$$
+\frac{1}{\ln 2^{1024}}
+$$
+
+e poiché:
+
+$$
+\ln 2^{1024} \approx 709.78
+$$
+
+servono in media circa **709.78 tentativi**. Se però scegliamo solo candidati dispari, scartiamo automaticamente tutti i numeri pari maggiori di $2$, che non possono essere primi. Per questo la media si dimezza:
+
+$$
+\frac{709.78}{2} \approx 354.89
+$$
+
+Ragionando direttamente sui numeri dispari di esattamente 1024 bit, il range corretto è:
+
+$$
+[2^{1023}, 2^{1024}]
+$$
+
+Il numero stimato di primi in questo intervallo è:
+
+$$
+\frac{2^{1024}}{\ln 2^{1024}} - \frac{2^{1023}}{\ln 2^{1023}}
+$$
+
+I candidati dispari nel range sono circa metà degli interi dell’intervallo, quindi:
+
+$$
+\frac{2^{1023}}{2}
+$$
+
+La probabilità stimata diventa:
+
+$$
+\frac{
+\frac{2^{1024}}{\ln 2^{1024}} - \frac{2^{1023}}{\ln 2^{1023}}
+}{
+2^{1023}/2
+}
+\approx
+\frac{1}{355.23}
+$$
+
+Quindi, scegliendo dispari nel range dei numeri a 1024 bit, servono in media circa **355 tentativi** per trovare un primo.
+
+> 💡 Un candidato dispari di 1024 bit ha il bit più significativo fissato a $1$, per essere davvero lungo 1024 bit, e il bit meno significativo fissato a $1$, per essere dispari. Restano quindi **1022 bit centrali** scelti casualmente.
+
 
 ---
 
