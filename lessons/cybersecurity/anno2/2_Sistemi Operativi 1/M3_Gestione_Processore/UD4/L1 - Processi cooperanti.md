@@ -101,7 +101,7 @@ La parallelizzazione si manifesta a **due livelli**:
 
 #### **5.2. Approfondimento: scalabilità con esempio**
 
-Consideriamo un'applicazione che riceve **molte richieste da molti utenti** (es. un web server). Realizzarla con un **unico processo** porta a una **serializzazione** della gestione delle richieste — un utente alla volta — riducendo drasticamente i tempi di risposta sotto carico.
+Consideriamo un'applicazione che riceve **molte richieste da molti utenti** (es. un web server). Realizzarla con un **unico processo** porta a una **serializzazione** della gestione delle richieste — un utente alla volta — aumentando drasticamente i tempi di risposta sotto carico.
 
 Pensando invece il sistema come **gruppo di processi cooperanti**, è facile **scalare**: si attivano dinamicamente **tanti processi quanti ne servono** a soddisfare il volume di richieste in arrivo, mantenendo bassi i tempi di risposta anche quando il carico cresce.
 
