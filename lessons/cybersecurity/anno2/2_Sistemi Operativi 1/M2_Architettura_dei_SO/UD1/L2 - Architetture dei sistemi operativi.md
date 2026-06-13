@@ -131,12 +131,15 @@ Un altro modo di organizzare il SO al fine di ottenere un'ottima modificabilità
 
 #### **6.2. Struttura**
 
-Si ha tipicamente un **kernel** centrale che contiene **soprattutto i meccanismi di base**. Intorno al kernel vengono costruiti **moduli** che si combinano in modo modulare e consentono l'**inserimento e l'estrazione di componenti** senza dover rimodificare il resto del sistema:
+Si ha tipicamente un **kernel** centrale che contiene **i meccanismi di base** — quelli che non cambiano al variare delle politiche:
 
-- gestione del processore,
-- gestione della memoria,
-- gestione dell'I/O,
-- e ai livelli più elevati, gestione del file system.
+- gestione di base del processore (scheduling primitivo, context switch),
+- gestione di base della memoria (allocazione, protezione).
+
+Intorno al kernel vengono costruiti **moduli** che si combinano in modo modulare e consentono l'**inserimento e l'estrazione di componenti** senza dover rimodificare il resto del sistema. I moduli gestiscono le funzioni estendibili o ad alto livello:
+
+- gestione dell'I/O (driver di dispositivo, implementabili come moduli separati),
+- gestione del file system (ai livelli più elevati, tipicamente un modulo intercambiabile).
 
 I moduli possono essere **caricati o rimossi dinamicamente**, rendendo il sistema flessibile e adattabile.
 

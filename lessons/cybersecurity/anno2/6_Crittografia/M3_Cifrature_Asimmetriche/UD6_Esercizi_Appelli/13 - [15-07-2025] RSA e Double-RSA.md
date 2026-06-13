@@ -51,7 +51,13 @@ RSA (Rivest, Shamir, Adleman, 1977) è il crittosistema asimmetrico più diffuso
 
 #### Parte b — Utilizzo "naive" di RSA e insicurezza con pochi messaggi (5 punti)
 
-**Uso naive:** consiste nel cifrare messaggi direttamente con RSA senza padding randomizzato (RSA deterministic, noto anche come "textbook RSA").
+**Uso naive:** corrisponde all'applicazione diretta del metodo di esponenziazione modulare presentato in L4_1: prendere $M$ e calcolare
+
+$$C = M^e \bmod n$$
+
+usando il ciclo elementare `a ← (a · M) mod n` ripetuto $e$ volte (o gli algoritmi equivalenti left-to-right / right-to-left), senza nessun'altra operazione sul messaggio prima della cifratura. Non si aggiunge padding, non si randomizza: $M$ entra così com'è nella funzione RSA.
+
+> 📌 Come evidenziato in L4_1, il metodo naive con esponente $e$ da 512+ bit è computazionalmente insostenibile ($\approx 2^{512}$ moltiplicazioni). Nella pratica si usano left-to-right o right-to-left, ma il risultato matematico è identico: $C = M^e \bmod n$ senza modifiche a $M$. Il termine "naive" si riferisce dunque all'**assenza di precauzioni** sul messaggio, non all'algoritmo scelto per il calcolo.
 
 **Insicurezza con pochi messaggi possibili:**
 
