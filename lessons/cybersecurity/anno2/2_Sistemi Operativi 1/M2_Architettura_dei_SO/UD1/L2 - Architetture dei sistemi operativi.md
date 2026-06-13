@@ -53,12 +53,14 @@ Si è dunque passati da una **struttura delle dipendenze a grafo completo** (eve
 
 La manutenzione si è **semplificata**, ma è rimasta ancora difficile: la separazione nei livelli gerarchici è **puramente legata alla dipendenza delle chiamate**, **non ai ruoli funzionali** delle singole componenti. Non c'è quindi chiarezza su quali siano le **responsabilità** delle varie parti del sistema.
 
+> ⚠️ **Distinzione chiave rispetto al sistema stratificato (sezione 4).** In questo modello una funzione ad alto livello può saltare livelli e chiamare direttamente una funzione di livello molto più basso, non solo quello immediatamente inferiore. Il sistema stratificato eliminerà anche questa libertà, imponendo che ogni strato si interfacci *solo* con il livello adiacente inferiore — nessun salto permesso.
+
 ---
 ### **4. Sistema stratificato**
 
 #### **4.1. Idea di base**
 
-Il sistema stratificato introduce una **chiara separazione modulare delle funzioni** svolte da ciascun componente del SO. È un'evoluzione della struttura gerarchica: ogni **strato** (layer) fornisce **servizi al livello superiore** e utilizza **solo quelli del livello inferiore**, ma — a differenza del modello gerarchico — la separazione è ora basata sui **ruoli funzionali** e non solo sulle dipendenze di chiamata.
+Il sistema stratificato introduce una **chiara separazione modulare delle funzioni** svolte da ciascun componente del SO. È un'evoluzione della struttura gerarchica: ogni **strato** (layer) fornisce **servizi al livello superiore** e utilizza **solo quelli del livello inferiore**, ma — a differenza del modello gerarchico — la separazione è ora basata sui **ruoli funzionali** e non solo sulle dipendenze di chiamata. Inoltre, a differenza del modello gerarchico dove era possibile saltare livelli, nel sistema stratificato ogni strato può accedere **solo al livello immediatamente inferiore** — i salti di livello non sono ammessi.
 
 Lo schema tipico stratifica le funzioni del SO in questo ordine, dal più basso (vicino all'hardware) al più alto:
 
@@ -116,7 +118,9 @@ $$
 \end{cases}  
 $$
 
-Il microkernel è oggi alla base di molti sistemi moderni, come **macOS**, **QNX** e **MINIX 3**, grazie alla sua robustezza e modularità.
+Il microkernel puro è oggi alla base di sistemi come **QNX** e **MINIX 3**, grazie alla sua robustezza e modularità. Sistemi come **macOS** non usano un microkernel puro: XNU incorpora il microkernel Mach ma il layer BSD gira anch'esso in kernel space — il risultato è un kernel **ibrido**, non un microkernel. (Vedi sezione 12 per i dettagli.)
+
+> 📌 **Servizi in user space — la protezione fondamentale del microkernel.** Nel microkernel le politiche (file system server, driver, scheduler di alto livello) girano come **processi ordinari in user space**, non in kernel mode. Se un driver crasha, il kernel rimane intatto e il processo si può riavviare. Questa protezione è ciò che distingue strutturalmente il microkernel dal sistema **modulare** (sezione 6), dove i moduli vengono invece caricati direttamente in kernel space.
 
 ---
 ### **6. Sistema a moduli funzionali**
@@ -136,6 +140,8 @@ Si ha tipicamente un **kernel** centrale che contiene **soprattutto i meccanismi
 
 I moduli possono essere **caricati o rimossi dinamicamente**, rendendo il sistema flessibile e adattabile.
 
+> ⚠️ **Moduli in kernel space — differenza critica rispetto al microkernel.** A differenza del microkernel (dove i servizi girano come processi in user space isolati), i moduli qui vengono caricati direttamente nello **spazio di indirizzamento del kernel**: nessun overhead IPC, ma un bug in un modulo può compromettere l'intero sistema. È il compromesso prestazioni ↔ isolamento tra i due modelli.
+
 #### **6.3. Principi chiave**
 
 - **Integrazione modulare**: ogni componente interagisce tramite interfacce ben definite.
@@ -153,12 +159,50 @@ $$
 \end{cases}  
 $$
 
-Questo approccio è oggi molto diffuso (ad esempio nei **kernel Linux**), poiché combina efficienza e modularità.
+Questo approccio è presente in sistemi moderni: **macOS** lo adotta pienamente con **I/O Kit** (driver scritti in C++, OOP nativo). **Linux** usa invece moduli caricabili (LKM, `.ko`) ma il kernel è scritto in C — la modularità è strutturale, non basata su OOP nel senso di questa sezione. Linux appartiene più correttamente alla categoria "monolitico modulare" (sezione 12.3).
 
 ---
-### **7. Sistema a macchine virtuali**
+### **7. Sistema ibrido (kernel ibrido)**
 
-#### **7.1. Motivazione e concetto**
+#### **7.1. Motivazione**
+
+Né il microkernel puro né il sistema monolitico classico sono stati adottati senza compromessi nei sistemi operativi general-purpose di grande diffusione. Il motivo è il **trade-off fondamentale** tra i due approcci:
+
+$$
+\begin{cases}
+\textbf{Microkernel puro:}~ & \text{ottima modularità e isolamento, ma overhead IPC elevato} \\\\
+& \text{per le continue comunicazioni tra user space e kernel mode.} \\\\
+\textbf{Monolitico:}~ & \text{prestazioni elevate, ma rigido e difficile da estendere in sicurezza.}
+\end{cases}
+$$
+
+Il **kernel ibrido** nasce come soluzione pragmatica: si mantiene la struttura monolitica per le componenti critiche in termini di prestazioni, ma si introducono elementi di modularità e separazione logica ispirati al microkernel.
+
+#### **7.2. Struttura**
+
+Il kernel ibrido non è una definizione rigida ma una **famiglia di approcci** che combinano:
+
+- Un **nucleo centrale** in kernel mode con le funzioni più critiche (scheduler, gestione memoria, IPC base) — analogamente al monolitico.
+- **Servizi aggiuntivi** che possono girare in user space o essere caricati come moduli dinamici — come nel microkernel e nel sistema modulare.
+- Una **separazione logica** tra sottosistemi (es. HAL, kernel, executive, subsystem in Windows) anche quando gran parte del codice gira nello stesso spazio di indirizzamento.
+
+#### **7.3. Prestazioni e trade-off**
+
+$$
+\begin{cases}
+\textbf{Vantaggi:}~ & \text{prestazioni vicine al monolitico, con maggiore modularità} \\\\
+& \text{e possibilità di aggiornare componenti senza fermare il sistema.} \\\\
+\textbf{Svantaggi:}~ & \text{architettura più complessa da progettare; non offre il pieno isolamento} \\\\
+& \text{del microkernel puro — un driver in kernel mode può destabilizzare il sistema.}
+\end{cases}
+$$
+
+> 📌 **Esempi reali.** **Windows NT** (e tutte le versioni successive fino a Windows 11): HAL + kernel + Executive in kernel mode, subsystem Win32/.NET/WSL in user mode. **macOS (XNU)**: il microkernel Mach gestisce IPC e memoria, ma il layer BSD gira anch'esso in kernel mode — non è quindi un microkernel puro. Per i dettagli architetturali, vedi la sezione di approfondimento.
+
+---
+### **8. Sistema a macchine virtuali**
+
+#### **8.1. Motivazione e concetto**
 
 L'architettura a **macchine virtuali** nasce dall'esigenza di **astrarre ulteriormente** le risorse, facendo in modo che ogni programma in esecuzione possa vedere un proprio ambiente — eventualmente **diverso** da quello degli altri programmi.
 
@@ -168,9 +212,9 @@ Si tratta di una costruzione gerarchica del SO in cui troviamo:
 - al di sopra, un **kernel di macchina virtuale** (*Virtual Machine Monitor*, VMM, detto anche **hypervisor**) che genera più macchine virtuali (VM₁, VM₂, VM₃, …);
 - su ciascuna VM viene poi installato uno **specifico sistema operativo**.
 
-#### **7.2. Funzionamento: replicazione, non astrazione**
+#### **8.2. Funzionamento: replicazione, non astrazione**
 
-A differenza degli altri livelli del SO visti finora, il VMM **non astrae** l'hardware: lo **replica esattamente, senza fare nessuna modifica**, creando una **copia per ogni insieme di processi** che si vogliono eseguire su una specifica macchina virtuale.
+A differenza degli altri livelli del SO visti finora, il VMM — nel **modello teorico classico** (IBM VM/370, 1972) — **non astrae** l'hardware: lo **replica esattamente, senza fare nessuna modifica**, creando una **copia per ogni insieme di processi** che si vogliono eseguire su una specifica macchina virtuale.
 
 Su ciascuna VM si può installare un sistema operativo differente: ad esempio uno Unix su VM₁, un OS/2 su VM₂, un altro OS più complesso su VM₃, e così via. **Ciascun OS vede esattamente la macchina hardware così com'è**, come se fosse appoggiato direttamente sull'hardware fisico, **senza sapere** che in realtà ci sono altri ambienti operativi in contemporanea nel sistema.
 
@@ -182,7 +226,9 @@ In questo modo è possibile **far convivere sistemi operativi diversi** sulla st
 - Il VMM **virtualizza completamente le risorse**, rendendo **minima la necessità di gestione** ai livelli superiori.
 - Le funzioni residue al livello superiore servono solo ad **astrarre e semplificare** l'uso delle risorse, come se fossero sempre completamente dedicate al singolo processo.
 
-#### **7.3. Vantaggi e limiti**
+> 💡 **Precisazione sui VMM moderni.** I virtualizzatori odierni (KVM, VMware, Hyper-V) si discostano dalla replica pura: presentano CPU virtuali, NIC virtuali e storage virtuale che non corrispondono necessariamente 1:1 all'hardware fisico. Il modello "replica esatta" descrive l'idea teorica del VMM classico; i sistemi moderni si appoggiano a **paravirtualizzazione** e **hardware-assisted virtualization** (Intel VT-x, AMD-V).
+
+#### **8.3. Vantaggi e limiti**
 
 La complessità, l'astrazione e la modularità di questo modello si pagano con **prestazioni ridotte**.
 
@@ -196,7 +242,7 @@ $$
 Le macchine virtuali sono alla base del **cloud computing** e dei moderni **sistemi di virtualizzazione (VMware, VirtualBox, KVM, Hyper-V)**.
 
 ---
-### **8. Programmi di sistema**
+### **9. Programmi di sistema**
 
 Oltre al kernel vero e proprio, i sistemi operativi includono una serie di **programmi di sistema**, che permettono di gestire in modo ottimale le risorse e supportare l'utente nelle attività di sviluppo.
 
@@ -204,7 +250,7 @@ Questi strumenti completano il supporto fornito dal kernel: l'utente non solo di
 
 Si distinguono in due grandi categorie.
 
-#### **8.1. Programmi per la gestione delle risorse**
+#### **9.1. Programmi per la gestione delle risorse**
 
 Funzioni di sistema utilizzate per:
 
@@ -213,7 +259,7 @@ Funzioni di sistema utilizzate per:
 - l'**attivazione dell'esecuzione di programmi**;
 - l'esecuzione delle **comunicazioni** all'interno del sistema.
 
-#### **8.2. Programmi per lo sviluppo di applicazioni**
+#### **9.2. Programmi per lo sviluppo di applicazioni**
 
 Strumenti che supportano l'intero ciclo di vita del software:
 
@@ -228,7 +274,7 @@ $$
 \end{cases}
 $$
 
-#### **8.3. Riepilogo**
+#### **9.3. Riepilogo**
 
 $$  
 \begin{cases}  
@@ -240,21 +286,22 @@ $$
 Questi strumenti formano il **livello superiore del sistema operativo**, rendendo la macchina realmente usabile da utenti e programmatori.
 
 ---
-### **9. Sintesi finale**
+### **10. Sintesi finale**
 
 $$  
 \begin{cases}  
 \textbf{Monolitico:}~ & \text{semplice ma difficile da manutenere.} \\\\  
-\textbf{Gerarchico:}~ & \text{migliora l’ordine ma resta rigido.} \\\\  
-\textbf{Stratificato:}~ & \text{chiaro e sicuro ma meno efficiente.} \\\\  
-\textbf{Microkernel:}~ & \text{modificabile e stabile ma più lento.} \\\\  
-\textbf{Modulare:}~ & \text{flessibile e diffuso (es. Linux).} \\\\  
-\textbf{Macchine virtuali:}~ & \text{massima indipendenza, base del cloud.}  
+\textbf{Gerarchico:}~ & \text{migliora l’ordine, salti di livello permessi.} \\\\  
+\textbf{Stratificato:}~ & \text{chiaro e sicuro, solo livello adiacente, ma meno efficiente.} \\\\  
+\textbf{Microkernel:}~ & \text{servizi in user space, molto stabile, ma lento per IPC.} \\\\  
+\textbf{Modulare:}~ & \text{flessibile e OOP-based (es. macOS I/O Kit).} \\\\  
+\textbf{Ibrido:}~ & \text{bilancia prestazioni (monolitico) e modularità (microkernel) — es. Windows, macOS.} \\\\  
+\textbf{Macchine virtuali:}~ & \text{massima indipendenza, isolamento, base del cloud.}  
 \end{cases}  
 $$
 
 ---
-### **10. Conclusione**
+### **11. Conclusione**
 
 Le architetture dei sistemi operativi riflettono **l’evoluzione dell’informatica**:  
 dalle strutture monolitiche dei primi calcolatori, alle architetture modulari e virtualizzate dei sistemi moderni.
@@ -264,7 +311,7 @@ Il passo successivo sarà analizzare **come nasce e si avvia**: la generazione, 
 
 ---
 
-### **11. APPROFONDIMENTO - Classificazione architetturale di Windows, macOS e Linux**
+### **12. APPROFONDIMENTO - Classificazione architetturale di Windows, macOS e Linux**
 
 I tre grandi sistemi operativi general-purpose di oggi non appartengono in modo "puro" a una sola delle architetture viste (monolitico, stratificato, microkernel, ecc.), ma **combinano** diversi principi per bilanciare **prestazioni, sicurezza e modularità**. Windows e macOS adottano kernel **ibridi**, mentre Linux è un **kernel monolitico modulare**.
 
@@ -281,7 +328,7 @@ $$
 \textbf{Livello hardware abstraction layer (HAL):}~ & \text{fornisce un'interfaccia uniforme verso l'hardware.} \\  
 \textbf{Kernel:}~ & \text{gestisce thread, interrupt, sincronizzazione, scheduler.} \\  
 \textbf{Executive:}~ & \text{implementa servizi di più alto livello (memoria, I/O, file system, sicurezza).} \\  
-\textbf{User mode:}~ & \text{ospita subsystem come Win32, POSIX, .NET, GUI, ecc.}  
+\textbf{User mode:}~ & \text{ospita subsystem come Win32, .NET, GUI, WSL (il vecchio subsystem POSIX fu rimosso in XP; oggi è sostituito da WSL in Windows 10/11).}  
 \end{cases}  
 $$
 

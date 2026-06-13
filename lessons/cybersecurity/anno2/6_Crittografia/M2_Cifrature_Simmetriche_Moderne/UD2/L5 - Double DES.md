@@ -65,9 +65,11 @@ Il **Double DES non è equivalente** a un DES singolo, ma **non raddoppia realme
 L’attacco _Meet in the Middle_ sfrutta il fatto che la doppia cifratura può essere “incontrata” a metà, combinando una cifratura e una decifratura.
 
 ![](imgs/Pasted%20image%2020260222121716.png)
+
 #### **Idea di base**
 
 Dato un **testo in chiaro noto** $x$ e il corrispondente **testo cifrato** $y$:  
+
 $$  
 y = DES_{k_2}(DES_{k_1}(x))  
 $$

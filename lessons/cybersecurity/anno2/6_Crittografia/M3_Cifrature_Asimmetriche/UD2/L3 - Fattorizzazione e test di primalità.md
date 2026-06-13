@@ -216,7 +216,7 @@ Esistono due categorie principali:
     
     - "Probabilmente primo"
         
-    - "Composto"
+    - "Certamente composto"
         
 - Possiedono una **probabilità di errore ≤ (1/2)**.
     
@@ -256,19 +256,29 @@ Esistono due categorie principali:
 
 ### **6. Algoritmo di Miller–Rabin**
 
-Sia $p$ un numero dispari:
+> 💡 **L'idea di fondo, prima delle formule.** Il test di Fermat (sezione 5) dice solo: «se $p$ è primo, allora $a^{p-1} \equiv 1$». Miller–Rabin **non si accontenta** di arrivare a $1$ alla fine: controlla *come* ci si arriva, guardando la "strada" dei quadrati successivi. Il trucco è spezzare l'esponente $p-1$ per poter osservare i passaggi intermedi, ed è proprio quello che fanno i passi qui sotto.
+
+Sia $p$ un numero dispari (lo assumiamo dispari perché i pari diversi da $2$ non sono mai primi: non avrebbe senso testarli).
 
 1. Si scrive:  
     $$  
     p - 1 = 2^k \cdot q \quad \text{con } q \text{ dispari e } k > 0  
     $$
     
+    > 📌 **Perché questa scrittura è sempre possibile?** Dato che $p$ è dispari, $p-1$ è **sicuramente pari**. Ogni numero pari si può esprimere come una potenza di $2$ (con esponente $k$) moltiplicata per una parte dispari $q$: basta continuare a dividere per $2$ finché si può, e $k$ conta *quante volte* riusciamo a dividere. Ci conviene farlo perché in questo modo isoliamo da una parte tutta la "parte pari" ($2^k$) e dall'altra il nocciolo dispari ($q$): l'esponente dispari $q$ sarà il punto di partenza, mentre i $k$ fattori $2$ diventeranno i $k$ elevamenti al quadrato che eseguiremo uno dopo l'altro.
+    >
+    > *Esempio:* se $p = 29$, allora $p-1 = 28 = 4 \cdot 7 = 2^2 \cdot 7$, quindi $k = 2$ e $q = 7$.
+    
 2. Si sceglie un $a$ casuale con $1 < a < p - 1$
+    
+    > 💡 Questo $a$ è il nostro **"interrogato"**: lo usiamo come testimone per mettere alla prova $p$. Lo prendiamo strettamente tra $1$ e $p-1$ perché $a = 1$ e $a = p-1 \equiv -1$ darebbero sempre risposta "primo" qualunque sia $p$, quindi sarebbero testimoni inutili (non distinguono primi da composti).
     
 3. Si calcolano i seguenti valori:  
     $$  
     a^q, \ a^{2q}, \ a^{4q}, \ \dots, \ a^{2^k q} \pmod{p}  
     $$
+    
+    > 📌 **Cosa stiamo davvero calcolando.** Notare che ogni termine è il **quadrato del precedente**: $a^{2q} = (a^q)^2$, $a^{4q} = (a^{2q})^2$, e così via. Quindi non serve ricominciare da capo ogni volta: si parte da $a^q$ e si eleva ripetutamente al quadrato, $k$ volte. L'ultimo termine è $a^{2^k q} = a^{p-1}$, cioè **esattamente** la quantità del test di Fermat. In pratica stiamo ricostruendo $a^{p-1}$ passo dopo passo, e ci fermiamo a *spiare* ogni gradino intermedio invece di guardare solo il risultato finale.
     
 4. Se:
     
@@ -277,8 +287,13 @@ Sia $p$ un numero dispari:
     - $\exists j \in [0, k-1] \text{ tale che } a^{2^j q} \equiv -1 \pmod{p}$  
         → **$p$ è probabilmente primo.**
         
+    > 💡 **Da dove escono queste due condizioni?** Se $p$ è primo, l'ultimo valore $a^{p-1}$ vale $1$ (Fermat). Ma $1$ è un quadrato: l'unico passo che può aver prodotto $1$ elevando al quadrato un valore precedente è un valore la cui radice quadrata (modulo $p$) sia $+1$ oppure $-1$. Infatti, quando $p$ è primo, le **uniche radici quadrate di $1$** sono $+1$ e $-1$ (è questo il fatto chiave che i composti violano). Quindi, risalendo la catena dei quadrati, o partiamo già da $a^q \equiv 1$, oppure prima o poi incontriamo un $-1$ che, elevato al quadrato, genera il $1$ finale. Trovare uno di questi due "segnali" è coerente con $p$ primo.
+    
 5. In caso contrario → **$p$ è composto.**
     
+    > ⚠️ **Perché "in caso contrario" significa composto (e non solo "boh").** Se la catena arriva a $1$ **senza** essere mai passata per $-1$ e **senza** partire da $a^q \equiv 1$, allora abbiamo trovato una radice quadrata di $1$ diversa da $\pm 1$. Per un numero primo questo è **impossibile**: solo i numeri composti ammettono "radici quadrate non banali di $1$". Quindi quel $a$ è una prova schiacciante (un *witness*, vedi sezione 7) che $p$ **non** è primo. Da qui l'asimmetria del test: "composto" è una **certezza**, "primo" è solo "probabilmente".
+    
+    > 💡 **Perché allora $(1/4)^t$ e non $(1/2)^t$?** Quando $p$ è composto, *almeno tre quarti* dei possibili $a$ sono witness (sezione 7): scegliendo $a$ a caso, la probabilità di essere ingannati da un singolo test è al più $1/4$. Ripetendo il test $t$ volte con $a$ indipendenti, la probabilità di sbagliare $t$ volte di fila crolla a $(1/4)^t$. È questo che rende Miller–Rabin più affidabile, a parità di ripetizioni, di Solovay–Strassen.
 
 ---
 
