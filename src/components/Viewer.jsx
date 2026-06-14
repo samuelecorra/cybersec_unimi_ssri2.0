@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo, useMemo, useState, useEffect, useRef, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -9,6 +9,41 @@ import { getParentPath } from "../utils/tree.js";
 
 function Viewer({ content, currentFile, loading }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
+  const [lightboxSrc, setLightboxSrc] = useState(null);
+  const [lightboxAlt, setLightboxAlt] = useState("");
+  const articleRef = useRef(null);
+  const scrollSaveRef = useRef(0);
+  const touchStartYRef = useRef(0);
+
+  const openLightbox = useCallback((src, alt) => {
+    const container = articleRef.current?.parentElement;
+    scrollSaveRef.current = container?.scrollTop ?? 0;
+    setLightboxSrc(src);
+    setLightboxAlt(alt || "");
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxSrc(null);
+    requestAnimationFrame(() => {
+      const container = articleRef.current?.parentElement;
+      if (container) container.scrollTop = scrollSaveRef.current;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!lightboxSrc) return;
+    const handler = (e) => { if (e.key === "Escape") closeLightbox(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [lightboxSrc, closeLightbox]);
+
+  const onTouchStart = useCallback((e) => {
+    touchStartYRef.current = e.touches[0].clientY;
+  }, []);
+
+  const onTouchMove = useCallback((e) => {
+    if (e.touches[0].clientY - touchStartYRef.current > 60) closeLightbox();
+  }, [closeLightbox]);
 
   const components = useMemo(
     () => ({
@@ -24,17 +59,28 @@ function Viewer({ content, currentFile, loading }) {
           }
           const resolvedPath = resolved.join("/");
           const base = import.meta.env.BASE_URL;
+          const resolvedSrc = `${base}lessons/${encodeURI(resolvedPath)}`;
           return (
             <img
-              src={`${base}lessons/${encodeURI(resolvedPath)}`}
+              src={resolvedSrc}
               alt={alt || ""}
               className="md-image"
               loading="lazy"
+              onClick={() => openLightbox(resolvedSrc, alt)}
               {...props}
             />
           );
         }
-        return <img src={src} alt={alt || ""} className="md-image" loading="lazy" {...props} />;
+        return (
+          <img
+            src={src}
+            alt={alt || ""}
+            className="md-image"
+            loading="lazy"
+            onClick={() => openLightbox(src, alt)}
+            {...props}
+          />
+        );
       },
       table: ({ children, ...props }) => (
         <div className="table-wrapper">
@@ -62,7 +108,7 @@ function Viewer({ content, currentFile, loading }) {
         );
       },
     }),
-    [dirPath],
+    [dirPath, openLightbox],
   );
 
   if (!currentFile) {
@@ -117,14 +163,37 @@ function Viewer({ content, currentFile, loading }) {
   }
 
   return (
-    <article className="viewer-content markdown-body">
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkMath, remarkCallouts]}
-        rehypePlugins={[rehypeKatex, rehypeHighlight]}
-        components={components}>
-        {content}
-      </ReactMarkdown>
-    </article>
+    <>
+      <article ref={articleRef} className="viewer-content markdown-body">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm, remarkMath, remarkCallouts]}
+          rehypePlugins={[rehypeKatex, rehypeHighlight]}
+          components={components}>
+          {content}
+        </ReactMarkdown>
+      </article>
+
+      {lightboxSrc && (
+        <div
+          className="lightbox-overlay"
+          onClick={closeLightbox}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Immagine ingrandita"
+        >
+          <button className="lightbox-close" onClick={closeLightbox} aria-label="Chiudi">✕</button>
+          <img
+            src={lightboxSrc}
+            alt={lightboxAlt}
+            className="lightbox-img"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <span className="lightbox-hint">ESC · click fuori per chiudere · swipe↓ da mobile</span>
+        </div>
+      )}
+    </>
   );
 }
 
