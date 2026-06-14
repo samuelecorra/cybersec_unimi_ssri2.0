@@ -186,6 +186,14 @@ $$
 \end{cases}  
 $$
 
+![](imgs/Pasted%20image%2020260614110900.png)
+
+![](imgs/Pasted%20image%2020260614110838.png)
+
+![](imgs/Pasted%20image%2020260614110852.png)
+
+![](imgs/Pasted%20image%2020260614110913.png)
+
 ---
 ### **7. Algoritmo di verifica dello stato sicuro**
 
@@ -204,6 +212,8 @@ $$
 
 L'algoritmo non esegue realmente i processi e non modifica subito lo stato del sistema: costruisce una **simulazione** per verificare se esiste almeno un ordine in cui tutti i processi possono terminare. L'idea è chiedersi: "con le risorse disponibili adesso, riesco a far completare un processo? Se sì, dopo il suo completamento recupero le risorse che occupava e provo con gli altri".
 
+ATTENZIONE: d'ora in avanti dunque si lavora per RIGHE, essenzialmente, ecco il perché dell'indice i.
+
 1. **Inizializzazione della simulazione:**  
     $$Work = Available, \quad Finish[i] = false \text{ per tutti i processi.}$$
     
@@ -215,32 +225,32 @@ L'algoritmo non esegue realmente i processi e non modifica subito lo stato del s
     
     $$Finish[i] = false \quad \text{e} \quad Need_i \leq Work$$
     
-    La condizione $Need_i \leq Work$ va letta componente per componente: per ogni tipo di risorsa, il fabbisogno residuo di $P_i$ deve essere minore o uguale alle risorse disponibili nella simulazione.  
+    La condizione $Need_i \leq Work$ scorre tutta la i-esima riga selezionata della matrice per tale processo, e ogni cella di fabbisogno per la singola risorsa viene confrontata con la corrispondente cella di work: per ogni tipo di risorsa, il fabbisogno residuo di $P_i$ deve essere minore o uguale alle risorse disponibili nella simulazione. 
     
-    Se **nessun processo** soddisfa questa condizione, l'algoritmo non riesce piu' a proseguire e passa al punto 4.
+    Se **nessun processo** soddisfa questa condizione, l'algoritmo non riesce più a proseguire e passa al punto 4.
 
 3. **Simulazione del completamento del processo trovato:**  
     se esiste un processo $P_i$ che puo' terminare, l'algoritmo immagina di concedergli le risorse residue, farlo completare e poi recuperare tutte le risorse che aveva gia' allocate:  
     
     $$Work = Work + Allocation_i, \quad Finish[i] = true$$
     
-    L'aumento di `Work` non deriva dalle risorse appena concesse, ma dal fatto che, una volta terminato, $P_i$ rilascia le risorse indicate da `Allocation_i`.  
+    L'aumento di `Work` deriva dal fatto che, una volta terminato, $P_i$ rilascia tutta la propria riga delle risorse indicate da `Allocation_i`.  
     A questo punto $P_i$ viene marcato come completato nella simulazione e l'algoritmo torna al punto 2 per cercare un altro processo completabile.
 
 4. **Valutazione finale dello stato:**  
-    se alla fine tutti i processi hanno `Finish[i] = true`, allora e' stata trovata una sequenza in cui ogni processo puo' terminare: lo **stato è sicuro**.  
-    Se invece almeno un processo rimane con `Finish[i] = false`, significa che la simulazione si e' bloccata prima di completare tutti i processi: lo **stato è non sicuro**.
+    se alla fine tutti i processi hanno `Finish[i] = true`, allora è stata trovata una sequenza in cui ogni processo può terminare: lo **stato è sicuro**.  
+    Se invece almeno un processo rimane con `Finish[i] = false`, significa che la simulazione si è bloccata prima di completare tutti i processi: lo **stato è non sicuro**.
 
-> 📌 L'obiettivo dell'algoritmo non e' scegliere quale processo eseguire davvero, ma verificare se esiste almeno una sequenza teorica di completamento che garantisca l'assenza di deadlock.
+> 📌 L'obiettivo dell'algoritmo non è scegliere quale processo eseguire davvero, ma verificare se esiste almeno una sequenza teorica di completamento che garantisca l'assenza di deadlock.
 
 ---
 ### **8. Algoritmo di richiesta delle risorse**
 
 Quando un processo $P_i$ effettua una richiesta `Request[i]`:
 
-1. Se $Request[i] > Need[i]$ → **errore** (richiesta illegale).
+1. Se $Request[i] > Need[i]$ → **errore** (richiesta illegale, sta chiedendo più di quanto gli manchi davvero per poter concludere correttamente la propria computazione!!
     
-2. Se $Request[i] > Available$ → **attesa** (risorse non disponibili).
+2. Se $Request[i] > Available$ → **attesa** (risorse non disponibili). (qui credo che il docente dia equivalenza tra le scritture available e work in quanto bisognerebbe basarsi sulle ATTUALMENTE disponibili durante il lavoro piuttosto che sulla config iniziale...)
     
 3. Altrimenti:
     
