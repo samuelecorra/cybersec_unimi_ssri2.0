@@ -1431,39 +1431,46 @@ body::before {
   background: rgba(5, 5, 16, 0.93);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
   animation: lightbox-in 0.15s ease;
 }
 
 @keyframes lightbox-in {
-  from { opacity: 0; transform: scale(0.97); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Scrollable inner area: panning in all 4 directions when zoomed */
+.lightbox-scroll-area {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  display: flex;
+  align-items: safe center;
+  justify-content: safe center;
+  padding: 3.5rem 1rem 2.5rem;
 }
 
 .lightbox-img {
   max-width: 95vw;
-  max-height: 90vh;
+  max-height: 85vh;
   object-fit: contain;
   border-radius: var(--radius);
   box-shadow:
     0 0 40px rgba(0, 240, 255, 0.12),
     0 8px 48px rgba(0, 0, 0, 0.5);
-  cursor: default;
+  flex-shrink: 0;
 }
 
+/* position:fixed so the button stays in corner regardless of scroll/zoom level */
 .lightbox-close {
-  position: absolute;
+  position: fixed;
   top: 1rem;
   right: 1rem;
   background: var(--glass-bg);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 50%;
   font-size: 1rem;
   line-height: 1;
@@ -1481,10 +1488,17 @@ body::before {
   box-shadow: 0 0 8px var(--glow-cyan);
 }
 
+/* position:fixed so hint stays at bottom regardless of scroll */
 .lightbox-hint {
-  font-size: 0.72rem;
+  position: fixed;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
   color: var(--text-muted);
   letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
 }

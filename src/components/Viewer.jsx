@@ -11,25 +11,28 @@ function Viewer({ content, currentFile, loading }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
   const [lightboxSrc, setLightboxSrc] = useState(null);
   const [lightboxAlt, setLightboxAlt] = useState("");
+  const [zoom, setZoom] = useState(1);
   const articleRef = useRef(null);
   const scrollSaveRef = useRef(0);
-  const touchStartYRef = useRef(0);
 
   const openLightbox = useCallback((src, alt) => {
     const container = articleRef.current?.parentElement;
     scrollSaveRef.current = container?.scrollTop ?? 0;
     setLightboxSrc(src);
     setLightboxAlt(alt || "");
+    setZoom(1);
   }, []);
 
   const closeLightbox = useCallback(() => {
     setLightboxSrc(null);
+    setZoom(1);
     requestAnimationFrame(() => {
       const container = articleRef.current?.parentElement;
       if (container) container.scrollTop = scrollSaveRef.current;
     });
   }, []);
 
+  // ESC to close
   useEffect(() => {
     if (!lightboxSrc) return;
     const handler = (e) => { if (e.key === "Escape") closeLightbox(); };
@@ -37,13 +40,18 @@ function Viewer({ content, currentFile, loading }) {
     return () => window.removeEventListener("keydown", handler);
   }, [lightboxSrc, closeLightbox]);
 
-  const onTouchStart = useCallback((e) => {
-    touchStartYRef.current = e.touches[0].clientY;
-  }, []);
-
-  const onTouchMove = useCallback((e) => {
-    if (e.touches[0].clientY - touchStartYRef.current > 60) closeLightbox();
-  }, [closeLightbox]);
+  // Ctrl+wheel → zoom image, intercept before browser handles it
+  useEffect(() => {
+    if (!lightboxSrc) return;
+    const handleWheel = (e) => {
+      if (!e.ctrlKey) return;
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.15 : -0.15;
+      setZoom((prev) => Math.min(Math.max(0.3, prev + delta), 8));
+    };
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [lightboxSrc]);
 
   const components = useMemo(
     () => ({
@@ -162,6 +170,8 @@ function Viewer({ content, currentFile, loading }) {
     );
   }
 
+  const imgZoomed = zoom !== 1;
+
   return (
     <>
       <article ref={articleRef} className="viewer-content markdown-body">
@@ -176,21 +186,33 @@ function Viewer({ content, currentFile, loading }) {
       {lightboxSrc && (
         <div
           className="lightbox-overlay"
-          onClick={closeLightbox}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
           role="dialog"
           aria-modal="true"
           aria-label="Immagine ingrandita"
         >
+          {/* X button: position:fixed so always visible regardless of scroll/zoom */}
           <button className="lightbox-close" onClick={closeLightbox} aria-label="Chiudi">✕</button>
-          <img
-            src={lightboxSrc}
-            alt={lightboxAlt}
-            className="lightbox-img"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <span className="lightbox-hint">ESC · click fuori per chiudere · swipe↓ da mobile</span>
+
+          {/* Scrollable container: allows panning in all 4 directions when zoomed */}
+          <div className="lightbox-scroll-area">
+            <img
+              src={lightboxSrc}
+              alt={lightboxAlt}
+              className="lightbox-img"
+              style={imgZoomed ? {
+                width: `${zoom * 90}vw`,
+                maxWidth: "none",
+                maxHeight: "none",
+                height: "auto",
+              } : {}}
+            />
+          </div>
+
+          <span className="lightbox-hint">
+            {imgZoomed
+              ? `${Math.round(zoom * 100)}% · Ctrl+rotella per zoom · ✕ o ESC per chiudere`
+              : "Ctrl+rotella per zoom · ✕ o ESC per chiudere"}
+          </span>
         </div>
       )}
     </>
