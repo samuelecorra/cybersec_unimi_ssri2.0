@@ -14,6 +14,9 @@ function Viewer({ content, currentFile, loading }) {
   const [zoom, setZoom] = useState(1);
   const articleRef = useRef(null);
   const scrollSaveRef = useRef(0);
+  const scrollAreaRef = useRef(null);
+  const isDragging = useRef(false);
+  const dragStart = useRef({ x: 0, y: 0, scrollLeft: 0, scrollTop: 0 });
 
   const openLightbox = useCallback((src, alt) => {
     const container = articleRef.current?.parentElement;
@@ -39,6 +42,40 @@ function Viewer({ content, currentFile, loading }) {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [lightboxSrc, closeLightbox]);
+
+  // Mouse drag-to-pan: global move/up listeners attached while lightbox is open
+  const onMouseDown = useCallback((e) => {
+    if (e.button !== 0 || !scrollAreaRef.current) return;
+    isDragging.current = true;
+    dragStart.current = {
+      x: e.clientX,
+      y: e.clientY,
+      scrollLeft: scrollAreaRef.current.scrollLeft,
+      scrollTop: scrollAreaRef.current.scrollTop,
+    };
+    scrollAreaRef.current.classList.add("is-dragging");
+    e.preventDefault();
+  }, []);
+
+  useEffect(() => {
+    if (!lightboxSrc) return;
+    const onMouseMove = (e) => {
+      if (!isDragging.current || !scrollAreaRef.current) return;
+      scrollAreaRef.current.scrollLeft = dragStart.current.scrollLeft - (e.clientX - dragStart.current.x);
+      scrollAreaRef.current.scrollTop  = dragStart.current.scrollTop  - (e.clientY - dragStart.current.y);
+    };
+    const onMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      scrollAreaRef.current?.classList.remove("is-dragging");
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+  }, [lightboxSrc]);
 
   // Ctrl+wheel → zoom image, intercept before browser handles it
   useEffect(() => {
@@ -193,12 +230,17 @@ function Viewer({ content, currentFile, loading }) {
           {/* X button: position:fixed so always visible regardless of scroll/zoom */}
           <button className="lightbox-close" onClick={closeLightbox} aria-label="Chiudi">✕</button>
 
-          {/* Scrollable container: allows panning in all 4 directions when zoomed */}
-          <div className="lightbox-scroll-area">
+          {/* Scrollable + draggable container for panning in all 4 directions */}
+          <div
+            className="lightbox-scroll-area"
+            ref={scrollAreaRef}
+            onMouseDown={onMouseDown}
+          >
             <img
               src={lightboxSrc}
               alt={lightboxAlt}
               className="lightbox-img"
+              draggable="false"
               style={imgZoomed ? {
                 width: `${zoom * 90}vw`,
                 maxWidth: "none",

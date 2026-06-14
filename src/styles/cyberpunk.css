@@ -1448,6 +1448,14 @@ body::before {
   align-items: safe center;
   justify-content: safe center;
   padding: 3.5rem 1rem 2.5rem;
+  cursor: grab;
+}
+
+.lightbox-scroll-area.is-dragging {
+  cursor: grabbing;
+  /* disable text/image selection while dragging */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .lightbox-img {
@@ -1459,6 +1467,7 @@ body::before {
     0 0 40px rgba(0, 240, 255, 0.12),
     0 8px 48px rgba(0, 0, 0, 0.5);
   flex-shrink: 0;
+  pointer-events: none; /* prevents image drag interfering with pan gesture */
 }
 
 /* position:fixed so the button stays in corner regardless of scroll/zoom level */
