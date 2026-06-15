@@ -62,6 +62,15 @@ YOU MUST extract the subject and file dynamically from the prompt. Do not assume
 - Da ora il lavoro principale passa a Statistica e Crittografia.
 - Per i prossimi prompt integrativi, privilegiare l'avanzamento di queste due materie.
 
+### Matematica Discreta [IN PROGRESS]
+
+- M1_Insiemi_numerici/UD1_Numeri_naturali: [COMPLETED] — creati L1-L6 (operazioni in ℕ, induzione, definizioni ricorsive, numeri primi, divisori/crivello, MCD/mcm)
+- M1_Insiemi_numerici/UD2_Relazioni_di_equivalenza: [COMPLETED] — creati L1-L2 (relazioni e proprietà, equivalenza e ordine)
+- M1_Insiemi_numerici/UD3_Congruenze_e_criteri_divisibilita: [COMPLETED] — creati L1-L7 (congruenza mod n, ℤₙ, congruenze lineari, TCR, criteri divisibilità, Wilson/Fermat/Eulero, esercizi)
+- M2_Gruppi_Anelli_Campi/UD1_Gruppi: [COMPLETED] — creati L1-L6 (strutture algebriche, gruppi e proprietà, ℤₙ/ℤₙ* e gruppi ciclici, gruppo simmetrico Sₙ, omomorfismi, teorema di Lagrange)
+- M2_Gruppi_Anelli_Campi/UD2_Campi_e_anelli: [COMPLETED] — creati L1-L3 (campi e anelli, anelli di polinomi A[x], anello delle matrici Mₙₓₙ[K])
+- M3 e moduli successivi: [NEXT TASK]
+
 ### Statistica [NEXT FOCUS]
 
 - M1 UD1: [PENDING]
