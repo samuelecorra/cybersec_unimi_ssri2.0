@@ -17,6 +17,11 @@ function Viewer({ content, currentFile, loading }) {
   const scrollAreaRef = useRef(null);
   const isDragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0, scrollLeft: 0, scrollTop: 0 });
+  // zoomRef mirrors zoom state — lets touch handlers read current zoom
+  // without being in their closure deps (avoids re-attaching listeners on every zoom tick)
+  const zoomRef = useRef(1);
+  const pinchStartDist = useRef(null);
+  const pinchStartZoom = useRef(1);
 
   const openLightbox = useCallback((src, alt) => {
     const container = articleRef.current?.parentElement;
@@ -24,16 +29,21 @@ function Viewer({ content, currentFile, loading }) {
     setLightboxSrc(src);
     setLightboxAlt(alt || "");
     setZoom(1);
+    zoomRef.current = 1;
   }, []);
 
   const closeLightbox = useCallback(() => {
     setLightboxSrc(null);
     setZoom(1);
+    zoomRef.current = 1;
     requestAnimationFrame(() => {
       const container = articleRef.current?.parentElement;
       if (container) container.scrollTop = scrollSaveRef.current;
     });
   }, []);
+
+  // Keep zoomRef in sync after every render (covers ctrl+wheel path)
+  useEffect(() => { zoomRef.current = zoom; }, [zoom]);
 
   // ESC to close
   useEffect(() => {
@@ -89,6 +99,46 @@ function Viewer({ content, currentFile, loading }) {
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => window.removeEventListener("wheel", handleWheel);
   }, [lightboxSrc]);
+
+  // Pinch-to-zoom on mobile/tablet — non-passive listeners on the scroll area
+  // so we can preventDefault() and stop the browser from zooming the visual viewport
+  // (which would also scale position:fixed elements like the X button).
+  // touch-action:pan-x pan-y on the CSS side tells the browser to ignore pinch natively.
+  useEffect(() => {
+    const el = scrollAreaRef.current;
+    if (!lightboxSrc || !el) return;
+
+    const dist = (t) => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+
+    const onTouchStart = (e) => {
+      if (e.touches.length !== 2) return;
+      pinchStartDist.current = dist(e.touches);
+      pinchStartZoom.current = zoomRef.current;
+      e.preventDefault();
+    };
+
+    const onTouchMove = (e) => {
+      if (e.touches.length !== 2 || pinchStartDist.current === null) return;
+      e.preventDefault();
+      const ratio = dist(e.touches) / pinchStartDist.current;
+      const next = Math.min(Math.max(0.3, pinchStartZoom.current * ratio), 8);
+      zoomRef.current = next;
+      setZoom(next);
+    };
+
+    const onTouchEnd = (e) => {
+      if (e.touches.length < 2) pinchStartDist.current = null;
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: false });
+    el.addEventListener("touchmove",  onTouchMove,  { passive: false });
+    el.addEventListener("touchend",   onTouchEnd);
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove",  onTouchMove);
+      el.removeEventListener("touchend",   onTouchEnd);
+    };
+  }, [lightboxSrc]); // intentionally no `zoom` dep — uses zoomRef instead
 
   const components = useMemo(
     () => ({

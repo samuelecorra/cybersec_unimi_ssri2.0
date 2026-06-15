@@ -1449,6 +1449,11 @@ body::before {
   justify-content: safe center;
   padding: 3.5rem 1rem 2.5rem;
   cursor: grab;
+  /* tell the browser to handle only pan gestures natively, not pinch zoom —
+     our touchstart/touchmove handlers implement pinch zoom instead,
+     preventing the browser from scaling the visual viewport (which would
+     incorrectly scale position:fixed elements like the X button) */
+  touch-action: pan-x pan-y;
 }
 
 .lightbox-scroll-area.is-dragging {
