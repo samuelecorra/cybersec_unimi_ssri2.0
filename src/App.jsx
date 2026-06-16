@@ -134,7 +134,7 @@ export default function App() {
               <polygon points="11,5 17,8.5 17,15.5 11,19 5,15.5 5,8.5" stroke="currentColor" strokeWidth="0.8" fill="currentColor" fillOpacity="0.06" opacity="0.6" />
               <circle cx="11" cy="12" r="2" fill="currentColor" />
             </svg>
-            <span className="logo-text hidden sm:inline">Samu CyberLocker</span>
+            <span className="logo-text hidden sm:inline">SSRI 2.0</span>
           </h1>
         </div>
         <SearchBar query={searchQuery} onChange={setSearchQuery} />
@@ -204,6 +204,18 @@ export default function App() {
           )}
         </div>
       </div>
+      <footer className="app-footer">
+        <span className="footer-notice">
+          SSRI 2.0 — Archivio accademico non a fini di lucro · Lezioni UniMI trasposte in Markdown, integrate con temi d&apos;esame risolti e commentati per una fruizione completa del materiale universitario.
+        </span>
+        <span className="footer-author">
+          Samuele Corrà
+          <span className="footer-sep">·</span>
+          <a href="mailto:samuele.corra@studenti.unimi.it" className="footer-mail">samuele.corra@studenti.unimi.it</a>
+          <span className="footer-sep">·</span>
+          <span className="footer-collab">Collaboratori benvenuti</span>
+        </span>
+      </footer>
     </div>
   );
 }
