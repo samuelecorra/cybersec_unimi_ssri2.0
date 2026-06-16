@@ -39,7 +39,7 @@ const FileIcon = ({ active }) => (
 function FileTree({ nodes, currentFile, expandedDirs, onToggleDir, onSelectFile, depth }) {
   return (
     <ul className="tree-list" style={{ '--depth': depth }}>
-      {nodes.map(node => {
+      {nodes.filter(n => !((n.type === 'file' || n.type === 'web-lesson') && n.name.startsWith('L0'))).map(node => {
         if (node.type === 'dir') {
           const isExpanded = expandedDirs[node.path] ?? false;
           const fileCount = countFiles(node);
@@ -96,7 +96,7 @@ function FileTree({ nodes, currentFile, expandedDirs, onToggleDir, onSelectFile,
 }
 
 function countFiles(node) {
-  if (node.type === 'file' || node.type === 'web-lesson') return 1;
+  if (node.type === 'file' || node.type === 'web-lesson') return node.name.startsWith('L0') ? 0 : 1;
   if (!node.children) return 0;
   return node.children.reduce((sum, child) => sum + countFiles(child), 0);
 }

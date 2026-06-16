@@ -1,7 +1,7 @@
 export function flattenFiles(tree, list = []) {
   for (const node of tree) {
     if (node.type === 'file' || node.type === 'web-lesson') {
-      list.push(node.path);
+      if (!node.name.startsWith('L0')) list.push(node.path);
     } else if (node.children) {
       flattenFiles(node.children, list);
     }

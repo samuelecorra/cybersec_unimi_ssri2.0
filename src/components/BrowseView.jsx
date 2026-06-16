@@ -55,7 +55,7 @@ const HomeIcon = () => (
 );
 
 function countFilesInNode(node) {
-  if (node.type === 'file' || node.type === 'web-lesson') return 1;
+  if (node.type === 'file' || node.type === 'web-lesson') return node.name.startsWith('L0') ? 0 : 1;
   if (!node.children) return 0;
   return node.children.reduce((sum, c) => sum + countFilesInNode(c), 0);
 }
@@ -102,7 +102,7 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
 
   const displayNodes = effectiveRoot.autoSkip && isRoot ? effectiveRoot.nodes : currentNodes;
   const displayDirs = displayNodes.filter(n => n.type === 'dir');
-  const displayFiles = displayNodes.filter(n => n.type === 'file' || n.type === 'web-lesson');
+  const displayFiles = displayNodes.filter(n => (n.type === 'file' || n.type === 'web-lesson') && !n.name.startsWith('L0'));
 
   // Determine if these dirs are "years" (anno1, anno2, anno3)
   const isYearsView = isRoot && effectiveRoot.autoSkip &&
