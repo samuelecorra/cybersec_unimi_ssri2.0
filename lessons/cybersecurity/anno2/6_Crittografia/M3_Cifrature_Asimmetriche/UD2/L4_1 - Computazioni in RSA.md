@@ -297,7 +297,7 @@ Scelte tipiche:
     
     - Rappresentazione binaria:  
         $$  
-        e = 1\underbrace{0000000000000000}16 1  
+        e = 1\underbrace{0000000000000000}_{16} 1  
         $$
         
     - È una scelta ottimale: **basso costo computazionale**, ma sicurezza elevata.

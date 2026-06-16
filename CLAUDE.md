@@ -71,9 +71,10 @@ YOU MUST extract the subject and file dynamically from the prompt. Do not assume
 - M2_Gruppi_Anelli_Campi/UD2_Campi_e_anelli: [COMPLETED] — creati L1-L3 (campi e anelli, anelli di polinomi A[x], anello delle matrici Mₙₓₙ[K])
 - M3 e moduli successivi: [NEXT TASK]
 
-### Statistica [NEXT FOCUS]
+### Statistica [IN PROGRESS]
 
-- M1 UD1: [PENDING]
+- M4_Esami_svolti/esami_2025: [COMPLETED] — creati 4 file soluzione completa (23-lug-2025, 5-lug-2025, 12-feb-2025, 15-gen-2025); coprono Binomiale, Poisson, Gaussiana, Ipergeometrica, Esponenziale, Bayes, stat. descrittiva, TLC
+- M1-M3 (teoria): [PENDING]
 
 ### Crittografia [IN PROGRESS]
 
