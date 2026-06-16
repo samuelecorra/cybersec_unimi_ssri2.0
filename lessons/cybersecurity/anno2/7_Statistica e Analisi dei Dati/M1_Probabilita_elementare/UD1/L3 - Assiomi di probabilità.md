@@ -114,15 +114,15 @@ Passaggi:
     
 2. Si calcola la somma totale, che si ottiene tramite la sommatoria da 1 ad n di tali pesi arbitrari:
 
-$$  
-    N = \sum_{i=1}^{n} w_i  
-    $$
+$$
+N = \sum_{i=1}^{n} w_i
+$$
 
 3. Si definiscono le probabilità normalizzate, dividendo le arbitrarie per la somma totale trovata
 
-$$  
-    P_i = \frac{w_i}{N}  
-    $$
+$$
+P_i = \frac{w_i}{N}
+$$
 
 In questo modo la somma delle probabilità risulta sempre uguale a 1:
 
