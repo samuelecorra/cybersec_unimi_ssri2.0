@@ -6,7 +6,7 @@ import lessonsPlugin from './vite-plugin-lessons.js';
 const isGHPages = process.env.GITHUB_ACTIONS === 'true';
 
 export default defineConfig({
-  base: isGHPages ? '/samu-cyberlocker/' : '/',
+  base: isGHPages ? '/cybersec_unimi_ssri2.0/' : '/',
   plugins: [
     react(),
     tailwindcss(),
