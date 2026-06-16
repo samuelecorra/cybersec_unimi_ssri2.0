@@ -7,7 +7,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
 import { getParentPath } from "../utils/tree.js";
 
-function Viewer({ content, currentFile, loading }) {
+function Viewer({ content, currentFile, loading, onFileSelect }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
   const [lightboxSrc, setLightboxSrc] = useState(null);
   const [lightboxAlt, setLightboxAlt] = useState("");
@@ -182,11 +182,37 @@ function Viewer({ content, currentFile, loading }) {
           <table {...props}>{children}</table>
         </div>
       ),
-      a: ({ href, children, ...props }) => (
-        <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
-          {children}
-        </a>
-      ),
+      a: ({ href, children, ...props }) => {
+        const isInternal =
+          href &&
+          !href.startsWith("http") &&
+          !href.startsWith("mailto:") &&
+          !href.startsWith("#") &&
+          (href.endsWith(".md") || href.endsWith(".html"));
+        if (isInternal && onFileSelect) {
+          const handleClick = (e) => {
+            e.preventDefault();
+            const decoded = decodeURIComponent(href);
+            const parts = dirPath ? `${dirPath}/${decoded}`.split("/") : decoded.split("/");
+            const resolved = [];
+            for (const p of parts) {
+              if (p === "..") resolved.pop();
+              else if (p && p !== ".") resolved.push(p);
+            }
+            onFileSelect(resolved.join("/"));
+          };
+          return (
+            <a href={href} onClick={handleClick} style={{ cursor: "pointer" }} {...props}>
+              {children}
+            </a>
+          );
+        }
+        return (
+          <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+            {children}
+          </a>
+        );
+      },
       code: ({ children, className, node, ...props }) => {
         const isInline = !className;
         if (isInline) {
@@ -203,7 +229,7 @@ function Viewer({ content, currentFile, loading }) {
         );
       },
     }),
-    [dirPath, openLightbox],
+    [dirPath, openLightbox, onFileSelect],
   );
 
   if (!currentFile) {

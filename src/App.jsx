@@ -190,6 +190,7 @@ export default function App() {
                   content={content}
                   currentFile={currentFile}
                   loading={loading}
+                  onFileSelect={handleFileSelect}
                 />
               )}
             </>
