@@ -12,16 +12,16 @@ La prima formulazione — vista nella lezione precedente — trattava il rapport
 1. **Prima formulazione:**  
     Al crescere del numero di prove $n$, la **frequenza empirica** $f$ di un evento tende alla sua probabilità $p$:  
 
-$$  
-    \lim_{n \to \infty} f = p  
-    $$
+$$
+\lim_{n \to \infty} f = p  
+$$
     
 2. **Seconda formulazione:**  
     Al crescere del numero di prove $n$, la **media empirica** $m$ di una quantità associata a un evento tende al suo **valore atteso**:  
 
-$$  
-    \lim_{n \to \infty} m = \langle x \rangle  
-    $$
+$$
+\lim_{n \to \infty} m = \langle x \rangle  
+$$
 
 
 La prima è un **caso particolare** della seconda, in cui la quantità aleatoria assume solo i valori 1 (evento accaduto) e 0 (evento non accaduto).
