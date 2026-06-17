@@ -61,15 +61,11 @@ $$
 
 Per tre eventi $A$, $B$ e $C$, la formula generale è:
 
-$$  
+$$
 P(A \cup B \cup C) = P(A) + P(B) + P(C)
-
 - P(A \cap B) - P(A \cap C) - P(B \cap C)
-    
-
 - P(A \cap B \cap C)  
-    $$
-
+$$
 
 ![](imgs/Pasted%20image%2020251216160824.png)
 
@@ -84,14 +80,14 @@ Si parte dall’insieme totale $S$ e si sottrae la probabilità dell’evento op
 
 ![](imgs/Pasted%20image%2020251216160915.png)
 
-$$  
-(A \cup B)^c = (\neg A) \cap (\neg B)  
+$$
+(A \cup B)^c = (\neg A) \cap (\neg B)
 $$
 
 Da cui:
 
-$$  
-P(A \cup B) = 1 - P((\neg A) \cap (\neg B))  
+$$
+P(A \cup B) = 1 - P((\neg A) \cap (\neg B))
 $$
 
 ---
@@ -106,8 +102,8 @@ Il metodo del complemento è particolarmente utile quando:
 
 Per esempio, per tre eventi è già molto comodo!
 
-$$ 
-P(A \cup B \cup C) = 1 - P((\neg A) \cap (\neg B) \cap (\neg C))  
+$$
+P(A \cup B \cup C) = 1 - P((\neg A) \cap (\neg B) \cap (\neg C))
 $$
 
 Molto più compatto rispetto alla lunga forma vista prima.
@@ -127,14 +123,14 @@ Vogliamo la probabilità che esca **almeno una volta testa**.
 L’evento complementare è “non esce mai testa” → “esce sempre croce”.  
 C’è un solo caso favorevole su $2^3 = 8$ totali: $(C, C, C)$.
 
-$$ 
-P(\text{sempre croce}) = \frac{1}{8}  
+$$
+P(\text{sempre croce}) = \frac{1}{8}
 $$
 
 Da cui:
 
 $$
-P(\text{almeno una testa}) = 1 - \frac{1}{8} = \frac{7}{8}  
+P(\text{almeno una testa}) = 1 - \frac{1}{8} = \frac{7}{8}
 $$
 
 ---
@@ -148,14 +144,14 @@ Per due insiemi $A$ e $B$, i frammenti sono:
 
 ![](imgs/Pasted%20image%2020251216162652.png)
 
-$$ 
-(A \cap B), \quad (A \cap \neg B), \quad (\neg A \cap B), \quad (\neg A \cap \neg B)  
+$$
+(A \cap B), \quad (A \cap \neg B), \quad (\neg A \cap B), \quad (\neg A \cap \neg B)
 $$
 
 Solo i primi tre appartengono all’unione $A \cup B$, quindi:
 
 $$
-P(A \cup B) = P(A \cap \neg B) + P(A \cap B) + P(\neg A \cap B)  
+P(A \cup B) = P(A \cap \neg B) + P(A \cap B) + P(\neg A \cap B)
 $$
 
 ---
