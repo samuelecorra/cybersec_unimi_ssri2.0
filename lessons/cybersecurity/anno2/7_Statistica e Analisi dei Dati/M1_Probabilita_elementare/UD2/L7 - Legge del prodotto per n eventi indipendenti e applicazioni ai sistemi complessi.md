@@ -205,14 +205,15 @@ $$
 F_T = (1 - R_3)^3 = (0.3)^3 = 0.027 \quad \Rightarrow \quad R_T = 1 - F_T = 0.973  
 $$
 
-$$  
-F_Q = (1 - R_4)^2 = (0.25)^2 = 0.0625 \quad \Rightarrow \quad R_Q = 1 - F_Q = 0.9375  $$
+$$
+F_Q = (1 - R_4)^2 = (0.25)^2 = 0.0625 \quad \Rightarrow \quad R_Q = 1 - F_Q = 0.9375
+$$
 
 
 #### **Sistema complessivo in serie**
 
-$$  
-R = R_1 \cdot R_2 \cdot R_T \cdot R_Q \cdot R_5 = 0.95 \cdot 0.99 \cdot 0.973 \cdot 0.9375 \cdot 0.9 \approx 0.81  
+$$
+R = R_1 \cdot R_2 \cdot R_T \cdot R_Q \cdot R_5 = 0.95 \cdot 0.99 \cdot 0.973 \cdot 0.9375 \cdot 0.9 \approx 0.81
 $$
 
 ---
