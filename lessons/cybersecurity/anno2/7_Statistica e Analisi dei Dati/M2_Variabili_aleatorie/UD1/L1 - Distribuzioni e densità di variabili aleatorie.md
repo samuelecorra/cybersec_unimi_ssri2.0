@@ -172,12 +172,13 @@ Spesso si usa l’abbreviazione **p.d.f.** per _probability density/distribution
 
 Nel seguito del corso si studieranno varie famiglie di distribuzioni fondamentali:
 
-|**Distribuzioni (discrete)**|**Densità (continue)**|
-|---|---|
-|Bernoulliana|Uniforme|
-|Geometrica|Esponenziale|
-|Binomiale|Gaussiana|
-|Poissoniana|—|
+| **Distribuzioni (discrete)** | **Densità (continue)** |
+| ---------------------------- | ---------------------- |
+| Bernoulliana                 | -                      |
+| Uniforme                     | Uniforme               |
+| Geometrica                   | Esponenziale           |
+| Binomiale                    | Gaussiana              |
+| Poissoniana                  | -                      |
 
 ---
 
@@ -190,6 +191,8 @@ P(0) = 1 - p, \quad P(1) = p
 $$
 
 È una **distribuzione di Bernoulli** (o _Bernoulliana_), cioè una famiglia di distribuzioni con **un solo parametro $p$**.
+
+![](imgs/Pasted%20image%2020260618144150.png)
 
 È già **normalizzata**:
 
@@ -204,6 +207,8 @@ $$
 - **Distribuzione uniforme discreta**: tutti gli eventi hanno la stessa probabilità.  
     Esempio: dado bilanciato
 
+![](imgs/Pasted%20image%2020260618144316.png)
+
 $$  
 P(k) = \frac{1}{6}, \quad k = 1,2,3,4,5,6  
 $$
@@ -217,6 +222,8 @@ f(t) =
 0, & \text{altrove}  
 \end{cases}  
 $$
+
+![](imgs/Pasted%20image%2020260618144406.png)
 
 ---
 

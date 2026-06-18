@@ -25,6 +25,10 @@ Per caratterizzare la posizione di una densità $f(x)$ o di una distribuzione $P
     
 3. **Media ($x_{\text{media}}$ o $\mu$)** – punto di equilibrio o baricentro della distribuzione.
 
+![](imgs/Pasted%20image%2020260618185621.png)
+
+Nell'esempio in figura:
+
 $$  
 x_{\text{moda}} \quad < \quad x_{\text{mediana}} \quad < \quad x_{\text{media}}  
 $$
@@ -53,6 +57,8 @@ $$
     
 - Talvolta il massimo si trova **agli estremi** dell’intervallo di definizione.
 
+![](imgs/Pasted%20image%2020260618201012.png)
+
 ---
 
 ### **4. La Mediana**
@@ -62,6 +68,8 @@ La **mediana** è il punto che divide la distribuzione in due parti uguali, cio�
 $$  
 F(x_{\text{mediana}}) = \frac{1}{2}  
 $$
+
+![](imgs/Pasted%20image%2020260618201045.png)
 
 Oppure, in termini di funzioni complementari:
 

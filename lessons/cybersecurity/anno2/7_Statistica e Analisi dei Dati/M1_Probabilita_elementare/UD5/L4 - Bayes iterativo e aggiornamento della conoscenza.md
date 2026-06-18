@@ -150,7 +150,7 @@ $$
 
 Oppure, più sinteticamente:  
 $$  
-P(A|(*,*)), ; P(A|(T,*)), ; P(A|(T,T))  
+P(A|(*,*)), \ \ P(A|(T,*)), \ \ P(A|(T,T))  
 $$  
 per indicare la sequenza di osservazioni.
 
@@ -181,8 +181,8 @@ $$
 #### **Dopo il primo lancio (esce Testa)**
 
 $$  
-P(A|(T,_)) = \frac{(1/3)(3/4)}{1/2} = \tfrac{1}{2}, \quad  
-P(B|(T,_)) = \tfrac{1}{3}, \quad  
+P(A|(T,*)) = \frac{(1/3)(3/4)}{1/2} = \tfrac{1}{2}, \quad  
+P(B|(T,*)) = \tfrac{1}{3}, \quad  
 P(C|(T,*)) = \tfrac{1}{6}  
 $$
 
