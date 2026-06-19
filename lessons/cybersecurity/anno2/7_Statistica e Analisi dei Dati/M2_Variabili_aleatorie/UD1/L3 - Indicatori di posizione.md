@@ -85,6 +85,8 @@ Interpretazione:
 
 Esempio per una **densità uniforme**:
 
+![](imgs/Pasted%20image%2020260618201505.png)
+
 $$  
 x_{\text{mediana}} = a + \frac{b - a}{2}  
 $$
@@ -102,13 +104,13 @@ La **media** (o valore atteso, o _speranza matematica_) è la **coordinata del b
 - **Caso discreto:**
 
 $$  
-\mu = \sum_k k , P(k)  
+\mu = \sum_k k \ P(k)  
 $$
 
 - **Caso continuo:**
 
 $$  
-\mu = \int_{-\infty}^{+\infty} x , f(x),dx  
+\mu = \int_{-\infty}^{+\infty} x \ f(x) \ dx  
 $$
 
 Si indica comunemente con $\mu$, $\langle x \rangle$ o $x_{\text{media}}$.
@@ -122,10 +124,12 @@ La densità uniforme è definita da:
 $$  
 f(t) =  
 \begin{cases}  
-\frac{1}{b - a}, & a \le t \le b \  
+\frac{1}{b - a}, & a \le t \le b \\\\  
 0, & \text{altrove}  
 \end{cases}  
 $$
+
+![](imgs/Pasted%20image%2020260618202705.png)
 
 - **Moda:** assente (tutti i valori hanno la stessa probabilità).
     
@@ -154,6 +158,8 @@ $$
 P(0) = 1 - p, \quad P(1) = p  
 $$
 
+![](imgs/Pasted%20image%2020260618203607.png)
+
 #### **Moda:**
 
 Dipende dal valore di $p$:
@@ -166,17 +172,31 @@ Dipende dal valore di $p$:
 
 Segue la stessa regola della moda:
 
+![](imgs/Pasted%20image%2020260618204141.png)
+
 - Se $p > \tfrac{1}{2}$, allora $k_{\text{mediana}} = 1$
     
 - Se $p < \tfrac{1}{2}$, allora $k_{\text{mediana}} = 0$
 
 Per la Bernoulliana, **moda e mediana coincidono**.
 
+Va detto sin da subito che la mediana, nel caso discreto, è usata raramente, e ancor meno per le distribuzioni con pochi canali!
+
+Possiamo comunque, come esercizio, in vista di calcolo di mediana per distribuzioni/densità più complesse, vedere come il calcolo della mediana della Bernoulliana si possa ottenere dalla Cumulativa della Bernoulliana.
+
+![](imgs/Pasted%20image%2020260618204929.png)
+
+E' molto semplice: bisogna andare sull'asse delle $y$ della cumulativa per trovare il punto 0.5 - ovvero la F(x) = 1/2.
+
+Ora a tale punto intersechiamo una perpendicolare che quindi sarà orizzontale che a sua volta intersecherà la linea della cumulativa, al che scendendo sull'asse delle ascisse troveremo la coordinata corrispondente alla condizione di F(x) = 1/2, in questo caso 1 poiché infatti p > 1/2.
+
 #### **Media:**
 
 $$  
 \langle k \rangle = 0 \cdot (1 - p) + 1 \cdot p = p  
 $$
+
+![](imgs/Pasted%20image%2020260618210016.png)
 
 La media può non coincidere con un valore discreto della distribuzione.
 
@@ -186,17 +206,27 @@ La media può non coincidere con un valore discreto della distribuzione.
 
 Ogni indicatore reagisce in modo diverso ai **cambiamenti nella distribuzione**:
 
+![](imgs/Pasted%20image%2020260618211013.png)
+
+![](imgs/Pasted%20image%2020260618215726.png)
+
+![](imgs/Pasted%20image%2020260618215746.png)
+
 |**Indicatore**|**Sensibilità**|**Caratteristiche principali**|
 |---|---|---|
 |**Moda**|Bassa|Dipende solo dal punto di massimo; utile per distribuzioni unimodali|
 |**Mediana**|Media|Dipende solo dall’ordine dei valori; non cambia se si deformano le code|
 |**Media**|Alta|Dipende dalle coordinate di tutti i punti; molto sensibile agli estremi|
 
-#### **Esempio visivo (concettuale)**
+#### **Esempio visivo**
+
+![](imgs/Pasted%20image%2020260618215800.png)
 
 - Due distribuzioni possono avere **stessa moda**, ma medie diverse.
     
 - Due distribuzioni possono avere **stessa mediana**, ma medie diverse.
+
+![](imgs/Pasted%20image%2020260618215813.png)
 
 ---
 
@@ -221,9 +251,13 @@ $$
 
 Esempio:
 
+![](imgs/Pasted%20image%2020260619120334.png)
+
 - Densità uniforme
     
 - Densità gaussiana centrata
+
+![](imgs/Pasted%20image%2020260619120346.png)
 
 ---
 

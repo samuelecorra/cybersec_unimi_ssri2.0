@@ -5,6 +5,8 @@
 Due distribuzioni possono avere la **stessa media** ma una **diversa ampiezza**, cioè una diversa **dispersione** dei valori intorno al centro.  
 L’ampiezza descrive **quanto i dati sono sparsi** rispetto alla posizione centrale.
 
+![](imgs/Pasted%20image%2020260619120419.png)
+
 Esempio:
 
 $$  
@@ -13,6 +15,8 @@ P(-1) = P(1) = 0.5 \\\\
 P(-2) = P(2) = 0.5  
 \end{cases}  
 $$
+
+![](imgs/Pasted%20image%2020260619120441.png)
 
 Entrambe le distribuzioni hanno **media = 0**, ma la seconda è **più ampia**.
 
@@ -50,6 +54,8 @@ Allo stesso modo, possiamo dividere la distribuzione in **quattro parti uguali**
 
 I **quartili** sono tre punti che dividono la distribuzione in quattro parti uguali:
 
+![](imgs/Pasted%20image%2020260619120527.png)
+
 1. **Primo quartile $Q_1$:**  
     $$F(Q_1) = \frac{1}{4}$$
     
@@ -64,6 +70,8 @@ I **quartili** sono tre punti che dividono la distribuzione in quattro parti ugu
 ### **5. Intervallo interquartile**
 
 L’intervallo interquartile rappresenta **la metà centrale della massa** della distribuzione.
+
+![](imgs/Pasted%20image%2020260619120557.png)
 
 Poiché:
 
@@ -88,10 +96,12 @@ Per una densità uniforme su $[a, b]$:
 $$  
 f(t) =  
 \begin{cases}  
-\frac{1}{b-a}, & a \le t \le b \  
+\frac{1}{b-a}, & a \le t \le b \\\\  
 0, & \text{altrove}  
 \end{cases}  
 $$
+
+![](imgs/Pasted%20image%2020260619120627.png)
 
 I quartili risultano:
 
@@ -108,6 +118,14 @@ Da cui:
 $$  
 \Delta = Q_3 - Q_1 = \frac{b - a}{2}  
 $$
+
+![](imgs/Pasted%20image%2020260619120703.png)
+
+Nel discreto e specie in distribuzioni con pochi canali non ha molta utilità in quanto può essere poco indicativo dell'ampiezza della distribuzione:
+
+![](imgs/Pasted%20image%2020260619120859.png)
+
+Qui infatti si noti che l'ampiezza del range sarebbe nulla!
 
 ---
 
@@ -170,6 +188,10 @@ Il **momento di ordine 2** misura quanto la distribuzione è ampia rispetto all�
 
 Esempio:
 
+![](imgs/Pasted%20image%2020260619122357.png)
+
+Infatti hanno entrambe media = 0
+
 $$  
 \begin{cases}  
 P(-1) = P(1) = 0.5 \Rightarrow \langle k^2 \rangle = 1 \\\\  
@@ -193,6 +215,10 @@ $$
 - Per $r=1$ → 0
     
 - Per $r=2$ → **Varianza**
+
+Ora questo indicatore è INSENSIBILE alla posizione del baricentro, ma sensibile alla posizione delle masse relativamente al baricentro!
+
+![](imgs/Pasted%20image%2020260619125221.png)
 
 ---
 
