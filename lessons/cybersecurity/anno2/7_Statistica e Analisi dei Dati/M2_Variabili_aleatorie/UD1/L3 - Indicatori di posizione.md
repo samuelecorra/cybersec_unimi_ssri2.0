@@ -236,7 +236,7 @@ Ogni indicatore reagisce in modo diverso ai **cambiamenti nella distribuzione**:
     
 - La **mediana** è **sempre definita**, poiché $F(x)$ passa sempre da $1/2$.
     
-- La **media** può non essere definita quando l’integrale $\int x f(x),dx$ diverge  
+- La **media** può non essere definita quando l’integrale $\int x f(x) \ dx$ diverge  
     (esempio: $f(x) = \tfrac{1}{x^2}$).
 
 ---

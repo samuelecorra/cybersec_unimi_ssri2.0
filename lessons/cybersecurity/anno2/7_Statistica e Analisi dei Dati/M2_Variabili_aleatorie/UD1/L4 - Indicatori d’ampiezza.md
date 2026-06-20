@@ -276,8 +276,40 @@ $$
 f(x) = \frac{1}{b - a}, \quad a \le x \le b  
 $$
 
-$$  
-\sigma^2 = \frac{(b - a)^2}{12}, \quad \sigma = \frac{b - a}{\sqrt{12}}  
+**Dimostrazione:**
+
+**Passo 1 — calcolo della media (E sta per Expected Value) $E[X]$:**
+
+$$
+E[X] = \int_a^b x \cdot \frac{1}{b-a}\,dx = \frac{1}{b-a} \cdot \frac{x^2}{2}\Bigg|_a^b = \frac{b^2 - a^2}{2(b-a)} = \frac{(b+a)\cancel{(b-a)}}{2\cancel{(b-a)}} = \frac{a+b}{2}
+$$
+
+**Passo 2 — calcolo di $E[X^2]$:**
+
+$$
+E[X^2] = \int_a^b x^2 \cdot \frac{1}{b-a}\,dx = \frac{1}{b-a} \cdot \frac{x^3}{3}\Bigg|_a^b = \frac{b^3 - a^3}{3(b-a)}
+$$
+
+Usando la fattorizzazione $b^3 - a^3 = (b-a)(b^2+ab+a^2)$:
+
+$$
+E[X^2] = \frac{\cancel{(b-a)}(b^2+ab+a^2)}{3\cancel{(b-a)}} = \frac{a^2+ab+b^2}{3}
+$$
+
+**Passo 3 — varianza con la formula $\sigma^2 = E[X^2] - (E[X])^2$:**
+
+$$
+\sigma^2 = \frac{a^2+ab+b^2}{3} - \left(\frac{a+b}{2}\right)^2 = \frac{a^2+ab+b^2}{3} - \frac{a^2+2ab+b^2}{4}
+$$
+
+Portando al denominatore comune 12:
+
+$$
+\sigma^2 = \frac{4(a^2+ab+b^2) - 3(a^2+2ab+b^2)}{12} = \frac{4a^2+4ab+4b^2-3a^2-6ab-3b^2}{12} = \frac{a^2-2ab+b^2}{12}
+$$
+
+$$
+\boxed{\sigma^2 = \frac{(b-a)^2}{12}}, \quad \sigma = \frac{b-a}{\sqrt{12}}
 $$
 
 ---

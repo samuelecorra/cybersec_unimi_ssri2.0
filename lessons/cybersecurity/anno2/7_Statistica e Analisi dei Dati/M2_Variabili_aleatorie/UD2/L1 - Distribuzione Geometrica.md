@@ -83,7 +83,7 @@ La **distribuzione geometrica è già normalizzata**.
 La **media (valore atteso)** rappresenta il numero medio di tentativi necessari per ottenere il primo successo.
 
 $$  
-\mu = \langle i \rangle = \sum_{i=1}^{\infty} i , q^{i-1}p = \frac{1}{p}  
+\mu = \langle i \rangle = \sum_{i=1}^{\infty} i \  q^{i-1}p = \frac{1}{p}  
 $$
 
 **Interpretazione:**  
@@ -179,16 +179,18 @@ $$
 
 Ricavando:
 
-$$  
-i_{\text{mediana}} = -\frac{\log 2}{\log q}  
+$$
+i_{\text{mediana}} = -\frac{\log 2}{\log q}
 $$
 
 **Esempio:**  
 
-$$q = \frac{5}{6}$ → $\log_2 q = -0.26303$$
+$$
+q = \frac{5}{6}$ → $\log_2 q = -0.26303
+$$
 
-$$  
-i_{\text{mediana}} = \frac{1}{0.26303} \approx 3.8 \Rightarrow i_{\text{mediana}} \approx 4  
+$$
+i_{\text{mediana}} = \frac{1}{0.26303} \approx 3.8 \Rightarrow i_{\text{mediana}} \approx 4
 $$
 
 ---
