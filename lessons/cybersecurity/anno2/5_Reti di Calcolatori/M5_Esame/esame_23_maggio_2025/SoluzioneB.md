@@ -14,7 +14,7 @@ Per una comunicazione peer-to-peer in tempo reale UDP è la scelta naturale:
 - la latenza è minima.
 
 Per gestire **invio e ricezione simultanei** su un singolo socket sono possibili tre approcci canonici:
-
+S
 1. **`select()`** o **`poll()`** su un unico processo (multiplexing I/O);
 2. **Multithreading**;
 3. **`fork()`** che genera due processi figli che condividono il descrittore di socket.
