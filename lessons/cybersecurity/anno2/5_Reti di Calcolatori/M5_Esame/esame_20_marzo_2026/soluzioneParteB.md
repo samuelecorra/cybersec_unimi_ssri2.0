@@ -1,4 +1,4 @@
-﻿# Soluzione Esame di Reti di Calcolatori — Parte B — 20/03/2026
+# Soluzione Esame di Reti di Calcolatori — Parte B — 20/03/2026
 
 **Prof. Ernesto Damiani**
 
