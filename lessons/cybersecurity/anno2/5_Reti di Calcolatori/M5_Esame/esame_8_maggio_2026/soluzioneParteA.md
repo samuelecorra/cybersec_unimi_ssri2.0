@@ -6,16 +6,9 @@ Per ogni esercizio è indicato il riferimento alle lezioni di teoria del corso e
 
 ---
 
-## Indice
-
-- [Esercizio 1 — Tempo di trasferimento di 1 GB via TCP su Ethernet 100 Mbps](#esercizio-1--tempo-di-trasferimento-di-1-gb-via-tcp-su-ethernet-100-mbps)
-- [Esercizio 2 — Routing con Longest Prefix Match](#esercizio-2--routing-con-longest-prefix-match)
-- [Esercizio 3 — VLSM su 193.204.176.0/22 + switching L2 + ARP](#esercizio-3--vlsm-su-1932041760022--switching-l2--arp)
-- [Esercizio 4 — Tabella di instradamento del Router A](#esercizio-4--tabella-di-instradamento-del-router-a)
-
----
-
 ## Esercizio 1 — Tempo di trasferimento di 1 GB via TCP su Ethernet 100 Mbps
+
+Calcolate il tempo richiesto in secondi per trasferire via TCP un file di 1 Gbyte tra un computer A e un computer B attraverso un cavo Ethernet 100 Mbps che collega direttamente i due computer. Fate tutte le ipotesi necessarie per rendere la vostra analisi il più precisa possibile.
 
 > **Riferimenti di teoria**:
 >
@@ -23,12 +16,6 @@ Per ogni esercizio è indicato il riferimento alle lezioni di teoria del corso e
 > - [M2/UD5/L2 — Efficienza e controllo d'errore](../../M2_Protocolli_rete_TCP_IP/UD5/L2%20-%20Efficienza%20e%20controllo%20d%E2%80%99errore.md) (formula $T_{ix} = \text{bit}/\text{bps}$, efficienza, $\alpha = T_p/T_{ix}$)
 > - [M2/UD5/L9 — Flusso e congestione TCP](../../M2_Protocolli_rete_TCP_IP/UD5/L9%20-%20Flusso%20e%20congestione%20TCP.md) (slow start, CWND, RTT)
 > - [M2/UD6/L2 — UDP e TCP a confronto](../../M2_Protocolli_rete_TCP_IP/UD6/L2%20-%20UDP%20e%20TCP%20a%20confronto.md) (header TCP = 20 byte, overhead)
-
----
-
-**Esercizio 1 (5 punti)**
-
-Calcolate il tempo richiesto in secondi per trasferire via TCP un file di 1 Gbyte tra un computer A e un computer B attraverso un cavo Ethernet 100 Mbps che collega direttamente i due computer. Fate tutte le ipotesi necessarie per rendere la vostra analisi il più precisa possibile.
 
 ---
 
@@ -124,16 +111,6 @@ $$
 
 ## Esercizio 2 — Routing con Longest Prefix Match
 
-> **Riferimenti di teoria**:
->
-> - [M2/UD3/L1 — Introduzione all'instradamento IP](../../M2_Protocolli_rete_TCP_IP/UD3/L1%20-%20Introduzione%20all%E2%80%99instradamento%20IP.md) (Longest Prefix Match, struttura della tabella, default route)
-> - [M2/UD2/L3 — Complementi di IP](../../M2_Protocolli_rete_TCP_IP/UD2/L3%20-%20Complementi%20di%20IP.md) (CIDR, maschere variabili)
-> - [M2/UD2/L1 — Internet Protocol (IP)](<../../M2_Protocolli_rete_TCP_IP/UD2/L1%20-%20Internet%20Protocol%20(IP).md>) (operazione AND bit-a-bit)
-
----
-
-**Esercizio 2 (8 punti)**
-
 Considerando la seguente tabella di instradamento
 
 | Dest. prefix    | Next Hop   |
@@ -144,7 +121,14 @@ Considerando la seguente tabella di instradamento
 
 Mostrate i dettagli del calcolo eseguito per instradare pacchetti indirizzati all'host 192.24.128.5 e all'host 192.24.1.5.
 
+> **Riferimenti di teoria**:
+>
+> - [M2/UD3/L1 — Introduzione all'instradamento IP](../../M2_Protocolli_rete_TCP_IP/UD3/L1%20-%20Introduzione%20all%E2%80%99instradamento%20IP.md) (Longest Prefix Match, struttura della tabella, default route)
+> - [M2/UD2/L3 — Complementi di IP](../../M2_Protocolli_rete_TCP_IP/UD2/L3%20-%20Complementi%20di%20IP.md) (CIDR, maschere variabili)
+> - [M2/UD2/L1 — Internet Protocol (IP)](<../../M2_Protocolli_rete_TCP_IP/UD2/L1%20-%20Internet%20Protocol%20(IP).md>) (operazione AND bit-a-bit)
+
 ---
+
 ### Inquadramento teorico
 
 Quando un router riceve un pacchetto con `dst IP = D`, esegue questa procedura (cfr. M2/UD3/L1, §6–9):
@@ -273,6 +257,10 @@ Poiché la rotta è "direct", il router risolve via ARP il MAC di `192.24.1.5` s
 
 ## Esercizio 3 — VLSM su 193.204.176.0/22 + switching L2 + ARP
 
+- Dato il blocco CIDR 193.204.176.0/22, sub-nettatelo con la tecnica VLSM per creare due sottoreti A, B e due collegamenti IP punto-punto: A-B, B-Internet. Precisate quanti router utilizzerete, a quali sottoreti saranno connessi. Per ciascuna sottorete fornite subnetID, intervallo d'indirizzamento e indirizzo di broadcast.
+- Fornite un progetto di switching a livello 2 che supporti il piano d'indirizzamento IP usando due switch, lasciando su ciascuno switch porte di entrambe le reti. Specificate la configurazione degli switch, e la tecnica di connessione dei router agli switch.
+- Simulate una richiesta ARP fatta da un host sulla rete A, facendo le opportune ipotesi e mostrando tutti i frame generati.
+
 > **Riferimenti di teoria**:
 >
 > - [M2/UD2/L4 — Progetto di inter-reti](../../M2_Protocolli_rete_TCP_IP/UD2/L4%20-%20Progetto%20di%20inter-reti.md) (FLSM/VLSM, fasi progettuali)
@@ -281,14 +269,6 @@ Poiché la rotta è "direct", il router risolve via ARP il MAC di `192.24.1.5` s
 > - [M1/UD2/L6 — Switched Ethernet](../../M1_Tecniche_comunicazione_digitale/UD2/L6%20-%20Switched%20Ethernet.md) (tabella MAC, CAM)
 > - [M1/UD2/L7 — VLAN e Trunking](../../M1_Tecniche_comunicazione_digitale/UD2/L7%20-%20VLAN%20e%20Trunking.md) (VLAN ID, 802.1Q, router-on-a-stick)
 > - [M2/UD3/L3 — Address Resolution Protocol (ARP)](<../../M2_Protocolli_rete_TCP_IP/UD3/L3%20-%20Address%20Resolution%20Protocol%20(ARP).md>) (ARP request/reply, frame Ethernet, broadcast)
-
----
-
-**Esercizio 3 (12 punti)**
-
-- Dato il blocco CIDR 193.204.176.0/22, sub-nettatelo con la tecnica VLSM per creare due sottoreti A, B e due collegamenti IP punto-punto: A-B, B-Internet. Precisate quanti router utilizzerete, a quali sottoreti saranno connessi. Per ciascuna sottorete fornite subnetID, intervallo d'indirizzamento e indirizzo di broadcast.
-- Fornite un progetto di switching a livello 2 che supporti il piano d'indirizzamento IP usando due switch, lasciando su ciascuno switch porte di entrambe le reti. Specificate la configurazione degli switch, e la tecnica di connessione dei router agli switch.
-- Simulate una richiesta ARP fatta da un host sulla rete A, facendo le opportune ipotesi e mostrando tutti i frame generati.
 
 ---
 
@@ -572,15 +552,6 @@ Generato da `host_A2`:
 
 ## Esercizio 4 — Tabella di instradamento del Router A
 
-> **Riferimenti di teoria**:
->
-> - [M2/UD3/L1 — Introduzione all'instradamento IP](../../M2_Protocolli_rete_TCP_IP/UD3/L1%20-%20Introduzione%20all%E2%80%99instradamento%20IP.md) (struttura tabella, rotte dirette/indirette/default)
-> - [M2/UD2/L4 — Progetto di inter-reti](../../M2_Protocolli_rete_TCP_IP/UD2/L4%20-%20Progetto%20di%20inter-reti.md) (assegnazione indirizzi alle interfacce)
-
----
-
-**Esercizio 4 (5 punti)**
-
 Data la rete in figura, specificate la tabella di instradamento per il router A.
 
 ![](imgs/Pasted%20image%2020260519141502.png)
@@ -598,6 +569,11 @@ Data la rete in figura, specificate la tabella di instradamento per il router A.
 > - **Host B:** 10.0.3.2/24 eth0 (oppure 10.0.2.1/24 eth1)
 > - **Router B:** 10.0.1.2/24 eth0, 10.0.2.2/24 eth1, 10.0.3.1/24 eth0
 > - **Router A:** 100.4.1.24 d0, 10.0.2.1/24 eth1, 10.0.1.2/24 eth0
+
+> **Riferimenti di teoria**:
+>
+> - [M2/UD3/L1 — Introduzione all'instradamento IP](../../M2_Protocolli_rete_TCP_IP/UD3/L1%20-%20Introduzione%20all%E2%80%99instradamento%20IP.md) (struttura tabella, rotte dirette/indirette/default)
+> - [M2/UD2/L4 — Progetto di inter-reti](../../M2_Protocolli_rete_TCP_IP/UD2/L4%20-%20Progetto%20di%20inter-reti.md) (assegnazione indirizzi alle interfacce)
 
 ---
 
@@ -726,17 +702,3 @@ route add 0.0.0.0  mask 0.0.0.0       100.4.1.1
 > **Osservazione**: il numero esatto di righe e i next-hop dipendono dall'interpretazione finale dell'immagine. La struttura logica (3 rotte dirette + 1–2 rotte indirette via R_B + 1 default verso Internet) **resta valida** indipendentemente dai numeri esatti, ed è quella che il professore si attende.
 
 ---
-
-## Riferimenti incrociati al corso
-
-Per ogni esercizio, i materiali di studio rilevanti:
-
-- **TCP/Ethernet — throughput, overhead, slow start**: `M1/UD2/L4`, `M2/UD5/L2`, `M2/UD5/L9`, `M2/UD6/L2`.
-- **Routing, Longest Prefix Match, default route**: `M2/UD3/L1`, `M2/UD2/L3`.
-- **Subnetting VLSM, FLSM, CIDR**: `M2/UD2/L1`, `M2/UD2/L3`, `M2/UD2/L4`.
-- **Switching L2, VLAN, trunking 802.1Q**: `M1/UD2/L6`, `M1/UD2/L7`.
-- **ARP, frame Ethernet**: `M1/UD2/L4`, `M2/UD3/L3`.
-- **Tabella di routing**: `M2/UD3/L1`.
-
----
-

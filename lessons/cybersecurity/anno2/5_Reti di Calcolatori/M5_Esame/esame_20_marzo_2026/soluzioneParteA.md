@@ -16,15 +16,13 @@ Per ogni esercizio è indicato il riferimento alle lezioni di teoria del corso, 
 
 ## Esercizio 1 — Distanza massima in CSMA/CD a 100 Mbps con $L_{min}=512$ bit
 
+**Esercizio 1 (10 punti)** In una rete Ethernet che utilizza un protocollo a contesa CSMA/CD operante a bit rate R = 100 Mbps, la lunghezza minima del PDU (frame) è fissata a L_min = 512 bit. Calcolate la distanza massima consentita tra due stazioni, in modo da garantire l'integrità del frame (cioè che una stazione termini la trasmissione del frame prima che eventuali collisioni vengano rilevate). Motivate la formula utilizzata e fornite il risultato numerico in metri (arrotondato all'intero più vicino).
+
 > **Riferimenti di teoria**:
 >
 > - [M1/UD2/L4 — Ethernet – Frame e CSMA-CD](../../M1_Tecniche_comunicazione_digitale/UD2/L4%20-%20Ethernet%20%E2%80%93%20Frame%20e%20CSMA-CD.md) (back-to-back delay, lunghezza minima del frame, vincoli temporali)
 > - [M1/UD2/L5 — Gestione delle collisioni in Ethernet](../../M1_Tecniche_comunicazione_digitale/UD2/L5%20-%20Gestione%20delle%20collisioni%20in%20Ethernet.md) (§3–4 — vincolo $T_{tx} \geq 2T_p$, slot time 51,2 μs a 10 Mbps su 2500 m)
 > - [M2/UD5/L2 — Efficienza e controllo d'errore](../../M2_Protocolli_rete_TCP_IP/UD5/L2%20-%20Efficienza%20e%20controllo%20d%E2%80%99errore.md) (formula $T_{ix} = \text{bit}/R$)
-
----
-
-**Esercizio 1 (10 punti)** In una rete Ethernet che utilizza un protocollo a contesa CSMA/CD operante a bit rate R = 100 Mbps, la lunghezza minima del PDU (frame) è fissata a L_min = 512 bit. Calcolate la distanza massima consentita tra due stazioni, in modo da garantire l'integrità del frame.
 
 ---
 
@@ -133,6 +131,16 @@ Entrambi i valori sono accettabili in compito purché la **velocità di propagaz
 
 ## Esercizio 2 — Progetto VLAN e indirizzamento IP per due switch + router
 
+**Esercizio 2 (10 punti)** – Si devono collegare due piani di un edificio con i seguenti requisiti:
+
+- Switch A (piano terra) e Switch B (primo piano) sono collegati tra loro tramite un cavo di trunking (porta GigabitEthernet 0/24).
+- Su entrambi gli switch devono esistere: VLAN Ufficio (ID 10) per host cablati; VLAN Wi-Fi (ID 20) per Access Point 802.11
+- Sullo Switch A deve esistere anche la VLAN Internet (ID 30) alla quale è collegato (porta GigabitEthernet 0/1) il router esterno verso Internet.
+
+**(1)** Fornite (in stile Cisco IOS) la configurazione delle VLAN e delle porte per entrambi gli switch. Specificate: La creazione delle VLAN; le porte di accesso per gli host ufficio e per gli AP Wi-Fi; La configurazione del trunking tra i due switch; Le porte a cui è connesso il router interno tra VLAN Wi-Fi e VLAN Internet (usate porte normali o porte di trunk? – motivate la scelta)
+
+**(2)** Progettate il piano di indirizzamento IP per la rete rispettando le seguenti regole: Ogni VLAN corrisponde a un subnet IP. Il router interno funge da gateway di default per tutte le VLAN. La VLAN Wi-Fi (20) deve poter raggiungere Internet (attraverso la VLAN 30). Specificate: subnet e maschere per le tre VLAN; gli indirizzi IP assegnati al router su ciascuna interfaccia; Come viene realizzata la connessione L3 tra VLAN Wi-Fi e VLAN Internet (router-on-a-stick o tradizionale).
+
 > **Riferimenti di teoria**:
 >
 > - [M1/UD2/L6 — Switched Ethernet](../../M1_Tecniche_comunicazione_digitale/UD2/L6%20-%20Switched%20Ethernet.md) (CAM, switching, domini di collisione)
@@ -140,10 +148,6 @@ Entrambi i valori sono accettabili in compito purché la **velocità di propagaz
 > - [M2/UD2/L2 — Introduzione alla configurazione IP](../../M2_Protocolli_rete_TCP_IP/UD2/L2%20-%20Introduzione%20alla%20configurazione%20IP.md) (gateway predefinito, indirizzi privati)
 > - [M2/UD2/L4 — Progetto di inter-reti](../../M2_Protocolli_rete_TCP_IP/UD2/L4%20-%20Progetto%20di%20inter-reti.md) (assegnazione subnet)
 > - [M2/UD4/L1 — Indirizzi pubblici e privati](../../M2_Protocolli_rete_TCP_IP/UD4/L1%20-%20Indirizzi%20pubblici%20e%20privati.md) (RFC1918)
-
----
-
-**Esercizio 2 (10 punti)** Due piani di un edificio, due switch (A piano terra, B primo piano), trunk su Gi0/24. VLAN Ufficio (10) e Wi-Fi (20) su entrambi; VLAN Internet (30) solo su SW-A, con router esterno su Gi0/1.
 
 ---
 
@@ -359,6 +363,8 @@ Sia `H_wifi = 192.168.20.50` un client Wi-Fi che vuole raggiungere `8.8.8.8`:
 
 ## Esercizio 3 — Spoofing DHCP (Rogue DHCP Server)
 
+**Esercizio 3 (10 punti)** Illustrate con un esempio concreto (nomi di host, indirizzi IP, sequenza di messaggi) l'attacco di spoofing DHCP (o rogue DHCP server). Indicate: La sequenza di messaggi DHCP coinvolti; quali campi sono falsificati dall'attaccante; le conseguenze per le vittime (MITM, furto credenziali, ecc.); una possibile contromisura semplice (a livello di switch o router).
+
 > **Riferimenti di teoria**:
 >
 > - [M2/UD2/L5 — Assegnazione dinamica di indirizzi IP](../../M2_Protocolli_rete_TCP_IP/UD2/L5%20-%20Assegnazione%20dinamica%20di%20indirizzi%20IP.md) (motivazioni, lease)
@@ -366,6 +372,8 @@ Sia `H_wifi = 192.168.20.50` un client Wi-Fi che vuole raggiungere `8.8.8.8`:
 > - [M2/UD2/L1 — Internet Protocol (IP)](../../M2_Protocolli_rete_TCP_IP/UD2/L1%20-%20Internet%20Protocol%20(IP).md) (broadcast `255.255.255.255`)
 > - [M1/UD2/L7 — VLAN e Trunking](../../M1_Tecniche_comunicazione_digitale/UD2/L7%20-%20VLAN%20e%20Trunking.md) (segmentazione domini broadcast, contromisure su switch)
 > - [M2/UD3/L3 — Address Resolution Protocol (ARP)](../../M2_Protocolli_rete_TCP_IP/UD3/L3%20-%20Address%20Resolution%20Protocol%20(ARP).md) (analogo problema di trust nelle LAN — pattern di MITM)
+
+---
 
 ### Inquadramento teorico
 

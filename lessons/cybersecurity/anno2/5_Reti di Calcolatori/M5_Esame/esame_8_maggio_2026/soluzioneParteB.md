@@ -1,4 +1,4 @@
-# Soluzione Esame di Reti di Calcolatori — Parte B — 8/05/2026
+﻿# Soluzione Esame di Reti di Calcolatori — Parte B — 8/05/2026
 
 **Prof. Ernesto Damiani**
 
@@ -47,167 +47,91 @@ Per **non bloccare** il proxy mentre dialoga con il programma fedeltà remoto, s
 
 ### Pseudocodice del proxy
 
-```python
-# ─────────────────────────────────────────────────────────────────────
-#  proxy_volo.py   —   Proxy TCP autenticato per Wi-Fi di bordo
-#  Avvio: ./proxy_volo
-#  - Ogni client che apre TCP verso il proxy viene controllato.
-#  - Se il suo IP NON è in CONNECTED, si chiedono user/pwd, si chiede
-#    un token al server fedeltà remoto, lo si valida e — se OK — si
-#    appende l'IP del client al file CONNECTED.
-#  - L'effettivo proxying verso Internet è gestito da un PROCESSO
-#    SEPARATO (fuori scope del testo) che legge il file CONNECTED.
-# ─────────────────────────────────────────────────────────────────────
+```c
+#define PROXY_PORT     8080
+#define FEDELTA_IP     "10.10.10.1"
+#define FEDELTA_PORT   443
+#define CONNECTED_FILE "/var/lib/proxy/CONNECTED"
+#define BUF            4096
 
-CONST PROXY_PORT       = 8080
-CONST FEDELTA_HOST     = "loyalty.airline.com"
-CONST FEDELTA_PORT     = 443
-CONST CONNECTED_FILE   = "/var/lib/proxy/CONNECTED"
-CONST BUF              = 4096
-CONST PROMPT_USER      = "USERNAME?\n"
-CONST PROMPT_PASS      = "PASSWORD?\n"
-CONST MSG_OK           = "AUTH_OK\n"
-CONST MSG_KO           = "AUTH_FAIL\n"
+int main(void) {
+    int sock_srv = socket(AF_INET, SOCK_STREAM, 0);
 
-# ─── Lock file lock per scritture concorrenti su CONNECTED ───────────
-mutex_connected = file_lock(CONNECTED_FILE + ".lock")
+    struct sockaddr_in srv_addr;
+    bzero((char*)&srv_addr, sizeof(srv_addr));
+    srv_addr.sin_family      = AF_INET;
+    srv_addr.sin_port        = htons(PROXY_PORT);
+    srv_addr.sin_addr.s_addr = INADDR_ANY;
 
-# ──────────────────────────────────────────────────────────────────────
-#  main
-# ──────────────────────────────────────────────────────────────────────
-function main():
+    bind(sock_srv, (struct sockaddr*)&srv_addr, sizeof(srv_addr));
+    listen(sock_srv, 64);
 
-    # 1) Socket TCP del proxy (SOCK_STREAM) — cfr. M4/UD1/L2
-    sock_listen = socket(AF_INET, SOCK_STREAM)
-    setsockopt(sock_listen, SO_REUSEADDR, 1)
-    bind(sock_listen, ("0.0.0.0", PROXY_PORT))      # ascolta su tutte le NIC
-    listen(sock_listen, backlog=64)
-    print("[INFO] Proxy in ascolto su porta " + PROXY_PORT)
+    while (1) {
+        struct sockaddr_in cli_addr;
+        int cli_len = sizeof(cli_addr);
+        int sock_cli = accept(sock_srv, (struct sockaddr*)&cli_addr, &cli_len);
 
-    # 2) Loop principale di accept()
-    while true:
-        # accept() restituisce: (nuovo socket, indirizzo del client)
-        # ←—— l'IP PRIVATO del client si legge QUI dal socket, NON
-        #     da campi forniti dall'utente.
-        (sock_client, client_addr) = accept(sock_listen)
-        client_ip   = client_addr.ip            # es. "192.168.7.42"
-        client_port = client_addr.port
+        /* IP del client letto dal kernel tramite accept() — non falsificabile */
+        char client_ip[16];
+        strcpy(client_ip, inet_ntoa(cli_addr.sin_addr));
 
-        # Delega la gestione del client a un processo figlio
-        pid = fork()
-        if pid == 0:                            # processo figlio
-            close(sock_listen)                  # il figlio non accetta più
-            try:
-                handle_client(sock_client, client_ip)
-            finally:
-                close(sock_client)
-            exit(0)
-        else:                                   # padre
-            close(sock_client)                  # il padre non comunica
-            # raccoglie zombie in modo non bloccante
-            waitpid(ANY_CHILD, WNOHANG)
+        if (fork() == 0) {          /* figlio: gestisce UN client */
+            close(sock_srv);
+            char buf[BUF];
 
+            /* 1. già autorizzato? cerca IP nel file CONNECTED (alto livello) */
+            if (ip_in_file(CONNECTED_FILE, client_ip)) {
+                send(sock_cli, "ALREADY_AUTHORIZED\n", 19, 0);
+                close(sock_cli); exit(0);
+            }
 
-# ──────────────────────────────────────────────────────────────────────
-#  handle_client — eseguito nel figlio
-# ──────────────────────────────────────────────────────────────────────
-function handle_client(sock_client, client_ip):
+            /* 2. raccogli credenziali dal client */
+            send(sock_cli, "USERNAME?\n", 10, 0);
+            recv(sock_cli, buf, sizeof(buf), 0);   /* legge username (TCP stream) */
+            char username[256]; /* copia da buf */
 
-    print("[INFO] Nuova connessione da " + client_ip)
+            send(sock_cli, "PASSWORD?\n", 10, 0);
+            recv(sock_cli, buf, sizeof(buf), 0);   /* legge password */
+            char password[256]; /* copia da buf */
 
-    # 1) Controlla se il client è già autenticato (file CONNECTED)
-    if ip_in_file(CONNECTED_FILE, client_ip):
-        # già autorizzato: nessuna ulteriore azione qui;
-        # un processo separato lo proxy-erà verso Internet
-        send(sock_client, "ALREADY_AUTHORIZED\n")
-        return
+            /* 3. apre connessione TCP al server fedeltà — lato attivo */
+            struct sockaddr_in fed_addr;
+            bzero((char*)&fed_addr, sizeof(fed_addr));
+            fed_addr.sin_family      = AF_INET;
+            fed_addr.sin_port        = htons(FEDELTA_PORT);
+            fed_addr.sin_addr.s_addr = inet_addr(FEDELTA_IP);
 
-    # 2) Non autorizzato: avvia il flusso di autenticazione
-    send(sock_client, PROMPT_USER)
-    username = recv_line(sock_client, BUF)      # legge fino a "\n"
-    send(sock_client, PROMPT_PASS)
-    password = recv_line(sock_client, BUF)
+            int sock_fed = socket(AF_INET, SOCK_STREAM, 0);
+            connect(sock_fed, (struct sockaddr*)&fed_addr, sizeof(fed_addr));
 
-    if username == EMPTY or password == EMPTY:
-        send(sock_client, MSG_KO)
-        return
+            /* 4. invia credenziali, ricevi token */
+            snprintf(buf, sizeof(buf), "AUTH %s %s\n", username, password);
+            send(sock_fed, buf, strlen(buf), 0);
+            recv(sock_fed, buf, sizeof(buf), 0);   /* token */
+            close(sock_fed);
 
-    # 3) Connessione TCP al server remoto del programma fedeltà
-    #    (M4/UD1/L3 — lato attivo: connect())
-    sock_fed = socket(AF_INET, SOCK_STREAM)
-    try:
-        connect(sock_fed, (FEDELTA_HOST, FEDELTA_PORT))
-    except NetworkError:
-        send(sock_client, "REMOTE_UNREACHABLE\n")
-        close(sock_fed)
-        return
+            /* 5. valida token (chiamata di libreria) */
+            if (!loyalty_check_token(buf)) {
+                send(sock_cli, "AUTH_FAIL\n", 10, 0);
+            } else {
+                /* 6. registra IP nel file CONNECTED e autorizza */
+                append_ip(CONNECTED_FILE, client_ip);  /* alto livello */
+                send(sock_cli, "AUTH_OK\n", 8, 0);
+            }
 
-    # 4) Invia credenziali al server fedeltà, riceve un token
-    send(sock_fed, "AUTH " + username + " " + password + "\n")
-    token = recv_line(sock_fed, BUF)            # es. "TKN:abc123..."
-    close(sock_fed)
-
-    if token == EMPTY:
-        send(sock_client, MSG_KO)
-        return
-
-    # 5) Validazione del token tramite chiamata di libreria
-    #    (libreria fornita dal programma fedeltà, dettagli fuori scope)
-    if not loyalty_lib.check_token(token):
-        send(sock_client, MSG_KO)
-        print("[WARN] Token non valido per " + client_ip)
-        return
-
-    # 6) Token OK → registra il client come autorizzato
-    with mutex_connected:                       # sezione critica
-        if not ip_in_file(CONNECTED_FILE, client_ip):
-            append_line(CONNECTED_FILE, client_ip)
-
-    send(sock_client, MSG_OK)
-    print("[INFO] Client " + client_ip + " autenticato e registrato")
-
-
-# ──────────────────────────────────────────────────────────────────────
-#  Utility — gestione del file CONNECTED
-# ──────────────────────────────────────────────────────────────────────
-function ip_in_file(path, ip):
-    if not exists(path): return false
-    for line in read_lines(path):
-        if strip(line) == ip:
-            return true
-    return false
-
-function append_line(path, line):
-    with open(path, "a") as f:
-        f.write(line + "\n")
-        fsync(f)        # forza il flush su disco (durabilità)
-
-
-# ──────────────────────────────────────────────────────────────────────
-#  recv_line — legge dal socket fino al newline o BUF byte
-# ──────────────────────────────────────────────────────────────────────
-function recv_line(sock, maxlen):
-    buf = ""
-    while length(buf) < maxlen:
-        chunk = recv(sock, 1)                  # un byte alla volta
-        if chunk == EMPTY: break                # peer ha chiuso
-        if chunk == "\n":  break
-        buf = buf + chunk
-    return strip(buf)
-
-
-main()
+            close(sock_cli);
+            exit(0);
+        }
+        close(sock_cli);    /* padre: torna subito ad accept() */
+    }
+}
 ```
 
-### Punti di robustezza messi in evidenza
+### Note chiave
 
-1. **Lettura dell'IP dal socket**: il valore `client_addr.ip` è popolato dal kernel a partire dal mittente reale del segmento `SYN` ricevuto durante il three-way handshake. Non c'è modo, per il client, di iniettare un IP diverso (al massimo può fare _spoofing_ del SYN, ma il proxy non riuscirebbe a completare l'handshake — quindi `accept()` non ritornerebbe mai con quell'IP).
-2. **`SO_REUSEADDR`** in `bind()`: permette il riavvio rapido del proxy senza attendere il `TIME_WAIT` del kernel.
-3. **`fork()` per concorrenza**: in alternativa si può usare un thread pool o `select()`/`poll()` (cfr. M4/UD1/L6).
-4. **Sezione critica con file lock**: più processi figli potrebbero tentare di scrivere su `CONNECTED` contemporaneamente.
-5. **`recv_line` byte-per-byte**: TCP è uno stream (cfr. M2/UD6/L2): non c'è garanzia che un `recv(BUF)` torni esattamente una riga, va parsata l'applicazione.
-6. **Validazione del token come "chiamata di libreria"**: per ipotesi del testo (`loyalty_lib.check_token(token)`); in pratica può essere una verifica di firma JWT, una `HMAC`, o un'altra richiesta al server fedeltà.
-7. **Doppio controllo `ip_in_file`** dentro il `mutex`: evita race condition se due connessioni dello stesso client arrivano in parallelo.
+1. **IP letto da `accept()`**: il kernel popola `cli_addr` con l'IP reale del mittente del SYN; il client non può falsificarlo.
+2. **TCP è stream**: `recv()` può tornare parziale → in pratica si legge in loop fino a `\n` per ogni riga di testo.
+3. **`fork()` per concorrenza**: ogni figlio gestisce un solo client; il padre torna immediatamente ad `accept()` (cfr. M4/UD1/L6).
 
 ### Diagramma di sequenza
 
@@ -556,7 +480,7 @@ Si vede chiaramente perché HTTP/1.1 rappresenta un **salto di prestazioni** ris
 > - [M2/UD2/L1 — Internet Protocol (IP)](<../../M2_Protocolli_rete_TCP_IP/UD2/L1%20-%20Internet%20Protocol%20(IP).md>) (filtering basato su IP/protocollo)
 > - [M2/UD6/L2 — UDP e TCP a confronto](../../M2_Protocolli_rete_TCP_IP/UD6/L2%20-%20UDP%20e%20TCP%20a%20confronto.md) (numeri di protocollo: TCP=6, UDP=17)
 > - [M2/UD4/L1 — Indirizzi pubblici e privati](../../M2_Protocolli_rete_TCP_IP/UD4/L1%20-%20Indirizzi%20pubblici%20e%20privati.md) (politica di filtering al gateway)
-> - Cfr. anche soluzione "[Esercizio 3 (4 pt) — Regola di firewall TCP](../esame_23_maggio_2025/Soluzione_Reti_20250523.md#esercizio-3-4-pt--regola-di-firewall-tcp)" del 23/05/2025 per il pattern stateless/stateful
+> - Cfr. anche soluzione "[Esercizio 3 (4 pt) — Regola di firewall TCP](../esame_23_maggio_2025/SoluzioneParteA.md#esercizio-3-4-pt--regola-di-firewall-tcp)" del 23/05/2025 per il pattern stateless/stateful
 
 ### Inquadramento
 
@@ -649,155 +573,3 @@ Questa configurazione coincide con il pattern "**out OK solo se è il proxy, in 
 ---
 
 ---
-
-## Appendice — Legenda flag `iptables`
-
-> 📌 `iptables` è lo strumento Linux per configurare le regole di filtraggio del kernel (netfilter). Opera su **tabelle** (filter, nat, mangle…); la tabella di default è **filter**, quella usata in tutti gli esercizi di questo corso.
-
----
-
-### 1. Struttura di un comando iptables
-
-```
-iptables  [-t tabella]  <COMANDO>  <CATENA>  [opzioni di match]  -j <TARGET>
-```
-
----
-
-### 2. Comandi principali (cosa fare sulla catena)
-
-| Flag | Forma estesa | Significato |
-|---|---|---|
-| `-P` | `--policy` | Imposta la **policy di default** della catena: se nessuna regola fa match, si applica questo target (es. `DROP` o `ACCEPT`). |
-| `-A` | `--append` | **Aggiunge** la regola in fondo alla catena. Le regole sono valutate in ordine: la prima che fa match termina la valutazione. |
-| `-I` | `--insert` | **Inserisce** la regola in una posizione specifica (di default in cima). Utile per mettere regole prioritarie prima di quelle esistenti. |
-| `-D` | `--delete` | **Elimina** una regola dalla catena (per numero o per pattern). |
-| `-F` | `--flush` | **Svuota** tutte le regole della catena (o di tutte le catene se non specificata). |
-| `-L` | `--list` | **Elenca** le regole presenti (aggiungere `-v` per contatori, `-n` per non risolvere nomi). |
-
----
-
-### 3. Catene (CHAIN) — dove si applica la regola
-
-| Catena | Quando viene attraversata |
-|---|---|
-| `INPUT` | Pacchetti **destinati alla macchina stessa** (il firewall è il destinatario finale). |
-| `OUTPUT` | Pacchetti **generati dalla macchina stessa** e in uscita. |
-| FORWARD | Pacchetti **in transito**: entrano da un'interfaccia ed escono da un'altra (il firewall fa da router). È la catena usata per filtrare il traffico tra LAN e Internet. |
-| `PREROUTING` | Pacchetti appena arrivati, prima del routing (usata in tabella nat per DNAT). |
-| `POSTROUTING` | Pacchetti dopo il routing, prima di uscire (usata in tabella nat per SNAT). |
-
-> 💡 Negli esercizi d'esame la catena più usata è **FORWARD** perché il firewall protegge una LAN interna verso Internet: i pacchetti non sono destinati al firewall stesso ma lo attraversano.
-
----
-
-### 4. Opzioni di match — criteri di selezione del pacchetto
-
-#### 4.1 Interfacce
-
-| Flag | Forma estesa | Significato |
-|---|---|---|
-| `-i eth0` | `--in-interface` | Pacchetto **arrivato** dall'interfaccia `eth0`. Usabile in INPUT e FORWARD. |
-| `-o eth1` | `--out-interface` | Pacchetto **in uscita** dall'interfaccia `eth1`. Usabile in OUTPUT e FORWARD. |
-
-> ⚠️ `-i` è l'interfaccia di **ingresso**, `-o` quella di **uscita**. In FORWARD si usano entrambi per specificare la direzione del flusso (es. `-i eth0 -o eth1` = dalla LAN verso Internet).
-
-#### 4.2 Indirizzi IP
-
-| Flag | Forma estesa | Significato |
-|---|---|---|
-| `-s 10.0.0.1` | `--source` | IP **sorgente** del pacchetto. Può essere un singolo IP o una subnet CIDR (es. `10.0.0.0/24`). |
-| `-d 10.0.0.1` | `--destination` | IP **destinazione** del pacchetto. Stessa sintassi di `-s`. |
-| `! -s 10.0.0.1` | negazione | Il `!` **nega** il match: significa "qualunque sorgente **tranne** `10.0.0.1`". |
-
-#### 4.3 Protocollo
-
-| Flag | Significato |
-|---|---|
-| `-p tcp` | Match solo sui pacchetti **TCP** (numero protocollo IP = 6). |
-| `-p udp` | Match solo sui pacchetti **UDP** (numero protocollo IP = 17). |
-| `-p icmp` | Match sui pacchetti **ICMP** (ping, traceroute…). |
-| `-p all` | Match su **tutti** i protocolli (default se `-p` è omesso). |
-
-#### 4.4 Porte (richiedono `-p tcp` o `-p udp`)
-
-| Flag | Forma estesa | Significato |
-|---|---|---|
-| `--sport 80` | `--source-port` | Porta **sorgente** del segmento. |
-| `--dport 443` | `--destination-port` | Porta **destinazione** del segmento. |
-| `--dport 1024:65535` | range | Intervallo di porte da 1024 a 65535. |
-
-#### 4.5 Flag TCP (richiedono `-p tcp`)
-
-| Flag | Significato |
-|---|---|
-| `--syn` | Match sui pacchetti con **solo SYN settato** (FIN, RST, ACK azzerati). Equivale a `--tcp-flags FIN,SYN,RST,ACK SYN`. Identifica i pacchetti di **apertura connessione** (primo passo del three-way handshake). Bloccare `--syn` impedisce nuove connessioni in ingresso senza toccare le risposte. |
-| `--tcp-flags <mask> <set>` | Forma generica: `<mask>` = insieme di flag da esaminare; `<set>` = quelli che devono risultare settati. Es. `--tcp-flags SYN,RST SYN,RST` = pacchetto con SYN e RST entrambi settati (illegale). |
-
-> ⚠️ `--syn` cattura solo il primo SYN. I pacchetti successivi della stessa connessione TCP (ACK, FIN…) non hanno il solo SYN settato, quindi non fanno match e vengono gestiti dalle regole successive o dalla policy di default.
-
-#### 4.6 Moduli estesi (`-m`)
-
-I moduli estendono le capacità di match. Si caricano con `-m <nome_modulo>`.
-
-**Modulo `conntrack`** — connection tracking stateful:
-
-| Stato (`--ctstate`) | Significato |
-|---|---|
-| `NEW` | Pacchetto che avvia una **nuova** connessione (il kernel non ha visto questo flusso prima). |
-| `ESTABLISHED` | Pacchetto appartenente a una connessione già **stabilita** (andata e ritorno già visti). |
-| `RELATED` | Pacchetto **correlato** a una connessione esistente (es. ICMP error su un flusso TCP, o canale dati FTP correlato al controllo). |
-| `INVALID` | Pacchetto che non corrisponde ad alcuna connessione nota e non è un nuovo SYN: va droppato. |
-| `ESTABLISHED,RELATED` | Match su entrambi: permette il traffico di **ritorno** per connessioni avviate dall'interno. È il pattern tipico del firewall stateful che blocca le connessioni nuove in ingresso ma lascia passare le risposte. |
-
----
-
-### 5. Target (`-j`) — cosa fare con il pacchetto
-
-| Target | Significato |
-|---|---|
-| `ACCEPT` | **Lascia passare** il pacchetto. Nessuna ulteriore regola viene valutata per questo pacchetto. |
-| `DROP` | **Scarta silenziosamente** il pacchetto. Il mittente non riceve alcuna notifica: la connessione risulta in timeout. |
-| `REJECT` | **Scarta** il pacchetto **e invia un errore ICMP** al mittente. Più cortese di DROP ma rivela la presenza del firewall. |
-| `LOG` | **Registra** le informazioni del pacchetto nel log di sistema e poi **continua** la valutazione delle regole successive (non è un target terminale). |
-
-> 💡 **DROP vs REJECT**: in contesti di sicurezza si preferisce `DROP` perché non rivela informazioni al potenziale attaccante (il port scan restituisce timeout anziché ICMP error). `REJECT` è più utile nella LAN interna per dare feedback agli utenti.
-
----
-
-### 6. Logica di valutazione delle regole
-
-```
-Pacchetto in arrivo
-        |
-        v
-  Regola 1: fa match?  --NO-->  Regola 2: fa match?  --NO-->  ...  --NO-->  Policy di default (-P)
-        |                               |
-       SI                              SI
-        |                               |
-        v                               v
-   Applica target                Applica target
-   (ACCEPT o DROP)               (ACCEPT o DROP)
-   Fine valutazione              Fine valutazione
-```
-
-> ⚠️ Le regole sono valutate **in ordine**. Al primo match, la valutazione si interrompe e il target viene applicato. Se nessuna regola fa match, si applica la **policy di default** (impostata con `-P`). Per questo la policy `DROP` con regole `ACCEPT` selettive è la configurazione più sicura.
-
----
-
-### 7. Esempio di lettura di una regola completa
-
-```bash
-iptables -A FORWARD -i eth0 -o eth1 -s 10.0.0.1 -p tcp -j ACCEPT
-```
-
-| Pezzo | Significato |
-|---|---|
-| `-A FORWARD` | Aggiungi in coda alla catena FORWARD. |
-| `-i eth0` | Il pacchetto è arrivato dall'interfaccia `eth0` (LAN interna). |
-| `-o eth1` | Il pacchetto uscirà dall'interfaccia `eth1` (Internet). |
-| `-s 10.0.0.1` | L'IP sorgente è `10.0.0.1` (il proxy). |
-| `-p tcp` | Il protocollo è TCP. |
-| `-j ACCEPT` | Se tutti i criteri sono soddisfatti: lascia passare il pacchetto. |
-
-**Lettura in chiaro:** *"Aggiungi alla catena FORWARD una regola che accetta i pacchetti TCP provenienti dalla LAN (eth0) verso Internet (eth1) se la sorgente è il proxy (10.0.0.1)."*

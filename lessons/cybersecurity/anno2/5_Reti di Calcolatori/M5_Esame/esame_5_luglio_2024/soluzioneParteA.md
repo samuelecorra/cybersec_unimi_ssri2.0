@@ -6,17 +6,20 @@ Soluzione integrale della Parte A, redatta in chiave "30 e lode": ogni esercizio
 
 ---
 
-## Indice
+## Esercizio 1 (10 punti)
 
-- [Esercizio 1 — TCP Reno: CWND all'istante 16](#esercizio-1--tcp-reno-cwnd-allistante-16)
-- [Esercizio 2 — Subnetting FLSM /28 (vero/falso)](#esercizio-2--subnetting-flsm-28-verofalso)
-- [Esercizio 3 — Algoritmo di Dijkstra verso il nodo O](#esercizio-3--algoritmo-di-dijkstra-verso-il-nodo-o)
+Considerando l'algoritmo per il controllo di congestione del protocollo TCP nella versione Reno, calcolate il valore della finestra di congestione all'istante 16 nelle seguenti ipotesi:
 
----
+- il valore della finestra di congestione all'atto della prima trasmissione (istante 0) è pari a 1 MSS
+- il valore iniziale della soglia è posto a 8 MSS
+- si ha un time-out in seguito alla trasmissione dell'istante 5
+- si hanno tre ACK duplicati in seguito alla trasmissione dell'istante 12
 
-## Esercizio 1 — TCP Reno: CWND all'istante 16
+Ai fini dell'esercizio si consideri infinita la dimensione del buffer ricevente è infinita
 
 > **Riferimento di teoria**: [M2/UD5/L9 — Flusso e congestione TCP](../../M2_Protocolli_rete_TCP_IP/UD5/L9%20-%20Flusso%20e%20congestione%20TCP.md) · [M2/UD5/L10 — Timeout e decremento moltiplicativo](../../M2_Protocolli_rete_TCP_IP/UD5/L10%20-%20Timeout%20e%20decremento%20moltiplicativo.md) · [M2/UD5/L11 — Fast Retransmit e Fast Recovery](../../M2_Protocolli_rete_TCP_IP/UD5/L11%20-%20Fast%20Retransmit%20e%20Fast%20Recovery.md)
+
+---
 
 ### Inquadramento teorico
 
@@ -151,9 +154,15 @@ CWND
 
 ---
 
-## Esercizio 2 — Subnetting FLSM /28 (vero/falso)
+## Esercizio 2 (8 punti)
+
+Dato l'indirizzo IP di classe C 194.33.18.0, nel caso in cui si applichi la tecnica di sub-netting FLSM con maschera 255.255.255.240, quali dei seguenti sono indirizzi validi per indicare una particolare sottorete ed il relativo indirizzo di broadcast?
+
+a) 194.33.18.96 (sottorete) e 194.33.18.255 (broadcast) b) 194.33.18.128 (sottorete) e 194.33.18.240 (broadcast) c) 194.33.18.96 (sottorete) e 194.33.18.111 (broadcast) d) 194.33.18.12 (sottorete) e 194.33.18.15 (broadcast) e) 194.33.18.128 (sottorete) e 194.33.18.255 (broadcast) f) 194.33.18.0 (sottorete) e 194.33.18.255 (broadcast)
 
 > **Riferimento di teoria**: [M2/UD2/L3 — Complementi di IP](../../M2_Protocolli_rete_TCP_IP/UD2/L3%20-%20Complementi%20di%20IP.md) (maschere, AND logico) · [M2/UD2/L4 — Progetto di inter-reti](../../M2_Protocolli_rete_TCP_IP/UD2/L4%20-%20Progetto%20di%20inter-reti.md) (FLSM/VLSM)
+
+---
 
 ### Inquadramento teorico
 
@@ -224,7 +233,13 @@ $$
 
 ---
 
-## Esercizio 3 — Algoritmo di Dijkstra verso il nodo O
+## Esercizio 3 (12 punti)
+
+Considerate il grafo G= (N, A) pesato e non orientato riportato in figura. Applicando l'algoritmo di Dijkstra, calcolate i cammini minimi da qualunque nodo al nodo O (destinatario). Indicate i vari passi dell'algoritmo e la soluzione trovata.
+
+![](imgs/Pasted%20image%2020260522035803.png)
+
+---
 
 > **Riferimento di teoria**: [M2/UD7/L3 — Da RIP a OSPF](../../M2_Protocolli_rete_TCP_IP/UD7/L3%20-%20Da%20RIP%20a%20OSPF.md) (Dijkstra alla base di OSPF) · [M2/UD7/L4 — OSPF avanzato](../../M2_Protocolli_rete_TCP_IP/UD7/L4%20-%20OSPF%20avanzato.md)
 
@@ -465,15 +480,3 @@ Per ogni nodo verifichiamo che la distanza calcolata sia minore o uguale a quell
 - **Applicazione OSPF**: in una rete OSPF reale, ogni router esegue questo algoritmo localmente sul Link State Database, ricavando l'**albero dei cammini minimi** radicato in sé stesso. La tabella di routing è poi derivata leggendo, per ogni destinazione, il **primo hop** sul cammino minimo.
 - **Multipath ECMP**: in caso di parità di costo (come per D), OSPF può installare **tutte** le rotte equivalenti, bilanciando il carico in modo automatico.
 - **Non orientato vs orientato**: dato che il grafo è simmetrico, i cammini minimi *verso* O coincidono con quelli *da* O. Su un grafo orientato bisognerebbe distinguere e usare Dijkstra sul grafo "trasposto" per ottenere i cammini *verso* la destinazione.
-
----
-
-## Riepilogo finale
-
-| Esercizio | Punti | Risultato sintetico |
-|:--:|:--:|:---|
-| **1** | 10 | TCP Reno: dopo timeout @ t=5 e 3-dup-ACK @ t=12, all'istante 16 si ha **CWND = 8 MSS**, **SSTHRESH = 4 MSS**. |
-| **2** | 8 | Unica coppia (subnet, broadcast) valida con maschera `/28`: **c) `194.33.18.96` / `194.33.18.111`**. |
-| **3** | 12 | Dijkstra da O: $d(A)=2,\ d(B)=4,\ d(C)=4,\ d(D)=8,\ d(E)=7,\ d(T)=9,\ d(F)=12$. Cammino più lungo: F→T→E→B→A→O (costo 12). |
-
-> **Totale Parte A: 30 punti.** Soluzione completa, motivata e basata su formule e algoritmi del corso (M2/UD2, M2/UD5, M2/UD7).

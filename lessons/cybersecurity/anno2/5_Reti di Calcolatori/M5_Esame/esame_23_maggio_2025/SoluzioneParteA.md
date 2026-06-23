@@ -1,23 +1,16 @@
-# Soluzione Esame di Reti di Calcolatori — 23/05/2025
+# Soluzione Esame di Reti di Calcolatori — Parte A — 23/05/2025
 
 **Prof. Ernesto Damiani**
 
 ---
 
-## Indice
-
-- [Parte A](#parte-a)
-  - [Esercizio 1 — Andamento CWND e SSTHRESH (TCP)](#esercizio-1--andamento-cwnd-e-ssthresh-tcp)
-  - [Esercizio 2 — Datagrammi UDP del sensore di temperatura](#esercizio-2--datagrammi-udp-del-sensore-di-temperatura)
-  - [Esercizio 3 — Progetto di inter-rete (subnetting)](#esercizio-3--progetto-di-inter-rete-subnetting)
-
----
-
-# Parte A
-
 ## Esercizio 1 — Andamento CWND e SSTHRESH (TCP)
 
+**Esercizio 1 (5 punti)** Un'applicazione A deve trasferire 128 kbyte all'applicazione B utilizzando il protocollo TCP. Si supponga che la connessione sia già stata instaurata. Le variabili note sono le seguenti: MSS concordata pari a 1000 byte; RCVWND annunciata pari a 32 kbyte; SSTHRESH = RCVWND/2; RTT costante pari a 0.5 secondi. Si supponga che RTT vari da 0.5 a 0.8 sec dopo 3 secondi dall'inizio della trasmissione. Determinate con un grafico l'andamento della CWND e il valore finale della CWND e della SSTHRESH.
+
 > **Riferimento di teoria**: [M2/UD5/L9 — Flusso e congestione TCP](../../M2_Protocolli_rete_TCP_IP/UD5/L9%20-%20Flusso%20e%20congestione%20TCP.md)
+
+---
 
 ### Inquadramento teorico
 
@@ -131,6 +124,8 @@ Caratteristiche chiave del grafico:
 
 ## Esercizio 2 — Datagrammi UDP del sensore di temperatura
 
+**Esercizio 2 (5 punti)** Un client usa UDP per inviare a un server remoto i valori di temperatura rilevati da un sensore rappresentati come coppie di interi, uno per la parte intera e l'altro per la parte decimale. Il client manda ogni valore al server in un datagramma separato. Supponiamo di monitorare il traffico in transito tra client e server, e che il sensore generi i valori 2.3 e 4.1. Rappresentate con un diagramma i datagrammi UDP generati evidenziando il payload di ciascuno.
+
 > **Riferimento di teoria**: [M2/UD6/L1 — User Datagram Protocol (UDP)](../../M2_Protocolli_rete_TCP_IP/UD6/L1%20-%20User%20Datagram%20Protocol%20(UDP).md)
 
 ### Inquadramento teorico
@@ -228,6 +223,18 @@ Header lungo $8$ byte (4 campi da 2 byte) + payload da $2$ byte $\Rightarrow$ Le
 ---
 
 ## Esercizio 3 — Progetto di inter-rete (subnetting)
+
+**Esercizio 3 (20 punti)** I cinque router (R1-R5), riportati in figura, sono forniti di schede Ethernet e sono fra loro connessi mediante link punto a punto. Ai router sono collegate delle LAN indicate in figura con i nomi LAN 1, LAN2, LAN 4, LAN5.
+
+![](imgs/Pasted%20image%2020260623184328.png)
+
+Avete a disposizione il seguente range di indirizzi IP pubblici da 194.1.1.17 a 194.1.1.255:
+
+a. assegnate gli indirizzi IP, subnet mask, network address e broadcast address per le LAN 1,2,4,5, a partire dai valori inferiori del range che avete a disposizione.
+b. usando gli indirizzi rimasti del range assegnate gli indirizzi IP alle schede di rete dei collegamenti punto-punto, specificando anche, per ognuno di tali link, network address, subnet mask e broadcast address. Nota: indicate ogni link con il nome "link Rx-Ry" ove x e y sono i due router collegati.
+c. indicate gli indirizzi IP non utilizzati.
+d. fornite la configurazione, per il router 3, della tabella di routing (destination network, subnet mask, gateway, interface).
+e. specificate il trattamento effettuato dai layer IP ed Ethernet di un host della LAN 1 quando deve instradare un pacchetto che ha, come indirizzo IP di destinazione, l'indirizzo di un host della LAN 5.
 
 > **Riferimento di teoria**: [M2/UD2/L4 — Progetto di inter-reti](../../M2_Protocolli_rete_TCP_IP/UD2/L4%20-%20Progetto%20di%20inter-reti.md) (subnetting FLSM/VLSM) · [M2/UD3/L1 — Introduzione all'instradamento IP](../../M2_Protocolli_rete_TCP_IP/UD3/L1%20-%20Introduzione%20all%E2%80%99instradamento%20IP.md) (tabella di routing, ARP, hop)
 

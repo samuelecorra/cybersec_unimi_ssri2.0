@@ -1,7 +1,16 @@
-
-# Compito B
+﻿# Soluzione Esame di Reti di Calcolatori — Parte B — 23/05/2025
 
 ## Esercizio 1 — Chat UDP fra due peer con fork()
+
+**Esercizio 1 (12 punti)** Fornite lo pseudocodice di un programma che permetta a due utenti di comunicare tra loro in tempo reale utilizzando il protocollo UDP.
+
+**Porta locale**: definita dall'utente.
+**Porta remota**: indirizzo IP e porta dell'altro peer.
+
+- Ciascuno dei due peer deve poter **inviare e ricevere** messaggi.
+- I messaggi devono essere visualizzati in tempo reale nella console di ciascun peer.
+- Bonus: Utilizzate **multiprocessing con chiamata fork()** per gestire l'invio e la ricezione simultanei.
+- **Uscita**: Digitando exit, il programma termina.
 
 > **Riferimento di teoria**: [M4/UD1/L4 — Funzioni di comunicazione via socket](../../M4_Tecniche_programmazione_distribuita/UD1/L4%20-%20Funzioni%20di%20comunicazione%20via%20socket.md) (`sendto`/`recvfrom`) · [M4/UD1/L2 — Creazione di un socket](../../M4_Tecniche_programmazione_distribuita/UD1/L2%20-%20Creazione%20di%20un%20socket.md)
 
@@ -23,90 +32,68 @@ Il testo richiede la terza soluzione. Dopo `fork()`, **padre e figlio condividon
 
 ### Pseudocodice
 
-```python
-# ───────────────────────────────────────────────────────────────────
-# peer_chat.py — chat UDP P2P con fork()
-# Avvio: ./peer_chat <local_port> <remote_ip> <remote_port>
-# ───────────────────────────────────────────────────────────────────
+```c
+#define BUF 4096
 
-CONST BUF_SIZE = 4096
-CONST EXIT_CMD = "exit"
+int main(int argc, char *argv[]) {
+    int   local_port  = atoi(argv[1]);
+    char *remote_ip   = argv[2];
+    int   remote_port = atoi(argv[3]);
 
-function main(argv):
+    int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 
-    # 1) Parsing argomenti -------------------------------------------
-    local_port  = int(argv[1])                  # porta locale (bind)
-    remote_ip   = argv[2]                       # IP del peer remoto
-    remote_port = int(argv[3])                  # porta del peer remoto
+    struct sockaddr_in local_addr;
+    bzero((char*)&local_addr, sizeof(local_addr));
+    local_addr.sin_family      = AF_INET;
+    local_addr.sin_port        = htons(local_port);
+    local_addr.sin_addr.s_addr = INADDR_ANY;
+    bind(sockfd, (struct sockaddr*)&local_addr, sizeof(local_addr));
 
-    # 2) Creazione e bind del socket UDP -----------------------------
-    sock = socket(AF_INET, SOCK_DGRAM)
-    bind(sock, ("0.0.0.0", local_port))         # ascolta su tutte le NIC
+    struct sockaddr_in peer_addr;
+    bzero((char*)&peer_addr, sizeof(peer_addr));
+    peer_addr.sin_family      = AF_INET;
+    peer_addr.sin_port        = htons(remote_port);
+    peer_addr.sin_addr.s_addr = inet_addr(remote_ip);
 
-    print("[INFO] In ascolto su porta " + local_port +
-          ", peer = " + remote_ip + ":" + remote_port)
-
-    # 3) Fork: split del processo ------------------------------------
-    pid = fork()
-
-    if pid < 0:
-        print("[ERRORE] fork fallito")
-        close(sock); exit(1)
-
-    # -----------------------------------------------------------------
-    # 4) PROCESSO FIGLIO  →  ricezione asincrona
-    # -----------------------------------------------------------------
-    if pid == 0:                                # figlio
-        while true:
-            (data, from_addr) = recvfrom(sock, BUF_SIZE)   # bloccante
-            if data == EMPTY: continue
-            msg = decode_utf8(data)
-            print("\n[" + from_addr.ip + ":" + from_addr.port + "] "
-                  + msg + "\n> ")
-            # NB: non rispondiamo automaticamente; spetta all'utente.
-        # mai raggiunto: il figlio termina via signal dal padre
-
-    # -----------------------------------------------------------------
-    # 5) PROCESSO PADRE  →  invio da stdin
-    # -----------------------------------------------------------------
-    else:                                       # padre  (pid > 0)
-        install_signal_handler(SIGCHLD, on_child_exit)
-
-        while true:
-            print("> ", no_newline=true)
-            line = read_line(stdin)             # bloccante su tastiera
-
-            if line == EXIT_CMD:
-                # terminazione ordinata
-                kill(pid, SIGTERM)              # ferma il figlio
-                waitpid(pid)                    # raccoglie lo zombie
-                close(sock)
-                print("[INFO] Chat terminata.")
-                exit(0)
-
-            payload = encode_utf8(line)
-            sendto(sock, payload, (remote_ip, remote_port))
-
-# Handler invocato se il figlio muore inaspettatamente -----------------
-function on_child_exit(signal):
-    waitpid(ANY_CHILD, WNOHANG)
-    print("[WARN] Processo di ricezione terminato.")
-    exit(1)
-
-main(argv)
+    if (fork() == 0) {          /* FIGLIO: ricezione */
+        char buf[BUF];
+        struct sockaddr_in from_addr;
+        int from_len = sizeof(from_addr);
+        while (1) {
+            int n = recvfrom(sockfd, buf, sizeof(buf)-1, 0,
+                             (struct sockaddr*)&from_addr, &from_len);
+            buf[n] = '\0';
+            printf("[%s] %s\n", inet_ntoa(from_addr.sin_addr), buf);
+        }
+    } else {                    /* PADRE: invio da stdin */
+        signal(SIGTERM, cleanExit);
+        signal(SIGINT,  cleanExit);
+        char line[BUF];
+        while (fgets(line, sizeof(line), stdin)) {
+            if (strncmp(line, "exit", 4) == 0) { close(sockfd); exit(0); }
+            sendto(sockfd, line, strlen(line), 0,
+                   (struct sockaddr*)&peer_addr, sizeof(peer_addr));
+        }
+    }
+    return 0;
+}
+void cleanExit(int sig) { exit(0); }
 ```
 
-### Punti di robustezza messi in chiaro
+### Note chiave
 
-- **Bind solo lato locale**: UDP non ha `connect` obbligatorio. Si fa `bind` sulla porta locale per ricevere; in invio è il sistema operativo a scegliere la porta sorgente, ma qui usiamo la stessa porta sia in entrata sia in uscita (semplifica il `recvfrom` lato peer).
-- **Condivisione del socket**: il descrittore restituito da `socket()` è ereditato attraverso `fork()` ed è condiviso fra i due processi. Le primitive `recvfrom` (figlio) e `sendto` (padre) non collidono perché operano in direzioni opposte sul medesimo handle.
-- **Terminazione pulita**: il padre invia `SIGTERM` al figlio e attende con `waitpid()` per evitare processi *zombie*. La gestione di `SIGCHLD` copre il caso opposto (crash del figlio).
-- **Tempo reale**: il `recvfrom` nel figlio stampa appena arriva il datagramma (no buffer in attesa) — vincolo del testo.
-- **Esuriente per UDP**: nessun controllo di sequenza, niente ritrasmissione: se un messaggio si perde, è perso. Questo limite è accettabile per una chat semplice.
+- **`bind()` obbligatorio lato ricezione**: serve per fissare la porta locale; il peer deve sapere su quale porta mandare (M4/UD1/L2).
+- **Socket condiviso tra fork**: figlio usa `recvfrom`, padre usa `sendto` sullo stesso `sockfd` — non collidono perché direzioni opposte.
 
 ---
 
 ## Esercizio 2 — UDP vs TCP, sicurezza, multipeer
+
+**Esercizio 2 (6 punti)** Con riferimento all'esercizio 1, rispondete alle seguenti domande:
+
+1. Quali sono i vantaggi e gli svantaggi dell'uso di UDP rispetto a TCP in questo contesto?
+2. Come potreste migliorare la sicurezza della comunicazione?
+3. Come potreste estendere il programma per supportare più peer?
 
 > **Riferimento di teoria**: [M2/UD6/L2 — UDP e TCP a confronto](../../M2_Protocolli_rete_TCP_IP/UD6/L2%20-%20UDP%20e%20TCP%20a%20confronto.md)
 
@@ -168,20 +155,29 @@ Tre topologie possibili:
 
 **(a) Mesh full P2P** — ogni peer mantiene la lista `peers[] = {(ip, porta), …}`. All’invio si itera:
 
-```python
-function broadcast(msg):
-    for p in peers:
-        sendto(sock, msg, (p.ip, p.port))
+```c
+/* invia msg a tutti i peer della lista — O(n) sendto() */
+void broadcast(char *msg, int sockfd,
+               struct sockaddr_in peers[], int n_peers) {
+    for (int i = 0; i < n_peers; i++)
+        sendto(sockfd, msg, strlen(msg), 0,
+               (struct sockaddr *)&peers[i], sizeof(peers[i]));
+}
 ```
 
 Costi: $O(n)$ datagrammi per messaggio, ogni peer deve conoscere tutti gli altri (problema di **discovery**).
 
-**(b) Multicast UDP** — si assegna un indirizzo di classe D (224.0.0.0 – 239.255.255.255), tutti i peer eseguono `setsockopt(IP_ADD_MEMBERSHIP, group)` e ricevono ogni datagramma inviato sul gruppo.
+**(b) Multicast UDP** — si assegna un indirizzo di gruppo di classe D (224.0.0.0–239.255.255.255). Ogni peer deve iscriversi al gruppo tramite una chiamata di gestione SO (fuori dall'API base della Socket Library insegnata nel corso). Una volta iscritto, il peer riceve automaticamente tutti i datagrammi inviati all'indirizzo di gruppo. L'invio è un semplice `sendto()` verso quell'indirizzo — M4/UD1/L4:
 
-```python
-group_addr = "239.1.2.3"
-sock.setsockopt(IPPROTO_IP, IP_ADD_MEMBERSHIP, group_addr + iface_addr)
-# invio: un solo sendto a (group_addr, port)
+```c
+/* invio multicast: un solo sendto raggiunge tutti i peer iscritti al gruppo */
+struct sockaddr_in grp_addr;
+bzero((char *)&grp_addr, sizeof(grp_addr));
+grp_addr.sin_family      = AF_INET;
+grp_addr.sin_port        = htons(port);
+grp_addr.sin_addr.s_addr = inet_addr("239.1.2.3");
+sendto(sockfd, msg, strlen(msg), 0,
+       (struct sockaddr *)&grp_addr, sizeof(grp_addr));
 ```
 
 Vantaggi: **scalabilità** ($1$ datagramma indipendentemente dal numero di destinatari). Svantaggi: il multicast non è instradato sull’Internet pubblica (resta confinato alla LAN o richiede infrastruttura PIM).
@@ -193,6 +189,8 @@ Per una piccola chat di gruppo su LAN la soluzione (b) è elegante; per una chat
 ---
 
 ## Esercizio 3 (8 pt) — Query DNS non autoritativa
+
+**Esercizio 3 (8 punti)** Avete inviato una query DNS di tipo A (IPv4) verso un server *non-autoritativo* (es. 8.8.8.8 di Google) per ottenere informazioni sul dominio Internet a vostra scelta (es. example.com, un.org, ecc.). Fornite e commentate le risposte ricevute. Da dove si evince che la risposta non è autoritativa? Perché è utile sapere se una risposta DNS è autoritativa?
 
 > **Riferimento di teoria**: [M3/UD1/L4 — Risoluzione dei nomi](../../M3_Protocolli_applicativi/UD1/L4%20-%20Risoluzione%20dei%20nomi.md) (resolver, RR, cache vs autoritativo) · [M3/UD1/L2 — Caratteristiche del DNS](../../M3_Protocolli_applicativi/UD1/L2%20-%20Caratteristiche%20del%20DNS.md)
 
@@ -294,6 +292,8 @@ example.com.            136     IN      A       96.7.128.175
 ---
 
 ## Esercizio 3 (4 pt) — Regola di firewall TCP
+
+**Esercizio 3 (4 punti)** Siete i gestori del firewall di una rete. Volete impedire ai vostri utenti di rispondere a richieste di connessione TCP generate all'esterno, mantenendo però la loro possibilità di connettersi a server su Internet e ricevere le relative risposte. Specificate la regola da utilizzare.
 
 > **Riferimento di teoria**: [M2/UD2/L1 — Internet Protocol (IP)](../../M2_Protocolli_rete_TCP_IP/UD2/L1%20-%20Internet%20Protocol%20(IP).md) (§1.6 instradamento e filtraggio dei pacchetti)
 
@@ -399,155 +399,3 @@ Per ogni esercizio, i materiali di studio rilevanti del modulo:
 *Fine soluzione.*
 
 ---
-
-## Appendice — Legenda flag `iptables`
-
-> 📌 `iptables` è lo strumento Linux per configurare le regole di filtraggio del kernel (netfilter). Opera su **tabelle** (filter, nat, mangle…); la tabella di default è **filter**, quella usata in tutti gli esercizi di questo corso.
-
----
-
-### 1. Struttura di un comando iptables
-
-```
-iptables  [-t tabella]  <COMANDO>  <CATENA>  [opzioni di match]  -j <TARGET>
-```
-
----
-
-### 2. Comandi principali (cosa fare sulla catena)
-
-| Flag | Forma estesa | Significato |
-|---|---|---|
-| `-P` | `--policy` | Imposta la **policy di default** della catena: se nessuna regola fa match, si applica questo target (es. `DROP` o `ACCEPT`). |
-| `-A` | `--append` | **Aggiunge** la regola in fondo alla catena. Le regole sono valutate in ordine: la prima che fa match termina la valutazione. |
-| `-I` | `--insert` | **Inserisce** la regola in una posizione specifica (di default in cima). Utile per mettere regole prioritarie prima di quelle esistenti. |
-| `-D` | `--delete` | **Elimina** una regola dalla catena (per numero o per pattern). |
-| `-F` | `--flush` | **Svuota** tutte le regole della catena (o di tutte le catene se non specificata). |
-| `-L` | `--list` | **Elenca** le regole presenti (aggiungere `-v` per contatori, `-n` per non risolvere nomi). |
-
----
-
-### 3. Catene (CHAIN) — dove si applica la regola
-
-| Catena | Quando viene attraversata |
-|---|---|
-| `INPUT` | Pacchetti **destinati alla macchina stessa** (il firewall è il destinatario finale). |
-| `OUTPUT` | Pacchetti **generati dalla macchina stessa** e in uscita. |
-| FORWARD | Pacchetti **in transito**: entrano da un'interfaccia ed escono da un'altra (il firewall fa da router). È la catena usata per filtrare il traffico tra LAN e Internet. |
-| `PREROUTING` | Pacchetti appena arrivati, prima del routing (usata in tabella nat per DNAT). |
-| `POSTROUTING` | Pacchetti dopo il routing, prima di uscire (usata in tabella nat per SNAT). |
-
-> 💡 Negli esercizi d'esame la catena più usata è **FORWARD** perché il firewall protegge una LAN interna verso Internet: i pacchetti non sono destinati al firewall stesso ma lo attraversano.
-
----
-
-### 4. Opzioni di match — criteri di selezione del pacchetto
-
-#### 4.1 Interfacce
-
-| Flag | Forma estesa | Significato |
-|---|---|---|
-| `-i eth0` | `--in-interface` | Pacchetto **arrivato** dall'interfaccia `eth0`. Usabile in INPUT e FORWARD. |
-| `-o eth1` | `--out-interface` | Pacchetto **in uscita** dall'interfaccia `eth1`. Usabile in OUTPUT e FORWARD. |
-
-> ⚠️ `-i` è l'interfaccia di **ingresso**, `-o` quella di **uscita**. In FORWARD si usano entrambi per specificare la direzione del flusso (es. `-i eth0 -o eth1` = dalla LAN verso Internet).
-
-#### 4.2 Indirizzi IP
-
-| Flag | Forma estesa | Significato |
-|---|---|---|
-| `-s 10.0.0.1` | `--source` | IP **sorgente** del pacchetto. Può essere un singolo IP o una subnet CIDR (es. `10.0.0.0/24`). |
-| `-d 10.0.0.1` | `--destination` | IP **destinazione** del pacchetto. Stessa sintassi di `-s`. |
-| `! -s 10.0.0.1` | negazione | Il `!` **nega** il match: significa "qualunque sorgente **tranne** `10.0.0.1`". |
-
-#### 4.3 Protocollo
-
-| Flag | Significato |
-|---|---|
-| `-p tcp` | Match solo sui pacchetti **TCP** (numero protocollo IP = 6). |
-| `-p udp` | Match solo sui pacchetti **UDP** (numero protocollo IP = 17). |
-| `-p icmp` | Match sui pacchetti **ICMP** (ping, traceroute…). |
-| `-p all` | Match su **tutti** i protocolli (default se `-p` è omesso). |
-
-#### 4.4 Porte (richiedono `-p tcp` o `-p udp`)
-
-| Flag | Forma estesa | Significato |
-|---|---|---|
-| `--sport 80` | `--source-port` | Porta **sorgente** del segmento. |
-| `--dport 443` | `--destination-port` | Porta **destinazione** del segmento. |
-| `--dport 1024:65535` | range | Intervallo di porte da 1024 a 65535. |
-
-#### 4.5 Flag TCP (richiedono `-p tcp`)
-
-| Flag | Significato |
-|---|---|
-| `--syn` | Match sui pacchetti con **solo SYN settato** (FIN, RST, ACK azzerati). Equivale a `--tcp-flags FIN,SYN,RST,ACK SYN`. Identifica i pacchetti di **apertura connessione** (primo passo del three-way handshake). Bloccare `--syn` impedisce nuove connessioni in ingresso senza toccare le risposte. |
-| `--tcp-flags <mask> <set>` | Forma generica: `<mask>` = insieme di flag da esaminare; `<set>` = quelli che devono risultare settati. Es. `--tcp-flags SYN,RST SYN,RST` = pacchetto con SYN e RST entrambi settati (illegale). |
-
-> ⚠️ `--syn` cattura solo il primo SYN. I pacchetti successivi della stessa connessione TCP (ACK, FIN…) non hanno il solo SYN settato, quindi non fanno match e vengono gestiti dalle regole successive o dalla policy di default.
-
-#### 4.6 Moduli estesi (`-m`)
-
-I moduli estendono le capacità di match. Si caricano con `-m <nome_modulo>`.
-
-**Modulo `conntrack`** — connection tracking stateful:
-
-| Stato (`--ctstate`) | Significato |
-|---|---|
-| `NEW` | Pacchetto che avvia una **nuova** connessione (il kernel non ha visto questo flusso prima). |
-| `ESTABLISHED` | Pacchetto appartenente a una connessione già **stabilita** (andata e ritorno già visti). |
-| `RELATED` | Pacchetto **correlato** a una connessione esistente (es. ICMP error su un flusso TCP, o canale dati FTP correlato al controllo). |
-| `INVALID` | Pacchetto che non corrisponde ad alcuna connessione nota e non è un nuovo SYN: va droppato. |
-| `ESTABLISHED,RELATED` | Match su entrambi: permette il traffico di **ritorno** per connessioni avviate dall'interno. È il pattern tipico del firewall stateful che blocca le connessioni nuove in ingresso ma lascia passare le risposte. |
-
----
-
-### 5. Target (`-j`) — cosa fare con il pacchetto
-
-| Target | Significato |
-|---|---|
-| `ACCEPT` | **Lascia passare** il pacchetto. Nessuna ulteriore regola viene valutata per questo pacchetto. |
-| `DROP` | **Scarta silenziosamente** il pacchetto. Il mittente non riceve alcuna notifica: la connessione risulta in timeout. |
-| `REJECT` | **Scarta** il pacchetto **e invia un errore ICMP** al mittente. Più cortese di DROP ma rivela la presenza del firewall. |
-| `LOG` | **Registra** le informazioni del pacchetto nel log di sistema e poi **continua** la valutazione delle regole successive (non è un target terminale). |
-
-> 💡 **DROP vs REJECT**: in contesti di sicurezza si preferisce `DROP` perché non rivela informazioni al potenziale attaccante (il port scan restituisce timeout anziché ICMP error). `REJECT` è più utile nella LAN interna per dare feedback agli utenti.
-
----
-
-### 6. Logica di valutazione delle regole
-
-```
-Pacchetto in arrivo
-        |
-        v
-  Regola 1: fa match?  --NO-->  Regola 2: fa match?  --NO-->  ...  --NO-->  Policy di default (-P)
-        |                               |
-       SI                              SI
-        |                               |
-        v                               v
-   Applica target                Applica target
-   (ACCEPT o DROP)               (ACCEPT o DROP)
-   Fine valutazione              Fine valutazione
-```
-
-> ⚠️ Le regole sono valutate **in ordine**. Al primo match, la valutazione si interrompe e il target viene applicato. Se nessuna regola fa match, si applica la **policy di default** (impostata con `-P`). Per questo la policy `DROP` con regole `ACCEPT` selettive è la configurazione più sicura.
-
----
-
-### 7. Esempio di lettura di una regola completa
-
-```bash
-iptables -A FORWARD -i eth0 -o eth1 -s 10.0.0.1 -p tcp -j ACCEPT
-```
-
-| Pezzo | Significato |
-|---|---|
-| `-A FORWARD` | Aggiungi in coda alla catena FORWARD. |
-| `-i eth0` | Il pacchetto è arrivato dall'interfaccia `eth0` (LAN interna). |
-| `-o eth1` | Il pacchetto uscirà dall'interfaccia `eth1` (Internet). |
-| `-s 10.0.0.1` | L'IP sorgente è `10.0.0.1` (il proxy). |
-| `-p tcp` | Il protocollo è TCP. |
-| `-j ACCEPT` | Se tutti i criteri sono soddisfatti: lascia passare il pacchetto. |
-
-**Lettura in chiaro:** *"Aggiungi alla catena FORWARD una regola che accetta i pacchetti TCP provenienti dalla LAN (eth0) verso Internet (eth1) se la sorgente è il proxy (10.0.0.1)."*
