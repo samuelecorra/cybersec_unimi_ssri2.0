@@ -10,6 +10,8 @@ Dopo aver studiato i protocolli applicativi e di gestione, in questo modulo si p
 
 Riprendiamo in esame la pila di protocolli TCP/IP studiata nei moduli precedenti. C'è un livello di trasporto con TCP (orientato alla connessione) e UDP (non orientato alla connessione); sopra ci sono le applicazioni utente che implementano i protocolli applicativi del Modulo 3.
 
+![](imgs/Pasted%20image%2020260623153655.png)
+
 Se vogliamo scrivere un programma che manda e riceve dati con una determinata struttura, la domanda è: **come possiamo accedere al servizio di recapito TCP dall'interno del nostro programma?** Con quali strumenti di programmazione creiamo le connessioni per trasportare i dati applicativi?
 
 Esistono tantissime **API (Application Programming Interface)** per la comunicazione in rete. La prima storica, messa a disposizione all'interno del sistema operativo **Unix BSD** e ancora oggi supportata da tutti i sistemi operativi — incluso Windows — è la **Socket Library**: una libreria di funzioni (originariamente in C) che consente all'applicazione utente di accedere al livello trasporto.
@@ -23,10 +25,14 @@ Tutti i protocolli della famiglia TCP/IP utilizzano il concetto di **porta**: l'
 - In **TCP**, la porta identifica un endpoint di una connessione orientata alla connessione.
 - In **UDP**, la porta non identifica una connessione, ma una **specifica entry di multiplexing applicativo** — identifica quale applicazione deve ricevere i dati.
 
+![](imgs/Pasted%20image%2020260623153726.png)
+
 Le porte sono rappresentate da valori **interi positivi**:
 
 - **Well-known ports** (0–1023): riservate a protocolli e servizi standard (HTTP → 80, FTP, SMTP, ecc.). Richiedono privilegi amministrativi per essere aperte.
 - **Porte alte** (≥ 1024): disponibili per servizi e programmi definiti dall'utente.
+
+![](imgs/Pasted%20image%2020260623153749.png)
 
 ---
 

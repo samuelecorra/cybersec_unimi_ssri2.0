@@ -18,8 +18,6 @@ Entrambi i significati coesistono: si parla di "socket" sia come endpoint logico
 
 Corrispondono ai due protocolli fondamentali della suite TCP/IP:
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 | Tipo | Protocollo | Caratteristiche |
 |---|---|---|
 | **Socket di flusso** (`SOCK_STREAM`) | **TCP** | Connessione affidabile, ordinata, full-duplex; dati trasmessi come flusso continuo di byte |
@@ -52,8 +50,6 @@ Client e server sono creati dallo stesso programmatore. Il programmatore ha il *
 
 ### **4. Socket di benvenuto e socket di connessione (lato server)**
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 Nel caso di TCP, il server deve gestire **due socket distinti**:
 
 **Socket di benvenuto** (`welcomeSocket` / `ServerSocket`)
@@ -76,8 +72,6 @@ Nel caso di TCP, il server deve gestire **due socket distinti**:
 
 ### **5. Le chiamate socket fondamentali**
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 Le chiamate di sistema della Socket Library, applicabili sia in C che — con astrazione orientata agli oggetti — in Java:
 
 | Chiamata | Lato | Scopo |
@@ -97,9 +91,23 @@ Le chiamate di sistema della Socket Library, applicabili sia in C che — con as
 
 ### **6. Flusso completo della comunicazione TCP**
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260623155159.png)
+
+Nell'immagine qui sopra si può vedere in forma grafica il processo di attivazione di una comunicazione socket di tipo TCP.
+In primo luogo il socket client inizia la richiesta di connessione sul socket di benvenuto del server: ci esegue la sincronia trilaterale, cioè il Three Way Handshake TCP; una volta andato a buon fine, si crea il socket di connessione su cui viene attivato un flusso bidirezionale full duplex di byte tra client e server.
+Questo costituisce la connessione; il socket di benvenuto rimane libero per le richieste di connessione da parte di altri client.
+
+Come programmatori noi possiamo creare all'interno di un nostro programma entrambi i socket:
+
+![](imgs/Pasted%20image%2020260623155527.png)
+
+> 💡 Chi sviluppa l'applicativo può configurare alcuni parametri TCP dall'interno del programma: tipicamente le **dimensioni massime dei buffer** (usati per la retransmission list) e le **dimensioni dei segmenti** iniziali trasmessi lungo la connessione. Il programma controlla la parte applicativa; il sistema operativo gestisce il TCP sottostante con i suoi buffer e variabili di stato.
+
+---
 
 Il diagramma del professore mostra il flusso completo lato server e lato client:
+
+![](imgs/Pasted%20image%2020260623155621.png)
 
 **Lato server** (colonna destra):
 1. `socket()` → crea il socket
@@ -120,8 +128,6 @@ Il diagramma del professore mostra il flusso completo lato server e lato client:
 6. (eventuale ciclo di più richieste)
 7. `close()` → chiude il socket; il flag FIN viene inviato al server
 
-> 💡 Chi sviluppa l'applicativo può configurare alcuni parametri TCP dall'interno del programma: tipicamente le **dimensioni massime dei buffer** (usati per la retransmission list) e le **dimensioni dei segmenti** iniziali trasmessi lungo la connessione. Il programma controlla la parte applicativa; il sistema operativo gestisce il TCP sottostante con i suoi buffer e variabili di stato.
-
 ---
 
 ### **7. Esempio: applicazione TCP client/server con capitalizzazione**
@@ -134,13 +140,15 @@ L'esempio di riferimento del corso è un'applicazione client/server in cui:
 4. La rimanda al client attraverso il flusso `outToClient`.
 5. Il **client** riceve la risposta (`inFromServer`) e la stampa a video.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260623155647.png)
 
 Questo esempio è volutamente semplice: l'elaborazione è banale (maiuscolo), ma la struttura è quella di qualunque applicazione client/server reale — lettura input → invio → elaborazione → risposta → stampa output.
 
 ---
 
 ### **8. Socket TCP in Java: le classi del package `java.net`**
+
+Prima di vederne il codice, possiamo apprezzarne uno pseudocodice più intuitivo: 
 
 Java semplifica la programmazione socket tramite il package **`java.net`**, che astrae le chiamate di sistema C in classi orientate agli oggetti.
 
@@ -203,8 +211,6 @@ DataOutputStream outToClient =
 
 ### **9. Codice completo: TCPClient.java**
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ```java
 import java.io.*;
 import java.net.*;
@@ -255,8 +261,6 @@ class TCPClient {
 ---
 
 ### **10. Codice completo: TCPServer.java**
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ```java
 import java.io.*;
@@ -309,8 +313,6 @@ class TCPServer {
 
 ### **11. Socket UDP in Java**
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 #### **11.1. Caratteristiche del servizio UDP**
 
 A differenza di TCP:
@@ -322,6 +324,14 @@ A differenza di TCP:
 Dal punto di vista della programmazione:
 - Il **mittente** costruisce un pacchetto (`DatagramPacket`) contenente i dati + IP destinatario + porta destinataria, e lo invia.
 - Il **destinatario** riceve il pacchetto e ne **estrae manualmente** i dati e l'indirizzo del mittente.
+
+Anche qui mostriamo prima uno pseudocodice molto intuitivo:
+
+![](imgs/Pasted%20image%2020260623160100.png)
+
+Qui sotto vediamo il client Java usando UDP, poi tra poco lo andremo a codificare per bene...
+
+![](imgs/Pasted%20image%2020260623160248.png)
 
 #### **11.2. Le classi Java per UDP**
 

@@ -68,6 +68,8 @@ Il client crea un socket e gli attribuisce **tutti e quattro i parametri** della
 
 $$(\underbrace{\text{IP client}}_{\text{noto}},\ \underbrace{\text{porta client}}_{\text{noto o assegnata}},\ \underbrace{\text{IP server}}_{\text{noto}},\ \underbrace{\text{porta server}}_{\text{noto}})$$
 
+![](imgs/Pasted%20image%2020260623154132.png)
+
 **Fase 3 — Attesa dell'accettazione**
 
 Il client attende che il server approvi la richiesta (`accept()` lato server). È questo il momento in cui avviene il three-way handshake TCP.

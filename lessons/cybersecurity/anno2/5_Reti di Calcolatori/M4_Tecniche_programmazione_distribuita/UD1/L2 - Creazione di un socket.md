@@ -6,8 +6,12 @@
 
 Abbiamo detto che il socket rappresenta un **descrittore** — un numero che identifica una particolare connessione. Tuttavia, una connessione TCP ha sempre **due lati**: un client e un server. Il ruolo del socket è quindi diverso sulle due parti.
 
+![](imgs/Pasted%20image%2020260623153824.png)
+
 - Il **server** crea un socket sul quale arriveranno le richieste di connessione da parte dei client. Questo è il **socket di connessione** (o socket d'ascolto).
 - Il **client** crea un socket per eseguire la connessione verso il server.
+
+![](imgs/Pasted%20image%2020260623153850.png)
 
 Quando la richiesta di connessione del client arriva al socket del server, il sistema operativo crea **un secondo socket**: il **socket di servizio**. Perché questa distinzione?
 

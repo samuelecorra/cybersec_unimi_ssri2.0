@@ -49,8 +49,6 @@ Esistono funzioni di controllo che disattivano il blocco per una certa chiamata.
 
 Per gestire i socket, `select()` usa la struttura **`fd_set`**, composta da **tre vettori di bit** — uno per ogni tipo di evento da monitorare:
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 | Vettore | Evento monitorato |
 |---|---|
 | `readfds` | Socket pronti per la **lettura** |
@@ -142,8 +140,6 @@ Il programma non resta bloccato su una singola connessione e può gestire più c
 
 ### **9. Altre funzioni utili della Socket Library**
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 La Socket Library include molte altre funzioni di supporto che vengono usate negli esempi e negli esercizi di programmazione:
 
 | Funzione | Firma | Descrizione |
@@ -159,8 +155,6 @@ La Socket Library include molte altre funzioni di supporto che vengono usate neg
 ---
 
 ### **10. Porte libere: il problema della terminazione anomala**
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 Un problema frequente quando si scrivono esempi di programmazione con i socket è la **terminazione anomala del processo**. Quando un processo che usa socket viene interrotto con **Ctrl-C** (o da qualunque altro evento esterno), il sistema operativo potrebbe **non liberare immediatamente la porta** associata al socket.
 

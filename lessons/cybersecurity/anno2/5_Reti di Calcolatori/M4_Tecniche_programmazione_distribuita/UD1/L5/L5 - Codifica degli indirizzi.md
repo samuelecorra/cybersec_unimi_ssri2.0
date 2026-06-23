@@ -68,6 +68,8 @@ Porta e indirizzo IP sono interi, rispettivamente a 16 e 32 bit. Esistono due co
 
 #### **Esempio concreto**
 
+![](imgs/Pasted%20image%2020260623154414.png)
+
 Si vuole comunicare l'indirizzo IP `128.119.40.12` da una macchina **big-endian** a una macchina **little-endian**. In memoria big-endian i byte sono nell'ordine `128 | 119 | 40 | 12`. La macchina little-endian li legge dall'ordine opposto: `12 | 40 | 119 | 128`, ottenendo l'indirizzo `12.40.119.128` — un indirizzo di Classe A completamente diverso da quello originale. La connessione andrebbe verso la macchina sbagliata.
 
 > ⚠️ Questo dimostra perché non si può passare un valore intero "così com'è" da una macchina all'altra senza accordarsi sul formato.
@@ -106,6 +108,8 @@ Per eseguire queste conversioni, la Socket Library mette a disposizione **quattr
 echoServAddr.sin_port        = htons(80);           // porta → network byte order
 echoServAddr.sin_addr.s_addr = htonl(INADDR_ANY);   // IP → network byte order
 ```
+
+![](imgs/Pasted%20image%2020260623154515.png)
 
 #### **Comportamento su macchine big-endian**
 
