@@ -48,20 +48,39 @@ Per **non bloccare** il proxy mentre dialoga con il programma fedeltà remoto, s
 ### Pseudocodice del proxy
 
 ```c
-#define PROXY_PORT     8080
-#define FEDELTA_IP     "10.10.10.1"
-#define FEDELTA_PORT   443
-#define CONNECTED_FILE "/var/lib/proxy/CONNECTED"
-#define BUF            4096
+// Partiamo con le include essenziali:
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
 
+// E' buona norma iniziare con delle define dal momento che riuseremo spesso queste costanti,
+// e così il codice è più leggibile e manutenibile.
+#define PROXY_PORT     8080 // va bene qualsiasi porta > 1024
+#define FEDELTA_IP     "10.10.10.1" // nella traccia non è specificato, ma va bene un IP privato
+#define FEDELTA_PORT   443 // la porta del server fedeltà supponiamo che sia sicuro ergo HTTPS ergo 443
+#define CONNECTED_FILE "/var/lib/proxy/CONNECTED" // il path è casuale, non facciamoci troppo caso
+#define BUF            4096 // Ci servirà un buffer per leggere le credenziali e il token
+
+// Ci basta un main, non abbiamo bisogno di spezzare il codice in troppe funzioni, anche se in un progetto reale sarebbe meglio farlo. Questo invece è un esercizio d'esame, quindi va bene così, ridurlo "all'osso" per mostrare solo le funzioni richieste dal prof nel modulo 4 del corso.
 int main(void) {
-    int sock_srv = socket(AF_INET, SOCK_STREAM, 0);
 
+    // Primissima cosa: creiamo il socket TCP di ascolto del proxy aka srv=server
+    int sock_srv = socket(AF_INET, SOCK_STREAM, 0); // parametri standard per TCP: AF_INET=IPv4, SOCK_STREAM=TCP, 0=default protocol - ci verrà restituito un file descriptor (int) che useremo per bind() e listen().
+
+    // Il file descriptor però non basta da solo: il kernel vorrà sapere a quale indirizzo IP e porta associare il socket di ascolto. Per questo usiamo la struttura sockaddr_in, che è una struttura standard per gli indirizzi IPv4.
+    // Ci serve anche un'altra struttura srv_addr per passare i parametri a bind() e listen().
     struct sockaddr_in srv_addr;
-    bzero((char*)&srv_addr, sizeof(srv_addr));
-    srv_addr.sin_family      = AF_INET;
-    srv_addr.sin_port        = htons(PROXY_PORT);
-    srv_addr.sin_addr.s_addr = INADDR_ANY;
+    bzero((char*)&srv_addr, sizeof(srv_addr)); // La azzeriamo per evitare valori casuali residui in memoria che potrebbero causare problemi.
+
+    // Notiamo che nel dichiarare le strutture non ne abbiamo nemmeno indicato i campi, e nemmeno allocato
+    // memoria dinamica: per quest'esercizio in C infatti possiamo semplicemente creare  i campi nelle prossime tre righe e assegnare loro i valori che ci servono:
+    srv_addr.sin_family      = AF_INET; // sin sta per "socket internet", e AF_INET indica che stiamo usando IPv4
+    srv_addr.sin_port        = htons(PROXY_PORT); // htons() ci garantisce che la porta sia in network byte order (big-endian), come richiesto dal kernel, e convertiamo 8080.
+    srv_addr.sin_addr.s_addr = INADDR_ANY; // INADDR_ANY è una macro che non abbiamo definito (il compilatore la trova in <netinet/in.h>) e indica al kernel di accettare connessioni su **qualsiasi** interfaccia di rete disponibile (Wi-Fi, Ethernet, ecc.) del sistema.
 
     bind(sock_srv, (struct sockaddr*)&srv_addr, sizeof(srv_addr));
     listen(sock_srv, 64);
@@ -188,7 +207,6 @@ Rispondete alle seguenti domande:
 2. Cosa significano i parametri q=0.8 e q=0.5?
 3. Il browser richiede una connessione persistente o non persistente?
 4. Qual è il tipo (e la versione) di browser utilizzato dal client nella richiesta HTTP?
-
 
 > **Riferimenti di teoria**:
 >
