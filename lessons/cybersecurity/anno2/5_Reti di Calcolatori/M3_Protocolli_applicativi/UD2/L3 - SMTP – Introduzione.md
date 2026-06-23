@@ -16,12 +16,9 @@ A differenza di protocolli come **FTP** o **Telnet**, **non è un protocollo int
 
 Mentre FTP e Telnet stabiliscono **sessioni interattive** tra client e server, SMTP funziona in modo **asincrono**:
 
-- i messaggi vengono **accodati in uno spooler**, cioè una coda temporanea sul disco;
-    
-- un **agente SMTP** si occupa di **prelevarli e spedirli** ai server di destinazione;
-    
+- i programmi che l'utente usa per scrivere i messaggi sono in realtà degli **editor** che salvano le email in una **directory di spool** (una coda su disco locale);
+- un **unico daemon (MTA, Message Transfer Agent)** accede a quella directory, preleva i messaggi e li spedisce ai server di destinazione tramite SMTP;
 - se il server di destinazione non è raggiungibile, i messaggi restano in coda e vengono **ritrasmessi automaticamente** in un secondo momento.
-    
 
 Questo modello permette al sistema di posta elettronica di funzionare anche in caso di **disponibilità parziale della rete**, garantendo che nessun messaggio venga perso.
 
@@ -35,8 +32,8 @@ In un sistema SMTP completo interagiscono diversi componenti:
     
 2. **MTA (Message Transfer Agent)** – è il programma che si occupa di **trasferire i messaggi** tra server SMTP.
     
-    - Nei sistemi UNIX, l’MTA più famoso è **Sendmail**, configurato e gestito dall’amministratore di rete.
-        
+    - Nei sistemi UNIX, l’MTA più famoso è **Sendmail**. È un programma particolarmente delicato: molte macchine devono ricevere posta elettronica, quindi Sendmail lato ricezione non può essere semplicemente disabilitato — ed è per questo uno dei **punti più critici per la sicurezza** dell’intera macchina.
+
 3. **Server di destinazione** – riceve il messaggio e lo consegna alla casella del destinatario.
     
 
@@ -75,6 +72,7 @@ Content-Transfer-Encoding: 7bit
     
 - `Date:` → specifica **data e ora di invio**.
     
+- `X-Mailer:` → identifica il **programma client** usato per scrivere il messaggio (es. Microsoft Outlook Express 5.0).
 - `MIME-Version` → definisce la versione del formato MIME (utile per gestire allegati, immagini, ecc.).
     
 - `Content-Type` → specifica il **tipo di contenuto** (testo, HTML, allegato binario...).

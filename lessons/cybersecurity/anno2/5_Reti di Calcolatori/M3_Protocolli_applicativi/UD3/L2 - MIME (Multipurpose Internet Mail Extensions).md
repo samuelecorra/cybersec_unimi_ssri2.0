@@ -253,7 +253,19 @@ Questo messaggio contiene:
 
 ---
 
-### **10. Conclusione**
+### **10. Implicazioni di sicurezza: MIME come vettore di contenuti ostili**
+
+Comprendere com'è strutturato un messaggio di posta elettronica a livello di trasporto è importante anche per ragioni di sicurezza.
+
+Il messaggio di posta è oggi spesso utilizzato per **veicolare contenuti ostili**: virus, malware, spam. Un meccanismo di difesa classico è il filtraggio per parole chiave nel corpo del messaggio. MIME, però, ha reso questo approccio inefficace:
+
+> ⚠️ Per **evitare di essere filtrati** sulla base del contenuto testuale, i messaggi di spam o i malware nascondono il vero contenuto nell'**allegato multimediale**: ad esempio, un'immagine JPEG che riproduce graficamente le scritte che il messaggio vuole mostrare all'utente. Per l'utente è sempre testo leggibile; per un filtro anti-spam che analizza il corpo del messaggio, è solo un blob di dati base64 — le parole chiave ricorrenti tipiche dello spam non compaiono nel testo in chiaro e non possono essere intercettate con una semplice ricerca testuale.
+
+Questo ha reso necessario lo sviluppo di tecniche di filtraggio più avanzate (analisi degli allegati, OCR sulle immagini, sandbox per i binari, ecc.) e rappresenta un esempio concreto di come lo stesso meccanismo — MIME — che ha reso la posta multimediale abbia anche ampliato la superficie di attacco.
+
+---
+
+### **11. Conclusione**
 
 Il protocollo **MIME** ha reso possibile la **posta elettronica moderna**, permettendo di:
 

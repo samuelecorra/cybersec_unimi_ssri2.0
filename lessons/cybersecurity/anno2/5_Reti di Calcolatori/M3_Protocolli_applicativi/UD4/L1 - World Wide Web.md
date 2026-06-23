@@ -4,157 +4,89 @@
 
 ### **1. Il Web come sistema client/server**
 
-Il **World Wide Web** è il **più grande sistema client/server al mondo**.  
-Si basa sullo **scambio di messaggi** secondo il paradigma **richiesta–risposta**, dove:
+Il **World Wide Web** riveste un interesse del tutto particolare per la sua estensione e pervasività: è il **sistema client/server più diffuso al mondo**.
 
-- il **client** (il browser) invia una **richiesta HTTP** a un server;
-    
-- il **server Web** elabora la richiesta e invia una **risposta** con i contenuti richiesti.
-    
-
-Ogni interazione sul Web — dall’apertura di una pagina alla visualizzazione di un’immagine — segue esattamente questo schema.
+La comunicazione avviene attraverso un paradigma di **scambio di messaggi di tipo pull**, secondo il modello **richiesta–risposta**. In questo paradigma il **client TCP è anche il client a livello di protocollo applicativo**: è lui a parlare per primo nell'interscambio tra le due parti, inviando la richiesta.
 
 ---
 
-### **2. Comunicazione via Web**
+### **2. L'operazione fondamentale: la URL**
 
-Quando l’utente digita un **URL** (Uniform Resource Locator) o clicca su un collegamento ipertestuale, il **browser**:
+Dal punto di vista dell'utente, l'operazione fondamentale è selezionare — digitandola o recuperandola dai preferiti — una forma estesa di indirizzo: la **URL (Uniform Resource Locator)**.
+
+Una volta inserita la URL, il browser compie una serie di operazioni per richiedere la risorsa corrispondente al server. Il server risponde con un messaggio di cui interessano:
+
+- il **contenuto**, che il browser visualizzerà;
+- soprattutto l'**intestazione**, che contiene campi descrittivi — in primo luogo il **Content-Type** (in analogia con quanto appreso sui protocolli di posta elettronica e MIME) — che consentono al browser di gestire correttamente le informazioni ricevute.
+
+Se la risorsa è collegata ad altre risorse (immagini, script, CSS…), queste andranno trasferite con **connessioni separate**.
+
+---
+
+### **3. L'idea originale del Web: Tim Berners-Lee al CERN**
 
 ![](imgs/Pasted%20image%2020260225163022.png)
 
-1. **Identifica** il server Web indicato nell’URL.
-    
-2. **Invia una richiesta** HTTP per la risorsa desiderata.
-    
-3. **Riceve una risposta** contenente:
-    
-    - il **tipo di contenuto** (HTML, immagine, PDF, file ZIP, ecc.);
-        
-    - e i **dati veri e propri** della pagina.
-        
+Il Web fu inventato da **Tim Berners-Lee** presso il laboratorio **CERN** di Ginevra. L'idea originale era semplice:
 
-Il browser utilizza le informazioni sul tipo di contenuto per **decidere come visualizzarlo**.  
-Se la pagina HTML contiene altri elementi (immagini, applet, file CSS o script), **il browser deve richiederli separatamente**, aprendo più richieste verso lo stesso server.
-
----
-
-### **3. Esempio pratico del flusso Web**
-
-Supponiamo che un utente clicchi su un link all’interno del browser:
-
-1. Il **browser** identifica il **server Web** (es. `www.unimi.it`).
-    
-2. Il browser **stabilisce una connessione** con il server, tramite Internet.
-    
-3. Il **server** cerca nel proprio filesystem la **pagina richiesta** (ad esempio `index.html`).
-    
-4. Il server invia la pagina come **risposta HTTP**.
-    
-5. Il browser **interpreta e visualizza** il contenuto sullo schermo dell’utente.
-    
-
-In sostanza, il browser e il server comunicano usando **messaggi testuali** standardizzati, costruiti secondo il protocollo HTTP.
+- qualunque utente con un client può **cliccare su un collegamento** all'interno di una pagina già ricevuta, oppure **digitare direttamente** l'indirizzo di una pagina nuova;
+- entrambe le operazioni producono lo stesso effetto: una **richiesta dal client al server** appropriato, poiché la URL specifica anche la macchina su cui si trovano i dati;
+- il server — che non è altro che un **grande file system** — ricerca la risorsa richiesta (un file di qualche tipo nelle proprie directory) e la rimanda al client.
 
 ---
 
 ### **4. Il protocollo HTTP**
 
-**HTTP (HyperText Transfer Protocol)** è un **protocollo di livello applicativo**, progettato per sistemi **ipermediali, collaborativi e distribuiti**.  
-È il **protocollo principale del Web**, pensato per essere:
+Il formato delle richieste e delle risposte è definito da un protocollo a livello applicativo: **HTTP (HyperText Transfer Protocol)**. HTTP è:
 
-- **orientato agli oggetti** e **generico**;
-    
-- **stateless**, cioè senza memoria delle richieste precedenti;
-    
-- compatibile con **firewall traversal**, garantendo connettività tra qualunque coppia di nodi Internet.
-    
-
-Grazie a queste caratteristiche, HTTP è utilizzato non solo per le pagine web, ma anche per **sistemi distribuiti** e **servizi di naming**.
+- **orientato agli oggetti**: è un protocollo per il trasferimento di oggetti/risorse in generale;
+- **generico**: non è pensato per trasferire un tipo specifico di risorsa, ma può trasferirne molti;
+- **stateless**: ogni richiesta fa storia a sé; la risposta a una data richiesta HTTP è sempre la stessa se la richiesta è formulata in modo identico, indipendentemente da quelle precedenti.
 
 ---
 
-### **5. HTTP/1.0**
+### **5. La porta 80 e la sicurezza**
 
-La prima versione diffusa del protocollo, **HTTP/1.0**, prevedeva una gestione molto semplice ma inefficiente delle connessioni:
+Dal punto di vista della sicurezza, un elemento fondamentale di HTTP è che **non si può chiudere la porta 80**: HTTP viaggia su una porta universalmente utilizzata su Internet, e con pochissime eccezioni quasi nessuna organizzazione può permettersi di filtrare questo traffico. HTTP gode quindi di un'**elevata uniformità di raggiungibilità**: da qualunque punto di Internet a qualunque altro, i pacchetti sulla porta 80 riescono in genere a viaggiare attraverso tutti gli schermi e i filtri di pacchetti presenti.
 
-- Ogni richiesta o risposta richiedeva **una nuova connessione TCP**.
-    
-- Per scaricare una singola pagina con immagini, il browser doveva aprire **più connessioni consecutive**, una per ogni elemento.
-    
-
-Questo comportamento causava:
-
-- **sovraccarico** del server,
-    
-- **ritardi** di risposta,
-    
-- **aumento dell’overhead** di rete (cioè il tempo speso a stabilire continuamente nuove connessioni).
-    
+> ⚠️ Questa caratteristica è un'arma a doppio taglio: garantisce massima accessibilità al Web, ma rende HTTP un canale difficilmente bloccabile anche per traffico potenzialmente indesiderato.
 
 ---
 
-### **6. HTTP/1.1**
+### **6. Stateless: vantaggi e problemi**
 
-Per risolvere questi limiti, fu introdotta la versione **HTTP/1.1**, che fornisce **connessioni persistenti** di default.
+Il fatto di essere **stateless** presenta due facce.
 
-In pratica:
+**Vantaggio**: consente la **ridondanza dei server**. Poiché ogni richiesta fa storia a sé, se due server hanno lo stesso contenuto non fa differenza a quale dei due venga indirizzata la richiesta. Questo rende HTTP naturalmente adatto al bilanciamento del carico e alla replicazione.
 
-- Una volta stabilita la connessione, **resta aperta** fino a quando non viene chiusa dal client o dal server (oppure scade un timeout).
-    
-- Ciò consente di **riutilizzare la stessa connessione** per più richieste consecutive.
-    
+**Problema**: se si vogliono gestire transazioni articolate in più passi — tipiche dell'**e-commerce** — HTTP da solo non basta. Consideriamo un modulo di acquisto in sette passi: un client che invia solo il terzo modulo deve essere trattato diversamente da un client che li sta inviando tutti in successione, perché solo quest'ultimo sta completando la transazione. Ma HTTP non ha memoria delle richieste precedenti e non può fare questa distinzione da solo.
 
-Questo miglioramento comporta:
-
-- **riduzione del numero di connessioni** totali;
-    
-- **minore overhead**;
-    
-- possibilità di inviare **più richieste in parallelo** senza aspettare le risposte (tecnica detta _pipelining_).
-    
-
-Esempio:  
-il browser può chiedere **tutte le immagini di una pagina HTML contemporaneamente**, velocizzando il caricamento.
+> 📌 Per risolvere questo problema occorrono apposite tecniche che si **aggiungono a HTTP** e supportano le sessioni, rendendo il protocollo **stateful** per le applicazioni che lo richiedono. Questo aspetto sarà approfondito nelle prossime lezioni.
 
 ---
 
-### **7. HTTP come protocollo stateless**
+### **7. HTTP/1.0**
 
-HTTP è un protocollo **stateless**, cioè **non mantiene memoria** delle interazioni precedenti.  
-Due richieste identiche, inviate una dopo l’altra, vengono trattate **come indipendenti**.
+La prima versione diffusa, **HTTP/1.0**, mappava direttamente ogni richiesta applicativa su una singola connessione TCP:
 
-Questo approccio è efficiente per le risorse statiche, ma diventa limitante per le **applicazioni dinamiche**, come l’e-commerce.  
-Infatti, siti come **Amazon** devono ricordare:
+- ogni richiesta e ogni risposta apriva una **nuova connessione TCP**;
+- una pagina con molti elementi (immagini, script…) richiedeva altrettante connessioni TCP separate.
 
-- il nome dell’utente;
-    
-- gli acquisti passati;
-    
-- la carta di credito e le preferenze.
-    
-
-Per simulare una **sessione stateful** (cioè persistente), vengono introdotti **meccanismi esterni** al protocollo, come:
-
-- **cookie** salvati lato client,
-    
-- **sessioni lato server** con identificatori univoci.
-    
+Una grande quantità di connessioni TCP, ciascuna delle quali trasporta poche informazioni, tende a essere **meno efficiente** di una connessione unica: l'overhead di apertura/chiusura si ripete per ogni singola risorsa, e i parametri di throughput non riescono a essere ottimizzati.
 
 ---
 
-### **8. Sintesi finale**
+### **8. HTTP/1.1: connessioni persistenti e pipelining**
 
-|Versione|Caratteristiche principali|Limiti o vantaggi|
-|---|---|---|
-|**HTTP/1.0**|Nuova connessione per ogni richiesta|Overhead elevato|
-|**HTTP/1.1**|Connessioni persistenti, pipelining|Maggiore efficienza|
-|**HTTP (generico)**|Stateless, compatibile con firewall, orientato agli oggetti|Richiede meccanismi aggiuntivi per la gestione di sessioni utente|
+Con **HTTP/1.1** fu adottata una prospettiva diversa: la prima richiesta a un server apre una **connessione TCP persistente** che rimane aperta finché le due parti non decidono di chiuderla o scade un timeout. Su quella connessione vengono trasportate tutte le richieste e risposte successive.
+
+Vantaggi:
+
+- **Pipelining**: è possibile inviare **più richieste senza aspettare la risposta a ciascuna**, sfruttando il **parallelismo interno del server**. Ad esempio, se il server tiene le immagini su un disco e i file di testo su un altro, il client può richiedere in parallelo testi e immagini, permettendo al server di accedere contemporaneamente a entrambi i sottosistemi.
+- **Ottimizzazione del throughput**: una singola connessione che trasporta più dati consente di calibrare meglio i parametri TCP di trasmissione.
 
 ---
 
 ### **9. Conclusione**
 
-Il **World Wide Web** è costruito interamente su **HTTP**, un protocollo semplice, scalabile e indipendente dallo stato.  
-La sua architettura client/server e il modello richiesta–risposta rendono possibile ogni interazione tra browser e server, dalle pagine statiche ai complessi servizi cloud di oggi.
-
-Con l’introduzione di versioni più avanzate (come **HTTP/1.1**, poi **HTTP/2** e **HTTP/3**), il Web è passato da un sistema di documenti collegati a una vera **piattaforma distribuita globale**, capace di supportare applicazioni interattive, transazioni e comunicazioni in tempo reale.
+Il **World Wide Web** è costruito interamente su **HTTP**, un protocollo semplice, scalabile e indipendente dallo stato. La sua architettura client/server e il modello richiesta–risposta rendono possibile ogni interazione tra browser e server. Il fatto di essere stateless — con i vantaggi e i limiti che ne conseguono — è la caratteristica fondamentale da tenere presente per comprendere le evoluzioni successive del protocollo, che aggiungeranno meccanismi di gestione dello stato per supportare le applicazioni moderne.

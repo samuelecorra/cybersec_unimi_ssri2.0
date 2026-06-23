@@ -12,7 +12,7 @@ Tutta la posta elettronica spedita su Internet, ancora oggi, si basa su questo s
 
 > ogni messaggio viene trasferito usando il protocollo **SMTP**, implementato in numerosi programmi detti **Mail Transfer Agent (MTA)**, come il celebre _Sendmail_.
 
-Un **server SMTP** può inviare e ricevere posta da **qualsiasi altro server SMTP** nel mondo, rendendo il sistema globale e interoperabile.
+L'idea originale di Postel era di rendere **ciascun computer** in grado di ospitare un server SMTP e quindi di ricevere e inviare messaggi a qualunque altro server SMTP di Internet. Nel tempo, però, i server SMTP attivi tendono a essere **pochi all'interno di un'organizzazione**, con gli altri computer che fanno riferimento ai servizi di questi server centralizzati.
 
 ---
 
@@ -41,23 +41,32 @@ Il passaggio tra server SMTP e protocolli POP/IMAP rappresenta il confine tra la
 
 ---
 
-### **3. Punti deboli di SMTP**
+### **3. Il dialogo SMTP e il suo "dualismo"**
 
-SMTP è uno dei protocolli più **vecchi e semplici** di Internet.  
-Questa semplicità, necessaria per gestire centinaia di messaggi al secondo, comporta anche **vulnerabilità strutturali**.
+Il comando `HELO` — originariamente scritto con una sola "L" per via di limitazioni nella lunghezza dei messaggi presenti nelle prime implementazioni — è forse il più famoso dei comandi obbligatori dei protocolli Internet. Non è un'autenticazione: è semplicemente uno **scambio di nomi** tra server.
 
-Infatti:
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-- le informazioni fornite dal mittente (nome, indirizzo e-mail, dominio) **non vengono verificate** dal server ricevente;
-    
-- ciò rende possibile **falsificare facilmente** sia il nome del mittente sia il dominio di provenienza.
-    
+In SMTP esiste un **dualismo strutturale**: la stessa informazione (mittente, destinatario) compare **sia come messaggio di protocollo** (nel dialogo SMTP tra i due MTA) **sia come campo dell'intestazione del messaggio** che viene effettivamente trasferito. La **mancata concordanza di formato** tra queste due rappresentazioni è uno dei principali problemi del protocollo.
 
-In pratica, un utente malintenzionato può inviare una mail con un **mittente falso**, generando spam o phishing.
+> ⚠️ Questo duplice utilizzo delle stesse informazioni è fonte di vulnerabilità: mittente e destinatario sono dichiarati nel dialogo di protocollo, ma poi gli stessi valori compaiono (eventualmente diversi) nei campi `From:` e `To:` del messaggio. Non c'è garanzia di coerenza tra i due.
+
+La semplicità di SMTP — necessaria per gestire decine e decine di richieste al secondo — è stata quindi ottenuta a prezzo di una vulnerabilità strutturale: **le informazioni base non vengono verificate** e **possono essere duplicate in modo incoerente**.
 
 ---
 
-### **4. Analisi del campo “Received:”**
+### **4. Punti deboli di SMTP**
+
+SMTP è uno dei protocolli più **vecchi e semplici** di Internet. Le sue vulnerabilità strutturali derivano da due elementi fondamentali:
+
+1. Le informazioni fornite dal mittente **non vengono verificate** dal server ricevente.
+2. Le stesse informazioni sono **ripetute sia come messaggio di protocollo sia come contenuto del messaggio**, rendendo possibile introdurre discrepanze.
+
+In pratica, un utente malintenzionato può inviare una mail con un **mittente falso** (spoofing), generando spam o phishing. Ma anche un'implementazione imprecisa del client di posta (non necessariamente malevola) può generare campi incoerenti.
+
+---
+
+### **5. Analisi del campo “Received:”**
 
 Ogni messaggio di posta elettronica include, nell’intestazione, uno o più campi `Received:`.  
 Questi campi vengono aggiunti **automaticamente** dai server SMTP che gestiscono il messaggio durante il suo percorso.
@@ -81,39 +90,36 @@ Questo significa:
 - la **user-id** del mittente sul server d’origine è `201`.
     
 
+> 📌 Il campo `envelope-from` (es. `<caio@crema.unimi.it>`) **non è il campo `From:` visibile all’utente** nel messaggio: appartiene all’intestazione tecnica SMTP e contiene l’indirizzo email e la user-id del mittente sul MTA di provenienza. È possibile che il campo `From:` all’interno del messaggio abbia un valore diverso dall’`envelope-from`, e SMTP non impone che i due coincidano.
+
 Questo campo non deve essere confuso con il campo `From:` visibile all’utente (che può essere facilmente falsificato):  
 `Received:` appartiene all’intestazione **tecnica SMTP**, ed è generato automaticamente dai server intermedi.
 
 ---
 
-### **5. Controlli DNS sul mittente**
+### **6. Controlli DNS sul mittente**
 
-Molti server SMTP “diffidenti” adottano alcune precauzioni per verificare la legittimità del mittente.  
-Una delle più comuni consiste nel controllare se il **dominio dopo la chiocciola (@)**, presente nel campo `envelope-from`, sia **traducibile tramite DNS**.
+Il minimo che quasi tutti i server SMTP fanno quando vengono contattati da un server mittente è una **query DNS** sull'`envelope-from`: si prende il FQDN dopo la `@` (es. `crema.unimi.it`), si risolve via DNS e si confronta l'IP ottenuto con l'indirizzo del server SMTP che si è collegato.
 
-Esempio:  
-se il messaggio proviene da `user@crema.unimi.it`, il server ricevente può interrogare il DNS per verificare che `crema.unimi.it` **esista davvero**.  
-Se il dominio non è risolvibile, il messaggio può essere **rifiutato** come sospetto.
+> ⚠️ Questi confronti possono dare risultati **incoerenti** non solo a causa di volute manipolazioni delle intestazioni, ma anche perché il client di posta elettronica dell'utente può aver inserito una forma abbreviata nell'`envelope-from`, non traducibile via DNS, senza alcuna intenzione di contraffazione. Programmare bene un server SMTP che gestisca correttamente tutti questi casi è quindi non banale.
 
-Questo controllo aiuta a bloccare messaggi provenienti da software di posta che generano **campi SMTP falsi o incompleti**, tipici dello spam o dei malware.
+> 💡 L'idea di usare query DNS per controllare i campi SMTP è il primo passo verso un **sistema di autenticazione del mittente**, che è stato più volte proposto su Internet (cercate “SPF”, “DKIM”) e che ha ispirato proposte di standard autenticati per SMTP.
 
 ---
 
-### **6. Affidabilità dei campi “Received:”**
+### **7. Affidabilità dei campi “Received:” e chain of trust**
 
-Un campo `Received:` è affidabile **solo se proviene da un server considerato fidato**.  
-Nel nostro esempio, possiamo ritenere attendibile il campo generato da `pollon`, ma non necessariamente quello dei server precedenti.
+Un campo `Received:` è affidabile **solo se proviene da un server considerato fidato**. Esiste una **chain of trust**: se ci fidiamo del server mittente `pollon` (il server SMTP del nostro campus), l’indirizzo IP `159.149.70.1` ci è specificato da quel server fidato — non è necessario che il server destinatario si metta a fare ulteriori controlli. Molti server lo fanno lo stesso per sicurezza aggiuntiva.
 
 La parte più importante del campo è l’indirizzo IP (es. `159.149.70.1`), che possiamo verificare tramite:
 
 - una **query DNS inversa** (per risalire al nome del server associato all’IP);
-    
-- o una ricerca **WHOIS**, per identificare la **rete e l’organizzazione** proprietaria di quell’indirizzo.
+- il comando **WHOIS**, per identificare la **rete e l’organizzazione** proprietaria di quell’indirizzo.
     
 
 ---
 
-### **7. Esempio di analisi WHOIS**
+### **8. Esempio di analisi WHOIS**
 
 Eseguendo una ricerca WHOIS sull’indirizzo `159.149.70.1`, si ottiene:
 
@@ -132,7 +138,7 @@ Questo rafforza la fiducia sull’autenticità del messaggio proveniente da quel
 
 ---
 
-### **8. Tecniche di difesa: Blacklist e Whitelist**
+### **9. Tecniche di difesa: Blacklist e Whitelist**
 
 Conoscere l’indirizzo IP del mittente permette di implementare **strategie di filtraggio** sui server SMTP:
 
@@ -152,7 +158,7 @@ Entrambi i metodi migliorano la sicurezza, ma devono essere usati con cautela:
 
 ---
 
-### **9. Conclusione**
+### **10. Conclusione**
 
 SMTP è un protocollo storico e tuttora indispensabile, ma la sua architettura **non prevede autenticazione né verifica dell’identità**.  
 Questo lo rende vulnerabile a spoofing e spam, rendendo necessari **filtri, controlli DNS e analisi dei log** per identificare l’origine dei messaggi.

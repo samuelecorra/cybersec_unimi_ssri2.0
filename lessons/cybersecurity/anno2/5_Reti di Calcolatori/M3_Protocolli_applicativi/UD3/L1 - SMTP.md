@@ -4,164 +4,143 @@
 
 ### **1. Introduzione alla posta elettronica**
 
-La **posta elettronica (e-mail)** è una delle **infrastrutture applicative più importanti** su Internet e sulle reti IP aziendali.  
-Il suo funzionamento si basa su un insieme coordinato di componenti e protocolli che gestiscono **invio, consegna e ricezione** dei messaggi.
+La **posta elettronica** è una delle **infrastrutture applicative più importanti** su Internet e sulle reti IP aziendali, con un'importanza fondamentale per il funzionamento delle organizzazioni.
 
 Gli **elementi principali** di un sistema di posta elettronica sono:
 
-- **User Agent (UA)** → il programma usato dall’utente per scrivere, inviare e leggere e-mail (es. Outlook, Thunderbird, Gmail).
-    
-- **Mail Server** → il computer che gestisce la spedizione e la ricezione dei messaggi.
-    
-- **Mailbox** → lo spazio riservato a ciascun utente sul server, dove vengono archiviati i messaggi ricevuti.
-    
+- **User Agent (UA)** → il programma che l'utente usa per scrivere e inviare e-mail (es. Outlook, Thunderbird). Come visto nei moduli precedenti, serve per preparare il messaggio di posta.
+- **Mail Server** → il programma (MTA, Message Transfer Agent) che si occupa dell'invio dei messaggi via SMTP ad altri mail server.
+- **Mailbox** → la directory che contiene tutti i messaggi ricevuti da un certo utente.
 
 ---
 
-### **2. Il ruolo del Mail Server**
+### **2. Il ruolo del Mail Server e la mailbox**
 
 Ogni **mail server** contiene due componenti fondamentali:
 
-1. **Coda dei messaggi** → raccoglie le e-mail in **uscita**, in attesa di essere recapitate al server destinatario.
-    
-2. **Mailbox** → contiene le e-mail **ricevute**, una per ogni utente registrato sul server.
+1. **Coda dei messaggi in uscita** → raccoglie le e-mail da spedire.
+2. **Mailbox utente** → contiene i messaggi ricevuti.
 
-![](imgs/Pasted%20image%2020260225161730.png)
+![](imgs/Pasted%20image%2020260622223802.png)
 
-I server comunicano tra loro attraverso protocolli standardizzati.  
-Il principale protocollo per la **consegna della posta** è **SMTP (Simple Mail Transfer Protocol)**.
-
----
-
-### **3. Protocollo SMTP – Funzioni generali**
-
-SMTP si occupa della **trasmissione dei messaggi**:
-
-- dal **client** al **server locale** (quando un utente invia un’e-mail);
-    
-- e **tra mail server diversi**, durante il recapito verso la destinazione finale.
-    
-
-In pratica, **SMTP è attivo sia negli agenti di posta (MUA)** sia nei **mail server (MTA)** che si occupano di smistare la posta.  
-Nel contesto SMTP:
-
-- il **client** è il sistema che **invia** il messaggio;
-    
-- il **server** è quello che **riceve** il messaggio.
-    
+> ⚠️ Distinzione importante: il **mail server ricevente** può gestire le mailbox in due modi distinti.
+>
+> - **Configurazione storica**: il destinatario ha un account sulla stessa macchina dove risiede il mail server. In questo caso il server copia i messaggi direttamente nelle directory mailbox locali degli utenti.
+> - **Configurazione moderna** (più frequente): il destinatario non ha un account sulla macchina del mail server (es. ti inviano un messaggio al tuo indirizzo presso un provider come TIN). Il mail server mantiene i messaggi in attesa e l'utente si collegherà via **POP o IMAP** per prelevarli dal proprio PC.
 
 ---
 
-### **4. Meccanismo di trasmissione SMTP**
+### **3. Invio del messaggio: user agent e mail server**
 
-SMTP utilizza una **connessione TCP**, generalmente sulla **porta 25**, per trasferire la posta elettronica in modo **affidabile**.
+Quando si usa un programma come Outlook per inviare un messaggio, il comportamento dipende da dove si trova il mail server:
 
-Il flusso tipico è il seguente:
+- **User agent su macchina diversa dal mail server** → il UA usa **SMTP** per trasferire il messaggio al mail server locale.
+- **User agent sulla stessa macchina del mail server** → il UA salva direttamente il file del messaggio nella **directory di spool** del mail server, senza aprire una connessione SMTP.
 
-1. L’agente o il client invia la mail al **server SMTP locale**.
-    
-2. Quest’ultimo memorizza temporaneamente il messaggio nella sua **coda di uscita**.
-    
-3. Il server tenta di **trasferire direttamente** la mail al **server del destinatario** (specificato dal dominio dell’indirizzo e-mail).
-    
-4. Se il server remoto non è raggiungibile, la mail viene **ritentata periodicamente**, finché non viene consegnata o scade il tempo massimo.
-    
+In entrambi i casi, il mail server si trova con un messaggio pronto per partire. Analizza l'indirizzo del destinatario e apre una connessione SMTP verso il mail server di destinazione.
 
-Le **ritrasmissioni intermedie** (passaggi attraverso più server) sono oggi **rare**, ma possono ancora verificarsi in reti complesse.
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
-### **5. Le tre fasi di un dialogo SMTP**
+### **4. SMTP come protocollo bidirezionale**
 
-Un’interazione SMTP segue sempre lo schema **comando/risposta**, in tre fasi principali:
+**SMTP** è il protocollo che viene usato:
 
-1. **Handshaking (saluto iniziale)**  
-    Il client si presenta al server con un messaggio `HELO` (o `EHLO` in versione estesa).  
-    Il server risponde confermando l’accettazione della connessione.
-    
-2. **Trasferimento del messaggio**  
-    Il client invia le informazioni sul mittente (`MAIL FROM`), sul destinatario (`RCPT TO`), e poi il contenuto del messaggio (`DATA`).
-    
-3. **Chiusura della connessione**  
-    Dopo la trasmissione, il client chiude la sessione con il comando `QUIT` o semplicemente interrompendo la connessione TCP.
-    
+- dallo **user agent** per trasferire il messaggio al mail server locale;
+- dal **mail server locale** per trasferire il messaggio al mail server del dominio del destinatario.
 
-Le **righe di comando e di risposta** sono in **testo ASCII**, e terminano con i caratteri **CR-LF** (ritorno carrello + fine riga).  
-Le risposte del server includono un **codice numerico** e una **frase esplicativa** (es. `250 OK`).
+> 📌 Lo stesso mailer può essere a volte **emittente** (quando trasferisce posta verso un collega destinatario) e a volte **destinatario** (quando riceve posta da altri mailer). SMTP è fondamentalmente lo stesso protocollo in entrambe le direzioni.
+
+Il trasferimento avviene su **connessione TCP, porta 25**, e in genere è **point-to-point**: il mail server locale si collega direttamente al mail server del destinatario, senza passaggi intermedi. La ritrasmissione in più hop non è vietata da SMTP, ma va contro l'idea dell'uniformità di Internet (poter contattare qualsiasi macchina direttamente) ed è un caso non frequente.
 
 ---
 
-### **6. Relazione tra SMTP e POP**
+### **5. Il flusso di consegna completo**
 
-Una volta che un messaggio è stato **recapitato nella mailbox** del destinatario, non è più SMTP a gestirne l’accesso.  
-A questo punto interviene un altro protocollo: il **POP (Post Office Protocol)**.
+![](imgs/Pasted%20image%2020260622224409.png)
 
-![](imgs/Pasted%20image%2020260225161801.png)
+Il processo di consegna è il seguente:
 
-#### **Flusso di recapito completo:**
+1. Il **user agent** (Outlook) trasferisce il messaggio al **mail server locale** via SMTP.
+2. Il mail server locale, con un certo ritardo (gestito dalla coda), contatta via SMTP il **mail server del dominio destinatario**.
+3. Il mail server remoto riceve il messaggio via SMTP e lo deposita nella **mailbox del destinatario** (locale o in attesa di prelievo via POP/IMAP).
 
-1. L’agente di posta dell’utente (MUA) invia il messaggio via **SMTP** al **mail server locale**.
-    
-2. Il mail server locale comunica con altri server remoti, sempre via **SMTP**, fino a raggiungere il **server del destinatario**.
-    
-3. Il server destinatario deposita la mail nella **mailbox** dell’utente.
-    
-4. Infine, l’utente scarica la posta con un **protocollo di accesso** come **POP** (o, oggi più spesso, **IMAP**).
+> ⚠️ Quando il vostro Outlook dice che avete "inviato" un messaggio, vuol dire solo che lo ha trasferito al mail server locale. Il mail server locale di solito lo inoltrerà subito, ma **non esiste nel protocollo una certificazione del delay massimo** tra il momento in cui avete trasferito il messaggio al server locale e il momento in cui questo lo trasmetterà. Esistono però **sistemi di posta temporizzata** per messaggi di particolare importanza, che ricevono conferme da ogni punto del percorso.
 
-![](imgs/Pasted%20image%2020260225161829.png)
+---
+
+### **6. Le tre fasi di un dialogo SMTP**
+
+Un'interazione SMTP segue sempre tre fasi:
+
+1. **Handshaking (saluto iniziale)**
+    Il client apre la connessione TCP sulla porta 25. Attenzione: **SMTP è non standard** perché è il **server a parlare per primo**, inviando un codice 220 con il proprio nome, anche se è il client ad aver aperto la connessione.
+    Il client risponde con `HELO` (o `HELLO`) per comunicare la propria identità. Questa non è una vera autenticazione (non ci sono password): è semplicemente uno **scambio di identità** tra server.
+
+2. **Trasferimento del messaggio**
+    - `MAIL FROM: <mittente>` → il server verifica e può rifiutare il mittente (possibile meccanismo di blacklist anti-spam).
+    - `RCPT TO: <destinatario>` → il server verifica che il destinatario abbia un account riconosciuto sulla macchina. Si può configurare il server per **non accettare posta da certi mittenti** (blacklist), oppure per non accettare destinatari non registrati.
+    - `DATA` → inizia il corpo del messaggio. Il server risponde con **354** (codice 3xx: "tutto ok finora, mandami i dati e poi vediamo"). Il messaggio termina con una **riga contenente solo un punto (.)**, che funge da delimitatore.
+
+3. **Chiusura della connessione**
+    Il server risponde con **221** confermando che il messaggio è stato accettato e la connessione può essere chiusa.
+
+Le **righe di comando e risposta** sono in **testo NVT (ASCII esteso)** e terminano con **CR-LF**.
 
 ---
 
 ### **7. Esempio di interazione SMTP**
 
-Ecco un esempio concreto di sessione SMTP tra due server, `crepes.fr` (mittente) e `hamburger.edu` (destinatario).
+Il client SMTP (`crepes.fr`) stabilisce la connessione TCP con il server `hamburger.edu` alla **porta 25**.
 
-**Connessione:**
-
-- Il client SMTP (`crepes.fr`) apre una connessione TCP con il server `hamburger.edu` sulla **porta 25**.
-
-![](imgs/Pasted%20image%2020260225161854.png)
-
-**Dialogo:**
+![](imgs/Pasted%20image%2020260622224506.png)
 
 ```
-S: 220 hamburger.edu
-C: HELO crepes.fr
-S: 250 HELLO crepes.fr, pleased to meet you
-C: MAIL FROM:<alice@crepes.fr>
-S: 250 alice@crepes.fr... Sender ok
-C: RCPT TO:<bob@hamburger.edu>
-S: 250 bob@hamburger.edu... Recipient ok
-C: DATA
-S: 354 Enter mail, end with "." on a line by itself
-C: Do you like ketchup?
-C: How about pickles?
-C: .
-S: 221 hamburger.edu closing connection
+Server: 220 hamburger.edu
+Client: HELLO crepes.fr
+     S: 250 HELLO crepes.fr, pleased to meet you
+     C: MAIL FROM: <alice@crepes.fr>
+     S: 250 alice@crepes.fr... Sender ok
+     C: RCPT TO: <bob@hamburger.edu>
+     S: 250 bob@hamburger.edu... Recipient ok
+     C: DATA
+     S: 354 Enter mail, end with "." on a line by itself
+     C: Do you like ketchup?
+     C: .
+     S: 221 hamburger.edu closing connection
 ```
 
-**Nota:**  
-La riga contenente **solo un punto (.)** indica la **fine del messaggio**.  
-Tutto ciò che si trova prima viene interpretato come corpo del testo e-mail.
+La riga con il **solo punto** è il delimitatore di messaggi. Il codice 221 conferma che il servizio è stato eseguito correttamente.
 
 ---
 
-### **8. Riassunto concettuale**
+### **8. Sicurezza e scelta del mail server**
 
-|Fase|Azione|Protocollo|Porta|
-|---|---|---|---|
-|Invio|L’utente invia la mail al server locale|SMTP|25|
-|Trasferimento|I server si scambiano i messaggi|SMTP|25|
-|Ricezione|L’utente scarica la posta|POP o IMAP|110 / 143|
+SMTP è normalmente **point-to-point**: i messaggi non passano da server intermedi, riducendo il rischio di intercettazione sui link Internet. Tuttavia:
 
-SMTP è quindi responsabile **solo della consegna** dei messaggi tra sistemi di posta, **non della loro lettura**.
+> ⚠️ Se si usa il mailer di un **provider esterno** (es. quello di un ISP), nulla vieta tecnicamente a quel provider di esaminare il contenuto delle mail in transito. Il rischio che qualcuno monitori continuamente i collegamenti di rete è relativo, ma l'idea che qualcuno possa accedere al mailer del provider e leggere la posta di un'organizzazione è concreta.
+
+Per questo motivo, enti pubblici, grandi aziende e organizzazioni tendono a **gestire i propri server di posta**, mantenendo il controllo del flusso di messaggi.
 
 ---
 
-### **9. Conclusione**
+### **9. Riepilogo del flusso e di POP**
 
-SMTP è il **cuore del sistema di posta elettronica**:  
-assicura che i messaggi partano dal mittente e arrivino, anche attraverso più server, al destinatario corretto.
+| Fase | Azione | Protocollo | Porta |
+| :--- | :----- | :--------- | :---- |
+| Invio | User agent → mail server locale | SMTP | 25 |
+| Trasferimento | Mail server locale → mail server remoto | SMTP | 25 |
+| Ricezione | Destinatario scarica i messaggi dal server | POP o IMAP | 110 / 143 |
 
-Il suo modello semplice ma robusto, basato su testo ASCII e connessioni TCP affidabili, ha permesso la costruzione di una delle più durature e fondamentali infrastrutture di Internet.  
-Oggi, insieme a POP3 e IMAP, forma la **triade di protocolli** che rende possibile l’intero ciclo di vita dell’e-mail.
+Una volta recapitato il messaggio nella mailbox del destinatario, entra in gioco il **POP (Post Office Protocol)**: è il protocollo con cui il client va a recuperare la posta elettronica che è arrivata via SMTP al mail server ed è diretta a lui.
+
+![](imgs/Pasted%20image%2020260622224325.png)
+
+Perché è necessario un protocollo separato? Come visto nella sezione 2, il caso oggi più frequente è che il destinatario **non abbia un account** sulla macchina del mail server. Ad esempio, quando qualcuno vi manda un messaggio al vostro indirizzo presso un provider (es. TIN), il mailer del provider riceve il messaggio via SMTP ma non ha una vostra directory locale dove metterlo. Lo mantiene in attesa, e voi — quando vi collegate con il vostro programma di posta — utilizzate **POP** per scaricarne l'intero contenuto sul vostro PC.
+
+> 📌 La configurazione dell'indirizzo del mail server locale fa parte del setup di qualunque user agent: Outlook (o qualsiasi altro client) deve sapere a quale mailer rivolgersi sia per inviare (via SMTP) sia per ricevere (via POP/IMAP).
+
+Esiste anche la variante **IMAP (Internet Message Access Protocol)**, che permette di leggere i messaggi che si trovano sul server **senza scaricarli localmente**: i messaggi restano sul server e il client ne visualizza solo il contenuto, consentendo l'accesso da più dispositivi in modo sincronizzato.
+
+> ✅ SMTP è responsabile **solo della consegna** dei messaggi tra sistemi di posta, non della loro lettura da parte dell'utente finale — compito di POP o IMAP.

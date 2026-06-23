@@ -2,167 +2,108 @@
 
 ---
 
-### **1. Visione d’insieme**
+### **1. Visione d'insieme**
 
-**SNMP (Simple Network Management Protocol)** è il protocollo standard per la **gestione remota dei dispositivi di rete**, come router, bridge, switch e server.  
-Nasce con l’obiettivo di permettere all’amministratore di **controllare, configurare e monitorare** dispositivi distribuiti in rete **da un unico punto di gestione**.
+**SNMP (Simple Network Management Protocol)** è uno dei protocolli più importanti a livello applicativo e uno dei più utili per gli amministratori di rete, pur rimanendo spesso **dietro le quinte** — gli utenti finali non lo vedono mai direttamente.
 
-Il **principio fondamentale** su cui si basa SNMP è semplice:
+Durante tutto il corso ci siamo spesso occupati di meccanismi per la gestione e la configurazione del software di rete e dei dispositivi come router e bridge, senza però mai entrare nel dettaglio di **come** questa configurazione viene concretamente eseguita.
 
-> la gestione dei dispositivi avviene tramite la **lettura e la modifica dei valori di specifiche variabili**.
+È ovviamente possibile configurare manualmente ogni singolo dispositivo e ogni singolo host, collegandosi fisicamente alla console di ciascuno e introducendo le informazioni necessarie. Esistono però dei protocolli — e il **principio fondamentale** di SNMP è esattamente questo: gestire i dispositivi **leggendo e impostando i valori di alcune variabili** che ne controllano il funzionamento.
 
-Ogni dispositivo di rete espone un insieme di **variabili di stato** (per esempio numero di pacchetti inviati, velocità dell’interfaccia, errori di trasmissione, ecc.) che possono essere:
-
-- **lette** per conoscere lo stato del dispositivo,
-    
-- o **modificate** per cambiare la sua configurazione.
-    
-
-L’approccio operativo è di tipo **“test and set”**, cioè:
-
-- **test** → leggere i valori di una variabile per verificarne lo stato;
-    
-- **set** → modificarne il valore per impostare nuovi parametri o comportamenti.
-    
-
-SNMP gestisce queste operazioni tramite un **protocollo di messaggi semplici**, che viaggiano all’interno della rete IP.
+L'insieme dei dispositivi di un **dominio di amministrazione SNMP** — che coincide di solito con la rete dell'azienda o dell'organizzazione — è rappresentato come un insieme di oggetti, ciascuno con dei propri attributi. Su questi attributi il protocollo può operare in **test** (lettura del valore) o in **set** (impostazione del valore). Attraverso una serie di operazioni di test e set è possibile leggere e configurare l'intera rete da **un'unica console di amministrazione** che comunica tramite SNMP con i vari dispositivi.
 
 ---
 
 ### **2. Protocollo dei messaggi SNMP**
 
-I messaggi SNMP vengono trasmessi usando il **protocollo UDP** (User Datagram Protocol), per garantire leggerezza e velocità.  
-Le porte standard utilizzate sono:
+I messaggi SNMP hanno in genere un **ambito di circolazione ristretto** e, per rubare meno banda possibile alle connessioni e al trasporto dei dati utente, la scelta del protocollo di trasporto è **UDP**. Le porte standard sono:
 
-- **161** → per le **richieste e risposte** (tra gestore e agente);
-    
-- **162** → per le **notifiche** (messaggi spontanei inviati dai dispositivi).
-    
+- **161** → per le richieste di test/get e le risposte;
+- **162** → per le **notifiche proattive** di cambiamento di stato da parte dei dispositivi.
 
 #### **Tipi principali di messaggi SNMP:**
 
-|Tipo di messaggio|Descrizione|
+| Tipo di messaggio | Descrizione |
 |---|---|
-|**GetRequest**|Il gestore (manager) richiede il valore di una o più variabili dal dispositivo (agente).|
-|**GetNextRequest**|Richiede la **variabile successiva** nella gerarchia della MIB, utile per scorrere sequenze di dati.|
-|**GetResponse**|È la **risposta dell’agente** al manager, contenente i valori richiesti.|
-|**SetRequest**|Invia istruzioni all’agente per **impostare nuovi valori** alle variabili.|
-|**Trap**|Messaggio **spontaneo dell’agente** verso il manager, per segnalare **eventi o cambiamenti di stato** (es. un guasto o un riavvio).|
-
-Questi messaggi formano il nucleo operativo di SNMP, rendendolo un protocollo **semplice, efficiente e universale** per la gestione di reti eterogenee.
+| **GetRequest** | Il manager richiede il valore di una o più variabili dal dispositivo (agente). |
+| **GetNextRequest** | Richiede la **variabile successiva** nella gerarchia della MIB, utile per leggere le variabili una dopo l'altra. |
+| **GetResponse** | È la **risposta dell'agente** al manager, contenente i valori richiesti. |
+| **SetRequest** | Consente da una console remota di **impostare i valori** di certi attributi di un dispositivo per configurarlo. È forse il messaggio più importante. |
+| **Trap** | Messaggio **spontaneo dell'agente** (porta 162) verso il manager, per segnalare eventi o cambiamenti di stato — es. caduta di un dispositivo adiacente, cambio di stato della rete. |
 
 ---
 
-### **3. Le “Community” in SNMP**
+### **3. Sicurezza in SNMP**
 
-SNMP introduce il concetto di **community**, ossia un meccanismo di controllo degli accessi basato su **parole chiave condivise** tra gestore e agente.
+> ⚠️ È un indice della **scarsa attenzione alla sicurezza** che caratterizzava i primi protocolli applicativi il fatto che SNMP sia ancora oggi molto usato in versione **autenticata ma non crittografata**: i messaggi viaggiano in chiaro, consentendo a un eventuale sniffer di farsi un'idea precisa dello stato della rete intercettata.
 
-Ogni community definisce un **livello di autorizzazione**:
+Al posto di una autenticazione formale, si utilizza attualmente il concetto di **community**: gruppi di utenti con diversi livelli di accesso in lettura e scrittura a diversi tipi di variabili. Ad esempio:
 
-|Tipo di community|Permessi associati|
-|---|---|
-|**Read-only (RO)**|Consente solo la lettura delle variabili.|
-|**Read-write (RW)**|Permette sia lettura che modifica.|
-|**None**|Nessun accesso autorizzato.|
+- una community di **power user** può leggere tutte le variabili del dispositivo senza poter fare operazioni di set;
+- le operazioni di set sono riservate a utenti esperti o all'amministratore di rete;
+- è possibile riservare le operazioni di set (configurazione) di certe classi di dispositivi ad **amministratori specializzati** in quel tipo di apparato.
 
-In pratica, il nome della community funge da **password testuale**, che deve essere inserita in ogni messaggio SNMP.  
-Tuttavia, **le versioni più vecchie del protocollo (SNMPv1 e SNMPv2c)** trasmettono queste informazioni **in chiaro**, senza crittografia: ciò le rende vulnerabili a intercettazioni o accessi non autorizzati.
-
-Nonostante questo limite, **SNMP non cifrato è ancora molto diffuso**, soprattutto nelle reti locali o negli ambienti di monitoraggio interni.
+> 💡 Vi è invitati a cercare autonomamente la documentazione sulle versioni di SNMP che prevedono sia l'autenticazione dei messaggi sia la loro **crittografia**.
 
 ---
 
-### **4. Codifica dei messaggi**
+### **4. Codifica dei messaggi: SMI e ASN.1**
 
-I messaggi SNMP sono codificati come **flussi di byte** secondo le regole **ASN.1 BER**  
-(_Abstract Syntax Notation One – Basic Encoding Rules_), lo standard usato per rappresentare in modo univoco i dati in forma binaria.
+Così come gli altri protocolli applicativi di Internet, anche SNMP è **orientato al carattere** sia per i nomi degli attributi sia per i loro valori. Questi valori devono però essere codificati in modo da poter essere scambiati tra dispositivi di tipo diverso.
 
-Ogni elemento del messaggio è espresso come una **tripla (Type, Length, Value)**, dove:
+La codifica è definita da uno standard internazionale per i valori degli attributi dei dispositivi di telecomunicazione (usato anche in ambito telefonico): lo **SMI (Structure of Management Information)**. SMI fornisce una tecnica di codifica in stringhe di carattere dei valori degli attributi — il cosiddetto **ASN.1 (Abstract Syntax Notation One)** con regole di codifica **BER (Basic Encoding Rules)**.
 
-- **Type** specifica il tipo di dato (intero, stringa, indirizzo IP, ecc.);
-    
-- **Length** indica la lunghezza del valore in byte;
-    
-- **Value** contiene effettivamente il dato.
-    
+> 📌 Il valore di un attributo scritto su una console deve essere convertito in una **rappresentazione di tipo di dato astratta** (ASN.1) per essere accettabile da un dispositivo remoto (router, PC). L'implementazione SNMP a bordo del dispositivo si occupa poi di convertirlo nella rappresentazione locale.
 
 #### **Tipi di dato usati in SNMP:**
 
-- Tipi ASN.1 di base:
-    
-    - **INTEGER**, **OCTET STRING**, **OBJECT IDENTIFIER**, **SEQUENCE**.
-        
-- Tipi specifici di SNMP:
-    
-    - **Gauge** (valore misurabile, come la temperatura o il traffico),
-        
-    - **Counter** (contatore incrementale),
-        
-    - **IPAddress** (indirizzo IP a 32 bit).
-        
+- Tipi ASN.1 di base: `INTEGER`, `OCTET STRING` (caratteri ASCII), `OBJECT IDENTIFIER`, `SEQUENCE`.
+- Tipi specifici di SNMP, tra cui il più utile è l'**`IPAddress`** (indirizzo IP a 32 bit): quando si assegna un indirizzo IP a un dispositivo in configurazione remota, si modifica il valore di una sola variabile inviandolo in formato ASN.1/BER; l'implementazione SNMP del dispositivo lo converte poi nella rappresentazione locale dell'indirizzo IP.
 
-Questa struttura standardizzata consente a sistemi diversi (hardware e software) di **scambiarsi informazioni di gestione in modo interoperabile**.
+Questo problema di rappresentare in modo indipendente dalla rete e dai dispositivi i tipi di dati sarà ripreso nelle ultime lezioni del corso parlando dei paradigmi di programmazione.
 
 ---
 
-### **5. SMI – Structure of Management Information**
+### **5. La MIB: Management Information Base**
 
-Per organizzare e descrivere in modo coerente le informazioni gestite, SNMP utilizza un modello chiamato **SMI (Structure of Management Information)**.
+Come fa l'operatore alla console a sapere quali dispositivi sono installati sulla rete e quali oggetti SMI può andare a modificare?
 
-L’SMI stabilisce **come devono essere definite le variabili** e **come vengono identificate all’interno della rete**.  
-Ogni variabile corrisponde a un **oggetto** della **MIB (Management Information Base)**, che rappresenta il “catalogo” di tutti i dati gestibili.
+Tutte le rappresentazioni dei dispositivi di rete in formato SMI sono custodite in una **MIB (Management Information Base)**: un database in **formato testo** che riunisce tutte le informazioni su tutti i dispositivi — tutti gli attributi, i loro valori e i dispositivi installati sulla rete.
 
-#### **Caratteristiche della MIB:**
-
-- È un **file di testo strutturato**, scritto in **ASN.1**, che definisce le variabili e le loro relazioni gerarchiche.
-    
-- Ogni variabile ha un **Object Identifier (OID)**, cioè un nome numerico univoco che ne specifica la posizione nella gerarchia.
-    
-- Le **variabili standard** sono definite nelle **RFC** (Request For Comments).
-    
-- I **produttori di dispositivi** possono aggiungere **variabili specifiche**, dette _proprietary MIBs_, per rappresentare parametri unici dei loro apparati.
-    
-
-Esempio (da RFC 1213, MIB-II):
-
-```
-iso.org.dod.internet.mgmt.mib-2.system.sysUpTime
-```
-
-→ indica il tempo trascorso dall’ultimo riavvio del dispositivo.
+Per ogni dispositivo standard (router, host, bridge) esistono attributi definiti nelle **RFC dell'IETF** su cui si possono fare operazioni di test e set. Esistono però anche attributi **specifici di certi modelli o costruttori** (_proprietary MIBs_) — occorre conoscerli per poterli modificare in fase di configurazione.
 
 ---
 
-### **6. Funzionamento sintetico di SNMP**
+### **6. Esempio di MIB: il gruppo Interfaces**
 
-Un’architettura SNMP tipica prevede due attori principali:
+Per concludere, vediamo un frammento reale di MIB — si tratta di un semplice file di testo:
 
-1. **Manager (gestore)**  
-    È l’applicazione centrale che invia richieste SNMP, raccoglie le risposte e mantiene sotto controllo l’intera rete.
-    
-2. **Agent (agente)**  
-    È il software in esecuzione su ciascun dispositivo gestito, incaricato di leggere i dati locali e rispondere alle richieste del manager.
-    
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-Il manager interroga periodicamente gli agenti con messaggi **GetRequest** e riceve i valori aggiornati tramite **GetResponse**.  
-Quando un evento importante si verifica (per esempio, un’interfaccia di rete che si disconnette), l’agente invia **spontaneamente** un messaggio **Trap** al manager per segnalare il problema.
+```
+-- the Interfaces group
+
+-- Implementation of the Interfaces group is mandatory for
+-- all systems.
+
+ifNumber OBJECT-TYPE
+    SYNTAX  INTEGER
+    ACCESS  read-only
+    STATUS  mandatory
+    DESCRIPTION
+        "The number of network interfaces (regardless of
+        their current state) present on this system."
+    ::= { interfaces 1 }
+```
+
+Il **gruppo Interfaces** è un gruppo di attributi **obbligatorio per tutti i sistemi**: qualunque dispositivo deve averlo, altrimenti non sarebbe raggiungibile e gestibile tramite SNMP.
+
+L'oggetto `ifNumber` è una semplice variabile che tiene traccia del **numero di interfacce di rete installate sul dispositivo**. L'accesso è `read-only` perché non è possibile aggiungere schede di rete mandando un messaggio: le schede sono un parametro definito in fase di acquisto e installazione fisica, non un parametro di configurazione software.
+
+`::= { interfaces 1 }` è l'**OID assignment**: assegna a questo oggetto la posizione `1` all'interno del nodo `interfaces` nella gerarchia della MIB.
 
 ---
 
 ### **7. Conclusione**
 
-**SNMP** rappresenta la **spina dorsale dell’amministrazione remota delle reti IP**.  
-È un protocollo semplice ma estremamente potente, basato sul concetto di **manipolazione di variabili** che descrivono lo stato di ogni apparato.
-
-Grazie a meccanismi leggeri come **UDP**, a un linguaggio comune di descrizione dei dati (**ASN.1**) e a strutture standard come la **MIB**, SNMP consente:
-
-- monitoraggio centralizzato,
-    
-- configurazione remota,
-    
-- e notifica automatica degli eventi.
-    
-
-Anche se le versioni più recenti (SNMPv3) hanno introdotto **sicurezza e autenticazione**, i principi fondamentali restano invariati:
-
-> osservare, misurare e controllare la rete in modo semplice, universale e distribuito.
+**SNMP** è la spina dorsale dell'amministrazione remota delle reti IP: un protocollo semplice ma potente, basato sul concetto di manipolazione di variabili che descrivono lo stato di ogni apparato. Grazie a UDP, ad ASN.1/SMI e alla MIB, SNMP consente monitoraggio centralizzato, configurazione remota e notifica automatica degli eventi — anche se la trasmissione in chiaro rimane un limite nelle implementazioni più diffuse.

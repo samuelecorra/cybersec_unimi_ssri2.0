@@ -4,167 +4,108 @@
 
 ### **1. Tipica sessione FTP**
 
-Per comprendere il funzionamento interno di FTP, è utile analizzare una **sessione tipica** tra client e server.  
-FTP utilizza **due connessioni TCP parallele**:
+Per comprendere il funzionamento interno di FTP, è utile analizzare una **sessione tipica** tra client e server. FTP utilizza **due connessioni TCP parallele**:
 
 - una per il **canale di controllo** (porta 21);
-    
-- una per il **canale dati** (porta 20 o altra dinamica).
+- una per il **canale dati** (porta 20 lato server, porta alta lato client).
 
-![](imgs/Pasted%20image%2020260225161118.png)
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-Durante l’intera sessione:
+Il server è in ascolto sulla porta 21. Il client, usando una porta alta (es. **1025**, non well-known), stabilisce la connessione al processo di controllo lato server.
 
-1. Il **client** si connette al **server FTP** sulla porta **21** (canale di controllo).
-    
-2. Una volta stabilito il collegamento, vengono inviati **comandi** come `LIST` (per elencare i file) o `RETR` (per scaricarne uno).
-    
-3. Per trasferire effettivamente i dati, si apre una **seconda connessione TCP** tra il client e il server (canale dati).
-    
-4. I due canali operano in parallelo:
-    
-    - il **canale di controllo** serve per scambiarsi comandi e risposte testuali,
-        
-    - il **canale dati** trasporta il contenuto dei file o delle directory.
-        
+A questo punto la sessione procede così:
+
+1. Il client invia un comando `LIST` dalla sua porta 1025 alla porta 21 del server. Il comando include il numero di porta locale su cui il client attenderà la risposta (es. **1493**).
+2. Il server conferma il `PORT OK` e dalla sua porta **20** invia la lista dei file alla porta **1493** del client.
+3. Il client invia poi un comando `RETR gnutella.zip` dalla porta 1025 alla porta 21, comunicando questa volta la porta **1522** per ricevere il file.
+4. Il server risponde con `PORT OK` e invia i dati dalla porta **20** alla porta **1522** del client.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 📌 Il client non comunica mai con una **porta non privilegiata** di un server non considerato sicuro. Le porte well-known (21 per il controllo, 20 per i dati) sono riservate ai servizi di sistema, riducendo il rischio di accessi non autorizzati.
 
 ---
 
-### **2. Sicurezza delle porte e modalità di connessione**
+### **2. La modalità passiva (Passive FTP)**
 
-FTP adotta una regola importante:
+In alcune configurazioni di firewall, il server non può **iniziare connessioni verso il client**: dall'esterno possono entrare connessioni verso l'interno ma non viceversa, oppure il contrario.
 
-> il client non comunica mai con una **porta non privilegiata** di un server che non sia considerato **sicuro**.
+Quando la connessione dal server verso il client non è abilitata, si usa la **modalità passiva**.
 
-![](imgs/Pasted%20image%2020260225161133.png)
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-Le porte “note” (well-known ports) – come la **21** per il controllo e la **20** per i dati – sono riservate ai servizi di sistema, e ciò riduce il rischio di attacchi o accessi non autorizzati.
+In modalità passiva è il **server** a comunicare un proprio numero di porta al client, e sarà il **client** ad attivare la connessione TCP verso il server per ricevere i risultati del comando.
 
-Durante un trasferimento, la sequenza tipica è la seguente:
+Il meccanismo è:
 
-1. Il client invia un comando `PORT` per comunicare al server la porta locale su cui riceverà i dati.
-    
-2. Il server risponde `PORT OK`.
-    
-3. Viene quindi stabilita la **connessione dati** e il file o la lista richiesta vengono trasferiti.
-    
-
-Esempio:
-
-- Il comando `LIST` richiede la lista dei file della directory.
-    
-- Il comando `RETR gnutella.zip` scarica il file `gnutella.zip`.
-    
+1. Il client invia il comando `PASV` al server (prima del comando `LIST` o `RETR`).
+2. Il server risponde confermando la modalità passiva e indicando una propria porta libera (es. **4107**).
+3. Il client apre la connessione dati verso quella porta del server e riceve la risposta.
 
 ---
 
-### **3. La modalità passiva (Passive FTP)**
+### **3. Introduzione a Telnet**
 
-In alcune situazioni, il server non può **iniziare connessioni verso il client**, ad esempio se è presente un **firewall** che blocca connessioni in ingresso.  
-In questi casi si usa la **modalità passiva**, che inverte il ruolo di chi apre la connessione dati.
+FTP ha un **protocollo fratello** che consente di inviare comandi da una macchina all'altra senza il meccanismo delle porte dati separate per i trasferimenti file: si tratta di **Telnet** (da _Terminale di rete_).
 
-![](imgs/Pasted%20image%2020260225161151.png)
-
-Il meccanismo è questo:
-
-1. Il client invia il comando `PASV` al server.
-    
-2. Il server risponde comunicando **una porta libera** sulla quale resterà in ascolto.
-    
-3. Sarà il **client** ad aprire la connessione dati verso quella porta.
-    
-
-Questa modalità è essenziale per attraversare firewall o NAT (Network Address Translation) che impediscono le connessioni server→client.
-
----
-
-### **4. Introduzione a Telnet**
-
-Dopo FTP, un altro protocollo fondamentale nato nei primi anni di Internet è **Telnet**.  
-Telnet consente di **collegarsi a un host remoto** e **interagire direttamente con il suo terminale**, come se si stesse digitando sulla tastiera di quel computer.
+Telnet consente di **collegarsi a un host remoto** e di interagire direttamente con la sua shell, come se si fosse fisicamente connessi a un terminale locale o a una console della macchina.
 
 Caratteristiche principali:
 
-- È basato su **TCP**, quindi offre comunicazioni affidabili.
-    
-- Trasmette i dati in formato **NVT (Network Virtual Terminal)**, cioè **ASCII esteso**.
-    
+- Basato su **TCP**, quindi offre comunicazioni affidabili.
+- Trasmette i dati in formato **NVT (Network Virtual Terminal)**: un formato a 8 bit che è un'estensione del classico ASCII, storicamante usato per codificare i caratteri digitati dall'utente sulla tastiera.
 - Richiede **autenticazione** tramite nome utente e password.
-    
-- Per funzionare, sul sistema remoto deve essere attivo un **server Telnet**, chiamato **telnetd**, in ascolto sulla **porta 23**.
-    
+- Come per FTP, **username e password viaggiano in chiaro**: non c'è una procedura di challenge o autenticazione cifrata.
+- Per funzionare, sul sistema remoto deve essere attivo un **server Telnet** (demone **telnetd** in Unix/Linux), in ascolto sulla **porta 23**.
 
 ---
 
-### **5. Funzionamento del protocollo Telnet**
+### **4. Funzionamento del protocollo Telnet**
 
-Quando si stabilisce una connessione Telnet:
-
-- Il **client Telnet** invia tutte le **sequenze di tasti** premuti dall’utente al sistema remoto.
-    
-- Il **server Telnet** esegue i comandi ricevuti e rimanda **l’output del terminale remoto** sullo schermo dell’utente.
-    
+Il server Telnet riceve dal client i comandi tramite la connessione TCP e li **passa a una shell locale del sistema operativo**, esattamente come se l'utente fosse collegato direttamente a un terminale locale. Il client vede l'output come se fosse sulla console della macchina remota.
 
 Telnet fornisce due servizi principali:
 
-1. **Terminale virtuale di rete (NVT)** – un’interfaccia standard che permette di comunicare con sistemi diversi in modo uniforme.
-    
-2. **Gestione delle opzioni di comunicazione** – un meccanismo di negoziazione che tratta **simmetricamente** le due estremità della connessione (client e server), decidendo dinamicamente le opzioni supportate (eco, modalità di linea, ecc.).
-    
+1. **Terminale virtuale di rete (NVT)** – un'interfaccia standard per impartire da lontano comandi di shell al sistema operativo remoto, in modo uniforme tra sistemi eterogenei.
+
+2. **Gestione delle opzioni di comunicazione** – oltre ai comandi da inoltrare alla shell remota, è possibile inviare dei comandi che **non vengono interpretati come comandi shell**, ma come opzioni che caratterizzano le modalità di comunicazione del server (es. eco, modalità linea, ecc.).
+
+Ogni nuova connessione sulla porta 23 genera un **nuovo processo** lato server, consentendo la gestione di sessioni multiple contemporaneamente.
 
 ---
 
-### **6. Struttura operativa di Telnet**
+### **5. Limiti e problemi di sicurezza**
 
-Il **client Telnet** si collega al server remoto con un comando come:
+Sia FTP che Telnet, in particolare Telnet, rappresentano potenzialmente dei **buchi di sicurezza clamorosi**, perché:
 
-```
-telnet crema.unimi.it
-```
+- Trasmettono **in chiaro** sia i comandi che le **credenziali** (username e password).
+- Chi riuscisse ad ascoltare il traffico di rete e catturare la password potrebbe poi **replicare la connessione** e impartire comandi alla macchina remota con le stesse autorizzazioni dell'utente originale.
+- Il rischio è massimo se l'utente ha privilegi amministrativi.
 
-Il server Telnet:
+> ⚠️ Per questo motivo Telnet è in genere **disattivato** sui server esposti. Quando è attivo, lo è solo per macchine sulla **stessa rete locale**, facendo affidamento sulla sicurezza fisica della rete (impossibilità di collegamento fisico da parte di intrusi). Non appena le porte Telnet sono accessibili da macchine remote su Internet, il sistema è indifeso.
 
-- ascolta sulla **porta 23** le richieste in ingresso;
-    
-- per ogni nuova connessione, **crea un nuovo processo** (via `fork`) per gestire l’utente in modo indipendente.
-    
-
-Questo modello consente a molti utenti di accedere contemporaneamente allo stesso host.
+Per questi motivi, sia FTP che Telnet sono stati progressivamente sostituiti da varianti sicure: **FTPS/SFTP** e **SSH (Secure Shell)**.
 
 ---
 
-### **7. Limiti e problemi di sicurezza**
+### **6. Importanza storica di Telnet**
 
-Telnet è uno dei protocolli più **insicuri** tra quelli storici, perché:
+Nonostante i problemi di sicurezza, Telnet ha avuto un **impatto enorme** sulla storia delle reti. Negli anni '70 e '80, il modello informatico dominante era quello basato su **minicomputer con terminali**: i terminali erano connessi fisicamente alla macchina centrale tramite cavi o concentratori.
 
-- trasmette **in chiaro** sia i comandi che le **credenziali**;
-    
-- non offre alcuna forma di **cifratura** o **autenticazione forte**;
-    
-- è facilmente vulnerabile a **intercettazioni** (sniffing) e **spoofing**.
-    
+Con Telnet è diventato possibile collegare un numero **a priori illimitato** di terminali virtuali a qualunque macchina, semplicemente collegando tutte le macchine a una rete IP locale e usando Telnet. Questo ha consentito di:
 
-Per questi motivi, Telnet è stato progressivamente sostituito da **SSH (Secure Shell)**, che svolge la stessa funzione ma in modo **criptato e autenticato**.
+- utilizzare la **rete locale come sostituto del collegamento fisico** tra terminale e mainframe;
+- eliminare la necessità di cavi dedicati per ogni terminale;
+- connettere personal computer alle reti locali IP come terminali virtuali verso server centrali.
 
----
-
-### **8. Gestione dell’eterogeneità e prestazioni**
-
-Uno dei compiti principali di Telnet è **gestire l’eterogeneità dei sistemi**:  
-tradurre i caratteri di controllo, i codici ASCII e le funzioni terminali in modo uniforme, così che un computer UNIX possa comunicare senza problemi con un mainframe, un sistema Windows o un vecchio terminale.
-
-Tuttavia, questa architettura produce un flusso continuo di **pacchetti molto piccoli**, chiamati **tinygram**, che possono appesantire la rete.  
-Per limitare questo problema, Telnet (e TCP in generale) utilizza l’**algoritmo di Nagle**, che combina più caratteri in un singolo pacchetto per ridurre il traffico e migliorare l’efficienza.
+> 💡 L'NVT costituisce la naturale estensione del formato ASCII storicamente usato per codificare i caratteri premuti sulla tastiera e inviati verso la console: l'NVT porta questo paradigma sulla rete IP.
 
 ---
 
-### **9. Conclusione**
+### **7. Prestazioni: il problema dei tinygram**
 
-Telnet rappresenta uno dei primi esempi di **interazione remota in rete**, basato su TCP e progettato per garantire compatibilità tra sistemi diversi.  
-Pur essendo oggi superato in ambito pratico, rimane un **modello concettuale essenziale** per comprendere:
+Il paradigma di Telnet impone che **ogni carattere digitato dall'utente venga inviato immediatamente al server**, perché il successivo comando che l'utente impartirà dipende dall'output di quello precedente (es. la risposta di `ls` determina il prossimo comando).
 
-- la **logica client/server**;
-    
-- la gestione dei **terminali virtuali**;
-    
-- e la necessità, oggi imprescindibile, di garantire **sicurezza e cifratura** nelle comunicazioni di rete.
+Questo genera un flusso continuo di **pacchetti molto piccoli** (tinygram), che appesantiscono la rete.
+
+> 📌 L'**algoritmo di Nagle** è nato proprio per gestire questa situazione: combina più caratteri in un singolo pacchetto per ridurre il traffico e migliorare l'efficienza di TCP in presenza di applicazioni interattive come Telnet.

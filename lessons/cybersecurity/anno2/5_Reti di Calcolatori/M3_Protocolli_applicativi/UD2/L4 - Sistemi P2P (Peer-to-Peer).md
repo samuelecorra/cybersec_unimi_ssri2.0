@@ -4,227 +4,159 @@
 
 ### **1. Definizione generale**
 
-Un **sistema P2P (Peer-to-Peer)** è un’architettura di rete in cui i **nodi ai margini di Internet** (cioè i computer degli utenti) condividono direttamente le proprie risorse, **senza dipendere da un server centrale**.  
-Ogni nodo può agire **sia da client che da server**, scambiando dati, potenza di calcolo o contenuti.
+Un **sistema P2P (Peer-to-Peer)** è un'architettura collaborativa composta da **programmi tutti uguali** (peer), contrariamente al modello client/server in cui i ruoli sono distinti. Dal punto di vista ingegneristico presenta caratteristiche importanti:
 
-Le risorse condivise includono:
+- Sfrutta risorse **non del cuore della rete**, ma dei computer degli utenti:
+    - **Memoria e contenuti** detenuti dagli utenti;
+    - **Cicli di CPU** sui computer degli utenti;
+    - **Il lavoro degli utenti stessi**.
 
-- **Memoria** (spazio per memorizzare dati o file);
-    
-- **Cicli di CPU** (potenza di elaborazione);
-    
-- **Contenuti** (file, musica, video, ecc.);
-    
-- **Utenti stessi**, che offrono disponibilità alla rete.
-    
-
-Poiché i nodi possono connettersi o disconnettersi liberamente, le **connessioni P2P sono intermittenti**: vengono create e rimosse dinamicamente.
+Questo lo rende potenzialmente a **costo molto basso**: non occorrono grandi server centralizzati. Tuttavia crea la necessità di gestire **problemi di discontinuità di presenza**: un computer di un utente può essere spento, la connessione può andare e venire, quindi il sistema deve funzionare anche in condizioni di **limitata disponibilità** dei nodi.
 
 ---
 
 ### **2. Due grandi categorie di sistemi P2P**
 
-I sistemi P2P possono essere suddivisi in due macro-approcci:
+I sistemi P2P si dividono in due macro-approcci:
 
-1. **Sistemi non strutturati**  
-    Esempi: _Napster_, _Gnutella_, _KaZaA_.
-    
-    - Le connessioni tra nodi non seguono regole fisse.
-        
-    - La ricerca dei contenuti avviene tramite tecniche di **flooding** o **flashflood**: ogni richiesta viene “inondatta” nella rete.
-        
-    - Semplici da implementare ma **poco efficienti** per grandi reti.
-        
-2. **Sistemi strutturati (DHT – Distributed Hash Table)**  
+1. **Sistemi non strutturati**
+    Esempi storici: _Napster_, _Gnutella_, _KaZaA_.
+    - Non c'è nessuna relazione tra un programma, la sua posizione rispetto agli altri e il suo compito.
+    - La ricerca dei contenuti avviene tramite tecniche di **flooding** (o "flash flood"): le richieste vengono propagate a tutti i vicini.
+    - I vicini vengono scelti **casualmente**, trovandoli localmente sulla propria subnet IP → più facile che i vicini di overlay siano anche vicini IP.
+    - Semplici da implementare ma poco efficienti per reti molto grandi.
+
+2. **Sistemi strutturati (DHT – Distributed Hash Table)**
     Esempi: _Chord_, _CAN_, _Pastry_, _Tapestry_.
-    
-    - I nodi e i contenuti sono organizzati secondo una **struttura logica precisa** (spesso ad anello o ad albero).
-        
-    - Consentono **ricerche rapide e deterministiche**.
-        
-    - Ideali per **memorizzazione persistente**, **distribuzione di file** o **gestione della mobilità** dei peer.
-        
+    - Il compito di un programma è determinato dalla sua **posizione sull'overlay** rispetto agli altri.
+    - I vicini vengono scelti in base al ruolo/contenuto che si vuole gestire, non casualmente.
+    - La prossimità IP non viene tenuta in considerazione: ci si colloca vicino a nodi con contenuti simili.
+    - L'operazione di adesione all'overlay è più complessa rispetto ai sistemi non strutturati.
 
 ---
 
 ### **3. Concetto di rete overlay**
 
-Un **overlay** è una **rete virtuale** costruita sopra la rete fisica Internet.  
-Ogni peer possiede un **indirizzo overlay** (logico), che può essere tradotto nel suo **indirizzo IP reale**.
+La rete P2P è un **overlay** della rete IP: è situata **sopra** di essa. I computer che ne fanno parte si conoscono tramite **pseudonimi, nick o indirizzi tipici dell'overlay** che non hanno nulla a che fare con gli indirizzi IP delle macchine su cui girano. Tuttavia ogni nodo deve essere in grado di risolvere l'indirizzo overlay dei propri vicini in indirizzo IP (almeno per quelli diretti), e tramite propagazione tra vicini è possibile raggiungere tutti i nodi dell'overlay.
 
-![](imgs/Pasted%20image%2020260225161523.png)
+![](imgs/Pasted%20image%2020260622221655.png)
 
-#### **Manutenzione dell’overlay**
+#### **Manutenzione dell'overlay**
 
-Per mantenere in vita la rete overlay:
+- Periodicamente ogni nodo effettua un **ping** dei propri vicini per verificarne l'attività.
+- Se un vicino cade e il numero di vicini scende sotto il minimo necessario, bisogna **reclutarne un altro**.
+- Ogni nuovo nodo che entra deve trovare dei vicini prima di poter aderire all'overlay.
 
-- i nodi eseguono periodicamente un **ping** per verificare se i vicini sono ancora attivi;
-    
-- se un nodo si disconnette, viene **ricostruito un nuovo collegamento** per mantenere la connettività;
-    
-- ogni nuovo nodo che entra deve essere **inizializzato**, cioè inserito correttamente nella struttura overlay.
-    
+#### **Adesione all'overlay non strutturato**
 
-#### **Tipologie di overlay**
+Il nuovo nodo cerca localmente sulla propria subnet IP qualcuno da reclutare come vicino, si auto-attribuisce un nick/indirizzo overlay, lo comunica ai vicini trovati: entra nella rete in modo completamente non strutturato, in base a chi si trovava nelle vicinanze IP.
 
-- **Overlay non strutturate**: un nuovo nodo sceglie in modo **casuale** alcuni vicini già esistenti.
-    
-- **Overlay strutturate**: i collegamenti seguono una **logica precisa** (es. struttura ad albero, anello o DHT).
-    
-- **Prossimità IP**: la vicinanza fisica o geografica **non è necessariamente considerata**, poiché i legami overlay sono logici.
-    
+#### **Adesione all'overlay strutturato**
+
+Bisogna trovare i vicini "giusti" in base al ruolo che si vuole assumere. Si riceve un overlay address in base alla posizione che si deve occupare. Ad esempio: se un nodo ha tutti i file immagine e sulla propria subnet IP trova un nodo dell'overlay che ha tutti i file di testo, non potrà eleggerlo come vicino. Quel nodo risponderà "chiedi ai miei vicini", e man mano il nuovo nodo si avvicinerà alla parte dell'overlay dove si trovano gli altri nodi con file di tipo immagine.
+
+> 📌 Nell'overlay **non strutturato** è più facile che i vicini di overlay siano anche vicini IP (trovati localmente). Nell'overlay **strutturato** invece la prossimità IP non viene considerata: si è vicini in base alla similitudine di contenuto/ruolo.
 
 ---
 
 ### **4. Overlay a livello applicativo**
 
-Le reti P2P operano **completamente nello strato di applicazione** del modello TCP/IP.  
-Questo offre una **straordinaria flessibilità di progettazione**, perché gli sviluppatori possono decidere liberamente:
+Le reti P2P operano **completamente nello strato di applicazione** del modello TCP/IP, e questo offre una straordinaria flessibilità: il progettista può scegliere liberamente topologia, tipi di messaggi, protocollo di comunicazione (TCP o UDP), e formato delle query.
 
-![](imgs/Pasted%20image%2020260225161540.png)
+![](imgs/Pasted%20image%2020260622221710.png)
 
-- la **topologia** della rete (maglia, anello, albero…);
-    
-- i **meccanismi di mantenimento** e aggiornamento dei nodi;
-    
-- il **tipo di messaggi** e di **protocollo di comunicazione** (basato su TCP o UDP);
-    
-- il **formato** e la **gestione delle query** tra i peer.
-    
-
-La rete fisica sottostante rimane **trasparente**, perché l’overlay si comporta come una rete logica indipendente.
+> 💡 Chi sviluppa applicazioni **sopra** l'overlay (si parla informalmente di "livello 8") può non sapere nulla dell'IP che sta sotto: per queste applicazioni l'overlay è il trasporto, e la rete fisica rimane trasparente.
 
 ---
 
 ### **5. Esempi di overlay nella pratica**
 
-Esempi di reti overlay reali o concettualmente simili:
+L'overlay non nasce con i sistemi P2P moderni: esistono esempi precedenti nella rete Internet tradizionale.
 
-- **DNS** – è una rete distribuita di server che risolvono nomi in indirizzi IP.
-    
-- **Router BGP** – stabiliscono collegamenti logici di _peering_ tra domini di rete.
-    
-- **CDN (Content Distribution Networks)** – distribuiscono contenuti web tramite server dislocati geograficamente.
-    
-- **Multicast a livello applicativo** – simula la trasmissione multicast anche dove non è supportata dall’IP nativo.
-    
-- **Applicazioni P2P** – come sistemi di file sharing o streaming distribuito.
+- **DNS** — può essere considerato una sorta di overlay: ogni server DNS ha un superiore gerarchico che è il suo "vicino" sulla gerarchia DNS, senza alcun rapporto con la sua prossimità IP.
 
-![](imgs/Pasted%20image%2020260225161630.png)
+- **Router BGP** — i router BGP si scambiano annunci di rotte; ciascuno può essere considerato vicino degli altri con cui si scambia gli annunci, ma questa vicinanza è una vicinanza di overlay, non ha nulla a che vedere con la vicinanza IP.
+
+- **Multicast applicativo** — overlay appositamente costruite per fare multicast senza usare gli indirizzi classe D. Non fa guadagnare performance come il multicast a livello IP (richiede comunque connessioni unicast), ma semplifica molto la scrittura di certi programmi e quindi è comunque molto utilizzato.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+- **Applicazioni P2P** — file sharing, streaming distribuito, calcolo distribuito (vedi sezioni successive).
 
 ---
 
 ### **6. Esempio pratico: condivisione di file P2P**
 
-Immaginiamo **Alice**, che usa un’applicazione P2P di file sharing:
+![](imgs/Pasted%20image%2020260622221807.png)
 
-1. Alice **avvia il client P2P** sul suo notebook.
-    
-2. Si **connette saltuariamente** a Internet, ottenendo ogni volta un nuovo indirizzo IP.
-    
-3. Registra il contenuto che vuole condividere (es. canzoni o documenti).
-    
-4. Cerca un file scrivendo “Hey Jude”.
-    
-5. Il programma mostra un elenco di **altri peer** che possiedono una copia del file.
-    
-6. Alice sceglie un peer, ad esempio **Roberto**, e scarica il file **direttamente dal suo computer**.
-    
-7. Mentre scarica, anche **altri utenti possono scaricare** parti dello stesso file dal computer di Alice.
-    
+Uno scenario tipico di file sharing P2P:
 
-Questo modello trasforma **ogni utente in un piccolo server di contenuti**, creando una rete di milioni di nodi che si scambiano dati simultaneamente.
+1. **Alice** attiva il client P2P sul suo computer, si connette a Internet ottenendo un indirizzo IP, e trova dei vicini sull'overlay.
+2. Alice **registra il proprio contenuto**: annuncia ai suoi vicini di che cosa dispone; l'annuncio viene propagato sull'overlay.
+3. Alice lancia una **query** sull'overlay chiedendo se qualcuno dispone del file "Hey Jude" dei Beatles.
+4. La richiesta viaggia per l'overlay tramite propagazione tra vicini fino a raggiungere **Roberto**, che ha il file.
+5. Roberto risponde comunicando la sua disponibilità ad Alice.
+6. **I due si scambiano gli indirizzi IP** per creare una **media session** — una connessione TCP diretta che **non usa l'overlay** — attraverso cui avviene il download del file.
+7. Mentre Alice scarica da Roberto, altri utenti possono aprire media session verso Alice per scaricare i file che lei condivide, generando una rete di flussi di upload incrociati.
+
+> 📌 L'overlay viene usato **solo per trovare il contenuto**. Il trasferimento effettivo avviene tramite **media session dirette tra indirizzi IP**, bypassando completamente l'overlay.
+
+Per un certo periodo si è pensato che questo meccanismo avrebbe **sostituito il download dai server** come modello di diffusione dei contenuti: immettendo contenuti su una rete P2P la velocità di propagazione è molto superiore rispetto a offrirli da un server web (che deve essere promosso, inserito nel DNS, ecc.).
 
 ---
 
-### **7. Software di condivisione P2P**
+### **7. Software di condivisione P2P e analogia Dropbox**
 
-Un tipico software P2P offre tre funzionalità principali:
+Un tipico software P2P simula una **cartella del file system** visibile agli altri utenti sull'overlay, offrendo tre funzionalità:
 
-1. **Server virtuale** – consente di aprire una directory nel proprio file system, accessibile agli altri utenti (simile a un server web).
-    
-2. **Client virtuale** – permette di copiare file dalle directory condivise di altri peer (come un browser web).
-    
-3. **Motore di ricerca distribuito** – consente di cercare contenuti per **parole chiave**, analogamente a Google, ma limitato ai nodi della rete.
-    
+1. **Server virtuale** – apre una directory condivisa accessibile agli altri peer.
+2. **Client virtuale** – permette di copiare file dalle directory condivise di altri peer.
+3. **Motore di ricerca distribuito** – consente di cercare contenuti per parole chiave tra i nodi della rete.
+
+> 💡 Se ognuno si limitasse a condividere file di cui ha disponibilità completa, un sistema del genere — come dimostra il grande successo di **Dropbox** — non sarebbe altro che un utile ausilio alla collaborazione a distanza. Il problema nasce quando si condividono file che non si ha il diritto di distribuire.
 
 ---
 
 ### **8. Problemi di copyright**
 
-L’uso dei sistemi P2P per la **condivisione di contenuti protetti da copyright** ha generato controversie legali su due fronti:
+L'uso dei sistemi P2P per la condivisione di contenuti protetti ha generato ampie controversie legali.
 
 #### **a. Violazione diretta**
 
-- Gli **utenti finali** che scaricano o condividono materiale protetto (musica, film, software) commettono direttamente la violazione.
-    
+L'utente che scarica dalla cartella di Alice una canzone che Alice detiene legalmente, ma che non avrebbe il diritto di scaricare (e che Alice non avrebbe il diritto di dargli), commette una **violazione diretta**. Alice a sua volta, pur avendo il DVD acquistato per visione privata, non ha il diritto di distribuirlo ad altri.
 
 #### **b. Violazione indiretta**
 
-Coinvolge chi, **senza violare direttamente il copyright**, contribuisce o trae vantaggio dalla violazione:
+- **Il sistema P2P di ricerca** può configurarsi come violazione indiretta: non trasferisce nulla (la media session avviene direttamente tra gli IP dei due utenti), ma supporta la ricerca e l'identificazione del contenuto senza verificare se chi lo pubblicizza ha il diritto di distribuirlo.
+- **Chi sviluppa e distribuisce il software** P2P che consente ad altri di distribuire contenuto su cui non hanno diritti è considerato contraffattore indiretto.
+- **Le compagnie di telecomunicazione** che consentono ai propri utenti di usare software P2P possono essere ritenute responsabili per **omesso controllo** (responsabilità oggettiva): hanno lasciato sviluppare da parte degli utenti l'utilizzo di software di ricerca che consentono lo stabilire di media session di trasferimento di materiale protetto.
 
-- **Contraffazione contributiva** → chi sapeva della violazione e ha **favorito o facilitato** l’atto (es. sviluppatore o gestore del sistema).
-    
-- **Contraffazione indiretta** → chi era in grado di **controllare i trasgressori diretti** (es. chi può disattivare account) ma **non lo ha fatto**, ottenendo **vantaggi economici** dalla violazione (più utenti, pubblicità, guadagni).
-    
+> ⚠️ In gran parte del mondo, Italia compresa, sono state approvate disposizioni di legge che distinguono **contraffattori contributivi** (chi facilitava direttamente la violazione) e **contraffattori indiretti** (chi era in grado di controllare i trasgressori diretti ma non lo ha fatto, ottenendo vantaggi economici).
 
 ---
 
 ### **9. Instant Messaging e P2P**
 
-Anche la **messaggistica istantanea (IM)** può basarsi su architetture P2P.  
-Esempio:
+L'**instant messaging** è un caso d'uso del P2P privo delle criticità legali del file sharing:
 
-1. Alice avvia il **client IM** sul suo PC.
-    
-2. Si connette a Internet e si **registra** su un sistema centrale.
-    
-3. Apprende dall’elenco di amici che **Roberto è online**.
-    
-4. Stabilisce una **connessione TCP diretta** con lui.
-    
-5. I due **chattano direttamente**, scambiandosi testo, voce o video.
-    
+1. Alice avvia il client IM, che si registra sull'overlay trovando dei vicini.
+2. Invia messaggi sull'overlay per avere informazioni sulla **presenza in rete** dei propri amici in quel momento.
+3. Scopre che Roberto è attivo e avvia una **connessione TCP diretta** con lui per la chat.
 
-Molti sistemi VoIP moderni, come **Skype**, si basano su un’architettura **ibrida P2P**, in cui il traffico multimediale passa direttamente tra i peer.
+Siccome non c'è trasferimento di file, il sistema è un'applicazione di chat interattiva P2P estremamente flessibile, che usa l'overlay solo per scoprire la presenza degli amici.
+
+**Skype** è l'esempio più noto: con l'aiuto di **super peer** (nodi con capacità maggiore) cerca sull'overlay gli amici tramite i loro Nick Skype. Quando uno è in linea, invia un invite (richiesta di connessione telefonica) e parte una **media session** per il dialogo diretto.
 
 ---
 
 ### **10. Calcolo distribuito P2P**
 
-Un altro impiego dei sistemi P2P è il **calcolo distribuito**, cioè l’unione della potenza di molti computer sparsi nel mondo per risolvere problemi scientifici complessi.
+Un ulteriore utilizzo dell'overlay è la **delega di compiti di calcolo distribuito**: un nodo annuncia la propria disponibilità di cicli macchina sull'overlay; un sito centrale (o super peer) riceve l'annuncio e trasmette un compito da elaborare.
 
 Esempio emblematico: **SETI@home**
 
 - Progetto per la **ricerca di segnali extraterrestri** provenienti da radiotelescopi.
-    
-- Un **server centrale** divide i dati in **blocchi di lavoro** (circa 300 KB ciascuno).
-    
-- Gli utenti scaricano un **client** che lavora in background:
-    
-    1. scarica un blocco di dati;
-        
-    2. esegue calcoli di analisi (trasformate FFT);
-        
-    3. invia i risultati al server e riceve un nuovo blocco.
-        
+- Il client in background esegue una **FFT (Fast Fourier Transform)** su blocchi di dati ricevuti dai radiotelescopi, alla ricerca di regolarità che indicherebbero una trasmissione proveniente da un pianeta abitato da una specie intelligente.
+- In questo modo migliaia di computer domestici collaborano come un **supercomputer globale**, analizzando una quantità di dati molto maggiore di quella possibile con un supercomputer centralizzato.
 
-In questo modo, migliaia di computer domestici collaborano come un **supercomputer globale**.
-
----
-
-### **11. Conclusione**
-
-I sistemi **Peer-to-Peer** rappresentano una delle evoluzioni più significative nella storia di Internet:  
-hanno dimostrato che una rete **senza centro** può essere **efficiente, scalabile e resiliente**.
-
-Oggi i principi del P2P sono alla base di:
-
-- **reti di distribuzione dei contenuti (CDN)**,
-    
-- **tecnologie di blockchain e criptovalute**,
-    
-- **piattaforme di streaming e comunicazione diretta**.
-    
-
-Il futuro della rete continua a muoversi verso questa logica **distribuita e collaborativa**, in cui ogni nodo contribuisce con una parte delle proprie risorse per costruire un sistema globale più potente.
+> ✅ I sistemi P2P dimostrano che una rete senza centro può essere efficiente, scalabile e resiliente, sfruttando le risorse distribuite degli utenti per obiettivi collettivi che vanno dalla condivisione di contenuti al calcolo scientifico.

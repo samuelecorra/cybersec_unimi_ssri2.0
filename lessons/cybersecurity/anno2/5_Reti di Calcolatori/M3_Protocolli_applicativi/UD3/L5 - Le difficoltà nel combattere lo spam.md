@@ -2,203 +2,153 @@
 
 ---
 
-### **1. Introduzione**
+### **1. Perché il blacklisting non basta**
 
-Dopo aver visto come nasce e si diffonde lo spam, questa lezione si concentra sulle **strategie di difesa** adottate nel tempo.  
-Nonostante decenni di tentativi, **eliminare completamente lo spam è impossibile**: ogni contromisura tecnica ha generato **una reazione da parte degli spammer**, in una vera e propria corsa agli armamenti digitali.
+Ricapitolando quanto visto nella lezione precedente, gli spammer riescono ad aggirare il problema del relay — nonostante i server SMTP siano oggi configurati più rigorosamente e cerchino di fare blacklisting su chi manda messaggi — attraverso due tecniche fondamentali:
 
----
+1. **No relay**: installare un proprio server SMTP su una macchina con indirizzo IP dinamico, sempre diverso.
+2. **Open proxy**: utilizzare un proxy per l'invio dei messaggi SMTP; poiché il proxy trasmette anche traffico legittimo, non è possibile escluderlo totalmente con il blacklisting.
 
-### **2. Tecniche anti-spam iniziali**
-
-#### **Blocco degli indirizzi IP dinamici**
-
-Una delle prime idee per contrastare lo spam di tipo **“no relay”** (cioè inviato direttamente dagli host degli spammer) è stata quella di **bloccare gli indirizzi IP dinamici**.  
-L’idea era semplice: se i provider impedissero ai client con IP dinamico di inviare posta, solo i server autorizzati potrebbero spedire messaggi.
-
-Tuttavia, questo metodo è **poco pratico** perché:
-
-- non esiste un modo semplice per riconoscere se un indirizzo IP è dinamico o statico;
-    
-- molti utenti legittimi usano connessioni dinamiche;
-    
-- il blocco risulterebbe troppo esteso e penalizzante.
-    
+> ⚠️ In presenza di open proxy e di indirizzamento dinamico (no relay), **un blacklisting generalizzato è impossibile**: i server di destinazione non riescono a bloccare gli spammer senza rischiare di bloccare anche traffico legittimo.
 
 ---
 
-### **3. Honeypot: le trappole per spammer**
+### **2. Honeypot: trappole per spammer**
 
-Una tecnica più raffinata è quella delle **honeypot** (letteralmente “barattoli di miele”), ossia **finti server SMTP** o **caselle e-mail inesistenti**, create appositamente per attirare gli spammer.
+Una tecnica complementare è quella degli **honeypot** (letteralmente "barattoli di miele"): finti server SMTP e **finte caselle di posta** creati appositamente per attirare gli spammer, in modo da:
 
-Il loro scopo è:
+- catturare gli **indirizzi IP dei server SMTP** usati dagli spammer;
+- rendere agli spammer la vita più difficile in termini di sforzo, obbligandoli a "sprecare" messaggi su caselle inesistenti.
 
-- intercettare i messaggi di spam;
-    
-- **registrare gli indirizzi IP dei mittenti**;
-    
-- aggiornare le **blacklist** o fornire prove per azioni legali.
-    
-
-Tuttavia, la **diffusione lenta delle segnalazioni** raccolte dalle honeypot le rende **inefficaci in tempo reale**: sono più utili per indagini e azioni legali che per la difesa immediata.
+> ⚠️ L'honeypot è però una tecnica per identificare il **singolo spammer dopo il fatto**, non per impedire la propagazione dello spam in tempo reale. Per questo motivo deve essere complementata con tecniche diverse.
 
 ---
 
-### **4. Filtraggio orientato al contenuto**
+### **3. Il filtraggio basato sul contenuto**
 
-Poiché i metodi basati su IP si rivelarono inefficaci, nei primi anni 2000 la lotta allo spam si spostò sul **contenuto dei messaggi**.  
-L’idea: identificare lo spam non per _chi lo invia_, ma per _cosa contiene_.
+Poiché il blacklisting sull'identità del mittente si rivelò inefficace, nella **seconda metà degli anni 2000** prese piede un approccio radicalmente diverso: identificare lo spam non per *chi lo invia*, ma per *cosa contiene*.
 
-#### **Funzionamento del filtraggio collaborativo**
+#### **Filtraggio collaborativo per hash**
 
-- Gli spammer spesso inviano **lo stesso messaggio a milioni di utenti**.
-    
-- Se un certo numero di utenti segnala un messaggio come spam (spostandolo nella cartella “Posta indesiderata”), il suo **hash MD5** viene condiviso tra i server SMTP.
-    
-- Quando arriva un nuovo messaggio con lo stesso hash, il server lo riconosce e lo **scarta automaticamente**.
-    
-
-Questo metodo si basa sul principio della **collaborazione tra utenti e server**, analogo ai meccanismi usati per aggiornare gli antivirus.
+Lo spammer invia lo stesso messaggio a milioni di destinatari. Quando un utente o un amministratore riconosce un messaggio di spam, viene calcolato l'**hash** (una codifica abbreviata) di quel messaggio e inviato a tutti gli altri server di posta — un po' come si fa con i database degli antivirus. I server SMTP che ricevono un messaggio possono calcolarne l'hash, confrontarlo con gli hash noti di messaggi spam e scartarlo se coincide.
 
 ---
 
-### **5. SpamAssassin**
+### **4. SpamAssassin**
 
-Uno dei software più diffusi per il filtraggio antispam è **SpamAssassin**, oggi considerato una **soluzione di riferimento** a livello mondiale.
+Tra i programmi più noti di filtraggio dello spam basato sul contenuto c'è **SpamAssassin**, un software **open source** che esegue una serie di analisi sul testo del messaggio e utilizza **due sorgenti di giudizio** in combinazione:
 
-#### **Come funziona**
+1. **Blacklisting automatico**: scarica automaticamente dalla rete delle liste di MTA e server di posta non affidabili e confronta l'indirizzo IP mittente con queste liste.
+2. **Analisi del contenuto**: confronta il messaggio con gli hash di messaggi spam disponibili sulla rete collaborativa **Vipul's Razor**.
 
-- Analizza sia l’**intestazione** che il **contenuto** dei messaggi.
-    
-- Usa **regole euristiche**, **blacklist pubbliche** e **analisi statistiche**.
-    
-- A ogni messaggio assegna un **punteggio (“score”)** basato sulla probabilità che sia spam.
-    
-- Se il punteggio supera una certa soglia (es. 6.0), il messaggio viene contrassegnato o spostato nella posta indesiderata.
-    
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-Esempio di intestazione aggiunta da SpamAssassin:
+> 📌 **Vipul's Razor** è una rete distribuita e collaborativa di identificazione dello spam grazie alla quale è stato costruito un catalogo costantemente aggiornato dei messaggi di spam in circolazione. SpamAssassin si basa su questa rete per gli esempi di spam.
+
+Combinando entrambi i criteri, SpamAssassin assegna a ogni messaggio una **probabilità di essere spam** e consente l'esecuzione di filtri che scartano i messaggi al di sopra di una certa soglia.
+
+Ecco un esempio dell'intestazione aggiunta da SpamAssassin a un messaggio analizzato:
 
 ```
-X-Spam-Status: No, hits=3.8 required=6.0
+spamassassin: 3.2.1. perlscan: 1.25st.
+Clear:RC:0(159.149.10.22):SA:0(3.8/6.0):.
+Processed in 2.340732 secs); 09 Dec 2008 00:00:03
+-0000 X-Spam-Status: No, hits=3.8 required=6.0
 ```
 
-In questo caso, il messaggio **non è stato classificato come spam** (3.8 < 6.0).
+Il campo `hits=3.8` indica il punteggio spam del messaggio; `required=6.0` è la soglia. Poiché 3.8 < 6.0, il messaggio **non è classificato come spam**.
 
-SpamAssassin sfrutta anche **Vipul’s Razor**, una **rete distribuita di utenti e server** che condividono in tempo reale hash e metadati dei messaggi di spam conosciuti, aggiornando continuamente il database globale.
+> 💡 SpamAssassin può essere installato **anche sui client di posta**, non solo sui server. In questo modo si libera il server SMTP dallo sforzo di identificare lo spam: lo spam viene recapitato all'utente, ma è il suo client a mostrargli solo i messaggi al di sotto della soglia di probabilità.
 
 ---
 
-### **6. Il teorema di Bayes applicato allo spam**
+### **5. Il filtro bayesiano**
 
-Un altro approccio molto influente è quello **bayesiano**, proposto da **Paul Graham**.  
-Si basa su un’idea semplice ma potente: stimare la **probabilità che un messaggio sia spam** in base alle **parole che contiene**.
+Una variante importante della tecnica basata sulla similarità è il **filtro bayesiano**, proposto da **Paul Graham**. Invece di confrontare il messaggio con un campione noto, esamina il **vocabolario usato** nel messaggio. È anche una buona occasione per ripassare il teorema di Bayes.
 
-#### **a. L’idea base**
+#### **Impostazione del problema**
 
-Ogni volta che un utente riceve una mail, il filtro analizza le parole e calcola:
+- **Osservazione O**: un messaggio contiene una certa parola (es. "sex").
+- **Ipotesi H**: il messaggio è spam.
 
-- quanto spesso appaiono nei messaggi di spam (`P(O|H)`),
-    
-- quanto spesso appaiono nei messaggi legittimi (`P(O|¬H)`).
-    
+Vogliamo conoscere $P(H|O)$: la probabilità che il messaggio sia spam sapendo che contiene la parola "sex". Questa probabilità non è facile da stimare direttamente, ma possiamo ricavarla per via bayesiana.
 
-Il filtro poi decide se classificare il messaggio come spam valutando **P(H|O)**, cioè la probabilità che il messaggio sia spam dato che contiene quella parola.
+#### **Formula di Bayes applicata**
 
-#### **b. Formula di Bayes**
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-$$  
-P(H|O) = \frac{P(O|H) \cdot P(H)}{P(O)}  
-$$
+$$P(H|O) = \frac{P(O|H) \cdot P(H)}{P(O)}$$
 
 dove:
 
-- $P(H)$ è la probabilità generale che un messaggio sia spam (stimata dal numero di messaggi nella cartella “Junk Mail”);
-    
-- $P(O|H)$ è la probabilità che uno spam contenga una parola specifica (“sex”, “free”, “win”...);
-    
-- $P(O)$ è la probabilità complessiva che la parola appaia nei messaggi ricevuti.
-    
+- $P(O|H)$ = probabilità che uno **spam** contenga la parola "sex" → si stima guardando la cartella **Junk Mail** dell'utente e contando quanti messaggi spam contengono quella parola sul totale dei messaggi spam.
+- $P(H)$ = probabilità generale che **un messaggio qualsiasi sia spam** → si stima come rapporto tra la dimensione della cartella Junk Mail e il totale dei messaggi ricevuti.
+- $P(O)$ = probabilità che **un messaggio qualsiasi** (spam o no) contenga la parola "sex" → si stima contando quanti messaggi in totale (spam o legittimi) ricevuti dall'utente contengono quella parola.
 
-#### **c. Efficacia del metodo**
+#### **Personalizzazione e precisione**
 
-Paul Graham osservò che il filtro bayesiano **perde solo circa 5 messaggi di spam ogni 1000**, risultando **molto più preciso** dei sistemi basati su regole statiche.
+> 📌 Tutte e tre le stime vengono calcolate **sulle caselle di posta dello specifico utente**: sono stime personalizzate, non globali. Questo consente di ottenere un classificatore ad alta precisione adattato alle abitudini di ricezione di quel singolo utente.
+
+Le esperienze di Graham mostrano che il filtro **perde solo 5 messaggi di spam ogni 1000**, raggiungendo già dalle prime implementazioni una precisione **superiore al 95%**.
 
 ---
 
-### **7. Le contromisure degli spammer**
-
-Gli spammer, a loro volta, hanno imparato a **ingannare i filtri intelligenti**.  
-Alcune tecniche comuni:
+### **6. Le contromisure degli spammer**
 
 #### **a. List splitting**
 
-Personalizzare il contenuto dello spam per ogni destinatario, cambiando parole o frasi, in modo che i messaggi **non abbiano più lo stesso hash MD5**.
+Gli spammer hanno intuito la debolezza del filtraggio per hash: se il messaggio viene leggermente modificato, l'hash cambia e il filtro non lo riconosce. Usano quindi degli **scrambler automatici** — programmi che variano automaticamente il messaggio usando la tecnica del **list splitting**: rendere ogni copia del messaggio leggermente diversa per ogni destinatario.
+
+> 💡 Contro questa tecnica il filtro bayesiano è più robusto del filtraggio per hash: anche se il messaggio viene scramblato, **le parole usate non cambiano molto**, e quindi il classificatore bayesiano continua a identificare lo spam correttamente, mentre l'hash sarebbe già diverso.
 
 #### **b. Spam grafico**
 
-Convertire il testo dello spam in **immagini** (formato PNG o GIF) che contengono le parole del messaggio.  
-Poiché un filtro testuale non può “leggere” un’immagine, il messaggio **sfugge al riconoscimento**.
+Gli spammer hanno poi intuito il pericolo delle tecniche bayesiane e hanno iniziato a usare le cosiddette **tecniche grafiche**: il messaggio viene nascosto all'interno di un'immagine (il messaggio è un file HTML che contiene un'immagine incorporata in cui compaiono le parole).
 
-Questa tecnica sfrutta una debolezza simile a quella dei **CAPTCHA**:
+Ci si potrebbe chiedere perché non si applichi l'OCR (riconoscimento ottico dei caratteri) per estrarre il testo dall'immagine e poi applicare il filtro bayesiano. La risposta è duplice:
 
-> ciò che è facile da leggere per un essere umano è difficile da interpretare per un software.
+- **Non è sempre facile**: oggi moltissimi siti web richiedono agli utenti di digitare parole graficamente deformate (CAPTCHA), proprio perché gli algoritmi di riconoscimento dei caratteri disponibili per i computer non sono bravi quanto gli esseri umani a leggere testo da immagini perturbate.
+- **È troppo lento**: anche quando è possibile, il riconoscimento di caratteri su immagini richiede così tanto tempo che il processamento di un singolo messaggio diventa incompatibile con i grandi volumi di posta che i server SMTP di grandi dimensioni devono gestire.
 
-Fortunatamente, **creare immagini personalizzate per ogni destinatario** è complesso e costoso, per cui la tecnica non è stata applicata su larga scala.
-
----
-
-### **8. Difese contro la raccolta di indirizzi**
-
-Un modo per ridurre lo spam è **limitare la disponibilità pubblica degli indirizzi e-mail**, togliendo agli spammer la loro “benzina”.
-
-Gli spammer usano programmi chiamati **harvester** o **spambot** che scansionano il web alla ricerca di indirizzi di posta.  
-Per difendersi, molti siti adottano strategie semplici ma utili:
-
-#### **a. Offuscamento del testo**
-
-Scrivere gli indirizzi in forma non standard:
-
-```
-ernesto.damiani AT unimi DOT it
-```
-
-Tuttavia, gli spambot moderni riescono facilmente a riconoscere queste sostituzioni.
-
-#### **b. Indirizzi come immagini**
-
-Pubblicare l’indirizzo e-mail **sotto forma di immagine** invece che testo.  
-Funziona contro i bot, ma è **scomodo per gli utenti** (non possono copiare l’indirizzo).
-
-#### **c. Codifica HTML**
-
-Codificare l’indirizzo carattere per carattere usando i codici HTML:
-
-```
-someone@example.com → &#115;&#111;&#109;&#101;&#111;&#110;&#101;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;
-```
-
-Ma anche questo metodo è facilmente decodificabile, perché i codici corrispondono esattamente a lettere ASCII note.
-
-#### **d. Tecniche crittografiche**
-
-Le soluzioni più avanzate prevedono la **cifratura dell’indirizzo e-mail**, che viene **decifrato solo tramite uno script** quando l’utente lo utilizza.  
-In questo modo l’indirizzo **non compare mai in chiaro** nel codice della pagina web.
+> ⚠️ Lo spam grafico rimane dunque molto difficile da gestire: un anti-spam grafico incontra notevoli difficoltà prestazionali a gestire le moli di posta che i grandi server di posta devono smistare.
 
 ---
 
-### **9. Conclusione**
+### **7. Difese contro la raccolta di indirizzi (harvesting)**
 
-La lotta allo spam è un **gioco a somma zero**: ogni nuova difesa genera una nuova strategia di attacco.  
-I sistemi moderni combinano più livelli di protezione:
+Un'altra linea di difesa efficace — che agisce a monte — è rendere più **difficile e costosa** la raccolta degli indirizzi email da parte degli spammer.
 
-- **filtri bayesiani**,
-    
-- **reti collaborative** come SpamAssassin e Razor,
-    
-- **analisi comportamentale**,
-    
-- **autenticazioni DNS** come SPF, DKIM e DMARC.
-    
+Gli indirizzi dei server SMTP sono facilmente reperibili su Internet tramite i record MX del DNS; ma gli indirizzi dei **destinatari** non lo sono altrettanto: hanno un **costo di mercato** di alcuni dollari per indirizzo verificato. Se rendiamo più costosa la raccolta degli indirizzi, lo spammer — come qualsiasi altro fenomeno regolato da interessi economici — troverà meno conveniente organizzare la propria campagna.
 
-Nonostante tutto, lo spam rimane una delle **principali sfide aperte** della sicurezza Internet, simbolo di come **problemi semplici di protocollo** possano generare **conseguenze globali**.
+Le tecniche per rendere difficile l'**harvesting** automatico degli indirizzi sono:
+
+#### **a. Offuscamento testuale**
+
+Scrivere l'indirizzo in forma non standard (`at` al posto di `@`, `dot` al posto di `.`). Non è sufficiente: gli harvester moderni riconoscono facilmente queste sostituzioni.
+
+#### **b. Codifica ASCII carattere per carattere**
+
+Scrivere direttamente i codici ASCII dei caratteri che compongono l'indirizzo:
+
+```
+someone@example.com →
+&#115;&#111;&#109;&#101;&#111;&#110;&#101;&#64;&#101;
+&#120;
+&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;
+```
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Anche questa tecnica è però facilmente preda degli harvester: ogni carattere corrisponde esattamente a un codice secondo una tabella ASCII ben nota, quindi è banale scrivere un programma che la decodifichi.
+
+#### **c. Tecniche crittografiche**
+
+Le soluzioni più robuste prevedono la **cifratura dell'indirizzo email**: l'indirizzo viene cifrato e pubblicato in forma crittata; viene decifrato da uno script **solo al momento in cui viene effettivamente usato**. In questo modo l'indirizzo non compare mai in chiaro nella pagina.
+
+> 💡 Il compito qui non è impedire a un essere umano di decifrarlo, ma rendere difficile l'applicazione di tecniche di raccolta automatica. Siccome il decrittaggio — sia pure con chiave pubblica nota a tutti — avviene solo nel momento d'uso, si rende più costoso per lo spammer gestire la raccolta di indirizzi in forma crittata, poi decrittarli prima dell'invio, e quindi si rende più difficile e costosa la costruzione di grandi campagne di spam.
+
+---
+
+### **8. Conclusione**
+
+La lotta allo spam è un **gioco a somma zero**: ogni nuova difesa genera una nuova strategia di attacco. I sistemi moderni combinano più livelli di protezione — filtri bayesiani, reti collaborative come SpamAssassin e Vipul's Razor, protezione degli indirizzi, autenticazioni DNS come SPF e DKIM — ma lo spam rimane una delle **principali sfide aperte** della sicurezza Internet, simbolo di come problemi strutturali di protocollo possano generare conseguenze globali.

@@ -2,131 +2,92 @@
 
 ---
 
-### **1. Introduzione**
+### **1. Il problema della gestione di rete**
 
-Le reti moderne sono costituite da **centinaia o migliaia di componenti**, sia **hardware** (router, switch, server, terminali) sia **software** (servizi, applicazioni, protocolli), che interagiscono tra loro in modo continuo e complesso.  
-Per garantire che un sistema così articolato funzioni correttamente e con **costi di esercizio contenuti**, è necessario un **processo di gestione della rete** ben strutturato.
+Un sistema autonomo comprende, come abbiamo visto nel modulo 2, moltissimi componenti hardware — macchine host, router, dispositivi di vario tipo — che devono interagire tra loro per far funzionare correttamente Internet.
 
-La **gestione delle reti** comprende tutte le attività di:
+Il concetto di **gestire una rete** di questo tipo non è soltanto un problema di avere dei protocolli per comunicare con i dispositivi e per modificarne la configurazione: è un problema molto più complesso, di cui l'aspetto tecnologico dei protocolli e delle tecniche di interrogazione e modifica degli stati degli apparati è **soltanto un lato**.
 
-- **sviluppo**, **integrazione** e **coordinamento** di risorse fisiche e umane;
-    
-- **controllo**, **interrogazione**, **configurazione** e **valutazione** dei componenti di una rete IP;
-    
-- **monitoraggio** continuo per prevenire guasti e degradazioni delle prestazioni.
-    
-
-In sintesi, gestire una rete significa **mantenere in equilibrio un ecosistema tecnologico complesso**, assicurando funzionalità, efficienza e sicurezza.
+L'intero insieme di **risorse umane**, **aspetti organizzativi** e **aspetti tecnologici** ha un unico obiettivo: consentire alla rete di funzionare a un **costo contenuto** e comunque sufficiente per assicurarne il **successo commerciale**.
 
 ---
 
 ### **2. Aree funzionali della gestione di rete**
 
-La gestione di una rete si articola in **cinque aree funzionali principali**, ciascuna con obiettivi e strumenti specifici.
+Chi ha esperienza di gestione della rete come parte del proprio lavoro sa bene che gestire una rete coinvolge varie aree funzionali, ognuna con propri protocolli e proprie figure professionali:
 
 #### **a. Gestione delle risorse**
 
-Riguarda l’**inventario e la supervisione** di tutte le risorse fisiche e logiche presenti in rete:  
-dispositivi, software, licenze, indirizzi IP, connessioni e capacità operative.
+Inventario e supervisione di tutte le risorse fisiche e logiche: dispositivi, software, licenze, indirizzi IP, connessioni e capacità operative.
 
 #### **b. Gestione della sicurezza**
 
-Controlla l’**accesso alle risorse di rete** e tutela l’integrità dei dati e dei dispositivi.  
-Include l’autenticazione degli utenti, la definizione dei permessi e la protezione da intrusioni o attacchi.
+Controllo dell'accesso alle risorse di rete e tutela dell'integrità dei dati e dei dispositivi. Include autenticazione degli utenti, definizione dei permessi e protezione da intrusioni.
 
 #### **c. Gestione delle prestazioni**
 
-Analizza e ottimizza i **parametri di efficienza** della rete: banda disponibile, latenza, throughput, tassi di errore, tempi di risposta.  
-Lo scopo è **identificare colli di bottiglia** e migliorare la qualità complessiva del servizio (QoS).
+Analisi e ottimizzazione dei parametri di efficienza: banda disponibile, latenza, throughput, tassi di errore, tempi di risposta. Lo scopo è identificare colli di bottiglia e migliorare la qualità del servizio.
 
 #### **d. Gestione delle configurazioni**
 
-Si occupa della **definizione, modifica e distribuzione** delle configurazioni di rete.  
-Permette di mantenere un ambiente coerente anche in presenza di aggiornamenti o nuove installazioni.
+Definizione, modifica e distribuzione delle configurazioni di rete per mantenere un ambiente coerente anche in presenza di aggiornamenti.
 
-#### **e. Gestione dei guasti**
+#### **e. Interventi in caso di guasti**
 
-È l’area dedicata al **rilevamento, diagnosi e risoluzione** dei problemi.  
-Un sistema di gestione efficiente deve:
-
-- identificare rapidamente un guasto;
-    
-- determinarne la causa;
-    
-- e, se possibile, **automatizzare il ripristino del servizio**.
-    
+Rilevamento, diagnosi e risoluzione dei problemi. Un sistema efficiente deve identificare rapidamente il guasto, determinarne la causa e — se possibile — automatizzare il ripristino del servizio.
 
 ---
 
-### **3. La MIB: Management Information Base**
+### **3. L'orientamento agli oggetti nella gestione di rete**
 
-Ogni dispositivo gestito (router, switch, host, ecc.) contiene una serie di **oggetti gestiti**, cioè **parametri e variabili di stato** che descrivono il suo funzionamento.
+L'idea di fondo che sta alla base della gestione della rete è l'**orientamento agli oggetti**.
+
+I protocolli di gestione non mandano messaggi generici: mandano lo **stato di oggetti**. Gli oggetti corrispondono a dispositivi o a **parti di dispositivi** di rete — l'unità più fine è quindi un "oggetto gestibile" che può essere una parte di un singolo apparato, non necessariamente l'intero dispositivo.
+
+Tutti questi oggetti sono rappresentati esplicitamente con l'insieme dei loro **attributi di configurazione**. Le azioni che noi compiamo su di essi per gestire la rete sono **cambiamenti di stato** che andiamo a comandare. Non mandiamo mai messaggi generici: ci riferiamo sempre a oggetti specifici.
+
+---
+
+### **4. La MIB: Management Information Base**
+
+Dove sono memorizzate le rappresentazioni degli oggetti che compongono la rete?
 
 ![](imgs/Pasted%20image%2020260225163755.png)
 
-Tutti questi dati sono raccolti all’interno di una **MIB (Management Information Base)**, una vera e propria **base dati gerarchica** usata per rappresentare le informazioni di gestione di rete.
+Gli oggetti fisici sono i dispositivi reali. Le loro **rappresentazioni** sono **righe (entry) in un database distribuito** chiamato **MIB (Management Information Base)**.
 
-La MIB consente ai sistemi di monitoraggio di:
-
-- **leggere lo stato** di ciascun dispositivo (es. traffico, errori, connessioni attive);
-    
-- **modificare parametri operativi** tramite protocolli di gestione come SNMP.
-    
+> 📌 Non esiste un unico punto centralizzato in un sistema autonomo in cui è memorizzato il MIB di quel sistema. I vari dispositivi mantengono ognuno il proprio stato e lo stato delle proprie parti. La MIB è quindi un **database partizionato**, distribuito tra i vari dispositivi della rete.
 
 ---
 
-### **4. Il processo di gestione**
+### **5. Il processo di gestione**
 
-L’intero ciclo di gestione può essere rappresentato come una **sequenza di fasi iterative**:
+L'intero ciclo di gestione si basa su due primitive fondamentali — **GET** e **SET** — applicate agli oggetti della MIB:
 
 ![](imgs/Pasted%20image%2020260225163812.png)
 
-1. **Raccolta dati** dalle periferiche di rete (tramite agenti SNMP o altri protocolli).
-    
-2. **Analisi dei dati raccolti**, per individuare anomalie o inefficienze.
-    
-3. **Configurazione automatica o manuale** dei dispositivi, in base ai risultati dell’analisi.
-    
-4. **Intervento umano**, se necessario, per decisioni strategiche o manutenzioni critiche.
-    
-5. **Aggiornamento delle configurazioni**, per mantenere la rete coerente e documentata.
-    
+1. **Raccolta dati** (GET): lettura dello stato dei vari oggetti nei dispositivi.
+2. **Analisi dei dati**: rilevazione dei casi in cui è necessario intervenire.
+3. **Intervento** (SET): se è rilevata un'anomalia, si modificano gli stati degli oggetti inviando messaggi di set.
+4. **Monitoraggio continuo**: altrimenti si rimane nel loop di lettura e acquisizione dei dati di stato.
 
-Questo processo chiude un ciclo continuo di **osservazione → valutazione → intervento**, che costituisce la base della gestione automatizzata delle reti moderne.
+> ✅ Il processo è quindi un ciclo iterativo: **GET → analisi → SET (se necessario) → ritorno al GET**.
 
 ---
 
-### **5. Il protocollo CMIP**
+### **6. Il protocollo CMIP**
 
-Oltre a SNMP, esiste anche un altro protocollo storico di gestione: **CMIP (Common Management Information Protocol)**.
+Negli anni '80 fu proposto un protocollo per fare il get and set degli stati dei dispositivi di rete, con l'ambizione di diventare **uno standard mondiale**: fu presentato all'**ISO (International Standard Organization)** e si chiamava **CMIP (Common Management Information Protocol)**.
 
-#### **Caratteristiche principali:**
+CMIP fu molto importante perché fornì le **idee di base** che sono alla radice di tutta la gestione di rete moderna:
 
-- è un protocollo **ISO-standard** per il **monitoraggio e controllo** di reti conformi agli standard OSI;
-    
-- definisce un insieme di **operazioni generali** per il recupero e la modifica di informazioni di gestione;
-    
-- fu progettato negli **anni ’80** come **standard universale** di network management.
-    
+1. L'idea che i protocolli di gestione fossero **orientati agli oggetti**.
+2. L'idea che le principali primitive fossero di tipo **GET e SET**.
 
-#### **Motivo del successo limitato**
-
-Nonostante la sua solidità teorica, CMIP non ebbe un’ampia diffusione a causa di:
-
-- **complessità elevata** di implementazione;
-    
-- **sviluppo troppo lento** rispetto all’evoluzione pratica di Internet;
-    
-- maggiore **leggerezza e diffusione di SNMP**, che ne prese il posto come standard de facto.
-    
+Nonostante questo contributo concettuale fondamentale, CMIP **non è mai diventato un prodotto di successo**. I prodotti di successo nella gestione di rete si basano su protocolli diversi che vedremo nelle prossime lezioni.
 
 ---
 
-### **6. Conclusione**
+### **7. Conclusione**
 
-La gestione delle reti è una disciplina fondamentale per mantenere in efficienza i sistemi informatici distribuiti.  
-Ogni rete moderna richiede **monitoraggio continuo, configurazioni coerenti e sicurezza costante**.
-
-Protocolli come **SNMP** e strutture come la **MIB** rappresentano gli strumenti chiave che permettono agli amministratori di controllare **migliaia di dispositivi da un’unica postazione**, riducendo costi e tempi di intervento.
-
-Capire questi principi è la base per comprendere come funziona **l’amministrazione remota** delle infrastrutture di rete globali.
+La gestione delle reti è una disciplina che integra risorse umane, aspetti organizzativi e tecnologie di protocollo. Il paradigma orientato agli oggetti — con le sue primitive GET e SET applicate a una MIB distribuita — è il fondamento concettuale su cui si basano tutti i protocolli di network management moderni, da CMIP (storico) a SNMP (standard de facto).
