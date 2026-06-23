@@ -15,7 +15,7 @@ La MIB SNMP si basa su **due costrutti fondamentali**:
 
 Il costrutto `MODULE-IDENTITY` dichiara il nome e le informazioni anagrafiche di un modulo MIB. Come si vede dall'esempio, contiene non solo una descrizione e i numeri di revisione, ma in molti casi anche le **informazioni di contatto** di chi lo ha definito.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260623140824.png)
 
 Esempio tratto dal modulo **ipMIB**:
 
@@ -45,7 +45,7 @@ ipMIB MODULE-IDENTITY
 
 Consideriamo un modulo per la gestione dei pacchetti UDP entranti in un dispositivo tipo router. Gli oggetti del modulo hanno ciascuno un OID, un nome, un tipo e la propria semantica. Quasi tutti sono contatori a 32 bit (`Counter32`), tranne l'ultimo che è una `SEQUENCE` (a sua volta composta da sotto-elementi più semplici).
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260623140838.png)
 
 | OID | Nome | Tipo | Significato |
 |---|---|---|---|
@@ -65,7 +65,7 @@ Tutti questi oggetti danno origine a un database che contiene lo stato di quel d
 
 Gli OID vengono assegnati attraverso una **struttura gerarchica ad albero**: i vari moduli sono composti di oggetti; alcuni oggetti possono essere composti di oggetti più semplici. Ad ogni biforcazione dell'albero viene attribuito un **nome** e un **numero**.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260623140951.png)
 
 Esempio: `1.3.6.1.2.1.7.1`
 
@@ -88,7 +88,7 @@ Esempio: `1.3.6.1.2.1.7.1`
 
 Una volta compresa la struttura dei dati di stato, la domanda è: come vi si accede dall'esterno?
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260623141114.png)
 
 SNMP prevede due modalità:
 
@@ -105,8 +105,6 @@ Soprattutto ai fini di **allarme** — cioè per sollecitare l'intervento su un 
 ### **6. Software di gestione di rete**
 
 Al giorno d'oggi esistono molte implementazioni SNMP da parte dei produttori di apparati di rete, corredate da una **interfaccia grafica** per l'amministratore. Per l'amministratore non è necessario conoscere i dettagli della MIB o del protocollo sottostante: questi programmi gestionali **nascondono i dettagli di SNMP** mettendo l'operatore in grado di intervenire sui dispositivi problematici o di cambiare le configurazioni quando serve.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 Esempi:
 

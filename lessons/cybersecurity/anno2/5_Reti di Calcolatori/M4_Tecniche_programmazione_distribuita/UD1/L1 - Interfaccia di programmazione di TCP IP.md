@@ -2,125 +2,78 @@ Introduciamo ora i **fondamenti pratici della comunicazione tra processi su macc
 
 Dopo aver studiato i protocolli applicativi e di gestione, in questo modulo si passa al **livello software**, imparando **come scrivere programmi che dialogano realmente attraverso la rete**.
 
-L’obiettivo è comprendere:
-
-- **come è strutturato un servizio applicativo distribuito**, basato su modelli client/server;
-    
-- **come utilizzare la libreria Socket** per creare connessioni TCP o UDP tra processi;
-    
-- e come usare **RPC (Remote Procedure Call)** per realizzare comunicazioni più astratte, dove un programma può “chiamare” funzioni remote come se fossero locali.
-    
-
-In sintesi, questo modulo traduce la teoria delle reti in **codice eseguibile**, mostrando **come nascono concretamente i servizi di Internet**.
-
-
 ---
 
 ## **Lezione 1: Interfaccia di programmazione di TCP/IP**
 
-### **1. Introduzione**
+### **1. Il problema: come accedere al trasporto TCP da un programma**
 
-La **programmazione di rete** si basa sulla capacità di due applicazioni — spesso su computer diversi — di **scambiarsi dati attraverso la rete**.  
-Il modello di riferimento è la **pila TCP/IP**, composta da più livelli, ciascuno con un compito specifico:
+Riprendiamo in esame la pila di protocolli TCP/IP studiata nei moduli precedenti. C'è un livello di trasporto con TCP (orientato alla connessione) e UDP (non orientato alla connessione); sopra ci sono le applicazioni utente che implementano i protocolli applicativi del Modulo 3.
 
-- **Livello Applicazione** → dove operano i protocolli come **HTTP**, **FTP**, **Telnet**, o le applicazioni utente sviluppate con la **Socket Library**.
-    
-- **Livello Trasporto** → dove agiscono i protocolli **TCP** (orientato alla connessione) e **UDP** (senza connessione).
-    
+Se vogliamo scrivere un programma che manda e riceve dati con una determinata struttura, la domanda è: **come possiamo accedere al servizio di recapito TCP dall'interno del nostro programma?** Con quali strumenti di programmazione creiamo le connessioni per trasportare i dati applicativi?
 
-La **Socket Library** costituisce l’interfaccia che permette ai programmi di accedere ai servizi offerti dal livello Trasporto, rendendo possibile la comunicazione tra processi in modo standard e indipendente dal sistema operativo.
+Esistono tantissime **API (Application Programming Interface)** per la comunicazione in rete. La prima storica, messa a disposizione all'interno del sistema operativo **Unix BSD** e ancora oggi supportata da tutti i sistemi operativi — incluso Windows — è la **Socket Library**: una libreria di funzioni (originariamente in C) che consente all'applicazione utente di accedere al livello trasporto.
 
 ---
 
 ### **2. Le porte in TCP e UDP**
 
-I protocolli **TCP** e **UDP** utilizzano il concetto di **porta** per stabilire **a quale processo** debbano essere consegnati i dati ricevuti su una macchina.
+Tutti i protocolli della famiglia TCP/IP utilizzano il concetto di **porta**: l'identificativo di un particolare terminale di una connessione, usato da un server per parlare con un client o viceversa.
 
-Puoi immaginare la porta come una **“porta logica”** che collega la rete a un processo specifico:
+- In **TCP**, la porta identifica un endpoint di una connessione orientata alla connessione.
+- In **UDP**, la porta non identifica una connessione, ma una **specifica entry di multiplexing applicativo** — identifica quale applicazione deve ricevere i dati.
 
-- Ogni **porta** è rappresentata da un **numero intero positivo a 16 bit** (da 0 a 65535).
-    
-- Quando un pacchetto arriva su una macchina, il numero di porta serve al livello Trasporto per **inoltrarlo al processo corretto**.
-    
+Le porte sono rappresentate da valori **interi positivi**:
 
-#### **Esempio**
-
-Se un client invia dati al **server web**, essi arriveranno alla **porta 80**, che corrisponde al servizio **HTTP**.
+- **Well-known ports** (0–1023): riservate a protocolli e servizi standard (HTTP → 80, FTP, SMTP, ecc.). Richiedono privilegi amministrativi per essere aperte.
+- **Porte alte** (≥ 1024): disponibili per servizi e programmi definiti dall'utente.
 
 ---
 
-### **3. Porte note (Well-Known Ports)**
+### **3. Cos'è un socket**
 
-Alcuni servizi fondamentali di Internet utilizzano **porte riservate**, chiamate **well-known ports**, comprese nell’intervallo **0–1023**.
+L'idea del **socket** (letteralmente "presa nel muro" in inglese, da cui si inserisce la spina/plug) è quella di essere l'**identificativo di un canale di comunicazione**. Un socket corrisponde a una **quaterna**:
 
-|Servizio|Protocollo|Porta|
+$$(\text{IP sorgente},\ \text{porta sorgente},\ \text{IP destinazione},\ \text{porta destinazione})$$
+
+Questa quaterna identifica univocamente una comunicazione tra due endpoint. Il socket è il **descrittore** di tale comunicazione.
+
+> 💡 L'idea di avere un descrittore come quello dei **file** nasce dal voler riutilizzare le primitive già note (`read`/`write`) — usate per scrivere e leggere file su disco — anche per scrivere e leggere sulle connessioni di rete. Si mantiene così un'**uniformità tra I/O verso la memoria di massa e I/O verso la rete**.
+
+---
+
+### **4. Una interfaccia a basso livello**
+
+La Socket Library è un'interfaccia **molto a basso livello**: non dà una semantica forte come la scrittura su un file di testo. In particolare, **non specifica il tipo di servizio né il protocollo applicativo** che si sta utilizzando — questo è tutto lasciato al programmatore che implementa l'applicazione.
+
+Nelle prossime lezioni vedremo:
+1. come **creare** questi descrittori (socket);
+2. come **riempirli dei dati giusti** (porte, indirizzi, servizio da usare);
+3. come **leggere e scrivere** da questi descrittori.
+
+---
+
+### **5. Perché studiamo la Socket Library**
+
+La Socket Library fu la **prima API di programmazione di rete** storicamente definita, per il linguaggio C. Oggi è disponibile in **tutti i linguaggi di programmazione**, incluso Java, che è quello con cui lavoreremo in questo modulo.
+
+Rappresenta il modo più **diretto, a basso livello e spesso più veloce** per utilizzare il trasporto TCP — e per questo è ancora il fondamento di ogni comunicazione di rete a livello applicativo.
+
+---
+
+### **6. Porte note (Well-Known Ports) — riepilogo**
+
+| Servizio | Protocollo | Porta |
 |---|---|---|
-|**FTP**|TCP|21|
-|**Telnet**|TCP|23|
-|**SMTP** (posta elettronica)|TCP|25|
-|**Login remoto**|TCP|513|
+| **HTTP** | TCP | 80 |
+| **FTP** | TCP | 21 |
+| **Telnet** | TCP | 23 |
+| **SMTP** | TCP | 25 |
 
-Tutti gli altri servizi o programmi definiti dall’utente utilizzano **porte con numero ≥ 1024**, che non richiedono privilegi amministrativi per essere aperte.
-
----
-
-### **4. Cosa sono i Socket**
-
-Un **socket** è il punto terminale di una **connessione bidirezionale** tra due programmi che comunicano attraverso la rete.  
-Puoi pensarci come a un **canale di comunicazione virtuale**, simile a un **file** con cui un processo può leggere o scrivere dati.
-
-#### **Caratteristiche principali**
-
-- Ogni socket è **associato a una porta**, così che TCP o UDP sappiano **a quale applicazione** devono consegnare i dati.
-    
-- La comunicazione attraverso socket è gestita **come l’I/O su file**:
-    
-    - le stesse funzioni di **lettura (`read`)** e **scrittura (`write`)** possono essere applicate;
-        
-    - ciò rende la comunicazione **semplice e uniforme** per il programmatore.
-        
-
-Esempio in pseudocodice:
-
-```c
-socket → crea canale di comunicazione
-bind → associa socket a una porta locale
-listen → attende richieste (lato server)
-accept → accetta la connessione
-read/write → scambia dati
-close → chiude la connessione
-```
-
----
-
-### **5. Indipendenza dal linguaggio**
-
-Uno dei grandi vantaggi delle socket è la loro **indipendenza dal linguaggio di programmazione**.  
-Significa che:
-
-- un programma scritto in **Java** può comunicare con uno scritto in **C** o **Python**,
-    
-- purché entrambi utilizzino la **Socket Library** e rispettino i protocolli di rete (TCP o UDP).
-    
-
-Questo garantisce **interoperabilità totale** tra applicazioni sviluppate su piattaforme e sistemi diversi — un principio fondamentale dell’architettura Internet.
-
----
-
-### **6. Sintesi finale**
-
-|Concetto|Descrizione|
-|---|---|
-|**Pila TCP/IP**|Struttura logica che separa applicazione e trasporto.|
-|**Porte**|Canali numerici (0–65535) che collegano la rete ai processi.|
-|**Well-known ports**|Porte riservate a servizi standard (es. HTTP, FTP, SMTP).|
-|**Socket**|Endpoint logico della comunicazione; permette I/O di rete come su file.|
-|**Indipendenza linguistica**|Programmi in linguaggi diversi possono comunicare via socket.|
+Tutti gli altri servizi o programmi definiti dall'utente utilizzano **porte ≥ 1024**.
 
 ---
 
 ### **7. Conclusione**
 
-Le **socket** rappresentano il **ponte tra software e rete**.  
-Sono l’interfaccia che permette alle applicazioni di “parlare” con TCP/IP e quindi con il mondo esterno.  
-Imparare a usarle significa capire **come un programma locale diventa un servizio di rete**, aprendo la strada alla realizzazione di **server, client e applicazioni distribuite reali**.
+Le **socket** rappresentano il ponte tra software e rete: l'interfaccia che permette alle applicazioni di accedere a TCP/IP e quindi al mondo esterno. Nate su Unix BSD e adottate universalmente, sono ancora oggi — nelle loro varianti C, Java e in tutti i linguaggi moderni — il fondamento di ogni servizio di rete, dai più semplici ai più complessi.

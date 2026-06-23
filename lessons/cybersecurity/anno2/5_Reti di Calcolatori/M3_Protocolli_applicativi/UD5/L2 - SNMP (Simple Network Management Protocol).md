@@ -78,7 +78,7 @@ Per ogni dispositivo standard (router, host, bridge) esistono attributi definiti
 
 Per concludere, vediamo un frammento reale di MIB — si tratta di un semplice file di testo:
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260623140615.png)
 
 ```
 -- the Interfaces group
@@ -91,8 +91,7 @@ ifNumber OBJECT-TYPE
     ACCESS  read-only
     STATUS  mandatory
     DESCRIPTION
-        "The number of network interfaces (regardless of
-        their current state) present on this system."
+        "The number of network interfaces (regardless of their current state) present on this system."
     ::= { interfaces 1 }
 ```
 
