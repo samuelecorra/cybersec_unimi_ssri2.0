@@ -1,4 +1,4 @@
-﻿# Soluzione Esame di Reti di Calcolatori — Parte B — 8/05/2026
+# Soluzione Esame di Reti di Calcolatori — Parte B — 8/05/2026
 
 **Prof. Ernesto Damiani**
 
@@ -255,13 +255,13 @@ I valori `q=…` (chiamati **quality value** o **relative preference**) compaion
 
 Nello specifico della richiesta:
 
-| MIME-type                                             |   `q` effettivo | Interpretazione                                        |
-| ----------------------------------------------------- | --------------: | ------------------------------------------------------ |
-| `ext/xml`, `application/xml`, `application/xhtml+xml` | 1.0 (implicito) | i tipi XML/XHTML sono i preferiti                      |
-| `text/html`                                           |         **0.9** | HTML va benissimo, leggermente meno preferito di XML   |
-| `text/plain`                                          |         **0.8** | testo puro accettabile                                 |
-| `image/png`                                           | 1.0 (implicito) | PNG preferito                                          |
-| `*/*` (o `*,*`)                                       |         **0.5** | qualunque altra cosa è accettata, ma è l'ultima scelta |
+| MIME-type                                              |   `q` effettivo | Interpretazione                                        |
+| ------------------------------------------------------ | --------------: | ------------------------------------------------------ |
+| `text/xml`, `application/xml`, `application/xhtml+xml` | 1.0 (implicito) | i tipi XML/XHTML sono i preferiti                      |
+| `text/html`                                            |         **0.9** | HTML va benissimo, leggermente meno preferito di XML   |
+| `text/plain`                                           |         **0.8** | testo puro accettabile                                 |
+| `image/png`                                            | 1.0 (implicito) | PNG preferito                                          |
+| `*/*` (o `*,*`)                                        |         **0.5** | qualunque altra cosa è accettata, ma è l'ultima scelta |
 
 > Quindi `q=0.8` e `q=0.5` **non sono probabilità** né "qualità tecniche": sono **pesi relativi** che il browser usa per dire al server "se devi scegliere fra due rappresentazioni, dammi quella con `q` maggiore". Il server confronta l'`Accept` con i tipi a sua disposizione, calcola il _quality factor_ di ciascuno e serve quello migliore (algoritmo di **server-driven content negotiation**, RFC 7231 §5.3).
 
@@ -321,7 +321,7 @@ Una pagina HTML (es. `index.html`) referenzia altre risorse (immagini, fogli di 
 | ------------ | -------------------------------------- | ------------------------------------------------ | ----------------------------------------------- |
 | **HTTP/1.0** | una **nuova** TCP per ogni oggetto     | no (salvo `Connection: keep-alive` non standard) | no                                              |
 | **HTTP/1.1** | connessione **persistente** di default | sì                                               | sì (più request prima di attendere le response) |
-
+S
 ### Topologia delle risorse
 
 Sia `S1` il server che ospita HTML + 2 immagini (`img1`, `img2`) e `S2` quello che ospita le altre 2 (`img3`, `img4`):
