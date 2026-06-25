@@ -265,6 +265,7 @@ Connection: keep-alive
 ### Inquadramento teorico
 
 | Header | Valore | Significato |
+|--------|--------|-------------|
 | **Host** | `documents.example.org` | Host di destinazione. Obbligatorio in HTTP/1.1 per virtual hosting. |
 | **User-Agent** | `Mozilla/5.0 … Chrome/134 …` | Identifica browser e SO del client. |
 

@@ -36,7 +36,7 @@ dove:
 
 L’esponenziazione richiede circa $O((\log n)^3)$ operazioni,  
 mentre la **sicurezza** dipende dalla **difficoltà della fattorizzazione** di grandi numeri $n = p \cdot q$,  
-che è un problema computazionalmente **duro**, stimato in $O(e^\sqrt{{\log n \cdot \log (\log n)}})$ operazioni.
+che è un problema computazionalmente **duro**, stimato in $O(e^{\sqrt{\log n \cdot \log(\log n)}})$ operazioni.
 
 ---
 
