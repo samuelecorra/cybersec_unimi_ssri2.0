@@ -388,22 +388,39 @@ $$
 a^{\varphi(n)} \equiv 1 \pmod{n}
 $$
 
+In italiano: ogni rappresentante di una classe di coprimi modulo $n$ elevato al toziente di Eulero di $n$ è congruente a 1 modulo $n$. Questo è uno shortcut incredibile: sotto queste condizioni, non bisogna affidarsi ad Euclide esteso per calcolare l’inverso moltiplicativo di $a$ modulo $n$, ma basta elevare $a$ a $\varphi(n)-1$:
+
 #### **Esempi**
 
+Supponiamo un modulo non primo, quindi bisogna calcolare gli elementi di $Z_{10}^*$:
+
+Sappiamo benissimo che coprimi con 10, minori di esso ci sono 1, 3, 7 e 9. Quindi $\varphi(10) = 4$. Al posto del conteggio, formalmente applichiamo l'equazione appena vista nel paragrafo precedente:
+
+$$
+\varphi(10) = 10 \cdot (1 - 1/2) \cdot (1 - 1/5) = 10 \cdot (1/2) \cdot (4/5) = 4
+$$
+
+Supponiamo di scegliere 3:
+
 - $3^4 = 81 \equiv 1 \pmod{10}$
+
+Con un modulo primo, il toziente è immediato (p-1) e procediamo subito a verificare:
+
 - $2^{10} = 1024 \equiv 1 \pmod{11}$
 
 ---
 
 ### **10. Teorema di Fermat**
 
-Se $p$ è primo e $a \in Z_p^*$, allora:
+Continuiamo la carrellata di teoremi fondamentali. Subito dopo il Teorema di Eulero che ci facilita il calcolo degli inversi moltiplicativi, Fermat zoomma nel caso specifico in cui lavoriamo in modulo primo. In questo caso, il teorema di Eulero si semplifica e diventa il Teorema di Fermat:
+
+Se $p$ è primo e $a \in Z_p^*$, allora il toziente diventa $p-1$ e quindi il Teorema di Eulero si semplifica in:
 
 $$
 a^{p-1} \equiv 1 \pmod{p}
 $$
 
-e, in forma più generale:
+MA QUI ATTENZIONE C'E' UN PASSAGGIO FONDAMENTALE: SE MOLTIPLICHIAMO AMBI I MEMBRI PER $a$ OTTENIAMO:
 
 $$
 a^p \equiv a \pmod{p}
@@ -414,11 +431,15 @@ $$
 - $7^{18} \equiv 1 \pmod{19}$
 - $10^5 \equiv 10 \pmod{5} \equiv 0 \pmod{5}$
 
+Questo ci torna utilissimo per la decifratura RSA, perché ci permette di semplificare l’esponente della decifratura, che è un multiplo di $\varphi(n)$.
+
 ---
 
 ### **11. Correttezza della decifratura RSA**
 
-Per l’algoritmo RSA valgono le seguenti condizioni:
+Dopo tutta questa infarinatura di Teoria dei Numeri, possiamo finalmente dimostrare la correttezza della decifratura RSA.
+
+Torniamo al nostro schema di cifratura. I parametri in gioco per come Rivest, Shamir e Adleman hanno definito l’algoritmo sono:
 
 $$
 \begin{cases}
@@ -428,25 +449,56 @@ e \cdot d \equiv 1 \pmod{\varphi(N)}
 \end{cases}
 $$
 
-Per ogni messaggio $M$ primo con $N$:
+Riscriviamo più comodamente la coprimalità:
+
+$$
+e \cdot d = 1 + k \cdot \varphi(N)
+$$
+
+Ora vanno distinti due casi: presentiamo prima il più comodo, il più specifico:
+
+#### **Dimostrazione decifratura 1: $M$ primo con $N$**
+
+Per ogni messaggio $M$ primo con $N$, possiamo applicare Eulero:
+
+$$
+M^{\varphi(N)} \equiv 1 \pmod{N}
+$$
+
+Teniamo a mente la precedente relazione perché tornerà utile nella dimostrazione.
+Se ricordate bene dalla scorsa lezione che introduceva RSA, avevamo detto:
 
 $$
 C^d \bmod N = M
 $$
 
-Infatti:
+Al netto del modulo, possiamo scrivere:
 
 $$
-C^d = (M^e)^d = M^{ed} = M^{1 + k\varphi(N)} = M \cdot (M^{\varphi(N)})^k
+C^d = (M^e)^d
 $$
 
-Ma per il teorema di Eulero quella quantità elevata a fi di n è = 1, quindi tutta la parentesi va ad 1 e l'esponente k non cambia le cose, ergo otteniamo M\*1 e quindi:
+Rimuoviamo le parentesi; sostituiamo $ed$ con la sua espressione calcolata prima e infine spezziamo la potenza. Una volta spezzata, l'esponente $k \cdot \varphi(N)$ può venire comodamente riarrangiato, facendo uscire la $k$:
+
+$$
+ = M^{ed} = M^{1 + k\varphi(N)} = M \cdot (M^{\varphi(N)})^k
+
+
+$$
+
+Ma per il teorema di Eulero tutta la parentesi va ad 1 e l'esponente $k$ non cambia le cose, ergo otteniamo $M \cdot 1$ e quindi:
 
 $$
 M \cdot (M^{\varphi(N)})^k \equiv M \pmod{N}
 $$
 
 Ma questo M mod N non è altro che $M$ in quanto avevamo presupposto $0 \leq M < n$.
+
+CVD (Come Volevasi Dimostrare). ✅✅
+
+---
+
+#### **Dimostrazione decifratura 2: $M$ non primo con $N$**
 
 Se invece $M$ **non è primo con $N$**, non possiamo applicare direttamente il teorema di Eulero modulo $N$, perché $M \notin Z_N^*$. Questo non significa però che RSA smetta di funzionare: bisogna separare il ragionamento sui due fattori primi di $N$.
 
@@ -458,13 +510,18 @@ $$
 
 dove $p$ e $q$ sono primi distinti. Se $\gcd(M, N) \ne 1$, allora $M$ condivide almeno un fattore primo con $N$: quindi $M$ è multiplo di $p$, oppure è multiplo di $q$.
 
+Per la dimostrazione possiamo valutare solo uno dei due casi, in quanto il ragionamento è del tutto simmetrico (provare per credere!).
+
 Consideriamo il caso in cui $M$ sia multiplo di $p$. Allora esiste un intero $c$ tale che:
 
 $$
 M = c \cdot p
 $$
 
-Se $0 \le M < N$ e $M$ è multiplo di $p$ ma non è $0$, allora $M$ non può essere anche multiplo di $q$, altrimenti sarebbe multiplo di $p \cdot q = N$. Quindi, in questo caso:
+Se $0 \le M < N$
+e $M$ è multiplo di $p$ -- ma non è $0$,
+
+allora $M$ non può essere anche multiplo di $q$, altrimenti sarebbe multiplo di $p \cdot q = N$. Quindi, in questo caso:
 
 $$
 \gcd(M, q) = 1
@@ -476,61 +533,49 @@ $$
 M^{\varphi(q)} \equiv 1 \pmod q
 $$
 
-Poiché:
+Dal momento che i nostri $p$ e $q$ sono entrambi primi, il toziente di $n$ è il prodotto dei tozienti:
 
 $$
 \varphi(N) = \varphi(pq) = (p-1)(q-1) = \varphi(p)\varphi(q)
 $$
 
-si ha:
+la precedente osservazione ci permette di riscrivere più comodamente $M^{\varphi(N)}$:
 
 $$
-M^{\varphi(N)}
-=
-M^{\varphi(p)\varphi(q)}
-=
-\left(M^{\varphi(q)}\right)^{\varphi(p)}
+M^{\varphi(N)} = M^{\varphi(p)\varphi(q)} = \left(M^{\varphi(q)}\right)^{\varphi(p)}
 $$
 
-Dato che $M^{\varphi(q)} \equiv 1 \pmod q$, elevare questa quantità a $\varphi(p)$ non cambia la congruenza:
+Dato che $M^{\varphi(q)} \equiv 1 \pmod q$, elevare questa quantità a $\varphi(p)$ - ad ambi i membri, ovviamente - non cambia la congruenza:
 
 $$
 \left(M^{\varphi(q)}\right)^{\varphi(p)} \equiv 1^{\varphi(p)} \equiv 1 \pmod q
 $$
 
-quindi:
+però ora la parte sinistra la vediamo nuovamente come elevata alla fi di n:
 
 $$
 M^{\varphi(N)} \equiv 1 \pmod q
 $$
 
-Questo significa che esiste un intero $k$ tale che:
+Siamo a un punto importante: la precedente equazione significa che esiste un intero $k$ tale che:
 
 $$
 M^{\varphi(N)} = 1 + kq
 $$
 
-Moltiplichiamo ora entrambi i membri per $M$. Poiché $M = cp$, otteniamo:
+Moltiplichiamo ora entrambi i membri per $M$. E attenzione, mentre lo facciamo ricordiamoci che all'inizio, la casistica imponeva per costruzione $M = cp$, otteniamo:
 
 $$
-M^{\varphi(N)+1}
-=
-M(1 + kq)
-=
-M + Mkq
-=
-M + cpkq
+M^{\varphi(N)+1} = M(1 + kq) = M + Mkq = M + cpkq
 $$
 
 ma $p \cdot q = N$, quindi:
 
 $$
-M^{\varphi(N)+1}
-=
-M + ckN
+M^{\varphi(N)+1} = M + ckN
 $$
 
-Questo vuol dire che $M^{\varphi(N)+1}$ differisce da $M$ per un multiplo di $N$, quindi:
+Questo vuol dire che $M^{\varphi(N)+1}$ differisce da $M$ per un multiplo di $N$ (ovvero $ck$), quindi ne deriva una congruenza direttamente:
 
 $$
 M^{\varphi(N)+1} \equiv M \pmod N
@@ -538,21 +583,33 @@ $$
 
 Il ragionamento è simmetrico se $M$ è multiplo di $q$: si lavora modulo $p$ e si ottiene lo stesso risultato.
 
-Nel caso RSA l’esponente effettivo della decifratura non è semplicemente $\varphi(N)+1$, ma:
+Però ATTENZIONE, questa dimostrazione regge solo nell'ambito del suo esponente!!!
+Nel caso RSA l’esponente effettivo della decifratura non è semplicemente $\varphi(N)+1$, ma è, a partire dal plaintext $M$, l'esponente $ed$ ottenuto concatenando la cifratura e la decifratura. Cosa possiamo dire di questa quantità? Ricordiamo che per costruzione, quando il destinatario sceglie la chiave privata $d$, essa soddisfa la congruenza:
 
 $$
 ed = 1 + h\varphi(N)
 $$
 
-per un certo intero $h$, perché $e \cdot d \equiv 1 \pmod{\varphi(N)}$. Lo stesso ragionamento si applica quindi a:
+per un certo intero $h$, perché $e \cdot d \equiv 1 \pmod{\varphi(N)}$.
+
+Siamo fortunatissimi, perché lo stesso ragionamento si applica quindi a:
 
 $$
-M^{ed}
-=
-M^{1 + h\varphi(N)}
-=
-M \cdot \left(M^{\varphi(N)}\right)^h
+M^{ed} = M^{1 + h\varphi(N)} = M \cdot \left(M^{\varphi(N)}\right)^h
 $$
+
+Come ormai dovrebbe essere chiaro, nella precedente formula ho SOTTINTESO che siamo in modulo $N$. Ma noi la parentesi non sappiamo "farla scendere ad 1" con questo modulo...
+
+PERO' SAPPIAMO FARLA SCENDERE AD 1 SEPARATAMENTE MODULO $p$ E MODULO $q$. Quindi ragioniamo separatamente modulo $p$ e modulo $q$.
+
+**Modulo $q$:** abbiamo già dimostrato che $M^{\varphi(N)} \equiv 1 \pmod{q}$ (perché $\gcd(M,q)=1$). Quindi:
+$$\left(M^{\varphi(N)}\right)^h \equiv 1^h = 1 \pmod{q} \implies M^{ed} \equiv M \cdot 1 = M \pmod{q}$$
+
+**Modulo $p$:** $M = cp$, quindi $M \equiv 0 \pmod{p}$. Ma allora anche $M^{ed} = (cp)^{ed}$ è divisibile per $p$, cioè $M^{ed} \equiv 0 \equiv M \pmod{p}$.
+
+Alla luce di questi risultati apparentemente disgiunti, qual è l'anello mancante che ci permette di concludere la dimostrazione? Il Teorema Cinese del Resto (CRT), che ci dice che se due congruenze hanno moduli coprimi, allora esiste un'unica soluzione modulo il prodotto dei due moduli. In questo caso, i moduli sono $p$ e $q$, che sono primi distinti, quindi $\gcd(p,q)=1$. L'enunciato stesso del CRT è il passo finale che serve a noi!!!
+
+**Conclusione via CRT:** abbiamo $M^{ed} \equiv M \pmod{p}$ e $M^{ed} \equiv M \pmod{q}$. Poiché $p$ e $q$ sono primi distinti ($\gcd(p,q)=1$), per il Teorema Cinese del Resto:
 
 e porta alla congruenza:
 
@@ -576,3 +633,6 @@ Abbiamo introdotto i concetti matematici su cui si basa RSA:
 Questi strumenti consentono di comprendere **perché RSA funziona** e **su quali proprietà matematiche** si fonda la sua sicurezza.
 
 ---
+
+$$
+$$
