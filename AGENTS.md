@@ -85,6 +85,13 @@
 - Da ora il lavoro principale passa a Statistica e Crittografia.
 - Per i prossimi prompt integrativi, privilegiare l'avanzamento di queste due materie.
 
+### Sicurezza Web&Mobile [IN PROGRESS]
+
+- M2_AccessControl&Authentication/UD3/L1 (Intro Linux): [COMPLETED] — creato `L1_Intro_Linux.md` da `linux_m2_d1.pdf` + `es_linux1.pdf`.
+- M2_AccessControl&Authentication/UD3/L2 (Controllo accessi Linux): [COMPLETED] — creato `L2_Controllo_Accessi_Linux.md` da `linux_m2_d2.pdf` + `es_linux2.pdf`.
+- M2_AccessControl&Authentication/domande_fineM2: [COMPLETED] — creato `domande_fineM2.md` con risposte complete a 23 domande teoriche + esercizio Unix sui permessi.
+- M3_SecureComms: [NEXT TASK]
+
 ### Matematica Discreta [IN PROGRESS]
 
 - M1_Insiemi_numerici/UD1_Numeri_naturali: [COMPLETED] — creati L1-L6 (operazioni in ℕ, induzione, definizioni ricorsive, numeri primi, divisori/crivello, MCD/mcm)
@@ -120,4 +127,6 @@
 - M4_Tecniche_programmazione_distribuita/UD1/L5–L8 (esercizi C): [COMPLETED] — creati L5.1 (TCPClientEcho), L5.2 (TCPServerEcho), L6.1 (TCPServerEchoSelect con select()), L8.1 (HTTP Viewer lab); tutti con consegna + soluzione commentata step-by-step
 - M4_Tecniche_programmazione_distribuita/UD1/L6 (Select): [COMPLETED] — 3 strategie connessioni multiple (fork/exec, non-blocking, select), fd_set tre vettori bit (readfds/writefds/exceptfds), FD_ZERO+FD_SET pre/FD_ISSET post, timeout=0/NULL/positivo, altre funzioni utili (bzero/gethostname/gethostbyaddr/inet_addr/inet_ntoa), porte libere (SIGTERM/SIGINT + cleanExit)
 - M4_Tecniche_programmazione_distribuita/UD1/L7 (Socket Java): [COMPLETED] — 2 significati socket (RFC793/BSD), tipi flusso/datagramma, welcome vs connection socket, chiamate fondamentali, flusso completo TCP, TCPClient.java + TCPServer.java (capitalizzazione), UDP: DatagramSocket/DatagramPacket, UDPClient.java + UDPServer.java, confronto TCP vs UDP
+- M5_Esame/esame_21_marzo_2025: [COMPLETED] — creati parteB.md (traccia) + soluzioneParteB.md (soluzione Parte B: server HTTP TCP moderazione commenti in C con fork/accept/recv/send/mkdir, multipart/form-data, HTTP/1.0 vs 1.1 con 10 immagini, firewall sottorete con iptables)
+- M5_Esame (refactor): pseudocodice Python → C in esame_23_maggio_2025/SoluzioneB.md (chat UDP fork, broadcast, multicast) e esame_8_maggio_2026/soluzioneParteB.md (proxy TCP autenticato)
 - M4 moduli successivi / UD2+: [NEXT TASK]

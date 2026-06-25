@@ -62,6 +62,13 @@ YOU MUST extract the subject and file dynamically from the prompt. Do not assume
 - Da ora il lavoro principale passa a Statistica e Crittografia.
 - Per i prossimi prompt integrativi, privilegiare l'avanzamento di queste due materie.
 
+### Sicurezza Web&Mobile [IN PROGRESS]
+
+- M2_AccessControl&Authentication/UD3/L1 (Intro Linux): [COMPLETED] — creato `L1_Intro_Linux.md` da `linux_m2_d1.pdf` + `es_linux1.pdf`.
+- M2_AccessControl&Authentication/UD3/L2 (Controllo accessi Linux): [COMPLETED] — creato `L2_Controllo_Accessi_Linux.md` da `linux_m2_d2.pdf` + `es_linux2.pdf`.
+- M2_AccessControl&Authentication/domande_fineM2: [COMPLETED] — creato `domande_fineM2.md` con risposte complete a 23 domande teoriche + esercizio Unix sui permessi.
+- M3_SecureComms: [NEXT TASK]
+
 ### Matematica Discreta [IN PROGRESS]
 
 - M1_Insiemi_numerici/UD1_Numeri_naturali: [COMPLETED] — creati L1-L6 (operazioni in ℕ, induzione, definizioni ricorsive, numeri primi, divisori/crivello, MCD/mcm)
