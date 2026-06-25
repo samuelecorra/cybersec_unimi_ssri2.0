@@ -10,8 +10,8 @@ $2, 3, 5, 7, 11, 13, 17, 19, \dots$
 
 Ogni intero composto $n > 1$ può essere scritto in modo **unico** (a meno dell’ordine dei fattori) come prodotto di potenze di numeri primi:
 
-$$  
-n = p_1^{e_1} \cdot p_2^{e_2} \cdot \dots \cdot p_k^{e_k}  
+$$
+n = p_1^{e_1} \cdot p_2^{e_2} \cdot \dots \cdot p_k^{e_k}
 $$
 
 dove ogni $p_i$ è primo e ogni $e_i$ è un intero positivo.
@@ -22,8 +22,8 @@ dove ogni $p_i$ è primo e ogni $e_i$ è un intero positivo.
 
 Per ogni coppia di numeri $a \in \mathbb{Z}$ e $n \in \mathbb{Z}$, con $n \ne 0$, esiste un’unica coppia $(q, r)$ tale che:
 
-$$  
-a = q \cdot n + r, \quad \text{con } 0 \le r \le |n| - 1  
+$$
+a = q \cdot n + r, \quad \text{con } 0 \le r \le |n| - 1
 $$
 
 > 💡 Il teorema generale ammette $n \in \mathbb{Z}$, con $n \ne 0$, ma nell’aritmetica modulare il modulo è sempre un intero positivo per definizione: $\mathbb{Z}/n\mathbb{Z}$ richiede $n > 0$. Per questo la restrizione a $n \in \mathbb{N}$ è una semplificazione didattica difendibile, non un errore concettuale. La condizione $n \ne 0$ resta però logicamente obbligatoria, perché la divisione per zero non è definita e l’unicità di $(q, r)$ verrebbe meno. Il valore assoluto nel vincolo su $r$ è essenziale nel caso generale, perché consente di gestire anche divisori negativi.
@@ -33,9 +33,7 @@ Il valore $r$ è detto **resto** o **$a \bmod n$**.
 #### **Esempi**
 
 - $a = 11, n = 7 \Rightarrow 11 = 1 \cdot 7 + 4 \Rightarrow 11 \bmod 7 = 4$
-    
 - $a = -11, n = 7 \Rightarrow -11 = (-2) \cdot 7 + 3 \Rightarrow -11 \bmod 7 = 3$
-    
 
 ---
 
@@ -51,23 +49,21 @@ $$
 
 #### **Proprietà fondamentali delle congruenze**
 
-1) **Simmetria**: $a \equiv b \pmod{n} \iff b \equiv a \pmod{n}$ — discende direttamente dalla definizione: se $n \mid (a-b)$ allora $n \mid (b-a)$.
+1. **Simmetria**: $a \equiv b \pmod{n} \iff b \equiv a \pmod{n}$ — discende direttamente dalla definizione: se $n \mid (a-b)$ allora $n \mid (b-a)$.
 
-2) **Transitività**: se $a \equiv b \pmod{n}$ e $b \equiv c \pmod{n}$, allora $a \equiv c \pmod{n}$.
+2. **Transitività**: se $a \equiv b \pmod{n}$ e $b \equiv c \pmod{n}$, allora $a \equiv c \pmod{n}$.
 
-3) **Compatibilità con le operazioni**: se $a \equiv b \pmod{n}$ e $c \equiv d \pmod{n}$, allora:
-$$
-a + c \equiv b + d \pmod{n} \qquad a \cdot c \equiv b \cdot d \pmod{n}
-$$
+3. **Compatibilità con le operazioni**: se $a \equiv b \pmod{n}$ e $c \equiv d \pmod{n}$, allora:
+   $$
+   a + c \equiv b + d \pmod{n} \qquad a \cdot c \equiv b \cdot d \pmod{n}
+   $$
 
 #### **Esempi**
 
 - $73 \equiv 4 \pmod{23}$  
-    poiché $73 \bmod 23 = 4$
-    
+   poiché $73 \bmod 23 = 4$
 - $21 \equiv -9 \pmod{10}$  
-    poiché $21 - (-9) = 30$ è multiplo di 10
-    
+   poiché $21 - (-9) = 30$ è multiplo di 10
 
 ---
 
@@ -75,13 +71,12 @@ $$
 
 Per com'è definito, l'operatore di modulo riesce a "mappare" tutti gli interi in un insieme più piccolo. Più precisamente, scegliendo un certo $n$, sarà possibile mappare tutti gli interi nell'insieme dei numeri compresi tra $0$ ed $n-1$.
 
-
 L’insieme dei numeri **congruenti tra loro modulo $n$ e che quindi forniscono lo stesso resto** forma una **classe di resto**.
 
 Questa classe generica, individuata da $a \mod n$ sarà individuata da tutti quei numeri scrivibili come:
 
-$$  
-[a]_n = { a + k n \ \text{per qualsiasi} \ k \in \mathbb{Z} }  
+$$
+[a]_n = { a + k n \ \text{per qualsiasi} \ k \in \mathbb{Z} }
 $$
 
 Come rappresentante della classe si usa il più piccolo intero non negativo compreso in essa.
@@ -94,26 +89,22 @@ $$
 
 Il sistema completo delle classi di resto modulo $n$ è:
 
-$$  
-Z_n = { [0]_n, [1]_n, [2]_n, \dots, [n-1]_n }  
+$$
+Z_n = { [0]_n, [1]_n, [2]_n, \dots, [n-1]_n }
 $$
 
 #### **Esempio per $n=4$**
 
-$$  
-Z_4 = { [0]_4, [1]_4, [2]_4, [3]_4 }  
+$$
+Z_4 = { [0]_4, [1]_4, [2]_4, [3]_4 }
 $$
 
 dove:
 
 - $[0]_4 = {\dots, -8, -4, 0, 4, 8, \dots}$
-    
 - $[1]_4 = {\dots, -7, -3, 1, 5, 9, \dots}$
-    
 - $[2]_4 = {\dots, -6, -2, 2, 6, 10, \dots}$
-    
 - $[3]_4 = {\dots, -5, -1, 3, 7, 11, \dots}$
-    
 
 ---
 
@@ -122,18 +113,16 @@ dove:
 Il numero $d$ è il **massimo comune divisore** di $a$ e $n$ se:
 
 - $d$ divide sia $a$ che $n$,
-    
 - e ogni altro divisore comune di $a$ e $n$ divide $d$.
-    
 
-$$  
-d = \gcd(a, n)  
+$$
+d = \gcd(a, n)
 $$
 
 Può essere espresso come combinazione lineare:
 
-$$  
-d = a \cdot x + n \cdot y  
+$$
+d = a \cdot x + n \cdot y
 $$
 
 È facile ricavare il gcd di due interi positivi se si esprimono entrambi come prodotto di numeri primi (possibile dal teorema fondamentale dell’aritmetica). Scriviamo quindi le due espressioni equivalenti:
@@ -159,11 +148,8 @@ Il **massimo comun divisore** di due interi positivi si trova quindi fattorizzan
 #### **Proprietà principali**
 
 - $\gcd(a, n) = \gcd(a, -n) = \gcd(-a, n) = \gcd(|a|, |b|)$
-    
 - $\gcd(a, 0) = |a|$
-    
 - Se $\gcd(a, n) = 1$, allora $a$ e $n$ sono **relativamente primi, coprimi, primi tra loro**
-    
 
 ---
 
@@ -179,20 +165,20 @@ Euclide(a, b):
 
 #### **Esempio 1**
 
-$$  
-\text{Euclide}(30, 21) = \text{Euclide}(21, 9) = \text{Euclide}(9, 3) = \text{Euclide}(3, 0) = 3  
+$$
+\text{Euclide}(30, 21) = \text{Euclide}(21, 9) = \text{Euclide}(9, 3) = \text{Euclide}(3, 0) = 3
 $$
 
 #### **Esempio 2**
 
-$$  
+$$
 \text{Euclide}(4864, 3458) =
 \text{Euclide}(3458, 1406) =
 \text{Euclide}(1406, 646) =
 \text{Euclide}(646, 114) =
 \text{Euclide}(114, 76) =
 \text{Euclide}(76, 38) =
-\text{Euclide}(38, 0) = 38  
+\text{Euclide}(38, 0) = 38
 $$
 
 #### **Complessità**
@@ -224,10 +210,10 @@ operazioni su bit.
 Combinando questa stima con il numero massimo di chiamate, si ottiene una prima stima complessiva:
 
 $$
-O(\log a) \cdot O((\log a)^2) = O((\log a)^3)
+O(\log_2 a) \cdot O((\log a)^2) = O((\log a)^3)
 $$
 
-operazioni su bit.
+Che sia base 2 o logaritmo naturale quindi in base $e$, il risultato finale non cambia: la complessità è sempre cubica in $\log a$.
 
 Questa però non è la stima più precisa. Con un’analisi più accurata del comportamento delle divisioni successive, si dimostra che l’algoritmo di Euclide richiede complessivamente:
 
@@ -235,10 +221,10 @@ $$
 O((\log a)^2)
 $$
 
-operazioni su bit.
+operazioni su bit. Questo non è strettamente pertinente per il corso di crittografia, ma è interessante notare che l’algoritmo di Euclide è più efficiente di quanto si possa intuire da una stima elementare. Per maggiori informazioni: [https://en.wikipedia.org/wiki/Euclidean_algorithm#Complexity](https://en.wikipedia.org/wiki/Euclidean_algorithm#Complexity) oppure [https://people.engr.tamu.edu/andreas-klappenecker/alg/euclid.pdf](https://people.engr.tamu.edu/andreas-klappenecker/alg/euclid.pdf)
 
 > ✅ In sintesi, una stima elementare porta a $O((\log a)^3)$, mentre l’analisi migliore mostra che Euclide è più efficiente e lavora in $O((\log a)^2)$ operazioni su bit.
-      
+
 #### **Funzionamento dell’algoritmo**
 
 Il motivo per cui l’algoritmo di Euclide funziona è la seguente identità:
@@ -345,24 +331,24 @@ $$
 
 > ✅ In sintesi, Euclide funziona perché passare da $(a, b)$ a $(b, a \bmod b)$ non cambia l’insieme dei divisori comuni; cambia solo la dimensione dei numeri, rendendo il calcolo sempre più semplice.
 
-
 ---
 
 ### **7. L’insieme $Z_n^*$ e gli inversi**
 
-Si definisce:  
-$$  
-Z_n^* = { [a]_n \mid 0 < a < n, \ \gcd(a, n) = 1 }  
+Si definisce:
+
 $$
+Z_n^* = { [a]_n \mid 0 < a < n, \ \gcd(a, n) = 1 }
+$$
+
+Ovvero l'insieme dei rappresentanti delle classi di resto modulo $n$ che sono **primi con $n$**. L'insieme dei coprimi, potremmo chiamarlo.
 
 Gli elementi di $Z_n^*$ **hanno un inverso moltiplicativo modulo $n$**.
 
 #### **Esempi**
 
 - $Z_4^* = { [1]_4, [3]_4 }$
-    
 - $Z_8^* = { [1]_8, [3]_8, [5]_8, [7]_8 }$
-    
 
 Solo questi elementi in $Z_8$ hanno inverso rispetto alla moltiplicazione.
 
@@ -372,69 +358,61 @@ Solo questi elementi in $Z_8$ hanno inverso rispetto alla moltiplicazione.
 
 ### **8. La funzione di Eulero**
 
-La **funzione toziente** (o **funzione di Eulero**) φ(n) indica il **numero di interi minori di n che sono primi con n**, che essenzialmente coincide proprio con la cardinalità di $Z_n$*
+La **funzione toziente** (o **funzione di Eulero**) φ(n) indica il **numero di interi minori di n che sono primi con n**, che essenzialmente coincide proprio con la cardinalità di $Z_n$\*
 
 #### **Esempi**
 
 - $\varphi(37) = 36$
-    
 - $\varphi(35) = 24$
-    
 
 #### **Proprietà**
 
 - Se $p$ è primo, allora $\varphi(p) = p - 1$
-    
 - Se $p, q$ sono primi, allora $\varphi(pq) = (p - 1)(q - 1)$
-    
-- In generale, se  
-    $$  
-    n = p_1^{e_1} p_2^{e_2} \dots p_k^{e_k}  
-    $$  
-    allora:  
-    $$  
-    \varphi(n) = n \cdot \left(1 - \frac{1}{p_1}\right) \cdot \left(1 - \frac{1}{p_2}\right) \cdot \dots \cdot \left(1 - \frac{1}{p_k}\right)  
-    $$
-    
+- In generale, se
+  $$
+  n = p_1^{e_1} p_2^{e_2} \dots p_k^{e_k}
+  $$
+  allora:
+  $$
+  \varphi(n) = n \cdot \left(1 - \frac{1}{p_1}\right) \cdot \left(1 - \frac{1}{p_2}\right) \cdot \dots \cdot \left(1 - \frac{1}{p_k}\right)
+  $$
 
 ---
 
 ### **9. Teorema di Eulero**
 
-Per ogni $a \in Z_n^*$, vale:  
-$$  
-a^{\varphi(n)} \equiv 1 \pmod{n}  
+Per ogni $a \in Z_n^*$, vale:
+
+$$
+a^{\varphi(n)} \equiv 1 \pmod{n}
 $$
 
 #### **Esempi**
 
 - $3^4 = 81 \equiv 1 \pmod{10}$
-    
 - $2^{10} = 1024 \equiv 1 \pmod{11}$
-    
 
 ---
 
 ### **10. Teorema di Fermat**
 
-Se $p$ è primo e $a \in Z_p^*$, allora:  
+Se $p$ è primo e $a \in Z_p^*$, allora:
 
-$$  
-a^{p-1} \equiv 1 \pmod{p}  
+$$
+a^{p-1} \equiv 1 \pmod{p}
 $$
 
-e, in forma più generale:  
+e, in forma più generale:
 
-$$  
-a^p \equiv a \pmod{p}  
+$$
+a^p \equiv a \pmod{p}
 $$
 
 #### **Esempi**
 
 - $7^{18} \equiv 1 \pmod{19}$
-    
 - $10^5 \equiv 10 \pmod{5} \equiv 0 \pmod{5}$
-    
 
 ---
 
@@ -442,27 +420,30 @@ $$
 
 Per l’algoritmo RSA valgono le seguenti condizioni:
 
-$$  
-\begin{cases}  
-N = p \cdot q \\\\  
-\varphi(N) = (p-1)(q-1) \\\\  
-e \cdot d \equiv 1 \pmod{\varphi(N)}  
-\end{cases}  
+$$
+\begin{cases}
+N = p \cdot q \\\\
+\varphi(N) = (p-1)(q-1) \\\\
+e \cdot d \equiv 1 \pmod{\varphi(N)}
+\end{cases}
 $$
 
-Per ogni messaggio $M$ primo con $N$:  
-$$  
-C^d \bmod N = M  
+Per ogni messaggio $M$ primo con $N$:
+
+$$
+C^d \bmod N = M
 $$
 
-Infatti:  
-$$  
+Infatti:
+
+$$
 C^d = (M^e)^d = M^{ed} = M^{1 + k\varphi(N)} = M \cdot (M^{\varphi(N)})^k
 $$
 
-Ma per il teorema di Eulero quella quantità elevata a fi di n è = 1, quindi tutta la parentesi va ad 1 e l'esponente k non cambia le cose, ergo otteniamo M*1 e quindi:
+Ma per il teorema di Eulero quella quantità elevata a fi di n è = 1, quindi tutta la parentesi va ad 1 e l'esponente k non cambia le cose, ergo otteniamo M\*1 e quindi:
 
-$$M \cdot (M^{\varphi(N)})^k \equiv M \pmod{N}  
+$$
+M \cdot (M^{\varphi(N)})^k \equiv M \pmod{N}
 $$
 
 Ma questo M mod N non è altro che $M$ in quanto avevamo presupposto $0 \leq M < n$.
@@ -588,13 +569,9 @@ $$
 Abbiamo introdotto i concetti matematici su cui si basa RSA:
 
 - **Numeri primi e aritmetica modulare**
-    
 - **Algoritmo di Euclide** e **gcd**
-    
 - **Insieme $Z_n^*$ e funzione di Eulero**
-    
 - **Teoremi di Fermat e di Eulero**, che assicurano la **correttezza della decifratura RSA**
-    
 
 Questi strumenti consentono di comprendere **perché RSA funziona** e **su quali proprietà matematiche** si fonda la sua sicurezza.
 
