@@ -399,6 +399,8 @@ Quindi $c_1^\alpha = 4^7 \bmod 11 = 5$.
 
 Applicando il piccolo teorema di Fermat: $5^{-1} \equiv 5^{11-2} = 5^9 \bmod 11$.
 
+> 📌 **Piccolo teorema di Fermat.** Se $p$ è primo e $a$ non è divisibile per $p$, allora $a^{p-1} \equiv 1 \pmod p$. Di conseguenza l'inverso moltiplicativo di $a$ modulo $p$ si può calcolare come $a^{-1} \equiv a^{p-2} \pmod p$.
+
 $$5^2 = 25 \bmod 11 = 3$$
 $$5^4 = 3^2 = 9$$
 $$5^8 = 9^2 = 81 \bmod 11 = 4$$

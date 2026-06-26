@@ -12,6 +12,7 @@
 > **(35 punti)** Considera il seguente cifrario a blocchi basato su una funzione hash $h$ e sullo XOR. Assumiamo che $h$ produca valori di hash lunghi 64 bit e una chiave simmetrica $k$ di 128 bit. Sia $m$ un messaggio plaintext composto da due parti $m_1 m_2$, entrambe di lunghezza 64 bit, cioè $m = m_1 \cdot m_2$, dove $\cdot$ denota concatenazione. Si divida anche la chiave $k$ in due parti $k = k_1 k_2$ ciascuna di 64 bit.
 >
 > La cifratura $E_k(m) = c_1 \cdot c_2$ funziona in questo modo:
+> 
 > $$c_1 = m_1 \oplus h(m_2) \oplus k_1$$
 > $$c_2 = m_2 \oplus c_1 \oplus k_2$$
 >
