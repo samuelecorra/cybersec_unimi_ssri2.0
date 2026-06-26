@@ -67,7 +67,19 @@ YOU MUST extract the subject and file dynamically from the prompt. Do not assume
 - M2_AccessControl&Authentication/UD3/L1 (Intro Linux): [COMPLETED] — creato `L1_Intro_Linux.md` da `linux_m2_d1.pdf` + `es_linux1.pdf`.
 - M2_AccessControl&Authentication/UD3/L2 (Controllo accessi Linux): [COMPLETED] — creato `L2_Controllo_Accessi_Linux.md` da `linux_m2_d2.pdf` + `es_linux2.pdf`.
 - M2_AccessControl&Authentication/domande_fineM2: [COMPLETED] — creato `domande_fineM2.md` con risposte complete a 23 domande teoriche + esercizio Unix sui permessi.
-- M3_SecureComms: [NEXT TASK]
+- M3/UD1/L1 (Comunicazione sicura su canale insicuro): [COMPLETED] — integrato transcript su Internet come canale insicuro, Alice/Bob, confidenzialità, integrità, autenticazione, non ripudio, entity vs message authentication.
+- M3/UD1/L2 (Attacchi ai protocolli di comunicazione): [COMPLETED] — integrato transcript su protocolli, handshake, Trudy, attaccante passivo/attivo, intercettazione, cancellazione, modifica, impersonificazione, replay attack, limiti della cifratura.
+- M3/UD2/L1 (Introduzione storica alla crittografia): [COMPLETED] — integrato transcript su scopi della crittografia, steganografia, Erodoto, cifrario di Cesare, sostituzione/permutazione, chiave segreta, simmetrica, chiave pubblica, Maria Stuart, analisi delle frequenze, Vernam, uso militare/commerciale.
+- M3/UD2/L2 (Primitive di cifratura e decifratura): [COMPLETED] — integrato transcript su schema Alice/Bob/Trudy, chiavi di cifratura/decifratura, principio di Kerckhoffs, correttezza, efficienza, difficoltà per l'attaccante, forza bruta, spazio $2^N$, lunghezza chiavi, block cipher e stream cipher.
+- M3/UD2/L3 (Crittografia simmetrica e asimmetrica): [COMPLETED] — integrato transcript su chiave segreta, vantaggi/svantaggi, distribuzione chiavi, KDC, chiavi di sessione, chiave pubblica/privata, uso ibrido, algoritmi DES/3DES/DESX/AES/IDEA/RC2/RSA/Rabin/ElGamal, limiti su replay e autenticazione.
+- M3/UD2/L4 (Funzioni hash e MAC): [COMPLETED] — integrato transcript su definizione hash, one-way, preimage/second-preimage/collision resistance, effetto valanga, birthday paradox, usi per password/integrità/firma/sync, hash con chiave, MAC, limiti su segretezza/non ripudio/terze parti, MD4/MD5/SHA-1/RIPEMD.
+- M3/UD2/L5 (Firma digitale): [COMPLETED] — integrato transcript su analogia con firma cartacea, integrità/autenticazione/non ripudio, limiti del MAC, firma con chiave privata, verifica con chiave pubblica, firma del digest, verifica, resistenza alla contraffazione, associazione chiave pubblica-identità, confronto hash/MAC/firma.
+- M3/UD2/L6 (Certificati digitali e PKI): [COMPLETED] — integrato transcript su problemi di autenticazione chiavi pubbliche, certificati digitali X.509, Certification Authority, emissione certificati, chain of trust, root/intermediate CA, verifica certificati, CRL/revoca, confronto KDC vs PKI.
+- M3/UD2/L7: [PENDING]
+- M3/UD3/L1 (Notazione per protocolli crittografici): [COMPLETED] — integrato transcript su obiettivi dei protocolli, session/run, chiavi lungo/breve termine, freschezza, efficienza, terze parti, controllo chiavi, non ripudio, assunzioni d'attacco, notazione partecipanti/attaccanti/server/chiavi/cifratura/firma/certificati/messaggi.
+- M3/UD3/L2 (Protocollo di autenticazione unilaterale): [COMPLETED] — integrato transcript su progettazione incrementale del protocollo, identità/IP/password, replay attack, nonce, challenge-response con chiave condivisa, firma digitale, MITM e certificati.
+- M3/UD3/L3 (Attacchi comuni ai protocolli): [COMPLETED] — integrato transcript su osservazione passiva, modifica messaggi, replay, freshness, sessioni parallele, reflection attack, MITM, Denial of Service e SYN flood TCP.
+- M3/UD3/L4: [NEXT TASK]
 
 ### Matematica Discreta [IN PROGRESS]
 
