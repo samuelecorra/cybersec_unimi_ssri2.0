@@ -482,8 +482,6 @@ Rimuoviamo le parentesi; sostituiamo $ed$ con la sua espressione calcolata prima
 
 $$
  = M^{ed} = M^{1 + k\varphi(N)} = M \cdot (M^{\varphi(N)})^k
-
-
 $$
 
 Ma per il teorema di Eulero tutta la parentesi va ad 1 e l'esponente $k$ non cambia le cose, ergo otteniamo $M \cdot 1$ e quindi:
