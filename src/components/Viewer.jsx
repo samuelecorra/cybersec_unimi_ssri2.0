@@ -6,6 +6,7 @@ import remarkCallouts from "../utils/remarkCallouts.js";
 import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
 import { getParentPath } from "../utils/tree.js";
+import { colorizeMathVariables } from "../utils/colorizeMathVariables.js";
 
 function Viewer({ content, currentFile, loading, onFileSelect }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
@@ -139,6 +140,11 @@ function Viewer({ content, currentFile, loading, onFileSelect }) {
       el.removeEventListener("touchend",   onTouchEnd);
     };
   }, [lightboxSrc]); // intentionally no `zoom` dep — uses zoomRef instead
+
+  useEffect(() => {
+    if (loading || !articleRef.current) return undefined;
+    return colorizeMathVariables(articleRef.current);
+  }, [content, currentFile, loading]);
 
   const components = useMemo(
     () => ({

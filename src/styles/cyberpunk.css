@@ -32,6 +32,9 @@
   --neon-purple: #990022;
   --neon-orange: #ff5500;
 
+  --math-operator-color: #ff3b1f;
+  --math-grouping-color: #f0ece0;
+
   --glow-cyan: rgba(255, 191, 0, 0.4);
   --glow-magenta: rgba(255, 34, 0, 0.4);
   --glow-lime: rgba(255, 149, 0, 0.3);
@@ -1607,6 +1610,18 @@ body::before {
   color: var(--neon-yellow);
 }
 
+.katex .math-var-token,
+.katex .math-var-token * {
+  color: var(--math-var-color) !important;
+  text-shadow:
+    0 0 0.35em var(--math-var-glow),
+    0 0 0.9em color-mix(in srgb, var(--math-var-color) 34%, transparent);
+}
+
+.katex .math-var-token {
+  position: relative;
+}
+
 .katex .mord.text {
   color: var(--text-primary);
 }
@@ -1616,12 +1631,12 @@ body::before {
 }
 
 .katex .mbin {
-  color: var(--neon-magenta);
+  color: var(--math-operator-color);
 }
 
 .katex .mopen,
 .katex .mclose {
-  color: var(--text-primary);
+  color: var(--math-grouping-color);
 }
 
 .katex-display::-webkit-scrollbar {
