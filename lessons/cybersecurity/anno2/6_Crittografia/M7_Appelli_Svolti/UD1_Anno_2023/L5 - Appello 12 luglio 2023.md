@@ -32,7 +32,7 @@ Il **cifrario di Hill** (Lester Hill, 1929) è un cifrario a sostituzione **poli
 
 **Vantaggi:** cifra $d$ lettere alla volta, quindi **nasconde le frequenze delle singole lettere** (per $d\ge2$ già appiattisce le statistiche monogramma); semplice ed efficiente (sole moltiplicazioni di matrici).
 
-**Svantaggi:** è **lineare**, quindi totalmente vulnerabile al **known-plaintext**: con $d$ coppie (blocco chiaro, blocco cifrato) linearmente indipendenti si risolve $K = C\,P^{-1}\bmod 26$. La chiave deve essere invertibile mod 26 ($\mcd(\det K, 26)=1$), vincolo non banale. Nessuna confusione non lineare → inadatto come cifrario moderno.
+**Svantaggi:** è **lineare**, quindi totalmente vulnerabile al **known-plaintext**: con $d$ coppie (blocco chiaro, blocco cifrato) linearmente indipendenti si risolve $K = C\,P^{-1}\bmod 26$. La chiave deve essere invertibile mod 26 ($\operatorname{mcd}(\det K, 26)=1$), vincolo non banale. Nessuna confusione non lineare → inadatto come cifrario moderno.
 
 #### Parte b.i — Espressione matematica del cifrato (5 punti)
 
@@ -145,7 +145,7 @@ $$R_2 = L_1 \oplus f = 83 \oplus 90 = \texttt{01010011} \oplus \texttt{01011010}
 1. **Scelta dei primi:** si generano due primi grandi e distinti $p, q$ (es. 1024 bit ciascuno per $n$ a 2048 bit), tramite generazione casuale + test di primalità probabilistici (Miller-Rabin). Devono essere imprevedibili e non troppo vicini (altrimenti la fattorizzazione di Fermat li trova).
 2. **Modulo:** $n = pq$. È pubblico; la sua fattorizzazione è il segreto su cui poggia tutto.
 3. **Funzione di Eulero:** $\varphi(n) = (p-1)(q-1)$ (segreta).
-4. **Esponente pubblico:** $e$ con $1 < e < \varphi(n)$ e $\mcd(e, \varphi(n)) = 1$ (spesso $e = 65537$, primo e con pochi bit a 1 per cifratura veloce).
+4. **Esponente pubblico:** $e$ con $1 < e < \varphi(n)$ e $\operatorname{mcd}(e, \varphi(n)) = 1$ (spesso $e = 65537$, primo e con pochi bit a 1 per cifratura veloce).
 5. **Esponente privato:** $d \equiv e^{-1} \pmod{\varphi(n)}$, calcolato con l'algoritmo di Euclide esteso.
 6. **Chiavi:** pubblica $(n, e)$, privata $(n, d)$. Si **distruggono** $p, q, \varphi(n)$ (o si custodiscono segreti): chi li conosce calcola $d$ e rompe il sistema.
 

@@ -43,7 +43,7 @@ $$d_{\text{eff}} = (e_1 \cdot e_2)^{-1} \bmod \varphi(n)$$
 
 Questo esiste **se e solo se**:
 
-$$\mcd(e_1 \cdot e_2,\ \varphi(n)) = 1$$
+$$\operatorname{mcd}(e_1 \cdot e_2,\ \varphi(n)) = 1$$
 
 Se $e_1$ e $e_2$ sono entrambi coprimi con $\varphi(n)$ individualmente (condizione necessaria per RSA standard), il loro prodotto è **generalmente** anch'esso coprimo con $\varphi(n)$ — ma non è garantito, poiché $e_1 \cdot e_2$ potrebbe essere più grande e condividere fattori con $\varphi(n)$.
 
@@ -55,7 +55,7 @@ Se $e_1$ e $e_2$ sono entrambi coprimi con $\varphi(n)$ individualmente (condizi
 
 #### **4.1 Double-RSA non aggiunge sicurezza rispetto a RSA singolo**
 
-Supponiamo che $\mcd(e_1 \cdot e_2, \varphi(n)) = 1$. Un avversario che vuole decifrare $C$ deve trovare $d_{\text{eff}}$ tale che:
+Supponiamo che $\operatorname{mcd}(e_1 \cdot e_2, \varphi(n)) = 1$. Un avversario che vuole decifrare $C$ deve trovare $d_{\text{eff}}$ tale che:
 
 $$M = C^{d_{\text{eff}}} \bmod n$$
 
@@ -85,7 +85,7 @@ Nessuna informazione aggiuntiva è nascosta.
 |-----------|-----------|-----------|
 | Equivalente a singola cifratura? | No (DES non è un gruppo) | **Sì** ($M^{e_1 e_2}$ = RSA con un esponente) |
 | Sicurezza aggiuntiva? | Marginale (attacco MitM riduce a $2^{57}$) | **Nessuna** (identica a RSA con $e = e_1 e_2$) |
-| Decifratura possibile? | Sempre | Solo se $\mcd(e_1 e_2, \varphi(n))=1$ |
+| Decifratura possibile? | Sempre | Solo se $\operatorname{mcd}(e_1 e_2, \varphi(n))=1$ |
 
 > 💡 **Differenza chiave:** RSA opera in $\mathbb{Z}_n^*$ che ha struttura di gruppo abeliano, quindi la composizione di due esponenziazioni è sempre un'altra esponenziazione — il gruppo è chiuso. Per DES, lo spazio delle permutazioni sui $2^{64}$ blocchi è enormemente più grande del sottogruppo generato da DES, quindi la composizione può uscire dal sottogruppo.
 
@@ -97,7 +97,7 @@ Se i due esponenti sono uguali ($e_1 = e_2 = e$):
 
 $$C(M) = M^{e^2} \bmod n$$
 
-L'esponente effettivo è $e^2$. Per $e = 3$ (scelta comune): $e_{\text{eff}} = 9$. Poiché $\mcd(9, \varphi(n)) = 1$ (assumendo $\varphi(n)$ non divisibile per 3), la decifratura è possibile ma la sicurezza è ancora identica a RSA con esponente 9.
+L'esponente effettivo è $e^2$. Per $e = 3$ (scelta comune): $e_{\text{eff}} = 9$. Poiché $\operatorname{mcd}(9, \varphi(n)) = 1$ (assumendo $\varphi(n)$ non divisibile per 3), la decifratura è possibile ma la sicurezza è ancora identica a RSA con esponente 9.
 
 ---
 
@@ -117,7 +117,7 @@ L'esponente effettivo è $e^2$. Per $e = 3$ (scelta comune): $e_{\text{eff}} = 9
 $$C(M) = M^{e_1 \cdot e_2} \bmod n$$
 Double-RSA è equivalente a RSA con esponente $e_{\text{eff}} = e_1 \cdot e_2$.
 
-**Decifrabilità.** Se $\mcd(e_1 \cdot e_2,\ \varphi(n)) = 1$, esiste $d_{\text{eff}} = (e_1 e_2)^{-1} \bmod \varphi(n)$ e la decifratura è $M = C^{d_{\text{eff}}} \bmod n$. Se la condizione non vale, il cifrario non è invertibile.
+**Decifrabilità.** Se $\operatorname{mcd}(e_1 \cdot e_2,\ \varphi(n)) = 1$, esiste $d_{\text{eff}} = (e_1 e_2)^{-1} \bmod \varphi(n)$ e la decifratura è $M = C^{d_{\text{eff}}} \bmod n$. Se la condizione non vale, il cifrario non è invertibile.
 
 **Sicurezza.** Un avversario che conosce la chiave pubblica $(n, e_1, e_2)$ calcola banalmente $e_{\text{eff}} = e_1 \cdot e_2$. Il problema di rompere Double-RSA si riduce immediatamente al problema di rompere RSA standard con chiave $(n, e_1 e_2)$, che è equivalente alla fattorizzazione di $n$.
 
@@ -131,7 +131,7 @@ Double-RSA è equivalente a RSA con esponente $e_{\text{eff}} = e_1 \cdot e_2$.
 |---------|---------|
 | $C(M) = ((M)^{e_1})^{e_2}$ equivale a? | RSA con $e_{\text{eff}} = e_1 \cdot e_2$ |
 | Sicurezza aggiuntiva rispetto a RSA? | Nessuna |
-| Condizione per decifrare? | $\mcd(e_1 e_2, \varphi(n)) = 1$ |
+| Condizione per decifrare? | $\operatorname{mcd}(e_1 e_2, \varphi(n)) = 1$ |
 | Esponente privato? | $d_{\text{eff}} = (e_1 e_2)^{-1} \bmod \varphi(n)$ |
 | Confronto con Double DES? | Double DES non si riduce a DES singolo; Double-RSA sì |
 

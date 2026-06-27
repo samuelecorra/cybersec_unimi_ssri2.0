@@ -133,17 +133,17 @@ Per qualsiasi $x$, $f = 0$. Il XOR con 0 è l'identità. Il round non cifra null
 **2. $K = 5$:**
 $$f(x, 5) = (2x \cdot 5) \bmod 15 = (10x) \bmod 15$$
 
-$10$ e $15$ hanno $\mcd(10, 15) = 5$. L'immagine di $x \mapsto 10x \bmod 15$ è $\{0, 5, 10\}$ (solo multipli di 5): molti valori di $x$ producono lo stesso $f$. Grande perdita di informazione.
+$10$ e $15$ hanno $\operatorname{mcd}(10, 15) = 5$. L'immagine di $x \mapsto 10x \bmod 15$ è $\{0, 5, 10\}$ (solo multipli di 5): molti valori di $x$ producono lo stesso $f$. Grande perdita di informazione.
 
 **3. $K = 3$:**
 $$f(x, 3) = (6x) \bmod 15 = (6x) \bmod 15$$
 
-$\mcd(6, 15) = 3$. L'immagine è $\{0, 3, 6, 9, 12\}$: solo 5 valori su 16 possibili (per $x \in \{0,...,15\}$ non tutti i valori di $f$ sono raggiungibili).
+$\operatorname{mcd}(6, 15) = 3$. L'immagine è $\{0, 3, 6, 9, 12\}$: solo 5 valori su 16 possibili (per $x \in \{0,...,15\}$ non tutti i valori di $f$ sono raggiungibili).
 
 **4. $K = 7$ (il caso dell'esame):**
 $$f(x, 7) = (14x) \bmod 15$$
 
-$\mcd(14, 15) = 1$: la funzione $x \mapsto 14x \bmod 15$ è una **biiezione** su $\mathbb{Z}_{15}$ (tutti i valori $0$-$14$ sono raggiunti esattamente una volta). Questo è il caso migliore per la funzione di round.
+$\operatorname{mcd}(14, 15) = 1$: la funzione $x \mapsto 14x \bmod 15$ è una **biiezione** su $\mathbb{Z}_{15}$ (tutti i valori $0$-$14$ sono raggiunti esattamente una volta). Questo è il caso migliore per la funzione di round.
 
 **5. Problema con $\mathbb{Z}_{15}$ (non primo):**
 

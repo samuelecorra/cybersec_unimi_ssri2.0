@@ -68,7 +68,7 @@ $$2x' \equiv 7 - 15 \equiv -8 \equiv 12 \pmod{20}$$
 
 $$2x' \equiv 12 \pmod{20}$$
 
-Dividiamo entrambi i membri per 2. Poiché $\mcd(2, 20) = 2$ e $2 \mid 12$, l'equazione ha esattamente $\mcd(2, 20) = 2$ soluzioni in $\mathbb{Z}_{20}$.
+Dividiamo entrambi i membri per 2. Poiché $\operatorname{mcd}(2, 20) = 2$ e $2 \mid 12$, l'equazione ha esattamente $\operatorname{mcd}(2, 20) = 2$ soluzioni in $\mathbb{Z}_{20}$.
 
 Dividiamo tutto per 2: $x' \equiv 6 \pmod{10}$.
 
@@ -83,6 +83,6 @@ $$H(16) = 2 \cdot 16 + 15 \bmod 20 = 32 + 15 \bmod 20 = 47 \bmod 20 = 7 = H(6) \
 
 **Perché la proprietà manca strutturalmente:**
 
-La funzione $H(x) = 2x + 15 \bmod 20$ è **affine** (lineare con traslazione). Poiché $\mcd(2, 20) = 2 \neq 1$, la funzione lineare $x \mapsto 2x \bmod 20$ non è iniettiva: il suo kernel ha dimensione 2, quindi ogni elemento dell'immagine ha esattamente 2 preimmagini. Trovare una second preimage si riduce a risolvere una semplice equazione lineare congruenziale, operazione computazionalmente banale.
+La funzione $H(x) = 2x + 15 \bmod 20$ è **affine** (lineare con traslazione). Poiché $\operatorname{mcd}(2, 20) = 2 \neq 1$, la funzione lineare $x \mapsto 2x \bmod 20$ non è iniettiva: il suo kernel ha dimensione 2, quindi ogni elemento dell'immagine ha esattamente 2 preimmagini. Trovare una second preimage si riduce a risolvere una semplice equazione lineare congruenziale, operazione computazionalmente banale.
 
 > ⚠️ Una funzione hash deve essere non lineare, non invertibile, e con output ben distribuito. Una funzione affine modulo un intero composto viola tutte queste caratteristiche e non può essere usata in crittografia.

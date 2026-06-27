@@ -75,9 +75,9 @@ Quindi $P(C = c \mid M = m_1) = P(C = c \mid M = m_2)$ per ogni $m_1, m_2$ e ogn
 
 Il cifrario affine cifra un carattere $x \in \mathbb{Z}_{26}$ con chiave $(a, b)$ come:
 
-$$E_{(a,b)}(x) = ax + b \bmod 26 \quad \text{con } \mcd(a, 26) = 1$$
+$$E_{(a,b)}(x) = ax + b \bmod 26 \quad \text{con } \operatorname{mcd}(a, 26) = 1$$
 
-La condizione $\mcd(a, 26) = 1$ garantisce l'invertibilità (8 valori possibili per $a$: 1,3,5,7,9,11,15,17,19,21,23,25).
+La condizione $\operatorname{mcd}(a, 26) = 1$ garantisce l'invertibilità (8 valori possibili per $a$: 1,3,5,7,9,11,15,17,19,21,23,25).
 
 **Analisi della composizione:**
 
@@ -103,7 +103,7 @@ La composizione di due cifrari affini è ancora un cifrario affine. Ciò signifi
 
 2. **Nessuna espansione dello spazio delle chiavi effettivo:** anche se usiamo due chiavi $(a_1, b_1)$ e $(a_2, b_2)$, la sicurezza del doppio cifrario è quella di un cifrario affine con un'unica chiave equivalente $(a_1 a_2 \bmod 26, a_1 b_2 + b_1 \bmod 26)$. Un attaccante che rompe il cifrario affine singolo rompe automaticamente anche il doppio cifrario.
 
-3. **Quantificazione:** lo spazio delle chiavi di un singolo cifrario affine ha $8 \times 26 = 208$ chiavi valide. Quello del doppio cifrario sembra $(8 \times 26)^2 \approx 43000$ coppie di chiavi, ma le chiavi equivalenti rimangono al più 208 (lo spazio dell'immagine). In realtà non tutte le 208 chiavi equivalenti sono raggiungibili: dipende da quali prodotti $a_1 a_2 \bmod 26$ siano anch'essi invertibili modulo 26, il che è verificato se $\mcd(a_1, 26) = \mcd(a_2, 26) = 1$.
+3. **Quantificazione:** lo spazio delle chiavi di un singolo cifrario affine ha $8 \times 26 = 208$ chiavi valide. Quello del doppio cifrario sembra $(8 \times 26)^2 \approx 43000$ coppie di chiavi, ma le chiavi equivalenti rimangono al più 208 (lo spazio dell'immagine). In realtà non tutte le 208 chiavi equivalenti sono raggiungibili: dipende da quali prodotti $a_1 a_2 \bmod 26$ siano anch'essi invertibili modulo 26, il che è verificato se $\operatorname{mcd}(a_1, 26) = \operatorname{mcd}(a_2, 26) = 1$.
 
 > ✅ **Conclusione:** la doppia applicazione del cifrario affine con chiavi diverse è algebricamente equivalente a una singola applicazione con una chiave composta. Non aumenta la robustezza: l'analisi crittografica (ad esempio l'analisi delle frequenze) applicabile al cifrario affine semplice è altrettanto applicabile al doppio cifrario.
 
@@ -256,7 +256,7 @@ Poiché $f_i$ è lineare, la relazione tra plaintext e ciphertext è descrivibil
 
 **Setup RSA:**
 - Scegliere due primi distinti $p$ e $q$; calcolare $n = pq$ e $\varphi(n) = (p-1)(q-1)$.
-- Scegliere $e$ con $1 < e < \varphi(n)$ e $\mcd(e, \varphi(n)) = 1$.
+- Scegliere $e$ con $1 < e < \varphi(n)$ e $\operatorname{mcd}(e, \varphi(n)) = 1$.
 - Calcolare $d$ tale che $ed \equiv 1 \pmod{\varphi(n)}$.
 - **Chiave pubblica:** $(n, e)$; **chiave privata:** $(n, d)$.
 - **Cifratura:** $C = M^e \bmod n$
@@ -268,24 +268,24 @@ Poiché $f_i$ è lineare, la relazione tra plaintext e ciphertext è descrivibil
 
 Poiché $ed \equiv 1 \pmod{\varphi(n)}$, esiste un intero $k$ tale che $ed = 1 + k\varphi(n) = 1 + k(p-1)(q-1)$.
 
-**Caso 1: $\mcd(M, n) = 1$**
+**Caso 1: $\operatorname{mcd}(M, n) = 1$**
 
-Per il teorema di Eulero: $M^{\varphi(n)} \equiv 1 \pmod{n}$ quando $\mcd(M, n) = 1$. Quindi:
+Per il teorema di Eulero: $M^{\varphi(n)} \equiv 1 \pmod{n}$ quando $\operatorname{mcd}(M, n) = 1$. Quindi:
 
 $$M^{ed} = M^{1 + k\varphi(n)} = M \cdot (M^{\varphi(n)})^k \equiv M \cdot 1^k = M \pmod{n}$$
 
-**Caso 2: $\mcd(M, n) \neq 1$**
+**Caso 2: $\operatorname{mcd}(M, n) \neq 1$**
 
-Poiché $n = pq$ con $p, q$ primi, se $\mcd(M, n) \neq 1$ allora $p \mid M$ oppure $q \mid M$ (o entrambi, ma $M < n = pq$ esclude entrambi contemporaneamente se $M \neq 0$).
+Poiché $n = pq$ con $p, q$ primi, se $\operatorname{mcd}(M, n) \neq 1$ allora $p \mid M$ oppure $q \mid M$ (o entrambi, ma $M < n = pq$ esclude entrambi contemporaneamente se $M \neq 0$).
 
 Supponiamo $p \mid M$ ma $q \nmid M$.
 
 - **Modulo $p$:** $M \equiv 0 \pmod{p}$, quindi $M^{ed} \equiv 0 \equiv M \pmod{p}$.
-- **Modulo $q$:** $\mcd(M, q) = 1$, quindi per il piccolo teorema di Fermat: $M^{q-1} \equiv 1 \pmod{q}$. Poiché $ed = 1 + k(p-1)(q-1)$, si ha:
+- **Modulo $q$:** $\operatorname{mcd}(M, q) = 1$, quindi per il piccolo teorema di Fermat: $M^{q-1} \equiv 1 \pmod{q}$. Poiché $ed = 1 + k(p-1)(q-1)$, si ha:
 
 $$M^{ed} = M \cdot (M^{q-1})^{k(p-1)} \equiv M \cdot 1 = M \pmod{q}$$
 
-- **Ricombinazione (CRT):** abbiamo $M^{ed} \equiv M \pmod{p}$ e $M^{ed} \equiv M \pmod{q}$. Poiché $\mcd(p, q) = 1$, per il teorema cinese dei resti:
+- **Ricombinazione (CRT):** abbiamo $M^{ed} \equiv M \pmod{p}$ e $M^{ed} \equiv M \pmod{q}$. Poiché $\operatorname{mcd}(p, q) = 1$, per il teorema cinese dei resti:
 
 $$M^{ed} \equiv M \pmod{pq = n}$$
 
@@ -339,7 +339,7 @@ $$\varphi(55) = (5-1)(11-1) = 4 \times 10 = 40$$
 
 Dobbiamo trovare $d$ tale che $7d \equiv 1 \pmod{40}$.
 
-Usiamo l'**algoritmo di Euclide esteso** su $\mcd(7, 40)$:
+Usiamo l'**algoritmo di Euclide esteso** su $\operatorname{mcd}(7, 40)$:
 
 **Algoritmo di Euclide:**
 $$40 = 5 \cdot 7 + 5$$
@@ -347,7 +347,7 @@ $$7 = 1 \cdot 5 + 2$$
 $$5 = 2 \cdot 2 + 1$$
 $$2 = 2 \cdot 1 + 0$$
 
-$\mcd(7, 40) = 1$ ✓ (l'inverso esiste)
+$\operatorname{mcd}(7, 40) = 1$ ✓ (l'inverso esiste)
 
 **Back-substitution (Euclide esteso):**
 
@@ -465,7 +465,7 @@ $$H(m) + xr \equiv 0 \pmod{q}$$
 
 $$xr \equiv -H(m) \pmod{q}$$
 
-Ora $r = a \neq 0$. Poiché $q$ è primo e $0 < r < q$, si ha $\mcd(r, q) = 1$, quindi $r$ è invertibile modulo $q$. Moltiplicando entrambi i lati per $r^{-1} \bmod q$:
+Ora $r = a \neq 0$. Poiché $q$ è primo e $0 < r < q$, si ha $\operatorname{mcd}(r, q) = 1$, quindi $r$ è invertibile modulo $q$. Moltiplicando entrambi i lati per $r^{-1} \bmod q$:
 
 $$x \equiv -H(m) \cdot r^{-1} \pmod{q}$$
 

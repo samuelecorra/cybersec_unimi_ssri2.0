@@ -98,7 +98,7 @@ $\sqrt{225{,}104} = 474.5\ldots \approx 474$ → radici: $p = \frac{18{,}426 + 4
 
 Se un avversario potesse **calcolare direttamente $d$** da $(n, e)$, potrebbe anche **fattorizzare $n$** — e viceversa. Il ragionamento è il seguente.
 
-> 💡 **Idea del collegamento.** Se conosci $d$ e $e$, sai che $ed \equiv 1 \pmod{\varphi(n)}$, cioè $ed - 1$ è un multiplo di $\varphi(n)$. Dalla conoscenza di un multiplo di $\varphi(n)$ si può ricavare la fattorizzazione di $n$ tramite un algoritmo randomizzato: si sceglie un elemento casuale $a \in \mathbb{Z}_n^*$ e si calcola la sequenza $a^{(ed-1)/2^i} \bmod n$ finché non si trova una radice quadrata non banale di $1$. Una radice non banale di $1$ modulo $n = pq$ rivela un fattore di $n$ tramite il $\mcd$.
+> 💡 **Idea del collegamento.** Se conosci $d$ e $e$, sai che $ed \equiv 1 \pmod{\varphi(n)}$, cioè $ed - 1$ è un multiplo di $\varphi(n)$. Dalla conoscenza di un multiplo di $\varphi(n)$ si può ricavare la fattorizzazione di $n$ tramite un algoritmo randomizzato: si sceglie un elemento casuale $a \in \mathbb{Z}_n^*$ e si calcola la sequenza $a^{(ed-1)/2^i} \bmod n$ finché non si trova una radice quadrata non banale di $1$. Una radice non banale di $1$ modulo $n = pq$ rivela un fattore di $n$ tramite il $\operatorname{mcd}$.
 
 Un algoritmo in grado di calcolare $d$ può essere usato come base per un **algoritmo di tipo Las Vegas** che fattorizza $n$ con probabilità almeno $1/2$ ad ogni tentativo.
 
@@ -231,7 +231,7 @@ $$
 
 > 💡 **Scenario.** Un'autorità genera un solo modulo $n$ e lo distribuisce a più utenti, assegnando a ciascuno un esponente pubblico diverso ($e_1, e_2, \ldots$). Sembra efficiente, ma è un errore fatale: se lo stesso messaggio $M$ viene cifrato per due utenti diversi con lo stesso $n$, chiunque osservi entrambi i crittotesti può recuperare $M$ **senza conoscere** $d_1$ o $d_2$.
 
-**Condizione:** $\mcd(e_1, e_2) = 1$ (quasi sempre vera se $e_1, e_2$ sono scelti come numeri primi distinti).
+**Condizione:** $\operatorname{mcd}(e_1, e_2) = 1$ (quasi sempre vera se $e_1, e_2$ sono scelti come numeri primi distinti).
 
 Sia:
 
@@ -244,7 +244,7 @@ $$
 
 **Perché funziona — il collegamento con Bézout:**
 
-Poiché $\mcd(e_1, e_2) = 1$, per l'identità di Bézout esistono interi $x, y$ (con uno eventualmente negativo) tali che:
+Poiché $\operatorname{mcd}(e_1, e_2) = 1$, per l'identità di Bézout esistono interi $x, y$ (con uno eventualmente negativo) tali che:
 
 $$  
 e_1 x + e_2 y = 1  

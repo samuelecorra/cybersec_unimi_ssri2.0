@@ -70,9 +70,9 @@ Quindi $P(C = c \mid M = m_1) = P(C = c \mid M = m_2)$ per ogni $m_1, m_2$ e ogn
 
 Il cifrario affine cifra un carattere $x \in \mathbb{Z}_{26}$ con chiave $(a, b)$ come:
 
-$$E_{(a,b)}(x) = ax + b \bmod 26 \quad \text{con } \mcd(a, 26) = 1$$
+$$E_{(a,b)}(x) = ax + b \bmod 26 \quad \text{con } \operatorname{mcd}(a, 26) = 1$$
 
-La condizione $\mcd(a, 26) = 1$ garantisce l'invertibilità (8 valori possibili per $a$: 1,3,5,7,9,11,15,17,19,21,23,25).
+La condizione $\operatorname{mcd}(a, 26) = 1$ garantisce l'invertibilità (8 valori possibili per $a$: 1,3,5,7,9,11,15,17,19,21,23,25).
 
 **Analisi della composizione:**
 
@@ -98,7 +98,7 @@ La composizione di due cifrari affini è ancora un cifrario affine. Ciò signifi
 
 2. **Nessuna espansione dello spazio delle chiavi effettivo:** anche se usiamo due chiavi $(a_1, b_1)$ e $(a_2, b_2)$, la sicurezza del doppio cifrario è quella di un cifrario affine con un'unica chiave equivalente $(a_1 a_2 \bmod 26, a_1 b_2 + b_1 \bmod 26)$. Un attaccante che rompe il cifrario affine singolo rompe automaticamente anche il doppio cifrario.
 
-3. **Quantificazione:** lo spazio delle chiavi di un singolo cifrario affine ha $8 \times 26 = 208$ chiavi valide. Quello del doppio cifrario sembra $(8 \times 26)^2 \approx 43000$ coppie di chiavi, ma le chiavi equivalenti rimangono al più 208 (lo spazio dell'immagine). In realtà non tutte le 208 chiavi equivalenti sono raggiungibili: dipende da quali prodotti $a_1 a_2 \bmod 26$ siano anch'essi invertibili modulo 26, il che è verificato se $\mcd(a_1, 26) = \mcd(a_2, 26) = 1$.
+3. **Quantificazione:** lo spazio delle chiavi di un singolo cifrario affine ha $8 \times 26 = 208$ chiavi valide. Quello del doppio cifrario sembra $(8 \times 26)^2 \approx 43000$ coppie di chiavi, ma le chiavi equivalenti rimangono al più 208 (lo spazio dell'immagine). In realtà non tutte le 208 chiavi equivalenti sono raggiungibili: dipende da quali prodotti $a_1 a_2 \bmod 26$ siano anch'essi invertibili modulo 26, il che è verificato se $\operatorname{mcd}(a_1, 26) = \operatorname{mcd}(a_2, 26) = 1$.
 
 > ✅ **Conclusione:** la doppia applicazione del cifrario affine con chiavi diverse è algebricamente equivalente a una singola applicazione con una chiave composta. Non aumenta la robustezza: l'analisi crittografica (ad esempio l'analisi delle frequenze) applicabile al cifrario affine semplice è altrettanto applicabile al doppio cifrario.
 

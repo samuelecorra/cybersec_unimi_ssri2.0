@@ -372,7 +372,7 @@ $$2x' \equiv 7 - 15 \equiv -8 \equiv 12 \pmod{20}$$
 
 $$2x' \equiv 12 \pmod{20}$$
 
-Dividiamo entrambi i membri per 2. Poiché $\mcd(2, 20) = 2$ e $2 \mid 12$, l'equazione ha esattamente $\mcd(2, 20) = 2$ soluzioni in $\mathbb{Z}_{20}$.
+Dividiamo entrambi i membri per 2. Poiché $\operatorname{mcd}(2, 20) = 2$ e $2 \mid 12$, l'equazione ha esattamente $\operatorname{mcd}(2, 20) = 2$ soluzioni in $\mathbb{Z}_{20}$.
 
 Dividiamo tutto per 2: $x' \equiv 6 \pmod{10}$.
 
@@ -387,7 +387,7 @@ $$H(16) = 2 \cdot 16 + 15 \bmod 20 = 32 + 15 \bmod 20 = 47 \bmod 20 = 7 = H(6) \
 
 **Perché la proprietà manca strutturalmente:**
 
-La funzione $H(x) = 2x + 15 \bmod 20$ è **affine** (lineare con traslazione). Poiché $\mcd(2, 20) = 2 \neq 1$, la funzione lineare $x \mapsto 2x \bmod 20$ non è iniettiva: il suo kernel ha dimensione 2, quindi ogni elemento dell'immagine ha esattamente 2 preimmagini. Trovare una second preimage si riduce a risolvere una semplice equazione lineare congruenziale, operazione computazionalmente banale.
+La funzione $H(x) = 2x + 15 \bmod 20$ è **affine** (lineare con traslazione). Poiché $\operatorname{mcd}(2, 20) = 2 \neq 1$, la funzione lineare $x \mapsto 2x \bmod 20$ non è iniettiva: il suo kernel ha dimensione 2, quindi ogni elemento dell'immagine ha esattamente 2 preimmagini. Trovare una second preimage si riduce a risolvere una semplice equazione lineare congruenziale, operazione computazionalmente banale.
 
 > ⚠️ Una funzione hash deve essere non lineare, non invertibile, e con output ben distribuito. Una funzione affine modulo un intero composto viola tutte queste caratteristiche e non può essere usata in crittografia.
 
@@ -547,7 +547,7 @@ Questo è l'appello della sessione invernale (gennaio). Caratteristiche da notar
 
 - **D2 (20 punti):** AES è presente. È una domanda descrittiva: enumerare le 4 operazioni per round con precisione matematica (SubBytes in $GF(2^8)$, MixColumns come moltiplicazione polinomiale). Non dimenticare che MixColumns è assente nell'ultimo round.
 
-- **D3 (20 punti):** identica struttura alla D3 dell'appello 20/01/2025 (stessa domanda b con funzione diversa). Padroneggiare la tecnica: calcolare il valore, risolvere la congruenza lineare con $\mcd$, trovare le preimmagini multiple.
+- **D3 (20 punti):** identica struttura alla D3 dell'appello 20/01/2025 (stessa domanda b con funzione diversa). Padroneggiare la tecnica: calcolare il valore, risolvere la congruenza lineare con $\operatorname{mcd}$, trovare le preimmagini multiple.
 
 - **D4 (30 punti):** El-Gamal numerico classico. Verificare sempre prima che $g$ sia un generatore. La parte d (5 punti) su ECC è uguale in quasi tutti gli appelli: usare la tabella di corrispondenza, menzionare ECDLP e vantaggi in termini di dimensione chiave.
 

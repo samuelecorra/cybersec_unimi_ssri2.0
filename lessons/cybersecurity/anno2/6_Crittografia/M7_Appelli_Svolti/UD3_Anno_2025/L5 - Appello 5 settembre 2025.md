@@ -39,7 +39,7 @@ Ogni lettera dell'alfabeto viene mappata a un numero in $\mathbb{Z}_{26}$ (A=0, 
 $$E(x) = (a \cdot x + b) \bmod 26$$
 
 dove:
-- $a \in \mathbb{Z}_{26}$ è il **moltiplicatore** (deve soddisfare $\mcd(a, 26) = 1$ per garantire l'invertibilità)
+- $a \in \mathbb{Z}_{26}$ è il **moltiplicatore** (deve soddisfare $\operatorname{mcd}(a, 26) = 1$ per garantire l'invertibilità)
 - $b \in \mathbb{Z}_{26}$ è il **traslatore** (shift)
 - $(a, b)$ è la chiave
 
@@ -49,7 +49,7 @@ $$D(y) = a^{-1} \cdot (y - b) \bmod 26$$
 
 dove $a^{-1}$ è l'inverso moltiplicativo di $a$ in $\mathbb{Z}_{26}$.
 
-**Condizione di invertibilità:** $\mcd(a, 26) = 1$. I valori di $a$ invertibili in $\mathbb{Z}_{26}$ sono: 1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25 (12 valori). Con $b \in \{0, \ldots, 25\}$, lo spazio delle chiavi ha $12 \times 26 = 312$ chiavi.
+**Condizione di invertibilità:** $\operatorname{mcd}(a, 26) = 1$. I valori di $a$ invertibili in $\mathbb{Z}_{26}$ sono: 1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25 (12 valori). Con $b \in \{0, \ldots, 25\}$, lo spazio delle chiavi ha $12 \times 26 = 312$ chiavi.
 
 **Casi speciali:**
 - $a=1$: si riduce al cifrario di Cesare.

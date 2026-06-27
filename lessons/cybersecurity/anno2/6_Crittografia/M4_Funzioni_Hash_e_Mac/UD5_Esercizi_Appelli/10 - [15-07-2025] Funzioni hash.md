@@ -49,9 +49,9 @@ $$2x' \equiv -8 \equiv 2 \pmod{10}$$
 
 $$x' \equiv 1 \pmod{5}$$
 
-Poiché $\mcd(2, 10) = 2$ e $2 \mid 2$, ci sono $\mcd(2,10) = 2$ soluzioni in $\mathbb{Z}_{10}$: $x' = 1$ e $x' = 6$.
+Poiché $\operatorname{mcd}(2, 10) = 2$ e $2 \mid 2$, ci sono $\operatorname{mcd}(2,10) = 2$ soluzioni in $\mathbb{Z}_{10}$: $x' = 1$ e $x' = 6$.
 
-Quando $\mcd(a,n) \mid b$, il numero di soluzioni distinte in $\mathbb{Z}_n$ è esattamente $\mcd(a, n)$. Qui $\mcd(2, 10) = 2$, quindi ci sono **2 soluzioni** in $\mathbb{Z}_{10}$, separate da un passo di $n / \mcd = 10/2 = 5$.
+Quando $\operatorname{mcd}(a,n) \mid b$, il numero di soluzioni distinte in $\mathbb{Z}_n$ è esattamente $\operatorname{mcd}(a, n)$. Qui $\operatorname{mcd}(2, 10) = 2$, quindi ci sono **2 soluzioni** in $\mathbb{Z}_{10}$, separate da un passo di $n / \operatorname{mcd} = 10/2 = 5$.
 
 Ecco perché si trovano $x' = 1$ e $x' = 6$ (differiscono di 5), e la seconda è proprio l'input originale — questo è il motivo per cui la funzione non ha second preimage resistance.
 
@@ -63,7 +63,7 @@ La soluzione diversa da 6 è $x' = 1$.
 
 **Perché manca la second preimage resistance:**
 
-$H(x) = 2x + 8 \bmod 10$ non è una biiezione in $\mathbb{Z}_{10}$ perché $\mcd(2, 10) = 2 \neq 1$: la funzione è 2-a-1 (ogni valore dell'immagine ha esattamente due preimmagini, che differiscono di 5). Trovare una seconda preimmagine per qualsiasi valore è banale.
+$H(x) = 2x + 8 \bmod 10$ non è una biiezione in $\mathbb{Z}_{10}$ perché $\operatorname{mcd}(2, 10) = 2 \neq 1$: la funzione è 2-a-1 (ogni valore dell'immagine ha esattamente due preimmagini, che differiscono di 5). Trovare una seconda preimmagine per qualsiasi valore è banale.
 
 In generale:
 

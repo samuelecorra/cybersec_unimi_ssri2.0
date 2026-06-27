@@ -101,7 +101,7 @@ Ogni utente genera la propria coppia di chiavi seguendo questi passaggi:
 4. Si sceglie un **esponente di cifratura $e$** tale che:
 
    $$
-   \mcd(e, \varphi(n)) = 1
+   \operatorname{mcd}(e, \varphi(n)) = 1
    $$
 
    Questo primo vincolo di coprimità ci garantisce l'inverso moltiplicativo di $e$ modulo $\varphi(n)$, che sarà l’esponente di decifratura $d$.
@@ -162,10 +162,10 @@ Solo Alice può decifrare, perché solo lei conosce $d$.
 Scelta:
 
 $$
-e = 79,\quad \mcd(79, 3220) = 1
+e = 79,\quad \operatorname{mcd}(79, 3220) = 1
 $$
 
-Come calcolare velocemente il mcd per verificare la coprimalità? Si può usare l’**algoritmo di Euclide**. Ma in sede d'esame si può anche dare per garantito che il prof abbia scelto $p$ e $q$ tali che $e$ sia coprimo con $\varphi(n)$ per "costruzione". In poche parole computiamo e basta.
+Come calcolare velocemente il operatorname{mcd} per verificare la coprimalità? Si può usare l’**algoritmo di Euclide**. Ma in sede d'esame si può anche dare per garantito che il prof abbia scelto $p$ e $q$ tali che $e$ sia coprimo con $\varphi(n)$ per "costruzione". In poche parole computiamo e basta.
 
 Calcolo di $d$:
 
@@ -292,7 +292,7 @@ $$
 - $p = 11$, $q = 5$
 - $n = 11 \cdot 5 = 55$
 - $\varphi(n) = (10)(4) = 40$
-- Scelta $e = 3$, $\mcd(3, 40) = 1$
+- Scelta $e = 3$, $\operatorname{mcd}(3, 40) = 1$
 - Calcolo $d = 27$, perché:
   $$
   3 \cdot 27 \equiv 1 \pmod{40}

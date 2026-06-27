@@ -96,7 +96,7 @@ In notazione additiva, "$a^x$" significa $\underbrace{a + a + \cdots + a}_{x} = 
 
 Questa è una **congruenza lineare** nella variabile $x$. Come abbiamo visto nella lezione su Euclide esteso, si risolve in tempo $O((\log n)^2)$:
 
-1. Calcola $g = \mcd(a, n)$ con Euclide classico.
+1. Calcola $g = \operatorname{mcd}(a, n)$ con Euclide classico.
 2. Se $g \nmid b$: nessuna soluzione.
 3. Se $g \mid b$: $x = (b/g) \cdot (a/g)^{-1} \bmod (n/g)$, calcolando l'inverso con Euclide esteso.
 
@@ -190,7 +190,7 @@ $$
 $$
 
 $$  
-\mathbb{Z}_p^* = \{\ a \in \mathbb{Z}_p : \mcd(a, p) = 1\ \} = \{1, 2, \ldots, p-1\} \quad \text{(gruppo moltiplicativo, ordine } p-1\text{)}
+\mathbb{Z}_p^* = \{\ a \in \mathbb{Z}_p : \operatorname{mcd}(a, p) = 1\ \} = \{1, 2, \ldots, p-1\} \quad \text{(gruppo moltiplicativo, ordine } p-1\text{)}
 $$
 
 > 💡 **La differenza fondamentale tra i due.** $\mathbb{Z}_p$ con l’addizione è un gruppo dove DL è facile (congruenza lineare). $\mathbb{Z}_p^*$ con la moltiplicazione è il gruppo dove DL è difficile. Quando si parla di "logaritmo discreto" in crittografia, ci si riferisce **sempre** al secondo — il gruppo moltiplicativo. La confusione tra i due è la fonte dell’errore concettuale più comune su questo argomento.

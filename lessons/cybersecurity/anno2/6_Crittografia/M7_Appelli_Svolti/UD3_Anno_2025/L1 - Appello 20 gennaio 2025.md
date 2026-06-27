@@ -274,7 +274,7 @@ $$5x' \equiv 2 - 12 \equiv -10 \equiv 10 \pmod{20}$$
 
 $$5x' \equiv 10 \pmod{20}$$
 
-Dividiamo ambo i membri per 5. Poiché $\mcd(5, 20) = 5$ e $5 \mid 10$, l'equazione ha esattamente $\mcd(5,20) = 5$ soluzioni distinte in $\mathbb{Z}_{20}$.
+Dividiamo ambo i membri per 5. Poiché $\operatorname{mcd}(5, 20) = 5$ e $5 \mid 10$, l'equazione ha esattamente $\operatorname{mcd}(5,20) = 5$ soluzioni distinte in $\mathbb{Z}_{20}$.
 
 Cerchiamo manualmente i valori $x' \in \{0, 1, \ldots, 19\}$ tali che $5x' \bmod 20 = 10$:
 
@@ -297,7 +297,7 @@ Verifica: $H(2) = 5 \cdot 2 + 12 \bmod 20 = 10 + 12 \bmod 20 = 22 \bmod 20 = 2$ 
 
 **Dimostrazione che la proprietà manca in generale:**
 
-La funzione $H(x) = 5x + 12 \bmod 20$ è lineare, quindi iniettiva solo se $\mcd(5, 20) = 1$. Ma $\mcd(5, 20) = 5 \neq 1$, quindi $H$ non è iniettiva: esiste una classe di residui modulo $20/5 = 4$ che producono lo stesso output. Ogni valore nell'immagine di $H$ ha esattamente 5 preimmagini, il che rende banalmente semplice trovare second preimages (e collisioni).
+La funzione $H(x) = 5x + 12 \bmod 20$ è lineare, quindi iniettiva solo se $\operatorname{mcd}(5, 20) = 1$. Ma $\operatorname{mcd}(5, 20) = 5 \neq 1$, quindi $H$ non è iniettiva: esiste una classe di residui modulo $20/5 = 4$ che producono lo stesso output. Ogni valore nell'immagine di $H$ ha esattamente 5 preimmagini, il che rende banalmente semplice trovare second preimages (e collisioni).
 
 > ⚠️ Per avere second preimage resistance, una funzione hash deve avere un output molto più grande dell'input, non essere lineare, e non avere struttura algebrica sfruttabile. Questa funzione viola tutte e tre queste caratteristiche.
 

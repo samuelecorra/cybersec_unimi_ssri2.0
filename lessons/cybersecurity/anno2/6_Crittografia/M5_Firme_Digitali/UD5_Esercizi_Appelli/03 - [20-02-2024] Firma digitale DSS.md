@@ -94,7 +94,7 @@ Supponiamo (per assurdo) che si accettasse $s = 0$ come firma valida e che la ve
 
 $$s = k^{-1}(H(m) + xr) \equiv 0 \pmod{q}$$
 
-Questo implica $H(m) + xr \equiv 0 \pmod{q}$, ovvero $xr \equiv -H(m) \pmod{q}$. Se $r \neq 0$ e $r$ è invertibile modulo $q$ (poiché $\mcd(r, q) = 1$ con alta probabilità), si potrebbe ricavare:
+Questo implica $H(m) + xr \equiv 0 \pmod{q}$, ovvero $xr \equiv -H(m) \pmod{q}$. Se $r \neq 0$ e $r$ è invertibile modulo $q$ (poiché $\operatorname{mcd}(r, q) = 1$ con alta probabilità), si potrebbe ricavare:
 
 $$x \equiv -H(m) \cdot r^{-1} \pmod{q}$$
 
