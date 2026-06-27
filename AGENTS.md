@@ -102,7 +102,25 @@
 - M3/UD3/L1 (Notazione per protocolli crittografici): [COMPLETED] — integrato transcript su obiettivi dei protocolli, session/run, chiavi lungo/breve termine, freschezza, efficienza, terze parti, controllo chiavi, non ripudio, assunzioni d'attacco, notazione partecipanti/attaccanti/server/chiavi/cifratura/firma/certificati/messaggi.
 - M3/UD3/L2 (Protocollo di autenticazione unilaterale): [COMPLETED] — integrato transcript su progettazione incrementale del protocollo, identità/IP/password, replay attack, nonce, challenge-response con chiave condivisa, firma digitale, MITM e certificati.
 - M3/UD3/L3 (Attacchi comuni ai protocolli): [COMPLETED] — integrato transcript su osservazione passiva, modifica messaggi, replay, freshness, sessioni parallele, reflection attack, MITM, Denial of Service e SYN flood TCP.
-- M3/UD3/L4: [NEXT TASK]
+- M3/UD3/L4 (Protocolli challenge-response): [COMPLETED] — integrato transcript su test di autenticazione, freshness, nonce, timestamp, numeri di sequenza, chiavi a breve termine, varianti simmetriche, server/KDC e rischi di replay/reflection.
+- M3/UD3/L5 (Needham-Schroeder simmetrico): [COMPLETED] — integrato transcript su protocollo a chiave condivisa, KDC, chiavi a lungo termine/sessione, ticket per Bob, autenticazione mutua challenge-response, attacco Denning-Sacco e correzione con timestamp/Kerberos.
+- M3/UD3/L6 (Needham-Schroeder a chiave pubblica): [COMPLETED] — integrato transcript su protocollo asimmetrico, certificati, mutua autenticazione con nonce, segretezza dei nonce, attacco di Lowe/sessioni parallele e correzione con identità di Bob nel messaggio critico.
+- M3/UD3/L7 (Principi di progettazione dei protocolli): [COMPLETED] — integrato transcript sui principi di Abadi-Needham, efficienza, doppia cifratura in Kerberos, identità nei messaggi, Denning-Sacco, scopi della cifratura, firma/cifratura, X.509, non ripudio e verifica formale.
+- M3/UD3/L8: [PENDING]
+- M4/UD1_Contesto/L1 (Introduzione al Web e sicurezza applicazioni): [COMPLETED] — integrato transcript su funzionamento del web, browser/web server/database/Internet, HTTP richiesta-risposta, URL, siti statici/dinamici, crescita del web, sicurezza client/server/protocolli/DBMS e vulnerabilità OWASP come injection, autenticazione/sessione e XSS.
+- M4/UD1_Contesto/L2 (Architettura Internet e stack TCP/IP): [COMPLETED] — integrato transcript su modello ISO/OSI, comunicazione a livelli, stack TCP/IP, TCP/IP, incapsulamento messaggio-segmento-pacchetto-frame, sicurezza ai livelli applicazione/trasporto/rete, RFC, IETF e struttura dei documenti tecnici.
+- M4/UD1_Contesto/L3: [PENDING]
+- M4/UD2/L1 (HTTP: funzionamento e vulnerabilità): [COMPLETED] — integrato transcript su HTTP come protocollo applicativo stateless, oggetti web, browser/server, TCP porta 80, connessioni persistenti/non persistenti, request/response, header, metodi GET/HEAD/POST, codici di stato, limiti di sicurezza, HTTPS/TLS, certificati X.509, porta 443 e S-HTTP.
+- M4/UD2/L2 (Cookie HTTP, sessioni e privacy): [COMPLETED] — integrato transcript su HTTP stateless, Set-Cookie/Cookie, identificatori di sessione, backend server-side, attributi Domain/Path/Expires/Secure/HttpOnly, cookie di sessione/persistenti, first-party/third-party, tracking cookie, gestione browser, document.cookie e rischi privacy/XSS.
+- M4/UD2/L3 (Vulnerabilità dei cookie e contromisure): [COMPLETED] — integrato transcript su intercettazione cookie via HTTP, flag Secure/HTTPS, cookie poisoning, modifica lato client, carrello manipolabile, furto tramite document.cookie/XSS, HttpOnly, tracking cookie, campi hidden nei form e validazione server-side.
+- M4/UD2/L4: [PENDING]
+- M4/UD3/L1 (Introduzione a SQL per SQL injection): [COMPLETED] — integrato transcript su basi di dati relazionali, tabelle/record/attributi, query come tabella risultato, SELECT/FROM/WHERE, proiezione, restrizione, query su più tabelle, multinsiemi e DISTINCT, qualificazione attributi, terminazione con punto e virgola, DROP e INSERT.
+- M4/UD3/L2 (SQL injection: funzionamento dell'attacco): [COMPLETED] — integrato transcript su input non fidato, query SQL concatenate lato server, condizioni necessarie dell'attacco, bypass login con tautologia/commento, cancellazione tabella utenti con DROP, limiti legati alla conoscenza dello schema e attacco UNION ALL per esfiltrare dati sensibili.
+- M4/UD3/L3 (SQL injection: contromisure): [COMPLETED] — integrato transcript su vignetta Bobby Tables, distinzione dati/controllo, metacaratteri SQL, validazione input, blacklist e relativi limiti, whitelist con regex, prepared statement, bind variable tipate, uso ingenuo ancora vulnerabile e caso storico ASP/Microsoft 2008.
+- M4/UD3/L4: [PENDING]
+- M4/UD4/L1: [PENDING]
+- M4/UD4/L2 (Same Origin Policy): [COMPLETED] — integrato transcript su browser con sessioni parallele, cookie/session identifier, definizione di origine come protocollo+host+porta, path escluso dalla definizione generale, esempi di origini uguali/diverse, risorse cross-origin incluse nella stessa pagina, regole su cookie/document.cookie, varianti tra browser e collegamento con XSS.
+- M4/UD4/L3: [NEXT TASK]
 
 ### Matematica Discreta [IN PROGRESS]
 
