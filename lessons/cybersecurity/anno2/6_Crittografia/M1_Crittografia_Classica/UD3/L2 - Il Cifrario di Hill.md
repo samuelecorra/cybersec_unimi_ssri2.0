@@ -226,7 +226,7 @@ Affinché la cifratura sia **invertibile**, la matrice $K$ deve avere un **deter
 Condizione generale è che sian coprimi (gdc = greatest common divisor!)
 
 $$  
-\gcd(\det(K), 26) = 1  
+\mcd(\det(K), 26) = 1  
 $$
 
 In questo caso, per una matrice 2x2 si fa prodotto diag principale - prodotto diag secondaria
@@ -235,7 +235,7 @@ $$
 \det(K) = 11 \times 7 - 8 \times 3 = 77 - 24 = 53 \equiv 1 \pmod{26}  
 $$
 
-Poiché $\gcd(1,26) = 1$, la matrice è invertibile.
+Poiché $\mcd(1,26) = 1$, la matrice è invertibile.
 
 ---
 

@@ -108,7 +108,7 @@ dove:
 
 ---
 
-### **5. Massimo Comune Divisore / Greatest Common Divisor (gcd)**
+### **5. Massimo Comune Divisore / Greatest Common Divisor (mcd)**
 
 Il numero $d$ è il **massimo comune divisore** di $a$ e $n$ se:
 
@@ -116,7 +116,7 @@ Il numero $d$ è il **massimo comune divisore** di $a$ e $n$ se:
 - e ogni altro divisore comune di $a$ e $n$ divide $d$.
 
 $$
-d = \gcd(a, n)
+d = \mcd(a, n)
 $$
 
 Può essere espresso come combinazione lineare:
@@ -125,7 +125,7 @@ $$
 d = a \cdot x + n \cdot y
 $$
 
-È facile ricavare il gcd di due interi positivi se si esprimono entrambi come prodotto di numeri primi (possibile dal teorema fondamentale dell’aritmetica). Scriviamo quindi le due espressioni equivalenti:
+È facile ricavare il mcd di due interi positivi se si esprimono entrambi come prodotto di numeri primi (possibile dal teorema fondamentale dell’aritmetica). Scriviamo quindi le due espressioni equivalenti:
 
 $$
 n = p_{i_1}^{e_1} \cdot p_{i_2}^{e_2} \cdot \dots \cdot p_{i_k}^{e_k}
@@ -136,10 +136,10 @@ $$
 Allineando le fattorizzazioni sugli stessi primi $p_1, p_2, \dots, p_k$ e usando esponente $0$ per i primi assenti in uno dei due numeri:
 
 $$
-\gcd(a, n) = \prod_{\ell = 1}^{k} p_\ell^{\min(e_\ell, f_\ell)}
+\mcd(a, n) = \prod_{\ell = 1}^{k} p_\ell^{\min(e_\ell, f_\ell)}
 $$
 
-Il **massimo comun divisore** di due interi positivi si trova quindi fattorizzandoli entrambi in fattori primi e prendendo i fattori con l’esponente minore. Se un primo compare solo in uno dei due numeri, nell’altro ha esponente $0$, quindi il minimo è $0$ e quel fattore non entra davvero nel gcd.
+Il **massimo comun divisore** di due interi positivi si trova quindi fattorizzandoli entrambi in fattori primi e prendendo i fattori con l’esponente minore. Se un primo compare solo in uno dei due numeri, nell’altro ha esponente $0$, quindi il minimo è $0$ e quel fattore non entra davvero nel mcd.
 
 > 💡 Per il **minimo comune multiplo** la regola non è prendere solo fattori “esclusivi”: si prendono tutti i primi che compaiono in almeno una delle due fattorizzazioni, inclusi quelli comuni, ma con l’esponente maggiore. In formula: $\operatorname{lcm}(a, n) = \prod_{\ell = 1}^{k} p_\ell^{\max(e_\ell, f_\ell)}$.
 
@@ -147,15 +147,15 @@ Il **massimo comun divisore** di due interi positivi si trova quindi fattorizzan
 
 #### **Proprietà principali**
 
-- $\gcd(a, n) = \gcd(a, -n) = \gcd(-a, n) = \gcd(|a|, |b|)$
-- $\gcd(a, 0) = |a|$
-- Se $\gcd(a, n) = 1$, allora $a$ e $n$ sono **relativamente primi, coprimi, primi tra loro**
+- $\mcd(a, n) = \mcd(a, -n) = \mcd(-a, n) = \mcd(|a|, |b|)$
+- $\mcd(a, 0) = |a|$
+- Se $\mcd(a, n) = 1$, allora $a$ e $n$ sono **relativamente primi, coprimi, primi tra loro**
 
 ---
 
 ### **6. Algoritmo di Euclide**
 
-Il **metodo di Euclide** (circa 300 a.C.) permette di calcolare $\gcd(a, b)$ in modo efficiente:
+Il **metodo di Euclide** (circa 300 a.C.) permette di calcolare $\mcd(a, b)$ in modo efficiente:
 
 ```plaintext
 Euclide(a, b):
@@ -230,7 +230,7 @@ operazioni su bit. Questo non è strettamente pertinente per il corso di crittog
 Il motivo per cui l’algoritmo di Euclide funziona è la seguente identità:
 
 $$
-\gcd(a, b) = \gcd(b, a \bmod b)
+\mcd(a, b) = \mcd(b, a \bmod b)
 $$
 
 valida per tutti gli interi $a \ge 0$ e $b > 0$.
@@ -259,7 +259,7 @@ $$
 a \bmod b = a - k \cdot b
 $$
 
-Ora sia $d = \gcd(a, b)$. Dire che $d$ è il massimo comun divisore di $a$ e $b$ significa prima di tutto che $d$ divide sia $a$ sia $b$:
+Ora sia $d = \mcd(a, b)$. Dire che $d$ è il massimo comun divisore di $a$ e $b$ significa prima di tutto che $d$ divide sia $a$ sia $b$:
 
 $$
 d \mid a
@@ -320,13 +320,13 @@ $$
 Se due coppie di numeri hanno esattamente gli stessi divisori comuni, allora hanno anche lo stesso massimo comun divisore. Per questo:
 
 $$
-\gcd(a, b) = \gcd(b, a \bmod b)
+\mcd(a, b) = \mcd(b, a \bmod b)
 $$
 
 L’algoritmo di Euclide applica ripetutamente questa identità: sostituisce la coppia $(a, b)$ con la coppia più piccola $(b, a \bmod b)$, senza cambiare il valore del massimo comun divisore. Quando il secondo numero diventa $0$, il risultato è immediato, perché:
 
 $$
-\gcd(a, 0) = |a|
+\mcd(a, 0) = |a|
 $$
 
 > ✅ In sintesi, Euclide funziona perché passare da $(a, b)$ a $(b, a \bmod b)$ non cambia l’insieme dei divisori comuni; cambia solo la dimensione dei numeri, rendendo il calcolo sempre più semplice.
@@ -338,7 +338,7 @@ $$
 Si definisce:
 
 $$
-Z_n^* = { [a]_n \mid 0 < a < n, \ \gcd(a, n) = 1 }
+Z_n^* = { [a]_n \mid 0 < a < n, \ \mcd(a, n) = 1 }
 $$
 
 Ovvero l'insieme dei rappresentanti delle classi di resto modulo $n$ che sono **primi con $n$**. L'insieme dei coprimi, potremmo chiamarlo.
@@ -506,7 +506,7 @@ $$
 N = p \cdot q
 $$
 
-dove $p$ e $q$ sono primi distinti. Se $\gcd(M, N) \ne 1$, allora $M$ condivide almeno un fattore primo con $N$: quindi $M$ è multiplo di $p$, oppure è multiplo di $q$.
+dove $p$ e $q$ sono primi distinti. Se $\mcd(M, N) \ne 1$, allora $M$ condivide almeno un fattore primo con $N$: quindi $M$ è multiplo di $p$, oppure è multiplo di $q$.
 
 Per la dimostrazione possiamo valutare solo uno dei due casi, in quanto il ragionamento è del tutto simmetrico (provare per credere!).
 
@@ -522,7 +522,7 @@ e $M$ è multiplo di $p$ -- ma non è $0$,
 allora $M$ non può essere anche multiplo di $q$, altrimenti sarebbe multiplo di $p \cdot q = N$. Quindi, in questo caso:
 
 $$
-\gcd(M, q) = 1
+\mcd(M, q) = 1
 $$
 
 Possiamo allora applicare il teorema di Eulero modulo $q$:
@@ -600,14 +600,14 @@ Come ormai dovrebbe essere chiaro, nella precedente formula ho SOTTINTESO che si
 
 PERO' SAPPIAMO FARLA SCENDERE AD 1 SEPARATAMENTE MODULO $p$ E MODULO $q$. Quindi ragioniamo separatamente modulo $p$ e modulo $q$.
 
-**Modulo $q$:** abbiamo già dimostrato che $M^{\varphi(N)} \equiv 1 \pmod{q}$ (perché $\gcd(M,q)=1$). Quindi:
+**Modulo $q$:** abbiamo già dimostrato che $M^{\varphi(N)} \equiv 1 \pmod{q}$ (perché $\mcd(M,q)=1$). Quindi:
 $$\left(M^{\varphi(N)}\right)^h \equiv 1^h = 1 \pmod{q} \implies M^{ed} \equiv M \cdot 1 = M \pmod{q}$$
 
 **Modulo $p$:** $M = cp$, quindi $M \equiv 0 \pmod{p}$. Ma allora anche $M^{ed} = (cp)^{ed}$ è divisibile per $p$, cioè $M^{ed} \equiv 0 \equiv M \pmod{p}$.
 
-Alla luce di questi risultati apparentemente disgiunti, qual è l'anello mancante che ci permette di concludere la dimostrazione? Il Teorema Cinese del Resto (CRT), che ci dice che se due congruenze hanno moduli coprimi, allora esiste un'unica soluzione modulo il prodotto dei due moduli. In questo caso, i moduli sono $p$ e $q$, che sono primi distinti, quindi $\gcd(p,q)=1$. L'enunciato stesso del CRT è il passo finale che serve a noi!!!
+Alla luce di questi risultati apparentemente disgiunti, qual è l'anello mancante che ci permette di concludere la dimostrazione? Il Teorema Cinese del Resto (CRT), che ci dice che se due congruenze hanno moduli coprimi, allora esiste un'unica soluzione modulo il prodotto dei due moduli. In questo caso, i moduli sono $p$ e $q$, che sono primi distinti, quindi $\mcd(p,q)=1$. L'enunciato stesso del CRT è il passo finale che serve a noi!!!
 
-**Conclusione via CRT:** abbiamo $M^{ed} \equiv M \pmod{p}$ e $M^{ed} \equiv M \pmod{q}$. Poiché $p$ e $q$ sono primi distinti ($\gcd(p,q)=1$), per il Teorema Cinese del Resto:
+**Conclusione via CRT:** abbiamo $M^{ed} \equiv M \pmod{p}$ e $M^{ed} \equiv M \pmod{q}$. Poiché $p$ e $q$ sono primi distinti ($\mcd(p,q)=1$), per il Teorema Cinese del Resto:
 
 e porta alla congruenza:
 
@@ -624,7 +624,7 @@ $$
 Abbiamo introdotto i concetti matematici su cui si basa RSA:
 
 - **Numeri primi e aritmetica modulare**
-- **Algoritmo di Euclide** e **gcd**
+- **Algoritmo di Euclide** e **mcd**
 - **Insieme $Z_n^*$ e funzione di Eulero**
 - **Teoremi di Fermat e di Eulero**, che assicurano la **correttezza della decifratura RSA**
 

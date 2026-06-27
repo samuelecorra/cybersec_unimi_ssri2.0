@@ -42,7 +42,7 @@ $$
 \text{Accetta se: } \gamma \stackrel{?}{=} (\alpha^{e'} \cdot \beta^{e''} \bmod p) \bmod q
 $$
 
-> 📌 **Punto critico:** entrambe le fasi di verifica richiedono il calcolo di $\delta^{-1} \bmod q$. Questo inverso esiste **se e solo se** $\gcd(\delta, q) = 1$, cioè se $\delta \not\equiv 0 \pmod{q}$.
+> 📌 **Punto critico:** entrambe le fasi di verifica richiedono il calcolo di $\delta^{-1} \bmod q$. Questo inverso esiste **se e solo se** $\mcd(\delta, q) = 1$, cioè se $\delta \not\equiv 0 \pmod{q}$.
 
 ---
 
@@ -98,7 +98,7 @@ $$
 e' = \text{SHA}(M) \cdot \delta^{-1} \bmod q \qquad \text{e} \qquad e'' = \gamma \cdot \delta^{-1} \bmod q
 $$
 
-Se $\delta = 0$, l'inverso $\delta^{-1} \bmod q$ **non esiste** perché $\gcd(0, q) = q \ne 1$.
+Se $\delta = 0$, l'inverso $\delta^{-1} \bmod q$ **non esiste** perché $\mcd(0, q) = q \ne 1$.
 
 > ⚠️ La verifica fallisce prima ancora di procedere: la firma $(a, 0)$ non può essere accettata da nessun verificatore corretto. Quindi δ=0 comporta contemporaneamente:
 > 1. Firma **invalida** (non verificabile)
@@ -206,7 +206,7 @@ Poiché $\text{SHA}(M)$, $a$ e $q$ sono tutti noti o osservabili, la chiave priv
 
 Sì, bisogna obbligatoriamente rigenerare $r$ per due ragioni:
 
-**1. La firma è invalida.** La verifica richiede $\delta^{-1} \bmod q$, che non esiste quando $\delta = 0$ (poiché $\gcd(0, q) = q \ne 1$). La firma $(a, 0)$ non può essere verificata da nessun destinatario.
+**1. La firma è invalida.** La verifica richiede $\delta^{-1} \bmod q$, che non esiste quando $\delta = 0$ (poiché $\mcd(0, q) = q \ne 1$). La firma $(a, 0)$ non può essere verificata da nessun destinatario.
 
 **2. La firma rivela la chiave privata.** Come dimostrato nell'esercizio A, da $\delta = 0$ si ricava $s = -\text{SHA}(M) \cdot \gamma^{-1} \bmod q$. Trasmettere questa firma comprometterebbe permanentemente la sicurezza. Il protocollo corretto prevede di verificare $\delta \ne 0$ prima di trasmettere e, in caso contrario, generare un nuovo $r$ casuale e ricalcolare $(\gamma, \delta)$.
 

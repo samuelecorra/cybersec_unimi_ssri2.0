@@ -166,7 +166,7 @@ La tabella seguente elenca tutti gli argomenti che appaiono negli esami, ordinat
 
 1. **El-Gamal su curve ellittiche** (appelli 240117, 250120, 5 punti): la L2 di UD4 M3 tratta i crittosistemi ECC. Poiché questi appelli richiedono solo "cenni", il materiale è probabilmente sufficiente, ma va verificato che la lezione L2 di UD4 M3 sia stata letta completamente.
 
-2. **Double-RSA C(M) = ((M)^e1)^e2 – analisi sicurezza** (appelli 240708, 250715, 10 punti): questo schema specifico non è esplicitamente trattato nelle lezioni. Tuttavia, la risposta (C(M) = M^(e1·e2) che equivale a RSA con esponente composito; la sicurezza non aumenta se gcd(e1·e2, φ(n))=1) è deducibile dalle conoscenze RSA. La lezione sulla sicurezza RSA (L5 UD2 M3) fornisce i mattoni necessari ma non questo esempio specifico.
+2. **Double-RSA C(M) = ((M)^e1)^e2 – analisi sicurezza** (appelli 240708, 250715, 10 punti): questo schema specifico non è esplicitamente trattato nelle lezioni. Tuttavia, la risposta (C(M) = M^(e1·e2) che equivale a RSA con esponente composito; la sicurezza non aumenta se mcd(e1·e2, φ(n))=1) è deducibile dalle conoscenze RSA. La lezione sulla sicurezza RSA (L5 UD2 M3) fornisce i mattoni necessari ma non questo esempio specifico.
 
 ---
 

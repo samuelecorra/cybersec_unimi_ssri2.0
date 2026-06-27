@@ -38,7 +38,7 @@ Il cifrario di Hill è un cifrario a sostituzione **polialfabetica** basato sull
 
 **Setup:**
 - Si sceglie una dimensione del blocco $m$ (tipicamente $m=2$ o $m=3$).
-- La chiave è una matrice $K$ di dimensione $m \times m$ con coefficienti in $\mathbb{Z}_{26}$, tale che $K$ sia invertibile in $\mathbb{Z}_{26}$ (cioè $\gcd(\det K, 26) = 1$).
+- La chiave è una matrice $K$ di dimensione $m \times m$ con coefficienti in $\mathbb{Z}_{26}$, tale che $K$ sia invertibile in $\mathbb{Z}_{26}$ (cioè $\mcd(\det K, 26) = 1$).
 
 **Codifica:** si associa ogni lettera al suo numero: A=0, B=1, C=2, ..., Z=25.
 
@@ -108,7 +108,7 @@ Per decifrare, calcoliamo $K^{-1} \pmod{26}$.
 
 $\det K = 3 \cdot 5 - 7 \cdot 2 = 15 - 14 = 1$
 
-Poiché $\det K = 1$ e $\gcd(1, 26) = 1$, la matrice è invertibile in $\mathbb{Z}_{26}$.
+Poiché $\det K = 1$ e $\mcd(1, 26) = 1$, la matrice è invertibile in $\mathbb{Z}_{26}$.
 
 $(\det K)^{-1} = 1^{-1} = 1 \pmod{26}$
 
@@ -442,7 +442,7 @@ Questo appello (prima sessione estiva) presenta caratteristiche tipiche delle se
 - D4 (Secret Sharing) è ampia (30 punti) ma routinaria se si padroneggia Lagrange.
 
 **Consigli pratici:**
-- Per Hill: verificare sempre il determinante prima di calcolare $K^{-1}$. Se $\det K = 0$ o $\gcd(\det K, 26) \neq 1$, la chiave non è valida.
+- Per Hill: verificare sempre il determinante prima di calcolare $K^{-1}$. Se $\det K = 0$ o $\mcd(\det K, 26) \neq 1$, la chiave non è valida.
 - Per il birthday attack: ricordare la formula $O(2^{n/2})$ e spiegare il paradosso del compleanno come analogia.
 - Per $DES_k$ come hash: trattare i tre casi separatamente, con argomentazione chiara per ognuno.
 - Per lo schema $(n,n)$: non confonderlo con $(k,n)$; specificare che tutti $n$ partecipanti sono richiesti.

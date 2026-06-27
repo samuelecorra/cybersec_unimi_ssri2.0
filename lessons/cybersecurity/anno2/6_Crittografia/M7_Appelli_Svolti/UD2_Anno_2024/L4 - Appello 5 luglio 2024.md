@@ -199,7 +199,7 @@ I fattori chiave dei due round sono $14$ e $12$ (per $K=7$): sono entrambi deter
 
 > 📌 Le parti a, b e c di questa domanda sono **identiche** all'Appello del 24 giugno 2024 (L3, Domanda 3). Si rimanda a quella soluzione dettagliata. Di seguito sono riportati i risultati finali con riferimento ai calcoli.
 
-**Parte a:** La correttezza RSA si dimostra usando il teorema di Eulero ($M^{ed} \equiv M \pmod{n}$ quando $\gcd(M,n)=1$) e il teorema cinese dei resti per il caso $\gcd(M,n)>1$. Vedi L3 Domanda 3 per la dimostrazione completa.
+**Parte a:** La correttezza RSA si dimostra usando il teorema di Eulero ($M^{ed} \equiv M \pmod{n}$ quando $\mcd(M,n)=1$) e il teorema cinese dei resti per il caso $\mcd(M,n)>1$. Vedi L3 Domanda 3 per la dimostrazione completa.
 
 **Parte b:** Fattorizzazione di $n=1363$ con $\varphi(n)=1288$:
 
@@ -214,7 +214,7 @@ $$p = \frac{76 + 18}{2} = 47, \quad q = \frac{76 - 18}{2} = 29$$
 
 **Parte c:** Con $N=55=5\times11$, $e=7$, $\varphi(55)=40$.
 
-Euclide esteso su $\gcd(7,40)$:
+Euclide esteso su $\mcd(7,40)$:
 $$40 = 5\cdot7+5;\quad 7=1\cdot5+2;\quad 5=2\cdot2+1$$
 Back-sub: $1 = 3\cdot40 - 17\cdot7 \Rightarrow d = -17 \bmod 40 = 23$.
 

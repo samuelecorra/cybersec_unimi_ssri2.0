@@ -28,7 +28,7 @@
 
 #### Parte a — Caratteristiche e attacchi al Hill (10 punti)
 
-Il **cifrario di Hill** cifra blocchi di $d$ lettere con una matrice chiave $K$ invertibile mod 26: $\mathbf{c} = K\mathbf{p}\bmod26$, $\mathbf{p} = K^{-1}\mathbf{c}\bmod26$. Requisito di validità: $\gcd(\det K, 26) = 1$.
+Il **cifrario di Hill** cifra blocchi di $d$ lettere con una matrice chiave $K$ invertibile mod 26: $\mathbf{c} = K\mathbf{p}\bmod26$, $\mathbf{p} = K^{-1}\mathbf{c}\bmod26$. Requisito di validità: $\mcd(\det K, 26) = 1$.
 
 **Caratteristiche/vantaggi:** poligrammico → nasconde le frequenze delle singole lettere (per $d\ge2$); semplice ed efficiente.
 
@@ -36,7 +36,7 @@ Il **cifrario di Hill** cifra blocchi di $d$ lettere con una matrice chiave $K$ 
 
 #### Parte b — Validità, cifratura e decifratura di "ciao" (10 punti)
 
-**Validità:** $\det K = 1\cdot4 - 3\cdot1 = 1$. Poiché $\gcd(1, 26) = 1$, la matrice è **valida** (invertibile mod 26), con $\det^{-1} = 1$.
+**Validità:** $\det K = 1\cdot4 - 3\cdot1 = 1$. Poiché $\mcd(1, 26) = 1$, la matrice è **valida** (invertibile mod 26), con $\det^{-1} = 1$.
 
 **Cifratura** di "ciao" (c=2, i=8, a=0, o=14), blocchi $(2,8)$ e $(0,14)$:
 $$K\begin{pmatrix}2\\8\end{pmatrix} = \begin{pmatrix}1\cdot2+3\cdot8\\ 1\cdot2+4\cdot8\end{pmatrix} = \begin{pmatrix}26\\34\end{pmatrix} \equiv \begin{pmatrix}0\\8\end{pmatrix} = (\text{A},\text{I})$$
@@ -196,7 +196,7 @@ Ora Mallory condivide $S_A = 6$ con Alice e $S_B = 11$ con Bob: decifra, legge/a
 
 Appello della sessione autunnale (settembre 2023).
 
-- **D1 (20):** Hill — provare la validità ($\gcd(\det,26)=1$), poi cifrare/decifrare a blocchi. Qui $\det=1$, "ciao" → **AIQE**.
+- **D1 (20):** Hill — provare la validità ($\mcd(\det,26)=1$), poi cifrare/decifrare a blocchi. Qui $\det=1$, "ciao" → **AIQE**.
 - **D2 (40):** meet-in-the-middle sul 2DES ($2^{112}\to2^{57}$) e **AES-X**: il whitening in **sola uscita** è lineare e si cancella ($c\oplus c' = \text{AES}_{k_1}(m)\oplus\text{AES}_{k_1}(m')$), quindi KPA resta $2^{128}$ come AES (cfr. 19/09/2025).
 - **D3 (20):** RSA vs fattorizzazione (fattorizzazione ⇒ RSA; il viceversa **non** è provato) + ottimizzazioni (square-and-multiply, $e=65537$, CRT, Montgomery).
 - **D4 (20):** Diffie-Hellman — verifica radice primitiva (test su $10^{9},10^{6}$), piccolo logaritmo discreto per la privata di Alice ($a=10$), chiave condivisa $S=11$, e MITM battuto solo con autenticazione.

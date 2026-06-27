@@ -391,7 +391,7 @@ Detto questo, rimane un problema strutturale: $x^4+1$ **non è irriducibile** su
 La condizione esatta perché un polinomio $a(x) \in GF(2^8)[x]$ abbia inverso in questo anello è:
 
 $$
-\gcd(a(x),\ x^4+1) = 1 \quad \text{in } GF(2^8)[x]
+\mcd(a(x),\ x^4+1) = 1 \quad \text{in } GF(2^8)[x]
 $$
 
 Solo i polinomi **coprimi** con $x^4+1$ sono invertibili. Questo vincolo diventa concreto quando, nella prossima lezione, incontreremo una delle fasi di cifratura di AES chiamata **MixColumns**: essa opera su ogni colonna della matrice di stato (che è esattamente una word da 4 byte) moltiplicandola — nell'anello $GF(2^8)[x]/(x^4+1)$ — per un polinomio fisso $a(x)$. Poiché AES deve essere invertibile (serve la decifratura), quel polinomio $a(x)$ deve avere un inverso nell'anello, e quindi deve soddisfare la condizione di coprimalità. AES sceglie:
@@ -404,7 +404,7 @@ $$
 a^{-1}(x) = \{0b\}x^3 + \{0d\}x^2 + \{09\}x + \{0e\}
 $$
 
-> 💡 Questi polinomi soddisfano $\gcd(a(x), x^4+1) = 1$ in $GF(2^8)[x]$, garantendo l’invertibilità. Sono stati inoltre scelti perché massimizzano la **diffusione dei bit**: la matrice circolante che inducono ha **branch number = 5** (il massimo possibile per una trasformazione 4×4), il che significa che ogni bit di output dipende da tutti e 4 i byte di input — effetto valanga ottimale.
+> 💡 Questi polinomi soddisfano $\mcd(a(x), x^4+1) = 1$ in $GF(2^8)[x]$, garantendo l’invertibilità. Sono stati inoltre scelti perché massimizzano la **diffusione dei bit**: la matrice circolante che inducono ha **branch number = 5** (il massimo possibile per una trasformazione 4×4), il che significa che ogni bit di output dipende da tutti e 4 i byte di input — effetto valanga ottimale.
 
 ---
 

@@ -42,7 +42,7 @@ Il **cifrario di Hill** (proposto da Lester Hill nel 1929) è un cifrario a sost
 
 La matrice $K$ deve essere **invertibile modulo 26**, cioè deve esistere $K^{-1}$ tale che $KK^{-1} \equiv I \pmod{26}$.
 
-Condizione necessaria e sufficiente: $\gcd(\det(K), 26) = 1$, ovvero il determinante di $K$ deve essere coprimo con 26.
+Condizione necessaria e sufficiente: $\mcd(\det(K), 26) = 1$, ovvero il determinante di $K$ deve essere coprimo con 26.
 
 Poiché $26 = 2 \times 13$, il determinante deve essere dispari e non divisibile per 13.
 
@@ -95,7 +95,7 @@ Calcolo del determinante:
 
 $$\det(K) = 1 \cdot 5 - 4 \cdot 1 = 5 - 4 = 1$$
 
-Verifica: $\gcd(\det(K), 26) = \gcd(1, 26) = 1$ ✓
+Verifica: $\mcd(\det(K), 26) = \mcd(1, 26) = 1$ ✓
 
 La matrice è invertibile modulo 26 (il determinante 1 è già il suo stesso inverso modulo qualsiasi numero).
 
@@ -313,17 +313,17 @@ Per qualsiasi $x$, $f = 0$. Il XOR con 0 è l'identità. Il round non cifra null
 **2. $K = 5$:**
 $$f(x, 5) = (2x \cdot 5) \bmod 15 = (10x) \bmod 15$$
 
-$10$ e $15$ hanno $\gcd(10, 15) = 5$. L'immagine di $x \mapsto 10x \bmod 15$ è $\{0, 5, 10\}$ (solo multipli di 5): molti valori di $x$ producono lo stesso $f$. Grande perdita di informazione.
+$10$ e $15$ hanno $\mcd(10, 15) = 5$. L'immagine di $x \mapsto 10x \bmod 15$ è $\{0, 5, 10\}$ (solo multipli di 5): molti valori di $x$ producono lo stesso $f$. Grande perdita di informazione.
 
 **3. $K = 3$:**
 $$f(x, 3) = (6x) \bmod 15 = (6x) \bmod 15$$
 
-$\gcd(6, 15) = 3$. L'immagine è $\{0, 3, 6, 9, 12\}$: solo 5 valori su 16 possibili (per $x \in \{0,...,15\}$ non tutti i valori di $f$ sono raggiungibili).
+$\mcd(6, 15) = 3$. L'immagine è $\{0, 3, 6, 9, 12\}$: solo 5 valori su 16 possibili (per $x \in \{0,...,15\}$ non tutti i valori di $f$ sono raggiungibili).
 
 **4. $K = 7$ (il caso dell'esame):**
 $$f(x, 7) = (14x) \bmod 15$$
 
-$\gcd(14, 15) = 1$: la funzione $x \mapsto 14x \bmod 15$ è una **biiezione** su $\mathbb{Z}_{15}$ (tutti i valori $0$-$14$ sono raggiunti esattamente una volta). Questo è il caso migliore per la funzione di round.
+$\mcd(14, 15) = 1$: la funzione $x \mapsto 14x \bmod 15$ è una **biiezione** su $\mathbb{Z}_{15}$ (tutti i valori $0$-$14$ sono raggiunti esattamente una volta). Questo è il caso migliore per la funzione di round.
 
 **5. Problema con $\mathbb{Z}_{15}$ (non primo):**
 
@@ -511,11 +511,11 @@ Per usare $d = 3$ come chiave privata, deve valere $ed \equiv 1 \pmod{24}$.
 
 Con $d = 3$: dobbiamo trovare $e$ tale che $3e \equiv 1 \pmod{24}$, ovvero l'inverso di 3 modulo 24.
 
-$\gcd(3, 24) = 3 \neq 1$: il 3 **non ha inverso modulo 24** (poiché 3 divide 24).
+$\mcd(3, 24) = 3 \neq 1$: il 3 **non ha inverso modulo 24** (poiché 3 divide 24).
 
 Quindi **$d = 3$ non è una scelta valida** per la chiave privata RSA con $\varphi(n) = 24$. Non esiste una chiave pubblica $e$ corrispondente.
 
-**Motivo formale:** la condizione per un valido esponente privato è $\gcd(d, \varphi(n)) = 1$. Poiché $\gcd(3, 24) = 3 \neq 1$, la scelta è invalida.
+**Motivo formale:** la condizione per un valido esponente privato è $\mcd(d, \varphi(n)) = 1$. Poiché $\mcd(3, 24) = 3 \neq 1$, la scelta è invalida.
 
 > ⚠️ In generale, $d$ deve essere scelto coprimo con $\varphi(n)$. Un errore comune è scegliere $d$ senza verificare questa condizione. Per $\varphi(24) = $ i valori coprimi con 24 sono: 1, 5, 7, 11, 13, 17, 19, 23.
 
@@ -631,7 +631,7 @@ Questo è il secondo appello autunnale (settembre 2024). È uno degli appelli pi
 
 - **D1 (20 punti):** Hill con matrice $2\times2$. Calcoli: determinante, matrice aggiunta, inversione modulo 26, cifratura blocco per blocco. Da memorizzare: la formula dell'inversa $2\times2$ con la matrice aggiunta, e il fatto che $\det(K)$ deve essere coprimo con 26.
 
-- **D2 (35 punti):** Feistel con funzione aritmetica mod 15 (diversa da tutte le versioni precedenti). La parte iii sulla sicurezza in funzione del valore numerico di $K$ è originale: analizzare $\gcd(2K, 15)$ per diversi valori di $K$ e discutere quando la funzione di round è biiettiva.
+- **D2 (35 punti):** Feistel con funzione aritmetica mod 15 (diversa da tutte le versioni precedenti). La parte iii sulla sicurezza in funzione del valore numerico di $K$ è originale: analizzare $\mcd(2K, 15)$ per diversi valori di $K$ e discutere quando la funzione di round è biiettiva.
 
 - **D3 (25 punti):** la funzione identità come hash è una domanda trabocchetto. La risposta corretta richiede di distinguere tra: proprietà formalmente soddisfatte (collision resistance vacua per biiezione) e proprietà necessarie per l'utilità pratica (one-wayness, compressione). La parte b sul paradosso del compleanno è standard.
 
@@ -639,7 +639,7 @@ Questo è il secondo appello autunnale (settembre 2024). È uno degli appelli pi
 
 **Consigli per Hill:**
 
-1. Verificare sempre $\gcd(\det(K), 26) = 1$ prima di procedere.
+1. Verificare sempre $\mcd(\det(K), 26) = 1$ prima di procedere.
 2. Per l'inversione: calcolare la matrice aggiunta (scambiare diagonale principale, negare anti-diagonale), poi moltiplicare per $(\det K)^{-1} \bmod 26$.
 3. Per la cifratura: convertire ogni coppia di lettere in un vettore colonna, moltiplicare per $K$ mod 26, convertire il risultato in lettere.
 4. Ogni calcolo va fatto esplicitamente (prodotti scalari, riduzioni modulo 26).

@@ -284,7 +284,7 @@ dove $\text{counter}_i = \text{IV} + i$ (o analoga funzione del contatore).
 1. Scegliere due numeri primi grandi distinti $p$ e $q$ (tipicamente 1024-4096 bit ciascuno, per un modulo di 2048-8192 bit).
 2. Calcolare il modulo: $n = p \cdot q$.
 3. Calcolare la funzione di Eulero: $\varphi(n) = (p-1)(q-1)$.
-4. Scegliere l'esponente pubblico $e$ con $1 < e < \varphi(n)$ e $\gcd(e, \varphi(n)) = 1$. Valori comuni: $e = 65537 = 2^{16}+1$ (primo, piccolo, molte operazioni sono XOR shift).
+4. Scegliere l'esponente pubblico $e$ con $1 < e < \varphi(n)$ e $\mcd(e, \varphi(n)) = 1$. Valori comuni: $e = 65537 = 2^{16}+1$ (primo, piccolo, molte operazioni sono XOR shift).
 5. Calcolare l'esponente privato $d$ tale che $ed \equiv 1 \pmod{\varphi(n)}$ (algoritmo di Euclide esteso).
 
 **Chiave pubblica:** $(n, e)$ — distribuita pubblicamente.
@@ -351,7 +351,7 @@ Se entrambi $e_1$ e $e_2$ sono coprimi con $\varphi(n)$ (requisito standard di R
 
 **3. Attacco con common modulus:**
 
-Un caso interessante è quando due utenti hanno lo stesso modulo $n$ ma esponenti diversi $e_1$ e $e_2$ (con $\gcd(e_1, e_2) = 1$). Se lo stesso messaggio $M$ viene cifrato con entrambe le chiavi pubbliche producendo $C_1 = M^{e_1} \bmod n$ e $C_2 = M^{e_2} \bmod n$, allora (usando l'identità di Bézout: $\exists a, b: ae_1 + be_2 = 1$):
+Un caso interessante è quando due utenti hanno lo stesso modulo $n$ ma esponenti diversi $e_1$ e $e_2$ (con $\mcd(e_1, e_2) = 1$). Se lo stesso messaggio $M$ viene cifrato con entrambe le chiavi pubbliche producendo $C_1 = M^{e_1} \bmod n$ e $C_2 = M^{e_2} \bmod n$, allora (usando l'identità di Bézout: $\exists a, b: ae_1 + be_2 = 1$):
 
 $$M = C_1^a \cdot C_2^b \bmod n$$
 

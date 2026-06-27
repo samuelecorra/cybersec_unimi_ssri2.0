@@ -52,7 +52,7 @@ Se una **sequenza di lettere** (ad esempio “XFG”) compare più volte nel tes
     
 
 $$  
-t \approx \gcd(d_1, d_2, …, d_h)  
+t \approx \mcd(d_1, d_2, …, d_h)  
 $$
 
 Il valore ottenuto è **un multiplo della lunghezza della chiave** $t$.

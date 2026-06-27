@@ -174,7 +174,7 @@ Affinché la decifratura sia sempre possibile, deve esistere l’inverso $k_1^{-
 Questo accade **solo se $k_1$ e 26 sono coprimi**, cioè:
 
 $$  
-\gcd(k_1, 26) = 1  
+\mcd(k_1, 26) = 1  
 $$
 
 Invece, $k_2$ può assumere **qualsiasi valore** da 0 a 25.

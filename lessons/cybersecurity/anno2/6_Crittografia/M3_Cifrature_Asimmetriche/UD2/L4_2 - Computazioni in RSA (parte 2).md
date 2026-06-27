@@ -8,7 +8,7 @@ Per completare l’implementazione dell’algoritmo **RSA**, dopo aver generato 
     
 - Verificare che:  
     $$  
-    \gcd(e, \varphi(n)) = 1  
+    \mcd(e, \varphi(n)) = 1  
     $$
     
 - Calcolare:  
@@ -23,22 +23,22 @@ Dove $\varphi(n) = (p-1)(q-1)$ è la funzione di Eulero.
 
 ### **2. Algoritmo esteso di Euclide**
 
-> 💡 **Perché ci serve e da dove viene.** Per RSA dobbiamo calcolare $d = e^{-1} \bmod \varphi(n)$, cioè trovare un intero $d$ tale che $e \cdot d \equiv 1 \pmod{\varphi(n)}$. L’algoritmo di Euclide classico calcola solo il $\gcd$; la versione *estesa* fa di più: trova anche i due interi $x$ e $y$ della cosiddetta **identità di Bézout**, cioè esprime il $\gcd$ come combinazione lineare intera di $a$ e $n$. Quando il $\gcd$ vale $1$, il coefficiente $x$ è esattamente l’inverso che cerchiamo.
+> 💡 **Perché ci serve e da dove viene.** Per RSA dobbiamo calcolare $d = e^{-1} \bmod \varphi(n)$, cioè trovare un intero $d$ tale che $e \cdot d \equiv 1 \pmod{\varphi(n)}$. L’algoritmo di Euclide classico calcola solo il $\mcd$; la versione *estesa* fa di più: trova anche i due interi $x$ e $y$ della cosiddetta **identità di Bézout**, cioè esprime il $\mcd$ come combinazione lineare intera di $a$ e $n$. Quando il $\mcd$ vale $1$, il coefficiente $x$ è esattamente l’inverso che cerchiamo.
 
 L’**algoritmo esteso di Euclide** permette di:
 
-- Calcolare il **$\gcd(a, n)$**
+- Calcolare il **$\mcd(a, n)$**
     
-- Trovare **l’inverso moltiplicativo** di $a$ modulo $n$, se $\gcd(a,n)=1$
+- Trovare **l’inverso moltiplicativo** di $a$ modulo $n$, se $\mcd(a,n)=1$
     
 
 Restituisce tre valori $(d, x, y)$ tali che:
 
 $$  
-d = \gcd(a, n) = a \cdot x + n \cdot y  
+d = \mcd(a, n) = a \cdot x + n \cdot y  
 $$
 
-> 📌 **Identità di Bézout.** Questa scrittura $d = ax + ny$ si chiama identità di Bézout e vale sempre: il $\gcd$ di due interi si può sempre esprimere come loro combinazione lineare (con coefficienti interi, anche negativi). Riducendo entrambi i lati modulo $n$: $d \equiv ax \pmod{n}$. Se $d = 1$, allora $1 \equiv ax \pmod{n}$, cioè $x$ è proprio l’inverso di $a$ modulo $n$.
+> 📌 **Identità di Bézout.** Questa scrittura $d = ax + ny$ si chiama identità di Bézout e vale sempre: il $\mcd$ di due interi si può sempre esprimere come loro combinazione lineare (con coefficienti interi, anche negativi). Riducendo entrambi i lati modulo $n$: $d \equiv ax \pmod{n}$. Se $d = 1$, allora $1 \equiv ax \pmod{n}$, cioè $x$ è proprio l’inverso di $a$ modulo $n$.
 
 ---
 
@@ -52,7 +52,7 @@ Euclide-esteso(a, n)
   return (d, x, y)
 ```
 
-> 📌 **Come funziona il ritorno indietro.** La chiamata ricorsiva scende esattamente come l’Euclide classico (riducendo $a \bmod n$ ad ogni passo), finché $n = 0$: a quel punto il $\gcd$ è $a$ stesso, e i coefficienti banali sono $x=1, y=0$ (perché $a \cdot 1 + 0 \cdot 0 = a$). Poi, risalendo, ogni livello *ricostruisce* i propri $x$ e $y$ da quelli del livello sottostante tramite la formula $x = y’$, $y = x’ - \lfloor a/n \rfloor \cdot y’$. Questa formula deriva dalla sostituzione dell’identità $a = \lfloor a/n \rfloor \cdot n + (a \bmod n)$ nell’identità di Bézout del livello inferiore.
+> 📌 **Come funziona il ritorno indietro.** La chiamata ricorsiva scende esattamente come l’Euclide classico (riducendo $a \bmod n$ ad ogni passo), finché $n = 0$: a quel punto il $\mcd$ è $a$ stesso, e i coefficienti banali sono $x=1, y=0$ (perché $a \cdot 1 + 0 \cdot 0 = a$). Poi, risalendo, ogni livello *ricostruisce* i propri $x$ e $y$ da quelli del livello sottostante tramite la formula $x = y’$, $y = x’ - \lfloor a/n \rfloor \cdot y’$. Questa formula deriva dalla sostituzione dell’identità $a = \lfloor a/n \rfloor \cdot n + (a \bmod n)$ nell’identità di Bézout del livello inferiore.
 
 #### **Complessità**
 
@@ -90,21 +90,21 @@ Ha lo stesso tempo di esecuzione asintotico dell’algoritmo classico di Euclide
 Risultato finale:
 
 $$
-\gcd(99, 78) = 3, \qquad 99 \cdot (-11) + 78 \cdot 14 = -1089 + 1092 = 3
+\mcd(99, 78) = 3, \qquad 99 \cdot (-11) + 78 \cdot 14 = -1089 + 1092 = 3
 $$
 
 ---
 
 ### **4. Soluzione di una congruenza $a x \equiv b \pmod{n}$**
 
-> 💡 **Intuizione.** La congruenza $ax \equiv b \pmod{n}$ equivale a chiedere: esiste un intero $x$ tale che $ax - b$ sia un multiplo di $n$? Riscrivendo: $ax - kn = b$ per qualche intero $k$, cioè $ax + n(-k) = b$. Il lato sinistro è una combinazione lineare di $a$ e $n$, e — per il teorema di Bézout — l’insieme di tutti i valori che questa combinazione può assumere è esattamente l’insieme dei multipli di $\gcd(a, n)$. Quindi la congruenza è risolvibile se e solo se $\gcd(a,n)$ divide $b$.
+> 💡 **Intuizione.** La congruenza $ax \equiv b \pmod{n}$ equivale a chiedere: esiste un intero $x$ tale che $ax - b$ sia un multiplo di $n$? Riscrivendo: $ax - kn = b$ per qualche intero $k$, cioè $ax + n(-k) = b$. Il lato sinistro è una combinazione lineare di $a$ e $n$, e — per il teorema di Bézout — l’insieme di tutti i valori che questa combinazione può assumere è esattamente l’insieme dei multipli di $\mcd(a, n)$. Quindi la congruenza è risolvibile se e solo se $\mcd(a,n)$ divide $b$.
 
 #### **Condizioni di esistenza**
 
 La congruenza $a x \equiv b \pmod{n}$ ammette soluzioni **se e solo se**:
 
 $$  
-g = \gcd(a, n) \mid b  
+g = \mcd(a, n) \mid b  
 $$
 
 Se $g \mid b$, allora esistono **$g$ soluzioni distinte** modulo $n$, equi-spaziate di $n/g$:
@@ -121,9 +121,9 @@ dove $x’$ viene da **Euclide-esteso$(a, n)$**, che restituisce $(g, x’, y’
 
 ### **5. Caso particolare: $a x \equiv 1 \pmod{n}$**
 
-> 💡 **Raccordo con RSA.** Questo è esattamente il caso che ci serve: vogliamo trovare $d$ tale che $e \cdot d \equiv 1 \pmod{\varphi(n)}$. La condizione di esistenza diventa $\gcd(e, \varphi(n)) = 1$, e questa è precisamente la condizione che verifichiamo nella generazione delle chiavi RSA (passo 5 della sezione 9). Se non è soddisfatta, si cambia $e$ e si riprova.
+> 💡 **Raccordo con RSA.** Questo è esattamente il caso che ci serve: vogliamo trovare $d$ tale che $e \cdot d \equiv 1 \pmod{\varphi(n)}$. La condizione di esistenza diventa $\mcd(e, \varphi(n)) = 1$, e questa è precisamente la condizione che verifichiamo nella generazione delle chiavi RSA (passo 5 della sezione 9). Se non è soddisfatta, si cambia $e$ e si riprova.
 
-La congruenza $ax \equiv 1 \pmod{n}$ ha **soluzione unica** modulo $n$ se e solo se $\gcd(a, n) = 1$.
+La congruenza $ax \equiv 1 \pmod{n}$ ha **soluzione unica** modulo $n$ se e solo se $\mcd(a, n) = 1$.
 
 In tal caso Euclide esteso restituisce $x’$ tale che:
 
@@ -145,9 +145,9 @@ $$
 
 #### **Esempio 1 – modulo 8**
 
-> 💡 $8 = 2^3$ non è primo: gli unici numeri in $[1,7]$ coprimi con $8$ sono quelli **dispari** (i pari condividono il fattore $2$ con $8$, quindi $\gcd > 1$ e l'inverso non esiste).
+> 💡 $8 = 2^3$ non è primo: gli unici numeri in $[1,7]$ coprimi con $8$ sono quelli **dispari** (i pari condividono il fattore $2$ con $8$, quindi $\mcd > 1$ e l'inverso non esiste).
 
-| $a$ | $\gcd(a,8)$ | $a^{-1} \pmod{8}$ |
+| $a$ | $\mcd(a,8)$ | $a^{-1} \pmod{8}$ |
 |---|---|---|
 | 1 | 1 | 1 |
 | 2 | 2 | — (non esiste) |
@@ -163,7 +163,7 @@ Si nota che gli inversi esistenti sono **auto-inversi** ($3 \cdot 3 = 9 \equiv 1
 
 #### **Esempio 2 – modulo 7**
 
-> 💡 $7$ è primo: per il piccolo teorema di Fermat, ogni $a \in [1, 6]$ soddisfa $\gcd(a,7)=1$, quindi tutti hanno inverso. In un campo $\mathbb{Z}_p$ con $p$ primo l'inverso esiste sempre per ogni elemento non nullo.
+> 💡 $7$ è primo: per il piccolo teorema di Fermat, ogni $a \in [1, 6]$ soddisfa $\mcd(a,7)=1$, quindi tutti hanno inverso. In un campo $\mathbb{Z}_p$ con $p$ primo l'inverso esiste sempre per ogni elemento non nullo.
 
 | $a$ | $a^{-1} \pmod{7}$ | Verifica |
 |---|---|---|
@@ -212,7 +212,7 @@ Se $n = p \cdot q$ con $p, q$ primi distinti, una congruenza modulo $n$ può ess
 
 #### **Teorema Cinese del Resto**
 
-Siano $m_1, m_2, \dots, m_t$ interi positivi e **a coppie coprimi** ($\gcd(m_i, m_j)=1$ per $i \ne j$).
+Siano $m_1, m_2, \dots, m_t$ interi positivi e **a coppie coprimi** ($\mcd(m_i, m_j)=1$ per $i \ne j$).
 
 Allora il sistema:
 
@@ -298,7 +298,7 @@ $$
 
 4. **Scegli** casualmente un intero $e$ con $1 < e < \varphi(n)$. In pratica si usano valori standard come $e = 65537$ (primo di Fermat $2^{16}+1$) per efficienza.
 
-5. **Controlla** $\gcd(e,\, \varphi(n)) = 1$ tramite Euclide classico.
+5. **Controlla** $\mcd(e,\, \varphi(n)) = 1$ tramite Euclide classico.
     - Se la condizione vale: calcola $d = e^{-1} \bmod \varphi(n)$ tramite **Euclide esteso**.
     - Altrimenti: torna al passo 4 e prova un altro $e$.
 
@@ -314,7 +314,7 @@ $$
 
 - L’**algoritmo di Euclide esteso** è il cuore della generazione delle chiavi: calcola $d = e^{-1} \bmod \varphi(n)$ in tempo $O((\log n)^2)$, lo stesso dell’Euclide classico.
 
-- La **congruenza lineare** $ex \equiv 1 \pmod{\varphi(n)}$ ha soluzione unica se e solo se $\gcd(e, \varphi(n)) = 1$, condizione verificata a ogni tentativo di scelta di $e$.
+- La **congruenza lineare** $ex \equiv 1 \pmod{\varphi(n)}$ ha soluzione unica se e solo se $\mcd(e, \varphi(n)) = 1$, condizione verificata a ogni tentativo di scelta di $e$.
 
 - Il **Teorema Cinese del Resto** non è solo un risultato teorico: è l’ottimizzazione che rende la decifratura RSA circa **4 volte più veloce** in tutte le implementazioni reali, sfruttando il fatto che $n = pq$.
 

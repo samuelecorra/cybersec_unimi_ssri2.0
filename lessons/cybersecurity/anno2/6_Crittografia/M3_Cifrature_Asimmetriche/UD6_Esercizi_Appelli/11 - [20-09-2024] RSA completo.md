@@ -54,11 +54,11 @@ Per usare $d = 3$ come chiave privata, deve valere $ed \equiv 1 \pmod{24}$.
 
 Con $d = 3$: dobbiamo trovare $e$ tale che $3e \equiv 1 \pmod{24}$, ovvero l'inverso di 3 modulo 24.
 
-$\gcd(3, 24) = 3 \neq 1$: il 3 **non ha inverso modulo 24** (poiché 3 divide 24).
+$\mcd(3, 24) = 3 \neq 1$: il 3 **non ha inverso modulo 24** (poiché 3 divide 24).
 
 Quindi **$d = 3$ non è una scelta valida** per la chiave privata RSA con $\varphi(n) = 24$. Non esiste una chiave pubblica $e$ corrispondente.
 
-**Motivo formale:** la condizione per un valido esponente privato è $\gcd(d, \varphi(n)) = 1$. Poiché $\gcd(3, 24) = 3 \neq 1$, la scelta è invalida.
+**Motivo formale:** la condizione per un valido esponente privato è $\mcd(d, \varphi(n)) = 1$. Poiché $\mcd(3, 24) = 3 \neq 1$, la scelta è invalida.
 
 > ⚠️ In generale, $d$ deve essere scelto coprimo con $\varphi(n)$. Un errore comune è scegliere $d$ senza verificare questa condizione. Per $\varphi(24) = $ i valori coprimi con 24 sono: 1, 5, 7, 11, 13, 17, 19, 23.
 

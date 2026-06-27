@@ -210,7 +210,7 @@ $$2x' \equiv -8 \equiv 2 \pmod{10}$$
 
 $$x' \equiv 1 \pmod{5}$$
 
-Poiché $\gcd(2, 10) = 2$ e $2 \mid 2$, ci sono $\gcd(2,10) = 2$ soluzioni in $\mathbb{Z}_{10}$: $x' = 1$ e $x' = 6$.
+Poiché $\mcd(2, 10) = 2$ e $2 \mid 2$, ci sono $\mcd(2,10) = 2$ soluzioni in $\mathbb{Z}_{10}$: $x' = 1$ e $x' = 6$.
 
 La soluzione diversa da 6 è $x' = 1$.
 
@@ -220,7 +220,7 @@ La soluzione diversa da 6 è $x' = 1$.
 
 **Perché manca la second preimage resistance:**
 
-$H(x) = 2x + 8 \bmod 10$ non è una biiezione in $\mathbb{Z}_{10}$ perché $\gcd(2, 10) = 2 \neq 1$: la funzione è 2-a-1 (ogni valore dell'immagine ha esattamente due preimmagini, che differiscono di 5). Trovare una seconda preimmagine per qualsiasi valore è banale.
+$H(x) = 2x + 8 \bmod 10$ non è una biiezione in $\mathbb{Z}_{10}$ perché $\mcd(2, 10) = 2 \neq 1$: la funzione è 2-a-1 (ogni valore dell'immagine ha esattamente due preimmagini, che differiscono di 5). Trovare una seconda preimmagine per qualsiasi valore è banale.
 
 In generale:
 
@@ -263,7 +263,7 @@ RSA (Rivest, Shamir, Adleman, 1977) è il crittosistema asimmetrico più diffuso
 1. Si scelgono due numeri primi grandi e distinti $p$ e $q$ (in pratica, $\geq 1024$ bit ciascuno).
 2. Si calcola il **modulo**: $n = p \cdot q$.
 3. Si calcola la **funzione di Eulero**: $\phi(n) = (p-1)(q-1)$.
-4. Si sceglie l'**esponente pubblico** $e$ tale che $1 < e < \phi(n)$ e $\gcd(e, \phi(n)) = 1$ (tipicamente $e = 65537 = 2^{16}+1$).
+4. Si sceglie l'**esponente pubblico** $e$ tale che $1 < e < \phi(n)$ e $\mcd(e, \phi(n)) = 1$ (tipicamente $e = 65537 = 2^{16}+1$).
 5. Si calcola l'**esponente privato** $d$ tale che $d \cdot e \equiv 1 \pmod{\phi(n)}$ (inverso moltiplicativo di $e$ modulo $\phi(n)$, calcolabile con l'algoritmo di Euclide esteso).
 
 **Chiave pubblica:** $(n, e)$
@@ -274,7 +274,7 @@ RSA (Rivest, Shamir, Adleman, 1977) è il crittosistema asimmetrico più diffuso
 
 **Decifratura:** $M = C^d \bmod n$
 
-**Correttezza:** per il teorema di Eulero, $M^{e \cdot d} = M^{1 + k\phi(n)} \equiv M \pmod{n}$ per $\gcd(M, n) = 1$.
+**Correttezza:** per il teorema di Eulero, $M^{e \cdot d} = M^{1 + k\phi(n)} \equiv M \pmod{n}$ per $\mcd(M, n) = 1$.
 
 #### Parte b — Utilizzo "naive" di RSA e insicurezza con pochi messaggi (5 punti)
 
@@ -315,7 +315,7 @@ Double-RSA con lo stesso modulo è equivalente a RSA standard con esponente $e =
 
 **Caso 2 — attacco Common Modulus:**
 
-Se Alice e Bob usano lo stesso modulo $n$ ma esponenti diversi $e_1, e_2$ con $\gcd(e_1, e_2) = 1$, e lo stesso messaggio $M$ viene cifrato con entrambe le chiavi:
+Se Alice e Bob usano lo stesso modulo $n$ ma esponenti diversi $e_1, e_2$ con $\mcd(e_1, e_2) = 1$, e lo stesso messaggio $M$ viene cifrato con entrambe le chiavi:
 
 $$C_1 = M^{e_1} \bmod n, \quad C_2 = M^{e_2} \bmod n$$
 

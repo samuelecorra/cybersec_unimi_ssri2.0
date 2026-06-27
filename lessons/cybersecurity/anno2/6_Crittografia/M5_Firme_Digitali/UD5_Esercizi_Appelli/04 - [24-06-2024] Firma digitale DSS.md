@@ -60,7 +60,7 @@ $$H(m) + xr \equiv 0 \pmod{q}$$
 
 $$xr \equiv -H(m) \pmod{q}$$
 
-Ora $r = a \neq 0$. Poiché $q$ è primo e $0 < r < q$, si ha $\gcd(r, q) = 1$, quindi $r$ è invertibile modulo $q$. Moltiplicando entrambi i lati per $r^{-1} \bmod q$:
+Ora $r = a \neq 0$. Poiché $q$ è primo e $0 < r < q$, si ha $\mcd(r, q) = 1$, quindi $r$ è invertibile modulo $q$. Moltiplicando entrambi i lati per $r^{-1} \bmod q$:
 
 $$x \equiv -H(m) \cdot r^{-1} \pmod{q}$$
 

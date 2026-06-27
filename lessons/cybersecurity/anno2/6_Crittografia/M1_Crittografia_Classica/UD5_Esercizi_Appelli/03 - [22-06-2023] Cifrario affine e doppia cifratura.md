@@ -37,7 +37,7 @@ Il **One-Time Pad (OTP)** di Vernam: $c_i = m_i \oplus k_i$ con chiave $k$ **cas
 
 #### Parte c — Trovare la chiave affine e cifrare "CIAO" (10 punti)
 
-Cifrario affine: $E_{(a,b)}(x) = (a x + b) \bmod 26$, con $\gcd(a,26)=1$. Codifica A=0, …, Z=25. Dati: O=14, Z=25, T=19, I=8.
+Cifrario affine: $E_{(a,b)}(x) = (a x + b) \bmod 26$, con $\mcd(a,26)=1$. Codifica A=0, …, Z=25. Dati: O=14, Z=25, T=19, I=8.
 
 $$\begin{cases} 14a + b \equiv 25 \pmod{26} \\ 19a + b \equiv 8 \pmod{26} \end{cases}$$
 
@@ -45,7 +45,7 @@ Sottraendo la prima dalla seconda: $5a \equiv 8 - 25 = -17 \equiv 9 \pmod{26}$. 
 $$a \equiv 21 \cdot 9 = 189 \equiv 189 - 7\cdot26 = 7 \pmod{26}$$
 Da $14a + b \equiv 25$: $b \equiv 25 - 14\cdot7 = 25 - 98 = -73 \equiv -73 + 3\cdot26 = 5 \pmod{26}$.
 
-**Chiave:** $k = (a,b) = (7,5)$, con $\gcd(7,26)=1$ (valida). Verifica: $E(\text{O}) = 7\cdot14+5 = 103 \equiv 25 = \text{Z}$ ✓; $E(\text{T}) = 7\cdot19+5 = 138 \equiv 8 = \text{I}$ ✓.
+**Chiave:** $k = (a,b) = (7,5)$, con $\mcd(7,26)=1$ (valida). Verifica: $E(\text{O}) = 7\cdot14+5 = 103 \equiv 25 = \text{Z}$ ✓; $E(\text{T}) = 7\cdot19+5 = 138 \equiv 8 = \text{I}$ ✓.
 
 **Cifratura di "CIAO"** (C=2, I=8, A=0, O=14):
 $$E(2) = 7\cdot2+5 = 19 = \text{T}, \quad E(8) = 7\cdot8+5 = 61 \equiv 9 = \text{J}$$
