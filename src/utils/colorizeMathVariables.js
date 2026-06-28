@@ -22,7 +22,7 @@ const VARIABLE_SELECTOR = [
 const LETTER_PATTERN = /^\p{L}$/u;
 
 function cleanTokenText(text) {
-  return text.replace(/\u200b/g, "").replace(/\s+/g, "");
+  return text.replace(/​/g, "").replace(/\s+/g, "");
 }
 
 function isVariableGlyph(node) {
@@ -43,31 +43,6 @@ function getSubscriptIdentity(parent) {
   return cleanTokenText(scripts.textContent || "");
 }
 
-function getVariableTarget(node) {
-  const scriptedParent = getScriptedParent(node);
-  if (!scriptedParent) {
-    return {
-      target: node,
-      key: cleanTokenText(node.textContent || ""),
-    };
-  }
-
-  const base = cleanTokenText(node.textContent || "");
-  const subscript = getSubscriptIdentity(scriptedParent);
-
-  if (!subscript) {
-    return {
-      target: node,
-      key: base,
-    };
-  }
-
-  return {
-    target: scriptedParent,
-    key: `${base}_${subscript}`,
-  };
-}
-
 export function colorizeMathVariables(root) {
   if (!root) return () => {};
 
@@ -78,29 +53,89 @@ export function colorizeMathVariables(root) {
     node.style.removeProperty("--math-var-glow");
   });
 
-  const tokenIndexes = new Map();
-  const coloredTargets = new Set();
   const nodes = Array.from(root.querySelectorAll(VARIABLE_SELECTOR));
+
+  // For each letter node compute its effective element (scripted wrapper or itself)
+  // and map effective element → { node, baseLetter }
+  const effectiveElMap = new Map(); // effectiveEl -> { node, baseLetter }
 
   for (const node of nodes) {
     if (!isVariableGlyph(node)) continue;
+    const scriptedParent = getScriptedParent(node);
+    const effectiveEl = scriptedParent || node;
+    const baseLetter = cleanTokenText(node.textContent || "");
+    effectiveElMap.set(effectiveEl, { node, baseLetter });
+  }
 
-    const { target, key } = getVariableTarget(node);
-    if (!key || coloredTargets.has(target)) continue;
+  // Group effective elements by their parent to find consecutive runs (multi-letter operators)
+  const parentToEls = new Map();
+  for (const effectiveEl of effectiveElMap.keys()) {
+    const parent = effectiveEl.parentElement;
+    if (!parent) continue;
+    if (!parentToEls.has(parent)) parentToEls.set(parent, new Set());
+    parentToEls.get(parent).add(effectiveEl);
+  }
 
-    if (!tokenIndexes.has(key)) {
-      tokenIndexes.set(key, tokenIndexes.size);
+  // multiLetterKey: effectiveEl -> string key (the full operator word, e.g. "MAC")
+  const multiLetterKey = new Map();
+
+  for (const [parent, elSet] of parentToEls) {
+    const children = Array.from(parent.children);
+    let i = 0;
+    while (i < children.length) {
+      const child = children[i];
+      if (elSet.has(child)) {
+        const run = [child];
+        let j = i + 1;
+        while (j < children.length && elSet.has(children[j])) {
+          run.push(children[j]);
+          j++;
+        }
+        if (run.length >= 2) {
+          const word = run
+            .map((el) => effectiveElMap.get(el)?.baseLetter || "")
+            .join("");
+          for (const el of run) multiLetterKey.set(el, word);
+        }
+        i = j;
+      } else {
+        i++;
+      }
+    }
+  }
+
+  // Assign colors
+  const tokenIndexes = new Map();
+  const coloredTargets = new Set();
+
+  for (const [effectiveEl, { node, baseLetter }] of effectiveElMap) {
+    if (coloredTargets.has(effectiveEl)) continue;
+
+    let key;
+    if (multiLetterKey.has(effectiveEl)) {
+      // Multi-letter operator: all letters share the operator name as key
+      key = multiLetterKey.get(effectiveEl);
+    } else {
+      // Single variable: letter + optional subscript identity
+      const scriptedParent = getScriptedParent(node);
+      if (scriptedParent) {
+        const subscript = getSubscriptIdentity(scriptedParent);
+        key = subscript ? `${baseLetter}_${subscript}` : baseLetter;
+      } else {
+        key = baseLetter;
+      }
     }
 
-    const paletteEntry = MATH_VARIABLE_PALETTE[
-      tokenIndexes.get(key) % MATH_VARIABLE_PALETTE.length
-    ];
+    if (!tokenIndexes.has(key)) tokenIndexes.set(key, tokenIndexes.size);
 
-    target.classList.add("math-var-token");
-    target.dataset.mathToken = key;
-    target.style.setProperty("--math-var-color", paletteEntry.color);
-    target.style.setProperty("--math-var-glow", paletteEntry.glow);
-    coloredTargets.add(target);
+    const paletteEntry =
+      MATH_VARIABLE_PALETTE[tokenIndexes.get(key) % MATH_VARIABLE_PALETTE.length];
+
+    effectiveEl.classList.add("math-var-token");
+    effectiveEl.dataset.mathToken = key;
+    effectiveEl.style.setProperty("--math-var-color", paletteEntry.color);
+    effectiveEl.style.setProperty("--math-var-glow", paletteEntry.glow);
+    coloredTargets.add(effectiveEl);
   }
 
   return () => {
