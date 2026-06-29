@@ -19,7 +19,8 @@
 > a. (5 punti) Discutere la seguente affermazione: *"In un generico algoritmo di cifratura a sostituzione a blocchi di $n$ bit, le dimensioni della chiave sono $n \cdot 2^n$"*.
 >
 > b. Si consideri il seguente cifrario che prende blocchi binari di 3 bit, esegue una conversione in ottale, esegue un mapping, e restituisce blocchi binari di 3 bit.
->
+
+
 > | Input ottale | Output ottale |
 > |---|---|
 > | 0 | 0 |
@@ -30,7 +31,8 @@
 > | 5 | 5 |
 > | 6 | 6 |
 > | 7 | 7 |
->
+
+
 > c. (5 punti) Si indichino le caratteristiche del cifrario, specificando quanti possibili cifrari diversi è possibile ottenere cambiando il mapping.
 >
 > d. (10 punti) Si abbia un linguaggio con 8 lettere: R, O, L, P, S, T, A, E dove si usa la rappresentazione decimale R=0, O=1, L=2, P=3, S=4, T=5, A=6, E=7. Per cifrare una lettera si converte in forma binaria, si applica il cifrario, e si ottiene una nuova lettera. Cifrare la parola "PROLE". Si faccia qualche considerazione sulla robustezza di questo cifrario.
@@ -55,6 +57,7 @@ Per specificare completamente tale tabella:
 $$\text{Dimensione chiave} = n \cdot 2^n \text{ bit}$$
 
 Esempi:
+
 | $n$ | $2^n$ input | Bit output per input | Totale |
 |---|---|---|---|
 | 3 | 8 | 3 | 24 bit |

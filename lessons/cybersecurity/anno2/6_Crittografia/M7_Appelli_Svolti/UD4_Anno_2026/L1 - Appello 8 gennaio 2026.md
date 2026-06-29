@@ -95,10 +95,14 @@ $$\text{MIC} = \frac{n_e^X n_e^Y + n_t^X n_t^Y + n_o^X n_o^Y}{N_X N_Y} = \frac{1
 > **(35 punti)** Considera il seguente cifrario a blocchi basato su una funzione hash $h$ e sullo XOR. Assumiamo che $h$ produca valori di hash lunghi 64 bit e una chiave simmetrica $k$ di 128 bit. Sia $m$ un messaggio plaintext composto da due parti $m_1 m_2$, entrambe di lunghezza 64 bit, cioè $m = m_1 \cdot m_2$, dove $\cdot$ denota concatenazione. Si divida anche la chiave $k$ in due parti $k = k_1 k_2$ ciascuna di 64 bit.
 >
 > La cifratura $E_k(m) = c_1 c_2$ funziona in questo modo:
->
-> $$c_1 = m_1 \oplus h(m_2) \oplus k_1$$
-> $$c_2 = m_2 \oplus c_1 \oplus k_2$$
->
+
+$$
+\begin{cases}
+c_1 = m_1 \oplus h(m_2) \oplus k_1 \\\\
+c_2 = m_2 \oplus c_1 \oplus k_2
+\end{cases}
+$$
+
 > a. (10 punti) Mostrare come avviene la decifratura nell'ipotesi di conoscere la chiave $k$.
 >
 > b. (15 punti) Fare considerazioni sulla sicurezza di questo cifrario e considerare un attacco di tipo chosen plaintext, scegliendo opportunamente $m_1$ e $m_2$.
@@ -124,6 +128,7 @@ $$\boxed{m_2 = c_2 \oplus c_1 \oplus k_2}$$
 $$\boxed{m_1 = c_1 \oplus h(m_2) \oplus k_1}$$
 
 **Algoritmo di decifratura:**
+
 1. $m_2 \leftarrow c_2 \oplus c_1 \oplus k_2$
 2. $m_1 \leftarrow c_1 \oplus h(m_2) \oplus k_1$
 
@@ -152,6 +157,7 @@ $$k_2 = c_2 \oplus m_2 \oplus c_1$$
 > ⚠️ Questo cifrario è insicuro contro CPA. La vulnerabilità deriva dalla linearità di $c_1$ rispetto a $k_1$ (operazione XOR) e dalla calcolabilità di $h(m_2)$ da parte dell'avversario.
 
 **Riepilogo dell'attacco:**
+
 1. Scegli $m = 0^{64} \| m_2$ per qualsiasi $m_2$.
 2. Ottieni $(c_1, c_2)$.
 3. Calcola $h(m_2)$ (noto perché $m_2$ è stato scelto).
@@ -187,6 +193,7 @@ $$c_1 = 0101101010100101$$
 $$c_2 = m_2 \oplus c_1 \oplus k_2$$
 
 Prima: $m_2 \oplus c_1$:
+
 ```
   1111111111111111
 ⊕ 0101101010100101
@@ -194,6 +201,7 @@ Prima: $m_2 \oplus c_1$:
 ```
 
 Poi: $(m_2 \oplus c_1) \oplus k_2$:
+
 ```
   1010010101011010
 ⊕ 0000111111110000
@@ -277,12 +285,12 @@ Se $k$ è scelto casualmente e diverso per ogni firma, le due firme dello stesso
 
 **Confronto con RSA:**
 
-| Proprietà | DSS/DSA | RSA (textbook) |
-|---|---|---|
-| Determinismo | NON deterministico (dipende da $k$) | Deterministico |
-| Stesso messaggio firmato due volte | Firme diverse (se $k$ diverso) | Stessa firma |
-| Vulnerabilità nonce riusato | Critica: rivela $x$ | N/A (no nonce) |
-| Sicurezza basata su | Logaritmo discreto | Fattorizzazione |
+| Proprietà                          | DSS/DSA                             | RSA (textbook)  |
+| ---------------------------------- | ----------------------------------- | --------------- |
+| Determinismo                       | NON deterministico (dipende da $k$) | Deterministico  |
+| Stesso messaggio firmato due volte | Firme diverse (se $k$ diverso)      | Stessa firma    |
+| Vulnerabilità nonce riusato        | Critica: rivela $x$                 | N/A (no nonce)  |
+| Sicurezza basata su                | Logaritmo discreto                  | Fattorizzazione |
 
 RSA (textbook) è deterministico: la stessa chiave e lo stesso messaggio producono sempre la stessa firma. Questo è sia più semplice sia una vulnerabilità (attacchi a dizionario). RSA-PSS introduce randomizzazione analoga a DSS.
 

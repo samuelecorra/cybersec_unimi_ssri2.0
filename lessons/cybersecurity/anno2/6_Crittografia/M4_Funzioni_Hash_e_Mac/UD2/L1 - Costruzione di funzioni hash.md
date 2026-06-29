@@ -150,6 +150,8 @@ $$
 
 Lo schema parallelo procede per livelli.
 
+![](imgs/Pasted%20image%2020260629101111.png)
+
 Al primo livello:
 
 - $(m_1, m_2)$ vengono dati in input a una funzione hash o compressione;
@@ -247,6 +249,8 @@ Poi viene diviso in $n$ blocchi di uguale lunghezza:
 $$
 M' = (m_1, m_2, \ldots, m_n)
 $$
+
+![](imgs/Pasted%20image%2020260629101205.png)
 
 I blocchi vengono elaborati uno alla volta.
 
