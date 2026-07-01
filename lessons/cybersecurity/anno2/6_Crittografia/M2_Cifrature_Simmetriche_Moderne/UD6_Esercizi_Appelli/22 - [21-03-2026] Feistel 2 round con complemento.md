@@ -29,13 +29,21 @@
 
 **Round 1** (con $f(x,K) = K \oplus \bar{x}$):
 
-$$L_1 = R_0$$
-$$R_1 = L_0 \oplus f(R_0, K) = L_0 \oplus K \oplus \bar{R}_0$$
+$$
+\begin{aligned}
+L_1 &= R_0 \\\\
+R_1 &= L_0 \oplus f(R_0, K) = L_0 \oplus K \oplus \bar{R}_0
+\end{aligned}
+$$
 
 **Round 2:**
 
-$$L_2 = R_1 = L_0 \oplus K \oplus \bar{R}_0$$
-$$R_2 = L_1 \oplus f(R_1, K) = R_0 \oplus K \oplus \bar{R}_1$$
+$$
+\begin{aligned}
+L_2 &= R_1 = L_0 \oplus K \oplus \bar{R}_0 \\\\
+R_2 &= L_1 \oplus f(R_1, K) = R_0 \oplus K \oplus \bar{R}_1
+\end{aligned}
+$$
 
 #### Parte ii — Correttezza della decifratura (10 punti)
 
@@ -94,11 +102,11 @@ DES usa 16 round, Blowfish 16, AES 10–14. Con 2 round la diffusione dei bit è
 
 **Riepilogo:**
 
-| Proprietà | Valore |
-|---|---|
+| Proprietà        | Valore                                      |
+| ---------------- | ------------------------------------------- |
 | Linearità di $f$ | Affine: vulnerabile a crittoanalisi lineare |
-| Round | 2: diffusione insufficiente |
-| Sicurezza KPA | **Nulla**: 1 coppia rivela $K$ |
-| Sicurezza COA | $2^{\|K\|}$ brute-force |
+| Round            | 2: diffusione insufficiente                 |
+| Sicurezza KPA    | **Nulla**: 1 coppia rivela $K$              |
+| Sicurezza COA    | $2^{\|K\|}$ brute-force                     |
 
 > ⚠️ Questo cifrario è **completamente insicuro contro KPA**. La formula $K = L_0 \oplus L_2 \oplus \bar{R}_0$ mostra che la linearità di $f$ rispetto a $K$ consente di determinare la chiave con un singolo esempio noto.

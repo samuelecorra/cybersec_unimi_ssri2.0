@@ -351,7 +351,7 @@ Il costo individuale di generazione delle chiavi è quindi molto ridotto.
 
 Il docente mostra alcune tabelle di confronto tra RSA e DSA.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260701155001.png)
 
 Le tabelle confrontano tempi di firma e verifica, considerando:
 
