@@ -209,31 +209,31 @@ Strategia di attacco: ricerca esaustiva su $k$.
 
 ### Prerequisiti teorici
 
-- [`../../M3_Cifrature_Asimmetriche/UD3/L1 - Il problema del logaritmo discreto.md`](../../M3_Cifrature_Asimmetriche/UD3/L1%20-%20Il%20problema%20del%20logaritmo%20discreto.md) — El Gamal completo
+- [`../../M3_Cifrature_Asimmetriche/UD3/L2 - Crittosistema di El-Gamal.md`](../../M3_Cifrature_Asimmetriche/UD3/L2%20-%20Crittosistema%20di%20El-Gamal.md) — El Gamal completo
 
 ### Soluzione dettagliata
 
 #### Parte a — Schema El Gamal: cifratura e decifratura (5 punti)
 
 **Setup:** un primo $p$, un generatore $g$ di $\mathbb{Z}_p^*$, e le chiavi di Alice:
-- Chiave privata: $a \in \{1, \ldots, p-2\}$ casuale.
-- Chiave pubblica: $y = g^a \bmod p$.
+- Chiave privata: $\alpha \in \{1, \ldots, p-2\}$ casuale.
+- Chiave pubblica: $\beta = g^\alpha \bmod p$.
 
 **Cifratura** del messaggio $m \in \mathbb{Z}_p^*$:
 1. Il mittente sceglie un nonce $k \in \{1, \ldots, p-2\}$ casuale.
 2. Calcola $c_1 = g^k \bmod p$.
-3. Calcola $c_2 = m \cdot y^k \bmod p = m \cdot g^{ak} \bmod p$.
+3. Calcola $c_2 = m \cdot \beta^k \bmod p = m \cdot g^{\alpha k} \bmod p$.
 4. Invia il ciphertext $(c_1, c_2)$.
 
-**Decifratura** di $(c_1, c_2)$ con chiave privata $a$:
-1. Calcola $s = c_1^a \bmod p = g^{ak} \bmod p$.
-2. Calcola $m = c_2 \cdot s^{-1} \bmod p = m \cdot g^{ak} \cdot g^{-ak} = m$.
+**Decifratura** di $(c_1, c_2)$ con chiave privata $\alpha$:
+1. Calcola $s = c_1^\alpha \bmod p = g^{\alpha k} \bmod p$.
+2. Calcola $m = c_2 \cdot s^{-1} \bmod p = m \cdot g^{\alpha k} \cdot g^{-\alpha k} = m$.
 
-> 📌 La sicurezza si basa sulla difficoltà del problema del logaritmo discreto: $a$ è il logaritmo discreto di $y$ in base $g$ modulo $p$. Senza $a$, calcolare $s = g^{ak}$ da $c_1 = g^k$ e $y = g^a$ richiederebbe risolvere il Diffie-Hellman problem.
+> 📌 La sicurezza si basa sulla difficoltà del problema del logaritmo discreto: $\alpha$ è il logaritmo discreto di $\beta$ in base $g$ modulo $p$. Senza $\alpha$, calcolare $s = g^{\alpha k}$ da $c_1 = g^k$ e $\beta = g^\alpha$ richiederebbe risolvere il Diffie-Hellman problem.
 
-#### Parte b — Cifratura in $\mathbb{Z}_{11}$, $g=6$, $y_A=3$, $m=4$, $k=5$ (15 punti)
+#### Parte b — Cifratura in $\mathbb{Z}_{11}$, $g=6$, $\beta_A=3$, $m=4$, $k=5$ (15 punti)
 
-**Parametri:** $p=11$, $g=6$, chiave pubblica di Alice $y_A = 3$, nonce $k=5$.
+**Parametri:** $p=11$, $g=6$, chiave pubblica di Alice $\beta_A = 3$, nonce $k=5$.
 
 **Calcoli preliminari — $g^k \bmod p = 6^5 \bmod 11$:**
 
@@ -241,19 +241,21 @@ $$6^1 = 6,\quad 6^2 = 36 \bmod 11 = 3,\quad 6^3 = 18 \bmod 11 = 7,\quad 6^4 = 42
 
 $$c_1 = 6^5 \bmod 11 = 10$$
 
-**Calcolo di $y_A^k \bmod p = 3^5 \bmod 11$:**
+**Calcolo di $\beta_A^k \bmod p = 3^5 \bmod 11$:**
 
 $$3^1=3,\quad 3^2=9,\quad 3^3=27\bmod 11=5,\quad 3^4=15\bmod 11=4,\quad 3^5=12\bmod 11=1$$
 
-$$c_2 = m \cdot y_A^k \bmod p = 4 \cdot 1 \bmod 11 = 4$$
+$$c_2 = m \cdot \beta_A^k \bmod p = 4 \cdot 1 \bmod 11 = 4$$
 
 **Ciphertext:** $(c_1, c_2) = (10, 4)$.
 
-**Decifratura:** Alice determina la chiave privata $a$ tale che $g^a = y_A$, cioè $6^a \equiv 3 \pmod{11}$.
+**Decifratura:** Alice determina la chiave privata $\alpha$ tale che $g^\alpha = \beta_A$, cioè $6^\alpha \equiv 3 \pmod{11}$.
 
-Da sopra: $6^2 = 3 \bmod 11$, quindi $a = 2$.
+> 💡 La traccia non dà $\alpha$ come dato esplicito: qui lo si ricava per **ricerca esaustiva**, confrontando $\beta_A=3$ con le potenze di $g=6$ già tabulate sopra. È fattibile a mano solo perché $p=11$ è minuscolo (appena 9 esponenti possibili in $\{1,\dots,p-2\}$): è il caso concreto e trattabile del problema del logaritmo discreto discusso nella Parte a. Con $p$ a 2048+ bit questa stessa ricerca sarebbe impraticabile — è proprio ciò su cui si fonda la sicurezza di El-Gamal. In un caso reale, comunque, Alice non deve "trovare" $\alpha$: è la sua chiave privata, generata casualmente e già nota fin dalla creazione delle chiavi; qui lo si ricalcola solo a scopo didattico.
 
-$$s = c_1^a \bmod p = 10^2 \bmod 11 = 100 \bmod 11 = 1$$
+Da sopra: $6^2 = 3 \bmod 11$, quindi $\alpha = 2$.
+
+$$s = c_1^\alpha \bmod p = 10^2 \bmod 11 = 100 \bmod 11 = 1$$
 
 $(100 = 9 \cdot 11 + 1)$
 
@@ -264,12 +266,12 @@ $$m = c_2 \cdot s^{-1} \bmod p = 4 \cdot 1^{-1} \bmod 11 = 4 \cdot 1 = 4 \checkm
 | Fase | Calcolo | Risultato |
 |---|---|---|
 | $c_1 = g^k \bmod p$ | $6^5 \bmod 11$ | $10$ |
-| $c_2 = m \cdot y_A^k \bmod p$ | $4 \cdot 3^5 \bmod 11 = 4 \cdot 1$ | $4$ |
-| $a$ (chiave privata Alice) | $6^a \equiv 3 \pmod{11}$ | $a=2$ |
-| $s = c_1^a \bmod p$ | $10^2 \bmod 11$ | $1$ |
+| $c_2 = m \cdot \beta_A^k \bmod p$ | $4 \cdot 3^5 \bmod 11 = 4 \cdot 1$ | $4$ |
+| $\alpha$ (chiave privata Alice) | $6^\alpha \equiv 3 \pmod{11}$ | $\alpha=2$ |
+| $s = c_1^\alpha \bmod p$ | $10^2 \bmod 11$ | $1$ |
 | $m = c_2 / s \bmod p$ | $4 / 1 \bmod 11$ | $4$ ✓ |
 
-> 💡 Il fatto che $3^5 \equiv 1 \pmod{11}$ significa che il nonce $k=5$ produce uno "scudo" $y_A^k = 1$, il che rende $c_2 = m$ (il messaggio appare in chiaro nel ciphertext!). Questo non è un difetto del protocollo ma un caso particolare dovuto alla scelta di $k=5$: $y_A = 3$ ha ordine $5$ in $\mathbb{Z}_{11}^*$, quindi $3^5 = 1$.
+> 💡 Il fatto che $3^5 \equiv 1 \pmod{11}$ significa che il nonce $k=5$ produce uno "scudo" $\beta_A^k = 1$, il che rende $c_2 = m$ (il messaggio appare in chiaro nel ciphertext!). Questo non è un difetto del protocollo ma un caso particolare dovuto alla scelta di $k=5$: $\beta_A = 3$ ha ordine $5$ in $\mathbb{Z}_{11}^*$, quindi $3^5 = 1$.
 
 ---
 

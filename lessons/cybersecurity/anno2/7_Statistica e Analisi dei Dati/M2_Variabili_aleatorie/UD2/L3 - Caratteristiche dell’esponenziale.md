@@ -186,7 +186,7 @@ $$
 Poiché $\ln 2 \approx 0.6931$, la mediana è **inferiore alla media**:
 
 $$  
-t_{\text{mediana}} \approx 0.6931 , \tau  
+t_{\text{mediana}} \approx 0.6931 \cdot \tau  
 $$
 
 ---

@@ -132,27 +132,29 @@ Per $n = 1$:
 
 - La Binomiale coincide con la **Bernoulliana**:  
 
-$$  
-    P(0) = q, \quad P(1) = p  
-    $$
+$$
+P(0) = q, \quad P(1) = p
+$$
 
-Per $n = 2$:  
-$$  
+Per $n = 2$:
+
+$$
 \begin{cases}  
 P(0) = q^2 \\\\  
 P(1) = 2pq \\\\  
 P(2) = p^2  
-\end{cases}  
+\end{cases}
 $$
 
-Per $n = 3$:  
-$$  
+Per $n = 3$:
+
+$$
 \begin{cases}  
 P(0) = q^3 \\\\  
 P(1) = 3pq^2 \\\\  
 P(2) = 3p^2q \\\\  
 P(3) = p^3  
-\end{cases}  
+\end{cases}
 $$
 
 ---
@@ -173,31 +175,33 @@ All’aumentare di $n$, la distribuzione tende a diventare **continua** e ad ass
 
 I valori principali della Binomiale sono:
 
-$$  
-\text{Media: } \mu = n p  
+$$
+\text{Media: } \mu = n p
 $$
 
-$$  
-\text{Varianza: } \sigma^2 = n p q  
+$$
+\text{Varianza: } \sigma^2 = n p q
 $$
 
-$$  
-\text{Deviazione standard: } \sigma = \sqrt{n p q}  
+$$
+\text{Deviazione standard: } \sigma = \sqrt{n p q}
 $$
 
 ---
 
 ### **11. Moda**
 
-La **moda** della Binomiale** coincide con l’intero** compreso tra:  
-$$  
-p(n + 1) - 1 \le k_{\text{moda}} \le p(n + 1)  
+La **moda** della Binomiale** coincide con l’intero** compreso tra:
+
+$$
+p(n + 1) - 1 \le k_{\text{moda}} \le p(n + 1)
 $$
 
 **Esempio:**  
 per $p = 0.5$ e $n = 8$  
-$$  
-k_{\text{moda}} = 4 = \mu  
+
+$$
+k_{\text{moda}} = 4 = \mu
 $$  
 quindi per $p = 0.5$ la distribuzione è simmetrica e **moda = media**.
 
@@ -207,8 +211,8 @@ quindi per $p = 0.5$ la distribuzione è simmetrica e **moda = media**.
 
 La **funzione cumulativa** $F(k)$ e la **anticumulativa** $S(k)$ si definiscono come:
 
-$$  
-F(k) = \sum_{i=0}^{k} P(i), \quad S(k) = \sum_{i=k+1}^{n} P(i)  
+$$
+F(k) = \sum_{i=0}^{k} P(i), \quad S(k) = \sum_{i=k+1}^{n} P(i)
 $$
 
 Non esiste una forma analitica semplice per $F(k)$ o $S(k)$, quindi i valori vengono in genere:
@@ -227,22 +231,22 @@ Non esiste una forma analitica semplice per $F(k)$ o $S(k)$, quindi i valori ven
 
 Tre generatori indipendenti ($n = 3$) alimentano una lampadina che resta accesa se **almeno due** sono attivi.
 
-$$  
-P(\text{lampadina accesa}) = P(k \ge 2)  
+$$
+P(\text{lampadina accesa}) = P(k \ge 2)
 $$
 
 Calcoliamo:
 
-$$  
-P(k \ge 2) = 1 - [P(k=0) + P(k=1)]  
+$$
+P(k \ge 2) = 1 - [P(k=0) + P(k=1)]
 $$
 
-$$  
-P(k=0) + P(k=1) = q^3 + 3pq^2  
+$$
+P(k=0) + P(k=1) = q^3 + 3pq^2
 $$
 
-$$  
-\Rightarrow P(\text{funziona}) = 1 - (q^3 + 3pq^2)  
+$$
+\Rightarrow P(\text{funziona}) = 1 - (q^3 + 3pq^2)
 $$
 
 ---

@@ -29,7 +29,7 @@ $$
 
 $$  
 \begin{cases}  
-F(t) = 1 - e^{-\lambda t} \\\\  
+F(t) = 1 - e^{-\lambda t} \\\\\\  
 S(t) = e^{-\lambda t}  
 \end{cases}  
 $$
