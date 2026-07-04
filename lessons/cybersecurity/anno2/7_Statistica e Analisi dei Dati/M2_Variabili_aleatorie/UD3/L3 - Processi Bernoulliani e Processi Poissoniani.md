@@ -66,10 +66,10 @@ mentre l’**Esponenziale negativa** descrive _quanto tempo passa_ tra due event
 
 I due modelli sono **complementari**.
 
-| **Esperimento**    | **Discreto** | **Continuo** |
-| ------------------ | ------------ | ------------ |
-| **Tempi d’attesa** | Geometrica   | $G(ip)$      |
-| **Conteggi**       | Binomiale    | $B(kpn)$     |
+| **Esperimento**    | **Discreto**              | **Continuo**                |
+| ------------------ | ------------------------- | --------------------------- |
+| **Tempi d’attesa** | Geometrica $G(i \mid p)$  | Esponenziale negativa       |
+| **Conteggi**       | Binomiale $B(k \mid p,n)$ | Poissoniana $P(k \mid \mu)$ |
 
 ---
 
@@ -78,7 +78,7 @@ I due modelli sono **complementari**.
 Il collegamento fra la **densità esponenziale** e la **Poissoniana** è dato da:
 
 $$  
-\mu = \lambda , \Delta t  
+\mu = \lambda \, \Delta t  
 $$
 
 dove:
@@ -183,8 +183,8 @@ I modelli associati sono:
 |---|---|---|
 |Tipo|Discreto|Continuo|
 |Parametri|$p, n$|$\lambda, \Delta t$|
-|Tempi d’attesa|Geometrica $G(i|p)$|
-|Conteggi|Binomiale $B(k|p,n)$|
+|Tempi d’attesa|Geometrica $G(i \mid p)$|Esponenziale negativa|
+|Conteggi|Binomiale $B(k \mid p,n)$|Poissoniana $P(k \mid \mu)$|
 |Proprietà|Memoryless discreto|Memoryless continuo|
 
 ---
@@ -224,8 +224,8 @@ Questa proprietà è la base dei modelli di traffico e di rete in **teoria delle
 |**Parametro di evento**|$p$|$\lambda$|
 |**Numero di prove / intervallo**|$n$|$\Delta t$|
 |**Media**|$\mu = np$|$\mu = \lambda \Delta t$|
-|**Distribuzione dei conteggi**|Binomiale $B(k|p,n)$|
-|**Distribuzione dei tempi d’attesa**|Geometrica $G(i|p)$|
+|**Distribuzione dei conteggi**|Binomiale $B(k \mid p,n)$|Poissoniana $P(k \mid \mu)$|
+|**Distribuzione dei tempi d’attesa**|Geometrica $G(i \mid p)$|Esponenziale negativa|
 |**Proprietà**|Memoryless (discreto)|Memoryless (continuo)|
 |**Merging**|Non definito|$\lambda = \lambda_1 + \lambda_2$|
 |**Splitting**|Non definito|$p\lambda$ e $(1-p)\lambda$|
