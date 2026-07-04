@@ -191,7 +191,7 @@ $$
 
 ### **11. Moda**
 
-La **moda** della Binomiale** coincide con l’intero** compreso tra:
+La **moda** della Binomiale **coincide con l’intero** compreso tra:
 
 $$
 p(n + 1) - 1 \le k_{\text{moda}} \le p(n + 1)

@@ -56,53 +56,105 @@ $$
 n \to \infty, \quad p \to 0, \quad \text{con } np = \mu \text{ finito.}  
 $$
 
+Dalla condizione $np = \mu$ segue subito la **sostituzione chiave** che useremo in tutti i passaggi:
+
+$$  
+p = \frac{\mu}{n}  
+$$
+
 - Poiché $p \to 0$, segue che $q = 1 - p \to 1$.
     
-- $n \to \infty$ implica che $k \ll n$.
+- $n \to \infty$ implica che $k \ll n$ (nel limite consideriamo $k$ fissato).
     
 - La media rimane $\langle k \rangle = np = \mu$.
+
+> ⚠️ Dal fatto che $q \to 1$ **non** segue che $q^{n-k} \to 1$: la base tende a $1$, ma l'esponente $n-k \to \infty$. È una forma indeterminata del tipo $1^{\infty}$, il cui limite — come vedremo — vale $e^{-\mu}$. Proprio in questo termine sta il cuore del limite di Poisson.
 
 ---
 
 ### **5. Approssimazione del termine combinatorio**
 
-Per $k \ll n$ si può scrivere:
+Sviluppiamo il coefficiente binomiale semplificando $(n-k)!$ con il numeratore:
 
 $$  
-\binom{n}{k} = \frac{n!}{k!(n-k)!} \approx \frac{n^k}{k!}  
+\binom{n}{k} = \frac{n!}{k!(n-k)!} = \frac{n(n-1)(n-2)\cdots(n-k+1)}{k!}  
 $$
 
-mentre per il termine probabilistico:
+Il numeratore è un prodotto di esattamente $k$ fattori. Per $k$ fissato e $n \to \infty$, ciascun fattore è asintoticamente uguale a $n$ (infatti $\frac{n-j}{n} \to 1$ per ogni $j = 0, 1, \dots, k-1$ fissato), quindi:
 
 $$  
-q^{n-k} = (1 - p)^{n-k} \approx 1  
+\binom{n}{k} \approx \frac{n^k}{k!}  
 $$
 
-perché $p$ è molto piccolo.
+Combiniamo ora il coefficiente binomiale, nella sua forma esatta di prodotto, con $p^k$, usando la sostituzione $p = \mu/n$:
+
+$$  
+\binom{n}{k} p^k = \frac{n(n-1)\cdots(n-k+1)}{k!} \left(\frac{\mu}{n}\right)^k = \frac{\mu^k}{k!} \cdot \frac{n(n-1)\cdots(n-k+1)}{n^k}  
+$$
+
+Dividendo ciascuno dei $k$ termini del numeratore per uno dei $k$ fattori $n$ del denominatore:
+
+$$  
+\binom{n}{k} p^k = \frac{\mu^k}{k!} \cdot \left(1\right)\left(1 - \frac{1}{n}\right)\left(1 - \frac{2}{n}\right)\cdots\left(1 - \frac{k-1}{n}\right)  
+$$
+
+Poiché $k$ è fissato e $n \to \infty$, ognuno dei $k$ fattori tra parentesi tende a $1$, quindi:
+
+$$  
+\binom{n}{k} p^k \to \frac{\mu^k}{k!}  
+$$
+
+> 📌 Il fattore $\dfrac{\mu^k}{k!}$ della Poissoniana nasce dunque dal prodotto $\binom{n}{k} p^k$.
 
 ---
 
-### **6. Passaggio al limite**
+### **6. Passaggio al limite del termine esponenziale**
 
-Sostituendo e semplificando:
-
-$$  
-P(k) \approx \frac{n^k}{k!} p^k q^{n-k} \approx \frac{(np)^k}{k!}  
-$$
-
-e poiché $np = \mu$ è costante, otteniamo:
+Resta da trattare il termine $q^{n-k}$, che è il vero cuore del limite. Con la sostituzione $p = \mu/n$:
 
 $$  
-P(k) \propto \frac{\mu^k}{k!}  
+q^{n-k} = (1 - p)^{n-k} = \left(1 - \frac{\mu}{n}\right)^{n-k}  
 $$
 
-Per normalizzare, imponiamo che la somma delle probabilità sia unitaria:
+Scomponiamo la potenza in due fattori:
 
 $$  
-\sum_{k=0}^{\infty} P(k) = 1  
+\left(1 - \frac{\mu}{n}\right)^{n-k} = \left(1 - \frac{\mu}{n}\right)^{n} \left(1 - \frac{\mu}{n}\right)^{-k}  
 $$
 
-Il fattore normalizzante è $e^{-\mu}$.
+Per il primo fattore vale il limite notevole dell'esponenziale:
+
+$$  
+\left(1 - \frac{\mu}{n}\right)^{n} \to e^{-\mu}  
+$$
+
+Il secondo fattore, invece, tende davvero a $1$: la base tende a $1$ e l'esponente $-k$ è **fissato**, non cresce con $n$:
+
+$$  
+\left(1 - \frac{\mu}{n}\right)^{-k} \to 1  
+$$
+
+Quindi:
+
+$$  
+q^{n-k} = \left(1 - \frac{\mu}{n}\right)^{n-k} \to e^{-\mu}  
+$$
+
+> ⚠️ Sarebbe fuorviante concludere che $q^{n-k} \approx 1$ "perché $p$ è piccolo": l'esponente $n-k \to \infty$ compensa l'avvicinarsi della base a $1$, e proprio dal bilanciamento tra questi due effetti nasce il fattore $e^{-\mu}$.
+
+Mettendo insieme i due risultati:
+
+$$  
+P(k) = \binom{n}{k} p^k q^{n-k} \to \frac{\mu^k}{k!} \, e^{-\mu} = \frac{\mu^k e^{-\mu}}{k!}  
+$$
+
+La normalizzazione risulta automaticamente soddisfatta, senza doverla imporre a posteriori:
+
+$$  
+\sum_{k=0}^{\infty} P(k) = e^{-\mu} \sum_{k=0}^{\infty} \frac{\mu^k}{k!} = e^{-\mu} \, e^{\mu} = 1  
+$$
+
+> ✅ In sintesi: il fattore $\mu^k/k!$ proviene da $\binom{n}{k} p^k$, mentre il fattore $e^{-\mu}$ proviene da $q^{n-k}$.
 
 ---
 
