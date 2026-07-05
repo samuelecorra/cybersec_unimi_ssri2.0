@@ -130,6 +130,10 @@ Dalla legge dei tre sigma derivano altre relazioni più precise, basate sui **pe
 
 ### **7. Uso delle tabelle della Normale standard**
 
+![](imgs/Pasted%20image%2020260705025738.png)
+
+![](imgs/Pasted%20image%2020260705025828.png)
+
 Le tabelle della Normale standard forniscono i valori di:
 
 $$  
@@ -149,6 +153,8 @@ La probabilità di avere valori **maggiori** di $x$ (cioè l’anticumulativa) �
 $$  
 S(z) = 1 - F(z)  
 $$
+
+![](imgs/Pasted%20image%2020260705025805.png)
 
 ---
 
