@@ -33,7 +33,7 @@ e i coefficienti di $G_Z(u)$ forniscono le **probabilità $Z(k)$**.
 
 ### **3. Distribuzione di Bernoulli**
 
-La distribuzione di **Bernoulli**, denotata $X(i) = \text{Ber}(i ,|, p)$, è definita da:
+La distribuzione di **Bernoulli**, denotata $X(i) = \text{Ber}(i \,|\, p)$, è definita da:
 
 $$  
 X(0) = q = 1 - p, \quad X(1) = p  

@@ -205,7 +205,7 @@ $$
 Per $n$ **moderatamente grande**, la **densità della media campionaria** tende a essere **gaussiana**:
 
 $$  
-f_M(m) \approx N(m ,|, \mu, , \sigma^2/n)  
+f_M(m) \approx N(m \,|\, \mu,\, \sigma^2/n)  
 $$
 
 Questa è una conseguenza diretta del **Teorema del Limite Centrale**:
@@ -247,5 +247,5 @@ Le fluttuazioni relative si riducono come $1/\sqrt{n}$, in perfetto accordo con 
 |:--|:--|:--|
 |**Media della media campionaria**|$\mu_m = \mu_X$|La media empirica è centrata sulla media vera|
 |**Varianza della media campionaria**|$\sigma_m^2 = \sigma_X^2 / n$|La dispersione si riduce con $n$|
-|**Forma per $n$ grande**|$N(m|\mu, \sigma^2/n)$|
+|**Forma per $n$ grande**|$N(m \mid \mu,\, \sigma^2/n)$|La densità diventa approssimativamente gaussiana (TLC)|
 |**Legge dei grandi numeri**|$m \to \mu$|La media campionaria converge alla media della popolazione|

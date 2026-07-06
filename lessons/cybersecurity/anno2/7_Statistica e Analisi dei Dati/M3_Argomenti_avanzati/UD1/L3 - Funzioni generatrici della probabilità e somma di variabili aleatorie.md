@@ -148,7 +148,7 @@ Per ottenere la distribuzione della somma $Z(k)$:
     
 2. Costruire la funzione generatrice $G_Y(u)$ da $Y(j)$.
     
-3. Calcolare il prodotto $G_Z(u) = G_X(u) , G_Y(u)$.
+3. Calcolare il prodotto $G_Z(u) = G_X(u) \, G_Y(u)$.
     
 4. Estrarre i coefficienti di $G_Z(u)$ → otteniamo $Z(k)$.
 

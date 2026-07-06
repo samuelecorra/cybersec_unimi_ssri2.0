@@ -22,7 +22,7 @@ Il nostro obiettivo è determinare **quanto è plausibile che la media vera $\mu
 Formalmente, cerchiamo la **densità a posteriori delle ipotesi $h$** sulla posizione della media vera:
 
 $$  
-f(h ,|, m, \sigma^2, n)  
+f(h \,|\, m, \sigma^2, n)  
 $$
 
 ---
@@ -44,7 +44,7 @@ Per applicare il Teorema di Bayes, ci servono tre elementi:
 Applicando Bayes:
 
 $$  
-f(h|m,\sigma^2,n) = \frac{f(h) , L(m|h,\sigma^2,n)}{P(m)}  
+f(h|m,\sigma^2,n) = \frac{f(h) \, L(m|h,\sigma^2,n)}{P(m)}  
 $$
 
 Poiché la prior e l’evidence sono costanti rispetto a $h$, si può scrivere:
@@ -69,7 +69,7 @@ ossia:
 
 $$  
 L(m|h,\sigma^2,n) = \frac{1}{\sqrt{2\pi(\sigma^2/n)}}  
-\exp!\left[-\frac{(m-h)^2}{2(\sigma^2/n)}\right]  
+\exp\left[-\frac{(m-h)^2}{2(\sigma^2/n)}\right]  
 $$
 
 ---
@@ -80,7 +80,7 @@ Poiché $f(h|m,\sigma^2,n) \propto L(m|h,\sigma^2,n)$, anche la **posterior** ha
 
 $$  
 f(h|m,\sigma^2,n) \propto  
-\exp!\left[-\frac{1}{2} \frac{(m-h)^2}{(\sigma^2/n)}\right]  
+\exp\left[-\frac{1}{2} \frac{(m-h)^2}{(\sigma^2/n)}\right]  
 $$
 
 La funzione gaussiana è **simmetrica** rispetto agli argomenti $m$ e $h$, quindi:
@@ -131,9 +131,9 @@ Nella distribuzione normale valgono le regole empiriche:
 
 |Confidenza|Intervallo|
 |:--|:--|
-|68%|$[m - \sigma/\sqrt{n}, , m + \sigma/\sqrt{n}]$|
-|95%|$[m - 2\sigma/\sqrt{n}, , m + 2\sigma/\sqrt{n}]$|
-|99.7%|$[m - 3\sigma/\sqrt{n}, , m + 3\sigma/\sqrt{n}]$|
+|68%|$[m - \sigma/\sqrt{n},\ m + \sigma/\sqrt{n}]$|
+|95%|$[m - 2\sigma/\sqrt{n},\ m + 2\sigma/\sqrt{n}]$|
+|99.7%|$[m - 3\sigma/\sqrt{n},\ m + 3\sigma/\sqrt{n}]$|
 
 ---
 

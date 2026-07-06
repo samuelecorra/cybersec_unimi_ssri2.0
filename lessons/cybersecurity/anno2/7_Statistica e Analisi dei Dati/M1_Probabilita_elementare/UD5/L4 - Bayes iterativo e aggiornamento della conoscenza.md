@@ -248,7 +248,7 @@ il modello “impara” man mano che riceve dati, ma non si contraddice.
 |---|---|
 |Bayes iterativo|La posterior diventa prior al passo successivo|
 |Probabilità come conoscenza|Ogni nuova informazione aggiorna lo stato di fiducia|
-|Coerenza bayesiana|$P(H|
+|Coerenza bayesiana|$P(H \mid D_1, D_2)$ è la stessa sia elaborando i dati in sequenza sia tutti in una volta|
 |Esempio 3 monete|Dimostra la consistenza del metodo|
 |Apprendimento dinamico|Il modello si “nutre” dei dati e si adatta progressivamente|
 

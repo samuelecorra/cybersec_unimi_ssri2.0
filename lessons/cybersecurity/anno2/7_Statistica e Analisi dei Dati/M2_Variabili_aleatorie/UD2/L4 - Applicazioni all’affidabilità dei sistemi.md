@@ -177,7 +177,7 @@ Un sistema in **serie** funziona se **tutti i componenti** funzionano.
 L’affidabilità complessiva è il **prodotto** delle singole affidabilità:
 
 $$  
-R_{\text{serie}}(t) = R_1(t) , R_2(t) , \dots , R_n(t)  
+R_{\text{serie}}(t) = R_1(t) \, R_2(t) \, \dots \, R_n(t)  
 $$
 
 Se i componenti sono indipendenti e **senza memoria**, allora:
@@ -209,7 +209,7 @@ Un sistema in **parallelo** funziona se **almeno un componente** è attivo.
 La fallibilità complessiva è il **prodotto** delle singole fallibilità:
 
 $$  
-F_{\text{parallelo}}(t) = F_1(t) , F_2(t) , \dots , F_n(t)  
+F_{\text{parallelo}}(t) = F_1(t) \, F_2(t) \, \dots \, F_n(t)  
 $$
 
 Da cui:

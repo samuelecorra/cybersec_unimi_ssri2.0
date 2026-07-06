@@ -1,0 +1,53 @@
+Questa pagina presenta alcuni progetti tipici che possono essere svolti singolarmente per ottenere un incremento da 0 a 3 punti sulla media per difetto dei voti PARTE A e PARTE B dell'esame scritto.. E' possibile proporre progetti alternativi. In questo caso lo studente è tenuto 1) a garantire che tale progetto non sia già stato utilizzato in altro insegnamento, 2) inviare al docente una pagina di descrizione dettagliata del progetto. Il docente invierà poi conferma che il progetto può garantire l'incremento massimo di 3 punti oppure suggerimenti su come estenderlo.
+
+Il progetto deve essere presentato durante uno degli appelli scritti. Non è possibile, eccetto in situazioni di numerosità che rendono impossibile la discussione di tutti i progetti in un solo giorno, sostenere l'orale al di fuori degli appelli scritti. L'orale consiste nella sola discussione del progetto.
+
+Per prenotarsi e sostenere l'esame orale bisogna caricare il progetto (file + relazione scritta) alla pagina upload.unimi.it nella stanza corrispondente all'esame di reti di calcolatori entro la deadline proposta (tipicamente qualche giorno prima dell'esame scritto). La relazione deve contenere la descrizione del progetto, discutere brani di codice significativi e descrivere un walkthrough completo anche con l'aiuto di screenshot.
+
+Design and deployment of the university network (with IMUNES). The university consists of three sections (administration, professors, students), two student labs, five research labs. Design the university network and propose a suitable deployment using layers 2 and 3 approaches (VLAN, trunking, IP...)
+- IMUNES
+
+Implementation of a router in c 
+- c
+- funzionalità/protocolli di routing
+- modulo kernel space o quagga
+
+Implementation of a P2P Gnutella-like client
+- c
+
+Implementation of P2P chord protocol using the socket library
+- c
+
+Design and deployment of a network consisting of:
+- A DHCP server distributing IP addresses
+- A DNS server translating domain names in IP addresses
+- A choice of two: FTP server, HTTP server, SMTP server
+- An internal and an external user
+- IMUNES
+
+Design and deployment of a network consisting of:
+- A DHCP server distributing IP addresses
+- A DNS server translating domain names in IP addresses
+- A transparent proxy for filtering and load balancing, mediating requests to an HTTP server
+- An internal and an external user
+- IMUNES
+
+Design and deployment of a network whose requests from/to internal machines (both clients and servers) are mediated by a Linux firewall (e.g., IPTABLES)
+- IPTABLES
+
+Design and deployment of a network consisting of:
+- A DHCP server distributing IP addresses
+- A DNS server translating domain names in IP addresses
+- A HTTP server providing virtual hosting and SSL connections
+- A HTTP proxy server
+- An internal and an external user
+- IMUNES
+
+Implementation of an application protocol of your choice using socket API
+- c
+
+Study and practical demonstration of HTTP/3
+
+SNMP test and demonstration
+
+Implement of traceroute using the socket

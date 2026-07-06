@@ -180,7 +180,7 @@ $$
 E la densità corrispondente è:
 
 $$  
-f_{\text{max}}(t) = \frac{dF_{\text{max}}(t)}{dt} = n , f(t) [F(t)]^{n-1}  
+f_{\text{max}}(t) = \frac{dF_{\text{max}}(t)}{dt} = n \, f(t) [F(t)]^{n-1}  
 $$
 
 ---

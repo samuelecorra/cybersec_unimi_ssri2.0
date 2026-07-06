@@ -151,7 +151,7 @@ Un **campione discreto** è una distribuzione di **frequenze empiriche** $f(i)$,
 #### **Media campionaria (discreta)**
 
 $$  
-m = \sum_i i , f(i) = \frac{1}{n} \sum_i i , \#(i)  
+m = \sum_i i \, f(i) = \frac{1}{n} \sum_i i \, \#(i)  
 $$
 
 #### **Momento secondo e varianza campionaria**
