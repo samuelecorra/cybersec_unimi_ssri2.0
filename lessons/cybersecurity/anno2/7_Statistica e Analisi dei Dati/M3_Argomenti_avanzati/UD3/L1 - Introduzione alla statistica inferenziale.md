@@ -57,7 +57,7 @@ Quando le ipotesi sono numeriche, non parliamo più di “una probabilità per c
 Il Teorema di Bayes lega questi elementi:
 
 $$  
-P(h|T) = \frac{P(h) , P(T|h)}{P(T)}  
+P(h|T) = \frac{P(h) \, P(T|h)}{P(T)}  
 $$
 
 dove:
@@ -161,7 +161,7 @@ Dopo un lancio in cui esce **Testa**, otteniamo la posterior:
 |    h     |  0   | 1/3 | 2/3 |  1  |
 | :------: | :--: | :-: | :-: | :-: |
 | **P(h)** | 1/4  | 1/4 | 1/4 | 1/4 |
-|  **P(h   | T)** |  0  | 1/6 | 1/3 |
+| **P(h\|T)** |  0   | 1/6 | 1/3 | 1/2 |
 
 ---
 
@@ -206,7 +206,7 @@ Se non conosciamo affatto il valore di $h$ e possiamo ipotizzare qualunque sbila
 - la **posterior** si ottiene come:
 
 $$  
-P(h|T) \propto P(h) , P(T|h) = h  
+P(h|T) \propto P(h) \, P(T|h) = h  
 $$
 
 rinormalizzata sull’intervallo $[0,1]$.

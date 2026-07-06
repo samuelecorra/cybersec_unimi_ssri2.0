@@ -87,7 +87,7 @@ Supponiamo di estrarre **due valori casuali uniformi** tra 0 e 1 e di calcolarne
     $$  
     f_Z(z) =  
     \begin{cases}  
-    z, & 0 \le z \le 1 \  
+    z, & 0 \le z \le 1 \\\\  
     2 - z, & 1 < z \le 2  
     \end{cases}  
     $$

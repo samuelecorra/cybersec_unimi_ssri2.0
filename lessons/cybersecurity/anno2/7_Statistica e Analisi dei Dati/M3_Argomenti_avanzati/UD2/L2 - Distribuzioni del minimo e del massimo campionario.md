@@ -164,7 +164,7 @@ $$
 La **densità del minimo campionario** si ottiene derivando:
 
 $$  
-f_{\text{min}}(t) = -\frac{dS_{\text{min}}(t)}{dt} = n , f(t) [S(t)]^{n-1}  
+f_{\text{min}}(t) = -\frac{dS_{\text{min}}(t)}{dt} = n \cdot f(t) [S(t)]^{n-1}  
 $$
 
 ---
