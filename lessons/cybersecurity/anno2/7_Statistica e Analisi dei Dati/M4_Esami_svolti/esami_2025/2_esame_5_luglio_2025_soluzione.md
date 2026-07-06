@@ -118,6 +118,7 @@ $$P(1 < X \leq 2) = F(2) - F(1) = \frac{8}{27} - \frac{1}{27} = \frac{7}{27} \ap
 
 > **Riferimenti di teoria**:
 >
+> - [M2/UD5/L1 — Distribuzione Ipergeometrica](../../M2_Variabili_aleatorie/UD5_Approfondimenti_Esame/L1%20-%20Distribuzione%20Ipergeometrica.md) (lezione integrativa dedicata: formula, momenti, correzione per popolazione finita)
 > - [M1/UD2/L2 — Esperimenti compositi](../../M1_Probabilita_elementare/UD2/L2%20-%20Esperimenti%20compositi.md) (estrazioni senza reinserimento, conteggio combinatorio)
 > - Esercizi analoghi: [Esame 19/09/2025 — Domanda 1](7_esame_19_settembre_2025_soluzione.md) e [Esame 16/01/2026 — Domanda 1](8_esame_16_gennaio_2026_soluzione.md) (con identificazione, momenti e fattore di correzione)
 

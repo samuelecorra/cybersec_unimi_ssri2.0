@@ -9,7 +9,8 @@
 
 > **Riferimenti di teoria**:
 >
-> - [M1/UD2/L2 — Esperimenti compositi](../../M1_Probabilita_elementare/UD2/L2%20-%20Esperimenti%20compositi.md) (estrazioni senza reinserimento — schema ipergeometrico)
+> - [M2/UD5/L1 — Distribuzione Ipergeometrica](../../M2_Variabili_aleatorie/UD5_Approfondimenti_Esame/L1%20-%20Distribuzione%20Ipergeometrica.md) (lezione integrativa dedicata allo schema ipergeometrico)
+> - [M1/UD2/L2 — Esperimenti compositi](../../M1_Probabilita_elementare/UD2/L2%20-%20Esperimenti%20compositi.md) (estrazioni senza reinserimento)
 > - [M1/UD2/L4 — Probabilità di un evento condizionato](../../M1_Probabilita_elementare/UD2/L4%20-%20Probabilit%C3%A0%20di%20un%20evento%20condizionato.md) (condizionamento in cascata)
 > - [M1/UD5/L2 — Bayes – formulazione, terminologia ed esempi](../../M1_Probabilita_elementare/UD5/L2%20-%20Bayes%20%E2%80%93%20formulazione,%20terminologia%20ed%20esempi.md) (inversione con probabilità totale)
 

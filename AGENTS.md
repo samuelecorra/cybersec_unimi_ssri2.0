@@ -151,6 +151,7 @@
 ### Statistica [IN PROGRESS]
 
 - M4_Esami_svolti/esami_2025: [COMPLETED] — 8 soluzioni complete (15-gen, 12-feb, 16-giu, 5-lug, 23-lug, 5-set, 19-set 2025 + 16-gen-2026, PDF sorgenti inclusi); coprono Binomiale, Poisson, Gaussiana, Ipergeometrica, Esponenziale/memoryless, Bayes (anche iterato), stat. descrittiva (quartili, CV, Pearson, skewness), TLC, rete a ponte, convoluzione di uniformi, IC per proporzioni. **Tutte le 8 soluzioni hanno blocchi `> **Riferimenti di teoria**:` per domanda** con link relativi alle lezioni M1-M3 (stile Reti di Calcolatori). Naming: `N_esame_gg_mese_aaaa_soluzione.md` (numerazione progressiva per data di aggiunta).
+- Unità integrative "Approfondimenti_Esame": [COMPLETED] — censimento sistematico argomenti d'appello vs lezioni esistenti; create M2/UD5_Approfondimenti_Esame (L1 Ipergeometrica, L2 Approssimazione Normale della Binomiale + correzione di continuità) e M3/UD4_Approfondimenti_Esame (L1 CV, covarianza, Pearson, skewness). Rete a ponte già coperta da M1/UD3/L4 §8. Riferimenti negli esami M4 aggiornati per puntare alle nuove lezioni. Copertura teoria↔appelli completa al 100%.
 - M1-M3 (teoria): [PENDING]
 
 ### Crittografia [IN PROGRESS]

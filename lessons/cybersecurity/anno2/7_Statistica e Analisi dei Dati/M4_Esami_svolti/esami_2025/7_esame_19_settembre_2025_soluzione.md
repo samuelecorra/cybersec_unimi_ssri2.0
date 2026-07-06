@@ -10,6 +10,7 @@
 
 > **Riferimenti di teoria**:
 >
+> - [M2/UD5/L1 — Distribuzione Ipergeometrica](../../M2_Variabili_aleatorie/UD5_Approfondimenti_Esame/L1%20-%20Distribuzione%20Ipergeometrica.md) (lezione integrativa dedicata: formula, momenti, correzione per popolazione finita)
 > - [M1/UD2/L2 — Esperimenti compositi](../../M1_Probabilita_elementare/UD2/L2%20-%20Esperimenti%20compositi.md) (estrazioni senza reinserimento, conteggio combinatorio)
 > - Esercizi analoghi già svolti: [Esame 05/07/2025 — Domanda 3](2_esame_5_luglio_2025_soluzione.md) e [Esame 15/01/2025 — Domanda 1](4_esame_15_gennaio_2025_soluzione.md) (l'ipergeometrica compare sistematicamente negli appelli)
 
@@ -55,6 +56,7 @@ $$E[X] = 20 \times \frac{25}{300} = 20 \times \frac{1}{12} = \frac{20}{12} = \fr
 >
 > - [M2/UD3/L1 — Distribuzione Binomiale](../../M2_Variabili_aleatorie/UD3/L1%20-%20Distribuzione%20Binomiale.md) (formula, media $np$, varianza $npq$)
 > - [M2/UD4/L1 — Densità Gaussiana o Normale](../../M2_Variabili_aleatorie/UD4/L1%20-%20Densit%C3%A0%20Gaussiana%20o%20Normale.md) (standardizzazione e tavole)
+> - [M2/UD5/L2 — Approssimazione Normale della Binomiale e correzione di continuità](../../M2_Variabili_aleatorie/UD5_Approfondimenti_Esame/L2%20-%20Approssimazione%20Normale%20della%20Binomiale%20e%20correzione%20di%20continuit%C3%A0.md) (lezione integrativa dedicata: condizioni $np, n(1-p) \geq 10$ e correzione $\pm 0.5$ — svolge proprio questa domanda)
 > - [M3/UD1/L6 — Il Teorema del Limite Centrale](../../M3_Argomenti_avanzati/UD1/L6%20-%20Il%20Teorema%20del%20Limite%20Centrale.md) (perché la binomiale, somma di Bernoulli i.i.d., tende alla normale)
 
 ### Traccia originale
@@ -158,7 +160,8 @@ $$IC_{95\%} = 0.65 \pm 1.96 \times 0.0477 = 0.65 \pm 0.0935 = \boxed{[0.5565,\ 0
 >
 > - [M2/UD1/L3 — Indicatori di posizione](../../M2_Variabili_aleatorie/UD1/L3%20-%20Indicatori%20di%20posizione.md) (media, mediana, moda, quartili)
 > - [M2/UD1/L4 — Indicatori d'ampiezza](../../M2_Variabili_aleatorie/UD1/L4%20-%20Indicatori%20d%E2%80%99ampiezza.md) (range, varianza, deviazione standard, IQR)
-> - [M3/UD2/L1 — Dalla distribuzione al campione – Statistica descrittiva](../../M3_Argomenti_avanzati/UD2/L1%20-%20Dalla%20distribuzione%20al%20campione%20%E2%80%93%20Statistica%20descrittiva.md) (indicatori campionari; CV e correlazione non hanno una lezione dedicata: le definizioni operative sono richiamate qui sotto)
+> - [M3/UD2/L1 — Dalla distribuzione al campione – Statistica descrittiva](../../M3_Argomenti_avanzati/UD2/L1%20-%20Dalla%20distribuzione%20al%20campione%20%E2%80%93%20Statistica%20descrittiva.md) (indicatori campionari)
+> - [M3/UD4/L1 — CV, covarianza, correlazione di Pearson e skewness](../../M3_Argomenti_avanzati/UD4_Approfondimenti_Esame/L1%20-%20CV,%20covarianza,%20correlazione%20di%20Pearson%20e%20skewness.md) (lezione integrativa dedicata alle parti (d) ed (e))
 
 ### Traccia originale
 

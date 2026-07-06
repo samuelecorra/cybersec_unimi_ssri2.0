@@ -10,6 +10,7 @@
 
 > **Riferimenti di teoria**:
 >
+> - [M2/UD5/L1 — Distribuzione Ipergeometrica](../../M2_Variabili_aleatorie/UD5_Approfondimenti_Esame/L1%20-%20Distribuzione%20Ipergeometrica.md) (lezione integrativa dedicata: identificazione, formula, momenti — svolge proprio questa domanda)
 > - [M1/UD2/L2 — Esperimenti compositi](../../M1_Probabilita_elementare/UD2/L2%20-%20Esperimenti%20compositi.md) (estrazioni senza reinserimento, prove non indipendenti)
 > - Esercizi analoghi già svolti: [Esame 19/09/2025 — Domanda 1](7_esame_19_settembre_2025_soluzione.md) e [Esame 05/07/2025 — Domanda 3](2_esame_5_luglio_2025_soluzione.md)
 
@@ -66,6 +67,7 @@ $$Var(X) = n\,\frac{K}{N}\left(1 - \frac{K}{N}\right)\frac{N-n}{N-1} = 4 \times 
 > - [M3/UD2/L1 — Dalla distribuzione al campione – Statistica descrittiva](../../M3_Argomenti_avanzati/UD2/L1%20-%20Dalla%20distribuzione%20al%20campione%20%E2%80%93%20Statistica%20descrittiva.md) (bar plot delle frequenze, indicatori campionari)
 > - [M2/UD1/L3 — Indicatori di posizione](../../M2_Variabili_aleatorie/UD1/L3%20-%20Indicatori%20di%20posizione.md) (media/mediana/moda e loro confronto)
 > - [M2/UD1/L4 — Indicatori d'ampiezza](../../M2_Variabili_aleatorie/UD1/L4%20-%20Indicatori%20d%E2%80%99ampiezza.md) (varianza campionaria)
+> - [M3/UD4/L1 — CV, covarianza, correlazione di Pearson e skewness](../../M3_Argomenti_avanzati/UD4_Approfondimenti_Esame/L1%20-%20CV,%20covarianza,%20correlazione%20di%20Pearson%20e%20skewness.md) (lezione integrativa: regola media vs mediana per la skewness — parte (d))
 
 ### Traccia originale
 
