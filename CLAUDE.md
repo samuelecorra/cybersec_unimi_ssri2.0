@@ -65,6 +65,14 @@ Do not remove existing lesson content. At most correct inaccurate or poorly expl
 - Da ora il lavoro principale passa a Statistica e Crittografia.
 - Per i prossimi prompt integrativi, privilegiare l'avanzamento di queste due materie.
 
+### Sicurezza Sistemi e Reti [IN PROGRESS]
+
+- M1/UD1/L1 (Introduzione): [COMPLETED] — integrato transcript su struttura del corso, malware e APT, gestione identità/SSO, port scanning come ricognizione, laboratori con Wireshark/firewall/Linux, riferimenti bibliografici e modalità d'esame.
+- M1/UD1/L2 (La sicurezza informatica): [COMPLETED] — integrato transcript su cronaca e motivazioni degli attacchi, caso Lazio, vulnerabilità Apple, Huawei/5G, supply chain software/hardware, NotPetya, backdoor, infrastrutture critiche, differenza sicurezza/affidabilità e interdisciplinarietà con Spectre/social engineering.
+- M1/UD1/L3 (Il contesto): [COMPLETED] — integrato transcript su perimetro del sistema, soggetti/ruoli e smart card, reti fisiche/logiche, Internet come infrastruttura standardizzata, modelli di interazione online, IoT/AI, politica di sicurezza, threat model, meccanismi, rischio e motivazioni degli attaccanti.
+- M1/UD1/L4 (Il mercato della sicurezza): [COMPLETED] — integrato transcript su mercato di credenziali/dati rubati, dati vs denaro fisico, Wilshire Associates, bug bounty/broker/black market, zero-day, exploit come business, Hacking Team e cyberweapons, pay-per-install/botnet, peccato originale di Internet, bad/good news, costi/usabilità e obiettivi del corso.
+- M2/UD1/L1 (Standard di sicurezza): [NEXT TASK]
+
 ### Sicurezza Web&Mobile [IN PROGRESS]
 
 - M2_AccessControl&Authentication/UD3/L1 (Intro Linux): [COMPLETED] — creato `L1_Intro_Linux.md` da `linux_m2_d1.pdf` + `es_linux1.pdf`.

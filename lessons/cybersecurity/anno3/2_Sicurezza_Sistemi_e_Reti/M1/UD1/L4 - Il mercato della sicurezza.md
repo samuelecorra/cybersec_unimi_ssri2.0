@@ -6,6 +6,8 @@ La sicurezza informatica non è solo una disciplina tecnica, ma anche un **setto
 Dati, vulnerabilità, exploit e persino sistemi compromessi hanno oggi un **valore di mercato concreto**, tanto nel mondo legale quanto in quello criminale.  
 Comprendere la dimensione economica della sicurezza è fondamentale per interpretare le dinamiche globali del cybercrime e della difesa informatica.
 
+Le credenziali rubate sono un esempio immediato: un account sottratto non è solo un dato perso, ma uno strumento che un avversario può riutilizzare per impersonare l’utente, accedere ad altri servizi o rivendere l’accesso nel mercato illegale. Nei canali del dark web esistono quindi listini per account, dati personali e accessi bancari, con prezzi che dipendono dall’utilità pratica dell’informazione.
+
 ---
 
 ### **2. Dati vs denaro fisico**
@@ -19,6 +21,10 @@ Un paragone utile per comprendere il valore delle informazioni digitali è quell
 |**Valore del bene**|Sempre elevato.|Variabile: può essere bassissimo (dati banali) o altissimo (dati sensibili o riservati).|
 
 Esempio emblematico: il **sistema di posta di Wilshire Associates**, che gestiva investimenti per **10 miliardi di dollari**, evidenzia come il furto di informazioni possa equivalere al furto diretto di denaro.
+
+La differenza centrale è che il denaro fisico richiede protezione materiale: casseforti, controllo degli accessi fisici, guardie, sistemi di allarme. I dati invece sono piccoli, copiabili e trasferibili a distanza; possono essere sottratti senza che il proprietario perda immediatamente il possesso del supporto originale. Inoltre il valore dei dati non è sempre evidente a chi li gestisce: email, messaggi e documenti interni possono sembrare ordinari, ma diventare molto preziosi per concorrenti, ricattatori o avversari.
+
+Nel caso Wilshire Associates il problema non era la quantità di denaro custodita fisicamente, ma il fatto che messaggi e sistemi informativi fossero accessibili con protezioni inadeguate. Per una società finanziaria, rendere leggibili comunicazioni interne e dati sui clienti significa esporre strategie, relazioni commerciali e informazioni capaci di generare danni economici indiretti molto elevati.
 
 ---
 
@@ -54,6 +60,8 @@ Nei circuiti illegali, i prezzi sono molto più alti:
 - vulnerabilità critiche per iOS possono raggiungere anche **$500.000**.  
     (_Fonte: Forbes, 2012 – Andy Greenberg_)
     
+Uno **zero-day** è particolarmente remunerativo perché indica una vulnerabilità non ancora nota al produttore e quindi non ancora corretta. Chi la acquista può sfruttarla contro tutti i sistemi che usano quel software finché non viene scoperta e patchata. Il prezzo dipende dalla diffusione del prodotto, dal livello di privilegio ottenibile e dal valore dei dati raggiungibili: un bug su una piattaforma usata da profili business o istituzionali può valere più di un bug equivalente su un software meno strategico.
+
 
 ---
 
@@ -73,6 +81,8 @@ Secondo il _New York Times_ (luglio 2013), tra i maggiori compratori figurano **
 
 Un caso noto in Italia è quello di **Hacking Team**, società milanese che forniva software di sorveglianza a forze governative e agenzie di intelligence di diversi Paesi.
 
+Questi strumenti non sono semplici programmi commerciali: possono diventare vere e proprie **armi informatiche**, perché trasformano smartphone e computer in dispositivi di sorveglianza o accesso remoto. Per questo la loro vendita è anche un problema politico e giuridico: esportarli verso governi che violano diritti umani o li usano contro oppositori e giornalisti può rendere il fornitore corresponsabile di abusi.
+
 ---
 
 ### **5. Mercato dei dati rubati**
@@ -87,6 +97,8 @@ Nel **dark web**, le informazioni personali e finanziarie vengono vendute a prez
 |Credenziali bancarie online (saldo $70k–$150k)|meno di $300|
 
 Questi dati vengono poi usati per truffe, furti d’identità e frodi finanziarie.
+
+Il prezzo relativamente basso di molti dati rubati non deve trarre in inganno: il guadagno nasce dal volume e dalla possibilità di automatizzare gli abusi. Una singola carta può valere pochi dollari, mentre un profilo completo consente frodi più articolate perché collega identità, credenziali, dati bancari e informazioni personali.
 
 ---
 
@@ -128,7 +140,9 @@ Utilizzi principali:
 - Tool per spam via email o SMS: **$30–$50**;
     
 - Setup e manutenzione botnet: **$200/mese**.
-    
+	    
+Il mercato criminale non vende solo dati, ma anche **capacità operative**. Chi non possiede competenze tecniche può pagare per installare malware su macchine compromesse, affittare botnet, inviare spam, generare click fraudolenti o ospitare siti usati per truffe. Questo abbassa la barriera d’ingresso del cybercrime: l’attaccante può comprare un servizio invece di costruire da zero l’infrastruttura d’attacco.
+
 
 ---
 
@@ -145,6 +159,8 @@ Il corso di sicurezza affronta tre aree principali:
 
 Il “peccato originale” di Internet è che **non fu progettata con la sicurezza in mente**.  
 L’idea iniziale era una rete tra **utenti fidati**, priva di autenticazione e controllo.
+
+L’enfasi originaria era far comunicare sistemi e utenti, non impedire comportamenti malevoli. Molti protocolli e servizi sono nati privilegiando interoperabilità, apertura e facilità d’uso; controlli di accesso, autenticazione robusta e prevenzione degli abusi sono stati spesso aggiunti dopo, quando Internet era già diventata un’infrastruttura pubblica globale.
 
 ---
 
@@ -163,7 +179,9 @@ L’idea iniziale era una rete tra **utenti fidati**, priva di autenticazione e 
 - Le reti moderne sono **più aperte e complesse**, aumentando l’esposizione agli attacchi e la difficoltà di tracciarli.
     
 - Molti attacchi non sono tecnici ma **sociali** (es. _phishing_, _social engineering_).
-    
+	    
+La connettività permanente aumenta il rischio: ci si collega da uffici, case, reti mobili e reti pubbliche, spesso senza poter ricostruire con precisione dove e quando sia avvenuta la compromissione. Inoltre non tutti gli attacchi sfruttano una vulnerabilità tecnica: phishing e social engineering agiscono sulle debolezze umane, inducendo l’utente a cliccare link, installare software o consegnare credenziali.
+
 
 ---
 
@@ -179,6 +197,8 @@ Nonostante le difficoltà, esistono **numerosi meccanismi di difesa**:
     
 
 La sicurezza informatica sta progressivamente entrando nel **focus dello sviluppo software moderno**.
+
+Questa evoluzione richiede però equilibrio. La crittografia è essenziale, ma non risolve da sola problemi di implementazione, gestione delle chiavi, autenticazione o comportamento degli utenti. Un sistema molto sicuro ma inutilizzabile rischia di essere aggirato dagli stessi utenti; allo stesso modo, investire in sicurezza senza valutare costi e benefici può rendere il progetto insostenibile. Il compito di chi gestisce la sicurezza è bilanciare protezione, usabilità, prestazioni e ritorno economico.
 
 ---
 
@@ -196,6 +216,8 @@ Il corso mira a formare studenti capaci di:
     
 
 La filosofia del corso è “**mettere le mani in pasta**”: imparare facendo.
+
+Il corso mantiene quindi una doppia prospettiva: studiare come ragiona l’avversario, per capire vulnerabilità e tecniche d’attacco, e studiare come ragiona il difensore, per progettare contromisure e sistemi più resistenti. L’obiettivo non è coprire ogni possibile tema della sicurezza, ma costruire terminologia, consapevolezza e capacità operativa sufficienti per valutare correttamente rischi, limiti delle tecniche e scelte progettuali.
 
 ---
 
@@ -220,4 +242,3 @@ In sintesi:
 > È un equilibrio tra difesa, costo e consapevolezza collettiva.
 
 ---
-

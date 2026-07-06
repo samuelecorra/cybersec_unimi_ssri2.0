@@ -30,6 +30,10 @@ Il **livello di astrazione** può variare molto:
 
 Queste formulazioni aiutano a comprendere quanto la sicurezza dipenda dal **modello di interazione tra soggetti, ruoli e dispositivi**.
 
+Definire il perimetro di un sistema significa quindi decidere che cosa includere nell’analisi di sicurezza. Limitarsi al solo dispositivo fisico è spesso insufficiente: bisogna considerare il software installato, le applicazioni, i canali di comunicazione verso l’esterno e i comportamenti degli utenti legittimi o esterni. Un attacco può infatti sfruttare non solo un bug interno, ma anche una connessione di rete, una configurazione errata o l’uso improprio di credenziali.
+
+Nel caso dei soggetti, è importante distinguere tra identità reale, dispositivo usato e ruolo assunto nel sistema. Se Bob usa la smart card rubata ad Alice, il sistema può “vedere” Alice anche se l’attore fisico è Bob: la sicurezza deve quindi ragionare non solo su chi possiede un oggetto, ma su come l’identità viene autenticata e su quali assunzioni vengono fatte sull’uso corretto di quell’oggetto.
+
 ---
 
 ### **2. Concetto di rete**
@@ -109,7 +113,11 @@ Internet fornisce:
 - servizi di comunicazione (web, email, VoIP, social network, e-commerce, giochi, ecc.);
     
 - interfacce di programmazione (API) che permettono alle applicazioni di connettersi e scambiarsi dati.
-    
+	    
+La standardizzazione è ciò che permette a software, dispositivi e organizzazioni diverse di interoperare: due applicazioni possono comunicare anche se appartengono a produttori differenti, purché rispettino gli stessi protocolli. Questo vale tanto per protocolli di base come TCP/IP quanto per protocolli applicativi come HTTP, posta elettronica o servizi di messaggistica.
+
+Questa infrastruttura abilita modelli di interazione molto diversi: relazioni tra utenti finali e fornitori di servizi, commercio elettronico tra aziende, scambi tra privati, servizi pubblici online come dichiarazioni fiscali o votazioni elettroniche. Dal punto di vista della sicurezza, ogni nuovo modello di interazione introduce nuovi attori, nuove risorse e nuovi possibili abusi.
+
 
 ---
 
@@ -151,6 +159,8 @@ Si stima che:
 
 L’IoT rende possibili scenari innovativi come **case, città, edifici e sanità intelligenti**.
 
+Il valore di molti dispositivi IoT deriva proprio dall’essere raggiungibili, controllabili e integrabili con altri servizi. Sensori, attuatori, elettrodomestici, apparati medicali e dispositivi domestici possono raccogliere dati, inviarli ad applicazioni remote e reagire a comandi esterni. Questa apertura aumenta l’utilità del sistema, ma amplia anche il perimetro da proteggere.
+
 ---
 
 ### **8. Il futuro: IoT e Intelligenza Artificiale**
@@ -172,6 +182,8 @@ L’integrazione tra **IoT e AI** trasformerà profondamente la società:
 
 Queste tecnologie aumentano la produttività, ma anche la **superficie d’attacco** e i **rischi di sicurezza**.
 
+La combinazione tra IoT, raccolta dati e AI rende possibile prendere decisioni o produrre reazioni in tempo reale: un sistema può misurare l’ambiente, elaborare i dati e comandare automaticamente dispositivi fisici. Per questo la sicurezza non riguarda più soltanto la protezione di informazioni digitali, ma anche la prevenzione di effetti concreti su trasporti, sanità, industria e servizi pubblici.
+
 ---
 
 ### **9. Cos’è la sicurezza informatica**
@@ -192,9 +204,13 @@ Per definire un contesto di sicurezza servono tre elementi:
     - ipotesi su cosa può fare un attaccante (es. Alice non conosce la password ma può provare a indovinarla).
         
 3. **Meccanismo di sicurezza:**
-    
+	    
     - componenti software o hardware che fanno rispettare la politica, nei limiti del modello di minaccia.
-        
+	        
+Questi tre elementi devono essere coerenti. Una politica può dire “solo Bob legge il file”, ma il modello di minaccia deve specificare quali capacità ha l’avversario: può accedere fisicamente al computer? può provare password? può rubare una smart card? può inviare richieste dalla rete? Il meccanismo di sicurezza è adeguato solo rispetto a queste ipotesi: se il modello sottovaluta l’attaccante, anche un meccanismo corretto può risultare insufficiente.
+
+> 📌 La sicurezza non si definisce in astratto: si definisce sempre rispetto a una politica, a un modello di minaccia e a meccanismi concreti che devono far rispettare quella politica.
+
 
 ---
 
@@ -220,6 +236,10 @@ Il processo di progettazione è **iterativo**:
 La sicurezza assoluta non esiste:  
 si tratta di **gestire il rischio**, bilanciando costi e benefici.
 
+Questo processo è iterativo perché l’analisi può rivelare che il modello di minaccia era incompleto, oppure che il meccanismo scelto contiene bug. Il software è un prodotto umano, spesso molto grande e difficile da verificare interamente: una vulnerabilità scoperta dopo il rilascio può cambiare radicalmente la valutazione di sicurezza del sistema.
+
+L’obiettivo non è assumere che tutto sia rotto e quindi rinunciare all’uso dei sistemi informatici. L’approccio corretto consiste nel capire quali benefici offre il sistema, quali informazioni o funzionalità mette a rischio e quali controlli riducono il rischio a un livello accettabile.
+
 ---
 
 ### **11. Perché i sistemi informatici sono vulnerabili**
@@ -233,7 +253,13 @@ Le reti di computer sono **sistemi di sistemi**, caratterizzati da:
 - molteplicità di connessioni che amplificano le vulnerabilità;
     
 - lentezza nelle risposte agli incidenti e frequenti errori umani.
-    
+	    
+Un dispositivo isolato, protetto fisicamente e con software limitato, può essere analizzato in modo relativamente più semplice. Una rete, invece, è immersa in un ambiente dinamico: cambiano utenti, configurazioni, servizi, dispositivi collegati e modalità di accesso. Ogni nuova connessione aumenta le interazioni possibili e rende più difficile controllare l’intero comportamento del sistema.
+
+La pressione commerciale peggiora il problema: in mercati competitivi si tende a ridurre il tempo di sviluppo e a rilasciare rapidamente prodotti monetizzabili, rimandando test e revisioni di sicurezza. Questo lascia agli avversari più occasioni per sfruttare software non completamente verificato.
+
+Anche la risposta agli incidenti richiede tempo: bisogna rilevare l’attacco, capirne la causa, correggere il difetto, distribuire patch e modificare configurazioni. In tutte queste fasi può intervenire l’errore umano, dall’amministratore che configura male un sistema all’organizzazione che sottovaluta o ritarda la comunicazione dell’incidente.
+
 
 Esempi tipici:
 
@@ -260,7 +286,9 @@ Le motivazioni alla base degli attacchi informatici sono molteplici e cambiano n
     
 - **Hacktivism (dal 2011):**  
     attacchi simbolici a fini ideologici o sociali (_Anonymous_, _LulzSec_).
-    
+	    
+Le motivazioni si sovrappongono spesso: una botnet può essere usata per profitto, per estorsione o per attacchi distribuiti contro servizi pubblici; una vulnerabilità può essere sfruttata da criminali, apparati statali o gruppi ideologici. Per questo il difensore non può basarsi solo sull’identità dell’attaccante, ma deve valutare capacità, obiettivi e impatto potenziale.
+
 
 ---
 
