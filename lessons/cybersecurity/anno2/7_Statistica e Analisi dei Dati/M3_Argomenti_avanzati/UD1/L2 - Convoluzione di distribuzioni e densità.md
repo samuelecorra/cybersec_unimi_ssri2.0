@@ -192,6 +192,8 @@ Per $r = 1$, si riottiene l’esponenziale negativa.
 
 ### **14. Interpretazione della famiglia Erlang**
 
+![](imgs/Pasted%20image%2020260705163933.png)
+
 L’Erlang di parametro $r$ può essere vista come la **somma di $r$ variabili esponenziali indipendenti**.
 
 Applicazione:

@@ -22,6 +22,8 @@ Sia $S_n = X_1 + X_2 + \dots + X_n$ la somma di $n$ variabili aleatorie indipend
 
 ### **3. Risultato generale**
 
+![](imgs/Pasted%20image%2020260705235446.png)
+
 Per valori grandi di $n$, la risposta è sorprendentemente semplice:
 
 > **Sotto ipotesi molto generali, la distribuzione della somma tende a una distribuzione Gaussiana.**
@@ -92,7 +94,7 @@ Nel caso **Binomiale**, conosciamo già il risultato:
 per $n$ grande e $p$ non troppo vicino a 0 o 1, la Binomiale $B(n,p)$ si può approssimare con una **Normale**:
 
 $$  
-B(n,p) \approx N(np, , np(1-p))  
+B(n,p) \approx N(np,  np(1-p))  
 $$
 
 ---

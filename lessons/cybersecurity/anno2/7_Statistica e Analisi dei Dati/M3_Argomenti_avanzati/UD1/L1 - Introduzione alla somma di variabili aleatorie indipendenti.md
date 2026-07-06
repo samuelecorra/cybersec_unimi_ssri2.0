@@ -53,6 +53,8 @@ Per semplificare l’esempio, supponiamo che ogni dado possa fornire solo i tre 
 
 Lo spazio dei casi è il **prodotto cartesiano**:
 
+![](imgs/Pasted%20image%2020260705152225.png)
+
 $$  
 S = {1,2,3} \times {1,2,3}  
 $$
@@ -61,7 +63,7 @@ che contiene $3 \times 3 = 9$ coppie equiprobabili.
 Ogni coppia $(x, y)$ ha probabilità:
 
 $$  
-P(x, y) = P(x) \cdot P(y) = \frac{1}{3} \cdot \frac{1}{3} = \frac{1}{9}  
+P( \ (x, y) \ ) = P(x) \cdot P(y) = \frac{1}{3} \cdot \frac{1}{3} = \frac{1}{9}  
 $$
 
 |y \ x|1|2|3|
@@ -115,7 +117,17 @@ P(z=6)=\tfrac{1}{9}
 $$
 
 
+![](imgs/Pasted%20image%2020260705153411.png)
+
 La distribuzione assume una **forma triangolare**: i valori centrali sono più probabili di quelli estremi.
+
+![](imgs/Pasted%20image%2020260705153601.png)
+
+![](imgs/Pasted%20image%2020260705153610.png)
+
+Analogamente, nell'esempio VERO di un dado:
+
+![](imgs/Pasted%20image%2020260705153643.png)
 
 ---
 
