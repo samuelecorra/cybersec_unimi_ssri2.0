@@ -7,6 +7,12 @@
 
 ## Domanda 1 — Urna: probabilità condizionata e Bayes (6 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M1/UD2/L2 — Esperimenti compositi](../../M1_Probabilita_elementare/UD2/L2%20-%20Esperimenti%20compositi.md) (estrazioni senza reinserimento — schema ipergeometrico)
+> - [M1/UD2/L4 — Probabilità di un evento condizionato](../../M1_Probabilita_elementare/UD2/L4%20-%20Probabilit%C3%A0%20di%20un%20evento%20condizionato.md) (condizionamento in cascata)
+> - [M1/UD5/L2 — Bayes – formulazione, terminologia ed esempi](../../M1_Probabilita_elementare/UD5/L2%20-%20Bayes%20%E2%80%93%20formulazione,%20terminologia%20ed%20esempi.md) (inversione con probabilità totale)
+
 ### Traccia originale
 
 > Un'urna contiene 20 palline, di cui 10 sono rosse e 10 sono blu. Vengono estratte 6 palline senza reinserimento. Successivamente, viene effettuata un'altra estrazione di 3 palline, sempre senza reinserimento, dalle 6 estratte precedentemente.
@@ -62,6 +68,12 @@ $$P(A \mid B) = \frac{0.60 \times 0.2438}{P(B)}$$
 
 ## Domanda 2 — Distribuzione esponenziale e sistemi (6 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M2/UD2/L2 — Densità Esponenziale Negativa](../../M2_Variabili_aleatorie/UD2/L2%20-%20Densit%C3%A0%20Esponenziale%20Negativa.md) (legge di sopravvivenza)
+> - [M2/UD2/L4 — Applicazioni all'affidabilità dei sistemi](../../M2_Variabili_aleatorie/UD2/L4%20-%20Applicazioni%20all%E2%80%99affidabilit%C3%A0%20dei%20sistemi.md) (serie e parallelo di componenti esponenziali)
+> - [M3/UD2/L2 — Distribuzioni del minimo e del massimo campionario](../../M3_Argomenti_avanzati/UD2/L2%20-%20Distribuzioni%20del%20minimo%20e%20del%20massimo%20campionario.md) (min = serie, max = parallelo)
+
 ### Traccia originale
 
 > Un'azienda produce componenti elettronici. Il tempo di vita di questi componenti segue una distribuzione esponenziale con un valore atteso di 1000 ore.
@@ -107,6 +119,12 @@ $$P(\min(X_1,X_2) > 1500) = P(X_1>1500)\cdot P(X_2>1500) = e^{-1.5}\cdot e^{-1.5
 ---
 
 ## Domanda 3 — Densità continua $f(x) = cx$ (9 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M2/UD1/L1 — Distribuzioni e densità di variabili aleatorie](../../M2_Variabili_aleatorie/UD1/L1%20-%20Distribuzioni%20e%20densit%C3%A0%20di%20variabili%20aleatorie.md) (normalizzazione)
+> - [M2/UD1/L2 — Cumulativa e Anticumulativa](../../M2_Variabili_aleatorie/UD1/L2%20-%20Cumulativa%20e%20Anticumulativa.md) (da $f$ a $F$, probabilità di intervalli)
+> - [M2/UD1/L3 — Indicatori di posizione](../../M2_Variabili_aleatorie/UD1/L3%20-%20Indicatori%20di%20posizione.md) (mediana dal quantile $F(x)=1/2$)
 
 ### Traccia originale
 
@@ -156,6 +174,11 @@ $$\text{Var}(X) = E[X^2] - (E[X])^2 = 2 - \frac{16}{9} = \frac{18-16}{9} = \frac
 
 ## Domanda 4 — Gioco del Lotto (5 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M1/UD2/L2 — Esperimenti compositi](../../M1_Probabilita_elementare/UD2/L2%20-%20Esperimenti%20compositi.md) (conteggio combinatorio, estrazioni senza reinserimento)
+> - [M1/UD2/L1 — Il principio di moltiplicazione](../../M1_Probabilita_elementare/UD2/L1%20-%20Il%20principio%20di%20moltiplicazione.md) (spazi di esiti equiprobabili)
+
 ### Traccia originale
 
 > Nel gioco del Lotto, vengono estratti 5 numeri senza reinserimento da un'urna contenente 90 numeri.
@@ -187,6 +210,11 @@ Giocare 10 combinazioni moltiplica la probabilità per ~10 (approssimazione vali
 ---
 
 ## Domanda 5 — Teorema del Limite Centrale (7 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M3/UD1/L6 — Il Teorema del Limite Centrale](../../M3_Argomenti_avanzati/UD1/L6%20-%20Il%20Teorema%20del%20Limite%20Centrale.md) (enunciato, ipotesi, applicazioni)
+> - [M3/UD2/L3 — Distribuzione della media campionaria](../../M3_Argomenti_avanzati/UD2/L3%20-%20Distribuzione%20della%20media%20campionaria.md) ($N(m \mid \mu, \sigma^2/n)$)
 
 ### Traccia originale
 

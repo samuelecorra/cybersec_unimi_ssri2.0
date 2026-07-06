@@ -127,7 +127,7 @@ Do not remove existing lesson content. At most correct inaccurate or poorly expl
 
 ### Statistica [IN PROGRESS]
 
-- M4_Esami_svolti/esami_2025: [COMPLETED] — creati 4 file soluzione completa (23-lug-2025, 5-lug-2025, 12-feb-2025, 15-gen-2025); coprono Binomiale, Poisson, Gaussiana, Ipergeometrica, Esponenziale, Bayes, stat. descrittiva, TLC
+- M4_Esami_svolti/esami_2025: [COMPLETED] — 8 soluzioni complete (15-gen, 12-feb, 16-giu, 5-lug, 23-lug, 5-set, 19-set 2025 + 16-gen-2026, PDF sorgenti inclusi); coprono Binomiale, Poisson, Gaussiana, Ipergeometrica, Esponenziale/memoryless, Bayes (anche iterato), stat. descrittiva (quartili, CV, Pearson, skewness), TLC, rete a ponte, convoluzione di uniformi, IC per proporzioni. **Tutte le 8 soluzioni hanno blocchi `> **Riferimenti di teoria**:` per domanda** con link relativi alle lezioni M1-M3 (stile Reti di Calcolatori). Naming: `N_esame_gg_mese_aaaa_soluzione.md` (numerazione progressiva per data di aggiunta).
 - M1-M3 (teoria): [PENDING]
 
 ### Crittografia [IN PROGRESS]

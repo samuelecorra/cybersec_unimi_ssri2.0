@@ -7,6 +7,10 @@
 
 ## Domanda 1 — Distribuzione Binomiale (6 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M2/UD3/L1 — Distribuzione Binomiale](../../M2_Variabili_aleatorie/UD3/L1%20-%20Distribuzione%20Binomiale.md) (formula, media $np$, varianza $npq$)
+
 ### Traccia originale
 
 > Un'azienda produce componenti meccanici e si sa che, in media, il 5% dei componenti prodotti sono difettosi. Un ispettore raccoglie un campione casuale di 20 elementi da un grande lotto. Assumendo che la produzione di ciascun componente sia indipendente da quella di ciascun altro, si calcolino
@@ -79,6 +83,12 @@ $$P(X > 3) = 1 - 0.9841 = \boxed{0.0159}$$
 ---
 
 ## Domanda 2 — Statistica descrittiva (8 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M2/UD1/L3 — Indicatori di posizione](../../M2_Variabili_aleatorie/UD1/L3%20-%20Indicatori%20di%20posizione.md) (media, mediana, moda, quartili)
+> - [M2/UD1/L4 — Indicatori d'ampiezza](../../M2_Variabili_aleatorie/UD1/L4%20-%20Indicatori%20d%E2%80%99ampiezza.md) (range, varianza, deviazione standard)
+> - [M3/UD2/L1 — Dalla distribuzione al campione – Statistica descrittiva](../../M3_Argomenti_avanzati/UD2/L1%20-%20Dalla%20distribuzione%20al%20campione%20%E2%80%93%20Statistica%20descrittiva.md) (indicatori campionari, denominatore $n-1$)
 
 ### Traccia originale
 
@@ -169,6 +179,11 @@ $$g_1 = \frac{7}{6 \times 5} \times 1.368 = \frac{7}{30} \times 1.368 \approx \b
 
 ## Domanda 3 — Teorema di Bayes (4 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M1/UD5/L2 — Bayes – formulazione, terminologia ed esempi](../../M1_Probabilita_elementare/UD5/L2%20-%20Bayes%20%E2%80%93%20formulazione,%20terminologia%20ed%20esempi.md) (teorema, probabilità totale)
+> - [M1/UD5/L3 — Prior e Verosimiglianza](../../M1_Probabilita_elementare/UD5/L3%20-%20Prior%20e%20Verosimiglianza.md) (ruolo di prior e likelihood)
+
 ### Traccia originale
 
 > La malattia "Morbus Rarissimus" colpisce lo 0.1% della popolazione adulta. Esiste un test diagnostico per questa malattia che ha le seguenti caratteristiche:
@@ -219,6 +234,11 @@ $$P(M \mid T^+) = \frac{P(T^+ \mid M) \cdot P(M)}{P(T^+)} = \frac{0.00098}{0.010
 
 ## Domanda 4 — Distribuzione di Poisson (6 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M2/UD3/L2 — Forma analitica della distribuzione di Poisson](../../M2_Variabili_aleatorie/UD3/L2%20-%20orma%20analitica%20della%20distribuzione%20di%20Poisson.md) (formula $P(k\mid\mu)$, proprietà, esempi)
+> - [M2/UD3/L3 — Processi Bernoulliani e Processi Poissoniani](../../M2_Variabili_aleatorie/UD3/L3%20-%20Processi%20Bernoulliani%20e%20Processi%20Poissoniani.md) (legame $\mu = \lambda\,\Delta t$, conteggi nel tempo)
+
 ### Traccia originale
 
 > Un servizio clienti effettua il monitoraggio delle chiamate in ingresso. Si osserva che, in media, il centro riceve cinque chiamate in ogni ora di servizio. Assumendo che le chiamate in arrivo siano indipendenti e che il tasso di arrivo sia costante,
@@ -254,6 +274,11 @@ Con circa il 12.5% di probabilità il servizio riceve al più 2 chiamate in un'o
 ---
 
 ## Domanda 5 — Distribuzione Normale (8 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M2/UD4/L1 — Densità Gaussiana o Normale](../../M2_Variabili_aleatorie/UD4/L1%20-%20Densit%C3%A0%20Gaussiana%20o%20Normale.md) (standardizzazione $Z=(X-\mu)/\sigma$)
+> - [M2/UD4/L2 — Altre considerazioni sulla Gaussiana](../../M2_Variabili_aleatorie/UD4/L2%20-%20Altre%20considerazioni%20sulla%20Gaussiana.md) (tavole, simmetria, regole 68-95-99.7)
 
 ### Traccia originale
 

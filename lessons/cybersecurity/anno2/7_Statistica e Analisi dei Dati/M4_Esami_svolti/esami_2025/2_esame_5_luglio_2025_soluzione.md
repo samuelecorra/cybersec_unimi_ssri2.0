@@ -7,6 +7,12 @@
 
 ## Domanda 1 — Statistica descrittiva: punteggi maturità (6 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M2/UD1/L3 — Indicatori di posizione](../../M2_Variabili_aleatorie/UD1/L3%20-%20Indicatori%20di%20posizione.md) (media, mediana, moda)
+> - [M2/UD1/L4 — Indicatori d'ampiezza](../../M2_Variabili_aleatorie/UD1/L4%20-%20Indicatori%20d%E2%80%99ampiezza.md) (range, varianza, deviazione standard)
+> - [M3/UD2/L1 — Dalla distribuzione al campione – Statistica descrittiva](../../M3_Argomenti_avanzati/UD2/L1%20-%20Dalla%20distribuzione%20al%20campione%20%E2%80%93%20Statistica%20descrittiva.md) (indicatori campionari)
+
 ### Traccia originale
 
 > Un gruppo di amici affronta l'esame di maturità, conseguendo i punteggi 78, 85, 72, 90, 88, 75, 92, 80, 85, 91. Calcolare le seguenti statistiche descrittive per questo set di dati, mostrando i passaggi chiave:
@@ -69,6 +75,11 @@ $$\boxed{Q_3 = 90}$$
 
 ## Domanda 2 — Densità di probabilità continua (6 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M2/UD1/L1 — Distribuzioni e densità di variabili aleatorie](../../M2_Variabili_aleatorie/UD1/L1%20-%20Distribuzioni%20e%20densit%C3%A0%20di%20variabili%20aleatorie.md) (normalizzazione della densità)
+> - [M2/UD1/L2 — Cumulativa e Anticumulativa](../../M2_Variabili_aleatorie/UD1/L2%20-%20Cumulativa%20e%20Anticumulativa.md) (calcolo di $F(x)$ e probabilità di intervalli)
+
 ### Traccia originale
 
 > Una variabile aleatoria X ha densità di probabilità f(x) = Cx² per 0 ≤ x ≤ 3, f(x) = 0 altrove, dove C è una costante reale.
@@ -104,6 +115,11 @@ $$P(1 < X \leq 2) = F(2) - F(1) = \frac{8}{27} - \frac{1}{27} = \frac{7}{27} \ap
 ---
 
 ## Domanda 3 — Distribuzione ipergeometrica (8 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M1/UD2/L2 — Esperimenti compositi](../../M1_Probabilita_elementare/UD2/L2%20-%20Esperimenti%20compositi.md) (estrazioni senza reinserimento, conteggio combinatorio)
+> - Esercizi analoghi: [Esame 19/09/2025 — Domanda 1](7_esame_19_settembre_2025_soluzione.md) e [Esame 16/01/2026 — Domanda 1](8_esame_16_gennaio_2026_soluzione.md) (con identificazione, momenti e fattore di correzione)
 
 ### Traccia originale
 
@@ -159,6 +175,11 @@ $$\text{Var}(X) = n \cdot \frac{K}{N} \cdot \frac{N-K}{N} \cdot \underbrace{\fra
 
 ## Domanda 4 — Distribuzione Normale: QI (6 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M2/UD4/L1 — Densità Gaussiana o Normale](../../M2_Variabili_aleatorie/UD4/L1%20-%20Densit%C3%A0%20Gaussiana%20o%20Normale.md) (standardizzazione e tavole)
+> - [M2/UD4/L2 — Altre considerazioni sulla Gaussiana](../../M2_Variabili_aleatorie/UD4/L2%20-%20Altre%20considerazioni%20sulla%20Gaussiana.md) (simmetria, quantili)
+
 ### Traccia originale
 
 > Il Quoziente di Intelligenza (QI) è generalmente modellato secondo una distribuzione Normale, con media μ = 100.0 e deviazione standard σ = 16.0. Sia X la variabile aleatoria che rappresenta il QI individuale. Si calcolino
@@ -204,6 +225,13 @@ $$P^{10} = (0.3830)^{10} = (0.3830^5)^2 = (0.008243)^2 \approx \boxed{6.8 \times
 ---
 
 ## Domanda 5 — Bayes: sensitivity e specificity (6 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M1/UD5/L2 — Bayes – formulazione, terminologia ed esempi](../../M1_Probabilita_elementare/UD5/L2%20-%20Bayes%20%E2%80%93%20formulazione,%20terminologia%20ed%20esempi.md) (teorema, probabilità totale)
+> - [M1/UD5/L3 — Prior e Verosimiglianza](../../M1_Probabilita_elementare/UD5/L3%20-%20Prior%20e%20Verosimiglianza.md) (sensibilità/specificità come verosimiglianze)
+> - [M1/UD5/L4 — Bayes iterativo e aggiornamento della conoscenza](../../M1_Probabilita_elementare/UD5/L4%20-%20Bayes%20iterativo%20e%20aggiornamento%20della%20conoscenza.md) (test ripetuti: posterior → prior)
+> - Esercizio gemello con secondo test iterato: [Esame 05/09/2025 — Domanda 4](6_esame_5_settembre_2025_soluzione.md)
 
 ### Traccia originale
 

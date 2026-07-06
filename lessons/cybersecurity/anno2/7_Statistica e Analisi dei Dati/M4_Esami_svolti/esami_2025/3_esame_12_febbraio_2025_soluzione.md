@@ -7,6 +7,12 @@
 
 ## Domanda 1 — Varianza della somma e legge dei grandi numeri (8 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M3/UD1/L1 — Introduzione alla somma di variabili aleatorie indipendenti](../../M3_Argomenti_avanzati/UD1/L1%20-%20Introduzione%20alla%20somma%20di%20variabili%20aleatorie%20indipendenti.md) (linearità di media e varianza per v.a. indipendenti)
+> - [M1/UD4/L2 — Legge dei grandi numeri per il valore atteso](../../M1_Probabilita_elementare/UD4/L2%20-%20Legge%20dei%20grandi%20numeri%20per%20il%20valore%20atteso.md) (WLLN)
+> - [M3/UD2/L3 — Distribuzione della media campionaria](../../M3_Argomenti_avanzati/UD2/L3%20-%20Distribuzione%20della%20media%20campionaria.md) ($\sigma_m^2 = \sigma^2/n$ e convergenza $m \to \mu$)
+
 ### Traccia originale
 
 > (a) (4 punti) Date due variabili aleatorie indipendenti, $X$ e $Y$, di valore atteso rispettivamente $\mu_X$ e $\mu_Y$, e di varianza rispettivamente $\sigma_X^2$ e $\sigma_Y^2$, dimostrare, usando la nozione di covarianza, che la varianza della variabile aleatoria $Z = X + Y$ è $\sigma_Z^2 = \sigma_X^2 + \sigma_Y^2$.
@@ -71,6 +77,12 @@ Per il teorema del confronto: $\displaystyle\lim_{n\to\infty} P\bigl(|\bar{X}_n 
 ---
 
 ## Domanda 2 — Statistica descrittiva: età calciatori (8 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M2/UD1/L3 — Indicatori di posizione](../../M2_Variabili_aleatorie/UD1/L3%20-%20Indicatori%20di%20posizione.md) (media, mediana, moda, quartili)
+> - [M2/UD1/L4 — Indicatori d'ampiezza](../../M2_Variabili_aleatorie/UD1/L4%20-%20Indicatori%20d%E2%80%99ampiezza.md) (IQR, boxplot)
+> - [M3/UD2/L1 — Dalla distribuzione al campione – Statistica descrittiva](../../M3_Argomenti_avanzati/UD2/L1%20-%20Dalla%20distribuzione%20al%20campione%20%E2%80%93%20Statistica%20descrittiva.md) (calcoli con frequenze)
 
 ### Traccia originale
 
@@ -159,6 +171,11 @@ $$18 \;[\; 19.5 \mid 20.5 \mid 22 \;]\; 24 \quad \bullet\,29$$
 
 ## Domanda 3 — Bayes: macchine A, B, C (4 punti)
 
+> **Riferimenti di teoria**:
+>
+> - [M1/UD5/L2 — Bayes – formulazione, terminologia ed esempi](../../M1_Probabilita_elementare/UD5/L2%20-%20Bayes%20%E2%80%93%20formulazione,%20terminologia%20ed%20esempi.md) (teorema, probabilità totale su più ipotesi)
+> - [M1/UD5/L3 — Prior e Verosimiglianza](../../M1_Probabilita_elementare/UD5/L3%20-%20Prior%20e%20Verosimiglianza.md) (prior non uniformi)
+
 ### Traccia originale
 
 > Un'azienda produce componenti usando le macchine A, B, e C.
@@ -188,6 +205,12 @@ $$P(A \mid D) = \frac{P(D\mid A)\cdot P(A)}{P(D)} = \frac{0.005}{0.017} = \frac{
 ---
 
 ## Domanda 4 — Probabilità su mazzo di carte (6 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M1/UD2/L1 — Il principio di moltiplicazione](../../M1_Probabilita_elementare/UD2/L1%20-%20Il%20principio%20di%20moltiplicazione.md) (cammini e conteggi)
+> - [M1/UD2/L3 — Legge del prodotto per due eventi](../../M1_Probabilita_elementare/UD2/L3%20-%20Legge%20del%20prodotto%20per%20due%20eventi.md) (estrazioni condizionate senza reinserimento)
+> - [M1/UD3/L2 — Legge della Somma (o Legge delle Alternative)](../../M1_Probabilita_elementare/UD3/L2%20-%20Legge%20della%20Somma%20(o%20Legge%20delle%20Alternative).md) (unione di casi ed evento complementare)
 
 ### Traccia originale
 
@@ -230,6 +253,11 @@ $$P(\text{almeno un cuore o figura}) = 1 - \frac{435}{1326} = \frac{891}{1326} =
 ---
 
 ## Domanda 5 — Approssimazione di Poisson: uova di cioccolata (6 punti)
+
+> **Riferimenti di teoria**:
+>
+> - [M2/UD3/L2 — Forma analitica della distribuzione di Poisson](../../M2_Variabili_aleatorie/UD3/L2%20-%20orma%20analitica%20della%20distribuzione%20di%20Poisson.md) (Poisson come limite della Binomiale per $n\to\infty$, $p\to 0$, $np=\mu$)
+> - [M2/UD3/L1 — Distribuzione Binomiale](../../M2_Variabili_aleatorie/UD3/L1%20-%20Distribuzione%20Binomiale.md) (modello esatto di partenza)
 
 ### Traccia originale
 
