@@ -6,6 +6,8 @@ L’autenticazione è la **prima linea di difesa** contro gli accessi non autori
 Serve a **verificare l’identità dell’utente** e ad assegnargli i **privilegi appropriati** per l’accesso alle risorse del sistema.  
 Questa lezione presenta i principali **metodi di autenticazione**: basati su **conoscenza**, **possesso**, **biometria** e **combinazioni multifattore**.
 
+Il focus principale è l’autenticazione basata su password, perché è ancora il meccanismo più diffuso nei sistemi operativi e nei servizi online, ma anche uno dei più esposti a errori di implementazione, cattive scelte dell’utente e attacchi automatizzati.
+
 ---
 
 ### **2. Metodi di autenticazione dell’identità**
@@ -18,6 +20,10 @@ L’autenticazione può basarsi su quattro diverse categorie di elementi, ognuna
 |**Qualcosa che l’individuo possiede (token)**|Richiede il **possesso fisico o digitale** di un oggetto di autenticazione.|Smart card, chiavi USB, token hardware, tessere elettroniche|
 |**Qualcosa che l’individuo è (biometria statica)**|Basata su **caratteristiche fisiche uniche** e difficilmente replicabili.|Impronta digitale, viso, retina, geometria della mano|
 |**Qualcosa che l’individuo fa (biometria dinamica)**|Si basa su **comportamenti unici e ripetitivi** nel tempo.|Ritmo di digitazione, voce, firma, modo di camminare|
+
+Nel caso del **possesso**, la prova può consistere nell’inserimento fisico di una smart card in un lettore oppure nell’uso di un token che genera codici dinamici. L’idea è che l’attaccante non debba limitarsi a conoscere un segreto: deve anche disporre dell’oggetto corretto.
+
+Nel caso biometrico è utile distinguere tra caratteristiche **fisiche statiche** e caratteristiche **comportamentali**. Le prime includono impronte digitali, retina, volto, geometria della mano o pattern vascolari; le seconde includono intonazione della voce, ritmo di digitazione sulla tastiera e modalità di firma o scrittura.
 
 ---
 
@@ -34,6 +40,12 @@ Per esempio:
     
 
 Questa tecnica riduce drasticamente la probabilità che un attaccante possa impersonare un utente, anche in caso di furto di uno dei fattori.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Un esempio tipico è l’accesso a un servizio web con password seguito dalla richiesta di un codice ricevuto tramite SMS o generato da un’app dedicata. In questo caso la password dimostra qualcosa che l’utente **sa**, mentre il codice temporaneo dimostra il possesso di un dispositivo o di un token associato all’account.
+
+> 📌 La MFA è efficace solo se combina fattori realmente distinti. Due password diverse non costituiscono vera autenticazione multifattore: sono sempre due prove basate sulla conoscenza.
 
 ---
 
@@ -55,6 +67,8 @@ Questa tecnica riduce drasticamente la probabilità che un attaccante possa impe
 - Identifica l’utente e ne determina i **privilegi di accesso**.
     
 - È usato nei **modelli di controllo discrezionale (DAC)** per stabilire chi può accedere a cosa.
+
+Il nome utente o login non serve soltanto a selezionare la password corretta da verificare: identifica anche il profilo a cui il sistema assocerà privilegi, risorse accessibili e operazioni consentite. Per questo autenticazione e autorizzazione sono distinte, ma strettamente collegate.
     
 
 ---
@@ -81,6 +95,10 @@ Questa tecnica riduce drasticamente la probabilità che un attaccante possa impe
 - **Ingegneria sociale** (phishing, manipolazione psicologica).
     
 - **Password deboli** o riutilizzate su più servizi.
+
+La prima contromisura di base è proteggere il canale tra client e server: una password non deve mai essere trasmessa in chiaro. Tuttavia, un canale cifrato non elimina tutti i rischi: il server può essere compromesso e rivelare il database delle credenziali, mentre il client può essere compromesso da malware, keylogger o componenti malevole del browser.
+
+Gli attacchi di ingegneria sociale sfruttano invece la componente umana: l’attaccante induce l’utente a digitare, comunicare o salvare la password in modo insicuro, ad esempio tramite phishing, pretesti credibili o pagine di login contraffatte.
     
 
 ---
@@ -99,6 +117,26 @@ Questa tecnica riduce drasticamente la probabilità che un attaccante possa impe
 |**Shoulder surfing**|Osservazione diretta mentre l’utente digita le credenziali.|
 |**Social engineering**|Manipolazione psicologica per ottenere la password.|
 
+#### **Contromisure principali**
+
+- Per gli **attacchi dizionario offline**, la difesa primaria è impedire l’accesso al file delle password e memorizzare solo valori hashati e salati. Se l’attaccante ottiene il database e conosce la procedura di hashing, può calcolare hash candidati e confrontarli con quelli memorizzati.
+    
+- Per gli **attacchi mirati a un singolo account**, è essenziale limitare il numero di tentativi, introdurre ritardi progressivi o blocchi temporanei e monitorare gli accessi anomali.
+    
+- Per gli **attacchi a password popolari**, serve una policy che impedisca la scelta di password presenti in dizionari, liste comuni o raccolte di credenziali compromesse.
+    
+- Per gli attacchi basati sulla **conoscenza della vittima**, occorre educare gli utenti a non scegliere password legate a dati personali facilmente ricavabili e a non conservarle in file non protetti o su supporti fisici visibili.
+    
+- Per il **workstation hijacking**, servono blocco automatico dello schermo, timeout di inattività e richiesta di nuove credenziali dopo un periodo senza attività.
+    
+- Per gli **errori dell’utente**, la difesa passa da formazione, MFA, sistemi di rilevamento delle intrusioni e, per account privilegiati, password generate automaticamente con caratteristiche di robustezza elevate.
+    
+- Per il **riutilizzo delle password**, la regola corretta è usare credenziali diverse per contesti diversi: una password rubata in un servizio non deve permettere accesso anche ad altri account.
+    
+- Per **keylogger, shoulder surfing e phishing**, servono protezione del client, attenzione all’ambiente fisico, verifica del sito su cui si inseriscono credenziali e meccanismi aggiuntivi come MFA o token temporanei.
+    
+> ⚠️ Un sistema di autenticazione può essere crittograficamente corretto ma comunque vulnerabile se non limita i tentativi, non protegge gli endpoint o consente password deboli e riutilizzate.
+
 ---
 
 ### **7. Memorizzazione sicura delle password (Unix)**
@@ -114,6 +152,8 @@ Nei sistemi **Unix/Linux**, le password non vengono salvate in chiaro, ma in for
     - `H` è una funzione di hash crittografica.
         
 - Il salt è **pubblico**, ma impedisce il riutilizzo di tabelle precalcolate (Rainbow Tables).
+
+In fase di verifica, il sistema recupera il salt associato all’utente, ricalcola l’hash della password inserita usando quello stesso salt e confronta il risultato con il valore memorizzato. La password in chiaro non deve quindi essere salvata.
     
 
 #### **Vantaggi**
@@ -123,6 +163,8 @@ Nei sistemi **Unix/Linux**, le password non vengono salvate in chiaro, ma in for
 - Evita che due utenti con la stessa password abbiano lo stesso hash.
     
 - Limita il danno in caso di furto parziale del database delle password.
+
+Il salt produce anche un effetto importante sugli utenti che scelgono la stessa password: poiché il valore casuale è diverso, gli hash memorizzati risultano diversi. L’attaccante non può quindi dedurre immediatamente che due account condividono la stessa password.
     
 
 ---
@@ -153,6 +195,8 @@ Nei sistemi **Unix/Linux**, le password non vengono salvate in chiaro, ma in for
     - hash da **192 bit**;
         
     - elevata resistenza a brute force e Rainbow Tables.
+
+L’evoluzione da DES a MD5 e poi a bcrypt mostra un principio generale: gli schemi di memorizzazione delle password devono essere aggiornati quando cresce la potenza di calcolo disponibile agli attaccanti. Un algoritmo accettabile in un certo periodo può diventare insufficiente pochi anni dopo.
         
 
 ---
@@ -165,6 +209,10 @@ Nei sistemi **Unix/Linux**, le password non vengono salvate in chiaro, ma in for
 |**Tabelle Rainbow**|Tabelle precalcolate di hash per ridurre il tempo di ricerca, ma inefficaci contro salt lunghi e hash robusti.|
 |**Forza bruta (brute force)**|Prova sistematicamente tutte le combinazioni possibili di caratteri.|
 |**Password Cracker Tools**|Software dedicati come **John the Ripper** (1996), che combina forza bruta e dizionario con ottimizzazioni avanzate.|
+
+Il cracking resta essenzialmente un confronto: il programma genera una password candidata, applica la stessa procedura di hashing usata dal sistema, eventualmente con il salt corretto, e verifica se l’output coincide con quello memorizzato.
+
+Le **Rainbow Tables** riducono il tempo di calcolo tramite precomputazione e possono essere condivise o reperite online, ma perdono efficacia quando ogni password è associata a un salt lungo e casuale. Strumenti come **John the Ripper** combinano dizionari, forza bruta e generatori di pattern, producendo varianti automatiche delle parole più probabili.
 
 ---
 
@@ -187,6 +235,8 @@ L’aumento della potenza di calcolo ha reso necessarie **politiche di sicurezza
 
 Tuttavia, la complessità eccessiva può ridurre l’usabilità, spingendo gli utenti a **comportamenti insicuri** (es. scrivere le password o riutilizzarle).
 
+La scadenza periodica deve quindi essere calibrata: imporre cambi troppo frequenti può peggiorare la sicurezza, perché l’utente tende a scegliere password prevedibili, annotarle su supporti insicuri o modificarle solo in modo minimo.
+
 ---
 
 ### **11. Meccanismi per evitare password deboli**
@@ -206,6 +256,10 @@ Per migliorare la sicurezza mantenendo l’usabilità, si adottano alcune **stra
     > “Pensa a una frase e prendi le iniziali o parti di parole, mescolando lettere, numeri e simboli.”  
     > Esempio:  
     > “It’s 12 and I am hungry” → “I’S12&IAH”
+
+L’obiettivo è aumentare lo spazio di ricerca per l’attaccante senza rendere la password ingestibile per l’utente. Per questo si combinano lunghezza, lettere maiuscole e minuscole, numeri, caratteri speciali e, quando possibile, generazione casuale o passphrase robuste.
+
+Un controllo di qualità efficace può anche simulare attacchi a dizionario sulla password proposta: se una password è facilmente indovinabile dagli stessi strumenti usati dall’attaccante, non dovrebbe essere accettata.
     
 
 ---
@@ -217,6 +271,8 @@ Per migliorare la sicurezza mantenendo l’usabilità, si adottano alcune **stra
 - I metodi moderni uniscono **hash robusti, salt lunghi e controlli di qualità**.
     
 - La sicurezza deve sempre bilanciare **robustezza e usabilità**, poiché una password sicura ma difficile da gestire porta spesso a comportamenti rischiosi.
+
+- Le contromisure efficaci non sono solo tecniche: includono policy, educazione dell’utente, protezione del canale, protezione degli endpoint e corretta memorizzazione lato server.
     
 
 > **In sintesi:** la vera forza di un sistema di autenticazione non sta nella complessità della password, ma nel **modello di gestione complessivo** che la protegge.

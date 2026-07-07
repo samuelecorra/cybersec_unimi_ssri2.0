@@ -5,6 +5,8 @@
 Un **worm** è un programma capace di **replicarsi autonomamente** e di **diffondersi attivamente** verso altri sistemi, senza richiedere alcuna azione diretta da parte dell’utente.  
 Ogni macchina infetta diventa una **“rampa di lancio”** per ulteriori infezioni.
 
+Il termine _worm_ è stato introdotto nella letteratura fantascientifica a metà degli anni ’70 ed è poi entrato nel lessico della sicurezza informatica. La caratteristica distintiva rispetto a un virus classico è l’**iniziativa attiva**: il worm non aspetta soltanto che l’utente apra o copi un file, ma cerca nuove macchine, identifica vulnerabilità sfruttabili e prova a contattare altri sistemi da infettare.
+
 #### **Caratteristiche principali**
 
 - Sfrutta **vulnerabilità software** nei programmi client o server.
@@ -18,9 +20,11 @@ Ogni macchina infetta diventa una **“rampa di lancio”** per ulteriori infezi
     - **Posta elettronica** e servizi di **messaggistica istantanea**, allegando script o macro malevoli.
         
 - Dopo l’attivazione, il worm si **replica automaticamente** e può diffondere nuovamente copie di sé.
-    
+	    
 - Spesso include un **payload**, cioè un codice dannoso o funzionale aggiuntivo.
-    
+	    
+La replicazione è quindi la funzione essenziale del worm; il payload è il carico ulteriore, che può causare malfunzionamenti, installare altri componenti, aprire backdoor, inviare spam o rendere il sistema parte di una botnet.
+
 
 🧠 **Nota storica:** la prima implementazione di un worm fu sviluppata nei laboratori **Xerox Palo Alto** nei primi anni ’80.
 
@@ -59,7 +63,9 @@ I worm possono diffondersi in diversi modi, a seconda del mezzo e delle vulnerab
 #### **e. Accesso remoto**
 
 - Si connette come utente legittimo a un sistema remoto (es. tramite password rubate o chiavi SSH) e si replica eseguendo comandi locali.
-    
+	    
+In pratica un worm può combinare trasferimento di file ed esecuzione remota: prima copia una propria componente sul bersaglio, poi sfrutta un servizio remoto, una shell o credenziali valide per avviarla sul nuovo host.
+
 
 ---
 
@@ -113,7 +119,9 @@ Il worm era composto da due parti principali:
     
 - Il worm inviava una **stringa più lunga di 512 byte**, sovrascrivendo il buffer interno e alterando l’indirizzo di ritorno della funzione.  
     → Questo permetteva di **eseguire codice arbitrario** sulla macchina remota (classico _buffer overflow_).
-    
+	    
+Nel caso del Morris Worm, l’obiettivo dell’overflow era avviare una shell sul sistema bersaglio con privilegi elevati, così da poter eseguire i comandi necessari a installare e far partire il codice del worm.
+
 
 ---
 
@@ -124,9 +132,11 @@ Il worm era composto da due parti principali:
 - In ascolto sulla **porta 25 (SMTP)**.
     
 - Nel 1988, la **modalità debug** era attiva di default.
-    
+	    
 - Con il comando SMTP `DEBUG`, un utente remoto poteva **inviare uno script di shell da eseguire sul server**.
-    
+	    
+Il problema era quindi una funzionalità pensata per il debug e lasciata disponibile in produzione: chiunque riuscisse a raggiungere il servizio SMTP poteva usare quella modalità per far eseguire comandi all’host remoto.
+
 
 Il worm sfruttava questa funzionalità per **iniettare codice malevolo** e ottenere controllo completo sul sistema bersaglio.
 
@@ -143,7 +153,7 @@ Il worm tentava anche di **entrare nei sistemi remoti** utilizzando i file di fi
     - `~/.rhosts`
         
 - Tentava connessioni con `rsh` verso host fidati, supponendo che la **relazione di trust** fosse reciproca.
-    
+	    
 - Provava a violare **account locali**:
     
     - senza password,
@@ -154,6 +164,8 @@ Il worm tentava anche di **entrare nei sistemi remoti** utilizzando i file di fi
         
 
 Se trovava la password, il worm usava i file `.forward` e `.rhosts` per propagarsi automaticamente ad altri sistemi.
+
+Questi file erano particolarmente pericolosi perché descrivevano macchine e account considerati fidati dall’utente. In alcuni casi la relazione di fiducia permetteva l’accesso senza password; in altri il worm provava password deboli o comuni e, una volta trovata una credenziale valida, la riutilizzava sugli altri host associati allo stesso utente.
 
 ---
 
@@ -180,7 +192,9 @@ I worm contemporanei presentano caratteristiche evolute:
 - **Polimorfismo:** ogni copia genera codice cifrato o offuscato diverso.
     
 - **Metamorfismo:** riscrive completamente il proprio codice a ogni replica, variando struttura e comportamento per eludere i sistemi di difesa.
-    
+	    
+L’uso di più exploit e più canali rende i worm difficili da contenere: anche se una vulnerabilità viene corretta, il malware può continuare a diffondersi attraverso altri servizi esposti, supporti rimovibili o credenziali riutilizzate.
+
 
 ---
 

@@ -5,12 +5,16 @@
 L’autenticazione su **canali non sicuri** (come Internet) richiede meccanismi più robusti delle semplici password statiche.  
 Questa lezione presenta i **principali protocolli di autenticazione sicura** — **One-Time Password**, **Challenge-Response** e **Zero-Knowledge Proof** — insieme alle **tecniche di attacco** più comuni e alle **contromisure** per prevenirle.
 
+Il problema centrale è impedire che un avversario, dopo aver intercettato il traffico tra client e server, possa riutilizzare le informazioni osservate per autenticarsi al posto della vittima. Per questo i protocolli robusti cercano di fare in modo che ogni prova di autenticazione sia **fresca**, **non riutilizzabile** e legata a un segreto che l’attaccante non possiede.
+
 ---
 
 ### **2. One-Time Password (OTP)**
 
 Una **One-Time Password** è una password **valida per una sola sessione o transazione**.  
 Viene utilizzata per **difendersi dagli attacchi passivi**, come l’intercettazione del traffico di rete, poiché una password già usata non può essere riutilizzata.
+
+Gli schemi OTP richiedono normalmente una forma di sincronizzazione tra utente e server: può essere una sincronizzazione temporale, una lista precondivisa di password monouso oppure un contatore condiviso che indica quale password deve essere usata nel round corrente.
 
 #### **Vantaggi**
 
@@ -42,7 +46,7 @@ Viene utilizzata per **difendersi dagli attacchi passivi**, come l’intercettaz
     - Basato su una **sequenza di hash unidirezionali**:  
         $h(s),\ h(h(s)),\ h(h(h(s))),\ ...,\ h^{(n)}(s)$
         
-    - Le password vengono utilizzate in **ordine inverso**, a partire da $h^{(n)}(s)$.
+    - Le password vengono utilizzate in **ordine inverso**: il server memorizza inizialmente l’ultimo valore della catena, mentre l’utente presenta via via i valori precedenti, verificabili applicando una sola volta la funzione hash.
         
 
 ---
@@ -62,11 +66,15 @@ Il **protocollo Lamport OTP** è una delle implementazioni più note delle passw
     - e un numero intero $t$ (numero massimo di autenticazioni).
         
 2. Calcola $w_0 = H^{(t)}(w)$ e lo invia al server $B$, che lo memorizza.
+
+Il valore $w$ resta noto solo al client: il server memorizza soltanto un valore derivato dopo $t$ applicazioni della funzione hash. La sicurezza dipende dalla non invertibilità di $H$: conoscere $H(x)$ non deve permettere di risalire a $x$.
     
 
 #### **Protocollo operativo**
 
 Per la $i$-esima autenticazione ($1 < i < t$):
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 1. $A$ invia a $B$:  
     $(A, i, w_i = H^{(t - i)}(w))$
@@ -80,7 +88,9 @@ Per la $i$-esima autenticazione ($1 < i < t$):
 3. Se entrambe le condizioni sono vere, $B$ accetta l’autenticazione e incrementa $i_A$.
     
 
-💡 In questo modo, anche se un avversario intercetta $w_i$, non può calcolare $w_{i+1}$ a causa della natura **non invertibile** della funzione di hash.
+Dopo un’autenticazione riuscita, il server aggiorna il proprio database sostituendo il vecchio valore memorizzato con quello appena ricevuto. Al round successivo accetterà solo il nuovo predecessore nella catena.
+
+> 💡 In questo modo, anche se un avversario intercetta $w_i$, non può calcolare il valore successivo da presentare al server, perché dovrebbe invertire la funzione hash.
 
 ---
 
@@ -89,11 +99,15 @@ Per la $i$-esima autenticazione ($1 < i < t$):
 Nei protocolli **Challenge-Response**, il server invia una **sfida (challenge)** casuale e l’utente deve rispondere con un valore **dipendente dalla sfida e da un segreto condiviso**.  
 Questo metodo previene i **replay attack** poiché ogni sfida è diversa.
 
+La sfida può essere un timestamp, un nonce o un altro valore fresco. Il punto comune è che la risposta deve dimostrare la conoscenza di un segreto, ad esempio una chiave condivisa $K$, senza trasmettere direttamente tale segreto.
+
 #### **a. Autenticazione unilaterale basata su timestamp**
 
 - Da $A$ a $B$:  
     $MAC_K(t_A, B)$  
     dove $t_A$ è un timestamp e $MAC_K$ una funzione autenticata con chiave $K$.
+
+Il timestamp viene incluso nel MAC per legare la prova di autenticazione a un intervallo temporale limitato. Un messaggio vecchio, anche se formalmente corretto, deve essere rifiutato fuori dalla finestra di validità.
     
 
 #### **b. Autenticazione unilaterale basata su nonce**
@@ -102,7 +116,9 @@ Questo metodo previene i **replay attack** poiché ogni sfida è diversa.
     
 2. Da $A$ a $B$: risponde con $MAC_K(r_B, B)$.  
     → Solo chi conosce la chiave $K$ può generare la risposta corretta.
-    
+	    
+In questo caso la freschezza non dipende dall’orologio, ma dal nonce generato dal server. L’attaccante può anche osservare una risposta valida, ma non può riutilizzarla per una sfida diversa.
+
 
 #### **c. Autenticazione reciproca basata su nonce**
 
@@ -115,11 +131,15 @@ Questo metodo previene i **replay attack** poiché ogni sfida è diversa.
 
 Entrambe le parti si autenticano a vicenda, assicurando **mutual authentication**.
 
+L’uso di due nonce evita che solo una delle due parti sia autenticata: $B$ verifica che $A$ conosca $K$ e sappia rispondere a $r_B$, mentre $A$ verifica che $B$ conosca $K$ e sappia rispondere a $r_A$.
+
 ---
 
 ### **5. Autenticazione Zero-Knowledge Proof (ZKP)**
 
 Una **Zero-Knowledge Proof (ZKP)** è un protocollo crittografico che consente a una parte (**prover**) di convincere un’altra (**verifier**) del possesso di un segreto **senza rivelarlo**.
+
+La proprietà rilevante per l’autenticazione è che il verifier ottiene evidenza della conoscenza del segreto, ma i messaggi scambiati non contengono il segreto in forma riutilizzabile.
 
 #### **Definizione**
 
@@ -158,7 +178,9 @@ Gli **smart token** sono dispositivi fisici che memorizzano credenziali digitali
 - Possono avere forma di **smart card**, **chiave USB**, **token OTP** o **dispositivo portatile**.
     
 - Alcuni includono **tastiera e display** per l’interazione diretta (es. token bancari).
-    
+	    
+Nei token con interfaccia minima l’utente spesso deve solo premere un pulsante e leggere un codice dal display, da inserire poi nel servizio di autenticazione. Il dispositivo svolge internamente il calcolo, mentre all’esterno viene esposto solo il valore necessario al protocollo.
+
 
 #### **Interfacce**
 
@@ -226,11 +248,19 @@ L’autenticazione biometrica riconosce un individuo in base a **caratteristiche
 |**Trojan horse**|Un’applicazione malevola si finge legittima per catturare password o codici.|
 |**Denial of Service (DoS)**|Blocca il servizio di autenticazione tramite richieste massicce o malformate.|
 
+Gli attacchi non riguardano solo il traffico di rete. Un avversario può osservare fisicamente l’utente mentre digita una password, colpire il database che memorizza password o template biometrici, compromettere il client con keylogger o trojan, oppure indurre la vittima a inserire credenziali in un contesto controllato dall’attaccante.
+
+Nel caso biometrico il rischio è particolarmente delicato: se viene rubato un template o un codice derivato da una caratteristica fisica, non è possibile “cambiare” quell’attributo con la stessa semplicità con cui si cambia una password.
+
+Per la disponibilità, l’obiettivo dell’attaccante può essere impedire l’uso del servizio di autenticazione, sommergendolo di richieste e rendendo impossibile l’accesso agli utenti legittimi.
+
 ---
 
 ### **9. Replay Attack**
 
 Il **replay attack** consiste nel **riutilizzare messaggi o credenziali valide** per ottenere accessi fraudolenti.
+
+Nel caso più semplice l’attaccante copia un messaggio valido e lo riproduce in seguito. Una variante più forte consiste nel bloccare o sopprimere il messaggio originale della vittima e inviare al suo posto la copia intercettata: in questo modo il sistema non vede due messaggi uguali, ma solo quello dell’attaccante.
 
 #### **Esempi**
 
@@ -239,6 +269,8 @@ Il **replay attack** consiste nel **riutilizzare messaggi o credenziali valide**
 - Soppressione del messaggio originale e successiva riproduzione, così da evitare che il sistema rilevi il doppione.
     
 - Riproduzione “all’indietro” con cifratura simmetrica, rendendo difficile distinguere i messaggi originali da quelli replicati.
+
+> ⚠️ La cifratura da sola non impedisce il replay: un messaggio cifrato può essere copiato e ritrasmesso anche se l’attaccante non ne comprende il contenuto.
     
 
 ---
@@ -252,6 +284,8 @@ Il **replay attack** consiste nel **riutilizzare messaggi o credenziali valide**
 - Il sistema accetta solo messaggi con numeri nell’ordine corretto.
     
 - Ogni parte mantiene traccia dell’ultimo numero ricevuto da ciascun interlocutore.
+
+Il numero di sequenza deve essere protetto, ad esempio includendolo nel MAC o nel token autenticato. Se l’attaccante potesse modificarlo liberamente, potrebbe adattare un vecchio messaggio alla sequenza attesa.
     
 
 #### **Timestamp**
@@ -261,11 +295,15 @@ Il **replay attack** consiste nel **riutilizzare messaggi o credenziali valide**
 - Il sistema accetta solo messaggi entro una finestra di tempo valida.
     
 - Richiede **sincronizzazione precisa degli orologi**.
+
+Durante la finestra di validità del timestamp, il server può memorizzare i messaggi già ricevuti e scartare eventuali duplicati. Questo limita il replay semplice, ma non basta contro un attaccante che riesce a sopprimere il messaggio originale e a far arrivare solo la propria copia.
     
 
 #### **Protocolli Challenge-Response**
 
 - Eliminano la possibilità di replay grazie all’uso di **sfide uniche (nonce)** generate per ogni sessione.
+
+Il challenge-response è la contromisura più pulita quando si vuole evitare dipendenza forte dagli orologi: la risposta valida per un nonce non è riutilizzabile con un altro nonce, e solo chi conosce il segreto condiviso può calcolarla correttamente.
     
 
 ---
@@ -281,6 +319,8 @@ In questa lezione abbiamo analizzato:
 - le **principali vulnerabilità** dei meccanismi di autenticazione,
     
 - e le **contromisure contro i replay attack**.
+
+- la necessità di proteggere non solo il canale, ma anche host, client, token, database delle credenziali e disponibilità del servizio.
     
 
 > L’autenticazione sicura non si limita alla verifica dell’identità: richiede **protocollo, sincronizzazione e protezione del canale di comunicazione**.  

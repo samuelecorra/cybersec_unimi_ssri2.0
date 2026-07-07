@@ -30,6 +30,8 @@ I principali componenti sono:
 
 Questi moduli cooperano a livello di kernel e di spazio utente per eseguire i controlli di accesso, applicare le politiche di sicurezza e gestire i token degli utenti autenticati.
 
+L’architettura separa quindi il momento dell’**autenticazione** dal momento dell’**autorizzazione**: LSA, SAM, Active Directory e authentication packages contribuiscono a stabilire l’identità dell’utente, mentre l’SRM applica le decisioni di accesso sugli oggetti protetti.
+
 ---
 
 ### **2. Componenti fondamentali della sicurezza Windows**
@@ -45,6 +47,8 @@ Questi moduli cooperano a livello di kernel e di spazio utente per eseguire i co
     - Gestisce i **privilegi utente** e le **autorizzazioni**.
         
 - Ogni volta che un processo tenta di accedere a un oggetto protetto, è l’SRM a decidere se concedere o negare l’operazione.
+
+L’SRM opera con privilegi molto elevati perché si trova in modalità kernel: questo gli consente di mediare le richieste verso risorse sensibili, generare le entry di auditing e applicare correttamente i diritti utente stabiliti dalla politica di sicurezza.
     
 
 > Gli SRM moderni sono progettati per essere **piccoli e verificabili**, in modo da ridurre le possibilità di errore o bypass.
@@ -66,6 +70,8 @@ Questi moduli cooperano a livello di kernel e di spazio utente per eseguire i co
     - **Politiche di auditing** (quali operazioni loggare e su quali oggetti).
         
     - **Gestione dei privilegi** (quali account possono eseguire operazioni privilegiate).
+
+La politica locale comprende quindi regole sulla complessità delle password, criteri di accesso agli oggetti e privilegi differenziati tra utenti ordinari e account amministrativi. Un utente non privilegiato non deve poter modificare i privilegi di altri soggetti o alterare le regole di protezione del sistema.
         
 
 ---
@@ -84,6 +90,8 @@ Questi moduli cooperano a livello di kernel e di spazio utente per eseguire i co
         `\Windows\System32\Config`.
         
 - Il **SAM** è l’equivalente di `/etc/passwd` nei sistemi UNIX.
+
+Il SAM è usato per gli **account locali**: quando il login avviene sulla macchina, Windows confronta le credenziali presentate con le informazioni archiviate nel database locale.
     
 
 Le password sono archiviate in forma **hashata**, storicamente con **MD4**, ma dalle versioni più recenti (da **Vista in poi**) si utilizza una funzione derivata da **PBKDF2**, più robusta contro gli attacchi di forza bruta.
@@ -99,6 +107,8 @@ Le password sono archiviate in forma **hashata**, storicamente con **MD4**, ma d
 - Gestisce gli **account di dominio** e consente autenticazioni su larga scala.
     
 - È utilizzato nei contesti aziendali in cui i computer fanno parte di un **dominio** Windows.
+
+Active Directory entra in gioco quando l’utente usa un **account di dominio**: le informazioni di autenticazione non sono più solo locali, ma risiedono in un database centrale condiviso tra più macchine e consultato tramite il controller di dominio.
     
 
 **Differenza tra gruppo di lavoro e dominio:**
@@ -116,6 +126,8 @@ Le password sono archiviate in forma **hashata**, storicamente con **MD4**, ma d
 
 Windows implementa un sistema di controllo degli accessi **complesso e granulare**, in cui ogni oggetto ha un proprio **ACL** (Access Control List).
 
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
 Caratteristiche principali:
 
 - Autorizzazioni **granulari** su singoli oggetti (file, chiavi di registro, processi, ecc.).
@@ -123,6 +135,8 @@ Caratteristiche principali:
 - Ogni utente può appartenere a **più gruppi**, e i gruppi possono essere **annidati**.
     
 - Le ACL possono includere **regole di Allow, Deny, Audit** e combinazioni complesse.
+
+Il modello è in larga parte **discrezionale**: utenti o amministratori con privilegi adeguati possono modificare le regole di accesso associate a un oggetto. L’interfaccia grafica di Windows espone questa granularità permettendo di assegnare permessi come lettura, scrittura, modifica o controllo completo a utenti e gruppi.
     
 
 ---
@@ -130,6 +144,8 @@ Caratteristiche principali:
 ### **4. Security Identifier (SID)**
 
 Ogni account o gruppo in Windows è identificato da un **Security ID (SID)** univoco.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **Struttura del SID**
 
@@ -154,6 +170,8 @@ S-1-5-21-AAA-BBB-CCC-RRR
 
 Il SID è utilizzato in tutti i processi di autenticazione e nelle ACL per identificare utenti, gruppi e oggetti.
 
+Il SID è univoco all’interno del dominio o del contesto in cui viene generato: l’identità effettivamente usata dal sistema non è il nome visualizzato dell’utente, ma questo identificatore numerico-strutturato.
+
 ---
 
 ### **5. Security Descriptor (SD)**
@@ -165,6 +183,8 @@ Ogni oggetto in Windows è associato a un **Security Descriptor**, che definisce
 - La **DACL (Discretionary ACL)** → specifica chi può accedere e in che modo.
     
 - La **SACL (System ACL)** → specifica quali tentativi devono essere registrati nei log di sicurezza.
+
+Il security descriptor descrive quindi sia **chi possiede** l’oggetto, sia **chi può fare cosa**, sia **quali eventi devono essere tracciati**. La DACL realizza la parte discrezionale del controllo accessi, mentre la SACL collega l’oggetto alle regole di auditing e, nelle versioni moderne, anche a criteri obbligatori di integrità.
     
 
 Ogni processo è associato a un **token di sicurezza**, chiamato anche **security context**, che include:
@@ -176,9 +196,13 @@ Ogni processo è associato a un **token di sicurezza**, chiamato anche **securit
 - ID sessione di login.
     
 - Lista dei privilegi di sistema.
+
+- Eventuali informazioni di impersonificazione, usate quando un processo deve operare temporaneamente nel contesto di sicurezza di un altro utente.
     
 
 > Quando un processo tenta di accedere a un oggetto, Windows confronta il **token di sicurezza** del processo con il **security descriptor** dell’oggetto per determinare se l’accesso è consentito.
+
+In pratica, il processo presenta il proprio security context; Windows verifica se SID, gruppi e privilegi presenti nel token sono compatibili con le ACE contenute nel security descriptor dell’oggetto richiesto.
 
 ---
 
@@ -201,6 +225,8 @@ Esistono due principali tipologie di ACL:
     - Serve per l’auditing e per il controllo dei **criteri di integrità obbligatori** (MAC).
         
     - Determina quali azioni generano eventi nei log di sicurezza.
+
+Una **ACE** è quindi una maschera di controllo accessi: specifica il soggetto a cui si riferisce, tramite SID, e l’insieme di azioni consentite, negate o da tracciare per quello specifico oggetto.
         
 
 #### **Esempio di DACL**
@@ -219,6 +245,8 @@ ACE[2]: Allow CORP\Cheryl Read, Write, and Delete
 - **Cheryl** → può leggere, scrivere ed eliminare.
     
 - **Blake**, in quanto proprietario, mantiene sempre il controllo completo.
+
+Il proprietario dell’oggetto conserva un ruolo speciale: anche quando non viene mostrata esplicitamente una ACE dedicata, il sistema gli attribuisce la capacità di gestire l’oggetto secondo le regole previste dalla politica.
     
 
 ---
@@ -244,6 +272,10 @@ Ogni processo o oggetto è etichettato con un livello:
     
 
 > Questo meccanismo previene, ad esempio, che un’applicazione eseguita con privilegi bassi possa modificare file o impostazioni di sistema.
+
+Un caso tipico riguarda i file provenienti da Internet: Windows può assegnare loro un livello di integrità basso, perché il contenuto è meno fidato e potrebbe includere codice malevolo. Al contrario, file di sistema o oggetti creati da processi privilegiati possono avere integrità alta o di sistema.
+
+> ⚠️ La DACL stabilisce se un soggetto è autorizzato in senso discrezionale; il livello di integrità aggiunge un vincolo obbligatorio. Anche se la DACL sembra consentire un’azione, il controllo di integrità può impedirla se il processo ha un livello troppo basso.
 
 ---
 

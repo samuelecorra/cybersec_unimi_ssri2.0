@@ -10,6 +10,8 @@ In questa lezione analizziamo le forme di payload più pericolose, progettate pe
 - **Rootkit**
     
 - **Zombie** e **Botnet**
+
+Il punto comune è lo **stealthing**: il malware non vuole solo eseguire un’azione dannosa, ma vuole anche evitare i meccanismi di rilevamento, passare inosservato e mantenere nel tempo la possibilità di controllare il sistema compromesso.
     
 
 ---
@@ -31,6 +33,8 @@ Una **backdoor** è un **punto di accesso segreto** all’interno di un sistema 
 - Spesso viene inserita **dagli sviluppatori stessi** per test o manutenzione.
     
 - Può essere **inclusa nei compilatori** (come nel famoso caso del “Trusting Trust Attack” di Ken Thompson).
+
+Nella pratica una backdoor può presentarsi come un servizio di rete nascosto, in ascolto su una porta nota soltanto all’attaccante o a chi l’ha installata. Attraverso quel servizio l’attaccante può aprire una shell remota, eseguire comandi e aggirare controlli ordinari come login e password. Storicamente meccanismi simili sono stati talvolta introdotti anche per esigenze di test o debug, ma se rimangono attivi in produzione diventano un punto di accesso abusabile.
     
 
 #### **Esempio: Worm MyDoom**
@@ -40,6 +44,8 @@ Una **backdoor** è un **punto di accesso segreto** all’interno di un sistema 
 - Avvia il processo **SHIMGAPI.DLL** come figlio di _Windows Explorer_.
     
 - La stessa backdoor era utilizzata anche dal worm **Mimail**.
+
+Altri malware hanno riutilizzato backdoor o servizi nascosti lasciati da infezioni precedenti: una porta aperta per un attacco può diventare in seguito un canale di ingresso per attaccanti diversi.
     
 
 💡 **Nota:** una volta installata, la backdoor garantisce all’attaccante gli **stessi privilegi dell’utente** compromesso, permettendo pieno accesso al sistema.
@@ -78,6 +84,10 @@ Il suo scopo è **occultare la presenza dell’attaccante** e **alterare i mecca
 - **Rootkit semplici:** modificano programmi utente (es. `ls`, `ps`); rilevabili con strumenti come **Tripwire**.
     
 - **Rootkit avanzati:** operano a livello kernel o firmware, **difficilmente rilevabili** dallo spazio utente.
+
+La distinzione più importante è il livello a cui il rootkit altera il sistema. I rootkit in modalità utente modificano o sostituiscono programmi ordinari, ad esempio comandi come `ls` o `ps`, così che l’amministratore non veda file o processi malevoli. I rootkit kernel-mode intercettano invece chiamate e API del kernel: sono più invasivi e più difficili da rilevare, perché manipolano direttamente ciò che gli strumenti di controllo ricevono dal sistema operativo.
+
+I rootkit basati su macchina virtuale o firmware spostano il controllo ancora più in basso: il sistema operativo può essere eseguito dentro un ambiente virtualizzato controllato dall’attaccante, oppure il malware può collocarsi fuori dal normale sistema operativo e interagire direttamente con l’hardware. In questi casi la rilevazione dal sistema compromesso diventa particolarmente difficile.
     
 
 ---
@@ -87,6 +97,8 @@ Il suo scopo è **occultare la presenza dell’attaccante** e **alterare i mecca
 Un **zombie** è un computer **controllato da remoto** senza il consenso dell’utente, solitamente tramite **backdoor o trojan**.  
 Un insieme di zombie interconnessi forma una **botnet** (_robot network_).
 
+I termini _zombie_, _rete di zombie_ e _botnet_ descrivono quindi lo stesso scenario: molte macchine compromesse, apparentemente normali per i rispettivi utenti, che eseguono istruzioni provenienti da un controllore esterno.
+
 #### **Botnet**
 
 - È una **rete di macchine compromesse**, coordinate da un **server di comando e controllo (C&C)**.
@@ -95,6 +107,8 @@ Un insieme di zombie interconnessi forma una **botnet** (_robot network_).
     
 - Le botnet vengono spesso create usando worm o trojan come agenti di infezione.
     
+Il server di comando e controllo può essere centralizzato oppure sostituito da una rete peer-to-peer tra bot. Il suo ruolo resta lo stesso: distribuire ordini, aggiornamenti e nuovi componenti malevoli alla rete di macchine compromesse.
+
 
 #### **Scopi principali di una botnet**
 
@@ -123,9 +137,13 @@ Un insieme di zombie interconnessi forma una **botnet** (_robot network_).
 
 L’attaccante analizza Internet alla ricerca di **sistemi vulnerabili o non protetti**.
 
+La scansione cerca servizi esposti, software non aggiornato, librerie vulnerabili o account protetti da password deboli. L’obiettivo è individuare macchine abbastanza esposte da poter essere trasformate in nodi della botnet.
+
 ##### **2. Infezione**
 
 Installa in modo silenzioso un **agente zombie**, trasformando i computer vulnerabili in bot.
+
+L’agente installato resta nascosto e, una volta attivo, si mette in contatto con il server master o con gli altri bot. Da quel momento la macchina diventa un esecutore remoto: non decide l’attacco, ma riceve istruzioni e le applica.
 
 ##### **3. Connessione al server di comando**
 
@@ -144,6 +162,8 @@ Il risultato è la **saturazione delle risorse**, rendendo il servizio inaccessi
 
 Il sistema target è **sovraccarico** e non può rispondere alle richieste normali, causando un’interruzione del servizio.
 
+Le botnet possono anche nascondere l’identità dell’attaccante: chi osserva il traffico vede gli indirizzi IP degli zombie, non necessariamente quello del controllore reale. Per questo sono utili non solo per DDoS e spam, ma anche per phishing, sniffing, diffusione di adware, attacchi a reti di messaggistica e manipolazione di sondaggi o giochi online.
+
 ---
 
 ### **6. Caso studio: Storm Botnet**
@@ -159,6 +179,8 @@ La **Storm Botnet**, scoperta nel **gennaio 2007**, è stata una delle più gran
     - falsi link (“scarica il video”),
         
     - exploit _drive-by download_ (installazione automatica dal browser).
+        
+    - false pagine di sicurezza o antispam che in realtà installano il malware.
         
 - **Comunicazione tra bot:**
     
@@ -186,4 +208,3 @@ Questi meccanismi sono alla base degli attacchi **APT (Advanced Persistent Threa
 > Un sistema compromesso ma “silenzioso” è il peggior scenario possibile in sicurezza informatica.
 
 ---
-

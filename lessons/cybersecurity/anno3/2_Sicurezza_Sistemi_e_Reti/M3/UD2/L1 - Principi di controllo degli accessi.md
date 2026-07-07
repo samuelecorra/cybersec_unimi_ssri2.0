@@ -14,6 +14,8 @@ L’obiettivo è comprendere come le organizzazioni definiscono, applicano e sup
 Il **controllo degli accessi** è un elemento centrale nella **sicurezza informatica**, poiché regola **chi può accedere a cosa** e **in che modo**.  
 Consente di proteggere risorse e informazioni, garantendo che solo **utenti o processi autorizzati** possano utilizzarle secondo regole prestabilite.
 
+Il controllo degli accessi interviene tipicamente **dopo l’autenticazione**: una volta verificata l’identità del soggetto, il sistema deve stabilire quali azioni siano effettivamente consentite rispetto alle risorse protette.
+
 #### **Definizioni normative**
 
 - **NISTIR 7298 (2013)** definisce il controllo degli accessi come il processo di concessione o diniego di richieste specifiche per:
@@ -34,6 +36,8 @@ In sintesi, il controllo degli accessi **implementa la politica di sicurezza** c
 - **chi o cosa** può accedere a una risorsa di sistema;
     
 - **in quale modo** tale accesso è consentito.
+
+La politica di sicurezza è quindi l’insieme delle regole che collega soggetti, oggetti e diritti: non basta sapere che un utente è legittimo, bisogna anche determinare se può leggere, modificare, eseguire, cancellare o amministrare una specifica risorsa.
     
 
 ---
@@ -41,6 +45,8 @@ In sintesi, il controllo degli accessi **implementa la politica di sicurezza** c
 ### **2. Componenti principali del controllo degli accessi**
 
 Il controllo degli accessi è parte di un sistema più ampio che comprende **autenticazione, autorizzazione e auditing**.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 |**Funzione**|**Descrizione**|
 |---|---|
@@ -50,6 +56,12 @@ Il controllo degli accessi è parte di un sistema più ampio che comprende **aut
 
 Il **meccanismo di controllo degli accessi** media tra **utente/processo** e **risorse di sistema** (file, directory, database, applicazioni, ecc.), verificando — dopo l’autenticazione — se la richiesta di accesso è consentita.  
 Le decisioni si basano su un **database di autorizzazioni** gestito da un **amministratore di sicurezza**, mentre il modulo di **auditing** mantiene i log delle operazioni.
+
+Il componente che realizza il controllo può non essere un unico modulo fisico: nei sistemi reali può essere distribuito tra sistema operativo, applicazioni, database, servizi di rete e middleware. La logica resta però la stessa: confrontare la richiesta del soggetto con le regole memorizzate nel database delle autorizzazioni.
+
+L’**auditing** deve essere considerato una funzione indipendente di responsabilizzazione: registra accessi concessi, accessi negati e operazioni sensibili, così da permettere analisi successive, individuazione di violazioni e attribuzione delle responsabilità.
+
+> 📌 Autenticazione, autorizzazione e auditing rispondono a tre domande diverse: “chi sei?”, “cosa puoi fare?” e “cosa hai fatto?”.
 
 ---
 
@@ -68,6 +80,8 @@ I soggetti vengono generalmente classificati in tre categorie:
 - **Gruppo (Group):** insieme di utenti con privilegi condivisi su una determinata risorsa.
     
 - **Resto del mondo (World):** utenti che non appartengono né al proprietario né al gruppo, e che ricevono solo i permessi minimi.
+
+Nei sistemi operativi, il soggetto concreto che effettua l’accesso è spesso un processo avviato dall’utente. Quel processo opera con i privilegi dell’identità che lo ha lanciato, quindi il controllo degli accessi deve valutare anche programmi e applicazioni come entità operative, non solo utenti fisici.
     
 
 #### **Oggetto**
@@ -81,6 +95,8 @@ Il numero e il tipo di oggetti dipendono dall’ambiente operativo e dal sistema
 Indica **come** il soggetto può interagire con l’oggetto.  
 Esempi di diritti: `read`, `write`, `execute`, `delete`, `create`, `search`.  
 Ogni diritto viene assegnato in base alle regole di **autorizzazione** e può essere diverso per ciascun utente o gruppo.
+
+Questa distinzione è fondamentale: lo stesso soggetto può avere diritti diversi su oggetti diversi, e soggetti differenti possono avere diritti differenti sullo stesso oggetto. Il controllo degli accessi consiste proprio nel rendere esplicita e verificabile questa matrice di permessi.
 
 ---
 
@@ -125,6 +141,16 @@ Questi requisiti si suddividono in **base** e **derivati**.
 15. Autorizzare l’esecuzione remota di comandi privilegiati.
     
 16. Autorizzare l’**accesso wireless** prima della connessione effettiva.
+
+I requisiti derivati precisano come tradurre il principio generale in misure operative. La **separazione dei compiti** riduce il rischio che un singolo soggetto possa compiere da solo un’azione malevola o critica; limita anche i danni derivanti da errori o collusioni.
+
+Il **principio del privilegio minimo** impone di concedere solo i permessi strettamente necessari alla funzione da svolgere. In particolare, gli account amministrativi non dovrebbero essere usati per attività ordinarie: quando non si eseguono funzioni di sicurezza o amministrazione, si devono preferire account non privilegiati.
+
+Le misure su timeout, blocco sessione, tentativi falliti e terminazione automatica servono a evitare che una sessione lasciata inattiva o abusata diventi un punto di ingresso. Analogamente, le sessioni remote devono essere monitorate e protette crittograficamente, perché attraversano canali più esposti a intercettazione.
+
+Per operazioni particolarmente sensibili, come comandi privilegiati da remoto o accesso a file di sistema protetti, la politica può imporre controlli aggiuntivi: ad esempio autorizzazioni esplicite, punti di controllo gestiti, limitazioni sull’uso di connessioni wireless o richiesta di accesso fisico alla macchina.
+
+> ⚠️ Il privilegio minimo non è solo una regola tecnica: è una disciplina operativa. Usare abitualmente account amministrativi aumenta la superficie d’attacco anche quando l’utente sta svolgendo attività banali.
     
 
 ---
@@ -133,6 +159,8 @@ Questi requisiti si suddividono in **base** e **derivati**.
 
 Il controllo degli accessi è la **colonna portante della sicurezza dei sistemi informatici**.  
 Esso combina **autenticazione, autorizzazione e auditing** per garantire che solo soggetti legittimi possano interagire con le risorse, nel rispetto delle politiche aziendali.
+
+La qualità del controllo dipende dalla correttezza della politica, dall’aggiornamento del database delle autorizzazioni e dalla capacità di tracciare le operazioni rilevanti.
 
 > In un sistema sicuro, ogni accesso è **identificato, autorizzato e tracciato**.  
 > Il controllo degli accessi non si limita a bloccare gli utenti, ma **assicura che ciascuno operi entro i limiti dei propri diritti**.
