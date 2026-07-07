@@ -1,8 +1,12 @@
-## **Lezione 2: Shellshock (CVE-2014-6271)**
+# **UD4 - Approfondimenti d'esame: Shellshock e ambiente non fidato**
+
+Fonte integrata: contenuto già presente nella precedente lezione `L2 - Shellshock.md`, ora ricollocato come chiusura naturale del blocco su variabili di ambiente, Set-UID e invocazione di shell.
 
 ### **1. Perché Shellshock sta in questa unità**
 
-L'appello del 12/09/2025 chiede a bruciapelo: *"In cosa consiste l'attacco Shellshock?"*. Il tema non compare in nessuna lezione del programma, eppure è il naturale prolungamento del discorso sui programmi Set-UID: entrambi gli argomenti ruotano attorno alla stessa idea, cioè che **le variabili di ambiente sono un canale di input non fidato** e che quando questo input incontra un processo privilegiato — una shell, un CGI, un demone root — nasce una vulnerabilità. Shellshock è il caso estremo di questa lezione: un difetto nel parser di **bash** che trasforma una variabile di ambiente in **esecuzione di codice arbitrario**.
+Shellshock è il naturale prolungamento del discorso sui programmi Set-UID e sugli attacchi via ambiente. Tutti questi casi ruotano attorno alla stessa idea: le variabili di ambiente sono input controllabile dall'utente o da un attaccante, e diventano pericolose quando raggiungono un interprete, un demone, uno script CGI o un programma privilegiato.
+
+Shellshock è il caso più estremo: un difetto del parser di **bash** trasformava una variabile di ambiente in esecuzione immediata di codice.
 
 ---
 
@@ -68,7 +72,7 @@ Contesti che usano `ForceCommand` (es. Git, rsync ristretti) accettano dal clien
 
 #### **4.4. Programmi Set-UID che invocano bash**
 
-Chiudendo il cerchio con [[L1 - Set-UID, RUID-EUID e attacchi via variabili d'ambiente]]: un binario Set-UID root che chiama `system()` eredita l'ambiente dell'attaccante. Se `/bin/sh` è bash e il sistema non è patchato, l'attaccante imposta una variabile-funzione con coda malevola e ottiene **privilege escalation locale** all'avvio della shell interna.
+Chiudendo il cerchio con [L4 - Attacchi a programmi Set-UID tramite ambiente e PATH](L4%20-%20Attacchi%20a%20programmi%20Set-UID%20tramite%20ambiente%20e%20PATH.md): un binario Set-UID root che chiama `system()` eredita l'ambiente dell'attaccante. Se `/bin/sh` è bash e il sistema non è patchato, l'attaccante imposta una variabile-funzione con coda malevola e ottiene **privilege escalation locale** all'avvio della shell interna.
 
 > 💡 Il filo conduttore è sempre lo stesso: *dato non fidato* (header HTTP, opzione DHCP, variabile SSH, ambiente utente) → *finisce in una variabile di ambiente* → *raggiunge un'invocazione di bash* → *codice eseguito con i privilegi del processo ospite*. Cambiano solo il canale d'ingresso e i privilegi ottenuti.
 
@@ -89,4 +93,4 @@ Il codice difettoso era presente in bash **fin dal 1989**: la vulnerabilità è 
 
 > ✅ **Ricapitolando** — Shellshock è un difetto del parser di bash che, importando una funzione da una variabile di ambiente della forma `() { … }; <comando>`, eseguiva il `<comando>` in coda all'avvio della shell. Chiunque potesse impostare una variabile di ambiente destinata a bash — soprattutto tramite le intestazioni HTTP dei CGI, ma anche via DHCP, SSH o binari Set-UID — otteneva esecuzione di codice arbitrario con i privilegi del processo ospite, spesso da remoto e senza autenticazione. La difesa primaria è la patch di bash; quelle strutturali sono la rinuncia a bash nei CGI, la ripulitura dell'ambiente e il privilegio minimo.
 
-Collegamenti: [[L1 - Set-UID, RUID-EUID e attacchi via variabili d'ambiente]], [M4/UD4/L7 – Attacchi Heartbleed e BEAST](../../M4/UD4/L7%20-%20Attacchi%20Heartbleed%20e%20BEAST.md).
+Collegamenti: [L3 - Variabili d'ambiente nei processi Unix](L3%20-%20Variabili%20d'ambiente%20nei%20processi%20Unix.md), [L4 - Attacchi a programmi Set-UID tramite ambiente e PATH](L4%20-%20Attacchi%20a%20programmi%20Set-UID%20tramite%20ambiente%20e%20PATH.md), [M4/UD4/L7 - Attacchi Heartbleed e BEAST](../../M4/UD4/L7%20-%20Attacchi%20Heartbleed%20e%20BEAST.md).
