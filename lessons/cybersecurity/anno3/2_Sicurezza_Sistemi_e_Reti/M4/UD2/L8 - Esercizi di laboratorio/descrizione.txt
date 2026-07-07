@@ -1,0 +1,4 @@
+In questa unità didattica vi vengono proposte alcune esperienze di laboratorio in cui applicare i concetti studiati in materia di attacchi e vulnerabilità del protocollo TCP. Utilizzeremo un ambiente Linux che gira su una macchina virtuale basata su docker. Trovate qui di seguito l’immagine della macchina virtuale e le istruzioni per installarla.
+Per chi ha un MAC con processore ARM, sono disponibili istruzioni specifiche per l'installazione, e se necessario, la versione customizzata del codice.
+
+Una volta installata la macchina, potrete eseguire le  differenti esercitazioni di laboratorio proposte nei pdf allegati. Le slide servono da supporto per eseguire i task del laboratorio proposto. Per qualsiasi dubbio in merito contattate il tutor nel forum del modulo 4.
