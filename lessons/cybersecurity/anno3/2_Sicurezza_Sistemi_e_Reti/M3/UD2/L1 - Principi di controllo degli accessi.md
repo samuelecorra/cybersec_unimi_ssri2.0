@@ -46,7 +46,7 @@ La politica di sicurezza è quindi l’insieme delle regole che collega soggetti
 
 Il controllo degli accessi è parte di un sistema più ampio che comprende **autenticazione, autorizzazione e auditing**.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260708151507.png)
 
 |**Funzione**|**Descrizione**|
 |---|---|
