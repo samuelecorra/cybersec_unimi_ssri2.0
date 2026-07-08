@@ -1,151 +1,334 @@
 ## **Lezione 6: Altri attacchi TCP**
 
-### **1. Introduzione — che cosa vedremo e perché è importante**
+### **1. Introduzione**
 
-In questa lezione esploriamo altre varianti di attacco a livello trasporto e rete che non si limitano al semplice SYN-flooding: vedremo il **TCP con flood**, attacchi costruiti con **junk-packet**, exploit su protocolli senza stato come **UDP** (con gli esempi classici di NTP amplification), il ruolo di **ICMP** (ping / smurf) e come tutte queste tecniche siano usate per generare DDoS tramite **reflection** e **amplificazione**. Capire questi meccanismi è cruciale perché mostrano un principio semplice ma potente: l'Internet è pieno di servizi che possono essere **abusati come amplificatori** o come **reflector** per scaricare grandi volumi di traffico su una vittima.
+Dopo ACK storm e SYN flooding, rimangono altre forme di Denial of Service che sfruttano il normale comportamento dei protocolli di rete. Il filo conduttore è sempre lo stesso: pacchetti formalmente validi, spesso con indirizzi sorgente falsificati o generati da macchine controllate dall'attaccante, inducono host e server legittimi a consumare banda, CPU, memoria o capacità applicativa.
+
+In questa lezione vengono analizzati:
+
+- **TCP connection flood**, in cui le connessioni vengono completate davvero;
+
+- attacchi basati su **junk-packet**, cioè pacchetti validi ma costruiti per provocare risposte automatiche;
+
+- attacchi DoS su **UDP**, con il caso classico dell'**NTP amplification**;
+
+- abuso di **ICMP**, in particolare **Smurf** e **Fraggle**.
+
+> 📌 Questi attacchi mostrano un punto importante: non serve sempre "rompere" un protocollo. Spesso basta sfruttarne il comportamento corretto su grande scala o con indirizzi sorgente falsificati.
 
 ---
 
-### **2. TCP Con Flood (TCP connection flood)**
+### **2. TCP Connection Flood**
 
 #### **2.1. Idea di base**
 
-Un attacco TCP Con Flood ordina a una botnet di completare legittimamente la handshake TCP verso il server (non usa più SYN spoofati per nascondersi). Ogni bot apre la connessione e invia una breve richiesta HTTP (ad esempio `HEAD`) quindi chiude o reinizia, ripetendo rapidamente l’operazione. Poiché ogni bot completa la handshake, il proxy che mitiga i SYN cookies non può filtrare facilmente questo traffico: il proxy vede connessioni apparentemente legittime.
+Nel **TCP connection flood** l'attaccante non si limita a inviare `SYN` spoofati, come nel SYN flooding. Usa invece una rete di macchine compromesse, cioè una **botnet**, per aprire connessioni TCP reali verso il server.
 
-#### **2.2. Perché è pericoloso**
+Ogni macchina zombie:
 
-Questo attacco aggira le protezioni basate su SYN (SYN cookies, SYN cache) e può saturare risorse applicative (CPU, socket, banda uplink) o la capacità del server di servire richieste reali. Inoltre, perché la connessione è completata, il reflector/proxy può identificare i bot (visto che rispondono realmente), permettendo eventuali contromisure locali ma nel frattempo il carico può essere già dannoso.
+1. avvia il three-way handshake;
 
-#### **2.3. Contromisure pratiche**
+2. completa la connessione con l'`ACK` finale;
 
-- Rate limiting a livello applicazione (limita richieste per IP/prefix).
-    
-- WAF/Reverse proxy con challenge (CAPTCHA, TLS mutual?) per distinguere bot dalle connessioni reali.
-    
-- Analisi comportamentale a livello di sessione (frequenza di HEAD o pattern identici).  
-    Queste misure riducono l’efficacia della botnet senza dipendere unicamente dallo stack TCP.
-    
+3. eventualmente invia una richiesta applicativa, per esempio una richiesta HTTP verso un sito web;
+
+4. ripete rapidamente l'operazione.
+
+Poiché le connessioni vengono effettivamente iniziate e completate, il traffico ha lo stesso aspetto di molte connessioni legittime. Questo rende l'attacco più difficile da filtrare rispetto a un SYN flood classico.
+
+#### **2.2. Perché supera alcune difese anti-SYN flood**
+
+Le difese come SYN cookies, SYN cache o proxy pensati per filtrare connessioni incomplete sono efficaci quando l'attaccante non completa l'handshake. Nel TCP connection flood, invece, i bot rispondono davvero al `SYN/ACK` e portano la connessione allo stato `ESTABLISHED`.
+
+Di conseguenza:
+
+- il server o il proxy non può scartare la connessione solo perché l'handshake è incompleto;
+
+- le richieste applicative possono sembrare normali, soprattutto se sono semplici e ripetitive;
+
+- il carico si sposta dalla backlog TCP alle risorse applicative: socket, thread/processi, CPU, memoria, banda e capacità del web server.
+
+> ⚠️ L'attacco è meno "anonimo" del SYN flood spoofato: le macchine zombie usano i propri indirizzi IP reali e possono quindi essere identificate, filtrate o segnalate. Il vantaggio dell'attaccante è il volume distribuito, non la perfetta invisibilità.
+
+#### **2.3. Potenziale di traffico**
+
+Il docente cita come ordine di grandezza una botnet da circa **20.000 host**, capace di generare traffico dell'ordine di **2 Gbit/s**. Anche se ogni singola macchina produce poco traffico, l'aggregazione rende il flusso complessivo sufficiente a mettere in crisi un server o la sua connettività.
+
+Il punto critico è che i `SYN` e le connessioni di attacco hanno lo stesso formato dei `SYN` e delle connessioni di client reali. La distinzione deve quindi basarsi su segnali indiretti: frequenza, distribuzione geografica, pattern identici, numero di connessioni per indirizzo, comportamento applicativo e reputazione degli IP.
 
 ---
 
-### **3. Attacchi basati su “Junk-Packet”**
+### **3. Attacchi basati su junk-packet**
 
-#### **3.1. Definizione e categoria**
+#### **3.1. Definizione**
 
-Per _junk-packet_ si intendono pacchetti apparentemente innocui ma creati per provocare risposte diverse a seconda delle porte o del servizio destinazione, con l’obiettivo di massimizzare il traffico di ritorno (ovvero cause di “reflection”) o di costringere il target a consumare risorse rispondendo a numerosi pacchetti. La tabella riassuntiva nello studio ATLAS mostra quali pacchetti causano quale risposta (es. SYN su porta aperta → SYN/ACK; UDP su porta chiusa → ICMP port unreachable).
+Con **junk-packet** si indicano pacchetti apparentemente ordinari e formalmente validi, ma costruiti per provocare una reazione automatica nella vittima o in un host intermedio. Non sono necessariamente pacchetti "malformati": spesso rispettano il formato del protocollo, ma vengono inviati in grandi quantità, con flag particolari o con indirizzo sorgente spoofato.
 
-#### **3.2. Implicazioni**
+L'obiettivo può essere:
 
-Conoscendo la risposta tipica (TCP RST, ICMP unreachable, echo reply, ecc.) un attaccante può costruire flussi che generano il massimo traffico di ritorno verso l’IP spoofato (la vittima), massimizzando l’effetto DDoS con minimo input. Questo è il principio della maggior parte delle reflection + amplification attacks.
+- costringere la vittima a generare risposte inutili;
+
+- creare traffico di ritorno verso un indirizzo spoofato;
+
+- sfruttare la risposta standard dello stack TCP/IP;
+
+- contribuire a un attacco di reflection o amplification.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **3.2. Reazioni tipiche degli stack di rete**
+
+La risposta dipende dal protocollo, dal flag e dallo stato della porta:
+
+|Pacchetto ricevuto|Contesto tipico|Risposta possibile|
+|---|---|---|
+|`SYN` verso porta aperta|Servizio in ascolto|`SYN/ACK`|
+|`SYN` verso porta chiusa|Nessun servizio in ascolto|`RST`|
+|`ACK` inatteso|Nessuna connessione corrispondente|`RST` o scarto|
+|`RST`|Reset di connessione|Di norma nessuna risposta|
+|UDP verso porta chiusa|Nessun servizio UDP|ICMP Port Unreachable|
+|ICMP Echo Request|Host raggiungibile e configurato per rispondere|ICMP Echo Reply|
+
+![](imgs/Pasted%20image%2020260708222556.png)
+
+Queste reazioni, innocue in condizioni normali, diventano pericolose quando l'attaccante può generare grandi volumi di pacchetti con indirizzi sorgente falsificati.
+
+#### **3.3. Perché sono facili da produrre**
+
+La generazione di pacchetti TCP, UDP o ICMP con campi arbitrari è tecnicamente semplice per chi ha accesso a raw socket, librerie di packet crafting o strumenti equivalenti. L'attaccante può variare indirizzi, porte, flag e payload, producendo flussi molto grandi a basso costo.
+
+Le misure mostrate a lezione evidenziano che questi attacchi non sono solo storici: continuano a comparire in traffico reale, con flussi basati su `SYN`, ICMP e UDP osservati su base giornaliera.
+
+> 📌 Il punto d'esame non è il singolo pacchetto, ma la scala: un comportamento di risposta normale può diventare un DoS quando viene moltiplicato per migliaia o milioni di pacchetti.
 
 ---
 
 ### **4. UDP: proprietà e rischio**
 
-#### **4.1. Caratteristiche che lo rendono pericoloso**
+#### **4.1. Caratteristiche di UDP**
 
-UDP è senza connessione, senza stato e con header leggero: _pochi byte_ in ingresso possono provocare risposte molto più grandi. Non esiste handshake quindi l’attaccante può facilmente usare **IP spoofing** per far sì che la risposta vada a una vittima. Applicazioni tipiche che usano UDP (DNS, NTP, memcached, STUN, etc.) sono spesso vettori di amplificazione.
+UDP è un protocollo di trasporto:
 
-#### **4.2. Denial-of-service tramite UDP flood**
+- **connectionless**, cioè senza instaurazione di connessione;
 
-Un semplice UDP flood invia massicci datagram a una porta; la vittima, o il network a monte, deve processare e smistare questi pacchetti, saturando banda o risorse. Spesso i dispositivi di rete o i firewall hanno meno capacità di mitigare pakcets UDP rispetto a connessioni TCP consolidate.
+- **stateless**, perché non mantiene uno stato di sessione come TCP;
 
----
+- privo di garanzie di consegna;
 
-### **5. NTP Amplification (esempio dettagliato di amplificazione UDP)**
+- privo di garanzie sull'ordine dei datagrammi;
 
-#### **5.1. Meccanismo**
+- privo di controllo di flusso e congestione paragonabile a TCP;
 
-NTP è un protocollo UDP per sincronizzare orologi. Le versioni più vecchie di molti server NTP supportavano il comando `monlist` che elenca gli ultimi host con cui il server ha comunicato (fino a 600 voci). Un attaccante invia una richiesta `monlist` a uno o più server NTP ma con sorgente spoofata (l’IP della vittima). I server rispondono inviando la lunga lista alla vittima, generando un flusso molto più grande del packet originale.
+- privo di autenticazione nativa del mittente.
 
-#### **5.2. Fattore di amplificazione e impatto storico**
+![](imgs/Pasted%20image%2020260708222624.png)
 
-NTP può raggiungere fattori di amplificazione elevati: ad esempio un pacchetto di ~234 byte che genera una risposta aggregata di migliaia di byte (diverse decine di KB), con fattori di 10x–100x a seconda della query e della implementazione. Tra dicembre 2013 e febbraio 2014 si sono osservati DDoS massivi (fino a 400 Gbps) sfruttando migliaia di server NTP mal configurati. Questo dimostra come un singolo host con 1 Gbps di uplink possa dirigere decine di Gbps verso la vittima tramite reflector mal configurati.
+Per queste ragioni è usato in applicazioni che privilegiano semplicità e velocità, come streaming multimediale, trasmissioni real-time, DNS, NTP e vari protocolli di segnalazione.
 
-#### **5.3. Contromisure**
+#### **4.2. Perché UDP è utile negli attacchi DoS**
 
-- Disabilitare comandi pericolosi (`monlist`) o aggiornare NTP a versioni sicure.
-    
-- Filtraggio anti-spoofing (BCP38) sui router del provider per bloccare IP sorgente falsificati.
-    
-- Limitare le risposte dei server (rate limit, risposta solo a address not local).  
-    Queste misure riducono drasticamente la superficie di amplificazione.
-    
+L'assenza di handshake rende lo spoofing più semplice: un datagramma UDP può essere inviato con indirizzo sorgente falsificato e il destinatario, se il servizio risponde, invierà la risposta all'indirizzo indicato come sorgente.
 
----
+Questo crea due condizioni favorevoli all'attaccante:
 
-### **6. ICMP: funzioni e abusi (Smurf, Fraggle)**
+- **reflection**: la risposta va alla vittima, non all'attaccante;
 
-#### **6.1. ICMP in breve**
-
-ICMP è il protocollo che fornisce messaggi di controllo e segnalazione errori a livello rete (echo request/reply per `ping`, destination unreachable, TTL expired, ecc.). È trasportato su IP e include tipo/codice più alcuni byte del datagramma originale.
-
-#### **6.2. Smurf attack**
-
-Lo Smurf è un attacco che invia un ICMP Echo Request indirizzato a un broadcast di una rete (es. `x.y.z.255`) con IP sorgente spoofato impostato sull’IP della vittima. Tutti gli host che ricevono il broadcast inviano a loro volta un Echo Reply alla vittima, moltiplicando il traffico di ritorno. La variante **Fraggle** è analoga ma usa UDP (es. servizi tipo chargen o echo).
-
-#### **6.3. Prevenzione**
-
-- Non inoltrare pacchetti IP con indirizzo di destinazione broadcast dall’esterno.
-    
-- Disabilitare la risposta a broadcast su host/router quando non necessario.
-    
-- Applicare filtri anti-spoofing a livello ISP (BCP38).  
-    Queste pratiche sono efficaci per annullare Smurf e Fraggle.
-    
+- **amplification**: se la risposta è più grande della richiesta, la vittima riceve più traffico di quanto l'attaccante abbia generato.
 
 ---
 
-### **7. Reflection vs Amplification — chiarimento concettuale**
+### **5. NTP Amplification**
 
-- **Reflection**: l’attaccante invia una richiesta a un server (reflector) con IP sorgente falsificato (della vittima); il server risponde alla vittima. Qui la vittima viene “riflessa” con il traffico di risposta.
-    
-- **Amplification**: il reflector risponde con dati **molto più grandi** rispetto alla richiesta inviata dall’attaccante (es. DNS, NTP, memcached), quindi la vittima subisce un flusso di dati amplificato rispetto a quanto generato dall’attaccante.
-    
+#### **5.1. NTP e funzione `monlist`**
 
-Capire la differenza aiuta a progettare mitigazioni: per reflection serve anti-spoofing; per amplification serve sia anti-spoofing sia configurazioni dei servizi che limitino la dimensione della risposta.
+Il **Network Time Protocol** (`NTP`) è un protocollo basato su UDP usato per sincronizzare gli orologi dei sistemi. Normalmente un client invia una piccola richiesta e il server risponde con informazioni temporali.
+
+Il problema storico nasce da alcune vecchie implementazioni che esponevano anche funzioni di monitoraggio, tra cui `monlist`. Tale comando restituiva la lista degli ultimi host che avevano interrogato il server NTP, fino a circa **600** voci.
+
+#### **5.2. Meccanismo dell'attacco**
+
+L'attacco funziona così:
+
+1. l'attaccante invia a un server NTP una richiesta `monlist`;
+
+2. nel pacchetto inserisce come IP sorgente l'indirizzo della vittima;
+
+3. il server NTP risponde alla vittima, non all'attaccante;
+
+4. la risposta contiene una lista molto più grande della richiesta iniziale;
+
+5. ripetendo il processo su molti server NTP esposti, la vittima riceve un volume enorme di traffico.
+
+![](imgs/Pasted%20image%2020260708222705.png)
+
+#### **5.3. Reflection e amplification insieme**
+
+Questo attacco combina due proprietà:
+
+- è un attacco di **reflection**, perché il server NTP funge da reflector e invia la risposta alla vittima;
+
+- è un attacco di **amplification**, perché la risposta è molto più grande della richiesta.
+
+Nel transcript viene citato l'ordine di grandezza classico: una richiesta di circa **234 byte** può provocare una risposta dell'ordine di **49 KB**. Anche se il fattore di amplificazione effettivo dipende da implementazione, configurazione e modo di misurare il traffico, il principio è chiaro: una piccola quantità di traffico in uscita dall'attaccante può generare un volume molto maggiore verso la vittima.
+
+#### **5.4. Casi reali**
+
+Tra dicembre 2013 e febbraio 2014 furono osservati grandi attacchi DDoS basati su NTP amplification. Il docente cita uno scenario con migliaia di server NTP coinvolti, circa **4529** server nella slide, e volumi complessivi fino all'ordine di **centinaia di Gbit/s**.
+
+Nelle stime aggregate riportate a lezione, poche centinaia di migliaia di richieste potevano tradursi in centinaia di Gbit/s diretti contro la vittima. La slide cita anche un fattore di amplificazione dell'ordine di **19×** in uno degli scenari: il valore preciso dipende dal tipo di richiesta, dalla risposta generata e dal criterio con cui si misura il traffico, ma il punto essenziale è che l'attaccante spende molta meno banda di quella che fa arrivare alla vittima.
+
+Il motivo della gravità era la grande quantità di server NTP mal configurati o non aggiornati esposti su Internet. Il transcript cita circa **7 milioni** di server vulnerabili o non adeguatamente protetti come superficie potenziale.
+
+> ⚠️ L'NTP amplification è un esempio perfetto di cattiva esposizione di un servizio legittimo: il server NTP non è "malevolo", ma viene abusato come amplificatore.
+
+#### **5.5. Contromisure**
+
+Le difese principali sono:
+
+- disabilitare `monlist` e funzioni di monitoraggio non necessarie;
+
+- aggiornare NTP a versioni che rimuovono o limitano tali comandi;
+
+- applicare rate limiting alle risposte;
+
+- evitare che server pubblici rispondano indiscriminatamente a richieste di monitoraggio;
+
+- applicare filtri anti-spoofing a livello ISP, secondo il principio di BCP38.
 
 ---
 
-### **8. Strategie di difesa multilivello (best practice)**
+### **6. ICMP: funzioni e struttura**
 
-#### **8.1. Lato ISP / rete**
+#### **6.1. Scopo di ICMP**
 
-- Implementare **ingress filtering** (BCP38) per impedire IP spoofing.
-    
-- Deploy di sistemi di rilevazione/mitigazione DDoS (scrubbing centers) e rate limiting a livello backbone.
-    
+ICMP, **Internet Control Message Protocol**, è un protocollo di controllo usato da host e router per fornire feedback sullo stato della rete. Non serve a trasportare dati applicativi, ma a segnalare condizioni operative come errori, host non raggiungibili, scadenza del TTL o tempi di risposta.
 
-#### **8.2. Lato server / applicazione**
+Esempi tipici:
 
-- Hardening dei servizi UDP/TCP: disabilitare comandi non necessari (es. `monlist`), aggiornare software, applicare rate-limit e SYN cookies quando utile.
-    
-- Usare reverse proxy / CDN / WAF che terminano e verificano le connessioni prima che raggiungano l’origine.
-    
+- `ping`, basato su Echo Request ed Echo Reply;
 
-#### **8.3. Lato host**
+- `Destination Host Unreachable`;
 
-- Configurare firewall per rifiutare pacchetti diretti a broadcast da fonti esterne, limitare risposte ICMP non necessarie, e applicare limiti di connessioni per IP.
-    
-- Monitoraggio continuo (NetFlow / sflow) per individuare anomalie in tempo reale.
-    
+- `Destination Network Unreachable`;
+
+- `Time Exceeded`, per esempio quando il TTL scende a zero;
+
+- messaggi di diagnostica e segnalazione usati da host e router.
+
+#### **6.2. Formato dei messaggi**
+
+I messaggi ICMP sono trasportati dentro datagrammi IP. La struttura include almeno:
+
+- un campo **Type**, che identifica la categoria del messaggio;
+
+- un campo **Code**, che specifica il caso particolare;
+
+- un contenuto che spesso include parte del datagramma originale che ha generato l'errore.
+
+![](imgs/Pasted%20image%2020260708222750.png)
+
+Nel caso di `ping`:
+
+- Echo Request: `Type = 8`, `Code = 0`;
+
+- Echo Reply: `Type = 0`, `Code = 0`.
+
+ICMP è quindi fondamentale per il funzionamento e la diagnostica della rete, ma può essere abusato quando host o router rispondono automaticamente a richieste costruite con IP sorgente falsificato.
+
+---
+
+### **7. Smurf e Fraggle**
+
+#### **7.1. Smurf attack**
+
+Lo **Smurf attack** sfrutta ICMP Echo Request indirizzate al broadcast di una rete. L'attaccante invia un pacchetto `ping` verso l'indirizzo broadcast di una sottorete, ma inserisce come IP sorgente quello della vittima.
+
+Se la rete inoltra il broadcast e gli host rispondono:
+
+1. ogni host della sottorete riceve l'Echo Request;
+
+2. ogni host genera un Echo Reply;
+
+3. tutte le risposte vengono inviate alla vittima;
+
+4. la vittima viene inondata da un traffico amplificato.
+
+![](imgs/Pasted%20image%2020260708222816.png)
+
+Il fattore di amplificazione dipende dal numero di host che rispondono al broadcast. Una sola richiesta può quindi produrre decine, centinaia o migliaia di risposte.
+
+#### **7.2. Fraggle**
+
+**Fraggle** è una variante dello stesso principio basata su UDP invece che su ICMP. L'attaccante invia pacchetti UDP verso un indirizzo di broadcast, con IP sorgente impostato alla vittima. I servizi UDP raggiunti dagli host della rete rispondono alla vittima, generando traffico riflesso.
+
+#### **7.3. Prevenzione**
+
+La prevenzione essenziale consiste nel bloccare l'abuso del broadcast:
+
+- rifiutare pacchetti provenienti dall'esterno e diretti a indirizzi di broadcast interni;
+
+- disabilitare la risposta a richieste ICMP broadcast quando non necessaria;
+
+- filtrare traffico con IP sorgente falsificato;
+
+- configurare router e firewall affinché non inoltrino directed broadcast dall'esterno.
+
+> 📌 Smurf e Fraggle sono casi didatticamente importanti perché mostrano come un normale meccanismo di broadcast possa trasformare una singola richiesta in molte risposte verso la vittima.
 
 ---
 
-### **9. Esempio pratico (schema mentale Feynman)**
+### **8. Reflection vs amplification**
 
-Spiego come funziona un NTP amplification con parole semplici ma precise: un attaccante scrive una lettera molto piccola (request `monlist`) e la imbuca in migliaia di cassette postali (i server NTP). Ogni cassette postale risponde non all’autore ma a un indirizzo sbagliato (la vittima), e invia una busta molto grande (la lista di host). La vittima riceve centinaia o migliaia di grandi buste e non riesce più a leggere la posta ufficiale. Per fermare l’attacco dobbiamo o impedire che le cassette postali rispondano a indirizzi sbagliati (anti-spoofing) o chiudere la funzione che genera le grandi buste (disabilitare `monlist`).
+È utile distinguere i due concetti:
+
+- **reflection**: l'attaccante non invia traffico direttamente alla vittima, ma a un reflector; usando IP spoofing, fa sì che la risposta del reflector vada alla vittima;
+
+- **amplification**: la risposta generata dal reflector è più grande della richiesta iniziale.
+
+Un attacco può essere solo riflesso, solo amplificato o entrambe le cose. NTP amplification e Smurf combinano entrambi gli aspetti: il traffico è riflesso verso la vittima e il volume finale è maggiore di quello inviato dall'attaccante.
+
+---
+
+### **9. Strategie di difesa**
+
+Le contromisure vanno applicate a più livelli.
+
+#### **9.1. Lato rete e ISP**
+
+- Applicare ingress/egress filtering per impedire IP spoofing.
+
+- Usare sistemi di rilevazione e mitigazione DDoS, scrubbing center e rate limiting.
+
+- Bloccare traffico diretto a broadcast interni quando arriva dall'esterno.
+
+#### **9.2. Lato server e servizi**
+
+- Aggiornare servizi esposti, in particolare UDP.
+
+- Disabilitare funzioni di monitoraggio non necessarie, come `monlist`.
+
+- Limitare la dimensione e la frequenza delle risposte.
+
+- Usare reverse proxy, CDN o WAF per assorbire o filtrare traffico anomalo.
+
+#### **9.3. Lato host**
+
+- Limitare risposte ICMP non necessarie.
+
+- Monitorare anomalie con NetFlow, sFlow, log firewall e metriche applicative.
+
+- Applicare policy di rate limiting per IP, prefisso o comportamento.
 
 ---
 
-### **10. Riassunto tecnico (quick cheat-sheet)**
+### **10. Sintesi finale**
 
-|Attacco|Vettore|Caratteristica chiave|Contromisure|
-|---|--:|---|---|
-|TCP Con Flood|TCP completo + richieste HTTP|Aggira protezioni SYN perché handshake completata|Rate limit app, WAF, reverse proxy|
-|Junk-Packet floods|TCP/UDP/ICMP vari|Generano risposte di tipo diverso (RST / ICMP / echo)|Filtri, limitazione rate|
-|NTP Amplification|UDP (NTP `monlist`)|Alto fattore di amplificazione (×10–×100)|Aggiornare NTP, disabilitare comandi, BCP38|
-|Smurf / Fraggle|ICMP/UDP broadcast|Moltiplica le risposte via broadcast|Bloccare broadcast dall’esterno, anti-spoofing|
+|Attacco|Vettore|Meccanismo|Effetto|Contromisure|
+|---|---|---|---|---|
+|TCP connection flood|TCP completo|Bot completano handshake e generano richieste|Saturazione risorse applicative|Rate limiting, WAF, proxy, analisi comportamentale|
+|Junk-packet|TCP/UDP/ICMP|Pacchetti validi provocano risposte automatiche|Traffico inutile o riflesso|Filtri, rate limiting, hardening stack|
+|NTP amplification|UDP/NTP|`monlist` con IP sorgente spoofato|Reflection + amplification|Disabilitare `monlist`, aggiornare NTP, BCP38|
+|Smurf|ICMP broadcast|Echo Request broadcast con sorgente vittima|Molte Echo Reply verso la vittima|Bloccare directed broadcast, anti-spoofing|
+|Fraggle|UDP broadcast|Pacchetti UDP broadcast con sorgente vittima|Risposte UDP riflesse|Bloccare broadcast esterni, filtrare servizi UDP|
 
-
----
+> ✅ Punto d'esame: la difesa non può essere solo locale. Reflection e amplification si risolvono davvero solo se i reflector vengono configurati correttamente e se la rete impedisce lo spoofing degli indirizzi sorgente.
