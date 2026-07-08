@@ -6,6 +6,79 @@ Per ogni domanda sono indicati i riferimenti alle lezioni di teoria, l'inquadram
 
 ---
 
+## Traccia originale dell'appello
+
+**Cognome:**  
+**Nome:**  
+**Matricola:**
+
+**Sicurezza - SSRI**
+
+**Docenti:** S. Cimato – M. Anisetti  
+**Appello del 12/09/2025**
+
+Non è ammesso alcun materiale per la consultazione. Buon lavoro!
+
+### **1. Set-UID Privileged Programs**
+
+a. Ogni processo Unix è associato con un real user ID (RUID) e un effective user ID (EUID). Spiegare la differenza fra RUID e EUID e l'utilizzo del bit setuid.
+
+b. Si consideri il codice seguente `uid.c` compilato dallo user con id `1000`:
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int main(void){
+
+    int val;
+    printf("The real user ID is %d \n", getuid());
+    printf("The effective user ID is %d \n", geteuid());
+    return 0;
+}
+```
+
+Completare sotto indicando ID corretto al posto di `???`.
+
+```text
+1. gcc uid.c -o uid
+2. sudo chown root.root uid
+3. ls -la uid
+4. -rwxr-xr-x 1 root root 16712 Jul 10 11:59 uid
+5. ./uid
+6. The real user ID is ??
+7. The effective user ID is ??
+8. sudo chmod 4755 uid
+9. ls -la uid
+10. -rwsr-xr-x 1 root root 16712 Jul 10 11:59 uid
+11. ./uid
+12. The real user ID is ??
+13. The effective user ID is ??
+```
+
+### **2. Attacks**
+
+a. In cosa consiste l'attacco Shellshock?
+
+### **3. Network scanning**
+
+a. Riconoscere e commentare il tipo di scan evidenziato in figura e aggiungere il caso mancante (porta chiusa/aperta).
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+### **4. Attacchi**
+
+a. Discutere le problematiche di sicurezza relative al protocollo ARP e discutere ARP poisoning attack.
+
+### **5. Firewall e NIDS**
+
+a. Descrivere i principi inderogabili dei firewall.
+
+b. Come funziona una honey pot? A cosa serve e come la potrei realizzare?
+
+---
+
 ## Domanda 1 — Set-UID Privileged Programs
 
 > **Riferimenti di teoria**:

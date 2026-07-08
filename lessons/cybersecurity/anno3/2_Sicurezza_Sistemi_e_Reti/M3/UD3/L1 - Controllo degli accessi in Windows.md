@@ -126,7 +126,7 @@ Active Directory entra in gioco quando l’utente usa un **account di dominio**:
 
 Windows implementa un sistema di controllo degli accessi **complesso e granulare**, in cui ogni oggetto ha un proprio **ACL** (Access Control List).
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260708181637.png)
 
 Caratteristiche principali:
 
@@ -144,8 +144,6 @@ Il modello è in larga parte **discrezionale**: utenti o amministratori con priv
 ### **4. Security Identifier (SID)**
 
 Ogni account o gruppo in Windows è identificato da un **Security ID (SID)** univoco.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **Struttura del SID**
 
@@ -177,6 +175,8 @@ Il SID è univoco all’interno del dominio o del contesto in cui viene generato
 ### **5. Security Descriptor (SD)**
 
 Ogni oggetto in Windows è associato a un **Security Descriptor**, che definisce:
+
+![](imgs/Pasted%20image%2020260708181918.png)
 
 - L’**owner** (proprietario) e il **gruppo primario** (tramite i rispettivi SID).
     
@@ -231,7 +231,7 @@ Una **ACE** è quindi una maschera di controllo accessi: specifica il soggetto a
 
 #### **Esempio di DACL**
 
-```
+```dacl
 Owner: CORP\Blake
 ACE[0]: Allow CORP\Paige Full Control
 ACE[1]: Allow Administrators Full Control
@@ -254,6 +254,8 @@ Il proprietario dell’oggetto conserva un ruolo speciale: anche quando non vien
 ### **7. Mandatory Access Control (MAC) in Windows**
 
 Dalla versione **Windows Vista** in poi, Microsoft ha introdotto il **Mandatory Integrity Control (MIC)**, una forma di **MAC** basata su **livelli di integrità**.
+
+![](imgs/Pasted%20image%2020260708182532.png)
 
 Ogni processo o oggetto è etichettato con un livello:
 

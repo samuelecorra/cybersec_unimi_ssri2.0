@@ -1,4 +1,4 @@
-# **UD4 - Setup moderno del laboratorio VM**
+# **L0 - Setup moderno del laboratorio VM**
 
 Fonti integrate: `istruzioniVMSetup.pdf`, `istruzioniVMSetup-MAC_ARM.pdf`, documentazione ufficiale Oracle VirtualBox 7.2 e pagine ufficiali Ubuntu 26.04 LTS consultate a luglio 2026.
 

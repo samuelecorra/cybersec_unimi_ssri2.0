@@ -6,6 +6,60 @@ Per ogni domanda sono indicati i riferimenti alle lezioni di teoria, l'inquadram
 
 ---
 
+## Traccia originale dell'appello
+
+**Cognome:**  
+**Nome:**  
+**Matricola:**
+
+**Sicurezza - SSRI**
+
+**Docenti:** S. Cimato – V. Anisetti  
+**Appello del 21/02/2025**
+
+Non è ammesso alcun materiale per la consultazione. Buon lavoro!
+
+- **Esame da 6 CFU:** Rispondere a tutte le domande
+
+### **1. SETUID**
+
+a. Descrivere il funzionamento di SETUID e le eventuali problematiche di sicurezza.
+
+b. Si consideri il seguente programma `myls.c`:
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Mostrare come si possa compilare il programma di cui sopra, cambiare il suo proprietario in root e trasformarlo in un programma Set-UID.
+
+c. Discutere come il precedente programma Set-UID possa eseguire codice dannoso, al posto di `/bin/ls`, utilizzando la variabile di ambiente `PATH`.
+
+### **2. Politiche di sicurezza**
+
+a. Descrivere in cosa consiste una politica di sicurezza.
+
+b. Distinguere fra politiche MAC e DAC e discutere del loro utilizzo nei sistemi operativi moderni.
+
+### **3. TCP attacks**
+
+a. Descrivere in dettaglio in cosa consiste l'attacco SYN flood e le relative contromisure.
+
+b. Portare un attacco di RESET alla connessione riportata di seguito, dettagliando il pacchetto TCP da mandare.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+### **4. Malware**
+
+a. Descrivere le differenze fra virus e worm, elencando alcuni esempi tipici.
+
+b. Discutere le tecniche di polimorfismo e metamorfismo dei virus.
+
+### **5. Firewall e NIDS**
+
+1. Cosa si intende per deep packet inspection? Quali funzioni addizionali si trovano generalmente integrate in firewall di questo tipo?
+2. Differenza tra application-level gateway e circuit-level gateway.
+
+---
+
 ## Domanda 1 — SET-UID
 
 > **Riferimenti di teoria**:

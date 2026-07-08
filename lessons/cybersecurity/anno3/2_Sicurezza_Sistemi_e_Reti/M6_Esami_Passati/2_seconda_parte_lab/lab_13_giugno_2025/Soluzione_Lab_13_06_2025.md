@@ -6,6 +6,59 @@ Riferimenti di metodo: modulo [M7 – Wireshark e Firewall](../../../M7_Laborato
 
 ---
 
+## Traccia originale dell'appello
+
+**Cognome:**  
+**Nome:**  
+**Matricola:**
+
+**Sicurezza – SSRI - Laboratorio**
+
+**Docenti:** S. Cimato – M. Anisetti  
+**Appello del 13/06/2025**
+
+È permesso utilizzare manuali e documentazione dei tool, ma non comunicare con altri.
+
+### **Esercizio su Wireshark**
+
+Esaminando il traffico reso disponibile alla pagina:
+
+```text
+https://homes.di.unimi.it/cimato/SSR/esame/13giu
+```
+
+commentare e fare considerazioni su:
+
+1. Quali sono i nodi IP coinvolti nella prima connessione TCP?
+   a. Quali sono i MAC dei dispositivi coinvolti?
+   b. Quali sono le caratteristiche hardware/software dei nodi server e client?
+
+2. Descrivere le prime due sessioni DNS.
+
+3. Dare una descrizione in breve della sessione TLS.
+
+4. Quali sono le richieste e le relative risposte ricevute nella sessione HTTP?
+
+### **Esercizio su firewall**
+
+Il server Web ospita http, https, RPC e FTP attivo.  
+Il server di posta ospita SMTP.
+
+Configurare il firewall su Router 1 in modo che:
+
+- Solo la LAN può accedere ai servizi RPC nella DMZ.
+- Solo https del Web Server è accessibile da fuori.
+- FTP attivo del Web Server è accessibile solo da fuori.
+- http del server Web è accessibile solo per pc2.
+- Il server di posta deve funzionare correttamente secondo SMTP.
+
+Utilizzare esclusivamente la seguente tabella per descrivere le regole del firewall.
+
+| Direz. | IP Sorg | IP Dest | Protoc. | Porta Sorg | Porta Dest | Flag ACK | Azione |
+|---|---|---|---|---|---|---|---|
+
+---
+
 ## Parte 1 — Esercizio su Wireshark (traccia `13giu`)
 
 > **Riferimenti**: [M7/UD1/L4 — Analisi per protocollo](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md) (§1 HW/SW, §3 DNS, §5 TLS, §6 HTTP), [M7/UD1/L3 — Statistiche e Follow Stream](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L3%20-%20Statistiche,%20Conversations,%20Follow%20Stream%20ed%20Expert%20Info.md)

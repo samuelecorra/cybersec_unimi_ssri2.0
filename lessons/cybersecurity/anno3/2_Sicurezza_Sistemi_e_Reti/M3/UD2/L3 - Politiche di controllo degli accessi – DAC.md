@@ -16,7 +16,7 @@ Questa delega è la caratteristica distintiva rispetto al MAC: il sistema non im
 
 Il modello DAC è spesso rappresentato tramite una **matrice di accesso**, che specifica i diritti di ciascun soggetto su ciascun oggetto.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260708173150.png)
 
 - **Righe:** soggetti (utenti, gruppi, processi, applicazioni).
     
@@ -38,6 +38,8 @@ Per esempio, una cella può indicare che l’utente $B$ può leggere `File1`, me
 #### **a. Elenchi di Controllo degli Accessi (ACL – Access Control List)**
 
 Un **ACL** è una **colonna della matrice di accesso**, ossia l’elenco dei soggetti autorizzati per uno specifico oggetto, insieme ai loro diritti.
+
+![](imgs/Pasted%20image%2020260708173256.png)
 
 - Per ogni oggetto (es. file) esiste un elenco che indica **chi può fare cosa**.
     
@@ -64,6 +66,8 @@ In altri termini, per ogni risorsa si memorizza la lista dei soggetti che posson
 
 Un **Capability Ticket** è una **riga della matrice di accesso**, ossia l’elenco delle risorse e dei diritti associati a un singolo utente.
 
+![](imgs/Pasted%20image%2020260708173358.png)
+
 - Ogni utente possiede una serie di ticket che specificano **quali oggetti** può usare e **in quale modo**.
     
 - I ticket possono essere **trasferibili o prestabili**, ma ciò introduce **problemi di sicurezza** (devono essere protetti da falsificazioni).
@@ -88,6 +92,8 @@ La capability list è quindi la lettura per righe della matrice: per ogni sogget
 #### **c. Tabelle di autorizzazione**
 
 Un’alternativa proposta da [Sandhu, 1994] è la **Authorization Table**, una struttura **non sparsa** in cui ogni riga rappresenta **un singolo diritto** di un soggetto su un oggetto.
+
+![](imgs/Pasted%20image%2020260708173520.png)
 
 |**Soggetto**|**Operazione**|**Oggetto**|
 |---|---|---|
@@ -119,7 +125,8 @@ Lampson, Graham e Denning (1971–72) proposero un modello generale per DAC basa
 2. **Far rispettare** i diritti di accesso.
     
 3. **Permettere modifiche** controllate ai diritti (es. concessione o revoca).
-    
+
+![](imgs/Pasted%20image%2020260708173655.png)
 
 #### **Estensione della matrice:**
 
@@ -188,7 +195,7 @@ La distinzione tra modalità utente e modalità kernel è un esempio concreto di
 
 Nel modello **RBAC0**, sono presenti quattro tipi di entità fondamentali:
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260708174311.png)
 
 |**Entità**|**Descrizione**|
 |---|---|

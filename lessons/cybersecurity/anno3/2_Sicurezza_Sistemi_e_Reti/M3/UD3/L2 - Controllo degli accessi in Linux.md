@@ -68,6 +68,8 @@ Le informazioni sugli utenti e sui gruppi sono mantenute in file di sistema come
 
 I bit di permesso possono essere modificati in modo discrezionale dal proprietario dell’oggetto, quando autorizzato, o da root. Questa è la componente DAC del modello: chi controlla una risorsa può regolare i permessi secondo le regole del sistema.
 
+![](imgs/Pasted%20image%2020260708183035.png)
+
 > Esempio:
 > 
 > - _User Bob:_ permesso di scrittura su File1
@@ -79,7 +81,7 @@ I bit di permesso possono essere modificati in modo discrezionale dal proprietar
 
 ### **4. Struttura dei file e inode**
 
-Tutti i file UNIX sono gestiti tramite **inode (index node)** — strutture di controllo che contengono le informazioni chiave sul file.  
+Tutti i file UNIX sono gestiti tramite le strutture dati **inode (index node)** — strutture di controllo che contengono le informazioni chiave sul file.  
 Ogni inode include:
 
 - Attributi del file (dimensione, tipo, timestamp, permessi, ecc.)
@@ -102,6 +104,8 @@ Le **directory** formano un **albero gerarchico** che può contenere file o altr
 Ogni directory è un file speciale che **mappa i nomi dei file agli inode corrispondenti**.
 
 L’accesso effettivo a un file dipende anche dai permessi sulle directory del percorso: per raggiungere un oggetto non basta avere permessi sul file finale, ma occorre poter attraversare le directory che lo contengono. In UNIX classico non esiste una vera ereditarietà automatica generale dei permessi come in altri sistemi, ma la struttura ad albero influenza comunque il controllo dell’accesso.
+
+![](imgs/Pasted%20image%2020260708183409.png)
 
 ---
 
@@ -175,7 +179,7 @@ Un esempio classico è il programma per cambiare password: un utente ordinario d
 
 #### **Sticky Bit**
 
-Quando applicato a una **directory**, il _sticky bit_ impedisce a un utente di **rinominare, spostare o cancellare** file appartenenti ad altri nella stessa directory.  
+Quando applicato a una **directory**, lo _sticky bit_ impedisce a un utente di **rinominare, spostare o cancellare** file appartenenti ad altri nella stessa directory.  
 Solo il **proprietario del file** o **root** può modificarli.
 
 > Esempio pratico:  

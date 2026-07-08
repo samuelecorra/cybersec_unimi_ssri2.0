@@ -8,6 +8,59 @@ Riferimenti di metodo: modulo [M7 – Wireshark e Firewall](../../../M7_Laborato
 
 ---
 
+## Traccia originale dell'appello
+
+**Cognome:**  
+**Nome:**  
+**Matricola:**
+
+**Sicurezza – SSRI - Laboratorio**
+
+**Docenti:** S. Cimato – M. Anisetti  
+**Appello del 02/07/2025**
+
+È permesso utilizzare manuali e documentazione dei tool, ma non comunicare con altri.
+
+### **Esercizio su Wireshark**
+
+Esaminando il traffico reso disponibile alla pagina:
+
+```text
+https://homes.di.unimi.it/cimato/SSR/esame/2lug
+```
+
+commentare e fare considerazioni su:
+
+1. Quali sono i nodi IP coinvolti nella prima connessione TCP?
+   a. Quali sono i MAC dei dispositivi coinvolti?
+   b. Quali sono le caratteristiche hardware/software dei nodi server e client?
+
+2. Quali sono i file richiesti?
+
+3. Dare una descrizione in breve della sessione.
+
+4. Qual è il tentativo di phishing che si sta mettendo in atto?
+
+### **Esercizio su firewall**
+
+- La sottorete della reception contiene i nodi PC1 e PC2.
+- La sottorete dei servizi contiene un server di backup (HTTPS e TCP 445), un servizio di autenticazione degli AP (HTTPS) e un database (TCP 5432).
+- La sottorete reception può accedere al server di backup e al servizio di autenticazione.
+- La sottorete guests contiene un AP WiFi in modalità bridge.
+- L'AP WiFi comunica con il servizio di autenticazione per registrare gli accessi.
+- L'AP WiFi comunica con il servizio di autenticazione per registrare gli accessi.
+- I dispositivi connessi all'AP WiFi possono comunicare solo con Internet.
+- Il servizio di autenticazione comunica con il database.
+- Il server di backup è esposto a Internet sulla porta 5000.
+- Il restante traffico deve essere vietato.
+
+Utilizzare esclusivamente la seguente tabella per descrivere le regole del firewall.
+
+| Direz. | IP Sorg | IP Dest | Protoc. | Porta Sorg | Porta Dest | Flag ACK | Azione |
+|---|---|---|---|---|---|---|---|
+
+---
+
 ## Parte 1 — Esercizio su Wireshark (traccia `2lug`)
 
 > **Riferimenti**: [M7/UD1/L5 — Estrazione di file e phishing](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L5%20-%20Estrazione%20di%20file,%20credenziali%20e%20individuazione%20di%20phishing.md) (§1 Export Objects, §4 phishing/malware), [M7/UD1/L4 — Analisi per protocollo](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md)

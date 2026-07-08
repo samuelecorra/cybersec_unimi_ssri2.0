@@ -6,6 +6,58 @@ Riferimenti di metodo: [UD1 Wireshark](../../../M7_Laboratorio_Wireshark_e_Firew
 
 ---
 
+## Traccia originale dell'appello
+
+**Cognome:**  
+**Nome:**  
+**Matricola:**
+
+**Sicurezza – SSRI - Laboratorio**
+
+**Docenti:** S. Cimato – M. Anisetti  
+**Appello del 21/02/2025**
+
+È permesso utilizzare manuali e documentazione dei tool, ma non comunicare con altri.
+
+### **Esercizio su Wireshark**
+
+Esaminando il traffico reso disponibile alla pagina:
+
+```text
+https://homes.di.unimi.it/cimato/SSR/esame/21feb
+```
+
+commentare e fare considerazioni su:
+
+1. Quali sono i nodi IP coinvolti nelle sessioni FTP?
+   a. Quali sono i MAC dei dispositivi coinvolti?
+   b. Quali sono le caratteristiche hardware/software dei nodi server e client?
+   c. Quando inizia la connessione FTP?
+
+2. Quali sono i utenti e password coinvolti?
+
+3. Dare una descrizione in breve delle sessioni FTP.
+
+4. Quali sono i comandi FTP utilizzati e/o file scambiati?
+
+### **Esercizio su firewall**
+
+- La sottorete degli sviluppatori contiene i nodi PC1, PC2 e PC3.
+- La sottorete della segreteria contiene i nodi PC4, PC5 e PC6.
+- La sottorete dei servizi contiene un web server (HTTPS) e un database (HTTPS e porta TCP 5432) e dei servizi per la segreteria (HTTPS).
+- I PC della segreteria non hanno accesso ai PC degli sviluppatori e viceversa.
+- Gli sviluppatori e il web server hanno accesso al database.
+- La segreteria ha accesso al web server e ai servizi segreteria.
+- Il web server è esposto a Internet.
+- Il restante traffico deve essere vietato.
+
+Utilizzare la seguente tabella per descrivere le regole del firewall.
+
+| Direz. | IP Sorg | IP Dest | Protoc. | Porta Sorg | Porta Dest | Flag ACK | Azione |
+|---|---|---|---|---|---|---|---|
+
+---
+
 ## Parte 1 — Esercizio su Wireshark (traccia `21feb`)
 
 > **Riferimenti**: [M7/UD1/L4 — Analisi per protocollo](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md) (§7 FTP), [M7/UD1/L5 — Estrazione e attacchi](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L5%20-%20Estrazione%20di%20file,%20credenziali%20e%20individuazione%20di%20phishing.md) (§3 credenziali, §5 brute-force)
