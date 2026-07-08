@@ -8,50 +8,11 @@ Per ogni domanda sono indicati i riferimenti alle lezioni di teoria, l'inquadram
 
 ## Traccia originale dell'appello
 
-**Cognome:**  
-**Nome:**  
-**Matricola:**
-
-**Sicurezza - SSRI**
-
-**Docenti:** S. Cimato – V. Anisetti  
-**Appello del 02/07/2025**
-
-Non è ammesso alcun materiale per la consultazione. Buon lavoro!
-
 ### **1. Set-UID Privileged Programs**
 
 a. Ogni processo Unix è associato con un real user ID (RUID) e un effective user ID (EUID). Spiegare la differenza fra RUID e EUID e l'utilizzo del bit setuid.
 
 b. Si consideri un comando che abbia il setuid, in quali condizioni può diventare pericoloso?
-
-### **2. Attacks**
-
-c. Descrivere le problematiche di sicurezza del protocollo SSL.
-
-### **3. TCP attacks**
-
-Descrivere in dettaglio in cosa consiste il ARP spoofing attack ed elencare i passi necessari per un attacco tra le seguenti macchine in rete:
-
-```text
-Victim: Windows 10 machine (192.168.1.130)
-Attacker: Kali Linux machine (192.168.1.111)
-Router: Default gateway (192.168.1.1)
-```
-
-### **4. Politiche di sicurezza**
-
-a. Definire la differenza fra l'utilizzo delle politiche di sicurezza basate su DAC e MAC.
-
-### **5. Firewall e NIDS**
-
-a. Cosa si intende per deep packet inspection? Quali funzioni addizionali si trovano generalmente integrate in firewall di questo tipo?
-
-b. Differenza tra application-level gateway e circuit-level gateway.
-
----
-
-## Domanda 1 — Set-UID Privileged Programs
 
 > **Riferimenti di teoria**:
 >
@@ -64,7 +25,9 @@ b. Differenza tra application-level gateway e circuit-level gateway.
 
 ---
 
-## Domanda 2 — Attacks: problematiche di sicurezza di SSL
+### **2. Attacks**
+
+c. Descrivere le problematiche di sicurezza del protocollo SSL.
 
 > **Riferimenti di teoria**:
 >
@@ -82,7 +45,16 @@ La quarta categoria è la **fiducia nei certificati e nella PKI**: certificati e
 
 ---
 
-## Domanda 3 — ARP spoofing attack
+### **3. TCP attacks**
+
+Descrivere in dettaglio in cosa consiste il ARP spoofing attack ed elencare i passi necessari per un attacco tra le seguenti macchine in rete:
+
+```text
+Victim: Windows 10 machine (192.168.1.130)
+Attacker: Kali Linux machine (192.168.1.111)
+Router: Default gateway (192.168.1.1)
+```
+
 
 > **Riferimenti di teoria**:
 >
@@ -95,18 +67,22 @@ La quarta categoria è la **fiducia nei certificati e nella PKI**: certificati e
 **Passi dell'attacco** tra vittima Windows 10 (`192.168.1.130`), attaccante Kali (`192.168.1.111`) e router/gateway (`192.168.1.1`), tutti sulla stessa LAN:
 
 1. **Abilitare l'IP forwarding** sull'attaccante, così che il traffico intercettato venga comunque inoltrato alla destinazione reale e la vittima non si accorga dell'interruzione:
+
    ```bash
    echo 1 > /proc/sys/net/ipv4/ip_forward     # oppure: sysctl -w net.ipv4.ip_forward=1
    ```
+
 2. **Ricognizione dei MAC**: individuare gli indirizzi MAC di vittima e gateway, ad esempio con `arp-scan --localnet` o pingando gli host e leggendo `arp -a`.
 3. **Avvelenare la vittima**: inviare ripetutamente a `192.168.1.130` una ARP reply che dichiara *"192.168.1.1 (il gateway) si trova al MAC dell'attaccante"*. La cache della vittima associa così il gateway al MAC di Kali.
 4. **Avvelenare il gateway**: inviare ripetutamente a `192.168.1.1` una ARP reply che dichiara *"192.168.1.130 (la vittima) si trova al MAC dell'attaccante"*. Questo cattura anche il traffico di ritorno, realizzando un MITM **bidirezionale**.
 
    Con la suite `dsniff`, i due comandi corrispondenti sono:
+   
    ```bash
    arpspoof -i eth0 -t 192.168.1.130 192.168.1.1     # dice alla vittima: "il router sono io"
    arpspoof -i eth0 -t 192.168.1.1  192.168.1.130    # dice al router:  "la vittima sono io"
    ```
+  
    In alternativa si usano **ettercap** o **bettercap**, che automatizzano poisoning e sniffing.
 5. **Intercettazione**: tutto il traffico vittima↔Internet transita ora per Kali, dove può essere analizzato con Wireshark/`tcpdump`, alterato o usato per attacchi successivi (es. dirottamento di sessioni). Il poisoning va **ripetuto periodicamente** perché le voci ARP scadono e verrebbero altrimenti riscritte con i valori corretti.
 
@@ -114,7 +90,9 @@ La quarta categoria è la **fiducia nei certificati e nella PKI**: certificati e
 
 ---
 
-## Domanda 4 — Politiche di sicurezza: DAC contro MAC
+### **4. Politiche di sicurezza**
+
+a. Definire la differenza fra l'utilizzo delle politiche di sicurezza basate su DAC e MAC.
 
 > **Riferimenti di teoria**:
 >
@@ -128,7 +106,11 @@ Nella pratica i sistemi operativi moderni **combinano** i due modelli: il DAC è
 
 ---
 
-## Domanda 5 — Firewall e NIDS
+### **5. Firewall e NIDS**
+
+a. Cosa si intende per deep packet inspection? Quali funzioni addizionali si trovano generalmente integrate in firewall di questo tipo?
+
+b. Differenza tra application-level gateway e circuit-level gateway.
 
 > **Riferimenti di teoria**:
 >

@@ -8,19 +8,6 @@ Per ogni domanda sono indicati i riferimenti alle lezioni di teoria, l'inquadram
 
 ## Traccia originale dell'appello
 
-**Cognome:**  
-**Nome:**  
-**Matricola:**
-
-**Sicurezza - SSRI**
-
-**Docenti:** S. Cimato – V. Anisetti  
-**Appello del 13/06/2025**
-
-Non è ammesso alcun materiale per la consultazione. Buon lavoro!
-
-- **Esame da 6 CFU:** Rispondere a tutte le domande
-
 ### **1. Set-UID Privileged Programs**
 
 a. Ogni processo Unix è associato con un real user ID (RUID) e un effective user ID (EUID). Spiegare la differenza fra RUID e EUID e l'utilizzo del bit setuid e le implicazioni per la sicurezza.
@@ -44,36 +31,6 @@ int main(void)
 ```
 
 Supponendo che si compili il programma con `gcc setuid_file.c -o euid_zero` e successivamente si dia il comando `chmod ug+s euid_zero`, se l'utente `kali` con attributi `uid=1000(kali) gid=1000(kali) groups=1000(kali)`, manda in esecuzione con `./euid_zero`, cosa viene stampato?
-
-### **2. Attacks**
-
-a. Descrivere le problematiche di sicurezza del protocollo SSL.
-
-### **3. TCP attacks**
-
-a. Descrivere in dettaglio in cosa consiste il TCP hijacking attack, facendo un esempio nel caso l'attaccante abbia intercettato la conversazione tra client e server qui raffigurata.
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-i. Definire in dettaglio il pacchetto da spedire per portare a termine l'attacco.
-
-ii. Nel caso si voglia far eseguire un comando al server come si può procedere?
-
-### **4. Politiche di sicurezza**
-
-a. Definire l'utilizzo delle politiche di sicurezza basate su MAC e DAC.
-
-b. Fare cenni sull'utilizzo di tali politiche nei sistemi operativi moderni.
-
-### **5. Firewall e NIDS**
-
-a. Descrivere come funziona un proxy firewall.
-
-b. Differenza tra IDS e IPS.
-
----
-
-## Domanda 1 — Set-UID Privileged Programs
 
 > **Riferimenti di teoria**:
 >
@@ -102,7 +59,9 @@ RUID ed EUID valgono entrambi 1000 perché il proprietario è `kali`; `whoami` s
 
 ---
 
-## Domanda 2 — Attacks: problematiche di sicurezza di SSL
+### **2. Attacks**
+
+a. Descrivere le problematiche di sicurezza del protocollo SSL.
 
 > **Riferimenti di teoria**:
 >
@@ -120,7 +79,15 @@ La quarta famiglia riguarda la **fiducia nei certificati e nella PKI**: certific
 
 ---
 
-## Domanda 3 — TCP hijacking attack
+### **3. TCP attacks**
+
+a. Descrivere in dettaglio in cosa consiste il TCP hijacking attack, facendo un esempio nel caso l'attaccante abbia intercettato la conversazione tra client e server qui raffigurata.
+
+![](imgs/Pasted%20image%2020260708201010.png)
+
+i. Definire in dettaglio il pacchetto da spedire per portare a termine l'attacco.
+
+ii. Nel caso si voglia far eseguire un comando al server come si può procedere?
 
 > **Riferimenti di teoria**:
 >
@@ -153,7 +120,11 @@ avendo prima messo in ascolto `nc -lvp 9090` sulla macchina dell'attaccante. Cos
 
 ---
 
-## Domanda 4 — Politiche di sicurezza MAC e DAC
+### **4. Politiche di sicurezza**
+
+a. Definire l'utilizzo delle politiche di sicurezza basate su MAC e DAC.
+
+b. Fare cenni sull'utilizzo di tali politiche nei sistemi operativi moderni.
 
 > **Riferimenti di teoria**:
 >
@@ -167,7 +138,11 @@ avendo prima messo in ascolto `nc -lvp 9090` sulla macchina dell'attaccante. Cos
 
 ---
 
-## Domanda 5 — Firewall e NIDS
+### **5. Firewall e NIDS**
+
+a. Descrivere come funziona un proxy firewall.
+
+b. Differenza tra IDS e IPS.
 
 > **Riferimenti di teoria**:
 >

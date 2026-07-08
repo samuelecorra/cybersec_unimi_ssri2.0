@@ -8,17 +8,6 @@ Riferimenti di metodo: modulo [M7 – Wireshark e Firewall](../../../M7_Laborato
 
 ## Traccia originale dell'appello
 
-**Cognome:**  
-**Nome:**  
-**Matricola:**
-
-**Sicurezza – SSRI - Laboratorio**
-
-**Docenti:** S. Cimato – M. Anisetti  
-**Appello del 13/06/2025**
-
-È permesso utilizzare manuali e documentazione dei tool, ma non comunicare con altri.
-
 ### **Esercizio su Wireshark**
 
 Esaminando il traffico reso disponibile alla pagina:
@@ -38,28 +27,6 @@ commentare e fare considerazioni su:
 3. Dare una descrizione in breve della sessione TLS.
 
 4. Quali sono le richieste e le relative risposte ricevute nella sessione HTTP?
-
-### **Esercizio su firewall**
-
-Il server Web ospita http, https, RPC e FTP attivo.  
-Il server di posta ospita SMTP.
-
-Configurare il firewall su Router 1 in modo che:
-
-- Solo la LAN può accedere ai servizi RPC nella DMZ.
-- Solo https del Web Server è accessibile da fuori.
-- FTP attivo del Web Server è accessibile solo da fuori.
-- http del server Web è accessibile solo per pc2.
-- Il server di posta deve funzionare correttamente secondo SMTP.
-
-Utilizzare esclusivamente la seguente tabella per descrivere le regole del firewall.
-
-| Direz. | IP Sorg | IP Dest | Protoc. | Porta Sorg | Porta Dest | Flag ACK | Azione |
-|---|---|---|---|---|---|---|---|
-
----
-
-## Parte 1 — Esercizio su Wireshark (traccia `13giu`)
 
 > **Riferimenti**: [M7/UD1/L4 — Analisi per protocollo](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md) (§1 HW/SW, §3 DNS, §5 TLS, §6 HTTP), [M7/UD1/L3 — Statistiche e Follow Stream](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L3%20-%20Statistiche,%20Conversations,%20Follow%20Stream%20ed%20Expert%20Info.md)
 
@@ -83,7 +50,25 @@ Da `Statistics → Protocol Hierarchy` la cattura è dominata da **TLS (443)** e
 
 ---
 
-## Parte 2 — Esercizio su firewall (Router1, dual-stack IPv4/IPv6)
+### **Esercizio su firewall**
+
+![](imgs/Pasted%20image%2020260708202116.png)
+
+Il server Web ospita http, https, RPC e FTP attivo.  
+Il server di posta ospita SMTP.
+
+Configurare il firewall su Router 1 in modo che:
+
+- Solo la LAN può accedere ai servizi RPC nella DMZ.
+- Solo https del Web Server è accessibile da fuori.
+- FTP attivo del Web Server è accessibile solo da fuori.
+- http del server Web è accessibile solo per pc2.
+- Il server di posta deve funzionare correttamente secondo SMTP.
+
+Utilizzare esclusivamente la seguente tabella per descrivere le regole del firewall.
+
+| Direz. | IP Sorg | IP Dest | Protoc. | Porta Sorg | Porta Dest | Flag ACK | Azione |
+|---|---|---|---|---|---|---|---|
 
 > **Riferimenti**: [M7/UD2/L3 — Servizi multi-connessione (FTP attivo, RPC, SMTP)](../../../M7_Laboratorio_Wireshark_e_Firewall/UD2_Configurazione_Firewall/L3%20-%20Servizi%20multi-connessione%20%28FTP%20attivo-passivo,%20RPC,%20SMTP%29.md), [M7/UD2/L4 — dual-stack](../../../M7_Laboratorio_Wireshark_e_Firewall/UD2_Configurazione_Firewall/L4%20-%20NAT,%20bridge,%20port%20forwarding%20e%20dual-stack%20IPv4-IPv6.md)
 

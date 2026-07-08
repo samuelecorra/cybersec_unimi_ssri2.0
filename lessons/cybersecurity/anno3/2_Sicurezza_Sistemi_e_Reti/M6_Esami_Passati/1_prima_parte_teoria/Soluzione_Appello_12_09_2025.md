@@ -8,17 +8,6 @@ Per ogni domanda sono indicati i riferimenti alle lezioni di teoria, l'inquadram
 
 ## Traccia originale dell'appello
 
-**Cognome:**  
-**Nome:**  
-**Matricola:**
-
-**Sicurezza - SSRI**
-
-**Docenti:** S. Cimato – M. Anisetti  
-**Appello del 12/09/2025**
-
-Non è ammesso alcun materiale per la consultazione. Buon lavoro!
-
 ### **1. Set-UID Privileged Programs**
 
 a. Ogni processo Unix è associato con un real user ID (RUID) e un effective user ID (EUID). Spiegare la differenza fra RUID e EUID e l'utilizzo del bit setuid.
@@ -57,30 +46,6 @@ Completare sotto indicando ID corretto al posto di `???`.
 13. The effective user ID is ??
 ```
 
-### **2. Attacks**
-
-a. In cosa consiste l'attacco Shellshock?
-
-### **3. Network scanning**
-
-a. Riconoscere e commentare il tipo di scan evidenziato in figura e aggiungere il caso mancante (porta chiusa/aperta).
-
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-### **4. Attacchi**
-
-a. Discutere le problematiche di sicurezza relative al protocollo ARP e discutere ARP poisoning attack.
-
-### **5. Firewall e NIDS**
-
-a. Descrivere i principi inderogabili dei firewall.
-
-b. Come funziona una honey pot? A cosa serve e come la potrei realizzare?
-
----
-
-## Domanda 1 — Set-UID Privileged Programs
-
 > **Riferimenti di teoria**:
 >
 > - [M3/UD4/L1 — Set-UID, RUID-EUID e attacchi via variabili d'ambiente](../../M3/UD4_Approfondimenti_Esame/L1%20-%20Set-UID,%20RUID-EUID%20e%20attacchi%20via%20variabili%20d'ambiente.md) (§5 output getuid/geteuid prima e dopo chmod 4755)
@@ -115,7 +80,9 @@ Il punto della domanda è che il RUID racconta sempre chi lancia (1000), mentre 
 
 ---
 
-## Domanda 2 — Attacks: Shellshock
+### **2. Attacks**
+
+a. In cosa consiste l'attacco Shellshock?
 
 > **Riferimenti di teoria**:
 >
@@ -138,7 +105,11 @@ Altri vettori sono i **client DHCP** (un server malevolo mette payload in campi 
 
 ---
 
-## Domanda 3 — Network scanning (riconoscere lo scan e completare il caso mancante)
+### **3. Network scanning**
+
+a. Riconoscere e commentare il tipo di scan evidenziato in figura e aggiungere il caso mancante (porta chiusa/aperta).
+
+![](imgs/Pasted%20image%2020260708201353.png)
 
 > **Riferimenti di teoria**:
 >
@@ -158,7 +129,9 @@ Il grande vantaggio dell'idle scan è l'**anonimato**: dal punto di vista del ta
 
 ---
 
-## Domanda 4 — Attacchi: problematiche di sicurezza di ARP e ARP poisoning
+### **4. Attacchi**
+
+a. Discutere le problematiche di sicurezza relative al protocollo ARP e discutere ARP poisoning attack.
 
 > **Riferimenti di teoria**:
 >
@@ -172,7 +145,11 @@ Il grande vantaggio dell'idle scan è l'**anonimato**: dal punto di vista del ta
 
 ---
 
-## Domanda 5 — Firewall e NIDS
+### **5. Firewall e NIDS**
+
+a. Descrivere i principi inderogabili dei firewall.
+
+b. Come funziona una honey pot? A cosa serve e come la potrei realizzare?
 
 > **Riferimenti di teoria**:
 >
