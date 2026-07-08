@@ -20,6 +20,8 @@ Le sue funzioni principali sono:
 - Entrambe le parti (mittente e destinatario) **mantengono lo stato della connessione** per tutta la durata della comunicazione.
     
 
+![](imgs/Pasted%20image%2020260708203822.png)
+
 > In sintesi, TCP garantisce che i dati arrivino **completi, ordinati e senza duplicazioni**.
 
 ---
@@ -42,6 +44,8 @@ $$
 $$
 
 Ogni scambio di segmenti TCP o UDP tra due processi si basa su questa quadrupla di identificazione.
+
+![](imgs/Pasted%20image%2020260708204148.png)
 
 ---
 

@@ -63,7 +63,8 @@ Ogni host mantiene una **ARP cache**, cioè una tabella che memorizza le associa
     ```
     
 3. La risposta viene salvata nella ARP cache per un periodo limitato di tempo.
-    
+
+![](imgs/Pasted%20image%2020260708205914.png)
 
 Il comando `arp -a` consente di visualizzare la tabella ARP su sistemi **Linux** e **Windows**.
 
@@ -148,7 +149,10 @@ Questo comportamento consente l’attacco di **ARP Spoofing** (o **ARP cache poi
 - Le **risposte ARP non sono autenticate**.
     
 - Le implementazioni ARP sono **senza stato (stateless)**: ogni risposta aggiorna la cache, anche se non richiesta.
-    
+
+![](imgs/Pasted%20image%2020260708210500.png)
+
+![](imgs/Pasted%20image%2020260708210512.png)
 
 ---
 

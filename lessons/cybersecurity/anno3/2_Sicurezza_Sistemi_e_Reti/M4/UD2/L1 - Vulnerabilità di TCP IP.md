@@ -64,6 +64,8 @@ Il corretto funzionamento di Internet si basa su una serie di **meccanismi di tr
 
 La sicurezza dei protocolli TCP/IP può essere analizzata a partire dai diversi **livelli dello stack di rete**, evidenziando i rischi associati a ciascuno.
 
+![](imgs/Pasted%20image%2020260708210858.png)
+
 |**Livello**|**Esempi di protocolli**|**Principali vulnerabilità**|
 |---|---|---|
 |**Applicazione**|HTTP, FTP, NFS|Phishing, exploit software, version rollback|
