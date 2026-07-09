@@ -29,6 +29,7 @@ Agisce filtrando le comunicazioni **in ingresso e in uscita** del dispositivo, m
     
 - i pacchetti ricevuti da indirizzi remoti sospetti.
     
+![](imgs/Pasted%20image%2020260709141611.png)
 
 Questo tipo di firewall è molto utile su sistemi individuali (es. computer portatili o domestici), ma **non sostituisce** un firewall di rete, poiché agisce solo **a livello locale**.
 
@@ -187,7 +188,7 @@ Anche quando una vulnerabilità non porta direttamente a esfiltrazione di dati, 
 
 I firewall possono operare su diversi **livelli del modello ISO/OSI**, a seconda della loro complessità e del tipo di filtraggio:
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709141651.png)
 
 |Tipo di firewall|Livello ISO/OSI|Descrizione|
 |---|---|---|
@@ -213,9 +214,11 @@ Più precisamente:
 Un **firewall di rete** è una macchina dedicata che filtra **tutto il traffico in entrata e uscita** verso la rete locale.  
 In pratica, si colloca **tra la LAN interna e Internet**, diventando il **punto di controllo del traffico**.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709141710.png)
 
 Senza un firewall, tutti i dispositivi della LAN sarebbero **direttamente esposti** ai rischi di Internet.
+
+![](imgs/Pasted%20image%2020260709141728.png)
 
 In assenza di filtraggio, il traffico proveniente da Internet può raggiungere direttamente i target interni usando protocolli diversi. Alcuni protocolli possono essere necessari per il business, come FTP o SSH in determinati scenari amministrativi; altri, come Telnet, sono normalmente da bloccare perché espongono il sistema a rischi elevati.
 
@@ -227,6 +230,8 @@ Filtrare significa quindi decidere:
     
 - verso quali host o sottoreti sono ammessi.
     
+
+![](imgs/Pasted%20image%2020260709141838.png)
 
 ---
 
@@ -246,7 +251,8 @@ Per separare i sistemi pubblici da quelli privati, si introduce una **zona inter
 - La rete interna rimane invisibile e inaccessibile dall’esterno.
     
 - Il firewall **filtra e controlla** rigorosamente il traffico tra le tre zone.
-    
+
+![](imgs/Pasted%20image%2020260709141907.png)
 
 La DMZ non è una rete “sicura” nello stesso senso della LAN interna: è una rete controllata, ma volutamente esposta, perché contiene servizi che devono essere raggiungibili dall’esterno, come web server, mail server o server FTP.
 
@@ -268,6 +274,8 @@ Per gestire questa separazione, il firewall dispone di **tre interfacce di rete*
 Questa configurazione prende il nome di **three-legged architecture**.
 
 Dal punto di vista logico, le tre interfacce corrispondono a **zone di sicurezza** diverse. Il firewall può quindi applicare regole differenti a seconda della direzione e della zona coinvolta: Internet verso DMZ, Internet verso LAN, LAN verso Internet, LAN verso DMZ, DMZ verso LAN.
+
+![](imgs/Pasted%20image%2020260709141946.png)
 
 ---
 
@@ -319,7 +327,7 @@ I primi firewall apparvero alla fine degli anni ’80:
 
 Questi sistemi agivano come **gatekeeper**: ricevevano richieste dall’interno e le inoltravano verso l’esterno, filtrando il traffico in base a regole statiche.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709142017.png)
 
 Nei primi schemi architetturali comparivano spesso più componenti: un **packet screen** dedicato al controllo dei pacchetti in transito e un **gatekeeper** incaricato di raccogliere, filtrare e inoltrare richieste applicative lecite.
 

@@ -117,7 +117,7 @@ Uno dei problemi principali è la **difficoltà di misurare la sicurezza**: dete
 
 Il **costo stimato degli attacchi informatici globali** raggiungerà i **10,5 trilioni di dollari nel 2025**, superando i danni economici prodotti da tutte le forme di criminalità tradizionale messe insieme.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709141435.png)
 
 Il costo cresce anche perché aumentano gli asset esposti: dati, applicazioni, dispositivi, infrastrutture cloud, piattaforme di analytics e sistemi basati su intelligenza artificiale. Più asset sono raggiungibili o interconnessi, più aumentano le opportunità operative per l’attaccante.
 
@@ -138,7 +138,7 @@ Le statistiche più recenti mostrano un panorama preoccupante:
 
 > Ogni record perso o rubato rappresenta un potenziale rischio di danni economici, reputazionali e legali per le organizzazioni.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709141505.png)
 
 Le piccole e medie imprese non sono bersagli “secondari”: possono essere colpite direttamente, oppure usate come **ponte** per attaccare clienti, fornitori o infrastrutture più grandi. Questo è particolarmente rilevante nelle filiere produttive, dove un soggetto meno protetto può diventare il punto d’ingresso verso reti più critiche.
 
@@ -177,7 +177,7 @@ Secondo il **SoC Radar Report (2023)**:
 
 Per questo motivo, le statistiche di settore sono strumenti fondamentali per i **professionisti della sicurezza**, che possono individuare trend e prevenire vulnerabilità ricorrenti.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709141526.png)
 
 Tra le tipologie di attacco da monitorare, il docente richiama:
 

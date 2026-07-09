@@ -34,7 +34,7 @@ Entrambe le connessioni utilizzano **porte TCP maggiori di 1023** sul lato clien
 4. I dati viaggiano in parallelo alle comunicazioni di controllo.
     
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709143834.png)
 
 Nel caso di **FTP attivo**, durante la connessione di controllo il client comunica al server, tramite un messaggio nel payload FTP, su quale porta alta vuole ricevere la connessione dati. Ad esempio, il client può aprire una connessione di controllo da `1039` verso `21/tcp` e indicare al server di aprire la connessione dati verso la porta `1038`. Il server, a quel punto, inizializza la connessione dati dalla propria porta `20/tcp` verso `1038` del client.
 
@@ -48,6 +48,8 @@ Supponiamo di voler **bloccare l’FTP ma permettere il resto del traffico**.
 Poiché FTP usa le porte 20 e 21, è sufficiente definire regole `deny` specifiche su tali porte.
 
 #### **Esempio di configurazione**
+
+![](imgs/Pasted%20image%2020260709143929.png)
 
 ```bash
 access-list 103 deny tcp 192.168.3.0 0.0.0.255 192.168.2.0 0.0.0.255 eq 21
@@ -81,6 +83,7 @@ Negare il traffico FTP tra le reti:
     
 - `172.16.3.0/24`
     
+![](imgs/Pasted%20image%2020260709144019.png)
 
 #### **Soluzione**
 
@@ -110,7 +113,7 @@ In questo esercizio è sufficiente bloccare la porta `21/tcp`, assumendo che il 
 
 #### **Rete di riferimento**
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709144106.png)
 
 - Host B → `172.16.4.1`
     
@@ -241,6 +244,8 @@ Una prima tabella ingenua potrebbe permettere traffico in ingresso da qualunque 
 L’uso del flag ACK migliora la situazione: i pacchetti in ingresso devono apparire come risposte a una connessione già avviata. Tuttavia, in un filtro statico, questo non prova davvero che la connessione sia stata instaurata correttamente.
 
 > ⚠️ Solo le risposte con ACK vengono accettate, ma un packet filter stateless non può escludere completamente risposte simulate.
+
+![](imgs/Pasted%20image%2020260709144343.png)
 
 ---
 

@@ -23,7 +23,7 @@ Inoltre, circa il **58% dei siti di phishing** oggi opera sotto **HTTPS**, sfrut
 
 Il problema non riguarda solo i firewall di vecchia generazione: anche un firewall avanzato che voglia ispezionare il payload incontra difficoltà quando il contenuto applicativo è cifrato. La cifratura protegge le comunicazioni legittime, ma può proteggere anche payload malevoli, canali di comando e controllo o flussi di esfiltrazione dati.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709144543.png)
 
 I grandi data breach mostrano anche un altro limite del filtraggio puramente perimetrale: l’attaccante può riuscire a entrare, ma il danno maggiore si produce spesso quando i dati escono dalla rete per un periodo prolungato senza essere rilevati. Le tecniche di difesa devono quindi osservare anche il **traffico in uscita**, non soltanto quello in ingresso.
 
@@ -148,7 +148,7 @@ SMTP non va considerato isolatamente. In uno scenario reale:
 3. il destinatario scarica o consulta la posta con POP3 o IMAP.
     
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709144615.png)
 
 Quando si configura un firewall per la posta elettronica bisogna quindi sapere quali protocolli attraversano davvero il perimetro. In alcuni scenari i client interni parlano con il server aziendale senza attraversare il firewall, mentre è il server SMTP aziendale a comunicare con l’esterno.
 
@@ -181,6 +181,8 @@ External := not(159.149.70.0/24)
 ```
 
 Lo scenario assume che i client interni non attraversino il firewall per parlare con il server SMTP aziendale. Il firewall deve quindi regolare solo le comunicazioni tra `smtpSrv` e i mail server esterni.
+
+![](imgs/Pasted%20image%2020260709144700.png)
 
 ---
 
@@ -240,7 +242,7 @@ Una sessione FTP attraversa quindi, in forma semplificata, queste fasi:
 4. al termine, si chiude la sessione TCP e termina la sessione FTP.
     
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709144733.png)
 
 La difficoltà nasce dal fatto che il firewall statico non vede il significato dei comandi FTP nel payload. In particolare, nella modalità attiva il client comunica al server, tramite il comando `PORT`, quale porta alta dovrà essere contattata per la connessione dati.
 
@@ -301,15 +303,15 @@ Il rischio specifico è che una macchina esterna finga di essere un server FTP e
 
 Nel **Passive mode**, il client avvia la connessione dati, mantenendo così il **principio “solo connessioni interne in uscita”**.
 
-|Dir.|IP sorg.|IP dest.|Porta sorg.|Porta dest.|Azione|
-|---|---|---|---|---|---|
-|OUT|Internal|External|>1023|21|Permit|
-|IN|External|Internal|21|>1023|Permit|
-|OUT|Internal|External|>1023|>1023|Permit|
-|IN|External|Internal|>1023|>1023|Permit|
-|Any|Any|Any|Any|Any|Deny|
+| Dir. | IP sorg. | IP dest. | Porta sorg. | Porta dest. | Azione |
+| ---- | -------- | -------- | ----------- | ----------- | ------ |
+| OUT  | Internal | External | >1023       | 21          | Permit |
+| IN   | External | Internal | 21          | >1023       | Permit |
+| OUT  | Internal | External | >1023       | >1023       | Permit |
+| IN   | External | Internal | >1023       | >1023       | Permit |
+| Any  | Any      | Any      | Any         | Any         | Deny   |
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709145540.png)
 
 Anche in modalità passiva rimane una certa dinamicità, perché la porta dati viene scelta dal server. Tuttavia, il verso delle connessioni è più favorevole: il client interno apre sia il canale di controllo sia quello dati verso l’esterno. Per un packet filter statico questo è molto più gestibile rispetto all’accettare connessioni dati aperte dall’esterno verso l’interno.
 
@@ -365,7 +367,7 @@ Più precisamente:
 5. il client apre una nuova connessione verso quella porta.
     
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709145602.png)
 
 Il firewall statico non vede la semantica dello scambio con il port mapper: vede pacchetti, ma non interpreta il fatto che una certa porta sia stata appena comunicata come porta valida per un servizio RPC.
 

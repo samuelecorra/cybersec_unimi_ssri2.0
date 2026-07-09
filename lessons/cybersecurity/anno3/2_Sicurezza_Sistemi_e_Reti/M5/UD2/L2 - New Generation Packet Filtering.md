@@ -112,6 +112,8 @@ Questa logica consente di scrivere policy più semplici: di norma si definiscono
 
 > 📌 Ciò migliora sia la sicurezza sia le prestazioni: l’analisi più costosa avviene soprattutto all’inizio della connessione, poi i pacchetti successivi sono verificati tramite la connection table.
 
+![](imgs/Pasted%20image%2020260709145811.png)
+
 ---
 
 ### **3.3. Connection Table (esempio)**
@@ -133,6 +135,8 @@ Ogni entry contiene:
 TCP 192.168.1.10:1045 → 159.149.70.11:80  ESTABLISHED
 ```
 
+![](imgs/Pasted%20image%2020260709145849.png)
+
 La connection table deve anche gestire la **scadenza** delle entry. Se una connessione TCP termina correttamente, l’entry può essere rimossa in modo esplicito. Se invece client o server smettono di comunicare per errore, crash o perdita di pacchetti, il firewall usa un **timeout** per evitare che una sessione vecchia rimanga valida indefinitamente.
 
 > ⚠️ Un timeout troppo lungo può lasciare aperte finestre sfruttabili; un timeout troppo breve può far scadere una connessione ancora attiva, costringendo il firewall a rivalutarla.
@@ -143,13 +147,13 @@ La connection table deve anche gestire la **scadenza** delle entry. Se una conne
 
 Durante il three-way handshake, i due endpoint attraversano una sequenza di stati.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709145829.png)
 
-|Client|Server|Fase|Descrizione|
-|---|---|---|---|
-|SYN_SENT|LISTEN|1|Il client invia un SYN|
-|SYN_RCVD|SYN_RCVD|2|Il server risponde con SYN+ACK|
-|ESTABLISHED|ESTABLISHED|3|Il client conferma con ACK|
+| Client      | Server      | Fase | Descrizione                    |
+| ----------- | ----------- | ---- | ------------------------------ |
+| SYN_SENT    | LISTEN      | 1    | Il client invia un SYN         |
+| SYN_RCVD    | SYN_RCVD    | 2    | Il server risponde con SYN+ACK |
+| ESTABLISHED | ESTABLISHED | 3    | Il client conferma con ACK     |
 
 - Quando il server è in **LISTEN**, il firewall deve **verificare la ACL**.
     
@@ -165,7 +169,8 @@ In uno scenario tipico:
 3. il SYN+ACK del server e l’ACK finale del client vengono riconosciuti come appartenenti a quella connessione;
     
 4. i pacchetti successivi sono accettati perché coerenti con lo stato memorizzato.
-    
+
+![](imgs/Pasted%20image%2020260709145934.png)
 
 ---
 
@@ -184,6 +189,8 @@ Per gestirlo, il firewall implementa uno **pseudo-stato**, basato sulla correlaz
 Se il firewall rileva pacchetti coerenti con una comunicazione già in corso, li considera parte della stessa sessione.
 
 È importante distinguere tra stato applicativo e stato di trasporto: un’applicazione sopra UDP può avere una propria logica di sessione, ma UDP non fornisce handshake, chiusura o stati analoghi a TCP. Il firewall può quindi registrare solo tuple di indirizzi/porte e osservare se arrivano pacchetti coerenti con traffico transitato poco prima.
+
+![](imgs/Pasted%20image%2020260709150011.png)
 
 ### **5.2. Timeout**
 
@@ -209,7 +216,7 @@ Questo consente:
 
 Nel caso di **FTP attivo**, il firewall deve leggere il canale di controllo e riconoscere un comando come `PORT 1038`: solo così può capire che il server FTP tenterà una connessione dati dalla porta `20/tcp` verso la porta `1038` del client. Questa informazione non è nell’header IP/TCP, ma nel payload applicativo.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709150030.png)
 
 Il firewall può quindi inserire una entry temporanea nella connection table marcandola come traffico FTP e aprendo selettivamente solo la porta dati negoziata. Senza questa capacità, dovrebbe lasciare aperte molte porte alte o bloccare FTP attivo.
 
@@ -318,6 +325,8 @@ Anche quando un firewall dispone di DPI, davanti a un payload cifrato deve prima
 
 Gli attaccanti sfruttano lo stesso meccanismo: malware e canali di comando e controllo possono usare TLS per rendere opaco il traffico malevolo.
 
+![](imgs/Pasted%20image%2020260709150212.png)
+
 ### **9.2. Contromisure moderne**
 
 Per contrastare le minacce cifrate, i firewall di nuova generazione integrano moduli avanzati:
@@ -336,6 +345,8 @@ Nei prodotti di fascia alta, l’ispezione del traffico cifrato può avvenire co
 > ⚠️ Questa tecnica assomiglia a un Man-in-the-Middle controllato: può essere legittima in reti aziendali gestite, ma dipende da policy, configurazione dei certificati, consenso/legislazione e impatto prestazionale.
 
 > 📌 Il firewall moderno non è più solo un “guardiano delle porte”, ma un **centro di ispezione integrata** per traffico, applicazioni e dati.
+
+![](imgs/Pasted%20image%2020260709150236.png)
 
 ---
 

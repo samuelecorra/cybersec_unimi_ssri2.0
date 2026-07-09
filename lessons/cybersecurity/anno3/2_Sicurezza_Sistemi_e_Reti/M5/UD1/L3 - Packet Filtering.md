@@ -22,7 +22,7 @@ Il filtraggio dei pacchetti può essere:
 
 Ogni pacchetto IP contiene informazioni fondamentali che il firewall utilizza per il controllo:
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709142059.png)
 
 - **Versione** → IPv4 o IPv6
     
@@ -55,7 +55,7 @@ Il protocollo TCP fornisce informazioni aggiuntive utili per stabilire lo **stat
 
 Tra i campi più importanti:
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709142118.png)
 
 - **Porta sorgente e destinazione**
     
@@ -91,7 +91,7 @@ Il valore di acknowledgment informa quindi il mittente che un certo segmento è 
 
 Il TCP utilizza una **procedura a tre fasi** per instaurare la connessione tra client e server.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709142215.png)
 
 |Fase|Direzione|Flag|Descrizione|
 |---|---|---|---|
@@ -160,6 +160,8 @@ Questo approccio opera principalmente sui livelli **3 (Network)** e **4 (Transpo
 
 Se il filtro lavora soltanto a livello IP o inferiore, le informazioni disponibili sono ancora più limitate: protocollo trasportato, indirizzi, eventuali campi di frammentazione e interfaccia di provenienza o destinazione. Per salire di precisione bisogna considerare anche TCP/UDP, quindi porte e flag.
 
+![](imgs/Pasted%20image%2020260709142301.png)
+
 ---
 
 ### **3.3 Caratteristiche**
@@ -216,7 +218,7 @@ Esempi:
 
 Questa configurazione è tipica quando la LAN deve poter navigare o usare servizi remoti, ma non deve essere direttamente raggiungibile dall’esterno. La situazione cambia se esiste una DMZ: in quel caso alcuni servizi pubblici devono essere raggiungibili da Internet, ma non per questo la rete interna deve diventare accessibile.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709142358.png)
     
 
 ---
@@ -367,6 +369,8 @@ Tuttavia, alcuni malware o servizi malevoli **nascondono le loro porte** per sfu
 L’associazione tra porta e servizio è una convenzione, non una garanzia: un servizio può essere configurato su una porta non standard e un traffico malevolo può usare porte normalmente considerate legittime.
 
 > 📌 Per questo è necessario un approccio multilivello, che unisca packet filtering, DPI e analisi comportamentale.
+
+![](imgs/Pasted%20image%2020260709142439.png)
 
 ---
 

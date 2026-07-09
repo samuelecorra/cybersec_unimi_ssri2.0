@@ -176,7 +176,7 @@ Il traffico **ingress** comprende sia richieste provenienti dall’esterno verso
 
 Un router può applicare filtri in ingresso e in uscita secondo lo schema:
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709143254.png)
 
 In questo modo il firewall controlla entrambi i flussi, impedendo che pacchetti non autorizzati entrino o escano.
 
@@ -300,6 +300,8 @@ access-list 101 permit tcp 192.168.2.0 0.0.0.255 any eq ftp
 
 Per le porte note si possono usare keyword al posto del numero: ad esempio `ftp` per la porta 21, `ftp-data` per la porta 20 e `telnet` per la porta 23. Questo rende le regole più leggibili, ma il significato resta quello di un confronto sulla porta TCP/UDP.
 
+![](imgs/Pasted%20image%2020260709143537.png)
+
 ---
 
 ### **17. Operatore “established”**
@@ -323,7 +325,7 @@ Questo operatore è usato per consentire traffico di ritorno coerente con connes
 
 Consentire solo la navigazione web (HTTP/HTTPS) dalla rete interna `192.168.2.0/24`.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709143557.png)
 
 #### **Configurazione**
 
@@ -361,7 +363,7 @@ Router(config-if)# ip access-group <numero> {in | out}
 
 Il punto di applicazione è decisivo: la stessa ACL può produrre effetti diversi se applicata a un’interfaccia diversa o nella direzione sbagliata.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709143710.png)
 
 
 #### **Esempio**
@@ -370,6 +372,7 @@ Il punto di applicazione è decisivo: la stessa ACL può produrre effetti divers
 R1(config)# interface s0/0/0
 R1(config-if)# ip access-group 101 out
 R1(config-if)# ip access-group 102 in
+R1#(config)#end
 ```
 
 Nell’esempio, l’interfaccia `s0/0/0` è quella vicina alla rete `192.168.2.0/24` nel percorso verso Internet: la ACL 101 viene applicata in uscita per controllare le richieste web che lasciano la rete, mentre la ACL 102 viene applicata in ingresso per controllare le risposte che rientrano da Internet.
