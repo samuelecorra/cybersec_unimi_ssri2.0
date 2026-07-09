@@ -28,6 +28,8 @@ Con l’aumento esponenziale di dispositivi connessi, flussi di dati e servizi d
 
 Per questo motivo, prima di introdurre strumenti tecnici come i **firewall**, è fondamentale comprendere i **concetti base della sicurezza di rete**: minacce, vulnerabilità, attacchi e vettori di attacco.
 
+Questa lezione è quindi propedeutica: chiarisce il linguaggio con cui descrivere un incidente di sicurezza e mostra perché la difesa di rete non può ridursi all’acquisto di un prodotto, ma richiede scelte architetturali, configurazioni corrette e processi organizzativi maturi.
+
 ---
 
 ### **2. Concetti fondamentali**
@@ -38,6 +40,8 @@ Per questo motivo, prima di introdurre strumenti tecnici come i **firewall**, è
 Rappresenta tutto ciò che può compromettere la riservatezza, l’integrità o la disponibilità dei dati.  
 **Esempio:** perdita di informazioni sensibili a causa di un malware o di un errore umano.
 
+La minaccia è quindi una nozione relativamente generale: indica ciò che potrebbe causare un danno, prima ancora di specificare il punto tecnico preciso attraverso cui il danno avverrà.
+
 #### **Vulnerabilità (Vulnerability)**
 
 È una **debolezza** in un sistema informatico, in un’applicazione o in una procedura che **può essere sfruttata** da una minaccia.  
@@ -45,10 +49,14 @@ Rappresenta tutto ciò che può compromettere la riservatezza, l’integrità o 
 
 Le vulnerabilità note sono catalogate pubblicamente nel database **CVE (Common Vulnerabilities and Exposures)**, mantenuto da MITRE, per permettere agli esperti di sicurezza di monitorarle e correggerle.
 
+A differenza della minaccia, la vulnerabilità è **specifica**: riguarda una certa caratteristica, una certa versione o una certa configurazione di un prodotto. Per questo nei database CVE si trovano vulnerabilità riferite a prodotti, versioni e condizioni tecniche precise.
+
 #### **Attacco (Attack)**
 
 È l’**azione concreta** con cui una minaccia sfrutta una vulnerabilità.  
 Un attacco è quindi la **materializzazione della minaccia**.
+
+In altri termini: la vulnerabilità rende possibile l’attacco, e l’attacco è la procedura con cui la minaccia diventa un evento reale.
 
 #### **Vettore di attacco (Attack Vector)**
 
@@ -83,6 +91,22 @@ Viviamo in uno scenario informatico caratterizzato da **estrema complessità** e
 
 Parallelamente, le richieste di rete devono garantire **bassa latenza** e **alta disponibilità**, mentre i sistemi di business si basano su **Big Data** e **Intelligenza Artificiale** — due tecnologie che ampliano sia le opportunità sia i rischi.
 
+Il docente insiste in particolare sul fatto che il perimetro non coincide più con un confine fisico unico. Gli asset possono trovarsi:
+
+- in cloud;
+
+- on premise;
+
+- su nodi edge;
+
+- in dispositivi IoT distribuiti sul campo;
+
+- in sensori che producono dati continuamente.
+
+Molti dispositivi IoT sono inoltre limitati dal punto di vista computazionale: proprio perché economici, distribuiti e difficili da aggiornare, diventano bersagli semplici o punti d’appoggio per attacchi successivi.
+
+> 📌 Più il sistema è distribuito, più diventa difficile definire “dove finisce” la rete da proteggere.
+
 ---
 
 ### **4. L’urgenza della cybersecurity**
@@ -92,6 +116,10 @@ Secondo il **Consiglio Europeo**, la **cybersecurity è oggi la seconda emergenz
 Uno dei problemi principali è la **difficoltà di misurare la sicurezza**: determinare la relazione causa-effetto tra vulnerabilità, minacce e incidenti è una delle sfide più complesse per le organizzazioni moderne.
 
 Il **costo stimato degli attacchi informatici globali** raggiungerà i **10,5 trilioni di dollari nel 2025**, superando i danni economici prodotti da tutte le forme di criminalità tradizionale messe insieme.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Il costo cresce anche perché aumentano gli asset esposti: dati, applicazioni, dispositivi, infrastrutture cloud, piattaforme di analytics e sistemi basati su intelligenza artificiale. Più asset sono raggiungibili o interconnessi, più aumentano le opportunità operative per l’attaccante.
 
 ---
 
@@ -110,11 +138,25 @@ Le statistiche più recenti mostrano un panorama preoccupante:
 
 > Ogni record perso o rubato rappresenta un potenziale rischio di danni economici, reputazionali e legali per le organizzazioni.
 
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Le piccole e medie imprese non sono bersagli “secondari”: possono essere colpite direttamente, oppure usate come **ponte** per attaccare clienti, fornitori o infrastrutture più grandi. Questo è particolarmente rilevante nelle filiere produttive, dove un soggetto meno protetto può diventare il punto d’ingresso verso reti più critiche.
+
+I dati sottratti in un data breach hanno inoltre un doppio valore per l’attaccante:
+
+- valore **economico**, perché possono essere venduti;
+
+- valore **informativo**, perché username, password, email, informazioni personali o dettagli di configurazione possono facilitare attacchi successivi.
+
 ---
 
 ### **6. Security breaches e perdita di dati**
 
 Uno dei principali fattori che contribuiscono agli incidenti di sicurezza è la **configurazione errata dei sistemi**.
+
+Il transcript sottolinea che molti breach non dipendono dall’assenza di tecnologie avanzate, ma da problemi di **organizzazione, processi e persone**: fallimenti procedurali, errori di configurazione, social engineering, phishing, insider e mancanza di controllo sui processi interni.
+
+Una statistica citata dal docente evidenzia che circa il **72%** dei casi è riconducibile a problemi di questo tipo, più che all’impossibilità tecnica di implementare una soluzione di sicurezza.
 
 Secondo il **SoC Radar Report (2023)**:
 
@@ -135,6 +177,18 @@ Secondo il **SoC Radar Report (2023)**:
 
 Per questo motivo, le statistiche di settore sono strumenti fondamentali per i **professionisti della sicurezza**, che possono individuare trend e prevenire vulnerabilità ricorrenti.
 
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Tra le tipologie di attacco da monitorare, il docente richiama:
+
+- **malware**, ancora stabilmente tra le categorie più significative;
+
+- **malicious insider**, cioè soggetti interni che abusano dei propri privilegi;
+
+- **ransomware**, che può essere meno frequente di altre categorie in alcune statistiche, ma ha un impatto operativo spesso devastante.
+
+> ⚠️ Un attacco non va valutato solo per frequenza, ma anche per impatto. Il ransomware è un esempio classico: può bloccare completamente l’operatività aziendale.
+
 ---
 
 ### **7. Lezioni apprese e importanza della configurazione**
@@ -151,6 +205,10 @@ Tre principi emergono chiaramente:
     
 
 > La sicurezza non è solo tecnologia, ma soprattutto **organizzazione, competenza e consapevolezza**.
+
+Il perimetro non deve essere pensato solo come barriera “da fuori verso dentro”. Occorre anche osservare ciò che accade **all’interno**: insider, configurazioni errate, credenziali abusate e processi non controllati possono compromettere la rete anche senza un attacco esterno tradizionale.
+
+Questa è una delle motivazioni per cui il corso, pur concentrandosi sugli strumenti, insiste sulla configurazione: uno strumento avanzato ma scelto male o configurato male può produrre un livello di sicurezza inferiore a uno strumento più semplice ma coerente con i requisiti reali.
 
 ---
 
@@ -180,6 +238,9 @@ Infine, occorre riconoscere che:
     
 - mentre i tool e gli assessment di sicurezza sono spesso **statici** e non aggiornati in tempo reale.
     
+Il problema non è solo avere molti strumenti, ma riuscire a farli cooperare: vendor diversi richiedono competenze diverse, producono log diversi, applicano policy con semantiche diverse e possono non comunicare correttamente tra loro. La sicurezza diventa quindi anche un problema di **integrazione**.
+
+> 📌 Prima si definiscono i requisiti di sicurezza; poi si scelgono gli strumenti adatti a soddisfarli. Fare il contrario porta spesso a soluzioni costose ma incoerenti.
 
 ---
 
@@ -189,3 +250,5 @@ La lezione si conclude sottolineando che la sicurezza di rete richiede un approc
 Non basta installare strumenti di difesa, bisogna **saperli configurare e integrare** in un ecosistema coerente e aggiornato.
 
 Come primo passo concreto nello studio della protezione delle reti, si introduce ora **uno degli strumenti più classici e fondamentali della sicurezza perimetrale: il firewall**.
+
+Il firewall sarà studiato non come “scatola magica”, ma come strumento da configurare in modo consapevole rispetto a traffico, servizi, perimetro, minacce e politiche di sicurezza dell’organizzazione.

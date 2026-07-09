@@ -15,6 +15,10 @@ Il protocollo **TLS 1.3** rappresenta una profonda revisione rispetto alle versi
 
 TLS 1.3 nasce proprio come risposta alle vulnerabilità accumulate in più di vent’anni di evoluzione del protocollo.
 
+Il punto di partenza è l’analisi critica di TLS 1.2 e delle versioni precedenti: alcune funzionalità erano poco usate, altre erano difficili da implementare correttamente, altre ancora erano ormai considerate insicure alla luce dell’evoluzione della crittoanalisi e degli attacchi pratici.
+
+> 📌 TLS 1.3 non aggiunge semplicemente nuove opzioni: elimina molte scelte legacy per impedire che client e server possano negoziare accidentalmente configurazioni deboli.
+
 ---
 
 ### **2. Obiettivi principali di TLS 1.3**
@@ -25,7 +29,7 @@ TLS 1.3 introduce quattro obiettivi fondamentali:
     Eliminare tutte le funzionalità non più necessarie o potenzialmente pericolose.
     
 2. **Sicurezza:**  
-    Rafforzare il protocollo utilizzando tecniche di crittografia moderne e risultati delle analisi formali.
+    Rafforzare il protocollo utilizzando tecniche di crittografia moderne, risultati delle analisi formali e algoritmi oggi considerati robusti.
     
 3. **Privacy:**  
     Aumentare la protezione dei dati trasmessi, compreso il mascheramento di metadati come il nome del server (SNI).
@@ -38,13 +42,15 @@ TLS 1.3 introduce quattro obiettivi fondamentali:
     - **Handshake 0-RTT** per connessioni già note (riutilizzando chiavi precedenti).
         
 
+Il miglioramento delle prestazioni riguarda soprattutto il protocollo di handshake: l’obiettivo è ridurre il numero di messaggi necessari quando si apre una nuova connessione e permettere, in casi controllati, la ripresa di sessioni già stabilite in precedenza.
+
 #### **Funzionalità rimosse in TLS 1.3**
 
 TLS 1.3 elimina completamente:
 
-- Static **RSA** (chiavi fisse vulnerabili),
+- Static **RSA** per lo scambio delle chiavi, perché non garantisce forward secrecy e concentra troppa sicurezza sulla chiave privata a lungo termine del server,
     
-- Gruppi personalizzati (EC)DHE,
+- gruppi personalizzati (EC)DHE non sufficientemente analizzati o non considerati adeguati,
     
 - **Compressione** (causa di vulnerabilità come CRIME),
     
@@ -54,6 +60,8 @@ TLS 1.3 elimina completamente:
     
 - Meccanismi complessi di **session resumption** (sostituiti da un modello semplificato).
     
+
+> ⚠️ La rimozione di funzionalità è una misura di sicurezza: se una scelta debole non è più negoziabile, un attaccante non può forzarne l’uso tramite downgrade o manipolazione dell’handshake.
 
 ---
 
@@ -72,6 +80,8 @@ Infatti:
 **TLS 1.3** quindi **proibisce completamente la compressione**:  
 un server TLS 1.3 **deve rifiutare** la connessione se il client propone di usarla.
 
+La ragione è strutturale: comprimere prima di cifrare può far dipendere la lunghezza del testo cifrato da somiglianze tra dati segreti e dati controllati dall’attaccante. Questo apre canali laterali basati sulla lunghezza.
+
 #### **b. Cifrari non-AEAD**
 
 TLS 1.3 supporta solo cifrari con **Authenticated Encryption with Associated Data (AEAD)**, una forma avanzata di crittografia che:
@@ -84,6 +94,8 @@ TLS 1.3 supporta solo cifrari con **Authenticated Encryption with Associated Dat
     
 
 Questo impedisce attacchi di tipo _cut-and-paste_, dove un aggressore tenta di incollare porzioni di testo cifrato in un contesto diverso.
+
+La parte “Associated Data” è importante perché permette di autenticare anche informazioni non cifrate ma semanticamente legate al record, come header o contesto del messaggio. In questo modo un testo cifrato valido in un contesto non può essere semplicemente riutilizzato in un altro senza che la verifica fallisca.
 
 #### **Esempi di cifrari AEAD supportati:**
 
@@ -100,13 +112,29 @@ Questo impedisce attacchi di tipo _cut-and-paste_, dove un aggressore tenta di i
 
 Le vecchie modalità come **RC4**, **AES-CBC** (in modalità _MAC-then-Encrypt_) e altri algoritmi simili sono **vietati** in TLS 1.3.
 
+> 📌 TLS 1.3 accetta solo cifrari per cui la protezione di confidenzialità e integrità è progettata come un unico meccanismo coerente.
+
 ---
 
 ### **4. Fasi di handshake: analisi tecnica**
 
 Per comprendere meglio dove si inseriscono gli attacchi, ripercorriamo le fasi chiave dell’**handshake** (qui mostrate nella logica delle versioni 1.2 e 3.0, dove le vulnerabilità erano più frequenti).
 
-#### **a. ServerHello**
+#### **a. ClientHello**
+
+Il client avvia la negoziazione inviando:
+
+- la versione massima del protocollo che supporta;
+
+- le combinazioni di cifratura e MAC che è disposto a usare;
+
+- valori casuali, cioè nonce, che contribuiranno alla generazione delle chiavi;
+
+- eventuali altri parametri di sessione.
+
+Queste informazioni delimitano lo spazio di scelta del server: un attacco che le altera può condizionare l’intera connessione.
+
+#### **b. ServerHello**
 
 Il server risponde al client in chiaro con:
 
@@ -117,16 +145,24 @@ Il server risponde al client in chiaro con:
 - un **numero casuale (nonce)** per contribuire alla generazione delle chiavi.
     
 
-#### **b. ServerKeyExchange**
+Il server dovrebbe scegliere la versione più sicura tra quelle effettivamente supportate da entrambe le parti, non una versione arbitrariamente più vecchia. Anche il nonce del server deve essere fresco, cioè non riutilizzato in precedenza.
+
+![](imgs/Pasted%20image%2020260709012532.png)
+
+#### **c. ServerKeyExchange**
 
 Il server invia:
 
-- il **certificato pubblico** (RSA o Diffie-Hellman),
+- il **certificato pubblico**, contenente per esempio una chiave RSA o parametri/chiavi pubbliche Diffie-Hellman,
     
 - i **parametri di chiave pubblica** coerenti con la suite crittografica scelta.
     
 
-#### **c. ClientKeyExchange**
+Il client deve verificare il certificato del server prima di fidarsi della chiave pubblica ricevuta. Se questa verifica viene saltata o aggirata, l’intero handshake può essere esposto a Man-in-the-Middle.
+
+![](imgs/Pasted%20image%2020260709012618.png)
+
+#### **d. ClientKeyExchange**
 
 Il client:
 
@@ -134,8 +170,11 @@ Il client:
     
 - lo **cifra con la chiave pubblica del server**,
     
-- e lo invia al server, che potrà decifrarlo solo con la propria chiave privata.
+	- e lo invia al server, che potrà decifrarlo solo con la propria chiave privata.
     
+![](imgs/Pasted%20image%2020260709012641.png)
+
+> 📌 Molti attacchi storici colpiscono proprio questa fase: se l’attaccante riesce a modificare versione, cipher suite o chiave pubblica accettata, la cifratura successiva può essere formalmente attiva ma sostanzialmente debole.
 
 ---
 
@@ -159,6 +198,8 @@ struct {
 
 Il _PreMasterSecret_ contiene i **bit casuali** da cui verranno derivate le chiavi simmetriche di sessione, combinati con i _nonce_ del client e del server.
 
+Nel caso RSA classico, il campo `random[46]` rappresenta il materiale casuale generato dal client. Questi bit vengono poi combinati con i valori casuali scambiati nell’handshake tramite funzioni di derivazione, fino a ottenere le chiavi simmetriche effettive.
+
 ---
 
 ### **6. Importanza della casualità**
@@ -173,7 +214,8 @@ Un caso storico evidenzia quanto una minima vulnerabilità possa compromettere l
 - Senza quella riga, il generatore pseudocasuale usava solo il **Process ID** come seed.
     
 - Poiché il PID massimo in Linux è 32768, ciò significava che esistevano solo **32768 chiavi possibili**.
-    
+
+![](imgs/Pasted%20image%2020260709012811.png)
 
 Conseguenze:
 
@@ -182,7 +224,11 @@ Conseguenze:
 - Furono compromessi certificati **X.509**, chiavi **SSH**, **OpenVPN**, **DNSSEC**, e persino **chiavi di sessione TLS**.
     
 
-Un esempio perfetto di come **una singola linea di codice** può minare la fiducia di un intero ecosistema.
+Per un attaccante, uno spazio di 32768 possibilità è enumerabile. Diventa quindi realistico provare tutti i semi possibili, ricostruire le chiavi candidate e verificare quale corrisponde al traffico osservato.
+
+Un esempio perfetto di come **una singola linea di codice** può minare la fiducia di un intero ecosistema: se la casualità è prevedibile, le chiavi derivate non offrono più confidenzialità né integrità affidabile.
+
+> ⚠️ La sicurezza di TLS dipende anche dall’implementazione. Un protocollo teoricamente robusto può diventare insicuro se la generazione dei numeri casuali è sbagliata.
 
 ---
 
@@ -199,13 +245,18 @@ Uno dei principali attacchi contro SSL è il **Version Rollback Attack** (attacc
 3. Il server, credendo che il client supporti solo SSL 2.0, risponde di conseguenza.
     
 4. Entrambi finiscono per comunicare con una **versione vecchia e vulnerabile** del protocollo.
-    
+
+![](imgs/Pasted%20image%2020260709012912.png)
 
 #### **Conseguenza:**
 
 SSL 2.0 non prevedeva i messaggi “Finished” finali dell’handshake, quindi l’attaccante poteva manipolare la connessione senza essere rilevato.
 
 > In pratica: l’aggressore forza le parti a usare un protocollo debole, poi sfrutta le vulnerabilità di quella versione.
+
+![](imgs/Pasted%20image%2020260709012926.png)
+
+Il problema nasce perché la parte iniziale dell’handshake, nelle versioni storiche, non era ancora protetta in modo sufficiente. Un attaccante poteva intervenire prima che client e server avessero stabilito chiavi e autenticazione complete, alterando i parametri che sarebbero poi stati usati per proteggere la sessione.
 
 ---
 
@@ -214,10 +265,10 @@ SSL 2.0 non prevedeva i messaggi “Finished” finali dell’handshake, quindi 
 SSL 2.0, oggi completamente deprecato (vietato dal 2011), soffriva di gravi problemi strutturali:
 
 1. **Cipher Suite Rollback Attack**  
-    Le preferenze di cifratura non erano autenticate → l’attaccante poteva costringere l’uso di un algoritmo debole.
+    Le preferenze di cifratura non erano autenticate → l’attaccante poteva alterare i messaggi e far credere al server che il client supportasse solo cifrari deboli.
     
 2. **Messaggi non protetti durante l’handshake**  
-    Il client poteva inviare _Change Cipher Spec_ in chiaro → un attaccante poteva intercettare o bloccare l’aggiornamento dei parametri di sicurezza.
+    Il client poteva inviare messaggi di cambio delle specifiche di cifratura in chiaro → un attaccante poteva anticipare o manipolare l’aggiornamento dei parametri di sicurezza.
     
 3. **Hashing debole**  
     L’autenticazione dei messaggi usava **MD5**, vulnerabile a collisioni.
@@ -231,6 +282,8 @@ SSL 2.0, oggi completamente deprecato (vietato dal 2011), soffriva di gravi prob
 6. **Limitato supporto per certificati**  
     Non gestiva catene di certificati né algoritmi non-RSA.
     
+
+Questi problemi spiegano perché SSL 2.0 non è semplicemente “vecchio”, ma strutturalmente inadatto: permetteva all’attaccante di intervenire su scelte che avrebbero dovuto essere protette dalla negoziazione stessa.
 
 #### **Soluzione in SSL 3.0**
 

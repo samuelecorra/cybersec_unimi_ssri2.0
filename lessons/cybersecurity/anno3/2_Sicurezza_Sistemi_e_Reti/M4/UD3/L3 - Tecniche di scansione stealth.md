@@ -1,258 +1,310 @@
 ## **Lezione 3: Tecniche di scansione stealth**
 
-### **1. Introduzione — obiettivo della lezione**
+### **1. Introduzione**
 
-Questa lezione spiega le tecniche di _stealth scanning_: metodi che cercano di raccogliere informazioni sulle porte e i servizi riducendo la probabilità di essere rilevati o loggati. L’approccio è Feynman-style: spieghiamo il principio fisico/protocolare, mostriamo il comportamento osservabile nella rete, forniamo comandi pratici e discutiamo limiti, falsi positivi e contromisure.
+Le tecniche di **stealth scanning** cercano di raccogliere informazioni su host, porte e filtri riducendo la probabilità di essere rilevate. Non sono davvero invisibili: rendono solo più difficile il lavoro di firewall, IDS e sistemi di logging rispetto a una scansione TCP `connect()` tradizionale.
 
-### **2. Panoramica concettuale**
+L'idea comune è evitare o alterare il normale three-way handshake, usando pacchetti con flag anomali, frammenti IP o host intermedi. In questo modo lo scanner prova a ottenere informazioni senza aprire sessioni complete e senza produrre log applicativi evidenti.
 
-#### **2.1 Che significa “stealth”**
+> 📌 "Stealth" non significa "non rilevabile": significa meno evidente, più ambiguo o più difficile da correlare.
 
-Stealth non significa invisibile al 100%, ma ridurre la visibilità rispetto a una `connect()` normale: evitare handshakes completi, mimare traffico legittimo o sfruttare differenze di implementazione degli stack TCP/IP per ottenere risposte informative senza aprire sessioni tracciabili.
+![](imgs/Pasted%20image%2020260709010335.png)
 
-#### **2.2 Trade-off**
+---
 
-- **Pros:** minore traccia nei log, possibilità di aggirare firewall semplici, meno rumore per IDS.
-    
-- **Cons:** tecniche più delicate, soggette a false positive/negative, dipendono da implementazioni diverse degli OS e dai comportamenti dei firewall; talvolta lente e non affidabili in presenza di packet-loss.
-    
+### **2. SYN/ACK Scan**
 
-### **3. SYN/ACK stealth e inverse mapping**
+#### **2.1. Idea di base**
 
-#### **3.1 Principio**
+Una prima tecnica usa pacchetti `SYN/ACK` al posto dei normali `SYN`. I pacchetti `SYN` sono facili da riconoscere come inizio di una scansione o di una connessione; un `SYN/ACK`, invece, può sembrare parte di un handshake già in corso.
 
-Invece di inviare un SYN (come in un SYN scan standard), si inviano pacchetti con flag diversi (es. SYN/ACK) e si interpreta la reazione inverse: alcune implementazioni rispondono diversamente se la porta è chiusa o aperta. L’idea è ottenere informazioni **“inverse”**: usare risposte tipiche delle porte **chiuse** per dedurre lo stato delle porte aperte.
+L'obiettivo è sfruttare la risposta prevista dallo stack TCP quando riceve un pacchetto inatteso:
 
-#### **3.2 Comportamento osservabile**
+- se la porta è **chiusa**, il target risponde con `RST`;
 
-- Per una porta **chiusa** il target risponde tipicamente con **RST**.
-    
-- Per una porta **aperta** spesso **non risponde** a pacchetti SYN/ACK non attesi (comportamento usato come segnale di apertura).  
-    Questo ribalta la logica classica: la **assenza** di risposta può indicare `open` in questo tipo di probe.
-    
+- se la porta è **aperta**, il pacchetto può essere scartato senza risposta, perché non corrisponde a una connessione iniziata correttamente.
 
-#### **3.3 Limiti**
+![](imgs/Pasted%20image%2020260709010352.png)
 
-Perdita di pacchetti e filtraggio possono generare falsi positivi. Inoltre, molti IDS sono addestrati a riconoscere probe insolite come SYN/ACK anomali.
+Questa logica è "inversa" rispetto alla SYN scan classica: l'informazione forte arriva dalla risposta delle porte chiuse, mentre la mancata risposta può indicare apertura o filtraggio.
 
-### **4. ACK scan (mappatura firewall)**
+#### **2.2. Interpretazione**
 
-#### **4.1 Scopo**
+|Risposta al `SYN/ACK`|Interpretazione possibile|
+|---|---|
+|`RST`|Porta chiusa|
+|Nessuna risposta|Porta aperta oppure pacchetto filtrato/perso|
+|ICMP unreachable|Traffico filtrato|
 
-Non pensare all’ACK scan per rilevare porte aperte: serve a determinare **se esiste un filtro/firewall** e la sua natura (stateful vs stateless).
+> ⚠️ Questa tecnica è vulnerabile ai falsi positivi: se un pacchetto viene perso o filtrato, l'assenza di risposta può essere scambiata per porta aperta.
 
-#### **4.2 Meccanica e interpretazione**
+---
 
-- Si invia un pacchetto **TCP ACK** a una porta target.
-    
-- Risposte possibili:
-    
-    - **RST** → la porta è raggiungibile ma _unfiltered_ (cioè il firewall non sta bloccando).
-        
-    - **Nessuna risposta** o **ICMP unreachable** → la porta è _filtered_ (bloccata da firewall).  
-        Questo permette di mappare la presenza di filtri senza aprire connessioni.
-        
+### **3. ACK Scan**
 
-#### **4.3 Uso pratico (nmap)**
+#### **3.1. Scopo**
 
-`nmap -sA <target>` — utile come passo diagnostico per capire se un firewall è presente.
+L'**ACK scan** non serve principalmente a distinguere porta aperta e chiusa. Serve a capire se il traffico verso una porta è filtrato o meno e, in particolare, a ricavare informazioni sulla presenza e sul comportamento di un firewall.
 
-### **5. Window scan (sfruttare valori TCP window)**
+Lo scanner invia un pacchetto TCP con flag `ACK` verso una porta del target.
 
-#### **5.1 Principio**
+![](imgs/Pasted%20image%2020260709010420.png)
 
-Simile all’ACK scan ma sfrutta un dettaglio implementativo: il valore del campo TCP **Window** nel RST di risposta può differire se la porta è `open` oppure `closed` su alcuni sistemi.
+#### **3.2. Interpretazione**
 
-#### **5.2 Interpretazione pratica**
+|Risposta|Interpretazione|
+|---|---|
+|`RST`|Traffico non filtrato: il pacchetto ha raggiunto lo stack TCP|
+|Nessuna risposta|Traffico probabilmente filtrato|
+|ICMP unreachable / administratively prohibited|Traffico filtrato|
 
-- RST con **Window non-zero** → spesso indica **open** (implementazioni specifiche usano window > 0 per alcune risposte).
-    
-- RST con **Window zero** → indica **closed**.
-    
-- Nessuna risposta o ICMP → **filtered**.  
-    Non tutti gli OS distinguono: su sistemi che non espongono questa differenza il risultato sarà `closed` o ambiguo.
-    
+Un firewall stateless semplice potrebbe lasciar passare un `ACK` perché sembra appartenere a una connessione già avviata. Un firewall stateful, invece, può verificare se quella connessione esiste davvero e bloccare il pacchetto se è fuori stato.
 
-#### **5.3 Avvertenza**
+> 📌 L'ACK scan mappa i filtri più che i servizi: dice se il pacchetto passa, non se dietro quella porta c'è un servizio applicativo.
 
-Metodo dipendente dall’implementazione: va usato come test secondario più che principale.
+---
 
-### **6. FIN / NULL / Xmas scans (flag-trick scans)**
+### **4. Window Scan**
 
-#### **6.1 Idea semplice**
+#### **4.1. Principio**
 
-Si inviano pacchetti con flag atipici:
+Il **Window scan** è una variante dell'ACK scan. Anche qui si inviano pacchetti `ACK`, ma si osserva un dettaglio in più: il valore del campo TCP **Window** nel pacchetto `RST` di risposta.
 
-- **FIN**: solo FIN=1.
-    
-- **NULL**: nessun flag.
-    
-- **Xmas**: FIN, PSH e URG a 1 (luccicante come un albero di Natale).
-    
+Su alcuni sistemi operativi, storicamente, le risposte `RST` generate da porte aperte e chiuse presentavano valori diversi:
 
-Secondo la specifica TCP, host _chiusi_ rispondono con **RST**, mentre host _aperti_ dovrebbero **non rispondere** a questi pacchetti isolati. Quindi: RST → `closed`, nessuna risposta → `open|filtered`.
+- porta **aperta**: `RST` con window size positiva;
 
-#### **6.2 Vantaggi**
+- porta **chiusa**: `RST` con window size pari a zero.
 
-- Non si instaurano sessioni TCP complete (meno log).
-    
-- Possono bypassare firewall o filtri che bloccano SYN/ACK ma non questi tipi di pacchetti.
-    
+![](imgs/Pasted%20image%2020260709010448.png)
 
-#### **6.3 Limiti pratici**
+Questa differenza implementativa permette allo scanner di inferire lo stato della porta anche quando l'ACK scan ordinario direbbe solo `unfiltered`.
 
-- Alcuni OS (es. Windows) non rispettano lo standard e rispondono diversamente: rendono queste scansioni inefficaci su tali target.
-    
-- Packet loss o filtri possono generare ambiguità (open|filtered).
-    
-- IDS moderni spesso rilevano questi pattern.
-    
+#### **4.2. Limiti**
 
-#### **6.4 Comando nmap**
+Il metodo dipende fortemente dallo stack TCP/IP del sistema operativo. Se il sistema non usa questa differenza nel campo Window, il risultato è ambiguo o inutile. Inoltre:
 
-- FIN: `nmap -sF <target>`
-    
-- NULL: `nmap -sN <target>`
-    
-- Xmas: `nmap -sX <target>`
-    
+- nessuna risposta può indicare filtro o perdita;
 
-### **7. Fragmentation scan (evasione via frammentazione IP)**
+- ICMP unreachable suggerisce filtraggio;
 
-#### **7.1 Principio**
+- IDS moderni possono riconoscere sequenze anomale di ACK.
 
-Si frammentano le probe in piccoli datagrammi IP in modo che il contenuto utile (es. i flag TCP) sia spezzettato. Alcuni IDS/firewall che analizzano pacchetti sul singolo frammento non riescono a ricostruire il contesto e quindi non riconoscono la probe come malevola.
+> ⚠️ Il Window scan non è una regola universale di TCP: sfrutta comportamenti storici di alcune implementazioni.
 
-#### **7.2 Vantaggi**
+---
 
-- Aumenta la difficoltà per il detection e il blocking basati su signature.
-    
-- Può aggirare filtri superficiali che non riassemblano i frammenti.
-    
+### **5. FIN, NULL e Xmas Scan**
 
-#### **7.3 Svantaggi**
+#### **5.1. Flag anomali**
 
-- Lento e soggetto a packet loss.
-    
-- Alcuni firewall o IDS possono andare in crash se non progettati per gestire frammenti malevoli.
-    
-- Non affidabile su tutte le piattaforme; può essere controproducente su reti con frammentation filtering.
-    
+Altre tecniche stealth usano pacchetti TCP con combinazioni di flag non tipiche dell'apertura di una connessione:
 
-#### **7.4 Esempio**
+- **FIN scan**: invia un pacchetto con solo `FIN`;
 
-`nmap --mtu 16 -sS <target>` (forza piccole unità di MTU; attenzione alla legittimità e agli effetti collaterali).
+- **NULL scan**: invia un pacchetto senza flag TCP attivi;
 
-### **8. Idle (zombie) scan — anonimato completo**
+- **Xmas scan**: accende più flag, tipicamente `FIN`, `PSH` e `URG`, così chiamata perché il pacchetto è "illuminato" da molti flag come un albero di Natale.
 
-#### **8.1 Concetto chiave**
+![](imgs/Pasted%20image%2020260709010509.png)
 
-L’idle scan permette di eseguire una scansione **che appare provenire da uno “zombie”** (terzo host innocuo) invece che dallo scanner reale. Si basa sul comportamento del campo IP **ID** (IP identification): molti sistemi incrementano l’IP ID per ogni pacchetto inviato.
+#### **5.2. Interpretazione secondo lo standard**
 
-Requisiti per lo zombie:
+Secondo il comportamento previsto per TCP:
 
-- Debe essere _idle_ (non invia traffico che altera l’IP ID frequentemente).
-    
-- Deve avere un IP ID prevedibile/incrementale.
-    
+- una porta **chiusa** dovrebbe rispondere con `RST`;
 
-#### **8.2 Procedura passo-passo (semplificata)**
+- una porta **aperta** dovrebbe scartare il pacchetto senza risposta, perché non è un segmento valido per una connessione in stato `LISTEN`.
 
-1. Lo scanner interroga lo zombie per ottenere l’IP ID corrente (es. inviando SYN/ACK e osservando il RST con IPID = X).
-    
-2. Lo scanner invia una probe verso la **vittima** ma **spoofa** l’indirizzo sorgente come quello dello zombie (es. SYN indirizzato al target con src=IP_zombie).
-    
-3. Se la porta target è **open**, il target risponderà con SYN/ACK allo zombie. Lo zombie, non avendo inviato un SYN, risponderà con RST e incrementerà il proprio IP ID.
-    
-4. Lo scanner interroga di nuovo lo zombie per leggere l’IP ID. Se l’IP ID è aumentato di 2 (o di 1 a seconda della sequenza), lo scanner deduce che il target ha inviato un pacchetto allo zombie: la porta è `open`. Se non è aumentato, la porta è `closed`.
-    
+|Risposta|Interpretazione possibile|
+|---|---|
+|`RST`|Porta chiusa|
+|Nessuna risposta|Porta aperta oppure filtrata|
+|ICMP unreachable|Filtrata|
 
-#### **8.3 Vantaggi**
+Queste scansioni possono superare firewall stateless che filtrano soprattutto `SYN`, perché non sembrano tentativi normali di apertura di connessione.
 
-- Scansione praticamente **anonima**: il traffico verso la vittima sembra provenire dallo zombie.
-    
-- Nessuna connessione diretta tra scanner e target: ottima per evitare contromisure.
-    
+#### **5.3. Limiti pratici**
 
-#### **8.4 Limiti e controindicazioni**
+Il problema principale è l'ambiguità:
 
-- Richiede uno zombie con IP ID prevedibile e poco traffico.
-    
-- Se lo zombie non è veramente idle, il rumore rompe l’analisi.
-    
-- Molti sistemi moderni usano IP ID casuale o per flusso, rendendo la tecnica inefficace.
-    
-- Alcuni IDS correlano i pattern e rilevano comportamenti sospetti anche in presenza di idle scan.
-    
+- assenza di risposta può significare porta aperta, pacchetto filtrato o perdita;
 
-#### **8.5 Comando (nmap)**
+- alcuni sistemi operativi non seguono rigorosamente la specifica e rispondono sempre con `RST`;
 
-`nmap -sI <zombie> <target>` — usa lo zombie specificato.
+- IDS moderni riconoscono facilmente pattern FIN/NULL/Xmas ripetuti.
 
-### **9. Rilevazione di stealth scan e contromisure**
+> 📌 FIN/NULL/Xmas sono utili soprattutto per capire la logica degli stack e dei filtri. Nella pratica moderna non vanno considerati invisibili.
 
-#### **9.1 Come rilevarli**
+---
 
-- **Pattern anomali**: sequenze di pacchetti con flag inusuali (FIN/NULL/Xmas), SYN/ACK dal nulla, frammentazione irregolare.
-    
-- **Correlazione temporale**: richieste sparse ma sistematiche su molte porte o IP → tipico di low-and-slow scans.
-    
-- **Anomalie IP ID**: variazioni sospette nei campi IPID (utile se si controlla un potenziale zombie).
-    
-- **IDS signature + behavioural analysis**: combinare signature (es. Suricata/ Snort) con modelli di comportamento (SIEM).
-    
+### **6. Fragmentation Scan**
 
-#### **9.2 Contromisure pratiche**
+#### **6.1. Idea**
 
-- **Firewall stateful**: bloccare pacchetti non attesi e rate-limitare probe sospette.
-    
-- **Riassemblaggio e normalizzazione**: firewall/IDS che riassemblano frammenti e normalizzano il traffico prima di ispezionarlo.
-    
-- **Honeypot/Tarpit**: deviare gli scanner su ambienti controllati che raccolgono informazioni senza impatto alla produzione.
-    
-- **Hardening OS**: aggiornare gli stack TCP/IP per evitare implementazioni ambigue (es. IP ID prevedibile).
-    
-- **Logging e correlazione**: centralizzare eventi e impostare regole per blocchi dinamici (fail2ban, ipset).
-    
+La **fragmentation scan** frammenta i pacchetti di probe in piccoli datagrammi IP. L'obiettivo è rendere più difficile l'ispezione da parte di firewall o IDS che analizzano i pacchetti singolarmente senza riassemblare correttamente i frammenti.
 
-### **10. Best practice operative per chi difende (Feynman checklist)**
+Per esempio, i flag TCP o parte dell'header possono essere distribuiti su più frammenti. Se il dispositivo di sicurezza non mantiene stato o non ricostruisce il pacchetto, può non riconoscere la scansione.
 
-#### **10.1 Non fidarti di un singolo segnale**
+#### **6.2. Vantaggi**
 
-Combina evidenze: risposta RST, assenza di risposta, comportamento del window, ICMP, pattern temporale.
+- Aumenta la difficoltà di rilevamento basato su signature semplici.
 
-#### **10.2 Normalizza prima di analizzare**
+- Può aggirare sistemi che non bufferizzano o riassemblano sequenze di frammenti.
 
-Assicurati che i dispositivi di sicurezza facciano riassemblaggio dei frammenti e rimuovano evasion attempts.
+- Può rendere meno immediata la classificazione del probe.
 
-#### **10.3 Riduci superficie informativa**
+#### **6.3. Svantaggi**
 
-Elimina banner, disabilita servizi non necessari, non esporre host inutilmente.
+- È più lenta.
 
-#### **10.4 Monitora e rispondi automaticamente**
+- È sensibile a packet loss e riordinamento.
 
-Regole automatiche per bloccare scansioni ripetute e per inviare alert contestuali agli operatori.
+- Può produrre risultati poco affidabili.
 
-### **11. Esempi pratici (comandi e note interpretative)**
+- Alcuni firewall, sniffer o stack vulnerabili possono comportarsi male o andare in crash.
 
-- **SYN/ACK stealth (nmap)** — non esiste un’opzione diretta in nmap per inviare SYN/ACK puro come probe, ma si possono usare pacchetti grezzi con `hping3` per esperimenti (solo in laboratorio):  
-    `hping3 -S -p 80 --ack <target>` (es. costruire pacchetti atipici; uso con cautela).
-    
-- **ACK scan (nmap)**: `nmap -sA <target>` → mappa firewall.
-    
-- **Window scan (nmap)**: `nmap -sW <target>` → sfrutta il campo window per dedurre open/closed su sistemi vulnerabili.
-    
-- **FIN/NULL/Xmas**: `nmap -sF` / `nmap -sN` / `nmap -sX <target>` → utile per bypassare filtri semplici (attenzione alle incompatibilità OS).
-    
-- **Fragmentation**: `nmap -f <target>` o `--mtu` per aggiustare frammentazione; test in lab.
-    
-- **Idle scan**: `nmap -sI <zombie> <target>` → anonimizza la scansione (richiede zombie idoneo).
-    
+- Firewall/IDS moderni riassemblano e normalizzano i frammenti, neutralizzando la tecnica.
 
-### **12. Sintesi e raccomandazioni finali**
+> ⚠️ La frammentazione è una tecnica di evasione fragile: se il difensore normalizza il traffico prima dell'ispezione, il vantaggio dello scanner scompare.
 
-- Le tecniche stealth sono potenti ma fragili: funzionano solo contro determinati stack/filtri e sono sensibili a packet loss e rumore di rete.
-    
-- Per il difensore: assumere che l’attaccante utilizzi stealth e progettare rilevamento multilivello (normalizzazione, correlazione, rate limiting).
-    
-- Per lo studente/praticante: testare queste tecniche **solo** in ambienti controllati e con permesso; padroneggiare interpretazione dei risultati è molto più importante che imparare i comandi.
+---
+
+### **7. Idle Scan**
+
+#### **7.1. Concetto generale**
+
+L'**idle scan** è una tecnica stealth più sofisticata perché usa un terzo host, detto **zombie**, come intermediario. Lo scanner reale non comunica direttamente con la vittima in modo riconoscibile: costruisce pacchetti spoofati fingendo che provengano dallo zombie.
+
+Lo zombie deve avere due proprietà:
+
+- essere poco attivo, cioè non generare traffico proprio che alteri le misure;
+
+- usare un campo IP **Identification** (`IP ID`) prevedibile o incrementale.
+
+L'IP ID viene usato perché molti sistemi lo incrementano quando inviano pacchetti. Osservando quanto aumenta, lo scanner può dedurre se lo zombie ha inviato pacchetti a seguito dell'interazione con la vittima.
+
+![](imgs/Pasted%20image%2020260709010549.png)
+
+#### **7.2. Porta aperta sulla vittima**
+
+Caso in cui la porta target è aperta:
+
+1. lo scanner interroga lo zombie, per esempio con un `SYN/ACK`, e osserva il `RST` di risposta con un certo `IP ID`, per esempio `550`;
+
+2. lo scanner invia alla vittima un `SYN` spoofato, usando come IP sorgente l'indirizzo dello zombie;
+
+3. la vittima vede un `SYN` apparentemente proveniente dallo zombie e, se la porta è aperta, risponde allo zombie con `SYN/ACK`;
+
+4. lo zombie non ha iniziato alcuna connessione, quindi risponde alla vittima con `RST`;
+
+5. questa risposta incrementa l'IP ID dello zombie;
+
+6. lo scanner interroga di nuovo lo zombie e osserva che l'IP ID è aumentato più del normale, tipicamente di due unità rispetto alla prima osservazione.
+
+L'incremento extra indica che lo zombie ha ricevuto un `SYN/ACK` dalla vittima e ha risposto con `RST`. Quindi la porta interrogata sulla vittima era aperta.
+
+#### **7.3. Porta chiusa sulla vittima**
+
+Se la porta target è chiusa:
+
+1. lo scanner misura l'IP ID iniziale dello zombie;
+
+2. invia alla vittima un `SYN` spoofato con sorgente zombie;
+
+3. la vittima risponde allo zombie con `RST`, perché la porta è chiusa;
+
+4. lo zombie ignora il `RST` e non genera una nuova risposta;
+
+5. quando lo scanner interroga di nuovo lo zombie, l'IP ID è aumentato solo per la normale risposta data allo scanner.
+
+In questo caso non c'è incremento extra: lo scanner deduce che la porta è chiusa.
+
+#### **7.4. Porta filtrata**
+
+Se il traffico verso la vittima è filtrato, il `SYN` spoofato non produce alcuna risposta utile verso lo zombie. Dal punto di vista dello scanner, il risultato può assomigliare al caso della porta chiusa: l'IP ID dello zombie cresce solo per le interazioni dirette con lo scanner.
+
+Per questo idle scan può distinguere bene il caso **open**, ma può lasciare ambiguità tra **closed** e **filtered**.
+
+![](imgs/Pasted%20image%2020260709010708.png)
+
+#### **7.5. Vantaggi e limiti**
+
+Vantaggi:
+
+- la vittima vede traffico proveniente dallo zombie, non dallo scanner reale;
+
+- non c'è una conversazione diretta riconoscibile tra scanner e vittima;
+
+- può aggirare alcune forme di logging basate solo sull'IP sorgente.
+
+Limiti:
+
+- richiede uno zombie realmente idle;
+
+- richiede IP ID prevedibile;
+
+- traffico casuale dello zombie altera la misura;
+
+- molti sistemi moderni randomizzano o gestiscono l'IP ID per flusso;
+
+- IDS e sistemi di correlazione possono comunque rilevare anomalie.
+
+> 📌 L'idle scan è potente perché trasforma una variazione indiretta dell'IP ID in informazione sullo stato della porta della vittima.
+
+---
+
+### **8. Rilevazione e contromisure**
+
+#### **8.1. Rilevare scansioni stealth**
+
+I difensori possono cercare:
+
+- pacchetti `SYN/ACK` inattesi;
+
+- sequenze di `ACK` non associate a connessioni esistenti;
+
+- pattern FIN/NULL/Xmas;
+
+- frammentazione anomala;
+
+- molte risposte `RST` verso sorgenti sospette;
+
+- variazioni anomale di IP ID su host che potrebbero essere usati come zombie.
+
+La correlazione temporale è essenziale: un singolo pacchetto può sembrare innocuo, ma una sequenza sistematica su più porte o più host rivela la scansione.
+
+#### **8.2. Contromisure**
+
+Le difese principali sono:
+
+- usare firewall **stateful**, che scartano pacchetti fuori stato;
+
+- normalizzare e riassemblare i frammenti prima dell'ispezione;
+
+- filtrare combinazioni di flag TCP anomale;
+
+- randomizzare o rendere non globale l'IP ID;
+
+- centralizzare log e correlare eventi;
+
+- usare IDS/IPS con signature e analisi comportamentale;
+
+- applicare rate limiting e blocchi dinamici;
+
+- usare honeypot o tarpit per osservare scanner e rallentarli.
+
+---
+
+### **9. Sintesi finale**
+
+|Tecnica|Idea|Segnale principale|Limite|
+|---|---|---|---|
+|SYN/ACK scan|Usare `SYN/ACK` invece di `SYN`|`RST` indica porta chiusa|Nessuna risposta ambigua|
+|ACK scan|Mappare filtri/firewall|`RST` = unfiltered|Non distingue open/closed|
+|Window scan|Leggere TCP Window nel `RST`|Window positiva vs zero|Dipende dall'OS|
+|FIN/NULL/Xmas|Usare flag anomali|`RST` = closed, silenzio = open/filtered|OS e firewall moderni riducono affidabilità|
+|Fragmentation scan|Spezzare probe in frammenti IP|Evasione di filtri semplici|Fragile, lenta, normalizzabile|
+|Idle scan|Usare zombie e IP ID|Incremento extra dell'IP ID|Richiede zombie idle e IP ID prevedibile|
+
+> ✅ Punto d'esame: le scansioni stealth sfruttano ambiguità delle specifiche o differenze di implementazione. Il loro risultato va sempre interpretato probabilisticamente: assenza di risposta, `RST`, window size e IP ID sono indizi, non verità assolute.

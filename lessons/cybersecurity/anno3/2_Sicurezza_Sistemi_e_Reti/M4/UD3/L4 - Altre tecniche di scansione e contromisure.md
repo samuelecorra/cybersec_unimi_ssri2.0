@@ -1,211 +1,418 @@
 ## **Lezione 4: Altre tecniche di scansione e contromisure**
 
-### **1. Introduzione — obiettivo della lezione**
+### **1. Introduzione**
 
-In questa lezione vediamo tecniche pratiche avanzate di discovery e scanning (UDP scan, FTP bounce, OS fingerprinting, traceroute, evasione firewall/IDS) e, per ciascuna, le contromisure efficaci. Approccio Feynman: partiamo dal principio, osserviamo il comportamento della rete, traduciamo in comandi reali e termini di difesa.
+Questa lezione completa l'unità sul network e port scanning presentando alcune tecniche ulteriori e le principali contromisure difensive. Dopo le scansioni TCP classiche e stealth, vengono analizzati:
 
-### **2. UDP scan**
+- **UDP scan**, più lento e ambiguo del TCP scan;
 
-#### **2.1 Principio e comportamento**
+- **FTP bounce scan**, che sfrutta un server FTP come intermediario;
 
-Nel UDP scan lo scanner invia datagrammi UDP (spesso con 0 byte di payload) alle porte target e interpreta le eventuali risposte ICMP o UDP. Poiché molti servizi UDP non rispondono se non c’è un trigger applicativo, il risultato spesso sarà **open|filtered** (assenza di risposta) piuttosto che un `open` netto. Risultati tipici:
+- **OS fingerprinting**, per dedurre il sistema operativo da differenze implementative;
 
-- **Risposta UDP applicativa** → `open` (es. DNS risponde).
-    
-- **ICMP port unreachable** → `closed`.
-    
-- **Nessuna risposta** → `open|filtered`.
-    
+- **nmap**, come strumento automatico di scansione;
 
-#### **2.2 Vantaggi e limiti**
+- **traceroute**, per ricostruire il percorso dei pacchetti;
 
-Vantaggio: permette di scoprire servizi UDP (DNS, NTP, SNMP, etc.). Limite: molto più lento del TCP perché ci si basa su timeout ICMP e molte reti bloccano o limitano ICMP. Per efficienza, si inviano probe applicative (es. query DNS su porta 53) invece di datagrammi vuoti.
+- contromisure con firewall, IDS/IPS, filtraggio e hardening.
 
-#### **2.3 Esempio pratico**
-
-```
-nmap -sU -p 53,123,161 192.168.1.0/24
-# Per DNS: nmap --script=dns-recursion -p 53 <target> (probe applicativa)
-```
-
-#### **2.4 Contromisure**
-
-- Limitare risposte a query non autenticate; rate-limitare UDP; disabilitare servizi non necessari; applicare filtraggio ICMP a livello perimetro.
-    
+> 📌 La scansione non riguarda solo "quali porte sono aperte": può rivelare topologia, filtri, sistemi operativi, versioni software e percorsi di rete.
 
 ---
 
-### **3. FTP bounce scan**
+### **2. UDP Scan**
 
-#### **3.1 Principio**
+#### **2.1. Principio**
 
-L’FTP bounce sfrutta il comando `PORT` della modalità FTP attiva: un server FTP viene istruito a connettersi ad un terzo indirizzo/porta (spoof del target). Il server FTP diventa un “zombie” che prova connessioni verso la vittima; osservando l’esito, l’attaccante deduce lo stato della porta target. È analogo all’idlescan ma usa un servizio applicativo come vettore.
+La **UDP scan** invia datagrammi UDP verso una o più porte del target. Spesso il datagramma contiene **0 byte di dati**, ma può anche contenere un payload specifico per l'applicazione interrogata.
 
-#### **3.2 Vantaggi e svantaggi**
+L'interpretazione tipica è:
 
-- Vantaggi: stealth (la vittima vede il server FTP come sorgente), non richiede raw packets.
-    
-- Svantaggi: funziona solo se il server FTP non blocca `PORT` per IP diversi, è lento e lascia tracce su server FTP usati come riflettori.
-    
+|Risposta|Interpretazione|
+|---|---|
+|Risposta UDP applicativa|Porta aperta|
+|ICMP Port Unreachable|Porta chiusa|
+|Nessuna risposta|Porta aperta oppure filtrata|
+|Altri ICMP unreachable / administratively prohibited|Porta filtrata|
 
-#### **3.3 Contromisure pratiche**
+La difficoltà principale è che molti servizi UDP non rispondono a pacchetti vuoti o generici. Quindi l'assenza di risposta non permette quasi mai di concludere con certezza che la porta sia chiusa.
 
-- Configurare server FTP per rifiutare richieste `PORT` con IP diversi da quello del client; limitare le porte <1024; disabilitare modalità attiva se non necessaria; logging e monitor delle richieste `PORT`.
-    
+#### **2.2. Perché è lenta**
+
+La UDP scan è più lenta della scansione TCP perché lo scanner deve attendere timeout. Se non arriva risposta, bisogna distinguere tra più possibilità:
+
+- la porta è aperta ma il servizio non risponde a quel payload;
+
+- la porta è filtrata;
+
+- il pacchetto o la risposta sono stati persi;
+
+- l'ICMP di errore è stato limitato o bloccato.
+
+#### **2.3. Probe applicativi**
+
+Per aumentare l'affidabilità, spesso si usano pacchetti UDP specifici per il servizio atteso. Per esempio, se si vuole interrogare un DNS server sulla porta 53, conviene inviare una vera query DNS invece di un datagramma vuoto.
+
+Questo riduce l'ambiguità perché un servizio UDP reale è più propenso a rispondere a una richiesta applicativa valida.
+
+> ⚠️ Una scansione UDP efficace richiede conoscenza del protocollo applicativo. Il solo "pacchetto vuoto" spesso produce risultati `open|filtered`.
+
+#### **2.4. Esempi operativi**
+
+In laboratorio, una scansione UDP mirata può essere eseguita con `nmap` su un insieme ristretto di porte, perché una scansione UDP completa è molto lenta:
+
+```bash
+nmap -sU -p 53,123,161 192.168.1.0/24
+```
+
+Per servizi noti conviene usare probe applicativi o script specifici, per esempio una richiesta DNS su porta 53:
+
+```bash
+nmap --script=dns-recursion -p 53 <target>
+```
+
+---
+
+### **3. FTP Bounce Scan**
+
+#### **3.1. Richiamo al protocollo FTP**
+
+FTP, **File Transfer Protocol**, è usato per trasferire file tra client e server. Storicamente usa due connessioni:
+
+- una connessione di **controllo**, tipicamente sulla porta **21**, usata per inviare comandi;
+
+- una connessione di **dati**, storicamente associata alla porta **20** lato server nella modalità attiva.
+
+![](imgs/Pasted%20image%2020260709010828.png)
+
+Nella modalità FTP attiva, il client può usare il comando `PORT` per indicare al server su quale indirizzo IP e su quale porta aprire la connessione dati.
+
+#### **3.2. Meccanismo della scansione**
+
+La **FTP bounce scan** sfrutta proprio il comando `PORT`. L'attaccante usa un server FTP come intermediario, in modo simile a uno zombie:
+
+1. l'attaccante apre una sessione di controllo verso il server FTP;
+
+2. invia un comando `PORT` indicando l'indirizzo e la porta della vittima;
+
+3. chiede al server FTP di effettuare un trasferimento dati;
+
+4. il server FTP prova a connettersi alla porta della vittima indicata;
+
+5. dall'esito riportato nella sessione FTP, l'attaccante deduce se la porta della vittima è aperta o chiusa.
+
+Se il server FTP riesce ad aprire la connessione dati, la porta della vittima è probabilmente aperta. Se il tentativo fallisce e il server FTP restituisce un errore, la porta può essere chiusa o filtrata.
+
+![](imgs/Pasted%20image%2020260709010847.png)
+
+#### **3.3. Vantaggi e limiti**
+
+Vantaggi:
+
+- la vittima vede traffico proveniente dal server FTP, non direttamente dall'attaccante;
+
+- non servono raw socket o pacchetti TCP/IP costruiti manualmente;
+
+- la tecnica sfrutta un comportamento applicativo legittimo del protocollo FTP.
+
+Limiti:
+
+- lascia tracce sul server FTP usato come intermediario;
+
+- funziona solo con server FTP configurati in modo permissivo;
+
+- è lenta;
+
+- oggi molti server FTP impediscono questo abuso.
+
+#### **3.4. Contromisure**
+
+Le difese principali sono:
+
+- rifiutare comandi `PORT` che indicano un indirizzo IP diverso da quello del client FTP;
+
+- impedire che il server FTP apra connessioni verso porte privilegiate o inferiori a `1024`;
+
+- disabilitare la modalità attiva se non necessaria;
+
+- loggare e monitorare comandi `PORT` anomali.
+
+> 📌 FTP bounce mostra che anche un protocollo applicativo legittimo può diventare un vettore di scansione se permette a un client di far connettere il server verso terzi.
 
 ---
 
 ### **4. OS Fingerprinting**
 
-#### **4.1 Scopo e principio**
+#### **4.1. Scopo**
 
-L’OS fingerprinting determina il sistema operativo analizzando differenze di implementazione dello stack TCP/IP: ISN generation, valori della window, comportamento a pacchetti non standard, risposta a probe che violano o sfruttano ambiguità RFC. Si può eseguire **attivamente** (invia probe e osserva le risposte) o **passivamente** (osservando traffico reale).
+L'**OS fingerprinting** cerca di determinare quale sistema operativo stia usando un host remoto. L'idea è che gli stack TCP/IP non sono implementati in modo perfettamente identico: sistemi operativi e versioni diverse rispondono in modo leggermente diverso a pacchetti normali o anomali.
 
-#### **4.2 Tecniche e segnali tipici**
+Queste differenze vengono raccolte in database di fingerprint: osservando le risposte del target, lo scanner confronta il comportamento con profili noti.
 
-- **FIN prob**: diversi OS rispondono diversamente a FIN su porta chiusa.
-    
-- **FIN/SYN probing**: alcune implementazioni restituiscono flag particolari.
-    
-- **Bogus-flag probes**: bit TCP non usati possono essere mantenuti in risposta su vecchie versioni.
-    
-- **Window size e ISN sampling**: valori e algoritmi mostrano pattern OS-specific.
-    
-- **ICMP quoting length**: alcuni OS includono più/meno byte nel reply ICMP.
-    
+#### **4.2. Fingerprinting attivo e passivo**
 
-#### **4.3 Difese contro fingerprinting**
+Esistono due approcci.
 
-- **Detection**: NIDS che segnalano probe anomali.
-    
-- **Blocking / Normalization**: firewall che normalizzano pacchetti (strip di flags non standard).
-    
-- **Deception**: cambiare la “finta” fingerprint (OS fingerprint spoofing) o usare honeypots per ingannare scanner.
-    
+- **Fingerprinting attivo**: lo scanner invia pacchetti appositi, anche anomali, e osserva come il target risponde.
+
+- **Fingerprinting passivo**: lo scanner osserva traffico reale già presente e deduce il sistema operativo senza generare pacchetti.
+
+Il fingerprinting attivo è più ricco di informazioni ma più rilevabile. Quello passivo è meno intrusivo, ma dipende dal traffico disponibile.
+
+#### **4.3. Segnali usati**
+
+Esempi di segnali citati nel transcript:
+
+- risposta a pacchetti `FIN` su porte chiuse;
+
+- risposta a pacchetti con flag `FIN` e `SYN` contemporaneamente;
+
+- comportamento davanti a flag TCP non usati o "bogus";
+
+- dimensione della TCP Window;
+
+- quantità di dati del pacchetto originale riportata dentro messaggi ICMP di errore;
+
+- generazione degli Initial Sequence Number;
+
+- andamento del campo IP Identification (`IP ID`).
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **4.4. Esempi di differenze implementative**
+
+Alcuni esempi didattici:
+
+- sistemi diversi possono rispondere o non rispondere a un pacchetto `FIN` inatteso;
+
+- alcuni sistemi possono mantenere flag anomali anche nella risposta;
+
+- sistemi come AIX, OpenBSD o FreeBSD possono mostrare valori di window size differenti;
+
+- alcune implementazioni includono più di 8 byte del pacchetto originale nei messaggi ICMP di errore;
+
+- pattern di incremento dell'IP ID o degli ISN possono suggerire una famiglia di sistemi operativi.
+
+> ⚠️ Il fingerprinting non è una prova matematica: produce una stima basata su pattern. Firewall, NAT, proxy, normalizzatori e sistemi di deception possono alterare i risultati.
+
+#### **4.5. Difese contro il fingerprinting**
+
+Le contromisure includono:
+
+- IDS/NIDS che rilevano probe anomali;
+
+- firewall che filtrano pacchetti non standard;
+
+- normalizzazione del traffico;
+
+- riduzione dei banner applicativi;
+
+- modifica o mascheramento della fingerprint;
+
+- honeypot o sistemi di deception che restituiscono fingerprint ingannevoli.
 
 ---
 
-### **5. nmap: il Network Mapper**
+### **5. nmap: Network Mapper**
 
-#### **5.1 Funzionalità principali**
+#### **5.1. Funzione**
 
-nmap è lo strumento di riferimento per port & network scanning: supporta SYN/Connect/UDP/ICMP scans, OS detection, version detection, scripting (NSE) e molte opzioni di timing/evazione. È la cassetta degli attrezzi sia per il pentester che per il sysadmin.
+**nmap** sta per **Network Mapper** ed è uno strumento open source che automatizza molte tecniche di scansione viste nelle lezioni precedenti.
 
-#### **5.2 Esempi utili**
+Può eseguire:
 
+- host discovery;
+
+- port scanning TCP e UDP;
+
+- SYN scan, connect scan e ACK scan;
+
+- version detection;
+
+- OS detection;
+
+- script di enumerazione e vulnerability checking tramite NSE;
+
+- scansioni su un singolo host, su più host o su intere sottoreti.
+
+L'output tipico è un inventario delle porte aperte, dei servizi disponibili e, quando possibile, del sistema operativo e delle versioni software.
+
+#### **5.2. Esempi operativi**
+
+Esempi tipici in un ambiente autorizzato o di laboratorio:
+
+```bash
+nmap -sS -sV -O -p 1-1024 10.0.0.5
+nmap -sU -p 53,123 10.0.0.0/24
+nmap --script vuln 10.0.0.5
 ```
-nmap -sS -sV -O -p 1-1024 10.0.0.5   # SYN scan + version + OS detection
-nmap -sU -p 53,123 10.0.0.0/24      # UDP scan mirato
-nmap --script vuln 10.0.0.5         # lancia script NSE per vulnerabilità
-```
 
-#### **5.3 Avvertenza**
+Nel primo caso si combinano SYN scan, rilevamento versione e OS detection; nel secondo si esegue una scansione UDP mirata; nel terzo si usano script NSE orientati alla ricerca di vulnerabilità note.
 
-Molti IDS hanno regole per rilevare nmap; l’uso in ambienti non autorizzati è illegale.
+#### **5.3. Rilevabilità**
+
+nmap è molto usato anche dagli amministratori, ma proprio per questo molti IDS/IPS hanno regole per riconoscere pattern tipici delle sue scansioni. L'uso su sistemi non autorizzati può avere conseguenze legali e operative.
+
+> 📌 nmap non è "l'attacco": è uno strumento. Il contesto e l'autorizzazione determinano se il suo uso è amministrazione, audit o ricognizione malevola.
 
 ---
 
 ### **6. Traceroute**
 
-#### **6.1 Principio tecnico**
+#### **6.1. Principio**
 
-Traceroute ricostruisce il percorso verso una destinazione incrementando il TTL dei pacchetti e raccogliendo i messaggi ICMP “Time Exceeded” (ogni hop restituisce l’indirizzo del router che decrementa TTL a 0). Può usare ICMP, UDP o TCP (tcptraceroute) a seconda di ciò che si vuole raggiungere/aggirare.
+**Traceroute** ricostruisce il percorso seguito dai pacchetti verso una destinazione sfruttando il campo **TTL** degli header IP.
 
-#### **6.2 Limiti pratici**
+Il TTL, **Time To Live**, viene decrementato di 1 a ogni hop. Quando raggiunge 0, il router scarta il pacchetto e risponde con un messaggio ICMP **Time Exceeded**. Tale messaggio contiene l'indirizzo del router che ha scartato il pacchetto.
 
-Firewall/router possono bloccare o rate-limitare i messaggi ICMP o i pacchetti con TTL basso; per questo traceroute può terminare prima della destinazione. L’uso di TCP (port 80) a volte permette di superare filtri che bloccano UDP/ICMP.
+Traceroute invia pacchetti con TTL crescente:
 
-#### **6.3 Comandi**
+1. TTL = 1: risponde il primo router;
 
-```
-traceroute <host>            # UDP/ICMP depending on OS
-traceroute -T -p 80 <host>   # TCP traceroute (on systems that support it)
+2. TTL = 2: risponde il secondo router;
+
+3. TTL = 3: risponde il terzo router;
+
+4. e così via, fino alla destinazione.
+
+In questo modo si ottiene la sequenza degli hop attraversati e spesso anche una misura dei tempi di risposta.
+
+![](imgs/Pasted%20image%2020260709011130.png)
+
+#### **6.2. Termine della scansione**
+
+La procedura termina quando:
+
+- arriva una risposta dalla destinazione finale;
+
+- oppure si raggiunge un limite massimo di hop;
+
+- oppure i pacchetti vengono filtrati e non si ricevono più risposte utili.
+
+Se la destinazione non accetta il tipo di pacchetto usato, può arrivare un messaggio ICMP di porta non raggiungibile o un'altra indicazione di errore.
+
+#### **6.3. Limiti e varianti**
+
+Molti firewall bloccano ICMP o pacchetti usati da traceroute, perché rivelano informazioni sulla topologia interna della rete. Per questo esistono varianti:
+
+- traceroute basato su UDP;
+
+- traceroute basato su ICMP;
+
+- **tcptraceroute**, che usa pacchetti TCP, spesso `SYN`, verso porte come 80 o 443 per attraversare filtri che lasciano passare traffico web.
+
+> ⚠️ Traceroute può rivelare router, segmenti intermedi e tempi di attraversamento: per un difensore sono informazioni utili, ma per un attaccante sono dati di ricognizione.
+
+#### **6.4. Esempi operativi**
+
+Esempi di comandi usati in laboratorio:
+
+```bash
+traceroute <host>
+traceroute -T -p 80 <host>
 tcptraceroute <host> 80
 ```
 
----
-
-### **7. Firewall / IDS evasion & spoofing**
-
-#### **7.1 Tecniche di evasione comuni**
-
-- **Fragmentation**: spezzare probe in frammenti IP per ostacolare signature-based IDS che non riassemblano.
-    
-- **Timing (low-and-slow)**: rallentare la scansione per evitare pattern riconoscibili.
-    
-- **Payload obfuscation**: variare payload e flags per sfuggire a signature.
-    
-- **Source distribution**: usare molte sorgenti (botnet, proxy) per diluire il traffico.
-    
-- **Packet crafting**: inviare pacchetti non standard per provocare risposte diverse dagli stack target.
-    
-
-#### **7.2 Contromisure efficaci**
-
-- **Stateful inspection e normalizzazione**: i firewall moderni devono riassemblare frammenti e normalizzare flussi prima di ispezionarli.
-    
-- **Rate limiting & anomaly detection**: limiti di connessioni per IP/prefix e IDS behaviorali (SIEM) per correlare eventi.
-    
-- **Honeypots / tarpits**: deviare scanner su risorse controllate e rallentarli.
-    
-- **Ingress filtering (BCP38)**: impedire spoofing degli indirizzi sorgente a livello ISP.
-    
+La variante TCP verso porta 80 è utile quando i filtri bloccano UDP o ICMP ma lasciano passare traffico web.
 
 ---
 
-### **8. Difese generali e best practice**
+### **7. Firewall, IDS e IPS**
 
-#### **8.1 Prevenzione**
+#### **7.1. Rilevazione**
 
-- Disabilitare servizi non necessari; chiudere porte non utilizzate; usare firewall stateful; applicare least privilege.
-    
+Le attività di scanning sono spesso riconoscibili perché producono pattern:
 
-#### **8.2 Rilevazione**
+- molte porte interrogate in sequenza;
 
-- Deploy NIDS (Snort/Suricata), centralizzazione log (SIEM), regole per rilevare pattern di scansione (SYN floods, FIN/NULL/Xmas sequences).
-    
+- molte destinazioni contattate sulla stessa porta;
 
-#### **8.3 Risposta**
+- pacchetti con flag anomali;
 
-- Blocchi dinamici (ipset, firewall automation), throttling, engagement con honeypot per intelligence sulla fonte.
-    
+- molte connessioni incomplete;
+
+- molte risposte `RST`;
+
+- ICMP o UDP ripetuti;
+
+- probe riconducibili a tool noti come nmap.
+
+Un **IDS** rileva e segnala questi pattern. Un **IPS** può anche bloccare o modificare il traffico in tempo reale.
+
+#### **7.2. Dinamica attaccante-difensore**
+
+Il transcript sottolinea l'alternanza tipica:
+
+- gli scanner introducono tecniche nuove per aggirare firewall e IDS;
+
+- i sistemi difensivi aggiornano regole, signature e normalizzazioni;
+
+- gli scanner cambiano timing, flag, frammentazione, sorgenti e payload;
+
+- i difensori correlano più segnali e introducono controlli stateful.
+
+La scansione è quindi una fase preliminare dell'attacco, ma anche un comportamento che le difese moderne cercano attivamente di riconoscere e interrompere.
+
+#### **7.3. Evasione firewall/IDS**
+
+Tecniche di evasione ricorrenti sono:
+
+- **frammentazione IP**, per spezzare i probe e rendere più difficile il matching delle signature se l'IDS non riassembla correttamente;
+
+- **timing low-and-slow**, per diluire la scansione nel tempo ed evitare soglie banali;
+
+- **payload obfuscation**, per cambiare contenuto e flag dei pacchetti senza cambiare lo scopo della sonda;
+
+- **source distribution**, tramite molte sorgenti, proxy o botnet, per rendere meno evidente l'origine della ricognizione;
+
+- **packet crafting**, cioè invio di pacchetti non standard per provocare risposte particolari negli stack TCP/IP.
+
+Le contromisure coerenti sono ispezione stateful, normalizzazione e riassemblaggio prima dell'analisi, rate limiting, anomaly detection, honeypot/tarpit e, contro lo spoofing, ingress filtering secondo il principio BCP38.
+
+---
+
+### **8. Contromisure generali**
+
+Le difese più importanti sono:
+
+- **prevenzione**: disabilitare servizi non necessari e chiudere porte non usate;
+
+- **filtraggio**: usare firewall, preferibilmente stateful, per accettare solo traffico coerente con connessioni legittime;
+
+- **normalizzazione**: riassemblare frammenti e rimuovere ambiguità prima dell'ispezione;
+
+- **rilevazione**: usare IDS/NIDS per riconoscere pattern di scansione;
+
+- **prevenzione attiva**: usare IPS per bloccare traffico ritenuto malevolo;
+
+- **blacklisting dinamico**: bloccare temporaneamente IP sorgente sospetti;
+
+- **rate limiting**: limitare il numero di tentativi o pacchetti anomali;
+
+- **hardening applicativo**: ridurre banner, versioni esposte e servizi pubblici;
+
+- **logging centralizzato**: correlare eventi su firewall, host, server e IDS.
+
+> 📌 La difesa migliore non è solo "bloccare lo scan": è ridurre le informazioni utili che uno scan può ottenere.
 
 ---
 
-### **9. Esempi pratici rapidi**
+### **9. Sintesi finale**
 
-#### **9.1 UDP scan (nmap)**
+|Tecnica|Scopo|Segnale osservato|Contromisure|
+|---|---|---|---|
+|UDP scan|Scoprire servizi UDP|Risposta UDP, ICMP Port Unreachable, timeout|Rate limit, filtri UDP/ICMP, probe applicativi controllati|
+|FTP bounce|Usare FTP server come intermediario|Esito del comando/connessione dati|Bloccare `PORT` verso IP diversi dal client, limitare porte <1024|
+|OS fingerprinting|Identificare OS remoto|Differenze nello stack TCP/IP|Normalizzazione, filtraggio, deception, riduzione banner|
+|nmap|Automatizzare scanning|Pattern noti di probe|IDS/IPS, rate limit, logging|
+|Traceroute|Mappare percorso di rete|ICMP Time Exceeded per TTL crescente|Filtrare ICMP/TTL basso, limitare risposte informative|
 
-```
-nmap -sU -p 53 192.168.1.0/24
-```
+> ✅ Punto d'esame: le contromisure devono agire prima, durante e dopo la scansione: ridurre la superficie esposta, filtrare il traffico anomalo, rilevare pattern sospetti e reagire automaticamente quando l'attività diventa chiaramente ricognitiva.
 
-#### **9.2 FTP bounce (storico) — test in lab**
+In forma intuitiva:
 
-- Non eseguire su sistemi di terzi; riprodurre su lab con server FTP vulnerabile per capire meccanica PORT→target.
-    
+- per mappare una rete si inviano sonde mirate e si interpretano risposte, errori e silenzi;
 
-#### **9.3 OS fingerprinting (nmap)**
+- le tecniche avanzate sfruttano sia protocolli applicativi, come FTP, sia differenze implementative degli stack;
 
-```
-nmap -O 10.0.0.5
-```
-
-#### **9.4 Traceroute TCP**
-
-```
-tcptraceroute example.com 80
-```
-
----
-
-### **10. Sintesi Feynmaniana**
-
-- **Idea semplice:** per mappare una rete uso sonde mirate (UDP/TCP/ICMP/APP) e interpreto le risposte; le tecniche avanzate sfruttano funzionalità di servizi o debolezze di implementazione.
-    
-- **Cosa cambia la pratica:** UDP è rumoroso e lento, FTP bounce e idlescan permettono anonimato/reflection, fingerprinting sfrutta varianze implementative, traceroute rivela path ma può essere bloccato.
-    
-- **Difesa:** multilivello: ridurre superficie, normalizzare e riassemblare, rilevare pattern, bloccare spoofing e usare deception quando utile.
-    
-
----
+- la difesa efficace è multilivello: riduzione della superficie, normalizzazione, rilevazione, blocco dello spoofing e deception quando utile.

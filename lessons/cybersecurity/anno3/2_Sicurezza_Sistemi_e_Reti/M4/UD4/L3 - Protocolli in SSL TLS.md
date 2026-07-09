@@ -2,237 +2,359 @@
 
 ### **1. Introduzione generale**
 
-Il protocollo **SSL/TLS** è composto da più _sottoprotocolli_, ognuno con un compito preciso.  
-Tutti sfruttano il **Record Protocol** per la trasmissione sicura dei messaggi.
+SSL/TLS è una **suite di protocolli**. Non è composto da un unico meccanismo, ma da più protocolli coordinati che usano il **Record Protocol** per scambiarsi messaggi tra client e server.
 
 I principali protocolli interni sono:
 
-1. **Change Cipher Spec Protocol**
-    
-2. **Alert Protocol**
-    
-3. **Handshake Protocol**
-    
+- **Change Cipher Spec Protocol**;
 
-Questi tre livelli gestiscono la vita completa di una connessione sicura:
+- **Alert Protocol**;
 
-- negoziazione iniziale,
-    
-- gestione delle chiavi e della cifratura,
-    
-- segnalazione di errori o avvisi.
-    
+- **Handshake Protocol**;
+
+- **Application Data Protocol**, cioè il trasporto dei dati applicativi dopo la negoziazione.
+
+Questi protocolli gestiscono l’intero ciclo di vita di una connessione sicura:
+
+- negoziazione iniziale;
+
+- autenticazione;
+
+- scelta degli algoritmi;
+
+- generazione delle chiavi;
+
+- attivazione della cifratura;
+
+- segnalazione di errori;
+
+- trasporto dei dati applicativi.
+
+Il punto comune è che i messaggi vengono inseriti in record TLS: ciascun record ha un’intestazione e un payload, e il campo `Content Type` indica se quel payload appartiene a Handshake, Alert, Change Cipher Spec o Application Data.
+
+> 📌 Per capire TLS bisogna distinguere il ruolo dei protocolli: Handshake negozia, Change Cipher Spec attiva i parametri, Alert segnala errori, Record Protocol protegge e trasporta i messaggi.
 
 ---
 
 ### **2. Change Cipher Spec Protocol**
 
-#### **a. Funzione**
+#### **2.1. Funzione**
 
-È il protocollo più semplice tra i tre.  
-Serve per **attivare i nuovi parametri crittografici** che sono stati negoziati durante l’handshake.
+Il **Change Cipher Spec Protocol** è il protocollo più semplice della suite SSL/TLS. È costituito da un solo tipo di messaggio e serve a segnalare il passaggio ai parametri crittografici appena negoziati.
 
-#### **b. Struttura**
+Durante l’handshake, client e server costruiscono uno stato crittografico in sospeso, detto _pending state_. Quando una parte invia `ChangeCipherSpec`, notifica all’altra che da quel momento quello stato deve diventare lo **stato corrente** della connessione.
 
-- Contiene **un solo messaggio**, composto da **un singolo byte** con valore `1`.
-    
-- Quando viene ricevuto, indica che il destinatario deve:
-    
-    - **copiare lo stato “in sospeso” nello stato corrente**,
-        
-    - **aggiornare la suite di cifratura** (nuove chiavi, algoritmi e MAC) per la connessione in corso.
-        
+#### **2.2. Struttura**
 
-In sintesi:
+Il messaggio contiene **un singolo byte** di valore `1`.
 
-> Dopo aver concordato le chiavi e gli algoritmi, il messaggio `ChangeCipherSpec` segnala: “Da ora in poi usiamo le nuove regole di sicurezza”.
+Quando viene ricevuto, il destinatario deve:
+
+- copiare lo stato “in sospeso” nello stato corrente;
+
+- iniziare a usare le nuove chiavi;
+
+- applicare la cipher suite negoziata;
+
+- proteggere i messaggi successivi con i nuovi algoritmi.
+
+> ⚠️ `ChangeCipherSpec` non negozia gli algoritmi: la negoziazione è compito dell’Handshake Protocol. Il suo unico ruolo è segnalare: “da ora in poi usiamo i parametri già concordati”.
 
 ---
 
 ### **3. Alert Protocol**
 
-#### **a. Scopo**
+#### **3.1. Scopo**
 
-Gestisce la **segnalazione di eventi o errori** durante la comunicazione SSL/TLS.  
-Serve a notificare l’entità peer (client o server) di eventuali problemi.
+L’**Alert Protocol** serve a trasmettere avvisi e allarmi quando qualcosa non sta avvenendo correttamente durante una comunicazione SSL/TLS.
 
-#### **b. Struttura**
+Gli alert vengono inviati al peer, cioè all’altra entità della connessione, e sono a loro volta trasportati dentro record TLS. Quando lo stato crittografico è già attivo, anche gli alert vengono compressi, cifrati e autenticati secondo lo stato corrente.
 
-Ogni messaggio di _alert_ è composto da **due byte**:
+#### **3.2. Struttura**
 
-1. **Byte 1 – Livello di gravità**
-    
-    - `1` → _warning_ (avviso)
-        
-    - `2` → _fatal_ (errore irreversibile)
-        
-2. **Byte 2 – Codice di errore specifico**, che identifica il tipo di problema.
-    
+Ogni messaggio di alert è composto da **due byte**:
 
-#### **c. Comportamento**
+|Campo|Significato|
+|---|---|
+|Primo byte|Livello di gravità: `warning` oppure `fatal`|
+|Secondo byte|Codice specifico dell’alert|
 
-- Gli _alert_ vengono **compressi e cifrati** secondo lo stato di sessione attuale.
-    
-- Se il livello è _fatal_, la connessione viene **interrotta immediatamente**.
-    
-- Altre connessioni appartenenti alla stessa sessione possono continuare, ma **non se ne possono aprire di nuove**.
-    
+Il livello di gravità indica se il problema è recuperabile o no.
 
-**Esempio:**  
-Un alert _fatal: bad_record_mac_ indica che il MAC ricevuto non coincide con quello atteso → possibile manomissione del messaggio.
+- Un alert **warning** segnala una condizione anomala ma non necessariamente irreversibile.
+
+- Un alert **fatal** indica un errore grave: SSL/TLS interrompe immediatamente la connessione coinvolta.
+
+Se l’alert è fatale, le altre connessioni già aperte nella stessa sessione possono continuare, ma non è più possibile aprire nuove connessioni all’interno di quella sessione.
+
+**Esempio:** un alert `bad_record_mac` indica che il MAC ricevuto non coincide con quello atteso. Questo può indicare corruzione del messaggio, errore di chiave o tentativo di manomissione.
 
 ---
 
 ### **4. Handshake Protocol**
 
-#### **a. Obiettivo**
+#### **4.1. Obiettivo**
 
-Il cuore del protocollo SSL/TLS.  
-Serve a:
+L’**Handshake Protocol** è il protocollo di negoziazione di SSL/TLS. Serve a fissare i parametri della comunicazione sicura prima che inizino i dati applicativi protetti.
 
-- **autenticare client e server**,
-    
-- **negoziare algoritmi di cifratura e MAC**,
-    
-- **scambiare o generare chiavi crittografiche condivise**.
-    
+In particolare, l’handshake permette di:
 
-Dopo la conclusione dell’handshake, inizia la trasmissione sicura dei dati.
+- autenticare il server;
 
-#### **b. Struttura dei messaggi**
+- autenticare opzionalmente il client;
+
+- scegliere la versione del protocollo;
+
+- scegliere la cipher suite;
+
+- negoziare algoritmo di cifratura e meccanismo di MAC;
+
+- scambiare i dati necessari alla generazione delle chiavi;
+
+- verificare che entrambe le parti abbiano visto la stessa sequenza di messaggi.
+
+#### **4.2. Struttura dei messaggi**
 
 Ogni messaggio dell’handshake ha tre campi principali:
 
-|Campo|Descrizione|
-|---|---|
-|**Type**|Identifica il tipo di messaggio (1 byte, tra 10 valori possibili)|
-|**Length**|Lunghezza del messaggio (3 byte)|
-|**Content**|Parametri e dati del messaggio|
+|Campo|Dimensione|Descrizione|
+|---|---|---|
+|**Type**|1 byte|Identifica il tipo di messaggio dell’handshake|
+|**Length**|3 byte|Indica la lunghezza del contenuto|
+|**Content**|Variabile|Contiene parametri, random, certificati o dati di scambio chiavi|
+
+Il campo `Type` identifica uno dei messaggi previsti dal protocollo; `Length` permette al destinatario di sapere quanti byte leggere; `Content` contiene il materiale effettivo della negoziazione.
 
 ---
 
 ### **5. Sequenza dei messaggi di Handshake**
 
-Il protocollo segue una precisa sequenza logica di messaggi:
+Il protocollo segue una sequenza logica di messaggi:
 
 |Ordine|Messaggio|Contenuto / Funzione|
 |---|---|---|
-|1|**Hello Request**|Richiesta dal server al client di iniziare un handshake.|
-|2|**Client Hello**|Il client invia: versione TLS, numero casuale (_random_), session ID, lista di cipher suite e metodi di compressione supportati.|
-|3|**Server Hello**|Il server sceglie e comunica: versione TLS, numero casuale, session ID, cipher suite e metodo di compressione.|
-|4|**Certificate**|Il server invia la propria catena di certificati X.509v3 (opzionale anche il client).|
-|5|**Server Key Exchange**|Il server comunica i parametri per lo scambio di chiavi (es. Diffie-Hellman) e la firma digitale.|
-|6|**Certificate Request**|Il server può richiedere il certificato del client (opzionale).|
-|7|**Server Done**|Indica la fine della fase del server.|
-|8|**Client Certificate**|(se richiesto) il client invia il proprio certificato.|
-|9|**Client Key Exchange**|Il client invia i parametri per generare la chiave condivisa.|
-|10|**Certificate Verify**|Il client prova la proprietà del certificato firmando un messaggio.|
-|11|**Change Cipher Spec**|Attivazione delle chiavi e algoritmi negoziati.|
-|12|**Finished**|Entrambe le parti confermano l’integrità di tutti i messaggi scambiati.|
+|1|**Hello Request**|Richiesta del server al client di iniziare un handshake.|
+|2|**Client Hello**|Versione TLS, random del client, session ID, cipher suite e metodi di compressione supportati.|
+|3|**Server Hello**|Versione scelta, random del server, session ID, cipher suite e metodo di compressione selezionati.|
+|4|**Certificate**|Certificato o catena di certificati X.509v3 del server; eventualmente anche del client.|
+|5|**Server Key Exchange**|Parametri del server per lo scambio delle chiavi, se necessari.|
+|6|**Certificate Request**|Richiesta opzionale del certificato client.|
+|7|**Server Done**|Fine dei messaggi iniziali del server.|
+|8|**Client Certificate**|Certificato del client, se richiesto.|
+|9|**Client Key Exchange**|Parametri del client per generare il segreto condiviso.|
+|10|**Certificate Verify**|Prova del possesso della chiave privata associata al certificato client.|
+|11|**Change Cipher Spec**|Passaggio ai parametri crittografici negoziati.|
+|12|**Finished**|Conferma finale dell’integrità della negoziazione.|
 
-Dopo il messaggio **Finished**, la connessione è pienamente operativa e i dati applicativi possono transitare in modo cifrato.
+![](imgs/Pasted%20image%2020260709012039.png)
 
----
+#### **5.1. Fase 1: Hello**
 
-### **6. Generazione e scambio delle chiavi**
+La comunicazione viene avviata dal client con `Client Hello`; il server risponde con `Server Hello`.
 
-La costruzione delle chiavi TLS avviene in **tre fasi principali**:
+Questi messaggi includono:
 
-#### **a. Pre-Master Secret**
+- versione del protocollo;
 
-- Il client genera un valore casuale chiamato _pre-master secret_.
-    
-- Lo cifra con la **chiave pubblica del server** (contenuta nel certificato).
-    
-- Solo il server, con la sua chiave privata, può decifrarlo.
-    
+- identificatore di sessione;
 
-#### **b. Master Secret**
+- valori casuali del client e del server;
 
-- Entrambe le parti calcolano un _master secret_ combinando:
-    
-    $$  
-    \text{master\_secret} = f(\text{pre\_master\_secret}, \text{client\_random}, \text{server\_random})  
-    $$
-    
-    dove $f$ è una funzione di derivazione crittografica (PRF).
-    
-- Questo valore diventa la base di tutte le chiavi successive.
-    
+- cipher suite supportate dal client e scelta dal server;
 
-#### **c. Session Keys**
+- metodi di compressione disponibili o selezionati.
 
-Dal _master secret_ vengono derivate **4 chiavi principali**:
+![](imgs/Pasted%20image%2020260709012102.png)
 
-1. **Client MAC key**
-    
-2. **Server MAC key**
-    
-3. **Client encryption key**
-    
-4. **Server encryption key**
-    
+#### **5.2. Fase 2: messaggi del server**
 
-Queste chiavi assicurano confidenzialità e integrità in entrambe le direzioni di comunicazione.
+Il server può inviare:
 
----
+- il proprio certificato;
 
-### **7. Invio e ricezione dei dati**
+- parametri per lo scambio della chiave;
 
-Dopo la conclusione dell’handshake:
+- richiesta di certificato client, se vuole autenticare anche il client.
 
-- i messaggi applicativi passano attraverso il **Record Protocol**,
-    
-- vengono **numerati, autenticati, cifrati** e poi inviati tramite TCP,
-    
-- il destinatario li **decifra, verifica il MAC** e li ricompone in ordine.
-    
+Questa fase termina con `Server Done`.
 
-Tutti i messaggi successivi sono ora pienamente protetti.
+#### **5.3. Fase 3: messaggi del client**
+
+Il client risponde inviando:
+
+- il proprio certificato, se richiesto;
+
+- i parametri necessari allo scambio della chiave;
+
+- eventualmente `Certificate Verify`, per dimostrare il possesso della chiave privata associata al certificato.
+
+![](imgs/Pasted%20image%2020260709012117.png)
+
+#### **5.4. Fase 4: attivazione e chiusura dell’handshake**
+
+Le parti inviano `Change Cipher Spec` per attivare i parametri concordati e poi `Finished`, che conclude l’handshake.
+
+Il messaggio `Finished` è fondamentale: verifica che l’intera sequenza dei messaggi di handshake sia stata vista nello stesso modo da entrambe le parti. Se un attaccante avesse manipolato la negoziazione, questa verifica dovrebbe fallire.
+
+> 📌 Punto chiave: dopo `Finished`, la connessione è pienamente operativa e i dati applicativi possono essere trasmessi in modo cifrato e autenticato.
 
 ---
 
-### **8. Differenze tra SSL e SSH**
+### **6. Costo computazionale dell’handshake e rischio DoS**
 
-Sebbene **SSL (o TLS)** e **SSH** sembrino simili — entrambi creano un canale cifrato — hanno differenze fondamentali nel design.
+L’apertura di una sessione SSL/TLS richiede diverse operazioni lato client e lato server.
+
+Il client deve:
+
+- generare valori casuali;
+
+- verificare la validità del certificato digitale del server;
+
+- generare materiale per lo scambio della chiave;
+
+- inviare valori cifrati o parametri crittografici;
+
+- calcolare la chiave condivisa.
+
+Il server deve:
+
+- generare valori casuali;
+
+- decifrare o elaborare i valori ricevuti dal client;
+
+- verificare l’eventuale certificato client;
+
+- verificare l’eventuale firma del client;
+
+- calcolare la chiave condivisa.
+
+Queste operazioni sono più costose del semplice trasferimento di dati già cifrati. Per questo un numero elevato di richieste di handshake può mettere sotto pressione il server e diventare una forma di **Denial of Service**.
+
+> ⚠️ Qui il problema non è rompere la crittografia: è costringere il server a spendere CPU e risorse per molte negoziazioni, spesso iniziate e mai portate a termine.
+
+---
+
+### **7. Generazione e scambio delle chiavi**
+
+La costruzione delle chiavi TLS avviene in tre fasi principali.
+
+#### **7.1. Pre-Master Secret**
+
+Nel caso classico basato su RSA, il client genera un valore casuale chiamato **pre-master secret**, lo cifra con la chiave pubblica del server contenuta nel certificato e lo invia al server.
+
+Solo il server, possedendo la chiave privata corrispondente, può decifrare il valore ricevuto.
+
+Nelle versioni e configurazioni moderne, lo scambio può usare Diffie-Hellman o ECDHE, ma l’obiettivo resta lo stesso: far arrivare client e server a un segreto condiviso che l’attaccante non possa ricostruire.
+
+#### **7.2. Master Secret**
+
+Client e server calcolano poi il **master secret** combinando:
+
+$$
+\text{master\_secret} = f(\text{pre\_master\_secret}, \text{client\_random}, \text{server\_random})
+$$
+
+dove $f$ è una funzione di derivazione crittografica.
+
+I byte casuali del client e del server vengono scambiati nei messaggi `Client Hello` e `Server Hello`. Servono a garantire che sessioni diverse producano chiavi diverse, anche se coinvolgono le stesse parti.
+
+#### **7.3. Chiavi di sessione**
+
+Dal master secret vengono derivate almeno quattro chiavi operative:
+
+|Chiave|Uso|
+|---|---|
+|**Client MAC key**|MAC dei messaggi inviati dal client|
+|**Server MAC key**|MAC dei messaggi inviati dal server|
+|**Client encryption key**|Cifratura dei messaggi inviati dal client|
+|**Server encryption key**|Cifratura dei messaggi inviati dal server|
+
+Le chiavi sono quindi direzionali: il traffico client → server e il traffico server → client sono protetti con materiale crittografico distinto.
+
+![](imgs/Pasted%20image%2020260709012205.png)
+
+---
+
+### **8. Invio e ricezione dei dati**
+
+Dopo la conclusione dell’handshake, i dati applicativi vengono gestiti dal Record Protocol.
+
+![](imgs/Pasted%20image%2020260709012238.png)
+
+#### **8.1. Invio**
+
+Quando il client o il server devono inviare dati:
+
+1. i dati applicativi vengono frammentati;
+
+2. i frammenti possono essere compressi;
+
+3. viene calcolato e aggiunto il MAC;
+
+4. si aggiunge eventuale padding;
+
+5. il blocco viene cifrato;
+
+6. viene aggiunta l’intestazione TLS;
+
+7. il record viene passato al livello di trasporto, normalmente TCP.
+
+I record TLS diventano quindi payload di segmenti TCP, con le relative intestazioni TCP/IP.
+
+#### **8.2. Ricezione**
+
+All’arrivo:
+
+1. i record TLS vengono estratti dal payload TCP;
+
+2. la sequenza di record viene ricostruita;
+
+3. i record, che sono numerati, vengono riordinati;
+
+4. il contenuto viene decifrato;
+
+5. il MAC viene verificato;
+
+6. i dati vengono decompressi, se necessario;
+
+7. viene ricostruito il flusso di dati in chiaro originale.
+
+Un attaccante può ancora osservare metadati come indirizzi, porte, dimensioni e tempi dei pacchetti, ma non dovrebbe poter leggere o modificare il contenuto applicativo senza essere rilevato.
+
+> 📌 TLS protegge il contenuto trasportato, ma si appoggia comunque a TCP per consegna, ordinamento e affidabilità del flusso.
+
+---
+
+### **9. Differenze tra SSL/TLS e SSH**
+
+SSL/TLS e **SSH** hanno una funzionalità concettualmente simile: entrambi creano un **canale sicuro** o tunnel di trasporto per dati, fornendo confidenzialità, integrità e autenticazione.
+
+Tuttavia, differiscono in diversi aspetti di contorno.
 
 |Aspetto|SSL/TLS|SSH|
 |---|---|---|
-|**Scopo principale**|Sicurezza generica per applicazioni (HTTP, SMTP, ecc.)|Accesso remoto sicuro e tunneling specifico|
-|**Struttura del tunnel**|Basato su Record Protocol e Handshake|Basato su una pipeline criptata interna|
-|**Gestione delle chiavi**|Usa certificati X.509 standard|Usa un proprio formato di chiavi pubbliche|
-|**Autenticazione**|Basata su CA e certificati digitali|Può essere basata su password o chiavi pubbliche locali|
-|**Multiplexing interno**|Non previsto nativamente|Supporta più canali paralleli (file transfer, shell, ecc.)|
-|**Estendibilità**|Applicazioni esterne come HTTPS, FTPS, IMAPS|Include nativamente SFTP, SCP, terminale remoto, ecc.|
+|**Scopo principale**|Sicurezza generica per applicazioni come HTTP, SMTP, IMAP|Accesso remoto sicuro, terminale, tunneling e trasferimento file|
+|**Certificati / chiavi**|Usa certificati X.509 e infrastrutture PKI|Usa un formato e un modello di chiavi proprio|
+|**Autenticazione**|Tipicamente server autenticato da CA; client opzionale|Spesso basata su password o chiavi pubbliche registrate sul server|
+|**Servizi integrati**|Fornisce il canale sicuro, poi l’applicazione costruisce sopra|Integra nativamente shell remota, SFTP, SCP e forwarding|
+|**Interoperabilità concettuale**|Tunnel sicuro general-purpose|Tunnel sicuro orientato all’accesso remoto|
 
-**In sintesi:**
-
-- SSL/TLS fornisce il _canale sicuro_, su cui le applicazioni costruiscono i propri protocolli (es. HTTPS).
-    
-- SSH, invece, integra già diversi servizi all’interno del suo tunnel.
-    
-
-> Concettualmente, potresti sostituire la parte di trasporto dati di SSH con quella di SSL, oppure viceversa, ottenendo schemi equivalenti di sicurezza ma con gestione diversa delle identità e dei servizi.
+Dal punto di vista del “tunnel dati”, le tecniche sono simili; nella pratica non sono intercambiabili perché differiscono formato delle chiavi, gestione dei certificati, autenticazione e protocolli applicativi costruiti sopra.
 
 ---
 
-### **9. Conclusione**
+### **10. Conclusione**
 
-La famiglia di protocolli SSL/TLS rappresenta l’**architettura completa della sicurezza del trasporto Internet**:
+La suite SSL/TLS combina più protocolli specializzati:
 
-- l’**Handshake** negozia fiducia e chiavi,
-    
-- il **Change Cipher Spec** attiva la cifratura,
-    
-- l’**Alert** gestisce errori e chiusure,
-    
-- il **Record Protocol** trasmette i dati in modo sicuro.
-    
+- **Handshake Protocol** negozia parametri, autenticazione e chiavi;
 
-Nel complesso, questi meccanismi garantiscono che ogni connessione Internet sicura (HTTPS, SMTPs, IMAPs, ecc.) sia:
+- **Change Cipher Spec** attiva i parametri negoziati;
 
-- **autenticata**,
-    
-- **cifrata**,
-    
-- **integra**.
+- **Alert Protocol** segnala errori e condizioni anomale;
+
+- **Record Protocol** protegge e trasporta dati e messaggi di controllo.
+
+Nel complesso, TLS costruisce un canale sicuro sopra il trasporto, normalmente TCP, e permette alle applicazioni di comunicare con confidenzialità, integrità e autenticazione.
+
+> ✅ Per l’esame: la sequenza corretta è negoziazione tramite Handshake, attivazione tramite Change Cipher Spec, verifica finale con Finished, poi trasporto dei dati tramite Record Protocol.

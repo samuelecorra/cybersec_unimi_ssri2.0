@@ -1,213 +1,354 @@
 ## **Lezione 2: Tecniche di scansione**
 
-### **1. Introduzione — obiettivo della lezione**
+### **1. Introduzione**
 
-Questa lezione spiega come si scoprono host e porte, cosa significano i risultati di una scansione e quali tecniche pratiche vengono usate sul campo (SYN, `connect()`, UDP, ARP, ICMP, scansioni stealth). Approccio Feynman: prima il principio semplice, poi la traduzione in pacchetti, comportamento di rete e comandi pratici.
+Questa lezione entra nel dettaglio delle tecniche usate per raccogliere informazioni su host, porte e servizi. Dopo aver classificato gli approcci generali alla scansione, ora si osservano i pacchetti concreti che uno scanner può inviare e il modo in cui interpreta le risposte.
 
-### **2. Risultati della scansione — cosa interpreta lo scanner**
+L'idea di base è sempre la stessa: lo scanner invia una "domanda" alla rete e deduce informazioni dalla risposta, dalla mancata risposta o dal tipo di errore ricevuto. A seconda del protocollo usato, la domanda può essere una richiesta ARP, un messaggio ICMP, un segmento TCP, un datagramma UDP o un pacchetto IP con un particolare protocol number.
 
-#### **Stati fondamentali**
+> 📌 Una tecnica di scansione non identifica necessariamente subito "il servizio vulnerabile": spesso prima stabilisce solo se l'host è attivo, se una porta è raggiungibile o se un firewall sta filtrando il traffico.
 
-- **open (aperta)**: il target risponde in modo che dimostra un servizio in ascolto (es. SYN/ACK su TCP).
-    
-- **closed (chiusa)**: la porta esiste ma non c’è servizio (es. risposta RST su TCP).
-    
-- **filtered (filtrata)**: un filtro/firewall impedisce di determinare lo stato (nessuna risposta o ICMP unreachable).
-    
+---
 
-#### **Stati aggiuntivi (stile nmap)**
+### **2. Stati risultanti da una scansione**
 
-- **unfiltered**: la porta è raggiungibile ma non è possibile decidere se aperta o chiusa.
-    
-- **open|filtered** / **closed|filtered**: ambiguità da risposte insufficienti.  
-    Ricorda: “nessuna risposta” non equivale automaticamente a “closed”.
-    
+Il risultato di una scansione di porta viene classificato in base alla risposta osservata.
 
-### **3. Scoperta host (host discovery)**
+- **Open / aperta**: il target risponde in modo compatibile con un servizio attivo sulla porta interrogata. Nel caso TCP, per esempio, un `SYN/ACK` in risposta a un `SYN` indica una porta aperta.
 
-#### **ARP scan (sottorete locale)**
+- **Closed / chiusa**: la porta è raggiungibile, ma non c'è un servizio in ascolto. Nel caso TCP, spesso si osserva un `RST`.
 
-Invio di richieste ARP broadcast per ottenere il MAC; i device attivi rispondono. Funziona solo sulla stessa LAN; è la tecnica più affidabile e veloce per discovery locale.
+- **Filtered / filtrata**: lo scanner non riesce a stabilire lo stato reale perché un firewall o un dispositivo di filtraggio blocca il traffico o le risposte.
 
-#### **ICMP (ping)**
+Questa classificazione può essere raffinata:
 
-`ICMP Echo Request` → `Echo Reply` indica host up. Molti firewall bloccano ICMP: possibile falso negativo.
+- **unfiltered**: la porta è raggiungibile, ma la tecnica usata non consente di decidere se sia aperta o chiusa;
 
-#### **TCP/UDP discovery**
+- **open|filtered**: la porta potrebbe essere aperta oppure filtrata;
 
-- **TCP SYN ping**: inviare SYN su porta nota (es. 80). Risposta SYN/ACK o RST indica host attivo.
-    
-- **TCP ACK ping**: inviare ACK e attendere RST; utile per bypassare firewall stateful.
-    
-- **UDP ping**: inviare UDP a porta probabile; ICMP port unreachable indica host up.
-    
-- **IP-protocol ping**: inviare pacchetti con numeri di protocollo non usati; la risposta ICMP protocol unreachable rivela l’host.
-    
+- **closed|filtered**: la porta potrebbe essere chiusa oppure filtrata.
 
-### **4. Principi RFC (comportamento TCP di base)**
+> ⚠️ La mancata risposta non significa automaticamente "porta chiusa": può indicare un filtro, un firewall, una policy di drop silenzioso o un host che non risponde a quel tipo di probe.
 
-#### **Regole operative essenziali (RFC 793)**
+---
 
-1. Un segmento con **RST** ricevuto viene scartato senza risposta.
-    
-2. Se la porta è **closed** e arriva segmento senza RST → il target risponde con **RST**.
-    
-3. Se la porta è in **LISTEN**:
-    
-    - segmento con **ACK** → rispondi con **RST**;
-        
-    - segmento con **SYN** → rispondi **SYN/ACK**;
-        
-    - altrimenti scartare.
-        
+### **3. Host discovery con ARP**
 
-Queste regole spiegano le differenze di risposta tra SYN, ACK, FIN, NULL, Xmas.
+#### **3.1. Scenario**
 
-### **5. Tecniche di scansione TCP (pratiche)**
+L'**ARP scan** funziona sulla rete locale. Lo scanner deve trovarsi nella stessa LAN o nello stesso dominio di broadcast degli host da individuare.
 
-#### **TCP Connect Scan (`connect()` scan)**
+ARP serve a risolvere un indirizzo IP nel corrispondente indirizzo MAC. Per scoprire quali dispositivi sono attivi nella sottorete, lo scanner invia richieste ARP in broadcast per una sequenza di indirizzi IP, per esempio incrementando l'ultimo ottetto da `0` a `255`.
 
-- Usa la syscall `connect()` per completare la handshake.
-    
-- _Vantaggi_: non richiede privilegi root; semplice.
-    
-- _Svantaggi_: connessione completa e tipicamente loggata (più rumorosa).
-    
-- _Interpretazione_: SYN/ACK → open; RST → closed; nessuna risposta → filtered.  
-    Esempio: `nmap -sT 192.168.1.10`
-    
+Gli host attivi rispondono con una **ARP reply**, dalla quale lo scanner ricava:
 
-#### **TCP SYN Scan (half-open, “stealth”)**
+- indirizzo IP attivo;
 
-- Invia SYN; se arriva SYN/ACK lo scanner invia RST per abortire la connessione.
-    
-- _Vantaggi_: più silenziosa; richiede privilegi per raw packets.
-    
-- _Svantaggi_: rilevabile da IDS/IPS; può lasciare tracce se loggati SYN non completati.
-    
-- _Interpretazione_: SYN/ACK → open (si invia RST); RST → closed; nessuna risposta → filtered.  
-    Esempio: `nmap -sS 192.168.1.0/24`
-    
+- indirizzo MAC;
 
-#### **SYN vs Connect — riassunto**
+- talvolta informazioni indirette sul vendor della scheda di rete, tramite OUI del MAC address.
 
-- **SYN**: raw packet, half-open, meno intrusivo, richiede privilegi.
-    
-- **connect()**: usa stack OS, completo, più loggable, non richiede privilegi.
-    
+![](imgs/Pasted%20image%2020260709005848.png)
 
-#### **Altre scansioni TCP (stealth / fingerprinting)**
+#### **3.2. Proprietà**
 
-- **ACK scan**: invia ACK; se arriva RST → porta _unfiltered_; utile per mappare firewall stateful.
-    
-- **FIN / NULL / Xmas scans**: inviano flag particolari; comportamento delle risposte può rivelare implementazioni.
-    
-- **Idle (zombie) scan**: tecnica avanzata e anonima che sfrutta un host “zombie” con IP ID prevedibile; lo scanner deduce lo stato osservando variazioni nell’IP ID dello zombie.
-    
+L'ARP scan è molto efficace in LAN perché non dipende da TCP, UDP o ICMP: se un host deve comunicare nella rete locale, deve normalmente rispondere ad ARP.
 
-### **6. Scansione UDP**
+Limiti:
 
-#### **Meccanica e limiti**
+- non funziona oltre il router, perché ARP non attraversa le reti IP diverse;
 
-- Invio di datagrammi UDP; possibili riscontri: ICMP port unreachable → porta chiusa; nessuna risposta → open o filtered (open|filtered).
-    
-- Problemi: molte risposte ICMP bloccate da firewall, time-out lunghi; più lenta rispetto a TCP.  
-    Esempio: `nmap -sU -p 53,69,123 192.168.1.0/24`
-    
+- può essere rilevato da strumenti di monitoraggio locali;
 
-### **7. Discovery e Version Detection**
+- richiede accesso alla rete locale.
 
-#### **Version detection**
+---
 
-Dopo aver trovato una porta aperta si inviano probe applicativi per identificare la versione (banner HTTP, risposte SMTP/FTP, signature). Utile per correlare con CVE, ma più rumoroso.  
-Esempio: `nmap -sV -p 22,80,443 192.168.1.10`
+### **4. ICMP ping e varianti**
 
-### **8. Timing, stealth e dimensione della scansione**
+#### **4.1. Ping classico**
 
-#### **Scelte operative**
+Il metodo più noto per verificare se un host è attivo è `ping`, basato su ICMP:
 
-- **Timing**: “fast” vs “low and slow”; aumentare delay riduce probabilità di rilevamento.
-    
-- **Distributed scanning**: distribuisce il carico su più sorgenti per ridurre tracce.
-    
-- **Wide-range vs Targeted**: /16 per mappatura grossolana; scan verticale approfondito su host critici.
-    
+1. lo scanner invia un **ICMP Echo Request**;
 
-### **9. Log, rilevazione e falsi positivi**
+2. il target, se raggiungibile e configurato per rispondere, invia un **ICMP Echo Reply**;
 
-#### **Elementi da monitorare**
+3. lo scanner misura anche il tempo di risposta, tipicamente in millisecondi.
 
-- **Log host**: `auth.log`, `syslog`, connessioni incomplete, rilevazioni SYN flood.
-    
-- **IDS/IPS**: signature e anomalie di comportamento.
-    
-- **Falsi**: ARP discovery legittima vs ARP scan malevola; correlare tempo, IP e pattern per ridurre FP/FN.
-    
+![](imgs/Pasted%20image%2020260709005915.png)
 
-### **10. Contromisure e difesa attiva**
+Il tempo di risposta può dare indicazioni sullo stato della rete: latenza, congestione o distanza approssimativa del target.
 
-#### **Filtri e firewall**
+#### **4.2. Filtraggio di ICMP**
 
-Bloccare/limitare ICMP, applicare regole stateful, filtrare ingressi sospetti, rate limiting.
+Molte reti filtrano ICMP Echo Request, soprattutto se proviene dall'esterno. Questo genera falsi negativi: un host può essere attivo anche se non risponde al ping.
 
-#### **IDS / IPS e correlazione**
+Per aggirare filtri troppo semplici, alcuni scanner usano messaggi ICMP diversi dall'Echo Request, per esempio:
 
-Suricata, Snort e simili per rilevare pattern di scansione e attivare risposte.
+- **ICMP Timestamp Request**;
 
-#### **Honeypots e tarpit**
+- **ICMP Address Mask Request**.
 
-Honeypot per catturare scanner; tarpit per rallentarli con risposte lente.
+Alcune regole firewall controllano solo Echo Request/Echo Reply e possono lasciar passare altri tipi ICMP. Se l'host risponde, lo scanner ottiene comunque un'indicazione di attività.
 
-#### **Hardening applicativo**
+> ⚠️ ICMP filtrato non significa host spento. Significa solo che quel tipo di messaggio non produce una risposta osservabile.
 
-Disabilitare banner, usare port knocking, autenticazione forte, VPN per servizi sensibili.
+---
 
-#### **Logging e automazione**
+### **5. TCP e UDP ping**
 
-Centralizzare log (SIEM), correlare eventi e reagire con blocchi dinamici (ipset, fail2ban).
+#### **5.1. TCP SYN ping**
 
-### **11. Esempi pratici (comandi e interpretazione)**
+Il **TCP SYN ping** invia un segmento `SYN` verso una porta nota, per esempio una porta su cui è probabile trovare un servizio. Lo scopo non è ancora completare una scansione dettagliata delle porte, ma capire se l'host risponde.
 
-#### **Scansione TCP SYN (nmap)**
+Possibili risposte:
 
-```
-nmap -sS -p 1-1024 192.168.1.0/24
-```
+- `SYN/ACK`: la porta è aperta e l'host è attivo;
 
-Output: elenco porte per IP con stati `open`, `closed`, `filtered`. `filtered` suggerisce firewall.
+- `RST`: la porta è chiusa, ma l'host è comunque attivo;
 
-#### **Scansione UDP (nmap)**
+- nessuna risposta o ICMP unreachable: il traffico può essere filtrato.
 
-```
-nmap -sU -p 53,69,123 192.168.1.0/24
-```
+In discovery, sia `SYN/ACK` sia `RST` sono utili: anche una porta chiusa dimostra che l'host ha ricevuto il pacchetto e ha reagito.
 
-Più lenta: usare su target mirati.
+#### **5.2. TCP ACK ping**
 
-#### **Version detection**
+Il **TCP ACK ping** invia un segmento con flag `ACK` verso il target. Se non esiste una connessione TCP corrispondente, uno stack raggiungibile tende a rispondere con `RST`.
 
-```
-nmap -sV -p 22,80,3306 10.0.0.5
-```
+Questo può essere utile quando regole firewall semplici bloccano i `SYN`, ma non filtrano pacchetti `ACK`. In quel caso, l'ACK ping può rivelare che l'host è attivo anche se il SYN ping non ha prodotto risposta.
 
-Restituisce stringhe di versione (es. `OpenSSH 7.6p1`, `nginx 1.14.0`).
+> 📌 Il TCP ACK ping di solito non serve a dire se la porta è aperta: serve soprattutto a capire se l'host è raggiungibile e se il traffico è filtrato.
 
-#### **ARP scan (arp-scan / nmap)**
+#### **5.3. UDP ping**
 
-```
-arp-scan --localnet
-# oppure
-nmap -sn -PR 192.168.1.0/24
-```
+Nel **UDP ping** lo scanner invia un datagramma UDP verso una porta del target. Se la porta è chiusa, lo stack IP dovrebbe rispondere con un messaggio ICMP **Port Unreachable**.
 
-Elenca IP attivi con MAC: affidabile in LAN.
+Interpretazione:
 
-### **12. Riassunto Feynmaniano**
+- ICMP Port Unreachable: l'host è attivo, ma quella porta UDP è chiusa;
 
-- **Idea semplice**: per scoprire un servizio invio una domanda e osservo la risposta; la natura della risposta indica se la porta è aperta, chiusa o filtrata.
-    
-- **Cosa cambia**: il tipo di pacchetto (SYN, ACK, FIN, NULL, UDP, ICMP) determina la risposta; firewall e implementazioni diverse introducono ambiguità.
-    
-- **Pratica**: combina discovery (ARP/ICMP/TCP ping) → scansione porte (SYN/connect/UDP) → version detection → analisi dei log e hardening.
-    
-- **Difesa**: ridurre informazioni esposte, monitorare e automatizzare risposte, usare proxy/CDN/WAF e limitare banner.
+- risposta applicativa UDP: porta aperta o servizio attivo;
+
+- nessuna risposta: stato ambiguo, perché la porta potrebbe essere aperta, filtrata o il pacchetto/errore potrebbe essere stato bloccato.
+
+#### **5.4. IP protocol ping**
+
+Un datagramma IP contiene un campo **Protocol** che indica quale protocollo è incapsulato, per esempio TCP, UDP, ICMP, IGMP e così via. Una tecnica di discovery consiste nell'inviare pacchetti IP con un protocol number che probabilmente non è supportato dal target.
+
+Se l'host è attivo ma non supporta quel protocollo, può rispondere con ICMP **Protocol Unreachable**. Anche in questo caso lo scanner non scopre necessariamente una porta, ma ricava un'informazione sull'esistenza dell'host.
+
+---
+
+### **6. Porte TCP/UDP e intervalli**
+
+Le porte sono identificate da un numero a **16 bit**, quindi vanno da `0` a `65535`.
+
+Gli intervalli principali sono:
+
+- **well-known ports**: da `0` a `1023`, riservate ai servizi standard;
+
+- **registered ports**: da `1024` a `49151`, assegnate o registrate per applicazioni specifiche;
+
+- **dynamic/private ports**: da `49152` a `65535`, usate tipicamente come porte effimere lato client.
+
+Esempi di porte note:
+
+|Porta|Servizio|
+|---:|---|
+|21|FTP|
+|22|SSH|
+|25|SMTP|
+|53|DNS|
+|80|HTTP|
+|443|HTTPS|
+
+La scansione delle porte serve a capire quali servizi sono in ascolto e quindi quali software possono essere interrogati, identificati o eventualmente attaccati.
+
+![](imgs/Pasted%20image%2020260709010017.png)
+
+---
+
+### **7. Regole TCP utili per la scansione**
+
+Molte tecniche di port scanning sfruttano il comportamento previsto dallo standard TCP.
+
+Regole essenziali:
+
+1. Se arriva un segmento con flag `RST`, normalmente viene scartato senza generare risposta.
+
+2. Se una porta è nello stato **closed** e arriva un segmento senza `RST`, il target risponde con `RST`.
+
+3. Se una porta è in stato **LISTEN**:
+
+   - un `SYN` produce un `SYN/ACK`;
+
+   - un `ACK` non associato a una connessione produce un `RST`;
+
+   - segmenti non validi o inattesi possono essere scartati senza risposta.
+
+Queste regole sono alla base di scansioni `SYN`, `ACK`, `FIN`, `NULL`, `Xmas` e di molte tecniche di fingerprinting.
+
+> 📌 Lo scanner non "legge" direttamente lo stato della porta: lo inferisce osservando come lo stack TCP reagisce a segmenti costruiti apposta.
+
+---
+
+### **8. TCP Connect Scan**
+
+La **TCP Connect Scan** usa la normale chiamata di sistema `connect()` per aprire una connessione TCP verso una porta del target.
+
+Lo scanner lascia che sia il sistema operativo a gestire l'handshake:
+
+1. invio di `SYN`;
+
+2. ricezione eventuale di `SYN/ACK`;
+
+3. invio dell'`ACK` finale;
+
+4. connessione completata.
+
+![](imgs/Pasted%20image%2020260709010048.png)
+
+Interpretazione:
+
+- `SYN/ACK` e connessione riuscita: porta aperta;
+
+- `RST`: porta chiusa;
+
+- nessuna risposta o ICMP unreachable: porta filtrata o host non raggiungibile.
+
+![](imgs/Pasted%20image%2020260709010137.png)
+
+Vantaggi:
+
+- non richiede necessariamente privilegi speciali o raw socket;
+
+- è semplice da implementare;
+
+- usa lo stack TCP del sistema operativo.
+
+Svantaggi:
+
+- completa davvero la connessione;
+
+- è facilmente loggata dal servizio o dal sistema operativo;
+
+- è più rumorosa e intrusiva rispetto a tecniche half-open.
+
+---
+
+### **9. TCP SYN Scan**
+
+La **TCP SYN Scan** è detta anche **half-open scan** perché avvia l'handshake ma non lo completa.
+
+Procedura:
+
+1. lo scanner invia un `SYN`;
+
+2. se riceve `SYN/ACK`, conclude che la porta è aperta;
+
+3. invece di completare la connessione con `ACK`, invia un `RST` per interrompere la sessione;
+
+4. se riceve `RST`, conclude che la porta è chiusa;
+
+5. se non riceve risposta o riceve messaggi di errore, interpreta la porta come filtrata o ambigua.
+
+![](imgs/Pasted%20image%2020260709010222.png)
+
+Rispetto alla connect scan, la SYN scan è meno intrusiva perché non stabilisce completamente la connessione. Tuttavia non è invisibile: i `SYN` possono essere registrati da firewall, IDS/IPS o log dello stack TCP.
+
+|Tecnica|Connessione completata?|Rumorosità|Requisiti|
+|---|---|---|---|
+|`connect()` scan|Sì|Alta|Privilegi normali|
+|SYN scan|No, half-open|Media|Raw packet / privilegi elevati|
+
+---
+
+### **10. Version detection e fingerprinting**
+
+Una volta trovata una porta aperta, lo scanner può raccogliere informazioni più specifiche sul servizio.
+
+![](imgs/Pasted%20image%2020260709010253.png)
+
+Le fonti informative includono:
+
+- banner applicativi;
+
+- risposte HTTP, SMTP, FTP, SSH o DNS;
+
+- tempi di risposta;
+
+- differenze nel comportamento dello stack TCP/IP;
+
+- messaggi di errore;
+
+- campi e opzioni nei pacchetti.
+
+Queste informazioni possono rivelare:
+
+- software in uso;
+
+- versione del server;
+
+- librerie o stack di rete;
+
+- sistema operativo probabile;
+
+- configurazioni applicative.
+
+Esempio: una risposta HTTP può indicare il tipo e la versione del web server; una risposta TCP può mostrare pattern compatibili con uno specifico sistema operativo.
+
+> ⚠️ Più lo scanner interroga i servizi a livello applicativo, più aumenta la quantità di informazioni raccolte, ma anche la probabilità di lasciare tracce nei log.
+
+---
+
+### **11. UDP port scanning**
+
+La scansione UDP è più ambigua di quella TCP, perché UDP non ha handshake.
+
+Lo scanner invia un datagramma UDP e osserva:
+
+- risposta applicativa UDP: porta aperta;
+
+- ICMP Port Unreachable: porta chiusa;
+
+- nessuna risposta: porta aperta, filtrata o pacchetto perso.
+
+Per questo le scansioni UDP sono spesso più lente: lo scanner deve attendere timeout e distinguere, per quanto possibile, tra silenzio legittimo, filtro e perdita.
+
+---
+
+### **12. Log e rilevazione**
+
+Tutte le tecniche attive possono lasciare tracce:
+
+- connessioni completate nei log applicativi;
+
+- tentativi di connessione falliti;
+
+- sequenze di `SYN` verso molte porte;
+
+- ICMP o UDP ripetuti verso molti host;
+
+- pattern riconoscibili da IDS/IPS.
+
+La connect scan è in genere la più evidente perché completa l'handshake e può essere registrata dal servizio. La SYN scan è meno evidente, ma non invisibile. Le tecniche di discovery possono comunque essere rilevate se producono pattern anomali o ripetitivi.
+
+---
+
+### **13. Sintesi finale**
+
+|Tecnica|Obiettivo|Risposta utile|Informazione ricavata|
+|---|---|---|---|
+|ARP scan|Host discovery in LAN|ARP reply|Host attivo e MAC address|
+|ICMP ping|Host discovery|Echo Reply|Host raggiungibile e latenza|
+|ICMP alternativi|Host discovery evasiva|Timestamp/Address Mask reply|Host attivo se Echo è filtrato|
+|TCP SYN ping|Host discovery|`SYN/ACK` o `RST`|Host attivo|
+|TCP ACK ping|Host discovery / filtri|`RST`|Host raggiungibile o non filtrato|
+|UDP ping|Host discovery|ICMP Port Unreachable|Host attivo|
+|IP protocol ping|Host discovery|ICMP Protocol Unreachable|Host attivo|
+|TCP connect scan|Port scanning|Connessione riuscita / `RST`|Porta aperta o chiusa|
+|TCP SYN scan|Port scanning half-open|`SYN/ACK`, `RST`, timeout|Porta aperta, chiusa o filtrata|
+|UDP scan|Port scanning UDP|Risposta UDP / ICMP errore / timeout|Stato spesso ambiguo|
+
+> ✅ Punto d'esame: una scansione non interpreta solo le risposte positive. Anche `RST`, ICMP unreachable e assenza di risposta sono segnali: la difficoltà è capire se indicano porta chiusa, host attivo, filtro o ambiguità.

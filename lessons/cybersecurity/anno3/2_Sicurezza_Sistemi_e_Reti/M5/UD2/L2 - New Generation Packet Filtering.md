@@ -12,7 +12,9 @@ Inoltre:
 - Gli amministratori, spesso concentrati sulla sicurezza perimetrale, **trascurano la protezione interna**, lasciando vulnerabili i sistemi più sensibili.
     
 
-> In sintesi: lo static filtering è semplice ma rigido — e ogni rigidità, in sicurezza, diventa un punto debole.
+Questo è particolarmente critico perché gli host interni sono spesso meno hardenizzati dei server esposti in DMZ: l’organizzazione concentra attenzione e patching sui servizi pubblici, mentre workstation e host interni possono rimanere più vulnerabili. Se un firewall statico consente connessioni verso questi host, l’attaccante può trovare superfici meno protette.
+
+> 📌 In sintesi: lo static filtering è semplice ma rigido; se per far funzionare un protocollo bisogna lasciare aperte molte porte, la rigidità diventa esposizione.
 
 ---
 
@@ -37,7 +39,9 @@ In questo modo:
 - Diminuisce drasticamente la possibilità di sfruttare vulnerabilità passive.
     
 
-> Il dynamic packet filter trasforma il firewall da “muro statico” a “porta intelligente”: apre solo quando serve e solo per il tempo necessario.
+Il dinamismo consiste quindi nel fatto che una porta non resta sempre disponibile: viene aperta quando il traffico osservato indica che serve, e viene richiusa quando il flusso termina o non è più attivo.
+
+> 📌 Il dynamic packet filter riduce la finestra temporale d’attacco: una porta aperta solo per pochi istanti è molto meno sfruttabile di una porta permanentemente esposta.
 
 ---
 
@@ -50,7 +54,7 @@ In questo modo:
 - Riduce la possibilità di successo di molti attacchi comuni (es. TCP hijacking o port scanning).
     
 
-> La finestra temporale d’attacco si riduce, rendendo molto più difficile replicare un exploit.
+> 📌 La finestra temporale d’attacco si riduce, rendendo molto più difficile replicare un exploit.
 
 ---
 
@@ -63,7 +67,9 @@ In questo modo:
 - Non offrono **autenticazione integrata**: una volta stabilita la connessione, tutto dipende dal sistema target.
     
 
-> I DPF migliorano la sicurezza rispetto agli statici, ma rimangono ciechi a ciò che accade “dentro” la connessione.
+In particolare, se una connessione malevola viene accettata, la sicurezza dipende dalle vulnerabilità dell’host bersaglio. Inoltre, una volta compromesso un host interno, il traffico malevolo può spostarsi lateralmente nella rete interna, dove il firewall perimetrale spesso non osserva più i flussi.
+
+> ⚠️ I DPF migliorano la sicurezza rispetto agli statici, ma rimangono ciechi rispetto ad autenticazione dell’utente, autorizzazione del servizio e semantica applicativa completa. Per questi aspetti servono tecnologie più vicine agli application gateway.
 
 ---
 
@@ -83,6 +89,8 @@ Il firewall diventa così capace di:
 - accettare automaticamente i pacchetti appartenenti a connessioni note, senza controllarli di nuovo.
     
 
+Nella pratica, il termine **stateful packet filter** è spesso usato per indicare firewall dinamici che conservano memoria delle connessioni. L’idea è distinguere il pacchetto che avvia una sessione, da verificare accuratamente con le ACL, dai pacchetti successivi che possono essere riconosciuti tramite lo stato già registrato.
+
 ---
 
 ### **3.2. Meccanismo operativo**
@@ -100,7 +108,9 @@ Il firewall diventa così capace di:
     - Se non trovano corrispondenza → vengono scartati.
         
 
-> Ciò migliora sia la sicurezza sia le prestazioni, poiché le connessioni già note non vengono rivalutate a ogni pacchetto.
+Questa logica consente di scrivere policy più semplici: di norma si definiscono le regole relative all’apertura della connessione, mentre le risposte vengono accettate perché associate a una connessione già presente nella tabella.
+
+> 📌 Ciò migliora sia la sicurezza sia le prestazioni: l’analisi più costosa avviene soprattutto all’inizio della connessione, poi i pacchetti successivi sono verificati tramite la connection table.
 
 ---
 
@@ -123,11 +133,17 @@ Ogni entry contiene:
 TCP 192.168.1.10:1045 → 159.149.70.11:80  ESTABLISHED
 ```
 
+La connection table deve anche gestire la **scadenza** delle entry. Se una connessione TCP termina correttamente, l’entry può essere rimossa in modo esplicito. Se invece client o server smettono di comunicare per errore, crash o perdita di pacchetti, il firewall usa un **timeout** per evitare che una sessione vecchia rimanga valida indefinitamente.
+
+> ⚠️ Un timeout troppo lungo può lasciare aperte finestre sfruttabili; un timeout troppo breve può far scadere una connessione ancora attiva, costringendo il firewall a rivalutarla.
+
 ---
 
 ## **4. Stati di una connessione TCP**
 
 Durante il three-way handshake, i due endpoint attraversano una sequenza di stati.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 |Client|Server|Fase|Descrizione|
 |---|---|---|---|
@@ -138,6 +154,17 @@ Durante il three-way handshake, i due endpoint attraversano una sequenza di stat
 - Quando il server è in **LISTEN**, il firewall deve **verificare la ACL**.
     
 - Quando la sessione è **ESTABLISHED**, il firewall può accettare pacchetti in base alla **connection table**.
+    
+
+In uno scenario tipico:
+
+1. arriva un SYN dal client: la connessione non è ancora nota, quindi si controlla la policy;
+    
+2. se la policy consente il traffico, il firewall inserisce in tabella la coppia client/porta sorgente e server/porta destinazione;
+    
+3. il SYN+ACK del server e l’ACK finale del client vengono riconosciuti come appartenenti a quella connessione;
+    
+4. i pacchetti successivi sono accettati perché coerenti con lo stato memorizzato.
     
 
 ---
@@ -156,11 +183,13 @@ Per gestirlo, il firewall implementa uno **pseudo-stato**, basato sulla correlaz
 
 Se il firewall rileva pacchetti coerenti con una comunicazione già in corso, li considera parte della stessa sessione.
 
+È importante distinguere tra stato applicativo e stato di trasporto: un’applicazione sopra UDP può avere una propria logica di sessione, ma UDP non fornisce handshake, chiusura o stati analoghi a TCP. Il firewall può quindi registrare solo tuple di indirizzi/porte e osservare se arrivano pacchetti coerenti con traffico transitato poco prima.
+
 ### **5.2. Timeout**
 
 Poiché non esiste un meccanismo di chiusura nel protocollo UDP, il firewall imposta un **timeout** predefinito (es. 30-60 secondi) dopo il quale la sessione viene rimossa dalla tabella.
 
-> In pratica, lo stato UDP è “virtuale”: si basa solo sulla ricorrenza temporale dei pacchetti.
+> 📌 In pratica, lo stato UDP è “virtuale”: non deriva dal protocollo UDP, ma da una correlazione temporale tra pacchetti con stessi endpoint e porte compatibili.
 
 ---
 
@@ -178,6 +207,14 @@ Questo consente:
 - la simulazione di connessioni anche per protocolli “connectionless” (es. NFS, RPC).
     
 
+Nel caso di **FTP attivo**, il firewall deve leggere il canale di controllo e riconoscere un comando come `PORT 1038`: solo così può capire che il server FTP tenterà una connessione dati dalla porta `20/tcp` verso la porta `1038` del client. Questa informazione non è nell’header IP/TCP, ma nel payload applicativo.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Il firewall può quindi inserire una entry temporanea nella connection table marcandola come traffico FTP e aprendo selettivamente solo la porta dati negoziata. Senza questa capacità, dovrebbe lasciare aperte molte porte alte o bloccare FTP attivo.
+
+> 📌 Qui lo stateful filtering diventa application-aware: non si limita a ricordare connessioni, ma interpreta un frammento del protocollo applicativo per modificare dinamicamente le regole.
+
 ---
 
 ### **6.2. Limiti e prestazioni**
@@ -189,7 +226,20 @@ Questo consente:
 - Se il firewall non interpreta correttamente la semantica del protocollo, può essere **bypassato con tunnel applicativi** (es. HTTP tunneling).
     
 
-> Per questo motivo, il filtraggio applicativo è spesso implementato come **plugin opzionale** nei firewall commerciali.
+Per ragioni di performance, molti firewall implementano l’analisi applicativa tramite **plugin** per protocolli specifici, ad esempio FTP. Un plugin può riconoscere solo alcuni comandi e tradurli in azioni firewall, come aprire o chiudere porte temporanee.
+
+Questa soluzione è efficace per protocolli standardizzati e molto diffusi, ma diventa fragile con:
+
+- protocolli custom;
+    
+- varianti non standard di protocolli noti;
+    
+- tunneling applicativo;
+    
+- payload cifrato.
+    
+
+> ⚠️ Se il parser applicativo è semplificato o interpreta male la semantica del protocollo, un attaccante può costruire traffico che il firewall classifica in modo errato.
 
 ---
 
@@ -200,6 +250,8 @@ Questo consente:
 La **Deep Packet Inspection** rappresenta l’evoluzione più recente dello stateful filtering, con funzionalità di analisi del contenuto applicativo.  
 Il termine “DPI” non ha ancora una definizione univoca: spesso viene **abusato in ambito commerciale**, ma indica sempre la capacità di **esaminare i dati del payload**, non solo gli header.
 
+Il vero DPI non si limita a leggere un singolo campo applicativo: può correlare più pacchetti, ricostruire stream applicativi e cercare pattern distribuiti su più segmenti. È quindi molto più vicino a un motore di analisi del contenuto che a una semplice estensione delle ACL.
+
 ### **7.2. Funzionamento**
 
 - Analizza il contenuto delle sessioni applicative, cercando **pattern di stringhe** tipici di worm, malware o exploit.
@@ -208,6 +260,8 @@ Il termine “DPI” non ha ancora una definizione univoca: spesso viene **abusa
     
 - È implementata solo nei **firewall di fascia alta**, dove le prestazioni hardware consentono ispezioni in tempo reale.
     
+
+Esempi di uso sono l’ispezione del payload delle email, degli allegati, degli stream applicativi o di sequenze che sembrano parti di worm, malware o tentativi di exploit. Proprio per questo il termine viene spesso usato in modo commerciale: non tutti i prodotti che dichiarano DPI eseguono davvero un’analisi profonda e correlata del traffico.
 
 ---
 
@@ -242,7 +296,9 @@ Il termine “DPI” non ha ancora una definizione univoca: spesso viene **abusa
 - Mancanza di **autenticazione forte** integrata.
     
 
-> Il punto debole dei packet filter, anche evoluti, è che “si fidano del mittente”. Solo i sistemi applicativi possono fornire autenticazione reale.
+Un limite ulteriore è che il packet filter ragiona ancora prevalentemente su **indirizzi IP**. Se un host trusted viene compromesso, oppure se un attaccante riesce a presentarsi con un indirizzo considerato affidabile, il firewall può consentire traffico che in realtà non proviene da un utente o servizio autorizzato.
+
+Il punto debole dei packet filter, anche evoluti, è quindi che “si fidano del mittente” a livello di rete. Non verificano davvero che dietro quell’IP ci sia un utente autenticato e autorizzato a usare un certo servizio: questo sarà uno dei motivi per introdurre gli **application gateway**.
 
 ---
 
@@ -252,6 +308,15 @@ Il termine “DPI” non ha ancora una definizione univoca: spesso viene **abusa
 
 La cifratura, nata per proteggere, può essere **sfruttata per attaccare**.  
 I firewall tradizionali non possono analizzare il contenuto dei pacchetti **HTTPS o TLS**, e ciò permette ai malware di nascondersi nel traffico sicuro.
+
+Anche quando un firewall dispone di DPI, davanti a un payload cifrato deve prima poterlo decifrare. Questo introduce due problemi:
+
+- **tecnico-prestazionale**, perché decifrare, analizzare e ricifrare il traffico è molto costoso;
+    
+- **legale e di privacy**, perché il firewall si trova a leggere comunicazioni che l’utente si aspetta protette end-to-end.
+    
+
+Gli attaccanti sfruttano lo stesso meccanismo: malware e canali di comando e controllo possono usare TLS per rendere opaco il traffico malevolo.
 
 ### **9.2. Contromisure moderne**
 
@@ -264,7 +329,13 @@ Per contrastare le minacce cifrate, i firewall di nuova generazione integrano mo
 |**AIC** (_Application Inspection & Control_)|Identifica applicazioni e comportamenti anomali|
 |**DLP** (_Data Loss Prevention_)|Impedisce la fuoriuscita di dati sensibili|
 
-> Il firewall moderno non è più solo un “guardiano delle porte”, ma un **centro di ispezione integrata** per tutto il traffico di rete, anche cifrato.
+La **DLP** è particolarmente importante rispetto ai data breach: invece di limitarsi a bloccare traffico in ingresso, analizza anche ciò che esce dalla rete e può individuare dati sensibili non autorizzati in transito.
+
+Nei prodotti di fascia alta, l’ispezione del traffico cifrato può avvenire con una tecnica di interposizione controllata: il firewall si pone tra client e server, stabilisce due sessioni cifrate distinte e decritta il traffico nel mezzo per analizzarlo, per poi ricifrarlo e inoltrarlo.
+
+> ⚠️ Questa tecnica assomiglia a un Man-in-the-Middle controllato: può essere legittima in reti aziendali gestite, ma dipende da policy, configurazione dei certificati, consenso/legislazione e impatto prestazionale.
+
+> 📌 Il firewall moderno non è più solo un “guardiano delle porte”, ma un **centro di ispezione integrata** per traffico, applicazioni e dati.
 
 ---
 
@@ -282,4 +353,4 @@ Il **New Generation Packet Filtering** rappresenta l’unione di:
 È la risposta all’evoluzione del traffico moderno: cifrato, distribuito e dinamico.  
 Tuttavia, resta essenziale bilanciare sicurezza e prestazioni, poiché ogni strato di analisi aggiunge protezione ma anche latenza.
 
-> In sintesi: il firewall di nuova generazione non si limita a bloccare pacchetti — **comprende il contesto, riconosce le minacce e reagisce in tempo reale**.
+> ✅ In sintesi: il firewall di nuova generazione non si limita a bloccare pacchetti — **comprende il contesto, riconosce le minacce e reagisce in tempo reale**.

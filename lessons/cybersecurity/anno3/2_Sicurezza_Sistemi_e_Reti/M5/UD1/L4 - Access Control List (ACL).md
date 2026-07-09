@@ -7,6 +7,8 @@ Ogni pacchetto che transita nel dispositivo viene confrontato con le regole defi
 
 Questo meccanismo rappresenta il **cuore del filtraggio statico** dei pacchetti e costituisce il metodo più diffuso nei sistemi di rete **Cisco**.
 
+Nel contesto Cisco, le ACL sono particolarmente utili anche a fini didattici: permettono di vedere concretamente cosa significa applicare una regola di filtraggio a una specifica interfaccia di un router o di un firewall packet filter.
+
 ---
 
 ### **2. Semantica e principio di funzionamento**
@@ -14,11 +16,11 @@ Questo meccanismo rappresenta il **cuore del filtraggio statico** dei pacchetti 
 Le ACL operano secondo una **semantica binaria**:
 
 $$  
-\text{Azione} \in { \text{ACCEPT}, \text{DENY} }  
+\text{Azione} \in \{ \text{ACCEPT}, \text{DENY} \}  
 $$
 
 e vengono valutate **in ordine sequenziale (criterio top-down)**.  
-Il primo match trovato determina la decisione finale sul pacchetto; se nessuna regola corrisponde, si applica la **regola di default**.
+Il primo match trovato determina la decisione finale sull’intero pacchetto; la verifica continua solo finché non viene trovata una regola corrispondente. Se nessuna regola corrisponde, si applica la **regola di default**.
 
 #### **Regola di default**
 
@@ -30,7 +32,7 @@ $$
 
 che **blocca tutto il traffico non esplicitamente autorizzato**.
 
-> Le ACL seguono il principio del _first match wins_.
+> 📌 Le ACL seguono il principio del _first match wins_: l’ordine delle regole è parte integrante della politica di sicurezza.
 
 ---
 
@@ -44,6 +46,8 @@ Le ACL possono essere impostate secondo due strategie generali:
 - **Default Deny:** tutto è vietato, tranne ciò che è esplicitamente consentito.  
     → _Politica restrittiva e consigliata._
     
+
+Nei router Cisco, se non viene specificata una regola finale permissiva, il comportamento implicito è assimilabile a un **default deny**. Una politica di tipo **default permit** si ottiene invece inserendo esplicitamente una regola finale ampia, ad esempio `permit any`, dopo eventuali regole di blocco.
 
 ---
 
@@ -62,6 +66,11 @@ Le ACL vengono utilizzate per diversi scopi pratici:
 - **Filtrare tipi di traffico specifici** in ingresso o in uscita.
     
 
+- **Controllare o indirizzare il traffico** verso zone di rete sottoposte a controlli specifici.
+    
+- **Limitare le attività dall’interno verso l’esterno**, ad esempio per controllare traffico generato dai PC aziendali.
+    
+
 ---
 
 ### **5. Tipologie di ACL (secondo gli standard Cisco)**
@@ -72,6 +81,8 @@ Cisco distingue due tipi principali di ACL:
 |---|---|---|---|
 |**Standard ACL**|0–99|Solo indirizzo IP sorgente|Network (Layer 3)|
 |**Extended ACL**|100–199|IP sorgente, destinazione, protocollo, porte TCP/UDP, tipo ICMP|Network/Transport (Layer 3–4)|
+
+Le ACL standard effettuano quindi un **pre-screening molto semplice** basato sulla sola sorgente. Le ACL estese sono più espressive perché permettono di includere anche destinazione, protocollo, porte e codici ICMP.
 
 ---
 
@@ -120,7 +131,9 @@ La **wildcard mask** determina quali bit dell’indirizzo IP devono essere verif
 access-list 20 permit 192.168.1.0 0.0.0.255
 ```
 
-Controlla solo l’ultimo byte dell’indirizzo (poiché la wildcard `0.0.0.255` ignora i primi 24 bit).
+Verifica i primi 24 bit dell’indirizzo e ignora l’ultimo byte: la wildcard `0.0.0.255` corrisponde quindi alla logica della netmask `255.255.255.0` e identifica tutta la rete `192.168.1.x`.
+
+> 📌 La wildcard ha semantica opposta rispetto alla netmask: `0` significa “controlla questo bit”, `1` significa “ignora questo bit”.
 
 > Le wildcard vengono utilizzate anche in protocolli di routing come **EIGRP** e **OSPF**.
 
@@ -136,8 +149,13 @@ access-list 17 permit any
 
 - La parola chiave **host** equivale alla wildcard `0.0.0.0` (match esatto su un singolo IP).
     
+- La parola chiave **any** equivale a “qualsiasi sorgente”.
+    
 - Se non specificato diversamente, Cisco applica **implicitamente `deny any`** alla fine della lista.
     
+
+Nell’esempio, `permit any` rende esplicita una politica finale permissiva: prima si consente l’host specifico, poi si nega una rete, infine si permette tutto il resto. Senza l’ultima regola, tutto ciò che non ha fatto match sarebbe bloccato dalla regola implicita.
+
 
 ---
 
@@ -148,7 +166,9 @@ access-list 17 permit any
 |**Ingress firewall**|Entrante|Controlla le connessioni che arrivano dall’esterno. Utile per proteggere servizi pubblici.|
 |**Egress firewall**|Uscente|Controlla le connessioni originate dall’interno. Utile per monitorare l’attività del personale.|
 
-> È facile distinguere i due tipi nei protocolli orientati alla connessione (es. TCP), più complesso per protocolli _connectionless_ (es. ICMP, UDP).
+Il traffico **ingress** comprende sia richieste provenienti dall’esterno verso servizi offerti dalla rete, sia traffico di ritorno collegato a comunicazioni avviate dall’interno. Il traffico **egress**, invece, è tipicamente quello generato dai client interni verso Internet.
+
+> È facile distinguere i due tipi nei protocolli orientati alla connessione (es. TCP), perché il SYN chiarisce chi sta aprendo la connessione; è più complesso per protocolli _connectionless_ come ICMP e UDP.
 
 ---
 
@@ -156,11 +176,18 @@ access-list 17 permit any
 
 Un router può applicare filtri in ingresso e in uscita secondo lo schema:
 
-```
-INCOMING PACKETS → [Filtro Ingress] → Forwarding → [Filtro Egress] → OUTGOING PACKETS
-```
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 In questo modo il firewall controlla entrambi i flussi, impedendo che pacchetti non autorizzati entrino o escano.
+
+Più precisamente:
+
+- un filtro **in ingresso** viene applicato quando il pacchetto arriva sull’interfaccia;
+    
+- poi il router decide, tramite forwarding/routing, verso quale rete inviare il pacchetto, ad esempio LAN o DMZ;
+    
+- un filtro **in uscita** può essere applicato prima che il pacchetto lasci l’interfaccia di destinazione.
+    
 
 ---
 
@@ -178,6 +205,8 @@ access-list 14 permit any
 Queste regole **bloccano tutto il traffico in ingresso** con indirizzi IP di rete locale (RFC 1918).  
 Servono a **evitare attacchi provenienti da indirizzi privati mascherati come pubblici**.
 
+Il principio è semplice: se l’interfaccia è rivolta verso Internet, non dovrebbe arrivare traffico con sorgente privata, perché gli indirizzi RFC 1918 non sono instradabili sulla rete pubblica. Un pacchetto in ingresso con sorgente privata è quindi sospetto, tipicamente spoofato o comunque incoerente con la provenienza dichiarata.
+
 ---
 
 ### **12. Attacchi DDoS con indirizzi locali**
@@ -185,7 +214,9 @@ Servono a **evitare attacchi provenienti da indirizzi privati mascherati come pu
 Esistono casi documentati di attacchi **DDoS** condotti interamente usando indirizzi IP locali (RFC 1918).  
 Se l’**ISP** avesse applicato correttamente il filtraggio in ingresso, l’attacco **non avrebbe avuto effetto**.
 
-> Da qui nasce la necessità del filtraggio coerente “ingress/egress” a livello di ISP.
+Il problema è che le richieste raggiungono la vittima, ma le risposte non possono essere instradate correttamente verso indirizzi privati non routabili su Internet. Un filtraggio tempestivo da parte degli ISP evita che traffico evidentemente non valido venga propagato fino al bersaglio.
+
+> 📌 Da qui nasce la necessità del filtraggio coerente “ingress/egress” a livello di ISP.
 
 ---
 
@@ -205,6 +236,8 @@ Per una rete `192.0.2.0/24`:
 - Tutti i pacchetti in uscita devono avere IP sorgente ∈ `192.0.2.0/24`;
     
 - Tutti i pacchetti in ingresso con IP sorgente in quel range devono essere **bloccati**.
+
+Questa impostazione protegge anche da attività malevole originate dall’interno: se un host interno prova a inviare pacchetti con indirizzo sorgente falsificato, l’egress filtering dovrebbe bloccarli perché non appartengono al range assegnato alla rete.
     
 
 ---
@@ -217,6 +250,8 @@ access-list 14 deny any
 ```
 
 Serve per bloccare ogni traffico in uscita non proveniente dalla rete interna legittima.
+
+L’ordine è essenziale: prima si permette ciò che appartiene alla rete autorizzata, poi si nega tutto il resto. Se le regole fossero invertite, il `deny any` bloccherebbe ogni pacchetto prima di arrivare alla regola permissiva.
 
 ---
 
@@ -234,6 +269,8 @@ access-list <numero> <azione> <tipo> <sorgente> [wildcard] <opzioni> <destinazio
 |**Sorgente/Destinazione**|Indirizzi IP|
 |**Opzioni**|Porte TCP/UDP o tipo/codice ICMP|
 |**Log**|(opzionale) registra gli eventi nel log|
+
+L’opzione `log` è utile quando si vuole osservare quali pacchetti fanno match con una certa regola: ogni pacchetto corrispondente viene registrato, permettendo attività di controllo e diagnosi.
 
 ---
 
@@ -261,6 +298,8 @@ oppure con keyword:
 access-list 101 permit tcp 192.168.2.0 0.0.0.255 any eq ftp
 ```
 
+Per le porte note si possono usare keyword al posto del numero: ad esempio `ftp` per la porta 21, `ftp-data` per la porta 20 e `telnet` per la porta 23. Questo rende le regole più leggibili, ma il significato resta quello di un confronto sulla porta TCP/UDP.
+
 ---
 
 ### **17. Operatore “established”**
@@ -272,7 +311,9 @@ Il filtro verifica la presenza dei flag **ACK** o **RST**:
 access-list 102 permit tcp any 192.168.2.0 0.0.0.255 established
 ```
 
-> Questo evita attività di _port scanning_ o connessioni non richieste.
+Questo operatore è usato per consentire traffico di ritorno coerente con connessioni iniziate dall’interno, ad esempio risposte HTTP/HTTPS a richieste partite dalla LAN.
+
+> ⚠️ `established` non è una state table completa: nelle ACL Cisco classiche il controllo è basato sui flag TCP, quindi è meno robusto di un vero firewall stateful.
 
 ---
 
@@ -281,6 +322,8 @@ access-list 102 permit tcp any 192.168.2.0 0.0.0.255 established
 #### **Obiettivo**
 
 Consentire solo la navigazione web (HTTP/HTTPS) dalla rete interna `192.168.2.0/24`.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **Configurazione**
 
@@ -295,7 +338,9 @@ access-list 102 permit tcp any 192.168.2.0 0.0.0.255 established
 - La **ACL 102** consente **solo il traffico di ritorno** (risposte HTTP/HTTPS già stabilite).
     
 
-> Tutto il traffico in ingresso non associato a connessioni esistenti viene negato.
+La logica è questa: HTTP e HTTPS richiedono una connessione in uscita verso un server web, rispettivamente su porta 80 o 443, ma la pagina deve poi tornare al client interno. La ACL 102 permette quindi le risposte solo se appaiono associate a una comunicazione già stabilita; risposte finte o pacchetti non legati a richieste interne vengono bloccati.
+
+> 📌 Tutto il traffico in ingresso non associato a connessioni esistenti viene negato.
 
 ---
 
@@ -314,6 +359,11 @@ Router(config-if)# ip access-group <numero> {in | out}
 - Se non specificato, il default è **out**.
     
 
+Il punto di applicazione è decisivo: la stessa ACL può produrre effetti diversi se applicata a un’interfaccia diversa o nella direzione sbagliata.
+
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+
 #### **Esempio**
 
 ```
@@ -321,6 +371,8 @@ R1(config)# interface s0/0/0
 R1(config-if)# ip access-group 101 out
 R1(config-if)# ip access-group 102 in
 ```
+
+Nell’esempio, l’interfaccia `s0/0/0` è quella vicina alla rete `192.168.2.0/24` nel percorso verso Internet: la ACL 101 viene applicata in uscita per controllare le richieste web che lasciano la rete, mentre la ACL 102 viene applicata in ingresso per controllare le risposte che rientrano da Internet.
 
 ---
 
@@ -335,4 +387,4 @@ Le **ACL** sono strumenti potenti per **controllare e segmentare il traffico di 
 - e una **politica di sicurezza coerente** (idealmente _default deny_).
     
 
-> Le ACL sono la base del filtraggio nei firewall e nei router: semplici, efficaci, ma da usare con estrema precisione per evitare errori o vulnerabilità.
+> 📌 Le ACL sono la base del filtraggio nei firewall e nei router: semplici, efficaci, ma da usare con estrema precisione per evitare errori o vulnerabilità.
