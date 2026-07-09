@@ -21,7 +21,7 @@ Nel funzionamento di un proxy bisogna distinguere tra:
 - **connessioni reali**, cioè le connessioni effettivamente instaurate tra client e proxy e tra proxy e server;
 - **connessione apparente**, cioè la relazione logica che l'utente percepisce come comunicazione client-server per ottenere un certo servizio.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709155408.png)
 
 Dal punto di vista operativo, il client non stabilisce una connessione end-to-end direttamente con il server remoto. Stabilisce una connessione con il proxy; il proxy, a sua volta, stabilisce o gestisce una seconda comunicazione verso il server o verso il backend opportuno.
 
@@ -121,7 +121,7 @@ Il flusso logico è il seguente:
 5. se la richiesta è ammessa, il proxy la inoltra al vero web server;
 6. il server risponde e la risposta torna verso l'utente passando per il proxy.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709155449.png)
 
 Questa architettura semplifica anche la configurazione del firewall: il web server interno può essere configurato per accettare traffico solo dal reverse proxy, mentre il traffico esterno diretto al server reale viene negato o ridiretto.
 
@@ -133,7 +133,7 @@ In una prima variante, il reverse proxy è collocato in una zona esposta o semi-
 
 In una seconda variante, i server reali stanno nella rete interna e il reverse proxy comunica con loro tramite un canale dedicato, per esempio una VPN. Anche in questo caso il punto pubblico resta il proxy, mentre l'accesso ai server effettivi avviene tramite una relazione controllata e specifica.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709155515.png)
 
 Le configurazioni possono differire nei dettagli, ma l'obiettivo resta lo stesso: fare in modo che le richieste esterne arrivino al reverse proxy, vengano controllate, e solo dopo siano inoltrate ai server che erogano realmente il servizio.
 
@@ -356,7 +356,7 @@ Anche in questo caso le applicazioni possono dover essere modificate o configura
 
 Le tre soluzioni agiscono a livelli diversi.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709155613.png)
 
 Un **packet filter** controlla il traffico che attraversa il perimetro. Le sue decisioni sono basate soprattutto su indirizzi, porte, protocolli, flag e stato della connessione. Tutto il traffico deve passare dal firewall: se esistono percorsi alternativi, il modello di sicurezza perde senso.
 

@@ -163,7 +163,7 @@ Per capire dove scrivere una regola bisogna sapere quale percorso segue il pacch
 
 In un modello semplificato, considerando soprattutto `nat` e `filter`, il flusso è questo.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709160623.png)
 
 Quando un pacchetto arriva dalla rete:
 
@@ -189,7 +189,7 @@ Quando invece un pacchetto è generato da un'applicazione locale:
 
 Il flusso completo include anche le tabelle `raw` e `mangle`.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709160641.png)
 
 In ingresso, prima della decisione di routing, possono intervenire:
 

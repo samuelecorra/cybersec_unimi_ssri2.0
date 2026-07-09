@@ -23,7 +23,7 @@ Nel modello **screened host firewall single-homed** c'è un **packet filter**, s
 
 Il bastion host ospita il proxy. Il packet filter ha il compito di indirizzare il traffico verso il bastion host quando il servizio deve essere mediato dal proxy.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709155702.png)
 
 Il packet filter può permettere:
 
@@ -50,7 +50,7 @@ Una variante più robusta è il **dual-homed bastion host**, in cui il bastion h
 
 Questa configurazione separa meglio la rete esterna dalla rete interna: il traffico che arriva dall'esterno deve raggiungere il bastion host e poi essere inoltrato attraverso l'altra interfaccia solo se il proxy o il servizio lo consentono.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709155730.png)
 
 Il vantaggio rispetto al single-homed è che, anche se il packet filter viene compromesso, il traffico non può raggiungere direttamente la rete interna senza attraversare il bastion host. Per violare la separazione, l'attaccante dovrebbe compromettere o alterare anche il funzionamento del bastion host.
 
@@ -74,7 +74,7 @@ L'architettura usa tipicamente due packet filter:
 - un router/firewall esterno, tra Internet e rete perimetrale;
 - un router/firewall interno, tra rete perimetrale e rete privata.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709155746.png)
 
 Nella rete perimetrale possono trovarsi:
 
@@ -114,6 +114,8 @@ dove:
 
 Per esempio, `PORT 159,149,10,5,4,1` indica l'indirizzo `159.149.10.5` e la porta $256 \cdot 4 + 1 = 1025$.
 
+![](imgs/Pasted%20image%2020260709155916.png)
+
 #### **5.2. Scenario**
 
 Lo scenario didattico è il seguente:
@@ -123,7 +125,7 @@ Lo scenario didattico è il seguente:
 - un Telnet server è accessibile solo dall'interno, per esempio per diagnostica;
 - Telnet non dovrebbe essere esposto pubblicamente e, in generale, non dovrebbe essere usato in ambienti moderni perché insicuro.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709155952.png)
 
 L'attaccante sfrutta il server FTP come intermediario. Non attacca direttamente il Telnet server, perché il firewall non lo permetterebbe. Induce invece il server FTP, che è autorizzato a comunicare, ad aprire una connessione verso il Telnet server interno.
 
@@ -209,7 +211,7 @@ Un caso particolare è lo **stealth firewall**, cioè un firewall privo di indir
 
 L'idea è renderlo non direttamente attaccabile come host di rete. Il dispositivo viene collocato nel punto di transito dei pacchetti e intercetta fisicamente il traffico, per esempio tramite interfacce in modalità promiscua.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709160045.png)
 
 Il vantaggio è che l'attaccante esterno fatica a individuare e indirizzare direttamente il firewall: non c'è un IP a cui connettersi o contro cui lanciare attacchi di rete ordinari.
 

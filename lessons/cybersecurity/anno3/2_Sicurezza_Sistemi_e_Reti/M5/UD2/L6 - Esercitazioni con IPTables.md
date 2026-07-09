@@ -21,6 +21,8 @@ Il punto centrale non è imparare singoli comandi a memoria, ma capire:
 
 Per esercitarsi con firewall e `iptables`, il docente suggerisce l'uso di **IMUNES**.
 
+https://imunes.net/
+
 IMUNES è un simulatore di rete basato su container Docker. Tramite interfaccia grafica consente di:
 
 - disegnare una topologia di rete;
@@ -31,7 +33,7 @@ IMUNES è un simulatore di rete basato su container Docker. Tramite interfaccia 
 - configurare `iptables` su host o router;
 - installare applicazioni utili ai test, come `netcat`, `curl`, server web o servizi di rete.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709160917.png)
 
 Ogni nodo è un container. Questo rende l'ambiente comodo per sperimentare, ma introduce una conseguenza importante: quando la simulazione viene rilanciata, si può ripartire dall'immagine originale.
 
@@ -55,7 +57,7 @@ Il primo esercizio usa una topologia minima con:
 - due reti già configurate;
 - indirizzi IP, MAC address e interfacce predisposti dal simulatore.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709160857.png)
 
 L'obiettivo è bloccare traffico TCP verso la porta `8080`, prima direttamente sull'host destinatario e poi sul router.
 
@@ -199,6 +201,8 @@ Esempi:
 
 Il terzo esercizio estende la topologia con un terzo host.
 
+![](imgs/Pasted%20image%2020260709161024.png)
+
 Obiettivi:
 
 - host 3 non deve accedere al web server;
@@ -229,6 +233,8 @@ iptables -A FORWARD -p tcp --dport 22 -d <ip_host3> -s <ip_host1> -j DROP
 ### **7. Estensione: blocco di un'intera rete**
 
 L'esercizio viene poi esteso aggiungendo un quarto host nella stessa rete di host 3, tramite uno switch.
+
+![](imgs/Pasted%20image%2020260709161046.png)
 
 L'obiettivo diventa bloccare l'accesso al server web da tutta la nuova rete.
 
@@ -400,7 +406,7 @@ Opzioni utili:
 
 Un prefisso come `INPUT TCP:` o `FORWARD:` permette di capire rapidamente quale parte della configurazione ha prodotto la riga di log.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709161325.png)
 
 Il log può includere informazioni come:
 
@@ -571,7 +577,7 @@ La struttura completa diventa:
 - poi si invia il traffico TCP, UDP o ICMP alle chain dedicate;
 - ogni chain applica le proprie regole specializzate.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709175445.png)
 
 > ⚠️ Una chain personalizzata inutilizzata non filtra nulla. Deve essere richiamata da una chain attraversata realmente dal traffico.
 
@@ -584,12 +590,12 @@ Il transcript mostra un esempio di script che crea chain e poi collega i vari co
 L'idea generale è:
 
 1. creare `bad_tcp_packets`;
-2. creare `allowed`;
+2. creare `allowed`;s
 3. creare `tcp_packets`, `udp_packets`, `icmp_packets`;
 4. inserire in ciascuna chain le regole specifiche;
 5. fare `jump` dalle chain principali verso le chain personalizzate.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709175457.png)
 
 In uno script reale questo approccio evita di avere una configurazione monolitica e difficile da verificare.
 
@@ -610,7 +616,7 @@ La topologia contiene:
 - un DNS server nella DMZ;
 - un mail server nella DMZ, con SMTP.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709175509.png)
 
 I requisiti indicati sono:
 

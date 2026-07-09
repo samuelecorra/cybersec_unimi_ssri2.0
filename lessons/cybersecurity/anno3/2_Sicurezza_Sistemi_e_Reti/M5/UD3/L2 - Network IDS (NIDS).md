@@ -40,7 +40,7 @@ Il docente considera una rete tradizionale a tre zone:
 - rete interna;
 - firewall tra le zone.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709175938.png)
 
 In uno scenario di questo tipo, i **network sensor** possono essere collocati in più punti.
 
@@ -97,7 +97,7 @@ Un esempio tipico è la raccolta di statistiche a livello nazionale o settoriale
 
 Un IDS distribuito trasforma osservazioni grezze in decisioni operative.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709175953.png)
 
 La catena logica è la seguente:
 
@@ -152,7 +152,7 @@ Il formato è basato su XML e consente di rappresentare informazioni come:
 - riferimenti a vulnerabilità note, per esempio CVE;
 - link o riferimenti per approfondimento.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709180011.png)
 
 L'aspetto didattico importante non è memorizzare ogni tag XML, ma capire perché un formato strutturato è utile: rende gli alert scambiabili, filtrabili e correlabili da strumenti diversi.
 
@@ -227,7 +227,7 @@ Un **honeypot** è un sistema deliberatamente esposto o vulnerabile, costruito p
 
 Una **honeynet** è una rete di honeypot o un segmento di rete progettato per sembrare interessante, ma separato dalla produzione reale.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709180028.png)
 
 Il docente descrive una rete finta, distinta dalla vera DMZ, con dispositivi e servizi configurati in modo da attirare attacchi. L'idea è che molti attaccanti, soprattutto bot automatici, cerchino servizi esposti, versioni vulnerabili o configurazioni deboli.
 
@@ -488,13 +488,15 @@ Suricata è spesso considerato un'alternativa moderna a Snort, con architettura 
 
 Il punto concettuale è che il mondo NIDS non è limitato a un singolo strumento: Snort è fondamentale per capire regole e modello operativo, ma esistono motori e piattaforme diverse con obiettivi simili.
 
+![](imgs/Pasted%20image%2020260709180103.png)
+
 ---
 
 ### **19. IDS lungo la timeline di un attacco**
 
 Il docente chiude con lo schema tipico di un attacco.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709180119.png)
 
 Una sequenza semplificata comprende:
 

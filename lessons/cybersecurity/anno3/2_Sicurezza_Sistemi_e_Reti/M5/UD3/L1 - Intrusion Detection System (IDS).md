@@ -302,7 +302,7 @@ Un allarme è corretto quando l'IDS genera un allarme e l'intrusione esiste davv
 
 Per ragionare sulla qualità dell'IDS si usa la logica di una matrice di classificazione.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709175735.png)
 
 I casi sono quattro:
 
@@ -338,6 +338,8 @@ In un ambiente molto critico può essere accettabile gestire più falsi positivi
 ### **13. Precision, recall, specificità e FPR**
 
 Il docente collega la valutazione degli IDS alle metriche classiche dei classificatori.
+
+![](imgs/Pasted%20image%2020260709175805.png)
 
 Le grandezze principali sono:
 
@@ -375,7 +377,7 @@ La **recall** risponde alla domanda: tra gli attacchi reali, quanti sono stati r
 
 La relazione tra **True Positive Rate** e **False Positive Rate** viene rappresentata tramite la curva **ROC**.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260709175820.png)
 
 Una curva ideale separerebbe perfettamente attacchi e non-attacchi: tutti i veri positivi sarebbero rilevati senza falsi positivi. In quel caso l'area sotto la curva sarebbe pari a `1`.
 
@@ -384,6 +386,8 @@ Nei sistemi reali, invece, le distribuzioni di traffico normale e attacco si sov
 L'**AUC** misura quanto la curva si avvicina al comportamento ideale.
 
 > 📌 Più l'AUC è alta, più il classificatore distingue bene tra traffico normale e traffico malevolo; ma nessun IDS reale elimina completamente FP e FN.
+
+![](imgs/Pasted%20image%2020260709175905.png)
 
 ---
 
