@@ -1,4 +1,4 @@
-# Samu CyberLocker
+# SSRI 2.0
 
 > Archivio **open source e senza fini di lucro** delle lezioni del corso di laurea online **SSRI — Sicurezza dei Sistemi e delle Reti Informatiche** (Università degli Studi di Milano), realizzato da uno studente per tutti gli studenti del corso.
 
