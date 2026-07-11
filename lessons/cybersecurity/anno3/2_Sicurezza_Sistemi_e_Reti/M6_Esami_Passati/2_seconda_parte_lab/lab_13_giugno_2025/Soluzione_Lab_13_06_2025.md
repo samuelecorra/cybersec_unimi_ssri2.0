@@ -30,6 +30,29 @@ commentare e fare considerazioni su:
 
 > **Riferimenti**: [M7/UD1/L4 — Analisi per protocollo](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md) (§1 HW/SW, §3 DNS, §5 TLS, §6 HTTP), [M7/UD1/L3 — Statistiche e Follow Stream](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L3%20-%20Statistiche,%20Conversations,%20Follow%20Stream%20ed%20Expert%20Info.md)
 
+#### **Fase 0 — Dal download al primo triage**
+
+**Apertura del file.** La traccia si scarica in formato `pcap` o `pcapng`: per Wireshark è indifferente (`File → Open`, `Ctrl+O`, o drag & drop sulla finestra) — il formato non cambia in nulla filtri e statistiche. Verificare che la colonna *Time* mostri i secondi dall'inizio della cattura (`View → Time Display Format → Seconds Since Beginning of Capture`, il default): i tempi della soluzione usano questo riferimento.
+
+**Dimensioni del problema.** `Statistics → Capture File Properties` riporta **8.987 pacchetti in ~5 minuti e 45 secondi**: troppi per leggerli in sequenza, e per giunta quasi tutti cifrati. Si applica il metodo "a imbuto":
+
+1. **`Statistics → Protocol Hierarchy`**: la cattura è dominata dal traffico **HTTPS su TCP/443** — ~7.700 pacchetti su 8.987, da verificare col filtro `tcp.port == 443` (voce *Displayed* nella barra di stato). ⚠️ In Protocol Hierarchy questo volume si divide fra la riga *TLS* (i pacchetti con record TLS decodificati) e la riga *TCP* (ACK e segmenti puri): la vista attribuisce ogni pacchetto al livello più alto decodificato, quindi la riga TLS da sola mostra un numero più basso del totale di porta. Seguono **DNS** (~600 pacchetti) e una piccola quota **HTTP sulla porta 80**. Nessuna porta anomala: profilo da navigazione web ordinaria, e infatti le domande chiedono di *descrivere*, non di trovare un attacco.
+2. **`Statistics → Conversations`**: un solo client locale, `192.168.120.231`, parla con molti IP pubblici → è la macchina da osservare; la scheda *Ethernet* dà subito i MAC per la domanda 1a; ordinando la scheda *TCP* per numero di pacchetti si vede quali server concentrano il traffico.
+3. **Barra dei filtri** (`Ctrl+/`): un filtro mirato per ciascuna domanda, secondo la mappa qui sotto.
+
+**Mappa domanda → strumento/filtro** per questa traccia:
+
+| Domanda della traccia | Strumento o filtro | Cosa si ottiene |
+|---|---|---|
+| 1. Prima connessione TCP | `tcp.stream eq 0` (Wireshark numera i flussi TCP in ordine di apparizione: lo *stream 0* è la prima connessione) | solo i pacchetti della prima connessione, SYN in testa |
+| 1a. MAC | espandere *Ethernet II* sul primo SYN | ⚠️ il server è un IP pubblico remoto: il MAC di destinazione è quello del **gateway**, non del server |
+| 1b. HW/SW | OUI dei MAC (Conversations → *Ethernet*) + nomi risolti da DNS/SNI | ambiente virtualizzato, servizi del browser |
+| 2. Prime due sessioni DNS | `dns` (o solo le query con `dns.flags.response == 0`) | i primi frame in alto sono le prime due risoluzioni |
+| 3. Sessione TLS | `tls.handshake.type == 1` (tutti i *Client Hello*) | l'estensione **SNI**, in chiaro, dice a quale sito è diretta ogni sessione cifrata |
+| 4. HTTP | `http.request \|\| http.response` | tutte le richieste/risposte in chiaro (in gran parte OCSP) |
+
+> 💡 Il trucco che rende leggibile una cattura quasi tutta cifrata: filtrare `tls.handshake.type == 1`, selezionare in un pacchetto il campo *Server Name* (estensione `server_name` del Client Hello) e fare click destro → **Apply as Column**. La nuova colonna SNI trasforma la traccia in un elenco dei siti contattati, senza decifrare nulla. Per la parte in chiaro, click destro su una richiesta verso `www.example.com` → **Follow → HTTP Stream** mostra richiesta e risposta complete.
+
 Da `Statistics → Protocol Hierarchy` la cattura è dominata da **TLS (443)** e **DNS**, con una piccola quota **HTTP (80)** quasi tutta dedicata a OCSP: il profilo tipico di una **normale navigazione web cifrata**.
 
 **1. Nodi della prima connessione TCP.** Con il filtro `tcp.stream eq 0`, il primo SYN è **`192.168.120.231:42298 → 34.117.188.166:443`** (a `t ≈ 0,025 s`). Il client è dunque `192.168.120.231`; il server remoto è `34.117.188.166` sulla porta 443 (HTTPS).

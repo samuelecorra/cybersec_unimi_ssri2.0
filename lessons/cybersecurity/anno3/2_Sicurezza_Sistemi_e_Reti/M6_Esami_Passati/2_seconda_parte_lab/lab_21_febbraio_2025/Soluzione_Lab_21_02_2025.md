@@ -31,6 +31,30 @@ commentare e fare considerazioni su:
 
 > **Riferimenti**: [M7/UD1/L4 — Analisi per protocollo](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md) (§7 FTP), [M7/UD1/L5 — Estrazione e attacchi](../../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L5%20-%20Estrazione%20di%20file,%20credenziali%20e%20individuazione%20di%20phishing.md) (§3 credenziali, §5 brute-force)
 
+#### **Fase 0 — Dal download al primo triage**
+
+**Apertura del file.** Dalla pagina del docente la traccia è scaricabile sia in formato `pcap` sia `pcapng`: per Wireshark è indifferente — si aprono allo stesso modo (`File → Open`, `Ctrl+O`, oppure trascinando il file sulla finestra) e ogni filtro e statistica funziona identicamente su entrambi; `pcapng` è solo il formato più recente, con qualche metadato in più (commenti, interfacce multiple). Prima di guardare i pacchetti conviene verificare che la colonna *Time* mostri i secondi dall'inizio della cattura (`View → Time Display Format → Seconds Since Beginning of Capture`, che è il default): tutti i tempi citati nella soluzione usano questo riferimento.
+
+**Dimensioni del problema.** `Statistics → Capture File Properties` dice subito che la cattura contiene **19.730 pacchetti in ~44,6 secondi**: scorrerli uno a uno è fuori discussione. La regola d'oro degli esercizi d'esame è **non partire mai dall'elenco dei pacchetti**, ma da tre viste aggregate in quest'ordine (il metodo "a imbuto"):
+
+1. **`Statistics → Protocol Hierarchy`** — quali protocolli dominano. ⚠️ Questa vista attribuisce ogni pacchetto al **livello più alto che Wireshark decodifica al suo interno**: alla riga *FTP* compaiono solo i pacchetti che trasportano comandi o risposte, mentre handshake, ACK e ritrasmissioni restano conteggiati alla riga *TCP* — i due numeri **non devono coincidere**. Qui l'intera cattura viaggia comunque su **TCP porta 21** (verifica: filtro `tcp.port == 21` → la voce *Displayed* nella barra di stato in basso copre praticamente tutti i 19.730 pacchetti) → l'esercizio ruota attorno a sessioni FTP e il primo filtro da scrivere è `ftp`.
+2. **`Statistics → Conversations`** — chi parla con chi. Scheda *IPv4*: **una sola coppia di host** si scambia tutto il traffico → la domanda 1 (nodi coinvolti) è già risolta senza aprire un pacchetto. Scheda *Ethernet*: i **MAC** (domanda 1a). Scheda *TCP*, ordinata per *Packets*: **centinaia di connessioni brevissime** aperte in raffica → primo forte indizio di automazione.
+3. **Barra dei filtri di visualizzazione** (`Ctrl+/` porta il cursore direttamente sulla barra) — solo ora, con filtri mirati su ciò che le statistiche hanno fatto emergere.
+
+**Mappa domanda → strumento/filtro** per questa traccia:
+
+| Domanda della traccia | Strumento o filtro | Cosa si ottiene |
+|---|---|---|
+| 1. Nodi IP | `Statistics → Conversations`, schede *IPv4*/*TCP* | le due estremità di tutte le sessioni |
+| 1a. MAC | scheda *Ethernet* delle Conversations (o espandere *Ethernet II* su un pacchetto qualunque) | MAC e produttore via OUI |
+| 1b. HW/SW | OUI dei MAC + banner del server (prima risposta `220` nel filtro `ftp`) | produttore delle NIC, software del server |
+| 1c. Inizio connessione | `tcp.flags.syn == 1 && tcp.flags.ack == 0` | tutti i SYN; il primo (colonna *Time*) segna l'inizio |
+| 2. Utenti e password | `ftp.request.command == "USER" \|\| ftp.request.command == "PASS"`, oppure `Tools → Credentials` | credenziali in chiaro, già tabulate |
+| 3. Esito delle sessioni | `ftp.response.code == 530` (fallimenti) e `ftp.response.code == 230` (successi) | se il secondo filtro non restituisce nulla, il login non è **mai** riuscito |
+| 4. Comandi e file | `ftp` (canale comandi) e `ftp-data` (canale dati) | `ftp-data` vuoto ⇒ nessun file trasferito |
+
+> 💡 Due scorciatoie che evitano di ricordare la sintassi dei filtri: (a) click destro su un campo qualunque nel pannello di dettaglio → **Apply as Filter → Selected** costruisce il filtro da solo; (b) click destro su un pacchetto → **Follow → TCP Stream** (`Ctrl+Alt+Shift+T`) ricostruisce l'intero dialogo di una sessione — su questa traccia mostra la sequenza `USER`/`PASS`/`530` di un tentativo completo. La barra dei filtri diventa **verde** quando la sintassi è valida, **rossa** quando non lo è.
+
 Aprendo la traccia e guardando `Statistics → Protocol Hierarchy`, la cattura è quasi interamente **FTP sulla porta 21**: è il segnale che l'esercizio ruota attorno a una (o più) sessioni FTP. `Statistics → Conversations` mostra un'unica coppia di host che si scambia decine di migliaia di pacchetti.
 
 **1. Nodi IP coinvolti nelle sessioni FTP.** La conversazione avviene fra due soli host: il **server FTP `10.121.70.151`** (che ascolta sulla porta 21) e il **client `10.234.125.254`** (che apre le connessioni da porte effimere). Tutte le sessioni FTP sono fra questi due nodi.
