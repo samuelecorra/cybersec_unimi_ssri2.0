@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-11T17:27:35.414Z",
+  "generatedAt": "2026-07-13T17:00:39.494Z",
   "root": "lessons/cybersecurity",
-  "totalFiles": 5744,
+  "totalFiles": 5746,
   "files": [
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L1 - Rette.md",
@@ -23134,8 +23134,18 @@
       "ext": ".md"
     },
     {
+      "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M6_Esami_Passati/2_seconda_parte_lab/cheat_sheet_firewall_tabella.md",
+      "size": 30221,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M6_Esami_Passati/2_seconda_parte_lab/cheat_sheet_iptables.md",
+      "size": 27963,
+      "ext": ".md"
+    },
+    {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M6_Esami_Passati/2_seconda_parte_lab/cheat_sheet_wireshark_analysis.md",
-      "size": 45889,
+      "size": 45916,
       "ext": ".md"
     },
     {

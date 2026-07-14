@@ -1,6 +1,6 @@
 # 🦈 Cheat Sheet Enciclopedica — Analisi di traffico con Wireshark (Esame Laboratorio SSRI)
 
-> 📌 **A cosa serve questo file.** È la guida operativa da tenere aperta **durante** la prova di laboratorio (open book). Ti accompagna dal momento in cui clicchi il link del docente per scaricare la cattura fino alla stesura della risposta scritta, spiegando **cosa guardare, in che ordine, quali scorciatoie usare e come passare da un indizio alla diagnosi**. È scritta per non dare nulla per scontato: se segui le fasi nell'ordine, non ti perdi mai nel mare di pacchetti. I riferimenti di teoria puntano al modulo [M7 – Wireshark e Firewall](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L1%20-%20Interfaccia,%20cattura%20e%20anatomia%20di%20una%20traccia.md); i tre esami già risolti sono nella cartella accanto a questo file.
+> 📌 **A cosa serve questo file.** È la guida operativa da tenere aperta **durante** la prova di laboratorio (open book). Ti accompagna dal momento in cui clicchi il link del docente per scaricare la cattura fino alla stesura della risposta scritta, spiegando **cosa guardare, in che ordine, quali scorciatoie usare e come passare da un indizio alla diagnosi**. È scritta per non dare nulla per scontato: se segui le fasi nell'ordine, non ti perdi mai nel mare di pacchetti. I riferimenti di teoria puntano al modulo [M7 – Wireshark e Firewall](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L1%20-%20Interfaccia,%20cattura%20e%20anatomia%20di%20una%20traccia.md); i tre esami già risolti sono nella cartella accanto a questo file.
 
 ---
 
@@ -173,7 +173,7 @@ Filtra `arp`. Pattern tipici:
 
 I **filtri di visualizzazione** (*display filter*) sono il cuore dell'analisi mirata. Si scrivono nella barra in alto (portaci il cursore con **`Ctrl+/`**). La barra diventa **verde** quando la sintassi è valida, **rossa** quando è errata, gialla quando è valida ma "sospetta". Premi Invio per applicare.
 
-> ⚠️ **Non confondere i due tipi di filtro.** I **filtri di cattura** (*capture filter*, sintassi BPF, es. `port 80`) si impostano *prima* di catturare e scartano i pacchetti per sempre. I **filtri di visualizzazione** (sintassi Wireshark, es. `tcp.port == 80`) si applicano *dopo*, su una cattura già salvata, e **nascondono soltanto** senza cancellare: in esame usi **sempre e solo questi ultimi**, perché parti da un file già registrato. Dettagli in [M7/UD1/L2](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L2%20-%20Filtri%20di%20cattura%20e%20di%20visualizzazione.md).
+> ⚠️ **Non confondere i due tipi di filtro.** I **filtri di cattura** (*capture filter*, sintassi BPF, es. `port 80`) si impostano *prima* di catturare e scartano i pacchetti per sempre. I **filtri di visualizzazione** (sintassi Wireshark, es. `tcp.port == 80`) si applicano *dopo*, su una cattura già salvata, e **nascondono soltanto** senza cancellare: in esame usi **sempre e solo questi ultimi**, perché parti da un file già registrato. Dettagli in [M7/UD1/L2](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L2%20-%20Filtri%20di%20cattura%20e%20di%20visualizzazione.md).
 
 #### **5.1. La sintassi essenziale**
 
@@ -294,7 +294,7 @@ I valori di default nel pacchetto SYN (finestra iniziale `Window`, `TTL`, opzion
 
 ### **8. Ricettario per protocollo (schede operative)**
 
-Schede sintetiche: per ciascun protocollo, cosa filtrare e come rispondere alle domande d'esame. Approfondimenti in [M7/UD1/L4](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md).
+Schede sintetiche: per ciascun protocollo, cosa filtrare e come rispondere alle domande d'esame. Approfondimenti in [M7/UD1/L4](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md).
 
 #### **8.1. FTP**
 
@@ -455,4 +455,4 @@ Template mentale da riempire con i valori della tua cattura:
 
 ---
 
-> **Riferimenti**: modulo [M7 – Wireshark e Firewall](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L1%20-%20Interfaccia,%20cattura%20e%20anatomia%20di%20una%20traccia.md) — [L2 Filtri](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L2%20-%20Filtri%20di%20cattura%20e%20di%20visualizzazione.md), [L3 Statistiche e Follow Stream](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L3%20-%20Statistiche,%20Conversations,%20Follow%20Stream%20ed%20Expert%20Info.md), [L4 Analisi per protocollo](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md), [L5 Estrazione file e phishing](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L5%20-%20Estrazione%20di%20file,%20credenziali%20e%20individuazione%20di%20phishing.md), [L6 Cheat-sheet operativa](../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L6%20-%20Cheat-sheet%20operativa%20d'esame.md). Casi risolti: [21/02](lab_21_febbraio_2025/Soluzione_Lab_21_02_2025.md), [13/06](lab_13_giugno_2025/Soluzione_Lab_13_06_2025.md), [02/07 ≡ 12/09](lab_2_luglio_2025/Soluzione_Lab_02_07_2025.md).
+> **Riferimenti**: modulo [M7 – Wireshark e Firewall](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L1%20-%20Interfaccia,%20cattura%20e%20anatomia%20di%20una%20traccia.md) — [L2 Filtri](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L2%20-%20Filtri%20di%20cattura%20e%20di%20visualizzazione.md), [L3 Statistiche e Follow Stream](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L3%20-%20Statistiche,%20Conversations,%20Follow%20Stream%20ed%20Expert%20Info.md), [L4 Analisi per protocollo](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L4%20-%20Analisi%20per%20protocollo%20%28ARP,%20DNS,%20TCP,%20TLS,%20HTTP,%20FTP%29.md), [L5 Estrazione file e phishing](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L5%20-%20Estrazione%20di%20file,%20credenziali%20e%20individuazione%20di%20phishing.md), [L6 Cheat-sheet operativa](../../M7_Laboratorio_Wireshark_e_Firewall/UD1_Wireshark/L6%20-%20Cheat-sheet%20operativa%20d'esame.md). Casi risolti: [21/02](lab_21_febbraio_2025/Soluzione_Lab_21_02_2025.md), [13/06](lab_13_giugno_2025/Soluzione_Lab_13_06_2025.md), [02/07 ≡ 12/09](lab_2_luglio_2025/Soluzione_Lab_02_07_2025.md).
