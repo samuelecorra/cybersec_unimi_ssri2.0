@@ -143,3 +143,9 @@ La RIB è un array ordinato per `prefix_len` decrescente: il **longest prefix ma
 1. Verificare la disponibilità dell'ambiente: IMUNES (nativo su FreeBSD, via Docker/VM su Linux) e Quagga/FRR.
 2. Congelare una pagina di **proposta di estensione** da mandare al docente (facoltativa ma astuta: "Router in C userspace con RIPv2 interoperabile con Quagga, demo IMUNES" — così i 3 punti sono negoziati *prima*).
 3. Fase 0 della roadmap.
+
+---
+
+### **7. Implementazione realizzata**
+
+> ✅ Il progetto è stato **implementato per intero**: codice, test e relazione si trovano nella cartella [`router_ipv4_C/`](router_ipv4_C/). Il router `crouter` (~1500 righe di C, solo libc + header Linux) supera tutte le fasi della roadmap: data plane completo, RIPv2 interoperabile con FRRouting, i cinque scenari del walkthrough catturati, fuzzing di 2200 frame malformati e Valgrind puliti. L'ambiente di demo usa Linux network namespaces + FRR (`router_ipv4_C/test/topo.sh`) al posto di IMUNES, scelta per riproducibilità e per poter automatizzare i test; la topologia riprodotta è quella del §3.1. La relazione finale in PDF è [`router_ipv4_C/relazione/relazione.pdf`](router_ipv4_C/relazione/relazione.pdf) (rigenerabile con `router_ipv4_C/relazione/build_pdf.sh`). Restano da incollare a mano gli screenshot GUI nei segnaposto già predisposti nella relazione.

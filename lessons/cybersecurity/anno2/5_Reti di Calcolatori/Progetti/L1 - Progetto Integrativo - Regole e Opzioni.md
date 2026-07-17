@@ -70,20 +70,20 @@ Progetti di **sviluppo software di rete in C**, in continuità diretta con il mo
 
 ### **3. Analisi comparativa: difficoltà vs impatto**
 
-| # | Progetto | Difficoltà | Impatto sul docente | Note |
-|---|----------|:----------:|:-------------------:|------|
-| 2 | Router in C | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | Tocca il **cuore del corso** (livello 3, forwarding, routing dinamico). Il più ambizioso in assoluto |
-| 4 | Chord in C | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Accademicamente elegante, ma il P2P è marginale nel programma rispetto al routing |
-| 3 | Gnutella-like | ⭐⭐⭐⭐ | ⭐⭐⭐ | Impegnativo ma concettualmente più semplice di Chord |
-| 10 | HTTP/3 | ⭐⭐⭐ | ⭐⭐⭐⭐ | Modernissimo, ma "studio e demo": meno codice, meno rischio, meno gloria |
-| 8 | Virtual hosting + SSL | ⭐⭐⭐ | ⭐⭐⭐ | Il più ricco tra gli IMUNES |
-| 1 | Rete universitaria | ⭐⭐⭐ | ⭐⭐⭐ | Buona progettazione L2/L3, ma niente sviluppo |
-| 6 | Proxy trasparente | ⭐⭐⭐ | ⭐⭐⭐ | Interessante il load balancing |
-| 9 | Protocollo applicativo | ⭐⭐⭐ | ⭐⭐⭐ | Valore dipende interamente dall'idea |
-| 7 | Firewall IPTABLES | ⭐⭐ | ⭐⭐ | Standard |
-| 5 | Servizi base | ⭐⭐ | ⭐⭐ | Il più "compitino" |
-| 12 | Traceroute | ⭐⭐ | ⭐⭐⭐ | Piccolo ma chirurgico (socket raw, ICMP) |
-| 11 | SNMP | ⭐ | ⭐⭐ | Il meno impegnativo |
+| #   | Progetto               | Difficoltà | Impatto sul docente | Note                                                                                                 |
+| --- | ---------------------- | :--------: | :-----------------: | ---------------------------------------------------------------------------------------------------- |
+| 2   | Router in C            |   ⭐⭐⭐⭐⭐    |        ⭐⭐⭐⭐⭐        | Tocca il **cuore del corso** (livello 3, forwarding, routing dinamico). Il più ambizioso in assoluto |
+| 4   | Chord in C             |    ⭐⭐⭐⭐    |        ⭐⭐⭐⭐         | Accademicamente elegante, ma il P2P è marginale nel programma rispetto al routing                    |
+| 3   | Gnutella-like          |    ⭐⭐⭐⭐    |         ⭐⭐⭐         | Impegnativo ma concettualmente più semplice di Chord                                                 |
+| 10  | HTTP/3                 |    ⭐⭐⭐     |        ⭐⭐⭐⭐         | Modernissimo, ma "studio e demo": meno codice, meno rischio, meno gloria                             |
+| 8   | Virtual hosting + SSL  |    ⭐⭐⭐     |         ⭐⭐⭐         | Il più ricco tra gli IMUNES                                                                          |
+| 1   | Rete universitaria     |    ⭐⭐⭐     |         ⭐⭐⭐         | Buona progettazione L2/L3, ma niente sviluppo                                                        |
+| 6   | Proxy trasparente      |    ⭐⭐⭐     |         ⭐⭐⭐         | Interessante il load balancing                                                                       |
+| 9   | Protocollo applicativo |    ⭐⭐⭐     |         ⭐⭐⭐         | Valore dipende interamente dall'idea                                                                 |
+| 7   | Firewall IPTABLES      |     ⭐⭐     |         ⭐⭐          | Standard                                                                                             |
+| 5   | Servizi base           |     ⭐⭐     |         ⭐⭐          | Il più "compitino"                                                                                   |
+| 12  | Traceroute             |     ⭐⭐     |         ⭐⭐⭐         | Piccolo ma chirurgico (socket raw, ICMP)                                                             |
+| 11  | SNMP                   |     ⭐      |         ⭐⭐          | Il meno impegnativo                                                                                  |
 
 > ✅ **Scelta consigliata per i 3 punti pieni: il Router in C (#2)**, potenziato con una demo in IMUNES. È l'unico progetto che unisce **implementazione di basso livello** (socket raw, parsing di pacchetti, forwarding), **protocolli di routing dinamico** (il capitolo teoricamente più nobile del corso) e **deployment emulato** (IMUNES, come i progetti di design). In pratica: due categorie di progetto in una.
 
