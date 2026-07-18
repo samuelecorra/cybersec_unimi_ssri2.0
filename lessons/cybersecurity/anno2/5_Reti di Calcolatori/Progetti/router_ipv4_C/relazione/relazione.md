@@ -1,7 +1,8 @@
 # **crouter — Router IPv4 userspace in C con RIPv2**
+
 ## **Relazione del progetto integrativo di Reti di Calcolatori**
 
-*Corso di Laurea in Informatica per la Sicurezza dei Dati / Cybersecurity — Università degli Studi di Milano*
+_SSRI — Università degli Studi di Milano_
 
 ---
 
@@ -11,57 +12,57 @@ Questo preambolo raccoglie, in forma sintetica, i **concetti**, gli **acronimi**
 
 #### **0.1. Infarinatura teorica**
 
-**I tre livelli in gioco.** Un pacchetto attraversa più livelli della pila di rete: il **livello 2** (collegamento, *Ethernet*) muove *frame* fra dispositivi adiacenti identificati dal **MAC**; il **livello 3** (rete, *IP*) muove *pacchetti* fra reti diverse tramite l'**instradamento**; il **livello 4** (trasporto, *UDP/TCP*) offre un canale fra applicazioni. `crouter` opera soprattutto al livello 3, ma deve "vedere" e costruire anche i frame di livello 2.
+**I tre livelli in gioco.** Un pacchetto attraversa più livelli della pila di rete: il **livello 2** (collegamento, _Ethernet_) muove _frame_ fra dispositivi adiacenti identificati dal **MAC**; il **livello 3** (rete, _IP_) muove _pacchetti_ fra reti diverse tramite l'**instradamento**; il **livello 4** (trasporto, _UDP/TCP_) offre un canale fra applicazioni. `crouter` opera soprattutto al livello 3, ma deve "vedere" e costruire anche i frame di livello 2.
 
-**Frame Ethernet ed EtherType.** Ogni frame ha un MAC di destinazione, un MAC sorgente e un campo *EtherType* che dice cosa trasporta: `0x0800` = IPv4, `0x0806` = ARP.
+**Frame Ethernet ed EtherType.** Ogni frame ha un MAC di destinazione, un MAC sorgente e un campo _EtherType_ che dice cosa trasporta: `0x0800` = IPv4, `0x0806` = ARP.
 
-**ARP (Address Resolution Protocol).** Per consegnare un pacchetto IP a un vicino sulla stessa LAN serve il suo MAC. ARP lo scopre: *"chi ha l'IP X? mi comunichi il suo MAC"* (una *request* in broadcast), e il titolare dell'indirizzo risponde (*reply*). `crouter` mantiene una **cache** IP→MAC e **risponde alle richieste ARP per i propri IP** (quelli configurati sulle sue interfacce).
+**ARP (Address Resolution Protocol).** Per consegnare un pacchetto IP a un vicino sulla stessa LAN serve il suo MAC. ARP lo scopre: _"chi ha l'IP X? mi comunichi il suo MAC"_ (una _request_ in broadcast), e il titolare dell'indirizzo risponde (_reply_). `crouter` mantiene una **cache** IP→MAC e **risponde alle richieste ARP per i propri IP** (quelli configurati sulle sue interfacce).
 
-**IPv4.** Il pacchetto di livello 3 ha un header con indirizzo sorgente e destinazione (32 bit), un **TTL** (*Time To Live*) decrementato a ogni router attraversato — quando arriva a 0 il pacchetto è scartato, difesa contro i loop — e un **checksum** che ne protegge l'integrità. Un pacchetto troppo grande per un collegamento può essere **frammentato**.
+**IPv4.** Il pacchetto di livello 3 ha un header con indirizzo sorgente e destinazione (32 bit), un **TTL** (_Time To Live_) decrementato a ogni router attraversato — quando arriva a 0 il pacchetto è scartato, difesa contro i loop — e un **checksum** che ne protegge l'integrità. Un pacchetto troppo grande per un collegamento può essere **frammentato**.
 
-**ICMP.** Protocollo di messaggi di controllo e diagnostica: l'**Echo Request/Reply** è ciò che sta dietro al *ping*; il **Time Exceeded** è generato da un router quando il TTL arriva a 0 (ed è ciò che rende i router visibili al *traceroute*); il **Destination Unreachable** segnala una destinazione o una porta irraggiungibile.
+**ICMP.** Protocollo di messaggi di controllo e diagnostica: l'**Echo Request/Reply** è ciò che sta dietro al _ping_; il **Time Exceeded** è generato da un router quando il TTL arriva a 0 (ed è ciò che rende i router visibili al _traceroute_); il **Destination Unreachable** segnala una destinazione o una porta irraggiungibile.
 
-**Piano dati e piano di controllo; inoltro e instradamento.** Il **piano dati** (*data plane*) muove i singoli pacchetti verso il *next-hop* — è l'**inoltro** (*forwarding*). Il **piano di controllo** (*control plane*) decide *quali* siano i percorsi, costruendo e mantenendo la tabella di routing — è l'**instradamento** (*routing*). `crouter` implementa entrambi.
+**Piano dati e piano di controllo; inoltro e instradamento.** Il **piano dati** (_data plane_) muove i singoli pacchetti verso il _next-hop_ — è l'**inoltro** (_forwarding_). Il **piano di controllo** (_control plane_) decide _quali_ siano i percorsi, costruendo e mantenendo la tabella di routing — è l'**instradamento** (_routing_). `crouter` implementa entrambi.
 
 **Longest Prefix Match (LPM).** Fra tutte le rotte che "contengono" un indirizzo di destinazione, il router sceglie la più **specifica**, cioè quella con il prefisso più lungo (per esempio una `/30` batte una `/24`). È il criterio fondamentale con cui si decide dove inoltrare un pacchetto.
 
-**Routing dinamico e RIP.** Invece di configurare le rotte a mano, i router se le scambiano automaticamente. **RIP** (*Routing Information Protocol*) è un protocollo *distance-vector*: ogni router annuncia periodicamente ai vicini le reti che sa raggiungere e a quale "distanza" (**metrica** = numero di *hop*); chi ascolta somma 1 e tiene il percorso più corto. La metrica massima utile è 15; **16 significa infinito** (irraggiungibile). Per evitare i loop, RIP usa lo **split horizon con poisoned reverse** (una rotta appresa da un'interfaccia viene riannunciata *su quella stessa interfaccia* con metrica 16, cioè "da me non passare per tornare lì"). **RIPv2** (RFC 2453) aggiunge la *subnet mask* e il *next-hop*, permettendo reti *classless* (CIDR/VLSM).
+**Routing dinamico e RIP.** Invece di configurare le rotte a mano, i router se le scambiano automaticamente. **RIP** (_Routing Information Protocol_) è un protocollo _distance-vector_: ogni router annuncia periodicamente ai vicini le reti che sa raggiungere e a quale "distanza" (**metrica** = numero di _hop_); chi ascolta somma 1 e tiene il percorso più corto. La metrica massima utile è 15; **16 significa infinito** (irraggiungibile). Per evitare i loop, RIP usa lo **split horizon con poisoned reverse** (una rotta appresa da un'interfaccia viene riannunciata _su quella stessa interfaccia_ con metrica 16, cioè "da me non passare per tornare lì"). **RIPv2** (RFC 2453) aggiunge la _subnet mask_ e il _next-hop_, permettendo reti _classless_ (CIDR/VLSM).
 
-**FRR (FRRouting).** È una **suite software di routing** open source (erede di *Quagga*) che implementa RIP, OSPF, BGP e altri protocolli. Nella demo i router "di riferimento" (R2, R3, R4) eseguono FRR: il fatto che imparino le rotte da `crouter` e viceversa dimostra che il nostro router parla RIP "vero", interoperabile con software professionale.
+**FRR (FRRouting).** È una **suite software di routing** open source (erede di _Quagga_) che implementa RIP, OSPF, BGP e altri protocolli. Nella demo i router "di riferimento" (R2, R3, R4) eseguono FRR: il fatto che imparino le rotte da `crouter` e viceversa dimostra che il nostro router parla RIP "vero", interoperabile con software professionale.
 
-**Socket raw e router in spazio utente.** Di norma l'instradamento avviene nel *kernel*, invisibile all'applicazione. `crouter` invece apre un **socket raw** (`AF_PACKET`) su ogni interfaccia, che gli consegna i frame Ethernet completi (header di livello 2 inclusi) e gli permette di trasmetterne di costruiti a mano: così il routing è svolto interamente in **spazio utente**, dal nostro codice, e non dal sistema operativo.
+**Socket raw e router in spazio utente.** Di norma l'instradamento avviene nel _kernel_, invisibile all'applicazione. `crouter` invece apre un **socket raw** (`AF_PACKET`) su ogni interfaccia, che gli consegna i frame Ethernet completi (header di livello 2 inclusi) e gli permette di trasmetterne di costruiti a mano: così il routing è svolto interamente in **spazio utente**, dal nostro codice, e non dal sistema operativo.
 
 #### **0.2. Glossario degli acronimi**
 
-| Acronimo | Per esteso | In breve |
-|----------|------------|----------|
-| **ARP** | Address Resolution Protocol | Trova il MAC associato a un IP nella LAN |
-| **RIP / RIPv2** | Routing Information Protocol (v2) | Protocollo di routing dinamico *distance-vector*; la v2 aggiunge subnet mask e next-hop |
-| **FRR** | FRRouting | Suite software di routing (erede di Quagga) usata dai router di riferimento |
-| **RFC** | Request For Comments | Documento che definisce uno standard di Internet (es. RFC 2453 = RIPv2) |
-| **IP / IPv4** | Internet Protocol (versione 4) | Protocollo di livello 3; indirizzi a 32 bit |
-| **ICMP** | Internet Control Message Protocol | Messaggi di errore/diagnostica (ping, traceroute) |
-| **UDP** | User Datagram Protocol | Trasporto senza connessione; RIP viaggia su UDP porta 520 |
-| **TCP** | Transmission Control Protocol | Trasporto affidabile con connessione (usato nella demo HTTP) |
-| **TTL** | Time To Live | Contatore decrementato a ogni hop; a 0 il pacchetto è scartato (anti-loop) |
-| **MAC** | Media Access Control (address) | Indirizzo hardware a 48 bit di livello 2 |
-| **MTU** | Maximum Transmission Unit | Dimensione massima di un frame (tipicamente 1500 byte) |
-| **LAN** | Local Area Network | Rete locale |
-| **LPM** | Longest Prefix Match | Scelta della rotta più specifica (prefisso più lungo) |
-| **RIB** | Routing Information Base | La tabella di routing |
-| **CIDR** | Classless Inter-Domain Routing | Notazione indirizzo/prefisso, es. `10.0.1.0/24` |
-| **VLSM** | Variable Length Subnet Mask | Subnet di lunghezza diversa insieme (es. `/24` e `/30`) |
-| **NAT** | Network Address Translation | Traduzione degli indirizzi (modalità di rete della VM) |
-| **OVS** | Open vSwitch | Switch virtuale software; connette i nodi in IMUNES |
-| **IMUNES** | Integrated Multiprotocol Network Emulator/Simulator | Emulatore di rete con GUI (Appendice A) |
-| **ECMP** | Equal-Cost Multi-Path | Più percorsi a costo uguale verso la stessa destinazione |
-| **AFI** | Address Family Identifier | Campo RIP che indica il tipo di indirizzo (2 = IPv4) |
-| **DF / MF** | Don't Fragment / More Fragments | Flag di frammentazione nell'header IP |
-| **TOS / DSCP** | Type of Service / Differentiated Services Code Point | Campo di priorità dell'header IP |
-| **NIC** | Network Interface Card | Interfaccia di rete |
-| **veth** | Virtual Ethernet (pair) | Coppia di interfacce virtuali collegate come i capi di un cavo |
-| **WSL** | Windows Subsystem for Linux | Ambiente Linux integrato in Windows |
-| **CLI / GUI** | Command-Line / Graphical User Interface | Interfaccia a riga di comando / grafica |
+| Acronimo        | Per esteso                                           | In breve                                                                                |
+| --------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| **ARP**         | Address Resolution Protocol                          | Trova il MAC associato a un IP nella LAN                                                |
+| **RIP / RIPv2** | Routing Information Protocol (v2)                    | Protocollo di routing dinamico _distance-vector_; la v2 aggiunge subnet mask e next-hop |
+| **FRR**         | FRRouting                                            | Suite software di routing (erede di Quagga) usata dai router di riferimento             |
+| **RFC**         | Request For Comments                                 | Documento che definisce uno standard di Internet (es. RFC 2453 = RIPv2)                 |
+| **IP / IPv4**   | Internet Protocol (versione 4)                       | Protocollo di livello 3; indirizzi a 32 bit                                             |
+| **ICMP**        | Internet Control Message Protocol                    | Messaggi di errore/diagnostica (ping, traceroute)                                       |
+| **UDP**         | User Datagram Protocol                               | Trasporto senza connessione; RIP viaggia su UDP porta 520                               |
+| **TCP**         | Transmission Control Protocol                        | Trasporto affidabile con connessione (usato nella demo HTTP)                            |
+| **TTL**         | Time To Live                                         | Contatore decrementato a ogni hop; a 0 il pacchetto è scartato (anti-loop)              |
+| **MAC**         | Media Access Control (address)                       | Indirizzo hardware a 48 bit di livello 2                                                |
+| **MTU**         | Maximum Transmission Unit                            | Dimensione massima di un frame (tipicamente 1500 byte)                                  |
+| **LAN**         | Local Area Network                                   | Rete locale                                                                             |
+| **LPM**         | Longest Prefix Match                                 | Scelta della rotta più specifica (prefisso più lungo)                                   |
+| **RIB**         | Routing Information Base                             | La tabella di routing                                                                   |
+| **CIDR**        | Classless Inter-Domain Routing                       | Notazione indirizzo/prefisso, es. `10.0.1.0/24`                                         |
+| **VLSM**        | Variable Length Subnet Mask                          | Subnet di lunghezza diversa insieme (es. `/24` e `/30`)                                 |
+| **NAT**         | Network Address Translation                          | Traduzione degli indirizzi (modalità di rete della VM)                                  |
+| **OVS**         | Open vSwitch                                         | Switch virtuale software; connette i nodi in IMUNES                                     |
+| **IMUNES**      | Integrated Multiprotocol Network Emulator/Simulator  | Emulatore di rete con GUI (Appendice A)                                                 |
+| **ECMP**        | Equal-Cost Multi-Path                                | Più percorsi a costo uguale verso la stessa destinazione                                |
+| **AFI**         | Address Family Identifier                            | Campo RIP che indica il tipo di indirizzo (2 = IPv4)                                    |
+| **DF / MF**     | Don't Fragment / More Fragments                      | Flag di frammentazione nell'header IP                                                   |
+| **TOS / DSCP**  | Type of Service / Differentiated Services Code Point | Campo di priorità dell'header IP                                                        |
+| **NIC**         | Network Interface Card                               | Interfaccia di rete                                                                     |
+| **veth**        | Virtual Ethernet (pair)                              | Coppia di interfacce virtuali collegate come i capi di un cavo                          |
+| **WSL**         | Windows Subsystem for Linux                          | Ambiente Linux integrato in Windows                                                     |
+| **CLI / GUI**   | Command-Line / Graphical User Interface              | Interfaccia a riga di comando / grafica                                                 |
 
 #### **0.3. Librerie, macro e funzioni di rete usate**
 
@@ -69,53 +70,53 @@ Il programma dipende **solo dalla libreria standard C e dagli header di Linux** 
 
 **Header e cosa forniscono**
 
-| Header | Fornisce (usato per…) |
-|--------|-----------------------|
-| `<sys/socket.h>` | `socket`, `bind`, `send`, `recvfrom`, `setsockopt` |
-| `<linux/if_packet.h>` | `struct sockaddr_ll`, `struct packet_mreq`, costanti `PACKET_*` (socket raw Linux) |
-| `<net/ethernet.h>` | `ETH_P_ALL` e costanti Ethernet |
-| `<arpa/inet.h>` | `htons`/`htonl`/`ntohs`/`ntohl`, `inet_pton`/`inet_ntop` |
-| `<netinet/in.h>` | `struct in_addr`, `IPPROTO_*`, `IN_MULTICAST` |
-| `<net/if.h>` | `IF_NAMESIZE`, `struct ifreq` (nomi di interfaccia) |
-| `<sys/ioctl.h>` | `ioctl` + richieste `SIOCGIFINDEX` / `SIOCGIFHWADDR` |
-| `<sys/select.h>` | `select`, `fd_set`, `FD_ZERO`/`FD_SET`/`FD_ISSET` |
-| `<signal.h>` | `signal`, `sig_atomic_t`, i segnali `SIGINT`/`SIGTERM`/`SIGUSR1` |
-| `<unistd.h>` | `close`, `getpid`, `isatty` |
-| `<string.h>` | `memcpy`, `memset`, `strcmp`, `strerror` |
-| `<time.h>` / `<sys/time.h>` | `clock_gettime`, `gettimeofday` |
-| `<errno.h>` | `errno` + codici (`EAGAIN`, `EINTR`, …) |
-| `<stdint.h>` / `<stdbool.h>` | interi a larghezza fissa (`uint8_t`…); tipo `bool` |
+| Header                       | Fornisce (usato per…)                                                              |
+| ---------------------------- | ---------------------------------------------------------------------------------- |
+| `<sys/socket.h>`             | `socket`, `bind`, `send`, `recvfrom`, `setsockopt`                                 |
+| `<linux/if_packet.h>`        | `struct sockaddr_ll`, `struct packet_mreq`, costanti `PACKET_*` (socket raw Linux) |
+| `<net/ethernet.h>`           | `ETH_P_ALL` e costanti Ethernet                                                    |
+| `<arpa/inet.h>`              | `htons`/`htonl`/`ntohs`/`ntohl`, `inet_pton`/`inet_ntop`                           |
+| `<netinet/in.h>`             | `struct in_addr`, `IPPROTO_*`, `IN_MULTICAST`                                      |
+| `<net/if.h>`                 | `IF_NAMESIZE`, `struct ifreq` (nomi di interfaccia)                                |
+| `<sys/ioctl.h>`              | `ioctl` + richieste `SIOCGIFINDEX` / `SIOCGIFHWADDR`                               |
+| `<sys/select.h>`             | `select`, `fd_set`, `FD_ZERO`/`FD_SET`/`FD_ISSET`                                  |
+| `<signal.h>`                 | `signal`, `sig_atomic_t`, i segnali `SIGINT`/`SIGTERM`/`SIGUSR1`                   |
+| `<unistd.h>`                 | `close`, `getpid`, `isatty`                                                        |
+| `<string.h>`                 | `memcpy`, `memset`, `strcmp`, `strerror`                                           |
+| `<time.h>` / `<sys/time.h>`  | `clock_gettime`, `gettimeofday`                                                    |
+| `<errno.h>`                  | `errno` + codici (`EAGAIN`, `EINTR`, …)                                            |
+| `<stdint.h>` / `<stdbool.h>` | interi a larghezza fissa (`uint8_t`…); tipo `bool`                                 |
 
 **Macro e costanti principali**
 
-| Macro / costante | Significato |
-|------------------|-------------|
-| `AF_PACKET` | Famiglia di socket per accedere ai frame di livello 2 (Linux) |
-| `SOCK_RAW` | Consegna il pacchetto **grezzo**, con gli header inclusi |
-| `ETH_P_ALL` | "Tutti gli EtherType": in ricezione si prende ogni protocollo |
-| `SIOCGIFINDEX` / `SIOCGIFHWADDR` | `ioctl`: ottieni l'indice / il MAC di un'interfaccia |
-| `PACKET_MR_PROMISC`, `SOL_PACKET` | Attivano la modalità promiscua sul socket `AF_PACKET` |
-| `MSG_DONTWAIT` | Lettura **non bloccante** |
-| `IPPROTO_UDP` / `IPPROTO_ICMP` | Numeri di protocollo IP (17 / 1) |
-| `IN_MULTICAST(x)` | Vero se `x` è un indirizzo multicast (classe D) |
+| Macro / costante                  | Significato                                                   |
+| --------------------------------- | ------------------------------------------------------------- |
+| `AF_PACKET`                       | Famiglia di socket per accedere ai frame di livello 2 (Linux) |
+| `SOCK_RAW`                        | Consegna il pacchetto **grezzo**, con gli header inclusi      |
+| `ETH_P_ALL`                       | "Tutti gli EtherType": in ricezione si prende ogni protocollo |
+| `SIOCGIFINDEX` / `SIOCGIFHWADDR`  | `ioctl`: ottieni l'indice / il MAC di un'interfaccia          |
+| `PACKET_MR_PROMISC`, `SOL_PACKET` | Attivano la modalità promiscua sul socket `AF_PACKET`         |
+| `MSG_DONTWAIT`                    | Lettura **non bloccante**                                     |
+| `IPPROTO_UDP` / `IPPROTO_ICMP`    | Numeri di protocollo IP (17 / 1)                              |
+| `IN_MULTICAST(x)`                 | Vero se `x` è un indirizzo multicast (classe D)               |
 
 **Funzioni "stock" di rete**
 
-| Funzione | Cosa fa |
-|----------|---------|
-| `socket()` | Crea un socket |
-| `bind()` | Lega il socket a un'interfaccia/indirizzo |
-| `send()` / `recvfrom()` | Trasmette / riceve un frame |
-| `setsockopt()` | Imposta opzioni del socket (es. promiscuità) |
-| `ioctl()` | Interroga/configura il dispositivo di rete |
-| `select()` | Attende attività su più socket, con timeout |
-| `htons`/`htonl` · `ntohs`/`ntohl` | Conversione *host↔network byte order* (16 / 32 bit) |
-| `inet_pton()` / `inet_ntop()` | Indirizzo IP testo↔binario |
-| `close()` | Chiude il *file descriptor* del socket |
+| Funzione                          | Cosa fa                                             |
+| --------------------------------- | --------------------------------------------------- |
+| `socket()`                        | Crea un socket                                      |
+| `bind()`                          | Lega il socket a un'interfaccia/indirizzo           |
+| `send()` / `recvfrom()`           | Trasmette / riceve un frame                         |
+| `setsockopt()`                    | Imposta opzioni del socket (es. promiscuità)        |
+| `ioctl()`                         | Interroga/configura il dispositivo di rete          |
+| `select()`                        | Attende attività su più socket, con timeout         |
+| `htons`/`htonl` · `ntohs`/`ntohl` | Conversione _host↔network byte order_ (16 / 32 bit) |
+| `inet_pton()` / `inet_ntop()`     | Indirizzo IP testo↔binario                          |
+| `close()`                         | Chiude il _file descriptor_ del socket              |
 
 #### **0.4. Nota per chi apre il codice su Windows**
 
-`crouter` è un programma **specifico per Linux**: usa i socket raw `AF_PACKET` e header presenti solo su Linux (`linux/if_packet.h`, `net/ethernet.h`, `sys/ioctl.h`, `sys/socket.h`, …). Aprendo il repository su **Windows** — per esempio in Visual Studio Code — l'analizzatore di codice mostra numerosi errori del tipo *«cannot open source file "linux/if_packet.h"»*: è **atteso e del tutto innocuo**, perché quegli header non esistono sul sistema Windows e l'IDE non riesce a risolverli.
+`crouter` è un programma **specifico per Linux**: usa i socket raw `AF_PACKET` e header presenti solo su Linux (`linux/if_packet.h`, `net/ethernet.h`, `sys/ioctl.h`, `sys/socket.h`, …). Aprendo il repository su **Windows** — per esempio in Visual Studio Code — l'analizzatore di codice mostra numerosi errori del tipo _«cannot open source file "linux/if_packet.h"»_: è **atteso e del tutto innocuo**, perché quegli header non esistono sul sistema Windows e l'IDE non riesce a risolverli.
 
 > ⚠️ Questi errori **non indicano alcun bug**: il progetto **compila ed esegue senza un singolo warning su Linux** (`gcc -Wall -Wextra`). Per compilarlo basta un ambiente Linux — nativo, **WSL** (Windows Subsystem for Linux) o la VM della demo — e il comando `make`. Su Windows il codice si può leggere e navigare comodamente, ma non compilare: è normale e non toglie nulla alla correttezza del progetto.
 
@@ -129,12 +130,12 @@ Il progetto realizza da zero, in linguaggio C, un **router IPv4 funzionante inte
 
 Il router implementa due piani funzionali distinti, esattamente come un apparato commerciale:
 
-- il **piano dati** (*data plane*): ricezione, validazione, instradamento e inoltro dei pacchetti IP reali, con gestione di ARP e ICMP;
-- il **piano di controllo** (*control plane*): il demone RIPv2 che costruisce e mantiene aggiornata la tabella di routing scambiando annunci con i router vicini.
+- il **piano dati** (_data plane_): ricezione, validazione, instradamento e inoltro dei pacchetti IP reali, con gestione di ARP e ICMP;
+- il **piano di controllo** (_control plane_): il demone RIPv2 che costruisce e mantiene aggiornata la tabella di routing scambiando annunci con i router vicini.
 
 La correttezza dell'implementazione è dimostrata mettendo `crouter` a dialogare con **FRRouting** (FRR, il successore diretto di Quagga citato nella traccia): i router vicini eseguono il `ripd` standard di FRR, e il fatto che apprendano correttamente le nostre reti — e noi le loro — prova che `crouter` "parla RIP vero", non una versione semplificata.
 
-> 📌 La traccia ufficiale del progetto n. 2 recita: *«Implementation of a router in C — funzionalità/protocolli di routing — modulo kernel space o Quagga»*. Abbiamo scelto una **terza via**, più istruttiva di entrambe le opzioni suggerite: un router **interamente userspace su socket raw**. Rispetto al modulo kernel evita i rischi di un kernel panic e il debugging cieco; rispetto alla pura configurazione di Quagga costringe a **scrivere davvero** il parser dei pacchetti, la tabella di forwarding e la macchina a stati del protocollo di routing. Quagga/FRR resta comunque in gioco come **controparte di interoperabilità**.
+> 📌 La traccia ufficiale del progetto n. 2 recita: _«Implementation of a router in C — funzionalità/protocolli di routing — modulo kernel space o Quagga»_. Abbiamo scelto una **terza via**, più istruttiva di entrambe le opzioni suggerite: un router **interamente userspace su socket raw**. Rispetto al modulo kernel evita i rischi di un kernel panic e il debugging cieco; rispetto alla pura configurazione di Quagga costringe a **scrivere davvero** il parser dei pacchetti, la tabella di forwarding e la macchina a stati del protocollo di routing. Quagga/FRR resta comunque in gioco come **controparte di interoperabilità**.
 
 #### **1.2. Perché "userspace su socket raw"**
 
@@ -162,17 +163,17 @@ Il codice è organizzato in moduli con responsabilità nette, ognuno in una copp
                     └──────────────────────────────────────┘
 ```
 
-| Modulo | File | Responsabilità |
-|--------|------|----------------|
-| `netio`   | `netio.c/h`   | Un socket `AF_PACKET/SOCK_RAW` per interfaccia; RX/TX dei frame Ethernet grezzi |
-| `parse`   | `parse.c/h`   | Checksum Internet, checksum incrementale RFC 1624, validazione dell'header IPv4 |
-| `arp`     | `arp.c/h`     | Cache ARP con scadenza, risposta alle richieste, risoluzione del next-hop con coda dei pacchetti in attesa |
-| `rib`     | `rib.c/h`     | Tabella di routing (rotte connesse, statiche, RIP); **longest prefix match**; distanza amministrativa |
-| `forward` | `forward.c/h` | Motore di inoltro: decremento TTL, ricalcolo checksum, lookup, riscrittura dei MAC |
-| `icmp`    | `icmp.c/h`    | Generazione ICMP: Echo Reply, **Time Exceeded** (per traceroute), Destination Unreachable |
+| Modulo    | File          | Responsabilità                                                                                                      |
+| --------- | ------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `netio`   | `netio.c/h`   | Un socket `AF_PACKET/SOCK_RAW` per interfaccia; RX/TX dei frame Ethernet grezzi                                     |
+| `parse`   | `parse.c/h`   | Checksum Internet, checksum incrementale RFC 1624, validazione dell'header IPv4                                     |
+| `arp`     | `arp.c/h`     | Cache ARP con scadenza, risposta alle richieste, risoluzione del next-hop con coda dei pacchetti in attesa          |
+| `rib`     | `rib.c/h`     | Tabella di routing (rotte connesse, statiche, RIP); **longest prefix match**; distanza amministrativa               |
+| `forward` | `forward.c/h` | Motore di inoltro: decremento TTL, ricalcolo checksum, lookup, riscrittura dei MAC                                  |
+| `icmp`    | `icmp.c/h`    | Generazione ICMP: Echo Reply, **Time Exceeded** (per traceroute), Destination Unreachable                           |
 | `ripd`    | `ripd.c/h`    | RIPv2: request/response, update periodici e triggered, split horizon con poisoned reverse, timer di timeout/garbage |
-| `config`  | `config.c/h`  | Parsing del file di configurazione (interfacce, rotte statiche, abilitazione RIP) |
-| `main`    | `main.c`      | Event loop unico basato su `select()`, con il timeout che scandisce anche i timer |
+| `config`  | `config.c/h`  | Parsing del file di configurazione (interfacce, rotte statiche, abilitazione RIP)                                   |
+| `main`    | `main.c`      | Event loop unico basato su `select()`, con il timeout che scandisce anche i timer                                   |
 
 L'intero programma dipende **solo dalla libc e dagli header Linux**: nessuna libreria esterna. Compila con `gcc -Wall -Wextra` senza un singolo warning.
 
@@ -190,9 +191,9 @@ Per ogni frame ricevuto, la funzione `handle_frame()` in `main.c` esegue la pipe
 #### **1.5. Il piano di controllo: RIPv2**
 
 - **Trasporto**: UDP porta 520, annunci in multicast su `224.0.0.9` (MAC `01:00:5e:00:00:09`).
-- **Messaggi**: *Request* all'avvio (per una convergenza rapida senza attendere il primo periodico) e *Response* sia periodici (ogni **30 s** con jitter casuale) sia *triggered* alla variazione di una rotta.
+- **Messaggi**: _Request_ all'avvio (per una convergenza rapida senza attendere il primo periodico) e _Response_ sia periodici (ogni **30 s** con jitter casuale) sia _triggered_ alla variazione di una rotta.
 - **Metrica**: hop count, con $1 \le m \le 15$ e $m = 16 = \infty$ (rete irraggiungibile).
-- **Anti-loop**: **split horizon con poisoned reverse** (una rotta è riannunciata sull'interfaccia da cui è stata appresa con metrica 16); il *count-to-infinity* è comunque limitato dal tetto 15.
+- **Anti-loop**: **split horizon con poisoned reverse** (una rotta è riannunciata sull'interfaccia da cui è stata appresa con metrica 16); il _count-to-infinity_ è comunque limitato dal tetto 15.
 - **Timer per rotta**: **timeout 180 s** (la rotta viene invalidata a metrica 16) e **garbage collection 120 s** (dopo i quali la rotta è rimossa).
 
 > ⚠️ L'interoperabilità con FRR non è gratuita: richiede il rispetto rigoroso del formato delle entry RIPv2 (Address Family Identifier = 2, campi Route Tag / Subnet Mask / Next Hop tutti valorizzati) e il jitter sugli update periodici, senza il quale gli annunci dei vari router tenderebbero a sincronizzarsi e a congestionare la rete a raffiche.
@@ -237,7 +238,7 @@ static inline uint32_t prefix_to_mask(uint8_t len)
 }
 ```
 
-> 💡 La traccia menzionava il *trie binario* come struttura efficiente per l'LPM. Con le poche decine di rotte della nostra topologia l'array lineare è più che sufficiente e molto più leggibile; il trie resta la naturale evoluzione se il numero di rotte crescesse di ordini di grandezza.
+> 💡 La traccia menzionava il _trie binario_ come struttura efficiente per l'LPM. Con le poche decine di rotte della nostra topologia l'array lineare è più che sufficiente e molto più leggibile; il trie resta la naturale evoluzione se il numero di rotte crescesse di ordini di grandezza.
 
 #### **2.2. Checksum incrementale del TTL (RFC 1624)**
 
@@ -260,11 +261,11 @@ void ipv4_ttl_dec(struct ipv4_hdr *ih)
 }
 ```
 
-> ✅ Che il risultato sia corretto è verificabile end-to-end: i pacchetti inoltrati arrivano a destinazione (il `ping` funziona) e `tcpdump` sull'host finale non segnala mai *bad ip cksum*.
+> ✅ Che il risultato sia corretto è verificabile end-to-end: i pacchetti inoltrati arrivano a destinazione (il `ping` funziona) e `tcpdump` sull'host finale non segnala mai _bad ip cksum_.
 
 #### **2.3. La macchina a stati di una rotta RIP**
 
-La parte concettualmente più ricca è l'elaborazione di ciascuna entry ricevuta in un messaggio Response (`ripd.c:process_entry`), che implementa alla lettera la logica della RFC 2453 §3.9.2. Vale la pena isolare la gestione del caso "aggiornamento dallo **stesso** gateway che già ci fornisce la rotta", perché contiene la nascita del *deletion process*:
+La parte concettualmente più ricca è l'elaborazione di ciascuna entry ricevuta in un messaggio Response (`ripd.c:process_entry`), che implementa alla lettera la logica della RFC 2453 §3.9.2. Vale la pena isolare la gestione del caso "aggiornamento dallo **stesso** gateway che già ci fornisce la rotta", perché contiene la nascita del _deletion process_:
 
 ```c
 if (e->next_hop == nh) {
@@ -311,7 +312,7 @@ uint8_t metric = (e->ifidx == ifidx) ? RIP_INFINITY : e->metric;
 
 #### **2.4. L'event loop unico con `select()`**
 
-Tutto il router — RX su più interfacce, timer ARP, timer RIP — gira in un **singolo processo a thread singolo**, senza alcun rischio di *race condition*. Il collante è `select()`, che attende contemporaneamente su tutti i socket con un timeout breve; quel timeout funge anche da "battito" per far avanzare i timer:
+Tutto il router — RX su più interfacce, timer ARP, timer RIP — gira in un **singolo processo a thread singolo**, senza alcun rischio di _race condition_. Il collante è `select()`, che attende contemporaneamente su tutti i socket con un timeout breve; quel timeout funge anche da "battito" per far avanzare i timer:
 
 ```c
 struct timeval tv = { 0, 500 * 1000 };           /* 500 ms */
@@ -352,7 +353,7 @@ La topologia riproduce quella prevista nel documento di progettazione: due LAN a
 
 ![**Figura 1** — Topologia della demo: pc1 e pc2 alle estremità, il nucleo R1 (crouter)–R2–R3 e il cammino ridondante via R4.](img/00_topologia.png)
 
-> 💡 **Un dettaglio pratico sui veth.** Le interfacce virtuali `veth` del kernel offrono il *checksum offload*: delegano il calcolo del checksum TCP/UDP a un hardware che, in emulazione, non esiste. Un router userspace inoltra i byte così come sono, e l'host finale scarterebbe i segmenti come corrotti. Lo script disabilita l'offload (`ethtool -K … tx off`) su tutte le interfacce — un accorgimento specifico dell'emulazione, non un limite di `crouter`, che infatti su hardware reale non si porrebbe.
+> 💡 **Un dettaglio pratico sui veth.** Le interfacce virtuali `veth` del kernel offrono il _checksum offload_: delegano il calcolo del checksum TCP/UDP a un hardware che, in emulazione, non esiste. Un router userspace inoltra i byte così come sono, e l'host finale scarterebbe i segmenti come corrotti. Lo script disabilita l'offload (`ethtool -K … tx off`) su tutte le interfacce — un accorgimento specifico dell'emulazione, non un limite di `crouter`, che infatti su hardware reale non si porrebbe.
 
 #### **3.2. Scenario 1 — Convergenza a freddo**
 
@@ -409,7 +410,7 @@ Questa è la prova che `crouter` "parla RIP vero". Con `tcpdump` catturiamo un u
   AFI IPv4,  10.0.34.0/30,  tag 0x0000, metric: 2,  next-hop: self
 ```
 
-Le tre reti annunciate a **metrica 16** sono esattamente quelle che `crouter` ha appreso *da* R2: il **poisoned reverse** in azione. E FRR, dall'altra parte, accetta i nostri annunci: nella sua tabella la LAN `10.0.1.0/24` compare come appresa **da 10.0.12.1 (crouter)** a metrica 2.
+Le tre reti annunciate a **metrica 16** sono esattamente quelle che `crouter` ha appreso _da_ R2: il **poisoned reverse** in azione. E FRR, dall'altra parte, accetta i nostri annunci: nella sua tabella la LAN `10.0.1.0/24` compare come appresa **da 10.0.12.1 (crouter)** a metrica 2.
 
 ```
 $ vtysh -N r2 -c "show ip rip"
@@ -434,7 +435,7 @@ Si abbatte il link tra R2 e R3 mentre un `ping` continuo scorre da pc1 a pc2. Gl
 23:49:25  RIP: triggered update inviato
 ```
 
-R2, perso il cammino verso R3, annuncia a `crouter` la rotta avvelenata (metrica 16); `crouter` invalida la propria e, al successivo annuncio di R4, **reimpara** la stessa destinazione dal cammino alternativo (via `10.0.14.2`, cioè R4). La RIB finale mostra `10.0.4.0/24` di nuovo raggiungibile via `eth3`, mentre la rotta puntuale `10.0.23.0/30` — che passava solo per il link caduto — resta a metrica 16 nella fase di *garbage collection* prima di sparire:
+R2, perso il cammino verso R3, annuncia a `crouter` la rotta avvelenata (metrica 16); `crouter` invalida la propria e, al successivo annuncio di R4, **reimpara** la stessa destinazione dal cammino alternativo (via `10.0.14.2`, cioè R4). La RIB finale mostra `10.0.4.0/24` di nuovo raggiungibile via `eth3`, mentre la rotta puntuale `10.0.23.0/30` — che passava solo per il link caduto — resta a metrica 16 nella fase di _garbage collection_ prima di sparire:
 
 ```
 10.0.4.0/24          10.0.14.2       eth3   3    R    9s
@@ -505,7 +506,7 @@ Le direzioni di estensione naturali, discusse ma non implementate per contenere 
 - **trie binario** per l'LPM, se il numero di rotte crescesse;
 - **rotte di default** e ridistribuzione fra protocolli.
 
-Il porting della demo su **IMUNES** — l'emulatore grafico adottato nei progetti di *design* del corso — è invece stato **realizzato**, ed è documentato nell'**Appendice A**.
+Il porting della demo su **IMUNES** — l'emulatore grafico adottato nei progetti di _design_ del corso — è invece stato **realizzato**, ed è documentato nell'**Appendice A**.
 
 > ✅ Il progetto tocca il cuore del corso — livello 3, forwarding, routing dinamico — unendo implementazione di basso livello, un protocollo di routing reale e una demo di rete emulata: le due anime (implementazione e deployment) dei progetti proposti, in un unico lavoro.
 
@@ -513,9 +514,9 @@ Il porting della demo su **IMUNES** — l'emulatore grafico adottato nei progett
 
 ### **Appendice A — Demo su IMUNES**
 
-Oltre all'ambiente a network namespaces del §3, la stessa topologia è stata **portata su IMUNES**, l'emulatore di rete con interfaccia grafica adottato nei progetti di *design* del corso. È la prova che `crouter` non dipende dall'ambiente di test: gira **identico** dentro un nodo IMUNES.
+Oltre all'ambiente a network namespaces del §3, la stessa topologia è stata **portata su IMUNES**, l'emulatore di rete con interfaccia grafica adottato nei progetti di _design_ del corso. È la prova che `crouter` non dipende dall'ambiente di test: gira **identico** dentro un nodo IMUNES.
 
-Nell'emulazione i nodi sono container Docker connessi da Open vSwitch. I router R2, R3, R4 sono nodi *router* di IMUNES che eseguono **FRR** (versione 10.5); R1 è un nodo su cui gira il nostro **`crouter`**. Come nell'ambiente a namespaces, le interfacce di R1 **non hanno indirizzo IP a livello kernel**: è crouter a possederli e a rispondere per essi.
+Nell'emulazione i nodi sono container Docker connessi da Open vSwitch. I router R2, R3, R4 sono nodi _router_ di IMUNES che eseguono **FRR** (versione 10.5); R1 è un nodo su cui gira il nostro **`crouter`**. Come nell'ambiente a namespaces, le interfacce di R1 **non hanno indirizzo IP a livello kernel**: è crouter a possederli e a rispondere per essi.
 
 ![**Figura A.1** — La topologia in IMUNES: pc1 e pc2 alle estremità, R1 (crouter) e i router FRR R2/R3/R4 con il cammino ridondante. Gli indirizzi sono etichettati sui link; R1 non mostra IP sulle proprie interfacce, che sono gestite da crouter.](img/imunes_1_topologia.png)
 

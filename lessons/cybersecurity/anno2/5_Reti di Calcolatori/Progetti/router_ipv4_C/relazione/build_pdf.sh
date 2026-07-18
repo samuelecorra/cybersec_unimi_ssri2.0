@@ -15,6 +15,22 @@ set -eu                 # -e: esci al primo errore; -u: variabili non definite =
 cd "$(dirname "$0")"     # lavora nella cartella della relazione
 
 SRC=relazione.md
+OUT=relazione.pdf
+PANDOC=${PANDOC:-pandoc}
+
+if ! command -v "$PANDOC" >/dev/null 2>&1; then
+    WIN_PANDOC_ROOT="$HOME/AppData/Local/Microsoft/WinGet/Packages"
+    WIN_PANDOC=$(find "$WIN_PANDOC_ROOT" -path "*/pandoc.exe" -type f 2>/dev/null | sort | tail -n 1 || true)
+    if [ -n "$WIN_PANDOC" ] && [ -x "$WIN_PANDOC" ]; then
+        PANDOC="$WIN_PANDOC"
+    fi
+fi
+
+if ! command -v "$PANDOC" >/dev/null 2>&1 && [ ! -x "$PANDOC" ]; then
+    echo "errore: pandoc non trovato" >&2
+    exit 1
+fi
+
 # La copia temporanea sta NELLA cartella della relazione (-p .) così i
 # percorsi relativi delle immagini (img/...) si risolvono correttamente.
 TMP=$(mktemp --suffix=.md -p .)     # copia temporanea da manipolare
@@ -54,17 +70,61 @@ sed -i \
 #  --enable-local-file-access permette di caricare il CSS locale;
 #  -T/-B/-L/-R            margini superiore/inferiore/sinistro/destro.
 # Le opzioni del motore si passano con --pdf-engine-opt=...
-pandoc "$TMP" \
-    --standalone \
-    --css=stile.css \
-    --metadata title="crouter — Relazione del progetto" \
-    --pdf-engine=wkhtmltopdf \
-    --pdf-engine-opt=--enable-local-file-access \
-    --pdf-engine-opt=--encoding --pdf-engine-opt=utf-8 \
-    --pdf-engine-opt=-T --pdf-engine-opt=18mm \
-    --pdf-engine-opt=-B --pdf-engine-opt=18mm \
-    --pdf-engine-opt=-L --pdf-engine-opt=16mm \
-    --pdf-engine-opt=-R --pdf-engine-opt=16mm \
-    -o relazione.pdf
+if command -v wkhtmltopdf >/dev/null 2>&1; then
+    "$PANDOC" "$TMP" \
+        --standalone \
+        --css=stile.css \
+        --pdf-engine=wkhtmltopdf \
+        --pdf-engine-opt=--enable-local-file-access \
+        --pdf-engine-opt=--encoding --pdf-engine-opt=utf-8 \
+        --pdf-engine-opt=-T --pdf-engine-opt=18mm \
+        --pdf-engine-opt=-B --pdf-engine-opt=18mm \
+        --pdf-engine-opt=-L --pdf-engine-opt=16mm \
+        --pdf-engine-opt=-R --pdf-engine-opt=16mm \
+        -o "$OUT"
+else
+    HTML=$(mktemp --suffix=.html -p .)
+    CHROME_PROFILE=$(mktemp -d -p .)
+    trap 'rm -f "$TMP" "$HTML"; rm -rf "$CHROME_PROFILE"' EXIT
+    "$PANDOC" "$TMP" --standalone --css=stile.css -o "$HTML"
 
-echo "creato: $(pwd)/relazione.pdf ($(du -h relazione.pdf | cut -f1))"
+    CHROME=${CHROME:-}
+    for candidate in \
+        "/c/Program Files/Google/Chrome/Application/chrome.exe" \
+        "/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+    do
+        if [ -z "$CHROME" ] && [ -x "$candidate" ]; then
+            CHROME="$candidate"
+        fi
+    done
+
+    if [ -z "$CHROME" ]; then
+        for root in "$HOME/.cache/puppeteer" "$HOME/AppData/Local/ms-playwright"; do
+            if [ -d "$root" ]; then
+                candidate=$(find "$root" -path "*/chrome.exe" -type f 2>/dev/null | sort | tail -n 1 || true)
+                if [ -n "$candidate" ] && [ -x "$candidate" ]; then
+                    CHROME="$candidate"
+                    break
+                fi
+            fi
+        done
+    fi
+
+    if [ -z "$CHROME" ]; then
+        echo "errore: wkhtmltopdf non trovato e nessun Chrome/Edge disponibile per il fallback" >&2
+        exit 1
+    fi
+
+    OUT_WIN=$(cygpath -w "$(pwd)/$OUT")
+    HTML_URI="file:///$(cygpath -w "$(pwd)/$HTML" | sed 's@\\@/@g; s@ @%20@g')"
+    "$CHROME" \
+        --headless=new \
+        --disable-gpu \
+        --user-data-dir="$(cygpath -w "$(pwd)/$CHROME_PROFILE")" \
+        --no-pdf-header-footer \
+        --allow-file-access-from-files \
+        --print-to-pdf="$OUT_WIN" \
+        "$HTML_URI"
+fi
+
+echo "creato: $(pwd)/$OUT ($(du -h "$OUT" | cut -f1))"
