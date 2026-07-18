@@ -15,9 +15,7 @@ Questo preambolo raccoglie, in forma sintetica, i **concetti**, gli **acronimi**
 
 **Frame Ethernet ed EtherType.** Ogni frame ha un MAC di destinazione, un MAC sorgente e un campo *EtherType* che dice cosa trasporta: `0x0800` = IPv4, `0x0806` = ARP.
 
-**ARP (Address Resolution Protocol).** Per consegnare un pacchetto IP a un vicino sulla stessa LAN serve il suo MAC. ARP lo scopre: *"chi ha l'IP X? mi comunichi il suo MAC"* (una *request* in broadcast), e il titolare dell'indirizzo risponde (*reply*). `crouter` mantiene una **cache** IP→MAC e **risponde alle richieste ARP per i propri IP**.
-
-> 📌 **Attenzione: questo NON è "ARP poisoning".** `crouter` risponde in ARP **solo per gli indirizzi che possiede davvero** (quelli configurati sulle sue interfacce): è il comportamento legittimo di qualunque host o router. L'*ARP poisoning/spoofing* studiato in sicurezza è tutt'altro: lì un attaccante risponde per IP che **non** sono suoi, allo scopo di dirottare il traffico. Qui non c'è alcun inganno — semplicemente gli IP di R1 "vivono" dentro `crouter` (spazio utente) anziché nel kernel, e `crouter` risponde legittimamente per essi.
+**ARP (Address Resolution Protocol).** Per consegnare un pacchetto IP a un vicino sulla stessa LAN serve il suo MAC. ARP lo scopre: *"chi ha l'IP X? mi comunichi il suo MAC"* (una *request* in broadcast), e il titolare dell'indirizzo risponde (*reply*). `crouter` mantiene una **cache** IP→MAC e **risponde alle richieste ARP per i propri IP** (quelli configurati sulle sue interfacce).
 
 **IPv4.** Il pacchetto di livello 3 ha un header con indirizzo sorgente e destinazione (32 bit), un **TTL** (*Time To Live*) decrementato a ogni router attraversato — quando arriva a 0 il pacchetto è scartato, difesa contro i loop — e un **checksum** che ne protegge l'integrità. Un pacchetto troppo grande per un collegamento può essere **frammentato**.
 
