@@ -387,7 +387,28 @@ Le direzioni di estensione naturali, discusse ma non implementate per contenere 
 
 - **autenticazione RIPv2** (entry di tipo `0xFFFF` con password in chiaro, RFC 2453) per irrobustire il control plane contro annunci ostili;
 - **trie binario** per l'LPM, se il numero di rotte crescesse;
-- **rotte di default** e ridistribuzione fra protocolli;
-- porting della demo su **IMUNES**, per una presentazione con interfaccia grafica accanto a quella scriptata.
+- **rotte di default** e ridistribuzione fra protocolli.
+
+Il porting della demo su **IMUNES** — l'emulatore grafico adottato nei progetti di *design* del corso — è invece stato **realizzato**, ed è documentato nell'**Appendice A**.
 
 > ✅ Il progetto tocca il cuore del corso — livello 3, forwarding, routing dinamico — unendo implementazione di basso livello, un protocollo di routing reale e una demo di rete emulata: le due anime (implementazione e deployment) dei progetti proposti, in un unico lavoro.
+
+---
+
+### **Appendice A — Demo su IMUNES**
+
+Oltre all'ambiente a network namespaces del §3, la stessa topologia è stata **portata su IMUNES**, l'emulatore di rete con interfaccia grafica adottato nei progetti di *design* del corso. È la prova che `crouter` non dipende dall'ambiente di test: gira **identico** dentro un nodo IMUNES.
+
+Nell'emulazione i nodi sono container Docker connessi da Open vSwitch. I router R2, R3, R4 sono nodi *router* di IMUNES che eseguono **FRR** (versione 10.5); R1 è un nodo su cui gira il nostro **`crouter`**. Come nell'ambiente a namespaces, le interfacce di R1 **non hanno indirizzo IP a livello kernel**: è crouter a possederli e a rispondere per essi.
+
+![**Figura A.1** — La topologia in IMUNES: pc1 e pc2 alle estremità, R1 (crouter) e i router FRR R2/R3/R4 con il cammino ridondante. Gli indirizzi sono etichettati sui link; R1 non mostra IP sulle proprie interfacce, che sono gestite da crouter.](img/imunes_1_topologia.png)
+
+Avviato l'esperimento, si lancia `crouter` nel terminale del nodo R1. Il log mostra la stessa sequenza vista nell'ambiente a namespaces: interfacce rilevate, RIB iniziale con le sole rotte connesse, richieste RIP e infine le rotte remote apprese (righe `[R]`), in interoperabilità con gli FRR di IMUNES.
+
+![**Figura A.2** — `crouter` in esecuzione nel nodo R1 di IMUNES: convergenza RIP con le rotte remote apprese (righe `[R]`), identica a quella dell'ambiente a namespaces.](img/imunes_2_crouter.png)
+
+Dal terminale di pc1 il traffico raggiunge pc2 attraversando `crouter`: il `ping` ha successo con TTL 61 (tre router attraversati) e il `traceroute` mostra `crouter` (`10.0.1.1`) come **primo hop**, fino a pc2 come destinazione.
+
+![**Figura A.3** — Da pc1 in IMUNES: ping verso pc2 (0% di perdita, TTL 61) e traceroute in cui crouter è il primo hop e pc2 la destinazione, attraverso i router FRR.](img/imunes_3_ping.png)
+
+> ✅ Lo stesso router, **senza modifiche al codice**, funziona sia nell'ambiente a namespaces sia in IMUNES, dialogando in RIP con FRR in entrambi: la portabilità e l'interoperabilità del data plane e del control plane sono confermate anche nell'emulatore grafico del corso.

@@ -1,0 +1,154 @@
+node n0 {
+    type pc
+    network-config {
+	hostname pc1
+	!
+	interface eth0
+	 ip address 10.0.1.100/24
+	!
+    }
+    canvas c0
+    iconcoords {100 250}
+    labelcoords {100 282}
+    interface-peer {eth0 n1}
+}
+
+node n1 {
+    type pc
+    network-config {
+	hostname R1-crouter
+	!
+	interface eth0
+	!
+	interface eth1
+	!
+	interface eth2
+	!
+    }
+    canvas c0
+    iconcoords {280 250}
+    labelcoords {280 282}
+    interface-peer {eth0 n0}
+    interface-peer {eth1 n2}
+    interface-peer {eth2 n4}
+}
+
+node n2 {
+    type router
+    model frr
+    network-config {
+	hostname R2
+	!
+	interface eth0
+	 ip address 10.0.12.2/30
+	!
+	interface eth1
+	 ip address 10.0.23.1/30
+	!
+	router rip
+	 network eth0
+	 network eth1
+	!
+    }
+    canvas c0
+    iconcoords {470 140}
+    labelcoords {470 172}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n3}
+}
+
+node n3 {
+    type router
+    model frr
+    network-config {
+	hostname R3
+	!
+	interface eth0
+	 ip address 10.0.23.2/30
+	!
+	interface eth1
+	 ip address 10.0.4.1/24
+	!
+	interface eth2
+	 ip address 10.0.34.2/30
+	!
+	router rip
+	 network eth0
+	 network eth1
+	 network eth2
+	!
+    }
+    canvas c0
+    iconcoords {660 250}
+    labelcoords {660 282}
+    interface-peer {eth0 n2}
+    interface-peer {eth1 n5}
+    interface-peer {eth2 n4}
+}
+
+node n4 {
+    type router
+    model frr
+    network-config {
+	hostname R4
+	!
+	interface eth0
+	 ip address 10.0.14.2/30
+	!
+	interface eth1
+	 ip address 10.0.34.1/30
+	!
+	router rip
+	 network eth0
+	 network eth1
+	!
+    }
+    canvas c0
+    iconcoords {470 360}
+    labelcoords {470 392}
+    interface-peer {eth0 n1}
+    interface-peer {eth1 n3}
+}
+
+node n5 {
+    type pc
+    network-config {
+	hostname pc2
+	!
+	interface eth0
+	 ip address 10.0.4.100/24
+	!
+    }
+    canvas c0
+    iconcoords {840 250}
+    labelcoords {840 282}
+    interface-peer {eth0 n3}
+}
+
+link l0 {
+    nodes {n0 n1}
+}
+
+link l1 {
+    nodes {n1 n2}
+}
+
+link l2 {
+    nodes {n1 n4}
+}
+
+link l3 {
+    nodes {n2 n3}
+}
+
+link l4 {
+    nodes {n4 n3}
+}
+
+link l5 {
+    nodes {n3 n5}
+}
+
+canvas c0 {
+    name {Canvas0}
+}
