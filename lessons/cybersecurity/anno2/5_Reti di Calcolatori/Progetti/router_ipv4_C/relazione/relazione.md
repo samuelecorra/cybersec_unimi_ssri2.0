@@ -5,6 +5,124 @@
 
 ---
 
+### **0. Preambolo — Prerequisiti teorici e riferimenti**
+
+Questo preambolo raccoglie, in forma sintetica, i **concetti**, gli **acronimi** e gli **strumenti software** che ricorrono nel resto della relazione, così da poterla leggere senza consultazioni esterne. Chi ha già dimestichezza con le reti può saltarlo e usarlo solo come glossario di riferimento.
+
+#### **0.1. Infarinatura teorica**
+
+**I tre livelli in gioco.** Un pacchetto attraversa più livelli della pila di rete: il **livello 2** (collegamento, *Ethernet*) muove *frame* fra dispositivi adiacenti identificati dal **MAC**; il **livello 3** (rete, *IP*) muove *pacchetti* fra reti diverse tramite l'**instradamento**; il **livello 4** (trasporto, *UDP/TCP*) offre un canale fra applicazioni. `crouter` opera soprattutto al livello 3, ma deve "vedere" e costruire anche i frame di livello 2.
+
+**Frame Ethernet ed EtherType.** Ogni frame ha un MAC di destinazione, un MAC sorgente e un campo *EtherType* che dice cosa trasporta: `0x0800` = IPv4, `0x0806` = ARP.
+
+**ARP (Address Resolution Protocol).** Per consegnare un pacchetto IP a un vicino sulla stessa LAN serve il suo MAC. ARP lo scopre: *"chi ha l'IP X? mi comunichi il suo MAC"* (una *request* in broadcast), e il titolare dell'indirizzo risponde (*reply*). `crouter` mantiene una **cache** IP→MAC e **risponde alle richieste ARP per i propri IP**.
+
+> 📌 **Attenzione: questo NON è "ARP poisoning".** `crouter` risponde in ARP **solo per gli indirizzi che possiede davvero** (quelli configurati sulle sue interfacce): è il comportamento legittimo di qualunque host o router. L'*ARP poisoning/spoofing* studiato in sicurezza è tutt'altro: lì un attaccante risponde per IP che **non** sono suoi, allo scopo di dirottare il traffico. Qui non c'è alcun inganno — semplicemente gli IP di R1 "vivono" dentro `crouter` (spazio utente) anziché nel kernel, e `crouter` risponde legittimamente per essi.
+
+**IPv4.** Il pacchetto di livello 3 ha un header con indirizzo sorgente e destinazione (32 bit), un **TTL** (*Time To Live*) decrementato a ogni router attraversato — quando arriva a 0 il pacchetto è scartato, difesa contro i loop — e un **checksum** che ne protegge l'integrità. Un pacchetto troppo grande per un collegamento può essere **frammentato**.
+
+**ICMP.** Protocollo di messaggi di controllo e diagnostica: l'**Echo Request/Reply** è ciò che sta dietro al *ping*; il **Time Exceeded** è generato da un router quando il TTL arriva a 0 (ed è ciò che rende i router visibili al *traceroute*); il **Destination Unreachable** segnala una destinazione o una porta irraggiungibile.
+
+**Piano dati e piano di controllo; inoltro e instradamento.** Il **piano dati** (*data plane*) muove i singoli pacchetti verso il *next-hop* — è l'**inoltro** (*forwarding*). Il **piano di controllo** (*control plane*) decide *quali* siano i percorsi, costruendo e mantenendo la tabella di routing — è l'**instradamento** (*routing*). `crouter` implementa entrambi.
+
+**Longest Prefix Match (LPM).** Fra tutte le rotte che "contengono" un indirizzo di destinazione, il router sceglie la più **specifica**, cioè quella con il prefisso più lungo (per esempio una `/30` batte una `/24`). È il criterio fondamentale con cui si decide dove inoltrare un pacchetto.
+
+**Routing dinamico e RIP.** Invece di configurare le rotte a mano, i router se le scambiano automaticamente. **RIP** (*Routing Information Protocol*) è un protocollo *distance-vector*: ogni router annuncia periodicamente ai vicini le reti che sa raggiungere e a quale "distanza" (**metrica** = numero di *hop*); chi ascolta somma 1 e tiene il percorso più corto. La metrica massima utile è 15; **16 significa infinito** (irraggiungibile). Per evitare i loop, RIP usa lo **split horizon con poisoned reverse** (una rotta appresa da un'interfaccia viene riannunciata *su quella stessa interfaccia* con metrica 16, cioè "da me non passare per tornare lì"). **RIPv2** (RFC 2453) aggiunge la *subnet mask* e il *next-hop*, permettendo reti *classless* (CIDR/VLSM).
+
+**FRR (FRRouting).** È una **suite software di routing** open source (erede di *Quagga*) che implementa RIP, OSPF, BGP e altri protocolli. Nella demo i router "di riferimento" (R2, R3, R4) eseguono FRR: il fatto che imparino le rotte da `crouter` e viceversa dimostra che il nostro router parla RIP "vero", interoperabile con software professionale.
+
+**Socket raw e router in spazio utente.** Di norma l'instradamento avviene nel *kernel*, invisibile all'applicazione. `crouter` invece apre un **socket raw** (`AF_PACKET`) su ogni interfaccia, che gli consegna i frame Ethernet completi (header di livello 2 inclusi) e gli permette di trasmetterne di costruiti a mano: così il routing è svolto interamente in **spazio utente**, dal nostro codice, e non dal sistema operativo.
+
+#### **0.2. Glossario degli acronimi**
+
+| Acronimo | Per esteso | In breve |
+|----------|------------|----------|
+| **ARP** | Address Resolution Protocol | Trova il MAC associato a un IP nella LAN |
+| **RIP / RIPv2** | Routing Information Protocol (v2) | Protocollo di routing dinamico *distance-vector*; la v2 aggiunge subnet mask e next-hop |
+| **FRR** | FRRouting | Suite software di routing (erede di Quagga) usata dai router di riferimento |
+| **RFC** | Request For Comments | Documento che definisce uno standard di Internet (es. RFC 2453 = RIPv2) |
+| **IP / IPv4** | Internet Protocol (versione 4) | Protocollo di livello 3; indirizzi a 32 bit |
+| **ICMP** | Internet Control Message Protocol | Messaggi di errore/diagnostica (ping, traceroute) |
+| **UDP** | User Datagram Protocol | Trasporto senza connessione; RIP viaggia su UDP porta 520 |
+| **TCP** | Transmission Control Protocol | Trasporto affidabile con connessione (usato nella demo HTTP) |
+| **TTL** | Time To Live | Contatore decrementato a ogni hop; a 0 il pacchetto è scartato (anti-loop) |
+| **MAC** | Media Access Control (address) | Indirizzo hardware a 48 bit di livello 2 |
+| **MTU** | Maximum Transmission Unit | Dimensione massima di un frame (tipicamente 1500 byte) |
+| **LAN** | Local Area Network | Rete locale |
+| **LPM** | Longest Prefix Match | Scelta della rotta più specifica (prefisso più lungo) |
+| **RIB** | Routing Information Base | La tabella di routing |
+| **CIDR** | Classless Inter-Domain Routing | Notazione indirizzo/prefisso, es. `10.0.1.0/24` |
+| **VLSM** | Variable Length Subnet Mask | Subnet di lunghezza diversa insieme (es. `/24` e `/30`) |
+| **NAT** | Network Address Translation | Traduzione degli indirizzi (modalità di rete della VM) |
+| **OVS** | Open vSwitch | Switch virtuale software; connette i nodi in IMUNES |
+| **IMUNES** | Integrated Multiprotocol Network Emulator/Simulator | Emulatore di rete con GUI (Appendice A) |
+| **ECMP** | Equal-Cost Multi-Path | Più percorsi a costo uguale verso la stessa destinazione |
+| **AFI** | Address Family Identifier | Campo RIP che indica il tipo di indirizzo (2 = IPv4) |
+| **DF / MF** | Don't Fragment / More Fragments | Flag di frammentazione nell'header IP |
+| **TOS / DSCP** | Type of Service / Differentiated Services Code Point | Campo di priorità dell'header IP |
+| **NIC** | Network Interface Card | Interfaccia di rete |
+| **veth** | Virtual Ethernet (pair) | Coppia di interfacce virtuali collegate come i capi di un cavo |
+| **WSL** | Windows Subsystem for Linux | Ambiente Linux integrato in Windows |
+| **CLI / GUI** | Command-Line / Graphical User Interface | Interfaccia a riga di comando / grafica |
+
+#### **0.3. Librerie, macro e funzioni di rete usate**
+
+Il programma dipende **solo dalla libreria standard C e dagli header di Linux** (nessuna libreria esterna). Le tabelle seguenti riassumono ciò che si incontra nel codice.
+
+**Header e cosa forniscono**
+
+| Header | Fornisce (usato per…) |
+|--------|-----------------------|
+| `<sys/socket.h>` | `socket`, `bind`, `send`, `recvfrom`, `setsockopt` |
+| `<linux/if_packet.h>` | `struct sockaddr_ll`, `struct packet_mreq`, costanti `PACKET_*` (socket raw Linux) |
+| `<net/ethernet.h>` | `ETH_P_ALL` e costanti Ethernet |
+| `<arpa/inet.h>` | `htons`/`htonl`/`ntohs`/`ntohl`, `inet_pton`/`inet_ntop` |
+| `<netinet/in.h>` | `struct in_addr`, `IPPROTO_*`, `IN_MULTICAST` |
+| `<net/if.h>` | `IF_NAMESIZE`, `struct ifreq` (nomi di interfaccia) |
+| `<sys/ioctl.h>` | `ioctl` + richieste `SIOCGIFINDEX` / `SIOCGIFHWADDR` |
+| `<sys/select.h>` | `select`, `fd_set`, `FD_ZERO`/`FD_SET`/`FD_ISSET` |
+| `<signal.h>` | `signal`, `sig_atomic_t`, i segnali `SIGINT`/`SIGTERM`/`SIGUSR1` |
+| `<unistd.h>` | `close`, `getpid`, `isatty` |
+| `<string.h>` | `memcpy`, `memset`, `strcmp`, `strerror` |
+| `<time.h>` / `<sys/time.h>` | `clock_gettime`, `gettimeofday` |
+| `<errno.h>` | `errno` + codici (`EAGAIN`, `EINTR`, …) |
+| `<stdint.h>` / `<stdbool.h>` | interi a larghezza fissa (`uint8_t`…); tipo `bool` |
+
+**Macro e costanti principali**
+
+| Macro / costante | Significato |
+|------------------|-------------|
+| `AF_PACKET` | Famiglia di socket per accedere ai frame di livello 2 (Linux) |
+| `SOCK_RAW` | Consegna il pacchetto **grezzo**, con gli header inclusi |
+| `ETH_P_ALL` | "Tutti gli EtherType": in ricezione si prende ogni protocollo |
+| `SIOCGIFINDEX` / `SIOCGIFHWADDR` | `ioctl`: ottieni l'indice / il MAC di un'interfaccia |
+| `PACKET_MR_PROMISC`, `SOL_PACKET` | Attivano la modalità promiscua sul socket `AF_PACKET` |
+| `MSG_DONTWAIT` | Lettura **non bloccante** |
+| `IPPROTO_UDP` / `IPPROTO_ICMP` | Numeri di protocollo IP (17 / 1) |
+| `IN_MULTICAST(x)` | Vero se `x` è un indirizzo multicast (classe D) |
+
+**Funzioni "stock" di rete**
+
+| Funzione | Cosa fa |
+|----------|---------|
+| `socket()` | Crea un socket |
+| `bind()` | Lega il socket a un'interfaccia/indirizzo |
+| `send()` / `recvfrom()` | Trasmette / riceve un frame |
+| `setsockopt()` | Imposta opzioni del socket (es. promiscuità) |
+| `ioctl()` | Interroga/configura il dispositivo di rete |
+| `select()` | Attende attività su più socket, con timeout |
+| `htons`/`htonl` · `ntohs`/`ntohl` | Conversione *host↔network byte order* (16 / 32 bit) |
+| `inet_pton()` / `inet_ntop()` | Indirizzo IP testo↔binario |
+| `close()` | Chiude il *file descriptor* del socket |
+
+#### **0.4. Nota per chi apre il codice su Windows**
+
+`crouter` è un programma **specifico per Linux**: usa i socket raw `AF_PACKET` e header presenti solo su Linux (`linux/if_packet.h`, `net/ethernet.h`, `sys/ioctl.h`, `sys/socket.h`, …). Aprendo il repository su **Windows** — per esempio in Visual Studio Code — l'analizzatore di codice mostra numerosi errori del tipo *«cannot open source file "linux/if_packet.h"»*: è **atteso e del tutto innocuo**, perché quegli header non esistono sul sistema Windows e l'IDE non riesce a risolverli.
+
+> ⚠️ Questi errori **non indicano alcun bug**: il progetto **compila ed esegue senza un singolo warning su Linux** (`gcc -Wall -Wextra`). Per compilarlo basta un ambiente Linux — nativo, **WSL** (Windows Subsystem for Linux) o la VM della demo — e il comando `make`. Su Windows il codice si può leggere e navigare comodamente, ma non compilare: è normale e non toglie nulla alla correttezza del progetto.
+
+---
+
 ### **1. Descrizione del progetto**
 
 #### **1.1. Obiettivi**
