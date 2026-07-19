@@ -48,18 +48,18 @@ public class Videoteca {
 
     // ---------- GESTIONE CATALOGO ---------- //
 
-    public void aggiungiAlCatalogo(Film film) {
-        Film eGiaInCatalogo = trovaFilmInCatalogoPerId(film.getId());
-        if (eGiaInCatalogo == null) {
-            catalogoFilm.add(film);
-            copiePerTitolo.merge(film.getTitolo(), 1, Integer::sum);
-            numeroFilmRegistrati++;
-        } else {
-            System.out.println("Errore: copia con id " + film.getId() + " già esistente in catalogo.");
+    public boolean aggiungiAlCatalogo(Film film) {
+        if (film == null || idCopiaRegistrato(film.getId())) {
+            return false;
         }
+        catalogoFilm.add(film);
+        copiePerTitolo.merge(film.getTitolo(), 1, Integer::sum);
+        numeroFilmRegistrati++;
+        return true;
     }
 
-    public void rimuoviDalCatalogo(Film film) {
+    public boolean rimuoviDalCatalogo(Film film) {
+        if (film == null) return false;
         Film eGiaInCatalogo = trovaFilmInCatalogoPerId(film.getId());
         if (eGiaInCatalogo != null) {
             catalogoFilm.remove(eGiaInCatalogo);
@@ -68,25 +68,33 @@ public class Videoteca {
                 return (nuovoCount <= 0) ? null : nuovoCount;
             });
             numeroFilmRegistrati--;
+            return true;
         }
+        return false;
     }
 
     // ---------- GESTIONE CLIENTI ---------- //
 
-    public void registraCliente(Cliente cliente) {
+    public boolean registraCliente(Cliente cliente) {
+        if (cliente == null) return false;
         Cliente eGiaRegistrato = trovaClientePerId(cliente.getId());
         if (eGiaRegistrato == null) {
             clienti.add(cliente);
             numeroClientiRegistrati++;
+            return true;
         }
+        return false;
     }
 
-    public void rimuoviCliente(Cliente cliente) {
+    public boolean rimuoviCliente(Cliente cliente) {
+        if (cliente == null) return false;
         Cliente eGiaRegistrato = trovaClientePerId(cliente.getId());
-        if (eGiaRegistrato != null) {
+        if (eGiaRegistrato != null && eGiaRegistrato.getNumeroFilmNoleggiati() == 0) {
             clienti.remove(eGiaRegistrato);
             numeroClientiRegistrati--;
+            return true;
         }
+        return false;
     }
 
     // ---------- NOLEGGIO E RESTITUZIONE (NUOVE FIRME) ---------- //
@@ -233,5 +241,19 @@ public class Videoteca {
                         .append(")\n");
             }
         }
+    }
+
+    private boolean idCopiaRegistrato(int idFilm) {
+        if (trovaFilmInCatalogoPerId(idFilm) != null) {
+            return true;
+        }
+        for (Cliente cliente : clienti) {
+            for (Film film : cliente.getFilmNoleggiati()) {
+                if (film.getId() == idFilm) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

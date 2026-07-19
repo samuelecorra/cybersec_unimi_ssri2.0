@@ -2,6 +2,7 @@ package E4_avanzati.RegistroStudenti.Classi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Studente {
 
@@ -10,8 +11,14 @@ public class Studente {
     private final List<Integer> voti;
 
     public Studente(int matricola, String nome) {
+        if (matricola <= 0) {
+            throw new IllegalArgumentException("La matricola deve essere positiva");
+        }
         this.matricola = matricola;
-        this.nome = nome;
+        this.nome = Objects.requireNonNull(nome, "nome").trim();
+        if (this.nome.isEmpty()) {
+            throw new IllegalArgumentException("Il nome non può essere vuoto");
+        }
         this.voti = new ArrayList<>();
     }
 
@@ -24,11 +31,14 @@ public class Studente {
     }
 
     public List<Integer> getVoti() {
-        return voti;
+        return List.copyOf(voti);
     }
 
     // Aggiunge un voto alla lista
     public void aggiungiVoto(int voto) {
+        if (voto < 0 || voto > 30) {
+            throw new IllegalArgumentException("Il voto deve essere compreso tra 0 e 30");
+        }
         voti.add(voto);
     }
 
@@ -37,7 +47,7 @@ public class Studente {
         if (voti.isEmpty()) {
             return 0.0;
         }
-        int somma = 0;
+        long somma = 0;
         for (int v : voti) {
             somma += v;
         }
@@ -54,4 +64,3 @@ public class Studente {
                 '}';
     }
 }
-

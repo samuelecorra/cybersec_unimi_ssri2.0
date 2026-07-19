@@ -3,8 +3,9 @@ package M01_Fondamenti.L1_Intro;
 public class Intro {
     public static void main(String[] args) { // psvm
         System.out.println("Ciao, benvenuto al corso di Java!"); // sysout
-        sysout: System.out.println("Meglio con lo shortcut, vero? :)");
+        System.out.println("Questa istruzione usa ancora println.");
         int eta = 15;
+        System.out.println("Età di esempio: " + eta);
     }
 }
 
@@ -24,9 +25,9 @@ public class Intro {
 // 2. public static void main(String[] args) si può comodamente scrivere
 //    mediante lo shortcut "psvm" in molti IDE.
 
-//    Il main non deve essere
-//    necessariamente "public", ma se non lo è, non potrà essere
-//    invocato da codice esterno alla classe stessa.
+//    Nel contratto classico e portabile usato dal launcher Java, il main è
+//    public static void main(String[] args). Versioni recenti di Java hanno
+//    sperimentato forme più concise, ma non sono adatte a esempi compatibili.
 
 // 3. System è una classe "core" di Java, che contiene al suo interno
 //    vari membri (metodi e variabili) di utilità generale. Uno di questi
@@ -37,21 +38,20 @@ public class Intro {
 //    che stampa a video il testo passato come argomento e va a capo
 //    automaticamente alla fine della stampa.
 
-//    Di default, java permette lo shortcut "sysout" in molti IDE,
+//    Molti IDE offrono lo shortcut "sysout",
 //    che espande automaticamente in System.out.println() e non nelle altre,
 //    che richiedono live template personalizzati.
 
-//    C'è poi anche sout, che se posto dopo variabile. riesce a stampare in un
-//    colpo solo il valore della variabile stessa, ma questo lo vedremo
-//    più avanti.
+//    IntelliJ IDEA offre anche il live template postfix ".sout" per stampare
+//    un'espressione: è una funzione dell'IDE, non sintassi del linguaggio Java.
 
 //    Ci sono poi anche print(), che stampa senza andare a capo,
 //    e printf(), che consente di formattare la stringa di output
 //    in modo più sofisticato (come in C/C++).
 
-//    In poche parole, con Java non dobbiamo includere librerie come in C/C++
-//    facevando #include <stdio.h>, perché tutto è già incluso
-//    di default nel linguaggio stesso. CO-MO-DI-TA'! :D
+//    Java non usa #include. Il package java.lang è importato implicitamente;
+//    le classi di altri package, come java.util.Scanner, richiedono invece un
+//    import oppure il nome completamente qualificato.
 
 //    Parleremo più avanti del perché sono separati da un punto (.), per ora
 //    basti sapere che l'output di base in Java si fa così!

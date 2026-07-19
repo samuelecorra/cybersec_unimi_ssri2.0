@@ -2,7 +2,7 @@
 #include <math.h>               // direttiva per funzioni matematiche
 #include <windows.h>           // direttiva per SetConsoleOutputCP()
 
-int main() {                    // ingresso nel main
+int main(void) {                // ingresso nel main
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 
@@ -33,11 +33,9 @@ int main() {                    // ingresso nel main
     printf("\nVolume del cilindro con area di base %.2lf e altezza %.2lf = %.2lf\n", 
             areaCerchio, altezzaCilindro, volumeCilindro);
     
-    // Ora invece prendiamo come riferimento la circonferenza che abbiamo
-    // calcolato prima e usiamola per calcolare superficie e volume della sfera
-    // ad essa associata:
-    // La formula è Ssfera = 4 * π * r^2, ma noi abbiamo gia l'area della circonferenza
-    // ovvero Acerchio = r * r * π
+    // Ora riutilizziamo il raggio e l'area del cerchio calcolata prima per ottenere
+    // superficie e volume della sfera associata:
+    // La formula è Ssfera = 4 * π * r^2 e Acerchio = π * r^2.
     // Quindi possiamo riscrivere la formula della superficie della sfera come:
     double superficieSfera = 4 * areaCerchio; // superficie della sfera
 

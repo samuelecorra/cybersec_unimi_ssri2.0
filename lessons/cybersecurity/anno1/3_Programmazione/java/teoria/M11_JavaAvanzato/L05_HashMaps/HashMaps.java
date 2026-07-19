@@ -1,20 +1,22 @@
 package M11_JavaAvanzato.L05_HashMaps;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class HashMaps {
 
     // L'HashMap è una struttura dati che memorizza coppie chiave-valore.
     // Le chiavi devono per forza di cose essere univoche, mentre i valori possono essere duplicati.
 
-    // NON MANTENGONO ALCUN ORDINE! -> MA SONO MEMORY EFFICIENT!
+    // NON GARANTISCONO L'ORDINE DI ITERAZIONE. In cambio offrono, con una
+    // buona distribuzione degli hash, operazioni principali O(1) in media.
 
     // SINTASSI BASE:
     // HashMap<Chiave, Valore> nomeHashMap = new HashMap<>();
 
-    static void main() {
+    public static void main(String[] args) {
 
-        HashMap<String, Double> mappa = new HashMap<>();
+        Map<String, Double> mappa = new HashMap<>();
 
         // Aggiungere elementi
         mappa.put("Alice", 85.5);
@@ -55,8 +57,8 @@ public class HashMaps {
 
         System.out.println("Stampo formattato:");
 
-        for(String chiave : mappa.keySet()) {
-            System.out.println(chiave + " ha voto: " + mappa.get(chiave));
+        for (Map.Entry<String, Double> coppia : mappa.entrySet()) {
+            System.out.println(coppia.getKey() + " ha voto: " + coppia.getValue());
         }
 
 

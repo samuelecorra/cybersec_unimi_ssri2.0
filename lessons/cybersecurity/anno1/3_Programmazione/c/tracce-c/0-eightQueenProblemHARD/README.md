@@ -1,160 +1,49 @@
-# Eight Queens Problem — README
+# Eight Queens Problem
 
-## Che cos’è
-Il **Rompicapo delle Otto Regine** chiede di posizionare **8 regine** su una **scacchiera 8×8** in modo che **nessuna** minacci un’altra (quindi non condividono **riga**, **colonna** né **diagonale**).  
-È il caso classico del più generale **Problema delle N Regine**.
+Questa cartella svolge progressivamente la traccia dell’appello di Laboratorio di
+Programmazione del 26 gennaio 2024. Il testo originale e la soluzione del docente
+sono disponibili in [`traccia-e-soluzione.pdf`](./src/0-imgs-and-pdf/traccia-e-soluzione.pdf).
 
----
+Il problema richiede di collocare otto regine su una scacchiera 8×8 senza coppie
+sulla stessa riga, colonna o diagonale. Lo stato usa un array `stato[N]` con una
+regina per colonna:
 
-## Un po’ di storia
-- **Origini:** formulato nel **1848** da **Max Bezzel**, compositore di problemi di scacchi.  
-- **Generalizzazione:** nel **1850**, **Franz Nauck** estese il problema al caso di una scacchiera *N×N*, introducendo il concetto di **N-Queens Problem**.  
-- **Risultati noti:** per l’8×8 esistono **92 soluzioni**, di cui **12 fondamentali** (le altre derivano da rotazioni e riflessioni).  
-- **Rilevanza storica:** è uno dei primi problemi che ha portato allo sviluppo pratico degli algoritmi di **backtracking** e alla nascita di concetti fondamentali per l’**Intelligenza Artificiale** e la **Ricerca Operativa**.
-
----
-
-## Perché interessa alla programmazione e all’AI
-Il problema delle N regine è un esempio classico di **Constraint Satisfaction Problem (CSP)**.  
-È un laboratorio perfetto per esercitarsi con:
-
-- **Ricorsione** e **backtracking**  
-- **Euristiche di ricerca** (come l’approccio *least constrained*)  
-- **Ottimizzazioni con bitmask**  
-- **Parallelizzazione**  
-- **Risolutori SAT/CSP**
-
-In ambito moderno viene usato per:
-- Benchmark di algoritmi di ricerca e ottimizzazione  
-- Test di algoritmi di intelligenza artificiale  
-- Dimostrazioni pratiche di programmazione dichiarativa e constraint programming  
-
----
-
-## Specifica del problema (8×8)
-**Obiettivo:** trovare tutte le configurazioni in cui 8 regine sono posizionate su una scacchiera 8×8 senza che nessuna possa attaccare un’altra.
-
-**Vincoli:**
-1. Nessuna regina sulla stessa **riga**
-2. Nessuna regina sulla stessa **colonna**
-3. Nessuna regina sulla stessa **diagonale**
-
-![alt text](/c/tracce-c/0-eightQueenProblemHARD/src/0-imgs-and-pdf/figura1.png)
-
-**Output:**  
-Tutte le configurazioni valide, stampate come scacchiera con:
-- **Q** per le regine  
-- **-** per le caselle bianche  
-- **\*** per le caselle nere  
-- Bordo numerato **(1–8)** a sinistra e lettere **(a–h)** in basso  
-- Bordo superiore e destro **0-based (0–7)** per riferirsi agli indici della **matrice interna**  
-
----
-
-## Rappresentazione dello stato
-Usiamo un **vettore di 8 interi** `regine[8]`, dove:
-- L’indice `j` (0–7) rappresenta la **colonna**  
-- Il valore `regine[j]` (0–7) rappresenta la **riga**
-
-Esempio:
-
-[7, 4, 0, 3, 6, 1, 5, 2]
-
-
-Significa:
-- In colonna 0 (a) → riga 7  
-- In colonna 1 (b) → riga 4  
-- ecc.
-
-Ogni colonna contiene esattamente una regina, quindi non servono controlli sulle colonne.
-
----
-
-## Verifica dei vincoli
-Due regine in colonne `j` e `k` (con `j ≠ k`) si minacciano se:
-- Stessa riga: `regine[j] == regine[k]`
-- Stessa diagonale: `abs(regine[j] - regine[k]) == abs(j - k)`
-
----
-
-## Algoritmo di backtracking
-1. Posiziona ricorsivamente una regina nella **colonna `col`**.  
-2. Per ogni riga possibile:
-   - Verifica che non sia in conflitto con le colonne precedenti (`0..col-1`).  
-   - Se valida, passa a `col + 1`.  
-3. Se `col == 8`, hai trovato una **soluzione completa** → stampala.  
-4. In caso contrario, **backtrack** (torna indietro e prova un’altra riga).
-
-**Complessità:** esponenziale; un bound grezzo è `O(N!)`.  
-Il backtracking riduce enormemente le combinazioni esplorando solo configurazioni valide parziali.
-
----
-
-## Estensione a N regine
-
-Il codice può essere facilmente generalizzato:
-
-* `regine[N]`
-* Backtracking ricorsivo con parametro `N`
-* Controlli identici
-* Possibili ottimizzazioni:
-
-  * Uso di **bitmask** per righe e diagonali
-  * **Parallelizzazione** delle prime colonne
-  * Implementazioni **bitboard**
-
----
-
-## Struttura del progetto
-
-Il progetto è organizzato in sottocartelle numerate, ognuna dedicata a una fase logica di sviluppo e analisi del **problema delle otto regine**.
-```
-/0-eightQueenProblemHARD
-│
-├── src/
-│   │
-│   ├── 0-imgs-and-pdf/                  # Risorse grafiche e documentazione teorica
-│   │   ├── figura1.png
-│   │   ├── figura2.png
-│   │   └── traccia-e-soluzione.pdf
-│   │
-│   ├── 1-stampaConfig/                  # Esercizio 1.1 — stampa di una configurazione
-│   │   ├── README.md                    # Spiegazione della stampa e regole di visualizzazione
-│   │   └── stampaConfig.c               # Codice C per la stampa della scacchiera formattata
-│   │
-│   ├── 2-verificaConfig/                # Esercizio 1.2 — verifica di validità delle configurazioni
-│   │   ├── README.md                    # Spiegazione dei controlli e delle funzioni di verifica
-│   │   └── verificaConfig.c             # Implementazione delle funzioni di controllo
-│   │
-│   ├── 3-euristica/                     # Esercizio 1.3 — backtracking, ricorsione, euristiche
-│   │   ├── README.md                    # Spiegazione delle tecniche di backtracking e ottimizzazione
-│   │   └── euristica.c                  # Implementazione degli algoritmi di ricerca e risoluzione
-│   │
-│   └── (eventuali cartelle aggiuntive)  # Per moduli successivi o versioni ottimizzate
-│
-└── README.md                            # Documento principale del progetto
+```text
+stato[colonna] = riga
 ```
 
----
+Nel PDF le righe sono numerate `1..N`. Nei sorgenti della cartella sono memorizzate
+come `0..N-1`; pertanto la riga scacchistica `r` diventa `r - 1`. L’indice non
+indica la posizione visiva dall’alto: la riga interna `N-1` è la riga superiore.
 
-### 🧠 Suggerimento di evoluzione futura
-In una versione completa potresti aggiungere:
+![Una soluzione del problema](./src/0-imgs-and-pdf/figura1.png)
 
+## Percorso didattico
+
+1. [`stampaConfig`](./src/1-stampaConfig/) visualizza uno stato senza verificarlo.
+2. [`verificaConfig`](./src/2-verificaConfig/) conta le coppie in conflitto.
+3. [`euristica`](./src/3-euristica/) interpreta quel conteggio come costo.
+4. [`caricaConfig`](./src/4-caricaConfig/) carica uno stato da un file di testo.
+5. [`cerca`](./src/5-cerca/) valuta una mossa su una copia dello stato.
+6. [`main`](./src/6-main/) integra le operazioni in un menu interattivo.
+
+![Costi degli stati raggiungibili in una mossa](./src/0-imgs-and-pdf/figura2.png)
+
+La cartella non implementa un risolutore automatico né enumera le 92 soluzioni:
+il main permette di cercare manualmente una soluzione, come richiesto dalla traccia.
+L’algoritmo di backtracking è un possibile approfondimento, non parte del codice qui presente.
+
+## Compilazione
+
+Ogni fase è un esempio autonomo o un componente. Il programma completo è già
+riunito in `src/6-main/mainV1.c`:
+
+```bash
+gcc -std=c17 -Wall -Wextra -Wpedantic src/6-main/mainV1.c -o nregine
 ```
 
-├── include/
-│   ├── stampaConfig.h
-│   ├── verificaConfig.h
-│   └── euristica.h
-│
-└── tests/
-├── configurazioni_di_esempio.txt
-└── output_attesi.txt
+Si può scegliere una dimensione diversa, fino a 26, al momento della compilazione:
 
+```bash
+gcc -std=c17 -Wall -Wextra -Wpedantic -DN=4 src/6-main/mainV1.c -o nregine
 ```
-
-in modo da rendere il progetto **modulare e testabile** anche in ambito universitario (o GitHub Classroom).
-
----
-
-### Consultare i README.md delle varie implementazioni nella cartella /src per comprendere passo passo come la traccia è stata risolta. Bon voyage!

@@ -23,6 +23,8 @@ public class Aritmetica {
         // Divisione
         int quoziente = a / b;
         System.out.println("Quoziente: " + quoziente); // Output: 3
+        double quozienteReale = (double) a / b;
+        System.out.println("Quoziente reale: " + quozienteReale); // Output: 3.333...
 
         // Modulo
         int resto = a % b;
@@ -30,7 +32,7 @@ public class Aritmetica {
 
         // AUGMENTED ASSIGNED OPERATORS - anche dette forme compatte...
         int x = 10;
-        x += 5; // Equivalente ad:   x = x + 5
+        x += 5; // Per un int, equivale ad assegnare x + 5 a x
         System.out.println("x dopo x += 5: " + x); // Output: 15
         x *= 2; // Equivalente ad:   x = x * 2
         System.out.println("x dopo x *= 2: " + x); // Output: 30
@@ -67,7 +69,6 @@ public class Aritmetica {
         - Accesso a indice: a[i]
         - Accesso a metodo: obj.metodo()
         - Accesso a campo: obj.campo
-        - Cast postfisso a tipo array
         Associatività: da sinistra a destra
 
     ► 2. PREFISSI E UNARI
@@ -131,15 +132,9 @@ public class Aritmetica {
         - =, +=, -=, *=, /=, %=, &=, ^=, |=, <<=, >>=, >>>=
         Associatività: da destra a sinistra
 
-    ► 15. VIRGOLA (COMMA OPERATOR)
-        - ,
-        (usabile solo in contesti come i for)
-        Associatività: da sinistra a destra
-
-
     ----------------------------------------------------------
     NOTA IMPORTANTE:
-    Le parentesi “( )” hanno precedenza ASSOLUTA
+    Le parentesi “( )” raggruppano esplicitamente le sottoespressioni
     e permettono di controllare l'ordine di valutazione.
     ----------------------------------------------------------
 
@@ -153,6 +148,13 @@ public class Aritmetica {
     Gli operatori non menzionati in PEMDAS (come quelli logici,
     bitwise, assegnamenti, ternario, incrementi) sono specifici
     del linguaggio e seguono la scala sopra indicata.
+
+    Java non possiede un "comma operator": la virgola è un separatore
+    sintattico, per esempio tra argomenti o tra espressioni di un for.
+
+    Attenzione: un assegnamento composto include una conversione implicita.
+    Per esempio, con byte p, "p += 1" compila mentre "p = p + 1" richiede
+    un cast, perché p + 1 viene promosso a int.
 */
 
     }

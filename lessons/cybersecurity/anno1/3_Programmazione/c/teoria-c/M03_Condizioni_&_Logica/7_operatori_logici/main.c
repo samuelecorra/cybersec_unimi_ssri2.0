@@ -9,7 +9,7 @@ if e switch! */
 #include <string.h>
 #include <windows.h>
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(65001);
 
@@ -37,7 +37,7 @@ int main() {
         printf("La temperatura è fuori norma (caldo/freddo eccessivo)!\n");
     }
 
-    // Il codice sopra funziona, ma non è ottimale.
+    // Il codice sopra compila, ma la sua logica è sbagliata.
     // Infatti, se la temperatura inserita è un numero assurdamente grande,
     // il programma dirà che è nella norma, il che non ha senso perché staremmo
     // già morendo fusi come fossimo sulla superficie del sole!
@@ -47,7 +47,7 @@ int main() {
     // ma saremmo già morti di ipotermia prima che il programma finisca di eseguire.
 
     // La soluzione è usare l'operatore AND (&&):
-    if (temperatura > 0 && temperatura < 30) {
+    if (temperatura >= 0 && temperatura <= 30) {
         printf("La temperatura è nella norma!\n");
     } else {
         printf("La temperatura è fuori norma (caldo/freddo eccessivo)!\n");

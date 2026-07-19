@@ -15,14 +15,15 @@ public class ScopeVariabili {
     // e variabili statiche (anche dette variabili di classe, dichiarate con la parola chiave "static"
     // sempre fuori da qualsiasi metodo).
 
-    int x = 13; // global-like variable (instance variable)
-    static int y = 42; // global-like variable (static variable)
+    int x = 13; // campo di istanza: ogni oggetto ha la propria copia
+    static int y = 42; // campo statico (o di classe): condiviso da tutte le istanze
 
-    // Le variabili locali vincono sempre sulle global-like se hanno lo stesso nome!
-    // In generale si può dire che vince lo scope più interno, ovvero si manifesta
-    // il cosiddetto "variable shadowing".
+    // Se una variabile locale ha lo stesso nome di un campo, il nome semplice indica
+    // la variabile locale: è il cosiddetto "variable shadowing". Il campo rimane
+    // comunque accessibile attraverso un oggetto (oppure tramite il nome della classe,
+    // se è statico).
 
-        static void main(String[] args) {
+    public static void main(String[] args) {
 
         // IN C dicevamo "scope locale" quando la variabile era accessibile solo all'interno
         // di un blocco di codice (ad esempio, all'interno di una funzione o di un ciclo).
@@ -30,6 +31,10 @@ public class ScopeVariabili {
 
         // Esempio di variabile con scope di metodo:
         int x = 10; // Variabile locale al metodo main
+        ScopeVariabili esempio = new ScopeVariabili();
+        System.out.println("x locale: " + x);
+        System.out.println("campo x dell'oggetto: " + esempio.x);
+        System.out.println("campo statico y: " + ScopeVariabili.y);
 
         if (x > 5) {
             int y = 20; // Variabile locale al blocco if

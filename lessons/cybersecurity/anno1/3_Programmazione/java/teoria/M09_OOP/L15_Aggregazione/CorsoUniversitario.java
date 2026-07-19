@@ -19,9 +19,9 @@ import java.util.List;
  */
 public class CorsoUniversitario {
 
-    private String nomeCorso;
-    private String codiceCorso;
-    private List<Studente> studentiIscritti;
+    private final String nomeCorso;
+    private final String codiceCorso;
+    private final List<Studente> studentiIscritti;
 
     public CorsoUniversitario(String nomeCorso, String codiceCorso) {
         this.nomeCorso = nomeCorso;
@@ -72,7 +72,7 @@ public class CorsoUniversitario {
     }
 
     public List<Studente> getStudentiIscritti() {
-        return studentiIscritti;
+        return List.copyOf(studentiIscritti);
     }
 
     @Override

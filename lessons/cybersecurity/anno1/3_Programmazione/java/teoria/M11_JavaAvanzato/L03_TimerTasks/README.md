@@ -36,6 +36,7 @@ public class Main {
             @Override
             public void run() {
                 System.out.println("Sono passati 3 secondi! Eseguo il task una volta.");
+                timer.cancel(); // termina il thread non-daemon del Timer
             }
         };
 
@@ -76,7 +77,8 @@ TimerTask task = new TimerTask() {
 
 * Qui stiamo creando un **oggetto anonimo** che estende `TimerTask`.
 * **`run()`** è il metodo che il `Timer` chiamerà quando scatta il timer.
-* Dentro `run()` mettiamo il codice da eseguire.
+* Dentro `run()` mettiamo il codice da eseguire e chiudiamo il timer quando
+  non sono previste altre attività.
 
 ```java
 timer.schedule(task, 3000);
@@ -101,6 +103,7 @@ Esempio: stampare l’orario ogni 2 secondi.
 
 ```java
 import java.util.Timer;
+import java.util.TimerTask;
 import java.util.TimerTask;
 
 public class Main {
@@ -240,6 +243,14 @@ public class Main {
         // Dopo 10 secondi
         timer.schedule(promemoria2, 10000);
 
+        // Poco dopo l'ultimo promemoria, chiudiamo il thread del Timer.
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+            }
+        }, 10001);
+
         System.out.println("Promemoria programmati.");
     }
 }
@@ -263,8 +274,9 @@ Esistono due metodi principali per l’esecuzione periodica:
 La differenza è sottile ma importante:
 
 * **`schedule()`**
-  Cerca di eseguire il task **“a ritardo fisso”**:
-  ogni nuova esecuzione è programmata **`period` millisecondi dopo la fine di quella precedente** (se il task ritarda, le esecuzioni si spostano in avanti).
+  Usa una pianificazione **a ritardo fisso**: ogni esecuzione è riferita al
+  tempo effettivo della precedente. Se il thread del timer arriva tardi,
+  anche le esecuzioni successive slittano e non tentano di recuperare il ritardo.
 
 * **`scheduleAtFixedRate()`**
   Cerca di mantenere una **frequenza costante**:
@@ -294,6 +306,10 @@ Per progetti seri si preferisce spesso `ScheduledExecutorService`, ma per:
 * demo
 
 `Timer` + `TimerTask` è perfetto e molto più semplice da capire.
+
+> ⚠️ La stessa istanza di `TimerTask` può essere pianificata una sola volta.
+> Una seconda chiamata a `schedule` con lo stesso oggetto lancia
+> `IllegalStateException`; per un altro piano serve un nuovo task.
 
 ---
 

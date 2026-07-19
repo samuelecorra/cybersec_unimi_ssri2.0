@@ -17,7 +17,7 @@ public class NestedLoops {
     // o per la manipolazione di strutture dati complesse.
 
     // Stampiamo una matrice che ha 3 righe del tipo: 1 2 3 4 5 6 7 8 9
-    static void main() {
+    public static void main(String[] args) {
 
         for (int riga = 1; riga <= 3; riga++) { // ciclo esterno per le righe
             for (int colonna = 1; colonna <= 9; colonna++) { // ciclo interno per le colonne

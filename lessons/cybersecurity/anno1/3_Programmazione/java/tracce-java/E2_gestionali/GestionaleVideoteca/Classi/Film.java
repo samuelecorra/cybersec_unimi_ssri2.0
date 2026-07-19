@@ -8,10 +8,16 @@ public class Film {
     private final String genere;
 
     public Film(int id, int copie, String titolo, String genere) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("L'ID del film deve essere positivo.");
+        }
+        if (copie <= 0) {
+            throw new IllegalArgumentException("Il numero iniziale di copie deve essere positivo.");
+        }
         this.id = id;
         this.copie = copie;
-        this.titolo = titolo;
-        this.genere = genere;
+        this.titolo = richiediTesto(titolo, "titolo");
+        this.genere = richiediTesto(genere, "genere");
     }
 
     public int getId() {
@@ -36,17 +42,23 @@ public class Film {
         copie++;
     }
 
-    public void decrementaCopie() {
+    public boolean decrementaCopie() {
         if (copie > 0) {
             copie--;
-        } else {
-            System.out.println("Nessuna copia disponibile per il decremento");
+            return true;
         }
+        return false;
     }
 
     @Override
     public String toString() {
-        return "Film{id=" + id + ", titolo='" + titolo + "', genere='" + genere + "', copie='" + copie + "'}";
+        return "Film{id=" + id + ", titolo='" + titolo + "', genere='" + genere + "', copie=" + copie + "}";
+    }
+
+    private static String richiediTesto(String valore, String campo) {
+        if (valore == null || valore.isBlank()) {
+            throw new IllegalArgumentException("Il campo " + campo + " non può essere vuoto.");
+        }
+        return valore.trim();
     }
 }
-

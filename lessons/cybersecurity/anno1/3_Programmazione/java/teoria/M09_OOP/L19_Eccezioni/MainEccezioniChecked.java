@@ -10,15 +10,14 @@ import java.io.IOException;
  */
 public class MainEccezioniChecked {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("=== Lettura da file con eccezioni checked ===");
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("file_che_non_esiste.txt"));
+        // try-with-resources chiude BufferedReader anche se readLine() fallisce.
+        try (BufferedReader br = new BufferedReader(new FileReader("file_che_non_esiste.txt"))) {
             String linea = br.readLine();
             System.out.println("Contenuto: " + linea);
-            br.close();
         } catch (IOException e) {
             System.out.println("ERRORE: impossibile leggere il file!");
             System.out.println("Dettagli: " + e.getMessage());

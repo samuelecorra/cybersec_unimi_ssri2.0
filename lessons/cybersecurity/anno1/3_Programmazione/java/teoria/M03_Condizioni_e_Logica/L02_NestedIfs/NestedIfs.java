@@ -1,8 +1,7 @@
 package M03_Condizioni_e_Logica.L02_NestedIfs;
 
 public class NestedIfs {
-    static void main() {
-        int numero = 120;
+    public static void main(String[] args) {
 
         // Uno studente di quinta superiore ha lo sconto al cinema
         // Uno studente non in quinta superiore non ha lo sconto
@@ -46,7 +45,9 @@ public class NestedIfs {
         }
 
         // Quando un blocco if/else ha solo un'istruzione, le
-        // parentesi graffe possono essere omesse per semplicità. Rifacciamo lo scorso esempio senza graffe:
+        // parentesi graffe possono essere omesse. Nei costrutti annidati è però
+        // rischioso: ogni else si associa all'if privo di else più vicino.
+        // Rifacciamo lo scorso esempio solo per mostrare questa regola sintattica:
         if (età >= 18)
             if (haPatente)
                 if (haAssicurazione)
@@ -58,7 +59,8 @@ public class NestedIfs {
         else
             System.out.println("Non puoi né guidare l'auto né conseguire la patente se sei minorenne.");
 
-        // Pura indentazione!
+        // L'indentazione non cambia la struttura del programma: per codice reale
+        // sono preferibili le graffe, che rendono esplicite le associazioni.
 
     }
 

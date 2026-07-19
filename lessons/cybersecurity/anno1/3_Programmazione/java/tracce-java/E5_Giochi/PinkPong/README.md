@@ -7,12 +7,12 @@
 ## 1. Package e import
 
 ```java
-package PinkPongV1;
+package E5_Giochi.PinkPong;
 
 ```
 
-* `package PinkPongV1;`
-  Indica che tutte le classi del file appartengono al **package** `PinkPongV1`.
+* `package E5_Giochi.PinkPong;`
+  Indica che tutte le classi del file appartengono al **package** `E5_Giochi.PinkPong`.
   Serve per organizzare il codice in “cartelle logiche” (namespace) e per evitare conflitti di nomi tra classi con lo stesso nome in progetti diversi.
 
 * `import javax.swing.*;`
@@ -173,11 +173,13 @@ enum Difficolta {
 
 ```java
 class PannelloPong extends JPanel implements ActionListener, KeyListener {
+    private static final long serialVersionUID = 1L;
 ```
 
 * Estende `JPanel`: diventa un **componente grafico 2D** su cui possiamo disegnare ridefinendo `paintComponent`.
 * Implementa `ActionListener` → può ricevere eventi di tipo `ActionEvent` (usati dal `Timer` Swing).
 * Implementa `KeyListener` → può ricevere eventi da tastiera.
+* Dichiara `serialVersionUID` perché `JPanel` implementa `Serializable`: il campo rende esplicita la versione seriale ed evita l'avviso del compilatore, anche se il pannello non viene serializzato dall'applicazione.
 
 ### 5.1 Costanti di dimensione e velocità
 
@@ -315,7 +317,7 @@ public PannelloPong() {
     setFocusable(true);
     addKeyListener(this); // registriamo il pannello per ricevere eventi da tastiera
 
-    timerGioco = new Timer(1000 / 60, this); // 60 chiamate al secondo di actionPerformed
+    timerGioco = new Timer(1000 / 60, this); // circa 60 chiamate al secondo
     timerGioco.start();
 }
 ```
@@ -511,11 +513,11 @@ Poi testo centrale (“PAUSA”) e le righe “R o P per riprendere…” e “Q
 ### 7.2 Countdown
 
 ```java
-int secondiRimasti = fotogrammiCountdown / 60 + 1;
+int secondiRimasti = Math.max(1, (fotogrammiCountdown + 59) / 60);
 ```
 
-* Se ad es. `fotogrammiCountdown` è tra 120 e 179, integer division `/ 60` dà 2, +1 → 3;
-  così ottieni 3,2,1 a scendere.
+* La somma di 59 realizza l'arrotondamento per eccesso della divisione intera: 180 frame mostrano 3, da 120 a 179 mostrano ancora 3, da 60 a 119 mostrano 2 e da 1 a 59 mostrano 1.
+* `Math.max(1, ...)` impedisce di mostrare 0 nell'ultimo ridisegno del countdown.
 
 Il resto è identico: overlay + numero gigante centrato.
 
@@ -689,41 +691,46 @@ yPallina += velYPallina;
 ### 10.2 Collisioni con bordi alto/basso
 
 ```java
-if (yPallina <= 0 || yPallina + DIMENSIONE_PALLINA >= ALTEZZA) {
-    velYPallina = -velYPallina;
+if (yPallina <= 0) {
+    yPallina = 0;
+    velYPallina = Math.abs(velYPallina);
+} else if (yPallina + DIMENSIONE_PALLINA >= ALTEZZA) {
+    yPallina = ALTEZZA - DIMENSIONE_PALLINA;
+    velYPallina = -Math.abs(velYPallina);
 }
 ```
 
-* Se la pallina tocca la riga y=0 (alto) o la riga y=ALTEZZA-DIMENSIONE (basso) → inverti la velocità verticale.
+* Quando la pallina raggiunge un bordo, viene prima riportata entro il campo e poi orientata nella direzione opposta con `Math.abs`. Il riposizionamento evita rimbalzi ripetuti se un aggiornamento l'ha portata oltre il limite.
 
 ### 10.3 Collisione con palette sinistra
 
 ```java
-if (xPallina <= xPalettaSinistra + LARGHEZZA_PALETTA &&
-        xPallina >= xPalettaSinistra &&
+if (velXPallina < 0 &&
+        xPallina <= xPalettaSinistra + LARGHEZZA_PALETTA &&
+        xPallina + DIMENSIONE_PALLINA >= xPalettaSinistra &&
         yPallina + DIMENSIONE_PALLINA >= yPalettaSinistra &&
         yPallina <= yPalettaSinistra + ALTEZZA_PALETTA) {
 
+    xPallina = xPalettaSinistra + LARGHEZZA_PALETTA;
     velXPallina = Math.abs(velXPallina);
 }
 ```
 
 * Condizione di **rettangoli che si sovrappongono**:
 
-    * `xPallina` (margine sinistro della pallina) è compreso tra:
-
-        * `xPalettaSinistra` (margine sinistro della paletta)
-        * e `xPalettaSinistra + LARGHEZZA_PALETTA` (margine destro).
-    * E l’intervallo verticale della pallina interseca quello della paletta:
+    * la pallina sta andando verso la paletta (`velXPallina < 0`);
+    * il bordo sinistro della pallina non ha superato il bordo destro della paletta;
+    * il bordo destro della pallina non è prima del bordo sinistro della paletta;
+    * l’intervallo verticale della pallina interseca quello della paletta:
 
         * `yPallina + DIMENSIONE_PALLINA >= yPalettaSinistra` (il bordo basso della pallina è sotto il bordo alto della paletta)
         * `yPallina <= yPalettaSinistra + ALTEZZA_PALETTA` (il bordo alto della pallina è sopra il bordo basso della paletta).
 
-* `velXPallina = Math.abs(velXPallina);`:
+* Prima del rimbalzo, `xPallina` viene riportata appena a destra della paletta. Poi `velXPallina = Math.abs(velXPallina);`:
 
     * assicura che la velocità orizzontale diventi **positiva**, quindi va verso destra.
 
-Stesso schema speculare per la paletta destra, ma:
+Lo schema è speculare per la paletta destra: il controllo richiede `velXPallina > 0`, riporta la pallina appena a sinistra della paletta e poi assegna:
 
 ```java
 velXPallina = -Math.abs(velXPallina);
@@ -957,7 +964,7 @@ Mettiamo insieme i pezzi:
 1. **Event loop Swing + Timer**
 
     * Swing gestisce eventi GUI (repaint, key press, ecc.) sull’EDT.
-    * Il `Timer` genera un `ActionEvent` 60 volte al secondo → chiama `actionPerformed`.
+    * Il `Timer` genera un `ActionEvent` circa 60 volte al secondo → chiama `actionPerformed`.
 
 2. **Finite State Machine (FSM)**
 

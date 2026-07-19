@@ -23,10 +23,10 @@ package M09_OOP.L16_Composizione;
  */
 public class Auto {
 
-    private String marca;
-    private String modello;
-    private int anno;
-    private Motore motore;   // COMPOSIZIONE: Auto HA-UN Motore
+    private final String marca;
+    private final String modello;
+    private final int anno;
+    private final Motore motore;   // COMPOSIZIONE: Auto HA-UN Motore
 
     /*
      * Costruttore dell'Auto.
@@ -94,4 +94,3 @@ public class Auto {
                 '}';
     }
 }
-

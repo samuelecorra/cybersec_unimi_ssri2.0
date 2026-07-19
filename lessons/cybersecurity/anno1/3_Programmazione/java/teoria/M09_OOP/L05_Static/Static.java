@@ -10,11 +10,11 @@ public class Static {
 
     // Se usata su un metodo, indica che il metodo può essere chiamato senza creare un'istanza della classe.
 
-    // Se usata su un blocco di codice, indica che il blocco viene eseguito una sola volta, quando la classe viene caricata in memoria.
+    // Un blocco statico viene eseguito una sola volta, durante l'inizializzazione della classe.
 
     // Se usata su una classe interna, indica che la classe interna non ha un riferimento implicito alla classe esterna.
 
-    static void main() {
+    public static void main(String[] args) {
 
         Amico a1 = new Amico("Luca");
         Amico a2 = new Amico("Marco");
@@ -30,7 +30,9 @@ public class Static {
         // Che quando studiavamo i metodi di Math, ad esempio Math.sqrt(),
         // sqrt() era un metodo statico, quindi potevamo chiamarlo senza creare un'istanza di Math.
         double radice = Math.sqrt(16); // CORRETTO
-        // Math m = new Math(); // ERRORE! Non si possono creare istanze di classi con solo metodi statici come Math.
+        // Math m = new Math(); // ERRORE: il costruttore di Math è privato.
+        // Una classe che contiene solo metodi statici potrebbe invece essere istanziabile
+        // se dichiarasse un costruttore accessibile.
         System.out.println("Radice quadrata di 16: " + radice); // Output: Radice quadrata di 16: 4.0
 
 

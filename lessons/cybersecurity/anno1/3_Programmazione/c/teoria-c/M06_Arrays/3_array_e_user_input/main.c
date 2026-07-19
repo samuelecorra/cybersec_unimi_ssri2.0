@@ -4,23 +4,26 @@
 
 #include <stdio.h>
 
-int main() {
-    int arr[5];
+int main(void) {
 
-    // Stampiamo senza inizializzare:
+    // Questo frammento è deliberatamente NON compilato: leggere gli elementi di un
+    // array automatico non inizializzato ha comportamento indefinito.
+#if 0
+    int arr[5];
     for (int i = 0; i < 5; i++) {
         printf("arr[%d] = %d\n", i, arr[i]);
     }
+#endif
 
     /* A me è uscito:
     arr[0] = 2006608864;
     arr[1] = 484;
     arr[2] = 0;
     arr[3] = 1;
-    arr[4] = 0; // ovvero valori spazzatura provenienti da altri programmi!
+    arr[4] = 0; // possibili valori indeterminati; non dati provenienti da altri processi
     
-    // Ergo l'inizializzazione di un array ci riserva lo spazio necessario per
-    // eseguire accessi sicuri!
+    // La dichiarazione riserva già lo spazio. L'inizializzazione assegna valori
+    // definiti; resta comunque necessario rispettare gli indici da 0 a 4.
 
     // NOTA: se l'array fosse stato dichiarato statico (static int arr[5];)
     // tutti gli elementi sarebbero stati inizializzati a 0 automaticamente!
@@ -88,20 +91,20 @@ int main() {
     // Versione con ausilio del ciclo:
     printf("\n\nInserisci 5 numeri interi:\n");
 
-    int dimensione = sizeof(numeri) / sizeof(numeri[0]); // calcolo la dimensione dell'array
+    size_t dimensione = sizeof(numeri) / sizeof(numeri[0]); // numero di elementi
     
-    for (int i = 0; i < dimensione; i++) {
-        printf("Numero %d: ", i + 1);
+    for (size_t i = 0; i < dimensione; i++) {
+        printf("Numero %zu: ", i + 1);
         scanf("%d", &numeri[i]);
         getchar(); // per consumare il newline rimasto nel buffer
     }
 
     // Stampiamo:
-    for (int i = 0; i < dimensione; i++) {
-        printf("numeri[%d] = %d\n", i, numeri[i]);
+    for (size_t i = 0; i < dimensione; i++) {
+        printf("numeri[%zu] = %d\n", i, numeri[i]);
     }
 
-    // COMPUTAZIONALMENTE EFFICIENTE!
+    // Non cambia l'ordine di complessità, ma evita duplicazione ed errori di manutenzione.
 
     
     return 0;

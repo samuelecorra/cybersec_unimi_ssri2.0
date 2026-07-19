@@ -1,80 +1,84 @@
+/* Versione C17 portabile basata su un array di puntatori alle righe. */
+
+#include <limits.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 typedef struct {
-    char carattere;
-    int frequenza;
-} risultato;
+    unsigned char carattere;
+    size_t frequenza;
+} Risultato;
 
-risultato elaboraMatrice(int n, char** matrice) {
-
-    // Ci serve di sicuro un array-buffer di supporto per contare le occorrenze dei caratteri:
-    int occorrenze[256] = {0}; // Inizializzo tutto a 0
-    // Ora scorro la matrice per contare le occorrenze:
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            unsigned char indice = (unsigned char)matrice[i][j];
-            occorrenze[indice]++;
+static Risultato elaboraMatrice(size_t n, char *const matrice[]) {
+    size_t occorrenze[UCHAR_MAX + 1] = {0};
+    for (size_t riga = 0; riga < n; ++riga) {
+        for (size_t colonna = 0; colonna < n; ++colonna) {
+            ++occorrenze[(unsigned char)matrice[riga][colonna]];
         }
     }
-    // Ora individuiamo il carattere con il massimo delle occorrenze:
-    char carattereMassimo = 0;
-    int maxOccorrenze = 0;
-    for(int k = 0; k < 256; k++) {
-        if(occorrenze[k] > maxOccorrenze) {
-            maxOccorrenze = occorrenze[k];
-            carattereMassimo = (char)k;
-        }
-    }
-    // Ora stampiamo la matrice con gli spazi:
-    printf("Matrice elaborata:\n");
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            if(matrice[i][j] == carattereMassimo) {
-                printf("%c ", matrice[i][j]);
-            } else {
-                printf("  ");
-            }
-        }
-        printf("\n");
-    }
-    // Infine prepariamo il risultato da restituire:
-    risultato res;
-    res.carattere = carattereMassimo;
-    res.frequenza = maxOccorrenze;
-    return res;
 
+    Risultato risultato = {0, 0};
+    for (size_t valore = 0; valore <= UCHAR_MAX; ++valore) {
+        if (occorrenze[valore] > risultato.frequenza) {
+            risultato.carattere = (unsigned char)valore;
+            risultato.frequenza = occorrenze[valore];
+        }
+    }
+
+    puts("Matrice filtrata:");
+    for (size_t riga = 0; riga < n; ++riga) {
+        for (size_t colonna = 0; colonna < n; ++colonna) {
+            printf("%c ", (unsigned char)matrice[riga][colonna] == risultato.carattere
+                              ? (char)risultato.carattere : ' ');
+        }
+        putchar('\n');
+    }
+    return risultato;
 }
 
-// Main di test
-int main() {
-    int n = 4;
-    // Allochiamo dinamicamente la matrice
-    char** matrice = (char**)malloc(n * sizeof(char*));
-    for(int i = 0; i < n; i++) {
-        matrice[i] = (char*)malloc(n * sizeof(char));
+static char **allocaMatrice(size_t n) {
+    char **matrice = calloc(n, sizeof *matrice);
+    if (matrice == NULL) return NULL;
+    for (size_t riga = 0; riga < n; ++riga) {
+        matrice[riga] = malloc(n * sizeof *matrice[riga]);
+        if (matrice[riga] == NULL) {
+            while (riga > 0) free(matrice[--riga]);
+            free(matrice);
+            return NULL;
+        }
     }
-    // Inizializziamo la matrice con un esempio
-    char esempio[4][4] = {
+    return matrice;
+}
+
+static void liberaMatrice(char **matrice, size_t n) {
+    for (size_t riga = 0; riga < n; ++riga) free(matrice[riga]);
+    free(matrice);
+}
+
+int main(void) {
+    enum { N = 4 };
+    const char esempio[N][N] = {
         {'a', 'b', 'a', 'c'},
         {'d', 'a', 'e', 'f'},
         {'g', 'h', 'a', 'i'},
         {'j', 'k', 'l', 'a'}
     };
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            matrice[i][j] = esempio[i][j];
+
+    char **matrice = allocaMatrice(N);
+    if (matrice == NULL) {
+        fputs("Allocazione non riuscita.\n", stderr);
+        return 1;
+    }
+    for (size_t riga = 0; riga < N; ++riga) {
+        for (size_t colonna = 0; colonna < N; ++colonna) {
+            matrice[riga][colonna] = esempio[riga][colonna];
         }
     }
-    // Chiamiamo la funzione di elaborazione
-    risultato res = elaboraMatrice(n, matrice);
-    // Stampiamo il risultato
-    printf("Carattere più frequente: '%c' con frequenza: %d\n", res.carattere, res.frequenza);
-    // Liberiamo la memoria
-    for(int i = 0; i < n; i++) {
-        free(matrice[i]);
-    }
-    free(matrice);
+
+    Risultato risultato = elaboraMatrice(N, matrice);
+    printf("Carattere più frequente: '%c', %zu occorrenze.\n",
+           (char)risultato.carattere, risultato.frequenza);
+    liberaMatrice(matrice, N);
     return 0;
 }

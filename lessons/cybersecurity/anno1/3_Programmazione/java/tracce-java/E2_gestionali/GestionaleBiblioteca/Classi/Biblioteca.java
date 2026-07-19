@@ -11,12 +11,20 @@ public class Biblioteca {
         this.utenti = new ArrayList<Utente>();
     }
 
-    public void aggiungiLibro(Libro libro) {
+    public boolean aggiungiLibro(Libro libro) {
+        if (libro == null || libroRegistrato(libro.getId())) {
+            return false;
+        }
         libriDisponibili.add(libro);
+        return true;
     }
 
-    public void registraUtente(Utente utente) {
+    public boolean registraUtente(Utente utente) {
+        if (utente == null || trovaUtentePerId(utente.getId()) != null) {
+            return false;
+        }
         utenti.add(utente);
+        return true;
     }
 
     public boolean prestaLibro(int idLibro, int idUtente) {
@@ -26,7 +34,6 @@ public class Biblioteca {
         if (libro != null && utente != null) {
             utente.addLibro(libro);
             libriDisponibili.remove(libro);
-            System.out.println("Libro: " + libro.toString() + " prestato a " + utente.toString());
             return true;
         } else {
             return false;
@@ -40,9 +47,7 @@ public class Biblioteca {
         }
         Libro restituito = utente.removeLibro(idLibro);
         if (restituito != null) {
-            aggiungiLibro(restituito);
-            System.out.println("Libro: " + restituito.toString() + " restituito da " + utente.toString());
-            return true;
+            return aggiungiLibro(restituito);
         } else {
             return false;
         }
@@ -65,5 +70,11 @@ public class Biblioteca {
         }
         return null;
     }
-}
 
+    private boolean libroRegistrato(int idLibro) {
+        if (trovaLibroPerId(idLibro) != null) {
+            return true;
+        }
+        return utenti.stream().anyMatch(utente -> utente.haLibro(idLibro));
+    }
+}

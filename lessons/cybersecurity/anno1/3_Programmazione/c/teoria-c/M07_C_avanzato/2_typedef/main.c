@@ -1,72 +1,51 @@
-/* Il typedef in C è una keyword riservata dall'enorme potenzialità:
-
-   - Semplificare la dichiarazione di tipi complessi
-   - Aumentare la leggibilità del codice
-   - Creare alias per tipi esistenti
-
-
-    Sintassi:
-
-    typedef tipo_esistente nuovo_nome;
-    
-// ATTENZIONE: I TYPEDEF SI DICHIARANO FUORI DAL MAIN, COME LE LIBRERIE - PERCHE'?
-// Perché il typedef crea un alias che può essere utilizzato in tutto il file,
-// quindi deve essere dichiarato in un ambito globale, non all'interno di una funzione!
-// Se lo dichiariamo dentro il main, il suo ambito sarà limitato a quella funzione ->
-// Se il nostro programma vuole quei tipi user-defined anche in funzioni diverse
-// dal main, non potrà utilizzarli!             */
+/*
+ * typedef crea un alias per un tipo esistente:
+ *     typedef tipo_esistente nuovo_nome;
+ *
+ * Un typedef può comparire sia a livello di file sia dentro un blocco. L'ambito
+ * dell'alias segue le normali regole di visibilità: qui lo dichiariamo a livello
+ * di file perché sia utilizzabile da tutte le funzioni successive.
+ */
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include <windows.h>
+#include <string.h>
 
-    typedef int Intero;
-    
-    // la figata risiede nel fatto che ora possiamo anche facilitarci la scrittura
-    // delle stringhe, che in C è risaputa essere una pratica scomodissima rispetto
-    // a Java e altri linguaggi più moderni!
+typedef int Intero;
+typedef char Stringa[15]; // fino a 14 caratteri più il terminatore '\0'
+typedef char *PtrStringa;
 
-    // Abbiamo due modi di farlo:
-    // 1) Usare il typedef per creare un alias per un array di char di dimensione fissa
-    //    (ma in questo modo limitiamo la lunghezza della stringa a 9 caratteri + '\0')
-    typedef char Stringa[15];
-
-    // 2) Usare il typedef per creare un alias per un puntatore a char
-    typedef char* PtrStringa;
-    // In questo caso non dobbiamo dichiarare subito la dimensione dell'array,
-    // ma dobbiamo ricordarci di allocare dinamicamente la memoria quando
-    // utilizziamo il puntatore.
-
-int main() {
-
-    SetConsoleOutputCP(CP_UTF8);
-
-    // Esempio con typedef per int:
+int main(void) {
     Intero a = 10;
     Intero b = 20;
-    
-    Intero somma = a + b;
-    printf("La somma di %d e %d è %d\n", a, b, somma);
-    
-    printf("Premi INVIO per continuare...\n");
-    getchar();
+    printf("La somma di %d e %d è %d\n", a, b, a + b);
 
-    // Esempio con typedef per array di char:
     Stringa nome1 = "Principessa";
-    PtrStringa nome2 = (char*)malloc(20 * sizeof(char)); // Allocazione dinamica
-    // ma è un'argomento avanzato quindi ora lo citiamo e basta...
+    enum { CAPACITÀ_NOME = 20 };
+    PtrStringa nome2 = malloc(CAPACITÀ_NOME * sizeof *nome2);
 
-    // Stampiamo le due stringhe:
-    printf("Nome1: %s\n", nome1);
-    printf("Inserisci il tuo nome: ");
-    fgets(nome2, 20, stdin);
-    nome2[strcspn(nome2, "\n")] = '\0'; // Rimuoviamo il newline se presente
+    if (nome2 == NULL) {
+        fputs("Allocazione non riuscita.\n", stderr);
+        return EXIT_FAILURE;
+    }
+
+    printf("Nome1: %s\nInserisci il tuo nome: ", nome1);
+    if (fgets(nome2, CAPACITÀ_NOME, stdin) == NULL) {
+        fputs("Lettura non riuscita.\n", stderr);
+        free(nome2);
+        return EXIT_FAILURE;
+    }
+    nome2[strcspn(nome2, "\n")] = '\0';
     printf("Nome2: %s\n", nome2);
 
-    // Liberiamo la memoria allocata    // IMPORTANTE!
     free(nome2);
+    nome2 = NULL;
 
-    return 0;
+    /*
+     * Attenzione: PtrStringa nasconde il fatto che il tipo sia un puntatore.
+     * Per esempio "PtrStringa x, y" dichiara due puntatori, mentre
+     * "char *x, y" dichiara un puntatore e un char. Gli alias di puntatore
+     * vanno quindi usati soltanto quando migliorano davvero la leggibilità.
+     */
+    return EXIT_SUCCESS;
 }
-

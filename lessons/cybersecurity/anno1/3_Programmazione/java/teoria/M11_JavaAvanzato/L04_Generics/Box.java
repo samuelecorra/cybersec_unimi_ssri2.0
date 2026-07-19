@@ -3,7 +3,7 @@ package M11_JavaAvanzato.L04_Generics;
 // Agisce come un container generico che può contenere un oggetto di qualsiasi tipo T.
 public class Box<T> {
 
-    T item; // L'elemento di tipo generico T
+    private T item; // L'elemento di tipo generico T
 
     // Servirà un metodo per settare il tipo dell'elemento nella scatola:
     public void setItem(T item) {
@@ -16,4 +16,4 @@ public class Box<T> {
     }
 }
 
-// E' reusable, type-safe e flessibile!
+// È riutilizzabile, type-safe e flessibile!

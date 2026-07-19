@@ -8,9 +8,9 @@ Questo progetto simula un **semplice sistema di login da console**, utile per fi
 
 * uso di `Map` / `HashMap` in Java;
 * gestione di oggetti personalizzati (`Utente`);
-* concetto base di **password hashata** (con un “finto” hash tramite `String.hashCode()`).
+* derivazione sicura di un verificatore di password con **PBKDF2**, salt casuale e confronto a tempo costante.
 
-Non è un sistema sicuro reale, ma è perfetto come palestra per la mentalità da cybersecurity.
+Resta un esempio didattico in memoria, non un sistema di autenticazione pronto per la produzione.
 
 ---
 
@@ -20,7 +20,8 @@ Non è un sistema sicuro reale, ma è perfetto come palestra per la mentalità d
   Rappresenta un singolo utente registrato:
 
     * `username` (stringa univoca);
-    * `passwordHash` (int, ottenuto da `password.hashCode()`).
+    * `passwordSalt` (16 byte casuali e distinti per utente);
+    * `passwordHash` (256 bit derivati con PBKDF2-HMAC-SHA-256 e 120.000 iterazioni).
 
 * `SistemaLogin.java`
   Contiene la **logica applicativa**:
@@ -33,7 +34,7 @@ Non è un sistema sicuro reale, ma è perfetto come palestra per la mentalità d
         * cambio password;
         * stampa degli utenti registrati (senza password).
 
-* `MainLogin.java`
+* `MainSistemaLogin.java`
   Fornisce un **menu testuale** che permette all’utente di:
 
     * registrarsi,
@@ -72,45 +73,28 @@ Molto più naturale che scorrersi un `List<Utente>` a mano ogni volta.
 
 ---
 
-### 4. Gestione delle password: hash finto con `hashCode()`
+### 4. Gestione delle password: PBKDF2 con salt
 
-Nella classe `Utente` le password **non sono salvate in chiaro**, ma convertite in un “hash”:
+La classe `Utente` non conserva la password in chiaro. A ogni impostazione o cambio password genera un nuovo salt con `SecureRandom` e deriva un valore tramite:
 
 ```java
-private int calcolaHash(String password) {
-    return Objects.requireNonNull(password, "password").hashCode();
-}
+new PBEKeySpec(password, salt, 120_000, 256);
+SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
 ```
 
-e memorizzate come `int passwordHash`.
+Il salt non è segreto: serve a far produrre valori derivati differenti anche a password uguali e rende inefficaci le rainbow table precalcolate. Le iterazioni aumentano deliberatamente il costo di ogni tentativo offline.
 
 Quando un utente prova a fare login:
 
-* prende la password in input,
-* ne calcola l’hash con lo stesso metodo,
-* lo confronta con `passwordHash` salvato in memoria:
+* deriva un nuovo hash dalla password inserita usando il salt memorizzato;
+* lo confronta con l'hash salvato tramite `MessageDigest.isEqual`, evitando un confronto byte per byte con uscita anticipata;
+* azzera gli array temporanei quando non servono più.
 
 ```java
-public boolean verificaPassword(String password) {
-    return this.passwordHash == calcolaHash(password);
-}
+return MessageDigest.isEqual(passwordHash, hashDaVerificare);
 ```
 
-> **Importantissimo lato cybersecurity:**
-> `String.hashCode()` **NON è assolutamente adatto** per la protezione reale delle password:
->
-> * non è criptograficamente sicuro;
-> * è deterministico e facile da invertire con attacchi a dizionario;
-> * non usa salt, né iterazioni, né funzioni lente.
-
-Nel mondo reale dovresti usare algoritmi tipo:
-
-* `PBKDF2`, `bcrypt`, `scrypt`, `Argon2`, ecc.
-
-Qui lo usiamo **solo come giocattolo didattico** per:
-
-1. abituarti all’idea che **non si memorizzano mai password in chiaro**;
-2. mostrarti come si può confrontare una password tramite hash.
+> ⚠️ `String.hashCode()` non è una funzione crittografica e presenta collisioni note: password diverse potrebbero risultare equivalenti. Per questo non viene usato neppure nell'esempio didattico.
 
 ---
 
@@ -129,8 +113,8 @@ Qui lo usiamo **solo come giocattolo didattico** per:
     * controlla che non esista già la chiave nella mappa (`containsKey`);
     * crea un nuovo `Utente(username, password)` che al suo interno:
 
-        * calcola l’hash della password;
-        * memorizza solo `passwordHash`;
+        * genera un salt casuale;
+        * deriva e memorizza soltanto salt e hash PBKDF2;
     * lo inserisce in `utenti.put(username, utente)`.
 
 #### 5.2 Login
@@ -143,8 +127,8 @@ Qui lo usiamo **solo come giocattolo didattico** per:
     * se non esiste → errore;
     * se esiste, chiama `u.verificaPassword(password)`:
 
-        * ricalcola l’hash della password inserita;
-        * lo confronta con l’hash salvato;
+        * ricalcola l’hash PBKDF2 della password inserita con il salt dell'utente;
+        * lo confronta a tempo costante con l’hash salvato;
     * se coincidono → login riuscito, altrimenti fallisce.
 
 #### 5.3 Cambio password
@@ -155,7 +139,7 @@ Qui lo usiamo **solo come giocattolo didattico** per:
 
     * recupera l’utente con `utenti.get(username)`;
     * verifica la vecchia password con `verificaPassword`;
-    * se corretta, chiama `u.cambiaPassword(nuovaPassword)` che aggiorna l’hash.
+    * se corretta, chiama `u.cambiaPassword(nuovaPassword)`, che genera un nuovo salt e aggiorna l’hash.
 
 #### 5.4 Mostra utenti registrati
 
@@ -169,22 +153,20 @@ Qui lo usiamo **solo come giocattolo didattico** per:
 
 ---
 
-### 6. Spunti di miglioramento (versione “seria” cybersecurity)
+### 6. Limiti dell'esempio e miglioramenti necessari
 
-Se volessi trasformare questo giocattolo in qualcosa di più vicino a un sistema reale, potresti:
+PBKDF2 corregge il difetto più grave della versione basata su `hashCode()`, ma un sistema reale richiede ancora:
 
-* sostituire `hashCode()` con una vera funzione di hashing per password;
-* introdurre un campo `salt` per ogni utente (random);
 * serializzare gli utenti su file / database anziché solo in RAM;
-* inserire:
+* blocco o ritardo progressivo dopo tentativi falliti e logging degli accessi;
+* una policy sulle password e procedure sicure di recupero;
+* una scelta aggiornata dei parametri o di algoritmi come Argon2id in base al contesto;
+* input non visibile: `Scanner` mostra la password sul terminale, mentre un'applicazione reale dovrebbe usare un canale protetto;
+* controllo della concorrenza, gestione delle sessioni, autorizzazione e protezione dei dati persistenti.
 
-    * blocco dopo X tentativi falliti,
-    * logging degli accessi,
-    * policy sulle password (minimo 8 caratteri, numeri, simboli, ecc.);
-    * distinzione tra ruoli (admin, user normale, ecc.).
-
-Per l’esercizio però è perfetto così: ti allena su:
+L’esercizio allena su:
 
 * concetto di mapping username → utente con `HashMap`;
 * gestione oggetti e metodi;
-* primo contatto mentale col concetto di hash delle password.
+* differenza tra una normale funzione hash e una funzione di derivazione per password;
+* gestione coerente dello username, che viene ripulito con `trim()` in registrazione, login e cambio password.

@@ -10,15 +10,16 @@ public class VendingMachine {
     }
 
     public void aggiungiProdotto(Prodotto p) {
-        prodotti.add(p);
+        prodotti.add(Objects.requireNonNull(p, "prodotto"));
     }
 
     public Merendina compraMerendina(int soldi, int calorie) {
-        for (Prodotto p : prodotti) {
+        for (int i = 0; i < prodotti.size(); i++) {
+            Prodotto p = prodotti.get(i);
             if (p instanceof Merendina) {
                 Merendina m = (Merendina) p;
                 if (m.getCalorie() == calorie && soldi >= m.getCosto()) {
-                    prodotti.remove(m);
+                    prodotti.remove(i);
                     return m;
                 }
             }
@@ -27,11 +28,12 @@ public class VendingMachine {
     }
 
     public Bevanda compraBevanda(int soldi, int volume) {
-        for (Prodotto p : prodotti) {
+        for (int i = 0; i < prodotti.size(); i++) {
+            Prodotto p = prodotti.get(i);
             if (p instanceof Bevanda) {
                 Bevanda b = (Bevanda) p;
                 if (b.getVolume() == volume && soldi >= b.getCosto()) {
-                    prodotti.remove(b);
+                    prodotti.remove(i);
                     return b;
                 }
             }

@@ -23,21 +23,21 @@ public class MethodOverriding {
         Veicolo vAircraft = new Aircraft();
 
         // Upcasting: oggetto Harrier visto come Veicolo
-        Veicolo vF16 = new Harrier();
+        Veicolo vHarrier = new Harrier();
 
         System.out.println("=== Demo overriding di startEngine() ===");
         vGenerico.startEngine(); // chiama Veicolo.startEngine() => Motore di veicolo generico avviato.
         vAuto.startEngine();     // chiama Auto.startEngine() => Motore dell'auto avviato. Pronta a partire su strada.
         vAircraft.startEngine(); // chiama Aircraft.startEngine()
         // => Controlli di bordo completati. Motore dell'aeromobile pronto al decollo.
-        vF16.startEngine();      // chiama Harrier.startEngine() =>
+        vHarrier.startEngine();  // chiama Harrier.startEngine()
 
         System.out.println();
         System.out.println("=== Demo polimorfismo su metodo comune ===");
         stampaInfoPatente(vGenerico);
         stampaInfoPatente(vAuto);
         stampaInfoPatente(vAircraft);
-        stampaInfoPatente(vF16);
+        stampaInfoPatente(vHarrier);
 
         System.out.println();
         System.out.println("=== Uso di metodi specifici della sottoclasse ===");
@@ -71,4 +71,3 @@ public class MethodOverriding {
                 + " | patente richiesta: " + v.getPatenteRichiesta());
     }
 }
-

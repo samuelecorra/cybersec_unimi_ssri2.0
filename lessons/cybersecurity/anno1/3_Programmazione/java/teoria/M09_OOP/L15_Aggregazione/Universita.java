@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class Universita {
 
-    private String nome;
-    private List<Studente> studenti;
-    private List<CorsoUniversitario> corsi;
+    private final String nome;
+    private final List<Studente> studenti;
+    private final List<CorsoUniversitario> corsi;
 
     public Universita(String nome) {
         this.nome = nome;

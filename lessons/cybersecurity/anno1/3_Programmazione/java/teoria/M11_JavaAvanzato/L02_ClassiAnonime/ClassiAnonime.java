@@ -8,11 +8,12 @@ public class ClassiAnonime {
     // di classi "usa e getta", spesso per implementare interfacce o
     // estendere classi astratte in modo rapido.
 
-    // 1. NON POSSONO ESSERE RIUSATE
+    // 1. IL LORO TIPO NON PUÒ ESSERE NOMINATO E ISTANZIATO DI NUOVO
+    //    (l'oggetto ottenuto può invece essere conservato e usato più volte)
     // 2. AGGIUNGONO CUSTOM BEHAVIOR A UN'ISTANZA SENZA DOVER CREARE UNA NUOVA CLASSE
     // 3. SPESSO USATE PER ONE-TIME-USES (come vedremo in futuro TimerTask, Runnable, callbacks, ecc.)
 
-    static void main() {
+    public static void main(String[] args) {
 
         // COME FACEVAMO FINORA?
         // Nella classe Cane abbiamo un metodo abbaia().

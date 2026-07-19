@@ -8,7 +8,7 @@ Esempio di ciclo annidato:
 
 #include <stdio.h>
 
-int main() {
+int main(void) {
     for (int i = 0; i < 3; i++) {   // scorriamo i da 0 a 2
         for (int j = 0; j < 2; j++) {   // scorriamo j da 0 a 1
             printf("| i: %d , j: %d |", i, j); // stampiamo i e j
@@ -24,7 +24,7 @@ int main() {
 
 //======================================================================================
     
-    // Un'altro esempio valido: stampiamo tre volte con un nested loop un countdown
+    // Un altro esempio valido: stampiamo tre volte con un nested loop un countdown
 
     for (int count = 0; count < 3; count++) { // Tre iterazioni per il countdown
         printf("Countdown: %d - ", count+1); // Stampa il numero del countdown (count+1 per partire da 1)
@@ -45,7 +45,7 @@ int main() {
     printf("\nTabella di moltiplicazione (1-10):\n");
     for (int i = 1; i <= 10; i++) { // rig
         for (int j = 1; j <= 10; j++) { // colonne
-            printf("%5d", i * j); // stampa il prodotto di i e j con un campo di larghezza 4 per l'allineamento
+            printf("%5d", i * j); // campo di larghezza minima 5 per allineare le colonne
         }
         printf("\n"); // nuova linea dopo ogni riga della tabella
     }

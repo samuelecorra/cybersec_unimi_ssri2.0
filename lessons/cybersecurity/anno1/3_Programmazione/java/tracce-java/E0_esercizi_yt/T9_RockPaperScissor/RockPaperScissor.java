@@ -2,6 +2,7 @@ package E0_esercizi_yt.T9_RockPaperScissor;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Locale;
 
 public class RockPaperScissor {
 
@@ -10,7 +11,7 @@ public class RockPaperScissor {
     private static int vittorieIA = 0;
     private static int pareggi = 0;
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         // Implementazione del gioco
         Scanner sc = new Scanner(System.in);
@@ -24,12 +25,12 @@ public class RockPaperScissor {
 
         while (playAgain) {
             System.out.print("Inserisci la tua scelta (Sasso, Carta, Forbice): ");
-            String sceltaUtente = sc.nextLine().toLowerCase();
+            String sceltaUtente = sc.nextLine().trim().toLowerCase(Locale.ROOT);
 
             // Validazione dell'input utente
             while (!sceltaUtente.equals("sasso") && !sceltaUtente.equals("carta") && !sceltaUtente.equals("forbice")) {
                 System.out.print("Scelta non valida. Per favore, inserisci Sasso, Carta o Forbice: ");
-                sceltaUtente = sc.nextLine().toLowerCase();
+                sceltaUtente = sc.nextLine().trim().toLowerCase(Locale.ROOT);
             }
 
             // Scelta casuale dell'IA
@@ -58,10 +59,11 @@ public class RockPaperScissor {
             System.out.println("Pareggi: " + pareggi);
 
             System.out.println("Vuoi giocare di nuovo? (sì/no): ");
-            String risposta = sc.nextLine().toLowerCase();
+            String risposta = sc.nextLine().trim().toLowerCase(Locale.ROOT);
             playAgain = risposta.equals("sì") || risposta.equals("si");
         }
 
         System.out.println("Grazie per aver giocato!");
+        sc.close();
     }
 }

@@ -8,6 +8,9 @@ public class Merendina extends Prodotto{
 
     public Merendina(int costo, String nome, int calorie){
         super(costo, nome);
+        if (calorie <= 0) {
+            throw new IllegalArgumentException("Le calorie devono essere positive");
+        }
         this.calorie = calorie;
     }
 
@@ -15,4 +18,3 @@ public class Merendina extends Prodotto{
         return calorie;
     }
 }
-

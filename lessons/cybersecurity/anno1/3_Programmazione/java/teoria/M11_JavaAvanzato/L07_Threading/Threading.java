@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 public class Threading {
 
-    // Il Threading in Java è un concetto avanzato che permette di eseguire più operazioni contemporaneamente all'interno di un programma.
-    // Un "thread" è un flusso di esecuzione separato che può operare indipendentemente dagli altri flussi.
+    // Il threading permette più flussi di esecuzione concorrenti. Possono essere
+    // eseguiti davvero in parallelo se hardware e scheduler lo consentono.
 
-    // E' fondamentale quando si tratta di andare a migliorare le performance con tutte quelle operazioni
-    // che consumano tempo rilevante, come operazioni di I/O, comunicazioni di rete, o qualsiasi background task che
-    // non deve bloccare il flusso principale dell'applicazione.
+    // È utile per mantenere responsivo il flusso principale durante I/O, rete e
+    // attività in background; non rende automaticamente più veloce ogni programma.
 
     // Come creare un Thread in Java:
 
@@ -17,7 +16,7 @@ public class Threading {
 
     // 2. Implementare l'interfaccia Runnable, metodo più flessibile e preferito.
 
-    static void main() {
+    public static void main(String[] args) {
 
         // Proviamo intanto a capire cos'è il main thread, ovvero il flusso esecutivo principale di un programma Java.
         Scanner sc = new Scanner(System.in);
@@ -29,14 +28,20 @@ public class Threading {
         Thread thread = new Thread(mioRunnable);
 
         // Ora possiamo avviare il thread secondario
-        thread.setDaemon(true); // Impostiamo il thread come daemon, così si chiude quando il main thread termina
         thread.start();
 
-        System.out.print("Hai 5 secondi nel thread principale per digitare il tuo nome: ");
+        System.out.print("Digita il tuo nome mentre il thread secondario conta 5 secondi: ");
         String nome = sc.nextLine();
         System.out.println("Ciao, " + nome + "!");
 
         sc.close();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Il thread principale è stato interrotto durante l'attesa.");
+        }
 
     }
 

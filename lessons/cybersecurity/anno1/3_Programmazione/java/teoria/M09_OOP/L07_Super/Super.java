@@ -15,7 +15,7 @@ public class Super {
     //    agli attributi o ai metodi della superclasse che sono stati sovrascritti nella sottoclasse.
 
     // Esempio:
-    static void main() {
+    public static void main(String[] args) {
 
         // Abbiamo una superclasse Animale e una sottoclasse Cane.
         Cane c = new Cane("Fido", 3);

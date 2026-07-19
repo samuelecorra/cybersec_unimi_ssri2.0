@@ -14,17 +14,15 @@ import java.io.IOException;
  */
 public class MainFileOutputStream {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("=== FILEOUTPUTSTREAM: SCRITTURA BINARIA ===");
 
-        try {
-            FileOutputStream fos = new FileOutputStream("dati.bin");
+        try (FileOutputStream fos = new FileOutputStream("dati.bin")) {
 
             byte[] dati = { 10, 20, 30, 40, 50 };
             fos.write(dati);
 
-            fos.close();
             System.out.println("Scrittura completata (dati.bin)");
 
         } catch (IOException e) {

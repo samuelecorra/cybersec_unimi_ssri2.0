@@ -38,9 +38,9 @@ public class ArrayRicerca {
 
             int posNum = linearSearch(numeri, bersaglio);
             if (posNum >= 0) {
-                System.out.println("Il valore bersaglio e' all'indice " + posNum);
+                System.out.println("Il valore bersaglio è all'indice " + posNum);
             } else {
-                System.out.println("L'elemento non e' stato trovato nell'array di interi.");
+                System.out.println("L'elemento non è stato trovato nell'array di interi.");
             }
 
             // --- Ricerca su array di stringhe ---
@@ -49,9 +49,9 @@ public class ArrayRicerca {
 
             int posStr = linearSearch(parole, bersaglioStringa);
             if (posStr >= 0) {
-                System.out.println("La parola bersaglio e' all'indice " + posStr);
+                System.out.println("La parola bersaglio è all'indice " + posStr);
             } else {
-                System.out.println("L'elemento non e' stato trovato nell'array di stringhe.");
+                System.out.println("L'elemento non è stato trovato nell'array di stringhe.");
             }
         }
     }

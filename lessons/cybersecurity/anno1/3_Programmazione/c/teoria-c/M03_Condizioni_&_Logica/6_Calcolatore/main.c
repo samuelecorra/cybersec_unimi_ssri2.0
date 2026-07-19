@@ -8,7 +8,7 @@
 #include <time.h>
 #include <conio.h>
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8);
 
@@ -18,7 +18,8 @@ int main() {
     double num1 = 0.0;
     double num2 = 0.0;
     double risultato = 0.0;
-    bool operazioneValida = true;
+    bool operatoreValido = true;
+    bool divisionePerZero = false;
 
     printf("Benvenuto nel calcolatore scritto in C!\n");
     
@@ -45,28 +46,32 @@ int main() {
             risultato = num1 * num2;
             break;
         case '/':
-            if (num2 != 0) {
+            if (num2 != 0.0) {
                 risultato = num1 / num2;
             } else {
-                operazioneValida = false;
+                divisionePerZero = true;
             }
             break;
         case '%':
-            if ((int)num2 != 0) {
-                risultato = (int)num1 % (int)num2; // modulo solo per interi
+            // L'operatore % del C accetta soltanto interi. Poiché questo calcolatore
+            // acquisisce double, usiamo fmod per calcolare il resto floating-point.
+            if (num2 != 0.0) {
+                risultato = fmod(num1, num2);
             } else {
-                operazioneValida = false;
+                divisionePerZero = true;
             }
             break;
         default:
-            operazioneValida = false;
+            operatoreValido = false;
             break;
     }
 
-    if (operazioneValida) {
-        printf("Il risultato di %.2f %c %.2f è: %.2f\n", num1, operatore, num2, risultato);
+    if (!operatoreValido) {
+        printf("Operatore non valido. Usa +, -, *, / oppure %%.\n");
+    } else if (divisionePerZero) {
+        printf("Divisione o resto per zero non consentiti.\n");
     } else {
-        printf("Birichina, stai tentando di dividere per zero! Folle!\n");
+        printf("Il risultato di %.2f %c %.2f è: %.2f\n", num1, operatore, num2, risultato);
     }
 
     return 0;

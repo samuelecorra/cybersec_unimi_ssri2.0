@@ -1,7 +1,6 @@
 package M11_JavaAvanzato.L06_Enums;
 
-import org.w3c.dom.ls.LSOutput;
-
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Enumerazioni {
@@ -11,11 +10,11 @@ public class Enumerazioni {
     // Sono utili quando si desidera rappresentare un insieme limitato di valori possibili per una variabile.
 
     // MIGLIORANO LA LEGGIBILITA' E SONO FACILI DA MANTENERE.
-    // ANCOR PIU EFFICIENTI INTEGRANDOCI SWITCHES PIUTTOSTO CHE CON LA CLASSICA COMPARAZIONE DI STRINGHE!
+    // Rendono gli switch esaustivi e type-safe, evitando errori dovuti a stringhe arbitrarie.
 
     // ======================================================================================================
 
-    static void main() {
+    public static void main(String[] args) {
 
         // Creiamo un oggetto di tipo giorno:
         Giorno oggi = Giorno.VENERDI;
@@ -37,7 +36,7 @@ public class Enumerazioni {
         // Facciamolo con user input:
         Scanner scanner = new Scanner(System.in);
         System.out.print("Inserisci un giorno della settimana (LUNEDI, MARTEDI, MERCOLEDI, GIOVEDI, VENERDI, SABATO, DOMENICA): ");
-        String input = scanner.nextLine().toUpperCase();
+        String input = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
         try {
             Giorno giornoInserito = Giorno.valueOf(input);
             System.out.println("Hai inserito: " + giornoInserito);
@@ -55,6 +54,8 @@ public class Enumerazioni {
         } catch (IllegalArgumentException e) {
             System.out.println("Input non valido. Per favore inserisci un giorno corretto.");
         }
+
+        scanner.close();
 
     }
 

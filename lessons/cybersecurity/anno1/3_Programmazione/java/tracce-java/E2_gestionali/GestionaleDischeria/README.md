@@ -9,7 +9,7 @@ Il programma è composto da quattro classi principali:
 * `Disco`
 * `Cliente`
 * `Discheria`
-* `Solver` (main di test con menu testuale)
+* `DischeriaMain` (main di test con menu testuale)
 
 ---
 
@@ -83,11 +83,11 @@ Funzionalità principali:
 
     * verifica che il disco esista
     * verifica che il cliente esista
-    * assegna il disco al cliente
+    * assegna il disco al cliente e lo rimuove dal catalogo disponibile
 * `restituisciDisco(idDisco, idCliente)`
 
     * verifica esistenza cliente
-    * rimuove il disco dalla lista dei dischi presi
+    * rimuove il disco dalla lista dei dischi presi e lo reinserisce nel catalogo
 
 La ricerca degli elementi avviene tramite scansione semplice della lista (ricerca lineare).
 
@@ -109,7 +109,7 @@ Comandi disponibili:
 * END (per terminare)
 ```
 
-Il ciclo principale:
+Gli ID di dischi e clienti devono essere positivi e univoci. Il ciclo principale:
 
 * legge input da tastiera
 * interpreta il comando

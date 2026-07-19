@@ -2,7 +2,7 @@ package M09_OOP.L02_Costruttori;
 
 public class Costruttori {
 
-    static void main() {
+    public static void main(String[] args) {
 
         Automobile auto1 = new Automobile("Lamborghini", "Aventador",
             2020, "Giallo", 6498, 770, 350);

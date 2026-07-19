@@ -5,7 +5,6 @@ import java.util.*;
 
 public class DischeriaMain {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Discheria discheria = new Discheria();
 
         System.out.println("Benvenuto nella Discheria");
@@ -16,30 +15,41 @@ public class DischeriaMain {
         System.out.println("* RESTITUISCI <idDisco>,<idCliente>");
         System.out.println("* END (per terminare)");
 
-        while (scanner.hasNextLine()) {
-            String input = scanner.nextLine();
-            String[] parti = input.split(" ", 2);
-            String comando = parti[0];
-            switch (comando) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (scanner.hasNextLine()) {
+                String input = scanner.nextLine().trim();
+                if (input.isEmpty()) {
+                    continue;
+                }
+                String[] parti = input.split("\\s+", 2);
+                String comando = parti[0].toUpperCase(Locale.ROOT);
+                try {
+                    switch (comando) {
                 case "ADD-DISCO":
-                    String[] discoDettagli = parti[1].split(",");
+                    String[] discoDettagli = leggiDettagli(parti, 3, "ADD-DISCO <id>,<titolo>,<artista>");
                     int idDisco = Integer.parseInt(discoDettagli[0].trim());
                     String titolo = discoDettagli[1].trim();
                     String artista = discoDettagli[2].trim();
-                    discheria.aggiungiDisco(new Disco(idDisco, titolo, artista));
-                    System.out.println("Disco aggiunto: " + titolo + " (" + artista + ")");
+                    if (discheria.aggiungiDisco(new Disco(idDisco, titolo, artista))) {
+                        System.out.println("Disco aggiunto: " + titolo + " (" + artista + ")");
+                    } else {
+                        System.out.println("ID disco già registrato: " + idDisco);
+                    }
                     break;
 
                 case "ADD-CLIENTE":
-                    String[] clienteDettagli = parti[1].split(",");
+                    String[] clienteDettagli = leggiDettagli(parti, 2, "ADD-CLIENTE <id>,<nome>");
                     int idCliente = Integer.parseInt(clienteDettagli[0].trim());
                     String nome = clienteDettagli[1].trim();
-                    discheria.registraCliente(new Cliente(idCliente, nome));
-                    System.out.println("Cliente registrato: " + nome);
+                    if (discheria.registraCliente(new Cliente(idCliente, nome))) {
+                        System.out.println("Cliente registrato: " + nome);
+                    } else {
+                        System.out.println("ID cliente già registrato: " + idCliente);
+                    }
                     break;
 
                 case "PRENDI":
-                    String[] prendiDettagli = parti[1].split(",");
+                    String[] prendiDettagli = leggiDettagli(parti, 2, "PRENDI <idDisco>,<idCliente>");
                     int idDiscoPrendi = Integer.parseInt(prendiDettagli[0].trim());
                     int idClientePrendi = Integer.parseInt(prendiDettagli[1].trim());
                     if (discheria.prendiDisco(idDiscoPrendi, idClientePrendi)) {
@@ -50,7 +60,7 @@ public class DischeriaMain {
                     break;
 
                 case "RESTITUISCI":
-                    String[] restituisciDettagli = parti[1].split(",");
+                    String[] restituisciDettagli = leggiDettagli(parti, 2, "RESTITUISCI <idDisco>,<idCliente>");
                     int idDiscoRestituisci = Integer.parseInt(restituisciDettagli[0].trim());
                     int idClienteRestituisci = Integer.parseInt(restituisciDettagli[1].trim());
                     if (discheria.restituisciDisco(idDiscoRestituisci, idClienteRestituisci)) {
@@ -61,14 +71,27 @@ public class DischeriaMain {
                     break;
 
                 case "END":
-                    scanner.close();
                     return;
 
                 default:
                     System.out.println("Comando non riconosciuto.");
                     break;
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Input non valido: " + e.getMessage());
+                }
             }
         }
-        scanner.close();
+    }
+
+    private static String[] leggiDettagli(String[] parti, int quanti, String uso) {
+        if (parti.length < 2) {
+            throw new IllegalArgumentException("sintassi: " + uso);
+        }
+        String[] dettagli = parti[1].split(",", -1);
+        if (dettagli.length != quanti) {
+            throw new IllegalArgumentException("sintassi: " + uso);
+        }
+        return dettagli;
     }
 }

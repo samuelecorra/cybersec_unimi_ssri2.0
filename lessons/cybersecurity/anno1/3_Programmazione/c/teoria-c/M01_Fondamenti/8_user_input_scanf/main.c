@@ -16,12 +16,12 @@ scanf("formato", &variabile);       // Ha due parametri passati:
 
 #include <stdio.h>
 #include <windows.h>    // necessario per SetConsoleOutputCP() su Windows
-#include <string.h>   // necessario per strlen()
+#include <string.h>     // necessario per strcspn()
 
-int main() {
+int main(void) {
 
     // Settiamo la console in UTF-8 per poter usare caratteri accentati
-    // (funziona solo su Windows, su Linux e MacOS la console è già in UTF-8)
+    // (funziona solo su Windows; sugli altri sistemi la codifica dipende dal terminale)
     SetConsoleOutputCP(CP_UTF8);
 
     // Dichiarazione variabili
@@ -48,17 +48,18 @@ int main() {
                              // newline lasciata nel buffer da un input precedente
     printf("La tua iniziale è %c.\n", iniziale);
 
-    getchar(); // consuma la newline rimasta nel buffer
+    getchar(); // consuma un carattere, qui atteso come newline dopo un input valido
+    // Non è una pulizia generale: se la riga contiene altri caratteri, ne elimina solo uno.
 
     printf("Qual è il tuo nome? ");
-    scanf("%s", nome); // %s per stringhe
+    scanf("%49s", nome); // il limite 49 lascia spazio al terminatore '\0'
     printf("Ciao %s!\n", nome);
 
     // ATTENZIONE: scanf() con %s legge solo fino al primo spazio, ergo NON SA LEGGERE
     // ALCUN TIPO DI SPAZIO, ovvero spazio, tabulazione, newline.
     // Quindi se l'utente inserisce "Mario Rossi", verrà letto solo "Mario".
     printf("Qual è il tuo nome e cognome? ");
-    scanf("%s", nomeEcognome); // %s per stringhe
+    scanf("%49s", nomeEcognome); // resta comunque limitato alla prima parola
     printf("Ciao %s!\n", nomeEcognome); // Stampa solo il nome, non il cognome
 
     // Per l'ultimo esempio, puliamo il buffer di input per evitare problemi:
@@ -83,8 +84,8 @@ int main() {
     // Partiamo dalla fine degli argomenti passati: si passa un certo puntatore a file,
     // ovvero una certa sorgente da cui leggere. stdin è lo standard input, aka tastiera.
     // La dimensione è la dimensione massima della stringa che si vuole leggere,
-    // per evitare buffer overflow. Infine si passa la qualsiasi variabile in cui salvare
-    // la stringa letta, che può essere benissimo un array di char ma anche un file pointer.
+    // per evitare buffer overflow. Il primo argomento deve indicare un buffer di char
+    // abbastanza grande; non può essere un puntatore a FILE.
     // Esempio:
     printf("Qual è il tuo nome e cognome? ");
     fgets(nomeEcognome, sizeof(nomeEcognome), stdin); // legge fino a 49 caratteri + null terminator
@@ -93,10 +94,10 @@ int main() {
     // Se non vogliamo questo comportamento, dobbiamo rimuovere il newline manualmente:
     // Anticipiamo una funzione banale che useremo quando parleremo di stringhe:
     
-    nomeEcognome[strlen(nomeEcognome) - 1] = '\0'; 
-    
-    // rimuove il newline se presente
-    // settandolo a null terminator (funziona solo se l'utente ha inserito almeno un carattere!!
+    nomeEcognome[strcspn(nomeEcognome, "\n")] = '\0';
+
+    // strcspn trova il primo newline; se non c'è, restituisce la lunghezza della stringa.
+    // In entrambi i casi l'assegnazione resta entro il buffer e mantiene il terminatore.
     
     printf("Ciao %s!\n", nomeEcognome); // Stampa sia il nome che il cognome, SENZA
     // FAR ANDARE A CAPO IL PUNTO ESCLAMATIVO!

@@ -25,50 +25,37 @@ public class JavaQuizGame {
 
             String[] domande = {
                     "Quale componente informatico è filosoficamente detto il cervello del computer?",
-                    "Quale supereroe Marvel ha un'IA integrata nel proprio costume?",
-                    "In Avengers Infinity War, Peter Parker ha un costume ultra-tech che gli permette di resistere a...",
-                    "Chi è il più cervellone dell'Universo Marvel?",
-                    "Chi era Asimov e perché ora è tornato in voga?"
+                    "Quale IA assiste Tony Stark nei primi film di Iron Man?",
+                    "Quale armatura riceve Peter Parker in Avengers: Infinity War?",
+                    "Quale membro dei Fantastici Quattro è Reed Richards?",
+                    "Per quale idea della sua narrativa robotica è noto Isaac Asimov?"
             };
 
             String[][] opzioni = {
                     {"CPU", "GPU", "RAM", "Hard Disk"},
-                    {"Iron Man", "Spider-Man", "Black Panther", "Rocket Raccoon"},
-                    {
-                            "agli esplosivi prediletti come arma dai suoi nemici",
-                            "alla carenza di ossigeno a grandi altitudini",
-                            "all'alta pressione subacquea",
-                            "alla gravità zero nello spazio"
-                    },
-                    {"Tony Stark", "Reed Richards", "Stephen Strange", "Doctor Victor Von Doom"},
-                    {
-                            "sci-fi pioneer a cui ora viene dato credito per l'incombenza di AI e robotica intelligente",
-                            "Un antagonista di Star Trek con protesi robotiche intelligenti e responsive",
-                            "Un regista sci-fi che dopo Zemeckis e altri ha rivoluzionato ex-novo il genere",
-                            "Un ingegnere aerospaziale che teorizza l'uso di AI per contattare forme di vita extraterrestri"
-                    }
+                    {"J.A.R.V.I.S.", "KAREN", "Ultron", "Skynet"},
+                    {"Iron Spider", "Mark I", "War Machine", "Hulkbuster"},
+                    {"Mister Fantastic", "La Torcia Umana", "La Cosa", "La Donna Invisibile"},
+                    {"Le Tre Leggi della Robotica", "Il test di Turing", "La macchina analitica", "La legge di Moore"}
             };
 
             String[] risposteCorrette = {
                     "CPU",
-                    "Iron Man",
-                    "alla carenza di ossigeno a grandi altitudini",
-                    "Reed Richards",
-                    "sci-fi pioneer a cui ora viene dato credito per l'incombenza di AI e robotica intelligente"
+                    "J.A.R.V.I.S.",
+                    "Iron Spider",
+                    "Mister Fantastic",
+                    "Le Tre Leggi della Robotica"
             };
 
             String[] spiegazioni = {
                     "La CPU è il componente principale che esegue le istruzioni dei programmi.",
-                    "Iron Man utilizza un'intelligenza artificiale chiamata J.A.R.V.I.S. nel suo costume.",
-                    "Tony, durante la battaglia di New York contro i Chitauri, finisce nello spazio profondo. " +
-                            "Per Peter, Stark installa un sistema di supporto vitale che compensa le grandi altitudini.",
-                    "Reed Richards (Mister Fantastic) è celebre per l'intelligenza straordinaria oltre ai suoi poteri elastici.",
-                    "Asimov è stato un autore di fantascienza (le Tre Leggi della Robotica) ed è tornato in auge con l'interesse per AI e robotica."
+                    "J.A.R.V.I.S. è l'assistente IA di Tony Stark nei primi film dedicati a Iron Man.",
+                    "L'Iron Spider è l'armatura tecnologica progettata da Tony Stark per Peter Parker.",
+                    "Reed Richards è l'identità civile di Mister Fantastic.",
+                    "Asimov formulò nella sua narrativa le celebri Tre Leggi della Robotica."
             };
 
             int punteggio = 0;
-            final int NUM_OPZIONI = 4;
-
             System.out.println("\n-------------------------");
             System.out.println("       INIZIO QUIZ       ");
             System.out.println("-------------------------\n");
@@ -79,7 +66,7 @@ public class JavaQuizGame {
                     System.out.println((j + 1) + ". " + opzioni[i][j]);
                 }
 
-                int rispostaUtente = leggiRispostaValida(scanner, 1, NUM_OPZIONI);
+                int rispostaUtente = leggiRispostaValida(scanner, 1, opzioni[i].length);
 
                 String scelta = opzioni[i][rispostaUtente - 1];
                 if (scelta.equals(risposteCorrette[i])) {
@@ -116,4 +103,3 @@ public class JavaQuizGame {
         }
     }
 }
-

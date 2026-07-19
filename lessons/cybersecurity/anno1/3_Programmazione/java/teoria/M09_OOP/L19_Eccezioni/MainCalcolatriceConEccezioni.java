@@ -2,7 +2,7 @@ package M09_OOP.L19_Eccezioni;
 
 public class MainCalcolatriceConEccezioni {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("=== Calcolatrice con eccezioni ===");
 

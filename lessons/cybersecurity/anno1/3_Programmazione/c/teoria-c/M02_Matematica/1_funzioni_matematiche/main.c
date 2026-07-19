@@ -4,7 +4,7 @@
 #include <time.h>               // direttiva per time() per numeri casuali
 #include <stdlib.h>             // direttiva per funzioni di utilità generale come rand()
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 
@@ -54,7 +54,7 @@ int main() {
     double coseno = cos(0.0);        // coseno di 0 gradi
     double tangente = tan(3.14159 / 4); // tangente di π/4 ovvero 45 gradi
     
-    // LE ALTRE TRE (inversa delle fondamentali):
+    // LE TRE FUNZIONI INVERSE (da non confondere con le funzioni reciproche):
     double arcoseno = asin(1.0);      // ritorna l'angolo il cui seno è 1.0
     double arcocoseno = acos(1.0);    // ritorna l'angolo il cui coseno è 1.0
     double arcotangente = atan(1.0);  // ritorna l'angolo la cui tangente è 1.0
@@ -107,16 +107,13 @@ int main() {
 
     double num5 = 5.3;
     double num6 = -5.3;
-    double arrotondatoPerEccesso = ceil(num5); // arrotonda per eccesso, a prescindere
-    // che sia .1 o .9
-    double arrotondatoPerEccessoNeg = ceil(num6); // arrotonda per eccesso, ATTENZIONE
-    // che per i negativi arrotonda verso lo 0!!!
+    double arrotondatoPerEccesso = ceil(num5); // restituisce il minimo intero >= x
+    double arrotondatoPerEccessoNeg = ceil(num6); // anche per i negativi va verso +infinito
 
     double num7 = 5.7;
     double num8 = -5.7;
-    double arrotondatoPerDifetto = floor(num7); // arrotonda per difetto, a prescindere
-    double arrotondatoPerDifettoNeg = floor(num8); // arrotonda per difetto, ATTENZIONE
-    // che per i negativi arrotonda verso il -∞!!!
+    double arrotondatoPerDifetto = floor(num7); // restituisce il massimo intero <= x
+    double arrotondatoPerDifettoNeg = floor(num8); // anche per i negativi va verso -infinito
 
     // Stampiamo i risultati:
     printf("\nEsempi di funzioni di arrotondamento in C:\n");
@@ -175,7 +172,8 @@ int main() {
 
     // Ovviamente si può pilotare l'intervallo di numeri pseudo-casuali
     // usando l'operatore modulo, il perché è semplice:
-    // rand() % N ritorna un numero compreso tra 0 e N-1!
+    // rand() % N ritorna un numero compreso tra 0 e N-1. Se RAND_MAX + 1 non è
+    // multiplo di N, i risultati non sono perfettamente uniformi (modulo bias).
     int randomIntInRange = rand() % 100;  // numero intero pseudo-casuale tra 0 e 99
 
     // Stampiamo i risultati:
@@ -199,8 +197,9 @@ int main() {
     // e si noti che la risposta risiede nella domanda stessa: cosa cambia ogni volta
     // che si esegue un programma? Il tempo! E quindi si usa il tempo come seme.
 
-    // Per fare ciò, si usa la funzione time() definita in time.h, che ritorna
-    // il numero di secondi trascorsi dal 1 gennaio 1970.
+    // Per fare ciò, si usa spesso time() definita in time.h. Restituisce il tempo
+    // di calendario corrente; sulle piattaforme comuni è contato dall'epoca Unix,
+    // ma lo standard C non impone né l'epoca né l'unità della rappresentazione time_t.
     
     // Sintassi geenrica di time():
     // time_t time(time_t *t);

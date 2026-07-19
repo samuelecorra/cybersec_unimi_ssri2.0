@@ -4,13 +4,12 @@ import E2_gestionali.GestionaleVideotecaV2.Classi.Cliente;
 import E2_gestionali.GestionaleVideotecaV2.Classi.Film;
 import E2_gestionali.GestionaleVideotecaV2.Classi.Videoteca;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class VideotecaMain {
 
-    static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);        // Servirà user input
+    public static void main(String[] args) {
 
         Videoteca videoteca = new Videoteca();          // Creiamo la videoteca
 
@@ -36,7 +35,8 @@ public class VideotecaMain {
         System.out.println("===== GESTIONALE VIDEOTECA =====");
         stampaMenu(); // Stampiamo il menu iniziale
 
-        while (true) {      // Apriamo il ciclo principale di lettura comandi
+        try (Scanner scanner = new Scanner(System.in)) {
+        while (scanner.hasNextLine()) {      // Apriamo il ciclo principale di lettura comandi
             System.out.print("\nCOMANDO E ARGOMENTI > "); // Prompt per l'input
             String input = scanner.nextLine().trim(); // Leggiamo l'input e rimuoviamo spazi bianchi iniziali/finali
 
@@ -46,9 +46,9 @@ public class VideotecaMain {
 
             // Se l'input non è vuoto, lo dividiamo in comando + argomenti
             String[] parti = input.split("\\s+", 2); // Dividiamo in massimo 2 parti: comando e resto,
-            // Tagliamo su uno o pi spazi bianchi (\\s+) e limitiamo a 2 parti (2) come richiesto
+            // Tagliamo su uno o più spazi bianchi (\\s+) e limitiamo a 2 parti (2) come richiesto
 
-            String comando = parti[0].toUpperCase(); // Prendiamo il comando (prima parte) e lo portiamo in maiuscolo per compatibilità
+            String comando = parti[0].toUpperCase(Locale.ROOT); // Conversione indipendente dalla lingua di sistema
 
             // Prima di guardare l'argomento
             if (comando.equals("END")) {
@@ -58,6 +58,11 @@ public class VideotecaMain {
 
             if (comando.equals("VIEW")) {
                 System.out.println(videoteca);
+                stampaMenu();
+                continue;
+            }
+
+            if (comando.equals("HELP")) {
                 stampaMenu();
                 continue;
             }
@@ -85,12 +90,11 @@ public class VideotecaMain {
                         System.out.println("Comando non riconosciuto. Digita HELP per vedere i comandi disponibili.");
                         break;
                 }
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println("Errore nel processamento del comando: " + e.getMessage());
             }
         }
-
-        scanner.close();
+        }
     }
 
     // -------- Funzioni di supporto per il main -------- //
@@ -98,6 +102,7 @@ public class VideotecaMain {
     private static void stampaMenu() {
         System.out.println("Comandi disponibili:");
         System.out.println("  VIEW - Mostra lo stato attuale della videoteca");
+        System.out.println("  HELP - Mostra questo menu");
         System.out.println("  ADDFILM <id>,<titolo>,<genere>");
         System.out.println("  ADDCLIENTE <id>,<nome>");
         System.out.println("  NOLEGGIA <idFilm>,<idCliente>");
@@ -111,7 +116,7 @@ public class VideotecaMain {
             return;
         }
 
-        String[] filmDettagli = parti[1].split(",");
+        String[] filmDettagli = parti[1].split(",", -1);
         if (filmDettagli.length != 3) {
             System.out.println("Errore: devi fornire esattamente 3 campi: <id>,<titolo>,<genere>");
             return;
@@ -123,7 +128,11 @@ public class VideotecaMain {
             String genere = filmDettagli[2].trim();
 
             Film film = new Film(idFilm, titolo, genere);
-            videoteca.aggiungiAlCatalogo(film);
+            if (videoteca.aggiungiAlCatalogo(film)) {
+                System.out.println("Copia registrata: " + titolo + " (ID: " + idFilm + ").");
+            } else {
+                System.out.println("Errore: l'ID copia " + idFilm + " è già registrato, anche se la copia è a noleggio.");
+            }
         } catch (NumberFormatException e) {
             System.out.println("Errore: l'id del film deve essere un intero.");
         }
@@ -135,7 +144,7 @@ public class VideotecaMain {
             return;
         }
 
-        String[] clienteDettagli = parti[1].split(",");
+        String[] clienteDettagli = parti[1].split(",", -1);
         if (clienteDettagli.length != 2) {
             System.out.println("Errore: devi fornire esattamente 2 campi: <id>,<nome>");
             return;
@@ -146,8 +155,11 @@ public class VideotecaMain {
             String nome = clienteDettagli[1].trim();
 
             Cliente cliente = new Cliente(idCliente, nome);
-            videoteca.registraCliente(cliente);
-            System.out.println("Cliente registrato: " + nome + " (ID: " + idCliente + ")");
+            if (videoteca.registraCliente(cliente)) {
+                System.out.println("Cliente registrato: " + nome + " (ID: " + idCliente + ")");
+            } else {
+                System.out.println("Errore: l'ID cliente " + idCliente + " è già registrato.");
+            }
         } catch (NumberFormatException e) {
             System.out.println("Errore: l'id del cliente deve essere un intero.");
         }
@@ -159,7 +171,7 @@ public class VideotecaMain {
             return;
         }
 
-        String[] noleggiaDettagli = parti[1].split(",");
+        String[] noleggiaDettagli = parti[1].split(",", -1);
         if (noleggiaDettagli.length != 2) {
             System.out.println("Errore: devi fornire esattamente 2 campi: <idFilm>,<idCliente>");
             return;
@@ -186,7 +198,7 @@ public class VideotecaMain {
             return;
         }
 
-        String[] restituisciDettagli = parti[1].split(",");
+        String[] restituisciDettagli = parti[1].split(",", -1);
         if (restituisciDettagli.length != 2) {
             System.out.println("Errore: devi fornire esattamente 2 campi: <idFilm>,<idCliente>");
             return;

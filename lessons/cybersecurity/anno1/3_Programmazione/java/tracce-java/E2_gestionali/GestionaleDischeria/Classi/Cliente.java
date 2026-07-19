@@ -8,8 +8,14 @@ public class Cliente {
     private final List<Disco> dischiPresi;
 
     public Cliente(int id, String nome) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("L'ID del cliente deve essere positivo.");
+        }
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("Il nome del cliente non può essere vuoto.");
+        }
         this.id = id;
-        this.nome = nome;
+        this.nome = nome.trim();
         this.dischiPresi = new ArrayList<>();
     }
 
@@ -17,8 +23,17 @@ public class Cliente {
         dischiPresi.add(disco);
     }
 
-    public boolean restituisciDisco(int idDisco) {
-        return dischiPresi.removeIf(d -> d.getId() == idDisco);
+    public Disco restituisciDisco(int idDisco) {
+        for (int i = 0; i < dischiPresi.size(); i++) {
+            if (dischiPresi.get(i).getId() == idDisco) {
+                return dischiPresi.remove(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean haDisco(int idDisco) {
+        return dischiPresi.stream().anyMatch(disco -> disco.getId() == idDisco);
     }
 
     public int getId() {

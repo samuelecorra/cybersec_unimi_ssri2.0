@@ -35,11 +35,11 @@ Per dichiarare una variabile di tipo carattere (char), si può scrivere:
 char z;
 
 
-Infine, per dichiarare una variabile di tipo booleano (bool), si può scrivere:
+Infine, per usare il nome booleano bool, fornito da <stdbool.h> in C17, si può scrivere:
 
 #include <stdbool.h>  // necessario per usare il tipo bool
 
-bool èStudente; // (vero o falso, nessun altro valore possibile)
+bool èStudente; // false oppure true; ogni valore assegnato viene convertito a 0 oppure 1
 
 
 Una volta dichiarate, le variabili possono essere utilizzate nel programma per
@@ -70,16 +70,18 @@ bool èStudente, èLavoratore; // due variabili bool
 //================================================================================
 
 
-In C esistono quattro tipi primitivi imprescindibili:
+Tra i tipi fondamentali del C troviamo:
 
 int (interi)
 float (numeri in virgola mobile a precisione singola)
 char (singoli caratteri, ma in realtà è anch’esso un intero piccolo)
-bool (valori logici, introdotto tramite #include <stdbool.h> dallo standard C99).
+_Bool (valori logici); in C17 <stdbool.h> espone bool come macro che indica _Bool.
 
-Su questi si innestano una serie di modificatori:
-signed, unsigned, short, long, long long, double - che permettono di gestire in modo 
-fine range e precisione.
+Esiste inoltre void, che rappresenta l'assenza di un valore. Il C non possiede un
+tipo stringa fondamentale: le stringhe sono sequenze di char terminate da '\0'.
+
+Su questi si innestano i modificatori signed, unsigned, short e long, combinabili
+secondo le regole del linguaggio. I tipi floating-point sono float, double e long double.
 
 ⚠️ Nota: le dimensioni esatte possono dipendere dal compilatore e dall’architettura, 
 ma lo standard garantisce solo degli intervalli minimi. 
@@ -105,7 +107,7 @@ Tipicamente 4 byte (su 32 bit) o 8 byte (su 64 bit).
 Range: almeno –2,147,483,648 a +2,147,483,647, ma spesso molto più grande.
 
 long long int o long long
-Almeno 8 byte (64 bit).
+Almeno 64 bit; tipicamente 8 byte quando un byte è composto da 8 bit.
 Range: –9,223,372,036,854,775,808 a +9,223,372,036,854,775,807 (–2^63 a 2^63–1).
 
 
@@ -113,7 +115,8 @@ Signed/Unsigned:
 
 signed int (default): consente valori negativi e positivi.
 
-unsigned int: consente solo valori positivi → raddoppia il massimo range.
+unsigned int: consente valori non negativi, incluso 0. A parità di numero di bit,
+il massimo rappresentabile è circa il doppio di quello del corrispondente signed.
 
 unsigned int (4 byte): 0 a 4,294,967,295.
 
@@ -129,8 +132,9 @@ unsigned long long: 0 a 18,446,744,073,709,551,615 (2^64–1).
 unsigned: eliminando i negativi puoi sfruttare tutti i bit per rappresentare numeri
 grandi positivi (utile in contatori, bitmask, indirizzi memoria).
 
-short: risparmio di memoria (storico, oggi quasi inutile ma ancora usato in protocolli 
-e hardware).
+short: può ridurre memoria o descrivere formati con ampiezza limitata; resta rilevante
+in sistemi embedded, protocolli e interfacce hardware. Per ampiezze esatte si usano,
+quando disponibili, i tipi di <stdint.h> come int32_t e uint32_t.
 
 long/long long: gestione di numeri interi molto grandi (es. timestamp Unix a 64 bit).
 
@@ -164,7 +168,8 @@ Precisione estesa, fino a 18–19 cifre significative o più.
 
 👉 Perché servono i sottotipi?
 
-float: più veloce, meno memoria → utile in grafica, giochi, calcoli rapidi.
+float: occupa spesso meno memoria ed è utile, per esempio, in grafica e grandi array.
+Non è però universalmente più veloce di double: dipende dall'hardware e dal compilatore.
 
 double: standard per la maggior parte delle applicazioni scientifiche e di calcolo.
 
@@ -177,7 +182,8 @@ fisica computazionale).
 
 3. char
 
-Memorizza un singolo carattere, ma è in realtà un intero di 1 byte (8 bit).
+Memorizza un singolo carattere ed è un tipo intero grande esattamente 1 byte.
+Lo standard garantisce almeno 8 bit per byte (CHAR_BIT in <limits.h>), non esattamente 8.
 Range dipende dal compilatore: può essere signed o unsigned.
 
 TIPICAMENTE:
@@ -206,9 +212,10 @@ Introdotto in C99 via #include <stdbool.h>.
 
 Rappresenta valori logici: true e false.
 
-Implementato come alias di _Bool → in pratica occupa 1 byte.
+bool è una macro per _Bool nelle versioni del C che usano <stdbool.h>.
+sizeof(_Bool) vale 1 byte C, ma un byte C non è necessariamente composto da 8 bit.
 
-Internamente: false = 0, true = 1.
+false vale 0 e true vale 1. Assegnando a _Bool un valore diverso da zero si memorizza 1.
 
 👉 Perché è stato introdotto tardi?
 Storicamente il C usava interi (0 = falso, !=0 = vero). 
@@ -241,11 +248,29 @@ bool (_Bool)	    1	    true / false
 
 📌 In sintesi:
 
-int, float, char, bool sono le fondamenta.
+char, i tipi interi, i tipi floating-point, _Bool e void sono le fondamenta.
 
-I modificatori (short, long, unsigned, double) nascono per equilibrare memoria, 
-prestazioni e precisione.
+I modificatori short, long, signed e unsigned, insieme alla scelta fra float,
+double e long double, permettono di bilanciare intervallo, memoria e precisione.
 
 In epoca storica servivano a risparmiare byte (macchine a 16 bit). 
 Oggi restano per compatibilità, ma hanno ancora senso in contesti specifici 
 (bitmask, buffer, contatori, calcoli scientifici). */
+
+#include <stdbool.h>
+#include <stdio.h>
+
+int main(void) {
+    int età = 21;
+    float altezza = 1.77f;
+    double distanza = 149597870.7;
+    char iniziale = 'S';
+    bool èStudente = true;
+
+    printf("Età: %d, altezza: %.2f, distanza: %.1f, iniziale: %c, studente: %d\n",
+           età, altezza, distanza, iniziale, èStudente);
+    printf("Dimensioni su questa implementazione: int=%zu, float=%zu, double=%zu, char=%zu, _Bool=%zu byte\n",
+           sizeof(int), sizeof(float), sizeof(double), sizeof(char), sizeof(_Bool));
+
+    return 0;
+}

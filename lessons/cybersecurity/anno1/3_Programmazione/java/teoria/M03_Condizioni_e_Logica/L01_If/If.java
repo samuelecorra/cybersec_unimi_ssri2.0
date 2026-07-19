@@ -16,7 +16,7 @@ public class If {
         // blocco di codice eseguito se tutte le condizioni precedenti sono false
     // }
 
-    static void main() {
+    public static void main(String[] args) {
 
         // ESEMPIO 1: Solo un if che spezza il flusso lineare del codice:
         // è il caso più semplice:
@@ -81,11 +81,12 @@ public class If {
         System.out.println("Inserisci il tuo nome:");
         String nome = scanner.nextLine();
 
-        if (nome.isEmpty()) { // isEmpty() restituisce true se la stringa è vuota
+        if (nome.isBlank()) { // true anche se la riga contiene soltanto spazi bianchi
             System.out.println("Non hai inserito alcun nome. 🤬");
         } else {
             System.out.println("Ciao, " + nome + "! 😛");
         }
+        scanner.close();
 
     }
 }

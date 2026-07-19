@@ -12,9 +12,9 @@ public class Amico {
 
     // ATTENZIONE:
     void mostraAmici() {
-        // System.out.println("Numero di amici: " + this.numeroAmici); // ERRORE!
-        // Essendo attributo di classe, non può essere referenziato con "this", che si riferisce all'istanza corrente.
-        System.out.println("Numero di amici: " + Amico.numeroAmici); // CORRETTO
+        // Java permetterebbe anche this.numeroAmici, ma sarebbe fuorviante:
+        // il campo non appartiene alla singola istanza. Si preferisce il nome della classe.
+        System.out.println("Numero di amici: " + Amico.numeroAmici);
         // oppure anche
         System.out.println("Numero di amici: " + numeroAmici); // CORRETTO
     }

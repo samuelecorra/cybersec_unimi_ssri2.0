@@ -6,7 +6,7 @@ public class Substringhe {
 
     // Prendiamoci una lezione a parte dai metodi "standard" delle stringhe
     // per parlare delle substringhe, ovvero delle "sottostringhe".
-    static void main() {
+    public static void main(String[] args) {
 
         // Una sottostringa è una parte di una stringa più grande.
         // In Java, possiamo estrarre una sottostringa usando il metodo substring().
@@ -35,26 +35,35 @@ public class Substringhe {
         System.out.println("Username email (metodo dinamico): " + username2); // Output: principessa.gommarosa80
         System.out.println("Dominio email (metodo dinamico): " + dominio2); // Output: gmail.com
 
-        // Uniamo l'utile al dilettevole e iniziamo a controllare se l'email è valida:
+        // Applichiamo alcuni controlli strutturali minimi. Non è una validazione
+        // completa secondo gli standard delle email e non sostituisce una conferma
+        // tramite messaggio inviato all'indirizzo.
         Scanner inputUtente = new Scanner(System.in);
         System.out.print("Inserisci la tua email: ");
         String emailUtente = inputUtente.nextLine();
 
-        if (!(emailUtente.contains("@"))) {
-            System.out.println("Email non valida! Manca la chiocciola (@).");
+        int indiceChiocciola = emailUtente.indexOf('@');
+        boolean unaSolaChiocciola = indiceChiocciola == emailUtente.lastIndexOf('@');
+        boolean chiocciolaInPosizioneValida = indiceChiocciola > 0
+                && indiceChiocciola < emailUtente.length() - 1;
+
+        if (!unaSolaChiocciola || !chiocciolaInPosizioneValida) {
+            System.out.println("Formato non valido: serve una sola @, non iniziale né finale.");
         } else {
-            String user = emailUtente.substring(0, emailUtente.indexOf('@'));
-            String domain = emailUtente.substring(emailUtente.indexOf('@') + 1);
+            String user = emailUtente.substring(0, indiceChiocciola);
+            String domain = emailUtente.substring(indiceChiocciola + 1);
+            int indicePunto = domain.lastIndexOf('.');
             if (user.contains("-")) {
-                System.out.println("Non puoi mettere il trattino (-) nell'username!");
-            } else if (!(domain.contains("."))) {
-                System.out.println("Dominio non valido! Manca il punto (.)");
+                System.out.println("Per questa regola didattica l'username non può contenere '-'.");
+            } else if (indicePunto <= 0 || indicePunto == domain.length() - 1) {
+                System.out.println("Dominio non valido: il punto non può essere iniziale o finale.");
             } else {
-                System.out.println("Email valida!");
+                System.out.println("I controlli strutturali minimi sono superati.");
                 System.out.println("Username: " + user);
                 System.out.println("Dominio: " + domain);
             }
         }
+        inputUtente.close();
 
     }
 }

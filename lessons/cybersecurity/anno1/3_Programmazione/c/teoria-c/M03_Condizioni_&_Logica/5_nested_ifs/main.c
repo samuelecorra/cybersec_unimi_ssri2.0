@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <stdbool.h>
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8);
 
@@ -21,17 +21,17 @@ int main() {
 
             printf("Sei uno studente e un socio del cinema,"
                    " ergo ottieni uno sconto del 30%% sul biglietto!\n");
-            prezzoBiglietto *= 0.7; // applica sconto del 30%
+            prezzoBiglietto *= 0.7f; // applica sconto del 30%
 
         } else {
             printf("Sei solo uno studente, ergo ottieni uno sconto del 10%% sul biglietto!\n");
-            prezzoBiglietto *= 0.9; // applica sconto del 10%
+            prezzoBiglietto *= 0.9f; // applica sconto del 10%
         }
         
     } else {
         if (èSocioDelCinema) {
             printf("Sei solo un socio del cinema, ergo ottieni uno sconto del 20%% sul biglietto!\n");
-            prezzoBiglietto *= 0.8; // applica sconto del 20%
+            prezzoBiglietto *= 0.8f; // applica sconto del 20%
         } else {
             printf("Non sei né studente né socio del cinema, "
                    "pertanto non ottieni alcuno sconto sul biglietto.\n");

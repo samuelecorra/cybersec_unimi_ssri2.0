@@ -1,7 +1,7 @@
 package M05_Cicli.L04_BreakContinue;
 
 public class BreakContinue {
-    static void main() {
+    public static void main(String[] args) {
 
         // break e continue in Java
 

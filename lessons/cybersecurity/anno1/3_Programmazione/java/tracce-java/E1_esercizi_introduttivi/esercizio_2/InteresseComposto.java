@@ -22,9 +22,9 @@ public class InteresseComposto {
                 scanner.next(); // scarta l’input errato
             }
             capitaleIniziale = scanner.nextDouble();
-            if (capitaleIniziale < 0)
-                System.out.println("Il capitale non può essere negativo!");
-        } while (capitaleIniziale < 0);
+            if (!Double.isFinite(capitaleIniziale) || capitaleIniziale < 0)
+                System.out.println("Il capitale deve essere finito e non negativo!");
+        } while (!Double.isFinite(capitaleIniziale) || capitaleIniziale < 0);
 
         // --- LETTURA E VALIDAZIONE DEL TASSO DI INTERESSE ---
         do {
@@ -34,9 +34,9 @@ public class InteresseComposto {
                 scanner.next();
             }
             tassoInteresse = scanner.nextDouble();
-            if (tassoInteresse < 0)
-                System.out.println("Il tasso non può essere negativo!");
-        } while (tassoInteresse < 0);
+            if (!Double.isFinite(tassoInteresse) || tassoInteresse < 0)
+                System.out.println("Il tasso deve essere finito e non negativo!");
+        } while (!Double.isFinite(tassoInteresse) || tassoInteresse < 0);
 
         // Conversione in forma decimale
         tassoInteresse /= 100;
@@ -66,7 +66,8 @@ public class InteresseComposto {
         } while (t < 0);
 
         // --- CALCOLO DEL MONTANTE FINALE ---
-        double montanteFinale = capitaleIniziale * Math.pow((1 + tassoInteresse / n), (n * t));
+        double montanteFinale = capitaleIniziale
+                * Math.pow(1 + tassoInteresse / n, (double) n * t);
 
         // --- OUTPUT ---
         System.out.printf("Il montante finale dopo %d anni è: %.2f%n", t, montanteFinale);

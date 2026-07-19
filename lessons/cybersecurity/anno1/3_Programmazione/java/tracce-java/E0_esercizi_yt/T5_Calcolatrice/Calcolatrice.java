@@ -33,10 +33,7 @@ public class Calcolatrice {
                     risultato = num1 / num2;
                 }
             }
-            case '^' -> {
-                risultato = Math.pow(num1, num2);
-                System.out.printf("Risultato: %.2f ^ %.2f = %.2f%n", num1, num2, risultato);
-            }
+            case '^' -> risultato = Math.pow(num1, num2);
             default -> {
                 System.out.println("Operazione non valida.");
                 operazioneValida = false;

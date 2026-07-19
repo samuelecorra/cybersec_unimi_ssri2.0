@@ -1,47 +1,45 @@
 package E4_avanzati.RegistroStudenti.Main;
 
 import E4_avanzati.RegistroStudenti.Classi.*;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MainRegistroStudenti {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        RegistroStudenti registro = new RegistroStudenti();
+        try (Scanner scanner = new Scanner(System.in)) {
+            RegistroStudenti registro = new RegistroStudenti();
 
-        boolean esci = false;
+            boolean esci = false;
 
-        while (!esci) {
-            stampaMenu();
-            System.out.print("Scelta: ");
-            String input = scanner.nextLine();
+            while (!esci) {
+                stampaMenu();
+                System.out.print("Scelta: ");
+                String input = scanner.nextLine();
 
-            int scelta;
-            try {
-                scelta = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Inserire un numero valido.\n");
-                continue;
-            }
-
-            switch (scelta) {
-                case 1 -> aggiungiStudente(scanner, registro);
-                case 2 -> aggiungiVoto(scanner, registro);
-                case 3 -> mostraMediaStudente(scanner, registro);
-                case 4 -> rimuoviStudente(scanner, registro);
-                case 5 -> registro.stampaRegistro();
-                case 6 -> cercaStudente(scanner, registro);
-                case 0 -> {
-                    System.out.println("Uscita dal programma. Ciao!");
-                    esci = true;
+                int scelta;
+                try {
+                    scelta = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    System.out.println("Inserire un numero valido.\n");
+                    continue;
                 }
-                default -> System.out.println("Scelta non valida.\n");
+
+                switch (scelta) {
+                    case 1 -> aggiungiStudente(scanner, registro);
+                    case 2 -> aggiungiVoto(scanner, registro);
+                    case 3 -> mostraMediaStudente(scanner, registro);
+                    case 4 -> rimuoviStudente(scanner, registro);
+                    case 5 -> registro.stampaRegistro();
+                    case 6 -> cercaStudente(scanner, registro);
+                    case 0 -> {
+                        System.out.println("Uscita dal programma. Ciao!");
+                        esci = true;
+                    }
+                    default -> System.out.println("Scelta non valida.\n");
+                }
             }
         }
-
-        scanner.close();
     }
 
     private static void stampaMenu() {
@@ -78,6 +76,8 @@ public class MainRegistroStudenti {
             }
         } catch (NumberFormatException e) {
             System.out.println("Matricola non valida.\n");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Dati non validi: " + e.getMessage() + ".\n");
         }
     }
 
@@ -89,7 +89,7 @@ public class MainRegistroStudenti {
             System.out.print("Inserisci voto (0-30): ");
             int voto = Integer.parseInt(scanner.nextLine());
 
-            if (voto < 0 || voto > 31) {
+            if (voto < 0 || voto > 30) {
                 System.out.println("Voto non valido. Inserire un valore tra 0 e 30.\n");
                 return;
             }
@@ -102,6 +102,8 @@ public class MainRegistroStudenti {
             }
         } catch (NumberFormatException e) {
             System.out.println("Input non valido.\n");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Dati non validi: " + e.getMessage() + ".\n");
         }
     }
 
@@ -162,4 +164,3 @@ public class MainRegistroStudenti {
         }
     }
 }
-

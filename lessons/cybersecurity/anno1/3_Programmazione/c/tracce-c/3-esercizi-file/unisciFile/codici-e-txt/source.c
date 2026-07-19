@@ -1,45 +1,80 @@
 #include <stdio.h>
 #include "header.h"
 
-// Funzione di supporto per leggere il prossimo intero da un file
-static int leggi_prossimo(FILE *fp, int *val) { // static per visibilità limitata a questo file
-    return fscanf(fp, "%d", val) == 1; // Ritorna 1 se ha letto un intero, 0 altrimenti
+enum esito_lettura {
+    LETTURA_ERRORE = -1,
+    LETTURA_FINE = 0,
+    LETTURA_VALORE = 1
+};
+
+/* Distingue correttamente un intero, la fine regolare e un input malformato. */
+static enum esito_lettura leggi_prossimo(FILE *fp, int *val)
+{
+    int esito = fscanf(fp, "%d", val);
+    if (esito == 1) {
+        return LETTURA_VALORE;
+    }
+    if (esito == EOF && !ferror(fp)) {
+        return LETTURA_FINE;
+    }
+    return LETTURA_ERRORE;
 }
 
-int unisciFile(const char *file1in, const char *file2in, const char *fileOut) {
+int unisciFile(const char *file1in, const char *file2in, const char *fileOut)
+{
     FILE *f1 = fopen(file1in, "r");
     FILE *f2 = fopen(file2in, "r");
-    FILE *fo = fopen(fileOut, "w");
-    if (!f1 || !f2 || !fo) {
+    if (f1 == NULL || f2 == NULL) {
         if (f1) fclose(f1);
         if (f2) fclose(f2);
-        if (fo) fclose(fo);
-        return 0; // Errore nell'apertura dei file
+        return 0;
     }
 
-    int v1, v2; // Variabili per i valori letti dai file
-    int has1 = leggi_prossimo(f1, &v1); // Indica se è stato letto un valore da f1
-    int has2 = leggi_prossimo(f2, &v2); // Indica se è stato letto un valore da f2
+    FILE *fo = fopen(fileOut, "w");
+    if (fo == NULL) {
+        fclose(f1);
+        fclose(f2);
+        return 0;
+    }
 
-    int first = 1; // Flag per gestire gli spazi tra i numeri
-    while (has1 || has2) { // Finché c'è almeno un file con numeri da leggere
+    int v1;
+    int v2;
+    enum esito_lettura stato1 = leggi_prossimo(f1, &v1);
+    enum esito_lettura stato2 = leggi_prossimo(f2, &v2);
+
+    int primo = 1;
+    int riuscito = stato1 != LETTURA_ERRORE && stato2 != LETTURA_ERRORE;
+    while (riuscito &&
+           (stato1 == LETTURA_VALORE || stato2 == LETTURA_VALORE)) {
         int out;
-        if (has1 && has2) { // Entrambi i file hanno numeri disponibili
-            // scegliamo il minore e proviamo ad avanzare con la lettura del relativo file
-            if (v1 <= v2) { out = v1; has1 = leggi_prossimo(f1, &v1); } 
-            else          { out = v2; has2 = leggi_prossimo(f2, &v2); }
-        } else if (has1) { // Solo f1 ha numeri disponibili
-            out = v1; has1 = leggi_prossimo(f1, &v1); // Scelta obbligata e avanzamento idem
-        } else { // Solo f2 ha numeri disponibili
-            out = v2; has2 = leggi_prossimo(f2, &v2); // Scelta obbligata e avanzamento idem
+        if (stato1 == LETTURA_VALORE && stato2 == LETTURA_VALORE) {
+            if (v1 <= v2) { out = v1; stato1 = leggi_prossimo(f1, &v1); }
+            else          { out = v2; stato2 = leggi_prossimo(f2, &v2); }
+        } else if (stato1 == LETTURA_VALORE) {
+            out = v1;
+            stato1 = leggi_prossimo(f1, &v1);
+        } else {
+            out = v2;
+            stato2 = leggi_prossimo(f2, &v2);
         }
-        if (!first) fputc(' ', fo); // Se sto scrivendo il secondo o successivi numeri, metto uno spazio prima
-        first = 0; // Ora non sono più al primo numero
-        fprintf(fo, "%d", out); // Finally scrivo il numero scelto nel file di output
+
+        if (stato1 == LETTURA_ERRORE || stato2 == LETTURA_ERRORE) {
+            riuscito = 0;
+        }
+        if (riuscito && !primo && fputc(' ', fo) == EOF) {
+            riuscito = 0;
+        }
+        if (riuscito && fprintf(fo, "%d", out) < 0) {
+            riuscito = 0;
+        }
+        primo = 0;
     }
 
-    fclose(f1);
-    fclose(f2);
-    fclose(fo);
-    return 1;
+    if (riuscito && fputc('\n', fo) == EOF) {
+        riuscito = 0;
+    }
+    if (fclose(f1) == EOF) riuscito = 0;
+    if (fclose(f2) == EOF) riuscito = 0;
+    if (fclose(fo) == EOF) riuscito = 0;
+    return riuscito;
 }

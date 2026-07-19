@@ -2,6 +2,10 @@
 
 ## **3 grandi famiglie: testo, testo “comodo”, binario**
 
+Gli stream e i reader sono racchiusi in `try`-with-resources, così vengono
+chiusi anche in caso di eccezione. Nei file di testo la codifica UTF-8 è
+esplicita; negli accessi casuali, invece, `seek()` misura posizioni in byte.
+
 ---
 
 # 📌 FILE 1 — MainBufferedReader.java
@@ -14,6 +18,7 @@ package M10_FileHandling.L02_LetturaFile;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * ============================================================
@@ -26,7 +31,7 @@ import java.io.IOException;
  *
  * FileReader:
  *  - converte i byte in caratteri
- *  - si usa sempre insieme a BufferedReader
+ *  - può essere usato direttamente o avvolto in BufferedReader
  */
 public class MainBufferedReader {
 
@@ -34,15 +39,13 @@ public class MainBufferedReader {
 
         System.out.println("=== LETTURA FILE (BufferedReader + FileReader) ===");
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("testo_buffered.txt"));
+        try (BufferedReader br = new BufferedReader(new FileReader(
+                "testo_buffered.txt", StandardCharsets.UTF_8))) {
 
             String linea;
             while ((linea = br.readLine()) != null) {
                 System.out.println("Letto: " + linea);
             }
-
-            br.close();
 
         } catch (IOException e) {
             System.out.println("Errore nella lettura del file!");
@@ -64,7 +67,8 @@ public class MainBufferedReader {
 package M10_FileHandling.L02_LetturaFile;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -75,7 +79,7 @@ import java.util.Scanner;
  * Scanner:
  *  - perfetto per leggere testo strutturato
  *  - può leggere parola per parola, numero per numero
- *  - eccezione lanciata: FileNotFoundException (CHECKED)
+ *  - l'apertura del file può lanciare IOException (CHECKED)
  */
 public class MainScannerReader {
 
@@ -83,18 +87,16 @@ public class MainScannerReader {
 
         System.out.println("=== LETTURA FILE CON SCANNER ===");
 
-        try {
-            Scanner scanner = new Scanner(new File("testo_printwriter.txt"));
+        try (Scanner scanner = new Scanner(
+                new File("testo_printwriter.txt"), StandardCharsets.UTF_8)) {
 
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
                 System.out.println("[Scanner] " + linea);
             }
 
-            scanner.close();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Errore: file non trovato!");
+        } catch (IOException e) {
+            System.out.println("Errore durante l'apertura del file: " + e.getMessage());
         }
 
         System.out.println("\n=== Fine lettura con Scanner ===");
@@ -129,15 +131,12 @@ public class MainFileInputStream {
 
         System.out.println("=== LETTURA BINARIA (FileInputStream) ===");
 
-        try {
-            FileInputStream fis = new FileInputStream("dati.bin");
+        try (FileInputStream fis = new FileInputStream("dati.bin")) {
 
             int byteLetto;
             while ((byteLetto = fis.read()) != -1) {
                 System.out.println("Byte letto: " + byteLetto);
             }
-
-            fis.close();
 
         } catch (IOException e) {
             System.out.println("Errore lettura binaria!");
@@ -177,23 +176,17 @@ public class MainRandomAccessFile {
 
         System.out.println("=== RANDOM ACCESS FILE ===");
 
-        try {
-            RandomAccessFile raf = new RandomAccessFile("testo_buffered.txt", "r");
+        try (RandomAccessFile raf = new RandomAccessFile("dati.bin", "r")) {
 
             System.out.println("Lunghezza file: " + raf.length() + " byte");
 
-            // Legge i primi 15 byte
-            byte[] buffer = new byte[15];
-            raf.read(buffer);
-            System.out.println("Primi 15 bytes: " + new String(buffer));
+            int primoByte = raf.readUnsignedByte();
+            System.out.println("Primo byte: " + primoByte);
 
-            // Spostiamo il cursore nel punto 5
-            raf.seek(5);
-            byte[] buffer2 = new byte[10];
-            raf.read(buffer2);
-            System.out.println("Bytes da posizione 5: " + new String(buffer2));
-
-            raf.close();
+            // seek usa offset di byte, non indici di caratteri.
+            raf.seek(2);
+            int terzoByte = raf.readUnsignedByte();
+            System.out.println("Byte in posizione 2: " + terzoByte);
 
         } catch (IOException e) {
             System.out.println("Errore con RandomAccessFile!");
@@ -221,5 +214,3 @@ public class MainRandomAccessFile {
 | Metodo              | Note                                         |
 | ------------------- | -------------------------------------------- |
 | **FileInputStream** | lettura byte-per-byte (immagini, pdf, audio) |
-
-

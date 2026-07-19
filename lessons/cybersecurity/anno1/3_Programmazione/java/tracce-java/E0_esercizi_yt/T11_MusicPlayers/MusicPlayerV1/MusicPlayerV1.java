@@ -4,22 +4,28 @@ import javax.sound.sampled.*; // serve per AudioSystem, AudioInputStream, Clip, 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class MusicPlayerV1 {
 
-    static void main() {
+    public static void main(String[] args) {
 
         // Come riprodurre audio con Java (.wav, .au, .aiff)
 
-        String filePath = "C:/Users/nabis/cybersamu-gitlocker/1_PRIMO_ANNO/java/tracce-java/E0_esercizi_yt/T11_MusicPlayers/audio/Lazza-Molotov.wav"; // Innanzitutto il percorso del file audio, relativo!
-        File file = new File(filePath); // Creiamo un oggetto File con il percorso, che non è più un puntatore come in C!
+        Path filePath = args.length > 0
+                ? Path.of(args[0])
+                : Path.of("lessons", "cybersecurity", "anno1", "3_Programmazione",
+                        "java", "tracce-java", "E0_esercizi_yt", "T11_MusicPlayers",
+                        "audio", "Lazza-Molotov.wav");
+        File file = filePath.toFile();
 
         // Tutto ciò che riguarda il file handling richiede la gestione delle eccezioni in Java!
         try(Scanner sc = new Scanner(System.in);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);){
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip()) {
 
-            Clip clip = AudioSystem.getClip(); // Otteniamo un Clip (una linea che può riprodurre brevi suoni)
             clip.open(audioStream);
 
             String risposta = "";
@@ -33,7 +39,7 @@ public class MusicPlayerV1 {
                 System.out.println("Q = Quit");
                 System.out.println("--> Scegli un'opzione: ");
 
-                risposta = sc.next().toUpperCase();
+                risposta = sc.next().toUpperCase(Locale.ROOT);
 
                 switch(risposta){
                     case "P":
@@ -54,7 +60,6 @@ public class MusicPlayerV1 {
                         break;
                     case "Q":
                         clip.stop();
-                        clip.close();
                         System.out.println("Uscita dal programma.");
                         break;
                     default:

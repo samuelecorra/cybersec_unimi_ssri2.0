@@ -1,27 +1,28 @@
-
-// Vediamo ora invece come leggere da un file di testo.
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-int main() {
-
-    char buffer[100] = {0};
-
-    // Apriamo il file in modalità lettura ("r").
+int main(void) {
+    char buffer[100];
     FILE *file = fopen("filefolder/input.txt", "r");
     if (file == NULL) {
-        perror("Errore nell'apertura del file");
+        perror("Apertura del file di input");
         return EXIT_FAILURE;
     }
 
-    // Leggiamo il contenuto del file riga per riga.
-    while (fgets(buffer, sizeof(buffer), file) != NULL) {
-        printf("%s", buffer);  // Dopo averlo letto, stampiamo la riga.
+    while (fgets(buffer, sizeof buffer, file) != NULL) {
+        fputs(buffer, stdout);
     }
 
-    // Chiudiamo il file.
-    fclose(file);
+    // NULL da fgets può significare EOF normale oppure errore: ferror distingue i casi.
+    if (ferror(file)) {
+        perror("Lettura del file");
+        (void)fclose(file);
+        return EXIT_FAILURE;
+    }
+
+    if (fclose(file) == EOF) {
+        perror("Chiusura del file di input");
+        return EXIT_FAILURE;
+    }
     return EXIT_SUCCESS;
 }

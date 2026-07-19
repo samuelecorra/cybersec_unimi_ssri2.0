@@ -24,7 +24,9 @@ public class Automobile {
     public Automobile(String marca, String modello, int anno) {
         this.marca = marca;
         this.modello = modello;
-        setAnno(anno);   // usiamo il setter per applicare regole
+        // Evitiamo di chiamare dal costruttore un metodo sovrascrivibile:
+        // una sottoclasse non è ancora completamente inizializzata.
+        this.anno = normalizzaAnno(anno);
         this.velocita = 0;
     }
 
@@ -56,10 +58,12 @@ public class Automobile {
         if (anno < 1886) {
             // 1886 = prima automobile della storia (Benz Patent-Motorwagen)
             System.out.println("Anno non valido: le auto non esistevano prima del 1886.");
-            this.anno = 1886;
-        } else {
-            this.anno = anno;
         }
+        this.anno = normalizzaAnno(anno);
+    }
+
+    private static int normalizzaAnno(int anno) {
+        return Math.max(anno, 1886);
     }
 
     /*

@@ -49,7 +49,25 @@ Operatori aritmetici e logici del C:
 *=  moltiplicazione e assegnazione
 /=  divisione e assegnazione    
 
-%=  modulo e assegnazione                                                           */
+%=  modulo e assegnazione
+
+PRECEDENZA ESSENZIALE (dalla più alta alla più bassa, limitatamente agli operatori qui usati):
+1. parentesi e operatori postfissi ++ --
+2. operatori prefissi ++ --, + e - unari, !
+3. * / %
+4. + -
+5. < <= > >=
+6. == !=
+7. &&
+8. ||
+9. assegnazioni = += -= *= /= %=
+
+Operatori sullo stesso livello seguono l'associatività prevista dal C. Quando la lettura
+potrebbe essere ambigua, le parentesi rendono esplicita l'intenzione.
+
+Con operandi interi, / produce un quoziente intero troncato verso zero; % produce il resto.
+La divisione o il resto per zero hanno comportamento indefinito. L'overflow dei signed
+integer è indefinito, mentre gli unsigned operano modulo 2^N.                         */
 
 
 //================================================================================
@@ -57,7 +75,7 @@ Operatori aritmetici e logici del C:
 #include <stdio.h>
 #include <stdbool.h>      // necessario per usare il tipo bool
 
-int main() {
+int main(void) {
 
     int a = 5;
     int b = 2;

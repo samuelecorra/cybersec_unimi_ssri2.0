@@ -16,9 +16,9 @@ Per ora limitiamoci a un esempio semplice:   */
 
 #include <stdio.h>
 
-int main() {
+int main(void) {
    
-   int numeroDaInserire;
+   int numeroDaInserire = 0; // deve avere un valore definito prima del test del while
 
    while (numeroDaInserire != 2000) {  // finché numeroDaInserire è diverso da 2000
    
@@ -43,16 +43,18 @@ int main() {
 // sia vera o falsa.
 
    int età = 17;
+   int ripetiControllo = 0; // falso già prima del controllo finale
 
    do {
-      printf("Benvenuto in discoteca!\n");
-   } while (età > 18); // finché età è minore di 18
+      printf("Controllo dell'età eseguito almeno una volta.\n");
+   } while (ripetiControllo); // la condizione è falsa, ma viene valutata solo dopo il corpo
    printf("Mi spiace, non puoi entrare.\n");
    
-// Qui la condizione di uscita è già realizzata da prima che si entri nel ciclo,
+// Qui la condizione di continuazione è falsa già prima che si entri nel ciclo,
 // ma il ciclo viene eseguito comunque una volta, perché la condizione viene
 // verificata DOPO l'esecuzione del blocco di codice.
    
+   printf("Età controllata: %d anni.\n", età);
    printf("Premi invio per continuare...\n");
    getchar(); // per catturare l'invio finale
 

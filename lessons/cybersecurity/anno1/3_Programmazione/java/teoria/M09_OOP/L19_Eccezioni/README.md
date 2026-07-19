@@ -25,9 +25,14 @@ try {
 } catch (ExceptionType e) {
     // Cosa fare se si verifica quell'eccezione
 } finally {
-    // Codice che viene SEMPRE eseguito (anche in presenza di errori)
+    // Pulizia eseguita nel normale completamento del try/catch
 }
 ```
+
+`finally` non è una garanzia contro l'arresto della JVM: per esempio,
+`System.exit(...)`, `Runtime.halt(...)` o la terminazione forzata del processo
+possono impedirne l'esecuzione. Per chiudere risorse che implementano
+`AutoCloseable`, si preferisce il costrutto `try`-with-resources.
 
 ---
 
@@ -121,7 +126,7 @@ package M09_OOP.L19_Eccezioni;
 
 /**
  * Dimostrazione del blocco finally.
- * È un blocco che VIENE SEMPRE ESEGUITO.
+ * È eseguito sia nel percorso normale sia dopo un'eccezione gestita.
  */
 public class MainTryCatchFinally {
 
@@ -131,7 +136,9 @@ public class MainTryCatchFinally {
 
         try {
             System.out.println("Codice pericoloso...");
-            int n = 10 / 0; 
+            int divisore = args.length; // con zero argomenti vale 0
+            int n = 10 / divisore;
+            System.out.println("Risultato: " + n);
         } catch (ArithmeticException e) {
             System.out.println("ECCEZIONE CATTURATA: divisione per zero.");
         } finally {
@@ -166,11 +173,9 @@ public class MainEccezioniChecked {
 
         System.out.println("=== Lettura da file con eccezioni checked ===");
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("file_che_non_esiste.txt"));
+        try (BufferedReader br = new BufferedReader(new FileReader("file_che_non_esiste.txt"))) {
             String linea = br.readLine();
             System.out.println("Contenuto: " + linea);
-            br.close();
         } catch (IOException e) {
             System.out.println("ERRORE: impossibile leggere il file!");
             System.out.println("Dettagli: " + e.getMessage());
@@ -185,7 +190,8 @@ public class MainEccezioniChecked {
 
 # 💻 FILE 4 — `Calcolatrice.java` + `MainCalcolatriceConEccezioni.java`
 
-Implementiamo una piccola calcolatrice che LANCIA noi stessi un’eccezione custom.
+Implementiamo una piccola calcolatrice che lancia esplicitamente
+`IllegalArgumentException`, un'eccezione standard unchecked.
 
 ## `Calcolatrice.java`
 
@@ -262,7 +268,7 @@ public class MainCalcolatriceConEccezioni {
 
 ### ✔ catch = blocco che intercetta l’errore
 
-### ✔ finally = codice che viene sempre eseguito
+### ✔ finally = pulizia eseguita normalmente sia con sia senza eccezione
 
 ### ✔ throw = lancia manualmente un’eccezione
 

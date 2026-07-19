@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <ctype.h> // Per la funzione toupper
 
-int main() {
+int main(void) {
 
     // QUIZ GAME PER LA PRINCIPESSA!
 
@@ -45,16 +45,16 @@ int main() {
     printf("Iniziamo!\n");
     printf("--------------------------------------------------\n");
 
-    int numeroDomande = sizeof(domande) / sizeof(domande[0]);
+    size_t numeroDomande = sizeof(domande) / sizeof(domande[0]);
 
-    for(int i = 0; i < numeroDomande; i++) {
-        printf("Domanda %d:\n%s\n", i + 1, domande[i]);
+    for(size_t i = 0; i < numeroDomande; i++) {
+        printf("Domanda %zu:\n%s\n", i + 1, domande[i]);
         printf("%s\n", risposte[i]);
         printf("La tua risposta: ");
         
         // Leggiamo l'input dell'utente
         scanf(" %c", &inputPrincipessa);
-        inputPrincipessa = toupper(inputPrincipessa); // Convertiamo in maiuscolo per uniformità
+        inputPrincipessa = (char)toupper((unsigned char)inputPrincipessa);
         getchar(); // Consuma il newline rimasto nel buffer
 
         // Controlliamo se la risposta è corretta
@@ -68,7 +68,7 @@ int main() {
         
     }
 
-    printf("Quiz terminato: hai totalizzato %d punti su %d\n", punteggio, numeroDomande);
+    printf("Quiz terminato: hai totalizzato %d punti su %zu\n", punteggio, numeroDomande);
     printf("--------------------------------------------------\n");
     printf("Grazie per aver giocato, Principessa! Alla prossima!\n");
 

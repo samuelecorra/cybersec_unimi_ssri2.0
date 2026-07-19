@@ -3,7 +3,7 @@ package M02_Matematica.L03_NumeriRandomici;
 import java.util.Random;
 
 public class numeriRandomici {
-    static void main() {
+    public static void main(String[] args) {
 
 // In Java, per generare numeri randomici, ci sono due strade:
 
@@ -15,10 +15,10 @@ public class numeriRandomici {
         System.out.println("Numero randomico usando la classe Random: " + numeroRandomClasseRandom2);
         int numeroRandomClasseRandom3 = random.nextInt(50) + 50; // Genera un intero casuale tra 50 e 99
         System.out.println("Numero randomico usando la classe Random: " + numeroRandomClasseRandom3);
-        int numeroRandomClasseRandom4 = random.nextInt(1,6); // Genera un intero casuale tra 1 e 5 (destro escluso)
+        int numeroRandomClasseRandom4 = random.nextInt(1, 6); // Java 17+: origine inclusa, limite escluso
         System.out.println("Numero randomico usando la classe Random (1-5): " + numeroRandomClasseRandom4);
 
-        // E' comodo, infatti per il lancio di un dado si può fare così:
+        // È comodo: per il lancio di un dado si può fare così:
         int lancioDado = random.nextInt(1, 7); // 1–6
         System.out.println("Lancio del dado (1-6): " + lancioDado);
         // Per lanciare il dado di Dungeons & Dragons (d20):
@@ -28,8 +28,8 @@ public class numeriRandomici {
         // Ovviamente se si chiama nextDouble() si ottiene un double casuale tra 0.0 e 1.0
         double numeroRandomDouble = random.nextDouble();
         System.out.println("Numero randomico double usando la classe Random: " + numeroRandomDouble);
-        double numeroRandomDouble2 = random.nextDouble() * 100; // double tra 0.0 e 100.0
-        System.out.println("Numero randomico double tra 0.0 e 100.0 usando la classe Random: " + numeroRandomDouble2);
+        double numeroRandomDouble2 = random.nextDouble() * 100; // 0.0 incluso, 100.0 escluso
+        System.out.println("Numero randomico double nell'intervallo [0.0, 100.0): " + numeroRandomDouble2);
 
         // Comodità assurda: codificare il lancio di moneta con boolean randomici!
         boolean lancioMoneta = random.nextBoolean(); // true o false casuale
@@ -41,7 +41,7 @@ public class numeriRandomici {
 
 // ==============================================================================
 
-        // 2. Usare il metodo Math.random() come si faceva in C/C++ con rand()
+        // 2. Usare il metodo Math.random(), che restituisce un double pseudo-casuale
 // ==========================================================
 //                GENERAZIONE DI NUMERI RANDOMICI IN JAVA
 // ==========================================================
@@ -96,6 +96,9 @@ public class numeriRandomici {
 // ----------------------------------------------------------
         int numeroRandomIncluso2 = (int)(Math.random() * (max - min + 1)) + min;
         System.out.println("Intero randomico tra " + min + " e " + max + " (inclusi): " + numeroRandomIncluso2);
+
+        // Random e Math.random() non sono generatori crittograficamente sicuri.
+        // Per token, password o nonce si usa java.security.SecureRandom.
 
 
     }

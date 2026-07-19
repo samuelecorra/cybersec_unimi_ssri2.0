@@ -17,10 +17,10 @@ package M09_OOP.L16_Composizione;
  */
 public class Motore {
 
-    private int cilindrata;           // es. 1600, 2000...
-    private int cavalli;              // potenza in cavalli
+    private final int cilindrata;     // es. 1600, 2000...
+    private final int cavalli;        // potenza in cavalli
     private boolean acceso;           // stato del motore
-    private String tipoAlimentazione; // es. "benzina", "diesel", "elettrico"
+    private final String tipoAlimentazione; // es. "benzina", "diesel", "elettrico"
 
     /*
      * Costruttore del motore.

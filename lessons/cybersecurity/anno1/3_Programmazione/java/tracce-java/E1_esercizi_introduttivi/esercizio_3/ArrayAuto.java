@@ -7,13 +7,22 @@ public class ArrayAuto {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Inserisci il numero di auto che vuoi inserire: ");
-        int dimensione = scanner.nextInt();
+        int dimensione;
+        do {
+            System.out.print("Inserisci il numero di auto che vuoi inserire (1-100): ");
+            while (!scanner.hasNextInt()) {
+                System.out.print("Valore non valido. Inserisci un intero tra 1 e 100: ");
+                scanner.next();
+            }
+            dimensione = scanner.nextInt();
+            if (dimensione < 1 || dimensione > 100) {
+                System.out.println("La dimensione deve essere compresa tra 1 e 100.");
+            }
+        } while (dimensione < 1 || dimensione > 100);
         // Puliamo il buffer di input dalla ultima newline
         scanner.nextLine();
 
-        String[] automobili;
-        automobili = new String[dimensione];
+        String[] automobili = new String[dimensione];
 
         // Inserimento dei valori nell'array
         for (int i = 0; i < automobili.length; i++) {

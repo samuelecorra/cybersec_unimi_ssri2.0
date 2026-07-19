@@ -62,7 +62,7 @@ Aggiunge:
 
 * `calorie`
 
-Метodo rilevante:
+Metodo rilevante:
 
 * `getCalorie()`
 
@@ -103,6 +103,7 @@ Funzioni principali:
   Ordina tutti i prodotti per costo usando un `Comparator` e li stampa in ordine crescente.
 
 La ricerca dei prodotti avviene con scansione lineare della lista (`for` con `instanceof` e cast).
+La rimozione usa l'indice della lista: in questo modo non si modifica strutturalmente una `ArrayList` tramite un ciclo `for-each`.
 
 ---
 
@@ -135,6 +136,7 @@ F
 ```
 
 Alla fine di ogni operazione viene mostrato il credito disponibile.
+Ogni comando occupa una riga; il parser controlla numero e tipo degli argomenti senza terminare il programma in caso di input malformato. Nomi, costi, volume, calorie e credito devono avere valori validi e positivi.
 
 ---
 
@@ -143,7 +145,7 @@ Alla fine di ogni operazione viene mostrato il credito disponibile.
 Questo progetto esercita:
 
 * classi astratte e ereditarietà
-* overriding e polimorfismo
+* polimorfismo tramite riferimenti di tipo `Prodotto`
 * uso di `ArrayList`
 * gestione del cast e `instanceof`
 * implementazione di un sistema simulato basato su oggetti

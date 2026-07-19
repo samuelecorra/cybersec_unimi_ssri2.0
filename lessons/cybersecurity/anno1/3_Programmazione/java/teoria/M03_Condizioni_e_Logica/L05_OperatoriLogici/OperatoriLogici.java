@@ -32,11 +32,9 @@ public class OperatoriLogici {
             System.out.println("La condizione B è falsa."); // Verrà stampato
         }
 
-        // Ricordiamo che la precedenza degli operatori logici è:
-        // 1. NOT (!)
-        // 2. AND (&&) e 3. OR (||)
-        // Hanno precedenza più alta rispetto agli operatori di confronto (==, !=, <, >, <=, >=) e
-        // più bassa rispetto agli operatori aritmetici (+, -, *, /, %).
+        // Tra gli operatori logici la precedenza è: !, poi &&, infine ||.
+        // ! è un operatore unario; gli operatori aritmetici precedono confronti
+        // e uguaglianze, che a loro volta precedono && e ||.
 
         // Spesso è buona pratica usare le parentesi per chiarire l'ordine di valutazione:
         // Spesso si usano per concatenare più condizioni in modo leggibile.
@@ -62,7 +60,7 @@ public class OperatoriLogici {
             System.out.println("Non puoi guidare l'auto."); // Verrà stampato
         }
 
-        // Possiamo fare validare un username e password con condizioni logiche:
+        // Esempio puramente didattico di confronto tra username e password:
         String username = "utente123";
         String password = "passwordSicura!";
         String usernameCorretta = "utente123";
@@ -87,6 +85,7 @@ public class OperatoriLogici {
         } else {
             System.out.println("Username non valido.");
         }
+        scanner.close();
 
     }
 }

@@ -1,5 +1,7 @@
 package M09_OOP.L10_Abstract;
 
+import java.util.Locale;
+
 /*
  * Classe astratta che rappresenta una generica figura geometrica piana.
  *
@@ -34,7 +36,7 @@ public abstract class Figura {
     public abstract double perimetro();
 
     protected String format(double value) {
-        return String.format("%.2f", value);
+        return String.format(Locale.ROOT, "%.2f", value);
     }
 
     @Override

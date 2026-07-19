@@ -48,14 +48,14 @@ e come usarli.
 #include <stdio.h>
 #include <stdbool.h>      // necessario per usare il tipo bool
 
-int main() {
+int main(void) {
     printf("Hello, World!\n"); // stampa una stringa fissa
 
     int età = 21;
     printf("Ho %d anni.\n", età); // stampa un intero
 
-    float altezza = 1.77;
-    printf("La mia altezza è %f metri.\n", altezza); // stampa un float con 2 decimali
+    float altezza = 1.77f;
+    printf("La mia altezza è %f metri.\n", altezza); // %f stampa 6 cifre decimali di default
 
     char iniziale = 'Y';
     printf("La mia iniziale è %c.\n", iniziale); // stampa un carattere

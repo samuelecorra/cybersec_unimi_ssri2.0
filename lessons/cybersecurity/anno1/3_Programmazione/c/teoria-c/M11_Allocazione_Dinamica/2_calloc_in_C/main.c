@@ -1,73 +1,66 @@
-// La calloc è una funzione simile alla malloc, ma con due differenze principali:
-// 1) La calloc accetta due argomenti: il numero di elementi
-//    e la dimensione di ogni elemento (in byte).
-
-// 2) La calloc inizializza a zero tutti i byte della memoria allocata,
-//    mentre la malloc lascia il contenuto della memoria non inizializzato.
-
-// Si chiama così perché sta per "contiguous allocation" (allocazione contigua).
-// Infatti, la memoria allocata con calloc è garantita essere contigua,
-// il che può essere utile per certe strutture dati come array e matrici.
-// Mentre la malloc non garantisce che la memoria allocata sia contigua
-// (sebbene spesso lo sia).
-
-// Malloc è più veloce della calloc perché non deve inizializzare la memoria.
-// Ma calloc è più sicura, conduce a meno bug legati a memoria non inizializzata!
-
-// SINTASSI DI CALLOC:
-
-// void *calloc(size_t num, size_t size);
-
-// dove: size_t è un tipo di dato intero senza segno (unsigned int) che rappresenta
-// la dimensione in byte. La funzione restituisce un puntatore di tipo void*
-// alla memoria allocata, oppure NULL se l'allocazione fallisce.
+/*
+ * calloc(numero, dimensione) alloca un unico blocco contiguo come malloc e ne
+ * azzera tutti i byte. Non è corretto dire che malloc non garantisca contiguità.
+ * Inoltre byte tutti zero non rappresentano necessariamente il valore nullo di
+ * ogni possibile tipo; qui calloc inizializza in modo utile l'array di puntatori
+ * sulle piattaforme C ordinarie, ma il programma assegna comunque ogni elemento.
+ * calloc può anche rilevare internamente l'overflow del prodotto dei due argomenti.
+ */
 
 #include <stdio.h>
-#include <stdlib.h>  // Per calloc e free
+#include <stdlib.h>
+#include <string.h>
 
-int main() {
+enum { CAPACITÀ_NOME = 40 };
 
-    int giocatori = 0;
+static void liberaNomi(char **nomi, size_t quantità) {
+    for (size_t i = 0; i < quantità; ++i) {
+        free(nomi[i]);
+    }
+    free(nomi);
+}
 
+int main(void) {
+    size_t giocatori = 0;
     printf("Quanti giocatori vuoi inserire? ");
-    scanf("%d", &giocatori);
-    getchar();  // Per consumare il newline rimasto nel buffer
-    
-    // Allochiamo dinamicamente un array di n stringhe, che ricordiamo essere
-    // un array di array di caratteri usando calloc.
-    char **arrayGiocatori = (char **)calloc(giocatori, sizeof(char *));
+    if (scanf("%zu", &giocatori) != 1 || giocatori == 0) {
+        fputs("Quantità non valida.\n", stderr);
+        return EXIT_FAILURE;
+    }
+    int carattere = 0;
+    while ((carattere = getchar()) != '\n' && carattere != EOF) {
+        // svuota il resto della riga
+    }
 
-    // Evitiamo segmentation fault controllando che l'allocazione sia andata a buon fine.
-    if (arrayGiocatori == NULL) {
-        perror("Errore nell'allocazione della memoria");
+    char **nomi = calloc(giocatori, sizeof *nomi);
+    if (nomi == NULL) {
+        fputs("Allocazione non riuscita.\n", stderr);
         return EXIT_FAILURE;
     }
 
-    // Ora possiamo usare l'array come se fosse stato dichiarato staticamente.
-    for (int i = 0; i < giocatori; i++) {
-        printf("Inserisci il giocatore %d: ", i + 1);
-        arrayGiocatori[i] = (char *)calloc(20, sizeof(char));  // Allocazione per il nome del giocatore
-        if (arrayGiocatori[i] == NULL) {
-            perror("Errore nell'allocazione della memoria");
+    size_t creati = 0;
+    for (; creati < giocatori; ++creati) {
+        nomi[creati] = calloc(CAPACITÀ_NOME, sizeof *nomi[creati]);
+        if (nomi[creati] == NULL) {
+            fputs("Allocazione del nome non riuscita.\n", stderr);
+            liberaNomi(nomi, creati);
             return EXIT_FAILURE;
         }
-        scanf("%19s", arrayGiocatori[i]);  // Limitiamo l'input a 19 caratteri
-        getchar();  // Per consumare il newline rimasto nel buffer
+
+        printf("Inserisci il giocatore %zu: ", creati + 1);
+        if (fgets(nomi[creati], CAPACITÀ_NOME, stdin) == NULL) {
+            fputs("Lettura non riuscita.\n", stderr);
+            liberaNomi(nomi, creati + 1);
+            return EXIT_FAILURE;
+        }
+        nomi[creati][strcspn(nomi[creati], "\n")] = '\0';
     }
 
-    printf("I giocatori inseriti sono:\n");
-    for (int i = 0; i < giocatori; i++) {
-        printf("[%s], ", arrayGiocatori[i]);
+    for (size_t i = 0; i < giocatori; ++i) {
+        printf("[%s]%s", nomi[i], i + 1 == giocatori ? "\n" : ", ");
     }
-    printf("\n");
 
-    // Non dimentichiamoci di liberare la memoria allocata quando non ci serve più!
-    for (int i = 0; i < giocatori; i++) {
-        free(arrayGiocatori[i]);
-    }
-    free(arrayGiocatori);
-    // E evitiamo dangling pointer azzerando il puntatore.
-    arrayGiocatori = NULL;
-
+    liberaNomi(nomi, giocatori);
+    nomi = NULL;
     return EXIT_SUCCESS;
 }

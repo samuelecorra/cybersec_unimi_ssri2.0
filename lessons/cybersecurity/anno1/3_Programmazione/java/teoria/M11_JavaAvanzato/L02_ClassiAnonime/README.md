@@ -106,10 +106,13 @@ Cosa succede qui?
 * Dentro le `{ ... }` scrivi l’override dei metodi richiesti.
 * Alla fine hai **già l’istanza**, salvata in `s`.
 
-Non puoi fare:
+Puoi anche creare l'oggetto senza conservarlo, ma ha senso soltanto se lo usi
+subito o se la costruzione produce intenzionalmente un effetto osservabile:
 
 ```java
-new Saluto() { ... }; // SENZA assegnare a una variabile → inutile
+new Saluto() {
+    public void saluta() { System.out.println("Ciao!"); }
+}.saluta();
 ```
 
 ma tipicamente:
@@ -233,8 +236,9 @@ Interfaccia i = new Interfaccia() {
    NomeClasseAnonima x; // impossibile, non esiste un nome
    ```
 
-2. **Non è riutilizzabile**
-   Se vuoi lo stesso comportamento in un altro punto del codice:
+2. **Il tipo anonimo non è riutilizzabile per creare nuove istanze**
+   L'istanza già creata può essere invocata più volte. Se vuoi creare più
+   oggetti con lo stesso comportamento in punti diversi:
 
     * o **copi/incolli** (brutto),
     * o ti crei una classe nominata normale e la usi ovunque.

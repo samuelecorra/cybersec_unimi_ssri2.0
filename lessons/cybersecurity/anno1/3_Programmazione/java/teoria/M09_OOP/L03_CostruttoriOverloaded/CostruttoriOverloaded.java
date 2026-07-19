@@ -5,7 +5,7 @@ public class CostruttoriOverloaded {
     // Abbiamo già anticipato il concetto di costruttore sovraccaricato nella lezione precedente.
     // In questa lezione lo approfondiamo ulteriormente.
 
-    static void main() {
+    public static void main(String[] args) {
 
         Utente user1 = new Utente("mario_rossi");
         System.out.println("Utente 1: " + user1.username + ", Email: " + user1.email + ", Età: " + user1.eta);

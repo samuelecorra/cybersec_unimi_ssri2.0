@@ -33,6 +33,12 @@ public class UserInputNegliArray {
         int numeroCibi = scanner.nextInt();
         scanner.nextLine(); // Consuma il newline rimasto dopo nextInt()
 
+        if (numeroCibi < 0 || numeroCibi > 100) {
+            System.out.println("Dimensione non valida: inserisci un valore tra 0 e 100.");
+            scanner.close();
+            return;
+        }
+
         String[] altriCibi = new String[numeroCibi];
 
         // E poi popoliamo:

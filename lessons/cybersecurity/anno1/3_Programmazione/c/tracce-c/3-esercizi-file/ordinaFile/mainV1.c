@@ -1,94 +1,120 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct nodo {
     int val;
-    struct nodo* next;
+    struct nodo *next;
 } nodo;
 
-nodo* ordinaFile(char* nomeFileIn, char* nomeFileOut) { // Ritorniamo come al solito puntatore a nodo aka testa
-    
-    FILE* fIn = fopen(nomeFileIn, "r"); // Apriamo in lettura
+static void liberaLista(nodo *head)
+{
+    while (head != NULL) {
+        nodo *successivo = head->next;
+        free(head);
+        head = successivo;
+    }
+}
+
+static bool inserisciOrdinato(nodo **head, int valore)
+{
+    nodo *nuovo = malloc(sizeof *nuovo);
+    if (nuovo == NULL) {
+        return false;
+    }
+    nuovo->val = valore;
+
+    /* Il doppio puntatore individua anche il collegamento alla testa. */
+    nodo **collegamento = head;
+    while (*collegamento != NULL && (*collegamento)->val < valore) {
+        collegamento = &(*collegamento)->next;
+    }
+    nuovo->next = *collegamento;
+    *collegamento = nuovo;
+    return true;
+}
+
+nodo *ordinaFile(const char *nomeFileIn, const char *nomeFileOut)
+{
+    FILE *fIn = fopen(nomeFileIn, "r");
     if (fIn == NULL) {
-        printf("Errore nell'apertura del file di input.\n");
-        return NULL; // Gestiamo l'errore
+        fprintf(stderr, "Errore nell'apertura del file di input.\n");
+        return NULL;
     }
 
-    nodo* head = NULL;  // Inizializziamo la testa della lista a NULL.
-
-    int num;    // Ci serve un contenitore d'appoggio per i numeri letti dal file.
-
-    // fscanf restituisce il numero di elementi letti con successo, fino a che riesce a leggere
-    // un intero continuerà a restituire 1, quando arriva alla fine del file restituirà EOF.
-    while (fscanf(fIn, "%d", &num) != EOF) {
-
-        nodo* new = (nodo*)malloc(sizeof(nodo)); // Fintanto che leggiamo un numero effettivo, creiamo un nuovo nodo:
-        new->val = num; // Inizializziamo il valore
-        new->next = NULL; // MA non sappiamo ancora dove collocarlo!
-
-        // Ora bisogna inserire i nodi così creati in maniera ordinata:
-        
-        // Serve un controllo condizionale che sappia distinguere vari scenari:
-
-        if (head == NULL) {
-            head = new; // Lista vuota: il nuovo nodo diventa la testa.
-        } else if (num < head->val) { // Numero letto minore del valore in testa: inseriamo prima della testa.
-            new->next = head; // La ex testa diventa il successivo del nuovo nodo...
-            head = new; // ...e il nuovo nodo diventa la nuova testa.
-        } else {
-            // Se il nuovo nodo contiene un valore maggiore o uguale a quello della testa della lista
-            // troviamo il punto esatto in cui inserirlo, scorrendo la lista.
-            nodo* cur = head; // puntatore di appoggio per scorrere la lista
-
-            while (cur->next != NULL && cur->next->val < num) { // finché non arriviamo alla fine della lista ( != NULL si può omettere)
-                // e finché il successivo del nodo corrente è minore del numero da inserire
-                cur = cur->next; // scorriamo in avanti
-            }
-            // Sia che arriviamo in fondo, sia che troviamo un nodo con valore maggiore o uguale a num,
-            // dobbiamo inserire il nuovo nodo tra il corrente trovato e il suo successivo:
-            new->next = cur->next; // il successivo del nuovo nodo diventa il successivo del corrente
-            cur->next = new; // il successivo del corrente diventa il nuovo nodo
+    nodo *head = NULL;
+    int numero;
+    int esitoLettura;
+    while ((esitoLettura = fscanf(fIn, "%d", &numero)) == 1) {
+        if (!inserisciOrdinato(&head, numero)) {
+            fprintf(stderr, "Errore di allocazione della memoria.\n");
+            liberaLista(head);
+            fclose(fIn);
+            return NULL;
         }
     }
 
-    fclose(fIn); // Parte di input completata!
+    if (esitoLettura != EOF || ferror(fIn)) {
+        fprintf(stderr, "Il file di input contiene un dato non intero.\n");
+        liberaLista(head);
+        fclose(fIn);
+        return NULL;
+    }
+    if (fclose(fIn) == EOF) {
+        fprintf(stderr, "Errore durante la chiusura del file di input.\n");
+        liberaLista(head);
+        return NULL;
+    }
 
-    FILE* fOut = fopen(nomeFileOut, "w"); // Iniziamo la fase di scrittura in output
+    FILE *fOut = fopen(nomeFileOut, "w");
     if (fOut == NULL) {
-        printf("Errore nell'apertura del file di output.\n");
+        fprintf(stderr, "Errore nell'apertura del file di output.\n");
+        liberaLista(head);
+        return NULL;
+    }
 
-        nodo* current = head;           // In caso di errore nell'apertura del file di output,
-        while (current != NULL) {       // liberiamo la memoria allocata per la lista prima di uscire dalla funzione.
-            nodo* temp = current;
-            current = current->next;
-            free(temp);
+    bool primo = true;
+    bool scritturaRiuscita = true;
+    for (const nodo *corrente = head;
+         corrente != NULL && scritturaRiuscita;
+         corrente = corrente->next) {
+        if (!primo && fputc(' ', fOut) == EOF) {
+            scritturaRiuscita = false;
         }
-        return NULL; // Gestiamo l'errore e usciamo dalla funzione
+        if (scritturaRiuscita && fprintf(fOut, "%d", corrente->val) < 0) {
+            scritturaRiuscita = false;
+        }
+        primo = false;
+    }
+    if (scritturaRiuscita && fputc('\n', fOut) == EOF) {
+        scritturaRiuscita = false;
+    }
+    if (fclose(fOut) == EOF) {
+        scritturaRiuscita = false;
     }
 
-    nodo* current = head; // Scriviamo la lista nel file di output.
-    while (current != NULL) {
-        fprintf(fOut, "%d ", current->val);
-        current = current->next;
+    if (!scritturaRiuscita) {
+        fprintf(stderr, "Errore durante la scrittura del file di output.\n");
+        liberaLista(head);
+        return NULL;
     }
-
-    fclose(fOut);
     return head;
 }
 
-int main() {
-    char* in = "input.txt";
-    char* out = "output.txt";
+int main(void)
+{
+    nodo *listaOrdinata = ordinaFile("input.txt", "output.txt");
+    if (listaOrdinata == NULL) {
+        return EXIT_FAILURE;
+    }
 
-    nodo* listaOrdinata = ordinaFile(in, out); // File output.txt creato! Controllare!
-
-    // Stampiamo la lista per verificare che sia ordinata:
-    nodo* current = listaOrdinata;
-    while (current != NULL) {
-        printf("[ %d ] -> ", current->val);
-        current = current->next;
+    for (const nodo *corrente = listaOrdinata;
+         corrente != NULL;
+         corrente = corrente->next) {
+        printf("[ %d ] -> ", corrente->val);
     }
     printf("NULL\n");
 
-    return 0;
+    liberaLista(listaOrdinata);
+    return EXIT_SUCCESS;
 }

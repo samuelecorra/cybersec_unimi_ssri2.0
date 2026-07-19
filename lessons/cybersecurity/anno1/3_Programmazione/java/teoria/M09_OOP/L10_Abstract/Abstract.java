@@ -1,7 +1,7 @@
 package M09_OOP.L10_Abstract;
 
 public class Abstract {
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         // Non posso fare: Figura f = new Figura("boh");  // ERRORE: Figura è astratta
 

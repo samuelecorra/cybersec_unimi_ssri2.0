@@ -46,13 +46,13 @@ Grazie per aver giocato!
 
 Come eseguire in IntelliJ IDEA
 Crea un progetto Java.
-Crea un package: esercizio_5.
+Crea un package: E1_esercizi_introduttivi.esercizio_5.
 Inserisci il file JavaQuizGame.java nel package.
 Esegui la classe con il metodo main.
 
-Compilazione ed esecuzione da terminale (JDK installato)
-javac esercizio_5/JavaQuizGame.java
-java esercizio_5.JavaQuizGame
+Compilazione ed esecuzione da terminale, dalla cartella tracce-java (JDK installato)
+javac E1_esercizi_introduttivi/esercizio_5/JavaQuizGame.java
+java E1_esercizi_introduttivi.esercizio_5.JavaQuizGame
 
 Note
 Il programma convalida la risposta imponendo un intero nell’intervallo 1–4.

@@ -27,7 +27,7 @@ Problemi:
 * ❌ Integer o String possono essere sbagliati (typo, valore non valido).
 * ❌ Non esiste controllo su cosa è "ammesso".
 * ❌ Non puoi aggiungere metodi, comportamenti, descrizioni interne.
-* ❌ Nei `switch` le String costano di più rispetto agli enum.
+* ❌ Le `String` ammettono qualunque testo e rendono più facile dimenticare un caso.
 
 Gli enum risolvono tutto in un colpo solo.
 
@@ -91,7 +91,8 @@ Con uno sguardo capisci subito cosa rappresenta il valore.
 
 ### ✔ **3. Perfetti nei `switch`**
 
-Java può ottimizzare molto meglio un `switch` sugli enum.
+Il compilatore conosce tutte le costanti e può verificare l'esaustività di una
+switch expression senza `default`.
 
 ### ✔ **4. Puoi aggiungere metodi o campi**
 
@@ -197,7 +198,7 @@ System.out.println(r); // 12
 | --------------------- | ---------------------------------------------------------- | ------------------------------------------------ |
 | `final static int`    | veloce, semplice                                           | nessuna protezione, difficile capire significato |
 | `final static String` | leggibile                                                  | typo, confronto lento                            |
-| **Enum**              | sicuro, potente, estendibile, leggibile, veloce nei switch | nessuno, è lo standard moderno                   |
+| **Enum**              | sicuro, potente, leggibile, adatto agli switch              | insieme chiuso: non può estendere un'altra classe |
 
 ---
 

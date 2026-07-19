@@ -3,6 +3,8 @@ package M10_FileHandling.L01_ScritturaFile;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 /*
  * ============================================================
@@ -16,18 +18,20 @@ import java.io.PrintWriter;
  */
 public class MainPrintWriter {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("=== PRINTWRITER: SCRITTURA FORMATTATA ===");
 
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter("testo_printwriter.txt"));
+        try (PrintWriter pw = new PrintWriter(new FileWriter(
+                "testo_printwriter.txt", StandardCharsets.UTF_8))) {
 
             pw.println("Report generato da PrintWriter");
-            pw.printf("Oggi è il giorno %d del mese.\n", 17);
-            pw.printf("Il risultato di 10/3 è %.2f\n", 10.0 / 3.0);
+            pw.printf(Locale.ITALIAN, "Oggi è il giorno %d del mese.%n", 17);
+            pw.printf(Locale.ITALIAN, "Il risultato di 10/3 è %.2f%n", 10.0 / 3.0);
 
-            pw.close();
+            if (pw.checkError()) {
+                throw new IOException("PrintWriter ha rilevato un errore di scrittura");
+            }
             System.out.println("Scrittura completata (testo_printwriter.txt)");
 
         } catch (IOException e) {

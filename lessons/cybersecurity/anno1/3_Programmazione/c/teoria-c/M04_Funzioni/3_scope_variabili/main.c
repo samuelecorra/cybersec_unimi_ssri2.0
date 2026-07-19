@@ -37,11 +37,11 @@ int risultato = 0; // Variabile globale
 
 int somma(int a, int b) {
     // Dichiarazione di una variabile locale
-    int risultato = a + b;
-    return risultato;
+    int risultatoLocale = a + b;
+    return risultatoLocale;
 }
 
-int main() {
+int main(void) {
     int x = 5, y = 10;
 
     // Chiamata della funzione somma
@@ -50,11 +50,11 @@ int main() {
     // Stampa del risultato
     printf("Risultato della somma: %d\n", risultato); // Stampa la variabile globale
 
-    // Noteremo che verrà stampato il valore della variabile locale, quindi vince
-    // lo scope più interno (locale) rispetto a quello globale. Questo si chiama
-    // shadowing, ovvero l'oscuramento di una variabile globale da parte di una
-    // variabile locale con lo stesso nome. Ecco spiegato perché sono sconsigliate le
-    // variabili globali!
+    // Se la variabile locale di somma si chiamasse anch'essa risultato, oscurerebbe la
+    // globale soltanto nel corpo della funzione: questo fenomeno si chiama shadowing.
+    // Qui scegliamo il nome risultatoLocale per evitare l'ambiguità e il warning
+    // -Wshadow. Il valore locale viene restituito per copia; main lo assegna poi alla
+    // globale, che è quella letta da printf.
 
 
 // ====================================================================================

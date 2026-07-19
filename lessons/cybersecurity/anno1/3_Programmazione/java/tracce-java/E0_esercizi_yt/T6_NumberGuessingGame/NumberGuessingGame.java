@@ -6,6 +6,7 @@ public class NumberGuessingGame {
         int numeroDaIndovinare = (int) (Math.random() * 100) + 1;
         int tentativi = 0;
         int massimoTentativi = 10;
+        boolean indovinato = false;
         java.util.Scanner scanner = new java.util.Scanner(System.in);
 
         System.out.println("Benvenuto al gioco di indovinare il numero!");
@@ -21,12 +22,13 @@ public class NumberGuessingGame {
             } else if (tentativoUtente > numeroDaIndovinare) {
                 System.out.println("Troppo alto! Hai ancora " + (massimoTentativi - tentativi) + " tentativi.");
             } else {
+                indovinato = true;
                 System.out.println("Congratulazioni! Hai indovinato il numero in " + tentativi + " tentativi.");
                 break;
             }
         }
 
-        if (tentativi == massimoTentativi) {
+        if (!indovinato) {
             System.out.println("Mi dispiace, hai esaurito i tentativi. Il numero era: " + numeroDaIndovinare);
         }
 

@@ -57,7 +57,7 @@ import java.util.List;
  * ------------------------------------------------------------
  *  - ArrayList<E>
  *      * internamente usa un array RIDIMENSIONABILE.
- *      * accesso per indice molto veloce: O(1) medio.
+ *      * accesso per indice molto veloce: O(1).
  *      * inserimenti/rimozioni in mezzo alla lista costosi: O(n).
  *      * è la scelta standard nella maggior parte dei casi.
  *

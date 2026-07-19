@@ -10,7 +10,7 @@ In questa lezione vediamo:
 * `LocalDate` → solo la data
 * `LocalTime` → solo l’ora
 * `LocalDateTime` → data + ora (senza fuso)
-* `Instant` → timestamp UTC puro (perfetto per database e log)
+* `Instant` → istante sulla linea temporale, indipendente dal fuso
 * `ZonedDateTime` → data + ora + fuso orario
 * `DateTimeFormatter` → formattazione
 * Conversioni fra i vari tipi
@@ -90,7 +90,7 @@ Una data con un orario, ma **non** indica il fuso orario.
 
 Perfetto per:
 
-* timestamp locali,
+* appuntamenti espressi in tempo locale, quando il fuso è noto altrove,
 * eventi di calendario,
 * scadenze.
 
@@ -109,19 +109,20 @@ public class Main {
         System.out.println("Data+ora specifica: " + specific);
 
         // Operazioni
-        System.out.println("Tra 24 ore: " + now.plusDays(1));
+        System.out.println("Domani alla stessa ora locale: " + now.plusDays(1));
     }
 }
 ```
 
 ---
 
-# ⭐ 4. **Instant — timestamp UTC (per DATABASE e LOG)**
+# ⭐ 4. **Instant — un punto sulla linea temporale**
 
 ### Cosa rappresenta?
 
 Un numero di secondi/nanosecondi dalla **Epoch** (1 gennaio 1970 UTC).
-È il modo *standard* di salvare tempi in sistemi distribuiti.
+È una scelta comune per rappresentare eventi nei log e nei sistemi distribuiti;
+il modo concreto di salvarlo dipende dal database e dal relativo tipo temporale.
 
 ### Codice:
 
@@ -243,5 +244,3 @@ public class Main {
     }
 }
 ```
-
-

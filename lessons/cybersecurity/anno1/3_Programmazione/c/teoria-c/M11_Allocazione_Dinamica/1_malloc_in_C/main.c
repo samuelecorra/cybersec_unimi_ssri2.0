@@ -1,54 +1,46 @@
-// Finora abbiamo sempre allocato staticamente la memoria per le variabili
-// (ad esempio: int a;). Vediamo ora come allocare memoria dinamicamente
-// durante l'esecuzione del programma, utilizzando la funzione malloc().
+/*
+ * Una variabile locale come "int a" ha normalmente durata automatica, non è
+ * "allocata staticamente". malloc riserva invece a runtime un blocco di memoria
+ * contiguo di dimensione richiesta e restituisce void *, convertito implicitamente
+ * nel puntatore destinazione in C. Il contenuto iniziale è indeterminato.
+ */
 
-// malloc prepara un blocco di memoria di una certa dimensione di byte ben specificata
-// dal programmatore, e restituisce un puntatore al primo byte di questo blocco.
-// La memoria allocata con malloc rimane allocata fino a quando non viene liberata
-// esplicitamente con la funzione free().
-
-// ===================================================================================
-
-
-// Ecco che finalmente gli array intesi come puntatori a caratteri trovano il loro
-// senso: possiamo allocare un array di dimensione specificata dall'utente a runtime!
-
+#include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>  // Per malloc e free
+#include <stdlib.h>
 
-int main() {
-
-    int n;
-
+int main(void) {
+    size_t quantità = 0;
     printf("Quanti numeri vuoi inserire? ");
-    scanf("%d", &n);
-
-    // Allochiamo dinamicamente un array di n interi.
-    int *voti = (int *)malloc(n * sizeof(int));
-
-    // Evitiamo segmentation fault controllando che l'allocazione sia andata a buon fine.
-    if (voti == NULL) {
-        perror("Errore nell'allocazione della memoria");
+    if (scanf("%zu", &quantità) != 1 || quantità == 0) {
+        fputs("Quantità non valida.\n", stderr);
+        return EXIT_FAILURE;
+    }
+    if (quantità > SIZE_MAX / sizeof(int)) {
+        fputs("Dimensione richiesta troppo grande.\n", stderr);
         return EXIT_FAILURE;
     }
 
-    // Ora possiamo usare l'array come se fosse stato dichiarato staticamente.
-    for (int i = 0; i < n; i++) {
-        printf("Inserisci il voto %d: ", i + 1);
-        scanf("%d", &voti[i]);
-        getchar();  // Per consumare il newline rimasto nel buffer
+    int *voti = malloc(quantità * sizeof *voti);
+    if (voti == NULL) {
+        fputs("Allocazione non riuscita.\n", stderr);
+        return EXIT_FAILURE;
     }
 
-    printf("I voti inseriti sono:\n");
-    for (int i = 0; i < n; i++) {
-        printf("[%d], ", voti[i]);
+    for (size_t i = 0; i < quantità; ++i) {
+        printf("Inserisci il voto %zu: ", i + 1);
+        if (scanf("%d", &voti[i]) != 1) {
+            fputs("Voto non valido.\n", stderr);
+            free(voti);
+            return EXIT_FAILURE;
+        }
     }
-    printf("\n");
 
-    // Non dimentichiamoci di liberare la memoria allocata quando non ci serve più!
+    for (size_t i = 0; i < quantità; ++i) {
+        printf("%d%s", voti[i], i + 1 == quantità ? "\n" : ", ");
+    }
+
     free(voti);
-    // E evitiamo dangling pointer azzerando il puntatore.
-    voti = NULL;
-
+    voti = NULL; // utile contro il riuso locale, ma non azzera eventuali alias
     return EXIT_SUCCESS;
 }

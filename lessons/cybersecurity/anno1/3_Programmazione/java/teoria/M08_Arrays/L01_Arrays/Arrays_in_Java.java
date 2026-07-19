@@ -4,11 +4,10 @@ public class Arrays_in_Java {
 
     // ARRAY IN C VS ARRAY IN JAVA
 
-    // In C un array è semplicemente un blocco contiguo di memoria
-    // che contiene elementi dello stesso tipo. Gli array in C non
-    // hanno informazioni sul loro tipo o sulla loro dimensione.
-    // Devi gestire manualmente la memoria e tenere traccia della
-    // dimensione dell'array.
+    // In C un array è un blocco contiguo di elementi dello stesso tipo, ma quando
+    // viene passato a una funzione decade normalmente a puntatore: la lunghezza non
+    // viaggia con quel puntatore e deve essere comunicata separatamente. In Java,
+    // invece, ogni oggetto array conserva sempre la propria lunghezza a runtime.
 
     // In Java, un array è un oggetto che contiene informazioni
     // sul tipo degli elementi e sulla loro dimensione. Gli array
@@ -16,7 +15,7 @@ public class Arrays_in_Java {
     // quindi non devi preoccuparti della gestione della memoria.
 
     // DICHIARAZIONE E INIZIALIZZAZIONE DI ARRAY IN JAVA
-    static void main() {
+    public static void main(String[] args) {
 
         // Dichiarazione di un array di interi in Java
         int[] arrayDiInteri; // Forma identica al C
@@ -66,7 +65,8 @@ public class Arrays_in_Java {
 
         // ===================================================================
 
-        // Lunghezza dell'array - non è altro che il metodo built-in "length"
+        // Lunghezza dell'array: length è un campo final dell'oggetto array,
+        // non un metodo (quindi si scrive senza parentesi).
         int lunghezzaArray = arrayDiInteri4.length; // Restituisce 5
         // GRANDE PASSO IN AVANTI RISPETTO AL C, DOVE BISOGNA TENERE TRACCIA DELLA DIMENSIONE MANUALMENTE
         // facendo ad esempio int size = sizeof(array) / sizeof(array[0]);
@@ -94,7 +94,8 @@ public class Arrays_in_Java {
         frutta[3] = "Papaya"; // Sostituisco "Mango" con "Papaya"
         System.out.println("Ora il frutto in posizione 3 è: " + frutta[3]);
 
-        // La length viene ritornata, in quanto metodo, ergo possiamo riassegnarla...
+        // Non si può assegnare a frutta.length: la lunghezza dell'array è immutabile.
+        // Possiamo però copiarne il valore in una normale variabile intera.
         int numFrutti = frutta.length;
         System.out.println("Numero di frutti nell'array: " + numFrutti);
 

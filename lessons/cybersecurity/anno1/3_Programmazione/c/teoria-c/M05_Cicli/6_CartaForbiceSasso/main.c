@@ -8,15 +8,15 @@
 
 
 // Rendiamo il codice più leggibile con delle funzioni:
-int getSceltaGiocatore() {
-    int scelta;
+int getSceltaGiocatore(void) {
+    int scelta = 0;
     printf("Scegli: 1 per Carta, 2 per Forbice, 3 per Sasso: ");
     scanf("%d", &scelta);
-    getchar(); // puliamo il buffer
+    getchar(); // consuma un carattere, qui atteso come newline
     return scelta;
 }
 
-int getSceltaComputer() {
+int getSceltaComputer(void) {
     return (rand() % 3) + 1; // numero tra 1 e 3
 }
 
@@ -24,7 +24,7 @@ int getSceltaComputer() {
 //=====================================================================================
 
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 

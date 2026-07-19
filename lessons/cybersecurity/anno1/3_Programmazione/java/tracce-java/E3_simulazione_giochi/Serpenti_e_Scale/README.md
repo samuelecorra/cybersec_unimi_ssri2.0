@@ -114,13 +114,15 @@ Se un domani vuoi caricare il tabellone da file JSON o CSV, la `Map` è perfetta
 
 # 🏗️ Architettura del progetto
 
-```
-src/
- ├── Giocatore.java
- ├── Dado.java
- ├── Tabellone.java      → contiene la HashMap con serpenti e scale
- ├── Partita.java        → gestisce turni, movimento e controllo vittoria
- └── SerpentiEScaleGame.java (main)
+```text
+Serpenti_e_Scale/
+├── Classi/
+│   ├── Dado.java
+│   ├── Giocatore.java
+│   ├── Partita.java
+│   └── Tabellone.java
+└── Main/
+    └── SerpentiEScaleGame.java
 ```
 
 ---
@@ -141,7 +143,7 @@ Il cuore del tabellone.
 
 ### `Scanner`
 
-Per l'interazione da terminale.
+Per l'interazione da terminale. Il `main` crea una sola istanza e la passa a `Partita`: due `Scanner` contemporanei sullo stesso `System.in` potrebbero interferire a causa del buffering.
 
 ---
 
@@ -163,11 +165,12 @@ Per l'interazione da terminale.
 Compila ed esegui:
 
 ```bash
-javac *.java
-java SerpentiEScaleGame
+mkdir out
+javac -d out E3_simulazione_giochi/Serpenti_e_Scale/Classi/*.java E3_simulazione_giochi/Serpenti_e_Scale/Main/*.java
+java -cp out E3_simulazione_giochi.Serpenti_e_Scale.Main.SerpentiEScaleGame
 ```
-Se invece sei già su IntelliJ, puoi debuggare con un click...
+
+I comandi vanno eseguiti dalla cartella `tracce-java`. In un IDE è sufficiente avviare la classe `SerpentiEScaleGame`.
 
 ---
-
 

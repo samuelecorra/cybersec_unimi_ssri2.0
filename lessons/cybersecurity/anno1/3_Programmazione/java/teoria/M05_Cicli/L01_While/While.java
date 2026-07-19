@@ -9,15 +9,15 @@ public class While {
     // In generale continua a iterare finché la condizione è vera (true).
     // Nel blocco di codice, è importante modificare una variabile
     // coinvolta nella condizione, altrimenti si rischia un ciclo infinito.
-    // Ergo il blocco contiene la condizione di terminazione del ciclo.
+    // Il programma deve assicurare che la condizione possa prima o poi diventare falsa.
 
-    static void main() {
+    public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
 
         String nome = "";
         // ESEMPIO: chiedere il nome finché l'utente non inserisce effettivamente una stringa valida:
-        while (nome.isEmpty()) { // ritorna un booleano
+        while (nome.isBlank()) { // rifiuta anche una riga composta soltanto da spazi
             System.out.print("Inserisci il tuo nome: ");
             nome = input.nextLine();
         }
@@ -41,9 +41,9 @@ public class While {
         // Possiamo comodamente dire all'utente di premere un determinato tasto per uscire
         // e usare questo come condizione di terminazione mediante equals():
         String comando = "";
-        while (!comando.equals("Q")) { // continua finché comando NON è uguale a "Q"
+        while (!"Q".equalsIgnoreCase(comando)) {
             System.out.print("Stai giocando... Premi Q per uscire: ");
-            comando = input.nextLine().toUpperCase(); // convertiamo in maiuscolo per sicurezza
+            comando = input.nextLine();
         }
 
         // Ma anche per imporre validazioni!

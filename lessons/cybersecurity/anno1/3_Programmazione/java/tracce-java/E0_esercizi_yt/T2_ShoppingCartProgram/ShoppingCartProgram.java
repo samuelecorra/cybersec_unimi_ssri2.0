@@ -3,7 +3,7 @@ package E0_esercizi_yt.T2_ShoppingCartProgram;
 import java.util.Scanner;
 
 public class ShoppingCartProgram {
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -11,7 +11,7 @@ public class ShoppingCartProgram {
         double prezzo;
         int quantita;
         char valuta = '€';
-        double totale = 0.0;
+        double totale;
 
         System.out.println("Benvenuto al programma del carrello della spesa!");
         System.out.println("-----------------------------------------------");
@@ -19,14 +19,28 @@ public class ShoppingCartProgram {
         articolo = scanner.nextLine();
         System.out.println("Inserisci il prezzo unitario di " + articolo + " in " + valuta + ":");
         prezzo = scanner.nextDouble();
+        if (!Double.isFinite(prezzo) || prezzo < 0) {
+            System.out.println("Il prezzo deve essere un numero finito non negativo.");
+            scanner.close();
+            return;
+        }
         System.out.println("Quante unità di " + articolo + " desideri acquistare?");
         quantita = scanner.nextInt();
+        if (quantita < 0) {
+            System.out.println("La quantità non può essere negativa.");
+            scanner.close();
+            return;
+        }
 
         totale = prezzo * quantita;
-        int iva = 22;
-        double diCuiIVA = (totale * iva) / 100;
-        System.out.print("Il totale per " + quantita + " unità di " + articolo + " è: " + totale + valuta);
-        System.out.print(" (di cui " + diCuiIVA + valuta + " di IVA).");
+        final double aliquotaIva = 0.22;
+        // Se il prezzo inserito comprende già l'IVA al 22%, la quota d'imposta
+        // si scorpora dal lordo: lordo * 22 / 122, non lordo * 22 / 100.
+        double ivaCompresa = totale * aliquotaIva / (1 + aliquotaIva);
+        System.out.printf("Il totale per %d unità di %s è: %.2f%c", quantita, articolo, totale, valuta);
+        System.out.printf(" (di cui %.2f%c di IVA).%n", ivaCompresa, valuta);
+
+        scanner.close();
 
     }
 }

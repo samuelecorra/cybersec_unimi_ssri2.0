@@ -23,11 +23,21 @@ public class WeightConversion {
         if(scelta == 1) {
             System.out.print("Inserisci il peso in chilogrammi: ");
             massa = sc.nextDouble();
+            if (!Double.isFinite(massa) || massa < 0) {
+                System.out.println("La massa deve essere un numero finito non negativo.");
+                sc.close();
+                return;
+            }
             massaConvertita = massa * 2.20462; // Conversione kg a lb
             System.out.printf("%.2f chilogrammi sono %.2f libbre.%n", massa, massaConvertita);
         } else if(scelta == 2) {
             System.out.print("Inserisci il peso in libbre: ");
             massa = sc.nextDouble();
+            if (!Double.isFinite(massa) || massa < 0) {
+                System.out.println("La massa deve essere un numero finito non negativo.");
+                sc.close();
+                return;
+            }
             massaConvertita = massa / 2.20462; // Conversione lb a kg
             System.out.printf("%.2f libbre sono %.2f chilogrammi.%n", massa, massaConvertita);
         } else {

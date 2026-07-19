@@ -39,3 +39,14 @@
 
 
     4. printf serve solo dopo, quando abbiamo dell'output da dover formattare.
+
+
+    5. Il raggio deve essere un numero finito e non negativo: un raggio negativo,
+       NaN o infinito non descrive una sfera valida.
+
+
+    COMPILAZIONE ED ESECUZIONE DA TERMINALE
+    Dalla cartella tracce-java:
+
+       javac E1_esercizi_introduttivi/esercizio_1/CalcolatoreVolumeSfera.java
+       java E1_esercizi_introduttivi.esercizio_1.CalcolatoreVolumeSfera

@@ -15,27 +15,21 @@ import java.io.RandomAccessFile;
  */
 public class MainRandomAccessFile {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("=== RANDOM ACCESS FILE ===");
 
-        try {
-            RandomAccessFile raf = new RandomAccessFile("testo_buffered.txt", "r");
+        try (RandomAccessFile raf = new RandomAccessFile("dati.bin", "r")) {
 
             System.out.println("Lunghezza file: " + raf.length() + " byte");
 
-            // Legge i primi 15 byte
-            byte[] buffer = new byte[15];
-            raf.read(buffer);
-            System.out.println("Primi 15 bytes: " + new String(buffer));
+            int primoByte = raf.readUnsignedByte();
+            System.out.println("Primo byte: " + primoByte);
 
-            // Spostiamo il cursore nel punto 5
-            raf.seek(5);
-            byte[] buffer2 = new byte[10];
-            raf.read(buffer2);
-            System.out.println("Bytes da posizione 5: " + new String(buffer2));
-
-            raf.close();
+            // seek usa offset di byte, non indici di caratteri.
+            raf.seek(2);
+            int terzoByte = raf.readUnsignedByte();
+            System.out.println("Byte in posizione 2: " + terzoByte);
 
         } catch (IOException e) {
             System.out.println("Errore con RandomAccessFile!");

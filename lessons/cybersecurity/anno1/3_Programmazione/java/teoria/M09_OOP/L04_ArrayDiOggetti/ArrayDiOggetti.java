@@ -2,7 +2,7 @@ package M09_OOP.L04_ArrayDiOggetti;
 
 public class ArrayDiOggetti {
 
-    static void main() {
+    public static void main(String[] args) {
 
         // Creiamo qualche auto e poi riuniamole in un parco auto (ovvero un array di oggetti Auto)
         Auto auto1 = new Auto("Fiat Panda", "Bianco");

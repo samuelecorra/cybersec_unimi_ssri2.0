@@ -9,8 +9,14 @@ public class Utente {
     private final List<Libro> libriInPrestito = new ArrayList<>();
 
     public Utente(int id, String nome) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("L'ID dell'utente deve essere positivo.");
+        }
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("Il nome dell'utente non può essere vuoto.");
+        }
         this.id = id;
-        this.nome = nome;
+        this.nome = nome.trim();
     }
 
     public int getId() {
@@ -26,13 +32,17 @@ public class Utente {
     }
 
     public Libro removeLibro(int idLibro) {
-        for (Libro libro : libriInPrestito) {
+        for (int i = 0; i < libriInPrestito.size(); i++) {
+            Libro libro = libriInPrestito.get(i);
             if (libro.getId() == idLibro) {
-                libriInPrestito.remove(libro);
-                return libro;
+                return libriInPrestito.remove(i);
             }
         }
         return null;
+    }
+
+    public boolean haLibro(int idLibro) {
+        return libriInPrestito.stream().anyMatch(libro -> libro.getId() == idLibro);
     }
 
     @Override

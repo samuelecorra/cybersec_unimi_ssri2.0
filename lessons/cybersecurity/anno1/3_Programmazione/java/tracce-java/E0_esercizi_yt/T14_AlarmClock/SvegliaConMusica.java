@@ -1,5 +1,8 @@
 package E0_esercizi_yt.T14_AlarmClock;
 
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,7 +10,7 @@ import java.util.Scanner;
 
 public class SvegliaConMusica {
 
-    static void main() {
+    public static void main(String[] args) {
 
         // Java - Implementiamo una sveglia che suona una musica all'ora stabilita.
 
@@ -15,7 +18,11 @@ public class SvegliaConMusica {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss"); // Per poter parsare l'ora in un oggetto LocalTime
 
         LocalTime orarioSveglia = null;
-        String percorsoCanzone = "C:/Users/nabis/cybersamu-gitlocker/1_PRIMO_ANNO/java/tracce-java/E0_esercizi_yt/T14_AlarmClock/sinteticoxstarshopping.wav"; // Inserisci qui il percorso del file audio da riprodurre
+        String percorsoCanzone = args.length > 0
+                ? args[0]
+                : Path.of("lessons", "cybersecurity", "anno1", "3_Programmazione",
+                        "java", "tracce-java", "E0_esercizi_yt", "T14_AlarmClock",
+                        "sinteticoxstarshopping.wav").toString();
 
 
         while(orarioSveglia == null){
@@ -31,12 +38,24 @@ public class SvegliaConMusica {
             }
         }
 
-        AlarmClock sveglia = new AlarmClock(orarioSveglia, percorsoCanzone, sc);
+        LocalDateTime adesso = LocalDateTime.now();
+        LocalDateTime prossimaSveglia = LocalDateTime.of(LocalDate.now(), orarioSveglia);
+        if (!prossimaSveglia.isAfter(adesso)) {
+            prossimaSveglia = prossimaSveglia.plusDays(1);
+        }
+
+        AlarmClock sveglia = new AlarmClock(prossimaSveglia, percorsoCanzone, sc);
         Thread threadSveglia = new Thread(sveglia);
 
         threadSveglia.start();
-
-        // sc.close(); questo lo chiudiamo dall'altra classe perché per fermare la sveglia potremmo aver bisogno di input
+        try {
+            threadSveglia.join();
+        } catch (InterruptedException e) {
+            threadSveglia.interrupt();
+            Thread.currentThread().interrupt();
+        } finally {
+            sc.close();
+        }
 
     }
 }

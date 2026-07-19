@@ -17,16 +17,16 @@ Rappresenta un singolo studente.
 
 Campi:
 
-* `int matricola`: identificativo univoco.
-* `String nome`: nome dello studente.
-* `List<Integer> voti`: lista dei voti.
+* `int matricola`: identificativo univoco e positivo.
+* `String nome`: nome dello studente, non nullo né vuoto.
+* `List<Integer> voti`: lista dei voti, ciascuno compreso tra 0 e 30.
 
 Funzioni:
 
 * Costruttore: inizializza lo studente e la lista dei voti.
 * `aggiungiVoto(int)`: aggiunge un voto.
 * `calcolaMedia()`: calcola la media dei voti (0.0 se nessun voto).
-* Getter vari.
+* Getter vari; `getVoti()` restituisce una copia non modificabile, così il chiamante non può aggirare la validazione di `aggiungiVoto`.
 * `toString()`: rappresentazione completa dello studente, con voti e media.
 
 ---
@@ -52,7 +52,7 @@ Funzioni:
 * `aggiungiVotoAStudente(matricola, voto)`
 * `cercaStudente(matricola)`
 * `rimuoviStudente(matricola)`
-* `stampaRegistro()`
+* `stampaRegistro()`, in ordine crescente di matricola
 
 ---
 

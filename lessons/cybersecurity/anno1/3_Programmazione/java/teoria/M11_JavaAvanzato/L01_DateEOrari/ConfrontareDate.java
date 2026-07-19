@@ -4,7 +4,7 @@ import java.time.*;
 
 public class ConfrontareDate {
 
-    static void main() {
+    public static void main(String[] args) {
 
         LocalDateTime date1 = LocalDateTime.of(2023, 5, 20, 14, 30);
         LocalDateTime date2 = LocalDateTime.of(2024, 6, 15, 10, 0);

@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
+int main(void) {
 
     // DICHIARAZIONE DI UN ARRAY:
     // Sintassi:
@@ -24,9 +24,12 @@ int main() {
     int numeri3[] = {0}; // dichiarazione e inizializzazione,
     // con dimensione dedotta dal numero di elementi
 
-    int numeri4[3] = {0}; // tutti gli elementi inizializzati all'unico valore a destra
+    int numeri4[3] = {0}; // il primo e, implicitamente, tutti i restanti valgono 0
     
     int numeriConFor[5]; // ci serve dopo
+
+    // Usiamo almeno un elemento di ciascun esempio per osservarne l'inizializzazione.
+    printf("Inizializzazioni: %d, %d, %d\n", numeri2[0], numeri3[0], numeri4[2]);
 
 
     // INIZIALIZZAZIONE DEGLI ELEMENTI DELL'ARRAY

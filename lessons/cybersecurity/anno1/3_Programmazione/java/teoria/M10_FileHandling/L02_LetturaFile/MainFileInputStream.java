@@ -14,19 +14,16 @@ import java.io.IOException;
  */
 public class MainFileInputStream {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("=== LETTURA BINARIA (FileInputStream) ===");
 
-        try {
-            FileInputStream fis = new FileInputStream("dati.bin");
+        try (FileInputStream fis = new FileInputStream("dati.bin")) {
 
             int byteLetto;
             while ((byteLetto = fis.read()) != -1) {
                 System.out.println("Byte letto: " + byteLetto);
             }
-
-            fis.close();
 
         } catch (IOException e) {
             System.out.println("Errore lettura binaria!");

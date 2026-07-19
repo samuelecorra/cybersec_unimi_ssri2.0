@@ -1,22 +1,14 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ESERCIZIO DELL'APPELLO DI LABORATORIO DELL'11/06/2025
 
-// SECONDO ESERCIZIO DELL'ESAME LABORATORIO DI PROGRAMMAZIONE DELL'11/06/2025
+Scrivere una funzione che stabilisca se due stringhe alfabetiche sono anagrammi
+case-sensitive: devono avere la stessa lunghezza e le stesse frequenze di ogni
+carattere. In questa soluzione si adotta la convenzione dell'anagramma "proprio":
+due stringhe identiche non contano come riordinamento diverso.
 
-// CONSEGNA:
-// Scrivere un programma C che implementi una funzione che prende in ingresso due stringhe, e restituisca un
-// responso booleano alla domanda principale:
+Il dominio dichiarato dalla traccia è ASCII alfabetico (A-Z, a-z). Il programma
+lo valida esplicitamente e rifiuta righe assenti, vuote o più lunghe del buffer.
 
-// "La seconda stringa è un anagramma della prima? Con anagramma ricordiamo che si intende
-// una stringa, ovviamente di egual lunghezza alla prima, che contiene gli stessi caratteri della prima
-// ma in un ordine qualsiasi."
-
-// Per questo esercizio si supponga una corrispondenza case sensitive.
-// Si presupponga inoltre che le stringhe contengano solo caratteri alfabetici (A-Z, a-z).
-
-// Ad esempio:
-
-// "amor" e "roma" sono anagrammi.
-// "Amore" e "Roma" non sono anagrammi, perché la seconda stringa non contiene gli stessi caratteri della prima.
-// "Amor" e "Roma" non sono anagrammi, perché la seconda stringa non contiene gli stessi caratteri della prima.
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Esempi:
+  amor / roma  -> anagrammi
+  Amor / Roma  -> non anagrammi in modalità case-sensitive
+  casa / casa  -> identiche, quindi escluse dalla convenzione adottata

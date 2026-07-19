@@ -27,9 +27,9 @@ import java.io.IOException;
  *  - IOException                  → problemi di I/O sul file
  *  - LineUnavailableException     → risorsa audio non disponibile
  */
-public class MusicPlayer {
+public class MusicPlayer implements AutoCloseable {
 
-    private Clip clip;
+    private final Clip clip;
     private boolean inPausa = false;
     private long posizionePausa = 0; // in microsecondi
 
@@ -49,13 +49,14 @@ public class MusicPlayer {
         }
 
         // Otteniamo lo stream audio dal file
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-
-        // Otteniamo un Clip (una linea che può riprodurre brevi suoni)
-        clip = AudioSystem.getClip();
-
-        // Carichiamo i dati audio nel Clip
-        clip.open(audioStream);
+        Clip nuovoClip = AudioSystem.getClip();
+        try (AudioInputStream audioStream = AudioSystem.getAudioInputStream(file)) {
+            nuovoClip.open(audioStream);
+        } catch (UnsupportedAudioFileException | IOException | RuntimeException e) {
+            nuovoClip.close();
+            throw e;
+        }
+        clip = nuovoClip;
     }
 
     /*
@@ -63,11 +64,6 @@ public class MusicPlayer {
      * Se era in pausa, riparte dall'inizio (non dalla pausa).
      */
     public void playFromStart() {
-        if (clip == null) {
-            System.out.println("Nessun clip caricato.");
-            return;
-        }
-
         clip.stop();
         clip.setMicrosecondPosition(0);
         clip.start();
@@ -80,11 +76,6 @@ public class MusicPlayer {
      * Salviamo la posizione attuale in microsecondi.
      */
     public void pausa() {
-        if (clip == null) {
-            System.out.println("Nessun clip caricato.");
-            return;
-        }
-
         if (!clip.isRunning()) {
             System.out.println("Il brano non è in riproduzione.");
             return;
@@ -100,11 +91,6 @@ public class MusicPlayer {
      * Riprende la riproduzione dal punto in cui era stata messa in pausa.
      */
     public void riprendi() {
-        if (clip == null) {
-            System.out.println("Nessun clip caricato.");
-            return;
-        }
-
         if (!inPausa) {
             System.out.println("Il brano non è in pausa.");
             return;
@@ -120,10 +106,6 @@ public class MusicPlayer {
      * Ferma completamente la riproduzione e torna all'inizio.
      */
     public void stop() {
-        if (clip == null) {
-            return;
-        }
-
         clip.stop();
         clip.setMicrosecondPosition(0);
         inPausa = false;
@@ -134,10 +116,6 @@ public class MusicPlayer {
      * Attiva il loop infinito del brano.
      */
     public void attivaLoop() {
-        if (clip == null) {
-            return;
-        }
-
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         System.out.println("🔁 Loop attivo (riproduzione continua).");
     }
@@ -146,10 +124,6 @@ public class MusicPlayer {
      * Disattiva il loop, il brano continuerà fino alla fine e poi si fermerà.
      */
     public void disattivaLoop() {
-        if (clip == null) {
-            return;
-        }
-
         // Per disattivare il loop basta impostare il numero di loop a 0.
         clip.loop(0);
         System.out.println("⏹ Loop disattivato (nessuna ripetizione automatica).");
@@ -159,11 +133,10 @@ public class MusicPlayer {
      * Rilascia le risorse audio.
      * Va chiamato quando il programma termina.
      */
-    public void chiudi() {
-        if (clip != null) {
-            clip.stop();
-            clip.close();
-            System.out.println("Risorse audio rilasciate.");
-        }
+    @Override
+    public void close() {
+        clip.stop();
+        clip.close();
+        System.out.println("Risorse audio rilasciate.");
     }
 }

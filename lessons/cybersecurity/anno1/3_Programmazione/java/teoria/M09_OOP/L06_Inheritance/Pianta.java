@@ -1,11 +1,11 @@
 package M09_OOP.L06_Inheritance;
 
-public class Pianta extends EssereVivente  {
+public class Pianta extends Regno {
 
     // Le piante non hanno bisogno di nuovi attributi rispetto a Regno,
     // quindi non ne dichiariamo nessuno.
     Pianta(String soprannome, String nomeRegno) {
-        super(soprannome); // Chiamo il costruttore della superclasse EssereVivente
+        super(soprannome, nomeRegno); // Inizializza anche la parte Regno
     }
 
     // Però di sicuro ha bisogno di un metodo specifico per fotosintetizzare, rispetto a un animale o un fungo.

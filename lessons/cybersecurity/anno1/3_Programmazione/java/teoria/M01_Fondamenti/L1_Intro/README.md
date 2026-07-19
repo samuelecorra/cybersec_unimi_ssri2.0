@@ -6,7 +6,8 @@ Anche se *Intro.java* contiene pochissime righe di codice, al suo interno sono n
 ## 1. Struttura di un progetto Java e ruolo dei package
 
 In un progetto Java anche minimo, ogni file `.java` può appartenere a un **package**, cioè un contenitore logico che raggruppa classi affini.
-Il package viene dichiarato *sempre* come **prima riga** del file; è una sorta di intestazione.
+La dichiarazione di package, quando presente, precede import e dichiarazioni di
+tipo; può essere preceduta soltanto da commenti e spazi bianchi.
 
 Esempio:
 
@@ -65,16 +66,23 @@ public class Intro {
 }
 ```
 
-Il motivo è semplice: quando la JVM deve eseguire il programma, deve sapere con certezza qual è la classe principale.
-Non rispettare questa regola genera errori di compilazione.
+La regola riguarda ogni classe top-level dichiarata `public`: è il compilatore a
+richiedere la corrispondenza tra il suo nome e quello del file. Un file può
+contenere anche tipi top-level non pubblici con nomi diversi.
 
-## 5. Perché la classe deve essere `public`?
+## 5. Classe pubblica e metodo `main`
 
-La classe che contiene il `main` deve essere dichiarata come `public` perché la JVM (che è esterna al codice) deve potervi accedere.
-Vedremo più avanti tutti i livelli di visibilità (`public`, `private`, `protected` e default), ma per ora ci basta sapere che:
+Nel modello classico la classe principale si dichiara normalmente `public`, ma
+il launcher può avviare anche una classe top-level con accesso di package. È
+invece il metodo di ingresso a dover rispettare il contratto portabile
+`public static void main(String[] args)`.
 
-* **public = accessibile da chiunque**
-* serve obbligatoriamente per rendere eseguibile la classe da Java
+Vedremo più avanti tutti i livelli di visibilità (`public`, `private`,
+`protected` e accesso di package), ma per ora basta sapere che:
+
+* `public` rende il tipo o membro accessibile da ogni package compatibile con il sistema dei moduli;
+* `static` permette al launcher di chiamare `main` senza costruire un oggetto;
+* `void` indica che il metodo non restituisce un valore al chiamante.
 
 ## 6. Cosa troverai in *Intro.java*
 

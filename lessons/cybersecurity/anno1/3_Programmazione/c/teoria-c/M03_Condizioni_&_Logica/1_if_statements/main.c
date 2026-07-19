@@ -58,7 +58,7 @@ Esempio pratico:    */
 #include <math.h>               // direttiva per funzioni matematiche
 #include <stdbool.h>           // direttiva per usare il tipo bool
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 
@@ -86,8 +86,9 @@ int main() {
         printf("Hai l'età minima per iniziare a lavorare.\n");
     }
 
-    // Attenzione a come però decidiamo di costruire l'if-else if-else:
-    if (età > 18) {
+    // Regola puramente didattica dell'esempio (non è una norma sulla patente):
+    // oltre 80 anni vogliamo mostrare un messaggio diverso. Attenzione all'ordine.
+    if (età >= 18) {
         printf("Hai l'età minima per guidare\n");
     } else if (età > 80) {
         printf("Sei troppo anziano per metterti alla guida!\n");
@@ -104,7 +105,7 @@ int main() {
     // e i più permissivi dopo:
     if (età > 80) {
         printf("Sei troppo anziano per metterti alla guida!\n");
-    } else if (età > 18) {
+    } else if (età >= 18) {
         printf("Hai l'età minima per guidare\n");
     } else {
         printf("Non sei maggiorenne, ergo non puoi guidare!\n");
@@ -118,13 +119,12 @@ int main() {
 // e prende il ramo false se è uguale a zero.
 
 // Quindi è logico che metteremo all'interno della condizione un'espressione
-// che ritorna un valore booleano, ovvero true (diverso da zero, di solito 1) o false
-// (uguale a zero).
+// che produce un valore scalare. Gli operatori relazionali e logici producono int:
+// 1 quando il risultato è vero e 0 quando è falso.
 
 // E' ovvio che questo si presta bene ai confronti numerici, o ai confronti tra stringhe
-// che vedremo dopo, perché tali operatori matematici e funzioni built in di string.h
-// ritornano valori booleani per costruzione, ovvero proprio per facilitare la scrittura
-// di condizioni.
+// che vedremo dopo. Attenzione: strcmp non restituisce un booleano; restituisce 0
+// quando le stringhe sono uguali, un valore negativo o positivo per indicarne l'ordine.
 
 // Ma se come condizione mettessimo una variabile di tipo int, float, double, char,
 // o qualsiasi altro tipo di dato, il comportamento sarebbe lo stesso:

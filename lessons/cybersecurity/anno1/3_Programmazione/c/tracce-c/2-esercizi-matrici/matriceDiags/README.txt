@@ -1,20 +1,12 @@
-/* ==========================================================================================
+ESERCIZIO: SOMMA DELLE DIAGONALI PASSANTI PER OGNI CELLA
 
-ESERCIZIO DI LABORATORIO DI PROGRAMMAZIONE [NON RICORDO LA DATA]
+Per ogni cella (i,j), costruire il valore dato dalla somma degli elementi sulle
+due diagonali che la attraversano, escludendo la cella stessa.
 
-Data una matrice quadrata NxN di interi (dimensione dunque nota a priori, niente malloc),
-scrivere un programma che costruisce una nuova matrice M2 tale che ciascun elemento 
-M2[i][j] sia uguale alla somma dei valori della diagonale/delle diagonali passante/i per [i][j] 
-escluso l’elemento stesso.
+Sulle diagonali discendenti è costante la differenza `riga-colonna`; sulle
+ascendenti è costante la somma `riga+colonna`. Non si tratta di un rapporto.
 
-==============================================================================================*/
-
-// SONO STATE REALIZZATE DUE VERSIONI DI QUESTO ESERCIZIO:
-
-1. mainV1.c: versione inefficiente ma di facile comprensione, con complessità O(N^4).
-2. mainV2.c: versione efficiente con complessità O(N^2), che sfrutta il calcolo
-   preliminare delle somme delle diagonali ma che è più complessa da comprendere e quindi
-   in sede d'esame difficilmente verrebbe subito in mente, in quanto comporta competenze e
-   riflessioni matematiche non banali!
-
-==============================================================================================*/
+mainV1.c confronta ogni cella con tutte le altre: tempo O(N^4).
+mainV2.c pre-calcola le 2N-1 somme per ciascun verso: tempo e memoria O(N^2).
+Nella ricostruzione sottrae due volte la cella corrente perché compare in entrambe
+le somme diagonali.

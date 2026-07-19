@@ -1,19 +1,28 @@
 package E0_esercizi_yt.T12_Impiccato;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Impiccato {
 
-    static void main() {
+    public static void main(String[] args) {
 
         // Gioco dell'Impiccato (attento a non sbagliare troppo!)
 
-        String word = getRandomWord();
+        Path fileParole = args.length > 0
+                ? Path.of(args[0])
+                : Path.of("lessons", "cybersecurity", "anno1", "3_Programmazione",
+                        "java", "tracce-java", "E0_esercizi_yt", "T12_Impiccato",
+                        "parole.txt");
+        String word = getRandomWord(fileParole);
 
         if (word == null) {
             System.out.println("Errore: impossibile caricare le parole dal file!");
@@ -24,6 +33,7 @@ public class Impiccato {
 
         ArrayList<Character> wordState = new ArrayList<>();
         int tentativiSbagliati = 0;
+        Set<Character> lettereTentate = new HashSet<>();
 
         for (int i = 0; i < word.length(); i++) {
             wordState.add('_');
@@ -46,11 +56,21 @@ public class Impiccato {
                 System.out.print(c + " ");
             }
             System.out.println();
-            System.out.print("Inserisici una lettera e premi Invio: ");
-            char letteraTentata = sc.next().toLowerCase().charAt(0);
+            System.out.print("Inserisci una lettera e premi Invio: ");
+            String token = sc.next().toLowerCase(Locale.ROOT);
+            if (token.length() != 1 || !Character.isLetter(token.charAt(0))) {
+                System.out.println("Inserisci una sola lettera.");
+                continue;
+            }
+            char letteraTentata = token.charAt(0);
+
+            if (!lettereTentate.add(letteraTentata)) {
+                System.out.println("Hai già tentato questa lettera.");
+                continue;
+            }
 
             if (word.indexOf(letteraTentata) != -1) {
-                System.out.println("Brav*!");
+                System.out.println("Bravo!");
 
                 for (int i = 0; i < word.length(); i++) {
                     if (word.charAt(i) == letteraTentata) {
@@ -77,21 +97,18 @@ public class Impiccato {
 
     }
 
-    static String getRandomWord() {
+    static String getRandomWord(Path fileParole) {
         ArrayList<String> parole = new ArrayList<>();
 
-        try {
-            File file = new File("1_PRIMO_ANNO/java/tracce-java/E0_esercizi_yt/T12_Impiccato/parole.txt");
-            Scanner fileScanner = new Scanner(file);
+        try (Scanner fileScanner = new Scanner(
+                Files.newBufferedReader(fileParole, StandardCharsets.UTF_8))) {
 
             while (fileScanner.hasNextLine()) {
                 String parola = fileScanner.nextLine().trim();
                 if (!parola.isEmpty()) {
-                    parole.add(parola.toLowerCase());
+                    parole.add(parola.toLowerCase(Locale.ROOT));
                 }
             }
-
-            fileScanner.close();
 
             if (parole.isEmpty()) {
                 return null;
@@ -100,11 +117,9 @@ public class Impiccato {
             Random random = new Random();
             return parole.get(random.nextInt(parole.size()));
 
-        } catch (FileNotFoundException e) {
-            System.out.println("File parole.txt non trovato!");
-            return null;
-        } catch(IOException e) {
-            System.out.println("Errore di I/O durante la lettura del file parole.txt!");
+        } catch (IOException e) {
+            System.out.println("Errore nella lettura di " + fileParole.toAbsolutePath()
+                    + ": " + e.getMessage());
             return null;
         }
     }

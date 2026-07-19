@@ -1,8 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "header.h"
 
-int main() {
+int main(void) {
     // Definiamo i nomi dei file di input e output
     const char *file1in = "file1.txt";
     const char *file2in = "file2.txt";
@@ -15,10 +14,8 @@ int main() {
     if (res == 0) {
         printf("Si è verificato un errore durante l'unione dei file.\n");
         return 1; // Uscita con codice di errore
-    } else printf("fileOut.txt contiene ora tutti i numeri di file1.txt e file2.txt uniti e ordinati.\n");
-
-    printf("Premere Invio per terminare...");
-    getchar(); // Attende l'input dell'utente prima di terminare
+    }
+    printf("fileOut.txt contiene ora tutti i numeri di file1.txt e file2.txt uniti e ordinati.\n");
     return 0; // Uscita con successo
 }
 

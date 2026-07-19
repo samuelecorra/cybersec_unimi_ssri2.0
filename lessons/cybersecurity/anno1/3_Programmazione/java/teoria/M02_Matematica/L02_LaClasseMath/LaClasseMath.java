@@ -1,7 +1,7 @@
 package M02_Matematica.L02_LaClasseMath;
 
 public class LaClasseMath {
-    static void main() {
+    public static void main(String[] args) {
         // La classe Math in Java fornisce metodi e costanti matematiche utili.
         // NON SERVE IMPORTARLA, FA PARTE DEL PACKAGE JAVA.LANG CHE VIENE IMPORTATO AUTOMATICAMENTE.
         // E soprattutto non serve istanziarla, perché tutti i suoi membri sono statici (si capirà dopo).
@@ -32,18 +32,20 @@ public class LaClasseMath {
         int valoreNegativo = -10;
         int valoreAssoluto = Math.abs(valoreNegativo); // | -10 |
         System.out.println("Valore assoluto di -10 = " + valoreAssoluto);
+        // Caso limite: abs(Integer.MIN_VALUE) resta negativo, perché il suo
+        // opposto positivo non è rappresentabile come int.
 
-        // 4. fabs per double
+        // 4. Valore assoluto per double (Java usa ancora Math.abs, non fabs)
         double valoreNegativoDouble = -15.5;
         double valoreAssolutoDouble = Math.abs(valoreNegativoDouble); // | -15.5 |
         System.out.println("Valore assoluto di -15.5 = " + valoreAssolutoDouble);
 
         // 5. Arrotondamento generalizzato
         double numero1 = 5.7;
-        double arrotondato1 = Math.round(numero1); // 6.0, arrotonda al più vicino
+        long arrotondato1 = Math.round(numero1); // 6, Math.round(double) restituisce long
         System.out.println("5.7 arrotondato = " + arrotondato1);
         double numero2 = 5.3;
-        double arrotondato2 = Math.round(numero2); // 5.0
+        long arrotondato2 = Math.round(numero2); // 5
         System.out.println("5.3 arrotondato = " + arrotondato2);
 
         // 6. Arrotondamento per difetto
@@ -83,8 +85,8 @@ public class LaClasseMath {
         System.out.println("Circonferenza = " + circonferenza);
         System.out.println("Area della sfera = " + areaSfera);
         System.out.println("Volume della sfera = " + volumeSfera);
-        // Però così facendo stampiamo sempre 6 cifre decimali.
-        // Usiamo printf per formattare meglio l'output:
+        // println sceglie una rappresentazione leggibile, ma non permette di
+        // fissare il numero di cifre decimali. Usiamo printf per farlo:
         System.out.printf("Area del cerchio (formattata) = %.2f%n", areaCerchio);
         System.out.printf("Circonferenza (formattata) = %.2f%n", circonferenza);
         System.out.printf("Area della sfera (formattata) = %.2f%n", areaSfera);

@@ -1,13 +1,12 @@
 package E0_esercizi_yt.T10_SlotMachine;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class SlotMachine {
 
     // Creiamo un gioco da console molto semplice ma da ludopatia seria: la SLOT MACHINE!
     // Useremo le emoji come simboli della slot machine.
-    static void main() {
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
@@ -15,11 +14,11 @@ public class SlotMachine {
         // nemmeno sedere alla macchinetta.
         System.out.print("Benvenuto alla Slot Machine! Inserisci il tuo credito iniziale (minimo 50€): ");
         int creditoIniziale = sc.nextInt();
-        int credito = creditoIniziale;
         while (creditoIniziale < 50) {
             System.out.print("Credito insufficiente. Inserisci un credito minimo di 50€: ");
             creditoIniziale = sc.nextInt();
         }
+        int credito = creditoIniziale;
         System.out.println("Hai un credito iniziale di " + creditoIniziale + "€. Buona fortuna!");
         System.out.println("----------------------------------------------");
         System.out.println("   WELCOME TO THE JAVA Virtual SLOT MACHINE   ");
@@ -29,7 +28,7 @@ public class SlotMachine {
         System.out.println("Simboli disponibili: 🍒 🍋 ⭐ 7️⃣ 💎 ");
         System.out.println("----------------------------------------------");
 
-        while(credito >0) {
+        while (credito >= 5) {
             System.out.println("Il tuo credito attuale è di: " + credito + "€");
 
             // Ora chiediamo la puntata effettiva:
@@ -121,5 +120,10 @@ public class SlotMachine {
             }
 
         }
+
+        if (credito < 5) {
+            System.out.println("Credito insufficiente per la puntata minima. Credito finale: " + credito + "€.");
+        }
+        sc.close();
     }
 }

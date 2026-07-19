@@ -33,9 +33,9 @@ La ricerca lineare ha complessità temporale O(n) e spaziale O(1).
 
 Esempio di esecuzione
 Inserisci il valore intero da cercare nell'array numerico: 6
-Il valore bersaglio e' all'indice 4
+Il valore bersaglio è all'indice 4
 Inserisci la parola da cercare nell'array di stringhe: gatto
-La parola bersaglio e' all'indice 1
+La parola bersaglio è all'indice 1
 
 
 Estensioni possibili (facoltative)
@@ -47,10 +47,10 @@ Leggere gli array da input e non solo dal codice.
 
 Come eseguire in IntelliJ
 Creare un progetto Java.
-Creare un package chiamato esercizio_4.
+Creare un package chiamato E1_esercizi_introduttivi.esercizio_4.
 Inserire il file ArrayRicerca.java nel package.
 Eseguire la classe con il metodo main.
 
-Compilazione ed esecuzione da terminale
-javac esercizio_4/ArrayRicerca.java
-java esercizio_4.ArrayRicerca
+Compilazione ed esecuzione da terminale, dalla cartella tracce-java
+javac E1_esercizi_introduttivi/esercizio_4/ArrayRicerca.java
+java E1_esercizi_introduttivi.esercizio_4.ArrayRicerca

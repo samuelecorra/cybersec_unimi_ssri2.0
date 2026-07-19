@@ -1,19 +1,18 @@
 package E0_esercizi_yt.T14_AlarmClock;
 
 import javax.sound.sampled.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class AlarmClock implements Runnable {
 
-    private final LocalTime orarioSveglia;
+    private final LocalDateTime orarioSveglia;
     private final String percorsoCanzone;
     private final Scanner sc;
 
-    public AlarmClock(LocalTime orarioSveglia, String percorsoCanzone, Scanner scanner) {
+    public AlarmClock(LocalDateTime orarioSveglia, String percorsoCanzone, Scanner scanner) {
         this.orarioSveglia = orarioSveglia;
         this.percorsoCanzone = percorsoCanzone;
         this.sc = scanner;
@@ -21,15 +20,17 @@ public class AlarmClock implements Runnable {
 
     @Override
     public void run() {
-        while (LocalTime.now().isBefore(orarioSveglia)) {
+        while (LocalDateTime.now().isBefore(orarioSveglia)) {
             try {
                 Thread.sleep(1000); // Controlla ogni secondo
 
-                LocalTime ora = LocalTime.now();
+                LocalDateTime ora = LocalDateTime.now();
                 System.out.printf("\rOra attuale: %02d:%02d:%02d", ora.getHour(), ora.getMinute(), ora.getSecond());
 
             } catch (InterruptedException e) {
                 System.out.println("Sveglia interrotta. Buona giornata, principessa!");
+                Thread.currentThread().interrupt();
+                return;
             }
         }
 
@@ -41,15 +42,14 @@ public class AlarmClock implements Runnable {
 
         File fileAudio = new File(percorsoCanzone);
 
-        try(AudioInputStream audioStream = AudioSystem.getAudioInputStream(fileAudio)) {
-            Clip clip = AudioSystem.getClip();
+        try (AudioInputStream audioStream = AudioSystem.getAudioInputStream(fileAudio);
+             Clip clip = AudioSystem.getClip()) {
             clip.open(audioStream);
             clip.start();
 
             System.out.print("\nPremi INVIO per fermare la sveglia...");
             sc.nextLine(); // Attende l'input dell'utente
             clip.stop();
-            clip.close();
         }
         catch(UnsupportedAudioFileException e){
             System.out.println("Formato audio non supportato: " + e.getMessage());

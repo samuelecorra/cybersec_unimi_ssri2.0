@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class SimulatoreEcosistemaMontano {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         // Creiamo alcune istanze concrete di animali
         Camoscio camoscio = new Camoscio("Camoscio Carlo");
@@ -76,7 +76,7 @@ public class SimulatoreEcosistemaMontano {
         for (Predatore predatore : predatori) {
             System.out.println(">> Predatore: " + predatore.getClass().getSimpleName());
 
-            // Scegliamo una preda a caso dalla lista (per semplicità alterniamo manualmente).
+            // Simuliamo ciascun predatore contro tutte le prede della lista.
             for (Preda p : prede) {
                 System.out.println("   - Nuova simulazione di caccia contro: " + p);
                 predatore.caccia(p);
@@ -104,4 +104,3 @@ public class SimulatoreEcosistemaMontano {
         // dal punto di vista del compilatore abbiamo solo un "Predatore".
     }
 }
-

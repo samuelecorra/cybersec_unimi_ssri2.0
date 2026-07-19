@@ -13,7 +13,7 @@ public class toStringOverride {
 
     // E' una vera e propria "customizzazione" del metodo toString() per adattarlo alle esigenze specifiche della classe.
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         Studente studente1 = new Studente("Mario", "Rossi", 12345, 2,
                                         27.5, true, false);
 

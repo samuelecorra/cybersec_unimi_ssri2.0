@@ -10,7 +10,7 @@
 #include <string.h>            // direttiva per funzioni di manipolazione stringhe
 #include <ctype.h>             // direttiva per funzioni di manipolazione caratteri
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 

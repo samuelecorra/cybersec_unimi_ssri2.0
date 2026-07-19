@@ -31,13 +31,15 @@ Puoi avere 10 valori uguali con 10 chiavi diverse.
 ### **2.3. Accesso ultra-rapido**
 
 Il vantaggio centrale delle Map:
-→ trovare un valore conoscendo la chiave in tempo molto rapido (`O(1)` nelle HashMap).
+→ trovare un valore conoscendo la chiave in tempo `O(1)` **medio** in una
+`HashMap` ben dimensionata e con hash ben distribuiti. Non è una garanzia per
+ogni caso; collisioni e chiavi patologiche peggiorano il costo.
 
 ---
 
 # 🟦 **3. HashMap: l’implementazione più usata**
 
-`HashMap` è la Map standard. La userai il **99% delle volte**.
+`HashMap` è l'implementazione generale più comune quando non serve un ordine.
 
 Perché si chiama **Hash**?
 Perché usa una *funzione hash* per trasformare la chiave in un numero, sfruttato per trovare rapidamente il valore.
@@ -68,12 +70,13 @@ Ti faccio un esempio *didattico perfetto*, spiegato riga per riga.
 
 ```java
 import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
 
         // 1. Creo una HashMap con chiave String e valore Integer
-        HashMap<String, Integer> studenti = new HashMap<>();
+        Map<String, Integer> studenti = new HashMap<>();
 
         // 2. Inserisco elementi (Key, Value)
         studenti.put("Marco", 27);
@@ -96,9 +99,8 @@ public class Main {
         studenti.remove("Luca");
 
         // 7. Stampo tutti gli elementi
-        for (String chiave : studenti.keySet()) {
-            Integer valore = studenti.get(chiave);
-            System.out.println(chiave + " → " + valore);
+        for (Map.Entry<String, Integer> coppia : studenti.entrySet()) {
+            System.out.println(coppia.getKey() + " → " + coppia.getValue());
         }
     }
 }
@@ -123,11 +125,14 @@ studenti.put("Marco", 29); // sovrascrive
 
 ### ✔ `get(key)`
 
-Recupera il valore in O(1).
+Recupera il valore in tempo O(1) medio e restituisce `null` se la chiave non è
+presente. Poiché `HashMap` ammette anche valori `null`, per distinguere i due
+casi si usa `containsKey`.
 
-### ✔ `keySet()`
+### ✔ `entrySet()`
 
-Ottieni tutte le chiavi (iterazione tipica nelle Map).
+Se servono insieme chiave e valore, `entrySet()` evita una seconda ricerca con
+`get` per ogni chiave.
 
 ---
 

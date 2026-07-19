@@ -12,10 +12,11 @@ public class MioRunnable implements Runnable {
         // Codice da eseguire nel thread
         for (int i = 1; i <= 5; i++) {
             try {
-                Thread.sleep(1000); // Pausa di 500 millisecondi
+                Thread.sleep(1000); // Pausa di 1 secondo
                 System.out.println(testo);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                return;
             }
         }
     }

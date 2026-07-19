@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-int main() {
+int main(void) {
 
     int età = 0;
     char iniziale = '\0'; // carattere nullo

@@ -1,6 +1,7 @@
 package E0_esercizi_yt.T4_ConvertiTemperatura;
 
 import java.util.Scanner;
+import java.util.Locale;
 
 public class ConvertiTemperatura {
 
@@ -8,7 +9,7 @@ public class ConvertiTemperatura {
     // se vuole convertire da Celsius a Fahrenheit o viceversa, e poi gli chiediamo
     // la temperatura da convertire, per poi mostrargli il risultato.
 
-    static void main() {
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         double temperaturaInput;
@@ -18,7 +19,7 @@ public class ConvertiTemperatura {
         System.out.println("Convertitore di temperature!");
         System.out.println("Vuoi convertire in Celsius o Fahrenheit?");
         System.out.print("Inserisci C o F: ");
-        unita = sc.next().toUpperCase(); // leggiamo solo il primo carattere e lo portiamo in maiuscolo
+        unita = sc.next().trim().toUpperCase(Locale.ROOT); // leggiamo un token e lo portiamo in maiuscolo
 
         if (unita.equals("C")) {
             System.out.print("Inserisci la temperatura in Fahrenheit: ");
@@ -31,8 +32,10 @@ public class ConvertiTemperatura {
             temperaturaConvertita = (temperaturaInput * 9/5) + 32;
             System.out.printf("%.2f Celsius sono %.2f°%s.%n", temperaturaInput, temperaturaConvertita, unita);
         } else {
-            System.out.println("Scelta non valida. Per favore, esegui di nuovo il programma e scegli 1 o 2.");
+            System.out.println("Scelta non valida. Esegui di nuovo il programma e scegli C o F.");
         }
+
+        sc.close();
 
     }
 }

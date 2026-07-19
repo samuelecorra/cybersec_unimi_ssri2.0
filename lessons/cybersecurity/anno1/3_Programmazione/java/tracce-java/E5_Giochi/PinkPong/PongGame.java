@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class PongGame {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame finestra = new JFrame("Pink Pong - CyberSamu Edition");
             PannelloPong pannello = new PannelloPong();
@@ -53,6 +53,8 @@ enum Difficolta {
 // ===================== PANNELLO DI GIOCO =====================
 
 class PannelloPong extends JPanel implements ActionListener, KeyListener {
+
+    private static final long serialVersionUID = 1L;
 
     // Dimensioni finestra
     private static final int LARGHEZZA = 800;
@@ -115,7 +117,7 @@ class PannelloPong extends JPanel implements ActionListener, KeyListener {
         setFocusable(true);
         addKeyListener(this); // registriamo il pannello per ricevere eventi da tastiera
 
-        timerGioco = new Timer(1000 / 60, this); // 60 chiamate al secondo di actionPerformed
+        timerGioco = new Timer(1000 / 60, this); // circa 60 chiamate al secondo
         timerGioco.start();
     }
 
@@ -297,7 +299,7 @@ class PannelloPong extends JPanel implements ActionListener, KeyListener {
     // Overlay con il numero 3,2,1 al centro
     private void disegnaOverlayCountdown(Graphics2D g2d) {
         // Calcolo dei secondi rimanenti dal numero di frame
-        int secondiRimasti = fotogrammiCountdown / 60 + 1;
+        int secondiRimasti = Math.max(1, (fotogrammiCountdown + 59) / 60);
 
         g2d.setColor(COLORE_OVERLAY);
         g2d.fillRect(0, 0, LARGHEZZA, ALTEZZA);
@@ -440,26 +442,34 @@ class PannelloPong extends JPanel implements ActionListener, KeyListener {
         xPallina += velXPallina;
         yPallina += velYPallina;
 
-        // Rimbalzo su bordo alto/basso
-        if (yPallina <= 0 || yPallina + DIMENSIONE_PALLINA >= ALTEZZA) {
-            velYPallina = -velYPallina;
+        // Rimbalzo su bordo alto/basso, con riposizionamento entro il campo.
+        if (yPallina <= 0) {
+            yPallina = 0;
+            velYPallina = Math.abs(velYPallina);
+        } else if (yPallina + DIMENSIONE_PALLINA >= ALTEZZA) {
+            yPallina = ALTEZZA - DIMENSIONE_PALLINA;
+            velYPallina = -Math.abs(velYPallina);
         }
 
-        // Collisione con palette sinistra (IA)
-        if (xPallina <= xPalettaSinistra + LARGHEZZA_PALETTA &&
-                xPallina >= xPalettaSinistra &&
+        // Collisione AABB con paletta sinistra (IA), solo mentre la pallina va a sinistra.
+        if (velXPallina < 0 &&
+                xPallina <= xPalettaSinistra + LARGHEZZA_PALETTA &&
+                xPallina + DIMENSIONE_PALLINA >= xPalettaSinistra &&
                 yPallina + DIMENSIONE_PALLINA >= yPalettaSinistra &&
                 yPallina <= yPalettaSinistra + ALTEZZA_PALETTA) {
 
+            xPallina = xPalettaSinistra + LARGHEZZA_PALETTA;
             velXPallina = Math.abs(velXPallina); // assicuro che vada verso destra
         }
 
-        // Collisione con palette destra (giocatore)
-        if (xPallina + DIMENSIONE_PALLINA >= xPalettaDestra &&
-                xPallina + DIMENSIONE_PALLINA <= xPalettaDestra + LARGHEZZA_PALETTA &&
+        // Collisione AABB con paletta destra, solo mentre la pallina va a destra.
+        if (velXPallina > 0 &&
+                xPallina + DIMENSIONE_PALLINA >= xPalettaDestra &&
+                xPallina <= xPalettaDestra + LARGHEZZA_PALETTA &&
                 yPallina + DIMENSIONE_PALLINA >= yPalettaDestra &&
                 yPallina <= yPalettaDestra + ALTEZZA_PALETTA) {
 
+            xPallina = xPalettaDestra - DIMENSIONE_PALLINA;
             velXPallina = -Math.abs(velXPallina); // assicuro che vada verso sinistra
         }
 
@@ -506,6 +516,7 @@ class PannelloPong extends JPanel implements ActionListener, KeyListener {
         aggiornaMigliorPunteggio();
         punteggioSinistra = 0;
         punteggioDestra = 0;
+        resettaTasti();
 
         reimpostaPosizioni();
         avviaCountdown();
@@ -520,6 +531,7 @@ class PannelloPong extends JPanel implements ActionListener, KeyListener {
     // Mette il gioco in pausa
     private void mettiInPausa() {
         if (stato == StatoGioco.IN_GIOCO || stato == StatoGioco.CONTO_ALLA_ROVESCIA) {
+            resettaTasti();
             stato = StatoGioco.IN_PAUSA;
         }
     }
@@ -536,7 +548,13 @@ class PannelloPong extends JPanel implements ActionListener, KeyListener {
         aggiornaMigliorPunteggio();
         punteggioSinistra = 0;
         punteggioDestra = 0;
+        resettaTasti();
         stato = StatoGioco.MENU;
+    }
+
+    private void resettaTasti() {
+        frecciaSuPremuta = false;
+        frecciaGiuPremuta = false;
     }
 
     // Aggiorna il miglior punteggio e chi lo detiene (Giocatore o IA)

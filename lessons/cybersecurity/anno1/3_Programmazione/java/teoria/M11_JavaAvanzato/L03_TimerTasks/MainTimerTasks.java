@@ -12,7 +12,7 @@ public class MainTimerTasks {
         // Estenderemo la classe TimerTask per definire il nostro task personalizzato, ergo
         // creiamo una sub-classe che overrida il metodo run()
 
-    static void main() {
+    public static void main(String[] args) {
 
         // Innanzitutto servono due oggetti:
         Timer timer1 = new Timer();  // il timer che gestisce l'esecuzione dei task
@@ -22,7 +22,7 @@ public class MainTimerTasks {
 
             @Override
             public void run() {
-                System.out.println("Eseguendo il task come previsto: 3sec dopo!");
+                System.out.println("Esecuzione periodica del task. Conteggio: " + counter);
                 counter--;
                 if (counter == 0) {
                     System.out.println("Ho finito di contare, quindi termino il timer!");
@@ -31,8 +31,9 @@ public class MainTimerTasks {
             }
         };
 
-        timer1.schedule(task1, 3000); // Dopo una costante in ms, una singola volta
-        timer1.schedule(task1, 3000, 2000); // Dopo una costante in ms, ripetutamente ogni tot ms
+        // Un TimerTask può essere pianificato una sola volta: riusare la stessa
+        // istanza in due chiamate a schedule causerebbe IllegalStateException.
+        timer1.schedule(task1, 3000, 2000); // Prima esecuzione dopo 3 s, poi ogni 2 s
 
         // Però non possiamo eseguire all'infinito, quindi serve una condizione di uscita come nei loops!
 

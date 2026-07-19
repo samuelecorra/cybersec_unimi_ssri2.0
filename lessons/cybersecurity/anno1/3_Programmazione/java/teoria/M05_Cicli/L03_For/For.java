@@ -36,7 +36,7 @@ public class For {
             System.out.println("Elemento in posizione " + i + ": " + numeri[i]);
         }
 
-        // Costruiamo dinamicamente le interazioni
+        // Scegliamo dinamicamente il numero di iterazioni
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Quante volte iteriamo: ");
@@ -59,7 +59,7 @@ public class For {
         }
         System.out.println("Decollo!");
 
-        // E' possibile snellire la sintassi del for loop?
+        // È possibile snellire la sintassi del for loop?
 
         // 1. Sì, usando l'enhanced for loop:
         // 2. Sì, usando il metodo forEach che però non è un vero e proprio ciclo for, ma appunto un metodo!
@@ -71,6 +71,6 @@ public class For {
         System.out.println("Esempio 5: Usare il metodo forEach per stampare gli elementi di un array");
         Arrays.stream(numeri).forEach(numero -> System.out.println("Elemento: " + numero));
 
-        // NON FATECI CASO, LI VEDREMO PIU' AVANTI NEL CORSO!
+        // Stream e lambda verranno spiegati più avanti nel corso.
     }
 }

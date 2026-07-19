@@ -17,8 +17,8 @@ package M09_OOP.L15_Aggregazione;
  */
 public class Studente {
 
-    private String nome;
-    private String matricola;
+    private final String nome;
+    private final String matricola;
 
     public Studente(String nome, String matricola) {
         this.nome = nome;

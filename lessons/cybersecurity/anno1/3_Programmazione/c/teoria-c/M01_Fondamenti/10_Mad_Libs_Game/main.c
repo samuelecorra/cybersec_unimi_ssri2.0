@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <string.h> // necessario per strlen()
-#include <windows.h> // necessario per setlocale()
+#include <string.h>  // necessario per strcspn()
+#include <windows.h> // necessario per SetConsoleOutputCP()
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8);
 
@@ -15,23 +15,23 @@ int main() {
     // Chiediamo all'utente di inserire le parole
     printf("Inserisci un nome: ");
     fgets(nome, sizeof(nome), stdin);
-    nome[strlen(nome) - 1] = '\0'; // rimuovi il newline
+    nome[strcspn(nome, "\n")] = '\0'; // rimuovi il newline, se presente
 
     printf("Inserisci un verbo all'infinito: ");
     fgets(verbo, sizeof(verbo), stdin);
-    verbo[strlen(verbo) - 1] = '\0'; // rimuovi il newline
+    verbo[strcspn(verbo, "\n")] = '\0';
 
     printf("Inserisci un aggettivo invariabile per maschile/femminile: ");
     fgets(aggettivo, sizeof(aggettivo), stdin);
-    aggettivo[strlen(aggettivo) - 1] = '\0'; // rimuovi il newline
+    aggettivo[strcspn(aggettivo, "\n")] = '\0';
 
     printf("Inserisci un avverbio: ");
     fgets(avverbio, sizeof(avverbio), stdin);
-    avverbio[strlen(avverbio) - 1] = '\0'; // rimuovi il newline
+    avverbio[strcspn(avverbio, "\n")] = '\0';
 
     printf("Inserisci un luogo: ");
     fgets(luogo, sizeof(luogo), stdin);
-    luogo[strlen(luogo) - 1] = '\0'; // rimuovi il newline
+    luogo[strcspn(luogo, "\n")] = '\0';
 
     // Creiamo la storia
     printf("\nEcco la tua storia:\n");

@@ -8,23 +8,24 @@ Questa è una lezione *Feynman-style*, super chiara, super esplicita, con codice
 
 Un **thread** è come un “mini-programma” che vive dentro il tuo programma principale.
 
-Java permette di eseguire **più thread contemporaneamente**, così che il programma possa fare più cose allo stesso tempo.
+Java permette di eseguire più thread **concorrentemente**. Su più core possono
+anche procedere in parallelo; su un singolo core lo scheduler li alterna.
 
 ### 🎯 Perché è utile?
 
-Perché migliora enormemente le prestazioni quando devi fare operazioni:
+Perché può migliorare responsività o throughput quando devi gestire operazioni:
 
 * lente (file I/O)
 * di rete
 * attese
-* operazioni pesanti non-blocking
+* calcoli indipendenti, se sono disponibili più core
 * compiti in background
 
 ---
 
 # 🔵 **2. Due modi per creare un Thread**
 
-Ci sono esattamente due approcci ufficiali:
+Due approcci introduttivi a basso livello sono:
 
 ### **Opzione 1 — Estendere la classe `Thread` (più semplice, meno flessibile)**
 
@@ -90,7 +91,7 @@ public class Main {
 
 ### 🔍 Cosa succede?
 
-* `t1` e `t2` CORRONO davvero in parallelo.
+* `t1` e `t2` sono concorrenti e possono correre in parallelo.
 * L’output non sarà ordinato → normale, è multithreading.
 
 ---
@@ -117,7 +118,8 @@ class MyRunnable implements Runnable {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                return;
             }
         }
     }
@@ -143,7 +145,7 @@ public class Main {
 
 # 🟧 **5. Possiamo migliorarlo con le Lambda (Java moderno)**
 
-Se l'interfaccia ha **un solo metodo**, come Runnable, puoi scrivere:
+Se l'interfaccia ha **un solo metodo astratto**, come `Runnable`, puoi scrivere:
 
 ```java
 Thread t = new Thread(() -> {
@@ -175,7 +177,10 @@ Pulito, breve, professionale.
 
 Regola generale:
 
-### 👉 **Sempre meglio Runnable (o lambda).**
+### 👉 In genere separa il compito (`Runnable`) dal meccanismo che lo esegue.
+
+Nei programmi più grandi si preferiscono spesso `ExecutorService` e pool di
+thread, che gestiscono accodamento, riuso e arresto dei worker.
 
 ---
 
@@ -219,4 +224,3 @@ public class Main {
 ```
 
 ---
-

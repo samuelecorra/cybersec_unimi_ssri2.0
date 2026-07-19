@@ -14,7 +14,7 @@ public class Inheritance {
     // e poi classi derivate come "Mammifero", "Uccello", "Pesce", ecc.
     // Ogni classe derivata può avere attributi e metodi specifici, oltre a quelli ereditati dalla classe base.
 
-    static void main() {
+    public static void main(String[] args) {
 
         Gatto g1 = new Gatto("Garfield");
         g1.mostraInfoRegno(); // Metodo ereditato da Regno
@@ -29,6 +29,7 @@ public class Inheritance {
 
         // Possiamo anche creare una pianta
         Pianta p1 = new Pianta("Ficus", "Plantae");
+        p1.mostraInfoRegno(); // Metodo ereditato da Regno
         p1.fotosintetizza();   // Metodo specifico di Pianta
 
     }

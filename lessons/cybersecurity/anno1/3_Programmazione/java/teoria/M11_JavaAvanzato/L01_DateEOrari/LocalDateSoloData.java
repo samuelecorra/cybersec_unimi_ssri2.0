@@ -3,7 +3,7 @@ package M11_JavaAvanzato.L01_DateEOrari;
 import java.time.LocalDate;
 
 public class LocalDateSoloData {
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         LocalDate today = LocalDate.now();        // data di oggi
         LocalDate specific = LocalDate.of(2025, 11, 17);

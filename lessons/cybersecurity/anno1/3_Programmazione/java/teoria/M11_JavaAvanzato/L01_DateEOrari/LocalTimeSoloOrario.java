@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 public class LocalTimeSoloOrario {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         LocalTime now = LocalTime.now();
         LocalTime specific = LocalTime.of(14, 30, 15);
@@ -20,4 +20,3 @@ public class LocalTimeSoloOrario {
         // hanno metodi simili per operazioni di somma e sottrazione.
     }
 }
-

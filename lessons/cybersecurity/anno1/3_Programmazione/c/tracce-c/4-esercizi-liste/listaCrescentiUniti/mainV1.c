@@ -67,8 +67,8 @@ lista* unisciListe(lista* L1, lista* L2) {
     valore* corr1 = L1->testa;
     valore* corr2 = L2->testa;
 
-    // Dovendo scorrerle obbligatoriamente tutte, condizione di uscita è che entrambe
-    // non siano NULL
+    // Il merge prosegue finché entrambe le liste hanno un elemento da confrontare.
+    // Quando una termina, gli elementi residui dell'altra vengono copiati in coda.
     while (corr1 != NULL && corr2 != NULL) {
 
         // Confrontiamo i valori:

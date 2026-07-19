@@ -12,8 +12,8 @@ dove:
 M = montante (capitale finale dopo n periodi)
 C = capitale iniziale
 i = tasso annuo nominale (TAN) (es. 5% = 0,05)
-n = numero di periodi (anni, semestri, mesi… dipende da come è definito il tasso)
-m = numero di capitalizzazioni per periodo (es. 12 per mensile, 4 per trimestrale, 
+n = numero di anni
+m = numero di capitalizzazioni per anno (es. 12 per mensile, 4 per trimestrale,
 2 per semestrale, 1 per annuale)
 
 // L'implementazione cambia di poco rispetto a prima, vediamo come: */
@@ -22,7 +22,7 @@ m = numero di capitalizzazioni per periodo (es. 12 per mensile, 4 per trimestral
 #include <windows.h>           // direttiva per SetConsoleOutputCP()
 #include <math.h>               // direttiva per funzioni matematiche
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 

@@ -62,7 +62,8 @@ $$
 \text{scarto}_i = x_i - \mu
 $$
 
-È la **distanza** (positiva o negativa) tra il singolo dato e la media.
+È la **differenza con segno** tra il singolo dato e la media. La distanza
+non negativa dalla media è invece il valore assoluto $|x_i-\mu|$.
 
 #### **Esempio**
 
@@ -139,7 +140,8 @@ $$
 $$
 
 **Interpretazione:**
-in media, ogni valore si discosta di **circa 3 unità** dalla media.
+lo scarto quadratico medio ha radice pari a circa **3 unità**. Non significa
+che la distanza media assoluta dalla media sia 3: quella è una misura diversa.
 
 ---
 
@@ -158,7 +160,9 @@ Esempi:
 ### **9. Popolazione e campione**
 
 Se analizzi **tutti** i dati (popolazione intera), usi **N** nel denominatore.
-Se invece analizzi **solo un campione**, usi **N − 1** per correggere il bias di sottostima:
+Se invece stimi la varianza della popolazione a partire da **un campione**, usi
+**N − 1** per rendere non distorta la stima della varianza sotto le ipotesi del
+modello campionario:
 
 $$
 s = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2}
@@ -194,6 +198,6 @@ Quando i dati sono distribuiti “a campana” (curva normale):
 * La **media** dice *dove* stanno i dati.
 * Gli **scarti** dicono *di quanto* ogni dato si allontana.
 * La **varianza** misura *quanto sono ampie* queste distanze (ma in unità al quadrato).
-* La **deviazione standard** è la **media effettiva degli scarti**, espressa nelle **stesse unità** dei dati.
+* La **deviazione standard** è la **radice della media degli scarti quadratici**, espressa nelle **stesse unità** dei dati.
 
 ---

@@ -22,7 +22,7 @@ definiti da due dimensioni che facilitano l'astrazione: righe e colonne. */
 
 #include <stdio.h>
 
-int main() {
+int main(void) {
 
     // Se per un array monodimensionale usavamo una coppia di quadre,
     // per un array bidimensionale ne usiamo due coppie:
@@ -36,6 +36,7 @@ int main() {
     // correttamente gli indirizzi di memoria.
 
     int numeri[3][4]; // 3 righe e 4 colonne
+    printf("La matrice numeri può contenere %zu interi.\n", sizeof(numeri) / sizeof(numeri[0][0]));
 
     // In questo esempio, abbiamo dichiarato un array bidimensionale
     // chiamato "numeri" con 3 righe e 4 colonne. Questo significa che
@@ -51,10 +52,11 @@ int main() {
 
     // Oppure in modo più compatto:
 
-    int matriceCompatta[2][3] = {1, 2, 3, 4, 5, 6};
+    int matriceCompatta[2][3] = {{1, 2, 3}, {4, 5, 6}};
 
     // In entrambi i casi, abbiamo creato una matrice con 2 righe e
     // 3 colonne.
+    printf("Ultimo elemento della forma compatta: %d\n", matriceCompatta[1][2]);
 
 
 //=====================================================================================
@@ -100,7 +102,7 @@ int main() {
 
     // Oppure, per stampare la prima colonna:
     printf("Prima colonna della matrice: ");
-    for(int i = 0; i < 3; i++) { // 2
+    for(int i = 0; i < 3; i++) { // 3 righe
         printf("%d ", numeriDa1a9[i][0]); // Tutte le righe, prima colonna
     }
 

@@ -12,43 +12,48 @@ Qui trovi moduli brevi e mirati: dalla sintassi base fino a puntatori a funzione
 
 ## 🗂️ Struttura dei moduli
 
-- **[M1_Fondamenti](./M1_Fondamenti/)**  
-  Sintassi di base, tipi primitivi, `printf/scanf`, operatori aritmetici e relazionali, promozioni di tipo.
+- **[M01_Fondamenti](./M01_Fondamenti/)**
+  Struttura del programma, tipi fondamentali, `printf`/`scanf`, conversioni, overflow,
+  operatori aritmetici e bitwise, input testuale e primi progetti.
 
-- **[M2_Matematica](./M2_Matematica/)**  
-  Operatori e precedenze, overflow/underflow, floating point e cenni a `math.h`.
+- **[M02_Matematica](./M02_Matematica/)**
+  Funzioni di `math.h`, geometria, interesse semplice e composto, `rand`/`srand` e relativi limiti.
 
-- **[M3_Condizioni_&_Logica](./M3_Condizioni_&_Logica/)**  
-  `if/else`, `switch`, operatori logici, *short-circuit*, verità in C (qualsiasi valore ≠0 è *true*).
+- **[M03_Condizioni_&_Logica](./M03_Condizioni_&_Logica/)**
+  `if`/`else`, confronti tra stringhe, `switch`, condizioni annidate e operatori logici.
 
-- **[M4_Funzioni](./M4_Funzioni/)**  
-  Prototipi, *scope* e durata delle variabili, passaggio per valore, ricorsione, separazione `.h/.c`.
+- **[M04_Funzioni](./M04_Funzioni/)**
+  Dichiarazioni, definizioni e chiamate, `return`, passaggio per valore, ricorsione e scope.
 
-- **[M5_Cicli](./M5_Cicli/)**  
-  `for/while/do-while`, `break/continue`, pattern idiomatici, cenni di complessità sui loop annidati.
+- **[M05_Cicli](./M05_Cicli/)**
+  `for`/`while`/`do-while`, `break`/`continue`, cicli annidati e piccoli programmi interattivi.
 
-- **[M6_Arrays](./M6_Arrays/)**  
-  Array mono/bi-dimensionali, passaggio a funzione (decadimento a puntatore), basi delle stringhe C.
+- **[M06_Arrays](./M06_Arrays/)**
+  Array mono e bidimensionali, stringhe, array di stringhe, input e passaggio degli array alle funzioni.
 
-- **[M7_C_avanzato](./M7_C_avanzato/)**  
-  Ternary operator, typedef, enumerations, combinazioni dei precedenti...
+- **[M07_C_avanzato](./M07_C_avanzato/)**
+  Operatore condizionale, `typedef`, enumerazioni, `const`, durata e visibilità,
+  preprocessore, macro e include guard.
 
-- **[M8_Strutture](./M8_Strutture/)**  
-  `struct`, `typedef`, array di struct, struct annidate, passaggio per riferimento simulato.
+- **[M08_Strutture](./M08_Strutture/)**
+  `struct`, inizializzatori designati, array di struct, passaggio tramite puntatore,
+  padding e tagged union.
 
-- **[M9_Puntatori](./M9_Puntatori/)**  
-  Aritmetica dei puntatori, `*`/`&`, puntatori a `const`, doppi puntatori, stringhe come `char*`.
+- **[M09_Puntatori](./M09_Puntatori/)**
+  Operatori `*`/`&`, relazione tra array e puntatori, aritmetica entro i limiti,
+  puntatori multipli e parametri di uscita.
 
 - **[M10_File_Handling](./M10_File_Handling/)**  
-  `FILE*`, `fopen` (modalità testo/bin), `fgets/fscanf`, `fwrite/fread`, gestione errori ed EOF.
+  `FILE *`, modalità di `fopen`, lettura e scrittura testuale, EOF ed errori,
+  I/O binario e posizionamento con `fseek`.
 
 - **[M11_Allocazione_Dinamica](./M11_Allocazione_Dinamica/)**  
   `malloc/calloc/realloc/free`, *ownership*, *leak* e *dangling pointer*, pattern di inizializzazione.
 
 - **[M12_IMPORTANTE](./M12_IMPORTANTE/)**  
   Focus su due temi chiave:
-  - **[1_Puntatori_a_funzione](./M12_IMPORTANTE/1_Puntatori_a_funzione/)** — firme, callback, `qsort`, FSM/dispatch table.
-  - **[2_Liste_dinamiche](./M12_IMPORTANTE/2_Liste_dinamiche/)** — liste semplici/doppie, inserimento ordinato, rimozione, ricerca, *sentinel*.
+  - **[1_Puntatori_a_funzione](./M12_IMPORTANTE/1_Puntatori_a_funzione/)** — firme, alias e callback selezionabili.
+  - **[2_Liste_dinamiche](./M12_IMPORTANTE/2_Liste_dinamiche/)** — lista semplicemente concatenata, inserimento, rimozione e distruzione sicura.
 
 ---
 
@@ -60,13 +65,22 @@ Qui trovi moduli brevi e mirati: dalla sintassi base fino a puntatori a funzione
 ---
 
 ## 🛠️ Compilazione rapida (GCC)
-SI CONSIGLIA CODERUNNER, ESTENSIONE DI VSCODE SUPERCOMODA CHE PERMETTE DEBUG IN TERMINALE CON UN SINGOLO CLICK!
 
-ALTRIMENTI:
+Gli esempi che includono `windows.h` richiedono Windows e un ambiente GCC compatibile,
+come MinGW-w64. Code Runner può avviare rapidamente il comando configurato in VS Code;
+non sostituisce il debugger né il controllo dei warning del compilatore.
 
 ```bash
 # file singolo
-gcc -std=c17 -Wall -Wextra -O2 main.c -o main
+gcc -std=c17 -Wall -Wextra -Wpedantic -O2 main.c -o main
 
 # progetto con header
-gcc -std=c17 -Wall -Wextra -O2 *.c -o app
+gcc -std=c17 -Wall -Wextra -Wpedantic -O2 *.c -o app
+```
+
+Su sistemi Unix-like, gli esempi che usano `math.h` possono richiedere `-lm` in fase
+di linking. Il controllo sintattico più severo usato nella revisione è:
+
+```bash
+gcc -std=c17 -Wall -Wextra -Wpedantic -Wformat=2 -Wshadow -Wconversion -fsyntax-only main.c
+```

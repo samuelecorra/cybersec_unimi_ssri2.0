@@ -15,7 +15,7 @@ public class IntroGenerics {
     // che viene passato al type parameter quando si crea un'istanza di una classe generica
     // o si chiama un metodo generico.
 
-    static void main() {
+    public static void main(String[] args) {
 
         // In questo caso specifichiamo il type argument, non il qualsiasi type parameter
         ArrayList<String> frutti = new ArrayList<>(); // Il secondo diamond operator è opzionale da Java 7 in poi

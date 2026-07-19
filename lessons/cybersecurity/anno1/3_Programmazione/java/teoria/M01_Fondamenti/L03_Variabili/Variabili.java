@@ -1,20 +1,20 @@
 package M01_Fondamenti.L03_Variabili;
 
 public class Variabili {
-    static void main() {
-        // Una variabile è contenitore riusabile per un dato.
-        // A dire il vero è un'etichetta che punta a un'area di memoria,
-        // ma ai fini pratici si comporta come il valore attualmente memorizzato in quell'area.
+    public static void main(String[] args) {
+        // Una variabile è un nome associato a un dato di un tipo preciso.
+        // La Java Language Specification ne definisce semantica e valori;
+        // la disposizione fisica in memoria è un dettaglio della JVM.
 
-        // NON SIAMO PIU' IN C, non esistono solo tipi primitivi e user-defined.
+        // NON SIAMO PIÙ IN C: distinguiamo tipi primitivi e tipi di riferimento.
         // Dobbiamo introdurre, oltre agli appena citati, anche i tipi di riferimento (reference types).
 
         // TIPI PRIMITIVI
         // Sono i tipi di dato più semplici e basilari.
         int intero = 42;               // Numeri interi (4 byte)
         double decimale = 3.14;       // Numeri decimali (8 byte)
-        char carattere = 'A';         // Caratteri singoli (2 byte, Unicode)
-        boolean booleano = true;      // Valori logici (1 bit, true o false)
+        char carattere = 'A';         // Unità di codice UTF-16 senza segno a 16 bit
+        boolean booleano = true;      // Valori logici true/false; la dimensione in memoria non è fissata dal linguaggio
         // TIPI DI RIFERIMENTO
         // Sono tipi di dato più complessi che fanno riferimento a oggetti.
         String testo = "Ciao, mondo!"; // ATTENZIONE ALLA MAIUSCOLA! (sono oggetti, non tipi primitivi)

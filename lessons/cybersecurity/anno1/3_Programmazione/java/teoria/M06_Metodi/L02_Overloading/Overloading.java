@@ -6,6 +6,7 @@ public class Overloading {
     // L'overloading dei metodi è una caratteristica che consente di definire
     // più metodi con lo stesso nome all'interno della stessa classe,
     // purché abbiano firme diverse (diverso numero o tipo di parametri).
+    // Il solo tipo di ritorno non fa parte della firma e non basta a distinguere due overload.
 
     // Metodo somma per due interi
     static int somma(int a, int b) {
@@ -35,7 +36,7 @@ public class Overloading {
         return "Pizza con impasto: " + impasto + ", condimenti: " + condimenti + " e topping: " + topping;
     }
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("Somma di due interi: " + somma(5, 10));
         System.out.println("Somma di tre interi: " + somma(5, 10, 15));

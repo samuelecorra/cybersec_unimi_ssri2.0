@@ -1,36 +1,40 @@
 package M04_Stringhe.L01_MetodiStringhe;
 
+import java.util.Locale;
+
 public class MetodiStringhe {
-    static void main() {
+    public static void main(String[] args) {
         // I metodi delle stringhe in Java permettono di manipolare e
         // analizzare le stringhe in vari modi.
 
         String esempio = "Ciao, Mondo!";
 
-        // 1. length(): Restituisce la lunghezza della stringa
+        // 1. length(): restituisce il numero di unità di codice UTF-16,
+        // che può differire dal numero di code point Unicode percepiti.
         int lunghezza = esempio.length();
-        System.out.println("Lunghezza della stringa: " + lunghezza); // Output: 13
+        System.out.println("Lunghezza della stringa: " + lunghezza); // Output: 12
 
-        // 2. charAt(int index): Restituisce il carattere alla posizione specificata
-        char carattere = esempio.charAt(7);
-        System.out.println("Carattere alla posizione 7: " + carattere); // Output: M
+        // 2. charAt(int index): restituisce l'unità UTF-16 alla posizione specificata
+        char carattere = esempio.charAt(6);
+        System.out.println("Carattere alla posizione 6: " + carattere); // Output: M
         // 3. dualmente, indexOf(char c): Restituisce l'indice della prima occorrenza del carattere specificato
         int indice = esempio.indexOf('M');
-        System.out.println("Indice del carattere 'M': " + indice); // Output: 7
+        System.out.println("Indice del carattere 'M': " + indice); // Output: 6
         // 4. lastIndexOf(char c): Restituisce l'indice dell'ultima occorrenza del carattere specificato
         int ultimoIndice = esempio.lastIndexOf('o');
-        System.out.println("Ultimo indice del carattere 'o': " + ultimoIndice); // Output: 9
+        System.out.println("Ultimo indice del carattere 'o': " + ultimoIndice); // Output: 10
 
         // 5. toUpperCase(): Converte la stringa in maiuscolo
-        String maiuscolo = esempio.toUpperCase();
+        String maiuscolo = esempio.toUpperCase(Locale.ROOT);
         System.out.println("Stringa in maiuscolo: " + maiuscolo); // Output: CIAO, MONDO!
         // 6. toLowerCase(): Converte la stringa in minuscolo
-        String minuscolo = esempio.toLowerCase();
+        String minuscolo = esempio.toLowerCase(Locale.ROOT);
         System.out.println("Stringa in minuscolo: " + minuscolo); // Output: ciao, mondo!
 
-        // 7. trim(): Rimuove gli spazi bianchi iniziali e finali
+        // 7. strip(): Rimuove gli spazi bianchi Unicode iniziali e finali.
+        // trim() è il metodo storico e rimuove soltanto caratteri <= U+0020.
         String conSpazi = "   Spazi bianchi   ";
-        String senzaSpazi = conSpazi.trim();
+        String senzaSpazi = conSpazi.strip();
         System.out.println("Stringa senza spazi: '" + senzaSpazi + "'"); // Output: 'Spazi bianchi'
 
         // 8. replace(char oldChar, char newChar): Sostituisce tutte le occorrenze di un carattere con un altro
@@ -53,7 +57,7 @@ public class MetodiStringhe {
         System.out.println("La stringa contiene 'Mondo'? " + contiene); // Output: true
 
         // Quindi anche questo metodo si presta bene alle condizioni:
-        if (esempio.contains("Ciao")) {
+        if (esempio.startsWith("Ciao")) {
             System.out.println("La stringa inizia con un saluto.");
         } else {
             System.out.println("Nessun saluto trovato.");
@@ -64,6 +68,11 @@ public class MetodiStringhe {
         String altraStringa = "Ciao, Mondo!";
         boolean uguali = esempio.equals(altraStringa);
         System.out.println("Le due stringhe sono uguali? " + uguali); // Output: true
+
+        // == confronta l'identità dei riferimenti, non il contenuto testuale.
+        String copiaDistinta = new String("Ciao, Mondo!");
+        System.out.println("Stesso oggetto? " + (esempio == copiaDistinta)); // false
+        System.out.println("Stesso contenuto? " + esempio.equals(copiaDistinta)); // true
 
         // Questo metodo è molto utile per confrontare stringhe in condizioni:
         String passwordInserita = "segreta";

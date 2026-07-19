@@ -2,8 +2,8 @@ package M11_JavaAvanzato.L08_MultiThreading;
 
 public class MultiThreading {
 
-    // Promemoria: il thread è un flusso esecutivo di istruzioni che runna indipendentemente.
-    // Utile per background tasks o time-consumiung operations.
+    // Un thread è un flusso di esecuzione concorrente. È utile per attività in
+    // background o operazioni che attendono risorse esterne.
 
     // Il multithreading permette di eseguire più thread contemporaneamente.
     // Vantaggi:
@@ -11,7 +11,7 @@ public class MultiThreading {
     // 2. Utilizzo migliore delle risorse CPU (sfruttando core multipli)
     // 3. Semplificazione della gestione di operazioni concorrenti (es. server handling multiple clients)
 
-    static void main() {
+    public static void main(String[] args) {
 
         // MioRunnable mioRunnable = new MioRunnable();
         // Thread thread1 = new Thread(mioRunnable);
@@ -36,6 +36,8 @@ public class MultiThreading {
         }
         catch (InterruptedException e) {
             System.out.println("Il main thread è stato interrotto.");
+            Thread.currentThread().interrupt();
+            return;
         }
 
         System.out.println("Game over!");

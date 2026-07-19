@@ -31,25 +31,26 @@ public class EnhancedSwitches {
 
         System.out.println(giorno + " è un: " + tipoDiGiorno);
 
-        // Però a partire da Java 14, è stato introdotto l'Enhanced Switch,
-        // che utilizza la freccia "->" e non richiede l'uso di "break":
-        // La freccia è un operatore lambda, che vedremo più avanti.
+        // Le switch expression sono definitive da Java 14. Le regole con "->"
+        // non fanno fall-through e quindi non richiedono break. La stessa forma
+        // grafica compare nelle lambda, ma qui appartiene alla sintassi di switch.
 
         // Esempio di Enhanced Switch in Java
 
         Scanner sc = new Scanner(System.in);
 
+        System.out.print("Inserisci un giorno della settimana: ");
         String giorno2 = sc.nextLine();
-        String tipoDiGiorno2;
 
         // Utilizzo dell'enhanced switch per determinare il tipo di giorno
-        tipoDiGiorno = switch (giorno) {
+        String tipoDiGiorno2 = switch (giorno2) {
             case "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì" -> "Giorno lavorativo";
             case "Sabato", "Domenica" -> "Fine settimana";
             default -> "Giorno non valido";
         };
 
-        System.out.println(giorno + " è un: " + tipoDiGiorno);
+        System.out.println(giorno2 + " è un: " + tipoDiGiorno2);
+        sc.close();
 
     }
 }

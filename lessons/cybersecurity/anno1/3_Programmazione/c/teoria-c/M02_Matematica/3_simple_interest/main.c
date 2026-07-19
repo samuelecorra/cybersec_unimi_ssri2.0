@@ -19,7 +19,7 @@
 #include <windows.h>           // direttiva per SetConsoleOutputCP()
 #include <math.h>               // direttiva per funzioni matematiche
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 

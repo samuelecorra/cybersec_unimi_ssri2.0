@@ -27,7 +27,7 @@ public class Ternary {
         String esito = (voto >= 60) ? "Promosso" : "Bocciato";
         System.out.println("Esito dell'esame: " + esito);
 
-        // LA VERA DOMANDA E' - QUANDO E' PREFERIBILE USARE L'OPERATORE TERNARIO RISPETTO ALL'IF-ELSE?
+        // QUANDO È PREFERIBILE USARE L'OPERATORE TERNARIO RISPETTO ALL'IF-ELSE?
         // Risposta: Quando si tratta di assegnare valori in modo conciso basato su una condizione semplice.
         // Per condizioni più complesse o per eseguire più azioni, è meglio usare if-else.
 

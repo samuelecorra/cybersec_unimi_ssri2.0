@@ -3,11 +3,13 @@ package M01_Fondamenti.L05_UserInput;
 // Se in C c'era scanf mediante stdio.h, in Java per leggere l'input
 // da console si usa la classe Scanner, che fa parte del package java.util.
 import java.util.Scanner;
+import java.util.Locale;
 
 public class UserInput {
     public static void main(String[] args) {
         // Creiamo un oggetto Scanner per leggere l'input da console (System.in)
         Scanner scanner = new Scanner(System.in);
+        scanner.useLocale(Locale.ROOT); // separatore decimale '.' indipendente dal sistema
 
         // Con scanf usavamo i format specifiers (%d, %f, %s, ecc.),
         // in Java invece usiamo metodi specifici dell'oggetto Scanner
@@ -35,13 +37,18 @@ public class UserInput {
 
         // Chiediamo all'utente di inserire una stringa
         System.out.print("Inserisci una stringa: ");
-        scanner.nextLine(); // Consuma il newline rimasto dal nextDouble
         String testo = scanner.nextLine(); // Legge una linea di testo
         // scanner.nextLine(); non serve qui perché stiamo leggendo una linea completa
 
         // Chiediamo all'utente di inserire un singolo carattere
         System.out.print("Inserisci un singolo carattere: ");
-        char carattere = scanner.nextLine().charAt(0); // Legge una linea e prende il primo carattere
+        String rigaCarattere = scanner.nextLine();
+        if (rigaCarattere.isEmpty()) {
+            System.err.println("Non è stato inserito alcun carattere.");
+            scanner.close();
+            return;
+        }
+        char carattere = rigaCarattere.charAt(0); // prende la prima unità UTF-16 della riga
         // scanner.nextLine(); non serve qui perché stiamo leggendo una linea completa
 
         // Stampiamo i valori inseriti dall'utente

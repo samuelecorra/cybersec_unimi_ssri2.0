@@ -5,22 +5,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main() {
+int main(void) {
 
 
     // Qui come si può vedere inizializziamo un array di caratteri:
     // Il punto è che in C non esiste il tipo stringa, ma si usano gli array di caratteri
     // per rappresentare le stringhe di testo.
-    // Quindi, sia che noi dichiariamo un array di caratteri, sia che dichiariamo una stringa,
-    // in entrambi i casi stiamo effettivamente lavorando con un array di caratteri.
+    // Ogni stringa è memorizzata in un array di char, ma non ogni array di char è una
+    // stringa: per esserlo deve contenere un terminatore '\0' entro i propri limiti.
     
     char lettereDiDustin[] = {'D', 'u', 's', 't', 'i', 'n'};
     char nome1[] = "Dustin"; // dichiarazione e inizializzazione di una stringa
     
-    // E' proprio per questo che possiamo usare le funzioni di manipolazione delle stringhe
-    // anche su array di caratteri come quello sopra, che non sembrano contenere una
-    // stringa vera e propria ma solo una sequenza di caratteri!
-    for(int i = 0; i < strlen(lettereDiDustin); i++) {
+    // lettereDiDustin NON contiene '\0', quindi non può essere passato a strlen o %s:
+    // farlo leggerebbe oltre l'array e causerebbe comportamento indefinito. Per scorrere
+    // tutti i suoi elementi usiamo la dimensione dell'array.
+    size_t numeroLettere = sizeof(lettereDiDustin) / sizeof(lettereDiDustin[0]);
+    for(size_t i = 0; i < numeroLettere; i++) {
         printf("%c ", lettereDiDustin[i]);
     }
 
@@ -28,7 +29,8 @@ int main() {
 
     // Mentre qui ci sembra più ovvio che stiamo lavorando con una stringa ergo usare
     // le sue funzioni:
-    for(int i = 0; i < strlen(nome1); i++) {
+    size_t lunghezzaNome = strlen(nome1);
+    for(size_t i = 0; i < lunghezzaNome; i++) {
         printf("%c", nome1[i]);
     }
 
@@ -54,14 +56,16 @@ int main() {
 
     printf("\n\n");
 
-    // Come facciamo a generalizzare la condizione di i < strlen(nome1) per tutti gli
-    // array non sapendo il loro tipo e la loro dimensione?
+    // Come calcoliamo il numero di elementi di un vero array quando il suo tipo e la
+    // sua dimensione sono noti nel medesimo scope?
     // Semplice, usiamo sizeof() che ci restituisce la dimensione in byte
     // dell'array in questione, e la dividiamo per la dimensione in byte del tipo
     // di dato che contiene - ovvero del singolo elemento, 
     // ottenendo così il numero di elementi:
 
-    for(int i = 0; i < sizeof(nome1) / sizeof(nome1[0]); i++) {
+    // Per nome1 il rapporto vale 7 perché include anche il terminatore '\0'. Sottraiamo
+    // quindi 1 se vogliamo stampare soltanto i sei caratteri visibili.
+    for(size_t i = 0; i < (sizeof(nome1) / sizeof(nome1[0])) - 1; i++) {
         printf("%c", nome1[i]);
     }
 
@@ -71,16 +75,19 @@ int main() {
     // Facciamo lo stesso con un array non-stringa per sincerarci della validità del metodo:
     int numeri[] = {10, 20, 30, 40, 50};
 
-    int dimensioneArrayNumeri = sizeof(numeri) / sizeof(numeri[0]);
-    printf("Dimensione dell'array numeri: %d\n", dimensioneArrayNumeri);
+    size_t dimensioneArrayNumeri = sizeof(numeri) / sizeof(numeri[0]);
+    printf("Dimensione dell'array numeri: %zu\n", dimensioneArrayNumeri);
 
     // E la usiamo dentro al ciclo nella condizione:
-    for(int i = 0; i < dimensioneArrayNumeri; i++) {
+    for(size_t i = 0; i < dimensioneArrayNumeri; i++) {
         printf("%d ", numeri[i]);
     }
+
+    // Questa tecnica funziona solo dove l'oggetto è ancora un array. Quando un array
+    // viene passato a una funzione, il parametro è normalmente adattato a puntatore e
+    // sizeof restituisce la dimensione del puntatore, non il numero di elementi.
     
     printf("\n\n");
 
     return 0;
 }
-

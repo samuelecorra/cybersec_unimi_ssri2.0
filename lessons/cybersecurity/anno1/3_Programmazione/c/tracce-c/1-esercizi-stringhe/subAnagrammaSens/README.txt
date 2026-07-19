@@ -1,15 +1,8 @@
-// ESERCIZIO SULLA GESTIONE DI STRINGHE: SUB-ANAGRAMMI (VERSIONE CASE-SENSITIVE)
+ESERCIZIO: SUB-ANAGRAMMI CASE-SENSITIVE
 
-// Siano date due stringhe ALFABETICHE s1 e s2, modificabili direttamente nel main per comodità di test,
-// e dunque per garantire che funzioni tutto a prescindere dalle due stringhe scelte.
+La stringa s1 è un sub-anagramma di s2 quando ogni carattere di s1 compare in s2
+con frequenza almeno uguale. Il confronto distingue maiuscole e minuscole.
 
-// Si scriva una funzione che determini se s1 è un sub-anagramma di s2, ovvero se tutti i caratteri
-// della prima compaiono nella seconda con almeno la stessa frequenza.
-
-// Non è tassativo implementare un controllo che verifichi che le stringhe contengano solo caratteri alfabetici,
-// ma si presuppone che sia così. FACOLTATIVO: si implementi tale controllo.
-
-// La corrispondenza è case-sensitive, ovvero fa differenza tra maiuscole e minuscole.
-// Si veda poi anche la versione case-insensitive dello stesso esercizio.
-
-// C'E' UNA SOLA VERSIONE DI QUESTO ESERCIZIO, ottimizzata e ben strutturata.
+Il programma valida il dominio ASCII alfabetico, calcola entrambe le direzioni e
+usa una bitmask: bit 1 per s1 contenuta in s2, bit 2 per s2 contenuta in s1. Se
+entrambi sono attivi, le frequenze coincidono e le stringhe sono anagrammi completi.

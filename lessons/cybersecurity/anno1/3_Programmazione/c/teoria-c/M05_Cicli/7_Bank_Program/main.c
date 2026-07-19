@@ -13,7 +13,7 @@ void controllaSaldo(float saldo) {
 
 float prelevaDenaro(float saldo) {
     
-    float importoDaPrelevare;
+    float importoDaPrelevare = 0.0f;
     
     printf("Inserisci l'importo da prelevare: ");
     scanf("%f", &importoDaPrelevare);
@@ -31,9 +31,9 @@ float prelevaDenaro(float saldo) {
 }
 
 
-float depositaDenaro() {
+float depositaDenaro(void) {
     
-    float importoDaDepositare;
+    float importoDaDepositare = 0.0f;
     
     printf("Inserisci l'importo da depositare: ");
     scanf("%f", &importoDaDepositare);
@@ -45,19 +45,20 @@ float depositaDenaro() {
 
     } else {
         printf("Importo non valido. Il deposito deve essere maggiore di 0.\n");
+        return 0.0f; // nessun importo viene aggiunto al saldo
     }
 }
 
 //=====================================================================================
 
-int main() {
+int main(void) {
 
-    SetConsoleCP(CP_UTF8); // così non avremo problemi nel digitare sì con l'accento!
+    SetConsoleCP(CP_UTF8); // codifica UTF-8 per l'input della console Windows
     SetConsoleOutputCP(CP_UTF8); // Imposta la console per supportare i caratteri UTF-8
 
     float saldo = 1000.0f; // Saldo iniziale del conto
-    int scelta;
-    char conferma[3];
+    int scelta = 0;
+    char conferma[16];
 
     printf("Ciao Principessa,\nanche se sei ricca sfondata...\nBenvenuta nel tuo personalissimo programma per la gestione del tuo conto bancario!\n");
     
@@ -87,16 +88,16 @@ int main() {
             
             case 4:
 
-                printf("Sei sicuro di voler uscire? (sì/no): ");
-                scanf("%s", conferma);
+                printf("Sei sicuro di voler uscire? (si/no): ");
+                scanf("%15s", conferma); // limite coerente con la capacità del buffer
                 // Rimuoviamo il carattere di nuova linea rimasto nel buffer
                 getchar();
 
                 // Convertiamo la risposta in minuscolo per facilitare il confronto
                 for(int i = 0; conferma[i]; i++){
-                    conferma[i] = tolower(conferma[i]);
+                    conferma[i] = (char)tolower((unsigned char)conferma[i]);
                 }
-                if (strcmp(conferma, "sì") == 0) {
+                if (strcmp(conferma, "si") == 0) {
                     printf("Uscita dal programma. Arrivederci!\n");
                     exit(0);
                 } else {

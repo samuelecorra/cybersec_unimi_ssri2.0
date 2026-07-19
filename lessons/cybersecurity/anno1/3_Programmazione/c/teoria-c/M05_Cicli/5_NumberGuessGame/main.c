@@ -3,7 +3,7 @@
 #include <time.h>               // direttiva per time() per numeri casuali
 #include <windows.h>           // direttiva per SetConsoleOutputCP()
 
-int main() {
+int main(void) {
 
     // INDOVINA IL NUMERO - GIOCO SEMPLICE MA INTERESSANTE E INTERATTIVO!
 
@@ -27,7 +27,7 @@ int main() {
     
     printf("Inserisci e vediamo se ci hai azzecato al primo tentativo: ");
     scanf("%d", &rispostaGiocatore);
-    getchar(); // puliamo il buffer
+    getchar(); // consuma un carattere, qui atteso come newline dopo un input valido
     tentativi++;
 
     while (rispostaGiocatore != rispostaComputer) {
@@ -37,11 +37,12 @@ int main() {
             printf("Troppo alto! Riprova: ");
         }
         scanf("%d", &rispostaGiocatore);
-        getchar(); // puliamo il buffer
+        getchar(); // consuma un carattere, qui atteso come newline
         tentativi++;
     }
 
     // Se siamo qui, il giocatore ha indovinato
     printf("Complimenti! Hai indovinato il numero %d in %d tentativi!\n", rispostaComputer, tentativi);
 
+    return 0;
 }

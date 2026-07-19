@@ -39,7 +39,11 @@ Virgola mobile
 
 %f → numero floating-point in notazione decimale con parte intera e frazionaria
 
-%lf → come %f, ma per double (long float)
+Con printf, %f stampa un double: i float passati agli argomenti variadici vengono
+promossi automaticamente a double. %lf ha lo stesso significato di %f in printf.
+Con scanf la distinzione è invece essenziale: %f richiede float*, %lf richiede double*.
+
+%Lf → long double
 
 %F → come %f, ma usa sempre la F maiuscola per valori speciali (INF, NAN)
 
@@ -54,7 +58,7 @@ Virgola mobile
 
 Puntatori
 
-%p → indirizzo di memoria (tipicamente in esadecimale)
+%p → rappresentazione di un puntatore; l'argomento deve avere tipo void*
 
 
 Varie
@@ -89,14 +93,13 @@ tanti spazi quanti sono quelli necessari a raggiungere la larghezza minima
 - uno spazio ( ): il testo NON viene allineato, ma viene sempre stampato uno spazio
 davanti al numero se positivo, e il segno - se negativo (alternativa soft al +).
 
-- uno zero (0): il testo viene allineato a destra, e a sinistra vengono aggiunti
-tanti zeri quanti sono quelli necessari a raggiungere la larghezza minima. Questo è
-un modo interessante per fare estensioni di bit (bit padding) con gli zeri.
+- uno zero (0): per le conversioni numeriche compatibili, il campo viene completato
+a sinistra con zeri fino alla larghezza minima. È formattazione testuale, non estensione
+di bit del valore memorizzato.
 
-- un apostrofo ('): il testo viene allineato a destra, e a sinistra vengono aggiunti
-tanti spazi quanti sono quelli necessari a raggiungere la larghezza minima. Inoltre,
-viene usato il separatore delle migliaia (dipende dalla localizzazione, in Italia
-è il punto, in USA la virgola). // ATTENZIONE: non tutti i compilatori lo supportano!
+- un apostrofo ('): alcune piattaforme POSIX lo offrono come estensione per il
+raggruppamento locale delle cifre, ma non appartiene allo standard ISO C e non è
+portabile. Per questo non viene usato nell'esempio eseguibile sottostante.
 
 
 //================================================================================
@@ -138,8 +141,8 @@ printf("%#X\n", 255); // stampa: 0XFF
 
 %f e %e: il flag # garantisce la presenza del punto decimale, anche se non servirebbe.
 
-printf("%f\n", 5.0);   // stampa: 5.000000
-printf("%#f\n", 5.0);  // stampa: 5.000000.   // il punto resta sempre
+printf("%.0f\n", 5.0);   // stampa: 5
+printf("%#.0f\n", 5.0);  // stampa: 5.   (il punto resta presente)
 
 %g / %G: per default %g toglie zeri finali e anche il punto decimale se non servono. Con #, invece, li mantiene.
 
@@ -164,7 +167,7 @@ virgola mobile, o il numero massimo di caratteri da stampare per le stringhe.
 */
 
 #include <stdio.h>
-int main() {
+int main(void) {
     int anno = 2003;
     printf("%d\n", anno);      // stampa "2003"
     printf("%6d\n", anno);     // stampa "  2003" (due spazi a sinistra)
@@ -172,8 +175,9 @@ int main() {
     printf("%+6d\n", anno);    // stampa " +2003" (segno + esplicito)
     printf("% 6d\n", anno);    // stampa "  2003" (spazio per i positivi)
     printf("%06d\n", anno);    // stampa "002003" (due zeri a sinistra)
-    printf("%'6d\n", anno);    // stampa "2.003" (separatore delle migliaia) // non supportato, vedremo '6d e non il numero voluto
-    printf("%.2d\n", anno);   // stampa "2003" (precisione non ha effetto sugli interi!!)
+    // printf("%'6d\n", anno); // estensione non ISO C: risultato dipendente da piattaforma e locale
+    printf("%.2d\n", anno);    // stampa "2003": la precisione minima 2 è già superata
+    printf("%.6d\n", anno);    // stampa "002003": per gli interi indica il minimo di cifre
 
     double pi = 3.141592653589793;
     printf("%f\n", pi);        // stampa "3.141593" (default 6 cifre decimali)

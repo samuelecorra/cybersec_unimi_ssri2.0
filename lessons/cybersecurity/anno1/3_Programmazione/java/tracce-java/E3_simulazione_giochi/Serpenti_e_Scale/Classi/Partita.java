@@ -2,6 +2,7 @@ package E3_simulazione_giochi.Serpenti_e_Scale.Classi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Partita {
@@ -11,7 +12,7 @@ public class Partita {
     private final Tabellone tabellone;
     private final Scanner scanner;
 
-    public Partita(List<String> nomiGiocatori) {
+    public Partita(List<String> nomiGiocatori, Scanner scanner) {
         if (nomiGiocatori == null || nomiGiocatori.size() < 2) {
             throw new IllegalArgumentException("Servono almeno 2 giocatori");
         }
@@ -23,7 +24,7 @@ public class Partita {
         this.dado1 = new Dado(6);
         this.dado2 = new Dado(6);
         this.tabellone = new Tabellone();
-        this.scanner = new Scanner(System.in);
+        this.scanner = Objects.requireNonNull(scanner, "scanner");
     }
 
     public void gioca() {
@@ -89,4 +90,3 @@ public class Partita {
         System.out.println("Ha vinto: " + vincitore.getNome());
     }
 }
-

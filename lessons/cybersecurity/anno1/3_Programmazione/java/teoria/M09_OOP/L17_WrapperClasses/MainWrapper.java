@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class MainWrapper {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         // ============================================================
         // 1. ESEMPIO BASE: Autoboxing e Unboxing

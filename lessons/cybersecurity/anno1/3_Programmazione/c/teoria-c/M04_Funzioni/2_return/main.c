@@ -46,16 +46,13 @@ bool controlloMaggioreEtà(int età) {
 // ====================================================================================
 
 int massimo(int a, int b) {
-    if (a > b) {
-        return a; // Restituisce a se a è maggiore di b
-    } else if (a < b) {
-        return b; // Restituisce b altrimenti
-    } else {
-        return 0; // Restituisce 0 se a e b sono uguali
+    if (a >= b) {
+        return a; // se sono uguali, il massimo è comunque quel valore
     }
+    return b;
 }
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(65001);
 
@@ -96,12 +93,11 @@ int main() {
     printf("Inserisci due numeri interi (separati da spazio): ");
     scanf("%d %d", &num1, &num2);
     getchar();
-    int max = massimo(num1, num2);
-    
-    if (max != 0) {
+    if (num1 != num2) {
+        int max = massimo(num1, num2);
         printf("Il numero maggiore tra %d e %d è %d\n", num1, num2, max);
     } else {
-        printf("I numeri sono uguali!\n");
+        printf("I numeri sono uguali: il massimo è %d.\n", num1);
     }
 
     // Ecco finalmente spiegato il motivo per cui alla fine del main troviamo

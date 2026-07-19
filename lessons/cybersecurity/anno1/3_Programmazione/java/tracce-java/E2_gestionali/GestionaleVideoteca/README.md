@@ -9,7 +9,7 @@ Il sistema è composto da quattro classi principali:
 * `Film`
 * `Cliente`
 * `Videoteca`
-* `Solver` (programma principale con menu interattivo)
+* `VideotecaMain` (programma principale con menu interattivo)
 
 ---
 
@@ -22,7 +22,7 @@ L’obiettivo è progettare e implementare un mini–gestionale che sia in grado
     * identificativo univoco
     * titolo
     * genere
-    * numero di copie disponibili
+    * una copia disponibile per ogni comando `ADDFILM`
 
 2. **Aggiungere nuovi clienti** alla videoteca.
 
@@ -36,7 +36,7 @@ L’obiettivo è progettare e implementare un mini–gestionale che sia in grado
     * incremento del numero di copie
     * rimozione del film dalla lista del cliente
 
-5. **Interagire tramite comandi testuali**, grazie al menu fornito dal programma principale `Solver`.
+5. **Interagire tramite comandi testuali**, grazie al menu fornito dal programma principale `VideotecaMain`.
 
 Questo esercizio sviluppa capacità fondamentali di programmazione a oggetti, tra cui:
 
@@ -91,7 +91,7 @@ Contiene la logica principale.
 Liste gestite:
 
 * catalogo dei film
-* cliente registrati
+* clienti registrati
 
 Funzioni principali:
 
@@ -119,7 +119,7 @@ La ricerca di film e clienti avviene tramite scansione lineare delle liste.
 
 ---
 
-## 🔹 **4. Classe `Solver` – Menu testuale**
+## 🔹 **4. Classe `VideotecaMain` – Menu testuale**
 
 È l’interfaccia principale del programma.
 Mostra i comandi e gestisce l’interazione con l’utente tramite `Scanner`.
@@ -147,6 +147,9 @@ END
 ```
 
 Ogni comando stampa un messaggio che indica se l’operazione è andata a buon fine.
+Gli ID devono essere positivi; gli ID cliente sono univoci. Ripetere `ADDFILM`
+con lo stesso ID, titolo e genere aggiunge una singola copia fisica. Lo stesso ID
+associato a dati diversi viene rifiutato.
 
 ---
 

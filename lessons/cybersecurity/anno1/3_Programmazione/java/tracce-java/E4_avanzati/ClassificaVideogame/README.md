@@ -23,7 +23,7 @@ Le classi principali sono:
         * la **chiave** (`Integer`) è l’`id` del giocatore
         * il **valore** è l’oggetto `Giocatore` corrispondente
 
-* `MainClassifica`
+* `MainClassificaVideogame`
   Contiene il `main` con un menù testuale che permette di:
 
     * aggiungere un giocatore
@@ -95,13 +95,15 @@ Per questo la `HashMap` è perfetta quando la “chiave logica” del tuo oggett
           Comparator
               .comparingInt(Giocatore::getPunteggio)
               .reversed()
-              .thenComparing(Giocatore::getNickname)
+              .thenComparing(Giocatore::getNickname, String.CASE_INSENSITIVE_ORDER)
+              .thenComparingInt(Giocatore::getId)
       );
       ```
 
         * `comparingInt(Giocatore::getPunteggio)`: ordina per punteggio crescente
         * `.reversed()`: ribalta l’ordine → dal punteggio più alto al più basso
-        * `.thenComparing(Giocatore::getNickname)`: a parità di punteggio, ordina alfabeticamente per nickname.
+        * `.thenComparing(..., String.CASE_INSENSITIVE_ORDER)`: a parità di punteggio, ordina alfabeticamente per nickname senza distinguere maiuscole e minuscole;
+        * `.thenComparingInt(Giocatore::getId)`: se anche i nickname coincidono, usa l'id come ultimo criterio e rende l'ordine deterministico.
 
     * Infine stampa la classifica con una posizione (1°, 2°, 3°, …).
 

@@ -1,36 +1,70 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct {
-    int* divisori;
-    int count;
+    long long *divisori;
+    size_t count;
 } DivisoriArray;
 
-// ho scelto un array dinamico per semplicità di accesso e iterazione
+/*
+ * L'array dinamico offre memoria contigua e accesso per indice. Sono necessari
+ * due passaggi: il primo conta i divisori, il secondo riempie l'array.
+ */
+DivisoriArray divisori(long long n)
+{
+    DivisoriArray risultato = {NULL, 0};
+    if (n < 1) {
+        return risultato;
+    }
 
-DivisoriArray Divisori(long long n) {
-    DivisoriArray risultato = {NULL, 0}; // inizializzo il risultato
-    if (n<1) return risultato; // caso di input non valido
-    // conta i divisori
-    for (long long i = 1; i <= n; i++)
-        if (n % i == 0) // se i è un divisore
-            risultato.count++; // incremento il conteggio
-    // alloca l'array
-    risultato.divisori = malloc(risultato.count * sizeof(int)); // alloco memoria per i divisori    
-    int indice = 0; // indice per l'array dei divisori
-    for (long long i=1; i<=n; i++)
-        if (n%i == 0) // se i è un divisore
-            risultato.divisori[indice++] = i; // lo aggiungo all'array
+    for (long long i = 1; ; i++) {
+        if (n % i == 0) {
+            if (risultato.count == SIZE_MAX) {
+                return (DivisoriArray){NULL, 0};
+            }
+            risultato.count++;
+        }
+        if (i == n) {
+            break; /* evita l'overflow dell'incremento quando n == LLONG_MAX */
+        }
+    }
+
+    if (risultato.count > SIZE_MAX / sizeof *risultato.divisori) {
+        return (DivisoriArray){NULL, 0};
+    }
+    risultato.divisori = malloc(risultato.count * sizeof *risultato.divisori);
+    if (risultato.divisori == NULL) {
+        risultato.count = 0;
+        return risultato;
+    }
+
+    size_t indice = 0;
+    for (long long i = 1; ; i++) {
+        if (n % i == 0) {
+            risultato.divisori[indice++] = i;
+        }
+        if (i == n) {
+            break;
+        }
+    }
     return risultato;
 }
 
-int main() {
-    long long n = 83528476; // numero input positivo di esempio, di cui trovare i divisori
+int main(void)
+{
+    long long n = 83528476;
     printf("Divisori di %lld:\n", n);
-    DivisoriArray lista = Divisori(n); // chiamo la funzione
-    // stampa dei divisori (solo per test, richiesta dal main)
-    for (int i = 0; i < lista.count; i++) 
-        printf("%d  ", lista.divisori[i]); // stampo ogni divisore
-    free(lista.divisori); // libero la memoria allocata
-    return 0;
+
+    DivisoriArray lista = divisori(n);
+    if (lista.divisori == NULL) {
+        fprintf(stderr, "Input non valido o memoria insufficiente.\n");
+        return EXIT_FAILURE;
+    }
+    for (size_t i = 0; i < lista.count; i++) {
+        printf("%lld  ", lista.divisori[i]);
+    }
+    putchar('\n');
+    free(lista.divisori);
+    return EXIT_SUCCESS;
 }

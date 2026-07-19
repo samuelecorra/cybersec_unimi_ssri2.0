@@ -1,9 +1,8 @@
 /* FONDAMENTI DI C: STRUTTURA DI UN PROGRAMMA
 
-Un programma in C è essenzialmente una funzione, detta "main", ovvero appunto
-la funzione principale, che viene eseguita per prima quando il programma viene
-avviato. Tutta la logica interna del programma SOTTOSTÀ alla funzione main,
-che può a sua volta chiamare altre funzioni, definite dall'utente o predefinite.
+Ogni programma C ospitato deve definire una funzione chiamata "main": è il punto
+di ingresso invocato dall'ambiente di esecuzione. main può chiamare altre funzioni,
+definite dal programmatore oppure dichiarate dalle intestazioni della libreria standard.
 
 Non interessiamoci per ora a quello che possiamo scrivere dentro al main, bensì
 al suo esterno: infatti si noti subito che il main ha un tipo di ritorno, "int",
@@ -14,17 +13,15 @@ restituisce un valore intero al sistema operativo quando termina la sua esecuzio
 - 0 se il programma termina correttamente
 - un numero diverso da 0 se il programma termina con un errore
 
-// Quando non prende nulla in ingresso, ci sono due sintassi ugualmente valide:
-
-int main() {
-    // corpo della funzione
-}
-
-// oppure
+// Se non usiamo gli argomenti della riga di comando, la forma standard preferibile è:
 
 int main(void) {
     // corpo della funzione
 }
+
+// In C precedente a C23, una dichiarazione come int funzione() non è un prototipo:
+// lascia i parametri non specificati. Scrivere (void) dichiara invece esplicitamente
+// che la funzione non riceve parametri.
 
 Ma nulla vieta che il main possa ricevere dei parametri in ingresso, che per ora non ci
 interessano, ma che vedremo in futuro.
@@ -47,8 +44,8 @@ che iniziano con il simbolo #, e che servono a includere delle librerie,
 definire delle costanti, o altre operazioni di preprocessamento che sono dunque
 eseguite prima della compilazione vera e propria del codice. Le macro infatti
 rimpiazzano testualmente il codice sorgente prima che questo venga compilato, così
-come le librerie incluse con #include vengono "copiate e incollate" nel punto
-in cui sono incluse ancor prima che il compilatore inizi a leggere il codice!
+come il contenuto del file di intestazione indicato da #include viene inserito
+nel flusso di traduzione prima della compilazione vera e propria.
 
 Non includiamo le librerie INTERE, cioè non includiamo il loro implementativo.c,
 ma solo il loro file di intestazione .h, che contiene le dichiarazioni delle
@@ -64,7 +61,7 @@ successiva, detta appunto fase di linking, che avviene dopo la compilazione!
 
 #include <stdio.h>              // direttiva
 
-int main() {                    // ingresso nel main
+int main(void) {                // ingresso nel main
     printf("Hello, World!\n");  // corpo
     return 0;                   // del main
 }                               // uscita dal main
@@ -75,11 +72,11 @@ int main() {                    // ingresso nel main
 
 Qualche nota aggiuntiva:
 
-- Dal C99 in poi, se main termina senza un return, il compilatore sottintende 
-return 0;, ma è buona norma scriverlo sempre esplicitamente per chiarezza e portabilità.
+- Dal C99 in poi, raggiungere la graffa finale di main equivale a eseguire return 0;.
+  Scriverlo esplicitamente può comunque rendere più evidente il codice di uscita.
 
 - Ci sono due tipi di commenti in C:
-  - Commenti su più righe, racchiusi tra /* e */                                                /*
+  - Commenti su più righe, delimitati da slash-asterisco e asterisco-slash
   - Commenti su una sola riga, che iniziano con // e terminano alla fine della riga
 
 

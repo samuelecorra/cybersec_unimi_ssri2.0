@@ -9,12 +9,13 @@ public class MioRunnable implements Runnable {
                 Thread.sleep(1000); // Pausa di 1 secondo
             } catch (InterruptedException e) {
                 System.out.println("Il thread è stato interrotto...");
+                Thread.currentThread().interrupt();
+                return;
             }
 
             if(i == 5) {
                 System.out.println("\nTempo scaduto!");
-                // Forziamo l'uscita prematura del programma
-                System.exit(0);
+                return;
             }
         }
     }

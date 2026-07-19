@@ -50,7 +50,8 @@ public class Classifica {
                 Comparator
                         .comparingInt(Giocatore::getPunteggio)
                         .reversed()                    // prima chi ha punteggio più alto
-                        .thenComparing(Giocatore::getNickname) // a parità, per nickname
+                        .thenComparing(Giocatore::getNickname, String.CASE_INSENSITIVE_ORDER)
+                        .thenComparingInt(Giocatore::getId) // ordinamento totale e riproducibile
         );
 
         System.out.println("=== CLASSIFICA GIOCATORI ===");

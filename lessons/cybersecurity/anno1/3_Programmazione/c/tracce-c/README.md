@@ -8,56 +8,48 @@ Questa sezione raccoglie tutte le **tracce pratiche e gli esercizi svolti in lin
 ## 📂 Struttura delle sottocartelle
 
 ### `0-eightQueenProblemHARD`
-Contiene l’implementazione e le varianti del **problema delle otto regine**, classico dell’informatica combinatoria.  
-L’obiettivo è disporre 8 regine su una scacchiera 8×8 in modo che nessuna minacci le altre.  
-
-È la cartella “0-indexed” perché rappresenta l’area **più ardua e concettualmente profonda** dell’intero set.
+Svolge per fasi la traccia d’esame sulle **otto regine**: stampa dello stato,
+conteggio dei conflitti, euristica, caricamento da file, valutazione di una mossa e
+menu per la ricerca manuale. Include il PDF originale del docente; non implementa
+un risolutore automatico.
 
 ---
 
 ### `1-esercizi-stringhe`
-Esercizi dedicati alla **manipolazione di stringhe**:
-- Gestione di array di caratteri e terminatori `'\0'`
-- Confronto, concatenazione e ricerca di sottostringhe
-- Filtraggio di caratteri alfabetici / non alfabetici
-- Funzioni standard della libreria `<string.h>` (es. `strlen`, `strcmp`, `strcpy`, etc)
+Esercizi su anagrammi e sub-anagrammi case-sensitive/case-insensitive, conteggio
+delle frequenze e separazione di una stringa in liste di caratteri alfabetici e
+non alfabetici.
 
 ---
 
 ### `2-esercizi-matrici`
 Programmi centrati su **array bidimensionali (matrici)**:
-- Somma di righe, colonne e diagonali
-- Trasposizioni e simmetrie
-- Operazioni tra matrici (somma, prodotto, ecc.)
-- Esercizi con indici dinamici e cicli annidati
+- carattere più frequente;
+- somme delle diagonali passanti per ciascuna cella;
+- lettera minima tra gli adiacenti;
+- massimo e media degli otto adiacenti possibili;
+- confronto tra matrici allocate per righe e parametri VLA.
 
 ---
 
 ### `3-esercizi-file`
-Esercizi sull’**I/O con file**:
-- Apertura, lettura e scrittura di file testuali e binari  
-- Uso di `fopen`, `fscanf`, `fprintf` ed altre
-- Gestione di errori di accesso e chiusura file
-- Analisi e filtraggio di dati letti da file esterni
+Esercizi sull’**I/O con file di testo**: analisi di caratteri, parole, frasi e
+righe non vuote; costruzione di una lista ordinata a partire da interi letti da
+file; merge lineare di due sequenze ordinate con conservazione dei duplicati.
 
 ---
 
 ### `4-esercizi-liste`
-Esercizi su **liste concatenate (linked list)**:
-- Implementazione di strutture dinamiche con `malloc` e `free`
-- Inserimento in testa, coda e ordinato
-- Unione e intersezione di liste ordinate
-- Rimozione di duplicati e ricerca di elementi
+Esercizi su **liste concatenate** e strutture dinamiche: unione senza duplicati
+di due liste ordinate e calcolo dei divisori di un intero, proposto sia con una
+linked list sia con un array dinamico.
 
 ---
 
 ### `5-esercizi-generici`
-Raccolta di esercizi **miscellanei e trasversali** non appartenenti a un’unica categoria.  
-Possono includere:
-- Gestione di array dinamici
-- Algoritmi di ordinamento o ricerca
-- Esercizi di logica, aritmetica e controllo di flusso
-- Prototipi per esercizi d’esame
+Esercizi **miscellanei e trasversali**: media, varianza e deviazione standard su
+un array dinamico; confronto esatto e conteggio di frazioni in lista; merge di
+due file ordinati direttamente in una nuova lista concatenata.
 
 ---
 

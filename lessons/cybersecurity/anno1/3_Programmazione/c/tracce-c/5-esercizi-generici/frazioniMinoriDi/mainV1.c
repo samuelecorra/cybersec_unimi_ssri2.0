@@ -1,93 +1,108 @@
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <windows.h>
 
-// Innanzitutto serve una struttura 
-typedef struct frazione {
+typedef struct {
     int numeratore;
-    int denominatore;    
-} frazione;
+    int denominatore;
+} frac_t;
 
-// Dopodiché inseriamo le frazioni in una lista:
 typedef struct node {
-    frazione frazioneDelNodo;
-    struct node* next;
+    frac_t valore;
+    struct node *next;
 } node;
 
-// Ora la funzione per la conta:
-int contaLeFrazioniMinoriDi(node* testaLista, frazione valoreDiSoglia) {
-    
-    // Innanzitutto serve una variabile contatore:
-    int counter = 0;
-    printf("Contatore inizializzato a %d\n\n", counter);
+/*
+ * Confronta a/b e c/d senza conversioni in double. Prima rende positivi i
+ * denominatori, poi usa i prodotti incrociati: a/b < c/d se a*d < c*b.
+ * int64_t evita l'overflow del prodotto di due valori di tipo int.
+ */
+static bool frazioneMinore(frac_t sinistra, frac_t destra)
+{
+    int64_t a = sinistra.numeratore;
+    int64_t b = sinistra.denominatore;
+    int64_t c = destra.numeratore;
+    int64_t d = destra.denominatore;
 
-
-    // Dopodiché scopriamo a quanto equivale la frazione soglia:
-    double sogliaComeNumeroReale = (double)valoreDiSoglia.numeratore/valoreDiSoglia.denominatore;
-    printf("La frazione di soglia, convertita a numero Reale = %.2f\n\n", sogliaComeNumeroReale);
-
-    // Ora facciamo la stessa cosa con le varie frazioni della lista: è sufficiente un ciclo for
-    // ed ergo la lista sopra non deve essere doppiamente concatenata e nemmeno con sentinella,
-    // nel main basterà mettere il next dell'ultimo elemento a NULL!:
-    for(node* nodoDaScorrere = testaLista; nodoDaScorrere != NULL; nodoDaScorrere = nodoDaScorrere->next) {
-        // Facciamo crashare con errore se risulta inserito per errore uno 0 al denominatore della qualsiasi frazione della lista:
-        if(nodoDaScorrere->frazioneDelNodo.denominatore == 0) {
-            perror("Presente uno 0 al denominatore, termino.");
-            exit(EXIT_FAILURE);
-        }
-        // Se tutte le frazioni sono correttamente inserite nella lista, possiamo procedere:
-        double frazioneReale = (double)(nodoDaScorrere->frazioneDelNodo.numeratore)/nodoDaScorrere->frazioneDelNodo.denominatore;
-        if(frazioneReale < sogliaComeNumeroReale) {
-            printf("La frazione %d/%d, ovvero %.2f, è minore della soglia %.2f, incremento il contatore a: %d\n", nodoDaScorrere->frazioneDelNodo.numeratore, 
-                                                                                                                nodoDaScorrere->frazioneDelNodo.denominatore, 
-                                                                                                                frazioneReale, sogliaComeNumeroReale, counter + 1);
-            counter++;
-        }
-        else {printf("La frazione %d/%d, ovvero %.2f, NON è minore della soglia %.2f, contatore invariato a: %d\n", nodoDaScorrere->frazioneDelNodo.numeratore, 
-                                                                                                                nodoDaScorrere->frazioneDelNodo.denominatore, 
-                                                                                                                frazioneReale, sogliaComeNumeroReale, counter);
-        }
+    if (b < 0) {
+        a = -a;
+        b = -b;
     }
-
-    return counter;
+    if (d < 0) {
+        c = -c;
+        d = -d;
+    }
+    return a * d < c * b;
 }
 
-int main(void) {
+/* Restituisce -1 se la soglia o un elemento ha denominatore nullo. */
+int contaLeFrazioniMinoriDi(const node *testaLista, frac_t soglia)
+{
+    if (soglia.denominatore == 0) {
+        return -1;
+    }
 
-    SetConsoleOutputCP(65001);
+    int contatore = 0;
+    for (const node *corrente = testaLista;
+         corrente != NULL;
+         corrente = corrente->next) {
+        if (corrente->valore.denominatore == 0) {
+            return -1;
+        }
+        if (frazioneMinore(corrente->valore, soglia)) {
+            contatore++;
+        }
+    }
+    return contatore;
+}
 
-    // Creiamo una lista:
-    node* primoNodo = (node*) malloc(sizeof(node));
-    primoNodo->frazioneDelNodo.numeratore = 1;
-    primoNodo->frazioneDelNodo.denominatore = 2;
+static node *creaNodo(frac_t valore)
+{
+    node *nuovo = malloc(sizeof *nuovo);
+    if (nuovo != NULL) {
+        nuovo->valore = valore;
+        nuovo->next = NULL;
+    }
+    return nuovo;
+}
 
-    node* secondoNodo = (node*) malloc(sizeof(node));
-    secondoNodo->frazioneDelNodo.numeratore = 3;
-    secondoNodo->frazioneDelNodo.denominatore = 4;
-    primoNodo->next = secondoNodo;
+static void liberaLista(node *testa)
+{
+    while (testa != NULL) {
+        node *successivo = testa->next;
+        free(testa);
+        testa = successivo;
+    }
+}
 
-    node* terzoNodo = (node*) malloc(sizeof(node));
-    terzoNodo->frazioneDelNodo.numeratore = 5;
-    terzoNodo->frazioneDelNodo.denominatore = 6;
-    secondoNodo->next = terzoNodo;
-    terzoNodo->next = NULL; // Ultimo elemento della lista
+int main(void)
+{
+    node *primo = creaNodo((frac_t){1, 2});
+    node *secondo = creaNodo((frac_t){3, 4});
+    node *terzo = creaNodo((frac_t){5, 6});
+    if (primo == NULL || secondo == NULL || terzo == NULL) {
+        fprintf(stderr, "Errore di allocazione della memoria.\n");
+        free(primo);
+        free(secondo);
+        free(terzo);
+        return EXIT_FAILURE;
+    }
+    primo->next = secondo;
+    secondo->next = terzo;
 
-    // Definiamo la soglia:
-    frazione soglia;
-    soglia.numeratore = 2;
-    soglia.denominatore = 3;
+    frac_t soglia = {2, 3};
+    int risultato = contaLeFrazioniMinoriDi(primo, soglia);
+    if (risultato < 0) {
+        fprintf(stderr, "Una frazione ha denominatore nullo.\n");
+        liberaLista(primo);
+        return EXIT_FAILURE;
+    }
 
-    // Ora chiamiamo la funzione:
-    int risultato = contaLeFrazioniMinoriDi(primoNodo, soglia);
-    printf("Lo scorrimento della lista è terminato.\nFrazioni minori della soglia: %d", risultato);
-
-    printf("\nPremi un tasto per terminare...");
-    getchar();
-
-    // Libero la memoria allocata:
-    free(primoNodo);
-    free(secondoNodo);
-    free(terzoNodo);
-    return 0;
+    printf("Frazioni minori di %d/%d: %d\n",
+           soglia.numeratore,
+           soglia.denominatore,
+           risultato);
+    liberaLista(primo);
+    return EXIT_SUCCESS;
 }

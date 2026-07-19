@@ -11,25 +11,27 @@ public class Videoteca {
         this.clienti = new ArrayList<>(); // lista clienti vuota
     }
 
-    public void aggiungiFilm(Film film){
+    public boolean aggiungiFilm(Film film){
+        if (film == null) return false;
         for (Film f : catalogoFilm) {
             if (f.getId() == film.getId()) {
                 if (f.getTitolo().equals(film.getTitolo()) && f.getGenere().equals(film.getGenere())) {
                     f.incrementaCopie();
-                    System.out.println("Aggiunta una copia della pellicola. Copie del film: " + f.getCopie());
-                    return;
-                } else {
-                    System.out.println("Titolo o genere diversi dal film già registrato con questo ID");
-                    return;
+                    return true;
                 }
+                return false;
             }
         }
         catalogoFilm.add(film);
-        System.out.println("Film aggiunto: " + film.getTitolo() + " (" + film.getGenere() + ")");
+        return true;
     }
 
-    public void registraCliente(Cliente cliente){
+    public boolean registraCliente(Cliente cliente){
+        if (cliente == null || trovaCliente(cliente.getId()) != null) {
+            return false;
+        }
         clienti.add(cliente);
+        return true;
     }
 
     public boolean noleggiaFilm(int idFilm, int idCliente){
@@ -50,8 +52,7 @@ public class Videoteca {
             }
         }
         if(cliente == null) return false;
-        film.decrementaCopie();
-        System.out.println("Copie del film: " + film.getCopie());
+        if (!film.decrementaCopie()) return false;
         cliente.noleggiaFilm(film);
         return true;
     }
@@ -76,9 +77,16 @@ public class Videoteca {
         boolean restituito = cliente.restituisciFilm(idFilm);
         if (restituito) {
             film.incrementaCopie();
-            System.out.println("Copie del film: " + film.getCopie());
         }
         return restituito;
     }
-}
 
+    private Cliente trovaCliente(int idCliente) {
+        for (Cliente cliente : clienti) {
+            if (cliente.getId() == idCliente) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+}

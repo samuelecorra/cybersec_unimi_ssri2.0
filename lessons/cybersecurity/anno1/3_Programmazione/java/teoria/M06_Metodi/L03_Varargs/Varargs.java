@@ -11,7 +11,9 @@ public class Varargs {
     // di definire un metodo che accetta un numero variabile di argomenti
     // dello stesso tipo, senza dover fare overloading.
 
-    // Java si occupa di impacchettare gli argomenti in un array (studiare il Modulo 08 ad essi dedicato prima di procedere).
+    // Java impacchetta gli argomenti in un array. Qui basta sapere che length
+    // indica quanti valori sono arrivati e l'enhanced for li visita uno alla volta.
+    // Un metodo può avere un solo parametro varargs, sempre in ultima posizione.
 
     // ==============================================================
 
@@ -32,11 +34,13 @@ public class Varargs {
         for (double n : numeri) {
             somma += n;
         }
-        return numeri.length == 0 ? 0.0 : somma / numeri.length; // evitiamo divisione per zero
+        // La media dell'insieme vuoto non è definita: NaN lo rappresenta
+        // esplicitamente senza fingere che il risultato sia zero.
+        return numeri.length == 0 ? Double.NaN : somma / numeri.length;
     }
 
     // Testiamo i metodi nel main
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("Somma di 1, 2, 3: " + sommaVarargs(1, 2, 3));
         System.out.println("Somma di 10, 20, 30, 40, 50: " + sommaVarargs(10, 20, 30, 40, 50));

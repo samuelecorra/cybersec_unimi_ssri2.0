@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class BankingProgram {
 
     // Java Banking Program per principianti
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         // 1. Dichiarare le variabili necessarie:
         Scanner scanner = new Scanner(System.in);
@@ -22,6 +22,11 @@ public class BankingProgram {
             System.out.println("3. Preleva denaro");
             System.out.println("4. Esci");
             System.out.print("Scelta: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("Scelta non valida: inserisci un numero da 1 a 4.");
+                scanner.next();
+                continue;
+            }
             scelta = scanner.nextInt();
 
             // 3. Gestire le scelte dell'utente con uno switch:
@@ -44,6 +49,7 @@ public class BankingProgram {
                     break;
             }
         }
+        scanner.close();
     }
     // Creiamo i metodi ausilirari per deposito, prelievo e visualizzazione saldo
             static void viewBalance(double balance) {
@@ -53,14 +59,19 @@ public class BankingProgram {
             // Ritornano entrambi il nuovo saldo dopo l'operazione
             static double withdrawMoney(Scanner scanner, double balance) {
                 System.out.print("Inserisci l'importo da prelevare: €");
+                if (!scanner.hasNextDouble()) {
+                    System.out.println("Importo non valido: inserisci un numero.");
+                    scanner.next();
+                    return balance;
+                }
                 double amount = scanner.nextDouble();
-                if (amount > 0 && amount <= balance) {
+                if (!Double.isFinite(amount) || amount <= 0) {
+                    System.out.println("Importo non valido. Il prelievo deve essere positivo e finito.");
+                } else if (amount <= balance) {
                     balance -= amount;
                     System.out.printf("Hai prelevato: €%.2f%n", amount);
-                } else if (amount > balance) {
-                    System.out.println("Fondi insufficienti per questo prelievo.");
                 } else {
-                    System.out.println("Importo non valido. Il prelievo deve essere positivo.");
+                    System.out.println("Fondi insufficienti per questo prelievo.");
                 }
                 return balance;
             }
@@ -68,12 +79,17 @@ public class BankingProgram {
             // Idem, e ricordiamone la staticità!
             static double depositMoney(Scanner scanner, double balance) {
                 System.out.print("Inserisci l'importo da depositare: €");
+                if (!scanner.hasNextDouble()) {
+                    System.out.println("Importo non valido: inserisci un numero.");
+                    scanner.next();
+                    return balance;
+                }
                 double amount = scanner.nextDouble();
-                if (amount > 0) {
+                if (Double.isFinite(amount) && amount > 0) {
                     balance += amount;
                     System.out.printf("Hai depositato: €%.2f%n", amount);
                 } else {
-                    System.out.println("Importo non valido. Il deposito deve essere positivo.");
+                    System.out.println("Importo non valido. Il deposito deve essere positivo e finito.");
                 }
                 return balance;
             }

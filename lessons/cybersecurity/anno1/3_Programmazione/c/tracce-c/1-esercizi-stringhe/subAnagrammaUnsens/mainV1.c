@@ -1,94 +1,50 @@
+/* Versione base: costruisce due istogrammi da 26 contatori. */
+
+#include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
 
-#define alfabeto 26
+enum { LETTERE = 26 };
 
-// Definiamo la funzione con la quale lavoreremo:
-int isFirstSubOfSecond(char *str1, char *str2) {
+static int indiceLettera(unsigned char carattere) {
+    if (carattere >= 'A' && carattere <= 'Z') return (int)(carattere - 'A');
+    if (carattere >= 'a' && carattere <= 'z') return (int)(carattere - 'a');
+    return -1;
+}
 
-    int freq1[alfabeto] = {0};
-    int freq2[alfabeto] = {0};
-
-    // Contiamo le occorrenze di ciascuna lettera nelle due stringhe
-    for (int i = 0; str1[i] != '\0'; i++) { // Per tutti i caratteri della prima...
-        if (isalpha((unsigned char)str1[i])) { // Se il carattere letto è una lettera qualsiasi,
-            // sia minuscola che maiuscola
-            freq1[tolower((unsigned char)str1[i]) - 'a']++;
-        }
+static bool soloLettereAscii(const char *testo) {
+    if (testo == NULL || *testo == '\0') return false;
+    for (const unsigned char *p = (const unsigned char *)testo; *p != '\0'; ++p) {
+        if (indiceLettera(*p) < 0) return false;
     }
-    for (int i = 0; str2[i] != '\0'; i++) {
-        if (isalpha((unsigned char)str2[i])) {
-            freq2[tolower((unsigned char)str2[i]) - 'a']++;
-        }
-    }
+    return true;
+}
 
-    // Dobbiamo controllare se la prima è sub-anagramma della seconda ma anche il viceversa:
-    for (int i = 0; i < alfabeto; i++) {
-        if (freq1[i] > freq2[i]) {
-            return 0; // str1 non è sub-anagramma di str2
-        }
+static bool èSubanagramma(const char *richiesta, const char *disponibile) {
+    int occorrenzeRichieste[LETTERE] = {0};
+    int occorrenzeDisponibili[LETTERE] = {0};
+    for (const unsigned char *p = (const unsigned char *)richiesta; *p != '\0'; ++p) {
+        ++occorrenzeRichieste[indiceLettera(*p)];
     }
-    return 1; // str1 è sub-anagramma di str2
+    for (const unsigned char *p = (const unsigned char *)disponibile; *p != '\0'; ++p) {
+        ++occorrenzeDisponibili[indiceLettera(*p)];
     }
+    for (int i = 0; i < LETTERE; ++i) {
+        if (occorrenzeRichieste[i] > occorrenzeDisponibili[i]) return false;
+    }
+    return true;
+}
 
-// Allora reimplementiamo la medesima funzione ma conl controllo finale al contrario
-// per verificare se la seconda è sub anagramma della prima:
-int isSecondSubOfFirst(char *str1, char *str2) {
-    int freq1[alfabeto] = {0};
-    int freq2[alfabeto] = {0};
-
-    // Contiamo le occorrenze di ciascuna lettera nelle due stringhe
-    for (int i = 0; str1[i] != '\0'; i++) { // Per tutti i caratteri della prima...
-        if (isalpha((unsigned char)str1[i])) { // Se il carattere letto è una lettera qualsiasi,
-            // sia minuscola che maiuscola
-            freq1[tolower((unsigned char)str1[i]) - 'a']++;
-        } else { perror("Carattere non valido rilevato nella stringa passata.\n"
-                        "Il programma si arresterà");
-            return -1;
-        }
-    }
-    for (int i = 0; str2[i] != '\0'; i++) {
-        if (isalpha((unsigned char)str2[i])) {
-            freq2[tolower((unsigned char)str2[i]) - 'a']++;
-        } else { perror("Carattere non valido rilevato nella stringa passata.\n"
-                "Il programma si arresterà");
-            return -1;
-        }
+int main(void) {
+    const char *prima = "Causa";
+    const char *seconda = "Casa";
+    if (!soloLettereAscii(prima) || !soloLettereAscii(seconda)) {
+        fputs("Sono ammesse soltanto lettere ASCII A-Z e a-z.\n", stderr);
+        return 1;
     }
 
-    // Dobbiamo controllare se la prima è sub-anagramma della seconda ma anche il viceversa:
-    for (int i = 0; i < alfabeto; i++) {
-        if (freq2[i] > freq1[i]) {
-            return 0; // str2 non è sub-anagramma di str1
-        }
-    }
-    return 1; // str2 è sub-anagramma di str1
-    }
-
-// Testiamo subito: Causa e Casa saranno le due parole scelte:
-// ovviamente Causa NON è un sub-anagramma di Casa
-// MA IL VICEVERSA FUNZIONA: tutte le occorrenze delle lettere di Casa sono minori o uguali
-// a quelle di Causa!
-
-// Vediamolo:
-
-int main() {
-    
-    char str1[] = "Causa";
-    char str2[] = "Casa";
-
-    if (isFirstSubOfSecond(str1, str2)) {
-        printf("%s è un sub-anagramma di %s\n", str1, str2);
-    } else {
-        printf("%s NON è un sub-anagramma di %s\n", str1, str2);
-    }
-
-    if (isSecondSubOfFirst(str1, str2)) {
-        printf("%s è un sub-anagramma di %s\n", str2, str1);
-    } else {
-        printf("%s NON è un sub-anagramma di %s\n", str2, str1);
-    }
-
+    printf("\"%s\" %sè sub-anagramma di \"%s\".\n",
+           prima, èSubanagramma(prima, seconda) ? "" : "non ", seconda);
+    printf("\"%s\" %sè sub-anagramma di \"%s\".\n",
+           seconda, èSubanagramma(seconda, prima) ? "" : "non ", prima);
     return 0;
 }

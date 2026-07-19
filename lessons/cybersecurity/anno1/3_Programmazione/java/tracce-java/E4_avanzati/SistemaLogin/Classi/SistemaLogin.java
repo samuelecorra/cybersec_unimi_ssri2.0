@@ -10,31 +10,32 @@ public class SistemaLogin {
 
     // Registrazione di un nuovo utente
     public boolean registraUtente(String username, String password) {
-        if (username == null || password == null) {
-            System.out.println("Errore: username e password non possono essere null.");
+        String usernameNormalizzato = normalizzaUsername(username);
+        if (usernameNormalizzato == null || password == null || password.isEmpty()) {
+            System.out.println("Errore: username e password devono essere valorizzati.");
             return false;
         }
 
-        username = username.trim();
-        if (username.isEmpty()) {
-            System.out.println("Errore: username vuoto non consentito.");
+        if (utenti.containsKey(usernameNormalizzato)) {
+            System.out.println("Errore: lo username '" + usernameNormalizzato + "' è già registrato.");
             return false;
         }
 
-        if (utenti.containsKey(username)) {
-            System.out.println("Errore: lo username '" + username + "' è già registrato.");
-            return false;
-        }
-
-        Utente u = new Utente(username, password);
-        utenti.put(username, u);
-        System.out.println("Registrazione completata per l'utente: " + username);
+        Utente u = new Utente(usernameNormalizzato, password);
+        utenti.put(usernameNormalizzato, u);
+        System.out.println("Registrazione completata per l'utente: " + usernameNormalizzato);
         return true;
     }
 
     // Login: controllo username + password
     public boolean login(String username, String password) {
-        Utente u = utenti.get(username);
+        String usernameNormalizzato = normalizzaUsername(username);
+        if (usernameNormalizzato == null || password == null || password.isEmpty()) {
+            System.out.println("Login fallito: credenziali non valide.");
+            return false;
+        }
+
+        Utente u = utenti.get(usernameNormalizzato);
 
         if (u == null) {
             System.out.println("Login fallito: utente inesistente.");
@@ -42,7 +43,7 @@ public class SistemaLogin {
         }
 
         if (u.verificaPassword(password)) {
-            System.out.println("Login riuscito! Benvenuto, " + username + "!");
+            System.out.println("Login riuscito! Benvenuto, " + usernameNormalizzato + "!");
             return true;
         } else {
             System.out.println("Login fallito: password errata.");
@@ -52,7 +53,14 @@ public class SistemaLogin {
 
     // Cambio password (richiede vecchia password corretta)
     public boolean cambiaPassword(String username, String vecchiaPassword, String nuovaPassword) {
-        Utente u = utenti.get(username);
+        String usernameNormalizzato = normalizzaUsername(username);
+        if (usernameNormalizzato == null || vecchiaPassword == null || vecchiaPassword.isEmpty()
+                || nuovaPassword == null || nuovaPassword.isEmpty()) {
+            System.out.println("Cambio password fallito: dati non validi.");
+            return false;
+        }
+
+        Utente u = utenti.get(usernameNormalizzato);
 
         if (u == null) {
             System.out.println("Cambio password fallito: utente inesistente.");
@@ -65,7 +73,7 @@ public class SistemaLogin {
         }
 
         u.cambiaPassword(nuovaPassword);
-        System.out.println("Password cambiata con successo per l'utente: " + username);
+        System.out.println("Password cambiata con successo per l'utente: " + usernameNormalizzato);
         return true;
     }
 
@@ -77,8 +85,17 @@ public class SistemaLogin {
         }
 
         System.out.println("=== Utenti registrati ===");
-        for (Utente u : utenti.values()) {
-            System.out.println("- " + u.getUsername());
+        utenti.values().stream()
+                .map(Utente::getUsername)
+                .sorted(String.CASE_INSENSITIVE_ORDER)
+                .forEach(username -> System.out.println("- " + username));
+    }
+
+    private static String normalizzaUsername(String username) {
+        if (username == null) {
+            return null;
         }
+        String normalizzato = username.trim();
+        return normalizzato.isEmpty() ? null : normalizzato;
     }
 }

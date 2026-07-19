@@ -29,7 +29,7 @@ package M09_OOP.L15_Aggregazione;
  */
 public class MainAggregazione {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         // 1. Creiamo alcuni studenti (esistono da soli, senza corsi)
         Studente s1 = new Studente("Samuele", "S12345");

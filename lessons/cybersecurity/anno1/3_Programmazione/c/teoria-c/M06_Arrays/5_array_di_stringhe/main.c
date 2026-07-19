@@ -6,7 +6,7 @@ come possiamo rappresentare un array di stringhe? */
 #include <string.h>
 #include <windows.h>
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8);
 
@@ -35,11 +35,11 @@ int main() {
                           "Dattero" };
 
     // La rowSize non è altro che il numero di frutti nell'array:
-    int rowSize = sizeof(frutta) / sizeof(frutta[0]);
+    size_t rowSize = sizeof(frutta) / sizeof(frutta[0]);
 
     // E quindi ora la stampa è più flessibile:
-    for(int i = 0; i < rowSize; i++) {
-        printf("Frutto %d: %s\n", i + 1, frutta[i]);
+    for(size_t i = 0; i < rowSize; i++) {
+        printf("Frutto %zu: %s\n", i + 1, frutta[i]);
     }
 
     return 0;

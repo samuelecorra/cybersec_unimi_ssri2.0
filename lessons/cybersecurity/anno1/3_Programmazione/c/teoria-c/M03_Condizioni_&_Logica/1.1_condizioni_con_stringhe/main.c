@@ -11,7 +11,7 @@
 #include <stdbool.h>           // direttiva per usare il tipo bool
 #include <string.h>            // direttiva per funzioni di manipolazione stringhe
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 
@@ -25,8 +25,9 @@ int main() {
     // ("\n" in questo caso), o la lunghezza della stringa se non trovato.
     // Questo è utile per rimuovere il newline '\n' lasciando il resto della stringa intatto.
 
-    // lasciando il newline '\n' nel buffer di input. 
-    // Questo può dare problemi se poi usiamo un'altra scanf/fgets subito dopo.
+    // Se l'input entra interamente nel buffer, fgets acquisisce anche il newline e
+    // strcspn lo sostituisce nella stringa. Se la riga è troppo lunga, il newline
+    // resta invece nello stream e andrebbe consumato prima della lettura successiva.
 
     // E ora che abbiamo immagazzinato il nome, possiamo iniziare a divertirci:
 
@@ -37,6 +38,8 @@ int main() {
     } else {
         printf("Ciao persona che non è Principessa, non ho piacere di conoscerti!\n");
     }
+
+    return 0;
 }
 
 // Le funzioni built in per le stringhe come strlen() e strcmp() sono molto utili

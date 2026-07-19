@@ -2,11 +2,12 @@
 
 ## 🔵 1. Cos’è il multithreading?
 
-Il **multithreading** permette a un programma Java di eseguire **più parti di codice contemporaneamente**.
+Il **multithreading** permette a un programma Java di eseguire più parti di
+codice concorrentemente e, quando sono disponibili più core, anche in parallelo.
 
 Un *thread* è:
 
-> Un flusso di istruzioni indipendente che può lavorare in parallelo con altri.
+> Un flusso di istruzioni schedulato indipendentemente dagli altri.
 
 Esempi reali:
 
@@ -53,7 +54,7 @@ Più semplice, meno flessibile.
 
 ### ✔ Opzione 2 — **Implementare Runnable**
 
-Migliore, consigliata sempre.
+Più flessibile perché separa il compito dal thread che lo esegue.
 
 Li vediamo entrambi con codice perfetto.
 
@@ -74,7 +75,8 @@ class MyThread extends Thread {
             try {
                 Thread.sleep(500); // pausa di 0.5 secondi
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                return;
             }
         }
     }
@@ -181,7 +183,7 @@ Pulitissimo.
 Esempio:
 
 * il Thread A va in sleep → Thread B continua
-* tutto avviene in parallelo
+* l'altro thread può continuare in modo concorrente
 
 ---
 
@@ -225,7 +227,8 @@ t1.setPriority(Thread.MAX_PRIORITY); // 10
 t2.setPriority(Thread.MIN_PRIORITY); // 1
 ```
 
-Non garantisce l’ordine, ma influenza la scheduler JVM.
+Non garantisce né l'ordine né una quota precisa di CPU; JVM e sistema operativo
+possono trattare la priorità soltanto come un suggerimento.
 
 ---
 
@@ -296,4 +299,3 @@ public class Main {
 ```
 
 ---
-

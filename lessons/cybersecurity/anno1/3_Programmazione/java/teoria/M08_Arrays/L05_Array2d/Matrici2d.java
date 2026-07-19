@@ -1,16 +1,20 @@
 package M08_Arrays.L05_Array2d;
 
+import java.util.Arrays;
+
 public class Matrici2d {
 
     // Un array 2d in Java è fondamentalmente un array di array.
     // Ogni elemento dell'array principale è a sua volta un array.
 
-    // In matematichese, un array 2d può essere visto come una matrice!
+        // Se tutte le righe hanno la stessa lunghezza, un array 2D può essere
+        // visto come una matrice. Java consente anche array "frastagliati",
+        // nei quali le righe hanno lunghezze differenti.
     // Questo dettaglino è alla base dell'intelligenza artificiale,
     // specialmente nelle reti neurali, dove le matrici sono usate
     // per rappresentare i pesi delle connessioni tra i neuroni.
 
-    static void main() {
+    public static void main(String[] args) {
 
         // Partiamo col dichiarare tre array e poi un array 2d che li contiene.
         String[] frutta = {"Mela", "Banana", "Arancia"};
@@ -24,7 +28,14 @@ public class Matrici2d {
         // 1. Esempio sbagliato che può trarre in inganno:
         System.out.println("Esempio sbagliato:");
         for (String[] alimento : alimenti) {
-            System.out.println(alimento); // Stampa il riferimento di memoria
+            // Usa Object.toString(): tipo dell'array + hash identificativo.
+            // Non stampa né gli elementi né un indirizzo di memoria utilizzabile.
+            System.out.println(alimento);
+        }
+
+        System.out.println("Stampa delle righe con Arrays.toString():");
+        for (String[] riga : alimenti) {
+            System.out.println(Arrays.toString(riga));
         }
 
         // 2. Esempio corretto serve un nested loop:

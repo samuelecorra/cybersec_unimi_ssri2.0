@@ -43,7 +43,7 @@ public class Metodi {
         } else {
             System.out.println("Sei minorenne.");
         }
-        
+
     }
 
         // Esempio di metodo:
@@ -75,7 +75,8 @@ public class Metodi {
             return x * x; // restituisce il quadrato di x
         }
 
-        // Possiamo chiamare ricorsivamente quadrato per fare il cubo!
+        // Un metodo può riutilizzarne un altro: non è ricorsione, perché cuboDi
+        // non richiama sé stesso.
         static double cuboDi(double x) {
             return quadratoDi(x) * x; // restituisce il cubo di x
         }

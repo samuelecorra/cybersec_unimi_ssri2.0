@@ -407,8 +407,10 @@ Domanda naturale:
 “Ma a runtime, `List<String>` e `List<Integer>` sono tipi diversi?”
 
 In Java, **no**.
-A runtime esiste solo **`List`**, senza informazione sul tipo generico.
-Questo è il meccanismo di **type erasure** (cancellazione dei tipi).
+Le istanze `List<String>` e `List<Integer>` hanno la stessa classe runtime:
+non conservano l'argomento di tipo in modo da renderlo verificabile con
+`instanceof`. Il file `.class` può comunque conservare firme generiche utili
+alla reflection. Questo modello deriva dalla **type erasure**.
 
 ### 9.1. Cosa fa il compilatore
 
@@ -416,7 +418,7 @@ Quando compila una classe generica:
 
 1. **Sostituisce** i parametri di tipo (`T`) con il loro **bound** (o `Object` se non c’è bound).
 2. **Inserisce cast** dove serve.
-3. Elimina le informazioni sui parametri di tipo a runtime.
+3. Non crea classi runtime distinte per ogni argomento di tipo.
 
 Esempio intuitivo:
 
@@ -438,8 +440,10 @@ class Box {
 
 Il bello è che:
 
-* il compilatore controlla i tipi,
-* ma a runtime il bytecode rimane compatibile con il vecchio Java (pre-generics).
+* il compilatore controlla i tipi;
+* l'erasure ha consentito alle API generiche di interoperare con molto bytecode
+  e molte librerie precedenti ai generics. Non significa che un `.class`
+  compilato oggi sia eseguibile da una vecchia JVM.
 
 ### 9.2. Conseguenze pratiche
 
@@ -471,7 +475,8 @@ Per via dell’erasure:
 
 Nel Java moderno:
 
-* **tutte** le collezioni (`List`, `Set`, `Map`, `Queue`…) sono generiche;
+* le principali interfacce del Collections Framework (`List`, `Set`, `Map`,
+  `Queue`…) sono generiche;
 * moltissime API esposte dai framework (Spring, Hibernate, ecc.) usano generics;
 * la programmazione generica è essenziale per:
 
@@ -500,7 +505,7 @@ devi essere **molto a tuo agio** con:
 * Generics introdotti in **Java 5 (J2SE 5.0, 2004)**.
 * Servono per:
 
-    * **type safety** (niente più `ClassCastException` per errori banali),
+    * **type safety** (molti errori di tipo vengono intercettati in compilazione),
     * **riusabilità** (una classe/metodo funziona con tanti tipi),
     * **leggibilità** (meno cast, tipi espliciti).
 * Sintassi base:
@@ -516,4 +521,5 @@ devi essere **molto a tuo agio** con:
     * `<T extends Number>` (upper bound),
     * `<T extends Number & Comparable<T>>`,
     * wildcard: `List<?>`, `List<? extends Number>`, `List<? super Integer>`.
-* Sotto il cofano: **type erasure** → compatibilità con il vecchio bytecode, ma niente informazioni di tipo a runtime.
+* Sotto il cofano: **type erasure** → nessuna classe runtime distinta per
+  `List<String>` e `List<Integer>`, pur potendo restare metadati nelle firme.

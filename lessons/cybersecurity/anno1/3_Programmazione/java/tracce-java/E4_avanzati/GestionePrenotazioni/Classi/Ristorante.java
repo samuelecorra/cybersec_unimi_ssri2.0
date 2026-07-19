@@ -1,6 +1,7 @@
 package E4_avanzati.GestionePrenotazioni.Classi;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,12 @@ public class Ristorante {
      * -2 = numero persone supera la capienza massima del ristorante
      */
     public int prenotaTavoloAutomatico(String nomeCliente, int numeroPersone) {
+        Prenotazione prenotazione = new Prenotazione(nomeCliente, numeroPersone);
+
+        if (tavoli.isEmpty()) {
+            return -1;
+        }
+
         // Trova la capienza massima tra tutti i tavoli
         int capienzaMassima = 0;
         for (Tavolo t : tavoli.values()) {
@@ -48,15 +55,17 @@ public class Ristorante {
             return -2;
         }
 
-        // Cerca il primo tavolo libero adatto
-        for (Tavolo t : tavoli.values()) {
-            int numeroTavolo = t.getNumero();
-            // Se è libero e abbastanza capiente
-            if (!prenotazioni.containsKey(numeroTavolo) && t.getPosti() >= numeroPersone) {
-                Prenotazione p = new Prenotazione(nomeCliente, numeroPersone);
-                prenotazioni.put(numeroTavolo, p);
-                return numeroTavolo; // Ritorna il numero del tavolo prenotato
-            }
+        // Sceglie il tavolo libero più piccolo che sia abbastanza capiente.
+        Tavolo migliore = tavoli.values().stream()
+                .filter(t -> !prenotazioni.containsKey(t.getNumero()))
+                .filter(t -> t.getPosti() >= numeroPersone)
+                .min(Comparator.comparingInt(Tavolo::getPosti)
+                        .thenComparingInt(Tavolo::getNumero))
+                .orElse(null);
+
+        if (migliore != null) {
+            prenotazioni.put(migliore.getNumero(), prenotazione);
+            return migliore.getNumero();
         }
 
         // Nessun tavolo libero trovato
@@ -86,6 +95,7 @@ public class Ristorante {
                 liberi.add(t);
             }
         }
+        liberi.sort(Comparator.comparingInt(Tavolo::getNumero));
         return liberi;
     }
 
@@ -116,6 +126,7 @@ public class Ristorante {
                 occupati.add(t);
             }
         }
+        occupati.sort(Comparator.comparingInt(Tavolo::getNumero));
         return occupati;
     }
 

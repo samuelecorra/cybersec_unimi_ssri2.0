@@ -8,28 +8,34 @@ public class Cliente {
     private final int id;
     private final String nome;
     private final List<Film> filmNoleggiati;
-    private int numeroFilmNoleggiati;
 
     // COSTRUTTORE
     public Cliente(int id, String nome) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("L'ID del cliente deve essere positivo.");
+        }
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("Il nome del cliente non può essere vuoto.");
+        }
         this.id = id;
-        this.nome = nome;
+        this.nome = nome.trim();
         this.filmNoleggiati = new ArrayList<>();
-        this.numeroFilmNoleggiati = 0;
     }
 
     // GETTERS
     public int getId() { return id; }
     public String getNome() { return nome; }
-    public List<Film> getFilmNoleggiati() { return filmNoleggiati; }
-    public int getNumeroFilmNoleggiati() { return numeroFilmNoleggiati; }
+    public List<Film> getFilmNoleggiati() { return List.copyOf(filmNoleggiati); }
+    public int getNumeroFilmNoleggiati() { return filmNoleggiati.size(); }
 
     // METODI
 
     // Aggiunge una copia fisica alla lista dei film noleggiati dal cliente
     public void aggiungiAiNoleggiati(Film film) {
+        if (film == null) {
+            throw new IllegalArgumentException("Il film noleggiato non può essere nullo.");
+        }
         filmNoleggiati.add(film);
-        numeroFilmNoleggiati++;
     }
 
     /*
@@ -39,11 +45,10 @@ public class Cliente {
      *  - null se il cliente non ha una copia con quell'id
      */
     public Film restituisciFilm(int idFilm) {
-        for (Film f : filmNoleggiati) {
+        for (int i = 0; i < filmNoleggiati.size(); i++) {
+            Film f = filmNoleggiati.get(i);
             if (f.getId() == idFilm) {
-                filmNoleggiati.remove(f);
-                numeroFilmNoleggiati--;
-                return f;
+                return filmNoleggiati.remove(i);
             }
         }
         return null;
@@ -54,7 +59,7 @@ public class Cliente {
     public String toString() {
         return "Cliente{id=" + id +
                 ", nome='" + nome + '\'' +
-                ", numeroFilmNoleggiati=" + numeroFilmNoleggiati +
+                ", numeroFilmNoleggiati=" + getNumeroFilmNoleggiati() +
                 ", filmNoleggiati=" + filmNoleggiati +
                 '}';
     }

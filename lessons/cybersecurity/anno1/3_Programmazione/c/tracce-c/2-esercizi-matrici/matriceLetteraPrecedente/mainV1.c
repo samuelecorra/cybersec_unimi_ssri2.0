@@ -1,111 +1,115 @@
+#include <stdint.h>
+#include <limits.h>
 #include <stdio.h>
-#include <stdlib.h> // per allocazione dinamica e gestione errori
-#include <ctype.h> // per isalpha e tolower
+#include <stdlib.h>
 
-char** genMatrix(int dim) { // Funzione di generazione per evitare define
-    char** m = (char**)malloc(dim * sizeof(char*)); // alloco righe
-    if (m == NULL) {
-        fprintf(stderr, "Errore di allocazione memoria per righe\n");
-        exit(EXIT_FAILURE);
-    }
+static char **allocaMatrice(size_t dimensione) {
+    if (dimensione == 0 || dimensione > SIZE_MAX / sizeof(char *)
+        || dimensione > (size_t)LONG_MAX) return NULL;
+    char **matrice = calloc(dimensione, sizeof *matrice);
+    if (matrice == NULL) return NULL;
 
-    for (int row = 0; row < dim; row++) {
-        m[row] = (char*)malloc(dim * sizeof(char)); // alloco colonne
-        if (!m[row]) { // forma compatta equivalente di (m[row] == NULL)
-            fprintf(stderr, "Errore di allocazione memoria per colonne\n");
-            exit(EXIT_FAILURE);
+    for (size_t riga = 0; riga < dimensione; ++riga) {
+        matrice[riga] = malloc(dimensione * sizeof *matrice[riga]);
+        if (matrice[riga] == NULL) {
+            while (riga > 0) free(matrice[--riga]);
+            free(matrice);
+            return NULL;
         }
     }
-
-    printf("Matrice %dx%d generata con successo.\n", dim, dim);
-    printf("Premi r/R per usarla come matrice risultante (vuota)\n"
-           "Oppure qualsiasi altro tasto usarla come iniziale da popolare: ");
-    char choice;
-    scanf(" %c", &choice);
-    if (choice == 'r' || choice == 'R') {
-        return m; // restituisco la matrice vuota
-    }
-
-    for(int row = 0; row < dim; row++) {
-        for(int col = 0; col < dim; col++) { // Popoliamo
-            printf("Inserisci la lettera [%d][%d]: ", row, col);
-            scanf(" %c", &m[row][col]); // lo spazio prima di %c serve a ignorare eventuali newline o spazi
-            while(!isalpha(m[row][col])) {
-                printf("InvalidInput. Inserisci la lettera [%d][%d]: ", row, col);
-                scanf(" %c", &m[row][col]);
-            }
-        }
-    }
-    return m;
+    return matrice;
 }
 
-char** processMatrix(char** originale, int dim) {
-    char** risultante = genMatrix(dim); // premi r/R per averla vuota
+static void liberaMatrice(char **matrice, size_t dimensione) {
+    if (matrice == NULL) return;
+    for (size_t riga = 0; riga < dimensione; ++riga) free(matrice[riga]);
+    free(matrice);
+}
 
-    const int directions[8][2] = {
-        {-1,-1},{-1,0},{-1,1},
-        { 0,-1},        { 0,1}, // spostamenti per raggiungere tutti i vicini
-        { 1,-1},{ 1,0},{ 1,1}
+static int indiceLettera(unsigned char carattere) {
+    if (carattere >= 'A' && carattere <= 'Z') return (int)(carattere - 'A');
+    if (carattere >= 'a' && carattere <= 'z') return (int)(carattere - 'a');
+    return -1;
+}
+
+static int leggiMatrice(char **matrice, size_t dimensione) {
+    for (size_t riga = 0; riga < dimensione; ++riga) {
+        for (size_t colonna = 0; colonna < dimensione; ++colonna) {
+            char carattere = '\0';
+            printf("Lettera [%zu][%zu]: ", riga, colonna);
+            if (scanf(" %c", &carattere) != 1 || indiceLettera((unsigned char)carattere) < 0) {
+                fputs("È richiesta una lettera ASCII A-Z o a-z.\n", stderr);
+                return 0;
+            }
+            matrice[riga][colonna] = carattere;
+        }
+    }
+    return 1;
+}
+
+static char **elaboraMatrice(char *const originale[], size_t dimensione) {
+    char **risultato = allocaMatrice(dimensione);
+    if (risultato == NULL) return NULL;
+
+    static const int direzioni[8][2] = {
+        {-1,-1}, {-1,0}, {-1,1}, {0,-1}, {0,1}, {1,-1}, {1,0}, {1,1}
     };
+    for (size_t riga = 0; riga < dimensione; ++riga) {
+        for (size_t colonna = 0; colonna < dimensione; ++colonna) {
+            int indiceMinimo = 26;
+            char carattereMinimo = '\0';
+            for (size_t d = 0; d < 8; ++d) {
+                long rigaVicina = (long)riga + direzioni[d][0];
+                long colonnaVicina = (long)colonna + direzioni[d][1];
+                if (rigaVicina < 0 || colonnaVicina < 0
+                    || rigaVicina >= (long)dimensione || colonnaVicina >= (long)dimensione) continue;
 
-    for (int row = 0; row < dim; row++) {
-        for (int col = 0; col < dim; col++) {
-
-            char bestLower = '{';      // '{' è 1 oltre 'z' in ASCII => sentinella
-            char bestOrig  = '?';      // placeholder
-
-            for (int d = 0; d < 8; d++) { // Dunque complessità totale O(8 * n^2) = O(n^2)
-                int nr = row + directions[d][0];
-                int nc = col + directions[d][1];
-                if (nr < 0 || nr >= dim || nc < 0 || nc >= dim) continue;
-
-                char candOrig  = originale[nr][nc];
-                char candLower = (char)tolower((unsigned char)candOrig);
-
-                if (candLower < bestLower) {
-                    bestLower = candLower;
-                    bestOrig  = candOrig;  // mantieni il case originale
+                char candidato = originale[rigaVicina][colonnaVicina];
+                int indice = indiceLettera((unsigned char)candidato);
+                if (indice < indiceMinimo) {
+                    indiceMinimo = indice;
+                    carattereMinimo = candidato; // conserva il case del primo minimo incontrato
                 }
             }
-
-            risultante[row][col] = bestOrig;
+            risultato[riga][colonna] = carattereMinimo;
         }
     }
-    return risultante;
+    return risultato;
 }
 
+static void stampaMatrice(char *const matrice[], size_t dimensione) {
+    for (size_t riga = 0; riga < dimensione; ++riga) {
+        for (size_t colonna = 0; colonna < dimensione; ++colonna) printf("%c ", matrice[riga][colonna]);
+        putchar('\n');
+    }
+}
 
-// Testiamo:
-int main() {
-    int dim;
-    printf("Inserisci la dimensione della matrice quadrata: ");
-    scanf("%d", &dim);
-
-    char** originale = genMatrix(dim);
-    char** risultante = processMatrix(originale, dim);
-
-    printf("Matrice originale:\n");
-    for(int row = 0; row < dim; row++) {
-        for(int col = 0; col < dim; col++) {
-            printf("%c ", originale[row][col]);
-        }
-        printf("\n");
+int main(void) {
+    size_t dimensione = 0;
+    printf("Dimensione della matrice (almeno 2): ");
+    if (scanf("%zu", &dimensione) != 1 || dimensione < 2
+        || dimensione > (size_t)LONG_MAX) {
+        fputs("Dimensione non valida.\n", stderr);
+        return 1;
     }
 
-    printf("Matrice risultante:\n");
-    for(int row = 0; row < dim; row++) {
-        for(int col = 0; col < dim; col++) {
-            printf("%c ", risultante[row][col]);
-        }
-        printf("\n");
+    char **originale = allocaMatrice(dimensione);
+    if (originale == NULL || !leggiMatrice(originale, dimensione)) {
+        liberaMatrice(originale, dimensione);
+        return 1;
+    }
+    char **risultato = elaboraMatrice(originale, dimensione);
+    if (risultato == NULL) {
+        fputs("Allocazione non riuscita.\n", stderr);
+        liberaMatrice(originale, dimensione);
+        return 1;
     }
 
-    for(int row = 0; row < dim; row++) { // Liberiamo la memoria allocata
-        free(originale[row]);
-        free(risultante[row]); // libero ogni riga => ergo anche le colonne
-    }
-    free(originale); 
-    free(risultante); // libero il puntatore alle righe
-
+    puts("Matrice originale:");
+    stampaMatrice(originale, dimensione);
+    puts("Matrice risultante:");
+    stampaMatrice(risultato, dimensione);
+    liberaMatrice(originale, dimensione);
+    liberaMatrice(risultato, dimensione);
     return 0;
 }

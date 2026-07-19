@@ -4,7 +4,7 @@ che ci aiuti a convertire da Celsius a Fahrenheit e viceversa. */
 #include <stdio.h>
 #include <windows.h>
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8);
 

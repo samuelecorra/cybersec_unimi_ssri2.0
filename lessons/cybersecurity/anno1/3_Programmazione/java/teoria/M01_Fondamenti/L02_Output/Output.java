@@ -36,9 +36,11 @@ public class Output {
         //     - 'X' : interi esadecimali maiuscoli
         //     - 'o' : interi ottali
         //     - 'e' : notazione scientifica
-        //     - 'b' : booleani
+        //     - 'b' : booleano (per oggetti non Boolean: false solo se null)
         //     - '%' : simbolo percentuale come escape (%% stampa %)
-        //     - '\' : se raddoppiato (\\) stampa \
+
+        // La barra inversa non è una conversione di printf: "\\" è una
+        // sequenza di escape del letterale Java e produce un singolo backslash.
 
         // In C c'erano i puntatori e quindi %p per gli indirizzi di memoria,
         // in Java non ha senso, quindi non esiste.

@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <windows.h>
 
-int main() {
+int main(void) {
     
     SetConsoleOutputCP(CP_UTF8);
 
@@ -83,14 +83,13 @@ int main() {
     // Serve a "spezzare" l'esecuzione dello switch, altrimenti
     // il programma proseguirebbe nell'esecuzione dei case successivi
     // fino a incontrare un break o la fine dello switch.
-    // Si andrebbe a "cascare" in tutti i case successivi,
-    // con risultati imprevedibili.
+    // Si avrebbe il fallthrough nei case successivi. Il risultato è deterministico
+    // e talvolta intenzionale, come nell'accorpamento dei voti mostrato più sotto.
 
     // Si noti che invece anche se i case includono più istruzioni,
     // non è necessario racchiuderle tra parentesi graffe {}. Questo
-    // perché lo switch non è un costrutto di controllo come l'if,
-    // ma una semplice selezione di etichette (i case appunto) che
-    // indirizzano il flusso di esecuzione del programma.
+    // perché switch è un'istruzione di selezione e i case sono etichette interne
+    // al suo corpo. Le graffe possono comunque essere utili per creare scope locali.
 
 
 // ====================================================================================

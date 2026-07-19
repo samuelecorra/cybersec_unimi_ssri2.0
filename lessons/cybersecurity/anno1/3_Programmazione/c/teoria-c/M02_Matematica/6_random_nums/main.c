@@ -6,7 +6,7 @@
 #include <time.h>               // direttiva per time() per numeri casuali
 #include <windows.h>           // direttiva per SetConsoleOutputCP()
 
-int main() {
+int main(void) {
 
     SetConsoleOutputCP(CP_UTF8); // forziamo UTF-8 per poter usare simboli come l'euro
 
@@ -25,35 +25,39 @@ int main() {
 
     // Ma senza un seed continueremo sempre a generare la stessa sequenza
     // di numeri pseudo-casuali ogni volta che eseguiamo il programma, che nel mio caso,
-    // dato, che stampiamo un singolo numero, sarà sempre 41.
+    // dato che stampiamo un singolo numero, può essere sempre lo stesso. Il valore
+    // concreto dipende dall'implementazione: non è portabile aspettarsi 41.
 
     // Per cambiare la sequenza di numeri pseudo-casuali dobbiamo inizializzare
     // il generatore con un seme (seed) usando la funzione srand().
 
-    // Si sfrutta la funzione time() di time.h che ritorna il numero di secondi
-    // trascorsi dal 1 gennaio 1970 (epoca Unix), che cambia ogni secondo.
+    // Si sfrutta spesso time() di time.h. Sulle piattaforme comuni il valore è legato
+    // ai secondi trascorsi dall'epoca Unix; lo standard C non impone questa specifica
+    // rappresentazione, ma garantisce un valore di tempo di calendario time_t.
 
-    // ATTENZIONE: srand ha tipo di ritorno void, quindi non bisogna assegnare il seme
-    // generato a nessuna variabile, ci pensa il compilatore per noi!
+    // srand ha tipo di ritorno void: riceve il seme e aggiorna lo stato interno del
+    // generatore; non restituisce un numero casuale.
     
-    srand(time(NULL)); // inizializziamo il generatore con il tempo attuale
+    srand((unsigned int)time(NULL)); // conversione esplicita al tipo richiesto da srand
     
-    // Ora ogni volta che eseguiamo il programma, otterremo un numero diverso
+    // Esecuzioni avviate in secondi diversi ottengono normalmente sequenze diverse;
+    // due avvii nello stesso secondo possono invece usare lo stesso seme.
     randomInt = rand();               // numero intero pseudo-casuale
     printf("Numero casuale generato dopo aver inizializzato il seme: %d\n", randomInt);
     
-    // Notiamo che il numero tende sempre a salire verso l'alto, perché il tempo
-    // trascorso dal 1970 è sempre crescente, e quindi il seme è sempre più grande.
-    // Per generare numeri pseudo-casuali in un intervallo specifico, si usa
+    // Un seme più grande non implica risultati più grandi: rand() produce una sequenza
+    // deterministica dipendente dal seme, non una funzione monotona del seme.
+    // Per generare numeri pseudo-casuali in un intervallo specifico, si usa spesso
     // l'operatore modulo %, che ritorna il resto della divisione tra due numeri.
-    // Quindi rand() % N ritorna un numero compreso tra 0 e N-1!
+    // Quindi rand() % N ritorna un numero compreso tra 0 e N-1. Questa scorciatoia
+    // introduce modulo bias quando RAND_MAX + 1 non è divisibile per N ed è inadatta
+    // a crittografia, simulazioni che richiedono forte uniformità o sicurezza.
 
     int randomIntInRange = rand() % 100;  // numero intero pseudo-casuale tra 0 e 99
     printf("Numero casuale generato tra 0 e 99: %d\n", randomIntInRange);
 
-    // Tra l'altro, con il modulo risolviamo il problema per cui ad ogni esecuzione
-    // vedevamo un pattern fisso di crescita del numero pseudo-casuale, perché
-    // il modulo "riporta indietro" il numero ad ogni N, quindi...
+    // Il modulo limita l'intervallo, ma non migliora la qualità del generatore e non
+    // elimina eventuali correlazioni della sequenza.
 
 
     printf("\n//===============================================================\n\n");
@@ -67,7 +71,7 @@ int main() {
     int randBetweenMinMax1 = (rand() % (max - min + 1)) + min; // numero tra 50 e 100
     int randBetweenMinMax2 = (rand() % (max - min + 1)) + min; // numero tra 50 e 100
     int randBetweenMinMax3 = (rand() % (max - min + 1)) + min; // numero tra 50 e 100
-    // LA PRECEDENTE FORMULA VA IMPERATIVAMENTE MEMORIZZATA!
+    // La formula include entrambi gli estremi, purché min <= max e l'ampiezza sia valida.
     
     printf("Numero casuale generato tra %d e %d: %d\n", min, max, randBetweenMinMax1);
     printf("Numero casuale generato tra %d e %d: %d\n", min, max, randBetweenMinMax2);

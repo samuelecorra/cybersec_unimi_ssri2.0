@@ -25,7 +25,7 @@ Chiusura dello scanner.
 
 Input attesi
 
-Un numero intero positivo che rappresenta la dimensione dell’array.
+Un numero intero tra 1 e 100 che rappresenta la dimensione dell’array.
 Un insieme di stringhe (una per riga) corrispondenti ai modelli o ai nomi delle auto.
 
 Output
@@ -51,7 +51,6 @@ I valori inseriti rimangono in memoria solo durante l’esecuzione del programma
 
 Estensioni possibili (facoltative)
 
-Implementare un controllo per evitare dimensioni negative o pari a zero.
 Consentire la ricerca di un modello specifico all’interno dell’array.
 Aggiungere un contatore di auto inserite e un messaggio di conferma finale.
 
@@ -59,11 +58,11 @@ Aggiungere un contatore di auto inserite e un messaggio di conferma finale.
 Come eseguire in IntelliJ
 
 Crea un nuovo progetto Java.
-Aggiungi un package chiamato esercizio_3.
+Aggiungi un package chiamato E1_esercizi_introduttivi.esercizio_3.
 Inserisci al suo interno il file ArrayAuto.java.
 
 Esegui la classe con il metodo main.
 
-Come compilare ed eseguire da terminale
-javac esercizio_3/ArrayAuto.java
-java esercizio_3.ArrayAuto
+Come compilare ed eseguire da terminale, dalla cartella tracce-java
+javac E1_esercizi_introduttivi/esercizio_3/ArrayAuto.java
+java E1_esercizi_introduttivi.esercizio_3.ArrayAuto

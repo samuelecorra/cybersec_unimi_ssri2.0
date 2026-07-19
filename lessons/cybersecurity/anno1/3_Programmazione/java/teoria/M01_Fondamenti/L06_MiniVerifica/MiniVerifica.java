@@ -1,7 +1,7 @@
 package M01_Fondamenti.L06_MiniVerifica;
 
 public class MiniVerifica {
-    static void main() {
+    public static void main(String[] args) {
 
         // Dopo 5 lezioni, facciamo qualcosa di più concreto
         // Calcoliamo l'area e il volume di un parallelepipedo

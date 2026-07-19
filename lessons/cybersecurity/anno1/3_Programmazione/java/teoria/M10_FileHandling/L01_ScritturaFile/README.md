@@ -19,6 +19,9 @@
 # ⚠️ Tutti i metodi di scrittura possono generare una **IOException**
 
 Ecco perché questa lezione è perfetta dopo il modulo eccezioni.
+Gli esempi usano `try`-with-resources, che chiude automaticamente la risorsa
+anche quando la scrittura fallisce, e specificano UTF-8 per non dipendere dalla
+codifica predefinita del sistema operativo.
 
 ---
 
@@ -31,6 +34,7 @@ package M10_FileHandling.L01_ScritturaFile;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * ============================================================
@@ -39,11 +43,11 @@ import java.io.IOException;
  *
  * FileWriter:
  *  - ideale per file di testo semplici
- *  - scrive carattere per carattere
+ *  - espone operazioni di scrittura di caratteri e stringhe
  *  - può sovrascrivere o appendere al file
  *
  * NOTA IMPORTANTE:
- *  FileWriter lancia sempre IOException (eccezione CHECKED).
+ *  Le operazioni di FileWriter possono lanciare IOException (eccezione CHECKED).
  *  Occorre gestirla con try/catch oppure con throws.
  */
 public class MainFileWriter {
@@ -52,14 +56,13 @@ public class MainFileWriter {
 
         System.out.println("=== FILEWRITER: SCRITTURA BASE ===");
 
-        try {
-            FileWriter writer = new FileWriter("testo_filewriter.txt");
+        try (FileWriter writer = new FileWriter(
+                "testo_filewriter.txt", StandardCharsets.UTF_8)) {
 
             writer.write("Ciao Samuele!\n");
             writer.write("Questo file è stato scritto con FileWriter.\n");
             writer.write("È il metodo più semplice.\n");
 
-            writer.close();  // IMPORTANTISSIMO
             System.out.println("Scrittura completata (testo_filewriter.txt)");
 
         } catch (IOException e) {
@@ -84,6 +87,7 @@ package M10_FileHandling.L01_ScritturaFile;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * ============================================================
@@ -100,14 +104,13 @@ public class MainBufferedWriter {
 
         System.out.println("=== BUFFEREDWRITER: SCRITTURA EFFICIENTE ===");
 
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("testo_buffered.txt"));
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(
+                "testo_buffered.txt", StandardCharsets.UTF_8))) {
 
             bw.write("Scrittura tramite BufferedWriter.\n");
             bw.write("Questo metodo mette i dati in un buffer\n");
             bw.write("e li invia al file in blocchi più grandi.\n");
 
-            bw.close(); // svuota il buffer e chiude
             System.out.println("Scrittura completata (testo_buffered.txt)");
 
         } catch (IOException e) {
@@ -131,6 +134,8 @@ package M10_FileHandling.L01_ScritturaFile;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 /**
  * ============================================================
@@ -148,14 +153,16 @@ public class MainPrintWriter {
 
         System.out.println("=== PRINTWRITER: SCRITTURA FORMATTATA ===");
 
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter("testo_printwriter.txt"));
+        try (PrintWriter pw = new PrintWriter(new FileWriter(
+                "testo_printwriter.txt", StandardCharsets.UTF_8))) {
 
             pw.println("Report generato da PrintWriter");
-            pw.printf("Oggi è il giorno %d del mese.\n", 17);
-            pw.printf("Il risultato di 10/3 è %.2f\n", 10.0 / 3.0);
+            pw.printf(Locale.ITALIAN, "Oggi è il giorno %d del mese.%n", 17);
+            pw.printf(Locale.ITALIAN, "Il risultato di 10/3 è %.2f%n", 10.0 / 3.0);
 
-            pw.close();
+            if (pw.checkError()) {
+                throw new IOException("PrintWriter ha rilevato un errore di scrittura");
+            }
             System.out.println("Scrittura completata (testo_printwriter.txt)");
 
         } catch (IOException e) {
@@ -194,13 +201,11 @@ public class MainFileOutputStream {
 
         System.out.println("=== FILEOUTPUTSTREAM: SCRITTURA BINARIA ===");
 
-        try {
-            FileOutputStream fos = new FileOutputStream("dati.bin");
+        try (FileOutputStream fos = new FileOutputStream("dati.bin")) {
 
             byte[] dati = { 10, 20, 30, 40, 50 };
             fos.write(dati);
 
-            fos.close();
             System.out.println("Scrittura completata (dati.bin)");
 
         } catch (IOException e) {
@@ -229,4 +234,3 @@ public class MainFileOutputStream {
 | Metodo               | Note                               |
 | -------------------- | ---------------------------------- |
 | **FileOutputStream** | scrive byte → immagini, audio, pdf |
-

@@ -16,7 +16,7 @@ public class MetodiArray {
     // la ricerca, la copia, il confronto, e altro ancora.
 
     // Proviamo ad ordinare i nostri frutti in ordine alfabetico, o meglio, lessicografico:
-    static void main() {
+    public static void main(String[] args) {
 
         String[] frutta = {"mela", "banana", "arancia", "kiwi", "pera"};
         System.out.println("Frutti originali:");
@@ -33,6 +33,16 @@ public class MetodiArray {
             System.out.println(frutto); // mela non è più in prima posizione
         }
 
+        // binarySearch richiede un array già ordinato. Restituisce l'indice se
+        // trova l'elemento; in caso contrario restituisce un valore negativo.
+        int indiceKiwi = Arrays.binarySearch(frutta, "kiwi");
+        System.out.println("Indice di kiwi: " + indiceKiwi);
+
+        // copyOf crea un nuovo array indipendente; equals confronta i contenuti.
+        String[] copia = Arrays.copyOf(frutta, frutta.length);
+        System.out.println("Copia: " + Arrays.toString(copia));
+        System.out.println("Stesso contenuto? " + Arrays.equals(frutta, copia));
+
         // ===================================================================
 
         // Metodo fill:
@@ -43,8 +53,7 @@ public class MetodiArray {
             System.out.println(frutto); // ogni frutto è "ananas"
         }
 
-        // Per ora ci fermiamo qui, ma la classe Arrays offre molti altri metodi utili
-        // per lavorare con gli array in Java.
+        System.out.println("Array dopo fill: " + Arrays.toString(frutta));
     }
 
 

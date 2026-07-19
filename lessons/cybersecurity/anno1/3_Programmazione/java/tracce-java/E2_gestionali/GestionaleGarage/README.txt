@@ -8,4 +8,8 @@
     - Rimuovere un'automobile dal garage tramite la targa
     - Visualizzare la lista delle automobili presenti nel garage
 
+    La targa identifica stabilmente l'auto e non può essere modificata dopo la
+    creazione. Il programma rifiuta campi vuoti e nominativi duplicati, perché
+    i comandi di entrata e uscita cercano il guidatore per nome.
+
  -------------------------------------------------------------------------- */

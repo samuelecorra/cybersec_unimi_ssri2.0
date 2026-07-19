@@ -1,6 +1,7 @@
 package E4_avanzati.RegistroStudenti.Classi;
 
 import java.util.HashMap;
+import java.util.Comparator;
 import java.util.Map;
 
 public class RegistroStudenti {
@@ -53,9 +54,9 @@ public class RegistroStudenti {
             return;
         }
         System.out.println("=== REGISTRO STUDENTI ===");
-        for (Studente s : studenti.values()) {
-            System.out.println(s);
-        }
+        studenti.values().stream()
+                .sorted(Comparator.comparingInt(Studente::getMatricola))
+                .forEach(System.out::println);
         System.out.println("=========================");
     }
 
@@ -64,4 +65,3 @@ public class RegistroStudenti {
         return studenti.isEmpty();
     }
 }
-

@@ -5,13 +5,13 @@ public class Auto {
     // ATTRIBUTI:
     private String marca;
     private String modello;
-    private String targa; // univoca
+    private final String targa; // univoca: non deve cambiare dopo la registrazione
 
     // COSTRUTTORE
     public Auto(String marca, String modello, String targa) {
-        this.marca = marca;
-        this.modello = modello;
-        this.targa = targa;
+        this.marca = richiediTesto(marca, "marca");
+        this.modello = richiediTesto(modello, "modello");
+        this.targa = richiediTesto(targa, "targa");
     }
 
     // GETTERS
@@ -21,13 +21,10 @@ public class Auto {
 
     // SETTERS
     public void setMarca(String marca) {
-        this.marca = marca;
+        this.marca = richiediTesto(marca, "marca");
     }
     public void setModello(String modello) {
-        this.modello = modello;
-    }
-    public void setTarga(String targa) {
-        this.targa = targa;
+        this.modello = richiediTesto(modello, "modello");
     }
 
     // STAMPA INFO AUTO
@@ -36,4 +33,10 @@ public class Auto {
         return "Marca: " + marca + " - Modello: " + modello + " - Targa: " + targa;
     }
 
+    private static String richiediTesto(String valore, String campo) {
+        if (valore == null || valore.isBlank()) {
+            throw new IllegalArgumentException("Il campo " + campo + " non può essere vuoto.");
+        }
+        return valore.trim();
+    }
 }

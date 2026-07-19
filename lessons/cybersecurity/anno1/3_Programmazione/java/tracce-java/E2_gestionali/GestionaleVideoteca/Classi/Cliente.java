@@ -9,8 +9,14 @@ public class Cliente {
     private final List<Film> filmNoleggiati;
 
     public Cliente(int id, String nome) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("L'ID del cliente deve essere positivo.");
+        }
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("Il nome del cliente non può essere vuoto.");
+        }
         this.id = id;
-        this.nome = nome;
+        this.nome = nome.trim();
         this.filmNoleggiati = new ArrayList<>();
     }
 
@@ -23,7 +29,13 @@ public class Cliente {
     }
 
     public boolean restituisciFilm(int idFilm) {
-        return filmNoleggiati.removeIf(f -> f.getId() == idFilm);
+        for (int i = 0; i < filmNoleggiati.size(); i++) {
+            if (filmNoleggiati.get(i).getId() == idFilm) {
+                filmNoleggiati.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

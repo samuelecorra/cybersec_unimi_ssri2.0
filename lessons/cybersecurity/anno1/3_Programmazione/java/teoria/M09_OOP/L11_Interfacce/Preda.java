@@ -5,8 +5,8 @@ package M09_OOP.L11_Interfacce;
  * INTERFACCIA Preda
  * ============================================================
  * Un'interfaccia, in Java, è un "contratto": definisce COSA un oggetto
- * deve saper fare (metodi da implementare) ma NON contiene la logica
- * concreta (il COME).
+ * deve saper fare. Può dichiarare metodi astratti e, nelle versioni moderne
+ * di Java, anche metodi default, statici e privati dotati di implementazione.
  *
  * Qui "Preda" rappresenta il RUOLO di un animale che può essere cacciato.
  * Un animale può essere contemporaneamente:

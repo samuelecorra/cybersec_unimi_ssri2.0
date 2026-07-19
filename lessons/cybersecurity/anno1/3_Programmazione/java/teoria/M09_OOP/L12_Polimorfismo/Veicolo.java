@@ -26,8 +26,9 @@ public abstract class Veicolo {
 
     /*
      * Costruttore di base.
-     * Usiamo "protected" per permettere SOLO alle sottoclassi di istanziare
-     * il veicolo, non dall'esterno (tanto la classe è astratta).
+     * Usiamo "protected" perché il costruttore sia accessibile alle sottoclassi
+     * e alle classi dello stesso package. Veicolo resta comunque non istanziabile
+     * direttamente perché è una classe astratta.
      */
     protected Veicolo(String targa, int velocitaMassima) {
         this.targa = targa;

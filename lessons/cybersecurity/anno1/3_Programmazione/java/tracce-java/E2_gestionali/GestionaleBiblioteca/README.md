@@ -107,7 +107,7 @@ RESTITUISCI 1,10
 END
 ```
 
-Il main legge continuamente istruzioni da tastiera, interpreta il comando e chiama i metodi corrispondenti della classe `Biblioteca`, mostrando messaggi di successo o errore.
+Il main legge continuamente istruzioni da tastiera, interpreta il comando e chiama i metodi corrispondenti della classe `Biblioteca`, mostrando messaggi di successo o errore. Gli ID devono essere positivi e univoci; comandi incompleti, numeri malformati e campi vuoti vengono rifiutati senza interrompere il programma.
 
 ---
 

@@ -34,11 +34,13 @@ Li divido in categorie: anni, mesi, giorni, ore, minuti…
 
 | Pattern | Significato    | Esempio |
 | ------- | -------------- | ------- |
-| `y`     | anno           | `2025`  |
-| `yy`    | anno a 2 cifre | `25`    |
-| `yyyy`  | anno a 4 cifre | `2025`  |
+| `y`     | anno dell'era           | `2025`  |
+| `yy`    | anno dell'era a 2 cifre | `25`    |
+| `yyyy`  | anno dell'era a 4 cifre | `2025`  |
 
-👉 **Usa sempre `yyyy`** nei programmi seri.
+Per le date ISO e per gli anni prima/dopo l'anno zero, `uuuu` rappresenta
+l'anno prolettico ed è spesso preferibile a `yyyy`, che rappresenta l'anno
+dell'era e va abbinato a `G` quando l'era è rilevante.
 
 ---
 
@@ -107,7 +109,7 @@ Ci sono *due* sistemi:
 
 | Pattern     | Significato        | Esempio     |
 | ----------- | ------------------ | ----------- |
-| `S`         | decimi o centesimi | `1`, `12`   |
+| `S`         | una cifra della frazione di secondo | `1` |
 | `SSS`       | millisecondi       | `978`       |
 | `SSSSSS`    | microsecondi       | `123456`    |
 | `SSSSSSSSS` | nanosecondi        | `987654321` |
@@ -191,5 +193,4 @@ a → AM/PM
 ```
 
 ---
-
 

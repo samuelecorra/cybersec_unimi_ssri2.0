@@ -5,7 +5,7 @@ public class DiceRoller {
     // Minigioco che in base all'input dell'utente simula il lancio di un dado a 6 facce,
     // stampando la faccia del dado nel terminale:
 
-    static void main() {
+    public static void main(String[] args) {
         java.util.Random random = new java.util.Random();
         java.util.Scanner scanner = new java.util.Scanner(System.in);
 
@@ -14,8 +14,8 @@ public class DiceRoller {
         int numDadi = scanner.nextInt();
         int total = 0;
 
-        while (numDadi <= 0) {
-            System.out.println("Per favore, inserisci un numero positivo di dadi da lanciare:");
+        while (numDadi <= 0 || numDadi > 100) {
+            System.out.println("Inserisci un numero di dadi compreso tra 1 e 100:");
             numDadi = scanner.nextInt();
         }
 

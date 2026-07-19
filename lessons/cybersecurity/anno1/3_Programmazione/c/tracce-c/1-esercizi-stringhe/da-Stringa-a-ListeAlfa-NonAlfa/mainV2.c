@@ -1,108 +1,83 @@
+#include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h> // per poter usare isalpha() e simili
-#include <string.h>
 
-// ======================== STRUTTURE ================================================ //
 typedef struct Nodo {
-    char c;
-    struct Nodo* next;
+    char carattere;
+    struct Nodo *successivo;
 } Nodo;
 
-typedef struct Lista {
-    Nodo* head;
-    Nodo* tail;
+typedef struct {
+    Nodo *testa;
+    Nodo *coda;
 } Lista;
 
-// ======================== FUNZIONI AUSILIARIE ====================================== //
-static void inizializzaListaVuota(Lista* L) {
-    L->head = NULL;
-    L->tail = NULL;
+static void inizializzaLista(Lista *lista) {
+    lista->testa = NULL;
+    lista->coda = NULL;
 }
 
-/* Inserisce in coda in O(1), restituendo 0 in caso di fallimento e 1 in caso di successo */
-static int insInCoda(Lista* L, char ch) {
-    Nodo* n = (Nodo*)malloc(sizeof(Nodo));
-    if (!n) return 0;                 // fallimento allocazione
-    n->c = ch;
-    n->next = NULL;
-    if (!L->head) { // caso lista vuota
-        L->head = L->tail = n; // sia primo che ultimo nodo sono n
-    } else {
-        L->tail->next = n; // l'ex-coda ora punta ad n
-        L->tail = n; // n diventa la nuova coda
+static bool inserisciInCoda(Lista *lista, char carattere) {
+    Nodo *nuovo = malloc(sizeof *nuovo);
+    if (nuovo == NULL) return false;
+    nuovo->carattere = carattere;
+    nuovo->successivo = NULL;
+
+    if (lista->coda == NULL) lista->testa = nuovo;
+    else lista->coda->successivo = nuovo;
+    lista->coda = nuovo;
+    return true;
+}
+
+static bool separaStringa(const char *testo, Lista *alfabetici, Lista *nonAlfabetici) {
+    for (const unsigned char *p = (const unsigned char *)testo; *p != '\0'; ++p) {
+        Lista *destinazione = isalpha(*p) ? alfabetici : nonAlfabetici;
+        if (!inserisciInCoda(destinazione, (char)*p)) return false;
     }
-    return 1;
+    return true;
 }
 
-static void stampaLista(const Lista* L) {
-    for (const Nodo* curr = L->head; curr; curr = curr->next) {
-        unsigned char uc = (unsigned char)curr->c; // casting per corretta visualizzazione
-        if (uc == ' ')      printf("'spc' ");
-        else if (uc == '\t') printf("'\\t' ");
-        else if (uc < 32 || uc == 127) printf("[0x%02X] ", uc); // caratteri di controllo
-        else                 printf("%c ", curr->c);
+static void stampaLista(const Lista *lista) {
+    for (const Nodo *nodo = lista->testa; nodo != NULL; nodo = nodo->successivo) {
+        unsigned char valore = (unsigned char)nodo->carattere;
+        if (valore == ' ') fputs("'spc' ", stdout);
+        else if (valore == '\t') fputs("'\\t' ", stdout);
+        else if (valore < 32 || valore == 127) printf("[0x%02X] ", (unsigned int)valore);
+        else printf("'%c' ", nodo->carattere);
     }
-    puts(""); // equivalente a printf("\n");
+    putchar('\n');
 }
 
-static void liberaLista(Lista* L) {
-    Nodo* curr = L->head;
-    while (curr) {
-        Nodo* nx = curr->next;
-        free(curr);
-        curr = nx;
+static void liberaLista(Lista *lista) {
+    Nodo *corrente = lista->testa;
+    while (corrente != NULL) {
+        Nodo *successivo = corrente->successivo;
+        free(corrente);
+        corrente = successivo;
     }
-    L->head = L->tail = NULL;
+    inizializzaLista(lista);
 }
 
-// ======================== FUNZIONE PRINCIPALE RICHIESTA =================================== //
-static void separaStringa(const char* s, Lista* alfabetici, Lista* nonAlfabetici) {
-
-    // Cicliamo sui caratteri che compongono la stringa
-    for (const unsigned char* p = (const unsigned char*)s; *p; p++) {
-        if (isalpha(*p)) {
-            if (!insInCoda(alfabetici, (char)*p)) { // Inseriamo e al contempo controlliamo l'eventuale fallimento
-                fprintf(stderr, "Memoria insufficiente.\n");
-                return;
-            }
-        } else {
-            if (!insInCoda(nonAlfabetici, (char)*p)) { // Inseriamo e al contempo controlliamo l'eventuale fallimento
-                fprintf(stderr, "Memoria insufficiente.\n");
-                return;
-            }
-        }
-    }
-}
-
-// ======================== MAIN DI TEST ============================================== //
 int main(void) {
-    const char* input = "Ciao 123!";   // hardcoded, ma modificabile a piacere
+    const char input[] = "Ciao 123!";
+    Lista alfabetici;
+    Lista nonAlfabetici;
+    inizializzaLista(&alfabetici);
+    inizializzaLista(&nonAlfabetici);
 
-    // In alternativa, per input dinamico da tastiera, si potrebbe usare:
-    // char buf[1024];
-    // fgets(buf, sizeof buf, stdin);
-    // buf[strcspn(buf, "\n")] = '\0';
-    // const char* input = buf;
-    
-    // NOTA: per lo scopo dell'esercizio, basta editare l'input hardcoded per
-    // sincerarsi che funziona comunque a prescindere dalla lunghezza della stringa inputtata.
+    if (!separaStringa(input, &alfabetici, &nonAlfabetici)) {
+        fputs("Memoria insufficiente.\n", stderr);
+        liberaLista(&alfabetici);
+        liberaLista(&nonAlfabetici);
+        return 1;
+    }
 
-    Lista Lalpha, Lnon;
-
-    // ESTREMA ATTENZIONE: BISOGNA SEMPRE PASSARE PER RIFERIMENTO CON AMPERSAND LE VARIE LISTE,
-    // poiché tali strutture contengono puntatori che devono essere modificati all'interno della funzione.
-    inizializzaListaVuota(&Lalpha);
-    inizializzaListaVuota(&Lnon);
-    // INVECE la stringa è già un puntatore al primo carattere, quindi non serve l'ampersand
-    separaStringa(input, &Lalpha, &Lnon);
-
-    printf("Lista 1 (alfabetici): ");
-    stampaLista(&Lalpha);
-    printf("Lista 2 (non alfabetici): ");
-    stampaLista(&Lnon);
-
-    liberaLista(&Lalpha);
-    liberaLista(&Lnon);
+    fputs("Lista alfabetici: ", stdout);
+    stampaLista(&alfabetici);
+    fputs("Lista non alfabetici: ", stdout);
+    stampaLista(&nonAlfabetici);
+    liberaLista(&alfabetici);
+    liberaLista(&nonAlfabetici);
     return 0;
 }

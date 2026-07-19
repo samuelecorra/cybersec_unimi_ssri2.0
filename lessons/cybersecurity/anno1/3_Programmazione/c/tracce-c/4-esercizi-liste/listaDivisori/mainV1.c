@@ -17,11 +17,20 @@ ListaDivisori* calcolaDivisoriDi(int n) {
     ListaDivisori *head = NULL, *tail = NULL; // inizializzo la testa e la coda della lista
 
     // I divisori di n sono compresi tra 1 e n, quindi scorriamo in questo intervallo:
-    for (int i = 1; i <= n; i++) {
+    for (int i = 1; ; i++) {
 
         
         if (n % i == 0) { // Se il modulo è zero, i è un divisore di n
             ListaDivisori* nuovo = malloc(sizeof(ListaDivisori)); // alloco memoria per il nuovo nodo
+            if (nuovo == NULL) {
+                fprintf(stderr, "Errore di allocazione della memoria.\n");
+                while (head != NULL) {
+                    ListaDivisori *successivo = head->next;
+                    free(head);
+                    head = successivo;
+                }
+                return NULL;
+            }
             nuovo->divisore = i; // e ci metto il divisore
             nuovo->next = NULL; // il prossimo è NULL per ora
 
@@ -32,6 +41,9 @@ ListaDivisori* calcolaDivisoriDi(int n) {
                 tail->next = nuovo; // la EX-coda punta al nuovo nodo perché ora è il penultimo
                 tail = nuovo; // e infine la nuova coda è il nuovo nodo
             }
+        }
+        if (i == n) {
+            break; // evita l'overflow di i quando n == INT_MAX
         }
     }
     return head; // ritorno la testa della lista
@@ -44,6 +56,9 @@ int main(){
     printf("Divisori di %d:\n", n);
     
     ListaDivisori* lista = calcolaDivisoriDi(n); // chiamo la funzione
+    if (lista == NULL) {
+        return EXIT_FAILURE;
+    }
     
     // stampa dei divisori (solo per test, richiesta dal main)
     // Si noti che dopo il primo ; "curr;" sottintende curr != NULL

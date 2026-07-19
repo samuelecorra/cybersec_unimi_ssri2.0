@@ -1,29 +1,14 @@
-/*------------------------------------------------------------------------------------
+ESERCIZIO: MEDIA DEI VALORI ADIACENTI
 
-ESERCIZIO:
+Acquisire una matrice quadrata e produrre una matrice in cui ogni elemento è la
+media di tutti gli adiacenti orizzontali, verticali e diagonali, escludendo la
+cella stessa. Coerentemente con l'output fornito dalla traccia, un angolo ha 3
+vicini, una cella di bordo non angolare 5 e una cella interna 8.
 
-Scrivere un programma che acquisisce da tastiera i valori di una matrice 
-quadrata di dimensione N, tutti numeri interi. Il programma crea un nuova 
-matrice in cui il valore di ciascun elemento corrisponde alla media dei 
-valori sopra/sotto/sx/dx rispetto all'elemento considerato nella matrice
-originale (escluso quindi il valore dell'elemento stesso).
-Al termine, il programma visualizza le due matrici affiancate.
+mainV1.c separa clonazione, trasformazione e stampa; usa matrici di double.
+mainV2.c è compatta, conserva interi in ingresso, accumula in long long e produce
+medie double. Entrambe controllano l'esito dell'input.
 
-ESEMPIO
-
-Ingresso:                   Uscita:
-
-4 5 6 7                     5.00 4.80 4.60 5.00
-8 2 4 5                     4.80 6.00 5.12 5.20
-6 7 8 1                     5.40 5.25 4.62 5.40
-2 8 4 6                     7.00 5.40 6.00 4.33
-
-------------------------------------------------------------------------------------*/
-
-SONO PRESENTI DUE VERSIONI:
-
-1) mainV1.c è prolissa di commenti, più "didattica"
-2) mainV2.c è la versione ottimizzata, che vede una padronanza maggiore del linguaggio
-
-// ENTRAMBE UTILIZZANO #DEFINE N PER NON INCAPPARE IN PROBLEMI DI PASSAGGIO ALLA FUNZIONE
-// IN BASE AL COMPILER/STANDARD DEL C USATO!
+Le matrici locali hanno durata automatica: chiamarle "statiche" sarebbe improprio.
+La macro N è una scelta semplice per una dimensione nota a compile time; in C11-C17
+un compilatore che supporta i VLA consente anche dimensioni ricevute a runtime.

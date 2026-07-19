@@ -10,7 +10,7 @@ public class DoWhile {
     // la condizione alla fine di ogni iterazione.
 
     // ESEMPIO:
-    static void main() {
+    public static void main(String[] args) {
 
         int numero;
         do {

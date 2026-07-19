@@ -3,6 +3,7 @@ package M10_FileHandling.L01_ScritturaFile;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /*
  * ============================================================
@@ -15,18 +16,17 @@ import java.io.IOException;
  */
 public class MainBufferedWriter {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
         System.out.println("=== BUFFEREDWRITER: SCRITTURA EFFICIENTE ===");
 
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("testo_buffered.txt"));
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(
+                "testo_buffered.txt", StandardCharsets.UTF_8))) {
 
             bw.write("Scrittura tramite BufferedWriter.\n");
             bw.write("Questo metodo mette i dati in un buffer\n");
             bw.write("e li invia al file in blocchi più grandi.\n");
 
-            bw.close(); // svuota il buffer e chiude
             System.out.println("Scrittura completata (testo_buffered.txt)");
 
         } catch (IOException e) {

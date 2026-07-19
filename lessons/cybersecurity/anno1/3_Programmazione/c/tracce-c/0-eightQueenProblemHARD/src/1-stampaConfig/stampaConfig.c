@@ -1,51 +1,41 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-// Funzione per stampare la configurazione attuale delle 8 regine
-void stampaConfig(const int regine[8]) {
+#define N 8
 
-    // Stampa intestazione con indici colonna
-    printf("    ");
-    for (int c = 0; c < 8; c++) printf("%d   ", c);
-    printf("← indici colonne\n");
+/*
+ * Convenzione: regine[colonna] contiene la riga interna 0..7, ottenuta
+ * sottraendo 1 alla riga scacchistica 1..8. La stampa procede quindi dalla
+ * riga interna 7 (riga 8, in alto) alla riga interna 0 (riga 1, in basso).
+ * La funzione visualizza qualsiasi stato: non ne verifica i conflitti.
+ */
+void stampaConfig(const int regine[N]) {
+    fputs("    ", stdout);
+    for (int colonna = 0; colonna < N; ++colonna) {
+        printf("%d   ", colonna);
+    }
+    puts("← indici colonne");
+    puts("  ---------------------------------");
 
-    // Linea superiore
-    printf("  ---------------------------------\n");
-
-    // Stampa scacchiera
-    for (int r = 0; r < 8; r++) {
-        int rigaReale = 8 - r;   // 8..1 per lato sinistro
-        printf("%d |", rigaReale);
-
-        for (int c = 0; c < 8; c++) {
-            if (regine[c] == r) {
-                printf(" Q |");  // Regina
+    for (int riga = N - 1; riga >= 0; --riga) {
+        printf("%d |", riga + 1);
+        for (int colonna = 0; colonna < N; ++colonna) {
+            if (regine[colonna] == riga) {
+                fputs(" Q |", stdout);
             } else {
-                // Alternanza colori: angolo in alto sinistra bianco
-                if ((r + c) % 2 == 0)
-                    printf(" - |");  // Casella bianca
-                else
-                    printf(" * |");  // Casella nera
+                int rigaVisiva = N - 1 - riga;
+                fputs((rigaVisiva + colonna) % 2 == 0 ? " - |" : " * |", stdout);
             }
         }
-
-        printf(" %d\n", r); // Indice riga 0-based a destra
+        printf(" %d\n", riga);
     }
 
-    // Linea inferiore
-    printf("  ---------------------------------\n");
-
-    // Lettere colonne
-    printf("    a   b   c   d   e   f   g   h\n");
+    puts("  ---------------------------------");
+    puts("    a   b   c   d   e   f   g   h");
 }
 
-
-// Esempio di utilizzo
 int main(void) {
-    // Configurazione valida: [7, 4, 0, 3, 6, 1, 5, 2]
-    int regine[8] = {7, 4, 0, 3, 6, 1, 5, 2};
-
+    // Figura 1 del PDF: stato 1-based {8,4,1,3,6,2,7,5}.
+    const int regine[N] = {7, 3, 0, 2, 5, 1, 6, 4};
     stampaConfig(regine);
-
     return 0;
 }

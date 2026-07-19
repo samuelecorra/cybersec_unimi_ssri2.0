@@ -39,14 +39,14 @@ Una funzione in C si compone di 3 parti fondamentali:
     
     Esempio:
     int somma(int a, int b); // Dichiarazione della funzione somma
-    void stampa_messaggio(); // Dichiarazione della funzione stampa_messaggio
+    void stampa_messaggio(void); // Nessun parametro: void lo dichiara esplicitamente
     float calcola_area(float raggio); // Dichiarazione della funzione calcola_area
-    char ottieni_carattere(); // Dichiarazione della funzione ottieni_carattere
+    char ottieni_carattere(void); // Dichiarazione della funzione ottieni_carattere
 
     // ATTENZIONE:
     // 1. LA DICHIARAZIONE PREVEDE PUNTO E VIRGOLA FINALE!
     // 2. LA DEFINIZIONE NON PREVEDE PUNTO E VIRGOLA FINALE!
-    // 3. DICHIARAZIONE + DEFINIZIONE A INIZIO FILE NON RICHIEDONO PUNTO E VIRGOLA!
+    // 3. UNA DEFINIZIONE FUNGE ANCHE DA DICHIARAZIONE E NON HA PUNTO E VIRGOLA FINALE!
     // 4. LA DICHIARAZIONE PUO' ANCHE NON AVERE I NOMI DEI PARAMETRI, MA SOLO I TIPI!
     //    (es. int somma(int, int); è del tutto valido)
 
@@ -115,19 +115,20 @@ Una funzione in C si compone di 3 parti fondamentali:
 
 // PROCEDURA: non restituisce nulla (void)
 // Definiamo prima del main, così funge anche da dichiarazione esplicita!
-void cantaAuguri(char *Nome) {
+void cantaAuguri(const char *nome) {
     printf("Tanti auguri a te!\n");
     printf("Tanti auguri a te!\n");
-    printf("Tanti auguri a %s!\n", Nome);
+    printf("Tanti auguri a %s!\n", nome);
     printf("Tanti auguri a te!\n");
 }
 
 // N.B. per l'io del futuro: abbiamo passato un puntatore a char (stringa)
 // come parametro alla procedura. In C, le stringhe sono gestite come array di char.
 // Ma potevamo anche passare direttamente un array di char, ad esempio:
-// void cantaAuguri(char Nome[20]) { ... } è del tutto equivalente!
+// void cantaAuguri(const char nome[20]) { ... } nel parametro viene adattato a
+// const char *nome: la dimensione 20 non viene verificata né trasmessa alla funzione.
 
-int main() {
+int main(void) {
     
     char nome[20];
     

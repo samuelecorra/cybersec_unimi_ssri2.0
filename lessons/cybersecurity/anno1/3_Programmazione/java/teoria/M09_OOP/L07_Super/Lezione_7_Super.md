@@ -33,11 +33,14 @@ Per gestire tutto questo, Java offre la parola chiave `super`.
 
 
 
-La prima riga di ogni costruttore è sempre una **chiamata implicita o esplicita** al costruttore della superclasse.
+La prima istruzione di ogni costruttore è una chiamata, implicita o esplicita,
+a un altro costruttore: `this(...)` nella stessa classe oppure `super(...)`
+nella superclasse. Le due forme non possono comparire insieme nello stesso
+costruttore.
 
 ### ✔ Caso 1 — La superclasse ha un costruttore senza parametri
 
-Il compilatore inserisce automaticamente:
+Se non scrivi né `this(...)` né `super(...)`, il compilatore inserisce automaticamente:
 
 ```java
 super();
@@ -45,7 +48,9 @@ super();
 
 ### ✔ Caso 2 — La superclasse NON ha un costruttore senza parametri
 
-Allora *devi* chiamare `super(...)` **obbligatoriamente**, passando i parametri richiesti.
+Allora devi chiamare esplicitamente un costruttore accessibile con `super(...)`,
+passando i parametri richiesti, oppure delegare con `this(...)` a un costruttore
+che lo faccia.
 
 Se non lo fai ⇒ **errore di compilazione**.
 
@@ -87,10 +92,10 @@ class Cane extends Animale {
 
 Quando istanzi un oggetto di una sottoclasse, Java segue SEMPRE questo ordine:
 
-1️⃣ Vengono inizializzati gli attributi della superclasse
-2️⃣ Viene eseguito il costruttore della superclasse (`super(...)`)
-3️⃣ Vengono inizializzati gli attributi della sottoclasse
-4️⃣ Viene eseguito il costruttore della sottoclasse
+1️⃣ I campi dell'oggetto ricevono prima i valori di default (`0`, `false`, `null`, ecc.)
+2️⃣ La superclasse completa inizializzatori di istanza e corpo del proprio costruttore
+3️⃣ Vengono eseguiti inizializzatori di istanza e assegnazioni dei campi della sottoclasse
+4️⃣ Viene eseguito il corpo del costruttore della sottoclasse
 
 Questo garantisce che la superclasse sia **sempre pronta** prima della sottoclasse.
 
@@ -231,18 +236,18 @@ public class TestSuper {
 * evitare ambiguità tra metodi/attributi omonimi
 * estendere il comportamento di un metodo
 
-### ✔ `super()` è obbligatorio se:
+### ✔ `super(...)` esplicito è necessario se:
 
-* il costruttore della superclasse NON ha un costruttore senza parametri
+* la superclasse non ha un costruttore senza parametri accessibile e il
+  costruttore corrente non delega con `this(...)`
 
 ### ✔ ordine di esecuzione:
 
-1. attributi superclasse
-2. costruttore superclasse
-3. attributi sottoclasse
-4. costruttore sottoclasse
+1. valori di default dell'oggetto
+2. inizializzatori e costruttore della superclasse
+3. inizializzatori della sottoclasse
+4. corpo del costruttore della sottoclasse
 
 ### ✔ `super.metodo()` richiama la versione “originale” sovrascritta.
 
 ### ✔ `super.attributo` accede all’attributo della superclasse in caso di shadowing.
-

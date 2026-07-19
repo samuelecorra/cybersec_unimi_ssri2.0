@@ -6,6 +6,9 @@ public class Tavolo {
     private final int posti;
 
     public Tavolo(int numero, int posti) {
+        if (numero <= 0) {
+            throw new IllegalArgumentException("Il numero del tavolo deve essere positivo");
+        }
         if (posti <= 0) {
             throw new IllegalArgumentException("Il numero di posti deve essere positivo");
         }
@@ -26,4 +29,3 @@ public class Tavolo {
         return "Tavolo #" + numero + " (" + posti + " posti)";
     }
 }
-

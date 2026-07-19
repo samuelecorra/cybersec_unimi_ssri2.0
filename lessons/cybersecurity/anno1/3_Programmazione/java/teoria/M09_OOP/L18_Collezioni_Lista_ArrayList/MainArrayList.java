@@ -18,7 +18,8 @@ import java.util.List;
  *  - accesso per indice veloce: list.get(i)
  *  - dimensione variabile: add/remove cambiano la lunghezza
  *  - permette duplicati e valori null
- *  - NON è thread-safe (ma va benissimo per il 99% dei casi base)
+ *  - NON è thread-safe; va usata senza sincronizzazione solo quando non è
+ *    condivisa tra thread che la modificano
  *
  * In questa classe:
  *  1. Creiamo e popoliamo ArrayList di Integer (wrapper → autoboxing)
@@ -142,10 +143,10 @@ public class MainArrayList {
             System.out.println(" - " + s);
         }
 
-        // Nota: per contains/remove su oggetti, se vuoi che due studenti
-        // con stessa matricola siano considerati "uguali", dovresti
-        // ridefinire equals() e hashCode() in Studente.
-        // Per questa lezione introduttiva non è strettamente necessario.
+        // Studente ridefinisce equals() e hashCode() usando la matricola.
+        Studente stessaMatricola = new Studente("Nome irrilevante", "S12345", 3);
+        System.out.println("La lista riconosce la stessa matricola? "
+                + studenti.contains(stessaMatricola));
 
         System.out.println("\n=== FINE LEZIONE SU ARRAYLIST ===");
     }

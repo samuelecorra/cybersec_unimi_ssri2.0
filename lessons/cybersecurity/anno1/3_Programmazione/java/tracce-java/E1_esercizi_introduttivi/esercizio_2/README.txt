@@ -34,6 +34,7 @@ Tasso di interesse: maggiore o uguale a 0
 Numero di capitalizzazioni annue (n): intero maggiore o uguale a 1
 Numero di anni (t): intero maggiore o uguale a 0
 
+I valori decimali devono inoltre essere finiti: NaN e infinito non sono accettati.
 In caso di input non numerico o non valido, il programma richiede nuovamente il valore.
 
 Esempio di esecuzione
@@ -47,16 +48,16 @@ Come eseguire in IntelliJ IDEA
 
 Crea un nuovo progetto Java.
 
-Crea un package chiamato esercizio_2.
+Crea un package chiamato E1_esercizi_introduttivi.esercizio_2.
 
 Inserisci al suo interno il file InteresseComposto.java.
 
 Esegui la classe cliccando sul tasto di esecuzione ▶ accanto al metodo main.
 
 Come compilare ed eseguire da terminale (con JDK installato)
-Da dentro la cartella che contiene il package:
-javac esercizio_2/InteresseComposto.java
-java esercizio_2.InteresseComposto
+Dalla cartella tracce-java:
+javac E1_esercizi_introduttivi/esercizio_2/InteresseComposto.java
+java E1_esercizi_introduttivi.esercizio_2.InteresseComposto
 
 --------------------------------------------------------------------------------
 Estensioni possibili (facoltative)

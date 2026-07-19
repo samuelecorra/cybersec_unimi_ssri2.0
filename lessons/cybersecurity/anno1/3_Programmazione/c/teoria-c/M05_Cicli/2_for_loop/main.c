@@ -21,7 +21,7 @@ Ecco un esempio di utilizzo del for loop in C:  */
 #include <windows.h> // per Sleep()
 // Supponiamo di voler stampare cinque volte un messaggio di sveglia:
 
-int main() {
+int main(void) {
 
    for (int i = 0; i < 5; i++) { // i parte da 0, finché è minore di 5, incrementa di 1
       printf("Forza soldato, svegliati (%d)!\n", i+1); // i+1 per stampare da 1 a 5
@@ -40,6 +40,8 @@ int main() {
         printf("Conto alla rovescia: %d\n", i);
     }
     printf("Decollo!\n");
+
+    return 0;
 
 }
 

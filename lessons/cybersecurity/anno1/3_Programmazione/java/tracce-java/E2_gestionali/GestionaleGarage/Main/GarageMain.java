@@ -9,45 +9,46 @@ import java.util.Scanner;
 public class GarageMain {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print(
-                "Inserisci il numero di persone che vuoi registrare: "
-        );
-        int n;
-        while (true) {
-            String line = scanner.nextLine().trim();
-            try {
-                n = Integer.parseInt(line);
-                if (n < 0) {
-                    System.out.print("Inserisci un numero >= 0: ");
-                } else break;
-            } catch (NumberFormatException e) {
-                System.out.print("Valore non valido. Riprova: ");
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Inserisci il numero di persone che vuoi registrare (0-100): ");
+            int n;
+            while (true) {
+                String line = scanner.nextLine().trim();
+                try {
+                    n = Integer.parseInt(line);
+                    if (n < 0 || n > 100) {
+                        System.out.print("Inserisci un numero tra 0 e 100: ");
+                    } else break;
+                } catch (NumberFormatException e) {
+                    System.out.print("Valore non valido. Riprova: ");
+                }
             }
-        }
 
-        List<Guidatore> guidatori = new ArrayList<>();
-        Garage garage = new Garage();
+            List<Guidatore> guidatori = new ArrayList<>();
+            Garage garage = new Garage();
 
-        int targa = 100; // targa iniziale
+            int targa = 100; // targa iniziale
 
-        for (int i = 0; i < n; i++) {
-            System.out.print("Nome e cognome del guidatore " + (i + 1) + ": ");
-            String nomeECognome = scanner.nextLine().trim();
+            for (int i = 0; i < n; i++) {
+                String nomeECognome;
+                while (true) {
+                    nomeECognome = leggiTesto(scanner, "Nome e cognome del guidatore " + (i + 1) + ": ");
+                    String nomeDaVerificare = nomeECognome;
+                    boolean duplicato = guidatori.stream()
+                            .anyMatch(g -> g.getNomeECognome().equalsIgnoreCase(nomeDaVerificare));
+                    if (!duplicato) break;
+                    System.out.println("Nominativo già registrato: usane uno distinguibile.");
+                }
 
-            System.out.print("Marca dell'auto di " + nomeECognome + ": ");
-            String marca = scanner.nextLine().trim();
+                String marca = leggiTesto(scanner, "Marca dell'auto di " + nomeECognome + ": ");
+                String modello = leggiTesto(scanner, "Modello della " + marca + " di " + nomeECognome + ": ");
 
-            System.out.print("Modello della " + marca + " di " + nomeECognome + ": ");
-            String modello = scanner.nextLine().trim();
+                Auto auto = new Auto(marca, modello, String.valueOf(targa++));
+                Guidatore guidatore = new Guidatore(nomeECognome, auto);
+                guidatori.add(guidatore);
 
-            Auto auto = new Auto(marca, modello, String.valueOf(targa++));
-            Guidatore guidatore = new Guidatore(nomeECognome, auto);
-            guidatori.add(guidatore);
-
-            System.out.println("Registrato: " + guidatore);
-        }
+                System.out.println("Registrato: " + guidatore);
+            }
 
         System.out.println("\n========================================");
         System.out.println("Menù interattivo gestione garage");
@@ -121,6 +122,17 @@ public class GarageMain {
         System.out.println("\nStato finale del garage:");
         garage.visualizzaAuto();
 
-        scanner.close();
+        }
+    }
+
+    private static String leggiTesto(Scanner scanner, String messaggio) {
+        while (true) {
+            System.out.print(messaggio);
+            String valore = scanner.nextLine().trim();
+            if (!valore.isEmpty()) {
+                return valore;
+            }
+            System.out.println("Il valore non può essere vuoto.");
+        }
     }
 }

@@ -1,22 +1,20 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 #define N 8
 
+/*
+ * Il costo è il numero di coppie in conflitto, non una distanza minima in mosse
+ * dalla soluzione. Con N=8 il valore è compreso tra 0 e C(8,2)=28.
+ */
 int euristica(const int stato[N]) {
     int costo = 0;
-
-    for (int i = 0; i < N; i++) { // Implicitamente stiamo calcolando la combinazione semplice di due elementi
-        for (int j = i + 1; j < N; j++) { // ma per tutte ed 8 in un colpo solo ed intuitivo
-
-            if (stato[i] == stato[j]) // Stessa riga
-                costo++;
-
-            if (abs(stato[i] - stato[j]) == abs(i - j)) // Diagonale ↘️ o ↙️
-                costo++;
+    for (int prima = 0; prima < N; ++prima) {
+        for (int seconda = prima + 1; seconda < N; ++seconda) {
+            if (stato[prima] == stato[seconda]
+                || abs(stato[prima] - stato[seconda]) == seconda - prima) {
+                ++costo;
+            }
         }
     }
-
-    return costo; // 0 se soluzione altrimenti costo = numero di conflitti
+    return costo;
 }

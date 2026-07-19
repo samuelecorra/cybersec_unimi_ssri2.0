@@ -8,6 +8,9 @@ public class Bevanda extends Prodotto{
 
     public Bevanda(int costo, String nome, int volume){
         super(costo, nome);
+        if (volume <= 0) {
+            throw new IllegalArgumentException("Il volume deve essere positivo");
+        }
         this.volume = volume;
     }
 

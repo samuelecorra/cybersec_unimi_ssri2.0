@@ -2,7 +2,7 @@ package M01_Fondamenti.L04_Stringhe;
 
 public class Stringhe {
 
-    static void main() {
+    public static void main(String[] args) {
         // Per ora array e oggetti sono troppo avanzati, non abbiamo le basi!
 
         // => Iniziamo dalle stringhe:
@@ -20,7 +20,7 @@ public class Stringhe {
         // Ovviamente non c'è limite al numero di concatenazioni, ma
         // ATTENZIONE: il vero VANTAGGIO è che possiamo mischiare i tipi di dato concatenati:
         int anno = 2000;
-        String inizio = "Il millenium Bug è un problema del ";
+        String inizio = "Il Millennium Bug è un problema del ";
         System.out.println(inizio + anno + ", non del " + (anno - 1) + "!");
 
     }

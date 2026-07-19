@@ -44,15 +44,12 @@ Nel `Ristorante` ci sono i metodi chiave:
     * Se c’è già, torna `false`.
     * Se non c’è, crea un nuovo `Tavolo` e lo mette nella mappa `tavoli`, poi torna `true`.
 
-* **`prenotaTavolo(int numeroTavolo, String nomeCliente, int numeroPersone)`**
-  Per completare la prenotazione devono essere vere tre cose:
+* **`prenotaTavoloAutomatico(String nomeCliente, int numeroPersone)`**
 
-    1. Il tavolo deve **esistere** → controlliamo `tavoli.get(numeroTavolo)`.
-    2. Il tavolo deve essere **libero** → deve *non* essere presente come chiave in `prenotazioni`.
-    3. Il tavolo deve essere **sufficientemente grande** → `numeroPersone <= t.getPosti()`.
-
-  Se tutte le condizioni sono ok, creiamo una `Prenotazione` e la mettiamo in `prenotazioni`.
-  Ritorniamo `true` se tutto va bene, `false` se qualcosa non torna.
+    * Valida nome del cliente e numero di persone creando una `Prenotazione`.
+    * Considera soltanto i tavoli liberi e sufficientemente capienti.
+    * Sceglie il tavolo con meno posti tra quelli adatti, così limita i posti inutilizzati; a parità sceglie il numero di tavolo minore.
+    * Restituisce il numero assegnato, `-1` se non c'è un tavolo libero adatto oppure `-2` se il gruppo supera la capienza di qualunque tavolo esistente.
 
 * **`liberaTavolo(int numeroTavolo)`**
 
@@ -66,12 +63,12 @@ Nel `Ristorante` ci sono i metodi chiave:
 
     * Scorre tutti i tavoli di `tavoli.values()`.
     * Per ogni tavolo controlla se **non** è presente nelle chiavi della `prenotazioni`.
-    * Aggiunge quelli liberi a una `List<Tavolo>` e la ritorna.
+    * Aggiunge quelli liberi a una `List<Tavolo>`, la ordina per numero e la ritorna.
 
 * **`getTavoliOccupati()`**
 
     * Scorre le chiavi della mappa `prenotazioni` (i numeri dei tavoli occupati).
-    * Per ogni numero recupera il corrispondente `Tavolo` da `tavoli` e lo inserisce nella lista.
+    * Per ogni numero recupera il corrispondente `Tavolo` da `tavoli`, lo inserisce nella lista e ordina il risultato per numero.
 
 * Metodi di utilità:
 
@@ -86,7 +83,6 @@ La classe `MainRistorante` è solo un client che:
 
 * Crea uno `Scanner` per leggere da tastiera.
 * Crea un oggetto `Ristorante`.
-* Aggiunge qualche tavolo “di default” (1, 2, 3 con 2/4/6 posti) giusto per partire.
 * Mostra un menù con le opzioni:
 
 1. Aggiungi tavolo
@@ -94,12 +90,14 @@ La classe `MainRistorante` è solo un client che:
 3. Libera tavolo
 4. Mostra tavoli liberi
 5. Mostra tavoli occupati
-6. Esci
+0. Esci
 
 Per ogni scelta:
 
 * legge gli input necessari (numero tavolo, nome cliente, numero persone),
 * chiama il metodo opportuno su `Ristorante`,
-* mostra un messaggio di successo/errore in base al boolean di ritorno.
+* mostra un messaggio coerente con il valore di ritorno.
+
+Il programma parte senza tavoli precaricati: prima di prenotare occorre aggiungerne almeno uno tramite l'opzione 1. Gli input non numerici e i valori non positivi vengono segnalati senza interrompere il programma.
 
 ---
