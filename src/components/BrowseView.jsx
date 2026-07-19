@@ -64,7 +64,7 @@ function formatName(name) {
   return name
     .replace(/^\d+_/, '')          // remove leading number prefix like "1_"
     .replace(/_/g, ' ')            // underscores to spaces
-    .replace(/\.(md|html)$/, '');  // remove .md / .html extension
+    .replace(/\.(md|html|pdf)$/, '');  // remove supported lesson extension
 }
 
 function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {

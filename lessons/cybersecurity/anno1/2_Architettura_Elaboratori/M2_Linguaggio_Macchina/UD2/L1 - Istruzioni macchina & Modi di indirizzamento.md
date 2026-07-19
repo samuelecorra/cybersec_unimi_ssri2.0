@@ -1,353 +1,88 @@
-# **Lezione 3: Istruzioni macchina & Modi di indirizzamento**
+## ***Lezione 1: Istruzioni macchina e modi di indirizzamento***
 
 ---
 
-## **1. Il “vocabolario” della CPU**
+> 📌 Questa lezione rielabora integralmente le pagine 13–18 di `M2doc.pdf`.
 
-L’obiettivo della lezione è rispondere a una domanda fondamentale:
+### **1. Il vocabolario della CPU**
 
-> **Qual è il vocabolario dell’unità centrale?**  
-> Cioè: **qual è l’insieme delle direttive che la CPU è in grado di riconoscere, decodificare ed eseguire?**
+Una CPU non comprende direttamente costrutti come `while`, oggetti o funzioni di libreria: riconosce un insieme finito di **istruzioni macchina**. Questo insieme, insieme ai registri visibili, ai tipi di dato, ai formati e ai modi di indirizzamento, costituisce la sua **Instruction Set Architecture** o ISA.
 
-Per rispondere correttamente bisogna entrare nella **struttura interna della CPU**, che è composta da:
+L’ISA è il confine contrattuale tra hardware e software: il programmatore o il compilatore produce istruzioni conformi all’ISA; la microarchitettura le realizza mediante circuiti interni.
 
-- **registri**,
-    
-- **ALU**,
-    
-- **Unità di Controllo**,
-    
-- collegamenti ai bus.
-    
+### **2. Componenti interni della CPU**
 
----
+I blocchi mostrati nel PDF svolgono funzioni differenti:
 
-## **2. I registri: cosa sono e che ruolo hanno**
+| Componente | Natura | Ruolo |
+| --- | --- | --- |
+| **registri** | elementi di memoria bistabili | conservano temporaneamente parole binarie |
+| **ALU** | circuito combinatorio | esegue operazioni aritmetiche e logiche |
+| **Control Unit** | circuito sequenziale | ordina nel tempo trasferimenti e operazioni |
+| **bus interni** | vie di comunicazione | collegano registri, ALU e unità di controllo |
 
-I **registri** sono:
+Un registro non “decide” nulla: mantiene il valore caricato finché un segnale di controllo non lo modifica. ALU e unità di controllo sono invece i blocchi attivi del percorso di elaborazione.
 
-- **contenitori di bit**,
-    
-- costituiti tipicamente da un insieme di **bistabili**,
-    
-- **non hanno iniziativa propria**,
-    
-- non “pensano” né decidono,
-    
-- **servono solo a contenere informazioni** utili all’elaborazione.
-    
+### **3. Registri visibili al programmatore**
 
-Sono strumenti **passivi**, al servizio dell’ALU e della Control Unit.
+#### **3.1 Program Counter**
 
----
+Il **PC** contiene l’indirizzo della prossima istruzione da prelevare. L’incremento produce l’esecuzione sequenziale; scrivere un nuovo valore nel PC realizza salti, chiamate e ritorni.
 
-## **3. Gli elementi attivi della CPU**
+#### **3.2 General Purpose Registers**
 
-Gli elementi che invece **realizzano realmente il lavoro** sono due:
+I **GPR** conservano operandi, risultati intermedi e indirizzi. Poiché sono interni alla CPU, il loro accesso è più diretto di un accesso alla memoria centrale.
 
-### **3.1 ALU – Arithmetic Logic Unit**
+#### **3.3 Condition Codes**
 
-È un **circuito combinatorio**, quindi:
+I **CC** registrano proprietà dell’ultimo risultato rilevante e permettono di prendere decisioni. Una CPU generica può offrire flag di segno, zero, riporto e overflow; nella LC-2 studiata più avanti i codici visibili sono precisamente **N**, **Z** e **P**.
 
-- **senza memoria**,
-    
-- che esegue:
-    
-    - operazioni **aritmetiche** (somma, sottrazione, a volte moltiplicazione e divisione),
-        
-    - operazioni **logiche** (AND, OR, NOT, confronti).
-        
+### **4. Registri di interfaccia con memoria**
 
-Lavora sui dati contenuti nei **General Purpose Registers**.
+- l’**Instruction Register** conserva l’istruzione attualmente decodificata o eseguita;
+- il **Memory Address Register** presenta alla memoria l’indirizzo coinvolto nell’accesso;
+- il **Memory Data Register** contiene la parola in transito da o verso la memoria.
 
-L’esito dell’operazione (positivo, nullo, negativo, overflow, errore) viene salvato nel registro **Condition Codes**.
+MAR e MDR sono come “finestre” della CPU sui bus esterni: il primo riguarda il dove, il secondo il contenuto trasferito.
 
----
+### **5. Forma di un’istruzione**
 
-### **3.2 Control Unit (CU)**
+Ogni istruzione contiene almeno:
 
-È una **rete sequenziale**, quindi:
+- un **opcode**, che identifica l’operazione;
+- uno o più campi **operando**, che specificano registri, costanti o modalità per trovare i dati.
 
-- **con memoria**,
-    
-- che:
-    
-    - acquisisce le istruzioni dalla memoria,
-        
-    - le decodifica,
-        
-    - orchestra il funzionamento dell’intera CPU,
-        
-    - coordina le interazioni con il mondo esterno tramite il **Control Bus**.
-        
+Le istruzioni si possono raggruppare in:
 
----
+1. **operative**, per calcoli aritmetici e logici;
+2. **di trasferimento**, per spostare dati fra registri, memoria e I/O;
+3. **di controllo**, per modificare il flusso di esecuzione.
 
-## **4. Registri fondamentali visibili al programmatore**
+### **6. Modi di indirizzamento**
 
-### **4.1 Program Counter (PC)**
+Un modo di indirizzamento stabilisce come interpretare il campo operando e calcolare il dato o l’**indirizzo effettivo**.
 
-Contiene:
+| Modo | Operando indicato dall’istruzione | Passaggio essenziale |
+| --- | --- | --- |
+| **immediato** | il valore stesso | nessun accesso a memoria per l’operando |
+| **diretto** | l’indirizzo del dato | $DR\leftarrow M[A]$ |
+| **indiretto** | l’indirizzo di una cella che contiene l’indirizzo del dato | $DR\leftarrow M[M[A]]$ |
+| **base + offset** | registro base e spostamento | $EA\leftarrow R_b+\text{offset}$ |
 
-> l’indirizzo della cella di memoria che contiene la **prossima istruzione da eseguire**.
+#### **6.1 Immediato**
 
-È il **puntatore all’avanzamento del programma**.
+In `ADD R0, R0, #5`, il 5 è codificato nell’istruzione. È rapido, ma l’ampiezza del campo limita l’intervallo delle costanti.
 
----
+#### **6.2 Diretto**
 
-### **4.2 General Purpose Registers (GPR)**
+L’istruzione identifica una cella e ne legge o scrive il contenuto. È semplice, ma il campo indirizzo può non bastare per tutto lo spazio di memoria.
 
-Sono:
+#### **6.3 Indiretto**
 
-- registri ad **uso generale**,
-    
-- contengono:
-    
-    - i **dati in corso di elaborazione**,
-        
-    - i dati necessari ai **prossimi passi di trasformazione**.
-        
+La prima cella contiene un puntatore alla seconda. Richiede un accesso in più, ma consente di raggiungere indirizzi completi e implementa il concetto di puntatore.
 
----
+#### **6.4 Base + offset**
 
-### **4.3 Condition Codes (CC)**
+Somma un piccolo spostamento al contenuto di un registro. È utile per array, strutture e zone contigue: mantenendo in un registro l’indirizzo di base, si selezionano elementi vicini cambiando l’offset.
 
-Contiene:
-
-- informazioni **accessorie sull’esito dell’ultima elaborazione**,
-    
-- ad esempio:
-    
-    - segno del risultato (negativo, nullo, positivo),
-        
-    - overflow,
-        
-    - underflow.
-        
-
-NON contiene il risultato numerico, ma **informazioni sul risultato**.
-
----
-
-## **5. Registri interni non visibili al programmatore**
-
-Oltre ai registri “logici”, esistono registri **fondamentali per il funzionamento interno della CPU**, ma **non direttamente programmabili**.
-
----
-
-### **5.1 Instruction Register (IR)**
-
-Contiene:
-
-> il **codice binario dell’istruzione attualmente in esecuzione**.
-
-Dopo la fase di **Fetch**, l’istruzione:
-
-- viene copiata dalla memoria nell’IR,
-    
-- per poter essere decodificata.
-    
-
----
-
-### **5.2 Memory Address Register (MAR)**
-
-Contiene:
-
-> l’**indirizzo della cella** del dispositivo slave che la CPU vuole leggere o scrivere.
-
-Serve a **emettere l’indirizzo sull’Address Bus**.
-
----
-
-### **5.3 Memory Data Register (MDR)**
-
-Contiene:
-
-- il **dato che va dalla CPU al bus** durante una scrittura,
-    
-- oppure il **dato che arriva dal bus alla CPU** durante una lettura.
-    
-
-IR, MAR e MDR sono:
-
-> le **finestre della CPU sui bus**.
-
----
-
-## **6. Il progetto della CPU e la ISA**
-
-Il progetto di una CPU è definito da:
-
-- i suoi **elementi interni**,
-    
-- il suo **insieme di istruzioni**, detto formalmente:
-    
-
-> **ISA – Instruction Set Architecture**
-
----
-
-## **7. Cos’è la ISA**
-
-La **ISA** è:
-
-> l’insieme delle **istruzioni macchina elementari** che una specifica CPU è in grado di:
-> 
-> - riconoscere,
->     
-> - decodificare,
->     
-> - eseguire.
->     
-
-È il **vocabolario ufficiale** della CPU.
-
-La **codifica binaria delle istruzioni** costituisce il **linguaggio macchina** di quella CPU.
-
----
-
-## **8. Struttura generale di un’istruzione macchina**
-
-Ogni istruzione macchina è composta da **due parti fondamentali**:
-
-### **8.1 Opcode (codice operativo)**
-
-Specifica:
-
-> **che tipo di operazione** deve eseguire la CPU.
-
----
-
-### **8.2 Operandi (operands)**
-
-Sono:
-
-- i **dati**,
-    
-- oppure gli **indirizzi** dei dati,
-    
-- necessari allo svolgimento corretto dell’istruzione.
-    
-
----
-
-## **9. Tipologie fondamentali di istruzioni macchina**
-
-### **1) Istruzioni operative**
-
-Richiedono alla CPU di svolgere:
-
-- operazioni aritmetiche,
-    
-- operazioni logiche,
-    
-
-utilizzando l’**ALU**.
-
----
-
-### **2) Istruzioni di trasferimento**
-
-Servono a:
-
-- prelevare dati da memoria o da I/O,
-    
-- caricarli nei GPR,
-    
-- riscrivere i risultati in memoria o periferiche.
-    
-
----
-
-### **3) Istruzioni di controllo**
-
-Servono a:
-
-> **modificare il flusso sequenziale di esecuzione delle istruzioni**.
-
-Sono i **salti (branch)**:
-
-- condizionati,
-    
-- incondizionati.
-    
-
-Sono **l’essenza stessa della programmazione**.
-
----
-
-## **10. I modi di indirizzamento**
-
-I **modi di indirizzamento** sono:
-
-> le diverse modalità con cui il linguaggio macchina permette di **recuperare i dati necessari** per l’esecuzione delle istruzioni.
-
----
-
-### **10.1 Indirizzamento immediato**
-
-Il dato:
-
-- è **contenuto direttamente nell’istruzione macchina**.
-    
-
-Durante il Fetch vengono già prelevate anche le informazioni necessarie all’esecuzione.
-
----
-
-### **10.2 Indirizzamento diretto**
-
-L’istruzione fornisce:
-
-> l’**indirizzo della cella di memoria** che contiene il dato.
-
-È necessario:
-
-- **un secondo accesso a memoria** per leggere il dato vero e proprio.
-    
-
----
-
-### **10.3 Indirizzamento indiretto**
-
-L’istruzione fornisce:
-
-- un **indirizzo intermedio**,
-    
-- che punta a una cella che **contiene a sua volta l’indirizzo finale del dato**.
-    
-
-Sono necessari:
-
-- **due accessi a memoria**.
-    
-
----
-
-### **10.4 Indirizzamento Base + Offset**
-
-È un modo di indirizzamento **largamente diffuso**.
-
-L’istruzione fornisce:
-
-- un **registro base (GPR)**,
-    
-- un **offset costante**.
-    
-
-L’indirizzo finale si ottiene come:
-
-$$  
-\text{indirizzo} = \text{registro base} + \text{offset}  
-$$
-
-Questo indirizzamento:
-
-- usa **un solo accesso a memoria**,
-    
-- permette indirizzi **dinamici** perché il registro base può cambiare valore durante l’esecuzione.
-    
-
----
-
+> ✅ L’ISA descrive che cosa la macchina offre al software; i modi di indirizzamento spiegano come ogni istruzione trova i propri operandi.

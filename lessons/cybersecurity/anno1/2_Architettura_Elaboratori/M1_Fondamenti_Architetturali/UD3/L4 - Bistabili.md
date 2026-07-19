@@ -1,10 +1,14 @@
-## **Lezione 4: Bistabili**
+## ***Lezione 4: Bistabili***
+
+---
+
+> 📌 Questa lezione rielabora integralmente le pagine 86–98 di `M1doc.pdf`.
 
 ### **1. Dal circuito combinatorio al circuito sequenziale**
 
 I circuiti logici studiati finora erano **combinatori**:  
 l’uscita dipendeva **solo dagli ingressi presenti nello stesso istante**.  
-Ogni variazione degli input produceva **immediatamente** una variazione dell’output.
+Una variazione degli ingressi produce una variazione dell’uscita dopo il **ritardo di propagazione** delle porte, senza dipendere da uno stato memorizzato precedente.
 
 Nei calcolatori reali, però, serve qualcosa in più:
 
@@ -43,13 +47,13 @@ Il più semplice bistabile è il **latch SR**.
 La parola _latch_ significa _chiavistello_:  
 un meccanismo che mantiene una posizione finché non viene sbloccato manualmente.
 
-#### **Definizione formale**
+#### **3.1. Definizione formale**
 
 Un **latch** è un **circuito sequenziale retroazionato** in grado di:
 
 - memorizzare un bit,
     
-- mantenere il valore anche in assenza di input,
+- mantenere il valore quando gli ingressi di controllo sono inattivi,
     
 - cambiare solo quando riceve un comando.
     
@@ -89,15 +93,17 @@ Il latch SR si costruisce con **due porte NOR incrociate**:
 
 Questa struttura introduce la **retroazione (feedback)**, che è il meccanismo fisico della memoria.
 
+La retroazione rende l’uscita presente parte degli ingressi che determineranno l’uscita successiva. Le due configurazioni normali sono complementari, $(Q,\overline Q)=(1,0)$ e $(0,1)$, e ciascuna sostiene se stessa finché un comando esterno non la modifica.
+
 ---
 
 ### **6. Equazioni logiche del latch SR NOR**
 
-$$  
-\begin{cases}  
-Q = \neg(R + \overline{Q}) \  
-\overline{Q} = \neg(S + Q)  
-\end{cases}  
+$$
+\begin{cases}
+Q=\overline{R+\overline Q},\\
+\overline Q=\overline{S+Q}.
+\end{cases}
 $$
 
 Queste equazioni mostrano che:
@@ -129,13 +135,13 @@ Se invece le equazioni restituiscono valori diversi, il circuito **deve cambiare
 
 Supponiamo:
 
-$$  
-\begin{cases}  
-S = 0 \  
-R = 0 \  
-Q = 0 \  
-\overline{Q} = 1  
-\end{cases}  
+$$
+\begin{cases}
+S=0,\\
+R=0,\\
+Q=0,\\
+\overline Q=1.
+\end{cases}
 $$
 
 Verifica:
@@ -157,13 +163,13 @@ Questo è uno **stato di memoria**.
 
 Partiamo da:
 
-$$  
-\begin{cases}  
-Q = 0 \  
-\overline{Q} = 1 \  
-S = 0 \  
-R = 0  
-\end{cases}  
+$$
+\begin{cases}
+Q=0,\\
+\overline Q=1,\\
+S=0,\\
+R=0.
+\end{cases}
 $$
 
 Ora poniamo:
@@ -228,15 +234,17 @@ $$
 
 ### **11. Caso proibito: $S = 1$, $R = 1$**
 
-Qui si richiede contemporaneamente:
+Nel latch NOR, $S=R=1$ forza entrambe le uscite a zero:
 
-- $Q = 1$ (Set)
-    
-- $Q = 0$ (Reset)
-    
+$$
+Q=\overline{1+\overline Q}=0,
+\qquad
+\overline Q=\overline{1+Q}=0.
+$$
 
-È una **contraddizione logica**.  
-Questo stato è **proibito** e non deve mai essere utilizzato.
+Il circuito non sta risolvendo direttamente due comandi contraddittori imponendo insieme $Q=1$ e $Q=0$; produce invece $(Q,\overline Q)=(0,0)$, che viola la normale complementarità delle uscite. Il problema più delicato nasce quando $S$ e $R$ tornano quasi simultaneamente a $0$: piccole differenze nei ritardi delle due porte possono condurre in modo non prevedibile a uno dei due stati stabili e, nei circuiti reali, anche a una temporanea **metastabilità**.
+
+> ⚠️ Per questo la combinazione $S=R=1$ è detta proibita o non valida nel latch SR-NOR: il suo rilascio non determina in modo affidabile quale bit resterà memorizzato.
 
 ---
 
@@ -247,6 +255,15 @@ Questo stato è **proibito** e non deve mai essere utilizzato.
 - Da $Q = 1$ a $Q = 0$ → impulso su $R$
     
 - Con $S = 0$ e $R = 0$ → memoria mantenuta
+
+| $S$ | $R$ | $Q$ successivo | operazione |
+| ---: | ---: | --- | --- |
+| 0 | 0 | $Q$ precedente | memoria |
+| 1 | 0 | 1 | set |
+| 0 | 1 | 0 | reset |
+| 1 | 1 | non valido | entrambe le uscite a 0; rilascio indeterminato |
+
+Le equazioni descrivono la condizione stabile, ma una transizione avviene nel tempo. Durante un set, per esempio, l’attivazione di $S$ porta prima $\overline Q$ a $0$ dopo un ritardo di porta; questa variazione retroagisce sull’altra NOR e porta poi $Q$ a $1$. È proprio la successione causale, non un cambiamento matematicamente istantaneo, a rendere comprensibile il funzionamento fisico.
     
 
 ---
@@ -264,7 +281,7 @@ Nei diagrammi reali si usa un **simbolo semplificato**, che:
 
 ---
 
-### **14. Dal bistabile SR al bistabile SRC**
+### **14. Dal latch SR al latch SR controllato**
 
 Nel bistabile **SRC**:
 
@@ -272,14 +289,24 @@ Nel bistabile **SRC**:
     
 - passano prima da **due porte AND**,
     
-- queste sono abilitate dal segnale **$C$ (Control / Clock)**.
+- queste sono abilitate dal segnale **$C$ (Control)**.
     
 
-Se:
+Gli ingressi effettivi del latch NOR sono
 
-- $C = 0$ → il latch è **bloccato**
+$$
+S_g=S\cdot C,
+\qquad
+R_g=R\cdot C.
+$$
+
+Quindi:
+
+- $C = 0$ → $S_g=R_g=0$ e il latch conserva lo stato,
     
-- $C = 1$ → il latch è **attivo**
+- $C = 1$ → $S_g=S$, $R_g=R$ e il latch è sensibile agli ingressi.
+
+Questo circuito è un **gated SR latch sensibile al livello**: durante tutto l’intervallo in cui $C=1$, una variazione di $S$ o $R$ può modificare lo stato. Se $C$ è un segnale periodico lo si può chiamare clock, ma il circuito non è ancora un flip-flop sensibile al solo fronte.
     
 
 ---
@@ -295,18 +322,19 @@ Il **clock** è:
 - che sincronizza tutte le operazioni del sistema digitale.
     
 
-Serve per:
+Serve per coordinare gli istanti o gli intervalli nei quali i componenti sequenziali possono aggiornare lo stato. Non elimina automaticamente glitch o ambiguità: il progetto deve rispettare ritardi di propagazione, tempi di setup e hold e vincoli sul percorso del clock.
 
-- evitare glitch,
-    
-- eliminare ambiguità temporali,
-    
-- rendere prevedibili i cambiamenti di stato.
+È importante distinguere:
+
+- **latch sensibile al livello**: trasparente durante un intero livello di enable;
+- **flip-flop sensibile al fronte**: campiona l’ingresso in prossimità del fronte di salita o discesa.
+
+Il PDF anticipa l’idea di aggiornamento sul fronte del clock: tale comportamento appartiene propriamente ai flip-flop, ottenibili con strutture ulteriori rispetto al semplice SRC.
     
 
 ---
 
-### **16. Ruolo del clock nel bistabile SRC**
+### **16. Ruolo del controllo nel latch SRC**
 
 Nel SRC:
 
@@ -324,6 +352,40 @@ Questo introduce la **logica sequenziale temporizzata**, base di:
 - memorie,
     
 - CPU.
+
+---
+
+### **17. Realizzazione alternativa con porte NAND**
+
+Due porte NAND incrociate realizzano un latch SR con ingressi **attivi bassi**, indicati $\overline S$ e $\overline R$. L’ingresso è attivo quando vale $0$, perciò la tabella è duale rispetto a quella NOR:
+
+| $\overline S$ | $\overline R$ | $Q$ successivo | operazione |
+| ---: | ---: | --- | --- |
+| 1 | 1 | $Q$ precedente | memoria |
+| 0 | 1 | 1 | set |
+| 1 | 0 | 0 | reset |
+| 0 | 0 | non valido | entrambe le uscite a 1; rilascio indeterminato |
+
+Le equazioni sono
+
+$$
+\begin{cases}
+Q=\overline{\overline S\cdot\overline Q},\\
+\overline Q=\overline{\overline R\cdot Q}.
+\end{cases}
+$$
+
+La differenza operativa essenziale è quindi la polarità: nel latch NOR lo stato di memoria corrisponde a $S=R=0$; nel latch NAND corrisponde a $\overline S=\overline R=1$.
+
+---
+
+### **18. Stabilità, metastabilità e uso architetturale**
+
+Uno stato è **stabile** quando, mantenuti fissi gli ingressi, la retroazione conserva le uscite. La **metastabilità** è invece una condizione fisica transitoria nella quale il circuito impiega un tempo non prevedibile a risolversi verso $0$ o $1$; può essere favorita da ingressi proibiti o dalla violazione dei vincoli temporali vicino al clock. Non equivale a un terzo valore booleano permanente, ma ricorda che il modello $0/1$ è un’astrazione di tensioni continue.
+
+Latch e flip-flop sono i mattoni dai quali si costruiscono registri, contatori e macchine a stati. Il singolo bistabile memorizza un bit; mettendone $n$ in parallelo si ottiene un registro da $n$ bit.
+
+> ✅ La memoria nasce dalla retroazione: due stati autoconsistenti persistono nel tempo. Set e reset selezionano lo stato; enable e clock controllano quando può cambiare; combinazioni proibite e vincoli temporali devono essere rispettati per evitare risultati indeterminati.
     
 
 ---

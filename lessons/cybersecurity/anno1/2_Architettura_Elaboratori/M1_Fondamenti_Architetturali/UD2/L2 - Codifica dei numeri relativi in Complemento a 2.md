@@ -2,7 +2,9 @@
 
 ---
 
-## **1. Il problema fondamentale: rappresentare numeri negativi in binario**
+> 📌 Questa lezione rielabora integralmente le pagine 31–42 di `M1doc.pdf`.
+
+### **1. Il problema fondamentale: rappresentare numeri negativi in binario**
 
 Fino a questo punto abbiamo rappresentato:
 
@@ -33,7 +35,7 @@ Il primo tentativo naturale è il sistema **modulo e segno**:
 - $b-1$ bit per il valore assoluto
     
 
-Ma questo sistema ha **due difetti strutturali gravissimi**:
+Ma questo sistema ha due limiti strutturali:
 
 1. **Doppia rappresentazione dello zero**  
     +0 e −0 sono codifiche diverse → ambiguità matematica.
@@ -44,10 +46,10 @@ Ma questo sistema ha **due difetti strutturali gravissimi**:
     - concordi → somma
         
     - discordi → sottrazione  
-        → servono **branch logici**, confronti, circuiti più complessi.
+        Per implementarle servono selezione dell’operazione, confronti e circuiti più complessi.
         
 
-Questo è **inaccettabile per l’hardware**, che deve essere:
+Per l’hardware è preferibile una codifica che renda l’operazione uniforme e consenta di riutilizzare lo stesso sommatore binario.
 
 - semplice
     
@@ -60,9 +62,9 @@ Questo è **inaccettabile per l’hardware**, che deve essere:
 
 ---
 
-## **2. La soluzione definitiva: il Complemento a 2**
+### **2. La soluzione: il complemento a 2**
 
-### **Definizione operativa**
+#### **2.1. Definizione operativa**
 
 Dato un numero binario $x$ su $b$ bit, il suo **negativo in complemento a 2** si ottiene così:
 
@@ -77,17 +79,16 @@ $$
 -x = \overline{x} + 1  
 $$
 
-Questa non è una “regoletta tecnica”:  
-è l’**implementazione hardware del negativo matematico in aritmetica modulare**.
+Il risultato va sempre calcolato mantenendo la stessa larghezza $b$: un eventuale riporto oltre l’MSB viene scartato.
 
 ---
 
-## **3. Fondamento matematico: aritmetica modulare**
+### **3. Fondamento matematico: aritmetica modulare**
 
 Con $b$ bit, i registri lavorano **modulo $2^b$**:
 
 $$  
-\mathbb{Z}_{2^b} = {0,1,2,\dots,2^b-1}  
+\mathbb{Z}_{2^b}=\{0,1,2,\dots,2^b-1\}
 $$
 
 In questo sistema:
@@ -96,7 +97,7 @@ $$
 -n \equiv 2^b - n \pmod{2^b}  
 $$
 
-Ma:
+Per una parola di $b$ bit, la configurazione di tutti $1$ vale $2^b-1$. Sottrarre $n$ da tale configurazione equivale a invertirne i bit, quindi:
 
 - $2^b - 1$ = tutti 1 in binario
     
@@ -107,11 +108,27 @@ $$
 2^b - n = (\overline{n}) + 1  
 $$
 
-Quindi il **complemento a 2 è la realizzazione binaria del negativo in aritmetica modulare**.
+Quindi il **complemento a 2 realizza il negativo additivo nell’aritmetica modulo $2^b$**.
+
+> 💡 Immagina le $2^b$ configurazioni disposte su un anello: dopo $2^b-1$ si ritorna a $0$. Le configurazioni della metà superiore vengono interpretate come i numeri negativi che precedono lo zero.
+
+#### **3.1. L’anello delle configurazioni su 4 bit**
+
+| configurazione | valore senza segno | valore in complemento a 2 |
+| -------------- | -----------------: | ------------------------: |
+| `0000`–`0111`  |            $0$–$7$ |                   $0$–$7$ |
+| `1000`         |                $8$ |                      $-8$ |
+| `1001`         |                $9$ |                      $-7$ |
+| `1010`         |               $10$ |                      $-6$ |
+| `1011`         |               $11$ |                      $-5$ |
+| `1100`         |               $12$ |                      $-4$ |
+| `1101`         |               $13$ |                      $-3$ |
+| `1110`         |               $14$ |                      $-2$ |
+| `1111`         |               $15$ |                      $-1$ |
 
 ---
 
-## **4. Interpretazione del valore in complemento a 2**
+### **4. Interpretazione e decodifica**
 
 Per un numero binario $x = b_{b-1} b_{b-2}\dots b_0$ su $b$ bit:
 
@@ -121,9 +138,22 @@ $$
 
 Il **bit più significativo (MSB)** ha **peso negativo**.
 
+Esistono dunque due metodi equivalenti per decodificare una parola:
+
+1. applicare direttamente la formula dei pesi, con peso $-2^{b-1}$ per l’MSB;
+2. se l’MSB è $1$, calcolare inverti-più-uno sul pattern e anteporre il segno meno.
+
+Per `1101` su 4 bit:
+
+$$
+-1\cdot2^3+1\cdot2^2+0\cdot2+1=-8+4+1=-3.
+$$
+
+Con l’altro metodo, `1101` $\to$ `0010` $+1=$ `0011`, dunque il modulo è $3$ e il valore è $-3$.
+
 ---
 
-## **5. Il MSB indica il segno**
+### **5. Il MSB indica il segno**
 
 Nel complemento a 2:
 
@@ -134,7 +164,7 @@ Nel complemento a 2:
 
 Questo vale **per qualsiasi numero di bit**.
 
-### Esempi su 4 bit
+#### **5.1. Esempi su 4 bit**
 
 - `0101` → MSB = 0 → $+5$
     
@@ -149,7 +179,7 @@ Questo vale **per qualsiasi numero di bit**.
 
 ---
 
-## **6. Intervallo rappresentabile NON simmetrico**
+### **6. Intervallo rappresentabile non simmetrico**
 
 Con $b$ bit in complemento a 2:
 
@@ -170,7 +200,7 @@ $$
 |1000|−8|
 |1111|−1|
 
-### Perché NON è simmetrico?
+#### **6.1. Perché non è simmetrico**
 
 Perché:
 
@@ -178,22 +208,22 @@ Perché:
     
 - i non-negativi sono $2^{b-1}$
     
-- ma **lo zero è nei positivi**  
+- ma **lo zero è fra i non negativi**  
     → c’è **un negativo in più**
     
 
 ---
 
-## **7. Proprietà strutturali fondamentali**
+### **7. Proprietà strutturali fondamentali**
 
-### ✅ Uno e un solo zero
+#### **7.1. Uno e un solo zero**
 
 Niente +0 / −0.  
 Lo zero è unico: `000…000`
 
 ---
 
-### ✅ Somma e sottrazione unificate
+#### **7.2. Somma e sottrazione unificate**
 
 Nel complemento a 2:
 
@@ -214,26 +244,71 @@ $$
 
 ---
 
-### ✅ Nessun controllo di segno in fase operativa
+#### **7.3. Stesso sommatore per pattern con o senza segno**
 
-L’ALU **non deve sapere se un numero è positivo o negativo**.  
-Deve solo **sommare bit**.
+La rete di somma dell’ALU combina i bit allo stesso modo. È però la **semantica scelta dal programma** a stabilire se quei bit vadano letti con o senza segno, e di conseguenza quale flag di overflow controllare.
+
+#### **7.4. Esempi di somma su 4 bit**
+
+**Due positivi senza overflow:**
+
+$$
+0101\ (+5)+0010\ (+2)=0111\ (+7).
+$$
+
+**Due negativi senza overflow:**
+
+$$
+1100\ (-4)+1110\ (-2)=1\,1010\ \longrightarrow\ 1010\ (-6).
+$$
+
+Il riporto esterno viene scartato e `1010` vale $-6$.
+
+**Segni diversi:**
+
+$$
+0101\ (+5)+1010\ (-6)=1111\ (-1).
+$$
+
+Con operandi di segno diverso non può verificarsi overflow nella somma: il risultato matematico rimane compreso tra i due operandi.
+
+#### **7.5. Negazione e sottrazione svolte**
+
+Per negare $+5$ su 4 bit:
+
+$$
+0101\longrightarrow1010\longrightarrow1011=-5.
+$$
+
+Per negare $-3$:
+
+$$
+1101\longrightarrow0010\longrightarrow0011=+3.
+$$
+
+La sottrazione si riconduce quindi a
+
+$$
+A-B=A+(\overline{B}+1).
+$$
+
+> ⚠️ Il minimo rappresentabile, `1000` su 4 bit, è $-8$ e non possiede l’opposto $+8$ nella stessa larghezza. Inverti-più-uno restituisce ancora `1000`: la negazione causa overflow.
 
 ---
 
-## **8. Carry Out ≠ Overflow Logico (DISTINZIONE CRITICA)**
+### **8. Riporto e overflow: due fenomeni distinti**
 
-### **8.1 Carry Out (overflow aritmetico)**
+#### **8.1. Carry out**
 
 È il **riporto oltre il MSB**:
 
-- è un **fenomeno fisico**
+- è il bit prodotto oltre la larghezza fissata,
     
 - nasce dalla somma binaria pura
     
-- **non indica errore matematico**
+- segnala overflow nella lettura **senza segno**,
     
-- in complemento a 2 **si ignora**
+- nella lettura con segno non determina da solo l’overflow.
     
 
 Motivo:
@@ -243,9 +318,9 @@ Il carry out indica solo che hai fatto “un giro completo dell’anello”.
 
 ---
 
-### **8.2 Overflow Logico (errore semantico)**
+#### **8.2. Overflow con segno**
 
-È un **errore MATEMATICO**.
+Si verifica quando il risultato matematico non appartiene all’intervallo rappresentabile con $b$ bit.
 
 Si verifica **solo se**:
 
@@ -258,10 +333,10 @@ Formalmente:
 
 - $A>0$, $B>0$ e $A+B<0$ → overflow positivo
     
-- $A<0$, $B<0$ e $A+B\ge 0$ → overflow negativo (underflow)
+- $A<0$, $B<0$ e il pattern prodotto viene interpretato come non negativo → overflow nella direzione negativa.
     
 
-### Regola pratica hardware:
+Regola pratica hardware:
 
 Basta confrontare i **tre MSB**:
 
@@ -274,13 +349,23 @@ Basta confrontare i **tre MSB**:
 
 Se i primi due sono uguali e il terzo è diverso → **overflow**
 
+Esempi del PDF su 4 bit:
+
+$$
+0101\ (+5)+0110\ (+6)=1011,
+$$
+
+ma $+11$ non è rappresentabile e `1011` verrebbe letto erroneamente come $-5$;
+
+$$
+1100\ (-4)+1001\ (-7)=1\,0101\ \longrightarrow\ 0101,
+$$
+
+ma $-11$ non è rappresentabile e `0101` verrebbe letto come $+5$. Il carry out presente nel secondo caso dimostra che il solo riporto non è il criterio dell’overflow con segno.
+
 ---
 
-## **9. Underflow**
-
-È semplicemente:
-
-> **overflow verso il basso**
+### **9. Overflow nella direzione negativa**
 
 Accade quando:
 
@@ -289,11 +374,11 @@ Accade quando:
 - ottieni un risultato positivo
     
 
-È **sempre un overflow logico**, solo nel verso negativo.
+Nel contesto degli interi a complemento a 2 è più preciso chiamarlo **overflow con segno nella direzione negativa**. Il termine *underflow* è usato soprattutto per la virgola mobile, quando un valore non nullo è troppo vicino a zero per essere rappresentato normalmente.
 
 ---
 
-## **10. Estensione del segno (Sign Extension)**
+### **10. Estensione del segno**
 
 Se passi da $b$ bit a $k>b$ bit:
 
@@ -305,29 +390,37 @@ Se passi da $b$ bit a $k>b$ bit:
 |+5|0101|00000101|
 |−3|1101|11111101|
 
-### Perché funziona?
+#### **10.1. Perché funziona**
 
 Perché il MSB rappresenta il **peso negativo dominante**.  
 Ripeterlo **preserva il valore matematico**.
 
+Se il bit di segno è $0$, gli zeri aggiunti hanno peso nullo. Se è $1$, su $k$ bit i nuovi pesi negativi e positivi si compensano:
+
+$$
+-2^{k-1}+\sum_{i=b-1}^{k-2}2^i=-2^{b-1}.
+$$
+
+I bit originari di peso inferiore restano invariati, quindi resta invariato anche il valore complessivo.
+
 ---
 
-## **11. Perché il complemento a 2 è PERFETTO per l’hardware**
+### **11. Perché il complemento a 2 è adatto all’hardware**
 
 |Motivo|Effetto|
 |---|---|
 |Unico zero|niente ambiguità|
 |Somma unica|stessa ALU per + e −|
 |MSB = segno|decodifica istantanea|
-|Aritmetica modulare|carry out ignorabile|
+|Aritmetica modulare|il carry out viene scartato dalla parola; non è il criterio dell’overflow con segno|
 |Overflow rilevabile logicamente|confronto MSB|
 |Sign extension semplice|solo duplicazione bit|
 
-👉 Tutto è ridotto a **porte logiche di somma**.
+Somma e sottrazione possono quindi condividere gran parte della stessa rete aritmetica.
 
 ---
 
-## **12. Sintesi finale definitiva**
+### **12. Sintesi finale**
 
 Il **complemento a 2** è:
 
@@ -348,28 +441,4 @@ tutto **in un unico schema coerente**.
 
 ---
 
-## ✅ Conclusione assoluta
-
-> Il complemento a 2 non è una “tecnica”.  
-> È **la struttura matematica che rende possibile l’intero calcolo automatico moderno.**
-
-CPU, ALU, registri, bus, stack, indirizzi, offset, salti, differenze, contatori…  
-**Tutto vive dentro questa logica.**
-
----
-
-Se vuoi, nella prossima lezione possiamo fare **solo esercizi guidati completi** su:
-
-- calcolo del complemento
-    
-- somme con overflow
-    
-- sottrazioni mascherate
-    
-- esempi con 8, 16, 32 bit
-    
-- casi limite ($-2^{b-1}$, $+2^{b-1}-1$)
-    
-
-Dimmi:  
-👉 **vuoi subito una batteria di esercizi “da esame”?**
+> ✅ Su $b$ bit il complemento a 2 rappresenta l’intervallo $[-2^{b-1},2^{b-1}-1]$, ha un solo zero e permette di eseguire la sottrazione sommando l’opposto. Carry out e overflow con segno devono essere controllati con criteri diversi.

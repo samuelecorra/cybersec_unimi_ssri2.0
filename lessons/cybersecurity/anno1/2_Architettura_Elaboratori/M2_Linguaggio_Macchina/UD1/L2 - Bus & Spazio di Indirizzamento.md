@@ -1,222 +1,67 @@
-# **Lezione 2: Bus & Spazio di Indirizzamento**
+## ***Lezione 2: Bus e spazio di indirizzamento***
 
 ---
 
-## **1. Struttura tripartita del Bus di Sistema**
+> 📌 Questa lezione rielabora integralmente le pagine 9–12 di `M2doc.pdf`.
 
-Nel modello di Von Neumann si adotta una **notazione prevalentemente anglosassone** e si rappresenta il **bus di sistema** come una **struttura tripartita**:
+### **1. Il bus di sistema**
 
-- **Data Bus**
-    
-- **Address Bus**
-    
-- **Control Bus**
-    
+Il **bus di sistema** è il canale condiviso che collega CPU, memoria e interfacce di I/O. Non è un unico filo: è un insieme di linee raggruppate in tre sezioni con ruoli distinti.
 
-Questi tre sottosistemi lavorano insieme per permettere alla CPU di comunicare con:
+| Sezione | Informazione trasportata | Direzione tipica |
+| --- | --- | --- |
+| **data bus** | parole e istruzioni | bidirezionale |
+| **address bus** | indirizzo della cella o del registro selezionato | dalla CPU verso gli slave |
+| **control bus** | comandi, temporizzazione e risposte | dipende dal segnale |
 
-- memoria,
-    
-- periferiche,
-    
-- interfacce di I/O.
-    
+Durante una lettura, per esempio, la CPU seleziona una sorgente mediante l’address bus, richiede `READ` sul control bus e riceve la parola sul data bus.
 
----
+### **2. Data bus e parallelismo**
 
-## **2. Data Bus – Trasferimento dei dati**
+Se il data bus ha ampiezza $d$, può trasportare contemporaneamente una parola di $d$ bit. In una macchina coerente, $d$ è spesso legato alla dimensione naturale della parola elaborata dalla CPU.
 
-Il **Data Bus** è il **primo livello del bus** ed è la porzione dedicata al:
+Un bus più largo può trasferire più bit per operazione, ma la banda effettiva dipende anche dalla frequenza, dal protocollo e dai tempi di attesa:
 
-> trasferimento **in parallelo** di una **stringa di bit** tra l’unità **master (CPU)** e le unità **slave (memoria e I/O)**.
+$$
+\text{banda teorica}=d\cdot \text{trasferimenti al secondo}.
+$$
 
-Se indichiamo con $d$ il numero di linee (fili) del Data Bus, allora:
+Nel tempo sono state comuni ampiezze di 8, 16, 32, 64 e, in alcuni collegamenti o unità vettoriali, 128 bit. Aumentare $d$ non rende automaticamente più veloce ogni programma: conta che il resto dell’architettura possa sfruttare il parallelismo disponibile.
 
-- $d$ determina la **dimensione della parola di memoria**,
-    
-- quindi quanti bit possono essere trasferiti **contemporaneamente**.
-    
+### **3. Address bus e cardinalità dello spazio**
 
-### **Banda passante del Data Bus**
+Con $a$ linee di indirizzo sono disponibili $2^a$ configurazioni, quindi si possono distinguere fino a:
 
-La **banda passante** è definita come:
+$$
+N=2^a
+$$
 
-> il numero di bit trasferibili per unità di tempo.
+celle o unità indirizzabili. Questo insieme è lo **spazio di indirizzamento**.
 
-Essa è **direttamente proporzionale a $d$**, a parità di tutte le altre condizioni.
+Esempio: con 32 bit di indirizzo esistono $2^{32}=4\,294\,967\,296$ indirizzi. Se ogni indirizzo seleziona un byte, lo spazio vale $4\ \mathrm{GiB}$; se seleziona una parola, la quantità di byte è maggiore e dipende dalla parola. Per questo “32 bit = 4 GB” richiede sempre l’ipotesi di memoria **byte-addressable**.
 
----
+### **4. Spazio indirizzabile e memoria installata**
 
-## **3. Evoluzione storica del Data Bus**
+Lo spazio di indirizzamento è una **capacità architetturale**, non la quantità di RAM realmente presente. Una macchina può avere, per esempio, uno spazio di $4\ \mathrm{GiB}$ ma soltanto $2\ \mathrm{GiB}$ di memoria fisica installata. Gli indirizzi restanti possono essere non implementati oppure destinati ad altri dispositivi.
 
-Nel tempo, $d$ è cresciuto in modo esponenziale:
+Un address bus più ampio consente potenzialmente:
 
-- 8 bit
-    
-- 16 bit
-    
-- 32 bit
-    
-- 64 bit
-    
-- 128 bit
-    
+- più celle di memoria;
+- programmi e insiemi di dati più grandi;
+- più regioni assegnabili a RAM, ROM e I/O.
 
-Ogni aumento di $d$ ha portato un **incremento diretto delle prestazioni** del sistema.
+> ⚠️ L’ampiezza del data bus stabilisce quanti bit viaggiano insieme; quella dell’address bus stabilisce quante posizioni diverse possono essere selezionate. Sono proprietà indipendenti.
 
----
+### **5. Control bus**
 
-## **4. Address Bus – Spazio di indirizzamento**
+Le linee di controllo non costituiscono normalmente un numero binario unico, come accade per indirizzo e dato. Ogni linea ha una semantica propria. Fra i segnali tipici compaiono:
 
-L’**Address Bus** è il **secondo livello del bus**.
+- `READ` e `WRITE`;
+- `RESET`;
+- `CLOCK` o segnali di sincronizzazione;
+- richieste e riconoscimenti di interruzione;
+- segnali di pronto, attesa o errore.
 
-Il suo compito è permettere alla CPU (unità master) di:
+Alcune linee vanno dalla CPU agli slave, per esempio un comando di lettura; altre vanno dagli slave alla CPU, per esempio la segnalazione che un dato è disponibile. La complessità del control bus dipende dalle interazioni che l’architettura deve supportare.
 
-> indicare **a quale cella** di memoria o di periferica intende fare riferimento.
-
-Se indichiamo con $a$ il numero di linee dell’Address Bus, allora:
-
-> il numero massimo di celle indirizzabili è:
-> 
-> $2^a$
-
-Questo valore prende il nome di:
-
-> **spazio di indirizzamento** della CPU.
-
----
-
-## **5. Spazio di indirizzamento vs memoria fisica**
-
-È fondamentale distinguere tra:
-
-- **spazio di indirizzamento** → tutte le celle che la CPU **potrebbe teoricamente indirizzare**,
-    
-- **memoria fisica reale** → celle **effettivamente presenti** nel calcolatore.
-    
-
-Esempio:
-
-- Address Bus a **32 bit** → $2^{32} = 4 \text{ GB}$
-    
-- PC reale con **2 GB di RAM**
-    
-
-Significa che **solo una parte dello spazio indirizzabile è realmente occupata da memoria fisica**.
-
----
-
-## **6. Conseguenze dell’aumento dell’Address Bus**
-
-All’aumentare di $a$ aumentano direttamente:
-
-- la **dimensione massima dei programmi eseguibili**,
-    
-- la **quantità massima di dati elaborabili**.
-    
-
-A differenza del Data Bus, l’Address Bus:
-
-- non è cresciuto con semplici raddoppi costanti,
-    
-- ha seguito una crescita più irregolare:
-    
-    - 16 bit,
-        
-    - 20 bit,
-        
-    - 24 bit,
-        
-    - 32 bit,
-        
-    - nelle architetture PC.
-        
-
----
-
-## **7. Control Bus – Segnali di controllo**
-
-Il **Control Bus** è la **terza e ultima porzione** del bus di sistema.
-
-A differenza degli altri due:
-
-- **Data Bus → trasferisce dati aggregati**
-    
-- **Address Bus → trasferisce indirizzi aggregati**
-    
-- **Control Bus → ogni linea è indipendente**
-    
-
-Ogni linea del Control Bus trasporta:
-
-> un **segnale di controllo distinto**, con un significato ben preciso.
-
----
-
-## **8. Esempi di segnali sul Control Bus**
-
-Alcune linee tipiche sono:
-
-- **R (Read)** → lettura,
-    
-- **W (Write)** → scrittura,
-    
-- **Reset**
-    
-- **Clock**
-    
-
-Ogni linea funziona come un **interruttore autonomo**, indipendente dalle altre.
-
----
-
-## **9. Direzione dei segnali sul Control Bus**
-
-Esistono **due grandi categorie di linee**:
-
-### **a) Linee CPU → Dispositivi Slave**
-
-Servono alla CPU per:
-
-- impartire comandi,
-    
-- controllare memoria e periferiche.
-    
-
-Sono **linee in uscita dalla CPU**, perché la CPU è il **master**.
-
-Esempio tipico: **R / W**.
-
----
-
-### **b) Linee Dispositivi Slave → CPU**
-
-Servono agli slave per:
-
-- segnalare eventi alla CPU,
-    
-- richiedere attenzione,
-    
-- attivare particolari modalità di interazione.
-    
-
-Sono **linee in ingresso alla CPU**.
-
----
-
-## **10. Complessità del Control Bus**
-
-Il **numero di linee del Control Bus**:
-
-- non è fisso,
-    
-- dipende direttamente:
-    
-    - dalla **complessità della CPU**,
-        
-    - dal **numero e tipo di dispositivi slave**,
-        
-    - dalle **modalità di interazione supportate**.
-        
-
-Più la CPU è complessa, più il Control Bus diventa articolato.
+> ✅ Address, data e control bus rispondono rispettivamente alle domande “dove?”, “che cosa?” e “con quale operazione e temporizzazione?”.

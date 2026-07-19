@@ -2,6 +2,8 @@
 
 ---
 
+> 📌 Questa lezione rielabora integralmente le pagine 1–3 di `M1doc.pdf`.
+
 ### **1. Che cos’è l’informatica**
 
 L’informatica è la **scienza della manipolazione automatica dell’informazione**.  
@@ -103,16 +105,16 @@ Per rendere possibile l’elaborazione automatica dell’informazione servono **
     
 2. **Scegliere una grandezza fisica che possa rappresentarla.**
     
-3. **Stabilire una corrispondenza univoca tra informazione e grandezza fisica.**
+3. **Stabilire una regola di codifica e decodifica** tra informazione e stati della grandezza fisica.
     
 
 Da qui nasce il concetto chiave della rappresentazione.
 
 ---
 
-### **4. Il rappresentato e il rappresentante**
+### **4. Informazione, simbolo, valore e rappresentazione**
 
-#### **Il rappresentato**
+#### **4.1. Il rappresentato**
 
 È **l’informazione in sé**, cioè ciò che vogliamo trattare.
 
@@ -140,7 +142,7 @@ Esempi di rappresentato:
 - un valore logico vero o falso.
     
 
-#### **Il rappresentante**
+#### **4.2. Il rappresentante**
 
 È la **grandezza fisica concreta** usata per rappresentare quell’informazione.
 
@@ -162,7 +164,11 @@ Esempi di rappresentanti:
 - **elettrico: una tensione, una corrente, uno stato acceso/spento**.
     
 
-Il legame tra rappresentato e rappresentante è una **convenzione precisa**: a un certo stato fisico corrisponde una certa informazione.
+Il legame tra rappresentato e rappresentante è una **convenzione precisa**: a un certo stato fisico corrisponde un determinato valore informativo. Il **valore** è l’elemento astratto che si vuole comunicare o elaborare; il **simbolo** è un segno appartenente a un alfabeto; la **rappresentazione** è la configurazione concreta di simboli o stati fisici scelta per quel valore. Lo stesso valore può quindi avere rappresentazioni differenti: il numero dieci può essere scritto `10` in decimale, `1010` in binario o `A` in esadecimale.
+
+La corrispondenza non deve necessariamente associare ogni singolo valore fisico a un’informazione diversa. Nella rappresentazione digitale, per esempio, interi intervalli di tensione vengono interpretati come lo stesso simbolo logico. Deve però essere possibile **decodificare senza ambiguità** ogni stato fisico ammesso.
+
+> 💡 Il computer non “conosce” direttamente il numero dieci o la lettera A: modifica stati fisici che, in base alla convenzione adottata, noi interpretiamo come quei valori.
 
 ---
 
@@ -183,13 +189,13 @@ I rappresentanti elettrici sono quelli che soddisfano **meglio di tutti** questi
 
 I motivi sono strutturali:
 
-- gli elettroni si muovono in spazi microscopici → **miniaturizzazione**,
+- i dispositivi elettronici possono essere fabbricati su scala microscopica → **miniaturizzazione**,
     
 - non esistono parti meccaniche in movimento → **velocità elevatissime**,
     
 - i materiali sono economici (silicio, rame) → **basso costo**,
     
-- servono tensioni e correnti minime → **consumi ridotti**.
+- tensioni e correnti possono essere contenute → **consumi ridotti**, pur con consumi complessivi che dipendono dal numero di dispositivi, dalla frequenza e dalla tecnologia.
     
 
 Per questo l’informatica moderna è, nella pratica, **informatica elettronica**.
@@ -198,7 +204,7 @@ Per questo l’informatica moderna è, nella pratica, **informatica elettronica*
 
 ### **6. Il ruolo dei circuiti integrati**
 
-L’evoluzione decisiva è stata la nascita del **circuito integrato**: milioni di componenti elettronici concentrati in un unico chip di silicio.
+L’evoluzione decisiva è stata la nascita del **circuito integrato**: moltissimi componenti elettronici concentrati in un unico chip di materiale semiconduttore, tipicamente silicio. Il PDF parla di milioni di elementi; le integrazioni moderne possono arrivare a miliardi di transistor, mantenendo la stessa idea fondamentale di sintesi su un unico supporto.
 
 Questo ha permesso:
 
@@ -211,9 +217,9 @@ Questo ha permesso:
 - consumi energetici ridottissimi.
     
 
-In pochi millimetri quadrati oggi possono essere presenti:
+In un’area molto ridotta possono essere presenti:
 
-- milioni di transistori,
+- milioni o miliardi di transistor,
     
 - migliaia di circuiti logici,
     
@@ -232,7 +238,7 @@ A questo punto il legame è chiaro:
     
 - l’elettronica fornisce il **miglior supporto possibile**,
     
-- l’integrazione consente di rappresentare **un’enorme quantità di informazioni simultaneamente**
+- l’integrazione consente di rappresentare **un’enorme quantità di informazioni simultaneamente**.
     
 
 Questo rende l’elaborazione automatica:
@@ -243,7 +249,7 @@ Questo rende l’elaborazione automatica:
     
 - **economica**,
     
-- **industrialmente sostenibile**
+- **industrialmente sostenibile**.
     
 
 ---
@@ -256,7 +262,13 @@ Ogni computer funziona perché:
 
 Tutta l’architettura degli elaboratori nasce da questa catena:
 
-**informazione → rappresentazione fisica → elaborazione → nuova rappresentazione → nuova informazione**
+$$
+\text{informazione}
+\longrightarrow \text{rappresentazione fisica}
+\longrightarrow \text{elaborazione}
+\longrightarrow \text{nuova rappresentazione}
+\longrightarrow \text{nuova informazione}
+$$
 
 ---
 
@@ -294,5 +306,7 @@ Ora che è chiaro **perché l’informazione deve essere rappresentata**, nelle 
     
 - **perché non è sufficiente per i calcolatori moderni**,
     
-- **perché la rappresentazione digitale è l’unica veramente affidabile**.
+- **perché la rappresentazione digitale è particolarmente robusta e adatta ai calcolatori moderni**.
+
+> ✅ L’informazione è astratta; per elaborarla occorrono stati fisici controllabili e una convenzione che consenta di codificarli e decodificarli. L’elettronica integrata offre un supporto piccolo, veloce, economico e sufficientemente efficiente.
     

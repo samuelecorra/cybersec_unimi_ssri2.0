@@ -83,7 +83,7 @@ function FileTree({ nodes, currentFile, expandedDirs, onToggleDir, onSelectFile,
               title={node.path}
             >
               <FileIcon active={isActive} />
-              <span className="tree-name">{node.name.replace(/\.(md|html)$/, '')}</span>
+              <span className="tree-name">{node.name.replace(/\.(md|html|pdf)$/, '')}</span>
               {node.size != null && (
                 <span className="tree-size">{formatSize(node.size)}</span>
               )}

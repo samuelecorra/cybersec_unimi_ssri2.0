@@ -2,11 +2,13 @@
 
 ---
 
+> 📌 Questa lezione rielabora integralmente le pagine 55–59 di `M1doc.pdf` e rende esplicite le principali identità che discendono dai postulati.
+
 ### **1. Perché ci serve l’algebra booleana**
 
 Nel mondo fisico dei circuiti digitali:
 
-- una linea di segnale può essere **bassa** (0 V) oppure **alta** (es. 5 V),
+- una linea di segnale può trovarsi in una fascia riconosciuta come livello logico **basso** oppure **alto**,
     
 - un flip-flop può essere **reset** oppure **set**,
     
@@ -39,7 +41,7 @@ Definiamo una **variabile booleana** $X$.
 
 > **Postulato P1**  
 > Una variabile booleana può assumere **solo** uno di questi due valori:  
-> $X \in {0,1}$
+> $X\in\{0,1\}$
 
 Non esistono:
 
@@ -227,6 +229,29 @@ Principio chiave:
 
 Questo ti permette spesso di dimostrare **metà dei risultati** e ottenere l’altra metà per dualità.
 
+#### **7.1. Identità fondamentali derivate**
+
+| proprietà | forma AND | forma duale OR |
+| --- | --- | --- |
+| identità | $X\cdot1=X$ | $X+0=X$ |
+| elemento assorbente | $X\cdot0=0$ | $X+1=1$ |
+| idempotenza | $X\cdot X=X$ | $X+X=X$ |
+| complemento | $X\cdot\overline X=0$ | $X+\overline X=1$ |
+| commutatività | $XY=YX$ | $X+Y=Y+X$ |
+| associatività | $(XY)Z=X(YZ)$ | $(X+Y)+Z=X+(Y+Z)$ |
+| distributività | $X(Y+Z)=XY+XZ$ | $X+YZ=(X+Y)(X+Z)$ |
+| assorbimento | $X(X+Y)=X$ | $X+XY=X$ |
+
+Si aggiunge l’**involuzione** $\overline{\overline X}=X$. È importante non importare automaticamente le regole dell’algebra numerica: nell’algebra booleana sia AND sia OR possiedono una legge distributiva rispetto all’altra, e $X+X=X$ anziché $2X$.
+
+Esempio di semplificazione:
+
+$$
+X+\overline X Y=(X+\overline X)(X+Y)=1\cdot(X+Y)=X+Y.
+$$
+
+Il primo passaggio usa la distributività duale; il secondo la legge del complemento; il terzo l’identità. Una verifica mediante tabella di verità può sempre confermare che espressione iniziale e finale coincidono per ogni assegnamento.
+
 ---
 
 ### **8. Le leggi di De Morgan**
@@ -242,7 +267,7 @@ Le **leggi di De Morgan** sono due teoremi chiave che collegano:
 
 Sono indispensabili sia a livello **logico** (manipolazione formule) che **hardware** (realizzare un circuito con porte diverse).
 
-#### **8.1 Primo teorema di De Morgan**
+#### **8.1. Primo teorema di De Morgan**
 
   
 $\overline{A + B} = \overline{A} \cdot \overline{B}$
@@ -282,7 +307,7 @@ Le due colonne finali coincidono → le espressioni sono equivalenti.
 
 ---
 
-#### **8.2 Secondo teorema di De Morgan**
+#### **8.2. Secondo teorema di De Morgan**
 
  
 $\overline{A \cdot B} = \overline{A} + \overline{B}$
@@ -319,6 +344,18 @@ Anche qui le colonne finali coincidono.
 **Lettura logica:**
 
 > “Non (A e B)” è vero se **almeno una** tra A e B è falsa.
+
+Per $n$ variabili le stesse leggi diventano:
+
+$$
+\overline{X_1+X_2+\cdots+X_n}
+=\overline{X_1}\,\overline{X_2}\cdots\overline{X_n},
+$$
+
+$$
+\overline{X_1X_2\cdots X_n}
+=\overline{X_1}+\overline{X_2}+\cdots+\overline{X_n}.
+$$
 
 ---
 
@@ -393,6 +430,7 @@ Questo è uno dei motivi per cui De Morgan è **onnipresente** nei libri di arch
 
 Tutto ciò prepara il terreno per le prossime lezioni, in cui:
 
-- introdurrai altre leggi (associatività, commutatività, distributività, assorbimento, idempotenza…),
-    
-- e le userai per **minimizzare espressioni booleane** e progettare **circuiti combinatori reali**.
+- userai queste leggi per descrivere sommatori,
+- tradurrai le funzioni booleane in porte e circuiti reali.
+
+> ✅ Postulati e tabelle di verità definiscono AND, OR e NOT; dualità e identità derivate consentono di dimostrare equivalenze e trasformare le reti senza cambiarne la funzione.

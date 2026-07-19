@@ -2,6 +2,8 @@
 
 ---
 
+> 📌 Questa lezione rielabora integralmente le pagine 4–8 di `M1doc.pdf`.
+
 ### **1. Perché nasce la rappresentazione analogica**
 
 Nella Lezione 1 abbiamo visto che:
@@ -13,10 +15,9 @@ Nella Lezione 1 abbiamo visto che:
 - serve quindi una **rappresentazione fisica dell’informazione**.
     
 
-Il **primo grande metodo storico** usato per rappresentare fisicamente l’informazione è stato quello **analogico**.
+Un metodo naturale e storicamente importante per rappresentare fisicamente l’informazione è quello **analogico**.
 
-La rappresentazione analogica nasce in modo naturale perché **il mondo fisico è continuo**:  
-temperatura, luce, suono, movimento, pressione, tensione variano senza “salti”, ma con **infiniti valori intermedi**.
+La rappresentazione analogica nasce in modo naturale perché molti fenomeni macroscopici vengono modellati come **continui**: temperatura, intensità luminosa, pressione e tensione possono assumere, nel modello ideale, ogni valore di un intervallo. I dispositivi reali hanno comunque risoluzione, rumore e limiti fisici finiti.
 
 ---
 
@@ -64,6 +65,15 @@ Definiamo una **legge di corrispondenza lineare**:
 - $25^\circ C \rightarrow 2.5V$
     
 - $50^\circ C \rightarrow 5V$
+
+La legge è quindi
+
+$$
+V(T)=\frac{5\ \mathrm{V}}{50\ ^\circ\mathrm{C}}T
+=\frac{T}{10}\ \mathrm{V},
+$$
+
+mentre la decodifica inversa è $T(V)=10V\ ^\circ\mathrm{C}/\mathrm{V}$. Per esempio, $3{,}7\ \mathrm{V}$ rappresentano $37\ ^\circ\mathrm{C}$.
     
 
 ![](imgs/Pasted%20image%2020251208082935.png)
@@ -87,7 +97,7 @@ Questa è **la rappresentazione analogica** nel suo significato più puro.
 
 ### **4. Caratteristiche matematiche della rappresentazione analogica**
 
-Una buona rappresentazione analogica è:
+Nel modello ideale del PDF, la corrispondenza scelta è:
 
 - **biunivoca**  
     a ogni valore del rappresentato corrisponde **un solo valore del rappresentante**, e viceversa;
@@ -95,8 +105,8 @@ Una buona rappresentazione analogica è:
 - **continua**  
     tra due valori esistono **infiniti valori intermedi**;
     
-- **generalmente lineare**  
-    il grafico è spesso una retta, per semplicità di calcolo e prevedibilità.
+- **lineare nell’esempio**  
+    il grafico è una retta, caratteristica che semplifica calibrazione e conversione. Una rappresentazione analogica non è però necessariamente lineare: può usare qualunque funzione nota e invertibile nell’intervallo di lavoro.
     
 
 ![](imgs/Pasted%20image%2020251208083003.png)
@@ -105,7 +115,7 @@ Una buona rappresentazione analogica è:
 
 ### **5. Vantaggi della rappresentazione analogica**
 
-#### **5.1 Fedeltà**
+#### **5.1. Fedeltà**
 
 Ogni piccolissima variazione del fenomeno reale si riflette nel rappresentante fisico.
 
@@ -116,11 +126,11 @@ Esempio:
 - nessuna perdita di continuità.
     
 
-Questo rende l’analogico **estremamente fedele** nella descrizione dei fenomeni fisici.
+Questo permette all’analogico di seguire con continuità il fenomeno entro i limiti di banda, sensibilità, linearità e rumore del dispositivo.
 
 ---
 
-#### **5.2 Intuitività**
+#### **5.2. Intuitività**
 
 Il valore si **legge direttamente** osservando la grandezza fisica:
 
@@ -131,18 +141,17 @@ Il valore si **legge direttamente** osservando la grandezza fisica:
 - ampiezza dell’onda → intensità del segnale.
     
 
-Non serve decodificare numeri: **l’informazione è visibile**.
+La lettura può risultare intuitiva, benché richieda comunque una scala e una legge di corrispondenza.
 
 ---
 
 ### **6. Il problema fondamentale dell’analogico: la vulnerabilità**
 
-La rappresentazione analogica accetta **infiniti valori intermedi**.  
-Questo la rende **intrinsecamente fragile**.
+La rappresentazione analogica ammette un continuo di valori. Un disturbo non può quindi essere eliminato semplicemente riportando il segnale a uno fra pochi livelli ammessi: viene invece sovrapposto al valore utile.
 
 ---
 
-#### **6.1 Sensibilità ai disturbi**
+#### **6.1. Sensibilità ai disturbi**
 
 Poiché ogni valore è ammesso, anche una **minima alterazione** viene interpretata come informazione valida.
 
@@ -161,7 +170,7 @@ I disturbi possono essere:
 
 Una variazione microscopica di tensione può generare **un errore di misura**.
 
-In informatica questo è **inaccettabile**, perché il calcolo deve essere:
+Nel calcolo automatico questo costituisce un limite importante, perché il risultato deve essere:
 
 - stabile,
     
@@ -172,7 +181,7 @@ In informatica questo è **inaccettabile**, perché il calcolo deve essere:
 
 ---
 
-#### **6.2 Invecchiamento dei componenti**
+#### **6.2. Invecchiamento dei componenti**
 
 Con il tempo i componenti analogici subiscono:
 
@@ -195,7 +204,7 @@ Il sistema non è più affidabile nel tempo.
 
 ---
 
-#### **6.3 Errore di approssimazione e accumulo**
+#### **6.3. Errore di approssimazione e accumulo**
 
 Nessuna misura analogica è **perfettamente precisa**.  
 Ogni operazione introduce un piccolo errore.
@@ -206,7 +215,7 @@ Quando eseguiamo più operazioni in sequenza:
     
 - poi si **moltiplicano**,
     
-- e alla fine **esplodono**.
+- possono amplificarsi fino a rendere il risultato inutilizzabile.
     
 
 Esempio concettuale:
@@ -218,21 +227,21 @@ Esempio concettuale:
 - ripeto 1000 volte → ottengo un valore completamente inattendibile.
     
 
-Questo rende l’analogico **inadatto ai calcoli complessi**.
+Questo limita la profondità dei calcoli analogici senza tecniche di calibrazione, compensazione e controllo dell’errore.
 
 ---
 
 ### **7. Perché l’analogico non può sostenere l’informatica moderna**
 
-L’informatica richiede:
+L’elaborazione digitale su larga scala ricerca:
 
-- precisione assoluta,
+- risultati discreti riproducibili entro le specifiche,
     
 - stabilità nel tempo,
     
 - ripetibilità perfetta,
     
-- immunità ai disturbi,
+- elevata tolleranza ai disturbi,
     
 - possibilità di memorizzazione fedele,
     
@@ -252,7 +261,9 @@ La rappresentazione analogica:
 - soggetta ad accumulo di errore.
     
 
-Per questo **non è compatibile con il calcolo automatico moderno**.
+Per questo l’analogico non è il supporto dominante del calcolo general-purpose moderno. Non è però scomparso: sensori, convertitori, amplificatori, radio e circuiti mixed-signal continuano a elaborare segnali analogici, spesso prima o dopo una sezione digitale.
+
+> ⚠️ “Analogico” non significa “impreciso” e “digitale” non significa “esatto” in assoluto. La differenza riguarda l’insieme continuo o discreto dei valori usati nella rappresentazione; entrambi i sistemi reali hanno errori e limiti.
 
 ---
 
@@ -273,7 +284,7 @@ Per oltre un secolo l’umanità ha usato **rappresentazioni analogiche**:
 - telefoni analogici.
     
 
-Le prime macchine di calcolo erano:
+Molte prime macchine di calcolo erano:
 
 - meccaniche,
     
@@ -282,14 +293,9 @@ Le prime macchine di calcolo erano:
 - basate su movimenti continui.
     
 
-Le **schede perforate di Herman Hollerith** (1890) rappresentano il primo tentativo di automatizzare l’informazione, ma erano ancora legate a meccanismi fisici e a segnali non pienamente digitali.
+Le **schede perforate di Herman Hollerith**, impiegate per il censimento statunitense del 1890, erano lette da macchine elettromeccaniche. La presenza o assenza di un foro è però già una rappresentazione **discreta**, non analogica: il supporto è materiale, ma il codice è digitale.
 
-Durante la Seconda Guerra Mondiale, Alan Turing progettò la **Bomba**, una macchina elettromeccanica per decifrare Enigma.  
-Era una macchina:
-
-- fisicamente analogica,
-    
-- ma concettualmente già orientata verso la **logica discreta**.
+Durante la Seconda guerra mondiale, Alan Turing contribuì al progetto britannico della **Bombe**, macchina elettromeccanica usata nell’analisi dei messaggi Enigma. Anche in questo caso l’elaborazione era essenzialmente **logica e discreta**, pur essendo realizzata con rotori, relè e contatti elettromeccanici. Il riferimento del PDF alla sua natura “analogica” va quindi inteso soltanto come richiamo alla tecnologia fisica non elettronica, non al tipo di informazione elaborata.
     
 
 La vera svolta arriva con:
@@ -303,11 +309,11 @@ La vera svolta arriva con:
 - i **circuiti digitali**.
     
 
-Negli anni ’50-’60 tutta l’informazione viene trasformata in:
+Con l’affermazione dei calcolatori elettronici, l’informazione interna viene prevalentemente codificata mediante:
 
 - **due soli stati stabili**,
     
-- **due soli livelli di tensione**,
+- **due classi di livelli elettrici**,
     
 - **due soli simboli**: $0$ e $1$.
     
@@ -326,7 +332,7 @@ Il passaggio dall’analogico al digitale significa:
     
 - introdurre soglie nette,
     
-- trasformare l’errore in **non-errore**.
+- consentire la **rigenerazione** dei livelli entro opportuni margini di rumore.
     
 
 Questo rende possibile:
@@ -368,8 +374,7 @@ ma è anche:
 - inadatta all’elaborazione automatica su larga scala.
     
 
-È stata un **passaggio storico necessario**,  
-ma **non può essere il fondamento dell’informatica moderna**.
+Resta indispensabile nell’interfaccia con il mondo fisico, ma la rappresentazione discreta offre vantaggi decisivi per memoria e calcolo simbolico affidabile.
 
 ---
 
@@ -381,8 +386,10 @@ Ora siamo pronti per il passaggio decisivo:
 
 La risposta è:
 
-#### **rappresentazione digitale dell’informazione**
+la **rappresentazione digitale dell’informazione**.
 
 Ed è esattamente ciò che affronteremo nella **Lezione 3**.
+
+> ✅ Nell’analogico il rappresentante varia con continuità insieme al rappresentato. Questa continuità è intuitiva e fedele, ma rende rumore, deriva ed errori parte del valore elaborato; il digitale introduce invece un insieme finito di simboli riconoscibili.
 
 ---

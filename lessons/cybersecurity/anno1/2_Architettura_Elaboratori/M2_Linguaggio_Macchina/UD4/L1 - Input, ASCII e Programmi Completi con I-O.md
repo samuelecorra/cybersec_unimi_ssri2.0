@@ -1,315 +1,77 @@
-# **Lezione 1: Input, ASCII e Programmi Completi con I/O (pagg. 76–80)**
+## ***Lezione 1: Programmazione interattiva, input e ASCII***
 
 ---
 
-## **1. Il problema dell’Input nei programmi Assembly**
+> 📌 Questa lezione rielabora integralmente le pagine 76–80 di `M2doc.pdf`.
 
-Fino ad ora i programmi:
+### **1. I servizi usati dal programma**
 
-- lavoravano solo con **dati già presenti in memoria**,
-    
-- oppure con **costanti scritte tramite `.FILL`**.
-    
+L’esempio interattivo del PDF usa tre trap:
 
-Ma un vero programma deve poter:
+| Istruzione | Effetto |
+| --- | --- |
+| `TRAP x23` | attende un carattere e ne restituisce il codice in `R0` |
+| `TRAP x21` | stampa il carattere il cui codice è in `R0` |
+| `TRAP x25` | termina il programma |
 
-- **leggere dati dall’esterno**,
-    
-- interagire con l’utente.
-    
+Ogni `TRAP` salva in `R7` il punto di ritorno e trasferisce il controllo alla routine indicata dalla relativa voce nella vector table. La console LC-2 rappresenta tastiera e schermo del sistema simulato.
 
-Questo avviene tramite le **TRAP di input/output**.
+> ⚠️ In questa versione della LC-2 l’input usato dal PDF è `TRAP x23`, non `x20`. È inoltre input di **un carattere**, non una lettura automatica di interi decimali.
 
----
+### **2. Relazione fra maiuscole e minuscole ASCII**
 
-## **2. Codifica dei caratteri: ASCII**
+Nei codici ASCII le lettere latine maiuscole e minuscole corrispondenti differiscono di 32:
 
-Tutti i caratteri digitati da tastiera:
-
-- **non sono numeri in senso matematico**,
-    
-- ma **codici ASCII**.
-    
-
-Esempio:
-
-- `'0'` → 48
-    
-- `'1'` → 49
-    
-- `'9'` → 57
-    
-
-Quindi quando si legge un carattere numerico dalla tastiera:
-
-> **non si ottiene il numero 5, ma il codice ASCII del carattere `'5'` (53)**.
-
----
-
-## **3. TRAP di input: lettura di un carattere**
-
-Per leggere un carattere da tastiera si usa:
-
-```
-TRAP x20
-```
-
-Effetto:
-
-- la CPU:
-    
-    - aspetta che l’utente prema un tasto,
-        
-    - legge il carattere,
-        
-    - lo memorizza nel registro **R0** in formato ASCII.
-        
-
-Formalmente:
-
-```
-R0 ← ASCII del carattere letto
-```
-
----
-
-## **4. TRAP di output: stampa di un carattere**
-
-Per stampare un carattere:
-
-```
-TRAP x21
-```
-
-Effetto:
-
-- stampa sullo schermo:
-    
-    - il carattere il cui **codice ASCII è contenuto in R0**.
-        
-
----
-
-## **5. TRAP per stampare una stringa**
-
-Per stampare una stringa:
-
-```
-TRAP x22
-```
-
-Requisito fondamentale:
-
-- **R0 deve contenere l’indirizzo della stringa**.
-    
-
-Funzionamento:
-
-- legge un carattere alla volta,
-    
-- continua finché non trova lo **0 terminatore**,
-    
-- stampa ogni carattere sullo schermo.
-    
-
----
-
-## **6. Problema classico: trasformare un carattere in numero**
-
-Se l’utente digita `'5'`, in **R0** arriva:
-
-```
-ASCII('5') = 53
-```
-
-Ma per fare calcoli numerici serve ottenere:
-
-```
-5
-```
-
-Quindi bisogna fare:
-
-$$  
-\text{numero} = \text{ASCII} - 48  
+$$
+\operatorname{ASCII}(\text{minuscola})=
+\operatorname{ASCII}(\text{maiuscola})+32.
 $$
 
-In Assembly LC-2 questo si realizza con:
+Per esempio:
 
-```
-ADD R0, R0, #-48
-```
-
-Ora **R0 contiene davvero il valore numerico**.
-
----
-
-## **7. Operazione inversa: da numero a carattere**
-
-Se invece vogliamo stampare un numero:
-
-- prima dobbiamo **trasformarlo in carattere**:
-    
-
-$$  
-\text{ASCII} = \text{numero} + 48  
+$$
+\text{`Y'}=89=x0059,
+\qquad \text{`y'}=121=x0079,
+\qquad 121-89=32.
 $$
 
-In Assembly:
+Questa relazione consente una trasformazione con una sola somma, a condizione che l’input sia già una lettera maiuscola. Il programma non controlla l’intervallo `A–Z`: applicare 32 a un altro carattere produce semplicemente un altro codice.
 
-```
-ADD R0, R0, #48
-TRAP x21
-```
+### **3. Programma completo**
 
----
+```asm
+        .orig x3000
 
-## **8. Primo programma completo: lettura e stampa di un carattere**
+        TRAP  x23          ; legge un carattere in R0
+        LD    R1, MaToMin  ; R1 = 32
+        ADD   R0, R0, R1   ; maiuscola -> minuscola
+        TRAP  x21          ; stampa il carattere in R0
+        TRAP  x25          ; termina
 
-Struttura concettuale:
-
-```
-TRAP x20   ; leggi un carattere
-TRAP x21   ; ristampa lo stesso carattere
-HALT
+MaToMin .fill #32
+        .end
 ```
 
-Questo programma:
+`MaToMin` è una cella dati. Si usa `LD` perché 32 non è rappresentabile nel campo con segno `imm5` di `ADD`, limitato a $[-16,15]$.
 
-- legge un tasto,
-    
-- lo stampa immediatamente,
-    
-- termina.
-    
+### **4. Traccia con input Y**
 
-È il più semplice esempio completo di **I/O bidirezionale**.
+| Passo | Stato rilevante |
+| --- | --- |
+| `TRAP x23` | attende il tasto; poi `R0=x0059` |
+| `LD R1,MaToMin` | `R1=x0020` |
+| `ADD R0,R0,R1` | `R0=x0079`, cioè `y` |
+| `TRAP x21` | la console visualizza `y` |
+| `TRAP x25` | l’esecuzione si arresta |
 
----
+Nel simulatore la trap di input può eseguire internamente un gran numero di istruzioni in un ciclo di attesa finché non arriva un tasto. Questo comportamento non indica un blocco anomalo: è **busy waiting** della routine di sistema. Usare Step Into per ogni istruzione interna sarebbe inutilmente lento; Step Over consente di osservare direttamente il ritorno al programma.
 
-## **9. Programma con conversione carattere → numero → carattere**
+La schermata rende intuitivo il ciclo di attesa con una lettura ripetuta del registro di tastiera e un salto all’indietro finché non compare un dato. Quando l’utente digita `Y`, la console dell’esempio acquisisce subito il carattere, senza richiedere `Invio`; la routine termina e il controllo torna al programma con `R0=x0059` e `R7=x3001`.
 
-Logica completa:
+### **5. Caratteri e numeri**
 
-1. leggo un carattere `'5'`
-    
-2. lo trasformo in numero `5`
-    
-3. lo uso per un calcolo
-    
-4. lo riconverto in carattere
-    
-5. lo stampo
-    
+Un carattere digitato è una parola che contiene un codice ASCII. Il carattere `5`, per esempio, non restituisce automaticamente il numero 5. La conversione di stringhe decimali, i segni e i numeri a più cifre richiedono routine dedicate che non sono sviluppate in queste pagine.
 
-Concettualmente:
+> 💡 L’esempio mostra la differenza tra valore e rappresentazione: il numero 89, il codice `x0059` e il carattere `Y` possono essere la stessa configurazione di bit interpretata in modi diversi.
 
-```
-TRAP x20        ; leggi carattere
-ADD R0, R0, #-48  ; ASCII -> numero
-ADD R0, R0, #1    ; esempio: incremento
-ADD R0, R0, #48   ; numero -> ASCII
-TRAP x21        ; stampa risultato
-HALT
-```
-
-Se l’utente digita:
-
-```
-5
-```
-
-Il programma stampa:
-
-```
-6
-```
-
----
-
-## **10. Uso combinato di stringhe e input**
-
-Un programma completo tipico ha questa struttura:
-
-```
-.ORIG x3000
-    LEA R0, MSG1
-    TRAP x22       ; stampa messaggio
-
-    TRAP x20       ; leggi input
-
-    ADD R0, R0, #-48
-    ADD R0, R0, #1
-    ADD R0, R0, #48
-
-    TRAP x21       ; stampa risultato
-    HALT
-
-MSG1 .STRINGZ "Inserisci un numero: "
-.END
-```
-
-Questo è a tutti gli effetti:
-
-> un **programma interattivo completo**.
-
----
-
-## **11. Differenza tra I/O Assembly e I/O nei linguaggi ad alto livello**
-
-In C:
-
-```c
-scanf("%d", &x);
-printf("%d", x);
-```
-
-In LC-2 invece:
-
-- ogni singolo passaggio è **manuale**:
-    
-    - lettura del carattere,
-        
-    - conversione,
-        
-    - operazione,
-        
-    - riconversione,
-        
-    - stampa.
-        
-
-Questo rende evidente che:
-
-> **l’I/O ad alto livello è solo un enorme strato di astrazione sopra queste primitive elementari.**
-
----
-
-## **12. Significato conclusivo**
-
-Ora sai:
-
-- come funziona una CPU a livello strutturale,
-    
-- come si scrivono istruzioni macchina,
-    
-- come si gestisce la memoria,
-    
-- come funzionano:
-    
-    - salti,
-        
-    - sottoprogrammi,
-        
-    - stringhe,
-        
-    - array,
-        
-    - input/output,
-        
-    - conversioni ASCII.
-        
-
-Hai visto nascere **tutto ciò che userai poi in C, Java, Python, Assembly x86, ARM**.
-
----
+> ✅ Un programma interattivo LC-2 combina servizi di sistema, dati in memoria e istruzioni elementari; persino una conversione di carattere rende visibile il lavoro nascosto dalle librerie di alto livello.

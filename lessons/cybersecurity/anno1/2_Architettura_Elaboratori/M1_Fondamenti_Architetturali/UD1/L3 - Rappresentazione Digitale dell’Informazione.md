@@ -2,6 +2,8 @@
 
 ---
 
+> 📌 Questa lezione rielabora integralmente le pagine 9–15 di `M1doc.pdf`.
+
 ### **1. Il problema da risolvere: i limiti dell’analogico**
 
 Dalla **Lezione 2** sappiamo che la rappresentazione analogica è:
@@ -65,6 +67,8 @@ In questo modo:
 
 > il mondo continuo viene approssimato con “scalini” discreti.
 
+La **discretizzazione** è il passaggio generale da un insieme continuo a uno discreto. La quantizzazione discretizza i valori, cioè l’ampiezza. Il **campionamento**, che verrà applicato all’audio, discretizza invece il tempo scegliendo istanti separati. Le due operazioni sono distinte e, nella conversione analogico-digitale di un segnale variabile nel tempo, vengono normalmente usate entrambe.
+
 ---
 
 ### **3. Tipo di corrispondenza: univoca ma non biunivoca**
@@ -92,7 +96,7 @@ Questa perdita di dettaglio è il **prezzo da pagare** per ottenere robustezza.
 
 ### **4. Vantaggi della rappresentazione digitale**
 
-#### **4.1 Robustezza ai disturbi**
+#### **4.1. Robustezza ai disturbi**
 
 Se a un intervallo assegnamo un unico valore di tensione (es. $1V$), piccoli disturbi che spostano il valore reale di:
 
@@ -119,13 +123,15 @@ L’effetto è:
 - l’informazione è **stabile**, anche se il segnale fisico è leggermente sporco.
     
 
-Questa è la base dell’idea di **autocorrezione** a livello fisico:
+Questa è la base della **rigenerazione dei livelli**:
 
 > non serve conoscere il valore esatto della grandezza, basta sapere in **quale fascia** ricade.
 
+> ⚠️ La rigenerazione non è una codifica a correzione d’errore. Se il rumore porta il segnale oltre la soglia sbagliata, il simbolo cambia; per rilevare o correggere tali errori servono bit ridondanti e codici specifici.
+
 ---
 
-#### **4.2 Compatibilità con elaborazioni complesse**
+#### **4.2. Compatibilità con elaborazioni complesse**
 
 Nell’analogico:
 
@@ -161,7 +167,7 @@ Questo rende il sistema:
 
 ### **5. Svantaggi della rappresentazione digitale**
 
-#### **5.1 Perdita di fedeltà (errore di quantizzazione)**
+#### **5.1. Perdita di fedeltà (errore di quantizzazione)**
 
 Se due valori diversi del fenomeno reale cadono nello stesso intervallo:
 
@@ -183,7 +189,7 @@ il continuo viene approssimato con pochi scalini discreti.
 
 ---
 
-#### **5.2 Poca intuitività**
+#### **5.2. Poca intuitività**
 
 In un sistema digitale, il valore fisico (es. $2V$) non è direttamente leggibile come significato:
 
@@ -209,16 +215,16 @@ Tra tutte le rappresentazioni digitali, quella che ha vinto su tutte è la **bin
 
 Qui il rappresentante può assumere **solo due stati** ben distinti:
 
-- livello basso (es. $0V$) → **0**
+- livello basso (un intervallo di tensioni vicino al riferimento) → **0**
     
-- livello alto (es. $5V$ o $3.3V$) → **1**
+- livello alto (un altro intervallo, dipendente dalla tecnologia) → **1**
     
 
 ![](imgs/Pasted%20image%2020251208083848.png)
 
 Questi due stati rappresentano le **due cifre del sistema binario**: $0$ e $1$.
 
-#### **6.1 Vantaggi del binario**
+#### **6.1. Vantaggi del binario**
 
 - **Massima robustezza**  
     Serve un disturbo molto marcato o un grave guasto per far scambiare uno 0 con un 1.
@@ -226,19 +232,18 @@ Questi due stati rappresentano le **due cifre del sistema binario**: $0$ e $1$.
 - **Implementazione semplice**  
     Circuiti elettronici che riconoscono solo “basso” o “alto” sono relativamente facili da realizzare, piccoli ed efficienti.
     
-- **Consumo ridotto**  
-    Due livelli ben separati permettono di usare tensioni e correnti minime, con consumi stabili e prevedibili.
+- **Efficienza circuitale**  
+    Due classi di livelli consentono circuiti semplici; consumo e prestazioni dipendono comunque dalla tecnologia, dalla tensione, dalla frequenza e dall’attività di commutazione.
     
 - **Scalabilità**  
     È facile replicare milioni di elementi binari (transistori) dentro un circuito integrato.
     
 
-Per queste ragioni **tutta l’informatica moderna è binaria**:  
-i computer non capiscono numeri in base 10, ma solo sequenze di 0 e 1.
+Per queste ragioni l’elaborazione digitale general-purpose moderna è quasi interamente binaria: i circuiti operano su configurazioni di due simboli, alle quali il progetto assegna significati numerici, testuali o logici.
 
 ---
 
-#### **6.2 Apparente svantaggio del binario**
+#### **6.2. Apparente svantaggio del binario**
 
 Con solo due valori possibili (0 e 1), **da soli** non possiamo rappresentare molte informazioni.
 
@@ -246,7 +251,13 @@ La soluzione è:
 
 > **usare sequenze di bit.**
 
-Una sequenza di $n$ bit può rappresentare $2^n$ valori diversi.
+Una sequenza di $n$ bit può assumere $2^n$ configurazioni diverse. Il risultato segue dal principio di moltiplicazione: ciascuna delle $n$ posizioni ha due scelte indipendenti, quindi
+
+$$
+\underbrace{2\cdot 2\cdot\ldots\cdot 2}_{n\text{ fattori}}=2^n.
+$$
+
+Il numero di **valori** rappresentabili è anch’esso $2^n$ solo dopo aver stabilito una codifica che assegni un valore distinto a ogni configurazione.
 
 Esempi:
 
@@ -272,14 +283,16 @@ Più bit usiamo:
 
 La parola **bit** viene da **binary digit**, cioè “cifra binaria”.
 
-> Un bit è la **più piccola unità di informazione** in un sistema digitale.  
+> Un bit, nel contesto binario, è una cifra che può assumere i valori $0$ e $1$.  
 > Può valere solo **0** oppure **1**.
 
 Nel mondo elettronico:
 
-- $0$ → tipicamente “assenza di segnale”, tensione bassa (es. circa $0V$),
+- $0$ → una configurazione fisica assegnata per convenzione al livello logico basso,
     
-- $1$ → “presenza di segnale”, tensione alta (es. $5V$ o $3.3V$).
+- $1$ → una configurazione assegnata al livello logico alto.
+
+Non è necessario che $0$ significhi assenza fisica e $1$ presenza, né che siano tensioni esatte: contano la convenzione logica e le fasce riconosciute dal circuito.
     
 
 Qualunque informazione complessa (numeri, testi, immagini, audio, video) viene:
@@ -299,9 +312,9 @@ Questo è il principio di base della **codifica binaria**.
 
 Un **byte** è un gruppo ordinato di **8 bit**.
 
-Per convenzione architetturale:
+Nella quasi totalità delle architetture contemporanee:
 
-- il byte è l’unità minima di indirizzamento della memoria,
+- il byte è l’unità minima indirizzabile della memoria ordinaria,
     
 - la maggior parte delle architetture è progettata “a multipli di byte”.
     
@@ -323,7 +336,7 @@ Con un byte si possono rappresentare:
 
 Come per metri e grammi, anche per la memoria si usano multipli:
 
-- **kilobyte (KB)** ≈ $10^3$ byte,
+- **kilobyte (kB)** = $10^3$ byte,
     
 - **megabyte (MB)** ≈ $10^6$ byte,
     
@@ -332,7 +345,7 @@ Come per metri e grammi, anche per la memoria si usano multipli:
 - **terabyte (TB)** ≈ $10^{12}$ byte.
     
 
-In ambito strettamente tecnico si usano anche le unità **binariamente esatte**:
+Per le potenze binarie si usano le unità IEC:
 
 - **kibibyte (KiB)** = $1024$ byte = $2^{10}$ byte,
     
@@ -343,9 +356,9 @@ In ambito strettamente tecnico si usano anche le unità **binariamente esatte**:
 - …
     
 
-Nella pratica quotidiana:
+Nel PDF e in molta documentazione architetturale tradizionale:
 
-- si continua spesso a usare **KB, MB, GB** in senso “binario”,
+- si usa spesso **KB, MB, GB** in senso binario,
     
 - anche se formalmente sarebbe più corretto usare **KiB, MiB, GiB** per i multipli esatti di potenze di 2.
     
@@ -363,7 +376,7 @@ Nella pratica quotidiana:
     È studiato nella teoria dell’informazione, ma **non è usato** nei computer binari standard.
     
 
-Questi concetti servono per capire che:
+Il nibble è un raggruppamento di bit, non un “sottomultiplo” metrico; il trit appartiene invece a una base diversa. Questi concetti servono per capire che:
 
 > il digitale non deve essere per forza binario,  
 > ma **il binario è la scelta industrialmente vincente**.
@@ -380,7 +393,7 @@ Questi concetti servono per capire che:
         
     - adatta a elaborazioni complesse,
         
-    - consente autocorrezione e ridondanza,
+    - consente rigenerazione e, aggiungendo ridondanza, rilevazione o correzione degli errori,
         
     - facilmente memorizzabile e trasmissibile.
         
@@ -453,3 +466,5 @@ Questa lezione chiude il trittico:
     
 
 Da qui inizia veramente **Architettura degli Elaboratori**.
+
+> ✅ Digitale significa insieme discreto di simboli, non necessariamente binario. Il binario è il caso più importante: con $n$ bit si ottengono $2^n$ configurazioni, robuste finché i segnali rimangono entro i margini elettrici previsti.

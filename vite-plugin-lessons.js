@@ -10,7 +10,7 @@ const RESOLVED_SEARCH = '\0' + VIRTUAL_SEARCH;
 // Extensions to copy to dist for static hosting
 const STATIC_EXTS = new Set([
   '.md', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp',
-  '.html', '.js', '.css',
+  '.html', '.js', '.css', '.pdf',
 ]);
 
 function scanDir(dir, base = '') {
@@ -29,7 +29,7 @@ function scanDir(dir, base = '') {
           result.push({ type: 'dir', name: entry.name, path: rel, children });
         }
       }
-    } else if (entry.name.endsWith('.md')) {
+    } else if (entry.name.endsWith('.md') || entry.name.endsWith('.pdf')) {
       const stat = fs.statSync(path.join(dir, entry.name));
       result.push({ type: 'file', name: entry.name, path: rel, size: stat.size });
     }
@@ -153,6 +153,7 @@ export default function lessonsPlugin() {
             '.gif':  'image/gif',
             '.svg':  'image/svg+xml',
             '.webp': 'image/webp',
+            '.pdf':  'application/pdf',
           };
           const contentType = mimeTypes[ext] || 'application/octet-stream';
           const data = fs.readFileSync(fullPath);

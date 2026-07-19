@@ -4,6 +4,7 @@ import searchIndex from 'virtual:lesson-search';
 import Sidebar from './components/Sidebar.jsx';
 import Viewer from './components/Viewer.jsx';
 import WebLessonViewer from './components/WebLessonViewer.jsx';
+import PdfViewer from './components/PdfViewer.jsx';
 import BrowseView from './components/BrowseView.jsx';
 import Breadcrumb from './components/Breadcrumb.jsx';
 import Navigation from './components/Navigation.jsx';
@@ -58,13 +59,13 @@ export default function App() {
   }, [setCurrentFile]);
 
   useEffect(() => {
-    if (currentFile && !currentFile.endsWith('.html')) {
+    if (currentFile && !currentFile.endsWith('.html') && !currentFile.endsWith('.pdf')) {
       loadFile(currentFile);
     }
   }, []);
 
   const handleFileSelect = useCallback((filePath) => {
-    if (filePath.endsWith('.html')) {
+    if (filePath.endsWith('.html') || filePath.endsWith('.pdf')) {
       setCurrentFile(filePath);
       setContent('');
       setViewMode('viewer');
@@ -185,6 +186,8 @@ export default function App() {
               </div>
               {currentFile?.endsWith('.html') ? (
                 <WebLessonViewer filePath={currentFile} />
+              ) : currentFile?.endsWith('.pdf') ? (
+                <PdfViewer filePath={currentFile} />
               ) : (
                 <Viewer
                   content={content}

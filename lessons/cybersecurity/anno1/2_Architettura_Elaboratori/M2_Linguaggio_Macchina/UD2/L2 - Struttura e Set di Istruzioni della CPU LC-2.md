@@ -1,334 +1,86 @@
-# **Lezione 4: Struttura e Set di Istruzioni della CPU LC-2**
+## ***Lezione 2: Struttura e set di istruzioni della CPU LC-2***
 
 ---
 
-## **1. Cenni storici sulla LC-2**
+> 📌 Questa lezione rielabora integralmente le pagine 19–23 di `M2doc.pdf`.
 
-La **LC-2 (Little Computer 2)** è una **CPU didattica** progettata nei primi anni 2000 da un team di docenti del **Dipartimento di Ingegneria Informatica dell’Università della Virginia (UVA)**, in particolare dal **professor Yale N. Patt**, uno dei massimi esperti mondiali di architettura dei calcolatori.
+### **1. Origine e finalità della LC-2**
 
-È co-autore del testo di riferimento:
+La **LC-2** è una CPU didattica proposta da Yale N. Patt e utilizzata all’Università della Virginia e nel percorso del manuale *Introduction to Computing Systems*. Non vuole imitare la complessità di un processore commerciale: riduce la macchina ai meccanismi necessari per collegare circuiti, ISA, assembly e programmi.
 
-> _Introduction to Computing Systems: From Bits and Gates to C and Beyond_
+### **2. Profilo architetturale**
 
-Questo manuale è alla base della progettazione della **LC-2 e della LC-3** ed è utilizzato in **decine di corsi universitari nel mondo** per introdurre i principi fondamentali dell’architettura dei calcolatori.
+La LC-2 è una macchina RISC a 16 bit:
 
-Il grande vantaggio della LC-2 è quello di essere una **CPU estremamente semplificata** ma dotata di **ottimi strumenti di simulazione**, soprattutto in ambiente Windows.
+- ogni istruzione occupa una parola di **16 bit**;
+- data bus, celle di memoria, PC e registri generali sono larghi **16 bit**;
+- l’address bus a 16 bit identifica $2^{16}=65\,536$ celle;
+- i GPR sono otto, da `R0` a `R7`, quindi un registro si codifica con 3 bit;
+- i condition code sono `N`, `Z` e `P`;
+- l’ALU realizza direttamente `ADD`, `AND` e `NOT`.
 
----
+Con 4 bit di opcode esistono $2^4=16$ **codici operativi possibili**. Questo non significa che esistano soltanto sedici forme mnemoniche: uno stesso opcode può distinguere varianti attraverso altri campi, come `ADD` registro/immediato o `JSR` con e senza salvataggio del ritorno.
 
-## **2. Struttura interna della CPU LC-2**
+L’operazione OR non richiede una porta specifica nell’ISA, perché deriva da De Morgan:
 
-Analizzando lo schema interno della LC-2 si osserva che **tutti i componenti fondamentali della CPU di Von Neumann sono presenti**:
-
-- **Control Unit (CU)**
-    
-- **ALU**
-    
-- **Registri**
-    
-- **Bus dati, indirizzi e controllo**
-    
-
-Dallo schema si ricavano subito due informazioni fondamentali:
-
-- la **dimensione dei dati è di 16 bit**,
-    
-- il **Program Counter è anch’esso a 16 bit**.
-    
-
-Questo significa che **l’intera architettura LC-2 è una macchina a 16 bit**.
-
----
-
-## **3. La LC-2 come architettura RISC**
-
-La LC-2 è un esempio perfetto di:
-
-> **RISC – Reduced Instruction Set Computer**
-
-cioè una CPU caratterizzata da:
-
-- **numero ridotto di istruzioni macchina**,
-    
-- istruzioni **tutte della stessa lunghezza**,
-    
-- **decodifica semplice**,
-    
-- **esecuzione veloce**.
-    
-
----
-
-## **4. Opcode e numero di istruzioni**
-
-Ogni istruzione LC-2 è lunga **16 bit**.
-
-Di questi:
-
-- i **primi 4 bit** sono riservati all’**opcode** (codice operativo),
-    
-- restano **12 bit per la specifica degli operandi**.
-    
-
-Con 4 bit di opcode si possono rappresentare:
-
-$$  
-2^4 = 16 \text{ istruzioni macchina}  
+$$
+A\lor B=\neg(\neg A\land \neg B).
 $$
 
-Il modello LC-2 studiato è quindi una macchina con:
+In assembly si può quindi negare ciascun operando, applicare `AND` e negare il risultato.
 
-> **16 istruzioni macchina totali**
+### **3. Il problema dell’indirizzo in una parola da 16 bit**
 
-Tutte le istruzioni:
+I primi 4 bit di un’istruzione sono occupati dall’opcode. Restano al massimo 12 bit, insufficienti per includere un indirizzo arbitrario di 16 bit insieme agli altri operandi. La LC-2 risolve alcuni accessi mediante **indirizzamento nella pagina corrente**.
 
-- hanno **lunghezza fissa di 16 bit**,
-    
-- occupano **esattamente una parola di memoria**.
-    
+Un indirizzo di 16 bit viene separato correttamente in:
 
----
-
-## **5. Pochi modi di indirizzamento**
-
-Per mantenere la semplicità tipica delle RISC, la LC-2 adotta **pochi modi di indirizzamento**, che sono quelli già studiati:
-
-- immediato,
-    
-- diretto,
-    
-- indiretto,
-    
-- base + offset.
-    
-
----
-
-## **6. Conseguenze dell’architettura a 16 bit**
-
-Dalla struttura della LC-2 derivano queste caratteristiche fondamentali:
-
-### **6.1 Data Bus a 16 bit**
-
-- ogni cella di memoria è larga **16 bit**,
-    
-- ogni trasferimento dati avviene su 16 bit.
-    
-
----
-
-### **6.2 Address Bus a 16 bit**
-
-- lo spazio di indirizzamento è:
-    
-
-$$  
-2^{16} = 65,536 \text{ celle}  
+$$
+\underbrace{\text{pagina}}_{7\ \text{bit}}\;\underbrace{\text{spostamento nella pagina}}_{9\ \text{bit}}.
 $$
 
----
+Ne risultano:
 
-### **6.3 General Purpose Registers**
+- $2^7=128$ pagine;
+- $2^9=512$ celle per pagina;
+- $128\cdot512=65\,536$ celle complessive.
 
-I **registri GPR** sono:
+> ⚠️ La suddivisione non è 4+12: confondere i 4 bit dell’opcode con i bit di pagina porterebbe erroneamente a 16 pagine da 4096 celle.
 
-- **8 registri**,
-    
-- indicizzati da:
-    
-    - R0, R1, R2, R3, R4, R5, R6, R7,
-        
-- servono **3 bit** per rappresentarli.
-    
+### **4. Costruzione dell’indirizzo di pagina corrente**
 
----
+Le istruzioni con `pgoffset9` prendono i 7 bit più significativi del PC e li concatenano ai 9 bit dell’istruzione:
 
-### **6.4 Condition Codes**
-
-Il registro **CC (Condition Codes)** è composto da **3 bit**, che indicano:
-
-- **N** → risultato negativo,
-    
-- **Z** → risultato nullo,
-    
-- **P** → risultato positivo.
-    
-
-Questi bit rappresentano **il segno dell’ultimo valore numerico scritto in un qualsiasi GPR**.
-
----
-
-### **6.5 ALU minimale**
-
-L’**ALU della LC-2** implementa solo le operazioni **strettamente indispensabili**:
-
-- **ADD** (somma),
-    
-- **AND** (prodotto logico),
-    
-- **NOT** (negazione).
-    
-
-Non esiste l’operazione **OR** come istruzione diretta.
-
----
-
-## **7. OR tramite teorema di De Morgan**
-
-L’operazione OR viene realizzata **a livello software** sfruttando il **teorema di De Morgan**:
-
-$$  
-A \lor B = \neg(\neg A \land \neg B)  
+$$
+EA=PC[15:9]\;\|\;pgoffset9.
 $$
 
-Questo mostra un concetto fondamentale:
+Il simbolo $\|$ indica **concatenazione**, non somma. L’istruzione può quindi riferirsi a qualunque cella della pagina di 512 parole che contiene il PC usato come riferimento.
 
-> **il software può estendere le capacità dell’hardware**.
+Se il PC è nella pagina che inizia a `x3000`, i 9 bit finali selezionano da `x3000` a `x31FF`. Quando il PC passa in una pagina diversa, cambiano anche i 7 bit superiori e quindi la regione raggiunta.
 
----
+### **5. LEA: caricare un indirizzo**
 
-## **8. Limite degli operandi a 12 bit**
+Il formato di `LEA` è:
 
-Ogni istruzione ha:
+| 15–12 | 11–9 | 8–0 |
+| --- | --- | --- |
+| `1110` | `DR` | `pgoffset9` |
 
-- 4 bit di opcode,
-    
-- 12 bit per gli operandi.
-    
+La sua semantica è:
 
-Questo significa che:
-
-> **non è possibile rappresentare direttamente un indirizzo a 16 bit in un’istruzione immediata o diretta**.
-
-Le RISC adottano quindi una strategia alternativa.
-
----
-
-## **9. Indirizzamento a pagina corrente**
-
-La LC-2 utilizza l’**indirizzamento a pagina corrente**.
-
-L’indirizzo completo a 16 bit viene costruito concatenando:
-
-- i **bit più significativi del Program Counter (PC)**,
-    
-- con l’**offset contenuto nell’istruzione**.
-    
-
-Formalmente:
-
-$$  
-\text{indirizzo a 16 bit} = PC_{\text{MSB}}\ \& \ \text{offset}  
+$$
+DR\leftarrow PC[15:9]\;\|\;pgoffset9.
 $$
 
-Questo permette di:
+`LEA` carica l’**indirizzo effettivo**, senza leggere il contenuto della cella. Se il PC è `x3023`, la pagina è `x3000`; per ottenere `x30F4`, l’offset di pagina è `0 1111 0100`. Con `DR=R1`:
 
-- indirizzare **celle appartenenti alla stessa pagina di memoria** dell’istruzione corrente.
-    
-
----
-
-## **10. Struttura delle pagine di memoria**
-
-Ogni pagina contiene:
-
-$$  
-2^{12} = 4096 \text{ celle}  
-$$
-
-Poiché la memoria totale della LC-2 è:
-
-$$  
-2^{16} = 65,536  
-$$
-
-il numero di pagine è:
-
-$$  
-\frac{2^{16}}{2^{12}} = 2^4 = 16 \text{ pagine}  
-$$
-
-Ogni pagina è identificata dai **4 bit più significativi dell’indirizzo**.
-
----
-
-## **11. Concetto di “pagina corrente”**
-
-La **pagina corrente** è:
-
-> la pagina in cui si trova l’istruzione puntata dal **Program Counter** nel momento dell’esecuzione.
-
-Tutte le istruzioni che usano:
-
-- indirizzamento diretto,
-    
-- indirizzamento indiretto,
-    
-- LEA,
-    
-- LD,
-    
-
-operano **per default all’interno della pagina corrente**, salvo i casi a doppio accesso.
-
----
-
-## **12. Istruzione LEA – Load Effective Address**
-
-L’istruzione **LEA** non carica un valore, ma:
-
-> **carica un indirizzo a 16 bit in un registro GPR**.
-
-Formato:
-
-```
-LEA DR, PCoffset9
+```text
+1110 001 0 1111 0100 = xE2F4
 ```
 
-Dove:
+e al termine `R1=x30F4`.
 
-- **DR** → Destination Register (3 bit),
-    
-- **PCoffset9** → offset in complemento a 2 su 9 bit.
-    
+Nel PDF e negli esempi si usa talvolta la scrittura didattica `LEA R1, x30F4`. Nel vero sorgente assembly si preferisce un’etichetta: l’assembler verifica che sia nella pagina raggiungibile e inserisce i 9 bit necessari.
 
-L’indirizzo viene costruito come:
-
-$$  
-\text{indirizzo} = PC_{\text{MSB}}\ \& \ PCoffset_9  
-$$
-
----
-
-## **13. Significato operativo della LEA**
-
-La LEA è fondamentale perché permette di:
-
-- costruire indirizzi a 16 bit,
-    
-- aggirando il limite dei 12 bit disponibili negli operandi,
-    
-- mantenendo la filosofia RISC.
-    
-
-Metafora concettuale:
-
-- i **MSB del PC** sono il **numero di pagina del libro**,
-    
-- l’**offset** è la **riga all’interno della pagina**.
-    
-
----
-
-## **14. Pagina corrente e PC dinamico**
-
-Poiché il **Program Counter avanza continuamente**, anche la **pagina corrente cambia durante l’esecuzione del programma**.
-
-Questo rende:
-
-- gli indirizzi **relativi e dinamici**,
-    
-- il codice **rilocabile** all’interno della memoria.
-    
-
----
+> ✅ La LC-2 sacrifica l’indirizzo assoluto dentro ogni istruzione a favore di formati fissi e semplici; pagina corrente, indiretto e base+offset recuperano la flessibilità necessaria.

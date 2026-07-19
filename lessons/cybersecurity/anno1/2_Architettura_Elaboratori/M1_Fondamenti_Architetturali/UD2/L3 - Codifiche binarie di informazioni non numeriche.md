@@ -1,6 +1,8 @@
-## **Lezione 3: Codifiche binarie di informazioni non numeriche**
+## ***Lezione 3: Codifiche binarie di informazioni non numeriche***
 
 ---
+
+> 📌 Questa lezione rielabora integralmente le pagine 43–54 di `M1doc.pdf`.
 
 ### **1. Dal numero a “tutto il resto”: idea unificante**
 
@@ -32,9 +34,9 @@ Tutto il resto della lezione consiste nel vedere **come** si costruiscono queste
 
 ---
 
-## **2. Codifica di caratteri – Da ASCII a Unicode**
+### **2. Codifica di caratteri: da ASCII a Unicode**
 
-### **2.1 Perché serve una codifica per i caratteri**
+#### **2.1. Perché serve una codifica per i caratteri**
 
 Un computer non “capisce” le lettere **A, z, @**:  
 capisce solo **numeri interi** e quindi **bit**.
@@ -55,7 +57,7 @@ Questa tabella è uno **standard**, in modo che:
 
 ---
 
-### **2.2 ASCII a 7 bit**
+#### **2.2. ASCII a 7 bit**
 
 Lo standard storico si chiama **ASCII**  
 (_American Standard Code for Information Interchange_).
@@ -77,32 +79,28 @@ La tabella contiene:
     
 - **48–57**: cifre ‘0’–‘9’
     
-- **65–90**: lettere maiuscole ‘A’–‘Z’
-    
-- **97–122**: lettere minuscole ‘a’–‘z’
-    
-- **altri codici**: simboli vari (@, #, +, -, …)
+- **58–64**: altra punteggiatura e simboli
+- **65–90**: lettere maiuscole `A`–`Z`
+- **91–96**: simboli e punteggiatura
+- **97–122**: lettere minuscole `a`–`z`
+- **123–126**: simboli e punteggiatura
+- **127**: carattere di controllo `DEL`.
     
 
-#### Esempio: la lettera `A`
+##### **2.2.1. Esempio: la lettera `A`**
 
 - codice decimale: $65_{10}$
     
 - in binario a 7 bit: $1000001_2$
     
 
-La tabella ASCII viene spesso organizzata come **matrice**:
+La tabella del PDF è organizzata come una matrice $16\times8$: i **tre bit più significativi** selezionano una delle otto colonne e i **quattro bit meno significativi** una delle sedici righe. Per `A`, $100\,0001_2$, la colonna è $100_2=4$ e la riga $0001_2=1$.
 
-- i bit meno significativi (3–4 bit) → riga
-    
-- i bit più significativi (3–4 bit) → colonna
-    
-
-In questo modo puoi “leggere” la posizione del carattere direttamente dai bit.
+In questo modo si ricostruisce il codice concatenando i bit della colonna e quelli della riga.
 
 ---
 
-### **2.3 Perché 8 bit? ASCII esteso e compatibilità hardware**
+#### **2.3. Perché 8 bit? Famiglie a 8 bit e compatibilità hardware**
 
 L’hardware moderno lavora su **byte di 8 bit**, non su gruppi da 7 bit.
 
@@ -127,12 +125,11 @@ Questo ha aperto la porta a usare i codici **128–255** per:
 - caratteri specifici per lingua
     
 
-Nascono così le tante codifiche **“ASCII estese”** (ISO-8859-x, Windows-1252, ecc.).  
-Importante: **non sono standard universali**, cambiano da paese a paese.
+Nascono così molte codifiche colloquialmente dette **“ASCII estese”**. Non costituiscono un’unica estensione universale: ISO/IEC 8859 è una famiglia standardizzata di repertori a 8 bit, mentre Windows-1252 è una code page distinta. Lo stesso byte tra 128 e 255 può quindi significare caratteri diversi a seconda della codifica.
 
 ---
 
-### **2.4 Oltre ASCII: Unicode (cenno)**
+#### **2.4. Oltre ASCII: Unicode**
 
 ASCII non basta più per:
 
@@ -150,11 +147,19 @@ Per questo si usa oggi **Unicode**, che:
 
 Le codifiche più usate (UTF-8, UTF-16…) sono modi diversi di rappresentare quei codici in **sequenze di byte**.
 
+Unicode separa dunque il **code point** astratto dalla sua codifica. UTF-8 usa da uno a quattro byte e conserva la compatibilità con ASCII: i code point da U+0000 a U+007F hanno esattamente lo stesso singolo byte di ASCII. Non va descritto come una semplice tabella a 8 bit.
+
+| codifica | lunghezza | capacità o repertorio |
+| --- | --- | --- |
+| ASCII | fissa, 7 bit | 128 codici |
+| codifiche a 8 bit | fissa, 1 byte | 256 codici per ciascuna tabella |
+| UTF-8 | variabile, 1–4 byte | code point Unicode, oltre un milione di posizioni possibili |
+
 ---
 
-## **3. Immagini digitali e pixel**
+### **3. Immagini digitali e pixel**
 
-### **3.1 Origine storica del termine “pixel”**
+#### **3.1. Origine storica del termine “pixel”**
 
 “Pixel” = **picture element** (elemento dell’immagine).
 
@@ -169,11 +174,13 @@ Da allora, “pixel” è diventato il mattone fondamentale di tutta la grafica 
 
 ---
 
-### **3.2 Definizione formale di pixel**
+#### **3.2. Definizione di pixel**
 
-Un **pixel** è:
+Un **pixel** (*picture element*) è:
 
 > il più piccolo elemento discreto di un’immagine digitale, identificato da una posizione $(x,y)$ nella griglia e da un **valore numerico** (colore o intensità).
+
+È l’elemento di campionamento dell’immagine, non necessariamente un quadratino fisico indivisibile: forma e disposizione dei componenti del display dipendono dal dispositivo, mentre il pixel logico appartiene alla matrice dei dati.
 
 L’immagine è una **matrice bidimensionale**:
 
@@ -191,7 +198,7 @@ Esempio:
 
 ---
 
-### **3.3 Risoluzione spaziale e cromatica**
+#### **3.3. Risoluzione spaziale e cromatica**
 
 - **Risoluzione spaziale**: numero di pixel dell’immagine.  
     Più pixel → più dettagli → immagine più definita.
@@ -204,15 +211,17 @@ Esempio:
     - 8 bit/pixel → 256 livelli di grigio
         
     - 24 bit/pixel → 3 canali (R,G,B), 8 bit ciascuno → $256^3$ colori ≈ 16,7 milioni
+
+    - 32 bit/pixel → spesso RGB a 8 bit più un canale alpha a 8 bit, quindi $2^{32}$ configurazioni complessive
         
 
 Ogni pixel è quindi un **numero (o un gruppo di numeri)**, e ognuno di questi numeri è rappresentato in **binario**.
 
 ---
 
-## **4. Audio digitale: campionamento e quantizzazione**
+### **4. Audio digitale: campionamento e quantizzazione**
 
-### **4.1 Che cos’è un segnale audio**
+#### **4.1. Che cos’è un segnale audio**
 
 Un segnale audio analogico è una funzione continua nel tempo:
 
@@ -232,7 +241,7 @@ asse $x$ = tempo, asse $y$ = ampiezza del segnale.
 
 ---
 
-### **4.2 Dal continuo al discreto: il campionamento**
+#### **4.2. Dal continuo al discreto: il campionamento**
 
 Un computer non può memorizzare **infinito** numero di valori continui.  
 Serve trasformare il segnale in una sequenza discreta di numeri:
@@ -256,16 +265,17 @@ Esempio:
 
 ---
 
-### **4.3 Teorema di Nyquist–Shannon (idea)**
+#### **4.3. Teorema di Nyquist–Shannon**
 
 Domanda: **quanto spesso** bisogna campionare un segnale per non perdere informazione?
 
-> Se la massima frequenza presente nel segnale è $f_\text{max}$,  
-> allora la frequenza di campionamento deve essere **almeno**:  
-> $$  
- f_s \ge 2 f_\text{max}  
- $$  
-> per evitare aliasing.
+> Se il segnale è limitato in banda e la sua massima frequenza è $f_\text{max}$, la ricostruzione ideale richiede una frequenza di campionamento **strettamente maggiore del doppio** della banda; nei modelli introduttivi si scrive:
+
+$$
+f_s\geq2f_\text{max}.
+$$
+
+> In pratica si lascia una banda di transizione e si usa un filtro analogico anti-aliasing prima del campionamento.
 
 L’aliasing è l’errore per cui frequenze distinte diventano **indistinguibili** dopo il campionamento.
 
@@ -280,7 +290,7 @@ Per l’audio:
 
 ---
 
-### **4.4 Quantizzazione: da ampiezze reali a numeri finiti**
+#### **4.4. Quantizzazione: da ampiezze reali a numeri finiti**
 
 Ogni campione ha un certo valore reale $s(t_k)$, da trasformare in un **numero intero**.
 
@@ -305,14 +315,36 @@ Un secondo di audio stereo CD:
 Numero di byte al secondo:
 
 $$  
-44,100 \cdot 2 \cdot 2 \approx 176,400\ \text{byte} \approx 172\ \text{KB/s}  
+44\,100\cdot2\cdot2=176\,400\ \text{byte/s}\approx172{,}3\ \text{KiB/s}.
 $$
+
+Per un minuto di PCM stereo:
+
+$$
+176\,400\cdot60=10\,584\,000\ \text{byte}
+\approx10{,}58\ \text{MB}
+\approx10{,}09\ \text{MiB}.
+$$
+
+> ⚠️ La tabella del PDF riporta anche $5{,}3\ \text{MB}$ per un minuto: quel valore corrisponde a un solo canale PCM a 16 bit, non allo stereo specificato. Lo stereo non compresso occupa il doppio; una compressione potrebbe invece produrre altre dimensioni.
+
+#### **4.5. Confronto degli ordini di grandezza**
+
+| informazione | ipotesi | dimensione non compressa o esemplificativa |
+| --- | --- | ---: |
+| numero in doppia precisione | 64 bit | 8 byte; ordine massimo finito circa $1{,}8\cdot10^{308}$ |
+| pagina di testo | 2000 caratteri ASCII | 2000 byte, circa $2\ \text{kB}$ |
+| foto | 10 milioni di pixel, RGB 24 bpp | $30\,000\,000$ byte = $30\ \text{MB}$; il PDF mostra circa $2{,}5\ \text{MB}$ dopo JPEG |
+| audio PCM mono | 44,1 kHz, 16 bit, 60 s | $5\,292\,000$ byte |
+| audio PCM stereo | 44,1 kHz, 16 bit, 60 s | $10\,584\,000$ byte |
+
+Il confronto del PDF tra il massimo di un `double` e il numero stimato di atomi nell’universo osservabile, dell’ordine di $10^{79}$–$10^{80}$, illustra la grande **estensione** della virgola mobile; non significa che tutti gli interi fino a $10^{308}$ siano rappresentabili esattamente, perché la precisione del significando rimane finita.
 
 ---
 
-## **5. Video digitale: immagini + audio + compressione**
+### **5. Video digitale: immagini, audio e compressione**
 
-### **5.1 Che cos’è un video digitale**
+#### **5.1. Che cos’è un video digitale**
 
 Un video è:
 
@@ -330,7 +362,7 @@ Parametri principali:
 
 ---
 
-### **5.2 Quanto pesa un video non compresso? (esempio)**
+#### **5.2. Quanto pesa un video non compresso**
 
 Prendiamo:
 
@@ -347,7 +379,7 @@ Prendiamo:
 
 - pixel/frame: $720 \cdot 576 = 414,720$
     
-- byte/frame: $414,720 \cdot 3 \approx 1,244,160\ \text{byte} \approx 1{,}19\ \text{MB}$
+- byte/frame: $414\,720\cdot3=1\,244\,160\ \text{byte}$
     
 
 **Frame in 1 minuto:**
@@ -357,7 +389,7 @@ Prendiamo:
 
 **Peso totale:**
 
-- $1{,}19\ \text{MB} \cdot 1,800 \approx 2{,}14\ \text{GB}$
+- $1\,244\,160\cdot1\,800=2\,239\,488\,000\ \text{byte}$, cioè circa $2{,}24\ \text{GB}$ decimali o $2{,}09\ \text{GiB}$
     
 
 Quindi:
@@ -368,7 +400,7 @@ Ovviamente è insostenibile per archiviazione e trasmissione → serve la **comp
 
 ---
 
-### **5.3 Compressione video: idea generale**
+#### **5.3. Compressione video: idea generale**
 
 Scopo:
 
@@ -402,15 +434,23 @@ Risultato tipico:
 - da **2 GB/minuto non compresso**
     
 - a **qualche decina di MB/minuto** compresso.
+
+Il PDF usa come esempio MPEG-2 a $9\ \mathrm{Mbit/s}$:
+
+$$
+9\ \mathrm{Mbit/s}\div8=1{,}125\ \mathrm{MB/s},
+$$
+
+quindi un minuto occupa circa $67{,}5\ \mathrm{MB}$, senza includere eventuali differenze dovute a overhead e convenzioni di misura.
     
 
 ---
 
-## **6. Unità di misura dell’informazione**
+### **6. Ordini di grandezza e unità dell’informazione**
 
 Alla base di tutto ci sono le unità che userai continuamente in Architettura, Sistemi Operativi, Reti.
 
-### **6.1 bit**
+#### **6.1. Bit**
 
 - unità base di informazione: **binary digit**
     
@@ -423,7 +463,7 @@ Tutto nasce da qui.
 
 ---
 
-### **6.2 byte**
+#### **6.2. Byte**
 
 - gruppo ordinato di **8 bit**
     
@@ -443,42 +483,20 @@ Esempi:
 
 ---
 
-### **6.3 word (parola)**
+#### **6.3. Word**
 
 Una **word** è la dimensione “naturale” di elaborazione di una certa architettura.
 
-Storicamente:
-
-- 1 word = 16 bit = 2 byte
-    
-
-Nelle architetture moderne:
-
-- su CPU a 32 bit → spesso 1 word = 32 bit
-    
-- su CPU a 64 bit → spesso 1 word = 64 bit
-    
-
-Quindi “word” è **architettura-dipendente**.
+La sua ampiezza dipende dall’ISA e dal contesto: sono esistite word da 8, 12, 16, 32, 36, 64 bit e altre dimensioni. Non si può dedurre automaticamente la dimensione denominata `word` dalla sola etichetta “CPU a 64 bit”.
 
 ---
 
-### **6.4 double word, quad word**
+#### **6.4. Double word, quad word e convenzioni dell’ISA**
 
-- **double word (dword)**
-    
-    - 2 word
-        
-    - tipicamente 32 bit (su architetture dove word=16)
-        
-    - oppure 64 bit (dove word=32)
-        
-- **quad word (qword)**
-    
-    - 4 word
-        
-    - spesso 64 o 128 bit, a seconda del contesto
-        
+- **double word (dword)**: letteralmente due word nel contesto che la definisce;
+- **quad word (qword)**: letteralmente quattro word.
+
+Nella terminologia x86, tuttavia, i nomi storici sono dimensioni fisse: `WORD` è 16 bit, `DWORD` 32 bit e `QWORD` 64 bit anche in modalità x86-64. Bisogna quindi seguire la documentazione dell’architettura e non una regola universale.
 
 Usate per:
 
@@ -491,9 +509,9 @@ Usate per:
 
 ---
 
-### **6.5 Riassunto delle unità (tipico scenario moderno)**
+#### **6.5. Riassunto e terminologia del PDF**
 
-In una classica architettura a 64 bit:
+Una convenzione frequentemente incontrata è:
 
 - 1 bit → 0 o 1
     
@@ -503,7 +521,9 @@ In una classica architettura a 64 bit:
     
 - 32 bit → word
     
-- 64 bit → double word / quad word (dipende dalla convenzione)
+- 64 bit → doubleword oppure quadword, secondo la convenzione dell’ISA
+
+Il PDF menziona anche l’espressione **octal word** per $128$ bit e la collega, come esempio, alle chiavi AES-128. Non è però una denominazione generale standard: in x86, per un operando vettoriale di $128$ bit si incontra piuttosto `xmmword`; una chiave AES-128 ha semplicemente lunghezza $128$ bit.
     
 
 Queste dimensioni sono fondamentali per:
@@ -517,7 +537,7 @@ Queste dimensioni sono fondamentali per:
 
 ---
 
-## **7. Schema concettuale finale**
+### **7. Schema concettuale finale**
 
 Puoi vedere tutta la lezione così:
 
@@ -543,8 +563,10 @@ Puoi vedere tutta la lezione così:
 
 ---
 
-## **8. Frase-chiave da ricordare**
+### **8. Frase chiave da ricordare**
 
 > **Tutto può essere bit, a patto di usare il numero giusto di bit e la codifica giusta.**
 
 Questa frase è il ponte diretto tra **teoria dell’informazione**, **architettura degli elaboratori** e tutti i corsi successivi (Sistemi Operativi, Reti, Sicurezza, Multimedia…).
+
+> ✅ Testo, immagini, audio e video diventano bit attraverso codifiche diverse. La sequenza di bit non rivela da sola che cosa rappresenta: servono formato, metadati e convenzione interpretativa.

@@ -1,430 +1,88 @@
-## **Lezione 1: Struttura della macchina di Von Neumann**
+## ***Lezione 1: Struttura della macchina di Von Neumann***
 
 ---
 
-## **1. Origine del modello di Von Neumann**
+> 📌 Questa lezione rielabora integralmente le pagine 1–8 di `M2doc.pdf`.
 
-Nel 1945, il matematico ungherese naturalizzato statunitense **John Von Neumann** formalizza un modello tecnico per la costruzione dei **calcolatori digitali programmabili**.
+### **1. Dal programma alla macchina che lo esegue**
 
-Questa struttura, oggi nota come **architettura di Von Neumann**, rappresenta ancora la **base concettuale dei computer moderni**.
+Nel 1945 John von Neumann formalizzò un modello di calcolatore nel quale **istruzioni e dati condividono la stessa memoria**. Il modello è composto da quattro blocchi funzionali:
 
-Il modello è detto **quadripartito**, perché è costituito da **quattro grandi blocchi funzionali**:
+| Blocco | Compito essenziale |
+| --- | --- |
+| **CPU** | interpreta ed esegue le istruzioni |
+| **memoria di lavoro** | conserva temporaneamente programmi e dati |
+| **interfacce di input/output** | collegano la rappresentazione interna al mondo esterno |
+| **bus di sistema** | trasporta indirizzi, dati e segnali di controllo |
 
-1. **CPU**
-    
-2. **Memoria di lavoro**
-    
-3. **Interfacce di Input/Output**
-    
-4. **Bus di sistema**
-    
+La CPU è il **master** del sistema: decide quale operazione avviare e coordina gli altri blocchi. Memoria e interfacce rispondono alle sue richieste come dispositivi **slave**. “Master” non significa che la CPU produca da sola dati e programmi: senza memoria e I/O non avrebbe né istruzioni da eseguire né un modo per ricevere input e restituire risultati.
 
----
+> 💡 Il calcolatore è quindi un sistema cooperativo: la CPU dirige, la memoria conserva, le interfacce traducono e il bus mette in comunicazione tutti i componenti.
 
-## **2. CPU – Central Processing Unit**
+### **2. CPU e ciclo di esecuzione**
 
-La **CPU (Central Processing Unit)** è l’**unità centrale di elaborazione**, ovvero:
+La **Central Processing Unit** è l’unità che esegue il programma. Il suo lavoro si ripete secondo il ciclo:
 
-- il **master** del sistema,
-    
-- il **cervello** del calcolatore.
-    
+1. **fetch**: preleva dalla memoria l’istruzione indicata dal **Program Counter**;
+2. **decode**: riconosce l’operazione e individua gli operandi;
+3. **execute**: attiva i circuiti necessari, trasferisce o elabora i dati e registra il risultato.
 
-### **Funzioni fondamentali della CPU**
+Il **PC** identifica l’indirizzo della prossima istruzione da prelevare. Nel normale flusso sequenziale avanza, mentre un salto o una chiamata a sottoprogramma può caricarvi un indirizzo diverso.
 
-La CPU:
+Programmi, istruzioni e dati sono tutti rappresentati da sequenze di bit. È il **contesto d’uso** a stabilire se una parola binaria debba essere interpretata come istruzione, numero, carattere o indirizzo.
 
-- interpreta le **istruzioni macchina**,
-    
-- esegue **operazioni logico-aritmetiche**,
-    
-- controlla la **comunicazione con memoria e periferiche**.
-    
+### **3. Velocità di esecuzione e IPS**
 
-Il suo funzionamento è **sequenziale**: le istruzioni vengono eseguite una dopo l’altra secondo un ordine preciso.
+Una misura elementare delle prestazioni è il numero di **Instructions Per Second**:
 
----
+$$
+\mathrm{IPS}=\text{numero di processori o core}\cdot \text{frequenza di clock}\cdot \mathrm{IPC}
+$$
 
-## **3. Memoria di lavoro**
+dove IPC è il numero medio di istruzioni completate per ciclo. Il PDF propone, come stima puramente teorica per un processore con 24 core, frequenza di picco di circa $6\ \mathrm{GHz}$ e IPC assunto pari a 1:
 
-La **memoria di lavoro** è un **contenitore ad accesso rapido** che ospita:
+$$
+24\cdot 6\cdot 10^9\approx 144\cdot 10^9\ \mathrm{IPS}=144\ \mathrm{GIPS}.
+$$
 
-- i **programmi** (cioè le istruzioni da eseguire),
-    
-- i **dati** su cui le istruzioni operano.
-    
+> ⚠️ Questa non è una prestazione reale garantita: frequenza, IPC, numero di core utilizzabili, tipo di istruzioni e accessi alla memoria variano durante l’esecuzione.
 
-È una memoria:
+### **4. Memoria di lavoro**
 
-- **volatile**,
-    
-- centrale,
-    
-- organizzata in **celle tutte uguali**.
-    
+La memoria centrale contiene il programma in esecuzione e i dati su cui esso opera. È organizzata come un insieme ordinato di **celle**, ciascuna identificata da un indirizzo e capace di contenere una parola di ampiezza fissata.
 
-Ogni cella contiene una **parola di memoria**, cioè una **stringa di bit a lunghezza prefissata**, che può rappresentare:
+La memoria di lavoro è normalmente **volatile**: se manca l’alimentazione, il contenuto si perde. Questo la distingue dalle memorie permanenti usate per conservare programmi e dati nel tempo.
 
-- un’istruzione,
-    
-- un dato numerico,
-    
-- un’informazione binaria generica.
-    
+Per accedere a una cella la CPU deve specificare:
 
----
+- l’**indirizzo** della cella;
+- il **dato** da leggere o scrivere;
+- l’**operazione** richiesta, per esempio lettura o scrittura.
 
-## **4. Interfacce di Input/Output (I/O)**
+Una lettura può essere descritta così: la CPU pone l’indirizzo sul bus, attiva il comando di lettura e la memoria restituisce la parola contenuta. In scrittura, la CPU presenta anche il dato e attiva il comando corrispondente.
 
-Le **interfacce di I/O** sono **dispositivi elettronici specializzati** che:
+### **5. Perché servono le interfacce di I/O**
 
-- collegano il **calcolatore al mondo esterno**,
-    
-- traducono **segnali fisici** (pressioni, suoni, luce, tasti, movimento, ecc.)
-    
-- in **sequenze digitali** che il sistema può comprendere.
-    
+Il mondo esterno non usa un unico tipo di segnale: una tastiera chiude contatti, uno schermo emette luce, un disco controlla fenomeni magnetici o elettrici, una rete usa segnali secondo uno specifico protocollo. La CPU, invece, opera con parole binarie e un insieme regolare di comandi.
 
-Le periferiche NON lavorano direttamente in binario: serve sempre una **interfaccia** che svolga la **traduzione fisico → digitale**.
+L’**interfaccia di I/O** traduce fra questi due domini. Il PDF la paragona a **Giano bifronte**:
 
----
+- verso CPU e bus espone un comportamento digitale standardizzato;
+- verso la periferica gestisce segnali, tempi e protocolli specifici del dispositivo.
 
-## **5. Bus di sistema**
+Non è quindi corretto dire che la periferica “non usa bit” in assoluto: molti dispositivi sono digitali. Il punto è che la CPU non deve conoscere direttamente ogni dettaglio fisico o protocollare della periferica.
 
-Il **bus di sistema** è l’insieme dei **collegamenti elettrici** che permettono la trasmissione delle informazioni tra:
+### **6. Registri di una generica interfaccia**
 
-- CPU,
-    
-- memoria,
-    
-- periferiche.
-    
+Una tipica interfaccia contiene un’unità di controllo e alcuni registri visibili alla CPU:
 
-Il termine deriva dal latino **“omnibus”**, cioè **“per tutti”**, e indica che:
+| Registro | Direzione prevalente | Funzione |
+| --- | --- | --- |
+| **control** | CPU $\rightarrow$ interfaccia | seleziona operazioni e modalità |
+| **status** | interfaccia $\rightarrow$ CPU | segnala pronto, occupato, errore o evento |
+| **data out** | CPU $\rightarrow$ periferica | contiene il dato da inviare |
+| **data in** | periferica $\rightarrow$ CPU | contiene il dato ricevuto |
 
-> il bus è un **canale condiviso**.
+L’unità di controllo dell’interfaccia sincronizza questi registri con la periferica. Dal punto di vista della CPU, accedere a un registro di I/O può assomigliare a un normale accesso a memoria: questa astrazione permette di usare meccanismi regolari anche per dispositivi fisicamente molto diversi.
 
----
-
-## **6. Il ciclo di funzionamento della CPU**
-
-La CPU esegue un **ciclo continuo** che si articola in **tre macro-fasi**, che si ripetono indefinitamente finché il calcolatore è acceso.
-
----
-
-### **1. Fase di Fetch – Prelievo dell’istruzione**
-
-La CPU:
-
-- legge dalla memoria l’**istruzione successiva da eseguire**.
-    
-
-Ogni istruzione è una **stringa di bit**.
-
-Per sapere **da quale indirizzo leggere**, la CPU utilizza un **registro speciale** chiamato:
-
-**Program Counter (PC)** → contiene l’indirizzo dell’istruzione corrente.
-
----
-
-### **2. Fase di Decode – Decodifica**
-
-L’istruzione prelevata viene:
-
-- **interpretata**,
-    
-- riconosciuta come:
-    
-    - somma,
-        
-    - salto,
-        
-    - caricamento,
-        
-    - trasferimento,
-        
-    - ecc.
-        
-
-Vengono inoltre riconosciuti anche gli **operandi** coinvolti.
-
----
-
-### **3. Fase di Execute – Esecuzione**
-
-La CPU:
-
-- **esegue materialmente l’operazione richiesta**.
-    
-
-Se l’istruzione è:
-
-- **aritmetica/logica** → interviene l’ALU,
-    
-- **di trasferimento** → si accede a memoria o I/O.
-    
-
-In questa fase è possibile anche lo **scambio di dati con l’esterno**.
-
----
-
-## **7. Programmi, istruzioni e dati**
-
-Affinché la CPU sia una vera **macchina programmabile**, è fondamentale che:
-
-> possa **scoprire i propri compiti volta per volta**.
-
-Questi compiti sono **sequenze di stringhe di bit** che rappresentano:
-
-- **istruzioni**,
-    
-- **programmi completi**.
-    
-
-Anche i **dati** sono codificati come **stringhe di bit**.
-
----
-
-## **8. IPS – Instructions Per Second**
-
-Per misurare la velocità di una CPU si introduce l’unità:
-
-**IPS – Instructions Per Second**
-
-Formula concettuale:
-
-**IPS = socket × core per socket × frequenza di clock × IPC**
-
-Esempio teorico:
-
-- CPU: i9-14900K
-    
-- 24 core
-    
-- 6 GHz
-    
-- IPC ≈ 1
-    
-
-Si arriva teoricamente a:
-
-**~144 GIPS = 144 miliardi di istruzioni al secondo**  
-(stima puramente teorica).
-
----
-
-## **9. Perché serve la memoria di lavoro**
-
-Dato che:
-
-- i programmi sono enormi,
-    
-- i dati sono numerosissimi,
-    
-- la CPU lavora a velocità altissime,
-    
-
-serve un contenitore:
-
-> capace di **scambiare informazioni alla stessa velocità della CPU**.
-
-Questo contenitore è la **memoria di lavoro (RAM)**.
-
----
-
-## **10. Struttura logica della memoria**
-
-La memoria è rappresentabile come un **array di celle**.
-
-Ogni cella:
-
-- contiene una **parola di memoria**,
-    
-- ha una **lunghezza fissa in bit**,
-    
-- è identificata da un **indirizzo**.
-    
-
-Nasce quindi la necessità di:
-
-- **discriminare le celle** → linee di indirizzo,
-    
-- **trasferire i dati** → linee di dato,
-    
-- **specificare l’operazione** → linee di controllo (Read/Write).
-    
-
----
-
-## **11. Come interagiscono CPU e Memoria**
-
-La CPU deve indicare alla memoria:
-
-- **quale cella** (indirizzo),
-    
-- **che tipo di operazione**:
-    
-    - Read (lettura),
-        
-    - Write (scrittura).
-        
-
-Poi avviene lo **scambio effettivo del contenuto**.
-
----
-
-## **12. Gerarchia Master–Slave**
-
-Tra CPU e memoria esiste una **gerarchia funzionale chiara**:
-
-- **CPU → Master**
-    
-- **Memoria → Slave**
-    
-
-La CPU decide **cosa fare e quando farlo**.  
-La memoria **risponde alle richieste**.
-
----
-
-## **13. Perché servono le periferiche**
-
-CPU e memoria, da sole, sono **autosufficienti**, ma **isolabili dal mondo esterno**.
-
-Senza periferiche:
-
-- non potremmo caricare programmi,
-    
-- non potremmo inserire dati,
-    
-- non potremmo leggere risultati.
-    
-
-Il mondo esterno, inoltre, non è digitale, ma:
-
-- fisico,
-    
-- biologico,
-    
-- umano.
-    
-
-Serve dunque un sistema di **interfacce tra mondo digitale e mondo reale**.
-
----
-
-## **14. Le interfacce come “Giano bifronte”**
-
-Le interfacce di I/O hanno **due facce**:
-
-- una verso la **CPU** (digitale),
-    
-- una verso il **mondo esterno** (fisico).
-    
-
-### **Verso la CPU**
-
-- lavorano in **bit e segnali logici**,
-    
-- comunicano tramite:
-    
-    - comandi,
-        
-    - stato,
-        
-    - dato-in,
-        
-    - dato-out.
-        
-
-### **Verso il mondo esterno**
-
-- lavorano con:
-    
-    - segnali elettrici,
-        
-    - meccanici,
-        
-    - ottici,
-        
-    - sonori,
-        
-- comunicano con:
-    
-    - tastiera,
-        
-    - mouse,
-        
-    - monitor,
-        
-    - sensori,
-        
-    - microfoni,
-        
-    - ecc.
-        
-
----
-
-## **15. Struttura interna di una generica interfaccia I/O**
-
-Ogni interfaccia contiene **registri speciali**.
-
-### **Faccia verso la CPU**
-
-I registri sono:
-
-- identici a celle di memoria,
-    
-- leggibili e scrivibili con le stesse istruzioni della RAM.
-    
-
-### **Faccia verso il mondo esterno**
-
-I registri permettono di:
-
-- scambiare dati con la periferica,
-    
-- fornire lo stato della periferica,
-    
-- ricevere comandi dalla CPU.
-    
-
-Tutto è gestito da una **Unità di Controllo dell’Interfaccia**.
-
----
-
-## **16. Illusione per la CPU**
-
-Dal punto di vista della CPU:
-
-- i registri dell’interfaccia
-    
-- sono **normali celle di memoria con indirizzi particolari**.
-    
-
-Ma quando la CPU scrive o legge questi indirizzi:
-
-- in realtà sta comunicando con il **mondo esterno**.
-    
-
-Questo realizza:
-
-- invio comandi (unilaterale),
-    
-- lettura stato,
-    
-- scambio dati (bilaterale).
-    
-
----
-
-✅ **Questa è la Lezione 1 completa (pagine 1–8) completamente rifinita.**
-
----
-
-Se vuoi, al prossimo passo possiamo fare **subito**:
-
-👉 **Lezione 2 – Bus & Spazio di Indirizzamento (pagine 9–12)**  
-Oppure, se preferisci:  
-👉 aggiungiamo **schemi logici e riassunto ultra-compatto** per il ripasso da esame.
+> ✅ Nel modello di von Neumann istruzioni e dati sono parole in memoria; la CPU le elabora mediante fetch–decode–execute, mentre bus e interfacce rendono possibile il dialogo con memoria e mondo esterno.

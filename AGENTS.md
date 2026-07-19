@@ -88,6 +88,12 @@
 - Da ora il lavoro principale passa a Statistica e Crittografia.
 - Per i prossimi prompt integrativi, privilegiare l'avanzamento di queste due materie.
 
+### Architettura degli elaboratori [IN PROGRESS]
+
+- M1 – Fondamenti architetturali (UD1-UD3, 10 lezioni): [COMPLETED] — letto e confrontato integralmente `M1doc.pdf` (98 pagine); perfezionate le lezioni su rappresentazione analogica/digitale, codifiche numeriche e non numeriche, complemento a 2, algebra booleana, porte logiche e bistabili; verificati formule, calcoli, rendering KaTeX e accesso ai PDF originali dal frontend.
+- M2 – Linguaggio macchina (UD1-UD4, 10 lezioni): [COMPLETED] — letto e confrontato integralmente `M2doc.pdf` (87 pagine, incluse figure, annotazioni e schermate); riallineate le lezioni su macchina di von Neumann, bus, ISA LC-2, programmi macchina, assembly, assembler a due passate, simulatore/debugger, I/O ASCII e sottoprogrammi di shift; corretti indirizzamento 7+9, codifiche ed esempi; verificati KaTeX, calcoli LC-2, build, rendering delle dieci lezioni e accesso al PDF originale dal frontend.
+- M3 – Architettura del calcolatore: [NEXT TASK]
+
 ### Sicurezza Sistemi e Reti [IN PROGRESS]
 
 - M1/UD1/L1 (Introduzione): [COMPLETED] — integrato transcript su struttura del corso, malware e APT, gestione identità/SSO, port scanning come ricognizione, laboratori con Wireshark/firewall/Linux, riferimenti bibliografici e modalità d'esame.

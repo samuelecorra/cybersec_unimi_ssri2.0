@@ -2,6 +2,8 @@
 
 ---
 
+> 📌 Questa lezione rielabora integralmente le pagine 60–68 di `M1doc.pdf`.
+
 ### **1. Obiettivo della lezione**
 
 In questa lezione vogliamo **dimostrare operativamente** che:
@@ -19,13 +21,13 @@ L’esempio fondamentale è la **somma**:
 
 ---
 
-## **2. Somma di due bit singoli**
+### **2. Somma di due bit singoli**
 
 Consideriamo due variabili booleane / bit:
 
-- $A \in {0,1}$
+- $A\in\{0,1\}$
     
-- $B \in {0,1}$
+- $B\in\{0,1\}$
     
 
 Ogni coppia $(A,B)$ rappresenta la somma di due numeri binari a 1 bit.  
@@ -47,7 +49,7 @@ Quindi la nostra somma **a 1 bit** produce sempre **due** output:
 
 ---
 
-### **2.1 Espressione logica del riporto R**
+#### **2.1. Espressione logica del riporto $R$**
 
 Dalla tabella:
 
@@ -65,7 +67,7 @@ Questa è la formula del **riporto**:
 
 ---
 
-### **2.2 Espressione logica del bit di somma S**
+#### **2.2. Espressione logica del bit di somma $S$**
 
 Guardiamo la colonna $S$:
 
@@ -92,15 +94,15 @@ Questa è già una forma perfettamente valida.
 
 ---
 
-### **2.3 Definizione dell’operatore XOR**
+#### **2.3. Definizione dell’operatore XOR**
 
 Introduciamo un nuovo operatore, estremamente usato in aritmetica binaria.
 
-> **Operatore XOR (eXclusive OR)**  
-> $$
- S = A \oplus B  \stackrel{\text{def}}{=}  \overline{A}B + A\overline{B}  
- $$ 
-> Restituisce 1 **se e solo se** i due bit sono **diversi**.
+> 📌 L’operatore XOR (*eXclusive OR*) restituisce 1 **se e solo se** i due bit sono diversi.
+
+$$
+S=A\oplus B\stackrel{\mathrm{def}}{=}\overline A B+A\overline B.
+$$
 
 Tabella di verità dell’XOR:
 
@@ -119,11 +121,19 @@ $$
 
 Queste due formule sono **la base teorica** di tutto il resto.
 
+L’XOR è commutativo e associativo; inoltre $X\oplus0=X$, $X\oplus1=\overline X$, $X\oplus X=0$. Da associatività e cancellazione segue, per esempio,
+
+$$
+(A\oplus B)\oplus B=A\oplus(B\oplus B)=A.
+$$
+
+Poiché una tabella di verità enumera tutti i possibili assegnamenti di variabili booleane, l’uguaglianza delle colonne finali costituisce una dimostrazione esaustiva dell’equivalenza di due funzioni. Il PDF chiama questo metodo **induzione perfetta**.
+
 ---
 
-## **3. Half Adder: il primo mattoncino aritmetico**
+### **3. Half Adder: il primo mattoncino aritmetico**
 
-### **3.1 Definizione**
+#### **3.1. Definizione**
 
 Un **Half Adder (HA)** è un circuito combinatorio che:
 
@@ -140,7 +150,7 @@ Formalmente:
 
 - ingressi: $A, B$
     
-- uscite: $S = A \oplus B,; R = A \cdot B$
+- uscite: $S=A\oplus B$ e $R=A\cdot B$.
     
 
 Schema funzionale (a parole):
@@ -159,7 +169,7 @@ Questo circuito:
 
 ---
 
-## **4. Somma di numeri a 2 bit**
+### **4. Somma di numeri a 2 bit**
 
 Passiamo ora a due numeri binari **a 2 bit**:
 
@@ -177,9 +187,11 @@ dove:
 Esempio:
 
 - $A = 10_2$ corrisponde a $2_{10}$ perché $1\cdot 2^1 + 0\cdot 2^0$.
+
+In `10`, il bit più a sinistra è l’MSB e vale $1$, mentre quello più a destra è l’LSB e vale $0$. Questa precisazione corregge l’inversione delle etichette presente nel testo del PDF.
     
 
-### **4.1 Fase 1: somma dei bit meno significativi**
+#### **4.1. Fase 1: somma dei bit meno significativi**
 
 Sommiamo prima $A_0$ e $B_0$:
 
@@ -200,7 +212,7 @@ $$
 
 ---
 
-### **4.2 Fase 2: somma dei bit più significativi con riporto**
+#### **4.2. Fase 2: somma dei bit più significativi con riporto**
 
 Ora dobbiamo sommare **tre bit**:
 
@@ -223,9 +235,9 @@ Questo circuito è il **Full Adder (FA)**.
 
 ---
 
-## **5. Full Adder e funzione di maggioranza**
+### **5. Full Adder e funzione di maggioranza**
 
-### **5.1 Tabella della verità del Full Adder**
+#### **5.1. Tabella della verità del Full Adder**
 
 Indichiamo gli ingressi:
 
@@ -258,7 +270,7 @@ Tabella:
 
 ---
 
-### **5.2 Espressione logica del riporto $R_1$**
+#### **5.2. Espressione logica del riporto $R_1$**
 
 Guardiamo dove $R_1 = 1$:
 
@@ -287,7 +299,7 @@ Ogni termine AND rappresenta il caso in cui **una coppia** di ingressi è contem
 
 ---
 
-### **5.3 Espressione logica del bit di somma $S_1$**
+#### **5.3. Espressione logica del bit di somma $S_1$**
 
 Dalla tabella:
 
@@ -311,7 +323,7 @@ $$
 
 ---
 
-### **5.4 Full Adder: definizione finale**
+#### **5.4. Full Adder: definizione finale**
 
 Un **Full Adder (FA)** a 1 bit:
 
@@ -336,9 +348,9 @@ Realizzazione tipica:
 
 ---
 
-## **6. Dalla somma a 2 bit al sommatore a N bit**
+### **6. Dalla somma a 2 bit al sommatore a $N$ bit**
 
-### **6.1 Sommatore a 2 bit completo**
+#### **6.1. Sommatore a 2 bit completo**
 
 Per sommare:
 
@@ -371,22 +383,17 @@ $$
 
 ---
 
-### **6.2 Sommatore ripple-carry a N bit**
+#### **6.2. Sommatore ripple-carry a $N$ bit**
 
-L’idea si generalizza immediatamente:
-
-- per sommare due numeri a **N bit**, si mettono in cascata:
-    
-    - 1 **Half Adder** sulla colonna meno significativa,
-        
-    - $(N-1)$ **Full Adder** sulle colonne successive.
-        
+L’idea si generalizza immediatamente. Se non esiste un riporto iniziale, si possono usare un Half Adder sulla posizione meno significativa e $N-1$ Full Adder. Più uniformemente, si impiegano $N$ Full Adder ponendo $C_0=0$; questo consente allo stesso circuito di ricevere anche un carry in esterno.
 
 Lo schema è detto **ripple-carry adder** perché:
 
 - il carry “rimbalza” (ripple) da un blocco all’altro,
     
 - da destra verso sinistra, fino al bit più significativo.
+
+Il collegamento in cascata è semplice, ma introduce un ritardo: il risultato del bit più significativo può stabilizzarsi solo dopo la propagazione del carry attraverso i blocchi precedenti. Questa osservazione collega l’espressione booleana alle prestazioni temporali dell’hardware.
     
 
 **Estensione a 3, 4, 5 bit, …**:
@@ -403,7 +410,7 @@ In questo modo, con **solo AND, OR, NOT (e XOR costruiti da essi)**, l’algebra
 
 ---
 
-## **7. Messaggio concettuale finale**
+### **7. Messaggio concettuale finale**
 
 Mettiamo insieme il quadro:
 
@@ -441,3 +448,5 @@ Questa lezione è il ponte diretto fra:
 - **teoria logica** (Algebra di Boole)
     
 - e **hardware reale** (sommatore, ALU, CPU).
+
+> ✅ Half Adder e Full Adder mostrano come una tabella di verità diventi una funzione booleana e poi un blocco circuitale. Cascadando i Full Adder si ottiene un sommatore a più bit, alla base dell’ALU.

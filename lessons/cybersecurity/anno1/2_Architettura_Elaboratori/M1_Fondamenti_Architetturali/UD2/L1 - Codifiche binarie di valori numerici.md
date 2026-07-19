@@ -2,6 +2,8 @@
 
 ---
 
+> 📌 Questa lezione rielabora integralmente le pagine 16–30 di `M1doc.pdf`.
+
 ### **1. Introduzione: dal “mondo continuo” al “mondo discreto”**
 
 Nell’Unità 1 hai visto il salto concettuale decisivo:
@@ -77,18 +79,17 @@ Il sistema decimale:
 - i pesi sono **potenze di 10**.
     
 
-Esempio:  
-$$3947_{10} = 3\cdot 10^3 + 9\cdot 10^2 + 4\cdot 10^1 + 7\cdot 10^0$$
+Esempio del PDF:
 
-cioè:
+$$
+(1273)_{10}=1\cdot10^3+2\cdot10^2+7\cdot10^1+3\cdot10^0.
+$$
 
-- $3$ migliaia,
-    
-- $9$ centinaia,
-    
-- $4$ decine,
-    
-- $7$ unità.
+In generale, se $d_i$ sono cifre comprese tra $0$ e $B-1$,
+
+$$
+(d_{n-1}\ldots d_1d_0)_B=\sum_{i=0}^{n-1}d_iB^i.
+$$
     
 
 Questa logica è ciò che vogliamo **copiare** in altri sistemi di numerazione, cambiando solo:
@@ -111,30 +112,26 @@ Nel sistema binario:
 - i pesi sono potenze di 2: $2^0, 2^1, 2^2, \dots$
     
 
-Esempio:  
-$$101101_2 = 1\cdot 2^5 + 0\cdot 2^4 + 1\cdot 2^3 + 1\cdot 2^2 + 0\cdot 2^1 + 1\cdot 2^0$$
+Esempio del PDF:
+
+$$
+(10010110)_2=1\cdot2^7+0\cdot2^6+0\cdot2^5+1\cdot2^4+0\cdot2^3+1\cdot2^2+1\cdot2^1+0\cdot2^0.
+$$
 
 cioè:
 
-- $1\cdot 32$
-    
-- $0\cdot 16$
-    
-- $1\cdot 8$
-    
-- $1\cdot 4$
-    
-- $0\cdot 2$
-    
-- $1\cdot 1$
+- $1\cdot128$,
+- $1\cdot16$,
+- $1\cdot4$,
+- $1\cdot2$.
     
 
 Somma:  
-$$32 + 8 + 4 + 1 = 45_{10}$$
+$$128+16+4+2=150_{10}.$$
 
 Quindi:
 
-$$101101_2 = 45_{10}$$
+$$10010110_2=150_{10}.$$
 
 ---
 
@@ -151,19 +148,25 @@ L’esadecimale è molto usato in informatica perché si **aggancia bene al bina
     - poi $A=10$, $B=11$, $C=12$, $D=13$, $E=14$, $F=15$.
         
 
-Esempio:  
-$$3A_{16} = 3\cdot 16^1 + 10\cdot 16^0 = 3\cdot 16 + 10 = 48 + 10 = 58_{10}$$
+Esempio del PDF:
+
+$$
+(A59F)_{16}=10\cdot16^3+5\cdot16^2+9\cdot16+15=42399_{10}.
+$$
 
 Collegamento col binario (4 bit per cifra esadecimale):
 
-- $3_{16} = 0011_2$
-    
-- $A_{16} = 1010_2$
+- $A_{16}=1010_2$,
+- $5_{16}=0101_2$,
+- $9_{16}=1001_2$,
+- $F_{16}=1111_2$.
     
 
 Quindi:
 
-$$3A_{16} = 00111010_2$$
+$$A59F_{16}=1010\ 0101\ 1001\ 1111_2.$$
+
+Il raggruppamento inverso si effettua da destra in gruppi di quattro bit, aggiungendo eventualmente zeri non significativi a sinistra. Per esempio $111010_2=0011\ 1010_2=3A_{16}$.
 
 ---
 
@@ -202,9 +205,13 @@ $$
 c = \left\lfloor \log_{10} N \right\rfloor + 1  
 $$
 
-Per $N \ge 1$ queste due sono chiaramente **equivalenti**:
+Una forma equivalente, valida anche quando $N$ è una potenza esatta della base, è
 
-$$⌊log⁡_{10}N⌋+1=⌈log⁡_{10}N⌉$$
+$$
+c=\left\lceil\log_{10}(N+1)\right\rceil.
+$$
+
+> ⚠️ La formula $\lceil\log_{10}N\rceil$ riportata nel PDF non è equivalente alla precedente quando $N$ è una potenza di $10$: per $N=1000$ darebbe $3$, ma servono $4$ cifre. Il valore $N=0$ costituisce inoltre un caso separato e richiede una cifra.
 
 Esempio: $N = 512$
 
@@ -250,6 +257,21 @@ Esempio: $N = 1000$
 
 Quindi per rappresentare $1000_{10}$ in binario servono **10 bit**.
 
+| $N$ | cifre decimali | bit binari |
+| ---: | ---: | ---: |
+| $9$ | $1$ | $4$ |
+| $99$ | $2$ | $7$ |
+| $255$ | $3$ | $8$ |
+| $1000$ | $4$ | $10$ |
+
+In modo equivalente, per $N\geq1$,
+
+$$
+b=\left\lceil\log_2(N+1)\right\rceil.
+$$
+
+Anche qui $\lceil\log_2N\rceil$, forma abbreviata riportata nel PDF, fallisce sulle potenze esatte di due: $N=8$ richiede quattro bit (`1000`), non tre. La formula con $N+1$ oppure $\lfloor\log_2N\rfloor+1$ evita il caso limite.
+
 ---
 
 ### **5. Conversione tra binario e decimale**
@@ -276,7 +298,13 @@ $$
 = \sum_{i=0}^{n-1} b_i \cdot 2^i  
 $$
 
-Esempio:
+Esempio breve del PDF:
+
+$$
+1011_2=1\cdot8+0\cdot4+1\cdot2+1\cdot1=11_{10}.
+$$
+
+Un secondo esempio:
 
 $$  
 101101_2 = 1\cdot 2^5 + 0\cdot 2^4 + 1\cdot 2^3 + 1\cdot 2^2 + 0\cdot 2^1 + 1\cdot 2^0 = 45_{10}  
@@ -403,11 +431,20 @@ Per risolvere l’ambiguità, la norma IEC 80000-13 introduce prefissi binari **
 - $1,\text{MiB} = 1024,\text{KiB} = 2^{20},\text{B}$,
     
 - $1,\text{GiB} = 1024,\text{MiB} = 2^{30},\text{B}$.
+
+| unità IEC | byte |
+| --- | ---: |
+| $1\ \mathrm{KiB}$ | $2^{10}$ |
+| $1\ \mathrm{MiB}$ | $2^{20}$ |
+| $1\ \mathrm{GiB}$ | $2^{30}$ |
+| $1\ \mathrm{TiB}$ | $2^{40}$ |
+| $1\ \mathrm{PiB}$ | $2^{50}$ |
+| $1\ \mathrm{EiB}$ | $2^{60}$ |
     
 
 Nella pratica, però, molti continuano a usare “KB/MB/GB” con significato binario.
 
-> **Quando studi Architettura degli Elaboratori, assumi sempre base 2**:
+> 📌 Nel testo del corso, quando il contesto architetturale usa la convenzione storica, `KB`, `MB` e `GB` possono indicare potenze di $2$. Nella scrittura non ambigua si devono invece usare `KiB`, `MiB` e `GiB`:
 > 
 > - $1,\text{KB} = 1024,\text{B}$
 >     
@@ -437,16 +474,17 @@ Regole locali:
 
 Esempio:
 
-$$  
-\begin{array}{cccccc}  
-& 1 & 0 & 1 & 1 & 0 \\  
-+& 0 & 0 & 1 & 1 & 1 \\  
-\hline  
-& 1 & 0 & 0 & 1 & 0 \\  
-\end{array}  
+$$
+\begin{array}{r}
+00110101_2\ (53)\\
++\ 10110001_2\ (177)\\ \hline
+11100110_2\ (230)
+\end{array}
 $$
 
-(colonna per colonna, da destra a sinistra, gestendo i riporti come fai in base 10.)
+Si procede da destra verso sinistra propagando i riporti. Per esempio, $1+1=10_2$: si scrive $0$ e si riporta $1$ nella colonna successiva.
+
+Con una parola fissata a $b$ bit, il risultato matematico può richiedere $b+1$ bit. In tal caso il riporto oltre il bit più significativo non entra nella parola: per numeri **senza segno** segnala overflow e il risultato conservato è il resto modulo $2^b$.
 
 ---
 
@@ -479,6 +517,14 @@ Esempio concettuale:
 
 La logica è **identica** alla sottrazione decimale, ma con base $B=2$.
 
+Esempio del PDF:
+
+$$
+10010001_2\ (145)-00110000_2\ (48)=01100001_2\ (97).
+$$
+
+Il prestito di una unità dalla posizione $i+1$ aggiunge $2$ alla cifra della posizione $i$, perché $1\cdot2^{i+1}=2\cdot2^i$.
+
 ---
 
 #### **7.3. Prodotto binario**
@@ -507,6 +553,20 @@ Quindi la moltiplicazione binaria si riduce a:
 - **shift** (spostamenti a sinistra),
     
 - **somme**.
+
+Esempio completo:
+
+$$
+\begin{array}{r}
+1101_2\ (13)\\
+\times\ 1001_2\ (9)\\ \hline
+1101\\
+0000\phantom{0}\\
+0000\phantom{00}\\
+1101\phantom{000}\\ \hline
+1110101_2\ (117)
+\end{array}
+$$
     
 
 ---
@@ -543,21 +603,22 @@ cioè:
 
 Esempio:
 
-$$  
-101{,}01_2 = 1\cdot 2^2 + 0\cdot 2^1 + 1\cdot 2^0 + 0\cdot 2^{-1} + 1\cdot 2^{-2}  
+$$
+10010{,}110_2
+=1\cdot2^4+1\cdot2^1+1\cdot2^{-1}+1\cdot2^{-2}.
 $$
 
 Calcolo:
 
-- parte intera: $1\cdot 4 + 0\cdot 2 + 1\cdot 1 = 5$
+- parte intera: $16+2=18$
     
-- parte frazionaria: $0\cdot \frac{1}{2} + 1\cdot \frac{1}{4} = 0{,}25$
+- parte frazionaria: $\frac12+\frac14=0{,}75$
     
 
 Quindi:
 
-$$  
-101{,}01_2 = 5{,}25_{10}  
+$$
+10010{,}110_2=18{,}75_{10}.
 $$
 
 La regola è la stessa:
@@ -570,6 +631,8 @@ La regola è la stessa:
 ---
 
 ### **9. Il problema: precisione ed estensione**
+
+Con la **virgola fissa** si decide in anticipo quante posizioni sono dedicate alla parte intera e quante alla parte frazionaria. È una soluzione semplice e prevedibile, ma l’ampiezza dell’intervallo rappresentabile e la distanza fra valori adiacenti sono rigidamente legate a tale scelta.
 
 Per rappresentare numeri reali con:
 
@@ -623,9 +686,9 @@ dove:
 
 #### **10.1. Esempi in notazione scientifica decimale**
 
-- $3140000 = 3{,}14 \cdot 10^6$
+- $450000=4{,}5\cdot10^5$
     
-- $0{,}00052 = 5{,}2 \cdot 10^{-4}$
+- $0{,}00081=8{,}1\cdot10^{-4}$
     
 
 La mantissa conserva le cifre “importanti”, l’esponente indica l’ordine di grandezza.
@@ -645,6 +708,12 @@ In binario:
 La mantissa è un numero binario “normalizzato”, del tipo:
 
 - $1{,}xxxxx\dots_2$ (la prima cifra diversa da zero è 1).
+
+Per esempio:
+
+$$
+1101{,}01_2=1{,}10101_2\cdot2^3.
+$$
     
 
 L’esponente dice **dove** posizionare la virgola.
@@ -656,7 +725,7 @@ Risultato:
     spostando la scala con l’esponente.
     
 
-> È il compromesso ideale tra **precisione** ed **estensione**.
+> 💡 La virgola mobile amplia enormemente l’intervallo di grandezze rappresentabili, ma non elimina il compromesso: con un numero finito di bit, molte frazioni devono essere arrotondate. Nello standard IEEE 754 esistono inoltre zero, subnormali, infiniti e NaN, quindi la forma normalizzata non descrive tutti i casi.
 
 (Lo standard concreto che troverai più avanti è l’IEEE 754, ma qui ci basta l’idea.)
 
@@ -720,6 +789,16 @@ $$
 -(2^{b-1}-1), \ \dots, \ -1,\ -0,\ +0,\ 1,\ \dots, \ (2^{b-1}-1)  
 $$
 
+| bit totali $b$ | minimo | massimo |
+| ---: | ---: | ---: |
+| $4$ | $-7$ | $+7$ |
+| $8$ | $-127$ | $+127$ |
+| $16$ | $-32767$ | $+32767$ |
+| $32$ | $-2147483647$ | $+2147483647$ |
+| $64$ | $-9223372036854775807$ | $+9223372036854775807$ |
+
+Le $2^b$ configurazioni codificano $2^b-1$ valori distinti, perché $+0$ e $-0$ rappresentano lo stesso numero.
+
 ---
 
 #### **11.2. Limiti del modulo e segno**
@@ -775,3 +854,5 @@ Da qui in poi, ogni volta che sentirai parlare di:
     
 
 stai in realtà manipolando **codifiche binarie di valori numerici**.
+
+> ✅ Una configurazione di bit non possiede da sola un significato numerico: sono la base, il formato e la larghezza fissata a stabilire valore, intervallo, precisione e condizioni di overflow.
