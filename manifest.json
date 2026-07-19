@@ -1,426 +1,621 @@
 {
-  "generatedAt": "2026-07-13T17:00:39.494Z",
+  "generatedAt": "2026-07-19T13:42:17.091Z",
   "root": "lessons/cybersecurity",
-  "totalFiles": 5746,
+  "totalFiles": 5987,
   "files": [
     {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD0 - Strumenti discreti e induzione/L1 - Sommatorie e produttorie.md",
+      "size": 10093,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD0 - Strumenti discreti e induzione/L2 - Fattoriale e coefficienti binomiali.md",
+      "size": 7931,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD0 - Strumenti discreti e induzione/L3 - Principio di induzione.md",
+      "size": 12241,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD0 - Strumenti discreti e induzione/L4 - Binomio di Newton.md",
+      "size": 7966,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L0 - Equivalenza, equazioni e sistemi.md",
+      "size": 9726,
+      "ext": ".md"
+    },
+    {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L1 - Rette.md",
-      "size": 9310,
+      "size": 11207,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L2 - Equazioni e Disequazioni di 1o grado.md",
-      "size": 6866,
+      "size": 8283,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L3 - Parabole.md",
-      "size": 6123,
+      "size": 7251,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L4 - Equazioni e disequazioni di 2o grado.md",
-      "size": 9005,
+      "size": 10526,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD1 - 1o e 2o grado/L5 - Circonferenza nel piano cartesiano.md",
+      "size": 16375,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD2 - Potenze/L1 - Potenze e loro proprietà.md",
-      "size": 6449,
+      "size": 6720,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD2 - Potenze/L2 - Potenze con esponente reciproco.md",
-      "size": 5707,
+      "size": 5843,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD2 - Potenze/L2A - Radicali e razionalizzazione.md",
+      "size": 5984,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD2 - Potenze/L3 - Potenze con esponente razionale.md",
-      "size": 5185,
+      "size": 5680,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD2 - Potenze/L4 - Potenze con esponente reale.md",
-      "size": 5607,
+      "size": 6624,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD3 - Disequazioni Razionali/L0 - Valore assoluto e distanza.md",
+      "size": 16118,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD3 - Disequazioni Razionali/L0A - Struttura e operazioni sui polinomi.md",
+      "size": 7666,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD3 - Disequazioni Razionali/L0B - Prodotti notevoli e fattorizzazione di base.md",
+      "size": 6161,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD3 - Disequazioni Razionali/L0C - Divisione tra polinomi e regola di Ruffini.md",
+      "size": 7933,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD3 - Disequazioni Razionali/L0D - Teoremi del resto e del fattore.md",
+      "size": 8097,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD3 - Disequazioni Razionali/L0E - Radici, molteplicità e fattorizzazione completa.md",
+      "size": 10608,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD3 - Disequazioni Razionali/L1 - Polinomi nelle disequazioni.md",
-      "size": 0,
+      "size": 8856,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD3 - Disequazioni Razionali/L2 - Razionali Fratte.md",
-      "size": 0,
+      "size": 9314,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD4 - Disequazioni Irrazionali/L0 - Equazioni irrazionali.md",
+      "size": 5341,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD4 - Disequazioni Irrazionali/L1 - Irrazionali con indici pari.md",
-      "size": 0,
+      "size": 8440,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD4 - Disequazioni Irrazionali/L2 - Irrazionali con indici dispari.md",
-      "size": 0,
+      "size": 7837,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD5 - Logaritmi ed Esponenziali/L1 - Definizioni e proprietà dei logaritmi.md",
-      "size": 0,
+      "size": 8415,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD5 - Logaritmi ed Esponenziali/L2 - Equazioni e disequazioni logaritmiche.md",
-      "size": 0,
+      "size": 7246,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD5 - Logaritmi ed Esponenziali/L3 - Definizioni e proprietà degli esponenziali.md",
-      "size": 0,
+      "size": 6736,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD5 - Logaritmi ed Esponenziali/L4 - Equazioni e disequazioni esponenziali.md",
-      "size": 0,
+      "size": 6992,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L1 - Intro alla goniometria.md",
-      "size": 0,
+      "size": 9004,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L2 - Funzioni goniometriche.md",
-      "size": 0,
+      "size": 8023,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L3 - Simmetrie.md",
-      "size": 0,
+      "size": 6423,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L4 - Funzioni goniometriche inverse.md",
-      "size": 0,
+      "size": 7716,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L5 - Formule fondamentali.md",
-      "size": 0,
+      "size": 8053,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L5A - Prostaferesi, Werner e identità trigonometriche.md",
+      "size": 5695,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L6 - Equazioni e disequazioni goniometriche.md",
-      "size": 0,
+      "size": 8717,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L6A - Equazioni trigonometriche avanzate.md",
+      "size": 5775,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD6 - Trigonometria/L7 - Triangoli e trigonometria.md",
-      "size": 0,
+      "size": 10940,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD7 - Funzioni Iperboliche/L1 - Funzioni Iperboliche.md",
-      "size": 0,
+      "size": 7840,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD7 - Funzioni Iperboliche/L2 - Grafici.md",
-      "size": 0,
+      "size": 10326,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD7 - Funzioni Iperboliche/L3 - Identità, equazioni e disequazioni iperboliche.md",
+      "size": 6661,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD7 - Funzioni Iperboliche/L4 - Funzioni iperboliche inverse.md",
+      "size": 9250,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD1 - Insiemi/L1 - Intro Insiemistica.md",
-      "size": 0,
+      "size": 3852,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD1 - Insiemi/L2 - Sottoinsiemi.md",
-      "size": 0,
+      "size": 3622,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD1 - Insiemi/L3 - Operazioni insiemistiche.md",
-      "size": 0,
+      "size": 7300,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD1 - Insiemi/L4 - Operatori Booleani OR AND NOT.md",
-      "size": 0,
+      "size": 8014,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD2 - Applicazioni/L1 - Intro Applicazioni.md",
-      "size": 0,
+      "size": 5470,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD2 - Applicazioni/L2 - Caratteristiche delle applicazioni.md",
-      "size": 0,
+      "size": 3846,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD2 - Applicazioni/L3 - Applicazione inversa.md",
-      "size": 0,
+      "size": 4949,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD2 - Applicazioni/L4 - Composizione.md",
-      "size": 0,
+      "size": 4112,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD3 - Relazioni/L1 - Intro Relazioni.md",
-      "size": 0,
+      "size": 5878,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD3 - Relazioni/L2 - Relazioni d'ordine.md",
-      "size": 0,
+      "size": 5720,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD3 - Relazioni/L3 - Relazioni d'equivalenza.md",
-      "size": 0,
+      "size": 5270,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD4 - Min Max Inf Sup/L1 - Insiemi Numerici.md",
-      "size": 0,
+      "size": 5263,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD4 - Min Max Inf Sup/L2 - Minimo e massimo.md",
-      "size": 0,
+      "size": 3988,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M02_Insiemistica e Relazioni/UD4 - Min Max Inf Sup/L3 - Sup e Inf.md",
-      "size": 0,
+      "size": 5974,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M03_Finito ed Infinito/UD1 - Insiemi finiti ed infiniti/L1 - Insiemi finiti.md",
-      "size": 0,
+      "size": 6372,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M03_Finito ed Infinito/UD1 - Insiemi finiti ed infiniti/L1A - Principi di conteggio e principio dei cassetti.md",
+      "size": 7360,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M03_Finito ed Infinito/UD1 - Insiemi finiti ed infiniti/L2 - Insiemi infiniti.md",
-      "size": 0,
+      "size": 6630,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M03_Finito ed Infinito/UD1 - Insiemi finiti ed infiniti/L2A - Confronto tra cardinalità e teorema di Cantor-Bernstein.md",
+      "size": 7231,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M03_Finito ed Infinito/UD2 - Numerabilità e potenza del continuo/L1 - Infinità numerabile.md",
-      "size": 0,
+      "size": 7498,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M03_Finito ed Infinito/UD2 - Numerabilità e potenza del continuo/L1A - Stabilità della numerabilità e applicazioni.md",
+      "size": 8404,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M03_Finito ed Infinito/UD2 - Numerabilità e potenza del continuo/L2 - Potenza del continuo.md",
-      "size": 0,
+      "size": 8420,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M03_Finito ed Infinito/UD2 - Numerabilità e potenza del continuo/L2A - Cardinalità del continuo e gerarchia degli infiniti.md",
+      "size": 9733,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD1 - Costruzione ed operazioni/L1 - Intro ai complessi e insieme C.md",
-      "size": 0,
+      "size": 8011,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD1 - Costruzione ed operazioni/L2 - Forma algebrica.md",
-      "size": 0,
+      "size": 6607,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD1 - Costruzione ed operazioni/L3 - Piano Complesso.md",
-      "size": 0,
+      "size": 7282,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD1 - Costruzione ed operazioni/L3A - Luoghi geometrici e trasformazioni.md",
+      "size": 7517,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD2 - Forma trigonometrica ed esponenziale/L1 - Forma trigonometrica.md",
-      "size": 0,
+      "size": 6796,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD2 - Forma trigonometrica ed esponenziale/L2 - Formula di De Moivre.md",
-      "size": 0,
+      "size": 6082,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD2 - Forma trigonometrica ed esponenziale/L3 - Forma esponenziale.md",
-      "size": 0,
+      "size": 7360,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD3 - Radici e logaritmi/L1 - Radici in C.md",
-      "size": 0,
+      "size": 7557,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD3 - Radici e logaritmi/L1A - Equazioni e fattorizzazione in C.md",
+      "size": 9717,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M04_Numeri Complessi/UD3 - Radici e logaritmi/L2 - Logaritmi in C.md",
-      "size": 0,
+      "size": 8087,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD1 - Definizioni ed esempi/L1 - Intro alle successioni.md",
-      "size": 0,
+      "size": 5298,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD1 - Definizioni ed esempi/L2 - Limitatezza.md",
-      "size": 0,
+      "size": 3894,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD1 - Definizioni ed esempi/L3 - Monotonia.md",
-      "size": 0,
+      "size": 3994,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD1 - Definizioni ed esempi/L4 - Successione estratta.md",
-      "size": 0,
+      "size": 4323,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M05_Successioni/UD1 - Definizioni ed esempi/L4A - Valori di aderenza e Bolzano-Weierstrass.md",
+      "size": 4699,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M05_Successioni/UD1 - Definizioni ed esempi/L4B - Limite superiore e limite inferiore.md",
+      "size": 3545,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD2 - Limiti e teoremi/L1 - Definizioni di limite.md",
-      "size": 0,
+      "size": 5540,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD2 - Limiti e teoremi/L2 - Verifiche e teoremi.md",
-      "size": 0,
+      "size": 5218,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD2 - Limiti e teoremi/L3 - Successioni di Cauchy.md",
-      "size": 0,
+      "size": 4939,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD3 - Calcolo dei limiti/L1 - Aritmetizzazione.md",
-      "size": 0,
+      "size": 4278,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD3 - Calcolo dei limiti/L2 - Forme di indecisione.md",
-      "size": 0,
+      "size": 4357,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M05_Successioni/UD3 - Calcolo dei limiti/L2A - Stolz-Cesaro e medie di Cesaro.md",
+      "size": 4018,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD3 - Calcolo dei limiti/L3 - Alcuni limiti.md",
-      "size": 0,
+      "size": 5246,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M05_Successioni/UD4 - il numero e ed i limiti notevoli/L0 - Successioni geometriche e disuguaglianza di Bernoulli.md",
+      "size": 3196,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD4 - il numero e ed i limiti notevoli/L1 - Il numero e.md",
-      "size": 0,
+      "size": 5524,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD4 - il numero e ed i limiti notevoli/L2 - Limiti Notevoli.md",
-      "size": 0,
+      "size": 5159,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD5 - Infinitesime e definite per ricorrenza/L1 - Successioni infinitesime.md",
-      "size": 0,
+      "size": 4927,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD5 - Infinitesime e definite per ricorrenza/L2 - Successioni a confronto.md",
-      "size": 0,
+      "size": 4607,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M05_Successioni/UD5 - Infinitesime e definite per ricorrenza/L3 - Successioni definite per ricorrenza.md",
-      "size": 0,
+      "size": 6749,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M05_Successioni/UD5 - Infinitesime e definite per ricorrenza/L3A - Ricorrenze lineari.md",
+      "size": 4477,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD1 - Intro e Criterio di Cauchy/L1 - Intro serie numeriche.md",
-      "size": 0,
+      "size": 7764,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD1 - Intro e Criterio di Cauchy/L2 - Alcune serie facili.md",
-      "size": 0,
+      "size": 6955,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD1 - Intro e Criterio di Cauchy/L3 - Criterio di Cauchy.md",
-      "size": 0,
+      "size": 4740,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD1 - Intro e Criterio di Cauchy/L3A - Condensazione di Cauchy e serie logaritmiche.md",
+      "size": 4653,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD2 - Serie a termini positivi e criteri di convergenza/L1 - Criterio del confronto.md",
-      "size": 0,
+      "size": 6061,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD2 - Serie a termini positivi e criteri di convergenza/L2 - Criterio del rapporto.md",
-      "size": 0,
+      "size": 4782,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD2 - Serie a termini positivi e criteri di convergenza/L3 - Criterio della radice.md",
-      "size": 0,
+      "size": 5601,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD2 - Serie a termini positivi e criteri di convergenza/L3A - Criteri di Raabe-Duhamel e Gauss.md",
+      "size": 4532,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD3 - Serie a termini di segno qualunque/L1 - Serie a segno alterno.md",
-      "size": 0,
+      "size": 4657,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD3 - Serie a termini di segno qualunque/L2 - Convergenza assoluta.md",
-      "size": 0,
+      "size": 6022,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD3 - Serie a termini di segno qualunque/L2A - Dirichlet Abel e sommazione per parti.md",
+      "size": 5041,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD3 - Serie a termini di segno qualunque/L2B - Prodotti e riordinamenti.md",
+      "size": 6758,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M06_Serie Numeriche/UD3 - Serie a termini di segno qualunque/L2C - Serie complesse e doppie.md",
+      "size": 9309,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD1 - Fondamenti delle funzioni/L1 - Intro funzioni - R f R.md",
-      "size": 0,
+      "size": 6857,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M07_Funzioni/UD1 - Fondamenti delle funzioni/L1A - Operazioni composizione e grafico.md",
+      "size": 8061,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M07_Funzioni/UD1 - Fondamenti delle funzioni/L1B - Iniettivita suriettivita e inversa.md",
+      "size": 6596,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD1 - Fondamenti delle funzioni/L2 - Min Max Inf Sup.md",
-      "size": 0,
+      "size": 4968,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M07_Funzioni/UD1 - Fondamenti delle funzioni/L2A - Monotonia e limitatezza.md",
+      "size": 5856,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD1 - Fondamenti delle funzioni/L3 - Simmetrie e periodicità.md",
-      "size": 0,
+      "size": 6286,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M07_Funzioni/UD1 - Fondamenti delle funzioni/L3A - Trasformazioni dei grafici.md",
+      "size": 6041,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD2 - Insieme di definizione/L1 - Funzioni razionali e irrazionali.md",
-      "size": 0,
+      "size": 6775,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD2 - Insieme di definizione/L2 - Funzioni logaritmiche ed esponenziali.md",
-      "size": 0,
+      "size": 5611,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD2 - Insieme di definizione/L3 - Funzioni trigonometriche.md",
-      "size": 0,
+      "size": 4718,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD2 - Insieme di definizione/L4 - Funzioni con modulo.md",
-      "size": 0,
+      "size": 3645,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M07_Funzioni/UD2 - Insieme di definizione/L4A - Funzioni speciali e famiglie.md",
+      "size": 7947,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD3 - Zeri e Segno/L1 - Calcolo degli zeri.md",
-      "size": 0,
+      "size": 4138,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD3 - Zeri e Segno/L2 - Valori approssimati.md",
-      "size": 0,
+      "size": 6001,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M07_Funzioni/UD3 - Zeri e Segno/L3 - Calcolo del segno.md",
-      "size": 0,
+      "size": 6704,
       "ext": ".md"
     },
     {
@@ -635,252 +830,547 @@
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L1 - Introduzione intuitiva al concetto di limite.md",
-      "size": 5822,
+      "size": 5592,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L2 - Limiti per x tendente a infinito.md",
-      "size": 7417,
+      "size": 7544,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L3 - Definizione formale di limite.md",
-      "size": 11886,
+      "size": 15213,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L3A - Topologia della retta - intorni e punti di accumulazione.md",
+      "size": 10773,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L3B - Prime dimostrazioni con la definizione e negazione del limite.md",
+      "size": 10856,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L3C - Limiti laterali, limiti infiniti e retta reale estesa.md",
+      "size": 13721,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L3D - Teoremi generali sui limiti - unicita, segno, confronto.md",
+      "size": 12102,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L3E - Criterio sequenziale di Heine e criterio di Cauchy.md",
+      "size": 11692,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L3F - Algebra dei limiti, composizione e forme indeterminate.md",
+      "size": 16369,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD1 - Fondamenti/L4 - Funzioni continue e limiti delle funzioni elementari.md",
-      "size": 9733,
+      "size": 11071,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD2 - Calcolo dei limiti/L1 - Limiti di funzioni razionali per x tendente a un numero.md",
-      "size": 5232,
+      "size": 6033,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD2 - Calcolo dei limiti/L2 - Limiti di funzioni polinomiali e razionali per x tendente a +- infinito.md",
-      "size": 5261,
+      "size": 5712,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD2 - Calcolo dei limiti/L3 - Limiti all’infinito con esponenziali e logaritmi – scala di confronto asintotico.md",
-      "size": 7701,
+      "size": 11069,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD2 - Calcolo dei limiti/L4 - Limiti di funzioni composte e altri strumenti utili.md",
-      "size": 6900,
+      "size": 8215,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD2 - Calcolo dei limiti/L5 - Asintoti verticali, orizzontali e obliqui.md",
+      "size": 10467,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD2 - Calcolo dei limiti/L6 - Valore assoluto, funzioni a tratti e limiti con parametri.md",
+      "size": 8024,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD3 - Limiti Notevoli/L1 - Limiti notevoli – introduzione e primi esempi.md",
-      "size": 8557,
+      "size": 13414,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD3 - Limiti Notevoli/L2 - Limiti notevoli advanced (magheggi e sostituzioni).md",
-      "size": 5710,
+      "size": 7598,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L1 - Errori comuni nel calcolo dei limiti e strumenti avanzati.md",
-      "size": 4837,
+      "size": 4870,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L2 - Equivalenze asintotiche.md",
-      "size": 3844,
+      "size": 6891,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L3 - Il piccolo-o.md",
-      "size": 4732,
+      "size": 6673,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L4 - Formula di Taylor con resto di Peano.md",
-      "size": 4871,
+      "size": 5198,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L5 - Limiti con Taylor (resto di Peano) — Esempi.md",
-      "size": 5295,
+      "size": 4978,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L6 - Ordine di infinitesimo e parte principale.md",
-      "size": 4830,
+      "size": 5370,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/M08_Limiti/UD4 - Argomenti avanzati/L7 - Esercizi riepilogativi sui limiti.md",
-      "size": 5904,
+      "size": 5236,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L1 - Introduzione alla derivata prima.md",
-      "size": 4404,
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD5 - Continuita e teoremi globali/L1 - Continuita in un punto - definizione e criteri.md",
+      "size": 9099,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L10 - Continuita e derivabilita.md",
-      "size": 5678,
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD5 - Continuita e teoremi globali/L2 - Algebra delle funzioni continue e funzioni elementari.md",
+      "size": 9844,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L11 - Continuita e derivabilita.md",
-      "size": 5923,
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD5 - Continuita e teoremi globali/L3 - Classificazione delle discontinuita ed estensione continua.md",
+      "size": 10336,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L12 - Massimi e minimi con le derivate.md",
-      "size": 4032,
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD5 - Continuita e teoremi globali/L4 - Teorema degli zeri e dei valori intermedi, metodo di bisezione.md",
+      "size": 11786,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L13 - Massimi e minimi – problema di geometria solida (Maturità 2014).md",
-      "size": 4044,
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD5 - Continuita e teoremi globali/L5 - Teorema di Weierstrass e continuita dell'inversa monotona.md",
+      "size": 10104,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L14 - Massimi e minimi – rettangolo di area massima sotto y = fabs(x alla 2 - 1).md",
-      "size": 4431,
+      "path": "anno1/1_Analisi 1/M08_Limiti/UD5 - Continuita e teoremi globali/L6 - Continuita uniforme, Lipschitz e teorema di Heine-Cantor.md",
+      "size": 11963,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L2 - Derivate delle funzioni elementari.md",
-      "size": 5033,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD1 - Definizione e significato/L1 - Introduzione alla derivata prima.md",
+      "size": 7042,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L3 - Derivate di seno, coseno, esponenziale e logaritmo.md",
-      "size": 4185,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD1 - Definizione e significato/L2 - Definizione rigorosa, derivate laterali e notazioni.md",
+      "size": 7363,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L4 - Regole di derivazione.md",
-      "size": 4545,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD1 - Definizione e significato/L3 - Retta tangente, retta normale e interpretazione fisica.md",
+      "size": 6582,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L5 - Derivata del reciproco e del quoziente.md",
-      "size": 4756,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD1 - Definizione e significato/L4 - Derivabilita implica continuita.md",
+      "size": 5939,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L6 - Derivazione delle funzioni composte e chain rule.md",
-      "size": 4656,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD1 - Definizione e significato/L5 - Approssimazione lineare e differenziale.md",
+      "size": 7108,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L7 - Derivare funzioni del tipo f(x) alla g(x).md",
-      "size": 4861,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD2 - Regole di derivazione/L1 - Derivate fondamentali dalla definizione.md",
+      "size": 6793,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L8 - Esercizi svolti sulle derivate.md",
-      "size": 7175,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD2 - Regole di derivazione/L2 - Derivate di seno, coseno, esponenziale e logaritmo.md",
+      "size": 5158,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M09_Derivate/L9 - Punti di non derivabilita.md",
-      "size": 7105,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD2 - Regole di derivazione/L3 - Linearita e regola del prodotto.md",
+      "size": 5600,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L01 -  Introduzione agli integrali definiti.md",
-      "size": 4124,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD2 - Regole di derivazione/L4 - Derivata del reciproco e del quoziente.md",
+      "size": 5423,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L02 - Primitive, integrali indefiniti e prime proprieta.md",
-      "size": 4186,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD2 - Regole di derivazione/L5 - Regola della catena.md",
+      "size": 6834,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L03 - Primitive generalizzate e funzioni composte.md",
-      "size": 4266,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD2 - Regole di derivazione/L6 - Derivata della funzione inversa.md",
+      "size": 6825,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L04 - Integrazione per parti.md",
-      "size": 3761,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD3 - Derivate delle funzioni elementari/L1 - Potenze reali, esponenziali e derivazione logaritmica.md",
+      "size": 7544,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L05 - Integrazione per parti — trucchetto del “per 1” e integrali ciclici.md",
-      "size": 4857,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD3 - Derivate delle funzioni elementari/L2 - Derivate delle funzioni trigonometriche e iperboliche.md",
+      "size": 5569,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L06 - Integrazione per sostituzione.md",
-      "size": 3820,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD3 - Derivate delle funzioni elementari/L3 - Derivate delle inverse trigonometriche e iperboliche.md",
+      "size": 7459,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L07 - Sostituzione, quando usare dy o quando ricavare dx.md",
-      "size": 3989,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD3 - Derivate delle funzioni elementari/L4 - Valore assoluto e derivazione implicita.md",
+      "size": 7805,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L08 - Integrali di funzioni razionali “semplici”.md",
-      "size": 3708,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD3 - Derivate delle funzioni elementari/L5 - Derivate successive e classi Ck.md",
+      "size": 7339,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L09 - Metodo generale per integrare funzioni razionali.md",
-      "size": 4277,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD3 - Derivate delle funzioni elementari/L6 - Esercizi svolti sulle derivate.md",
+      "size": 6315,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L10  - Funzioni razionali con fattori “speciali” al denominatore.md",
-      "size": 4686,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD4 - Non derivabilita e raccordi/L1 - Punti di non derivabilita.md",
+      "size": 10103,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L11 - Integrali – esercizi svolti.md",
-      "size": 4238,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD4 - Non derivabilita e raccordi/L2 - Continuita e derivabilita - esercizi.md",
+      "size": 5492,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L12 -.md",
-      "size": 0,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD4 - Non derivabilita e raccordi/L3 - Raccordi con parametri e casi sottili.md",
+      "size": 6290,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L13 -.md",
-      "size": 0,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD5 - Teoremi fondamentali/L1 - Teorema di Fermat e punti critici.md",
+      "size": 6947,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L14 -.md",
-      "size": 0,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD5 - Teoremi fondamentali/L2 - Teorema di Rolle.md",
+      "size": 6909,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L15 -.md",
-      "size": 0,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD5 - Teoremi fondamentali/L3 - Teorema di Lagrange e limite della derivata.md",
+      "size": 7738,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L16 -.md",
-      "size": 0,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD5 - Teoremi fondamentali/L4 - Conseguenze di Lagrange - monotonia e criterio della derivata prima.md",
+      "size": 8979,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L17 -.md",
-      "size": 0,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD5 - Teoremi fondamentali/L5 - Teorema di Cauchy e teorema di Darboux.md",
+      "size": 8452,
       "ext": ".md"
     },
     {
-      "path": "anno1/1_Analisi 1/M11_Integrali/L18 -.md",
-      "size": 0,
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD5 - Teoremi fondamentali/L6 - Disuguaglianze tramite derivate.md",
+      "size": 7399,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD6 - Ottimizzazione e applicazioni/L1 - Massimi e minimi con le derivate.md",
+      "size": 4474,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD6 - Ottimizzazione e applicazioni/L2 - Problema di geometria solida (Maturita 2014).md",
+      "size": 4163,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD6 - Ottimizzazione e applicazioni/L3 - Rettangolo di area massima sotto y = valore assoluto di x^2-1.md",
+      "size": 4056,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M09_Derivate/UD6 - Ottimizzazione e applicazioni/L4 - Metodo di Newton e derivazione numerica.md",
+      "size": 9078,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD1 - Raccordo con M09 e ripasso/L1 - Mappa dei prerequisiti da M09.md",
+      "size": 4514,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD1 - Raccordo con M09 e ripasso/L2 - Esercizi di ripasso su regole, inversa e monotonia.md",
+      "size": 4574,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD2 - l'Hopital e applicazioni/L1 - I teoremi di l'Hopital.md",
+      "size": 5455,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD2 - l'Hopital e applicazioni/L2 - Confronto fra infiniti.md",
+      "size": 2679,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD2 - l'Hopital e applicazioni/L3 - Calcolo di limiti.md",
+      "size": 2102,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD2 - l'Hopital e applicazioni/L4 - Esercizi su l'Hopital e forme indeterminate.md",
+      "size": 4220,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD3 - Taylor e applicazioni/L1 - La formula di Taylor.md",
+      "size": 3446,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD3 - Taylor e applicazioni/L2 - Il resto di Peano.md",
+      "size": 4407,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD3 - Taylor e applicazioni/L3 - Il resto di Lagrange.md",
+      "size": 3793,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD3 - Taylor e applicazioni/L4 - Maclaurin.md",
+      "size": 3097,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD3 - Taylor e applicazioni/L5 - Applicazioni.md",
+      "size": 3422,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD4 - Concavita e flessi/L1 - Definizione di concavita.md",
+      "size": 4657,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD4 - Concavita e flessi/L2 - Determinazione del verso della concavita.md",
+      "size": 3480,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M10_Derivabilita/UD4 - Concavita e flessi/L3 - Esercizi su concavita e flessi.md",
+      "size": 3332,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/MCS_M11.zip",
+      "size": 145427679,
+      "ext": ".zip"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U01_L01.pdf",
+      "size": 129077,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U01_L02.pdf",
+      "size": 131515,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U01_L03.pdf",
+      "size": 113556,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U02_L01.pdf",
+      "size": 81654,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U02_L02.pdf",
+      "size": 72704,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U02_L03.pdf",
+      "size": 90899,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U02_L04.pdf",
+      "size": 133868,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U03_L01.pdf",
+      "size": 102451,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U03_L02.pdf",
+      "size": 116927,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U03_L03.pdf",
+      "size": 113136,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U04_L01.pdf",
+      "size": 90829,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U04_L02.pdf",
+      "size": 143347,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U04_L03.pdf",
+      "size": 77265,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/pdf/MCS_M11_U04_L04.pdf",
+      "size": 8670723,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L01 -  Introduzione agli integrali definiti.md",
+      "size": 3883,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L02 - Primitive, integrali indefiniti e prime proprieta.md",
+      "size": 3906,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L03 - Primitive generalizzate e funzioni composte.md",
+      "size": 3910,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L04 - Integrazione per parti.md",
+      "size": 3447,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L05 - Integrazione per parti — trucchetto del “per 1” e integrali ciclici.md",
+      "size": 4409,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L06 - Integrazione per sostituzione.md",
+      "size": 3466,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L07 - Sostituzione, quando usare dy o quando ricavare dx.md",
+      "size": 3676,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L08 - Integrali di funzioni razionali “semplici”.md",
+      "size": 3433,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L09 - Metodo generale per integrare funzioni razionali.md",
+      "size": 3933,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L10  - Funzioni razionali con fattori “speciali” al denominatore.md",
+      "size": 4316,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L11 - Integrali – esercizi svolti.md",
+      "size": 3934,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L12 - Esercizi svolti di Analisi 1 sugli integrali.md",
+      "size": 7515,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L13 - Integrali e area.md",
+      "size": 6911,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L14 - Volumi dei solidi di rotazione.md",
+      "size": 6170,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L15 - Integrali impropri introduzione.md",
+      "size": 5907,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L16 - Integrali impropri advanced esempi piu elaborati.md",
+      "size": 6325,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L17 - Integrali impropri convergenza.md",
+      "size": 7708,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/1_Analisi 1/M12_Integrali/L18 - Integrali impropri esercizi Analisi 1.md",
+      "size": 8605,
       "ext": ".md"
     },
     {
       "path": "anno1/1_Analisi 1/schema_lezioni.md",
-      "size": 4803,
+      "size": 10676,
       "ext": ".md"
     },
     {
@@ -960,102 +1450,222 @@
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD1/L1 - Necessità di Rappresentare l'Informazione.md",
-      "size": 6864,
+      "size": 8623,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD1/L2 - Rappresentazione Analogica.md",
-      "size": 8093,
+      "size": 10290,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD1/L3 - Rappresentazione Digitale dell’Informazione.md",
-      "size": 11758,
+      "size": 13637,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD2/L1 - Codifiche binarie di valori numerici.md",
-      "size": 16263,
+      "size": 19521,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD2/L2 - Codifica dei numeri relativi in Complemento a 2.md",
-      "size": 6505,
+      "size": 10006,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD2/L3 - Codifiche binarie di informazioni non numeriche.md",
-      "size": 12164,
+      "size": 15985,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD3/L1 - Postulati dell’algebra booleana.md",
-      "size": 8587,
+      "size": 10165,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD3/L2 - Aritmetica con l’Algebra Booleana.md",
-      "size": 8772,
+      "size": 10096,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD3/L3 - Porte Logiche.md",
-      "size": 11862,
+      "size": 15386,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M1_Fondamenti_Architetturali/UD3/L4 - Bistabili.md",
-      "size": 5630,
+      "size": 10080,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD1/L1 - Struttura della macchina di Von Neumann.md",
-      "size": 8224,
+      "size": 5503,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD1/L2 - Bus & Spazio di Indirizzamento.md",
-      "size": 4527,
+      "size": 3641,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD2/L1 - Istruzioni macchina & Modi di indirizzamento.md",
-      "size": 6670,
+      "size": 4552,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD2/L2 - Struttura e Set di Istruzioni della CPU LC-2.md",
-      "size": 6729,
+      "size": 3710,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD2/L2.1 - Instruction Set Architecture (ISA) della CPU LC-2.md",
-      "size": 13035,
+      "size": 10024,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD2/L3 - Esempi di Programmi in Linguaggio Macchina LC-2.md",
-      "size": 5499,
+      "size": 4643,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD3/L1 - Linguaggio Assembly della LC-2.md",
-      "size": 5884,
+      "size": 3984,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD3/L2 - Pseudo-istruzioni, Stringhe, Aree di Memoria e HALT.md",
-      "size": 5081,
+      "size": 6504,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD4/L1 - Input, ASCII e Programmi Completi con I-O.md",
-      "size": 4598,
+      "size": 3609,
       "ext": ".md"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/M2_Linguaggio_Macchina/UD4/L2 -.md",
-      "size": 6246,
+      "size": 6349,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD1/L1 - Stadi di Uscita per Collegamento al Bus.md",
+      "size": 5972,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD2/L1 - Chip di Memoria.md",
+      "size": 6694,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD2/L2 - Banchi di Memoria.md",
+      "size": 6216,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD3/L1 - Problematiche di Input-Output.md",
+      "size": 5351,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD3/L2 - Controllo di Programma.md",
+      "size": 5358,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD4/L1 - Principio di Funzionamento dell'Interrupt.md",
+      "size": 4724,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD4/L2 - Interrupt Cablato.md",
+      "size": 4180,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD4/L3 - Interrupt Vettorizzato.md",
+      "size": 4849,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD5/L1 - Input-Output a DMA.md",
+      "size": 5280,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M3_Architettura_del_Calcolatore/UD5/L2 - Comportamento Hardware e Software durante I-O in DMA.md",
+      "size": 5444,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M4_Struttura_della_CPU/UD1/L1 - Data Path di una semplicissima CPU.md",
+      "size": 9224,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M4_Struttura_della_CPU/UD1/L2 - Control Path di una semplicissima CPU.md",
+      "size": 7637,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M4_Struttura_della_CPU/UD2/L1 - Control Unit cablata.md",
+      "size": 6940,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M4_Struttura_della_CPU/UD2/L2 - Control Unit microprogrammata.md",
+      "size": 7926,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M4_Struttura_della_CPU/UD3/L1 - Compiti e organizzazione dell ALU.md",
+      "size": 6306,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M4_Struttura_della_CPU/UD3/L2 - Circuiti sommatori.md",
+      "size": 7257,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M4_Struttura_della_CPU/UD3/L3 - Circuiti moltiplicatori.md",
+      "size": 6900,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M5_Principali_Linee_di_Evoluzione_Architetturale/UD1/L1 - Principio di Funzionamento della Memoria Cache.md",
+      "size": 8663,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M5_Principali_Linee_di_Evoluzione_Architetturale/UD1/L2 - Memoria Cache e Politica Tag Associative.md",
+      "size": 6389,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M5_Principali_Linee_di_Evoluzione_Architetturale/UD1/L3 - Politiche Fully Associative e Set Associative.md",
+      "size": 6844,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M5_Principali_Linee_di_Evoluzione_Architetturale/UD1/L4 - Accesso in Scrittura alla Memoria Cache.md",
+      "size": 5945,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M5_Principali_Linee_di_Evoluzione_Architetturale/UD1/L5 - Gerarchia di Memoria.md",
+      "size": 6654,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M5_Principali_Linee_di_Evoluzione_Architetturale/UD2/L1 - Motivazioni del Ricorso alle Strutture Pipeline.md",
+      "size": 6628,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/M5_Principali_Linee_di_Evoluzione_Architetturale/UD2/L2 - Problemi di Esecuzione con CPU Pipeline.md",
+      "size": 8806,
       "ext": ".md"
     },
     {
@@ -1179,8 +1789,168 @@
       "ext": ".md"
     },
     {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD1_I_vettori/L1 - Segmenti orientati e vettori.md",
+      "size": 7089,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD1_I_vettori/L2 - Componenti di un vettore.md",
+      "size": 6202,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD1_I_vettori/L3 - Prodotto scalare.md",
+      "size": 5920,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD1_I_vettori/L4 - Norma e prodotto vettoriale.md",
+      "size": 7570,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD2_Sistemi_lineari/L1 - Sistemi lineari.md",
+      "size": 7449,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD2_Sistemi_lineari/L2 - Matrice inversa.md",
+      "size": 5647,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD3_La_geometria_nel_piano/L1 - Le rette in R2.md",
+      "size": 4842,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD3_La_geometria_nel_piano/L2 - Mutue posizioni di rette in R2.md",
+      "size": 6237,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD3_La_geometria_nel_piano/L3 - Esercitazione.md",
+      "size": 4897,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD4_La_geometria_lineare_dello_spazio/L1 - Le rette in R3.md",
+      "size": 5557,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD4_La_geometria_lineare_dello_spazio/L2 - I piani in R3.md",
+      "size": 5002,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD4_La_geometria_lineare_dello_spazio/L3 - Piani e rette in R3.md",
+      "size": 6128,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD4_La_geometria_lineare_dello_spazio/L4 - Distanze in R3.md",
+      "size": 6389,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M3_Vettori_e_geometria/UD4_La_geometria_lineare_dello_spazio/L5 - Esercitazione.md",
+      "size": 5783,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD1_Spazi_vettoriali/L1 - Spazi vettoriali.md",
+      "size": 4648,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD1_Spazi_vettoriali/L2 - Sistemi generatori.md",
+      "size": 3497,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD1_Spazi_vettoriali/L3 - Basi.md",
+      "size": 3880,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD1_Spazi_vettoriali/L4 - Formula di Grassmann.md",
+      "size": 4163,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L1 - Omomorfismi.md",
+      "size": 2508,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L2 - Nucleo e immagine.md",
+      "size": 3558,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L3 - Omomorfismi particolari.md",
+      "size": 3143,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L4 - Omomorfismi e matrici.md",
+      "size": 2639,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L5 - Proprietà degli omomorfismi.md",
+      "size": 2269,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L6 - Esercizi.md",
+      "size": 3032,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L7 - Determinanti.md",
+      "size": 3543,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L8 - Rango di una matrice.md",
+      "size": 2716,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD2_Omomorfismi_di_spazi_vettoriali/L9 - Sistemi e matrici.md",
+      "size": 2967,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD3_Autovalori_e_autovettori/L1 - Autovalori e autovettori.md",
+      "size": 3078,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD3_Autovalori_e_autovettori/L2 - Ricerca di autovalori e autovettori.md",
+      "size": 3063,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD3_Autovalori_e_autovettori/L3 - Matrici diagonalizzabili.md",
+      "size": 2946,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD3_Autovalori_e_autovettori/L4 - Esercizi.md",
+      "size": 2842,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/2_Matematica_Discreta/M4_Spazi_vettoriali_e_omomorfismi/UD4_Esercitazioni/L1 - Esercitazione didattica.md",
+      "size": 5615,
+      "ext": ".md"
+    },
+    {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/1_Struttura_programma_C/main.c",
-      "size": 4789,
+      "size": 4860,
       "ext": ".c"
     },
     {
@@ -1190,272 +1960,317 @@
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/10_Mad_Libs_Game/main.c",
-      "size": 1374,
+      "size": 1330,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/2_variabili/main.c",
-      "size": 7620,
+      "size": 9066,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/3_printf/main.c",
-      "size": 3225,
+      "size": 3237,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/4_specificatori_formato/main.c",
-      "size": 6754,
+      "size": 6918,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/5_aritmetica/main.c",
-      "size": 3038,
+      "size": 3679,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/5.1_conversioni_overflow/main.c",
+      "size": 2674,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/5.2_operatori_bitwise/main.c",
+      "size": 2167,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/6_variabili_non_inizializzate/main.c",
-      "size": 1387,
+      "size": 1438,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/7_pulire_variabili/main.c",
-      "size": 555,
+      "size": 559,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/8_user_input_scanf/main.c",
-      "size": 4263,
+      "size": 4475,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M01_Fondamenti/9_ShoppingCart/main.c",
-      "size": 1637,
+      "size": 1667,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M02_Matematica/1_funzioni_matematiche/main.c",
-      "size": 8659,
+      "size": 8799,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M02_Matematica/2_geometria_con_mat.h/main.c",
-      "size": 2371,
+      "size": 2267,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M02_Matematica/3_simple_interest/main.c",
-      "size": 2056,
+      "size": 2061,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M02_Matematica/4_compound_interest/main.c",
-      "size": 2780,
+      "size": 2785,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M02_Matematica/5_compound_interest_periodic/main.c",
-      "size": 3973,
+      "size": 3908,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M02_Matematica/6_random_nums/main.c",
-      "size": 3700,
+      "size": 4118,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M03_Condizioni_&_Logica/1_if_statements/main.c",
-      "size": 6546,
+      "size": 6655,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M03_Condizioni_&_Logica/1.1_condizioni_con_stringhe/main.c",
-      "size": 2530,
+      "size": 2668,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M03_Condizioni_&_Logica/2_ConvertiPeso/main.c",
-      "size": 1817,
+      "size": 1822,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M03_Condizioni_&_Logica/3_ConvertiTemperatura/main.c",
-      "size": 1175,
+      "size": 1180,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M03_Condizioni_&_Logica/4_switches/main.c",
-      "size": 4138,
+      "size": 4194,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M03_Condizioni_&_Logica/5_nested_ifs/main.c",
-      "size": 1835,
+      "size": 1843,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M03_Condizioni_&_Logica/6_Calcolatore/main.c",
-      "size": 1938,
+      "size": 2207,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M03_Condizioni_&_Logica/7_operatori_logici/main.c",
-      "size": 2699,
+      "size": 2716,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M04_Funzioni/1_intro_funzioni/main.c",
-      "size": 6889,
+      "size": 7015,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M04_Funzioni/2_return/main.c",
-      "size": 3376,
+      "size": 3299,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M04_Funzioni/3_scope_variabili/main.c",
-      "size": 2914,
+      "size": 2965,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M04_Funzioni/4_passaggio_per_valore/main.c",
+      "size": 1251,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M04_Funzioni/5_ricorsione/main.c",
+      "size": 1057,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M05_Cicli/1_while_loop/main.c",
-      "size": 2543,
+      "size": 2787,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M05_Cicli/2_for_loop/main.c",
-      "size": 2174,
+      "size": 2194,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M05_Cicli/3_break_e_continue/main.c",
-      "size": 1402,
+      "size": 1407,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M05_Cicli/4_nested_loops/main.c",
-      "size": 3740,
+      "size": 3723,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M05_Cicli/5_NumberGuessGame/main.c",
-      "size": 1627,
+      "size": 1723,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M05_Cicli/6_CartaForbiceSasso/main.c",
-      "size": 2543,
+      "size": 2588,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M05_Cicli/7_Bank_Program/main.c",
-      "size": 4117,
+      "size": 4267,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M06_Arrays/1_intro_array/main.c",
-      "size": 1911,
+      "size": 2082,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M06_Arrays/2_array_char_vs_stringhe/main.c",
-      "size": 3012,
+      "size": 3555,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M06_Arrays/3_array_e_user_input/main.c",
-      "size": 3110,
+      "size": 3358,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M06_Arrays/4_array_bidimensionali/main.c",
-      "size": 4738,
+      "size": 4935,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M06_Arrays/5_array_di_stringhe/main.c",
-      "size": 1345,
+      "size": 1357,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M06_Arrays/6_user_input_array_string/main.c",
-      "size": 1085,
+      "size": 1595,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M06_Arrays/7_QuizGame/main.c",
-      "size": 2827,
+      "size": 2817,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M06_Arrays/8_array_come_parametri/main.c",
+      "size": 1697,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/1_ternary_operator/main.c",
-      "size": 2277,
+      "size": 1345,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/2_typedef/main.c",
-      "size": 2438,
+      "size": 1547,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/3_enums/main.c",
-      "size": 3080,
-      "ext": ".c"
-    },
-    {
-      "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/3_enums/tempCodeRunnerFile.c",
-      "size": 20,
+      "size": 1661,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/4_combinare_typedef+enum/main.c",
-      "size": 3418,
+      "size": 1205,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/5_qualificatore_const/main.c",
+      "size": 1147,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/6_durata_e_visibilita/main.c",
+      "size": 1080,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/7_preprocessore_e_macro/config.h",
+      "size": 208,
+      "ext": ".h"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M07_C_avanzato/7_preprocessore_e_macro/main.c",
+      "size": 899,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M08_Strutture/1_structs_in_C/main.c",
-      "size": 5456,
+      "size": 2163,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M08_Strutture/2_fields_filling/main.c",
-      "size": 1889,
+      "size": 1097,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M08_Strutture/3_passare_struct_a_funzioni/main.c",
-      "size": 2118,
+      "size": 1136,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M08_Strutture/4_array_di_struct/main.c",
-      "size": 2078,
+      "size": 1099,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M08_Strutture/5_union_e_campi_designati/main.c",
+      "size": 1082,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M09_Puntatori/1_intro_pointers/main.c",
-      "size": 2190,
+      "size": 850,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M09_Puntatori/2_usare_puntatori/main.c",
-      "size": 1928,
+      "size": 784,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M09_Puntatori/3_puntatori_e_array/main.c",
-      "size": 3703,
+      "size": 1328,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M09_Puntatori/4_aritmetica_puntatori/main.c",
-      "size": 3901,
+      "size": 1282,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M09_Puntatori/5_puntatori_multipli/main.c",
-      "size": 4132,
+      "size": 1309,
       "ext": ".c"
     },
     {
@@ -1465,7 +2280,7 @@
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M10_File_Handling/1_intro_file/main.c",
-      "size": 3253,
+      "size": 1252,
       "ext": ".c"
     },
     {
@@ -1475,7 +2290,7 @@
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M10_File_Handling/2_scrivere_file/main.c",
-      "size": 1800,
+      "size": 845,
       "ext": ".c"
     },
     {
@@ -1485,47 +2300,57 @@
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M10_File_Handling/3_leggere_file/main.c",
-      "size": 634,
+      "size": 686,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M10_File_Handling/4_file_binari_e_posizionamento/main.c",
+      "size": 1942,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M11_Allocazione_Dinamica/1_malloc_in_C/main.c",
-      "size": 1844,
+      "size": 1431,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M11_Allocazione_Dinamica/2_calloc_in_C/main.c",
-      "size": 2841,
+      "size": 2123,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M11_Allocazione_Dinamica/3_realloc_in_C/main.c",
-      "size": 3046,
+      "size": 2315,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M11_Allocazione_Dinamica/4_Digital_Clock_in_C/main.c",
-      "size": 2171,
+      "size": 1013,
+      "ext": ".c"
+    },
+    {
+      "path": "anno1/3_Programmazione/c/teoria-c/M11_Allocazione_Dinamica/5_ownership_e_cleanup/main.c",
+      "size": 1300,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M12_IMPORTANTE/1_Puntatori_a_funzione/main.c",
-      "size": 3446,
+      "size": 2299,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/M12_IMPORTANTE/2_Liste_dinamiche/main.c",
-      "size": 4632,
+      "size": 3044,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/teoria-c/README.md",
-      "size": 2956,
+      "size": 3521,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/README.md",
-      "size": 6028,
+      "size": 2039,
       "ext": ".md"
     },
     {
@@ -1545,207 +2370,207 @@
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/1-stampaConfig/README.md",
-      "size": 1511,
+      "size": 688,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/1-stampaConfig/stampaConfig.c",
-      "size": 1337,
+      "size": 1278,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/2-verificaConfig/README.md",
-      "size": 4993,
+      "size": 702,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/2-verificaConfig/verificaConfig.c",
-      "size": 598,
+      "size": 553,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/3-euristica/euristica.c",
-      "size": 614,
+      "size": 555,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/3-euristica/README.md",
-      "size": 5277,
+      "size": 741,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/4-caricaConfig/caricaConfig.c",
-      "size": 519,
+      "size": 1140,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/4-caricaConfig/config.txt",
-      "size": 15,
+      "size": 16,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/4-caricaConfig/README.md",
-      "size": 3962,
+      "size": 622,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/5-cerca/cerca.c",
-      "size": 2398,
+      "size": 1056,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/5-cerca/README.md",
-      "size": 4641,
+      "size": 732,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/6-main/mainV1.c",
-      "size": 9632,
+      "size": 7087,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/0-eightQueenProblemHARD/src/6-main/README.md",
-      "size": 3657,
+      "size": 1203,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/anagrammaSens/mainV1.c",
-      "size": 3513,
+      "size": 2072,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/anagrammaSens/README.txt",
-      "size": 1143,
+      "size": 691,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/anagrammaUnsens/mainV1.c",
-      "size": 1851,
+      "size": 2494,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/anagrammaUnsens/README.txt",
-      "size": 889,
+      "size": 432,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/da-Stringa-a-ListeAlfa-NonAlfa/mainV1.c",
-      "size": 8487,
+      "size": 3012,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/da-Stringa-a-ListeAlfa-NonAlfa/mainV2.c",
-      "size": 3726,
+      "size": 2323,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/da-Stringa-a-ListeAlfa-NonAlfa/README.txt",
-      "size": 1062,
+      "size": 742,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/subAnagrammaSens/mainV1.c",
-      "size": 2052,
+      "size": 1808,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/subAnagrammaSens/README.txt",
-      "size": 881,
+      "size": 445,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/subAnagrammaUnsens/mainV1.c",
-      "size": 3198,
+      "size": 1737,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/subAnagrammaUnsens/mainV2.c",
-      "size": 2529,
+      "size": 1982,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/1-esercizi-stringhe/subAnagrammaUnsens/README.txt",
-      "size": 1189,
+      "size": 476,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceCaratteri/mainV1.c",
-      "size": 2311,
+      "size": 2468,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceCaratteri/mainV2.c",
-      "size": 2219,
+      "size": 1537,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceCaratteri/README.txt",
-      "size": 2627,
+      "size": 765,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceDiags/mainV1.c",
-      "size": 2635,
+      "size": 1151,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceDiags/mainV2.c",
-      "size": 2725,
+      "size": 1104,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceDiags/README.txt",
-      "size": 1108,
+      "size": 603,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceLetteraPrecedente/mainV1.c",
-      "size": 3677,
+      "size": 4104,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceLetteraPrecedente/README.txt",
-      "size": 1326,
+      "size": 659,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceMax/mainV1.c",
-      "size": 8268,
+      "size": 2668,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceMax/mainV2.c",
-      "size": 2984,
+      "size": 1243,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceMax/README.txt",
-      "size": 1765,
+      "size": 674,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceMedia/mainV1.c",
-      "size": 10843,
+      "size": 2102,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceMedia/mainV2.c",
-      "size": 2053,
+      "size": 1549,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/2-esercizi-matrici/matriceMedia/README.txt",
-      "size": 1151,
+      "size": 807,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/3-esercizi-file/analizzaFile/mainV1.c",
-      "size": 5484,
+      "size": 3491,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/3-esercizi-file/analizzaFile/README.txt",
-      "size": 776,
+      "size": 957,
       "ext": ".txt"
     },
     {
@@ -1760,7 +2585,7 @@
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/3-esercizi-file/ordinaFile/mainV1.c",
-      "size": 3792,
+      "size": 3076,
       "ext": ".c"
     },
     {
@@ -1785,12 +2610,12 @@
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/3-esercizi-file/unisciFile/codici-e-txt/mainV1.c",
-      "size": 1033,
+      "size": 905,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/3-esercizi-file/unisciFile/codici-e-txt/source.c",
-      "size": 1976,
+      "size": 2175,
       "ext": ".c"
     },
     {
@@ -1800,7 +2625,7 @@
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/4-esercizi-liste/listaCrescentiUniti/mainV1.c",
-      "size": 6722,
+      "size": 6783,
       "ext": ".c"
     },
     {
@@ -1810,32 +2635,32 @@
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/4-esercizi-liste/listaDivisori/mainV1.c",
-      "size": 2492,
+      "size": 2982,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/4-esercizi-liste/listaDivisori/mainV2.c",
-      "size": 1316,
+      "size": 1706,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/4-esercizi-liste/listaDivisori/README.txt",
-      "size": 621,
+      "size": 715,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/5-esercizi-generici/deviazioneStandard/lezione.md",
-      "size": 5651,
+      "size": 5911,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/5-esercizi-generici/deviazioneStandard/mainV1.c",
-      "size": 1362,
+      "size": 1868,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/5-esercizi-generici/frazioniMinoriDi/mainV1.c",
-      "size": 3972,
+      "size": 2549,
       "ext": ".c"
     },
     {
@@ -1860,172 +2685,202 @@
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/5-esercizi-generici/listaCrescentiUnitiDaFile/unisciCrescentiERitornaHeadLista.c",
-      "size": 5027,
+      "size": 4089,
       "ext": ".c"
     },
     {
       "path": "anno1/3_Programmazione/c/tracce-c/README.md",
-      "size": 2370,
+      "size": 2144,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M01_Fondamenti/L02_Output/Output.java",
-      "size": 2998,
+      "size": 3149,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M01_Fondamenti/L03_Variabili/Variabili.java",
-      "size": 2826,
+      "size": 2892,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M01_Fondamenti/L04_Stringhe/Stringhe.java",
-      "size": 966,
+      "size": 987,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M01_Fondamenti/L05_UserInput/UserInput.java",
-      "size": 2895,
+      "size": 3154,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M01_Fondamenti/L06_MiniVerifica/MiniVerifica.java",
-      "size": 1489,
+      "size": 1510,
+      "ext": ".java"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/M01_Fondamenti/L07_ConversioniOverflow/ConversioniOverflow.java",
+      "size": 2549,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M01_Fondamenti/L1_Intro/Intro.java",
-      "size": 2558,
+      "size": 2675,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M01_Fondamenti/L1_Intro/README.md",
-      "size": 3957,
+      "size": 4329,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M02_Matematica/L01_Aritmetica/Aritmetica.java",
-      "size": 5026,
+      "size": 5360,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M02_Matematica/L02_LaClasseMath/LaClasseMath.java",
-      "size": 4477,
+      "size": 4715,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M02_Matematica/L03_NumeriRandomici/numeriRandomici.java",
-      "size": 5042,
+      "size": 5201,
+      "ext": ".java"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/M02_Matematica/L04_OperatoriBitwise/OperatoriBitwise.java",
+      "size": 1720,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M03_Condizioni_e_Logica/L01_If/If.java",
-      "size": 3266,
+      "size": 3316,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M03_Condizioni_e_Logica/L02_NestedIfs/NestedIfs.java",
-      "size": 2540,
+      "size": 2798,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M03_Condizioni_e_Logica/L03_TernaryOperator/Ternary.java",
-      "size": 1387,
+      "size": 1366,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M03_Condizioni_e_Logica/L04_EnhancedSwitches/EnhancedSwitches.java",
-      "size": 1744,
+      "size": 1834,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M03_Condizioni_e_Logica/L05_OperatoriLogici/OperatoriLogici.java",
-      "size": 3604,
+      "size": 3546,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M04_Stringhe/L01_MetodiStringhe/MetodiStringhe.java",
-      "size": 4114,
+      "size": 4679,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M04_Stringhe/L02_Substringhe/Substringhe.java",
-      "size": 3059,
+      "size": 3698,
+      "ext": ".java"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/M04_Stringhe/L03_ImmutabilitaStringBuilder/ImmutabilitaStringBuilder.java",
+      "size": 1466,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M05_Cicli/L01_While/While.java",
-      "size": 2701,
+      "size": 2674,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M05_Cicli/L02_DoWhile/DoWhile.java",
-      "size": 1436,
+      "size": 1456,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M05_Cicli/L03_For/For.java",
-      "size": 3152,
+      "size": 3166,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M05_Cicli/L04_BreakContinue/BreakContinue.java",
-      "size": 1171,
+      "size": 1191,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M05_Cicli/L05_NestedLoops/NestedLoops.java",
-      "size": 2186,
+      "size": 2206,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M06_Metodi/L01_Metodi/Metodi.java",
-      "size": 3672,
+      "size": 3713,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M06_Metodi/L02_Overloading/Overloading.java",
-      "size": 1812,
+      "size": 1915,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M06_Metodi/L03_Varargs/Varargs.java",
-      "size": 2155,
+      "size": 2401,
+      "ext": ".java"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/M06_Metodi/L04_PassaggioPerValore/PassaggioPerValore.java",
+      "size": 1319,
+      "ext": ".java"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/M06_Metodi/L05_Ricorsione/Ricorsione.java",
+      "size": 1075,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M07_ScopeVariabili/L01_ScopeVariabili/ScopeVariabili.java",
-      "size": 2509,
+      "size": 2844,
+      "ext": ".java"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/M07_ScopeVariabili/L02_FinalEDurata/FinalEDurata.java",
+      "size": 2469,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M08_Arrays/L01_Arrays/Arrays_in_Java.java",
-      "size": 5196,
+      "size": 5395,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M08_Arrays/L02_MetodiArray/MetodiArray.java",
-      "size": 1891,
+      "size": 2427,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M08_Arrays/L03_UserInputNegliArray/UserInputNegliArray.java",
-      "size": 2032,
+      "size": 2233,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M08_Arrays/L04_RicercaNegliArray/RicercaNegliArray.java",
-      "size": 3891,
+      "size": 4294,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M08_Arrays/L05_Array2d/Matrici2d.java",
-      "size": 3348,
+      "size": 3843,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L01_IntroOOP/IntroOOP.java",
-      "size": 4969,
+      "size": 4970,
       "ext": ".java"
     },
     {
@@ -2040,12 +2895,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L02_Costruttori/Costruttori.java",
-      "size": 1424,
+      "size": 1444,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L03_CostruttoriOverloaded/CostruttoriOverloaded.java",
-      "size": 967,
+      "size": 988,
       "ext": ".java"
     },
     {
@@ -2055,7 +2910,7 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L04_ArrayDiOggetti/ArrayDiOggetti.java",
-      "size": 1488,
+      "size": 1508,
       "ext": ".java"
     },
     {
@@ -2065,12 +2920,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L05_Static/Amico.java",
-      "size": 613,
+      "size": 569,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L05_Static/Static.java",
-      "size": 1940,
+      "size": 2026,
       "ext": ".java"
     },
     {
@@ -2090,12 +2945,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L06_Inheritance/Inheritance.java",
-      "size": 1486,
+      "size": 1565,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L06_Inheritance/Pianta.java",
-      "size": 621,
+      "size": 602,
       "ext": ".java"
     },
     {
@@ -2115,12 +2970,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L07_Super/Lezione_7_Super.md",
-      "size": 5439,
+      "size": 5914,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L07_Super/Super.java",
-      "size": 1252,
+      "size": 1272,
       "ext": ".java"
     },
     {
@@ -2135,12 +2990,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L08_MethodOverriding/Harrier.java",
-      "size": 2477,
+      "size": 2487,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L08_MethodOverriding/MethodOverriding.java",
-      "size": 3125,
+      "size": 3129,
       "ext": ".java"
     },
     {
@@ -2155,12 +3010,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L09_toStringOverride/toStringOverride.java",
-      "size": 2057,
+      "size": 2064,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L10_Abstract/Abstract.java",
-      "size": 543,
+      "size": 550,
       "ext": ".java"
     },
     {
@@ -2170,7 +3025,7 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L10_Abstract/Figura.java",
-      "size": 1185,
+      "size": 1224,
       "ext": ".java"
     },
     {
@@ -2210,7 +3065,7 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L11_Interfacce/Preda.java",
-      "size": 1512,
+      "size": 1576,
       "ext": ".java"
     },
     {
@@ -2220,7 +3075,7 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L11_Interfacce/SimulatoreEcosistemaMontano.java",
-      "size": 4543,
+      "size": 4531,
       "ext": ".java"
     },
     {
@@ -2245,12 +3100,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L12_Polimorfismo/TestPolimorfismoVeicoli.java",
-      "size": 4093,
+      "size": 4100,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L12_Polimorfismo/Veicolo.java",
-      "size": 3164,
+      "size": 3237,
       "ext": ".java"
     },
     {
@@ -2275,12 +3130,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L13_PolimorfismoDinamico/TestPolimorfismoDinamico.java",
-      "size": 1682,
+      "size": 1689,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L14_Incapsulamento/Automobile.java",
-      "size": 2945,
+      "size": 3125,
       "ext": ".java"
     },
     {
@@ -2290,27 +3145,27 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L15_Aggregazione/CorsoUniversitario.java",
-      "size": 2577,
+      "size": 2608,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L15_Aggregazione/MainAggregazione.java",
-      "size": 3627,
+      "size": 3634,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L15_Aggregazione/Studente.java",
-      "size": 1118,
+      "size": 1130,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L15_Aggregazione/Universita.java",
-      "size": 3146,
+      "size": 3164,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L16_Composizione/Auto.java",
-      "size": 3156,
+      "size": 3179,
       "ext": ".java"
     },
     {
@@ -2320,12 +3175,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L16_Composizione/Motore.java",
-      "size": 2192,
+      "size": 2198,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L17_WrapperClasses/MainWrapper.java",
-      "size": 3591,
+      "size": 3598,
       "ext": ".java"
     },
     {
@@ -2335,17 +3190,17 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L18_Collezioni_Lista_ArrayList/MainArrayList.java",
-      "size": 5847,
+      "size": 5908,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L18_Collezioni_Lista_ArrayList/MainIntroduzioneCollezioni.java",
-      "size": 4589,
+      "size": 4583,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L18_Collezioni_Lista_ArrayList/Studente.java",
-      "size": 831,
+      "size": 1313,
       "ext": ".java"
     },
     {
@@ -2355,97 +3210,97 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L19_Eccezioni/MainCalcolatriceConEccezioni.java",
-      "size": 860,
+      "size": 867,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L19_Eccezioni/MainEccezioniBase.java",
-      "size": 1522,
+      "size": 1529,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L19_Eccezioni/MainEccezioniChecked.java",
-      "size": 864,
+      "size": 918,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L19_Eccezioni/MainTryCatchFinally.java",
-      "size": 639,
+      "size": 801,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M09_OOP/L19_Eccezioni/README.md",
-      "size": 6692,
+      "size": 7158,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L01_ScritturaFile/MainBufferedWriter.java",
-      "size": 1207,
+      "size": 1233,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L01_ScritturaFile/MainFileOutputStream.java",
-      "size": 998,
+      "size": 969,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L01_ScritturaFile/MainFileWriter.java",
-      "size": 1338,
+      "size": 1413,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L01_ScritturaFile/MainPrintWriter.java",
-      "size": 1214,
+      "size": 1464,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L01_ScritturaFile/README.md",
-      "size": 6476,
+      "size": 6970,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L02_LetturaFile/MainBufferedReader.java",
-      "size": 1199,
+      "size": 1274,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L02_LetturaFile/MainFileInputStream.java",
-      "size": 993,
+      "size": 964,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L02_LetturaFile/MainRandomAccessFile.java",
-      "size": 1404,
+      "size": 1279,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L02_LetturaFile/MainScannerReader.java",
-      "size": 1100,
+      "size": 1162,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M10_FileHandling/L02_LetturaFile/README.md",
-      "size": 6148,
+      "size": 6325,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/ConfrontareDate.java",
-      "size": 572,
+      "size": 592,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/FormattazioneDate.java",
-      "size": 1081,
+      "size": 1175,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/FORMATTAZIONI.md",
-      "size": 4218,
+      "size": 4412,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/InstantTimestampUTC.java",
-      "size": 745,
+      "size": 871,
       "ext": ".java"
     },
     {
@@ -2455,27 +3310,27 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/LocalDateSoloData.java",
-      "size": 1668,
+      "size": 1675,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/LocalDateTimeTutto.java",
-      "size": 1114,
+      "size": 1107,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/LocalTimeSoloOrario.java",
-      "size": 794,
+      "size": 800,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/README.md",
-      "size": 5895,
+      "size": 6064,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L01_DateEOrari/ZonedDateTimeConFuso.java",
-      "size": 908,
+      "size": 905,
       "ext": ".java"
     },
     {
@@ -2490,32 +3345,32 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L02_ClassiAnonime/ClassiAnonime.java",
-      "size": 1989,
+      "size": 2122,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L02_ClassiAnonime/README.md",
-      "size": 7198,
+      "size": 7464,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L03_TimerTasks/MainTimerTasks.java",
-      "size": 1507,
+      "size": 1603,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L03_TimerTasks/README.md",
-      "size": 9776,
+      "size": 10410,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L04_Generics/Box.java",
-      "size": 504,
+      "size": 519,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L04_Generics/IntroGenerics.java",
-      "size": 2739,
+      "size": 2759,
       "ext": ".java"
     },
     {
@@ -2525,22 +3380,22 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L04_Generics/README.md",
-      "size": 13411,
+      "size": 13753,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L05_HashMaps/HashMaps.java",
-      "size": 2304,
+      "size": 2459,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L05_HashMaps/README.md",
-      "size": 4336,
+      "size": 4698,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L06_Enums/Enumerazioni.java",
-      "size": 2282,
+      "size": 2327,
       "ext": ".java"
     },
     {
@@ -2550,37 +3405,52 @@
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L06_Enums/README.md",
-      "size": 4732,
+      "size": 4814,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L07_Threading/MioRunnable.java",
-      "size": 581,
+      "size": 588,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L07_Threading/README.md",
-      "size": 4919,
+      "size": 5225,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L07_Threading/Threading.java",
-      "size": 1696,
+      "size": 1628,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L08_MultiThreading/MioRunnable.java",
-      "size": 561,
+      "size": 593,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L08_MultiThreading/MultiThreading.java",
-      "size": 1925,
+      "size": 1999,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L08_MultiThreading/README.md",
-      "size": 5487,
+      "size": 5710,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L09_LambdaExpressions/LambdaExpressions.java",
+      "size": 2286,
+      "ext": ".java"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/M11_JavaAvanzato/L09_LambdaExpressions/README.md",
+      "size": 1662,
+      "ext": ".md"
+    },
+    {
+      "path": "anno1/3_Programmazione/java/teoria/README.md",
+      "size": 1689,
       "ext": ".md"
     },
     {
@@ -16440,18 +17310,353 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/Progetti/L1 - Progetto Integrativo - Regole e Opzioni.md",
-      "size": 6599,
+      "size": 7895,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/Progetti/L2 - Progetto Router IPv4 in C - Design.md",
-      "size": 9940,
+      "size": 10860,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/Progetti/progetti.txt",
       "size": 3084,
       "ext": ".txt"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/.gitignore",
+      "size": 18,
+      "ext": ""
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/arp.o",
+      "size": 8792,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/config.o",
+      "size": 4408,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/crouter",
+      "size": 45248,
+      "ext": ""
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/forward.o",
+      "size": 3736,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/icmp.o",
+      "size": 4584,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/log.o",
+      "size": 3816,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/main.o",
+      "size": 7784,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/netio.o",
+      "size": 5304,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/parse.o",
+      "size": 2072,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/rib.o",
+      "size": 7752,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/ripd.o",
+      "size": 11248,
+      "ext": ".o"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/frr/r2/ripd.conf",
+      "size": 114,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/frr/r2/zebra.conf",
+      "size": 37,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/frr/r3/ripd.conf",
+      "size": 128,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/frr/r3/zebra.conf",
+      "size": 37,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/frr/r4/ripd.conf",
+      "size": 114,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/frr/r4/zebra.conf",
+      "size": 37,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/r1_static.conf",
+      "size": 300,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/r1.conf",
+      "size": 195,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/imunes/deploy_crouter.sh",
+      "size": 1316,
+      "ext": ".sh"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/imunes/r1.conf",
+      "size": 268,
+      "ext": ".conf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/imunes/README.md",
+      "size": 2108,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/imunes/topo.imn",
+      "size": 2042,
+      "ext": ".imn"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/Makefile",
+      "size": 1950,
+      "ext": ""
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/README.md",
+      "size": 2354,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/build_pdf.sh",
+      "size": 5315,
+      "ext": ".sh"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/00_topologia.png",
+      "size": 50583,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/01_convergenza.png",
+      "size": 36223,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/02_dataplane.png",
+      "size": 62578,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/03_interop.png",
+      "size": 123861,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/04_guasto.png",
+      "size": 121979,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/05_http.png",
+      "size": 96715,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/imunes_1_topologia.png",
+      "size": 64440,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/imunes_2_crouter.png",
+      "size": 41303,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/imunes_3_ping.png",
+      "size": 16675,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/relazione.md",
+      "size": 43436,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/relazione.pdf",
+      "size": 1113009,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/stile.css",
+      "size": 2987,
+      "ext": ".css"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/topologia.dot",
+      "size": 1417,
+      "ext": ".dot"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/arp.c",
+      "size": 9964,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/arp.h",
+      "size": 1592,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/common.h",
+      "size": 10587,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/config.c",
+      "size": 5223,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/config.h",
+      "size": 1336,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/forward.c",
+      "size": 2878,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/forward.h",
+      "size": 896,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/icmp.c",
+      "size": 5863,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/icmp.h",
+      "size": 1560,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/log.c",
+      "size": 3081,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/log.h",
+      "size": 1637,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/main.c",
+      "size": 10115,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/netio.c",
+      "size": 6278,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/netio.h",
+      "size": 1312,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/parse.c",
+      "size": 4862,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/parse.h",
+      "size": 1556,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/rib.c",
+      "size": 5730,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/rib.h",
+      "size": 3087,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/ripd.c",
+      "size": 19394,
+      "ext": ".c"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/src/ripd.h",
+      "size": 1365,
+      "ext": ".h"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/demo.sh",
+      "size": 4274,
+      "ext": ".sh"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/offload.sh",
+      "size": 1846,
+      "ext": ".sh"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/run_rip.sh",
+      "size": 1424,
+      "ext": ".sh"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/scenari/__pycache__/fuzz.cpython-310.pyc",
+      "size": 2159,
+      "ext": ".pyc"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/scenari/fuzz.py",
+      "size": 3397,
+      "ext": ".py"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/scenari/guasto_link.sh",
+      "size": 1850,
+      "ext": ".sh"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/topo.sh",
+      "size": 8266,
+      "ext": ".sh"
     },
     {
       "path": "anno2/6_Crittografia/LEZIONE 0 - Intro all'insegnamento.md",
