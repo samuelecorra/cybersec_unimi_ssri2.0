@@ -11,11 +11,19 @@ import BrowseView from './components/BrowseView.jsx';
 import Breadcrumb from './components/Breadcrumb.jsx';
 import Navigation from './components/Navigation.jsx';
 import SearchBar from './components/SearchBar.jsx';
+import { HashRouter, useHashRouter } from './components/HashRouter.jsx';
 import { flattenFiles } from './utils/tree.js';
 import { encodePathSegments, getFileKind, isTextViewerFile } from './utils/fileTypes.js';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 
-export default function App() {
+function RoutedApp() {
+  const {
+    route,
+    navigateHome,
+    navigateToDirectory,
+    navigateToFile,
+    getParentDirectory,
+  } = useHashRouter();
   const [currentFile, setCurrentFile] = useLocalStorage('cyberlocker:currentFile', null);
   const [expandedDirs, setExpandedDirs] = useLocalStorage('cyberlocker:expandedDirs', {});
   const [content, setContent] = useState('');
@@ -25,6 +33,7 @@ export default function App() {
   const [browsePath, setBrowsePath] = useState([]);
   const [viewMode, setViewMode] = useLocalStorage('cyberlocker:viewMode', 'browse'); // 'browse' | 'viewer'
   const loadRequestId = useRef(0);
+  const legacyState = useRef({ currentFile, viewMode });
 
   const allFiles = useMemo(() => flattenFiles(tree), []);
 
@@ -54,50 +63,87 @@ export default function App() {
       if (!res.ok) throw new Error('Failed to load');
       const text = await res.text();
       if (requestId === loadRequestId.current) setContent(text);
-    } catch (err) {
+    } catch {
       if (requestId === loadRequestId.current) {
-        setCurrentFile(null);
-        setViewMode('browse');
+        navigateToDirectory(getParentDirectory(filePath), { replace: true });
       }
     } finally {
       if (requestId === loadRequestId.current) setLoading(false);
     }
-  }, [setCurrentFile, setViewMode]);
+  }, [getParentDirectory, navigateToDirectory]);
 
   useEffect(() => {
-    if (currentFile && isTextViewerFile(currentFile)) {
-      loadFile(currentFile);
+    if (route.kind === 'unset') {
+      const previous = legacyState.current;
+      if (previous.viewMode === 'viewer' && previous.currentFile && allFiles.includes(previous.currentFile)) {
+        navigateToFile(previous.currentFile, { replace: true });
+      } else {
+        navigateHome({ replace: true });
+      }
+      return;
     }
-  }, []);
 
-  const handleFileSelect = useCallback((filePath) => {
-    const kind = getFileKind(filePath);
-    if (['web-lesson', 'pdf', 'image', 'audio'].includes(kind)) {
-      loadRequestId.current++;
-      setLoading(false);
+    if (route.kind === 'file') {
+      const filePath = route.path;
       setCurrentFile(filePath);
+      setBrowsePath(getParentDirectory(filePath));
       setContent('');
       setViewMode('viewer');
-    } else {
-      setCurrentFile(filePath);
-      setContent('');
-      loadFile(filePath);
+      if (isTextViewerFile(filePath)) {
+        loadFile(filePath);
+      } else {
+        loadRequestId.current++;
+        setLoading(false);
+      }
+      const pathSegments = filePath.split('/').slice(0, -1);
+      setExpandedDirs(previous => {
+        const next = { ...previous };
+        for (let i = 1; i <= pathSegments.length; i++) {
+          next[pathSegments.slice(0, i).join('/')] = true;
+        }
+        return next;
+      });
+      return;
     }
-    setSearchQuery('');
-    setViewMode('viewer');
-  }, [loadFile, setCurrentFile]);
 
-  const handleBrowse = useCallback((path) => {
-    setBrowsePath(path);
-  }, []);
-
-  const handleBackToBrowse = useCallback(() => {
     loadRequestId.current++;
     setLoading(false);
-    setViewMode('browse');
     setCurrentFile(null);
     setContent('');
-  }, [setCurrentFile]);
+    setViewMode('browse');
+    const directorySegments = route.kind === 'directory' ? route.segments : [];
+    setBrowsePath(directorySegments);
+    setExpandedDirs(previous => {
+      const next = { ...previous };
+      for (let i = 1; i <= directorySegments.length; i++) {
+        next[directorySegments.slice(0, i).join('/')] = true;
+      }
+      return next;
+    });
+  }, [
+    allFiles,
+    getParentDirectory,
+    loadFile,
+    navigateHome,
+    navigateToFile,
+    route,
+    setCurrentFile,
+    setExpandedDirs,
+    setViewMode,
+  ]);
+
+  const handleFileSelect = useCallback((filePath) => {
+    if (navigateToFile(filePath)) setSearchQuery('');
+  }, [navigateToFile]);
+
+  const handleBrowse = useCallback((path) => {
+    if (path.length === 0) navigateHome();
+    else navigateToDirectory(path);
+  }, [navigateHome, navigateToDirectory]);
+
+  const handleBackToBrowse = useCallback(() => {
+    navigateToDirectory(getParentDirectory(currentFile));
+  }, [currentFile, getParentDirectory, navigateToDirectory]);
 
   const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
@@ -242,5 +288,13 @@ export default function App() {
         </span>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <HashRouter tree={tree}>
+      <RoutedApp />
+    </HashRouter>
   );
 }

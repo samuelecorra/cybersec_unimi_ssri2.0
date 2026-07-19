@@ -74,7 +74,16 @@ L'app sarà disponibile su **http://127.0.0.1:5180**.
 - **Navigazione prev/next** — Scorrimento sequenziale delle lezioni
 - **Breadcrumb** — Percorso del file sempre visibile
 - **Persistenza** — Ultimo file aperto e stato dell'albero in localStorage
+- **Link profondi** — Hash URL condivisibili per anni, materie, cartelle e singole lezioni
 - **Tema cyberpunk** — Palette neon (cyan/magenta/lime) su base scura, font mono
+
+Ogni navigazione aggiorna l'hash del browser. Per esempio:
+
+```text
+https://samuelecorra.github.io/cybersec_unimi_ssri2.0/#/cybersecurity/anno1/3_Programmazione
+```
+
+I segmenti contenenti spazi o caratteri speciali vengono codificati automaticamente. È quindi sufficiente aprire la cartella o la lezione desiderata e copiare l'URL dalla barra del browser.
 
 ### Comandi
 

@@ -1,4 +1,5 @@
 import { chromium } from 'playwright';
+import { createHashPath } from '../src/utils/hashRouting.js';
 
 const BASE = process.env.SOURCE_RENDERER_BASE_URL || 'http://127.0.0.1:5180/';
 const PREFIX = 'cybersecurity/anno1/3_Programmazione';
@@ -42,12 +43,7 @@ const page = await context.newPage();
 let failures = 0;
 
 async function openFile(filePath, selector = '.source-viewer') {
-  await page.goto(BASE, { waitUntil: 'domcontentloaded' });
-  await page.evaluate(path => {
-    localStorage.setItem('cyberlocker:currentFile', JSON.stringify(path));
-    localStorage.setItem('cyberlocker:viewMode', JSON.stringify('viewer'));
-  }, filePath);
-  await page.reload({ waitUntil: 'networkidle' });
+  await page.goto(`${BASE}${createHashPath(filePath)}`, { waitUntil: 'networkidle' });
   await page.waitForSelector(selector, { timeout: 8000 });
   if (selector === '.source-viewer') await page.waitForSelector('.source-code', { timeout: 8000 });
 }

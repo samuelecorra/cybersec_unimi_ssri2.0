@@ -7,6 +7,8 @@
     "dev": "vite --host 127.0.0.1 --port 5180",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 5180",
+    "validate:hash-routing": "node scripts/validate-hash-routing.mjs",
+    "test:hash-routing:e2e": "node scripts/run-hash-routing-e2e.mjs",
     "validate:source-renderer": "node scripts/validate-source-renderer.mjs",
     "test:source-renderer:e2e": "node scripts/run-source-renderer-e2e.mjs"
   },

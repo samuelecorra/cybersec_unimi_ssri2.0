@@ -3,6 +3,7 @@
 // body renders with real content (and KaTeX where expected). A failed fetch
 // would make the app fall back to the browse view (no .markdown-body).
 import { chromium } from 'playwright';
+import { createHashPath } from '../src/utils/hashRouting.js';
 
 const BASE = 'http://127.0.0.1:5180/';
 const P = 'cybersecurity/anno2/6_Crittografia';
@@ -45,11 +46,7 @@ for (const f of FILES) {
 // PART B — one full end-to-end render of the trickiest filename (parens + '=')
 console.log('\n— Render end-to-end del nome piu ostico (parentesi + =) —');
 const tricky = FILES.find((f) => f.includes('H(x)=DESk'));
-await page.evaluate((file) => {
-  localStorage.setItem('cyberlocker:currentFile', JSON.stringify(file));
-  localStorage.setItem('cyberlocker:viewMode', JSON.stringify('viewer'));
-}, tricky);
-await page.reload({ waitUntil: 'networkidle' });
+await page.goto(`${BASE}${createHashPath(tricky)}`, { waitUntil: 'networkidle' });
 await page.waitForTimeout(900);
 const e2e = await page.evaluate(() => {
   const body = document.querySelector('.markdown-body');

@@ -5,6 +5,7 @@
 //
 // Usage: node scripts/mobile-overflow-check.mjs
 import { chromium } from 'playwright';
+import { createHashPath } from '../src/utils/hashRouting.js';
 
 const BASE = 'http://127.0.0.1:5180/';
 
@@ -90,12 +91,7 @@ const run = async () => {
     };
 
     const openLesson = async (file) => {
-      await page.goto(BASE, { waitUntil: 'domcontentloaded' });
-      await page.evaluate((f) => {
-        localStorage.setItem('cyberlocker:currentFile', JSON.stringify(f));
-        localStorage.setItem('cyberlocker:viewMode', JSON.stringify('viewer'));
-      }, file);
-      await page.goto(BASE, { waitUntil: 'networkidle' });
+      await page.goto(`${BASE}${createHashPath(file)}`, { waitUntil: 'networkidle' });
       await page.waitForSelector('.markdown-body', { timeout: 8000 }).catch(() => {});
     };
 
@@ -111,11 +107,7 @@ const run = async () => {
     await assess('· sidebar OPEN over lesson');
 
     // 3) Browse landing grid (no file)
-    await page.evaluate(() => {
-      localStorage.setItem('cyberlocker:viewMode', JSON.stringify('browse'));
-      localStorage.removeItem('cyberlocker:currentFile');
-    });
-    await page.goto(BASE, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE}#/`, { waitUntil: 'networkidle' });
     await page.waitForSelector('.browse-grid, .browse-view', { timeout: 8000 }).catch(() => {});
     await assess('· browse landing');
 
