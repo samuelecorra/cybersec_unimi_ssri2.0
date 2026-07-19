@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { formatSize } from '../utils/tree.js';
+import { getDisplayFileType } from '../utils/fileTypes.js';
 
 /* ─── SVG Icons ─── */
 const ChevronIcon = ({ expanded }) => (
@@ -26,13 +27,22 @@ const FolderIcon = ({ open }) => (
   </svg>
 );
 
-const FileIcon = ({ active }) => (
+const FileIcon = ({ active, source }) => (
   <svg className={`tree-icon tree-icon--file ${active ? 'active' : ''}`} width="14" height="16" viewBox="0 0 14 16" fill="none">
     <path d="M1 2C1 1.45 1.45 1 2 1H8.5L13 5.5V14C13 14.55 12.55 15 12 15H2C1.45 15 1 14.55 1 14V2Z" fill="currentColor" opacity={active ? '0.15' : '0.05'} stroke="currentColor" strokeWidth="1" />
     <path d="M8.5 1V5.5H13" stroke="currentColor" strokeWidth="1" />
-    <line x1="3.5" y1="8.5" x2="10.5" y2="8.5" stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
-    <line x1="3.5" y1="10.5" x2="9" y2="10.5" stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
-    <line x1="3.5" y1="12.5" x2="7" y2="12.5" stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
+    {source ? (
+      <>
+        <path d="M5.3 8L3.6 10L5.3 12" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8.7 8L10.4 10L8.7 12" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    ) : (
+      <>
+        <line x1="3.5" y1="8.5" x2="10.5" y2="8.5" stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
+        <line x1="3.5" y1="10.5" x2="9" y2="10.5" stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
+        <line x1="3.5" y1="12.5" x2="7" y2="12.5" stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
+      </>
+    )}
   </svg>
 );
 
@@ -75,6 +85,7 @@ function FileTree({ nodes, currentFile, expandedDirs, onToggleDir, onSelectFile,
         }
 
         const isActive = currentFile === node.path;
+        const displayType = getDisplayFileType(node.path);
         return (
           <li key={node.path} className="tree-file">
             <button
@@ -82,8 +93,11 @@ function FileTree({ nodes, currentFile, expandedDirs, onToggleDir, onSelectFile,
               onClick={() => onSelectFile(node.path)}
               title={node.path}
             >
-              <FileIcon active={isActive} />
+              <FileIcon active={isActive} source={displayType?.category === 'source' || displayType?.category === 'support'} />
               <span className="tree-name">{node.name.replace(/\.(md|html|pdf)$/, '')}</span>
+              {displayType && (
+                <span className="tree-source-type">{displayType.label}</span>
+              )}
               {node.size != null && (
                 <span className="tree-size">{formatSize(node.size)}</span>
               )}

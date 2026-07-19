@@ -7,6 +7,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
 import { getParentPath } from "../utils/tree.js";
 import { colorizeMathVariables } from "../utils/colorizeMathVariables.js";
+import { getFileKind } from "../utils/fileTypes.js";
 
 function Viewer({ content, currentFile, loading, onFileSelect }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
@@ -189,16 +190,17 @@ function Viewer({ content, currentFile, loading, onFileSelect }) {
         </div>
       ),
       a: ({ href, children, ...props }) => {
+        const linkedPath = href?.split(/[?#]/, 1)[0];
         const isInternal =
           href &&
           !href.startsWith("http") &&
           !href.startsWith("mailto:") &&
           !href.startsWith("#") &&
-          (href.endsWith(".md") || href.endsWith(".html"));
+          getFileKind(linkedPath) !== "unsupported";
         if (isInternal && onFileSelect) {
           const handleClick = (e) => {
             e.preventDefault();
-            const decoded = decodeURIComponent(href);
+            const decoded = decodeURIComponent(linkedPath);
             const parts = dirPath ? `${dirPath}/${decoded}`.split("/") : decoded.split("/");
             const resolved = [];
             for (const p of parts) {

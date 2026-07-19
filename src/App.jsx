@@ -1,8 +1,10 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import tree from 'virtual:lesson-tree';
 import searchIndex from 'virtual:lesson-search';
 import Sidebar from './components/Sidebar.jsx';
 import Viewer from './components/Viewer.jsx';
+import SourceViewer from './components/SourceViewer.jsx';
+import AssetViewer from './components/AssetViewer.jsx';
 import WebLessonViewer from './components/WebLessonViewer.jsx';
 import PdfViewer from './components/PdfViewer.jsx';
 import BrowseView from './components/BrowseView.jsx';
@@ -10,6 +12,7 @@ import Breadcrumb from './components/Breadcrumb.jsx';
 import Navigation from './components/Navigation.jsx';
 import SearchBar from './components/SearchBar.jsx';
 import { flattenFiles } from './utils/tree.js';
+import { encodePathSegments, getFileKind, isTextViewerFile } from './utils/fileTypes.js';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 
 export default function App() {
@@ -21,6 +24,7 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [browsePath, setBrowsePath] = useState([]);
   const [viewMode, setViewMode] = useLocalStorage('cyberlocker:viewMode', 'browse'); // 'browse' | 'viewer'
+  const loadRequestId = useRef(0);
 
   const allFiles = useMemo(() => flattenFiles(tree), []);
 
@@ -41,35 +45,42 @@ export default function App() {
   }, [searchQuery]);
 
   const loadFile = useCallback(async (filePath) => {
+    const requestId = ++loadRequestId.current;
     setLoading(true);
     try {
       const base = import.meta.env.BASE_URL;
-      const url = `${base}lessons/${filePath}`;
+      const url = `${base}lessons/${encodePathSegments(filePath)}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error('Failed to load');
       const text = await res.text();
-      setContent(text);
-      setCurrentFile(filePath);
+      if (requestId === loadRequestId.current) setContent(text);
     } catch (err) {
-      setCurrentFile(null);
-      setViewMode('browse');
+      if (requestId === loadRequestId.current) {
+        setCurrentFile(null);
+        setViewMode('browse');
+      }
     } finally {
-      setLoading(false);
+      if (requestId === loadRequestId.current) setLoading(false);
     }
-  }, [setCurrentFile]);
+  }, [setCurrentFile, setViewMode]);
 
   useEffect(() => {
-    if (currentFile && !currentFile.endsWith('.html') && !currentFile.endsWith('.pdf')) {
+    if (currentFile && isTextViewerFile(currentFile)) {
       loadFile(currentFile);
     }
   }, []);
 
   const handleFileSelect = useCallback((filePath) => {
-    if (filePath.endsWith('.html') || filePath.endsWith('.pdf')) {
+    const kind = getFileKind(filePath);
+    if (['web-lesson', 'pdf', 'image', 'audio'].includes(kind)) {
+      loadRequestId.current++;
+      setLoading(false);
       setCurrentFile(filePath);
       setContent('');
       setViewMode('viewer');
     } else {
+      setCurrentFile(filePath);
+      setContent('');
       loadFile(filePath);
     }
     setSearchQuery('');
@@ -81,6 +92,8 @@ export default function App() {
   }, []);
 
   const handleBackToBrowse = useCallback(() => {
+    loadRequestId.current++;
+    setLoading(false);
     setViewMode('browse');
     setCurrentFile(null);
     setContent('');
@@ -184,10 +197,18 @@ export default function App() {
                   total={allFiles.length}
                 />
               </div>
-              {currentFile?.endsWith('.html') ? (
+              {getFileKind(currentFile) === 'web-lesson' ? (
                 <WebLessonViewer filePath={currentFile} />
-              ) : currentFile?.endsWith('.pdf') ? (
+              ) : getFileKind(currentFile) === 'pdf' ? (
                 <PdfViewer filePath={currentFile} />
+              ) : getFileKind(currentFile) === 'source' ? (
+                <SourceViewer
+                  content={content}
+                  currentFile={currentFile}
+                  loading={loading}
+                />
+              ) : ['image', 'audio'].includes(getFileKind(currentFile)) ? (
+                <AssetViewer currentFile={currentFile} />
               ) : (
                 <Viewer
                   content={content}

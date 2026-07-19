@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { flattenFiles } from '../utils/tree.js';
+import { getDisplayFileType, isSourceFile } from '../utils/fileTypes.js';
 
 /* ── SVG Icons ── */
 const BackArrow = () => (
@@ -47,6 +47,13 @@ const LessonIcon = ({ active }) => (
   </svg>
 );
 
+const SourceIcon = ({ active }) => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <rect x="1" y="1" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="1" fill="currentColor" fillOpacity={active ? '0.12' : '0.04'} />
+    <path d="M8 6L4.5 10L8 14M12 6L15.5 10L12 14" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const HomeIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
     <polygon points="8,1 15,7 15,15 1,15 1,7" stroke="currentColor" strokeWidth="1.2" fill="currentColor" fillOpacity="0.06" />
@@ -58,6 +65,12 @@ function countFilesInNode(node) {
   if (node.type === 'file' || node.type === 'web-lesson') return 1;
   if (!node.children) return 0;
   return node.children.reduce((sum, c) => sum + countFilesInNode(c), 0);
+}
+
+function countSourceFilesInNode(node) {
+  if (node.type === 'file') return isSourceFile(node.path) ? 1 : 0;
+  if (!node.children) return 0;
+  return node.children.reduce((sum, child) => sum + countSourceFilesInNode(child), 0);
 }
 
 function formatName(name) {
@@ -198,8 +211,8 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
       <div className={`browse-grid ${isYearsView ? 'browse-grid--years' : ''} ${displayFiles.length > 0 && displayDirs.length === 0 ? 'browse-grid--files' : ''}`}>
         {displayDirs.map((dir, i) => {
           const fileCount = countFilesInNode(dir);
+          const sourceCount = countSourceFilesInNode(dir);
           const subDirs = (dir.children || []).filter(c => c.type === 'dir');
-          const subFiles = (dir.children || []).filter(c => c.type === 'file');
 
           return (
             <button
@@ -220,7 +233,10 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
               <div className="browse-card-info">
                 <h3 className="browse-card-title">{formatName(dir.name)}</h3>
                 <div className="browse-card-meta">
-                  <span className="browse-card-count">{fileCount} lezioni</span>
+                  <span className="browse-card-count">{fileCount} file</span>
+                  {sourceCount > 0 && (
+                    <span className="browse-card-sub">{sourceCount} sorgenti/supporti</span>
+                  )}
                   {subDirs.length > 0 && (
                     <span className="browse-card-sub">{subDirs.length} sezioni</span>
                   )}
@@ -238,6 +254,7 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
         {/* File items at this level */}
         {displayFiles.map((file) => {
           const isActive = currentFile === file.path;
+          const displayType = getDisplayFileType(file.path);
           return (
             <button
               key={file.path}
@@ -246,10 +263,15 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
               style={{ '--card-accent': accentColor }}
             >
               <div className="browse-card-icon">
-                <LessonIcon active={isActive} />
+                {displayType?.category === 'source' || displayType?.category === 'support'
+                  ? <SourceIcon active={isActive} />
+                  : <LessonIcon active={isActive} />}
               </div>
               <div className="browse-card-info">
                 <h3 className="browse-card-title">{formatName(file.name)}</h3>
+                {displayType && (
+                  <span className="browse-file-type">{displayType.label}</span>
+                )}
               </div>
               <div className="browse-card-arrow">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">

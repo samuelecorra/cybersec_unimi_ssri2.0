@@ -1,19 +1,58 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  getFileExtension,
+  getFileKind,
+  getSourceFileType,
+} from './src/utils/fileTypes.js';
 
 const LESSONS_DIR = 'lessons';
 const VIRTUAL_TREE = 'virtual:lesson-tree';
 const VIRTUAL_SEARCH = 'virtual:lesson-search';
 const RESOLVED_TREE = '\0' + VIRTUAL_TREE;
 const RESOLVED_SEARCH = '\0' + VIRTUAL_SEARCH;
+const PROGRAMMING_PREFIX = 'cybersecurity/anno1/3_Programmazione/';
 
 // Extensions to copy to dist for static hosting
-const STATIC_EXTS = new Set([
+export const STATIC_EXTS = new Set([
   '.md', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp',
   '.html', '.js', '.css', '.pdf',
 ]);
 
-function scanDir(dir, base = '') {
+export const MIME_TYPES = Object.freeze({
+  '.md': 'text/plain; charset=utf-8',
+  '.html': 'text/plain; charset=utf-8',
+  '.js': 'text/plain; charset=utf-8',
+  '.css': 'text/plain; charset=utf-8',
+  '.c': 'text/plain; charset=utf-8',
+  '.h': 'text/plain; charset=utf-8',
+  '.java': 'text/plain; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+  '.wav': 'audio/wav',
+  '.pdf': 'application/pdf',
+});
+
+export function isTreeFile(fileName, relativePath = fileName) {
+  const kind = getFileKind(fileName);
+  if (['markdown', 'pdf'].includes(kind)) return true;
+  return ['source', 'image', 'audio'].includes(kind)
+    && relativePath.split(path.sep).join('/').startsWith(PROGRAMMING_PREFIX);
+}
+
+export function isPublishedFile(fileName, relativePath = fileName) {
+  if (STATIC_EXTS.has(getFileExtension(fileName))) return true;
+  const kind = getFileKind(fileName);
+  return ['source', 'audio'].includes(kind)
+    && relativePath.split(path.sep).join('/').startsWith(PROGRAMMING_PREFIX);
+}
+
+export function scanDir(dir, base = '') {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   const result = [];
   for (const entry of entries) {
@@ -29,9 +68,17 @@ function scanDir(dir, base = '') {
           result.push({ type: 'dir', name: entry.name, path: rel, children });
         }
       }
-    } else if (entry.name.endsWith('.md') || entry.name.endsWith('.pdf')) {
+    } else if (isTreeFile(entry.name, rel)) {
       const stat = fs.statSync(path.join(dir, entry.name));
-      result.push({ type: 'file', name: entry.name, path: rel, size: stat.size });
+      const sourceType = getSourceFileType(entry.name);
+      result.push({
+        type: 'file',
+        name: entry.name,
+        path: rel,
+        size: stat.size,
+        kind: getFileKind(entry.name),
+        ...(sourceType ? { language: sourceType.language, category: sourceType.category } : {}),
+      });
     }
   }
   result.sort((a, b) => {
@@ -43,7 +90,7 @@ function scanDir(dir, base = '') {
   return result;
 }
 
-function flattenFiles(tree, list = []) {
+export function flattenFiles(tree, list = []) {
   for (const node of tree) {
     if (node.type === 'file' || node.type === 'web-lesson') {
       list.push(node.path);
@@ -54,39 +101,43 @@ function flattenFiles(tree, list = []) {
   return list;
 }
 
-function buildSearchIndex(lessonsPath, files) {
+export function buildSearchIndex(lessonsPath, files) {
   const index = [];
   for (const filePath of files) {
-    if (!filePath.endsWith('.md')) continue;
+    const kind = getFileKind(filePath);
+    if (kind !== 'markdown' && kind !== 'source') continue;
     try {
       const fullPath = path.join(lessonsPath, filePath);
       const content = fs.readFileSync(fullPath, 'utf-8');
       const headings = [];
-      const lines = content.split('\n');
-      for (const line of lines) {
-        const match = line.match(/^#{1,4}\s+(.+)/);
-        if (match) headings.push(match[1].trim());
+      if (kind === 'markdown') {
+        const lines = content.split('\n');
+        for (const line of lines) {
+          const match = line.match(/^#{1,4}\s+(.+)/);
+          if (match) headings.push(match[1].trim());
+        }
       }
-      const preview = content.slice(0, 300).replace(/\n/g, ' ');
-      index.push({ path: filePath, headings, preview });
+      const previewLength = kind === 'source' ? 800 : 300;
+      const preview = content.slice(0, previewLength).replace(/\s+/g, ' ');
+      index.push({ path: filePath, headings, preview, kind });
     } catch {
-      index.push({ path: filePath, headings: [], preview: '' });
+      index.push({ path: filePath, headings: [], preview: '', kind });
     }
   }
   return index;
 }
 
-/** Recursively copy .md and image files from src to dest */
-function copyStaticFiles(srcDir, destDir) {
+/** Recursively copy published lesson and support files from src to dest. */
+export function copyStaticFiles(srcDir, destDir, rootDir = srcDir) {
   const entries = fs.readdirSync(srcDir, { withFileTypes: true });
   for (const entry of entries) {
     const srcPath = path.join(srcDir, entry.name);
     const destPath = path.join(destDir, entry.name);
     if (entry.isDirectory()) {
-      copyStaticFiles(srcPath, destPath);
+      copyStaticFiles(srcPath, destPath, rootDir);
     } else {
-      const ext = path.extname(entry.name).toLowerCase();
-      if (STATIC_EXTS.has(ext)) {
+      const relativePath = path.relative(rootDir, srcPath);
+      if (isPublishedFile(entry.name, relativePath)) {
         fs.mkdirSync(path.dirname(destPath), { recursive: true });
         fs.copyFileSync(srcPath, destPath);
       }
@@ -130,32 +181,27 @@ export default function lessonsPlugin() {
         const prefix = '/lessons/';
         if (!req.url?.startsWith(prefix)) return next();
 
-        const filePath = decodeURIComponent(req.url.slice(prefix.length));
-        const safePath = path.normalize(filePath).replace(/\.\.\\/g, '').replace(/\.\.\//g, '');
-        const fullPath = path.join(lessonsPath, safePath);
+        let filePath;
+        try {
+          const requestPath = req.url.split('?', 1)[0];
+          filePath = decodeURIComponent(requestPath.slice(prefix.length));
+        } catch {
+          res.statusCode = 400;
+          res.end('Bad request');
+          return;
+        }
 
-        if (!fullPath.startsWith(lessonsPath)) {
+        const fullPath = path.resolve(lessonsPath, filePath);
+        const relativePath = path.relative(lessonsPath, fullPath);
+        if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
           res.statusCode = 403;
           res.end('Forbidden');
           return;
         }
 
         try {
-          const ext = path.extname(fullPath).toLowerCase();
-          const mimeTypes = {
-            '.md':   'text/plain; charset=utf-8',
-            '.html': 'text/plain; charset=utf-8',
-            '.js':   'text/plain; charset=utf-8',
-            '.css':  'text/plain; charset=utf-8',
-            '.png':  'image/png',
-            '.jpg':  'image/jpeg',
-            '.jpeg': 'image/jpeg',
-            '.gif':  'image/gif',
-            '.svg':  'image/svg+xml',
-            '.webp': 'image/webp',
-            '.pdf':  'application/pdf',
-          };
-          const contentType = mimeTypes[ext] || 'application/octet-stream';
+          const ext = getFileExtension(fullPath);
+          const contentType = MIME_TYPES[ext] || 'application/octet-stream';
           const data = fs.readFileSync(fullPath);
           res.setHeader('Content-Type', contentType);
           res.setHeader('Cache-Control', 'no-cache');
