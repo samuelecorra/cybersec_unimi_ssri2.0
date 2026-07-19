@@ -184,14 +184,15 @@ Do not remove existing lesson content. At most correct inaccurate or poorly expl
 - M5/UD1/L3 (Sicurezza delle app in iOS e Android): [COMPLETED] — integrato transcript su confronto Android/iOS per mitigare app infette, architettura iOS a livelli, C/Objective-C, Cocoa Touch/Foundation/UIKit, Media/Core Services/Core OS, sandbox iOS, API di comunicazione controllate, firma vendor-signed Apple, privilegi e cartella sandbox, architettura Android con kernel Linux, librerie C/C++, Android Runtime, core libraries Java, Dalvik VM, APK, SQLite/OpenSSL/primitive crittografiche, mercato aperto e app self-signed, permessi in installazione, isolamento Linux con user ID per app, socket Unix, componenti root init/Zygote, condivisione user ID/processo/VM, pattern di reverse engineering e ripubblicazione malevola, mercati fasulli, confronto su approvazione/upload/permessi/linguaggio e rischio buffer overflow.
 - M5/UD1/L4: [NEXT TASK]
 
-### Matematica Discreta [IN PROGRESS]
+### Matematica Discreta [COMPLETED]
 
 - M1_Insiemi_numerici/UD1_Numeri_naturali: [COMPLETED] — creati L1-L6 (operazioni in ℕ, induzione, definizioni ricorsive, numeri primi, divisori/crivello, MCD/mcm)
 - M1_Insiemi_numerici/UD2_Relazioni_di_equivalenza: [COMPLETED] — creati L1-L2 (relazioni e proprietà, equivalenza e ordine)
 - M1_Insiemi_numerici/UD3_Congruenze_e_criteri_divisibilita: [COMPLETED] — creati L1-L7 (congruenza mod n, ℤₙ, congruenze lineari, TCR, criteri divisibilità, Wilson/Fermat/Eulero, esercizi)
 - M2_Gruppi_Anelli_Campi/UD1_Gruppi: [COMPLETED] — creati L1-L6 (strutture algebriche, gruppi e proprietà, ℤₙ/ℤₙ* e gruppi ciclici, gruppo simmetrico Sₙ, omomorfismi, teorema di Lagrange)
 - M2_Gruppi_Anelli_Campi/UD2_Campi_e_anelli: [COMPLETED] — creati L1-L3 (campi e anelli, anelli di polinomi A[x], anello delle matrici Mₙₓₙ[K])
-- M3 e moduli successivi: [NEXT TASK]
+- M3_Vettori_e_geometria (UD1-UD4, 14 lezioni): [COMPLETED] — ricostruito integralmente da `MDF_M3 (1).zip`; letti e verificati pagina per pagina 14 PDF per 53 pagine, incluse formule, dimostrazioni, esempi, esercizi, annotazioni e figure; create le unità su vettori, sistemi lineari, geometria nel piano e geometria lineare dello spazio; corretti e documentati il refuso sul prodotto vettoriale e la notazione imprecisa sul numero di soluzioni; verificati KaTeX, struttura, build, indicizzazione e rendering frontend delle 14 lezioni.
+- M4_Spazi_vettoriali_e_omomorfismi (UD1-UD4, 18 lezioni): [COMPLETED] — ricostruito integralmente da `MDF_M4 (1).zip`; letti e verificati pagina per pagina 27 PDF per 76 pagine, incluse formule, dimostrazioni, esempi, esercizi e annotazioni manoscritte; create le unità su spazi vettoriali, omomorfismi, autovalori/autovettori ed esercitazioni; corretti e documentati i refusi o le imprecisioni su formula di Grassmann, basi canoniche, ordine della base nella forma normale, determinante dell'esercizio, numero di soluzioni sui campi finiti e matrice dichiarata priva di autovalori; verificati KaTeX, build, indicizzazione, rendering e assenza di overflow delle 18 lezioni.
 
 ### Statistica [IN PROGRESS]
 
