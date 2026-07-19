@@ -22,7 +22,7 @@ Dal punto di vista ingegneristico, la parabola è il **modello minimo di comport
 
 ---
 
-## **2. Equazione generale della parabola**
+### **2. Equazione generale della parabola**
 
 Una parabola nel piano cartesiano ha equazione:
 
@@ -41,7 +41,7 @@ con:
 
 ---
 
-### **2.1 Ruolo dei coefficienti**
+#### **2.1 Ruolo dei coefficienti**
 
 - $a$ → **curvatura e concavità**
     
@@ -59,7 +59,7 @@ In particolare:
 
 ---
 
-## **3. Concavità e comportamento globale**
+### **3. Concavità e comportamento globale**
 
 Il segno di $a$ determina completamente il comportamento “globale”:
 
@@ -72,11 +72,11 @@ Questo è il primo esempio concreto di **estremo globale** di una funzione.
 
 ---
 
-## **4. Vertice della parabola**
+### **4. Vertice della parabola**
 
 Il **vertice** è il punto in cui la parabola raggiunge il massimo o il minimo.
 
-### **4.1 Coordinata $x$ del vertice**
+#### **4.1 Coordinata $x$ del vertice**
 
 Si ottiene con:
 
@@ -88,7 +88,7 @@ Questa formula è **fondamentale**: tornerà con le derivate.
 
 ---
 
-### **4.2 Coordinata $y$ del vertice**
+#### **4.2 Coordinata $y$ del vertice**
 
 Sostituendo:
 
@@ -104,18 +104,36 @@ $$
 
 ---
 
-## **5. Forma canonica (o forma del vertice)**
+### **5. Forma canonica (o forma del vertice)**
 
-Riscrivendo la funzione quadratica si ottiene:
+La forma del vertice si ricava mediante completamento del quadrato. Partiamo da:
 
-$$  
-y = a(x - x_V)^2 + y_V  
+$$
+y=ax^2+bx+c
 $$
 
-cioè:
+e raccogliamo $a$ nei primi due termini:
+
+$$
+y=a\left(x^2+\frac{b}{a}x\right)+c.
+$$
+
+Aggiungiamo e sottraiamo il quadrato di $\frac{b}{2a}$:
+
+$$
+y=a\left[\left(x+\frac{b}{2a}\right)^2-\frac{b^2}{4a^2}\right]+c.
+$$
+
+Distribuendo $a$:
+
+$$
+y=a\left(x+\frac{b}{2a}\right)^2-\frac{b^2}{4a}+c.
+$$
+
+Poiché $x_V=-\frac{b}{2a}$ e $y_V=c-\frac{b^2}{4a}$, otteniamo:
 
 $$  
-y = a\left(x + \frac{b}{2a}\right)^2 - \frac{b^2}{4a} + c  
+y = a(x - x_V)^2 + y_V
 $$
 
 Questa forma è **molto più informativa** della forma generale perché:
@@ -125,11 +143,31 @@ Questa forma è **molto più informativa** della forma generale perché:
 - la concavità è immediata;
     
 - lo studio qualitativo è istantaneo.
+
+#### **5.1 Traslazioni e lettura del grafico**
+
+Il grafico di:
+
+$$
+y=a(x-h)^2+k
+$$
+
+si ottiene dal grafico di $y=ax^2$ traslandolo di $h$ unità orizzontalmente e di $k$ unità verticalmente. Il vertice è $(h,k)$ e l'asse è $x=h$.
+
+Per esempio:
+
+$$
+y=2(x-3)^2-1
+$$
+
+ha vertice $(3,-1)$, asse $x=3$ e concavità verso l'alto. La traslazione non modifica l'apertura determinata da $a$.
+
+> ⚠️ Se $a=0$, l'espressione $y=ax^2+bx+c$ non rappresenta più una parabola: degenera in una retta o in una funzione costante.
     
 
 ---
 
-## **6. Asse di simmetria**
+### **6. Asse di simmetria**
 
 La parabola è simmetrica rispetto alla retta verticale:
 
@@ -143,9 +181,9 @@ Ogni punto a sinistra ha un punto simmetrico a destra con la stessa ordinata.
 
 ---
 
-## **7. Intersezioni con gli assi**
+### **7. Intersezioni con gli assi**
 
-### **7.1 Intersezione con l’asse $y$**
+#### **7.1 Intersezione con l’asse $y$**
 
 Si ottiene ponendo $x=0$:
 
@@ -161,7 +199,7 @@ $$
 
 ---
 
-### **7.2 Intersezioni con l’asse $x$ (zeri)**
+#### **7.2 Intersezioni con l’asse $x$ (zeri)**
 
 Si risolve:
 
@@ -173,7 +211,7 @@ $$
 
 ---
 
-## **8. Discriminante e casi possibili**
+### **8. Discriminante e casi possibili**
 
 Definiamo il **discriminante**:
 
@@ -199,7 +237,7 @@ Interpretazione geometrica:
 
 ---
 
-## **9. Formula risolutiva**
+### **9. Formula risolutiva**
 
 Quando $\Delta \ge 0$:
 
@@ -211,7 +249,7 @@ Questi sono gli **zeri della funzione**.
 
 ---
 
-## **10. Studio del segno della parabola**
+### **10. Studio del segno della parabola**
 
 Lo studio del segno dipende da:
 
@@ -240,7 +278,7 @@ Questo schema è **fondamentale** per:
 
 ---
 
-## **11. Parabola come luogo geometrico**
+### **11. Parabola come luogo geometrico**
 
 Dal punto di vista geometrico classico, la parabola è:
 
@@ -255,9 +293,9 @@ Questa visione è meno usata in Analisi, ma è utile per:
 
 ---
 
-## **12. Collegamento con le rette**
+### **12. Collegamento con le rette**
 
-### **12.1 Intersezione retta–parabola**
+#### **12.1 Intersezione retta–parabola**
 
 Data una retta:
 
@@ -279,6 +317,42 @@ $$
 
 Il numero di intersezioni dipende dal discriminante.
 
+Più precisamente, per l'equazione:
+
+$$
+ax^2+(b-m)x+(c-q)=0
+$$
+
+vale:
+
+$$
+\Delta_{\ell}=(b-m)^2-4a(c-q).
+$$
+
+- se $\Delta_{\ell}>0$, la retta è secante e vi sono due punti distinti;
+- se $\Delta_{\ell}=0$, la retta è tangente e vi è un punto doppio;
+- se $\Delta_{\ell}<0$, retta e parabola non hanno punti reali comuni.
+
+Esempio: intersechiamo $y=x+1$ con $y=x^2-1$. Uguagliando le ordinate:
+
+$$
+x^2-1=x+1,
+$$
+
+da cui:
+
+$$
+x^2-x-2=0
+$$
+
+e quindi $x=-1$ oppure $x=2$. Sostituendo nella retta otteniamo i punti:
+
+$$
+( -1,0),\qquad (2,3).
+$$
+
+Il discriminante è positivo e conferma che la retta è secante.
+
 Questo è il primo esempio concreto di:
 
 - **sistema non lineare**
@@ -288,7 +362,7 @@ Questo è il primo esempio concreto di:
 
 ---
 
-## **13. Interpretazione ingegneristica**
+### **13. Interpretazione ingegneristica**
 
 Le parabole descrivono:
 
@@ -314,7 +388,7 @@ Il vertice rappresenta:
 
 ---
 
-## **14. Ponte verso l’Analisi vera**
+### **14. Ponte verso l’Analisi vera**
 
 Questa lezione prepara direttamente:
 
@@ -337,7 +411,7 @@ capirai che il vertice è il punto in cui la derivata si annulla.
 
 ---
 
-## **15. Checklist finale (livello ingegneria)**
+### **15. Checklist finale (livello ingegneria)**
 
 Devi saper fare:
 

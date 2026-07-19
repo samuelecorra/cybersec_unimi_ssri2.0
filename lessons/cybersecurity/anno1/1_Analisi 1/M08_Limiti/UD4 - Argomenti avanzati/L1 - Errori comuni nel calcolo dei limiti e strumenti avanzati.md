@@ -1,4 +1,4 @@
-## **Lezione 11: Errori comuni nel calcolo dei limiti e strumenti avanzati**
+# **M8 UD4 Lezione 1 - Errori comuni nel calcolo dei limiti e strumenti avanzati**
 
 ### **1. Obiettivo della lezione**
 
@@ -16,25 +16,19 @@ In questa lezione concludiamo il percorso sul **calcolo dei limiti**, concentran
 Consideriamo il limite:
 
 $$
-
 \lim_{x\to 1}\frac{x^2-3x+2}{x^2-1}
-
 $$
 
 Sostituendo $x=1$ otteniamo una forma indeterminata:
 
 $$
-
 \frac{0}{0}
-
 $$
 
 Si procede correttamente scomponendo:
 
 $$
-
 \frac{(x-1)(x-2)}{(x-1)(x+1)}
-
 $$
 
 e semplificando il fattore comune $(x-1)$.
@@ -42,17 +36,13 @@ e semplificando il fattore comune $(x-1)$.
 A questo punto **è corretto** scrivere:
 
 $$
-
 \lim_{x\to 1}\frac{x-2}{x+1}
-
 $$
 
 e solo **alla fine** sostituire $x=1$:
 
 $$
-
 \frac{1-2}{1+1}=-\frac{1}{2}
-
 $$
 
 ---
@@ -61,9 +51,7 @@ $$
 Scrivere direttamente:
 
 $$
-
 \frac{x-2}{x+1}=-\frac{1}{2}
-
 $$
 
 ❌ **Errore concettuale**:
@@ -73,9 +61,7 @@ $\frac{x-2}{x+1}$ è una **funzione**, mentre $-\frac{1}{2}$ è un **numero**.
 La forma corretta è sempre:
 
 $$
-
 \lim_{x\to 1}\frac{x-2}{x+1}=-\frac{1}{2}
-
 $$
 
 👉 **Regola d’oro**:
@@ -88,9 +74,7 @@ non perdere mai la notazione di limite finché non hai davvero finito.
 Consideriamo:
 
 $$
-
 \lim_{x\to\infty}\left(\frac{x-1}{x+1}+\frac{\sin x}{x}\right)
-
 $$
 
 Un errore comune è dire:
@@ -102,9 +86,7 @@ Un errore comune è dire:
 e concludere:
 
 $$
-
 1+1=2
-
 $$
 
 ❌ **Errore grave**.
@@ -114,9 +96,7 @@ $$
 
 Il limite notevole:
 $$
-
 \lim_{x\to 0}\frac{\sin x}{x}=1
-
 $$
 vale **solo** per $x\to 0$, **non** per $x\to\infty$.
 
@@ -128,20 +108,15 @@ Per $x\to\infty$:
 
 quindi:
 $$
-
 \frac{\sin x}{x}\to 0
-
 $$
 
 ---
 #### **Conclusione corretta**
 
 $$
-
 \lim_{x\to\infty}\left(\frac{x-1}{x+1}+\frac{\sin x}{x}\right)
-
 =1+0=1
-
 $$
 👉 **Morale**:
 
@@ -152,22 +127,16 @@ un limite notevole va usato **solo** quando la variabile tende al valore giusto.
 
 Consideriamo:
 $$
-
 \lim_{x\to 0}\frac{\ln(1+\cos x)}{\cos x}
-
 $$
 
 Qualcuno potrebbe pensare di porre:
 $$
-
 y=\cos x
-
 $$
 e scrivere:
 $$
-
 \lim_{y\to 0}\frac{\ln(1+y)}{y}=1
-
 $$
 ❌ **Errore concettuale**.
 
@@ -176,17 +145,13 @@ $$
 
 Quando $x\to 0$:
 $$
-
 \cos x \to 1
-
 $$
 non a $0$.
 
 Il limite notevole:
 $$
-
 \lim_{y\to 0}\frac{\ln(1+y)}{y}=1
-
 $$
 si applica **solo** se $y\to 0$.
 
@@ -195,11 +160,8 @@ si applica **solo** se $y\to 0$.
 
 Basta sostituire direttamente $x=0$:
 $$
-
 \frac{\ln(1+\cos 0)}{\cos 0}
-
 =\ln(2)
-
 $$
 👉 **Regola**:
 
@@ -210,17 +172,13 @@ prima di ogni cambio di variabile, controlla **dove tende davvero** la nuova var
 
 Consideriamo:
 $$
-
 \lim_{x\to 0}\frac{\sin x - x + 2x^5}{3x^3}
-
 $$
 Forma indeterminata $\frac{0}{0}$.
 
 Un errore frequente è usare subito:
 $$
-
 \frac{\sin x}{x}\to 1
-
 $$
 e “portarsi avanti” gli altri termini.
 
@@ -252,27 +210,22 @@ Il limite è del tipo $\frac{0}{0}$.
 Applicando de l’Hôpital **tre volte** si ottiene:
 
 $$
-
 \lim_{x\to 0}\frac{\sin x - x + 2x^5}{3x^3}
-
 =-\frac{1}{18}
-
 $$
+
+> ⚠️ **Anticipazione dichiarata**: il teorema di de l'Hôpital usa le **derivate** e appartiene a M10 (UD2), dove viene enunciato con le sue ipotesi e dimostrato. Qui lo citiamo solo per mostrare che il problema ha una via d'uscita; **in questo modulo non è uno strumento ammesso** nelle dimostrazioni, e in sede d'esame va usato solo dopo averne verificato le ipotesi.
 
 ---
 #### **Metodo 2: sviluppi di Taylor / equivalenze asintotiche**
 
 Usando lo sviluppo di Taylor:
 $$
-
 \sin x = x - \frac{x^3}{6} + o(x^3)
-
 $$
 si ricava lo stesso risultato:
 $$
-
 -\frac{1}{18}
-
 $$
 
 ---

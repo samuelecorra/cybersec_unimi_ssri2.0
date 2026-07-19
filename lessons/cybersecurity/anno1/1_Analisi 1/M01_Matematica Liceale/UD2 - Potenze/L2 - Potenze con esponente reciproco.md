@@ -22,7 +22,7 @@ Gli esponenti reciproci sono il **ponte concettuale** tra:
 
 ---
 
-## **2. Motivazione strutturale**
+### **2. Motivazione strutturale**
 
 Vogliamo che le **proprietà delle potenze** restino valide anche per nuovi esponenti.
 
@@ -42,21 +42,20 @@ Questa non è una scelta arbitraria: è **l’unica definizione coerente**.
 
 ---
 
-## **3. Definizione di potenza con esponente reciproco**
+### **3. Definizione di potenza con esponente reciproco**
 
-Sia $n \in \mathbb{N}$ con $n \ge 2$.
-
-Per **$a \ge 0$**, si definisce:
+Sia $n \in \mathbb{N}$ con $n \ge 2$. Si definisce:
 
 $$  
 a^{1/n} = \sqrt[n]{a}  
 $$
 
-cioè:
+nel dominio reale appropriato:
 
-> $a^{1/n}$ è il **numero non negativo** che elevato alla $n$ dà $a$.
+- se $n$ è pari, si richiede $a\ge0$ e $a^{1/n}$ è l'unico numero non negativo la cui potenza $n$-esima vale $a$;
+- se $n$ è dispari, si ammette ogni $a\in\mathbb{R}$ e $a^{1/n}$ è l'unico numero reale la cui potenza $n$-esima vale $a$.
 
-Formalmente:
+In entrambi i casi:
 
 $$  
 \left(a^{1/n}\right)^n = a  
@@ -64,13 +63,13 @@ $$
 
 ---
 
-## **4. Perché si richiede $a \ge 0$ (punto cruciale)**
+### **4. Perché il dominio dipende dalla parità di $n$**
 
-Il vincolo sul segno di $a$ **non è una scelta didattica**, ma una necessità matematica.
+Il vincolo sul segno di $a$ **non è una scelta didattica**, ma dipende dalla parità dell'indice.
 
 ---
 
-### **4.1 Caso $n$ pari**
+#### **4.1 Caso $n$ pari**
 
 Se $n$ è **pari**, allora per ogni $x \in \mathbb{R}$:
 
@@ -104,7 +103,7 @@ $$
 
 ---
 
-### **4.2 Caso $n$ dispari**
+#### **4.2 Caso $n$ dispari**
 
 Se $n$ è **dispari**, allora:
 
@@ -120,54 +119,42 @@ Esempi:
 - $\sqrt[3]{-8} = -2$
     
 
-Tuttavia, **per uniformità di definizione delle potenze**, in Analisi 1 si introduce comunque:
-
-$$  
-a^{1/n} = \sqrt[n]{a}  
-$$
-
-con la consapevolezza che:
-
-- per $n$ dispari la definizione è estendibile a tutto $\mathbb{R}$;
-    
-- per $n$ pari il dominio resta $a \ge 0$.
+Quindi, per $n$ dispari, la definizione è effettivamente estesa a tutto $\mathbb{R}$; soltanto per $n$ pari il dominio resta $a\ge0$.
     
 
 ---
 
-## **5. Proprietà fondamentali (con attenzione al dominio)**
+### **5. Proprietà fondamentali (con attenzione al dominio)**
 
 Le proprietà delle potenze **continuano a valere**, ma **solo quando hanno senso**.
 
 ---
 
-### **5.1 Potenza di una potenza**
+#### **5.1 Potenza di una potenza**
 
-Per $a \ge 0$:
+Per ogni $a$ appartenente al dominio reale della radice:
 
 $$  
 \left(a^{1/n}\right)^n = a  
 $$
 
-e anche:
+L'operazione nell'ordine inverso dipende invece dalla parità:
 
-$$  
-\left(a^n\right)^{1/n} = a \quad \text{solo se } a \ge 0  
+$$
+\sqrt[n]{a^n}=
+\begin{cases}
+|a| & n\text{ pari} \\
+a & n\text{ dispari}.
+\end{cases}
 $$
 
-Questo è un punto delicato:
-
-$$  
-\sqrt{a^2} = |a|  
-$$
-
-non $a$.
+In particolare, $\sqrt{a^2}=|a|$, non $a$.
 
 ---
 
-### **5.2 Prodotto di potenze con lo stesso esponente reciproco**
+#### **5.2 Prodotto di potenze con lo stesso esponente reciproco**
 
-Se $a \ge 0$, $b \ge 0$:
+Se $n$ è pari richiediamo $a,b\ge0$; se $n$ è dispari sono ammessi $a,b\in\mathbb{R}$. Nei rispettivi domini:
 
 $$  
 a^{1/n} \cdot b^{1/n} = (ab)^{1/n}  
@@ -181,9 +168,9 @@ $$
 
 ---
 
-### **5.3 Quoziente**
+#### **5.3 Quoziente**
 
-Se $a \ge 0$, $b > 0$:
+Per indice pari richiediamo $a\ge0$ e $b>0$; per indice dispari basta $b\ne0$. Nei rispettivi domini:
 
 $$  
 \frac{a^{1/n}}{b^{1/n}} = \left(\frac{a}{b}\right)^{1/n}  
@@ -191,7 +178,7 @@ $$
 
 ---
 
-## **6. Collegamento con le radici**
+### **6. Collegamento con le radici**
 
 In pratica:
 
@@ -213,7 +200,7 @@ Ma la **notazione con esponente** è concettualmente più potente perché:
 
 ---
 
-## **7. Interpretazione grafica**
+### **7. Interpretazione grafica**
 
 La funzione:
 
@@ -241,7 +228,7 @@ Queste osservazioni qualitative torneranno nello studio:
 
 ---
 
-## **8. Errori concettuali comuni (da evitare)**
+### **8. Errori concettuali comuni (da evitare)**
 
 1. Scrivere $\sqrt{a^2} = a$ invece di $|a|$
     
@@ -254,7 +241,7 @@ Queste osservazioni qualitative torneranno nello studio:
 
 ---
 
-## **9. Collegamento con il dominio delle funzioni**
+### **9. Collegamento con il dominio delle funzioni**
 
 Ogni volta che compare un’espressione del tipo:
 
@@ -279,9 +266,11 @@ Questo sarà centrale quando studieremo:
 
 ---
 
-## **10. Preparazione alla prossima lezione**
+### **10. Preparazione alla prossima lezione**
 
 Questa lezione prepara direttamente:
+
+- la trattazione operativa di [radicali e razionalizzazione](L2A%20-%20Radicali%20e%20razionalizzazione.md);
 
 - **esponenti razionali** ($a^{p/q}$);
     
@@ -294,7 +283,7 @@ Questa lezione prepara direttamente:
 
 ---
 
-## **11. Checklist finale (da Analisi 1)**
+### **11. Checklist finale (da Analisi 1)**
 
 Devi saper fare:
 
@@ -306,7 +295,7 @@ Devi saper fare:
     
 4. Applicare le proprietà **solo se il dominio lo consente**
     
-5. Riconoscere immediatamente i vincoli $a \ge 0$
+5. Riconoscere immediatamente i vincoli imposti dalla parità dell'indice
     
 6. Usare $a^{1/n}$ come base per esponenti più generali
     

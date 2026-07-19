@@ -1,4 +1,4 @@
-## **Lezione 6: Limiti di funzioni polinomiali e razionali per $x \to \pm\infty$**
+# **M8 UD2 Lezione 2 - Limiti di funzioni polinomiali e razionali per $x \to \pm\infty$**
 
 ### **1. Obiettivo della lezione**
 
@@ -12,9 +12,7 @@ Prima di occuparci delle funzioni razionali, però, è indispensabile capire ben
 Consideriamo il limite
 
 $$
-
 \lim_{x\to +\infty}\left(x^3 - 5x^2 + 1\right)
-
 $$
 #### **2.1 Analisi preliminare**
 
@@ -27,9 +25,7 @@ $$
 Siamo quindi davanti a una **forma indeterminata** del tipo
 
 $$
-
 \infty - \infty
-
 $$
 
 Per risolverla dobbiamo capire **quale termine domina**, cioè quale cresce più velocemente.
@@ -40,24 +36,17 @@ Per risolverla dobbiamo capire **quale termine domina**, cioè quale cresce più
 Tra $x^3$ e $x^2$ domina $x^3$, perché a parità di $x$ grande:
 
 $$
-
 x^3 \gg x^2
-
 $$
 
 Per rendere questa idea rigorosa, raccogliamo il termine di grado massimo.
 
 ---
 #### **2.3 Raccoglimento del termine di grado massimo**
- **$$
 
-
+$$
 x^3 - 5x^2 + 1 =
-
-  
-
 x^3\left(1 - \frac{5}{x} + \frac{1}{x^3}\right)
-
 $$
 Ora analizziamo i limiti dei singoli pezzi:
 
@@ -70,15 +59,12 @@ Ora analizziamo i limiti dei singoli pezzi:
 Quindi la parentesi tende a $1$.
 
 ---
-### **2.4 Conclusione**
+#### **2.4 Conclusione**
 
 $$
 \lim_{x\to +\infty}\left(x^3 - 5x^2 + 1\right)
-
 = (+\infty)\cdot 1
-
 = +\infty
-
 $$
 
 ---
@@ -96,9 +82,7 @@ Passiamo ora alle funzioni razionali.
 Consideriamo il limite
 
 $$
-
 \lim_{x\to +\infty}\frac{x^3 - 4x - 3}{2x^2 + 5}
-
 $$
 #### **3.1 Analisi preliminare**
 
@@ -131,14 +115,12 @@ Si procede così:
 Numeratore:
 $$
 x^3 - 4x - 3 =
-
 x^3\left(1 - \frac{4}{x^2} - \frac{3}{x^3}\right)
 $$
 
 Denominatore:
 $$
 2x^2 + 5 =
-
 2x^2\left(1 + \frac{5}{2x^2}\right)
 $$
 
@@ -146,21 +128,15 @@ $$
 #### **3.4 Semplificazione**
 
 $$
-
 \frac{x^3}{2x^2} = \frac{x}{2}
-
 $$
 
 Quindi il limite diventa
 
 $$
-
 \frac{x}{2}
-
 \cdot
-
 \frac{1 - \frac{4}{x^2} - \frac{3}{x^3}}{1 + \frac{5}{2x^2}}
-
 $$
 ---
 #### **3.5 Limite dei singoli pezzi**
@@ -174,15 +150,13 @@ $$
 - $\dfrac{5}{2x^2} \to 0$
     
 
-La frazione tende a $1$. E per x tendente a infinito, $\frac{x}{2} \cdot 1 = +infinito$
+La frazione tende a $1$, quindi per $x \to +\infty$ il prodotto $\dfrac{x}{2} \cdot 1$ tende a $+\infty$.
 
 ---
 #### **3.6 Conclusione**
 $$
 \lim_{x\to +\infty}\frac{x^3 - 4x - 3}{2x^2 + 5} =
-
 +\infty
-
 $$
 
 ---
@@ -191,9 +165,7 @@ $$
 Consideriamo ora
 
 $$
-
 \lim_{x\to -\infty}\frac{x^3 - 4x}{5x^6 - 1}
-
 $$
 #### **4.1 Analisi preliminare**
 
@@ -208,16 +180,13 @@ Siamo ancora in una forma $\dfrac{\infty}{\infty}$, ma ora il **denominatore cre
 
 $$
 \frac{x^3 - 4x}{5x^6 - 1} =
-
 \frac{x^3\left(1 - \frac{4}{x^2}\right)}{5x^6\left(1 - \frac{1}{5x^6}\right)}
 $$
 
 Semplificando:
 
 $$
-
 \frac{x^3}{5x^6} = \frac{1}{5x^3}
-
 $$
 
 ---
@@ -230,9 +199,7 @@ $$
 Quindi
 
 $$
-
 \lim_{x\to -\infty}\frac{x^3 - 4x}{5x^6 - 1} = 0
-
 $$
 
 ---
@@ -241,24 +208,19 @@ $$
 Consideriamo
 
 $$
-
 \lim_{x\to -\infty}\frac{2x^2 - x}{x^2 + 1}
-
 $$
 #### **5.1 Raccoglimento**
 
 $$
 \frac{2x^2 - x}{x^2 + 1} =
-
 \frac{x^2\left(2 - \frac{1}{x}\right)}{x^2\left(1 + \frac{1}{x^2}\right)}
 $$
 
 Semplificando:
 
 $$
-
 \frac{2 - \frac{1}{x}}{1 + \frac{1}{x^2}}
-
 $$
 ---
 #### **5.2 Limite**
@@ -270,9 +232,7 @@ $$
 Quindi
 
 $$
-
 \lim_{x\to -\infty}\frac{2x^2 - x}{x^2 + 1} = 2
-
 $$
 
 ---
@@ -290,9 +250,7 @@ Allora:
 Il numeratore cresce più velocemente.
 
 $$
-
 \lim_{x\to \pm\infty}\frac{P(x)}{Q(x)} = \pm\infty
-
 $$
 
 (il segno dipende dai coefficienti e dal verso dell’infinito)
@@ -303,9 +261,7 @@ $$
 Il denominatore cresce più velocemente.
 
 $$
-
 \lim_{x\to \pm\infty}\frac{P(x)}{Q(x)} = 0
-
 $$
 
 ---
@@ -315,14 +271,14 @@ Il limite è il **rapporto dei coefficienti principali**:
 
 $$
 \lim_{x\to \pm\infty}\frac{a_n x^n + \dots}{b_n x^n + \dots} =
-
 \frac{a_n}{b_n}
-
 $$
 
 ---
 #### **7. Chiusura**
 
 Prima ancora di fare i conti, **guardare i gradi di numeratore e denominatore** permette spesso di prevedere subito il risultato del limite: infinito, zero oppure numero finito.
+
+> 📌 La "regola dei gradi" del punto 6 **non è un assioma**: è un teorema la cui dimostrazione è esattamente il metodo usato in tutta la lezione (raccoglimento della potenza dominante, limiti dei singoli pezzi con l'algebra dei limiti). In un esame scritto puoi citare la regola; in un orale devi saperla **derivare** con il raccoglimento. Nel caso $n>m$ il segno dell'infinito va determinato caso per caso dal segno di $\frac{a_n}{b_m}x^{\,n-m}$ nel verso considerato.
 
 Nella prossima lezione estenderemo questo studio ai limiti all’infinito che coinvolgono **esponenziali, logaritmi e funzioni miste**.

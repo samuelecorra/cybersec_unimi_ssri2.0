@@ -35,6 +35,51 @@ $$
 
 Questa è la **forma parametrica** (fondamentale, perché evita casi speciali e ti fa ragionare con i vettori).
 
+#### **2.1 Coordinate, distanza tra due punti e punto medio**
+
+Nel piano cartesiano un punto $P=(x,y)$ è individuato dalla sua ascissa $x$ e dalla sua ordinata $y$. Dati due punti:
+
+$$
+P_1=(x_1,y_1),\qquad P_2=(x_2,y_2),
+$$
+
+le differenze $x_2-x_1$ e $y_2-y_1$ sono i cateti di un triangolo rettangolo. Per il teorema di Pitagora, la distanza euclidea è:
+
+$$
+d(P_1,P_2)=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}.
+$$
+
+Il punto medio $M$ del segmento $P_1P_2$ si ottiene facendo la media delle coordinate corrispondenti:
+
+$$
+M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right).
+$$
+
+Per esempio, se $P_1=(-2,1)$ e $P_2=(4,5)$, allora:
+
+$$
+d(P_1,P_2)=\sqrt{6^2+4^2}=2\sqrt{13}
+$$
+
+e:
+
+$$
+M=\left(1,3\right).
+$$
+
+Queste formule verranno usate per definire circonferenze, diametri, intorni e distanze tra oggetti geometrici.
+
+#### **2.2 Simmetrie elementari nel piano**
+
+Le trasformazioni più frequenti dei grafici si leggono direttamente sulle coordinate:
+
+- rispetto all'asse $x$: $(x,y)\mapsto(x,-y)$;
+- rispetto all'asse $y$: $(x,y)\mapsto(-x,y)$;
+- rispetto all'origine: $(x,y)\mapsto(-x,-y)$;
+- rispetto alla retta $y=x$: $(x,y)\mapsto(y,x)$.
+
+Queste regole permettono di riconoscere rapidamente le simmetrie di rette, parabole, circonferenze e grafici di funzioni.
+
 ---
 
 ### **3. Le forme principali dell’equazione di una retta**
@@ -43,7 +88,7 @@ In pratica userai varie forme a seconda del contesto. Devi saperle **riconoscere
 
 ---
 
-## **3.1 Forma esplicita (forma “pendenza-intercetta”)**
+#### **3.1 Forma esplicita (forma “pendenza-intercetta”)**
 
 La forma più usata in Analisi è:
 
@@ -84,7 +129,7 @@ Quindi $q$ è la quota in cui la retta taglia l’asse $y$.
 
 ---
 
-## **3.2 Forma implicita (o generale)**
+#### **3.2 Forma implicita (o generale)**
 
 La forma più generale (e più robusta) è:
 
@@ -125,7 +170,7 @@ $$
 
 ---
 
-## **3.3 Retta verticale**
+#### **3.3 Retta verticale**
 
 Una retta verticale ha equazione:
 
@@ -145,7 +190,7 @@ quindi $a=1$, $b=0$, $c=-k$.
 
 ---
 
-## **3.4 Forma punto-pendenza**
+#### **3.4 Forma punto-pendenza**
 
 Se conosci un punto $P_0(x_0,y_0)$ e il coefficiente angolare $m$, la retta è:
 
@@ -157,7 +202,7 @@ $$
 
 ---
 
-## **3.5 Forma per due punti**
+#### **3.5 Forma per due punti**
 
 Se hai due punti distinti $P_1(x_1,y_1)$ e $P_2(x_2,y_2)$:
 
@@ -179,7 +224,7 @@ $$
 
 ---
 
-## **3.6 Forma parametrica (vettoriale)**
+#### **3.6 Forma parametrica (vettoriale)**
 
 Come detto:
 
@@ -202,7 +247,7 @@ Se $a=0$, la retta è verticale.
 
 ---
 
-## **3.7 Forma normale (utile per distanze)**
+#### **3.7 Forma normale (utile per distanze)**
 
 La retta implicita:
 
@@ -337,7 +382,7 @@ $$
 
 ### **7. Distanze fondamentali (livello ingegneria)**
 
-## **7.1 Distanza punto-retta**
+#### **7.1 Distanza punto-retta**
 
 Data la retta:
 
@@ -351,6 +396,28 @@ $$
 d(P,\ell) = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2+b^2}}.  
 $$
 
+La formula si giustifica usando il vettore normale $\vec n=(a,b)$. Sia $Q=(x_Q,y_Q)$ un punto qualsiasi della retta, così che:
+
+$$
+ax_Q+by_Q+c=0.
+$$
+
+La componente del vettore $\overrightarrow{QP}=(x_0-x_Q,y_0-y_Q)$ lungo la normale unitaria:
+
+$$
+\frac{\vec n}{\|\vec n\|}=\frac{(a,b)}{\sqrt{a^2+b^2}}
+$$
+
+ha valore assoluto:
+
+$$
+\left|\overrightarrow{QP}\cdot\frac{\vec n}{\|\vec n\|}\right|
+=
+\frac{|a(x_0-x_Q)+b(y_0-y_Q)|}{\sqrt{a^2+b^2}}.
+$$
+
+Poiché $ax_Q+by_Q=-c$, il numeratore diventa $|ax_0+by_0+c|$. Questa componente è proprio la lunghezza del segmento perpendicolare alla retta, cioè la distanza minima.
+
 Questa formula è centrale perché:
 
 - appare in geometria analitica avanzata;
@@ -362,7 +429,7 @@ Questa formula è centrale perché:
 
 ---
 
-## **7.2 Distanza tra rette parallele**
+#### **7.2 Distanza tra rette parallele**
 
 Due rette parallele:
 

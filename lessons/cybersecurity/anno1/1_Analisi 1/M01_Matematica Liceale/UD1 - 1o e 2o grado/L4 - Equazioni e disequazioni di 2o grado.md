@@ -24,7 +24,7 @@ In Analisi 1, il secondo grado è la “palestra” perfetta per imparare la men
 
 ---
 
-## **2. Equazione di secondo grado: definizione generale**
+### **2. Equazione di secondo grado: definizione generale**
 
 Un’equazione di secondo grado in $x$ è:
 
@@ -41,7 +41,7 @@ con:
 
 ---
 
-## **3. Normalizzazione: ridurre al caso monico**
+### **3. Normalizzazione: ridurre al caso monico**
 
 Spesso conviene dividere per $a$ (se $a\neq 0$), ottenendo:
 
@@ -59,7 +59,7 @@ Questo passaggio semplifica molte manipolazioni e fa emergere chiaramente le for
 
 ---
 
-## **4. Il discriminante $\Delta$ e la classificazione delle soluzioni**
+### **4. Il discriminante $\Delta$ e la classificazione delle soluzioni**
 
 Si definisce il **discriminante**:
 
@@ -73,7 +73,7 @@ La natura delle soluzioni dipende _solo_ da $\Delta$:
     
 - $\Delta = 0$ → **una soluzione reale doppia**
     
-- $\Delta < 0$ → **nessuna soluzione reale** (due complesse coniugate)
+- $\Delta < 0$ → **nessuna soluzione reale**; le due soluzioni complesse coniugate saranno giustificate nel modulo M04
     
 
 Interpretazione geometrica (fondamentale):
@@ -83,114 +83,111 @@ Interpretazione geometrica (fondamentale):
 - $\Delta = 0$: la parabola è tangente all’asse $x$
     
 - $\Delta < 0$: la parabola non interseca l’asse $x$
+
+<!-- TODO FIGURA:
+Tre parabole con lo stesso verso di concavità: una secante all'asse x in due punti,
+una tangente nel vertice e una disgiunta dall'asse. Etichettare rispettivamente
+Delta > 0, Delta = 0 e Delta < 0.
+Obiettivo didattico: interpretazione geometrica del discriminante.
+-->
     
 
 ---
 
-## **5. Formula risolutiva classica**
+### **5. Derivazione della formula risolutiva**
 
-Se $\Delta \ge 0$, le soluzioni reali sono:
+La formula non è una regola isolata: deriva dal completamento del quadrato. Partiamo da:
 
-$$  
-x_{1,2} = \frac{-b \pm \sqrt{\Delta}}{2a}  
+$$
+ax^2+bx+c=0,\qquad a\ne0
 $$
 
----
+Dividiamo per $a$, operazione reversibile perché $a\ne0$:
 
-## **6. Formula del $\Delta/4$: trucco “da ingegneria” per snellire i conti**
-
-Quando $b$ è pari o comunque conviene lavorare con $b/2$, si usa:
-
-$$  
-\Delta' = \left(\frac{b}{2}\right)^2 - ac  
+$$
+x^2+\frac ba x+\frac ca=0
 $$
 
-Osserva che:
+Portiamo il termine noto a destra e aggiungiamo a entrambi i membri $\left(\frac{b}{2a}\right)^2$:
 
-$$  
-\Delta = b^2 - 4ac = 4\left[\left(\frac{b}{2}\right)^2 - ac\right] = 4\Delta'  
+$$
+x^2+\frac ba x+\left(\frac{b}{2a}\right)^2
+=\left(\frac{b}{2a}\right)^2-\frac ca
 $$
 
-Quindi:
+Il primo membro è un quadrato perfetto; il secondo si riduce a denominatore comune:
 
-$$  
-\sqrt{\Delta} = \sqrt{4\Delta'} = 2\sqrt{\Delta'}  
+$$
+\left(x+\frac{b}{2a}\right)^2=\frac{b^2-4ac}{4a^2}=\frac{\Delta}{4a^2}
 $$
 
-e la formula risolutiva diventa:
+Moltiplicando per il numero positivo $4a^2$ otteniamo:
 
-$$  
-x_{1,2} = \frac{-b \pm 2\sqrt{\Delta'}}{2a}  
-= \frac{-b}{2a} \pm \frac{\sqrt{\Delta'}}{a}  
+$$
+(2ax+b)^2=\Delta
 $$
 
-Questa forma è spesso molto più rapida:
+Se $\Delta<0$, non esistono soluzioni reali. Se $\Delta\ge0$, l'equazione $u^2=\Delta$ equivale a $u=\pm\sqrt{\Delta}$; dunque:
 
-$$  
-x_{1,2} = -\frac{b}{2a} \pm \frac{\sqrt{\left(\frac{b}{2}\right)^2 - ac}}{a}  
+$$
+2ax+b=\pm\sqrt{\Delta}
 $$
 
----
+Isolando $x$ si ottiene la forma usuale:
 
-## **7. Completamento del quadrato e forma canonica**
-
-Un metodo concettualmente fondamentale (e che prepara Taylor, derivate, minimi) è il **completamento del quadrato**.
-
-Partiamo da:
-
-$$  
-ax^2 + bx + c  
+$$
+x_{1,2}=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
 $$
 
-Fattorizziamo $a$:
+Il simbolo $\pm$ è essenziale: il simbolo $\sqrt{\Delta}$ indica la radice principale non negativa, mentre l'equazione $u^2=\Delta$ ha le due soluzioni $u=\pm\sqrt{\Delta}$ quando $\Delta>0$.
 
-$$  
-a\left(x^2 + \frac{b}{a}x\right) + c  
+### **6. Equazioni incomplete e formula ridotta**
+
+Prima di applicare la formula generale conviene riconoscere i casi più semplici:
+
+- **monomia**, $ax^2=0$, con radice doppia $x=0$;
+- **pura**, $ax^2+c=0$, equivalente a $x^2=-c/a$;
+- **spuria**, $ax^2+bx=0$, fattorizzabile come $x(ax+b)=0$.
+
+Quando $b$ è pari, ponendo:
+
+$$
+\Delta'=\left(\frac b2\right)^2-ac
 $$
 
-Completiamo il quadrato:
+si ha $\Delta=4\Delta'$ e la formula ridotta:
 
-# $$  
-x^2 + \frac{b}{a}x
-
-\left(x + \frac{b}{2a}\right)^2 - \left(\frac{b}{2a}\right)^2  
+$$
+x_{1,2}=\frac{-\frac b2\pm\sqrt{\Delta'}}{a}
 $$
 
-Quindi:
+Non è un teorema diverso, ma la stessa formula dopo aver raccolto il fattore $4$.
 
-# $$  
-ax^2 + bx + c
+### **7. Forma canonica del trinomio**
 
-a\left(x + \frac{b}{2a}\right)^2 - a\left(\frac{b}{2a}\right)^2 + c  
+Lo stesso completamento del quadrato, applicato all'espressione e non all'equazione, fornisce:
+
+$$
+ax^2+bx+c=a\left(x+\frac{b}{2a}\right)^2+c-\frac{b^2}{4a}
 $$
 
-cioè:
+Pertanto:
 
-# $$  
-ax^2 + bx + c
-
-a\left(x + \frac{b}{2a}\right)^2 + c - \frac{b^2}{4a}  
 $$
-
-Forma canonica:
-
-# $$  
-ax^2 + bx + c
-
-a(x-x_V)^2 + y_V  
+ax^2+bx+c=a(x-x_V)^2+y_V
 $$
 
 dove:
 
-$$  
-x_V = -\frac{b}{2a},  
-\quad  
-y_V = c - \frac{b^2}{4a}  
 $$
+x_V=-\frac{b}{2a},\qquad y_V=-\frac{\Delta}{4a}
+$$
+
+Questa forma mostra simultaneamente asse di simmetria, vertice e valore minimo o massimo della parabola.
 
 ---
 
-## **8. Le formule di Viète (fondamentali, e spesso “dimenticate”)**
+### **8. Le formule di Viète (fondamentali, e spesso “dimenticate”)**
 
 Le formule di Viète collegano le **radici** ai coefficienti.
 
@@ -237,9 +234,23 @@ x_1 + x_2 = -p,
 x_1x_2 = q  
 $$
 
+La derivazione fondamentale si ottiene confrontando:
+
+$$
+a(x-x_1)(x-x_2)=ax^2-a(x_1+x_2)x+ax_1x_2
+$$
+
+con $ax^2+bx+c$. L'uguaglianza dei coefficienti dà:
+
+$$
+-a(x_1+x_2)=b,\qquad ax_1x_2=c
+$$
+
+e quindi le due formule precedenti. L'estensione alle somme simmetriche di tre radici è trattata nella lezione `UD3/L0D - Teoremi del resto e del fattore.md`.
+
 ---
 
-## **9. Fattorizzazione tramite radici**
+### **9. Fattorizzazione tramite radici**
 
 Se l’equazione ha radici $x_1, x_2$, allora:
 
@@ -257,7 +268,7 @@ Questo è essenziale per lo **studio del segno** e per le **disequazioni**.
 
 ---
 
-## **10. Disequazioni di secondo grado: idea chiave**
+### **10. Disequazioni di secondo grado: idea chiave**
 
 Una disequazione di secondo grado è:
 
@@ -280,7 +291,7 @@ Il modo “ingegneristico” di risolverla è sempre questo:
 
 ---
 
-## **11. Caso $\Delta > 0$: due radici reali distinte**
+### **11. Caso $\Delta > 0$: due radici reali distinte**
 
 Siano $x_1 < x_2$ le radici.
 
@@ -316,7 +327,7 @@ Per $\ge$ o $\le$ basta includere le radici.
 
 ---
 
-## **12. Caso $\Delta = 0$: radice doppia**
+### **12. Caso $\Delta = 0$: radice doppia**
 
 La radice doppia è:
 
@@ -354,7 +365,7 @@ Questo caso è importante perché è il primo esempio di funzione che non cambia
 
 ---
 
-## **13. Caso $\Delta < 0$: nessuna radice reale**
+### **13. Caso $\Delta < 0$: nessuna radice reale**
 
 La parabola non interseca l’asse $x$, quindi non cambia mai segno.
 
@@ -376,9 +387,16 @@ $$
 
 Questo è un caso chiave per risolvere disequazioni “senza radici”.
 
+<!-- TODO FIGURA:
+Tabella grafica del segno di ax^2+bx+c nei casi Delta > 0, Delta = 0 e Delta < 0,
+con entrambe le possibilità a > 0 e a < 0. Evidenziare gli intervalli positivi,
+negativi e gli zeri inclusi solo nelle disequazioni larghe.
+Obiettivo didattico: collegare fattorizzazione, parabola e tabella dei segni.
+-->
+
 ---
 
-## **14. Metodo “universale” per le disequazioni quadratiche**
+### **14. Metodo “universale” per le disequazioni quadratiche**
 
 Schema operativo che deve diventare automatico:
 
@@ -406,7 +424,7 @@ $$
 
 ---
 
-## **15. Problemi parametrici: usare Viète invece di “fare casino”**
+### **15. Problemi parametrici: usare Viète invece di “fare casino”**
 
 Molti esercizi “da ingegneria” chiedono condizioni sui parametri perché:
 
@@ -453,9 +471,25 @@ $$
 
 Questa mentalità è quella giusta: **usare struttura**, non brute force.
 
+#### **15.1 Il parametro può cambiare il grado**
+
+Nell'equazione:
+
+$$
+(m-1)x^2-2x+1=0
+$$
+
+si deve separare $m=1$. Se $m=1$, l'equazione diventa lineare e ha soluzione $x=\frac12$. Soltanto per $m\ne1$ è lecito usare discriminante e formula quadratica:
+
+$$
+\Delta=4-4(m-1)=8-4m
+$$
+
+In tale ramo esistono soluzioni reali se $m\le2$. Il valore $m=1$ non va perso, ma va trattato con l'equazione del grado effettivo.
+
 ---
 
-## **16. Checklist finale (da padrone del secondo grado)**
+### **16. Checklist finale (da padrone del secondo grado)**
 
 Devi saper fare:
 

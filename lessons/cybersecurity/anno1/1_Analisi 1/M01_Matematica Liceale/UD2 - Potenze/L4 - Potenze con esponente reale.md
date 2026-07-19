@@ -20,11 +20,11 @@ Questa lezione risponde a questa domanda **senza ancora usare esplicitamente i l
 
 ---
 
-## **2. Idea fondamentale: continuità come principio guida**
+### **2. Idea costruttiva, rinviata ai moduli successivi**
 
 Il principio chiave è il seguente:
 
-> Le potenze con esponente reale devono essere la **naturale estensione continua** delle potenze con esponente razionale.
+> Le potenze con esponente reale vengono caratterizzate come la **naturale estensione continua** delle potenze con esponente razionale.
 
 Questo significa:
 
@@ -33,11 +33,11 @@ Questo significa:
 - allora vogliamo che $a^{x_n} \to a^x$.
     
 
-Questa idea è **tipicamente analitica**: non si definisce più per formule finite, ma per **limite**.
+Questa è un'anticipazione analitica: successioni, limite e continuità non vengono qui usati come risultati già dimostrati. La costruzione completa sarà possibile soltanto dopo aver sviluppato tali strumenti.
 
 ---
 
-## **3. Dominio della base: perché si richiede $a>0$**
+### **3. Dominio della base: perché si richiede $a>0$**
 
 Da ora in poi fissiamo:
 
@@ -47,17 +47,17 @@ $$
 
 Questo vincolo è **fondamentale**, non opzionale.
 
-### **Perché $a>0$?**
+#### **3.1 Perché $a>0$?**
 
 1. Se $a=0$, $0^x$ non è definito per $x \le 0$.
     
-2. Se $a<0$, le potenze razionali diventano:
+2. Se $a<0$, le potenze razionali considerate singolarmente sono:
     
     - a volte definite,
         
     - a volte no,
         
-    - non continue.
+    - incompatibili con una funzione reale continua definita per ogni esponente reale.
         
 3. La funzione $a^x$ deve essere:
     
@@ -68,24 +68,26 @@ Questo vincolo è **fondamentale**, non opzionale.
     - monotona.
         
 
-Tutto questo è possibile **solo se $a>0$**.
+Una funzione reale $x\mapsto a^x$ definita per ogni $x\in\mathbb{R}$ e dotata delle usuali leggi esponenziali si costruisce quindi per $a>0$. Ciò non nega l'esistenza di singole potenze con base nulla o negativa ed esponente intero o razionale ammissibile, già trattate nelle lezioni precedenti.
 
 ---
 
-## **4. Definizione operativa (idea, non ancora formula)**
+### **4. Definizione operativa (idea, non ancora formula)**
 
-Per $a>0$ e $x \in \mathbb{R}$, si definisce $a^x$ come:
+Per $a>0$ e $x\in\mathbb{R}$, in questo modulo assumiamo l'esponenziale reale come funzione elementare che estende le potenze razionali in modo continuo. L'idea costruttiva è la seguente:
 
 > l’unico valore reale che rende la funzione $x \mapsto a^x$ continua  
 > e coincidente con le potenze razionali quando $x \in \mathbb{Q}$.
 
-Formalmente (idea concettuale):
+Se $(q_n)$ è una successione di razionali che tende a $x$, si pone, dopo aver dimostrato che il valore non dipende dalla successione scelta:
 
-$$  
-a^x = \lim_{q \to x, , q \in \mathbb{Q}} a^q  
+$$
+a^x=\lim_{n\to+\infty}a^{q_n}
 $$
 
-Questa definizione:
+La giustificazione completa richiede completezza dei reali, successioni e limiti e verrà fornita nei moduli dedicati. Qui la caratterizzazione è usata come proprietà operativa dichiarata, non come dimostrazione già conclusa.
+
+Questa caratterizzazione:
 
 - **non è computazionale**,
     
@@ -96,7 +98,7 @@ Questa definizione:
 
 ---
 
-## **5. Proprietà fondamentali delle potenze reali**
+### **5. Proprietà fondamentali delle potenze reali**
 
 Con questa definizione, **tutte le proprietà delle potenze restano valide**.
 
@@ -104,7 +106,7 @@ Per $a>0$, $x,y \in \mathbb{R}$:
 
 ---
 
-### **5.1 Prodotto**
+#### **5.1 Prodotto**
 
 $$  
 a^x \cdot a^y = a^{x+y}  
@@ -112,7 +114,7 @@ $$
 
 ---
 
-### **5.2 Quoziente**
+#### **5.2 Quoziente**
 
 $$  
 \frac{a^x}{a^y} = a^{x-y}  
@@ -120,7 +122,7 @@ $$
 
 ---
 
-### **5.3 Potenza di una potenza**
+#### **5.3 Potenza di una potenza**
 
 $$  
 \left(a^x\right)^y = a^{xy}  
@@ -128,7 +130,7 @@ $$
 
 ---
 
-### **5.4 Valori notevoli**
+#### **5.4 Valori notevoli**
 
 $$  
 a^0 = 1,  
@@ -136,11 +138,11 @@ a^0 = 1,
 a^1 = a  
 $$
 
-Queste proprietà **non sono più dimostrate con prodotti finiti**, ma discendono dalla continuità e dai limiti.
+Queste proprietà **non sono più dimostrate con prodotti finiti**. La loro dimostrazione, una volta costruita l'estensione reale, utilizza densità dei razionali, completezza e limiti; in questa lezione sono assunte come proprietà operative dichiarate.
 
 ---
 
-## **6. Segno e monotonia**
+### **6. Segno e monotonia**
 
 Per $a>0$:
 
@@ -166,7 +168,7 @@ Questa distinzione è cruciale per:
 
 ---
 
-## **7. Continuità della funzione $a^x$**
+### **7. Continuità della funzione $a^x$**
 
 La funzione:
 
@@ -189,7 +191,7 @@ Questa è una delle **funzioni fondamentali dell’Analisi**.
 
 ---
 
-## **8. Comportamento agli estremi (intuizione analitica)**
+### **8. Comportamento agli estremi (intuizione analitica)**
 
 Se $a>1$:
 
@@ -211,7 +213,7 @@ Questi risultati saranno **dimostrati rigorosamente** nel modulo sui limiti, ma 
 
 ---
 
-## **9. Confronto con le potenze polinomiali**
+### **9. Confronto con le potenze polinomiali**
 
 Una delle idee più importanti (che tornerà in M8):
 
@@ -224,13 +226,13 @@ Questo è il seme del **confronto asintotico**.
 
 ---
 
-## **10. Perché non si definisce $a^x$ per $a \le 0$**
+### **10. Perché non si ottiene una funzione esponenziale reale globale per $a \le 0$**
 
 Riepilogo concettuale:
 
-- $a=0$: funzione non definibile globalmente
+- $a=0$: l'espressione non è definibile per ogni esponente reale, in particolare per quelli negativi;
     
-- $a<0$: funzione non continua, non univoca
+- $a<0$: non esiste un'estensione reale continua definita per ogni $x\in\mathbb{R}$ e coerente con tutte le usuali leggi delle potenze;
     
 - $a>0$: funzione ben definita, continua, monotona
     
@@ -239,7 +241,7 @@ L’Analisi sceglie **struttura e coerenza**, non casi speciali.
 
 ---
 
-## **11. Anticipazione naturale: il logaritmo**
+### **11. Anticipazione naturale: il logaritmo**
 
 Da questa lezione nasce spontaneamente una nuova domanda:
 
@@ -258,13 +260,13 @@ Quindi:
 
 ---
 
-## **12. Checklist finale (cerniera dell’Analisi)**
+### **12. Checklist finale (cerniera dell’Analisi)**
 
 Devi saper:
 
 1. Capire perché serve l’esponente reale
     
-2. Sapere che $a^x$ è definito solo per $a>0$
+2. Sapere che la funzione reale $x\mapsto a^x$ definita per ogni esponente reale richiede $a>0$
     
 3. Usare tutte le proprietà delle potenze
     

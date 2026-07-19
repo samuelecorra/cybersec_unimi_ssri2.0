@@ -1,4 +1,4 @@
-## **Lezione 3: Definizione formale di limite**
+# **M8 UD1 Lezione 3 - Definizione formale di limite**
 
 ### **1. Perché serve una definizione formale**
 
@@ -32,9 +32,7 @@ Sia $x_0 \in \mathbb{R}$.
 Chiamiamo **intorno sferico** (o più semplicemente **intorno**) di centro $x_0$ e raggio $\delta$ l’intervallo aperto:
 
 $$
-
 U_\delta(x_0) = (x_0 - \delta \ , \ x_0 + \delta)
-
 $$
 
 Qui:
@@ -51,6 +49,14 @@ Se lo visualizzi sul grafico, $U_\delta(x_0)$ è semplicemente una “fascia” 
 
 Più $\delta$ è piccolo, più l’intorno è “stretto”, cioè più rappresenta una zona **vicinissima** a $x_0$.
 
+Per il limite serve anche una seconda nozione: l’**intorno puntato** (o intorno bucato) di $x_0$, cioè l’intorno **privato del centro**:
+
+$$
+U_\delta^\ast(x_0) = U_\delta(x_0)\setminus\{x_0\} = (x_0-\delta,\ x_0)\cup(x_0,\ x_0+\delta)
+$$
+
+> 📌 L’intorno puntato è l’insieme dei punti "vicini a $x_0$ ma diversi da $x_0$". È l’oggetto giusto per il limite, perché il limite osserva la funzione **attorno** al punto e mai **nel** punto. Definiamo infine gli **intorni laterali**: l’intorno destro $(x_0,\ x_0+\delta)$ e l’intorno sinistro $(x_0-\delta,\ x_0)$, che useremo per i limiti laterali (Lezione 3C).
+
 ---
 ### **3. Intorni anche sull’asse $y$**
 
@@ -59,9 +65,7 @@ Lo stesso concetto vale anche per un valore $L$ sull’asse $y$.
 Dato $L \in \mathbb{R}$ e un raggio $\varepsilon>0$, un intorno di $L$ è:
 
 $$
-
-V_\varepsilon(L) = (L - \varepsilon,; L + \varepsilon)
-
+V_\varepsilon(L) = (L - \varepsilon,\ L + \varepsilon)
 $$
 
 Quindi:
@@ -80,18 +84,14 @@ Per parlare di limiti all’infinito, dobbiamo anche definire che cosa significa
 **Intorno di $-\infty$**: un intervallo del tipo
 
 $$
-
-(-\infty,; K)
-
+(-\infty,\ K)
 $$
 con $K \in \mathbb{R}$.
 
 È l’insieme dei reali tali che:
 
 $$
-
 x < K
-
 $$
 
 ![](../imgs/Pasted%20image%2020251218113307.png)
@@ -101,18 +101,14 @@ Graficamente lo immagini come una **semiretta verso sinistra**.
 **Intorno di $+\infty$**: un intervallo del tipo
 
 $$
-
-(K,; +\infty)
-
+(K,\ +\infty)
 $$
 con $K \in \mathbb{R}$.
 
 È l’insieme dei reali tali che:
 
 $$
-
 x > K
-
 $$
 
 ![](../imgs/Pasted%20image%2020251218113326.png)
@@ -126,11 +122,24 @@ Sia $f: A \to \mathbb{R}$, con $A \subseteq \mathbb{R}$.
 
 Per poter parlare del limite per $x \to x_0$, il punto $x_0$ deve essere un **punto di accumulazione** per $A$.
 
+**Definizione.** $x_0\in\mathbb{R}$ è punto di accumulazione di $A$ se **ogni** intorno puntato di $x_0$ contiene almeno un punto di $A$:
+
+$$
+\forall \delta>0:\quad U_\delta^\ast(x_0)\cap A \neq \varnothing
+$$
+
 Intuitivamente significa:
 
-> attorno a $x_0$ ci sono punti del dominio arbitrariamente vicini a $x_0$.
+> attorno a $x_0$ ci sono punti del dominio arbitrariamente vicini a $x_0$, **diversi da $x_0$**.
 
 Cioè posso avvicinarmi quanto voglio a $x_0$ restando dentro al dominio (anche se magari $x_0$ stesso non appartiene al dominio).
+
+> 📌 Due fatti da non confondere:
+>
+> - un punto di accumulazione di $A$ **può non appartenere** ad $A$: per $A=(0,1)$ i punti $0$ e $1$ sono di accumulazione ma non stanno in $A$;
+> - un punto che appartiene ad $A$ **può non essere** di accumulazione: se attorno a lui non ci sono altri punti di $A$ si chiama **punto isolato**, e lì la definizione di limite non ha senso (non ci sono $x\neq x_0$ su cui verificarla, quindi la condizione sarebbe vera "a vuoto" per qualunque $L$: adottiamo lo standard analitico di **non definire** il limite nei punti isolati).
+>
+> La classificazione completa dei punti rispetto a un insieme (interni, esterni, di frontiera, isolati, di accumulazione) è nella Lezione 3A.
 
 ---
 ### **6. Definizione formale di limite con gli intorni**
@@ -146,9 +155,7 @@ Supponiamo che:
 Si dice che:
 
 $$
-
 \lim_{x \to x_0} f(x) = L
-
 $$
 
 se vale questa condizione:
@@ -158,8 +165,8 @@ se vale questa condizione:
 Scritta in modo preciso:
 
 $$
-\forall \varepsilon > 0 \;\; \exists \delta > 0 \;
-\mid \; \forall{x} \in A,
+\forall \varepsilon > 0 \;\; \exists \delta > 0 \;\;
+\forall x \in A:
 \;
 0 < |x - x_0| < \delta
 \;\Rightarrow\;
@@ -167,6 +174,12 @@ $$
 $$
 
 Questa è la classica forma $\varepsilon$–$\delta$, ma è esattamente la stessa idea degli intorni.
+
+> ⚠️ L'**ordine dei quantificatori** è essenziale e non si può scambiare:
+>
+> - prima si fissa $\varepsilon$ (la precisione richiesta su $y$), **poi** si trova $\delta$: quindi $\delta$ **può dipendere da $\varepsilon$** (e in generale dipende anche da $x_0$), e lo si sottolinea scrivendo $\delta=\delta(\varepsilon)$;
+> - $\delta$ **non può dipendere da $x$**: il quantificatore $\forall x$ viene **dopo** $\exists\delta$, quindi lo stesso $\delta$ deve funzionare per **tutti** gli $x$ ammessi;
+> - la condizione $0<|x-x_0|$ esclude esattamente il punto $x_0$: senza di essa staremmo imponendo anche $|f(x_0)-L|<\varepsilon$, cioè un vincolo sul **valore** della funzione nel punto, che con il limite non c'entra.
 L'originale da cui ho attinto è:
 
 ![](../imgs/Pasted%20image%2020251218114103.png)
@@ -181,7 +194,7 @@ se per ogni intorno $V_\varepsilon(L)$ di L esiste un intorno $U_\delta(x_0)$ di
 
 $$x \in U_\delta(x_0) \cap A \setminus \{x_0\} \;\Rightarrow\; f(x) \in V_\varepsilon(L)$$
 
-Questa definizione è equivalente alla seguente formulazione $ε–δ$:
+Questa definizione con gli intorni è **equivalente** alla formulazione $\varepsilon$–$\delta$ scritta sopra: dire $f(x)\in V_\varepsilon(L)$ è esattamente dire $|f(x)-L|<\varepsilon$, e dire $x\in U_\delta(x_0)\setminus\{x_0\}$ è esattamente dire $0<|x-x_0|<\delta$. Mettiamo a confronto i due punti di vista.
 
 Il punto centrale della definizione con gli intorni appena vista è descrivere il limite come una **relazione di vicinanza**.
 
@@ -195,23 +208,23 @@ Non si guarda cosa fa la funzione **in** $x_0$, ma cosa fa **arbitrariamente vic
 Questa definizione mette in evidenza un’idea molto generale e astratta: **la funzione trasforma punti vicini a** $x_0$ **in valori vicini a** $L$.
 
 
-La definizione $ε–δ$ è la stessa idea, ma resa **quantitativa**.
+La definizione $\varepsilon$–$\delta$ è la stessa idea, ma resa **quantitativa**.
 
 Il focus qui è il seguente:
 
-> per quanto io voglia che i valori della funzione siano vicini a L, esiste sempre un modo per imporre quanto devo avvicinarmi a x_0 affinché questo accada.
+> per quanto io voglia che i valori della funzione siano vicini a $L$, esiste sempre un modo per imporre quanto devo avvicinarmi a $x_0$ affinché questo accada.
 
 In altre parole:
 
-- ε rappresenta **la precisione richiesta sul valore della funzione**;
+- $\varepsilon$ rappresenta **la precisione richiesta sul valore della funzione**;
     
-- δ rappresenta **la precisione richiesta sull’argomento**.
+- $\delta$ rappresenta **la precisione richiesta sull’argomento**.
 
 La definizione afferma che:
 
-- ogni richiesta di precisione su $y (ε)$
+- ogni richiesta di precisione su $y$ (cioè $\varepsilon$)
     
-- può essere soddisfatta scegliendo una precisione adeguata su $x (δ)$.
+- può essere soddisfatta scegliendo una precisione adeguata su $x$ (cioè $\delta$).
 
 Il focus quindi è il **controllo**: controllo dell’errore sull’uscita tramite il controllo sull’ingresso.
 
@@ -220,7 +233,7 @@ Le due definizioni dicono **esattamente la stessa cosa**, ma da due punti di vis
 
 - la definizione con intorni è **geometrica e concettuale**;
     
-- la definizione ε–δ è **operativa e quantitativa**.
+- la definizione $\varepsilon$–$\delta$ è **operativa e quantitativa**.
 
 La prima è ideale per **capire** che cos’è un limite.
 La seconda è ideale per **dimostrare** che un limite vale davvero.
@@ -273,9 +286,7 @@ Graficamente succede questo:
 Il dettaglio cruciale è proprio questo:
 
 $$
-
-x \in U_\delta(x_0)\setminus{x_0}
-
+x \in U_\delta(x_0)\setminus\{x_0\}
 $$
 
 Perché? Perché **il limite non dipende dal valore della funzione nel punto**, ma da come si comporta **vicino** al punto.
@@ -324,9 +335,7 @@ Ora dobbiamo coprire tutti gli altri casi che abbiamo visto:
 La chiave è introdurre la **retta reale estesa**:
 
 $$
-
-\overline{\mathbb{R}} = \mathbb{R}\cup{-\infty,+\infty}
-
+\overline{\mathbb{R}} = \mathbb{R}\cup\{-\infty,+\infty\}
 $$
 
 Cosa significa?
@@ -338,6 +347,8 @@ Che adesso permettiamo a:
 - $L$ di essere un reale oppure $\pm\infty$.
 
 La definizione “con gli intorni” resta la stessa, cambia solo il tipo di intorno da usare (intorno finito oppure semiretta).
+
+> ⚠️ $+\infty$ e $-\infty$ **non sono numeri reali**: sono due simboli aggiunti a $\mathbb{R}$ con una convenzione d'ordine ($-\infty < x < +\infty$ per ogni $x\in\mathbb{R}$). Scrivere $\lim f(x)=+\infty$ **non** significa che il limite "esiste come numero": significa che $f$ cresce oltre ogni soglia. Le operazioni con $\pm\infty$ non sono tutte definite (ad esempio $\infty-\infty$ e $0\cdot\infty$ non hanno alcun valore): la retta reale estesa e le sue regole sono trattate nella Lezione 3C.
 
 ---
 ### **12. Esempio: $\lim_{x\to +\infty} f(x) = +\infty$ (forma esplicita)**
@@ -351,16 +362,12 @@ Prendiamo il caso:
 Allora la definizione formale diventa:
 
 $$
-
 \lim_{x\to +\infty} f(x)=+\infty
-
 $$
 se e solo se:
 
 $$
-
-\forall M>0 \; \exists K>0 \; \mid \; x\in A, \; x>K \; \text{allora } f(x)>M
-
+\forall M>0 \;\; \exists K>0 \;\; \forall x\in A: \; x>K \;\Rightarrow\; f(x)>M
 $$
 
 Questa è la versione con $M$ e $K$ che, a livello intuitivo, avevamo già anticipato nelle lezioni precedenti.
@@ -380,15 +387,11 @@ Questa definizione dice:
 
 L’intorno di $x_0=+\infty$ è la semiretta:
 $$
-
 (K, \ +\infty)
-
 $$
 e l’intorno di $+\infty$ su $y$ è:
 $$
-
 (M,\ +\infty)
-
 $$
 
 ![](../imgs/Pasted%20image%2020251218115946.png)
@@ -416,3 +419,5 @@ Con questa lezione abbiamo completato l’introduzione ai limiti, passando:
 
 
 Nelle prossime lezioni, però, inizieremo a calcolare limiti concretamente e vedrai che, anche se la definizione è pesante, le tecniche di calcolo diventano via via molto più naturali.
+
+> ✅ La definizione appena data è il punto di partenza del blocco teorico dell'unità: la Lezione 3A classifica i punti della retta (interni, isolati, di accumulazione); la 3B mostra come **si usa** la definizione nelle dimostrazioni e come si **nega**; la 3C formalizza limiti laterali, limiti infiniti e retta reale estesa; la 3D dimostra i teoremi generali (unicità, permanenza del segno, confronto, carabinieri); la 3E collega i limiti di funzione ai limiti di successione di M05; la 3F stabilisce l'algebra dei limiti e il teorema di composizione. La Lezione 4 introduce invece la continuità, sviluppata a fondo nella UD5.

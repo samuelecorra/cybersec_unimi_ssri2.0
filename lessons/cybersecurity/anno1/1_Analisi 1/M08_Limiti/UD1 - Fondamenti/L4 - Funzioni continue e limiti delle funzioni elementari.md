@@ -1,4 +1,4 @@
-## **Lezione 4: Funzioni continue e limiti delle funzioni elementari**
+# **M8 UD1 Lezione 4 - Funzioni continue e limiti delle funzioni elementari**
 ### **1. Riprendiamo il filo del discorso**
 
 
@@ -53,13 +53,15 @@ Da qui nasce la definizione: nel primo caso la funzione è continua nel punto, n
 ---
 ### **5. Definizione di funzione continua in un punto**
 
-Sia $f:A\subseteq\mathbb{R}\to\mathbb{R}$ e sia $x_0$ un punto di accumulazione di $A$. Si dice che $f$ è continua in $x_0$ se
+Sia $f:A\subseteq\mathbb{R}\to\mathbb{R}$ e sia $x_0 \in A$ un punto **del dominio** che sia anche punto di accumulazione di $A$. Si dice che $f$ è continua in $x_0$ se
 
 $$
 \lim_{x\to x_0} f(x)=f(x_0)
 $$
 
 In altre parole, la funzione è continua in $x_0$ quando è definita in $x_0$ e lì vale esattamente ciò che ci aspettiamo guardando come si comporta quando ci avviciniamo a $x_0$. È la formalizzazione matematica dell’idea “in quel punto non succede nulla di strano”.
+
+> ⚠️ La condizione $x_0\in A$ è **essenziale** e distingue la continuità dal limite: il limite per $x\to x_0$ ha senso anche se $f$ non è definita in $x_0$ (basta che $x_0$ sia di accumulazione per $A$), la continuità invece **richiede che $f(x_0)$ esista**, perché la definizione confronta il limite proprio con quel valore. La definizione di continuità impacchetta quindi **tre condizioni**: (1) $f$ è definita in $x_0$; (2) il limite per $x\to x_0$ esiste finito; (3) i due valori coincidono. Se $x_0\in A$ non è di accumulazione (punto isolato), $f$ si dice continua in $x_0$ automaticamente, come precisato al punto 7.
 
 ---
 ### **6. Continuità su un intervallo: il criterio della penna**
@@ -72,7 +74,7 @@ Se invece nell’intervallo c’è un punto in cui siamo obbligati a staccare la
 
   ![](../imgs/Pasted%20image%2020251218130855.png)
 
-Quando il grafico presenta un salto netto, si parla di discontinuità di prima specie o “a salto”.
+Quando il grafico presenta un salto netto, si parla di discontinuità di prima specie o “a salto”. La classificazione completa delle discontinuità (eliminabili, a salto, infinite, oscillatorie) è sviluppata nella UD5, Lezione 3.
 
 ---
 ### **7. Continuità sul dominio e continuità automatica nei punti isolati**
@@ -82,7 +84,7 @@ Quando una funzione è continua in tutti i punti del suo dominio, si dice sempli
 ---
 ### **8. Funzioni elementari continue nel loro dominio naturale**
 
-È un fatto fondamentale, dimostrabile, che le principali funzioni elementari sono continue in tutti i punti del loro dominio naturale. In particolare:
+È un fatto fondamentale, **che dimostreremo rigorosamente nella UD5 (Lezione 2)**, che le principali funzioni elementari sono continue in tutti i punti del loro dominio naturale. In particolare:
 
 - le potenze $x^n$ (ad esempio $x^2$, $x^3$, ecc.)
     
@@ -194,6 +196,8 @@ All’infinito:
 $$
 \lim_{x\to +\infty} \frac{1}{x} = 0^+,\qquad \lim_{x\to -\infty} \frac{1}{x} = 0^-.
 $$
+
+> 💡 Convenzione di scrittura: $0^+$ e $0^-$ **non sono numeri diversi da $0$**. Il limite è $0$ in entrambi i casi; l'apice registra l'informazione aggiuntiva che l'avvicinamento avviene **per valori positivi** ($0^+$) o **per valori negativi** ($0^-$). Questa informazione è preziosa quando il risultato finisce a denominatore in un limite successivo.
   
 
 Vicino a 0 succede qualcosa di diverso a seconda del lato:
@@ -256,4 +260,6 @@ e lo stesso vale per $x\to -\infty$.
 
 ### **20. Chiusura della lezione**
 
-Il punto chiave di questa lezione è che la continuità rende il calcolo dei limiti semplice: se la funzione è continua nel punto, il limite coincide con il valore della funzione. Per questo molti limiti si risolvono sostituendo direttamente. I casi davvero interessanti sono quelli in cui la funzione non è continua o quando il punto verso cui tende x è un punto di accumulazione del dominio ma non appartiene al dominio.
+Il punto chiave di questa lezione è che la continuità rende il calcolo dei limiti semplice: se la funzione è continua nel punto, il limite coincide con il valore della funzione. Per questo molti limiti si risolvono sostituendo direttamente. I casi davvero interessanti sono quelli in cui la funzione non è continua o quando il punto verso cui tende $x$ è un punto di accumulazione del dominio ma non appartiene al dominio.
+
+> ✅ Questa lezione usa la continuità come **strumento di calcolo**. La teoria completa (criteri di continuità, algebra delle funzioni continue, dimostrazione della continuità delle funzioni elementari, classificazione delle discontinuità, teorema degli zeri, teorema di Weierstrass, continuità uniforme) è sviluppata nella **UD5 - Continuità e teoremi globali**.

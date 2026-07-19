@@ -2,7 +2,7 @@
 
 ### **1. Introduzione concettuale**
 
-Le **equazioni** e **disequazioni di primo grado** costituiscono il primo vero esempio di **modello matematico lineare**.  
+Le **equazioni** e **disequazioni di primo grado** costituiscono il primo vero esempio di **modello matematico lineare**. I principi che rendono leciti i passaggi sono sviluppati in [L0 - Equivalenza, equazioni e sistemi](L0%20-%20Equivalenza,%20equazioni%20e%20sistemi.md); qui li applichiamo al caso lineare.
 Non sono solo “calcoli”: rappresentano **vincoli**, **relazioni**, **condizioni di ammissibilità**.
 
 Dal punto di vista dell’ingegneria e dell’analisi:
@@ -25,30 +25,23 @@ Questa lezione va quindi letta come **ponte tra algebra e geometria**, e come ba
 
 ---
 
-## **2. Equazioni di primo grado in una variabile**
+### **2. Equazioni di primo grado in una variabile**
 
-### **2.1 Definizione**
+#### **2.1 Definizione**
 
-Un’equazione di primo grado in una variabile reale $x$ ha la forma generale:
+Un'equazione lineare in una variabile reale $x$ ha la forma:
 
 $$  
 ax + b = 0  
 $$
 
-con:
-
-- $a, b \in \mathbb{R}$
-    
-- $a \neq 0$
-    
-
-È detta _di primo grado_ perché la massima potenza di $x$ è 1.
+con $a,b\in\mathbb{R}$. È propriamente **di primo grado** soltanto se $a\ne0$; il caso $a=0$ deve essere separato perché l'equazione perde l'incognita.
 
 ---
 
-### **2.2 Risoluzione algebrica**
+#### **2.2 Risoluzione algebrica**
 
-L’equazione si risolve isolando l’incognita:
+Se $a\ne0$, l'equazione si risolve isolando l'incognita:
 
 $$  
 ax + b = 0  
@@ -58,12 +51,39 @@ ax = -b
 x = -\frac{b}{a}  
 $$
 
-**Osservazione fondamentale:**  
-una equazione lineare **ammette sempre un’unica soluzione reale**.
+La divisione per $a$ è lecita proprio perché in questo caso $a\ne0$. La classificazione completa è:
+
+$$
+\begin{cases}
+a\ne0 &\Rightarrow S=\left\{-\dfrac ba\right\} \\
+a=0,\ b\ne0 &\Rightarrow S=\varnothing \\
+a=0,\ b=0 &\Rightarrow S=\mathbb{R}
+\end{cases}
+$$
+
+Nel secondo caso si ottiene l'uguaglianza falsa $b=0$; nel terzo l'identità $0=0$.
+
+> ⚠️ Non si può scrivere subito $x=-b/a$: prima bisogna distinguere il caso $a=0$.
+
+#### **2.3 Esempio parametrico**
+
+Consideriamo:
+
+$$
+(m-2)x=m^2-4
+$$
+
+Se $m\ne2$, possiamo dividere per $m-2$ e fattorizzare il secondo membro:
+
+$$
+x=\frac{(m-2)(m+2)}{m-2}=m+2
+$$
+
+Se $m=2$, l'equazione originaria diventa $0=0$, quindi ogni $x\in\mathbb{R}$ è soluzione. La formula $x=m+2$ non vale in questo caso, perché è stata ottenuta dividendo per zero.
 
 ---
 
-### **2.3 Interpretazione geometrica**
+#### **2.3 Interpretazione geometrica**
 
 Consideriamo la funzione associata:
 
@@ -93,9 +113,9 @@ Questa interpretazione è cruciale perché:
 
 ---
 
-## **3. Equazioni di primo grado in due variabili**
+### **3. Equazioni di primo grado in due variabili**
 
-### **3.1 Forma generale**
+#### **3.1 Forma generale**
 
 Un’equazione di primo grado in due variabili è:
 
@@ -109,7 +129,7 @@ Come visto nella lezione precedente, essa rappresenta una **retta nel piano cart
 
 ---
 
-### **3.2 Insieme delle soluzioni**
+#### **3.2 Insieme delle soluzioni**
 
 Una equazione in due variabili **non ha una soluzione unica**, ma **infinitamente molte**:
 
@@ -130,21 +150,21 @@ Questo è un punto concettuale fondamentale:
 
 ---
 
-## **4. Disequazioni di primo grado in una variabile**
+### **4. Disequazioni di primo grado in una variabile**
 
-### **4.1 Definizione**
+#### **4.1 Definizione**
 
-Una disequazione di primo grado ha una delle forme:
+Una disequazione lineare ha una delle forme:
 
 $$  
 ax + b > 0, \quad ax + b \ge 0, \quad ax + b < 0, \quad ax + b \le 0  
 $$
 
-con $a \neq 0$.
+con $a,b\in\mathbb{R}$. Se $a=0$, la disequazione è costante e può essere sempre vera oppure impossibile.
 
 ---
 
-### **4.2 Metodo risolutivo**
+#### **4.2 Metodo risolutivo**
 
 Si procede come per un’equazione, **prestando attenzione al segno di $a$**.
 
@@ -170,9 +190,11 @@ $$
 x < -\frac{b}{a}  
 $$
 
+Se $a=0$, non si divide. Per esempio, $0x+3>0$ è vera per ogni reale, mentre $0x-2\ge0$ non ha soluzioni. Nei problemi parametrici il caso in cui il coefficiente di $x$ si annulla va sempre trattato per primo.
+
 ---
 
-### **4.3 Interpretazione sulla retta reale**
+#### **4.3 Interpretazione sulla retta reale**
 
 La soluzione di una disequazione di primo grado è sempre:
 
@@ -196,9 +218,9 @@ Questo è il primo esempio concreto di **insieme soluzione infinito ma struttura
 
 ---
 
-## **5. Disequazioni di primo grado in due variabili**
+### **5. Disequazioni di primo grado in due variabili**
 
-### **5.1 Forma generale**
+#### **5.1 Forma generale**
 
 Una disequazione lineare in due variabili è:
 
@@ -210,7 +232,7 @@ $$
 
 ---
 
-### **5.2 Interpretazione geometrica: semipiani**
+#### **5.2 Interpretazione geometrica: semipiani**
 
 L’equazione associata:
 
@@ -235,7 +257,7 @@ Procedura concettuale:
 
 ---
 
-### **5.3 Inclusione o esclusione del bordo**
+#### **5.3 Inclusione o esclusione del bordo**
 
 - $>$ oppure $<$ → **retta esclusa**
     
@@ -253,17 +275,17 @@ Questo dettaglio diventerà fondamentale nello studio:
 
 ---
 
-## **6. Sistemi di disequazioni lineari**
+### **6. Sistemi di disequazioni lineari**
 
 Un sistema di disequazioni è un’intersezione di semipiani.
 
 Esempio concettuale:
 
-$$  
-\begin{cases}  
-a_1x + b_1y + c_1 \ge 0 \  
-a_2x + b_2y + c_2 \le 0  
-\end{cases}  
+$$
+\begin{cases}
+a_1x+b_1y+c_1\ge0 \\
+a_2x+b_2y+c_2\le0
+\end{cases}
 $$
 
 Geometricamente:
@@ -280,6 +302,8 @@ Questa regione può essere:
 - limitata,
     
 - illimitata.
+
+In una variabile vale la stessa logica: si risolve ogni disequazione e si prende l'**intersezione** degli insiemi soluzione, mai la loro unione, salvo che il testo presenti esplicitamente un'alternativa logica.
     
 
 È il primo esempio di **insieme ammissibile**, concetto chiave in:
@@ -295,7 +319,7 @@ Questa regione può essere:
 
 ---
 
-## **7. Collegamento con lo studio del segno**
+### **7. Collegamento con lo studio del segno**
 
 Ogni disequazione del tipo:
 
@@ -329,7 +353,7 @@ Questo metodo sarà **generalizzato** per:
 
 ---
 
-## **8. Interpretazione ingegneristica**
+### **8. Interpretazione ingegneristica**
 
 In contesti applicativi:
 
@@ -351,7 +375,7 @@ Matematicamente: **insiemi definiti da disequazioni lineari**.
 
 ---
 
-## **9. Checklist finale (da ingegneria)**
+### **9. Checklist finale (da ingegneria)**
 
 Devi saper fare **senza esitazione**:
 

@@ -1,4 +1,4 @@
-## **Lezione 1: Introduzione intuitiva al concetto di limite**
+# **M8 UD1 Lezione 1 - Introduzione intuitiva al concetto di limite**
 
 ### **1. Perché iniziamo dai limiti (senza formule difficili)**
 
@@ -18,9 +18,7 @@ Questa scelta è fondamentale: **senza intuizione, il formalismo resta vuoto**.
 Consideriamo la funzione:
 
 $$
-
 y = x + 1
-
 $$
 
 Il suo grafico è una retta.
@@ -30,9 +28,7 @@ Il suo grafico è una retta.
 Supponiamo ora che ci venga chiesto di calcolare:  
 
 $$
-
 \lim_{x \to 1} (x + 1)
-
 $$
 
 Che cosa ci stanno chiedendo **davvero** con questa scrittura?
@@ -72,9 +68,7 @@ Poiché:
 
 possiamo concludere che:
 $$
-
 \lim_{x \to 1} (x + 1) = 2
-
 $$
 
 Il limite descrive quindi **il valore verso cui tende la funzione**, non necessariamente il valore che assume nel punto.
@@ -85,9 +79,7 @@ Il limite descrive quindi **il valore verso cui tende la funzione**, non necessa
 
 Consideriamo ora la funzione:
 $$
-
 y = x^2
-
 $$
 
 Il suo grafico è una parabola.
@@ -96,9 +88,7 @@ Il suo grafico è una parabola.
 
 Calcoliamo il limite:
 $$
-
 \lim_{x \to -1} x^2
-
 $$
 
 Come prima, la domanda va interpretata così:
@@ -124,9 +114,7 @@ In entrambi i casi, le ordinate dei punti del grafico si avvicinano al valore $y
 Poiché il comportamento è lo stesso da entrambi i lati, possiamo affermare che:
 
 $$
-
 \lim_{x \to -1} x^2 = 1
-
 $$
 
 ---
@@ -209,9 +197,7 @@ Tutte queste situazioni verranno analizzate in modo sistematico più avanti.
 Per concludere questa introduzione, segnaliamo un caso centrale dell’Analisi:
 
 $$
-
 \lim_{x \to \pm \infty} f(x)
-
 $$
 I limiti all’infinito sono fondamentali per capire:
 

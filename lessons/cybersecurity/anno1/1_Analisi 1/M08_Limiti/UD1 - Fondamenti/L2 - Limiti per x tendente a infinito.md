@@ -1,4 +1,4 @@
-## **Lezione 2: Limiti per $x$ tendente a infinito**
+# **M8 UD1 Lezione 2 - Limiti per $x$ tendente a infinito**
 
 ### **1. Che cosa significa “limite per $x$ tendente a più infinito”**
 
@@ -7,9 +7,7 @@ In questa seconda lezione della nostra introduzione al calcolo dei limiti, ci oc
 La prima cosa da chiarire è **che tipo di domanda stiamo facendo** quando scriviamo:
 
 $$
-
 \lim_{x \to +\infty} f(x)
-
 $$
 
 Questa scrittura non chiede di sostituire un numero al posto di $x$, perché **$+\infty$ non è un numero**.
@@ -40,9 +38,7 @@ Detto in modo informale:
 Quando questo succede, si dice che:
 
 $$
-
 \lim_{x \to +\infty} f(x) = +\infty
-
 $$
 
 ---
@@ -88,14 +84,12 @@ La condizione chiave è la seguente:
 
 Per **ogni quota fissata $M$ sull’asse $y$**, anche molto grande,
 
-deve esistere un valore $x_0$ tale che:
+deve esistere una soglia $K$ sull’asse $x$ tale che:
 
 ![](../imgs/Pasted%20image%2020251218110413.png)  
 
 $$
-
-x > x_0 \Rightarrow f(x) > M
-
+x > K \Rightarrow f(x) > M
 $$
 
 In altre parole:
@@ -129,9 +123,7 @@ In modo informale:
 
 In questo caso si scrive:
 $$
-
 \lim_{x \to +\infty} f(x) = -\infty
-
 $$
 
 ---
@@ -159,11 +151,9 @@ Il criterio intuitivo è simmetrico a quello visto prima.
 
 Per **ogni quota $M$ sull’asse $y$**, anche molto piccola,
 
-deve esistere un valore $x_0$ tale che:
+deve esistere una soglia $K$ sull’asse $x$ tale che:
 $$
-
-x > x_0 \Rightarrow f(x) < M
-
+x > K \Rightarrow f(x) < M
 $$
 
   ![](../imgs/Pasted%20image%2020251218110640.png)
@@ -192,9 +182,7 @@ Può accadere che:
 In questo caso si scrive:
 
 $$
-
 \lim_{x \to +\infty} f(x) = L
-
 $$
 
 ---
@@ -241,9 +229,7 @@ Questo avvicinamento può avvenire:
 Se la funzione **non rientra in nessuno dei casi precedenti**, allora diciamo che:
 
 $$
-
 \lim_{x \to +\infty} f(x) \quad \text{non esiste}
-
 $$
 
 ![](../imgs/Pasted%20image%2020251218110835.png)
@@ -273,15 +259,15 @@ Per funzioni come seno e coseno possiamo dire solo che:
 
 E questo è il motivo per cui il limite **non esiste**.
 
+> ⚠️ Attenzione al linguaggio: una funzione senza limite non necessariamente "tende a infinito". $\sin x$ per $x\to+\infty$ **oscilla restando limitata**; $x\sin x$ per $x\to+\infty$ oscilla **senza essere limitata**, ma non tende né a $+\infty$ né a $-\infty$ (si annulla in punti arbitrariamente grandi). "Non avere limite" e "divergere a $\pm\infty$" sono situazioni diverse: la distinzione rigorosa è nella Lezione 3C.
+
 ---
 ### **14. Limiti per $x \to -\infty$**
 
 Tutto ciò che abbiamo detto per $x \to +\infty$ vale **in modo perfettamente simmetrico** per:
 
 $$
-
 \lim_{x \to -\infty} f(x)
-
 $$
 
 L’unica differenza è che:

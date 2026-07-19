@@ -23,43 +23,36 @@ Gli **esponenti razionali** permettono di:
 
 ---
 
-## **2. Definizione di potenza con esponente razionale**
+### **2. Definizione di potenza con esponente razionale**
 
-Sia $a \ge 0$ e sia:
+Sia:
 
-$$  
-r = \frac{p}{q} \in \mathbb{Q}, \quad q \ge 1, \quad \gcd(p,q)=1  
+$$
+r=\frac pq\in\mathbb{Q},\qquad q\ge1,\qquad \gcd(p,q)=1
 $$
 
-Si definisce:
+La frazione deve essere ridotta ai minimi termini. Per $a>0$ si definisce:
 
-$$  
-a^{\frac{p}{q}} = \left(a^{1/q}\right)^p = \sqrt[q]{a^p}  
+$$
+a^{p/q}=\left(\sqrt[q]{a}\right)^p=\sqrt[q]{a^p}
 $$
 
-Questa definizione è **coerente** con:
-
-- $a^p$ per $p$ intero;
-    
-- $a^{1/q}$ come radice;
-    
-- $(a^m)^n = a^{mn}$.
-    
+Se $p<0$, si richiede $a\ne0$ e si usa il reciproco. La base positiva garantisce che rappresentazioni equivalenti dello stesso numero razionale diano lo stesso risultato e che le leggi delle potenze siano coerenti.
 
 ---
 
-## **3. Dominio: il punto più importante della lezione**
+### **3. Dominio: il punto più importante della lezione**
 
-Il dominio **dipende dalla parità di $q$**.
+Per basi non positive occorre distinguere con precisione.
 
 ---
 
-### **3.1 Caso $q$ pari**
+#### **3.1 Caso $q$ pari**
 
-Se $q$ è **pari**, allora:
+Se $q$ è **pari**, una base negativa non è ammessa nei reali:
 
-$$  
-a^{\frac{p}{q}} \text{ è definito solo per } a \ge 0  
+$$
+a^{p/q}\text{ è reale soltanto per }a\ge0
 $$
 
 Motivo: compare una **radice di indice pari**.
@@ -73,28 +66,29 @@ Esempi:
 
 ---
 
-### **3.2 Caso $q$ dispari**
+#### **3.2 Caso $q$ dispari**
 
-Se $q$ è **dispari**, la radice $\sqrt[q]{a}$ è definita per ogni $a \in \mathbb{R}$.
+Se $q$ è **dispari**, la definizione radicale è reale anche per $a<0$. Per esempio:
 
-Tuttavia, **in Analisi 1** si mantiene comunque la convenzione:
+$$
+(-8)^{2/3}=\left(\sqrt[3]{-8}\right)^2=4
+$$
 
-> le potenze con esponente razionale si definiscono **principalmente per $a \ge 0$**,  
-> così da poterle estendere in modo continuo agli esponenti reali.
+La base $a=0$ è ammessa soltanto per $p/q>0$. Infatti $0^0$ non è definito in questo contesto e un esponente negativo richiederebbe il reciproco di zero.
 
-Questo evita ambiguità e mantiene coerenza concettuale.
-
----
-
-## **4. Coerenza con le proprietà delle potenze**
-
-Con questa definizione, **tutte le proprietà fondamentali restano valide**, purché le espressioni abbiano senso.
+> ⚠️ La riduzione di $p/q$ precede l'analisi del dominio. La stessa frazione razionale non deve produrre definizioni diverse a seconda di come è scritta.
 
 ---
 
-### **4.1 Prodotto**
+### **4. Coerenza con le proprietà delle potenze**
 
-Se $a \ge 0$, $b \ge 0$:
+Con questa definizione, le proprietà fondamentali restano valide quando tutte le espressioni coinvolte sono definite. Per evitare ambiguità, le formule generali di questa sezione sono enunciate per basi positive.
+
+---
+
+#### **4.1 Prodotto**
+
+Se $a>0$, $b>0$:
 
 $$  
 a^r \cdot b^r = (ab)^r  
@@ -102,9 +96,9 @@ $$
 
 ---
 
-### **4.2 Quoziente**
+#### **4.2 Quoziente**
 
-Se $a \ge 0$, $b > 0$:
+Se $a>0$, $b>0$:
 
 $$  
 \frac{a^r}{b^r} = \left(\frac{a}{b}\right)^r  
@@ -112,19 +106,19 @@ $$
 
 ---
 
-### **4.3 Potenza di una potenza**
+#### **4.3 Potenza di una potenza**
 
-$$  
-\left(a^r\right)^s = a^{rs}  
+$$
+\left(a^r\right)^s=a^{rs},\qquad a>0
 $$
 
 Questa proprietà è il **cuore concettuale** di tutta la teoria delle potenze.
 
 ---
 
-## **5. Esempi strutturali (non solo calcolo)**
+### **5. Esempi strutturali (non solo calcolo)**
 
-### **5.1 Riscrittura**
+#### **5.1 Riscrittura**
 
 $$  
 16^{3/4} = \left(16^{1/4}\right)^3 = 2^3 = 8  
@@ -132,10 +126,10 @@ $$
 
 ---
 
-### **5.2 Semplificazione**
+#### **5.2 Semplificazione**
 
 $$  
-x^{5/2} = x^2 \cdot x^{1/2}  
+x^{5/2}=x^2\cdot x^{1/2},\qquad x\ge0
 $$
 
 utile per:
@@ -149,13 +143,13 @@ utile per:
 
 ---
 
-### **5.3 Forma radicale vs forma esponenziale**
+#### **5.3 Forma radicale vs forma esponenziale**
 
 $$  
 \sqrt[3]{x^2} = x^{2/3}  
 $$
 
-La forma esponenziale è **preferibile in Analisi** perché:
+La forma esponenziale è spesso più maneggevole in Analisi, soprattutto per basi positive, perché:
 
 - è più maneggevole nei limiti;
     
@@ -166,7 +160,7 @@ La forma esponenziale è **preferibile in Analisi** perché:
 
 ---
 
-## **6. Attenzione: semplificazioni non sempre lecite**
+### **6. Attenzione: semplificazioni non sempre lecite**
 
 Un errore classico è scrivere:
 
@@ -192,18 +186,13 @@ Questo nasce dal fatto che $a^{1/2}$ è definito come **numero non negativo**.
 
 ---
 
-## **7. Potenze razionali e segno**
+### **7. Potenze razionali e segno**
 
-Per $a \ge 0$:
+Per $a>0$:
 
-- $a^{p/q} \ge 0$ sempre
-    
-- vale $a^{p/q} = 0 \iff a = 0$
-    
+- $a^{p/q}>0$ per ogni esponente razionale.
 
-Se compare una variabile:
-
-- il segno dell’espressione è determinato **dal dominio**, non dall’esponente.
+Se $a=0$ e l'esponente è positivo, il valore è $0$. Per una base negativa ammessa, il segno dipende dal numeratore ridotto $p$: è positivo se $p$ è pari e negativo se $p$ è dispari.
     
 
 Questo è cruciale per:
@@ -217,7 +206,7 @@ Questo è cruciale per:
 
 ---
 
-## **8. Collegamento con lo studio del dominio**
+### **8. Collegamento con lo studio del dominio**
 
 Ogni espressione del tipo:
 
@@ -235,22 +224,17 @@ Questo schema tornerà **in modo sistematico** nello studio delle funzioni.
 
 ---
 
-## **9. Interpretazione grafica qualitativa**
+### **9. Interpretazione grafica qualitativa**
 
-Le funzioni:
+Per $r\in\mathbb{Q}$, le funzioni:
 
 $$  
-f(x) = x^{p/q}  
+f(x)=x^r
 $$
 
-(per $x \ge 0$) sono:
+(considerate dapprima per $x>0$) sono crescenti se $r>0$, decrescenti se $r<0$ e costanti se $r=0$. Il punto $x=0$ appartiene al dominio nel caso $r>0$, ma non nel caso $r<0$. La possibilità di estendere il dominio a valori negativi dipende dalla forma ridotta dell'esponente, come discusso nella sezione 3.
 
-- crescenti;
-    
-- continue;
-    
-- con concavità che dipende dal valore dell’esponente.
-    
+La continuità e la concavità dipendono dal dominio e dal valore dell'esponente; verranno giustificate nei moduli sulle funzioni, sui limiti e sulle derivate.
 
 Senza ancora formalizzarlo, stai già vedendo:
 
@@ -263,7 +247,7 @@ Senza ancora formalizzarlo, stai già vedendo:
 
 ---
 
-## **10. Preparazione diretta alla L4**
+### **10. Preparazione diretta alla L4**
 
 Questa lezione è l’ultimo tassello prima di:
 
@@ -282,7 +266,7 @@ Dove:
 
 ---
 
-## **11. Checklist finale (livello Analisi 1)**
+### **11. Checklist finale (livello Analisi 1)**
 
 Devi saper fare:
 

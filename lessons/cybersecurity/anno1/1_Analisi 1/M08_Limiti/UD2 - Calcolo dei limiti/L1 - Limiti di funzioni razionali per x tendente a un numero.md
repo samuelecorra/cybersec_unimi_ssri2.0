@@ -1,4 +1,4 @@
-## **Lezione 5: Limiti di funzioni razionali per** $x \to x_0$
+# **M8 UD2 Lezione 1 - Limiti di funzioni razionali per $x \to x_0$**
 ### **1. Di che funzioni stiamo parlando**
 
 In questa lezione studiamo i **limiti delle funzioni razionali**, cioè funzioni del tipo
@@ -160,7 +160,9 @@ $$
 \lim_{x \to 2} \frac{x+1}{2-x} \text{ non esiste}
 $$
 
-In termini grafici questo significa che la retta $x=2$ è un **asintoto verticale**.
+In termini grafici questo significa che la retta $x=2$ è un **asintoto verticale** (la definizione formale di asintoto verticale, con tutte le casistiche, è nella Lezione 5 di questa unità).
+
+> ⚠️ L'asintoto verticale è certificato dai **limiti laterali infiniti appena calcolati**, non dal semplice annullarsi del denominatore. Uno zero del denominatore che si semplifica con il numeratore (caso 4 qui sotto) produce un limite finito e **nessun** asintoto.
 
 ![](../imgs/Pasted%20image%2020251218133243.png)
 
@@ -233,6 +235,8 @@ Semplificando:
 $$
 \frac{(x-1)(x-2)}{(x-1)(x+1)} = \frac{x-2}{x+1}
 $$
+
+> 💡 Perché la semplificazione è lecita? L'uguaglianza vale per ogni $x\neq 1$, e il limite per $x\to 1$ osserva la funzione **solo** in punti $x\neq 1$: due funzioni che coincidono in un intorno puntato di $x_0$ hanno lo stesso limite in $x_0$ (**carattere locale del limite**, dimostrato nella Lezione 3D della UD1). La funzione originaria resta non definita in $x=1$: cambiamo espressione, non funzione.
 ---
 ### **12. Ora il limite si può calcolare**
 
@@ -263,7 +267,7 @@ Graficamente:
 - la funzione “passa vicino” a quota $-\frac{1}{2}$
 
 ---
-## **14. Riassunto operativo finale**
+### **14. Riassunto operativo finale**
 
 Quando calcoli un limite di una funzione razionale per $x \to x_0$:
 

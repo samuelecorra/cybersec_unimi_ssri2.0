@@ -1,4 +1,6 @@
-## **Lezione 14: Formula di Taylor con resto di Peano**
+# **M8 UD4 Lezione 4 - Formula di Taylor con resto di Peano**
+
+> ⚠️ **Anticipazione dichiarata di M9-M10.** Questa lezione (e le due successive) usa il concetto di **derivata**, che in questo percorso è sviluppato nei moduli M9 e M10: l'enunciato rigoroso della formula di Taylor, la sua dimostrazione e il resto di Lagrange sono in M10 UD3. La includiamo qui perché, dal punto di vista operativo, gli sviluppi sono lo strumento naturale che completa equivalenze asintotiche e piccolo-o nel calcolo dei limiti. A un orale devi dichiarare la dipendenza: "uso lo sviluppo di Taylor, la cui giustificazione richiede le derivate". Tutte le altre lezioni di M08 sono indipendenti da questa.
 
 ### **1. Perché la formula di Taylor è fondamentale**
 
@@ -33,22 +35,17 @@ Supponiamo che:
 Se valgono le ipotesi precedenti, allora per $x \to 0$ vale:
 
 $$
-
 f(x) = T_n(x) + o(x^n)
-
 $$
 
 dove $T_n(x)$ è il **polinomio di Taylor di ordine $n$** dato da:
 
 $$
-T_n(x) = f(0) + f’(0)x + \frac{f’’(0)}{2!}x^2 + \cdots + \frac{f^{(n)}(0)}{n!}x^n
-
+T_n(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \cdots + \frac{f^{(n)}(0)}{n!}x^n
 $$
 In forma compatta:
 $$
-
 T_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(0)}{k!}x^k
-
 $$
 
 ---
@@ -87,17 +84,13 @@ Per esempio, per $e^x$:
 - approssimazione al secondo ordine:
 
 $$
-
 e^x = 1 + x + \frac{x^2}{2} + o(x^2)
-
 $$
 
 - approssimazione al terzo ordine:
 
 $$
-
 e^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)
-
 $$
 
 ---
@@ -111,9 +104,7 @@ La formula di Taylor è particolarmente utile nella risoluzione dei **limiti con
 Consideriamo un limite del tipo:
 
 $$
-
 \lim_{x \to 0} \frac{\sin x - x}{x^3}
-
 $$
 
 Siamo davanti a una forma indeterminata $0/0$.
@@ -121,37 +112,28 @@ Siamo davanti a una forma indeterminata $0/0$.
 Usiamo lo sviluppo di Taylor del seno al terzo ordine:
 
 $$
-
 \sin x = x - \frac{x^3}{6} + o(x^3)
-
 $$
 Sostituendo:
 
 $$
 \frac{(x - \frac{x^3}{6} + o(x^3)) - x}{x^3} =
-
 \frac{-\frac{x^3}{6} + o(x^3)}{x^3}
 $$
 
 Dividendo:
 $$
-
 -\frac{1}{6} + \frac{o(x^3)}{x^3}
-
 $$
 
 Poiché:
 $$
-
 \frac{o(x^3)}{x^3} \to 0
-
 $$
 
 il limite vale:
 $$
-
 \boxed{-\frac{1}{6}}
-
 $$
 
 ---
@@ -172,27 +154,19 @@ lavorando **direttamente sui polinomi**, senza ricalcolare ogni volta tutte le d
 
 Per sviluppare al quarto ordine:
 $$
-
 \sin x + \cos x
-
 $$
 si usano gli sviluppi:
 $$
-
 \sin x = x - \frac{x^3}{6} + o(x^4)
-
 $$
 
 $$
-
 \cos x = 1 - \frac{x^2}{2} + o(x^4)
-
 $$
 Sommandoli:
 $$
-
 1 + x - \frac{x^2}{2} - \frac{x^3}{6} + o(x^4)
-
 $$
 
 ---
@@ -200,28 +174,20 @@ $$
 
 Per sviluppare al quarto ordine:
 $$
-
 \sin x \cos x
-
 $$
 
 si moltiplicano gli sviluppi troncati:
 $$
-
 (x - \frac{x^3}{6})(1 - \frac{x^2}{2})
-
 $$
 I termini rilevanti sono:
 $$
-
 x - \frac{x^3}{2} - \frac{x^3}{6}
-
 $$
 cioè:
 $$
-
 x - \frac{2x^3}{3} + o(x^4)
-
 $$
 
 Tutti i termini di grado superiore vengono **assorbiti dal piccolo-o**.
@@ -231,22 +197,16 @@ Tutti i termini di grado superiore vengono **assorbiti dal piccolo-o**.
 
 Per funzioni come:
 $$
-
 \sin(3x)
-
 $$
 si prende lo sviluppo del seno e si sostituisce $x$ con $3x$:
 
 $$
-
 \sin(3x) = 3x - \frac{(3x)^3}{6} + o(x^4)
-
 $$
 cioè:
 $$
-
 \sin(3x) = 3x - \frac{9}{2}x^3 + o(x^4)
-
 $$
 
 ---

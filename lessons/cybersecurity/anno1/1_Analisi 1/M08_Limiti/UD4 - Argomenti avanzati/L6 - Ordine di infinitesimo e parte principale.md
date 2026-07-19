@@ -1,13 +1,11 @@
-## **Lezione 16: Ordine di infinitesimo e parte principale**
+# **M8 UD4 Lezione 6 - Ordine di infinitesimo e parte principale**
 
 ### **1. Definizione**
 
 Sia $f(x)$ una funzione tale che, per $x \to 0$, valga una equivalenza asintotica del tipo:
 
 $$
-
 f(x) \sim kx^\alpha
-
 $$
 dove:
 
@@ -29,9 +27,7 @@ Allora diciamo che:
 Sappiamo che:
 
 $$
-
 \sin x \sim x \quad (x \to 0)
-
 $$
 Quindi:
 
@@ -44,9 +40,7 @@ Quindi:
 
 Sappiamo che:
 $$
-
 \cos x - 1 \sim -\frac{1}{2}x^2 \quad (x \to 0)
-
 $$
 Quindi:
 
@@ -60,9 +54,7 @@ Quindi:
 Ricordiamo il legame fondamentale:
 
 $$
-
 f(x) \sim kx^\alpha \quad \Longleftrightarrow \quad f(x)=kx^\alpha + o(x^\alpha)
-
 $$
 
 Questa equivalenza è cruciale perché ci dice che:
@@ -90,9 +82,7 @@ Se non hai l’equivalenza “pronta”, puoi usare gli **sviluppi di Taylor**:
 Determinare **ordine di infinitesimo** e **parte principale** di:
 
 $$
-
 \sqrt{1+x}-\sqrt{1-x}-x
-
 $$
 #### **5.1 Sviluppo di $\sqrt{1+x}$**
 
@@ -100,7 +90,6 @@ Usiamo lo sviluppo di $(1+x)^\alpha$ con $\alpha=\frac{1}{2}$, fino al terzo ord
 
 $$
 \sqrt{1+x} =
-
 1+\frac{1}{2}x-\frac{1}{8}x^2+\frac{1}{16}x^3+o(x^3)
 $$
 #### **5.2 Sviluppo di $\sqrt{1-x}$**
@@ -113,7 +102,6 @@ Si ottiene sostituendo $x \mapsto -x$:
 
 $$
 \sqrt{1-x} =
-
 1-\frac{1}{2}x-\frac{1}{8}x^2-\frac{1}{16}x^3+o(x^3)
 $$
 #### **5.3 Sottrazione e semplificazioni**
@@ -121,29 +109,23 @@ $$
 Calcoliamo:
 
 $$
-
 \sqrt{1+x}-\sqrt{1-x}
-
 $$
 $$
-\left(1+\frac{1}{2}x-\frac{1}{8}x^2+\frac{1}{16}x^3+o(x^3)\right) =
-
+\left(1+\frac{1}{2}x-\frac{1}{8}x^2+\frac{1}{16}x^3+o(x^3)\right) -
 \left(1-\frac{1}{2}x-\frac{1}{8}x^2-\frac{1}{16}x^3+o(x^3)\right)
-
 $$
 
 I termini costanti si eliminano, i termini in $x^2$ si eliminano, e rimane:
 
 $$
 \sqrt{1+x}-\sqrt{1-x} =
-
 x+\frac{1}{8}x^3+o(x^3)
 $$
 Ora sottraiamo $x$:
 
 $$
 \sqrt{1+x}-\sqrt{1-x}-x =
-
 \frac{1}{8}x^3+o(x^3)
 $$
 #### **5.4 Conclusione**
@@ -151,9 +133,7 @@ $$
 Da:
 $$
 \sqrt{1+x}-\sqrt{1-x}-x =
-
 \frac{1}{8}x^3+o(x^3)
-
 $$
 segue che:
 
@@ -186,9 +166,7 @@ Quindi, in un limite, un termine di ordine $2$ è **trascurabile** rispetto a un
 Il ragionamento porta a ridurre il limite a quello notevole:
 
 $$
-
 \lim_{x \to 0}\frac{\sin x}{x}=1
-
 $$
 
 ---
@@ -198,17 +176,13 @@ La parte principale permette di capire **come appare il grafico** vicino a $0$ s
 
 Se:
 $$
-
 f(x) \sim \frac{x}{2} \quad (x \to 0)
-
 $$
 
 allora vicino a $0$ il grafico di $f(x)$ sarà molto simile a quello della retta:
 
 $$
-
 y=\frac{x}{2}
-
 $$
 
 Quindi la funzione “si comporta come” quella retta in prima approssimazione.
@@ -222,17 +196,19 @@ Il concetto di parte principale e ordine:
     
 - ma si può definire anche per:
 $$
-
 x \to x_0 \neq 0
-
 $$
 
 e anche per:
 $$
-
 x \to +\infty
-
 $$
+
+Cambia solo l'**infinitesimo campione** con cui si confronta:
+
+- per $x\to x_0$ finito, il campione è $(x-x_0)$: si scrive $f(x)\sim k\,(x-x_0)^\alpha$ (esempio: $\sin(x-1)\sim(x-1)$ per $x\to 1$);
+- per $x\to+\infty$ e $f$ infinitesima, il campione è $\dfrac{1}{x}$: ordine $\alpha$ significa $f(x)\sim\dfrac{k}{x^\alpha}$ (esempio: $\dfrac{2x+1}{x^3}\sim\dfrac{2}{x^2}$, infinitesimo di ordine $2$);
+- specularmente, per una funzione **infinita** si parla di **ordine di infinito**: $f(x)\sim k\,x^\alpha$ per $x\to+\infty$ (esempio: $\sqrt{x^4+x}\sim x^2$, infinito di ordine $2$). Attenzione: esistono infiniti "fuori scala" rispetto ai campioni $x^\alpha$, come $e^x$ (di ordine superiore a ogni $\alpha$) e $\ln x$ (di ordine inferiore a ogni $\alpha>0$), per i quali non si assegna un ordine reale.
 
 ---
 ### **10. Idea chiave da portare a casa**

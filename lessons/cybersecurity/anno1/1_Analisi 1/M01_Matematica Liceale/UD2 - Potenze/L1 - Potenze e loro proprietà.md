@@ -21,7 +21,7 @@ Gli esponenti reciproci, razionali e reali verranno affrontati nelle lezioni suc
 
 ---
 
-## **2. Definizione di potenza con esponente intero positivo**
+### **2. Definizione di potenza con esponente intero positivo**
 
 Sia $a \in \mathbb{R}$ e $n \in \mathbb{N}$ con $n \ge 1$.
 
@@ -45,7 +45,7 @@ la potenza è un’operazione **ripetitiva**, non una moltiplicazione “strana�
 
 ---
 
-## **3. Il caso $n = 0$**
+### **3. Il caso $n = 0$**
 
 Per ogni $a \neq 0$ si definisce:
 
@@ -69,7 +69,7 @@ $$
 
 ---
 
-## **4. Esponente negativo: significato strutturale**
+### **4. Esponente negativo: significato strutturale**
 
 Per $a \neq 0$ e $n \in \mathbb{N}$, si definisce:
 
@@ -89,9 +89,9 @@ l’esponente negativo **non cambia il tipo di numero**, ma ne inverte il ruolo 
 
 ---
 
-## **5. Riassunto delle definizioni fondamentali**
+### **5. Riassunto delle definizioni fondamentali**
 
-Per $a \neq 0$:
+Per $a\ne0$:
 
 - $a^n$ con $n>0$ → prodotto ripetuto
     
@@ -102,15 +102,17 @@ Per $a \neq 0$:
 
 Queste tre definizioni sono **la base di tutto**.
 
+Per la base nulla bisogna invece distinguere: $0^n=0$ per ogni intero $n>0$, mentre $0^0$ non viene definito in questo contesto e $0^{-n}$ non esiste perché richiederebbe una divisione per zero.
+
 ---
 
-## **6. Proprietà fondamentali delle potenze**
+### **6. Proprietà fondamentali delle potenze**
 
 Tutte le proprietà che seguono valgono per **esponenti interi**, e derivano direttamente dalla definizione.
 
 ---
 
-### **6.1 Prodotto di potenze con la stessa base**
+#### **6.1 Prodotto di potenze con la stessa base**
 
 $$  
 a^m \cdot a^n = a^{m+n}  
@@ -126,7 +128,7 @@ Questa proprietà vale **anche con esponenti negativi**, purché $a \neq 0$.
 
 ---
 
-### **6.2 Quoziente di potenze con la stessa base**
+#### **6.2 Quoziente di potenze con la stessa base**
 
 $$  
 \frac{a^m}{a^n} = a^{m-n}  
@@ -144,7 +146,7 @@ $$
 
 ---
 
-### **6.3 Potenza di una potenza**
+#### **6.3 Potenza di una potenza**
 
 $$  
 (a^m)^n = a^{mn}  
@@ -160,7 +162,7 @@ Questa proprietà è spesso fonte di errori se non si capisce che **gli esponent
 
 ---
 
-### **6.4 Potenza di un prodotto**
+#### **6.4 Potenza di un prodotto**
 
 $$  
 (ab)^n = a^n b^n  
@@ -174,7 +176,7 @@ $$
 
 ---
 
-### **6.5 Potenza di un quoziente**
+#### **6.5 Potenza di un quoziente**
 
 $$  
 \left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}  
@@ -183,13 +185,13 @@ $$
 
 ---
 
-## **7. Ruolo del segno della base**
+### **7. Ruolo del segno della base**
 
 Il segno della base interagisce con la **parità dell’esponente**.
 
 ---
 
-### **7.1 Esponente pari**
+#### **7.1 Esponente pari**
 
 Se $n$ è **pari**, allora:
 
@@ -208,7 +210,7 @@ Esempi:
 
 ---
 
-### **7.2 Esponente dispari**
+#### **7.2 Esponente dispari**
 
 Se $n$ è **dispari**, allora:
 
@@ -225,7 +227,7 @@ Esempi:
 
 ---
 
-### **7.3 Sintesi fondamentale**
+#### **7.3 Sintesi fondamentale**
 
 - esponente **pari** → il segno si perde
     
@@ -245,7 +247,7 @@ Questo fatto è **cruciale** per:
 
 ---
 
-## **8. Attenzione alle parentesi (errore tipico)**
+### **8. Attenzione alle parentesi (errore tipico)**
 
 Un errore frequentissimo è confondere:
 
@@ -265,7 +267,7 @@ l’esponente agisce **solo su ciò che è tra parentesi**.
 
 ---
 
-## **9. Potenze e confronto tra numeri**
+### **9. Potenze e confronto tra numeri**
 
 Se $a>1$:
 
@@ -293,7 +295,7 @@ Questi concetti verranno formalizzati quando parleremo di:
 
 ---
 
-## **10. Collegamento con polinomi**
+### **10. Collegamento con polinomi**
 
 Ogni **polinomio** è una combinazione lineare di potenze di $x$:
 
@@ -310,7 +312,7 @@ Quindi:
 
 ---
 
-## **11. Collegamento con lo studio del segno**
+### **11. Collegamento con lo studio del segno**
 
 Il segno di $x^n$ dipende da:
 
@@ -330,7 +332,33 @@ Questo sarà la base per:
 
 ---
 
-## **12. Checklist finale (da Analisi 1)**
+### **12. False proprietà da riconoscere**
+
+Le leggi delle potenze riguardano prodotti e quozienti, non somme. In generale:
+
+$$
+(a+b)^n\ne a^n+b^n
+$$
+
+Per esempio, $(1+1)^2=4$ mentre $1^2+1^2=2$. Analogamente:
+
+$$
+a^{m+n}=a^m\cdot a^n\ne a^m+a^n
+$$
+
+e il segno richiede le parentesi:
+
+$$
+(-a)^n=
+\begin{cases}
+a^n & n\text{ pari} \\
+-a^n & n\text{ dispari}
+\end{cases}
+$$
+
+Non è quindi vero che $(-a)^n=-a^n$ per ogni $n$.
+
+### **13. Checklist finale (da Analisi 1)**
 
 Devi saper fare **senza esitazione**:
 
@@ -357,7 +385,7 @@ Devi saper fare **senza esitazione**:
 
 ---
 
-### **13. Ponte verso la prossima lezione**
+### **14. Ponte verso la prossima lezione**
 
 Nella **UD2 L2** introdurremo:
 
