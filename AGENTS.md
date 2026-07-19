@@ -85,8 +85,8 @@
 
 ### Focus Operativo Corrente
 
-- Il lavoro principale è ora `lessons/cybersecurity/anno1/3_Programmazione`.
-- Il ciclo pianificato di audit, perfezionamento e rendering del corso è completato; il prossimo task sarà definito con l'utente.
+- Il lavoro principale è ora `lessons/cybersecurity/anno2/4_Basi Di Dati/M11_Esami_passati`.
+- L'audit e la soluzione dei tre appelli 2026 sono completati; il prossimo task della materia è il recupero degli allegati mancanti indicati sotto, se e quando saranno forniti dall'utente.
 
 ### Programmazione [COMPLETED]
 
@@ -100,6 +100,12 @@
 - Tracce Java, prima metà (`E0_esercizi_yt`, `E1_esercizi_introduttivi`, `E2_gestionali`): [COMPLETED] — letti e revisionati integralmente 43 sorgenti Java e 12 risorse di supporto; corretti IVA scorporata, vittoria al decimo tentativo, credito della slot, countdown e sveglia, gestione audio, validazioni e domande ambigue del quiz; ripristinati gli invarianti di ID, copie, prestiti e restituzioni nei cinque gestionali; ricostruito il dizionario dell’impiccato in 2.627 parole uniche eliminando righe concatenate e corrotte; verificati entrambi i WAV; 43/43 sorgenti compilati insieme con Java 17 e `-Xlint:all -Werror`, 26 flussi applicativi eseguiti, test di dominio superati e build completa riuscita.
 - Tracce Java, seconda metà (`E3_simulazione_giochi`, `E4_avanzati`, `E5_Giochi`): [COMPLETED] — letti e revisionati integralmente 24 sorgenti Java e 7 README; corretti validazione e gestione degli input, proprietà dei `Scanner`, rimozioni sicure dalle liste, ordinamenti deterministici, assegnazione best-fit dei tavoli, voto 31 erroneamente accettato e incapsulamento dei voti; sostituito il login vulnerabile basato su `String.hashCode()` con PBKDF2-HMAC-SHA-256, salt casuale e confronto a tempo costante; corretti entry point, countdown, collisioni AABB, rimbalzi e stato dei tasti di PinkPong; riallineata integralmente la documentazione al codice; 24/24 sorgenti compilati insieme con Java 17 e `-Xlint:all -Werror`, 7 gruppi di test comportamentali e di dominio superati, 7/7 README controllati e build completa riuscita.
 - Renderer sorgenti e risorse: [COMPLETED] — esteso chirurgicamente il tree frontend ai 388 file pubblicabili di Programmazione; aggiunto un viewer dedicato per 106 file C, 2 header, 201 file Java e 35 file testuali con highlighting, numerazione righe, copia, ritorno a capo, statistiche, ricerca e navigazione interna; aggiunti viewer nativi per 4 immagini e 2 WAV; gestiti in sicurezza percorsi con `&` e `+`, MIME e richieste concorrenti; verificate 350/350 copie byte-identiche, build di produzione, server di sviluppo e suite Playwright desktop/mobile senza errori.
+
+### Basi di Dati [COMPLETED]
+
+- Audit M1-M10 per preparazione d'esame: [COMPLETED] — inventariati 125 file Markdown e confrontati tutti gli argomenti richiesti dai tre appelli del 2026 con modello/algebra relazionale, SQL, progettazione E-R, transazioni/recovery/concorrenza, basi distribuite, regole attive e data mining; confermata la copertura delle nozioni e isolati tre soli gap metodologici.
+- M11 — Appelli 08/05, 23/05 e 03/07/2026: [COMPLETED] — esaminate visualmente tutte le 6 pagine disponibili; create 3 soluzioni discorsive complete con tracce originali, riferimenti a M1-M10, query SQL/algebra, schemi E-R testuali, recovery, serializzabilità, 2PC, deadlock, trigger, timestamp e regole di associazione; aggiunta `Approfondimenti_per_Esame` con audit di copertura e lezioni su limiti di cardinalità, conteggio degli schedule equivalenti e limiti supporto/confidenza; validati 7 Markdown, 382 formule KaTeX, link, build Vite e rendering Playwright.
+- M11 — Allegati non presenti nelle fonti: [NEXT TASK] — se forniti, completare le classificazioni della Domanda 4 e le tabelle timestamp dell'Esercizio 1 del 23/05, la tabella timestamp dell'Esercizio 4 dell'08/05 e la trascrizione dello schedule dell'Esercizio 3 dell'08/05 oggi parzialmente coperto da annotazioni manoscritte.
 
 ### Architettura degli elaboratori [COMPLETED]
 
