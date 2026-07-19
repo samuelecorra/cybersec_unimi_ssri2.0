@@ -88,11 +88,13 @@
 - Da ora il lavoro principale passa a Statistica e Crittografia.
 - Per i prossimi prompt integrativi, privilegiare l'avanzamento di queste due materie.
 
-### Architettura degli elaboratori [IN PROGRESS]
+### Architettura degli elaboratori [COMPLETED]
 
 - M1 – Fondamenti architetturali (UD1-UD3, 10 lezioni): [COMPLETED] — letto e confrontato integralmente `M1doc.pdf` (98 pagine); perfezionate le lezioni su rappresentazione analogica/digitale, codifiche numeriche e non numeriche, complemento a 2, algebra booleana, porte logiche e bistabili; verificati formule, calcoli, rendering KaTeX e accesso ai PDF originali dal frontend.
 - M2 – Linguaggio macchina (UD1-UD4, 10 lezioni): [COMPLETED] — letto e confrontato integralmente `M2doc.pdf` (87 pagine, incluse figure, annotazioni e schermate); riallineate le lezioni su macchina di von Neumann, bus, ISA LC-2, programmi macchina, assembly, assembler a due passate, simulatore/debugger, I/O ASCII e sottoprogrammi di shift; corretti indirizzamento 7+9, codifiche ed esempi; verificati KaTeX, calcoli LC-2, build, rendering delle dieci lezioni e accesso al PDF originale dal frontend.
-- M3 – Architettura del calcolatore: [NEXT TASK]
+- M3 – Architettura del calcolatore (UD1-UD5, 10 lezioni): [COMPLETED] — letto e rielaborato integralmente `M3doc.pdf` (64 pagine, incluse annotazioni, tabelle e schemi circuitali); create da zero le lezioni su stadi di uscita e bus, chip SRAM/DRAM/ROM, banchi di memoria, I/O a controllo di programma, interrupt cablato e vettorizzato con PIC, DMA e cooperazione hardware/software; corretti i refusi $2^{12}=4056$ e `AB12–AB11`; verificati KaTeX, struttura Markdown, build, indicizzazione delle dieci lezioni e accesso al PDF originale dal frontend.
+- M4 – Struttura della CPU (UD1-UD3, 7 lezioni): [COMPLETED] — letto e rielaborato integralmente `M4doc.pdf` (41 pagine, incluse annotazioni e schemi circuitali); create da zero le lezioni su datapath e control path della CPU didattica YM-0, CU cablata e microprogrammata, organizzazione dell'ALU, sommatori ripple-carry/carry look-ahead e moltiplicatore a matrice; corretti i refusi “Complex Instruction Set Compute” e `ADD/SUB=2`; verificati microcodice, formule, KaTeX, build, indicizzazione delle sette lezioni e accesso al PDF originale dal frontend.
+- M5 – Principali linee di evoluzione architetturale (UD1-UD2, 7 lezioni): [COMPLETED] — letto e rielaborato integralmente `M5doc.pdf` (48 pagine, incluse tabelle, grafici e diagrammi temporali); create da zero le lezioni su località e gerarchia di memoria, cache direct-mapped/fully associative/set-associative, politiche di scrittura, memoria virtuale, pipeline, hazard e relative contromisure; corretti l'hit ratio $N_{hit}/(N_{hit}+N_{miss})$ e l'espansione LRU in “Least Recently Used”; verificati mapping, formule, KaTeX, build, indicizzazione delle sette lezioni e accesso al PDF originale dal frontend.
 
 ### Sicurezza Sistemi e Reti [IN PROGRESS]
 
