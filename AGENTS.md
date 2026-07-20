@@ -107,6 +107,12 @@
 - M11 — Appelli 08/05, 23/05 e 03/07/2026: [COMPLETED] — esaminate visualmente tutte le 6 pagine disponibili; create 3 soluzioni discorsive complete con tracce originali, riferimenti a M1-M10, query SQL/algebra, schemi E-R testuali, recovery, serializzabilità, 2PC, deadlock, trigger, timestamp e regole di associazione; aggiunta `Approfondimenti_per_Esame` con audit di copertura e lezioni su limiti di cardinalità, conteggio degli schedule equivalenti e limiti supporto/confidenza; validati 7 Markdown, 382 formule KaTeX, link, build Vite e rendering Playwright.
 - M11 — Allegati non presenti nelle fonti: [NEXT TASK] — se forniti, completare le classificazioni della Domanda 4 e le tabelle timestamp dell'Esercizio 1 del 23/05, la tabella timestamp dell'Esercizio 4 dell'08/05 e la trascrizione dello schedule dell'Esercizio 3 dell'08/05 oggi parzialmente coperto da annotazioni manoscritte.
 
+### Algoritmi e Strutture Dati [COMPLETED]
+
+- Audit M1-M11 per preparazione d'esame: [COMPLETED] — lette visualmente tutte le 9 fotografie relative a 5 prove tra gennaio 2025 e marzo 2026; confrontate 47 domande/esercizi con gli 11 moduli esistenti e isolati soltanto cinque gap: MergeSort/QuickSort, Prim/tagli, confronto Fibonacci, ricerca binaria di confine ed elemento maggioritario.
+- M12 — Esami passati: [COMPLETED] — create 5 soluzioni integrali con trascrizioni, riferimenti teorici, dimostrazioni, pseudocodice e svolgimenti passo-passo di Dijkstra, Prim, Kruskal, DFS, HeapSort, hash, Moore, QuickSort e KMP; aggiunta `Approfondimenti_per_Esame` con matrice di copertura e 4 lezioni autonome; verificate 793 formule KaTeX, link, calcoli algoritmici, build Vite e rendering desktop/mobile.
+- Anomalie delle fonti: [COMPLETED] — documentata l'intestazione incoerente dell'appello archiviato come 21/01/2026, il caso base mancante nello pseudocodice `MA` e il frammento RBAC estraneo del 09/01/2026 privo della tabella richiamata, senza inventare dati mancanti né considerarli lacune del corso.
+
 ### Architettura degli elaboratori [COMPLETED]
 
 - M1 – Fondamenti architetturali (UD1-UD3, 10 lezioni): [COMPLETED] — letto e confrontato integralmente `M1doc.pdf` (98 pagine); perfezionate le lezioni su rappresentazione analogica/digitale, codifiche numeriche e non numeriche, complemento a 2, algebra booleana, porte logiche e bistabili; verificati formule, calcoli, rendering KaTeX e accesso ai PDF originali dal frontend.
