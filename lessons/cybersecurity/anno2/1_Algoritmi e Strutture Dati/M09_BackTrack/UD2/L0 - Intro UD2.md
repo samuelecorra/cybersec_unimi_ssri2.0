@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 2 - – String Matching**
+# **Lezione 0 - Intro Unità Didattica 2 – String Matching**
 
 
 In questa unità si affronta uno dei problemi più importanti e diffusi nell’informatica teorica e applicata: il **problema del riconoscimento di stringhe** (_string matching_).  

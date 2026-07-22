@@ -95,7 +95,7 @@ A ogni passo, l’algoritmo aggiunge un arco $[i,j]$ che **collega due component
 
 Formalmente:  
 $$  
-A_{k-1} = A_k \cup { [i, j] }  
+A_{k-1} = A_k \cup \{ [i, j] \}  
 $$  
 dove $i$ e $j$ appartengono a **due componenti distinte** di $F_k$.  
 Per induzione, si mostra che vengono calcolate, nell’ordine, $F_n, F_{n-1}, …, F_1$, fino a ottenere l’unico albero di copertura.

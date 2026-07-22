@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Schema generale**
+# **Lezione 0 - Intro Unità Didattica 1 – Schema generale**
 
 
 In questa unità viene introdotto lo **schema generale della tecnica di programmazione dinamica**, evidenziandone la struttura logica, le componenti fondamentali e le differenze rispetto alla tecnica **greedy**.

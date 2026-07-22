@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 2 - – Classificazione di problemi computazionali**
+# **Lezione 0 - Intro Unità Didattica 2 – Classificazione di problemi computazionali**
 
 
 In questa unità entriamo nel cuore della **teoria della complessità**, imparando a **classificare formalmente i problemi** in base alla loro difficoltà computazionale.

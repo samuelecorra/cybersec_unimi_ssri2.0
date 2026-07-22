@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - Schema generale**
+# **Lezione 0 - Intro Unità Didattica 1 - Schema generale**
 
 
 La prima unità del modulo è dedicata allo **schema generale** della tecnica “Divide et Impera”.  

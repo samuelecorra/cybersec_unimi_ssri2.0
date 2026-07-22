@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 3 - Alberi bilanciati di ricerca**
+# **Lezione 0 - Intro Unità Didattica 3 - Alberi bilanciati di ricerca**
 
 
 ## **Introduzione**

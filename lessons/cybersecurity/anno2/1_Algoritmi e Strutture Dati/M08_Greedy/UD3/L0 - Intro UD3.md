@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 3 - – Scheduling di programmi**
+# **Lezione 0 - Intro Unità Didattica 3 – Scheduling di programmi**
 
 
 In questa unità viene affrontato il **problema dello scheduling**, ossia la **pianificazione ottimale dell’esecuzione di programmi o attività** su un’unica risorsa (come un processore, una macchina o un canale di comunicazione).  

@@ -16,7 +16,7 @@ Tuttavia, in questo caso specifico, vedremo che **il criterio di ottimalità non
 Sia dato un insieme di elementi:
 
 $$  
-N = { e_i : i = 1, \dots, n }  
+N = \{ e_i : i = 1, \dots, n \}  
 $$
 
 Per ogni coppia di elementi $(e_i, e_j)$ è definita una **funzione di diversità**:
@@ -138,7 +138,7 @@ Osserviamo che:
 
 - Se $M = \emptyset$, allora $D_i = 0 \quad \forall i \in N$
     
-- Se $M = {j}$, allora $D_i = d_{ij}$
+- Se $M = \{j\}$, allora $D_i = d_{ij}$
     
 - Se aggiungiamo $k$ a $M$, allora per ogni $i \in N \setminus M$:
     

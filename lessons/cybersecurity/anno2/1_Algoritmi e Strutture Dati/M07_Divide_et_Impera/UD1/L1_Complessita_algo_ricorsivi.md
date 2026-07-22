@@ -57,7 +57,7 @@ Quando analizziamo algoritmi ricorsivi, il loro comportamento può essere espres
 Una relazione di ricorrenza generale può essere scritta nella forma:
 
 $$  
-T(n) = a_i , T(n - i) + c,n^{\beta}  
+T(n) = a_i \, T(n - i) + c \, n^{\beta}  
 $$
 
 dove:
@@ -136,7 +136,7 @@ Esiste una classe particolare di relazioni di ricorrenza, chiamate **partizioni 
 In questi casi, se la fase di divisione e quella di combinazione dei risultati richiedono **tempo polinomiale**, la funzione di complessità assume la forma:
 
 $$  
-T(n) = a,T!\left(\frac{n}{b}\right) + c,n^{\beta}  
+T(n) = a\,T\!\left(\frac{n}{b}\right) + c\,n^{\beta}  
 $$
 
 dove:
@@ -156,7 +156,7 @@ Siano $a \ge 1$ e $b \ge 2$ costanti intere, $c > 0$, $d \ge 0$ e $\beta \ge 0$ 
 Posta la relazione:
 
 $$  
-T(n) = a,T!\left(\frac{n}{b}\right) + c,n^{\beta}  
+T(n) = a\,T\!\left(\frac{n}{b}\right) + c\,n^{\beta}  
 $$
 
 si applica il **teorema delle ricorrenze lineari con partizione bilanciata**, che generalizza il caso precedente e sarà essenziale per analizzare gli algoritmi _Divide et Impera_.
@@ -185,7 +185,7 @@ boolean ricbin(dizionario *D, chiave k, int i, int j) {
 Per la ricerca binaria, la relazione di ricorrenza è:
 
 $$  
-T(n) = T!\left(\frac{n}{2}\right) + c  
+T(n) = T\!\left(\frac{n}{2}\right) + c  
 $$
 
 Qui $a = 1$ e $b = 2$, da cui segue $\alpha = \beta = 0$.  

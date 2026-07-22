@@ -196,7 +196,7 @@ $$
 O(n \log n)  
 $$
 
-Infine, la costruzione della soluzione $S^*$ dai dati del vettore $r[,]$ costa $O(n)$.
+Infine, la costruzione della soluzione $S^*$ dai dati del vettore $r[\cdot]$ costa $O(n)$.
 
 **Complessità complessiva:**
 

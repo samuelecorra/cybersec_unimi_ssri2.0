@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Cammini minimi**
+# **Lezione 0 - Intro Unità Didattica 1 – Cammini minimi**
 
 
 In questa unità si affronta il **problema dei cammini minimi**, uno dei temi centrali dell’informatica teorica e applicata.  

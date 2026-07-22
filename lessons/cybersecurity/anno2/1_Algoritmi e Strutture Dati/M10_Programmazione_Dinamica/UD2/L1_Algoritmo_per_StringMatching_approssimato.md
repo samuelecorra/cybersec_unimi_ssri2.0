@@ -57,9 +57,9 @@ Il valore di $D[i, j]$ può assumere tre diverse forme in base all’operazione 
 $$  
 D[i, j] = \min  
 \begin{cases}  
-D[i-1, j-1] & \text{se } p_i = t_j \ \  
-D[i-1, j-1] + 1 & \text{(sostituzione se } p_i \neq t_j) \ \  
-D[i-1, j] + 1 & \text{(cancellazione in } P) \ \  
+D[i-1, j-1] & \text{se } p_i = t_j \\  
+D[i-1, j-1] + 1 & \text{(sostituzione se } p_i \neq t_j) \\  
+D[i-1, j] + 1 & \text{(cancellazione in } P) \\  
 D[i, j-1] + 1 & \text{(inserimento in } T)  
 \end{cases}  
 $$

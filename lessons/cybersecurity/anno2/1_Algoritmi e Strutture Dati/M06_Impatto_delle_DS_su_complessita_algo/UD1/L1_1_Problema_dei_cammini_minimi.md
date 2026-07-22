@@ -57,9 +57,9 @@ Supponiamo di voler trovare il percorso più breve dal nodo 1 al nodo 6.
 
 Esempio di due possibili cammini:
 
-- $P_{16} = {(1,3), (3,4), (4,6)}$ con costo $C(P_{16}) = 7$
+- $P_{16} = \{(1,3), (3,4), (4,6)\}$ con costo $C(P_{16}) = 7$
     
-- $P_{16} = {(1,2), (2,5), (5,4), (4,6)}$ con costo $C(P_{16}) = 6$
+- $P_{16} = \{(1,2), (2,5), (5,4), (4,6)\}$ con costo $C(P_{16}) = 6$
     
 
 Poiché $6 < 7$, il cammino minimo è il secondo, con costo $6$.
@@ -71,7 +71,7 @@ Poiché $6 < 7$, il cammino minimo è il secondo, con costo $6$.
 Una **soluzione ammissibile** al problema dei cammini minimi è composta da $n-1$ cammini, uno per ogni nodo diverso dal sorgente $r$.  
 Affinché la soluzione sia valida, devono essere rispettate due condizioni fondamentali:
 
-1. Ogni nodo $u \in N \setminus {r}$ deve essere raggiungibile da $r$.
+1. Ogni nodo $u \in N \setminus \{r\}$ deve essere raggiungibile da $r$.
     
 2. Non devono esistere **cicli di costo negativo**.
     
@@ -90,7 +90,7 @@ Analizzando tutti i cammini che partono dal nodo sorgente $r$, si osserva che:
 - ma non possono coincidere nella parte finale, altrimenti esisterebbero due cammini distinti che raggiungono lo stesso nodo.
     
 
-Da questa osservazione segue che la soluzione ammissibile può essere rappresentata come un **albero di copertura** $T$ del grafo $G$, **radicato in $r$**, che contiene un cammino minimo da $r$ a ogni nodo $u \in N \setminus {r}$.
+Da questa osservazione segue che la soluzione ammissibile può essere rappresentata come un **albero di copertura** $T$ del grafo $G$, **radicato in $r$**, che contiene un cammino minimo da $r$ a ogni nodo $u \in N \setminus \{r\}$.
 
 ---
 

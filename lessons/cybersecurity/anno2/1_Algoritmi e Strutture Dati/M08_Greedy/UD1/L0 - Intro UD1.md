@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Schema generale**
+# **Lezione 0 - Intro Unità Didattica 1 – Schema generale**
 
 
 In questa unità viene presentato lo **schema generale degli algoritmi greedy**, ossia la struttura logica comune a tutti gli algoritmi che seguono questo approccio.

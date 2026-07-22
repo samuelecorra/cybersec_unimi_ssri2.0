@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Problemi facili e difficili: strumenti di analisi**
+# **Lezione 0 - Intro Unità Didattica 1 – Problemi facili e difficili: strumenti di analisi**
 
 
 In questa prima unità entriamo nel cuore della **teoria della complessità computazionale**, affrontando la distinzione tra **problemi facili** e **problemi difficili** in base al **tempo necessario** per calcolare una soluzione.

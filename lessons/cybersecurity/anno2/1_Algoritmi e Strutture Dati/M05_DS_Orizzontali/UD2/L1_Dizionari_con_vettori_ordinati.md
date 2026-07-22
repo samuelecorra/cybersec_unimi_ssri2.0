@@ -85,13 +85,13 @@ L’ordinamento delle chiavi permette di verificare l’appartenenza di una chia
 
 #### **Principio**
 
-Si considera la chiave mediana v del vettore:
+Si considera la chiave mediana $v$ del vettore:
 
-- Se ( v < k ), la chiave cercata si trova **nella metà destra** del vettore.
+- Se $v < k$, la chiave cercata si trova **nella metà destra** del vettore.
     
-- Se ( v > k ), la chiave cercata si trova **nella metà sinistra**.
+- Se $v > k$, la chiave cercata si trova **nella metà sinistra**.
     
-- Se ( v = k ), la chiave è **trovata** e la ricerca termina.
+- Se $v = k$, la chiave è **trovata** e la ricerca termina.
     
 
 Il processo viene **ripetuto ricorsivamente** sulla metà in cui la chiave potrebbe trovarsi.

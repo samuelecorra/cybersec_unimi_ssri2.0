@@ -109,11 +109,11 @@ Per ridurre la profondità massima delle foglie:
 
 #### **Complessità (1)**
 
-Analizziamo la sequenza di fusioni in cui un generico elemento ( x ) è coinvolto.
+Analizziamo la sequenza di fusioni in cui un generico elemento $x$ è coinvolto.
 
-- **Caso 1:** se ( x ) appartiene all’albero più grande → il livello di ( x ) **non varia**.
+- **Caso 1:** se $x$ appartiene all’albero più grande → il livello di $x$ **non varia**.
     
-- **Caso 2:** se ( x ) appartiene all’albero più piccolo → il livello di ( x ) **aumenta di 1**, ma il nuovo albero avrà almeno **il doppio dei nodi** rispetto a quello precedente.
+- **Caso 2:** se $x$ appartiene all’albero più piccolo → il livello di $x$ **aumenta di 1**, ma il nuovo albero avrà almeno **il doppio dei nodi** rispetto a quello precedente.
     
 
 Poiché inizialmente esistono $n = |A|$ componenti singole, il numero di fusioni che possono raddoppiare la dimensione è al più $O(\log n)$.
@@ -133,7 +133,7 @@ $$
 \log_2 n  
 $$
 
-volte, quindi 3 iterazioni per ( n = 8 ).
+volte, quindi 3 iterazioni per $n = 8$.
 
 ---
 

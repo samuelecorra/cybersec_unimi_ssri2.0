@@ -25,7 +25,7 @@ Dato un **vettore di n posizioni** contenente valori binari (0 o 1), si richiede
 
 #### **Dimensione dell’input**
 
-Per costruire un insieme a partire da un vettore di dimensione ( n ):
+Per costruire un insieme a partire da un vettore di dimensione $n$:
 
 - qualsiasi algoritmo deve **scandire tutto il vettore** per verificare l’appartenenza di ciascun elemento;
     
@@ -107,7 +107,7 @@ La complessità della procedura `creaInsieme` dipende da quella dell’operatore
 | **Tipo di lista**  | **Complessità di `inserisci`** | **Complessità di `creaInsieme`** |
 | ------------------ | ------------------------------ | -------------------------------- |
 | Lista non ordinata | $O(1)$                         | $O(n)$                           |
-| Lista ordinata     | $O(n)$                         | $O(n²)$                          |
+| Lista ordinata     | $O(n)$                         | $O(n^2)$                         |
 
 In entrambi i casi, gli algoritmi risultano **ottimi** rispetto ai limiti inferiori teorici determinati.
 
@@ -119,8 +119,8 @@ In entrambi i casi, gli algoritmi risultano **ottimi** rispetto ai limiti inferi
     
 - È stata studiata la **complessità del problema** usando due metodi distinti:
     
-    - la **dimensione dei dati** $Ω(n)$,
+    - la **dimensione dei dati** $\Omega(n)$,
         
-    - gli **eventi contabili** $Ω(n)$ o $Ω(n²)$ a seconda della struttura).
+    - gli **eventi contabili** $\Omega(n)$ o $\Omega(n^2)$ a seconda della struttura.
         
 - È stata evidenziata una **forte analogia tra la gestione degli insiemi e delle liste**, sia a livello concettuale che implementativo.

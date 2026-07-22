@@ -41,7 +41,7 @@ Il grafo rappresenta una **rete di telecomunicazione** in cui:
 
 Il **numero di hop** indica quanti router vengono attraversati per passare dal nodo sorgente $r$ a un generico nodo $u$.
 
-Il problema consiste nel trovare, per ogni $u \in N \setminus {r}$, il **cammino con il numero minimo di hop** a partire da $r$.
+Il problema consiste nel trovare, per ogni $u \in N \setminus \{r\}$, il **cammino con il numero minimo di hop** a partire da $r$.
 
 ---
 
@@ -98,7 +98,7 @@ Ora però, a ogni arco $(u,v)$ è associata una **portata massima** $f_{uv}$, ci
 La **portata di un cammino $P$** è definita come:
 
 $$  
-F(P) = \min { f_{ij} : (i,j) \in P }  
+F(P) = \min \{ f_{ij} : (i,j) \in P \}  
 $$
 
 Cioè la portata massima del cammino è determinata dal **collegamento più debole** lungo quel percorso.
@@ -107,7 +107,7 @@ Cioè la portata massima del cammino è determinata dal **collegamento più debo
 
 #### **3.2. Obiettivo**
 
-Proporre un algoritmo che calcoli, per ogni $u \in N \setminus {r}$, un cammino da $r$ a $u$ **di portata massima**, cioè il cammino che consente il **massimo flusso simultaneo** tra i due nodi.
+Proporre un algoritmo che calcoli, per ogni $u \in N \setminus \{r\}$, un cammino da $r$ a $u$ **di portata massima**, cioè il cammino che consente il **massimo flusso simultaneo** tra i due nodi.
 
 ---
 
@@ -139,7 +139,7 @@ Inizializzazione:
 
 - $d_r = +\infty$
     
-- $d_u = 0$ per ogni $u \in N \setminus {r}$
+- $d_u = 0$ per ogni $u \in N \setminus \{r\}$
     
 
 ---
@@ -149,13 +149,13 @@ Inizializzazione:
 Le condizioni SPT diventano:
 
 $$  
-d_v \ge \min { d_u, f_{uv} }  
+d_v \ge \min \{ d_u, f_{uv} \}  
 $$
 
 Durante l’esecuzione, se la condizione è violata, si effettua l’aggiornamento:
 
 $$  
-\text{se } d_v < \min { d_u, f_{uv} } \text{ allora } d_v = \min { d_u, f_{uv} }  
+\text{se } d_v < \min \{ d_u, f_{uv} \} \text{ allora } d_v = \min \{ d_u, f_{uv} \}  
 $$
 
 In questo modo le etichette $d_u$ vengono progressivamente **ridotte** fino a convergere verso la portata massima effettiva di ciascun cammino.
@@ -191,6 +191,6 @@ Abbiamo applicato il modello SPT a due problemi differenti:
 |**Problema**|**Significato dei costi $c_{uv}$**|**Etichetta $d_u$**|**Condizioni SPT**|**Risultato**|
 |---|---|---|---|---|
 |Numero minimo di hop|$c_{uv} = 1$|Minimo numero di hop|Invariata|Visita BFS|
-|Portata massima|$c_{uv} = f_{uv}$|Portata massima (minimo tra archi)|$d_v \ge \min{d_u, f_{uv}}$|Cammino a portata massima|
+|Portata massima|$c_{uv} = f_{uv}$|Portata massima (minimo tra archi)|$d_v \ge \min\{d_u, f_{uv}\}$|Cammino a portata massima|
 
 In entrambi i casi, l’adattamento dell’algoritmo SPT dimostra la **flessibilità del modello dei cammini minimi**, che può essere riutilizzato in contesti diversi semplicemente cambiando la **semantica dei dati** senza alterare la **logica strutturale** dell’algoritmo.

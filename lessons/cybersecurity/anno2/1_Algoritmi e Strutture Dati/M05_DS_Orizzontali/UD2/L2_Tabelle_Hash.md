@@ -11,7 +11,7 @@ Con questa strategia:
 
 - gli **operatori principali** (inserimento, cancellazione, ricerca) hanno **complessità $O(1)$** nel caso medio;
     
-- tuttavia, nel **caso pessimo**, la complessità può degenerare fino a $**O(n)**$.
+- tuttavia, nel **caso pessimo**, la complessità può degenerare fino a **$O(n)$**.
     
 
 ---
@@ -23,7 +23,7 @@ Sia $K$ l’insieme di tutte le possibili chiavi distinte, e sia $D$ un vettore 
 L’obiettivo è definire una **funzione di accesso** (o **funzione hash**) che, data una chiave $k$, restituisca **la posizione in $D$** in cui memorizzarla:
 
 $$  
-H : K \to {1, 2, \dots, m}  
+H : K \to \{1, 2, \dots, m\}  
 $$
 
 #### **Proprietà ideale**
@@ -77,7 +77,7 @@ Quando due chiavi diverse producono lo stesso valore hash, **devono essere memor
 - evitare la formazione di **agglomerati di chiavi**.
     
 
-In genere si sceglie ( m ) come una **sovrastima** del numero di chiavi previste (spesso circa il **doppio**
+In genere si sceglie $m$ come una **sovrastima** del numero di chiavi previste (spesso circa il **doppio**
 del numero medio di chiavi attese).
 
 ---

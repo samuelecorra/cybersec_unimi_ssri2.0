@@ -106,7 +106,7 @@ In questo caso:
 Possiamo dunque scrivere la relazione di ricorrenza:
 
 $$  
-T(n) = T!\left(\frac{n}{2}\right) + c  
+T(n) = T\!\left(\frac{n}{2}\right) + c  
 $$
 
 con:

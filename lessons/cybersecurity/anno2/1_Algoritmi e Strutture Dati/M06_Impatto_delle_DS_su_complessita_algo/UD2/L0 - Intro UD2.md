@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 2 - Problemi computazionali e tecniche di progetto**
+# **Lezione 0 - Intro Unità Didattica 2 - Problemi computazionali e tecniche di progetto**
 
 
 ### **Introduzione**

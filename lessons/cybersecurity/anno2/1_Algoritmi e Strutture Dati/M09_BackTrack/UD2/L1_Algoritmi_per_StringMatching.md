@@ -75,7 +75,7 @@ L’algoritmo può essere visto come **una serie di sovrapposizioni successive**
 
 $$  
 \begin{aligned}  
-T &= 1\ 0\ 1\ 1\ 0\ 0\ 1\ 0\ 1\ 0\ 1\ 1\ 0\ 1\ 0\ 1\ 1\ 0\ 1\ 1\ 0\ 1\ 1 \  
+T &= 1\ 0\ 1\ 1\ 0\ 0\ 1\ 0\ 1\ 0\ 1\ 1\ 0\ 1\ 0\ 1\ 1\ 0\ 1\ 1\ 0\ 1\ 1 \\  
 P &= 1\ 0\ 1\ 1\ 0\ 1\ 1\ 0  
 \end{aligned}  
 $$
@@ -119,7 +119,7 @@ Questo principio è alla base dell’**algoritmo di Knuth–Morris–Pratt (KMP)
 Per rendere il backtrack efficiente, si costruisce un **vettore ausiliario `back[]`**, tale che:
 
 $$  
-back[j] = \max{h : h \le j - 2 \ \text{e} \ P[1..h-1] = P[j - h + 1..j - 1]}  
+back[j] = \max\{h : h \le j - 2 \ \text{e} \ P[1..h-1] = P[j - h + 1..j - 1]\}  
 $$
 
 In altre parole, `back[j]` indica **dove riprendere il confronto** nel pattern in caso di mismatch alla posizione $j$.

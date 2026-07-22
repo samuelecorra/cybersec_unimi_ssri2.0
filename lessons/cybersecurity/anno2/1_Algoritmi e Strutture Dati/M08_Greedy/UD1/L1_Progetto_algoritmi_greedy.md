@@ -45,7 +45,7 @@ void Greedy(insieme *A) {
 }
 ```
 
-L’algoritmo parte da un insieme $A = {a_1, \dots, a_n}$ e costruisce **incrementalmente** un sottoinsieme $S$, che rappresenta la soluzione.  
+L’algoritmo parte da un insieme $A = \{a_1, \dots, a_n\}$ e costruisce **incrementalmente** un sottoinsieme $S$, che rappresenta la soluzione.  
 Gli **elementi di A** vengono prima **ordinati** secondo un **criterio di ottimalità**, poi inseriti uno per volta in $S$ **se la loro aggiunta mantiene valida la soluzione**.
 
 Un algoritmo greedy di base si ottiene dunque **specificando l’ordinamento** e **la regola di costruzione** dell’insieme $S$.
@@ -65,7 +65,7 @@ Decrescente rispetto al valore $v_i$.
 **Costruzione dell’insieme $S$:**
 
 $$  
-S = S \cup {a_i} \quad \text{se} \quad p_i + \sum_{a_j \in S} p_j \le C  
+S = S \cup \{a_i\} \quad \text{se} \quad p_i + \sum_{a_j \in S} p_j \le C  
 $$
 
 ---

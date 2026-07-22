@@ -68,7 +68,7 @@ Le operazioni interne al ciclo `while` hanno costo $O(1)$ e vengono eseguite per
 La **complessità complessiva** risulta quindi:
 
 $$  
-O(n , m)  
+O(n \cdot m)  
 $$
 
 ---

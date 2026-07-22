@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Schema generale**
+# **Lezione 0 - Intro Unità Didattica 1 – Schema generale**
 
 
 In questa unità viene presentato lo **schema generale della tecnica di progetto Backtrack**, cioè la struttura logica e i principi comuni a tutti gli algoritmi che utilizzano la **ricerca con ritorno** per esplorare soluzioni possibili.

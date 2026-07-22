@@ -29,10 +29,10 @@ Rappresenta la **struttura matematica fondamentale** per la gestione di gruppi d
 Un insieme può essere descritto in due modi:
 
 1. **Elencando tutti gli elementi**, ad esempio:  
-    ( A = {1, 3, 5} )
+    $A = \{1, 3, 5\}$
     
 2. **Definendo una proprietà comune**, ad esempio:  
-    ( A = { x \mid x \text{ è un numero dispari minore di 6} } )
+    $A = \{ x \mid x \text{ è un numero dispari minore di } 6 \}$
     
 
 ---
@@ -42,13 +42,13 @@ Un insieme può essere descritto in due modi:
 La differenza principale tra **insiemi** e **liste** riguarda l’ordine e la molteplicità degli elementi:
 
 - Negli insiemi **non esiste un ordine** tra gli elementi:  
-    ( A = {1, 3, 5} ) e ( B = {5, 3, 1} ) sono lo **stesso insieme**.
+    $A = \{1, 3, 5\}$ e $B = \{5, 3, 1\}$ sono lo **stesso insieme**.
     
 - Nelle liste invece **l’ordine conta**:  
-    ( L_1 = [1, 3, 5] ) e ( L_2 = [5, 3, 1] ) sono **liste diverse**.
+    $L_1 = [1, 3, 5]$ e $L_2 = [5, 3, 1]$ sono **liste diverse**.
     
 - In un insieme **non sono ammesse ripetizioni**:  
-    Alla lista ( L = [1, 1, 2, 2] ) corrisponde l’insieme ( A = {1, 2} ).
+    Alla lista $L = [1, 1, 2, 2]$ corrisponde l’insieme $A = \{1, 2\}$.
     
 
 ---
@@ -57,13 +57,13 @@ La differenza principale tra **insiemi** e **liste** riguarda l’ordine e la mo
 
 Gli operatori principali che agiscono sugli insiemi sono:
 
-|**Operatore**|**Significato**|**Simbolo matematico**|
-|---|---|---|
-|Unione|( A \cup B )|unisce gli elementi dei due insiemi|
-|Intersezione|( A \cap B )|restituisce gli elementi comuni|
-|Differenza|( A \setminus B )|restituisce gli elementi di A non in B|
-|Inclusione|( A \subseteq B )|tutti gli elementi di A appartengono a B|
-|Appartenenza|( x \in A )|l’elemento x è contenuto in A|
+| **Operatore** | **Significato**   | **Simbolo matematico**                   |
+| ------------- | ----------------- | ---------------------------------------- |
+| Unione        | $A \cup B$        | unisce gli elementi dei due insiemi      |
+| Intersezione  | $A \cap B$        | restituisce gli elementi comuni          |
+| Differenza    | $A \setminus B$   | restituisce gli elementi di A non in B   |
+| Inclusione    | $A \subseteq B$   | tutti gli elementi di A appartengono a B |
+| Appartenenza  | $x \in A$         | l’elemento x è contenuto in A            |
 
 ---
 
@@ -84,17 +84,17 @@ cancella: (tipoelem, insieme) → insieme
 
 ### **6. Specifica semantica degli operatori**
 
-$$  
-\begin{cases}  
-creainsieme = A, & post: A = \emptyset \  
-insiemevuoto(A) = b, & post: b = vero \text{ sse } A = \emptyset \  
-appartiene(x,A) = b, & post: b = vero \text{ sse } x \in A \  
-unione(A,B) = C, & post: C = A \cup B \  
-intersezione(A,B) = C, & post: C = A \cap B \  
-differenza(A,B) = C, & post: C = A \setminus B \  
-inserisci(x,A) = A', & post: A' = A \cup {x} \  
-cancella(x,A) = A', & post: A' = A \setminus {x}  
-\end{cases}  
+$$
+\begin{cases}
+creainsieme() = A, & post: A = \emptyset \\
+insiemevuoto(A) = b, & post: b = \text{vero sse } A = \emptyset \\
+appartiene(x,A) = b, & post: b = \text{vero sse } x \in A \\
+unione(A,B) = C, & post: C = A \cup B \\
+intersezione(A,B) = C, & post: C = A \cap B \\
+differenza(A,B) = C, & post: C = A \setminus B \\
+inserisci(x,A) = A', & post: A' = A \cup \{x\} \\
+cancella(x,A) = A', & post: A' = A \setminus \{x\}
+\end{cases}
 $$
 
 ---
@@ -103,16 +103,16 @@ $$
 
 #### **Ipotesi**
 
-- Gli elementi dell’insieme sono identificabili da numeri interi tra 0 e ( n-1 ).
+- Gli elementi dell’insieme sono identificabili da numeri interi tra $0$ e $n-1$.
     
-- L’insieme ( A ) è rappresentato da un **vettore booleano** di ( n ) posizioni, dove:
+- L’insieme $A$ è rappresentato da un **vettore booleano** di $n$ posizioni, dove:
     
-    $$  
-    A[k] =  
-    \begin{cases}  
-    1 & \text{se } k \in A \  
-    0 & \text{se } k \notin A  
-    \end{cases}  
+    $$
+    A[k] =
+    \begin{cases}
+    1 & \text{se } k \in A \\
+    0 & \text{se } k \notin A
+    \end{cases}
     $$
     
 
@@ -148,9 +148,9 @@ void intersezione(insieme A, insieme B, insieme *C) {
 
 #### **Osservazioni sulla complessità**
 
-- `appartiene`, `inserisci`, `cancella` → **O(1)**
+- `appartiene`, `inserisci`, `cancella` → **$O(1)$**
     
-- `unione`, `intersezione`, `differenza` → **O(n)**
+- `unione`, `intersezione`, `differenza` → **$O(n)$**
     
 
 Questa rappresentazione è **semplice da implementare**, ma:
@@ -182,15 +182,15 @@ Si può rappresentare un insieme anche con una **lista** (struttura dinamica).
 
 #### **Complessità**
 
-Se gli operatori della lista sono in ( O(1) ):
+Se gli operatori della lista sono in $O(1)$:
 
 |**Operatore**|**Complessità**|
 |---|---|
-|creainsieme, insiemevuoto|O(1)|
-|appartiene, inserisci, cancella|O(n)|
-|unione, intersezione, differenza|O(n·m) con (|
+|creainsieme, insiemevuoto|$O(1)$|
+|appartiene, inserisci, cancella|$O(n)$|
+|unione, intersezione, differenza|$O(n \cdot m)$|
 
-Questo perché per ogni elemento di A è necessario **scandire tutta la lista B**.
+dove $n = \vert A \vert$ e $m = \vert B \vert$: questo perché per ogni elemento di A è necessario **scandire tutta la lista B**.
 
 ---
 
@@ -200,8 +200,8 @@ Se sugli elementi dell’insieme è definita una **relazione d’ordine totale**
 
 #### **Vantaggi**
 
-- La complessità degli operatori `unione`, `intersezione`, `differenza` migliora a **O(n + m)**.  
-    Questo è il limite ottimale, poiché la **fusione di due sequenze ordinate** ha complessità ( \Omega(n + m) ).
+- La complessità degli operatori `unione`, `intersezione`, `differenza` migliora a **$O(n + m)$**.  
+    Questo è il limite ottimale, poiché la **fusione di due sequenze ordinate** ha complessità $\Omega(n + m)$.
     
 
 #### **Svantaggi**

@@ -82,7 +82,7 @@ for (int i = 0; i < n; i++)
 Versione in pseudocodice matematico:
 
 $$  
-m = \arg\min { V[i] : i = 0, \ldots, n-1 }  
+m = \arg\min \{ V[i] : i = 0, \ldots, n-1 \}  
 $$
 
 Tuttavia, è fondamentale ricordare che anche se la scrittura è sintetica, **la complessità rimane $O(n)$**, perché la funzione `argmin` implica la scansione completa del vettore.
@@ -107,7 +107,7 @@ for each v ∈ (A ∪ B) { ... }
 ```
 
 Queste scritture sono eleganti, ma è importante **considerare il costo reale** dell’operazione.  
-Ad esempio, calcolare l’unione $A ∪ B$ può non essere lineare in tutti i casi.
+Ad esempio, calcolare l’unione $A \cup B$ può non essere lineare in tutti i casi.
 
 ---
 
@@ -182,7 +182,7 @@ Vediamo ora alcuni problemi computazionali fondamentali, ognuno rappresentato tr
 #### **3.1 Problema dello zaino (Knapsack)**
 
 **Definizione:**  
-Dati $n$ oggetti, ognuno con un **valore** $v_i$ e un **peso** $p_i$, e uno zaino con **capacità** $C$, selezionare un sottoinsieme $Z \subseteq {1, \ldots, n}$ tale che:
+Dati $n$ oggetti, ognuno con un **valore** $v_i$ e un **peso** $p_i$, e uno zaino con **capacità** $C$, selezionare un sottoinsieme $Z \subseteq \{1, \ldots, n\}$ tale che:
 
 $$  
 \sum_{i \in Z} p_i \le C \quad \text{e} \quad \sum_{i \in Z} v_i \ge k  
@@ -261,7 +261,7 @@ $$
 Dato un grafo non orientato $G = (N, A)$ con pesi $p_{uv}$ e numero di nodi pari $n = |N|$, dividere $N$ in due insiemi $N_1$ e $N_2$ di uguale cardinalità, in modo che:
 
 $$  
-\sum_{(u,v) \in A, , u \in N_1, v \in N_2} p_{uv} \le k  
+\sum_{(u,v) \in A \,:\, u \in N_1, v \in N_2} p_{uv} \le k  
 $$
 
 **Rappresentazione:**

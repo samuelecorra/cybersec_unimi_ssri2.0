@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 1 - – Insiemi**
+# **Lezione 0 - Intro Unità Didattica 1 – Insiemi**
 
 
 Gli **insiemi** rappresentano una delle strutture più fondamentali e universali della matematica e dell’informatica.  

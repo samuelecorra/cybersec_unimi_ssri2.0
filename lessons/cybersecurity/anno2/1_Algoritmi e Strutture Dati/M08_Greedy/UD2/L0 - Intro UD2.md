@@ -1,4 +1,4 @@
-# **Lezione 0 - Intro Unit? Didattica 2 - – Minimo albero di copertura**
+# **Lezione 0 - Intro Unità Didattica 2 – Minimo albero di copertura**
 
 
 In questa unità si affronta uno dei problemi fondamentali dell’informatica e della teoria dei grafi: quello del **minimo albero di copertura** (_Minimum Spanning Tree_, MST).  
