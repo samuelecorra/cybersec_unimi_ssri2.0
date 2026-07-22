@@ -55,6 +55,8 @@ Un Mfset con 5 elementi:
 
 #### **Operazioni di fusione**
 
+![](imgs/Pasted%20image%2020260722193724.png)
+
 1. `fondi(1, 2, S)`
     
 2. `fondi(3, 4, S)`
@@ -123,6 +125,8 @@ Poiché inizialmente esistono $n = |A|$ componenti singole, il numero di fusioni
 ### **6. Complessità (2): esempio illustrativo**
 
 Consideriamo un Mfset con $n = 2^3 = 8$ elementi.
+
+![](imgs/Pasted%20image%2020260722193950.png)
 
 Ad ogni fusione, si uniscono le componenti minori a quelle maggiori.  
 Nel **caso pessimo**, un nodo viene sempre unito come figlio della componente più grande (es. il nodo 1).
