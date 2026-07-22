@@ -46,6 +46,8 @@ Per $n = 7$:
 - 6 → 7
     
 
+![](imgs/Pasted%20image%2020260722170120.png)
+
 **Archi da dispari a pari:**
 
 - 1 → 2, 4, 6

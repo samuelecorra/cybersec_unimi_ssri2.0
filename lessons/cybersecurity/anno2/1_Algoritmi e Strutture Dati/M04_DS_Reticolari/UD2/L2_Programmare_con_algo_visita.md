@@ -28,6 +28,8 @@ $$
 
 Cioè: ogni arco del grafo originale viene **invertito di direzione**.
 
+![](imgs/Pasted%20image%2020260722172043.png)
+
 ---
 
 #### **Problema 2 – Orientamento di un grafo non orientato**
@@ -39,6 +41,8 @@ A^O = { (u, v), (v, u) \ | \ [u, v] \in A }
 $$
 
 In pratica, ogni arco bidirezionale $[u, v]$ del grafo non orientato viene sostituito da **due archi orientati** $(u, v)$ e $(v, u)$.
+
+![](imgs/Pasted%20image%2020260722172057.png)
 
 ---
 
@@ -165,7 +169,7 @@ $$
 
 visitato[u] =
 \begin{cases}
-\text{FALSE}, & \text{se } u \text{ non è stato visitato} \\
+\text{FALSE}, & \text{se } u \text{ non è stato visitato} \\\\
 \text{TRUE}, & \text{se } u \text{ è stato visitato}
 \end{cases}
 

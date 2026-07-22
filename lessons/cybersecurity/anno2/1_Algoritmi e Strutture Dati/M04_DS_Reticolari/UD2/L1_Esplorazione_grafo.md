@@ -52,7 +52,8 @@ In questo schema:
 - la funzione viene richiamata **ricorsivamente** per ogni nodo adiacente non ancora visitato;
     
 - la **ricorsione** gestisce implicitamente il ritorno ai nodi precedenti, come una pila.
-    
+
+![](imgs/Pasted%20image%2020260722170919.png)
 
 ---
 

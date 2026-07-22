@@ -57,6 +57,8 @@ Il grafo può essere rappresentato visivamente come una rete di collegamenti dir
 
 Esempio di applicazione: **porti e aeroporti**, dove i nodi rappresentano le città e gli archi le rotte disponibili.
 
+![](imgs/Pasted%20image%2020260722005126.png)
+
 ---
 
 ### **4. Cammini in un grafo orientato**
@@ -75,6 +77,8 @@ $$
     
 
 #### **Esempi**
+
+![](imgs/Pasted%20image%2020260722005144.png)
 
 - Cammino: 1, 2, 4, 2
     
@@ -96,11 +100,15 @@ Un grafo orientato è detto **fortemente connesso** se, per ogni coppia di nodi 
 
 > Esempio: un grafo in cui esiste un cammino da 1 → 4 ma non da 4 → 1 **non è fortemente connesso**.
 
+![](imgs/Pasted%20image%2020260722005437.png)
+
 ---
 
 ### **6. Grafi non orientati**
 
 Un **grafo non orientato** è un caso particolare in cui l’insieme degli archi è composto da **coppie non ordinate**:
+
+![](imgs/Pasted%20image%2020260722005923.png)
 
 $$  
 A = { [i, j] }  
@@ -136,6 +144,8 @@ $$
 
 Un grafo non orientato è detto **connesso** se per ogni coppia di nodi distinti $u, v$ esiste una catena che li collega.
 
+![](imgs/Pasted%20image%2020260722005955.png)
+
 ---
 
 ### **8. Grafi e alberi**
@@ -166,6 +176,8 @@ Dato un intero $k$, ci si chiede:
 
 Questo problema è noto come **Circuito Hamiltoniano**, uno dei casi classici di problema NP-difficile.
 
+![](imgs/Pasted%20image%2020260722005539.png)
+
 ---
 
 #### **Esempio 2 – Turnazione del personale**
@@ -177,7 +189,8 @@ Questo tipo di problema può essere modellato come un grafo in cui:
 - i nodi rappresentano **le persone o i turni**,
     
 - gli archi rappresentano **le relazioni di compatibilità o precedenza**.
-    
+
+![](imgs/Pasted%20image%2020260722164024.png)
 
 ---
 

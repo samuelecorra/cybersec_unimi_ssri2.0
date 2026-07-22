@@ -37,7 +37,7 @@ Gli operatori fondamentali del tipo di dato **grafo** sono:
 
 $$  
 \text{creagrafo()} = G  
-\quad \text{post: } G = (N, A), ; N = A = \varnothing  
+\quad \text{post: } G = (N, A), \ N = A = \varnothing  
 $$
 
 $$  
@@ -48,25 +48,25 @@ $$
 $$  
 \text{insnodo}(u, G) = G'  
 \quad \text{pre: } u \notin N  
-\quad \text{post: } G' = (N', A), ; N' = N \cup {u}  
+\quad \text{post: } G' = (N', A), \ N' = N \cup {u}  
 $$
 
 $$  
 \text{insarco}(u, v, G) = G'  
 \quad \text{pre: } u, v \in N \land (u, v) \notin A  
-\quad \text{post: } G' = (N, A'), ; A' = A \cup {(u, v)}  
+\quad \text{post: } G' = (N, A'), \ A' = A \cup {(u, v)}  
 $$
 
 $$  
 \text{cancnodo}(u, G) = G'  
 \quad \text{pre: } u \in N  
-\quad \text{post: } G' = (N', A), ; N' = N \setminus {u}  
+\quad \text{post: } G' = (N', A), \ N' = N \setminus {u}  
 $$
 
 $$  
 \text{cancarco}(u, v, G) = G'  
 \quad \text{pre: } (u, v) \in A  
-\quad \text{post: } G' = (N, A'), ; A' = A \setminus {(u, v)}  
+\quad \text{post: } G' = (N, A'), \ A' = A \setminus {(u, v)}  
 $$
 
 $$  
@@ -86,7 +86,7 @@ Esempio di inserimento di un nodo con peso $p$:
 $$  
 \text{insnodo}(p, u, G) = G'  
 \quad \text{pre: } u \notin N  
-\quad \text{post: } G' = (N', A), ; N' = N \cup {u}, ; peso(u) = p  
+\quad \text{post: } G' = (N', A), \ N' = N \cup {u}, \ peso(u) = p  
 $$
 
 ---
@@ -122,6 +122,8 @@ Per ogni arco $(i, j)$:
 
 #### **Esempio**
 
+![](imgs/Pasted%20image%2020260722165222.png)
+
 |Nodo|(1,2)|(2,4)|(3,2)|(4,2)|(4,3)|(1,3)|
 |---|---|---|---|---|---|---|
 |**1**|-1|0|0|0|0|-1|
@@ -156,6 +158,8 @@ e_{ij} =
 
 $$
 
+![](imgs/Pasted%20image%2020260722165412.png)
+
 #### **Osservazioni**
 
 - Se il grafo è **non orientato**, la matrice è **simmetrica**.
@@ -183,6 +187,8 @@ ogni nodo $u$ mantiene una lista con tutti i nodi $v$ tali che $(u, v) \in A$.
 |3|2|
 |4|2, 3|
 
+![](imgs/Pasted%20image%2020260722165522.png)
+
 ---
 
 #### **Vettori di adiacenza**
@@ -199,11 +205,11 @@ Si utilizzano due vettori:
 
 ### **9. Analisi delle realizzazioni**
 
-| Realizzazione                    | Spazio     | Scansione $A(u)$ | Appartenenza $(u,v)$ | Note                                |
-| -------------------------------- | ---------- | ---------------- | -------------------- | ----------------------------------- |
-| **Matrice di incidenza**         | $O(nm)$    | $O(nm)$          | —                    | Inefficiente, utile per grafi densi |
-| **Matrice di adiacenza**         | $O(n^2)$   | $O(n)$           | $O(1)$               | Accesso diretto ma memoria elevata  |
-| **Liste / vettori di adiacenza** | $O(n + m)$ | $O(              | A(u)                 | $O(\|A(u)\|)$                       |
+|Realizzazione|Spazio|Scansione $A(u)$|Appartenenza $(u,v)$|Note|
+|---|---|---|---|---|
+|**Matrice di incidenza**|$O(nm)$|$O(m)$|—|Inefficiente, utile per grafi densi|
+|**Matrice di adiacenza**|$O(n^2)$|$O(n)$|$O(1)$|Accesso diretto ma memoria elevata|
+|**Liste / vettori di adiacenza**|$O(n + m)$|$O(\lvert A(u)\rvert)$|$O(\lvert A(u)\rvert)$|Efficiente per grafi sparsi|
 
 ---
 

@@ -13,6 +13,29 @@ const RESOLVED_TREE = '\0' + VIRTUAL_TREE;
 const RESOLVED_SEARCH = '\0' + VIRTUAL_SEARCH;
 const PROGRAMMING_PREFIX = 'cybersecurity/anno1/3_Programmazione/';
 
+// Matches module/unit/course "intro" files (e.g. "L0 - Intro UD1.md",
+// "Intro M3.md", "Intro_M1.md", "00 - Intro.md", "Lezione 0 - Intro
+// all'insegnamento.md"), but not numbered lessons that merely mention
+// "Introduzione" in their own topic title (e.g. "L2 - Introduzione ai
+// Firewall.md").
+const INTRO_NAME_RE = /^(?:l0|lezione\s*0|00|0)?[\s_-]*intro/i;
+
+// These two "Intro M<n> - ..." files reuse the module-intro naming
+// convention but are actually full lessons (tens of KB of real content),
+// unlike every other "Intro M<n>.md" in the corpus (all under ~3.5 KB) —
+// keep them visible in the frontend instead of treating them as intros.
+const INTRO_EXCEPTIONS = new Set([
+  "cybersecurity/anno3/1_Computer_Forensics/M3/Intro M3 - Altri Ambiti dell'Informatica Forense.md",
+  "cybersecurity/anno3/1_Computer_Forensics/M4/Intro M4 - Simulazione Dibattimentale.md",
+]);
+
+export function isIntroFile(fileName, relativePath = fileName) {
+  const normalized = relativePath.split(path.sep).join('/');
+  if (INTRO_EXCEPTIONS.has(normalized)) return false;
+  const base = fileName.replace(/\.[^./]+$/, '');
+  return INTRO_NAME_RE.test(base.trim());
+}
+
 // Extensions to copy to dist for static hosting
 export const STATIC_EXTS = new Set([
   '.md', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp',
@@ -40,6 +63,7 @@ export const MIME_TYPES = Object.freeze({
 
 export function isTreeFile(fileName, relativePath = fileName) {
   const kind = getFileKind(fileName);
+  if (kind === 'markdown' && isIntroFile(fileName, relativePath)) return false;
   if (['markdown', 'pdf'].includes(kind)) return true;
   return ['source', 'image', 'audio'].includes(kind)
     && relativePath.split(path.sep).join('/').startsWith(PROGRAMMING_PREFIX);
