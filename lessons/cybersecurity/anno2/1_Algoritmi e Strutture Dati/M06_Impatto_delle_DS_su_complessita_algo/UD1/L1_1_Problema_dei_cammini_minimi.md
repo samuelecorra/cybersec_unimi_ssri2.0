@@ -53,6 +53,9 @@ L’obiettivo del problema è quindi determinare, per ogni nodo $u$, un cammino 
 ### **3. Esempio intuitivo**
 
 Consideriamo un grafo che rappresenta una rete di città collegate da strade, dove ogni arco ha un peso pari alla lunghezza del tratto.  
+
+![](imgs/Pasted%20image%2020260722215650.png)
+
 Supponiamo di voler trovare il percorso più breve dal nodo 1 al nodo 6.
 
 Esempio di due possibili cammini:
@@ -105,6 +108,8 @@ $$
 Per esempio, in un grafo con nodo sorgente $1$, potremmo avere:  
 $d_1 = 0$, $d_2 = 1$, $d_5 = 2$, $d_4 = 4$, $d_6 = 6$.
 
+![](imgs/Pasted%20image%2020260722215744.png)
+
 Il **Teorema di Bellman** afferma che la soluzione ammissibile individuata dall’albero $T$ è **ottima se e solo se** per ogni arco $(i,j) \in A$ valgono le seguenti condizioni:
 
 $$
@@ -135,6 +140,21 @@ L’idea alla base è:
 2. L’arco $(i,j)$ viene aggiunto all’albero al posto del precedente arco entrante in $j$.
     
 
+In pseudocodice, lo schema generale si traduce come segue:
+
+```c
+void SPT( grafo G, nodo r ) {
+    { T albero di copertura di G radicato in r };
+
+    while ( ∃ (i,j) : d_i + c_ij < d_j ) {    // violazione delle condizioni di Bellman
+        d_j = d_i + c_ij;
+        T = T ∪ {(i,j)} \ {(h,j)};             // (h,j): arco incidente in j prima della sostituzione
+    }
+}
+```
+
+L’arco $(h,j)$ è l’arco che, prima dell’aggiornamento, entrava in $j$ all’interno di $T$: la sostituzione $T \cup \{(i,j)\} \setminus \{(h,j)\}$ realizza esattamente il passo 2 appena descritto, rimpiazzando il vecchio arco entrante con quello nuovo appena scoperto.
+
 Questo processo continua finché tutte le condizioni sono verificate, e quindi l’albero risultante rappresenta l’insieme dei cammini minimi.
 
 ---
@@ -154,6 +174,34 @@ La logica di esecuzione è la seguente:
     
 
 Inizialmente tutte le etichette $d_u$ sono poste a un valore molto alto (ad esempio infinito), tranne $d_r = 0$.
+
+Il codice seguente traduce questa logica in pseudocodice, esplicitando anche l’inizializzazione dell’albero $T$ (qui rappresentato tramite il vettore dei padri) e la gestione dell’insieme $S$ con gli operatori del tipo di dato astratto **insieme** visto nel Modulo 5:
+
+```c
+void SPT( grafo G, nodo r ) {
+    albero T; insieme S; int d[n], k; nodo u, v;
+
+    for ( k = 0; k < n; k++ ) {              // inizializzazione etichette e vettore dei padri
+        T[k] = r; d[k] = MAXINT;
+    }
+    T[r] = r; d[r] = 0;
+
+    creainsieme( S ); inserisci( r, S );      // inizializzazione insieme S
+
+    while ( !insiemevuoto(S) ) {
+        u = leggi(S); cancella( u, S );       // estrazione da insieme S
+
+        for each v ∈ A(u)
+            if ( d[u] + c[u,v] < d[v] ) {      // visita adiacenti di u; verifica condizioni di Bellman
+                T[v] = u;
+                d[v] = d[u] + c[u,v];          // aggiornamento etichetta
+                if ( v ∉ S ) inserisci(v, S);
+            }
+    }
+}
+```
+
+Il vettore `T[]` funge da **vettore dei padri**: `T[v] = u` significa che, nell’albero dei cammini minimi, il padre di `v` è `u`, cioè l’arco $(u,v)$ è quello scelto per raggiungere $v$. L’operatore `A(u)` (introdotto nel Modulo 4) restituisce i nodi adiacenti a `u`, mentre `creainsieme`, `insiemevuoto`, `inserisci` e `cancella` sono gli operatori generici dell’insieme $S$: la loro **realizzazione concreta** (lista, coda, pila o heap) è proprio ciò che distinguerà, nelle prossime lezioni, gli algoritmi di Dijkstra, Johnson, Bellman-Ford-Moore, con pila e Pape-D’Esopo.
 
 ---
 

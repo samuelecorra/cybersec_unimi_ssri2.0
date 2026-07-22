@@ -24,7 +24,7 @@ Un peso negativo invalida la definitività dell'estrazione. Controesempio: $s\to
 
 **Traccia.** Confrontare gli algoritmi per cammini minimi rispetto a grafi sparsi e densi.
 
-> **Riferimento di teoria:** [M06 — Confronto delle complessità](../../M06_Impatto_delle_DS_su_complessita_algo/UD1/L4_Confrontro_tra_complessita.md).
+> **Riferimento di teoria:** [M06 — Confronto delle complessità](../../M06_Impatto_delle_DS_su_complessita_algo/UD1/L4_Confronto_tra_complessita.md).
 
 Un grafo sparso ha $|E|$ vicino a $|V|$; uno denso può avere $\Theta(|V|^2)$ archi. Nei grafi sparsi liste di adiacenza e heap evitano di scandire coppie non connesse: Dijkstra con heap binario costa $O(|E|\log|V|)$. Nei grafi densi, il costo $\Theta(|V|^2)$ della versione a matrice e selezione lineare è spesso preferibile a $O(|E|\log|V|)=O(|V|^2\log|V|)$.
 

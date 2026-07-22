@@ -30,6 +30,8 @@ Esempio:
 Supponiamo un grafo con nodo sorgente $1$ e pesi come segue:  
 $d_1 = 0$, $d_2 = 1$, $d_5 = 2$, $d_4 = 4$, $d_6 = 6$.
 
+![](imgs/Pasted%20image%2020260722220632.png)
+
 Queste etichette rappresentano i **costi minimi parziali** dei cammini dall’origine a ciascun nodo.
 
 ---
@@ -110,7 +112,8 @@ In particolare, valgono due relazioni:
     
 - **per ipotesi (condizioni di Bellman):**  
     $d_h + c_{hk} \ge d_k$
-    
+
+![](imgs/Pasted%20image%2020260722220700.png)
 
 ---
 

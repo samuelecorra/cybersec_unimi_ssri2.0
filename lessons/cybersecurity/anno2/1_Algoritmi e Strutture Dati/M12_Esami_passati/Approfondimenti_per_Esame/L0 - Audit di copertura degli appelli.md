@@ -34,7 +34,7 @@ Ogni domanda è stata confrontata con gli 11 moduli didattici esistenti. “Cope
 | 22/11/2025 | E2 | HeapSort | [M03/UD2/L2](../../M03_DS_Alberi/UD2/L2_HeapSort_e_SelectionSort.md) | Coperta |
 | 22/11/2025 | E3 | Tabelle hash, scansione lineare e doppio hash | [M05/UD2/L2](../../M05_DS_Orizzontali/UD2/L2_Tabelle_Hash.md) | Coperta |
 | 09/01/2026 | D1 | Dijkstra, complessità e archi negativi | [M06/UD1/L1.2](../../M06_Impatto_delle_DS_su_complessita_algo/UD1/L1_2_Problema_dei_cammini_minimi.md), [L2](../../M06_Impatto_delle_DS_su_complessita_algo/UD1/L2_Algo_Dijkstra_Johnson.md) | Coperta |
-| 09/01/2026 | D2 | Cammini minimi su grafi sparsi/densi | [M06/UD1/L4](../../M06_Impatto_delle_DS_su_complessita_algo/UD1/L4_Confrontro_tra_complessita.md) | Coperta |
+| 09/01/2026 | D2 | Cammini minimi su grafi sparsi/densi | [M06/UD1/L4](../../M06_Impatto_delle_DS_su_complessita_algo/UD1/L4_Confronto_tra_complessita.md) | Coperta |
 | 09/01/2026 | D3 | Fasi del progetto di algoritmi | [M06/UD2/L1](../../M06_Impatto_delle_DS_su_complessita_algo/UD2/L1_Progetto_di_algoritmi.md) | Coperta |
 | 09/01/2026 | D4 | Programmazione dinamica | [M10/UD1/L1](../../M10_Programmazione_Dinamica/UD1/L1_Progetto_di_algo_per_programmazione_dinamica.md) | Coperta |
 | 09/01/2026 | D5 | MergeSort, esempio e complessità | solo nominato in M07 | **Integrata in L1** |

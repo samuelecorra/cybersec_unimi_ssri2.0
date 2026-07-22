@@ -28,9 +28,13 @@ La **visita simmetrica** di un albero binario di ricerca restituisce sempre l’
 
 Esempio di visita simmetrica:
 
+![](imgs/Pasted%20image%2020260722213058.png)
+
 ```
 1, 5, 7, 8, 13, 17, 21, 27, 33, 37, 40, 42
 ```
+
+![](imgs/Pasted%20image%2020260722213135.png)
 
 ---
 
@@ -42,6 +46,8 @@ Il principio è analogo a quello della **ricerca binaria**:
 
 1. Si confronta la chiave cercata con l’elemento del nodo corrente.  
 2. Se non coincidono, si scende nel **sottoalbero sinistro** se la chiave è minore, oppure nel **sottoalbero destro** se la chiave è maggiore.
+
+![](imgs/Pasted%20image%2020260722214019.png)
 
 La ricerca continua fino a trovare la chiave o raggiungere una foglia.
 
@@ -64,6 +70,8 @@ $$
 O(h)
 $$
 
+![](imgs/Pasted%20image%2020260722214055.png)
+
 ---
 
 #### **Operatore `inserisci`**
@@ -76,6 +84,8 @@ Per inserire una nuova chiave:
 
 Esempio:  
 inserendo la chiave `9`, la ricerca arriva fino al nodo `13`, e l’inserimento avviene come figlio sinistro di `13`.
+
+![](imgs/Pasted%20image%2020260722214135.png)
 
 Anche `inserisci` ha complessità $O(h)$.
 
@@ -105,6 +115,8 @@ Si consideri l’eliminazione del nodo contenente il valore `33`.
 Il successore $y$ è il minimo del sottoalbero destro (ad esempio `37`).  
 Scambiando $x = 33$ con $y = 37$ e poi eliminando $x$, l’albero rimane correttamente ordinato.
 
+![](imgs/Pasted%20image%2020260722214229.png)
+
 Tutti gli operatori precedenti (`appartiene`, `min`, `inserisci`, `cancella`, `cancellamin`) hanno complessità $O(h)$.
 
 Tuttavia, l’altezza massima $h$ **non è necessariamente limitata da $\log_2 n$**, ma può arrivare fino a $n$ nel caso peggiore.  
@@ -125,6 +137,8 @@ Per questo motivo è necessario introdurre **tecniche di bilanciamento**, cioè 
 
 Supponiamo di inserire un nuovo nodo `9` che sbilancia l’albero.  
 Per ristabilire l’equilibrio si può effettuare una **rotazione** su un nodo (ad esempio sul nodo `8`), ottenendo un albero più bilanciato.
+
+![](imgs/Pasted%20image%2020260722214255.png)
 
 Le rotazioni sono operazioni locali che permettono di mantenere basse le altezze relative dei sottoalberi.
 

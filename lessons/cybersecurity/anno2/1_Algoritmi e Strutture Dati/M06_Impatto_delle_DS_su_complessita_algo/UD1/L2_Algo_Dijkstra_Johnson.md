@@ -153,6 +153,50 @@ Entrambi garantiscono la correttezza in presenza di **pesi non negativi** e diff
 
 Per visualizzare in modo intuitivo il funzionamento di questi algoritmi, è disponibile un’**applet Java** che mostra passo dopo passo come l’insieme $S$ viene aggiornato, e come i nodi vengono estratti e rilassati fino a formare l’albero dei cammini minimi.
 
+![](imgs/Pasted%20image%2020260722221057.png)
+
+---
+
+![](imgs/Pasted%20image%2020260722221114.png)
+
+In alto abbiamo una sorta di documentazione per tutto quel che sta succedendo;
+
+Nel dropdown a sinistra abbiamo invece la possibilità di selezionare le opzioni nel momento in cui dobbiamo disegnare il grafo di partenza. Quello d'esempio è il seguente:
+
+![](imgs/Pasted%20image%2020260722221244.png)
+
+Applicando il primo step:
+
+![](imgs/Pasted%20image%2020260722221309.png)
+
+Al secondo:
+
+![](imgs/Pasted%20image%2020260722221327.png)
+
+Dopodiché al terzo step:
+
+![](imgs/Pasted%20image%2020260722221345.png)
+
+Poi, estraendo il nodo C: 
+
+![](imgs/Pasted%20image%2020260722221446.png)
+
+Ed estraendo il nodo j:
+
+![](imgs/Pasted%20image%2020260722221507.png)
+
+Al passo successivo estraggo f:
+
+![](imgs/Pasted%20image%2020260722221619.png)
+
+Ancora una volta, procediamo ed estraiamo h:
+
+![](imgs/Pasted%20image%2020260722221646.png)
+
+E continuiamo fino a che...:
+
+![](imgs/Pasted%20image%2020260722221730.png)
+
 ---
 
 ### **5. Sintesi**

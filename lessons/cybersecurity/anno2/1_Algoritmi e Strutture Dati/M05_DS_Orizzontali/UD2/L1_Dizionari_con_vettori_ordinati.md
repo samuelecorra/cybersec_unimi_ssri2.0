@@ -109,7 +109,8 @@ Cercare la chiave 11 nella sequenza ordinata:
 2. Nuovo mediano = 13 → 11 < 13 ⇒ cerca a sinistra
     
 3. Nuovo mediano = 11 → trovata → **ricerca terminata**
-    
+
+![](imgs/Pasted%20image%2020260722205358.png)
 
 ---
 

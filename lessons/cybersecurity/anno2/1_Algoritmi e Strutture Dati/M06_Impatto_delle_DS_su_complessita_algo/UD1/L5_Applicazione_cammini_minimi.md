@@ -52,7 +52,8 @@ Consideriamo due possibili cammini tra i nodi $(a)$ e $(b)$:
 - il primo attraversa **1 hop**,
     
 - il secondo attraversa **2 hop**.
-    
+
+![](imgs/Pasted%20image%2020260722222618.png)
 
 L’obiettivo è chiaramente quello di **minimizzare** il numero di router intermedi.
 
