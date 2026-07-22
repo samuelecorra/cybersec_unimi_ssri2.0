@@ -17,9 +17,19 @@ const VARIABLE_SELECTOR = [
   ".katex .katex-html .mord.mathnormal",
   ".katex .katex-html .mord.mathit",
   ".katex .katex-html .mord.mainit",
+  // \operatorname{}/\mathrm{} (e.g. "MAC", "SPT"): named identifiers, not prose —
+  // unlike \text{} they should be colorized like any other variable/operator.
+  ".katex .katex-html .mord.mathrm",
 ].join(",");
 
-const LETTER_PATTERN = /^\p{L}$/u;
+// One-or-more letters, not exactly one: KaTeX silently merges adjacent italic
+// glyphs that share the same kerning correction into a single multi-letter
+// <span> (e.g. "primofiglio" renders as p/r/"im"/o/f/i/g/l/i/o — verified with
+// katex.renderToString, and it also happens to unrelated letters like "abc" →
+// "ab"/"c", so it's a font-metrics coincidence, not a word boundary). Requiring
+// exactly one letter made those merged spans invisible to the run-detection
+// below, which fragmented multi-letter identifiers into several colors.
+const LETTER_PATTERN = /^\p{L}+$/u;
 
 function cleanTokenText(text) {
   return text.replace(/​/g, "").replace(/\s+/g, "");
