@@ -69,7 +69,10 @@ dove:
 - $c > 0$ e $\beta \ge 0$: sono costanti reali che rappresentano il costo addizionale (non ricorsivo) del problema
     
 
-In generale, si considerano relazioni in cui i coefficienti $a_1, a_2, \ldots, a_h$ sono **interi non negativi** e $h$ è una costante positiva.  
+In generale, si considerano relazioni in cui i coefficienti $a_1, a_2, \ldots, a_h$ sono **interi non negativi** e $h$ è una costante positiva.
+
+$$ T(n) = \sum_{i=1}^{h} a_i T(n-i) + cn^\beta $$
+
 Tali relazioni vengono dette:
 
 - **lineari**, poiché $n$ ha grado 1 nei termini $T(n - i)$
@@ -85,6 +88,19 @@ Tali relazioni vengono dette:
 
 Siano $a_1, a_2, \ldots, a_h$ costanti intere non negative, con $h$ costante positiva, e siano $c > 0$ e $\beta \ge 0$ costanti reali.  
 Il **teorema delle ricorrenze lineari di ordine costante** permette di determinare direttamente la complessità di relazioni di questo tipo.
+
+Consideriamo una relazione di ricorrenza della forma: 
+
+$$ T(n) = \begin{cases} C, & \text{se } n \le m, \\[4pt] \displaystyle\sum_{i=1}^{h} a_iT(n-i) + cn^\beta, & \text{se } n > m, \end{cases} $$
+
+dove $C$ rappresenta il costo costante dei casi base, mentre $m$ indica la soglia al di sotto della quale la ricorrenza non viene ulteriormente sviluppata. Per determinare l'ordine di crescita di $T(n)$, si considera la somma dei coefficienti che moltiplicano i termini ricorsivi: 
+
+$$ a = \sum_{i=1}^{h} a_i. $$ 
+Il **teorema delle ricorrenze lineari di ordine costante** permette quindi di determinare direttamente la complessità della relazione distinguendo due casi:
+
+$$ T(n) = \begin{cases} O\left(n^{\beta+1}\right), & \text{se } a = 1, \\[4pt] O\left(a^n n^\beta\right), & \text{se } a \ge 2. \end{cases} $$
+
+In particolare: - se la somma dei coefficienti ricorsivi è $a=1$, la crescita è **polinomiale** e il grado aumenta di uno rispetto al termine non ricorsivo $cn^\beta$; - se la somma dei coefficienti ricorsivi è $a\ge 2$, la crescita è invece **esponenziale**, con fattore principale $a^n$, moltiplicato per il termine polinomiale $n^\beta$.
 
 #### **Esempio: funzione minima ricorsiva**
 
@@ -152,14 +168,65 @@ dove:
 
 ### **6. Teorema delle ricorrenze lineari con partizione bilanciata**
 
-Siano $a \ge 1$ e $b \ge 2$ costanti intere, $c > 0$, $d \ge 0$ e $\beta \ge 0$ costanti reali.  
-Posta la relazione:
+Siano $a \ge 1$ e $b \ge 2$ costanti intere, e siano $c > 0$, $d \ge 0$ e $\beta \ge 0$ costanti reali.
 
-$$  
-T(n) = a\,T\!\left(\frac{n}{b}\right) + c\,n^{\beta}  
+Consideriamo una relazione di ricorrenza della forma:
+
+$$
+T(n)=
+\begin{cases}
+d, & \text{se } n=1, \\[4pt]
+a\,T\!\left(\dfrac{n}{b}\right)+cn^\beta, & \text{se } n>1.
+\end{cases}
 $$
 
-si applica il **teorema delle ricorrenze lineari con partizione bilanciata**, che generalizza il caso precedente e sarà essenziale per analizzare gli algoritmi _Divide et Impera_.
+In questa relazione:
+
+- $a$ rappresenta il **numero di chiamate ricorsive** effettuate;
+- $\dfrac{n}{b}$ rappresenta la **dimensione di ciascun sottoproblema**;
+- $cn^\beta$ rappresenta il costo del lavoro svolto al di fuori delle chiamate ricorsive;
+- $d$ rappresenta il costo costante del caso base.
+
+Per applicare il teorema, si definisce:
+
+$$
+\alpha=\frac{\log a}{\log b}=\log_b a.
+$$
+
+Il valore di $\alpha$ viene quindi confrontato con l'esponente $\beta$ del termine non ricorsivo $cn^\beta$.
+
+Il **teorema delle ricorrenze lineari con partizione bilanciata** stabilisce che:
+
+$$
+T(n)=
+\begin{cases}
+O\left(n^\alpha\right), & \text{se } \alpha>\beta, \\[4pt]
+O\left(n^\alpha\log n\right), & \text{se } \alpha=\beta, \\[4pt]
+O\left(n^\beta\right), & \text{se } \alpha<\beta.
+\end{cases}
+$$
+
+Si distinguono quindi tre casi:
+
+1. **Se $\alpha>\beta$**, prevale il costo prodotto dalle chiamate ricorsive:
+
+   $$
+   T(n)=O\left(n^\alpha\right).
+   $$
+
+2. **Se $\alpha=\beta$**, il costo ricorsivo e il costo esterno alle chiamate ricorsive hanno lo stesso ordine di crescita. Compare quindi un fattore logaritmico aggiuntivo:
+
+   $$
+   T(n)=O\left(n^\alpha\log n\right).
+   $$
+
+3. **Se $\alpha<\beta$**, prevale il lavoro svolto al di fuori delle chiamate ricorsive:
+
+   $$
+   T(n)=O\left(n^\beta\right).
+   $$
+
+Questo teorema permette di analizzare direttamente numerosi algoritmi basati sulla tecnica **Divide et Impera**, nei quali il problema iniziale viene suddiviso in $a$ sottoproblemi, ciascuno di dimensione pari a circa $\dfrac{n}{b}$.
 
 ---
 

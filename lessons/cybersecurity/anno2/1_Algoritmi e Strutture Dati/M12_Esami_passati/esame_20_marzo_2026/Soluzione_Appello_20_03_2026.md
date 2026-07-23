@@ -114,6 +114,8 @@ Il costo è quindi polinomiale ma molto peggiore di $\Theta(n\log n)$. Le sovrap
 
 **Traccia.** Ordinare in senso crescente $[10,7,6,9,8,3,9,5,2,12,15]$ con QuickSort, scegliendo come pivot l'ultimo elemento di ogni sottovettore e mostrando i passi.
 
+> **Riferimento di teoria:** [M07/UD2 — Quicksort](../../M07_Divide_et_Impera/UD2/L2_Quick_sort.md).
+
 Usiamo una partizione dichiarata $[\le p]\,[p]\,[>p]$, preservando l'ordine relativo; in presenza di un altro 9 uguale al pivot, lo collochiamo nel gruppo sinistro.
 
 1. pivot $15$: nessuna modifica;

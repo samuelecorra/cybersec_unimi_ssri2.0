@@ -52,7 +52,7 @@ Per cercare il pattern dentro il testo, e non soltanto confrontare due stringhe 
 
 **Traccia.** Descrivere MergeSort, fornire la relazione di ricorrenza e risolverla con il teorema delle ricorrenze lineari.
 
-> **Riferimento di teoria:** [Approfondimento — MergeSort](../Approfondimenti_per_Esame/L1%20-%20MergeSort%20e%20QuickSort%20per%20gli%20esercizi%20d'esame.md).
+> **Riferimento di teoria:** [M07/UD2 — Mergesort](../../M07_Divide_et_Impera/UD2/L1_Merge_sort.md).
 
 MergeSort divide il vettore in due metà, le ordina ricorsivamente e le fonde in tempo lineare. Per $n>1$:
 
@@ -151,7 +151,9 @@ $$
 
 con QuickSort, scegliendo come pivot il primo elemento di ogni sottovettore, e mostrare tutti i passi.
 
-Adottiamo la partizione dichiarata nell'approfondimento: elementi $\le p$, pivot, elementi $>p$, conservando l'ordine relativo. Gli elementi sono distinti.
+> **Riferimento di teoria:** [M07/UD2 — Quicksort](../../M07_Divide_et_Impera/UD2/L2_Quick_sort.md).
+
+Adottiamo la convenzione dichiarata nella lezione: elementi $\le p$, pivot, elementi $>p$, conservando l'ordine relativo. Gli elementi sono distinti.
 
 1. pivot $40$:
    $[24,15,16,\mathbf{40},83,50,71,95,47,60,81,74]$;

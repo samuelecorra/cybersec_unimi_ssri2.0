@@ -57,7 +57,7 @@ Per Fibonacci, $F_i=F_{i-1}+F_{i-2}$: tabulando $F_0,\ldots,F_n$ si passa dall'e
 
 **Traccia.** Descrivere MergeSort con un esempio e indicarne complessità nel caso migliore e peggiore.
 
-> **Riferimento di teoria:** [Approfondimento — MergeSort](../Approfondimenti_per_Esame/L1%20-%20MergeSort%20e%20QuickSort%20per%20gli%20esercizi%20d'esame.md).
+> **Riferimento di teoria:** [M07/UD2 — Mergesort](../../M07_Divide_et_Impera/UD2/L1_Merge_sort.md).
 
 MergeSort dimezza ricorsivamente il vettore fino a ottenere sottovettori unitari e fonde coppie di sequenze ordinate in tempo lineare. Per $[4,1,3,2]$: $[4,1]\to[1,4]$, $[3,2]\to[2,3]$, poi $[1,4]$ e $[2,3]\to[1,2,3,4]$.
 
@@ -115,7 +115,9 @@ dove la parte dopo la barra può essere ordinata arbitrariamente rispetto all'ob
 
 **Traccia.** Ordinare $[12,-3,7,4,15,0,9,-8,6,2]$ con QuickSort scegliendo il primo elemento come pivot; mostrare i passi e indicare la complessità nei casi migliore e peggiore.
 
-Usiamo la partizione stabile dichiarata nell'[approfondimento](../Approfondimenti_per_Esame/L1%20-%20MergeSort%20e%20QuickSort%20per%20gli%20esercizi%20d'esame.md).
+> **Riferimento di teoria:** [M07/UD2 — Quicksort](../../M07_Divide_et_Impera/UD2/L2_Quick_sort.md).
+
+Usiamo la partizione stabile dichiarata nella lezione: elementi $\le p$, pivot, elementi $>p$, conservando l'ordine relativo.
 
 1. pivot $12$: $[-3,7,4,0,9,-8,6,2,\mathbf{12},15]$;
 2. pivot $-3$: $[-8,\mathbf{-3},7,4,0,9,6,2,12,15]$;

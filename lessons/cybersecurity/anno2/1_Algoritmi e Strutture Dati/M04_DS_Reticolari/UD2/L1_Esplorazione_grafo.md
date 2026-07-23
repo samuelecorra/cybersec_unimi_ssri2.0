@@ -71,7 +71,7 @@ void BFS(grafo G, nodo u) {
     coda Q;
 
     creacoda(Q);
-    incoda(u, Q);
+    incoda(u, Q); // la coda va usata per determinare l'ordine di visita
 
     while (!codavuota(Q)) {
         u = leggicoda(Q);
@@ -142,7 +142,7 @@ Si tratta quindi della **complessità ottima** per una visita completa di un gra
 
 ### **6. DFS iterativa**
 
-È possibile riscrivere la DFS in **forma iterativa**, utilizzando una **pila** invece della ricorsione.
+È possibile riscrivere la DFS in **forma iterativa**, utilizzando una **pila**.
 
 #### **Procedura**
 
