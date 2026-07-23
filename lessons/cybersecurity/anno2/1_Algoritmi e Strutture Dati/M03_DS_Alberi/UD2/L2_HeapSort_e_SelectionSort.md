@@ -116,17 +116,17 @@ Serve a **ristabilire la proprietà dello heap** dopo l’estrazione del massimo
 1. Si parte dalla nuova radice (ex ultima foglia a destra).
 2. Si confronta il suo valore con i figli.
 3. Se la proprietà “padre > figli” è violata, si esegue uno **scambio** con il figlio maggiore.
-4. Si ripete la discesa fssino a ristabilire la condizione di heap.
+4. Si ripete la discesa fino a ristabilire la condizione di heap.
 
 #### **Esempio grafico**
 
-![](imgs/Pasted%20image%2020260425211921.png)
+![](imgs/Pasted%20image%2020260723014119.png)
 
-![](imgs/Pasted%20image%2020260425211928.png)
+![](imgs/Pasted%20image%2020260723014129.png)
 
-![](imgs/Pasted%20image%2020260425211934.png)
+![](imgs/Pasted%20image%2020260723014134.png)
 
-![](imgs/Pasted%20image%2020260425211941.png)
+![](imgs/Pasted%20image%2020260723014140.png)
 
 ---
 

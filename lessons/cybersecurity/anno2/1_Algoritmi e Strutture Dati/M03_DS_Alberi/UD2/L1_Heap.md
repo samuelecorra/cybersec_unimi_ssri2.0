@@ -46,7 +46,7 @@ post: C' = C \ {x}, con x = min(C)
 
 ### **3. Realizzazione con liste**
 
-Una coda di priorità con ( n ) elementi può essere realizzata anche tramite **liste**, in due varianti:
+Una coda di priorità con $n$ elementi può essere realizzata anche tramite **liste**, in due varianti:
 
 #### **a) Lista ordinata**
 
@@ -151,22 +151,32 @@ Restituisce il valore minimo della coda:
 #### **b) cancellamin(C)**
 
 1. Sostituisce la radice con la foglia più a destra del livello massimo (per mantenere le proprietà 1 e 2).
+
+![](imgs/Pasted%20image%2020260723011808.png)
+
+![](imgs/Pasted%20image%2020260723012001.png)
+
 2. Fa “scendere” la nuova radice tramite **scambi padre–figlio** fino a ristabilire la proprietà 3.
 
-**Complessità:** $O(\log n)$
+![](imgs/Pasted%20image%2020260723012011.png)
 
-![[Pasted image 20251018183727.png]]
+**Complessità:** $O(\log n)$
 
 ---
 
 #### **c) inserisci(x, C)**
 
 1. Inserisce l’elemento `x` come **foglia più a destra**.
+
+![](imgs/Pasted%20image%2020260723012740.png)
+
+![](imgs/Pasted%20image%2020260723012746.png)
+
 2. Lo fa “salire” tramite **scambi padre–figlio** fino a rispettare la proprietà 3.
 
-**Complessità:** $O(\log n)$
+![](imgs/Pasted%20image%2020260723012755.png)
 
-![[Pasted image 20251018183747.png]]
+**Complessità:** $O(\log n)$
 
 ---
 
