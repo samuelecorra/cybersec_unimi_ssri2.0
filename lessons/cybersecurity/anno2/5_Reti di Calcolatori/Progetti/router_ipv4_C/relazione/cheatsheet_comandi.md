@@ -4,6 +4,22 @@
 
 ---
 
+## -1. Prerequisito: sei nella shell giusta?
+
+Questi comandi vanno lanciati in una **shell Linux vera**, non in PowerShell/cmd di Windows: servono `ip netns`, socket raw, veth, FRR, che su Windows nativo non esistono. Su questa macchina l'ambiente pronto è **WSL2, distro `Ubuntu-22.04`** (verificato: gcc/make, `ip`/tcpdump/traceroute/curl/ethtool, FRR con `vtysh`/`zebra`/`ripd` sono già installati, e il progetto compila senza warning).
+
+Per entrare: digitare `wsl` in una finestra PowerShell/cmd, oppure aprire "Ubuntu 22.04" dal menu Start. Poi spostarsi nella cartella del progetto (il disco `C:` è montato sotto `/mnt/c`, occhio alle virgolette per lo spazio in "5_Reti di Calcolatori"):
+
+```sh
+cd "/mnt/c/Users/nabis/samu-cyberlocker/lessons/cybersecurity/anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C"
+```
+
+Da qui in poi, tutti i comandi di questa pagina funzionano così come sono scritti — `sudo` dentro WSL è il vero `sudo` di Linux, non quello (disattivato) di Windows.
+
+> ⚠️ Se per errore si lancia `sudo bash test/topo.sh up` da **PowerShell**, l'errore è "Sudo è disabilitato in questo computer": è il `sudo` nativo di Windows 11 (Developer Settings), del tutto estraneo a questo progetto — non va abilitato, va semplicemente eseguito tutto da dentro `wsl`.
+
+---
+
 ## 0. Sequenza minima "sicura" (se hai solo 2-3 minuti)
 
 Questa è la sequenza che **so per certo funziona**, presa esattamente dagli script di test. Usarla come base, poi deviare secondo le richieste del professore.
