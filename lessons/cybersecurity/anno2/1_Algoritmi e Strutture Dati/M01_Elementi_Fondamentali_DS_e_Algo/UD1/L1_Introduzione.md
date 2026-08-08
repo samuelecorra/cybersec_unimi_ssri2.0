@@ -20,6 +20,36 @@ Un algoritmo quindi non è solo codice: è pensiero organizzato.
 Il problema definisce l’obiettivo; l’algoritmo ne è la traduzione operativa.  
 Capire questa differenza è ciò che distingue chi “usa” la programmazione da chi pensa come un informatico.
 
+#### **Formalizzazione**
+
+Innanzitutto definiamo il problema da risolvere in termini matematici, come una sorta di funzione che associa a ogni input un output desiderato.
+
+- Problema:
+
+$$f : D_I \rightarrow D_S$$
+
+Dove $D_I$ è l’insieme delle **istanze di input** e $D_S$ è l’insieme delle **soluzioni**.
+
+Quindi allo stesso modo definiamo:
+
+- Istanza:
+
+$$x \in D_I$$
+
+- Soluzione:
+
+$$y = f(x) \in D_S$$
+
+Infine, un algoritmo $A$ risolve il problema $f$ se:
+
+$$f(x) = f_A(x) \quad \forall x \in D_I$$
+
+---
+
+#### **ATTENZIONE**
+
+Problema $\neq$ algoritmo: il primo è la definizione astratta di ciò che vogliamo ottenere, il secondo è la sequenza concreta di passi per arrivarci.
+
 ---
 
 ### **2. Esempio: trovare il minimo in un intervallo di un array**
@@ -28,21 +58,17 @@ Prendiamo un esempio concreto.
 
 Abbiamo un array di numeri, $a$, e vogliamo sapere qual è il valore minimo compreso tra le posizioni $j$ e $k$.
 
-Il problema è chiaro: vogliamo il numero più piccolo in quella porzione. 
+Il problema è chiaro: vogliamo il numero più piccolo in quella porzione.
 Ora serve l’algoritmo, cioè il metodo per arrivarci.
 
 I possibili approcci sono due:
-  
 
 #### **2.1 - Versione iterativa (passo dopo passo)**
 
 1. Si suppone che il primo elemento a[j] sia il minimo. Questo è uno step manuale di inizializzazione che serve per progredire coi successivi!
-    
-2. Si scorrono tutti gli altri, da a[j+1] fino ad a[k].    
-    
-3. Ogni volta che si trova un elemento più piccolo, si aggiorna il minimo.    
-    
-4. Alla fine del ciclo, il valore più basso rimasto è il minimo assoluto.  
+2. Si scorrono tutti gli altri, da a[j+1] fino ad a[k].
+3. Ogni volta che si trova un elemento più piccolo, si aggiorna il minimo.
+4. Alla fine del ciclo, il valore più basso rimasto è il minimo assoluto.
 
 ```c
 #include <stdio.h>
@@ -81,11 +107,11 @@ La ricorsione funziona come uno specchio: la funzione chiama se stessa su un pro
 
 In questo caso:
 
-- Se c’è un solo elemento, è per forza il minimo.  
-    
-- Altrimenti si calcola il minimo nel sottoproblema (dall’indice j+1 a k) e lo si confronta con a[j].  
-      
-- Il più piccolo tra i due è il minimo finale.  
+- Se c’è un solo elemento, è per forza il minimo.
+
+- Altrimenti si calcola il minimo nel sottoproblema (dall’indice j+1 a k) e lo si confronta con a[j].
+
+- Il più piccolo tra i due è il minimo finale.
 
 La ricorsione funziona se — e solo se — ogni chiamata riduce il problema e c’è un caso base chiaro che fa terminare la catena.  
 È come scendere una scala togliendo un gradino ogni volta: se togli sempre un gradino, prima o poi tocchi terra.
@@ -129,6 +155,7 @@ Simuliamo cosa accadrebbe eseguendo il programma:
 - Confrontiamo dunque penultimo e ultimo elemento, decidendo che 13 è il nuovo minimo trovato nel sottoproblema;
 - Risaliamo ancora, confrontando 13 e 15, ergo la variabile min rimane invariata;
 - Tutti i successivi confronti durante la risalita danno falso come esito: alla fine, il minimo trovato è 13!
+
 ---
 
 ### **3. Iterazione e ricorsione: due modi per pensare**
@@ -154,20 +181,11 @@ La scelta del tipo di dato non è mai neutra: influenza la chiarezza, la precisi
 
 ### **5. Cosa bisogna metabolizzare ASAP**
 
-- Un problema computazionale è la relazione tra dati in ingresso e risultato atteso.  
-      
-    
-- Un algoritmo è la sequenza ordinata di azioni che permette di calcolare quel risultato in modo finito e determinato.  
-      
-    
-- Una procedura è l’implementazione di un algoritmo in un linguaggio di programmazione.  
-      
-    
-- Le soluzioni iterative e ricorsive sono due modi diversi di affrontare lo stesso compito: la prima ripete, la seconda si richiama finché non raggiunge il caso base.  
-      
-    
-- I tipi di dato sono il linguaggio con cui rappresentiamo tutto ciò che un algoritmo manipola: numeri, condizioni, insiemi di elementi.  
+- Un problema computazionale è la relazione tra dati in ingresso e risultato atteso.
+- Un algoritmo è la sequenza ordinata di azioni che permette di calcolare quel risultato in modo finito e determinato.
+- Una procedura è l’implementazione di un algoritmo in un linguaggio di programmazione.
+- Le soluzioni iterative e ricorsive sono due modi diversi di affrontare lo stesso compito: la prima ripete, la seconda si richiama finché non raggiunge il caso base.
+- I tipi di dato sono il linguaggio con cui rappresentiamo tutto ciò che un algoritmo manipola: numeri, condizioni, insiemi di elementi.
 
 In sintesi, questa lezione ci ha fornito la grammatica minima del pensiero computazionale:  
 sapere cosa significa “risolvere un problema”, come tradurre quella risoluzione in una forma eseguibile, e con quali strumenti rappresentare i dati del mondo digitale.
-
