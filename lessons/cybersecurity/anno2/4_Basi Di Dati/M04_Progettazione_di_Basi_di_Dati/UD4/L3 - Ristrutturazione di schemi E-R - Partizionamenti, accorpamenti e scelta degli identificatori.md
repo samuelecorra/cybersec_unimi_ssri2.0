@@ -440,7 +440,7 @@ Questa nuova entità viene collegata all'entità originale mediante una **relazi
 
 Schema concettuale:
 
-![[Pasted image 20260821191632.png]]
+![](Pasted%20image%2020260821192009.png)
 
 ---
 
