@@ -17,7 +17,8 @@ $RECYCLE.BIN/
 .directory
 
 # Editors / IDEs
-.vscode/
+.vscode/*
+!.vscode/settings.json
 .idea/
 .obsidian/
 !.obsidian/snippets/
