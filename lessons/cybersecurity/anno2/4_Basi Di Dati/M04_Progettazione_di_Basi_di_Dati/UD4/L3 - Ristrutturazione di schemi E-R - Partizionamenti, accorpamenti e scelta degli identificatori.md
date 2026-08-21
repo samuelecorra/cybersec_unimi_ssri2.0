@@ -76,7 +76,7 @@ Può essere utilizzato per:
 
 ---
 
-## **4. Partizionamento di entità**
+### **4. Partizionamento di entità**
 
 Il partizionamento di un'entità può essere effettuato principalmente in due modi:
 
@@ -87,9 +87,7 @@ Il partizionamento di un'entità può essere effettuato principalmente in due mo
 
 ---
 
-# **5. Partizionamento orizzontale**
-
-### **a) Definizione**
+### **5. Partizionamento orizzontale**
 
 Nel **partizionamento orizzontale**, un'entità $E$ viene sostituita da due o più entità che si dividono le **istanze** dell'entità originale.
 
@@ -103,7 +101,7 @@ dove le istanze precedentemente appartenenti a $E$ vengono distribuite tra $E_1$
 
 ---
 
-### **b) Collegamento con le gerarchie**
+#### **Collegamento con le gerarchie**
 
 Il partizionamento orizzontale equivale concettualmente a sostituire un'entità con alcune sue **figlie di generalizzazione/specializzazione**.
 
@@ -111,37 +109,7 @@ Si sta cioè dividendo l'insieme delle occorrenze del padre in sottoinsiemi dist
 
 ---
 
-### **c) Esempio: personale universitario**
-
-Supponiamo di avere inizialmente l'entità:
-
-```
-PERSONALE
-- matr.
-- nome
-- cognome
-- stipendio
-```
-
-Le istanze di `PERSONALE` possono essere divise in:
-
-```
-DOCENTE
-- matr.
-- nome
-- cognome
-- stipendio
-```
-
-e:
-
-```
-PERSONALE NON DOCENTE
-- matr.
-- nome
-- cognome
-- stipendio
-```
+#### **Esempio: personale universitario**
 
 ![](imgs/Pasted%20image%2020260821155654.png)
 
@@ -153,7 +121,7 @@ In questo caso:
 
 ---
 
-### **e) Idea chiave**
+#### **Idea chiave**
 
 > **Partizionamento orizzontale = divido le righe/istanze.**
 
@@ -161,16 +129,13 @@ In questo caso:
 
 ---
 
-# **6. Partizionamento verticale**
-
-### **a) Definizione**
+### **6. Partizionamento verticale**
 
 Nel **partizionamento verticale**, un'entità $E$ viene sostituita da due entità $E_1$ ed $E_2$ che si dividono:
 
 - gli **attributi**;
     
 - eventualmente anche le **relazioni**
-    
 
 dell'entità originale.
 
@@ -180,7 +145,7 @@ A differenza del partizionamento orizzontale, quindi:
 
 ---
 
-### **b) Collegamento tra le nuove entità**
+#### **Collegamento tra le nuove entità**
 
 Poiché $E_1$ ed $E_2$ descrivono aspetti differenti della stessa istanza originaria, le due nuove entità devono essere collegate tramite una **relazione**.
 
@@ -188,27 +153,11 @@ Una delle due mantiene l'**identificatore originale**.
 
 L'altra viene invece **identificata esternamente** attraverso la relazione con l'entità che conserva l'identificatore.
 
-Lo schema generale è quindi:
-
-```
-E
-- id
-- a1
-- a2
-```
-
-che viene trasformato in qualcosa del tipo:
-
-```
-E1                        E2
-- id                      - a2
-- a1
-          (1,1)   R   (1,1)
-```
+![](imgs/Pasted%20image%2020260821160218.png)
 
 ---
 
-### **c) Cardinalità**
+#### **Cardinalità**
 
 La relazione tra le due entità risultanti presenta cardinalità:
 
@@ -220,53 +169,13 @@ poiché ogni istanza di una parte corrisponde precisamente alla relativa istanza
 
 ---
 
-### **d) Esempio: impiegato**
+#### **Esempio: impiegato**
 
-Supponiamo di avere:
-
-```
-IMPIEGATO
-- matr.
-- nome
-- cognome
-- residenza
-- livello
-- stipendio
-- ritenute
-```
-
-Possiamo separare gli attributi in due gruppi.
-
-#### **Dati anagrafici**
-
-```
-DATI ANAGRAFICI
-- matr.
-- nome
-- cognome
-- residenza
-```
-
-#### **Dati lavorativi**
-
-```
-DATI LAVORATIVI
-- livello
-- stipendio
-- ritenute
-```
-
-Le due entità vengono collegate attraverso una relazione, mantenendo la corrispondenza uno-a-uno tra i dati anagrafici e quelli lavorativi dello stesso impiegato.
+![](imgs/Pasted%20image%2020260821160303.png)
 
 ---
 
-### **e) Rappresentazione grafica**
-
-> **[PLACEHOLDER IMMAGINE — Partizionamento verticale dell'entità IMPIEGATO in DATI ANAGRAFICI e DATI LAVORATIVI]**
-
----
-
-### **f) Idea chiave**
+#### **Idea chiave**
 
 > **Partizionamento verticale = divido le colonne/attributi.**
 
@@ -274,14 +183,14 @@ Le due entità vengono collegate attraverso una relazione, mantenendo la corrisp
 
 ---
 
-# **7. Differenza tra partizionamento orizzontale e verticale**
+### **7. Differenza tra partizionamento orizzontale e verticale**
 
 |Tipo|Cosa viene diviso?|Intuizione|
 |---|---|---|
 |**Orizzontale**|Le istanze dell'entità|Divido le **righe**|
 |**Verticale**|Gli attributi e/o le relazioni|Divido le **colonne**|
 
-### **Esempio mentale**
+#### **Esempio mentale**
 
 Se abbiamo:
 
@@ -320,9 +229,7 @@ matr., stipendio, livello
 
 ---
 
-# **8. Accorpamento di entità**
-
-### **a) Definizione**
+### **8. Accorpamento di entità**
 
 L'**accorpamento di entità** rappresenta sostanzialmente l'operazione opposta al partizionamento.
 
@@ -331,11 +238,10 @@ Due entità $E_1$ ed $E_2$ collegate da una relazione vengono sostituite da una 
 - gli **attributi di entrambe**;
     
 - le **relazioni di entrambe**.
-    
 
 ---
 
-### **b) Quando è possibile**
+#### **Quando è possibile**
 
 L'accorpamento considerato nella lezione riguarda entità legate da una relazione:
 
@@ -348,7 +254,7 @@ Gli attributi delle due entità vengono quindi trasferiti nella nuova entità ri
 
 ---
 
-### **c) Esempio: persona e appartamento**
+#### **Esempio: persona e appartamento**
 
 Supponiamo di avere:
 
@@ -377,9 +283,11 @@ con opportune cardinalità.
 
 Le due entità possono essere accorpate facendo confluire nell'entità risultante gli attributi di entrambe.
 
+![](imgs/Pasted%20image%2020260821160438.png)
+
 ---
 
-### **d) Effetto sulle cardinalità**
+#### **Effetto sulle cardinalità**
 
 Gli attributi provenienti dall'entità accorpata possono diventare **opzionali**, in funzione delle cardinalità presenti nello schema originale.
 
@@ -394,13 +302,7 @@ potranno essere presenti con cardinalità minima pari a `0`.
 
 ---
 
-### **e) Rappresentazione grafica**
-
-> **[PLACEHOLDER IMMAGINE — Accorpamento PERSONA / APPARTAMENTO tramite INTESTAZIONE]**
-
----
-
-### **f) Motivazione**
+#### **Motivazione**
 
 L'accorpamento può risultare conveniente quando gli attributi appartenenti a entità differenti vengono:
 
@@ -410,7 +312,7 @@ In questo modo si riduce la necessità di attraversare continuamente la relazion
 
 ---
 
-# **9. Partizionamento e accorpamento di relazioni**
+### **9. Partizionamento e accorpamento di relazioni**
 
 Le operazioni di partizionamento e accorpamento non riguardano solamente le **entità**.
 
@@ -418,9 +320,7 @@ Possono essere applicate anche alle **relazioni**.
 
 ---
 
-# **10. Partizionamento di relazioni**
-
-### **a) Definizione**
+### **10. Partizionamento di relazioni**
 
 Una relazione $R$ viene sostituita da due relazioni:
 
@@ -435,7 +335,7 @@ Le occorrenze della relazione originale vengono suddivise tra le due nuove relaz
 
 ---
 
-### **b) Quando è utile**
+#### **Quando è utile**
 
 Il partizionamento viene utilizzato quando differenti gruppi di occorrenze della relazione vengono:
 
@@ -445,7 +345,7 @@ In tal caso non è necessariamente conveniente conservarli tutti all'interno del
 
 ---
 
-### **c) Esempio**
+#### **Esempio**
 
 Nelle slide viene considerata una relazione di **composizione** tra:
 
@@ -464,21 +364,14 @@ che può essere separata distinguendo:
 - la **composizione attuale**;
     
 - la **composizione passata**.
-    
 
 In questo modo due categorie di associazioni concettualmente differenti vengono rappresentate con due relazioni distinte.
 
----
-
-### **d) Rappresentazione grafica**
-
-> **[PLACEHOLDER IMMAGINE — Partizionamento della relazione COMPOSIZIONE in COMPOSIZIONE ATTUALE e COMPOSIZIONE PASSATA]**
+![](imgs/Pasted%20image%2020260821160606.png)
 
 ---
 
-# **11. Accorpamento di relazioni**
-
-### **a) Definizione**
+### **11. Accorpamento di relazioni**
 
 L'operazione inversa consiste nell'accorpare due relazioni:
 
@@ -495,8 +388,6 @@ R
 
 ---
 
-### **b) Condizioni**
-
 L'accorpamento può essere utilizzato quando le due relazioni:
 
 - collegano le **stesse entità**;
@@ -504,13 +395,12 @@ L'accorpamento può essere utilizzato quando le due relazioni:
 - rappresentano due aspetti dello **stesso concetto**;
     
 - hanno occorrenze che vengono **sempre accedute contemporaneamente**.
-    
 
 In queste condizioni può essere più conveniente rappresentare entrambe attraverso una sola relazione.
 
 ---
 
-# **12. Partizionamento vs accorpamento**
+### **12. Partizionamento vs accorpamento**
 
 Possiamo quindi sintetizzare il criterio generale:
 
@@ -524,27 +414,23 @@ Possiamo quindi sintetizzare il criterio generale:
 
 ---
 
-# **13. Trasformazione di concetti non supportati dal modello relazionale**
+### **13. Trasformazione di concetti non supportati dal modello relazionale**
 
 Il partizionamento e l'accorpamento non vengono utilizzati solamente per ragioni di efficienza.
 
 Alcune trasformazioni sono necessarie perché determinati costrutti ammessi nel modello E–R:
 
 - **non sono direttamente supportati dal modello relazionale**.
-    
 
 In particolare occorre gestire:
 
 1. gli **attributi multivalore**;
     
 2. gli **attributi composti**.
-    
 
 ---
 
-# **14. Eliminazione degli attributi multivalore**
-
-### **a) Problema**
+### **14. Eliminazione degli attributi multivalore**
 
 Gli **attributi multivalore** non sono direttamente supportati dal modello relazionale.
 
