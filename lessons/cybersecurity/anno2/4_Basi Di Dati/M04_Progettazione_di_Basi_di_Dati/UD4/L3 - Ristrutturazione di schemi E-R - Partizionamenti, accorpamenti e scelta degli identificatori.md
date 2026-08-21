@@ -24,7 +24,7 @@ Queste trasformazioni hanno principalmente due obiettivi:
 
 ---
 
-## **2. Le fasi della ristrutturazione**
+### **2. Le fasi della ristrutturazione**
 
 Ricordiamo che la ristrutturazione di uno schema E–R comprende quattro fasi fondamentali:
 
@@ -43,7 +43,7 @@ In questa lezione ci concentriamo invece sulle ultime trasformazioni necessarie 
 
 ---
 
-# **3. Partizionamento e accorpamento**
+### **3. Partizionamento e accorpamento**
 
 Le operazioni di **partizionamento** e **accorpamento** vengono utilizzate soprattutto per migliorare l'efficienza delle operazioni applicative.
 
@@ -97,17 +97,7 @@ In altre parole:
 
 > vengono divise le **occorrenze**, non gli attributi.
 
-Se inizialmente abbiamo:
-
-```
-E
-```
-
-dopo il partizionamento possiamo ottenere:
-
-```
-E1     E2
-```
+![](imgs/Pasted%20image%2020260821155654.png)
 
 dove le istanze precedentemente appartenenti a $E$ vengono distribuite tra $E_1$ ed $E_2$.
 
@@ -153,18 +143,13 @@ PERSONALE NON DOCENTE
 - stipendio
 ```
 
+![](imgs/Pasted%20image%2020260821155654.png)
+
 In questo caso:
 
 - gli **attributi rimangono sostanzialmente gli stessi**;
     
 - vengono invece separate le **istanze** in base alla loro categoria.
-    
-
----
-
-### **d) Rappresentazione grafica**
-
-> **[PLACEHOLDER IMMAGINE — Partizionamento orizzontale: PERSONALE → DOCENTE / PERSONALE NON DOCENTE]**
 
 ---
 

@@ -77,7 +77,7 @@ In sintesi:
 
 ### **5. Schema della tabella**
 
-![[Pasted image 20251018223729.png]]
+![](imgs/Pasted%20image%2020251018223729.png)
 
 Ogni cella $D[i,j]$ dipende dalle tre celle adiacenti:
 

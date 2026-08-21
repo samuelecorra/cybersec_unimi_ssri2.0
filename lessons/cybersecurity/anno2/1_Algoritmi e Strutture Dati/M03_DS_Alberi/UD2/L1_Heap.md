@@ -105,7 +105,7 @@ $$
 
 L’albero binario associato $B$ (heap) verifica tutte le proprietà:
 
-![[Pasted image 20251018183441.png]]
+![](imgs/Pasted%20image%2020251018183441.png)
 
 L’albero è quasi completo, con tutte le foglie a sinistra e ogni nodo maggiore del suo padre.
 
@@ -137,7 +137,7 @@ $$
 
 Ad esempio, per il nodo in posizione 3 (9) del vettore $H$, il figlio sinistro (13) si trova in posizione $2 \cdot 3 = 6$, il figlio destro (12) in posizione $2 \cdot 3 + 1 = 7$ e il padre in posizione $\left\lfloor\frac{3}{2} \right\rfloor = \left\lfloor 1.5 \right\rfloor = 1$
 
-![[Pasted image 20251018183441.png]]
+![](imgs/Pasted%20image%2020251018183441.png)
 
 ---
 

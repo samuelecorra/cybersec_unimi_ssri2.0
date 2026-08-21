@@ -213,7 +213,7 @@ Dato un grafo non orientato $G = (N, A)$ con pesi $p_u$ sui nodi, trovare un sot
     
 - **S:** contiene l’insieme $C$ dei nodi della cricca e la somma totale dei pesi $z$.
 
-![[Pasted image 20251018204450.png]]
+![](imgs/Pasted%20image%2020251018204450.png)
 
 ---
 
@@ -251,7 +251,7 @@ $$
     
 - **S:** contiene la lista di nodi $C$ (il tour) e il costo totale $z$.
     
-![[Pasted image 20251018204522.png]]
+![](imgs/Pasted%20image%2020251018204522.png)
 
 ---
 
@@ -270,7 +270,7 @@ $$
     
 - **S:** insiemi $N_1$, $N_2$ e variabile $z$ (costo del taglio).
     
-![[Pasted image 20251018204548.png]]
+![](imgs/Pasted%20image%2020251018204548.png)
 
 ---
 

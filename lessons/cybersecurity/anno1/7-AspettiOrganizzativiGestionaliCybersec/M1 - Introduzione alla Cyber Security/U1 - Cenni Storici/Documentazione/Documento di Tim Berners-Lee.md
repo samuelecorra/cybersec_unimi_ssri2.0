@@ -1,1 +1,1 @@
-![[Information Management_ A Proposal 1.pdf]]
+![](../../../imgs/Information%20Management_%20A%20Proposal%201.pdf)
