@@ -30,10 +30,7 @@ Ogni **entità forte** $E$ viene tradotta in una **tabella** $R$ che contiene:
 
 **Esempio:**
 
-$$  
-\text{STUDENTE(matr, nome, cognome)} \  
-\text{DIPARTIMENTO(nome, città, indirizzo)}  
-$$
+![](Pasted%20image%2020260821193051.png)
 
 ---
 
@@ -61,10 +58,7 @@ Ogni **entità debole** $E$, identificata esternamente da un’entità forte $E'
 
 **Esempio:**
 
-```
-DIPARTIMENTO(nome, città, indirizzo)
-IMPIEGATO(matr, nome_dip, città_dip, nome, cognome, stipendio)
-```
+![](Pasted%20image%2020260821193249.png)
 
 L’entità `IMPIEGATO` è debole rispetto a `DIPARTIMENTO`, poiché la sua identificazione dipende da essa.
 
@@ -76,11 +70,7 @@ In presenza di **catene di entità deboli**, la traduzione deve procedere **part
 
 **Esempio:**
 
-```
-TRENO(numero)
-VETTURA(num_vet, num_treno)
-POSTO(num_p, num_vet, num_treno)
-```
+![](Pasted%20image%2020260821193555.png)
 
 Ogni entità eredita l’identificatore della precedente.
 
@@ -115,12 +105,7 @@ Ogni **relazione** $R$ tra entità $E_1, E_2, \dots, E_n$ viene tradotta in una 
 
 #### **3.2 Esempio di traduzione standard**
 
-```
-DIPARTIMENTO(nome, telefono)
-FORNITORE(PIVA, nome)
-PRODOTTO(codice, genere)
-FORNITURA(nome_dip, PIVA_forn, cod_prodotto, quantità)
-```
+![](Pasted%20image%2020260821194058.png)
 
 La tabella `FORNITURA` contiene:
 
@@ -138,10 +123,7 @@ Quando una relazione collega **un’entità con sé stessa**, la tabella risulta
 
 **Esempio:**
 
-```
-PRODOTTO(codice, nome)
-COMPOSIZIONE(composto, componente, quantità)
-```
+![](Pasted%20image%2020260821194235.png)
 
 Gli attributi `composto` e `componente` fanno entrambi riferimento alla chiave di `PRODOTTO`.
 
@@ -153,11 +135,7 @@ Per una relazione con **cardinalità (1:n)**, la chiave primaria è l’identifi
 
 **Esempio:**
 
-```
-PERSONA(c.f.)
-CITTÀ(nome)
-RESIDENZA(c.f., città, indirizzo)
-```
+![](Pasted%20image%2020260821194711.png)
 
 Chiave primaria: $(c.f.)$  
 Chiave esterna: $(città)$
@@ -166,7 +144,10 @@ Chiave esterna: $(città)$
 
 #### **3.5 Relazioni (1:1)**
 
-Per le relazioni **uno a uno**, la chiave primaria può essere **una delle due entità**, in base alle cardinalità minime.  
+Per le relazioni **uno a uno**, la chiave primaria può essere **una delle due entità**, in base alle cardinalità minime.
+
+![](Pasted%20image%2020260821194752.png)
+
 In questi casi sono possibili **traduzioni alternative**, come mostrato nella sezione seguente.
 
 ---
@@ -190,35 +171,13 @@ Se la cardinalità minima è 0, gli attributi inglobati diventano **opzionali (N
 
 **Esempio:**
 
-```
-PERSONA(c.f.)
-CITTÀ(nome)
-RESIDENZA(c.f., città, indirizzo)
-```
-
-→ Alternativa:
-
-```
-PERSONA(c.f., città, indirizzo)
-CITTÀ(nome)
-```
+![](Pasted%20image%2020260821194852.png)
 
 ---
 
 #### **4.3 Esempio applicativo**
 
-```
-IMPIEGATO(matr, stipendio)
-PROGETTO(nome)
-LAVORA(matr, nome_progetto, ruolo)
-```
-
-→ Alternativa:
-
-```
-IMPIEGATO(matr, stipendio, nome_progetto*, ruolo*)
-PROGETTO(nome)
-```
+![](Pasted%20image%2020260821194922.png)
 
 L’asterisco indica attributi **facoltativi** (potenzialmente _NULL_).
 
@@ -242,23 +201,7 @@ Entrambe le entità partecipano obbligatoriamente.
 
 **Traduzioni possibili:**
 
-- **Standard:**  
-    $R(id_1, id_2, a_R)$
-    
-- **Alternative:**
-    
-    - fusione in una delle due entità:
-        
-        ```
-        E1(id1, a1, id2, aR)
-        E2(id2, a2)
-        ```
-        
-    - oppure fusione completa:
-        
-        ```
-        E12(id1, a1, id2, a2, aR)
-        ```
+![](Pasted%20image%2020260821195028.png)
 
 ---
 
@@ -268,22 +211,7 @@ Un’entità partecipa **facoltativamente**, l’altra **obbligatoriamente**.
 
 **Traduzioni possibili:**
 
-- **Standard:**  
-    $R(id_1, id_2, a_R)$
-    
-- **Alternative:**
-    
-    ```
-    E1(id1, a1, id2*, aR*)
-    E2(id2, a2)
-    ```
-    
-    oppure
-    
-    ```
-    E1(id1, a1)
-    E2(id2, a2, id1, aR)
-    ```
+![](Pasted%20image%2020260821195104.png)
 
 Gli asterischi indicano attributi **opzionali**.
 
@@ -295,38 +223,13 @@ Entrambe le entità partecipano **facoltativamente**.
 
 **Traduzioni possibili:**
 
-- **Standard:**  
-    $R(id_1, id_2, a_R)$
-    
-- **Alternative:**
-    
-    ```
-    E1(id1, a1, id2*, aR*)
-    E2(id2, a2)
-    ```
-    
-    oppure
-    
-    ```
-    E1(id1, a1)
-    E2(id2, a2, id1*, aR*)
-    ```
+![](Pasted%20image%2020260821195147.png)
 
 ---
 
 #### **4.8 Esempio pratico**
 
-```
-PERSONA(c.f., nome)
-MATRIMONIO(c.f_lui, c.f_lei, data)
-```
-
-→ Alternative:
-
-```
-PERSONA(c.f., nome, c.f_lei*, data*)
-PERSONA(c.f., nome, c.f_lui*, data*)
-```
+![](Pasted%20image%2020260821195214.png)
 
 ---
 
