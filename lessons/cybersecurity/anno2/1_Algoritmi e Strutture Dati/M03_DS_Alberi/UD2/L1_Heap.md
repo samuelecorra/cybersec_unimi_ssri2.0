@@ -70,9 +70,18 @@ In entrambi i casi, la complessità **non è ottimale** per insiemi di grandi di
 
 Per migliorare l’efficienza, possiamo rappresentare la coda di priorità con un **vettore Heap**.
 Per intenderci, in italiano "heap" possiamo tradurlo con "cumulo" o "mucchio", che suggerisce come gli elementi siano organizzati in una struttura ad albero, ma con una disposizione particolare che garantisce l'efficienza delle operazioni di inserimento e cancellazione del minimo.
-In questo modo, l’insieme degli elementi può essere interpretato come un **albero binario quasi completo**, dove ogni nodo segue la **proprietà di ordinamento**:
 
-> Ogni nodo contiene un valore **maggiore o uguale** di quello del suo **padre** (per uno heap min, vale l’opposto).
+In questo modo, l’insieme degli elementi può essere interpretato come un **albero binario quasi completo**, ovvero un albero in cui tutti i livelli sono completamente pieni, tranne eventualmente l'ultimo, che viene riempito rigorosamente da sinistra verso destra senza lasciare posizioni vuote tra due nodi.
+
+Ci sono due tipi di heap:
+
+- **Max-Heap**: ogni nodo ha un valore **maggiore o uguale** a quello dei suoi figli - o detto in altro modo, ha un valore **minore** a quello del padre.
+- **Min-Heap**: ogni nodo ha un valore **minore o uguale** a quello dei suoi figli - o detto in altro modo, ha un valore **maggiore** a quello del padre.
+
+In entrambi i casi, l’elemento di priorità (massimo o minimo) si trova sempre alla **radice** dell’albero.
+Questo garantisce la **proprietà di ordinamento** necessaria per le operazioni di coda di priorità.
+
+Nel corso di questa lezione ci concentreremo sul **Min-Heap**, che è più comune nelle applicazioni pratiche, ma i concetti sono analoghi per il Max-Heap.
 
 ---
 
@@ -80,7 +89,7 @@ In questo modo, l’insieme degli elementi può essere interpretato come un **al
 
 Un vettore $H$ rappresenta uno heap se, e solo se, l’albero $B$ da esso derivato soddisfa le seguenti condizioni:
 
-1. Se $h$ è il livello massimo, ci sono esattamente $2^{h-1}$ nodi ai livelli inferiori.
+1. Se $h$ è il livello massimo, ci sono esattamente $2^{h}-1$ nodi ai livelli inferiori.
 2. Tutte le foglie al livello massimo sono **addossate a sinistra**.
 3. Ogni nodo contiene un valore **maggiore** di quello del padre.
 
@@ -100,11 +109,19 @@ L’albero binario associato $B$ (heap) verifica tutte le proprietà:
 
 L’albero è quasi completo, con tutte le foglie a sinistra e ogni nodo maggiore del suo padre.
 
+Il livello della radice è sempre 0 per convenzione, quindi in questo caso l'albero ha un livello massimo di 3, con 4 livelli in totale (0, 1, 2, 3).
+
+Quanti nodi ci sono ai livelli inferiori al massimo?
+
+$2^{3}-1 = 7$ nodi, che corrispondono a (3,5,8,6,8,13,12)
+
 ---
 
 ### **7. Correlazione tra vettore e albero**
 
-Dalle proprietà 1 e 2, si ricava che i **nodi di livello $k$** occupano le **prime $n$ posizioni** del vettore $H$, con le seguenti relazioni:
+Dalle proprietà 1 e 2, si ricava che:
+
+- gli $n$ nodi dell'albero $B$, ovvero i **nodi di livello $k$** $\implies$ occupano le **prime $n$ posizioni** del vettore $H$, con le seguenti relazioni:
 
 $$
 \text{figliosinistro}(i) = 2i
@@ -117,6 +134,10 @@ $$
 $$
 \text{padre}(i) = \left\lfloor \frac{i}{2} \right\rfloor
 $$
+
+Ad esempio, per il nodo in posizione 3 (9) del vettore $H$, il figlio sinistro (13) si trova in posizione $2 \cdot 3 = 6$, il figlio destro (12) in posizione $2 \cdot 3 + 1 = 7$ e il padre in posizione $\left\lfloor\frac{3}{2} \right\rfloor = \left\lfloor 1.5 \right\rfloor = 1$
+
+![[Pasted image 20251018183441.png]]
 
 ---
 

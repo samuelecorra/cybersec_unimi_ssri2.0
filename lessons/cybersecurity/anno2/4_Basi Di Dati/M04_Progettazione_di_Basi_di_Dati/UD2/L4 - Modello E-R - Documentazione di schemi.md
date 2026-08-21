@@ -184,22 +184,42 @@ Oltre alle tabelle sulle entità e relazioni, si aggiungono due ulteriori sezion
 
 ### **11. Esempio di schema documentato**
 
+Ripropongo per completezza lo schema originale dei lucidi delle lezioni con a seguire le tabelle (scusate le ripetizioni, ma in onor della chiarezza...)
+
 #### **Schema grafico**
 
-```
-IMPIEGATO ──< PARTECIPAZIONE >── PROGETTO
-     │ (0,1)                          │ (1,n)
-     │
-     └─< AFFERENZA >── DIPARTIMENTO ──< DIREZIONE >── IMPIEGATO
-```
+![](imgs/telegram-cloud-photo-size-4-5782937752423829719-y.jpg)
 
 #### **Esempio di tabelle descrittive**
 
-|**Nome Entità**|**Identificatore**|**Attributi**|**Descrizione**|
+| Nome Entità | Descrizione | Attributi | Identificatore |
 |---|---|---|---|
-|**Impiegato**|Codice|Cognome, Nome, Stipendio, Età|Lavoratore dell’azienda.|
-|**Progetto**|Nome|Budget, DataConsegna|Progetto aziendale in corso.|
-|**Dipartimento**|Nome|Sede, Telefono|Struttura organizzativa della società.|
+| impiegato | Impiegato che lavora nella azienda. | codice, cognome, stipendio, età | codice |
+| progetto | Progetti aziendali sui quali lavorano gli impiegati. | nome, budget, data consegna | nome |
+| dipartimento | Dipartimenti delle sedi dell’azienda. | telefono, nome | nome, sede |
+| sede | Sede dell’azienda in una certa città. | città, indirizzo (numero, via, CAP) | città |
+
+| Nome Relazione | Descrizione | Entità Coinvolte | Attributi |
+|---|---|---|---|
+| direzione | Associa un dipartimento al suo direttore. | impiegato (0,1), dipartimento (1,1) | |
+| afferenza | Associa un impiegato al suo dipartimento. | impiegato (0,1), dipartimento (1,n) | data afferenza |
+| partecipazione | Associa agli impiegati i progetti sui quali lavorano. | impiegato (0,1), progetto (1,n) | data inizio |
+| composizione | Associa una sede ai dipartimenti di cui è composta. | dipartimento (1,1), sede (1,n) | |
+
+### Regole di Vincolo
+
+| Regola | Descrizione |
+|---|---|
+| RV1 | Il direttore di un dipartimento deve afferire a tale dipartimento. |
+| RV2 | Un impiegato non deve avere uno stipendio maggiore del direttore del dipartimento al quale afferisce. |
+| RV3 | Un dipartimento con sede a Roma deve essere diretto da un impiegato con più di dieci anni di anzianità. |
+| RV4 | Un impiegato che non afferisce a alcun dipartimento non deve partecipare a alcun progetto. |
+
+### Regole di Derivazione
+
+| Regola | Descrizione |
+|---|---|
+| RD1 | Il budget di un progetto si ottiene moltiplicando per 3 la somma degli stipendi degli impiegati che vi partecipano. |
 
 ---
 

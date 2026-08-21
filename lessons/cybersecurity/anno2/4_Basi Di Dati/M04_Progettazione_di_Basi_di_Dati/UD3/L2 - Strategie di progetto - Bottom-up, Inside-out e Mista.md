@@ -25,17 +25,7 @@ Il processo consiste quindi nel:
 
 #### **Rappresentazione del processo**
 
-$$  
-\text{Specifiche}  
-\Rightarrow 
-\text{Sotto-componenti}  
-\Rightarrow
-\text{Sotto-schemi}  
-\Rightarrow
-\text{Integrazione}  
-\Rightarrow
-\text{Schema finale}  
-$$
+![](imgs/Pasted%20image%2020260821090526.png)
 
 ---
 
@@ -72,6 +62,8 @@ $$
 
 Si riconosce un **legame logico** tra due o più entità, e lo si rappresenta con una **relazione**.
 
+![](imgs/Pasted%20image%2020260821090634.png)
+
 #### **Esempio**
 
 Si introduce la relazione _Tenere_ fra le entità _Docente_ e _Corso_:
@@ -86,6 +78,8 @@ $$
 
 Si individua, tra le entità, un **rapporto gerarchico** di tipo _padre–figlio_, in cui un’entità rappresenta una **generalizzazione** di altre.
 
+![](imgs/Pasted%20image%2020260821090729.png)
+
 #### **Esempio**
 
 Dalle specifiche si può ricavare che _Personale_ è una generalizzazione di _Dipendente_ e _Consulente_.
@@ -94,7 +88,7 @@ $$
 \text{PERSONALE}  
 \Rightarrow  
 \begin{cases}  
-\text{DIPENDENTE} \  
+\text{DIPENDENTE} \\  
 \text{CONSULENTE}  
 \end{cases}  
 $$
@@ -105,31 +99,28 @@ $$
 
 Un insieme di attributi che descrivono un oggetto può essere **aggregato** per formare una nuova entità coerente.
 
+![](imgs/Pasted%20image%2020260821090829.png)
+
 #### **Esempio**
 
 Dagli attributi:  
+
 $$  
 {\text{Matricola}, \text{Nome}, \text{Cognome}}  
 $$  
 si identifica la nuova entità:  
+
 $$  
 \text{STUDENTE}  
 $$
-
-Rappresentazione grafica:
-
-```
-STUDENTE
- ├── Matricola
- ├── Nome
- └── Cognome
-```
 
 ---
 
 ### **8. T5 – Aggregazione di attributi su relazioni**
 
 Allo stesso modo, un insieme di attributi che descrivono un legame può essere aggregato per formare una **relazione**.
+
+![](imgs/Pasted%20image%2020260821090819.png)
 
 #### **Esempio**
 

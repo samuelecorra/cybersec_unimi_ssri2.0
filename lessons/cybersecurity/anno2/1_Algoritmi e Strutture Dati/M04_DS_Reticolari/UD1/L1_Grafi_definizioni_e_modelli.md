@@ -159,6 +159,8 @@ $$
 m = n - 1  
 $$
 
+![](imgs/Pasted%20image%2020260804163534.png)
+
 > Gli alberi possono quindi essere visti come **grafi connessi minimali**, privi di cicli.
 
 ---

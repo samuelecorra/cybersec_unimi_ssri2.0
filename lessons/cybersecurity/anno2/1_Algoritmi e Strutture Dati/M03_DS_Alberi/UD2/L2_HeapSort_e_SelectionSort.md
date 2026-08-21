@@ -99,7 +99,7 @@ Per eliminare il doppio trasferimento di dati, possiamo implementare HeapSort **
 2. Si estrae ogni volta il **massimo** (non il minimo) per metterlo in fondo al vettore.
 3. Dopo ogni estrazione, si ristabilisce la **proprietà dello heap** tramite la funzione `restauraheap`.
 
-Poiché vogliamo un **ordinamento crescente**, invertiamo la **proprietà 3** degli heap:
+Poiché vogliamo un **ordinamento crescente**, invertiamo la **proprietà 3** degli heap e usiamo un **maxHeap**:
 
 > “Ogni padre è maggiore dei propri figli.”
 

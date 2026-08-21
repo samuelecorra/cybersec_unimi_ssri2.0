@@ -21,15 +21,15 @@ Dopo averne compreso la natura teorica nella lezione precedente, ora passiamo a 
 
 Gli operatori fondamentali del tipo di dato **grafo** sono:
 
-|Operatore|Tipo|Descrizione|
-|---|---|---|
-|`creagrafo()`|→ grafo|Crea un grafo vuoto|
-|`grafovuoto(G)`|grafo → booleano|Verifica se il grafo è vuoto|
-|`insnodo(u, G)`|nodo × grafo → grafo|Inserisce un nodo nel grafo|
-|`insarco(u, v, G)`|nodo × nodo × grafo → grafo|Inserisce un arco tra due nodi|
-|`cancnodo(u, G)`|nodo × grafo → grafo|Cancella un nodo dal grafo|
-|`cancarco(u, v, G)`|nodo × nodo × grafo → grafo|Cancella un arco dal grafo|
-|`adiacenti(u, G)`|nodo × grafo → insieme|Restituisce l’insieme dei nodi adiacenti a `u`|
+| Operatore           | Tipo                        | Descrizione                                    |
+| ------------------- | --------------------------- | ---------------------------------------------- |
+| `creagrafo()`       | → grafo                     | Crea un grafo vuoto                            |
+| `grafovuoto(G)`     | grafo → booleano            | Verifica se il grafo è vuoto                   |
+| `insnodo(u, G)`     | nodo × grafo → grafo        | Inserisce un nodo nel grafo                    |
+| `insarco(u, v, G)`  | nodo × nodo × grafo → grafo | Inserisce un arco tra due nodi                 |
+| `cancnodo(u, G)`    | nodo × grafo → grafo        | Cancella un nodo dal grafo                     |
+| `cancarco(u, v, G)` | nodo × nodo × grafo → grafo | Cancella un arco dal grafo                     |
+| `adiacenti(u, G)`   | nodo × grafo → insieme      | Restituisce l’insieme dei nodi adiacenti a `u` |
 
 ---
 

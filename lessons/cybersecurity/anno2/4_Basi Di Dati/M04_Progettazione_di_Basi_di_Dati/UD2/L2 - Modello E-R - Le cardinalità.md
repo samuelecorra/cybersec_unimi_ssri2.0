@@ -30,20 +30,15 @@ Questi due numeri specificano:
 
 #### **Esempio**
 
-Nella relazione tra **impiegato** e **prodotto** nello sviluppo di una **commessa**:
+![](imgs/Pasted%20image%2020260821002504.png)
 
-```
-impiegato ──< sviluppo >── prodotto ──< commessa >── cliente
-   (0,5)                           (1,20)          (1,1)         (0,10)
-```
-
-- Un _impiegato_ può lavorare da 0 a 5 commesse;
+- La cardinalità (0,5) specificata come partecipazione di impiegato alla relazione sviluppo ci dice che impiegato potrà essere associato ad un num di prodotti che va da un minimo di 0 prodotti a un massimo di 5.
     
-- Un _prodotto_ può essere sviluppato da 1 a 20 persone;
+- La cardinalità (1,20) ci dice che ogni prodotto potrà essere associato ad un numero di impiegati che va da un numero minimo di 1 ad un massimo di 20.
     
-- Una _commessa_ è collegata a un solo _cliente_;
+- La cardinalità (1,1) ci fa desumere che per ogni prodotto abbiamo esattamente un cliente
     
-- Un _cliente_ può avere da 0 a 10 commesse.
+- Infine un _cliente_ può avere da 0 a 10 prodotti.
 
 ---
 
@@ -98,22 +93,7 @@ Le combinazioni più frequenti nel modello E–R sono quattro:
 
 Esempio di relazione nel contesto universitario:
 
-```
-(0,1)     (1,n)
-CORSO ───< SEGUIRE >─── STUDENTE
-```
-
-- Uno **studente** può seguire _più corsi_ (1,n).
-    
-- Un **corso** può essere seguito da _nessuno o più studenti_ (0,n).
-
-Altri esempi:
-
-```
-PROFESSORE ───< DOCENZA >─── CORSO     → (1,n)
-TESI ───< SVOLGERE >─── STUDENTE       → (1,1)
-STAGE ───< ASSEGNAMENTO >─── AZIENDA   → (0,1)
-```
+![](imgs/Pasted%20image%2020260821073253.png)
 
 ---
 
@@ -126,6 +106,9 @@ Le relazioni **binarie** (cioè tra due entità) possono essere classificate in 
 |**1:1 (uno a uno)**|A ogni occorrenza di un’entità corrisponde _al più_ un’occorrenza dell’altra.|_svolgere_ tra **studente** e **tesi**|
 |**1:n (uno a molti)**|Un’entità può essere associata a _molte_ occorrenze dell’altra, ma non viceversa.|_seguire_ tra **studente** e **corso**|
 |**n:m (molti a molti)**|Entrambe le entità possono avere _più associazioni_ reciproche.|_docenza_ tra **professore** e **corso**|
+
+Attenzione: quando vedremo delle copie di cardinalità nel corso degli schemi/esempi, se sto specificando min/max ci sarà una virgola come separatore.
+Se invece sto specificando classi di relazioni, troverò i due punti.
 
 ---
 
@@ -172,7 +155,7 @@ I valori possibili sono ancora **0**, **1**, **n**.
 |**(1,1)**|Proprietà obbligatoria, esattamente un valore (proprietà scalare).|
 |**(1,n)**|Proprietà obbligatoria, può avere più valori.|
 
-> La cardinalità **(1,1)** è così comune da poter essere **omessa** nello schema E–R.
+> La cardinalità **(1,1)** è così comune da poter essere **omessa** nello schema E–R. Infatti in gergo si chiama **proprietà scalare**, ed è la default del modello.
 
 ---
 
@@ -180,29 +163,13 @@ I valori possibili sono ancora **0**, **1**, **n**.
 
 Esempio di entità _Impiegato_ e _Progetto_:
 
-```
-IMPIEGATO (1,1)
-│
-├── Matricola (1,1)
-├── Nome (1,1)
-├── Cognome (1,1)
-└── Telefono (1,n)
-```
-
-```
-PROGETTO (1,1)
-│
-├── Codice (1,1)
-├── Titolo (1,1)
-├── Sponsor (0,1)
-└── Lavoro (0,n)
-```
+![](imgs/Pasted%20image%2020260821074833.png)
 
 Interpretazione:
 
 - Ogni **impiegato** deve avere _una matricola, un nome e un cognome_, ma può avere _più numeri di telefono_.
     
-- Ogni **progetto** deve avere _codice e titolo_, può avere _uno sponsor_ e _più lavori associati_.
+- Ogni **progetto** deve avere _codice e titolo_, ma può avere _uno o + sponsor_.
 
 ---
 

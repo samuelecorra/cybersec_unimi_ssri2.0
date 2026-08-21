@@ -11,6 +11,8 @@ L’obiettivo è produrre una rappresentazione che descriva **tutte le informazi
 
 La progettazione logica è articolata in due fasi principali:
 
+![](imgs/Pasted%20image%2020260821092506.png)
+
 1. **Ristrutturazione dello schema E–R**
     
     - Serve per **ottimizzare e semplificare** lo schema concettuale.
@@ -100,14 +102,7 @@ $$
 \text{Totale} = \text{Imponibile} + \text{IVA}  
 $$
 
-Schema:
-
-```
-FATTURA
- ├── Imponibile
- ├── IVA
- └── Totale (derivato)
-```
+![](imgs/Pasted%20image%2020260821093717.png)
 
 In questo caso, l’attributo _Totale_ è ridondante, poiché può essere calcolato in ogni momento a partire dagli altri due valori.
 
@@ -124,17 +119,7 @@ Il _totale di un acquisto_ può essere derivato dal _prezzo del prodotto_, attra
 
 Schema:
 
-```
-PRODOTTO (prezzo)
-   │
- (1,n)
-   │
-COMPOSIZIONE
-   │
- (1,n)
-   │
-ACQUISTO (totale derivato)
-```
+![](imgs/Pasted%20image%2020260821093738.png)
 
 Dunque, l’attributo _totale_ di _Acquisto_ può essere calcolato dalla somma dei prezzi dei prodotti coinvolti nella relazione _Composizione_.
 
@@ -151,17 +136,7 @@ Il numero di abitanti di una città può essere calcolato **contando le persone*
 
 Schema:
 
-```
-CITTÀ (numero_abitanti derivato)
-   │
- (1,n)
-   │
-RESIDENZA
-   │
- (1,1)
-   │
-PERSONA (c.f.)
-```
+![](imgs/Pasted%20image%2020260821102124.png)
 
 Quindi l’attributo _numero_abitanti_ è ridondante, poiché può essere ottenuto dal conteggio delle relazioni _residenza_.
 
@@ -176,13 +151,7 @@ Una **relazione** può essere derivata dalla **composizione di altre relazioni**
 Esempio:  
 La relazione _docenza_ tra _professore_ e _corso_ può essere derivata dalla combinazione delle relazioni _insegnamento_ e _frequenza_.
 
-Schema:
-
-```
-PROFESSORE ──< INSEGNAMENTO >── CORSO ──< FREQUENZA >── STUDENTE
-           \_____________________________________________/
-                          DOCENZA (derivata)
-```
+![](imgs/Pasted%20image%2020260821102353.png)
 
 La relazione _docenza_ non aggiunge nuove informazioni e può essere omessa per evitare ridondanza.
 

@@ -70,17 +70,7 @@ Esempi:
 
 Le entità vengono rappresentate con un **rettangolo** contenente il nome dell’entità, scritto in maiuscolo o in stampatello per chiarezza.
 
-Esempio:
-
-```
-+----------------+
-|   PERSONA      |
-+----------------+
-
-+----------------+
-|   DIPARTIMENTO |
-+----------------+
-```
+![](imgs/Pasted%20image%2020260820234030.png)
 
 ---
 
@@ -109,22 +99,13 @@ In altre parole, una relazione collega **oggetti concreti** appartenenti a entit
 
 Le relazioni si rappresentano con un **rombo**, contenente il nome della relazione, collegato con **linee** alle entità partecipanti.
 
-Esempio:
-
-```
-PERSONA ──< RESIDENZA >── CITTÀ
-BANCA ──< MUTUO >── PERSONA ──< MUTUO >── CASA
-```
+![](imgs/Pasted%20image%2020260820234525.png)
 
 #### **Più relazioni tra le stesse entità**
 
-Due entità possono essere collegate da **più relazioni distinte**, ognuna con un significato diverso.  
-Esempio:
+Due entità possono essere collegate da **più relazioni distinte**, ognuna con un significato diverso. 
 
-```
-PERSONA ──< RESIDENZA >── CITTÀ
-PERSONA ──< SEDE_LAVORO >── CITTÀ
-```
+![](imgs/Pasted%20image%2020260820234807.png)
 
 ---
 
@@ -141,17 +122,7 @@ In questi casi, le linee del diagramma vengono etichettate per indicare i **ruol
 - Relazione _ha(persona, persona)_  
     (es. _persona_ “ha” _figlio_)
 
-Rappresentazione:
-
-```
-+---------+
-| PERSONA |
-+---------+
-   ^     \
-   |      \
-   |       v
-   └─< AMICIZIA >─┘
-```
+![](imgs/Pasted%20image%2020260820235228.png)
 
 ---
 
@@ -162,9 +133,11 @@ essa rappresenta un **sottoinsieme del prodotto cartesiano** delle entità coinv
 
 Se abbiamo due entità:
 
-$$  
-\text{Persona} = {p_1, p_2, p_3, p_4, p_5} \  
-\text{Città} = {x, y, z, w}  
+$$
+\begin{aligned}
+\text{Persona} &= \{p_1, p_2, p_3, p_4, p_5\} \\
+\text{Città} &= \{x, y, z, w\}
+\end{aligned}
 $$
 
 La relazione **Residenza(Persona, Città)** è un sottoinsieme di:
@@ -175,7 +148,19 @@ $$
 
 E contiene solo le coppie effettivamente esistenti (es. $(p_1, x)$, $(p_2, y)$, …).
 
+![](imgs/Pasted%20image%2020260820235447.png)
+
 > In una relazione **non possono esistere n-uple ripetute**, poiché ogni legame logico è unico.
+
+Ad esempio:
+
+![](imgs/Pasted%20image%2020260820235836.png)
+
+Possiamo dunque avere al più una copia singolo studente - singolo corso (studente1 - corso1), non possiamo rappresentare questa copia più di una volta all'interno del nostro sistema.
+
+Questo vuol dire che la rappresentazione appena fornita va bene solo sotto specifici casi: ad esempio, va bene se stiamo rappresentando gli esami superati, per i quali sappiamo che esiste almeno una copia studente1 - corso1. Ma se volessimo anche rappresentare gli esami non superati, dovremo necessariamente avere più copie, e quindi bisogna evolvere la rappresentazione:
+
+![](imgs/Pasted%20image%2020260821000304.png)
 
 ---
 
@@ -200,13 +185,7 @@ Gli attributi si rappresentano con **cerchi (pallini)** collegati all’entità 
 
 Esempio:
 
-```
-STUDENTE
-   |
-   |── Matricola
-   |── Nome
-   |── Cognome
-```
+![](imgs/Pasted%20image%2020260821000710.png)
 
 ---
 
@@ -218,6 +197,7 @@ Serve a rappresentare strutture più dettagliate, mantenendo la coerenza del mod
 #### **Esempio**
 
 Attributo composto: _Indirizzo_, composto da:  
+
 $$  
 \text{Indirizzo} = {\text{Via}, \text{Numero}, \text{Città}}  
 $$
@@ -226,14 +206,7 @@ $$
 
 Un cerchio con all’interno il nome dell’attributo composto, da cui partono i cerchi dei sottoattributi:
 
-```
-STUDENTE
-   |
-   |── Indirizzo
-         ├── Via
-         ├── Numero
-         └── Città
-```
+![](imgs/Pasted%20image%2020260821000735.png)
 
 ---
 

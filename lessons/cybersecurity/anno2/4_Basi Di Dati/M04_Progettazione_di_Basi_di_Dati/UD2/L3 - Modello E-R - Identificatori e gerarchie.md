@@ -44,21 +44,7 @@ Questi attributi costituiscono una **chiave univoca** per le sue occorrenze.
     
 - Se l’identificatore è **composto da più attributi**, si disegna una **linea che collega e taglia** gli attributi coinvolti e termina con un **pallino pieno**.
 
-```
-IMPIEGATO
-  ├──● Matricola
-  ├── Cognome
-  └── Nome
-```
-
-oppure:
-
-```
-LIBRO
-  ├──● Autore
-  ├──● Titolo
-  └── Editore
-```
+![](imgs/Pasted%20image%2020260821075735.png)
 
 ---
 
@@ -75,13 +61,7 @@ In questo caso:
 
 **Esempio**
 
-```
-IMPIEGATO
- ├──● Matricola
- ├── Nome
- ├── Cognome
- └── Codice Fiscale (0,1)
-```
+![](imgs/Pasted%20image%2020260821080420.png)
 
 Entrambi _Matricola_ e _Codice Fiscale_ possono identificare univocamente un impiegato, ma il primo è l’identificatore principale.
 
@@ -111,29 +91,19 @@ Una **linea di identificazione** taglia:
 
 #### **Esempio**
 
-Un _lavoro_ può essere identificato dal **dipartimento** e dall’**impiegato** che lo svolge:
+![](imgs/Pasted%20image%2020260821080741.png)
 
-```
-IMPIEGATO ──< LAVORO >── DIPARTIMENTO
- (1,1)                      (1,n)
-```
-
-L’entità _Lavoro_ è **debole**, perché esiste solo se associata a un _Impiegato_ e a un _Dipartimento_.  
-I suoi identificatori sono:  
-**(Impiegato, Dipartimento)** + eventuali attributi interni.
+La matricola da sola non basta ad identificare un impiegato all'interno del sistema: serve anche specificare il dipartimento in cui lavora.
 
 ---
 
 ### **6. Identificatori esterni multipli**
 
-È possibile che un’identificazione esterna coinvolga un’altra entità **anch’essa debole**, purché non si creino **cicli di dipendenze**.
+È possibile che un’identificazione esterna coinvolga un’altra entità **anch’essa debole**, purché non si creino **cicli di dipendenze**. L'identificazione ricorsiva richiede vincolo di aciclicità!
 
 #### **Esempio**
 
-```
-TRENO ──< POSTO >── VETTURA
-(1,n)             (1,n)
-```
+![](imgs/Pasted%20image%2020260821081115.png)
 
 - _Posto_ è identificato da _Vettura_ e _Treno_.
     
@@ -171,15 +141,9 @@ Le generalizzazioni/specializzazioni si rappresentano con **frecce** che collega
 
 Esempio:
 
-```
-            PERSONA
-             /    \
-     LAVORATORE   STUDENTE
-                     / |  \
-             I_ANNO II_ANNO FUORICORSO
-```
+![](imgs/Pasted%20image%2020260821081830.png)
 
-Tutte le proprietà di _PERSONA_ (es. _codice fiscale_, _nome_, _cognome_) vengono **ereditate automaticamente** dalle entità figlie.
+Tutte le proprietà di _PERSONA_ (es. _codice fiscale_, _nome_, _cognome_) vengono **ereditate automaticamente** dalle entità figlie, MA NON VANNO PER FORZA RAPPRESENTATE ESPLICITAMENTE NEI FIGLI.
 
 ---
 
@@ -247,13 +211,7 @@ Esempio:
 
 Esempio applicativo:
 
-```
-             PERSONA (p,s)
-              /     \
-       LAVORATORE  STUDENTE
-                    / |  \
-           I_ANNO II_ANNO FUORICORSO (t,e)
-```
+![](imgs/Pasted%20image%2020260821082702.png)
 
 ---
 

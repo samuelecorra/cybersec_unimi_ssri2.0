@@ -93,19 +93,7 @@ A seconda del tipo di gerarchia, si introducono selettori con regole diverse:
 
 ### **c) Esempio grafico semplificato**
 
-Da:
-
-```
-     E
-   /   \
-  E1   E2
-```
-
-A:
-
-```
-E (a1, a2, sel1, sel2)
-```
+![](imgs/Pasted%20image%2020260821105017.png)
 
 Gli attributi e le relazioni di _E1_ ed _E2_ vengono spostati in _E_, con cardinalità minima 0.
 
@@ -149,20 +137,7 @@ Gli attributi e le relazioni di _E1_ ed _E2_ vengono spostati in _E_, con cardin
 
 ### **c) Esempio grafico semplificato**
 
-Da:
-
-```
-     E
-   /   \
-  E1   E2
-```
-
-A:
-
-```
-E1 (attributi E + attributi E1)
-E2 (attributi E + attributi E2)
-```
+![](imgs/Pasted%20image%2020260821150713.png)
 
 ---
 
@@ -205,20 +180,7 @@ E2 (attributi E + attributi E2)
 
 ### **c) Esempio grafico semplificato**
 
-Da:
-
-```
-     E
-   /   \
-  E1   E2
-```
-
-A:
-
-```
-E ──< Rg1 >── E1
-E ──< Rg2 >── E2
-```
+![](imgs/Pasted%20image%2020260821152059.png)
 
 Ogni figlia è legata al padre tramite una relazione con cardinalità (1,1).
 
@@ -275,6 +237,8 @@ In pratica, è possibile applicare **approcci misti**, combinando più strategie
 Una parte della gerarchia può essere **collassata verso l’alto**,  
 mentre un’altra può essere **mantenuta tramite relazioni esplicite**,  
 a seconda delle esigenze operative.
+
+![](imgs/Pasted%20image%2020260821153000.png)
 
 ---
 

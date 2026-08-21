@@ -122,7 +122,7 @@ Durante una visita DFS, gli archi del grafo vengono suddivisi in **quattro categ
 
 Questa classificazione permette di identificare **proprietà topologiche** come la presenza di cicli.
 
-![[Pasted image 20251018193416.png]]
+![](imgs/Pasted%20image%2020260804184248.png)
 
 ---
 

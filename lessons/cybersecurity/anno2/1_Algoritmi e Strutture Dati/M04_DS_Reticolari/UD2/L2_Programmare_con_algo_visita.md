@@ -10,9 +10,7 @@ Lo schema di riferimento è lo stesso del Modulo 1 (“Soluzione di un semplice 
 Gli obiettivi principali sono:
 
 - comprendere **come modificare gli algoritmi di visita** per produrre nuovi grafi;
-    
 - mantenere una **complessità ottima** (lineare rispetto al numero di nodi e archi).
-    
 
 ---
 
@@ -22,8 +20,8 @@ Gli obiettivi principali sono:
 
 Dato un grafo orientato $G = (N, A)$, vogliamo costruire il grafo trasposto $G^T = (N, A^T)$, dove:
 
-$$  
-A^T = { (v, u) \ | \ (u, v) \in A }  
+$$
+A^T = { (v, u) \ | \ (u, v) \in A }
 $$
 
 Cioè: ogni arco del grafo originale viene **invertito di direzione**.
@@ -36,8 +34,8 @@ Cioè: ogni arco del grafo originale viene **invertito di direzione**.
 
 Dato un grafo **non orientato** $G = (N, A)$, vogliamo ottenere un grafo **orientato** $G^O = (N, A^O)$, dove:
 
-$$  
-A^O = { (u, v), (v, u) \ | \ [u, v] \in A }  
+$$
+A^O = { (u, v), (v, u) \ | \ [u, v] \in A }
 $$
 
 In pratica, ogni arco bidirezionale $[u, v]$ del grafo non orientato viene sostituito da **due archi orientati** $(u, v)$ e $(v, u)$.
@@ -51,16 +49,13 @@ In pratica, ogni arco bidirezionale $[u, v]$ del grafo non orientato viene sosti
 In entrambi i casi, gli algoritmi devono:
 
 - leggere **tutti i nodi** del grafo ($n$);
-    
 - scandire **tutti gli archi** ($m$);
-    
 - e creare un nuovo grafo con le stesse dimensioni.
-    
 
 È quindi inevitabile una complessità minima teorica di:
 
-$$  
-\Omega(n + m)  
+$$
+\Omega(n + m)
 $$
 
 Un algoritmo ottimo sarà dunque quello che mantiene **questa complessità lineare**, senza sprechi.
@@ -69,31 +64,34 @@ Un algoritmo ottimo sarà dunque quello che mantiene **questa complessità linea
 
 ### **4. Algoritmo per il grafo trasposto**
 
+L'idea vincente è effettuare una BFS modificata: mentre si visitano i nodi e gli archi del grafo originale, si **invertono gli archi** in fase di inserimento nel nuovo grafo trasposto.
+Il parametro $u$ è il nodo di partenza della visita, che può essere scelto arbitrariamente.
+
 ```c
 grafo* creaGrafoTrasposto(grafo G, nodo u) {
     nodo v;
     coda Q;
-    grafo *GT;
+    grafo *GT; // Creiamo il grafo trasposto come puntatore perché dovremo modificare la struttura
 
-    creagrafo(GT);
-    creacoda(Q);
-    incoda(u, Q);
+    creacoda(Q); // Inizializziamo la coda, che inizialmente è vuot
+    incoda(u, Q); // E subito dopo la riempiamo con il nodo di partenza della visita
 
+    // Ora cicliamo: finché la coda non è vuota, ovvero finché la visita non è terminata, estraiamo un nodo dalla coda e lo analizziamo
     while (!codavuota(Q)) {
-        u = leggicoda(Q);
-        fuoricoda(Q);
+        u = leggicoda(Q); // Leggiamo il nodo in testa alla coda
+        fuoricoda(Q); // Lo rimuoviamo dalla coda, perché lo stiamo visitando
 
-        if (u ∉ GT)
+        if (u ∉ GT) // Se il nodo non è già presente nel grafo trasposto, lo inseriamo
             insnodo(u, GT);
 
-        for each v ∈ A(u) {
-            if (v ∉ GT)
-                insnodo(v, GT);
+        for each v ∈ A(u) { // Per ogni nodo adiacente v di u...
+            if (v ∉ GT) // Se l'adiacente v non è già presente nel grafo trasposto...
+                insnodo(v, GT); // Lo inseriamo
 
-            insarco(v, u, GT);   // arco invertito
+            insarco(v, u, GT); // Se prima era (u, v), ora inseriamo (v, u) nel grafo trasposto
 
-            if (v non visitato && v ∉ Q)
-                incoda(v, Q);
+            if (v non visitato && v ∉ Q) // Se v non è stato visitato e non è già in coda, lo inseriamo in coda
+                incoda(v, Q); // Così sarà visitato in seguito
         }
     }
 
@@ -104,18 +102,15 @@ grafo* creaGrafoTrasposto(grafo G, nodo u) {
 #### **Logica dell’algoritmo**
 
 - È una **modifica dell’algoritmo BFS**: mentre esplora gli archi $(u, v)$, li **inverte** in fase di inserimento nel nuovo grafo $G^T$.
-    
 - Ogni nodo o arco viene analizzato una sola volta.
-    
 - Gli operatori `insnodo` e `insarco` vengono chiamati solo quando necessario.
-    
 
 #### **Complessità**
 
 Ogni operazione di visita o inserimento è in **tempo costante $O(1)$**, quindi:
 
-$$  
-T(n, m) = O(n + m)  
+$$
+T(n, m) = O(n + m)
 $$
 
 ---
@@ -157,11 +152,8 @@ grafo* orientaGrafo(grafo G, nodo u) {
 #### **Osservazioni**
 
 - Anche questo algoritmo è una **visita BFS modificata**.
-    
 - Quando si esplora il nodo `u`, si inseriscono gli archi $(u, v)$ ma **non** serve aggiungere anche $(v, u)$, perché verrà aggiunto durante la scansione di `A(v)`.
-    
 - Il vettore `visitato[]` assicura che ogni nodo sia gestito una sola volta.
-    
 
 #### **Vettore di controllo**
 
@@ -173,6 +165,7 @@ visitato[u] =
 \text{TRUE}, & \text{se } u \text{ è stato visitato}
 \end{cases}
 
+
 $$
 
 ---
@@ -181,18 +174,15 @@ $$
 
 Entrambi gli algoritmi sono **lineari** nel numero di nodi e archi:
 
-$$  
-O(n + m)  
+$$
+O(n + m)
 $$
 
 Questo perché:
 
 - ogni arco viene visitato una sola volta;
-    
 - l’appartenenza alla coda o al grafo è verificata in **tempo costante**;
-    
 - nessuna operazione ridondante viene effettuata.
-    
 
 > Questi algoritmi sono quindi **ottimi**, raggiungendo il limite inferiore teorico di complessità.
 
@@ -200,10 +190,10 @@ Questo perché:
 
 ### **7. Sintesi finale**
 
-|Problema|Tipo di grafo|Operazione|Algoritmo|Complessità|
-|---|---|---|---|---|
-|**1. Grafo trasposto**|Orientato|Inversione archi|BFS modificata|$O(n + m)$|
-|**2. Grafo orientato da non orientato**|Non orientato|Duplicazione archi orientati|BFS modificata|$O(n + m)$|
+| Problema                                | Tipo di grafo | Operazione                   | Algoritmo      | Complessità |
+| --------------------------------------- | ------------- | ---------------------------- | -------------- | ----------- |
+| **1. Grafo trasposto**                  | Orientato     | Inversione archi             | BFS modificata | $O(n + m)$  |
+| **2. Grafo orientato da non orientato** | Non orientato | Duplicazione archi orientati | BFS modificata | $O(n + m)$  |
 
 ---
 

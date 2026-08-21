@@ -38,9 +38,7 @@ Il processo inizia dalle **specifiche generali** e si conclude con uno **schema 
 
 #### **Rappresentazione del processo**
 
-$$  
-\text{Specifiche} ;\Rightarrow; \text{Schema iniziale} ;\Rightarrow; \text{Schema intermedio} ;\Rightarrow; \text{Schema finale}  
-$$
+![](imgs/telegram-cloud-photo-size-4-5782937752423829724-y.jpg)
 
 Ogni passaggio comporta un **raffinamento concettuale**.
 
@@ -82,6 +80,8 @@ $$
 \text{CORSO} \Rightarrow \text{TIPO\_CORSO} \xleftrightarrow{\text{TIPOLOGIA}} \text{EDIZIONE\_CORSO}  
 $$
 
+![](imgs/Pasted%20image%2020260821090057.png)
+
 ---
 
 ### **5. T2 – Da entità a generalizzazione**
@@ -99,6 +99,8 @@ L’entità _Impiegato_ può essere generalizzata in:
 $$  
 \text{IMPIEGATO} \Rightarrow \text{FULL\_TIME}, \text{PART\_TIME}  
 $$
+
+![](imgs/Pasted%20image%2020260821090110.png)
 
 Questa trasformazione introduce una **gerarchia di specializzazione**, già vista nelle lezioni precedenti.
 
@@ -124,6 +126,8 @@ $$
 \end{cases}  
 $$
 
+![](imgs/Pasted%20image%2020260821090125.png)
+
 ---
 
 ### **7. T4 – Da relazione a entità con relazioni**
@@ -140,33 +144,31 @@ $$
 \text{CONSULENTE} \xleftrightarrow{\text{stipula}} \text{CONTRATTO} \xleftrightarrow{\text{riguarda}} \text{AZIENDA}  
 $$
 
+![](imgs/Pasted%20image%2020260821090155.png)
+
 ---
 
 ### **8. T5 – Introduzione di attributi su entità**
 
 Questa trasformazione prevede l’aggiunta di **attributi descrittivi** a un’entità, per arricchirne le informazioni.
 
+![](imgs/Pasted%20image%2020260821090240.png)
+
 #### **Esempio**
 
 L’entità _Studente_ può essere arricchita con gli attributi:  
+
 $$  
 {\text{Matricola}, \text{Nome}, \text{Cognome}}  
 $$
-
-Rappresentazione grafica:
-
-```
-STUDENTE
-  ├── Matricola
-  ├── Nome
-  └── Cognome
-```
 
 ---
 
 ### **9. T6 – Introduzione di attributi su relazioni**
 
 Analogamente, è possibile **aggiungere attributi a una relazione**, per rappresentare proprietà che riguardano il legame stesso tra le entità.
+
+![](imgs/Pasted%20image%2020260821090308.png)
 
 #### **Esempio**
 
