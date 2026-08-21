@@ -5,22 +5,15 @@
 Durante la fase di **ristrutturazione di uno schema E–R**, oltre all'analisi delle ridondanze e all'eliminazione delle gerarchie, è possibile modificare la struttura dello schema attraverso operazioni di:
 
 1. **partizionamento di entità e relazioni**;
-    
 2. **accorpamento di entità e relazioni**;
-    
 3. **eliminazione di attributi multivalore**;
-    
 4. **eliminazione di attributi composti**;
-    
 5. **scelta degli identificatori primari**.
-    
 
 Queste trasformazioni hanno principalmente due obiettivi:
 
 - **aumentare l'efficienza delle operazioni**, avvicinando o separando informazioni in base a come vengono utilizzate;
-    
 - **tradurre costrutti del modello E–R che non sono direttamente supportati dal modello relazionale**.
-    
 
 ---
 
@@ -29,13 +22,9 @@ Queste trasformazioni hanno principalmente due obiettivi:
 Ricordiamo che la ristrutturazione di uno schema E–R comprende quattro fasi fondamentali:
 
 1. **Analisi delle ridondanze**
-    
 2. **Eliminazione delle gerarchie**
-    
 3. **Partizionamento o accorpamento di entità e relazioni**
-    
 4. **Scelta degli identificatori primari**
-    
 
 Nella lezione precedente abbiamo analizzato l'**eliminazione delle gerarchie**.
 
@@ -50,9 +39,7 @@ Le operazioni di **partizionamento** e **accorpamento** vengono utilizzate sopra
 L'idea generale è molto semplice:
 
 - se alcune informazioni vengono utilizzate **sempre separatamente**, può essere conveniente **separarle**;
-    
 - se alcune informazioni vengono utilizzate **frequentemente insieme**, può essere conveniente **riunirle**.
-    
 
 ---
 
@@ -81,9 +68,7 @@ Può essere utilizzato per:
 Il partizionamento di un'entità può essere effettuato principalmente in due modi:
 
 1. **partizionamento orizzontale**;
-    
 2. **partizionamento verticale**.
-    
 
 ---
 
@@ -116,7 +101,6 @@ Si sta cioè dividendo l'insieme delle occorrenze del padre in sottoinsiemi dist
 In questo caso:
 
 - gli **attributi rimangono sostanzialmente gli stessi**;
-    
 - vengono invece separate le **istanze** in base alla loro categoria.
 
 ---
@@ -134,7 +118,6 @@ In questo caso:
 Nel **partizionamento verticale**, un'entità $E$ viene sostituita da due entità $E_1$ ed $E_2$ che si dividono:
 
 - gli **attributi**;
-    
 - eventualmente anche le **relazioni**
 
 dell'entità originale.
@@ -185,21 +168,21 @@ poiché ogni istanza di una parte corrisponde precisamente alla relativa istanza
 
 ### **7. Differenza tra partizionamento orizzontale e verticale**
 
-|Tipo|Cosa viene diviso?|Intuizione|
-|---|---|---|
-|**Orizzontale**|Le istanze dell'entità|Divido le **righe**|
-|**Verticale**|Gli attributi e/o le relazioni|Divido le **colonne**|
+| Tipo            | Cosa viene diviso?             | Intuizione            |
+| --------------- | ------------------------------ | --------------------- |
+| **Orizzontale** | Le istanze dell'entità         | Divido le **righe**   |
+| **Verticale**   | Gli attributi e/o le relazioni | Divido le **colonne** |
 
 #### **Esempio mentale**
 
 Se abbiamo:
 
-|   |   |   |   |   |
-|---|---|---|---|---|
-|matr.|nome|cognome|stipendio|livello|
-|1|Mario|Rossi|2000|4|
-|2|Luca|Bianchi|1800|3|
-|3|Anna|Verdi|2400|5|
+|       |       |         |           |         |
+| ----- | ----- | ------- | --------- | ------- |
+| matr. | nome  | cognome | stipendio | livello |
+| 1     | Mario | Rossi   | 2000      | 4       |
+| 2     | Luca  | Bianchi | 1800      | 3       |
+| 3     | Anna  | Verdi   | 2400      | 5       |
 
 Con un **partizionamento orizzontale** potremmo separare:
 
@@ -236,7 +219,6 @@ L'**accorpamento di entità** rappresenta sostanzialmente l'operazione opposta a
 Due entità $E_1$ ed $E_2$ collegate da una relazione vengono sostituite da una sola entità $E$ contenente:
 
 - gli **attributi di entrambe**;
-    
 - le **relazioni di entrambe**.
 
 ---
@@ -246,9 +228,7 @@ Due entità $E_1$ ed $E_2$ collegate da una relazione vengono sostituite da una 
 L'accorpamento considerato nella lezione riguarda entità legate da una relazione:
 
 - **1:1**;
-    
 - oppure **1**.
-    
 
 Gli attributi delle due entità vengono quindi trasferiti nella nuova entità risultante.
 
@@ -362,7 +342,6 @@ SQUADRA
 che può essere separata distinguendo:
 
 - la **composizione attuale**;
-    
 - la **composizione passata**.
 
 In questo modo due categorie di associazioni concettualmente differenti vengono rappresentate con due relazioni distinte.
@@ -391,9 +370,7 @@ R
 L'accorpamento può essere utilizzato quando le due relazioni:
 
 - collegano le **stesse entità**;
-    
 - rappresentano due aspetti dello **stesso concetto**;
-    
 - hanno occorrenze che vengono **sempre accedute contemporaneamente**.
 
 In queste condizioni può essere più conveniente rappresentare entrambe attraverso una sola relazione.
@@ -404,11 +381,11 @@ In queste condizioni può essere più conveniente rappresentare entrambe attrave
 
 Possiamo quindi sintetizzare il criterio generale:
 
-|   |   |
-|---|---|
-|Situazione|Operazione conveniente|
-|Informazioni utilizzate normalmente **separatamente**|**Partizionamento**|
-|Informazioni utilizzate frequentemente **insieme**|**Accorpamento**|
+|                                                       |                        |
+| ----------------------------------------------------- | ---------------------- |
+| Situazione                                            | Operazione conveniente |
+| Informazioni utilizzate normalmente **separatamente** | **Partizionamento**    |
+| Informazioni utilizzate frequentemente **insieme**    | **Accorpamento**       |
 
 > Il criterio fondamentale è quindi il **carico operativo**, cioè il modo in cui le applicazioni accedono realmente ai dati.
 
@@ -425,7 +402,6 @@ Alcune trasformazioni sono necessarie perché determinati costrutti ammessi nel 
 In particolare occorre gestire:
 
 1. gli **attributi multivalore**;
-    
 2. gli **attributi composti**.
 
 ---
@@ -449,11 +425,8 @@ PERSONA
 Una persona può infatti possedere:
 
 - nessun numero di telefono;
-    
 - un numero;
-    
 - più numeri.
-    
 
 Nel modello relazionale non possiamo semplicemente inserire un numero arbitrario di valori all'interno dello stesso attributo.
 
@@ -467,22 +440,7 @@ Questa nuova entità viene collegata all'entità originale mediante una **relazi
 
 Schema concettuale:
 
-```
-E
-- id
-- a1
-- a2 (multivalore)
-```
-
-diventa:
-
-```
-E                         E2
-- id                      - a2
-- a1
-
-          R
-```
+![[Pasted image 20260821191632.png]]
 
 ---
 
@@ -491,9 +449,7 @@ E                         E2
 La cardinalità della nuova relazione dipende:
 
 1. dalla **cardinalità originale dell'attributo multivalore**;
-    
 2. dal fatto che lo stesso valore dell'attributo possa oppure no comparire più volte.
-    
 
 Nello schema generale della lezione:
 
@@ -628,9 +584,7 @@ indirizzo
 È possibile fare l'opposto:
 
 - eliminare l'attributo composto;
-    
 - mantenere direttamente le sue componenti come attributi semplici dell'entità.
-    
 
 Quindi:
 
@@ -940,52 +894,44 @@ frequente
 **Abbiamo visto:**
 
 - il **partizionamento di entità**:
-    
-    - **orizzontale**, quando vengono separate le istanze;
-        
-    - **verticale**, quando vengono separati attributi e relazioni;
-        
+  - **orizzontale**, quando vengono separate le istanze;
+  - **verticale**, quando vengono separati attributi e relazioni;
 - l'**accorpamento di entità** collegate da relazioni 1:1 o 1;
-    
 - il **partizionamento e l'accorpamento delle relazioni**;
-    
 - l'eliminazione degli **attributi multivalore** attraverso la creazione di una nuova entità;
-    
 - le due possibili trasformazioni degli **attributi composti**;
-    
 - i criteri per scegliere gli **identificatori primari**.
-    
 
 ---
 
 ### **Da ricordare**
 
 > **Partizionamento**
-> 
+>
 > = separo ciò che viene usato separatamente.
 
 > **Accorpamento**
-> 
+>
 > = riunisco ciò che viene usato frequentemente insieme.
 
 > **Partizionamento orizzontale**
-> 
+>
 > = separo le **istanze**.
 
 > **Partizionamento verticale**
-> 
+>
 > = separo gli **attributi**.
 
 > **Attributo multivalore**
-> 
+>
 > = creo una **nuova entità**.
 
 > **Attributo composto**
-> 
+>
 > = mantengo il composto come attributo semplice oppure mantengo separatamente le sue componenti.
 
 > **Identificatore primario**
-> 
+>
 > = preferibilmente frequente, semplice, interno e senza attributi nulli.
 
 ---
