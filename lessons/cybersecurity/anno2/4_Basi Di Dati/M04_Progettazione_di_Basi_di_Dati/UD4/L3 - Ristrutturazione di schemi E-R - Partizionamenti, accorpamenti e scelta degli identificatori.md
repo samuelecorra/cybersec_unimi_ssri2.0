@@ -432,7 +432,7 @@ Nel modello relazionale non possiamo semplicemente inserire un numero arbitrario
 
 ---
 
-### **b) Soluzione**
+#### **Soluzione**
 
 Si crea una **nuova entità** contenente l'attributo multivalore.
 
@@ -444,7 +444,7 @@ Schema concettuale:
 
 ---
 
-### **c) Cardinalità della relazione**
+#### **Cardinalità della relazione**
 
 La cardinalità della nuova relazione dipende:
 
@@ -469,49 +469,13 @@ se lo stesso valore può comparire in più occorrenze.
 
 ---
 
-### **d) Esempio: numero di telefono**
+#### **Esempio: numero di telefono**
 
-Da:
-
-```
-PERSONA
-- c.f.
-- nome
-- cognome
-- telefono (0,n)
-```
-
-si passa a:
-
-```
-PERSONA
-- c.f.
-- nome
-- cognome
-```
-
-collegata attraverso una relazione, per esempio:
-
-```
-RECAPITO
-```
-
-all'entità:
-
-```
-TELEFONO
-- telefono
-```
+![](Pasted%20image%2020260821192234.png)
 
 ---
 
-### **e) Rappresentazione grafica**
-
-> **[PLACEHOLDER IMMAGINE — Eliminazione dell'attributo multivalore TELEFONO da PERSONA]**
-
----
-
-### **f) Idea chiave**
+#### **Idea chiave**
 
 > Un attributo che può contenere **più valori** viene trasformato in una **nuova entità** collegata all'entità originale.
 
@@ -525,9 +489,7 @@ nuova entità + relazione
 
 ---
 
-# **15. Eliminazione degli attributi composti**
-
-### **a) Problema**
+### **15. Eliminazione degli attributi composti**
 
 Anche gli **attributi composti** non sono direttamente supportati dal modello relazionale.
 
@@ -542,15 +504,13 @@ indirizzo
 └── CAP
 ```
 
----
-
-### **b) Due possibili soluzioni**
-
 Per eliminare un attributo composto esistono **due strategie**.
 
+![](Pasted%20image%2020260821192425.png)
+
 ---
 
-### **Soluzione 1 — Considerare il composto come attributo semplice**
+#### **Soluzione 1 — Considerare il composto come attributo semplice**
 
 Si elimina la suddivisione nelle singole componenti e si mantiene soltanto l'attributo complessivo.
 
@@ -579,7 +539,7 @@ indirizzo
 
 ---
 
-### **Soluzione 2 — Eliminare il composto e mantenere le componenti**
+#### **Soluzione 2 — Eliminare il composto e mantenere le componenti**
 
 È possibile fare l'opposto:
 
@@ -605,48 +565,7 @@ CAP
 
 ---
 
-### **c) Schema generale**
-
-Se abbiamo:
-
-```
-a
-├── a1
-├── a2
-└── a3
-```
-
-possiamo trasformarlo:
-
-#### **Prima possibilità**
-
-```
-E
-- a1
-- a2
-- a3
-```
-
-oppure:
-
-#### **Seconda possibilità**
-
-```
-E
-- a123
-```
-
-dove l'intero valore composto viene trattato come un unico attributo.
-
----
-
-### **d) Rappresentazione grafica**
-
-> **[PLACEHOLDER IMMAGINE — Eliminazione di un attributo composto: due possibili trasformazioni]**
-
----
-
-### **e) Idea chiave**
+#### **Idea chiave**
 
 Per un attributo composto possiamo quindi:
 
@@ -660,13 +579,13 @@ COMPOSTO
 
 ---
 
-# **16. Scelta degli identificatori primari**
+### **16. Scelta degli identificatori primari**
 
 Dopo aver completato le trasformazioni dello schema è necessario scegliere, per ogni entità, un **identificatore primario**.
 
 ---
 
-### **a) Identificatori e chiavi candidate**
+#### **Identificatori e chiavi candidate**
 
 Un'entità può possedere più identificatori.
 
@@ -678,7 +597,7 @@ Occorre quindi selezionare quale di essi verrà utilizzato come:
 
 ---
 
-### **b) Identificatori non selezionati**
+#### **Identificatori non selezionati**
 
 Gli identificatori che non vengono scelti come primari **non vengono necessariamente persi**.
 
@@ -690,13 +609,13 @@ Questo permette comunque di utilizzarli per accedere efficientemente ai dati.
 
 ---
 
-# **17. Criteri per scegliere l'identificatore primario**
+### **17. Criteri per scegliere l'identificatore primario**
 
 Quando un'entità possiede più identificatori, è preferibile scegliere come primario un identificatore che presenti determinate caratteristiche.
 
 ---
 
-### **1. Utilizzato frequentemente nelle operazioni**
+#### **1. Utilizzato frequentemente nelle operazioni**
 
 È preferibile un identificatore che venga:
 
@@ -706,7 +625,7 @@ Se molte interrogazioni individuano un'entità utilizzando un certo identificato
 
 ---
 
-### **2. Composto da pochi attributi**
+#### **2. Composto da pochi attributi**
 
 È preferibile scegliere un identificatore formato da:
 
@@ -730,7 +649,7 @@ L'obiettivo è evitare identificatori primari inutilmente complessi.
 
 ---
 
-### **3. Costituito da attributi interni**
+#### **3. Costituito da attributi interni**
 
 È preferibile utilizzare identificatori costituiti solamente da:
 
@@ -742,7 +661,7 @@ Questo viene preferito rispetto a un **identificatore esterno**, che dipende inv
 
 ---
 
-# **18. Identificatori che non possono essere primari**
+### **18. Identificatori che non possono essere primari**
 
 Esiste inoltre una restrizione fondamentale:
 
@@ -754,7 +673,7 @@ Un attributo che può essere assente non può quindi costituire correttamente pa
 
 ---
 
-# **19. Criteri riassuntivi per la scelta della chiave primaria**
+### **19. Criteri riassuntivi per la scelta della chiave primaria**
 
 Quando esistono più identificatori candidati, possiamo ricordare questa gerarchia di preferenze:
 
@@ -772,7 +691,7 @@ IDENTIFICATORE PRIMARIO IDEALE
 
 ---
 
-# **20. Quadro complessivo della ristrutturazione**
+### **20. Quadro complessivo della ristrutturazione**
 
 Possiamo ora vedere l'intera fase di ristrutturazione come una sequenza di trasformazioni.
 
@@ -808,88 +727,7 @@ Lo schema ottenuto è così maggiormente adatto alla successiva traduzione nel *
 
 ---
 
-# **21. Schema mentale delle trasformazioni**
-
-### **Partizionamento orizzontale**
-
-```
-Una entità
-    ↓
-più entità che dividono le ISTANZE
-```
-
-> **Divido le righe.**
-
----
-
-### **Partizionamento verticale**
-
-```
-Una entità
-    ↓
-più entità che dividono gli ATTRIBUTI
-```
-
-> **Divido le colonne.**
-
----
-
-### **Accorpamento**
-
-```
-Più entità/relazioni
-        ↓
-una struttura unica
-```
-
-> Utile quando le informazioni vengono **usate insieme**.
-
----
-
-### **Attributo multivalore**
-
-```
-attributo (0,n)
-      ↓
-nuova entità + relazione
-```
-
----
-
-### **Attributo composto**
-
-```
-       attributo composto
-             │
-      ┌──────┴──────┐
-      ▼             ▼
-composto come    componenti come
-attributo        attributi semplici
-semplice
-```
-
----
-
-### **Identificatori**
-
-```
-più chiavi candidate
-        ↓
-scelta della chiave primaria
-```
-
-preferendo:
-
-```
-frequente
-+ corta
-+ interna
-+ senza null
-```
-
----
-
-# **22. Sintesi finale**
+### **21. Sintesi finale**
 
 **Abbiamo visto:**
 
@@ -901,51 +739,3 @@ frequente
 - l'eliminazione degli **attributi multivalore** attraverso la creazione di una nuova entità;
 - le due possibili trasformazioni degli **attributi composti**;
 - i criteri per scegliere gli **identificatori primari**.
-
----
-
-### **Da ricordare**
-
-> **Partizionamento**
->
-> = separo ciò che viene usato separatamente.
-
-> **Accorpamento**
->
-> = riunisco ciò che viene usato frequentemente insieme.
-
-> **Partizionamento orizzontale**
->
-> = separo le **istanze**.
-
-> **Partizionamento verticale**
->
-> = separo gli **attributi**.
-
-> **Attributo multivalore**
->
-> = creo una **nuova entità**.
-
-> **Attributo composto**
->
-> = mantengo il composto come attributo semplice oppure mantengo separatamente le sue componenti.
-
-> **Identificatore primario**
->
-> = preferibilmente frequente, semplice, interno e senza attributi nulli.
-
----
-
-> **[PLACEHOLDER IMMAGINE — Partizionamento orizzontale]**
-
-> **[PLACEHOLDER IMMAGINE — Partizionamento verticale]**
-
-> **[PLACEHOLDER IMMAGINE — Accorpamento di entità]**
-
-> **[PLACEHOLDER IMMAGINE — Partizionamento di relazioni]**
-
-> **[PLACEHOLDER IMMAGINE — Eliminazione attributo multivalore]**
-
-> **[PLACEHOLDER IMMAGINE — Eliminazione attributo composto]**
-
----
