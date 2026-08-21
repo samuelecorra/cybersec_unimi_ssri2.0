@@ -8,7 +8,6 @@ Nonostante l’idea risalga agli anni ’70, il modello venne **implementato nei
 Il modello relazionale si basa su due principi fondamentali:
 
 - Il **concetto matematico di relazione**
-    
 - La **rappresentazione tabellare** delle relazioni
 
 ---
@@ -18,9 +17,7 @@ Il modello relazionale si basa su due principi fondamentali:
 Il termine **relazione** assume **tre accezioni differenti** nel contesto delle basi di dati:
 
 1. **Relazione matematica** → secondo la **teoria degli insiemi**
-    
 2. **Relazione nel modello relazionale** → rappresentata come **tabella**
-    
 3. **Relazione (relationship)** nel **modello concettuale Entità-Relazione (E-R)**, utilizzato nella progettazione concettuale delle basi di dati
 
 ---
@@ -42,18 +39,15 @@ Può essere rappresentata anche in **forma tabellare**, dove ogni riga corrispon
 Data una relazione matematica $r \subseteq D_1 \times D_2 \times \ldots \times D_n$:
 
 - **Domini della relazione:** $D_1, D_2, \ldots, D_n$
-    
 - **Grado della relazione:** numero di domini $n$
-    
 - **Cardinalità della relazione:** numero di n-uple contenute in $r$
-    
 - **Cardinalità del prodotto cartesiano:** $|D_1| \times |D_2| \times \ldots \times |D_n|$
 
 In generale, le relazioni sono **finite**, anche se i domini possono essere **infiniti**.
 
 **Esempio**
 
-Sia $D_1 = {a, b}$ e $D_2 = {x, y, z}$.  
+Sia $D_1 = {a, b}$ e $D_2 = {x, y, z}$.
 
 Allora:
 
@@ -77,45 +71,52 @@ $$d_1 \in D_1, d_2 \in D_2, \ldots, d_n \in D_n$$
 Proprietà principali:
 
 - La relazione è un **insieme** → le n-uple sono **distinte e non ordinate** tra loro
-    
 - Le n-uple sono **ordinate internamente** → l’**i-esimo valore** di ciascuna tupla proviene dall’**i-esimo dominio**
 
 **Esempio**
 
-|Reti|Fuori|RetiCasa|FuoriCasa|
-|:--|:--|:--|:--|
-|0|1|Juve|Milan|
-|3|1|Milan|Roma|
-|2|2|Roma|Juve|
-|0|1|Milan|Lazio|
-|1|3|Lazio|Juve|
+La seguente tabella però non riesce a mostrare il ruolo semantico dei domini, in quanto non è chiaro quale sia la squadra di casa e quale quella in trasferta.
+
+|       |       |     |     |
+| ----- | ----- | --- | --- |
+| Juve  | Lazio | 3   | 1   |
+| Lazio | Milan | 1   | 0   |
+| Juve  | Roma  | 2   | 2   |
+| Roma  | Milan | 1   | 3   |
+| Milan | Juve  | 1   | 0   |
 
 Ogni **posizione** ha un significato preciso (ruolo del dominio).  
 Ad esempio, nel dominio “Squadre”, i ruoli **“Casa”** e **“Fuori”** sono distinti in base alla posizione.
+
+Quindi la struttura si dice **_posizionale_**, in quanto la posizione dei domini ne determina il **_ruolo_** all'interno della relazio
+
+**Attenzione**:
+
+- Una stessa tupla non può apparire più volte nella relazione, in quanto le n-uple sono **distinte**!
 
 ---
 
 ### **6. Relazione nel modello relazionale**
 
+Vogliamo subito distaccarci da questa visione posizionale, in quanto **non è pratica** per la gestione dei dati.
+
 Nel **modello relazionale**, a ciascun dominio è **associato un nome (attributo)**, che ne definisce il ruolo nella relazione.  
-Gli attributi costituiscono l’**intestazione delle colonne** della tabella.
+Gli attributi costituiscono l’**intestazione/heading delle colonne** della tabella.
 
 **Esempio**
 
-|RetiCasa|FuoriCasa|RetiFuori|SquadraCasa|SquadraFuori|
-|:--|:--|:--|:--|:--|
-|0|1|Juve|Milan||
-|3|1|Milan|Roma||
-|2|2|Roma|Juve||
-|0|1|Milan|Lazio||
-|1|3|Lazio|Juve||
+| Casa  | Fuori | RetiCasa | RetiFuori |
+| ----- | ----- | -------- | --------- |
+| Juve  | Lazio | 3        | 1         |
+| Lazio | Milan | 1        | 0         |
+| Juve  | Roma  | 2        | 2         |
+| Roma  | Milan | 1        | 3         |
+| Milan | Juve  | 1        | 0         |
 
 Proprietà:
 
 - Ogni **attributo** ha un nome **univoco** nella relazione.
-    
 - L’**ordinamento degli attributi è irrilevante**: la struttura non è posizionale ma **nominale**.
-    
 - Ogni colonna rappresenta un **dominio** e ogni riga una **tupla** (n-upla di valori).
 
 ---
@@ -125,18 +126,16 @@ Proprietà:
 Sia:
 
 - $X$ = insieme degli **attributi**
-    
 - $D$ = insieme dei **domini**
 
 Definiamo:
 
 - Una **funzione**  
-    $dom: X \to D$  
-    che associa a ogni attributo $A \in X$ il proprio dominio $dom(A) \in D$
-    
+   $dom: X \to D$  
+   che associa a ogni attributo $A \in X$ il proprio dominio $dom(A) \in D$
 - Una **tupla (o n-upla)** su $X$ è una **funzione**  
-    $t: X \to \bigcup D$  
-    tale che per ogni attributo $A \in X$, $t(A) \in dom(A)$
+   $t: X \to \bigcup D$  
+   tale che per ogni attributo $A \in X$, $t(A) \in dom(A)$
 
 Una **relazione su $X$** è un **insieme di tuple su $X$**.
 
@@ -147,21 +146,19 @@ Una **relazione su $X$** è un **insieme di tuple su $X$**.
 Sia $t$ una tupla su $X$, e siano $A \in X$ e $Y \subseteq X$:
 
 - $t[A]$ oppure $t.A$: valore dell’attributo $A$ nella tupla $t$
-    
 - $t[Y]$: insieme dei valori degli attributi in $Y$
 
 **Esempio**
 
-|RetiCasa|FuoriCasa|RetiFuori|
-|:--|:--|:--|
-|2|Roma|Juve|
-|0|Milan|Lazio|
-|1|Lazio|Juve|
+| Casa  | Fuori | RetiCasa | RetiFuori |
+| ----- | ----- | -------- | --------- |
+| Juve  | Lazio | 3        | 1         |
+| Lazio | Milan | 1        | 0         |
+| Juve  | Roma  | 2        | 2         |
 
 Sia $t$ la tupla della prima riga:
 
 - $t[Casa] = t.Casa = \text{Juve}$
-    
 - $t[Casa, RetiCasa] = [\text{Juve}, 3]$
 
 ---
@@ -171,15 +168,12 @@ Sia $t$ la tupla della prima riga:
 Una tabella rappresenta correttamente una relazione se soddisfa le seguenti condizioni:
 
 - I **valori di ogni colonna** sono **omogenei** (stesso dominio)
-    
 - Le **righe (tuple)** sono **distinte** tra loro
-    
 - Le **intestazioni delle colonne (attributi)** sono **tutte diverse**
 
 Inoltre:
 
 - L’**ordine delle righe** è irrilevante
-    
 - L’**ordine delle colonne** è irrilevante
 
 La tabella è dunque una **rappresentazione logica** e non fisica dei dati.
@@ -191,11 +185,8 @@ La tabella è dunque una **rappresentazione logica** e non fisica dei dati.
 In questa lezione abbiamo introdotto:
 
 - Il **concetto di relazione** nelle sue diverse accezioni
-    
 - La **relazione matematica** e le sue proprietà
-    
 - La **relazione nel modello relazionale**, basata su attributi e tuple
-    
 - Le **regole che una tabella deve rispettare** per rappresentare una relazione
 
 Questi concetti costituiscono la base teorica del modello relazionale, su cui si fondano tutti i **DBMS moderni** e i **linguaggi di interrogazione** come SQL.
