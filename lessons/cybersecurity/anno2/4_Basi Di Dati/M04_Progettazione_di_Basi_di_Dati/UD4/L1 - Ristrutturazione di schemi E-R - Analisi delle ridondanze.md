@@ -14,41 +14,32 @@ La progettazione logica è articolata in due fasi principali:
 ![](imgs/Pasted%20image%2020260821092506.png)
 
 1. **Ristrutturazione dello schema E–R**
-    
-    - Serve per **ottimizzare e semplificare** lo schema concettuale.
-        
-    - Rende più efficienti le operazioni previste.
-        
-    - Traduce eventuali concetti che **non possono essere rappresentati direttamente** nel modello logico.
-        
-    - È **indipendente dal modello logico** scelto.
-    
+   - Serve per **ottimizzare e semplificare** lo schema concettuale.
+   - Rende più efficienti le operazioni previste.
+   - Traduce eventuali concetti che **non possono essere rappresentati direttamente** nel modello logico.
+   - È **indipendente dal modello logico** scelto.
+
 2. **Traduzione verso il modello logico**
-    
-    - Trasforma lo schema E–R ristrutturato in uno **schema logico relazionale**.
-        
-    - Questa fase è **dipendente dal modello** scelto (relazionale, gerarchico, a oggetti, ecc.).
-        
-    - Può includere ulteriori ottimizzazioni in base alle **caratteristiche specifiche del DBMS**.
+   - Trasforma lo schema E–R ristrutturato in uno **schema logico relazionale**.
+   - Questa fase è **dipendente dal modello** scelto (relazionale, gerarchico, a oggetti, ecc.).
+   - Può includere ulteriori ottimizzazioni in base alle **caratteristiche specifiche del DBMS**.
 
 ---
 
 ### **3. Struttura del processo di progettazione logica**
 
-$$  
-\text{Schema E–R}  
-\xRightarrow[\text{ottimizzazione}]{\text{Ristrutturazione}}  
-\text{Schema E–R ristrutturato}  
-\xRightarrow[\text{traduzione specifica}]{\text{Modello logico}}  
-\text{Schema logico finale}  
+$$
+\text{Schema E–R}
+\xRightarrow[\text{ottimizzazione}]{\text{Ristrutturazione}}
+\text{Schema E–R ristrutturato}
+\xRightarrow[\text{traduzione specifica}]{\text{Modello logico}}
+\text{Schema logico finale}
 $$
 
 Durante il processo si considerano anche:
 
 - i **vincoli di integrità** da trasferire nel modello logico;
-    
 - la **documentazione di supporto** dello schema;
-    
 - le **caratteristiche del carico applicativo** (cioè le operazioni più frequenti o costose).
 
 ---
@@ -58,11 +49,8 @@ Durante il processo si considerano anche:
 La ristrutturazione di uno schema E–R comprende:
 
 1. **Analisi delle ridondanze**
-    
 2. **Eliminazione delle gerarchie**
-    
 3. **Partizionamento o accorpamento** di entità e relazioni
-    
 4. **Scelta degli identificatori primari**
 
 Queste fasi migliorano la **chiarezza, efficienza e manutenibilità** del modello prima della traduzione logica.
@@ -79,16 +67,11 @@ Le ridondanze possono riguardare **attributi** o **relazioni** e vanno individua
 #### **Tipologie principali**
 
 - **Attributi derivabili** da:
-    
-    1. altri attributi della **stessa entità o relazione**;
-        
-    2. attributi di **altre entità o relazioni**;
-        
-    3. **operazioni di conteggio** di occorrenze.
-    
+  1. altri attributi della **stessa entità o relazione**;
+  2. attributi di **altre entità o relazioni**;
+  3. **operazioni di conteggio** di occorrenze.
 - **Relazioni derivabili** da:
-    
-    - **composizione** di altre relazioni, spesso in presenza di **cicli** nello schema.
+  - **composizione** di altre relazioni, spesso in presenza di **cicli** nello schema.
 
 ---
 
@@ -98,8 +81,8 @@ Le ridondanze possono riguardare **attributi** o **relazioni** e vanno individua
 
 Attributi derivabili da altri **della stessa entità o relazione**:
 
-$$  
-\text{Totale} = \text{Imponibile} + \text{IVA}  
+$$
+\text{Totale} = \text{Imponibile} + \text{IVA}
 $$
 
 ![](imgs/Pasted%20image%2020260821093717.png)
@@ -122,6 +105,8 @@ Schema:
 ![](imgs/Pasted%20image%2020260821093738.png)
 
 Dunque, l’attributo _totale_ di _Acquisto_ può essere calcolato dalla somma dei prezzi dei prodotti coinvolti nella relazione _Composizione_.
+
+Ovviamente non può valere il viceversa, i prezzi dei singoli prodotti ci servono!
 
 ---
 
@@ -162,15 +147,12 @@ La relazione _docenza_ non aggiunge nuove informazioni e può essere omessa per 
 #### **Vantaggi**
 
 - **Riduce gli accessi al database**, evitando calcoli o join complessi.
-    
 - **Aumenta l’efficienza** delle interrogazioni che richiedono dati derivati frequentemente.
 
 #### **Svantaggi**
 
 - **Occupa più memoria**, anche se di solito in misura non significativa.
-    
 - **Richiede aggiornamenti aggiuntivi** per mantenere i dati derivati coerenti con quelli originali.
-    
 - **Introduce rischio di inconsistenza**, se i dati base cambiano e quelli derivati non vengono aggiornati correttamente.
 
 ---
@@ -180,9 +162,7 @@ La relazione _docenza_ non aggiunge nuove informazioni e può essere omessa per 
 La scelta di **mantenere o eliminare** una ridondanza dipende da:
 
 - il **carico applicativo**, cioè la frequenza e il tipo di operazioni previste;
-    
 - il **costo computazionale** per calcolare i dati derivati;
-    
 - lo **spazio di memoria** disponibile e l’impatto della duplicazione.
 
 > Non sempre i cicli nello schema corrispondono a vere ridondanze,  
@@ -196,11 +176,8 @@ La scelta di **mantenere o eliminare** una ridondanza dipende da:
 **Abbiamo visto:**
 
 - le **due fasi principali** della progettazione logica (ristrutturazione e traduzione);
-    
 - la **struttura della ristrutturazione dello schema E–R**;
-    
 - le **diverse tipologie di ridondanza** e come individuarle;
-    
 - i **vantaggi e svantaggi** del mantenerle o eliminarle.
 
 **In sintesi:**
@@ -209,6 +186,4 @@ La scelta di **mantenere o eliminare** una ridondanza dipende da:
 
 ---
 
-
 ![](imgs/Pasted%20image%2020251125050757.png)
-

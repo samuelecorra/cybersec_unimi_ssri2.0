@@ -63,7 +63,8 @@ In questo caso:
 
 ![](imgs/Pasted%20image%2020260821080420.png)
 
-Entrambi _Matricola_ e _Codice Fiscale_ possono identificare univocamente un impiegato, ma il primo è l’identificatore principale.
+Entrambi _Matricola_ e _Codice Fiscale_ possono identificare univocamente un impiegato, ma il primo è l’identificatore principale. Nota bene: soprannome è opzionale, non scalare, ma è da esempio come possibilità in cui possiamo essere permissivi!
+Sono "falsi identificatori" poiché nel caso in cui non assumano valori vanno eliminati in fase di progettazione logica.
 
 ---
 
@@ -167,7 +168,7 @@ Le gerarchie si classificano in base a due **dimensioni ortogonali**:
 - **Parziale:** alcune occorrenze della **padre** possono non appartenere a nessuna figlia.  
     Esempio:  
     _Persona_ → _Lavoratore_, _Studente_  
-    (non tutte le persone sono lavoratori o studenti).
+    (non tutte le persone sono lavoratori o studenti -> pensionati, disoccupati...).
 
 ---
 
