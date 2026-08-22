@@ -442,6 +442,8 @@ Schema concettuale:
 
 ![](Pasted%20image%2020260821192009.png)
 
+con y > 1
+
 ---
 
 #### **Cardinalità della relazione**
