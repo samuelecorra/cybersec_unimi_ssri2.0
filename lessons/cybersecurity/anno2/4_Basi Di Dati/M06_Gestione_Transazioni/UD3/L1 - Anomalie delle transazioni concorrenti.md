@@ -52,14 +52,7 @@ Per analizzare il comportamento del controllo della concorrenza, si adottano alc
 Il modulo di controllo della concorrenza opera insieme agli altri componenti del DBMS.  
 La sua collocazione nell’architettura generale può essere schematizzata così:
 
-```
-Gestore dei metodi d’accesso
-Gestore delle transazioni
-Gestore della concorrenza
-Tabella dei lock
-Gestore della memoria secondaria
-Base di dati (BD)
-```
+![[Pasted image 20260823180716.png]]
 
 Flusso delle operazioni:
 
@@ -100,6 +93,8 @@ La **perdita di aggiornamenti** si verifica quando le modifiche di una transazio
 |`write(x)`|`write(x)`|
 |`commit`|`commit`|
 
+![[Pasted image 20260823180901.png]]
+
 **Valore iniziale:** `x = 2`  
 **Valore finale corretto:** `x = 4`  
 **Valore finale effettivo:** `x = 3`
@@ -113,6 +108,8 @@ La scrittura di **T2** ha **sovrascritto** la modifica di **T1**, che è andata 
 La **lettura sporca** si verifica quando una transazione legge un **valore temporaneo** modificato da un’altra transazione **non ancora confermata (non committed)**, che in seguito viene **annullata (rollback)**.
 
 **Esempio:**
+
+![[Pasted image 20260823181122.png]]
 
 |Transazione T1|Transazione T2|
 |---|---|
@@ -134,6 +131,8 @@ Si parla di **letture inconsistenti** quando una transazione legge dati **mentre
 
 **Esempio:**
 
+![[Pasted image 20260823181322.png]]
+
 |Transazione T1|Transazione T2|
 |---|---|
 |`begin`|`begin`|
@@ -154,6 +153,8 @@ Il risultato è incoerente: T1 osserva **due versioni diverse** dello stesso dat
 Un’**anomalia di aggiornamento fantasma** si verifica quando una transazione osserva solo **una parte degli effetti** di un’altra, violando temporaneamente un vincolo di integrità.
 
 **Esempio:**
+
+![[Pasted image 20260823181428.png]]
 
 Vincolo: $x + y + z = 1000$
 

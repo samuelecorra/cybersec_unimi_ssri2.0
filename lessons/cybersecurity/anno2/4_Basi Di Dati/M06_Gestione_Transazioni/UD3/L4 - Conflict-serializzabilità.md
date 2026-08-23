@@ -12,17 +12,13 @@ Essa si basa sull’analisi dei **conflitti** tra operazioni appartenenti a tran
 Due operazioni $a_i$ e $a_j$ (con $i \ne j$) si dicono **in conflitto** se soddisfano contemporaneamente le seguenti condizioni:
 
 1. Appartengono a **due diverse transazioni**;
-    
 2. Accedono allo **stesso oggetto** (es. stessa variabile o pagina di memoria);
-    
 3. **Almeno una delle due** è un’operazione di **scrittura**.
 
 Esistono quindi tre tipi di conflitto:
 
 - **read–write (rw)**
-    
 - **write–read (wr)**
-    
 - **write–write (ww)**
 
 ---
@@ -39,11 +35,8 @@ t2: r2(y) r2(x) w2(y)
 **Conflitti presenti:**
 
 - $(w1(x), r2(x))$ → conflitto **write–read**
-    
 - $(w1(y), r2(y))$ → conflitto **write–read**
-    
 - $(w1(y), w2(y))$ → conflitto **write–write**
-    
 - $(r1(y), w2(y))$ → conflitto **read–write**
 
 ---
@@ -53,13 +46,12 @@ t2: r2(y) r2(x) w2(y)
 Due schedule $S_i$ e $S_j$ (con $i \ne j$) sono **conflict-equivalenti** se valgono entrambe le condizioni:
 
 1. Contengono **le stesse operazioni**;
-    
 2. Ogni coppia di operazioni in conflitto appare **nello stesso ordine** in entrambi gli schedule.
 
 Si indica formalmente come:
 
-$$  
-S_i \equiv_C S_j  
+$$
+S_i \equiv_C S_j
 $$
 
 ---
@@ -70,8 +62,8 @@ Uno **schedule è conflict-serializzabile** se è **conflict-equivalente a uno s
 
 L’insieme di tutti gli schedule conflict-serializzabili si indica con:
 
-$$  
-CSR = { S \ |\ S \equiv_C S_{seriale} }  
+$$
+CSR = { S \ |\ S \equiv_C S_{seriale} }
 $$
 
 In altre parole, anche se le operazioni delle transazioni sono intrecciate, il loro ordine relativo nei conflitti è tale da preservare l’effetto di una serializzazione corretta.
@@ -86,29 +78,49 @@ S: w0(x) r1(x) w0(z) r1(z) r2(x) r3(z) w3(z) w1(x)
 
 **Conflitti rilevati:**
 
-- $(w0(x), r1(x))$
-    
-- $(w0(x), r2(x))$
-    
-- $(w0(x), w1(x))$
-    
-- $(w0(z), r1(z))$
-    
-- $(w0(z), r3(z))$
-    
-- $(w0(z), w3(z))$
-    
-- $(r1(z), w3(z))$
-    
-- $(r2(x), w1(x))$
+Mentre li scriviamo, li affianchiamo sin da subito con $t_{prima} \rightarrow t_{dopo}$ per indicare chi ha la precedenza, perché dobbiamo rispettare l'ordine delle operazioni in conflitto per vincolo dimostrativo della conflit-equivalenza.
 
-Questo schedule è **conflict-equivalente** al seguente **schedule seriale**:
+- $(w0(x), r1(x))$ ⚠️ $t0 \rightarrow t1$
+- $(w0(x), r2(x))$ ⚠️ $t0 \rightarrow t2$
+- $(w0(x), w1(x))$ ⚠️ $t0 \rightarrow t1$
+- $(w0(z), r1(z))$ ⚠️ $t0 \rightarrow t1$
+- $(w0(z), r3(z))$ ⚠️ $t0 \rightarrow t3$
+- $(w0(z), w3(z))$ ⚠️ $t0 \rightarrow t3$
+- $(r1(z), w3(z))$ ⚠️ $t1 \rightarrow t3$
+- $(r2(x), w1(x))$ ⚠️ $t2 \rightarrow t1$
+
+Guardando appunto gli ordini di precedenza, notiamo che t0 deve precedere le altre, t2 deve precedere t1 e t1 deve precedere t3.
+
+Ci mettiamo un attimo a concatenarle:
+
+$t0 \rightarrow t2 \rightarrow t1 \rightarrow t3$
+
+Abbiamo trovato **l'unico** tra i $4! = 24$ possibili schedule seriali che rispetta l'ordine dei conflitti e che quindi **POTREBBE** essere equivalente a S.
+
+Perché dico "potrebbe"? Perché dobbiamo ancora verificare che le operazioni in conflitto siano nello stesso ordine in entrambi gli schedule.
+
+Per giungere a una conclusione, iniziamo a scrivere lo schedule seriale trovato:
 
 ```
 w0(x) w0(z) r2(x) r1(x) r1(z) w1(x) r3(z) w3(z)
 ```
 
+Ora a partire da questo nuovo schedule seriale, verifichiamo che le operazioni in conflitto siano nello stesso ordine di S:
+
+- $(w0(x), r1(x))$ ⚠️ $t0 \rightarrow t1$ ✅
+- $(w0(x), r2(x))$ ⚠️ $t0 \rightarrow t2$ ✅
+- $(w0(x), w1(x))$ ⚠️ $t0 \rightarrow t1$ ✅
+- $(w0(z), r1(z))$ ⚠️ $t0 \rightarrow t1$ ✅
+- $(w0(z), r3(z))$ ⚠️ $t0 \rightarrow t3$ ✅
+- $(w0(z), w3(z))$ ⚠️ $t0 \rightarrow t3$ ✅
+- $(r1(z), w3(z))$ ⚠️ $t1 \rightarrow t3$ ✅
+- $(r2(x), w1(x))$ ⚠️ $t2 \rightarrow t1$ ✅
+
+Confrontando le operazioni in conflitto, vediamo che **tutte** rispettano lo stesso ordine in entrambi gli schedule.
+
 ✅ **Conclusione:** lo schedule è **conflict-serializzabile**.
+
+Notiamo però che è oneroso ogni volta dover confrontare tutte le operazioni in conflitto per verificare la conflict-serializzabilità, specie se il numero di transazioni e di operazioni cresce. Quindi sovviene una domanda: **esiste un metodo più sistematico per verificare la conflict-serializzabilità, che non funzioni per elencazione manuale?**
 
 ---
 
@@ -119,14 +131,13 @@ Per verificare in modo sistematico la conflict-serializzabilità, si costruisce 
 **Costruzione:**
 
 1. Ogni **transazione** è rappresentata da un **nodo**.
-    
 2. Per ogni coppia di operazioni $(a_i, a_j)$ in conflitto tali che $a_i$ **precede** $a_j$ nello schedule, si traccia un **arco orientato** da $t_i$ a $t_j$.
 
 **Criterio di serializzabilità:**
 
 > Uno schedule è **conflict-serializzabile se e solo se** il grafo dei conflitti è **aciclico**.
 
-In tal caso, gli **ordinamenti topologici** del grafo rappresentano **tutti gli schedule seriali equivalenti**.
+In tal caso, gli **ordinamenti topologici** del grafo rappresentano **tutti gli schedule seriali equivalenti**. Gli ordinamenti topologici sono tutti gli ordinamenti possibili dei nodi del grafo che rispettano la direzione degli archi.
 
 ---
 
@@ -141,24 +152,15 @@ S: w0(x) r1(x) w0(z) r1(z) r2(x) r3(z) w3(z) w1(x)
 **Conflitti già individuati:**
 
 - $(w0(x), r1(x))$
-    
 - $(w0(x), r2(x))$
-    
 - $(w0(x), w1(x))$
-    
 - $(w0(z), r1(z))$
-    
 - $(w0(z), r3(z))$
-    
 - $(w0(z), w3(z))$
-    
 - $(r1(z), w3(z))$
-    
 - $(r2(x), w1(x))$
 
-**Nodi:** T0, T1, T2, T3  
-**Archi:**  
-T0 → T1, T0 → T2, T0 → T3, T1 → T3, T2 → T1
+![](Pasted%20image%2020260823213658.png)
 
 Il grafo risultante è **aciclico**, quindi lo schedule è **conflict-serializzabile**.
 
@@ -168,25 +170,24 @@ Il grafo risultante è **aciclico**, quindi lo schedule è **conflict-serializza
 
 Le due classi di serializzabilità sono **legate da un rapporto di inclusione**:
 
-$$  
-CSR \subseteq VSR  
+$$
+CSR \subseteq VSR
 $$
 
 In altre parole:
 
 - Se $S \in CSR$ ⇒ allora $S \in VSR$
-    
 - Se $S \notin VSR$ ⇒ allora $S \notin CSR$
-    
 - Se $S \notin CSR$ ⇒ **non possiamo dire nulla** sulla sua appartenenza a VSR
-    
 - Se $S \in VSR$ ⇒ **non possiamo dire nulla** sulla sua appartenenza a CSR
 
 Visualmente:
 
 ```
+
 VSR
- └── CSR
+└── CSR
+
 ```
 
 ---
@@ -194,15 +195,16 @@ VSR
 ### **10. Esempio: CSR vs VSR**
 
 ```
+
 t1: r1(x) w1(x)
-t2: w2(x)    -- blind write
-t3: w3(x)    -- blind write
+t2: w2(x) -- blind write
+t3: w3(x) -- blind write
 
 S: r1(x) w2(x) w1(x) w3(x)
+
 ```
 
 - Lo schedule è **view-serializzabile**, poiché mantiene le stesse relazioni di lettura e scrittura finale.
-    
 - Tuttavia **non è conflict-serializzabile**, perché le operazioni in conflitto non possono essere ordinate in modo aciclico nel grafo.
 
 ✅ **Conclusione:** tutti gli schedule conflict-serializzabili sono view-serializzabili, ma non vale il contrario.
@@ -213,7 +215,7 @@ S: r1(x) w2(x) w1(x) w3(x)
 
 Determinare se uno schedule è **conflict-serializzabile** ha un **costo lineare** nella dimensione del grafo dei conflitti, quindi molto inferiore rispetto alla verifica della view-serializzabilità (NP-difficile).
 
-Tuttavia, nei **sistemi distribuiti** o ad altissimo carico, anche questa verifica può risultare onerosa.  
+Tuttavia, nei **sistemi distribuiti** o ad altissimo carico, anche questa verifica può risultare onerosa.
 Per questo motivo, i DBMS reali utilizzano **condizioni ancora più restrittive**, ma **più efficienti da verificare**, come il **locking a due fasi (2PL)** o i **timestamp ordering**.
 
 ---
@@ -225,22 +227,16 @@ In questa lezione abbiamo introdotto e analizzato il concetto di **conflict-seri
 **Abbiamo visto:**
 
 - La definizione di **conflitto** tra operazioni
-    
 - Il concetto di **conflict-equivalenza**
-    
 - Il criterio di **conflict-serializzabilità**
-    
 - La **costruzione del grafo dei conflitti** e la condizione di **aciclicità**
-    
 - La relazione **CSR ⊆ VSR**
-    
 - La **complessità lineare** del controllo di conflict-serializzabilità
 
-**Idea chiave:**  
+**Idea chiave:**
 La conflict-serializzabilità fornisce un metodo **più restrittivo ma più efficiente** per garantire la correttezza dell’esecuzione concorrente rispetto alla view-serializzabilità, rappresentando il punto di equilibrio tra **teoria e applicabilità pratica**.
 
 ---
-
 
 ![](imgs/Pasted%20image%2020251125051943.png)
 
@@ -254,3 +250,6 @@ La conflict-serializzabilità fornisce un metodo **più restrittivo ma più effi
 
 ![](imgs/Pasted%20image%2020251125052032.png)
 
+```
+
+```
