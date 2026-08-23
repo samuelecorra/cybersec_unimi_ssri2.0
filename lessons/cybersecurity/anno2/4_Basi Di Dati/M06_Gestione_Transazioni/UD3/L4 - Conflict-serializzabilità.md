@@ -160,7 +160,7 @@ S: w0(x) r1(x) w0(z) r1(z) r2(x) r3(z) w3(z) w1(x)
 - $(r1(z), w3(z))$
 - $(r2(x), w1(x))$
 
-![](Pasted%20image%2020260823213658.png)
+![alt text](imgs/grafoprec.png)
 
 Il grafo risultante è **aciclico**, quindi lo schedule è **conflict-serializzabile**.
 
