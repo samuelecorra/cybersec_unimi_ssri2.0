@@ -195,17 +195,40 @@ VSR
 ### **10. Esempio: CSR vs VSR**
 
 ```
-
 t1: r1(x) w1(x)
 t2: w2(x) -- blind write
 t3: w3(x) -- blind write
 
 S: r1(x) w2(x) w1(x) w3(x)
-
 ```
 
-- Lo schedule è **view-serializzabile**, poiché mantiene le stesse relazioni di lettura e scrittura finale.
-- Tuttavia **non è conflict-serializzabile**, perché le operazioni in conflitto non possono essere ordinate in modo aciclico nel grafo.
+Partiamo verificando la **view-serializzabilità**: dobbiamo guardare le **relazioni di lettura e scrittura finale**.
+
+- r1(x) legge il valore iniziale di x
+- la scrittura finale è ad opera di t3 con w3(x)
+
+Ci sono $3! = 6$ possibili schedule seriali, procediamo a discriminare quelli non validi:
+
+- dalla prima relazione di lettura t1 deve venire per forza per primo;
+- dalla seconda relazione di scrittura finale t3 deve venire per forza per ultimo.
+
+Rimane dunque confinato un unico schedule seriale possibile:
+
+$S_{seriale} = t1 \rightarrow t2 \rightarrow t3$
+
+$\implies$ Lo schedule è **view-serializzabile**, poiché mantiene le stesse relazioni di lettura e scrittura finale.
+
+Valutiamo ora se lo schedule è **conflict-serializzabile**: dobbiamo costruire il grafo dei conflitti a partire dai conflitti nello schedule originale:
+
+- $(r1(x), w2(x))$ → conflitto **read–write** → arco da t1 a t2
+- $(r1(x), w3(x))$ → conflitto **read–write** → arco da t1 a t3
+- $(w2(x), r1(x))$ → conflitto **write–read** → arco da t2 a t1
+
+ALT! Non scriviamoli tutti, ci accorgiamo subito che il grafo dei conflitti contiene un **ciclo** tra t1 e t2:
+
+![alt text](imgs/telegram-cloud-photo-size-4-5791774608980645086-y.jpg)
+
+- Ergo **non è conflict-serializzabile**, perché le operazioni in conflitto non possono essere ordinate in modo aciclico nel grafo.
 
 ✅ **Conclusione:** tutti gli schedule conflict-serializzabili sono view-serializzabili, ma non vale il contrario.
 
@@ -249,6 +272,10 @@ La conflict-serializzabilità fornisce un metodo **più restrittivo ma più effi
 ![](imgs/Pasted%20image%2020251125052023.png)
 
 ![](imgs/Pasted%20image%2020251125052032.png)
+
+```
+
+```
 
 ```
 
