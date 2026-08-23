@@ -87,6 +87,8 @@ Riguardano lo stato complessivo del DBMS:
 
 ---
 
+![[Pasted image 20260823024016.png]]
+
 ### **5. Before state e After state**
 
 Per ogni operazione di modifica (insert, delete, update), i record del log contengono:

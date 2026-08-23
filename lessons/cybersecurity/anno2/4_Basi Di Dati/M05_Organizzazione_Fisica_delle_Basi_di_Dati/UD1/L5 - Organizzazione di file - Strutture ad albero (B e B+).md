@@ -92,6 +92,12 @@ Un file può avere **un solo indice primario** ma **più indici secondari**, cia
 
 ---
 
+#### **5.1 - Esempio di B+ tree**
+
+![[Pasted image 20260823013259.png]]
+
+---
+
 ### **6. Operazioni sugli alberi B+**
 
 Le principali operazioni supportate da un albero B+ sono:
@@ -167,11 +173,14 @@ Per cancellare un valore $V$:
     
 2. Si elimina $V$ dal nodo foglia.
     
-3. Se il nodo diventa **troppo vuoto** (meno di $\lfloor F/2 \rfloor$ valori):
+3. Se $V$ era il **primo valore $K_1$** della foglia, si sostituisce $V$ nel nodo ascendente con il **nuovo $K_1$** della foglia (cioè il precedente $K_2$).
+    
+4. Se il nodo diventa **troppo vuoto** (meno di $\lfloor F/2 \rfloor$ valori):
     
     - si tenta un **bilanciamento (redistribution)** con un nodo adiacente;
         
     - se non possibile, si esegue un **merge**, unendo i due nodi in uno solo.
+        
 
 ##### **Merge**
 
@@ -180,6 +189,7 @@ Per cancellare un valore $V$:
 2. Si elimina dal padre la chiave che li separava.
     
 3. Se anche il padre risulta troppo vuoto, si ripete la procedura verso l’alto.
+    
 
 > In questo caso, l’altezza dell’albero **può diminuire**.
 

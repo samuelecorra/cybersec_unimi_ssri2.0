@@ -166,16 +166,7 @@ Le proprietà ACIDe sono garantite da specifici **moduli interni del DBMS**:
 
 L’insieme dei moduli del DBMS che cooperano nella gestione delle transazioni può essere rappresentato così:
 
-```
-Gestore delle interrogazioni e aggiornamenti
-Gestore dei metodi d’accesso
-Gestore del buffer
-Gestore della memoria secondaria
-Memoria secondaria
-Gestore delle transazioni
-Gestore della concorrenza
-Gestore dell’affidabilità
-```
+![[Pasted image 20260823023155.png]]
 
 ---
 
