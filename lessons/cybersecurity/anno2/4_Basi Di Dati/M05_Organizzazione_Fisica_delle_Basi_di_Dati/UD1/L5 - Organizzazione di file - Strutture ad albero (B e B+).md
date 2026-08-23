@@ -27,6 +27,8 @@ Le relazioni tra nodi sono definite da **puntatori**, e il **fan-out ($F$)** ind
 
 #### **3.1 Struttura dei nodi**
 
+![](Pasted%20image%2020260822214434.png)
+
 Ogni nodo $N$ contiene:
 
 - $F_N \le F - 1$ **valori chiave** (ordinati);
@@ -40,6 +42,8 @@ Per convenzione:
 - $P_0, P_1, \dots, P_{F_N}$ sono i puntatori associati.
 
 Le relazioni tra chiavi e puntatori sono:
+
+![](Pasted%20image%2020260822214726.png)
 
 $$  
 \begin{cases}  
@@ -65,6 +69,8 @@ Le differenze principali sono:
 - i nodi foglia contengono **tutti i valori della chiave** e, se necessario, **puntatori ai record**;
     
 - i nodi foglia sono **collegati tra loro in ordine crescente di chiave**, formando una **catena ordinata** che consente **accessi sequenziali efficienti**.
+
+![](Pasted%20image%2020260822214947.png)
 
 Le relazioni tra chiavi e puntatori nei nodi non foglia sono:
 

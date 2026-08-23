@@ -50,6 +50,8 @@ $$
 \end{array}  
 $$
 
+![](Pasted%20image%2020260822214037.png)
+
 > Il **bit di parità** viene utilizzato per verificare che le informazioni contenute nella pagina non siano state corrotte durante l’I/O.
 
 ---
