@@ -2385,6 +2385,21 @@ body::before {
     padding: 8px 16px;
   }
 
+  /* In a column flex container, `flex:1` no longer bounds the row's width —
+     without an explicit width these two grow to their content's natural size
+     (e.g. a long lesson title) and get silently clipped by .content-area's
+     overflow:hidden instead of shrinking/ellipsizing. Force them to the
+     container's width so their own min-width:0 + text-overflow rules apply. */
+  .content-header-left {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .navigation {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   /* Tame heading & math sizes so nothing pushes past the viewport */
   .markdown-body h1 {
     font-size: 1.5rem;
