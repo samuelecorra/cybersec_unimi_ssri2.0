@@ -195,20 +195,10 @@ body::before {
 }
 
 /* ── Header ── */
-.header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 0 20px;
-  height: 52px;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border);
-  position: relative;
-  z-index: 100;
-  flex-shrink: 0;
-}
+/* .header's box model is authored directly in Tailwind utilities in App.jsx;
+   this rule now exists only to anchor the neon underline pseudo-element,
+   which needs a real CSS rule (multi-stop gradient, bespoke one-off
+   flourish — not a repeated pattern, so left out of the Tailwind layer). */
 
 /* Header neon underline */
 .header::after {
@@ -229,52 +219,10 @@ body::before {
   opacity: 0.5;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
-.sidebar-toggle {
-  background: none;
-  border: 1px solid var(--border-color);
-  color: var(--neon-cyan);
-  font-size: 14px;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition);
-}
-
-.sidebar-toggle:hover {
-  background: var(--bg-hover);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 14px var(--glow-cyan);
-}
-
-.sidebar-toggle svg {
-  flex-shrink: 0;
-}
-
-/* Logo — gradient neon text with Orbitron display font */
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-}
+/* .header-left/.header-right/.sidebar-toggle/.logo (the flex wrappers) are
+   authored directly in Tailwind utilities in App.jsx — glow-btn covers
+   .sidebar-toggle's hover. .logo-hex/.logo-text below stay as legacy CSS:
+   bespoke animated brand-mark flourishes, not reusable structural patterns. */
 
 .logo-hex {
   flex-shrink: 0;
@@ -319,15 +267,7 @@ body::before {
   }
 }
 
-.file-count {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-  background: var(--bg-mid);
-  padding: 4px 10px;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-}
+/* .file-count is authored directly in Tailwind utilities in App.jsx. */
 
 /* ── Search Bar ── */
 .search-bar {
@@ -2311,10 +2251,10 @@ body::before {
     --sidebar-width: 82vw;
   }
 
-  .header {
-    padding: 0 12px;
-    gap: 10px;
-  }
+  /* .header's mobile padding/gap now lives as max-[768px]: utilities
+     directly on the element in App.jsx — a plain .header rule here would be
+     dead: @layer utilities always wins over @layer legacy regardless of
+     media query, by the file's own layer ordering (see top of file). */
 
   /* Main becomes the positioning context for the sidebar overlay */
   .main {

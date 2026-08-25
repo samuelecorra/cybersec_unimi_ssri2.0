@@ -173,14 +173,14 @@ function RoutedApp() {
 
   return (
     <div className="app">
-      <header className="header">
-        <div className="header-left">
+      <header className="header relative z-[100] flex h-[52px] shrink-0 items-center gap-4 border-b border-glass-border bg-glass-bg px-5 backdrop-blur-[20px] max-[768px]:gap-2.5 max-[768px]:px-3">
+        <div className="flex shrink-0 items-center gap-3">
           <button
-            className="sidebar-toggle"
+            className="glow-btn flex h-8 w-8 items-center justify-center rounded-md border border-border bg-transparent text-neon-cyan"
             onClick={() => setSidebarOpen(o => !o)}
             title={sidebarOpen ? 'Chiudi sidebar' : 'Apri sidebar'}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <svg className="shrink-0" width="14" height="14" viewBox="0 0 14 14" fill="none">
               {sidebarOpen ? (
                 <>
                   <rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.3" />
@@ -195,7 +195,7 @@ function RoutedApp() {
               )}
             </svg>
           </button>
-          <h1 className="logo">
+          <h1 className="flex items-center gap-2.5 whitespace-nowrap">
             <svg className="logo-hex" width="22" height="24" viewBox="0 0 22 24" fill="none">
               <polygon points="11,1 21,6.5 21,17.5 11,23 1,17.5 1,6.5" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.08" />
               <polygon points="11,5 17,8.5 17,15.5 11,19 5,15.5 5,8.5" stroke="currentColor" strokeWidth="0.8" fill="currentColor" fillOpacity="0.06" opacity="0.6" />
@@ -205,8 +205,10 @@ function RoutedApp() {
           </h1>
         </div>
         <SearchBar query={searchQuery} onChange={setSearchQuery} />
-        <div className="header-right hidden sm:flex">
-          <span className="file-count">{allFiles.length} files</span>
+        <div className="hidden shrink-0 items-center gap-3 sm:flex">
+          <span className="rounded-xl border border-border bg-bg-mid px-2.5 py-1 font-mono text-[0.8rem] text-text-muted">
+            {allFiles.length} files
+          </span>
         </div>
       </header>
 
