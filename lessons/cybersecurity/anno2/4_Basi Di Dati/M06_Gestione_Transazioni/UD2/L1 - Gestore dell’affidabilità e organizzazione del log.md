@@ -87,7 +87,7 @@ Riguardano lo stato complessivo del DBMS:
 
 ---
 
-![[Pasted image 20260823024016.png]]
+![](imgs/Pasted%20image%2020260823024016.png)
 
 ### **5. Before state e After state**
 

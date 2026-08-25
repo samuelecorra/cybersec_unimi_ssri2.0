@@ -440,7 +440,7 @@ Questa nuova entità viene collegata all'entità originale mediante una **relazi
 
 Schema concettuale:
 
-![](Pasted%20image%2020260821192009.png)
+![](imgs/Pasted%20image%2020260821192009.png)
 
 con y > 1
 
@@ -473,7 +473,7 @@ se lo stesso valore può comparire in più occorrenze.
 
 #### **Esempio: numero di telefono**
 
-![](Pasted%20image%2020260821192234.png)
+![](imgs/Pasted%20image%2020260821192234.png)
 
 ---
 
@@ -508,7 +508,7 @@ indirizzo
 
 Per eliminare un attributo composto esistono **due strategie**.
 
-![](Pasted%20image%2020260821192425.png)
+![](imgs/Pasted%20image%2020260821192425.png)
 
 ---
 

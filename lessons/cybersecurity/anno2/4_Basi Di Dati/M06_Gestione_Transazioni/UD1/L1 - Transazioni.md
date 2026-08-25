@@ -166,7 +166,7 @@ Le proprietà ACIDe sono garantite da specifici **moduli interni del DBMS**:
 
 L’insieme dei moduli del DBMS che cooperano nella gestione delle transazioni può essere rappresentato così:
 
-![[Pasted image 20260823023155.png]]
+![](imgs/Pasted%20image%2020260823023155.png)
 
 ---
 

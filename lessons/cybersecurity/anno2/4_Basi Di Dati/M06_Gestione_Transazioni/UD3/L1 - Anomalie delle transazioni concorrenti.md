@@ -52,7 +52,7 @@ Per analizzare il comportamento del controllo della concorrenza, si adottano alc
 Il modulo di controllo della concorrenza opera insieme agli altri componenti del DBMS.  
 La sua collocazione nell’architettura generale può essere schematizzata così:
 
-![[Pasted image 20260823180716.png]]
+![](imgs/Pasted%20image%2020260823180716.png)
 
 Flusso delle operazioni:
 
@@ -93,7 +93,7 @@ La **perdita di aggiornamenti** si verifica quando le modifiche di una transazio
 |`write(x)`|`write(x)`|
 |`commit`|`commit`|
 
-![[Pasted image 20260823180901.png]]
+![](imgs/Pasted%20image%2020260823180901.png)
 
 **Valore iniziale:** `x = 2`  
 **Valore finale corretto:** `x = 4`  
@@ -109,7 +109,7 @@ La **lettura sporca** si verifica quando una transazione legge un **valore tempo
 
 **Esempio:**
 
-![[Pasted image 20260823181122.png]]
+![](imgs/Pasted%20image%2020260823181122.png)
 
 |Transazione T1|Transazione T2|
 |---|---|
@@ -131,7 +131,7 @@ Si parla di **letture inconsistenti** quando una transazione legge dati **mentre
 
 **Esempio:**
 
-![[Pasted image 20260823181322.png]]
+![](imgs/Pasted%20image%2020260823181322.png)
 
 |Transazione T1|Transazione T2|
 |---|---|
@@ -154,7 +154,7 @@ Un’**anomalia di aggiornamento fantasma** si verifica quando una transazione o
 
 **Esempio:**
 
-![[Pasted image 20260823181428.png]]
+![](imgs/Pasted%20image%2020260823181428.png)
 
 Vincolo: $x + y + z = 1000$
 

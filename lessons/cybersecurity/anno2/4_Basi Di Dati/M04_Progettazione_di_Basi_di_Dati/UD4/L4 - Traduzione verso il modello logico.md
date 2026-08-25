@@ -30,7 +30,7 @@ Ogni **entità forte** $E$ viene tradotta in una **tabella** $R$ che contiene:
 
 **Esempio:**
 
-![](Pasted%20image%2020260821193051.png)
+![](imgs/Pasted%20image%2020260821193051.png)
 
 ---
 
@@ -58,7 +58,7 @@ Ogni **entità debole** $E$, identificata esternamente da un’entità forte $E'
 
 **Esempio:**
 
-![](Pasted%20image%2020260821193249.png)
+![](imgs/Pasted%20image%2020260821193249.png)
 
 L’entità `IMPIEGATO` è debole rispetto a `DIPARTIMENTO`, poiché la sua identificazione dipende da essa.
 
@@ -70,7 +70,7 @@ In presenza di **catene di entità deboli**, la traduzione deve procedere **part
 
 **Esempio:**
 
-![](Pasted%20image%2020260821193555.png)
+![](imgs/Pasted%20image%2020260821193555.png)
 
 Ogni entità eredita l’identificatore della precedente.
 
@@ -105,7 +105,7 @@ Ogni **relazione** $R$ tra entità $E_1, E_2, \dots, E_n$ viene tradotta in una 
 
 #### **3.2 Esempio di traduzione standard**
 
-![](Pasted%20image%2020260821194058.png)
+![](imgs/Pasted%20image%2020260821194058.png)
 
 La tabella `FORNITURA` contiene:
 
@@ -123,7 +123,7 @@ Quando una relazione collega **un’entità con sé stessa**, la tabella risulta
 
 **Esempio:**
 
-![](Pasted%20image%2020260821194235.png)
+![](imgs/Pasted%20image%2020260821194235.png)
 
 Gli attributi `composto` e `componente` fanno entrambi riferimento alla chiave di `PRODOTTO`.
 
@@ -135,7 +135,7 @@ Per una relazione con **cardinalità (1:n)**, la chiave primaria è l’identifi
 
 **Esempio:**
 
-![](Pasted%20image%2020260821194711.png)
+![](imgs/Pasted%20image%2020260821194711.png)
 
 Chiave primaria: $(c.f.)$  
 Chiave esterna: $(città)$
@@ -146,7 +146,7 @@ Chiave esterna: $(città)$
 
 Per le relazioni **uno a uno**, la chiave primaria può essere **una delle due entità**, in base alle cardinalità minime.
 
-![](Pasted%20image%2020260821194752.png)
+![](imgs/Pasted%20image%2020260821194752.png)
 
 In questi casi sono possibili **traduzioni alternative**, come mostrato nella sezione seguente.
 
@@ -171,13 +171,13 @@ Se la cardinalità minima è 0, gli attributi inglobati diventano **opzionali (N
 
 **Esempio:**
 
-![](Pasted%20image%2020260821194852.png)
+![](imgs/Pasted%20image%2020260821194852.png)
 
 ---
 
 #### **4.3 Esempio applicativo**
 
-![](Pasted%20image%2020260821194922.png)
+![](imgs/Pasted%20image%2020260821194922.png)
 
 L’asterisco indica attributi **facoltativi** (potenzialmente _NULL_).
 
@@ -201,7 +201,7 @@ Entrambe le entità partecipano obbligatoriamente.
 
 **Traduzioni possibili:**
 
-![](Pasted%20image%2020260821195028.png)
+![](imgs/Pasted%20image%2020260821195028.png)
 
 ---
 
@@ -211,7 +211,7 @@ Un’entità partecipa **facoltativamente**, l’altra **obbligatoriamente**.
 
 **Traduzioni possibili:**
 
-![](Pasted%20image%2020260821195104.png)
+![](imgs/Pasted%20image%2020260821195104.png)
 
 Gli asterischi indicano attributi **opzionali**.
 
@@ -223,13 +223,13 @@ Entrambe le entità partecipano **facoltativamente**.
 
 **Traduzioni possibili:**
 
-![](Pasted%20image%2020260821195147.png)
+![](imgs/Pasted%20image%2020260821195147.png)
 
 ---
 
 #### **4.8 Esempio pratico**
 
-![](Pasted%20image%2020260821195214.png)
+![](imgs/Pasted%20image%2020260821195214.png)
 
 ---
 

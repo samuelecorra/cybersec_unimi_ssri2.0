@@ -27,7 +27,7 @@ Le relazioni tra nodi sono definite da **puntatori**, e il **fan-out ($F$)** ind
 
 #### **3.1 Struttura dei nodi**
 
-![](Pasted%20image%2020260822214434.png)
+![](imgs/Pasted%20image%2020260822214434.png)
 
 Ogni nodo $N$ contiene:
 
@@ -43,7 +43,7 @@ Per convenzione:
 
 Le relazioni tra chiavi e puntatori sono:
 
-![](Pasted%20image%2020260822214726.png)
+![](imgs/Pasted%20image%2020260822214726.png)
 
 $$  
 \begin{cases}  
@@ -70,7 +70,7 @@ Le differenze principali sono:
     
 - i nodi foglia sono **collegati tra loro in ordine crescente di chiave**, formando una **catena ordinata** che consente **accessi sequenziali efficienti**.
 
-![](Pasted%20image%2020260822214947.png)
+![](imgs/Pasted%20image%2020260822214947.png)
 
 Le relazioni tra chiavi e puntatori nei nodi non foglia sono:
 
@@ -100,7 +100,7 @@ Un file può avere **un solo indice primario** ma **più indici secondari**, cia
 
 #### **5.1 - Esempio di B+ tree**
 
-![[Pasted image 20260823013259.png]]
+![](imgs/Pasted%20image%2020260823013259.png)
 
 ---
 
