@@ -78,6 +78,32 @@
   }
 }
 
+/* Shared thin-neon scrollbar recipe, previously duplicated across 4 selectors
+   (file tree, search results list, viewer content, dual-page content-area)
+   as one repeated ::-webkit-scrollbar block. Used here by the file tree and
+   search results list; .viewer-content/.content-area.dual-page-active keep
+   their own copy in @layer legacy below (out of scope for this pass, not
+   worth the churn of touching Viewer.jsx just to dedupe four lines). */
+@utility neon-scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 191, 0, 0.2);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-cyan);
+    box-shadow: 0 0 8px var(--glow-cyan);
+  }
+}
+
 @layer legacy {
 
 /* ── CSS Variables ── */
@@ -373,18 +399,12 @@ body::before {
 }
 
 /* ── Sidebar ── */
-.sidebar {
-  width: var(--sidebar-width);
-  min-width: var(--sidebar-width);
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  border-right: 1px solid var(--glass-border);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  position: relative;
-}
+/* .sidebar's box model is authored directly in Tailwind utilities in
+   Sidebar.jsx (including the mobile max-[768px]: overlay behavior — a plain
+   .sidebar rule in the mobile media query would be dead, same reasoning as
+   .header/.navigation above: @layer utilities always wins over @layer legacy
+   regardless of media query). This rule now exists only to anchor the neon
+   edge pseudo-element below. */
 
 /* Sidebar right neon edge */
 .sidebar::after {
@@ -398,169 +418,20 @@ body::before {
   opacity: 0.35;
 }
 
-.tree-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--neon-cyan);
-  border-bottom: 1px solid var(--glass-border);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-shadow: 0 0 12px var(--glow-cyan);
-}
-
-.tree-header-icon {
-  display: flex;
-  align-items: center;
-  color: var(--neon-cyan);
-  filter: drop-shadow(0 0 4px var(--glow-cyan));
-}
-
-.file-tree-container {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  flex: 1;
-}
-
-.file-tree-container > .tree-list {
-  overflow-y: auto;
-  flex: 1;
-  padding: 8px 0;
-}
-
-/* Custom scrollbar — thin neon */
-.file-tree-container > .tree-list::-webkit-scrollbar,
-.viewer-content::-webkit-scrollbar,
-.content-area.dual-page-active::-webkit-scrollbar,
-.search-results-list::-webkit-scrollbar {
-  width: 4px;
-}
-
-.file-tree-container > .tree-list::-webkit-scrollbar-track,
-.viewer-content::-webkit-scrollbar-track,
-.content-area.dual-page-active::-webkit-scrollbar-track,
-.search-results-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.file-tree-container > .tree-list::-webkit-scrollbar-thumb,
-.viewer-content::-webkit-scrollbar-thumb,
-.content-area.dual-page-active::-webkit-scrollbar-thumb,
-.search-results-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 191, 0, 0.2);
-  border-radius: 2px;
-}
-
-.file-tree-container > .tree-list::-webkit-scrollbar-thumb:hover,
-.viewer-content::-webkit-scrollbar-thumb:hover,
-.content-area.dual-page-active::-webkit-scrollbar-thumb:hover,
-.search-results-list::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-cyan);
-  box-shadow: 0 0 8px var(--glow-cyan);
-}
+/* .tree-header/.file-tree-container/.search-results* etc. are authored
+   directly in Tailwind utilities in Sidebar.jsx/FileTree.jsx (including the
+   neon-scrollbar and glow-btn-adjacent recipes near the top of this file).
+   Two things stay here because they're genuinely dynamic, not structural:
+   depth-based indentation (recursion depth isn't expressible as a static
+   utility class) and the indent guide line (a decorative pseudo-element that
+   also depends on depth). */
 
 /* ── File Tree ── */
-.tree-list {
-  list-style: none;
-}
-
-/* Tree chevron */
-.tree-chevron {
-  flex-shrink: 0;
-  color: var(--text-muted);
-  transition:
-    transform 0.15s ease,
-    color 0.15s ease;
-}
-
-.tree-chevron.expanded {
-  transform: rotate(90deg);
-  color: var(--neon-lime);
-}
-
-/* Tree icon (SVG) */
-.tree-icon {
-  flex-shrink: 0;
-  transition:
-    color var(--transition),
-    filter var(--transition);
-}
-
-.tree-icon--folder {
-  color: var(--neon-lime);
-}
-
-.tree-icon--file {
-  color: var(--text-muted);
-}
-
-.tree-icon--file.active {
-  color: var(--neon-cyan);
-  filter: drop-shadow(0 0 4px var(--glow-cyan));
-}
-
-.tree-dir-btn,
-.tree-file-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-  padding: 4px 12px;
+.tree-indent {
   padding-left: calc(12px + var(--depth, 0) * 18px);
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  text-align: left;
-  cursor: pointer;
-  transition: all var(--transition);
-  border-left: 2px solid transparent;
-}
-
-.tree-dir-btn:hover,
-.tree-file-btn:hover {
-  background: var(--bg-hover);
-}
-
-.tree-dir-btn {
-  color: var(--neon-lime);
-  font-weight: 600;
-}
-
-.tree-dir-btn:hover {
-  text-shadow: 0 0 10px var(--glow-lime);
-}
-
-.tree-dir-btn:hover .tree-icon--folder {
-  filter: drop-shadow(0 0 6px var(--glow-lime));
-}
-
-.tree-count {
-  margin-left: auto;
-  font-size: 0.65rem;
-  color: var(--neon-cyan);
-  flex-shrink: 0;
-}
-
-.tree-count-num {
-  background: rgba(255, 191, 0, 0.08);
-  border: 1px solid rgba(255, 191, 0, 0.15);
-  padding: 1px 7px;
-  border-radius: 10px;
-  font-family: var(--font-mono);
 }
 
 /* Dir children wrapper for indent guide */
-.tree-dir-children {
-  position: relative;
-}
-
 .tree-dir-children::before {
   content: "";
   position: absolute;
@@ -571,181 +442,7 @@ body::before {
   background: linear-gradient(180deg, rgba(255, 191, 0, 0.12), transparent);
 }
 
-.tree-file-btn.active {
-  background: linear-gradient(90deg, rgba(255, 191, 0, 0.1), transparent);
-  border-left-color: var(--neon-cyan);
-  color: var(--neon-cyan);
-  text-shadow: 0 0 8px var(--glow-cyan);
-}
-
-.tree-file-btn:hover .tree-icon--file {
-  color: var(--text-secondary);
-}
-
-.tree-file-btn .tree-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  flex: 1;
-}
-
-.tree-source-type {
-  flex-shrink: 0;
-  padding: 1px 5px;
-  border: 1px solid rgba(255, 149, 0, 0.2);
-  border-radius: 3px;
-  color: var(--neon-lime);
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.tree-size {
-  margin-left: auto;
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-}
-
-/* ── Search Results ── */
-.search-results {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  flex: 1;
-}
-
-.search-results-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  color: var(--neon-yellow);
-  border-bottom: 1px solid var(--glass-border);
-  font-weight: 600;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.search-results-label {
-  flex-shrink: 0;
-}
-
-.search-results-badge {
-  background: rgba(255, 215, 0, 0.12);
-  border: 1px solid rgba(255, 215, 0, 0.25);
-  color: var(--neon-yellow);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 1px 8px;
-  border-radius: 10px;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-.search-results-query {
-  font-family: var(--font-body);
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-  letter-spacing: 0;
-  text-transform: none;
-  font-weight: 400;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-shadow: none;
-}
-
-.search-results-list {
-  overflow-y: auto;
-  flex: 1;
-  padding: 4px 0;
-}
-
-.search-empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 32px 16px;
-  text-align: center;
-  color: var(--text-muted);
-}
-
-.search-empty-icon {
-  font-size: 24px;
-  opacity: 0.4;
-}
-
-.search-result-item {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: 100%;
-  padding: 10px 16px;
-  background: none;
-  border: none;
-  border-left: 2px solid transparent;
-  color: var(--text-primary);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  text-align: left;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.search-result-item:hover {
-  background: var(--bg-hover);
-}
-
-.search-result-item.active {
-  border-left-color: var(--neon-cyan);
-  background: linear-gradient(90deg, rgba(255, 191, 0, 0.08), transparent);
-}
-
-.search-result-top {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.search-result-icon {
-  flex-shrink: 0;
-  color: var(--text-muted);
-}
-
-.search-result-item.active .search-result-icon {
-  color: var(--neon-cyan);
-}
-
-.search-result-name {
-  color: var(--neon-cyan);
-  font-weight: 600;
-}
-
-.search-result-path {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.search-result-headings {
-  font-size: 0.7rem;
-  color: var(--neon-lime);
-  opacity: 0.7;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
+/* ── Content Area ── */
 /* ── Content Area ── */
 .content-area {
   flex: 1;
@@ -2261,16 +1958,8 @@ body::before {
     position: relative;
   }
 
-  /* Sidebar slides over the content instead of squeezing it */
-  .sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 200;
-    max-width: 320px;
-    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.55);
-  }
+  /* Sidebar slides over the content instead of squeezing it — now expressed
+     as max-[768px]: utilities directly on the element in Sidebar.jsx. */
 
   .sidebar-backdrop {
     display: block;
