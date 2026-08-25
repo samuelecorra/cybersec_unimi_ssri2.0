@@ -32,6 +32,7 @@ function RoutedApp() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [browsePath, setBrowsePath] = useState([]);
   const [viewMode, setViewMode] = useLocalStorage('cyberlocker:viewMode', 'browse'); // 'browse' | 'viewer'
+  const [readingMode, setReadingMode] = useLocalStorage('cyberlocker:readingMode', 'single'); // 'single' | 'dual'
   const loadRequestId = useRef(0);
   const legacyState = useRef({ currentFile, viewMode });
 
@@ -157,6 +158,12 @@ function RoutedApp() {
     }
   }, [currentIndex, allFiles, handleFileSelect]);
 
+  const toggleReadingMode = useCallback(() => {
+    setReadingMode(m => (m === 'dual' ? 'single' : 'dual'));
+  }, [setReadingMode]);
+
+  const isDualPage = readingMode === 'dual' && viewMode === 'viewer' && getFileKind(currentFile) === 'markdown';
+
   const toggleDir = useCallback((dirPath) => {
     setExpandedDirs(prev => ({
       ...prev,
@@ -222,7 +229,7 @@ function RoutedApp() {
             searchQuery={searchQuery}
           />
         )}
-        <div className="content-area">
+        <div className={`content-area${isDualPage ? ' dual-page-active' : ''}`}>
           {viewMode === 'viewer' && currentFile ? (
             <>
               <div className="content-header">
@@ -241,6 +248,8 @@ function RoutedApp() {
                   hasNext={currentIndex < allFiles.length - 1}
                   currentIndex={currentIndex}
                   total={allFiles.length}
+                  readingMode={getFileKind(currentFile) === 'markdown' ? readingMode : undefined}
+                  onToggleReadingMode={getFileKind(currentFile) === 'markdown' ? toggleReadingMode : undefined}
                 />
               </div>
               {getFileKind(currentFile) === 'web-lesson' ? (
@@ -261,6 +270,7 @@ function RoutedApp() {
                   currentFile={currentFile}
                   loading={loading}
                   onFileSelect={handleFileSelect}
+                  readingMode={readingMode}
                 />
               )}
             </>

@@ -9,7 +9,7 @@ import { getParentPath } from "../utils/tree.js";
 import { colorizeMathVariables } from "../utils/colorizeMathVariables.js";
 import { getFileKind } from "../utils/fileTypes.js";
 
-function Viewer({ content, currentFile, loading, onFileSelect }) {
+function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
   const [lightboxSrc, setLightboxSrc] = useState(null);
   const [lightboxAlt, setLightboxAlt] = useState("");
@@ -295,7 +295,10 @@ function Viewer({ content, currentFile, loading, onFileSelect }) {
 
   return (
     <>
-      <article ref={articleRef} className="viewer-content markdown-body">
+      <article
+        ref={articleRef}
+        className={`viewer-content markdown-body${readingMode === 'dual' ? ' dual-page' : ''}`}
+      >
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath, remarkCallouts]}
           rehypePlugins={[rehypeKatex, rehypeHighlight]}

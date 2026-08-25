@@ -12,7 +12,21 @@ const ArrowRight = () => (
   </svg>
 );
 
-function Navigation({ onPrev, onNext, hasPrev, hasNext, currentIndex, total }) {
+const SinglePageIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+    <rect x="3" y="1.5" width="8" height="11" rx="1" stroke="currentColor" strokeWidth="1.3" />
+  </svg>
+);
+
+const DualPageIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+    <rect x="0.5" y="1.5" width="5.7" height="11" rx="1" stroke="currentColor" strokeWidth="1.2" />
+    <rect x="7.8" y="1.5" width="5.7" height="11" rx="1" stroke="currentColor" strokeWidth="1.2" />
+  </svg>
+);
+
+function Navigation({ onPrev, onNext, hasPrev, hasNext, currentIndex, total, readingMode, onToggleReadingMode }) {
+  const isDual = readingMode === 'dual';
   return (
     <div className="navigation">
       <button
@@ -23,6 +37,16 @@ function Navigation({ onPrev, onNext, hasPrev, hasNext, currentIndex, total }) {
       >
         <ArrowLeft /> Prec
       </button>
+      {onToggleReadingMode && (
+        <button
+          className="nav-btn reading-mode-toggle"
+          onClick={onToggleReadingMode}
+          title={isDual ? 'Vista a doppia pagina (clic per pagina singola)' : 'Vista a pagina singola (clic per doppia pagina)'}
+          aria-pressed={isDual}
+        >
+          {isDual ? <DualPageIcon /> : <SinglePageIcon />}
+        </button>
+      )}
       <span className="nav-counter">
         <span className="nav-counter-current">{currentIndex >= 0 ? currentIndex + 1 : '—'}</span>
         <span className="nav-counter-sep">/</span>

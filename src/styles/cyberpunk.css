@@ -432,18 +432,21 @@ body::before {
 /* Custom scrollbar — thin neon */
 .file-tree-container > .tree-list::-webkit-scrollbar,
 .viewer-content::-webkit-scrollbar,
+.content-area.dual-page-active::-webkit-scrollbar,
 .search-results-list::-webkit-scrollbar {
   width: 4px;
 }
 
 .file-tree-container > .tree-list::-webkit-scrollbar-track,
 .viewer-content::-webkit-scrollbar-track,
+.content-area.dual-page-active::-webkit-scrollbar-track,
 .search-results-list::-webkit-scrollbar-track {
   background: transparent;
 }
 
 .file-tree-container > .tree-list::-webkit-scrollbar-thumb,
 .viewer-content::-webkit-scrollbar-thumb,
+.content-area.dual-page-active::-webkit-scrollbar-thumb,
 .search-results-list::-webkit-scrollbar-thumb {
   background: rgba(255, 191, 0, 0.2);
   border-radius: 2px;
@@ -451,6 +454,7 @@ body::before {
 
 .file-tree-container > .tree-list::-webkit-scrollbar-thumb:hover,
 .viewer-content::-webkit-scrollbar-thumb:hover,
+.content-area.dual-page-active::-webkit-scrollbar-thumb:hover,
 .search-results-list::-webkit-scrollbar-thumb:hover {
   background: var(--neon-cyan);
   box-shadow: 0 0 8px var(--glow-cyan);
@@ -864,6 +868,24 @@ body::before {
   cursor: default;
 }
 
+/* Icon-only variant of .nav-btn used for the single/dual page toggle */
+.reading-mode-toggle {
+  padding: 4px 8px;
+}
+
+.reading-mode-toggle[aria-pressed="true"] {
+  color: var(--neon-magenta);
+  border-color: var(--neon-magenta);
+  box-shadow: 0 0 12px var(--glow-magenta);
+}
+
+/* Two columns only make sense once there's real idle width to reclaim */
+@media (max-width: 1100px) {
+  .reading-mode-toggle {
+    display: none;
+  }
+}
+
 .nav-counter {
   display: flex;
   align-items: center;
@@ -1017,6 +1039,78 @@ body::before {
 .markdown-body .inline-code {
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+/* ── Dual-page reading mode ──
+   With no aside open, the centered 900px column leaves large idle gutters on
+   wide viewports. Dual-page widens the reading column and flows the markdown
+   into two CSS columns (browser-balanced, no JS pagination), so a screenful
+   shows roughly twice the material at the same font size — a "two pages open
+   side by side" reading mode rather than an actual zoom-out. */
+.viewer-content.dual-page {
+  max-width: 1680px;
+  column-count: 2;
+  column-gap: 64px;
+  column-rule: 1px solid var(--glass-border);
+  /* CSS multi-column balances columns within the container's own block-size;
+     .viewer-content normally gets a *constrained* height from flex:1 (it
+     fills the space below the sticky header and scrolls internally), which
+     makes the spec create extra columns sideways instead of growing taller —
+     silently hiding most of the lesson off-screen to the right. Freeing the
+     height here lets the columns balance to their natural (tall) size; the
+     resulting vertical scroll is handled one level up, on .content-area
+     (see .content-area.dual-page-active below). */
+  flex: 0 0 auto;
+  height: auto;
+  overflow-y: visible;
+}
+
+/* Promote .content-area to the scrolling box while dual-page is active, since
+   .viewer-content can no longer own its own scroll once its height is auto. */
+.content-area.dual-page-active {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Block-level elements must not be sliced by a column break; text (p/li) is
+   fine to break, same as a newspaper column. */
+.viewer-content.dual-page h1,
+.viewer-content.dual-page h2,
+.viewer-content.dual-page h3,
+.viewer-content.dual-page h4,
+.viewer-content.dual-page h5,
+.viewer-content.dual-page h6,
+.viewer-content.dual-page img,
+.viewer-content.dual-page pre,
+.viewer-content.dual-page table,
+.viewer-content.dual-page .table-wrapper,
+.viewer-content.dual-page blockquote,
+.viewer-content.dual-page .callout,
+.viewer-content.dual-page .katex-display {
+  break-inside: avoid;
+}
+
+/* Keep a heading attached to what follows it instead of stranding it alone
+   at the bottom of a column. */
+.viewer-content.dual-page h1,
+.viewer-content.dual-page h2,
+.viewer-content.dual-page h3,
+.viewer-content.dual-page h4,
+.viewer-content.dual-page h5,
+.viewer-content.dual-page h6 {
+  break-after: avoid;
+}
+
+/* Below this width two legible columns don't fit — fall back to single
+   column regardless of the stored preference (the toggle itself is hidden
+   in the same breakpoint, see .reading-mode-toggle). */
+@media (max-width: 1100px) {
+  .viewer-content.dual-page {
+    max-width: 900px;
+    column-count: 1;
+    column-gap: normal;
+    column-rule: none;
+  }
 }
 
 .markdown-body h1,
