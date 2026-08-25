@@ -2086,10 +2086,20 @@ body::before {
 .browse-card-meta {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px 10px;
+  flex-wrap: wrap;
   font-size: 0.75rem;
   color: var(--text-muted);
   font-family: var(--font-mono);
+}
+
+/* Without an explicit no-wrap, flex-shrink squeezes each span below its
+   content width under space pressure and the browser wraps the TEXT inside
+   it onto two lines instead of moving the whole item down — the item itself
+   must stay one line; the row wraps instead (flex-wrap above). */
+.browse-card-count,
+.browse-card-sub {
+  white-space: nowrap;
 }
 
 .browse-card-count {
@@ -2719,8 +2729,22 @@ body::before {
     font-size: 0.6rem;
   }
 
+  /* Same fix as .content-header-left: flex:1 stops bounding width once the
+     parent switches to flex-direction:column, so these grew to their natural
+     content size (1112px / 422px measured) and were silently clipped instead
+     of ellipsizing/wrapping. */
   .footer-notice {
+    width: 100%;
+    max-width: 100%;
     white-space: nowrap;
+  }
+
+  .footer-author {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    white-space: normal;
   }
 }
 
