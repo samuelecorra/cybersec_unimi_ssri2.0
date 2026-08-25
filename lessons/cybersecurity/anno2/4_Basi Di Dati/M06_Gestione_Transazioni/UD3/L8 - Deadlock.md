@@ -8,13 +8,12 @@ In altre parole, ciascuna transazione attende che un’altra **rilasci un lock**
 **Esempio di situazione base:**
 
 - $t_i$ è in attesa che $t_j$ rilasci un lock
-    
 - $t_j$ è in attesa che $t_i$ rilasci un lock
 
 Il fenomeno può coinvolgere anche **più di due transazioni**, ad esempio:
 
-$$  
-t_1 \rightarrow t_2 \rightarrow t_3 \rightarrow \dots \rightarrow t_n \rightarrow t_1  
+$$
+t_1 \rightarrow t_2 \rightarrow t_3 \rightarrow \dots \rightarrow t_n \rightarrow t_1
 $$
 
 dove ciascuna attende una risorsa posseduta dalla successiva, formando un **ciclo di attesa**.
@@ -33,21 +32,15 @@ t2: r2(y) w2(x)
 **Sequenza delle richieste:**
 
 1. `r_lock1(x)`
-    
 2. `r_lock2(y)`
-    
 3. `r1(x)`
-    
 4. `r2(y)`
-    
 5. `w_lock1(y)`
-    
 6. `w_lock2(x)`
 
 → In questo scenario si verifica un **deadlock**, perché:
 
 - `t1` attende che `t2` liberi `y`;
-    
 - `t2` attende che `t1` liberi `x`.
 
 Nessuna delle due può procedere: il sistema entra in **stallo**.
@@ -59,7 +52,6 @@ Nessuna delle due può procedere: il sistema entra in **stallo**.
 Il **grafo di attesa (wait-for graph)** è lo strumento formale usato per rilevare i deadlock.
 
 - Ogni **nodo** rappresenta una **transazione**.
-    
 - Esiste un **arco orientato** da $t_i$ a $t_j$ se $t_i$ è in attesa di una risorsa **bloccata da $t_j$**.
 
 > C’è un **deadlock** se e solo se nel grafo esiste un **ciclo**.
@@ -80,9 +72,7 @@ Ciclo → presenza di deadlock.
 Esistono **tre principali strategie** per affrontare i deadlock:
 
 1. **Timeout**
-    
 2. **Rilevamento e risoluzione (deadlock detection)**
-    
 3. **Prevenzione (deadlock prevention)**
 
 ---
@@ -94,13 +84,11 @@ Con la tecnica del **timeout**, una transazione può restare in attesa **solo pe
 Se il tempo scade e la transazione non ha ancora ottenuto il lock richiesto:
 
 - la richiesta viene **rifiutata**;
-    
 - la transazione viene **abortita e riavviata**.
 
 #### **Scelta del timeout**
 
 - **Troppo basso** → troppi abort inutili (transazioni terminate prima del necessario).
-    
 - **Troppo alto** → tempi di attesa eccessivi.
 
 💡 È la **soluzione più semplice** e viene usata nella maggior parte dei **DBMS commerciali**.
@@ -112,22 +100,17 @@ Se il tempo scade e la transazione non ha ancora ottenuto il lock richiesto:
 La tecnica di **rilevamento** controlla periodicamente le **tabelle dei lock** per individuare la presenza di cicli nel **grafo di attesa**.
 
 - Non impone vincoli preventivi: il sistema **lascia che il deadlock si verifichi**.
-    
 - Quando un ciclo viene trovato → si procede alla **risoluzione** abortendo una delle transazioni coinvolte.
 
 #### **Due decisioni fondamentali:**
 
 1. **Quando effettuare il controllo**
-    
-    - Continuamente (approccio reattivo)
-        
-    - Periodicamente (approccio a intervalli)
-    
+   - Continuamente (approccio reattivo)
+   - Periodicamente (approccio a intervalli)
+
 2. **Quale transazione terminare**
-    
-    - Di solito si sceglie quella **meno costosa da riavviare**
-        
-    - Oppure quella **che ha fatto meno lavoro**
+   - Di solito si sceglie quella **meno costosa da riavviare**
+   - Oppure quella **che ha fatto meno lavoro**
 
 ---
 
@@ -137,26 +120,19 @@ La **prevenzione** adotta strategie per **impedire a priori** che si creino cicl
 Può basarsi su:
 
 - **Tecniche di allocazione preventiva**
-    
 - **Regole di ordinamento sugli oggetti o sui timestamp**
 
 #### **Esempi di prevenzione**
 
 1. **2PL conservativo:**
-    
-    - Le transazioni devono **richiedere tutti i lock all’inizio** della loro esecuzione.
-        
-    - Se anche un solo lock non è disponibile, la transazione **non inizia**.
-        
-    - Evita completamente il deadlock, ma riduce il parallelismo.
-    
+   - Le transazioni devono **richiedere tutti i lock all’inizio** della loro esecuzione.
+   - Se anche un solo lock non è disponibile, la transazione **non inizia**.
+   - Evita completamente il deadlock, ma riduce il parallelismo.
+
 2. **Ordinamento sugli oggetti:**
-    
-    - Gli oggetti vengono **numerati o ordinati**.
-        
-    - Ogni transazione deve acquisire i lock **seguendo sempre lo stesso ordine**.
-        
-    - In questo modo, non possono formarsi cicli di attesa.
+   - Gli oggetti vengono **numerati o ordinati**.
+   - Ogni transazione deve acquisire i lock **seguendo sempre lo stesso ordine**.
+   - In questo modo, non possono formarsi cicli di attesa.
 
 ---
 
@@ -167,10 +143,9 @@ Una soluzione preventiva consiste nell’**uccidere una delle transazioni** coin
 Le politiche di uccisione si distinguono in:
 
 - **Preemptive (interrompenti):**  
-    uccidono la transazione **che possiede** la risorsa.
-    
+   uccidono la transazione **che possiede** la risorsa.
 - **Non-preemptive (non interrompenti):**  
-    uccidono la transazione **che richiede** la risorsa.
+   uccidono la transazione **che richiede** la risorsa.
 
 ---
 
@@ -180,31 +155,26 @@ Si utilizzano i **timestamp** delle transazioni per stabilire **chi deve aspetta
 
 #### **a. Wait–Die (non interrompente)**
 
-Quando `t_i` richiede un lock su `x` posseduto da `t_j`:
+Quando $t_i$ richiede un lock su `x` posseduto da $t_j$:
 
-- Se $ts(t_i) < ts(t_j)$ → `t_i` **aspetta**
-    
-- Altrimenti → `t_i` viene **abortita e riavviata** con lo stesso timestamp
+- Se $ts(t_i) < ts(t_j)$ → $t_i$ **aspetta**
+- Altrimenti → $t_i$ viene **abortita e riavviata** con lo stesso timestamp
 
 #### **b. Wound–Wait (interrompente)**
 
-Quando `t_i` richiede un lock su `x` posseduto da `t_j`:
+Quando $t_i$ richiede un lock su `x` posseduto da $t_j$:
 
-- Se $ts(t_i) > ts(t_j)$ → `t_i` **aspetta**
-    
-- Altrimenti → `t_j` viene **abortita e riavviata**
+- Se $ts(t_i) > ts(t_j)$ → $t_i$ **aspetta**
+- Altrimenti → $t_j$ viene **abortita e riavviata**
 
 ---
 
 ### **10. Osservazioni sui metodi basati su timestamp**
 
 - Le transazioni **uccise devono essere riavviate con lo stesso timestamp**, altrimenti rischierebbero di essere **uccise continuamente** (problema di _starvation_).
-    
 - Questi metodi sono **raramente adottati nei DBMS commerciali**, perché:
-    
-    - la probabilità di deadlock è **molto più bassa** rispetto a quella dei normali conflitti;
-        
-    - la loro implementazione comporta un **overhead elevato**.
+  - la probabilità di deadlock è **molto più bassa** rispetto a quella dei normali conflitti;
+  - la loro implementazione comporta un **overhead elevato**.
 
 ---
 
@@ -212,21 +182,18 @@ Quando `t_i` richiede un lock su `x` posseduto da `t_j`:
 
 #### **a. No waiting**
 
-- Se una transazione `t_i` non ottiene subito il lock, viene **abortita immediatamente** e poi **riavviata**.
+- Se una transazione $t_i$ non ottiene subito il lock, viene **abortita immediatamente** e poi **riavviata**.
 
 #### **b. Cautious waiting**
 
-- Se la transazione che detiene il lock (`t_j`) **non è in attesa** → `t_i` **aspetta**.
-    
-- Se invece `t_j` è **anch’essa in attesa**, allora `t_i` viene **abortita** per evitare un ciclo.
+- Se la transazione che detiene il lock ($t_j$) **non è in attesa** → $t_i$ **aspetta**.
+- Se invece $t_j$ è **anch’essa in attesa**, allora $t_i$ viene **abortita** per evitare un ciclo.
 
 #### **c. Altri criteri possibili**
 
 - Si può scegliere di uccidere la transazione che ha:
-    
-    - **fatto meno lavoro**, oppure
-        
-    - **consumato meno risorse**.
+  - **fatto meno lavoro**, oppure
+  - **consumato meno risorse**.
 
 ---
 
@@ -257,28 +224,18 @@ In questa lezione abbiamo affrontato il problema del **deadlock**, cioè la **mu
 **Riepilogo:**
 
 - **Deadlock:** situazione di attesa circolare tra due o più transazioni.
-    
 - **Rilevamento:** analisi del grafo di attesa per individuare cicli.
-    
 - **Timeout:** interruzione automatica dopo un tempo massimo.
-    
 - **Prevenzione:** applicazione di regole o politiche per evitare la formazione di cicli.
-    
 - **Politiche basate su timestamp:**
-    
-    - _Wait–Die_ (non interrompente)
-        
-    - _Wound–Wait_ (interrompente)
-    
+  - _Wait–Die_ (non interrompente)
+  - _Wound–Wait_ (interrompente)
 - **Problemi correlati:**
-    
-    - _Livelock_ (attesa infinita senza blocco)
-        
-    - _Starvation_ (transazione continuamente abortita)
+  - _Livelock_ (attesa infinita senza blocco)
+  - _Starvation_ (transazione continuamente abortita)
 
 ---
 
 ![](imgs/Pasted%20image%2020251125052209.png)
 
 ![](imgs/Pasted%20image%2020251125052220.png)
-

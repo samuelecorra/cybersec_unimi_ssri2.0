@@ -44,6 +44,8 @@ In questi casi è necessaria una **ripresa a freddo (cold recovery)**, poiché o
 
 ### **4. Modello fail-stop**
 
+![](imgs/Pasted%20image%2020260825161241.png)
+
 Il DBMS adotta il cosiddetto **modello fail-stop**, secondo cui:
 
 1. Quando viene rilevato un guasto, il sistema **arresta completamente** tutte le transazioni in corso.
