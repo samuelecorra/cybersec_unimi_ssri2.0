@@ -14,6 +14,70 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@600;700;800&display=swap");
 
+/* Design tokens, exposed as Tailwind utilities (bg-neon-cyan, text-text-muted,
+   font-display, ...) for app-chrome components authored directly in Tailwind.
+   Deliberately additive and duplicated from the :root values below rather than
+   renaming them: the :root custom properties are read by ~2600 lines of
+   existing "legacy" CSS (including .markdown-body, which renders every lesson
+   in this archive) and a rename touches all of it for no behavioral gain.
+   Keep both definitions in sync when a token value changes. */
+@theme {
+  --color-bg-darker: #080808;
+  --color-bg-dark: #101010;
+  --color-bg-mid: #181818;
+  --color-bg-light: #242424;
+
+  --color-neon-cyan: #ffbf00;
+  --color-neon-magenta: #ff2200;
+  --color-neon-lime: #ff9500;
+  --color-neon-yellow: #ffd700;
+  --color-neon-purple: #990022;
+  --color-neon-orange: #ff5500;
+
+  --color-text-primary: #f0ece0;
+  --color-text-secondary: #c0b4a0;
+  --color-text-muted: #807060;
+
+  --color-border: rgba(255, 191, 0, 0.12);
+  --color-border-glow: rgba(255, 191, 0, 0.25);
+
+  --color-glass-bg: rgba(10, 8, 6, 0.85);
+  --color-glass-border: rgba(255, 191, 0, 0.15);
+
+  /* Override Tailwind's default font-mono/font-display so any new
+     Tailwind-authored markup automatically matches the established faces. */
+  --font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", monospace;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Orbitron", "Inter", sans-serif;
+}
+
+/* Shared hover-glow recipe for icon/text buttons scattered across the chrome
+   (nav prev/next, reading-mode toggle, sidebar toggle, browse-return, ...).
+   Extracted once it repeated 3+ times with the same intent (glass button,
+   cyan border+text, cyan glow + svg drop-shadow on hover, dimmed when
+   disabled) rather than re-typing the same arbitrary-value cluster on every
+   button or keeping each one as separate legacy CSS. --glow-cyan/--glow-color
+   are read from the :root values in @layer legacy further down. */
+@utility glow-btn {
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--bg-hover);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 16px var(--glow-color, var(--glow-cyan));
+    text-shadow: 0 0 8px var(--glow-color, var(--glow-cyan));
+  }
+
+  &:hover:not(:disabled) svg {
+    filter: drop-shadow(0 0 4px var(--glow-color, var(--glow-cyan)));
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
 @layer legacy {
 
 /* ── CSS Variables ── */
@@ -768,145 +832,12 @@ body::before {
   z-index: 90;
 }
 
-/* ── Breadcrumb ── */
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  overflow: hidden;
-  min-width: 0;
-  white-space: nowrap;
-}
+/* .breadcrumb* is authored directly in Tailwind utilities in
+   Breadcrumb.jsx. */
 
-.breadcrumb-segment {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  min-width: 0;
-  flex-shrink: 1;
-}
-
-/* Keep the last segment (current file) from shrinking too much */
-.breadcrumb-segment:last-child {
-  flex-shrink: 1;
-  overflow: hidden;
-}
-
-.breadcrumb-sep {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  color: var(--text-muted);
-  margin: 0 2px;
-}
-
-.breadcrumb-chevron {
-  color: var(--text-muted);
-}
-
-.breadcrumb-dir {
-  color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 160px;
-}
-
-.breadcrumb-current {
-  color: var(--neon-cyan);
-  font-weight: 600;
-  text-shadow: 0 0 8px var(--glow-cyan);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* ── Navigation ── */
-.navigation {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.nav-btn {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: var(--glass-bg);
-  border: 1px solid var(--border-color);
-  color: var(--neon-cyan);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  padding: 4px 12px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: all var(--transition);
-  white-space: nowrap;
-  position: relative;
-}
-
-.nav-btn svg {
-  flex-shrink: 0;
-}
-
-.nav-btn:hover:not(:disabled) {
-  background: var(--bg-hover);
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 16px rgba(255, 191, 0, 0.2);
-  text-shadow: 0 0 8px var(--glow-cyan);
-}
-
-.nav-btn:hover:not(:disabled) svg {
-  filter: drop-shadow(0 0 4px var(--glow-cyan));
-}
-
-.nav-btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-/* Icon-only variant of .nav-btn used for the single/dual page toggle */
-.reading-mode-toggle {
-  padding: 4px 8px;
-}
-
-.reading-mode-toggle[aria-pressed="true"] {
-  color: var(--neon-magenta);
-  border-color: var(--neon-magenta);
-  box-shadow: 0 0 12px var(--glow-magenta);
-}
-
-/* Two columns only make sense once there's real idle width to reclaim */
-@media (max-width: 1100px) {
-  .reading-mode-toggle {
-    display: none;
-  }
-}
-
-.nav-counter {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  white-space: nowrap;
-}
-
-.nav-counter-current {
-  color: var(--neon-cyan);
-  font-weight: 600;
-}
-
-.nav-counter-sep {
-  color: var(--text-muted);
-}
-
-.nav-counter-total {
-  color: var(--text-muted);
-}
+/* Navigation (.navigation, .nav-btn, .nav-counter*, .reading-mode-toggle) is
+   authored directly in Tailwind utilities in Navigation.jsx — see the
+   glow-btn @utility near the top of this file for the shared hover recipe. */
 
 /* ── Viewer ── */
 .viewer-empty {
@@ -1776,26 +1707,8 @@ body::before {
   flex: 1;
 }
 
-.browse-return-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  background: var(--glass-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  color: var(--neon-cyan);
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.browse-return-btn:hover {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 14px var(--glow-cyan);
-  background: var(--bg-hover);
-}
+/* .browse-return-btn is authored directly in Tailwind utilities (glow-btn +
+   layout classes) where it's used in App.jsx. */
 
 /* ═══════════════════════════════════════════════════════════════
    BROWSE VIEW — Hierarchical navigation
@@ -2499,10 +2412,8 @@ body::before {
     max-width: 100%;
   }
 
-  .navigation {
-    width: 100%;
-    justify-content: space-between;
-  }
+  /* Navigation's own mobile width/justify now lives as max-[768px]: utilities
+     directly on its root div in Navigation.jsx. */
 
   /* Tame heading & math sizes so nothing pushes past the viewport */
   .markdown-body h1 {

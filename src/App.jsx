@@ -234,7 +234,11 @@ function RoutedApp() {
             <>
               <div className="content-header">
                 <div className="content-header-left">
-                  <button className="browse-return-btn" onClick={handleBackToBrowse} title="Torna alla navigazione">
+                  <button
+                    className="glow-btn flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border bg-glass-bg text-neon-cyan"
+                    onClick={handleBackToBrowse}
+                    title="Torna alla navigazione"
+                  >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M9 2L4 7L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
