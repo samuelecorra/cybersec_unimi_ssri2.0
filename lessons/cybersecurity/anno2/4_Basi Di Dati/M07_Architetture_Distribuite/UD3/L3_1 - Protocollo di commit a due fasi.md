@@ -130,14 +130,7 @@ Se invece un RM **non si è ancora dichiarato ready**, può **abortire autonomam
 
 Il protocollo può essere visualizzato così:
 
-```
-RM                           TM
-│                            │
-│ --- prepare ------------>  │
-│ <--- ready --------------  │
-│ --- decision ------------> │
-│ <--- ack ----------------  │
-```
+![](imgs/Pasted%20image%2020260826032111.png)
 
 Durante l’intero processo:
 

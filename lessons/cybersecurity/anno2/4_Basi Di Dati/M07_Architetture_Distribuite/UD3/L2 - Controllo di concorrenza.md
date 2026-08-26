@@ -89,6 +89,8 @@ Ogni timestamp è composto da **due parti**:
 
 In questo modo, i timestamp **riflettono l’ordine causale** degli eventi nel sistema distribuito.
 
+![](imgs/Pasted%20image%2020260826025144.png)
+
 ---
 
 ### **5. Deadlock distribuiti**

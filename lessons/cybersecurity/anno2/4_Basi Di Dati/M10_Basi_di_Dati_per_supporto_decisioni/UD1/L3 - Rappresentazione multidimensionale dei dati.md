@@ -45,6 +45,8 @@ Esempi:
 Ogni dimensione è organizzata secondo **livelli gerarchici**, che rappresentano diversi **gradi di aggregazione** dei dati.  
 Esempi tipici:
 
+![](imgs/Pasted%20image%2020260826072032.png)
+
 |**Dimensione**|**Livelli di gerarchia**|
 |---|---|
 |**Luogo**|negozio → città → provincia → regione|
@@ -65,15 +67,7 @@ Queste gerarchie consentono di **aggregare o disaggregare** i dati in funzione d
 
 Il modello può essere rappresentato come un **cubo dei dati**, dove ogni asse rappresenta una dimensione:
 
-```
-          Tempo (trimestre)
-                ↑
-                │
-                │
-Luogo ──────────┼──────────▶ Articolo
-                │
-             Quantità
-```
+![](imgs/Pasted%20image%2020260826072127.png)
 
 Ogni cella del cubo contiene una **misura aggregata** (es. quantità venduta) per una specifica combinazione di dimensioni (es. _prodotto X_, _trimestre 2_, _città di Milano_).
 
@@ -82,6 +76,8 @@ Ogni cella del cubo contiene una **misura aggregata** (es. quantità venduta) pe
 ### **5. Analisi dal punto di vista dei manager**
 
 Il modello multidimensionale consente diverse **prospettive di analisi**, a seconda del ruolo o dell’interesse dell’analista:
+
+![](imgs/Pasted%20image%2020260826072244.png)
 
 - Il **manager di città** esamina le vendite di tutti i prodotti nel tempo per la propria area.
     

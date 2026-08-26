@@ -143,26 +143,7 @@ Un’architettura tipica di data warehouse comprende:
 
 Rappresentazione semplificata dell’architettura di un sistema di data warehousing:
 
-```
-     +----------------------------------------------+
-     |                 Sorgenti dati                |
-     |----------------------------------------------|
-     |  Basi di dati operative   |  Sorgenti esterne|
-     +----------------------------------------------+
-                 │ Estrazione / Pulitura / Caricamento
-                 ▼
-     +----------------------------------------------+
-     |              Data Warehouse Server            |
-     |   +------------------+  +------------------+  |
-     |   |   Data Warehouse |  |     Data Mart    |  |
-     +----------------------------------------------+
-                 │
-                 ▼
-     +----------------------------------------------+
-     |          Analisi multidimensionale            |
-     |              e Data Mining                    |
-     +----------------------------------------------+
-```
+![](imgs/Pasted%20image%2020260826071731.png)
 
 ---
 
