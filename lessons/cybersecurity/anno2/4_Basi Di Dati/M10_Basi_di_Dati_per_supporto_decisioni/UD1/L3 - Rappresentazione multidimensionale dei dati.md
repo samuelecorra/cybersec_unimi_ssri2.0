@@ -82,10 +82,16 @@ Il modello multidimensionale consente diverse **prospettive di analisi**, a seco
 - Il **manager di città** esamina le vendite di tutti i prodotti nel tempo per la propria area.
     
 - Il **manager di prodotto** analizza le vendite di uno specifico articolo in tutti i periodi e in tutte le città.
-    
+
+![](imgs/Pasted%20image%2020260827181537.png)
+
 - Il **manager finanziario** confronta le vendite totali tra periodi diversi per tutte le città.
-    
+
+![](imgs/Pasted%20image%2020260827181601.png)
+
 - Il **manager strategico** osserva categorie di prodotti su aree geografiche più ampie e orizzonti temporali medi.
+
+![](imgs/Pasted%20image%2020260827181621.png)
 
 ---
 
@@ -178,18 +184,7 @@ Per facilitare l’analisi e la comunicazione dei risultati, i dati multidimensi
 
 Esempio: andamento delle vendite per prodotto e trimestre:
 
-```
-Vendite (unità)
-↑
-│
-│                  ● Pasta
-│              ●
-│          ●
-│      ●
-│  ●
-│────────────────────────────────────→ Tempo
-   1° T   2° T   3° T   4° T
-```
+![](imgs/Pasted%20image%2020260827182149.png)
 
 ---
 

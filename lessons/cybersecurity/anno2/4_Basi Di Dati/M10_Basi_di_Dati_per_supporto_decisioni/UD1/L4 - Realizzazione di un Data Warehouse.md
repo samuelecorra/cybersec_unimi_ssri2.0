@@ -108,6 +108,8 @@ Serve a **ridurre le ridondanze** nelle dimensioni, ma può comportare **un degr
 **Vantaggio:** minore ridondanza.  
 **Svantaggio:** interrogazioni più lente a causa dei join multipli.
 
+![](imgs/Pasted%20image%2020260827183109.png)
+
 ---
 
 ### **7. Operazioni su ROLAP**
@@ -116,6 +118,8 @@ In un sistema ROLAP, i dati vengono presentati all’utente con una **visione mu
 Le interrogazioni espresse su questa visione vengono poi **tradotte in SQL** dal sistema.
 
 #### **Esempio di query ROLAP (roll-up)**
+
+![](imgs/Pasted%20image%2020260827183428.png)
 
 > “Selezionare le vendite complessive del 2003 per categoria di articolo e trimestre.”
 
@@ -146,6 +150,8 @@ Entrambe utilizzano il valore speciale `ALL`, che rappresenta “tutti i valori 
 
 ### **9. Esempi pratici di aggregazione**
 
+![](imgs/Pasted%20image%2020260827183503.png)
+
 #### **a) Esempio con `WITH CUBE`**
 
 ```sql
@@ -162,7 +168,11 @@ WITH CUBE;
 
 → Genera tutte le aggregazioni possibili: per modello, anno, colore e combinazioni tra essi.
 
+![](imgs/Pasted%20image%2020260827183532.png)
+
 #### **b) Esempio con `WITH ROLLUP`**
+
+![](imgs/Pasted%20image%2020260827183503.png)
 
 ```sql
 SELECT Modello, Anno, Colore, SUM(Unità)
@@ -177,6 +187,8 @@ WITH ROLLUP;
 ```
 
 → Esegue un’aggregazione progressiva: prima per (Modello, Anno, Colore), poi per (Modello, Anno), poi per (Modello), e infine globale.
+
+![](imgs/Pasted%20image%2020260827183829.png)
 
 ---
 

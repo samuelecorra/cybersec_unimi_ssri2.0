@@ -8,7 +8,6 @@ Possono essere utilizzate sia per gestire automaticamente **vincoli interni al s
 Si distinguono quindi due categorie principali:
 
 - **Regole interne alla base di dati**, generate dal sistema e non visibili all’utente.
-    
 - **Regole esterne (o aziendali)**, definite per modellare conoscenza applicativa a livello di schema.
 
 ---
@@ -18,11 +17,8 @@ Si distinguono quindi due categorie principali:
 Le regole interne sono **create automaticamente dal DBMS** per supportare:
 
 - la **gestione dell’integrità referenziale**,
-    
 - la **derivazione o replicazione dei dati**,
-    
 - la **gestione di versioni e sicurezza**,
-    
 - il **logging delle azioni** e la **registrazione di eventi di sistema**.
 
 Queste regole operano in modo **trasparente per l’utente**, assicurando che i vincoli di integrità e le politiche del database siano rispettati senza intervento manuale.
@@ -35,14 +31,28 @@ Le regole esterne esprimono **conoscenza applicativa** e modellano **vincoli o p
 Implementarle tramite trigger permette di:
 
 - **centralizzare la logica aziendale** direttamente nel database;
-    
 - garantire la **consistenza delle regole** su tutte le applicazioni che accedono ai dati;
-    
 - mantenere una maggiore **indipendenza della conoscenza** rispetto al software esterno.
 
 ---
 
 ### **4. Esempi di regole interne: gestione dell’integrità referenziale**
+
+Partiamo da:
+
+```sql
+CREATE TABLE Impiegato (... ...
+  FOREIGN KEY (NDip) REFERENCES Dipartimento(NroDip)
+  ON DELETE SET NULL,
+  ON UPDATE CASCADE ... ...);
+```
+
+E' facile rendersi conto che il DBMS è vittima di operazioni che violano questo vincolo, e sono:
+
+- insert into Impiegato -> inserimento di un impiegato con un dipartimento inesistente;
+- update Impiegato.NDip -> modifica del dipartimento di un impiegato con un dipartimento inesistente;
+- delete from Dipartimento -> cancellazione di un dipartimento con impiegati associati;
+- update Dipartimento.NroDip -> modifica del numero di dipartimento con impiegati associati.
 
 #### **a) Esempio 1 – Inserimento in `Impiegato`**
 
@@ -175,9 +185,7 @@ PRODOTTO(Codice, Nome, SuperProdotto, Livello)
 Ogni prodotto può essere:
 
 - **composto** da altri (relazione di contenimento),
-    
 - **inserito** con riferimento a un super-prodotto,
-    
 - oppure **radice della gerarchia**, con `SuperProdotto = NULL` e `Livello = 0`.
 
 ---
@@ -230,21 +238,14 @@ END;
 In questa lezione abbiamo visto:
 
 - le **principali applicazioni delle regole attive**;
-    
 - la distinzione tra **regole interne** (legate alla struttura e all’integrità del database) e **regole aziendali** (legate alla logica applicativa);
-    
 - esempi pratici di trigger per:
-    
-    - **integrità referenziale**,
-        
-    - **vincoli di integrità aziendale**,
-        
-    - **derivazione di dati**.
+  - **integrità referenziale**,
+  - **vincoli di integrità aziendale**,
+  - **derivazione di dati**.
 
 **In sintesi:** le regole attive consentono di automatizzare controlli, derivazioni e comportamenti complessi, rendendo la base di dati **reattiva e intelligente**, capace di mantenere la coerenza e di eseguire azioni coerenti con le politiche applicative.
 
 ---
 
-
 ![](imgs/Pasted%20image%2020251125055027.png)
-
