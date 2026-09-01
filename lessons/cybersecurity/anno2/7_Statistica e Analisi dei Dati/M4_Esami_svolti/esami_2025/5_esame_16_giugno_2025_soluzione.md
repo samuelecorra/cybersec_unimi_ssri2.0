@@ -17,7 +17,7 @@
 
 > Si consideri un sistema di comunicazione da **i** a **o**, composto da cinque linee di trasmissione identiche, dove ciascuna linea ha una probabilità di funzionare correttamente $p$ e una probabilità di fallire $q = 1-p$. Tutte le linee funzionano indipendentemente l'una dall'altra.
 >
-> <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+> ![](imgs/Pasted%20image%2020260901130326.png)
 >
 > (a) (3 punti) Calcolare l'affidabilità complessiva dell'intero sistema. Spiegare il metodo utilizzato per affrontare questa configurazione.
 >

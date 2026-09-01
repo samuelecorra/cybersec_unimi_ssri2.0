@@ -1,4 +1,4 @@
-# **M1 UD2 Lezione 2 - Densità Esponenziale Negativa**
+# **M2 UD2 Lezione 2 - Densità Esponenziale Negativa**
 
 ### **1. Dalla distribuzione geometrica alla densità esponenziale**
 

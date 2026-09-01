@@ -307,5 +307,5 @@ Più della metà dei lotti da 500 uova contiene al più 2 collanine.
 | 1b | 4 | WLLN: $\text{Var}(\bar{X}_n)=\sigma^2/n\to 0$ + Chebyshev |
 | 2 | 8 | $\bar{x}=21$, $s\approx 2.406$ (unbiased), outlier: 29; boxplot: $Q_1=19.5$, med=20.5, $Q_3=22$ |
 | 3 | 4 | Bayes: $P(A\mid D)=5/17\approx 29.4\%$ |
-| 4 | 6 | $P(\text{2♥})=1/17$; $P(\geq\text{1A})=33/221$; $P(\text{♥ o figura})=297/442\approx 67.2\%$ |
+| 4 | 6 | $P(\text{2 cuori})=1/17$; $P(\geq\text{1 asso})=33/221$; $P(\text{cuori o figura})=297/442\approx 67.2\%$ |
 | 5 | 6 | Poisson($\lambda=2.5$): formula esatta; $P(X=3)\approx 0.214$; $P(X\leq 2)\approx 0.544$ |

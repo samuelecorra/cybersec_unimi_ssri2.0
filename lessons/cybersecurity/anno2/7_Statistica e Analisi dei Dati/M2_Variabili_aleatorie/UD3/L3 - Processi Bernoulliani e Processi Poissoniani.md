@@ -1,4 +1,4 @@
-# **M2 UD2 Lezione 3 - Processi Bernoulliani e Processi Poissoniani**
+# **M2 UD3 Lezione 3 - Processi Bernoulliani e Processi Poissoniani**
 
 ### **1. Inquadramento generale**
 

@@ -85,7 +85,7 @@ $$
 
 > ⚠️ In ordine di frequenza:
 >
-> 1. **Omettere la correzione di continuità**: con $\sigma \approx 3$ l'errore è tutt'altro che trascurabile (qui, senza correzione, verrebbe $\approx 0.6957$ invece di $0.7535$).
+> 1. **Omettere la correzione di continuità**: con $\sigma \approx 3$ l'errore è tutt'altro che trascurabile. Il valore binomiale **esatto** è $0.7423$; con la correzione si ottiene $0.7535$ (scarto $+0.011$), senza correzione si otterrebbe $\Phi(1.622) - \Phi(-0.649) \approx 0.6894$ (scarto $-0.053$, cinque volte peggiore).
 > 2. **Allargare nel verso sbagliato** (usare $8.5$ e $14.5$): l'intervallo va allargato **verso l'esterno**, gli estremi inclusi devono restare dentro.
 > 3. **Non verificare le condizioni** o non citarle: si perde il punteggio dedicato al metodo.
 > 4. **Usare $\sigma^2$ al posto di $\sigma$** nella standardizzazione: controllare sempre l'ordine di grandezza di $z$ (valori "ragionevoli" tra $-4$ e $4$).

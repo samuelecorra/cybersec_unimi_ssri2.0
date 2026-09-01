@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-19T13:42:17.091Z",
+  "generatedAt": "2026-09-01T11:53:29.447Z",
   "root": "lessons/cybersecurity",
-  "totalFiles": 5987,
+  "totalFiles": 6110,
   "files": [
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD0 - Strumenti discreti e induzione/L1 - Sommatorie e produttorie.md",
@@ -1165,7 +1165,7 @@
     },
     {
       "path": "anno1/1_Analisi 1/M10_Derivabilita/UD3 - Taylor e applicazioni/L1 - La formula di Taylor.md",
-      "size": 3446,
+      "size": 3914,
       "ext": ".md"
     },
     {
@@ -1190,7 +1190,7 @@
     },
     {
       "path": "anno1/1_Analisi 1/M10_Derivabilita/UD4 - Concavita e flessi/L1 - Definizione di concavita.md",
-      "size": 4657,
+      "size": 5186,
       "ext": ".md"
     },
     {
@@ -1205,7 +1205,7 @@
     },
     {
       "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/MCS_M11.zip",
-      "size": 145427679,
+      "size": 134,
       "ext": ".zip"
     },
     {
@@ -1377,6 +1377,41 @@
       "path": "anno1/2_Architettura_Elaboratori/dal_c_ad_asm/primida1a10.c",
       "size": 4420,
       "ext": ".c"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/lc2/LC2Edit.cnt",
+      "size": 83,
+      "ext": ".cnt"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/lc2/LC2Edit.exe",
+      "size": 307200,
+      "ext": ".exe"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/lc2/LC2EDIT.HLP",
+      "size": 11785,
+      "ext": ".hlp"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/lc2/Readme.txt",
+      "size": 1557,
+      "ext": ".txt"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/lc2/Simulate.cnt",
+      "size": 734,
+      "ext": ".cnt"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/lc2/Simulate.exe",
+      "size": 262144,
+      "ext": ".exe"
+    },
+    {
+      "path": "anno1/2_Architettura_Elaboratori/lc2/SIMULATE.HLP",
+      "size": 15171,
+      "ext": ".hlp"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/lezioni/M1 - Fondamenti architetturali/M1doc.pdf",
@@ -3465,7 +3500,7 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T10_SlotMachine/SlotMachine.java",
-      "size": 5689,
+      "size": 5859,
       "ext": ".java"
     },
     {
@@ -3475,37 +3510,37 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T11_MusicPlayers/MusicPlayerV1/MusicPlayerV1.java",
-      "size": 3249,
+      "size": 3239,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T11_MusicPlayers/MusicPlayerV2/MusicPlayer.java",
-      "size": 4567,
+      "size": 4117,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T11_MusicPlayers/MusicPlayerV2/MusicPlayerApp.java",
-      "size": 3155,
+      "size": 3333,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T12_Impiccato/Impiccato.java",
-      "size": 5244,
+      "size": 5980,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T12_Impiccato/parole.txt",
-      "size": 27087,
+      "size": 26893,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T13_CountdownTimer/CountdownTimer.java",
-      "size": 901,
+      "size": 1409,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T14_AlarmClock/AlarmClock.java",
-      "size": 2165,
+      "size": 2222,
       "ext": ".java"
     },
     {
@@ -3515,82 +3550,82 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T14_AlarmClock/SvegliaConMusica.java",
-      "size": 1560,
+      "size": 2128,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T2_ShoppingCartProgram/ShoppingCartProgram.java",
-      "size": 1153,
+      "size": 1741,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T3_WeightConversionProgram/WeightConversion.java",
-      "size": 1489,
+      "size": 1915,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T4_ConvertiTemperatura/ConvertiTemperatura.java",
-      "size": 1611,
+      "size": 1668,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T4_ConvertiTemperatura/ConvertiV2.java",
-      "size": 1352,
+      "size": 1360,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T5_Calcolatrice/Calcolatrice.java",
-      "size": 1927,
+      "size": 1802,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T6_NumberGuessingGame/NumberGuessingGame.java",
-      "size": 1475,
+      "size": 1528,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T7_BankingProgram/BankingProgram.java",
-      "size": 3221,
+      "size": 3953,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T8_DiceRoller/DiceRoller.java",
-      "size": 2727,
+      "size": 2752,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E0_esercizi_yt/T9_RockPaperScissor/RockPaperScissor.java",
-      "size": 2537,
+      "size": 2644,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_1/CalcolatoreVolumeSfera.java",
-      "size": 615,
+      "size": 829,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_1/README.txt",
-      "size": 1555,
+      "size": 1922,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_2/InteresseComposto.java",
-      "size": 2845,
+      "size": 3032,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_2/README.txt",
-      "size": 2430,
+      "size": 2570,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_3/ArrayAuto.java",
-      "size": 1011,
+      "size": 1430,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_3/README.txt",
-      "size": 2534,
+      "size": 2568,
       "ext": ".txt"
     },
     {
@@ -3600,72 +3635,72 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_4/README.txt",
-      "size": 2160,
+      "size": 2264,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_5/JavaQuizGame.java",
-      "size": 5832,
+      "size": 4789,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E1_esercizi_introduttivi/esercizio_5/README.txt",
-      "size": 2112,
+      "size": 2216,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleBiblioteca/Classi/Biblioteca.java",
-      "size": 1915,
+      "size": 2164,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleBiblioteca/Classi/Libro.java",
-      "size": 601,
+      "size": 1037,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleBiblioteca/Classi/Utente.java",
-      "size": 900,
+      "size": 1351,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleBiblioteca/Main/BibliotecaMain.java",
-      "size": 3306,
+      "size": 4427,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleBiblioteca/README.md",
-      "size": 3413,
+      "size": 3557,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleDischeria/Classi/Cliente.java",
-      "size": 742,
+      "size": 1289,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleDischeria/Classi/Discheria.java",
-      "size": 1414,
+      "size": 2329,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleDischeria/Classi/Disco.java",
-      "size": 510,
+      "size": 947,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleDischeria/Main/DischeriaMain.java",
-      "size": 3417,
+      "size": 4545,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleDischeria/README.md",
-      "size": 3500,
+      "size": 3636,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleGarage/Classi/Auto.java",
-      "size": 930,
+      "size": 1291,
       "ext": ".java"
     },
     {
@@ -3675,62 +3710,62 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleGarage/Classi/Guidatore.java",
-      "size": 988,
+      "size": 1541,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleGarage/Main/GarageMain.java",
-      "size": 4572,
+      "size": 5355,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleGarage/README.txt",
-      "size": 514,
+      "size": 741,
       "ext": ".txt"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideoteca/Classi/Cliente.java",
-      "size": 755,
+      "size": 1203,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideoteca/Classi/Film.java",
-      "size": 1047,
+      "size": 1570,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideoteca/Classi/Videoteca.java",
-      "size": 2627,
+      "size": 2596,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideoteca/Main/VideotecaMain.java",
-      "size": 3523,
+      "size": 4760,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideoteca/README.md",
-      "size": 4212,
+      "size": 4457,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideotecaV2/Classi/Cliente.java",
-      "size": 1761,
+      "size": 2085,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideotecaV2/Classi/Film.java",
-      "size": 721,
+      "size": 1159,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideotecaV2/Classi/Videoteca.java",
-      "size": 8593,
+      "size": 9184,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E2_gestionali/GestionaleVideotecaV2/Main/VideotecaMain.java",
-      "size": 8535,
+      "size": 9132,
       "ext": ".java"
     },
     {
@@ -3740,12 +3775,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/Serpenti_e_Scale/Classi/Giocatore.java",
-      "size": 704,
+      "size": 1216,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/Serpenti_e_Scale/Classi/Partita.java",
-      "size": 3494,
+      "size": 3556,
       "ext": ".java"
     },
     {
@@ -3755,47 +3790,47 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/Serpenti_e_Scale/Main/SerpentiEScaleGame.java",
-      "size": 1036,
+      "size": 1918,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/Serpenti_e_Scale/README.md",
-      "size": 3719,
+      "size": 4056,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/VendingMachine/Classi/Bevanda.java",
-      "size": 418,
+      "size": 537,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/VendingMachine/Classi/Merendina.java",
-      "size": 430,
+      "size": 552,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/VendingMachine/Classi/Prodotto.java",
-      "size": 515,
+      "size": 824,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/VendingMachine/Classi/VendingMachine.java",
-      "size": 1645,
+      "size": 1793,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/VendingMachine/Main/VendingMachineMain.java",
-      "size": 3600,
+      "size": 4964,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E3_simulazione_giochi/VendingMachine/README.md",
-      "size": 3772,
+      "size": 4142,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/ClassificaVideogame/Classi/Classifica.java",
-      "size": 2216,
+      "size": 2318,
       "ext": ".java"
     },
     {
@@ -3805,12 +3840,12 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/ClassificaVideogame/Main/MainClassificaVideogame.java",
-      "size": 3086,
+      "size": 3513,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/ClassificaVideogame/README.md",
-      "size": 4936,
+      "size": 5222,
       "ext": ".md"
     },
     {
@@ -3820,77 +3855,77 @@
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/GestionePrenotazioni/Classi/Ristorante.java",
-      "size": 4419,
+      "size": 4784,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/GestionePrenotazioni/Classi/Tavolo.java",
-      "size": 601,
+      "size": 730,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/GestionePrenotazioni/Main/MainRistorante.java",
-      "size": 3709,
+      "size": 4580,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/GestionePrenotazioni/README.md",
-      "size": 3768,
+      "size": 3865,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/RegistroStudenti/Classi/RegistroStudenti.java",
-      "size": 1914,
+      "size": 2005,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/RegistroStudenti/Classi/Studente.java",
-      "size": 1280,
+      "size": 1747,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/RegistroStudenti/Main/MainRegistroStudenti.java",
-      "size": 6062,
+      "size": 6369,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/RegistroStudenti/README.md",
-      "size": 2130,
+      "size": 2349,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/SistemaLogin/Classi/SistemaLogin.java",
-      "size": 2687,
+      "size": 3676,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/SistemaLogin/Classi/Utente.java",
-      "size": 1262,
+      "size": 3345,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/SistemaLogin/Main/MainSistemaLogin.java",
-      "size": 2469,
+      "size": 2522,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E4_avanzati/SistemaLogin/README.md",
-      "size": 5630,
+      "size": 5958,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E5_Giochi/PinkPong/PongGame.java",
-      "size": 23150,
+      "size": 23860,
       "ext": ".java"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/E5_Giochi/PinkPong/README.md",
-      "size": 29316,
+      "size": 30309,
       "ext": ".md"
     },
     {
       "path": "anno1/3_Programmazione/java/tracce-java/README.txt",
-      "size": 887,
+      "size": 991,
       "ext": ".txt"
     },
     {
@@ -7815,12 +7850,12 @@
     },
     {
       "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/esami/1_5sett2025.md",
-      "size": 43,
+      "size": 59,
       "ext": ".md"
     },
     {
       "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/esami/2_21febb2025.md",
-      "size": 41,
+      "size": 57,
       "ext": ".md"
     },
     {
@@ -9334,11 +9369,6 @@
       "ext": ".png"
     },
     {
-      "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/imgs/Pasted image 20251018183441.png",
-      "size": 15714,
-      "ext": ".png"
-    },
-    {
       "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/imgs/Pasted image 20251018183727.png",
       "size": 36130,
       "ext": ".png"
@@ -9361,26 +9391,6 @@
     {
       "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/imgs/Pasted image 20251018193416.png",
       "size": 35394,
-      "ext": ".png"
-    },
-    {
-      "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/imgs/Pasted image 20251018204450.png",
-      "size": 101086,
-      "ext": ".png"
-    },
-    {
-      "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/imgs/Pasted image 20251018204522.png",
-      "size": 40593,
-      "ext": ".png"
-    },
-    {
-      "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/imgs/Pasted image 20251018204548.png",
-      "size": 50517,
-      "ext": ".png"
-    },
-    {
-      "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/imgs/Pasted image 20251018223729.png",
-      "size": 31662,
       "ext": ".png"
     },
     {
@@ -9470,7 +9480,7 @@
     },
     {
       "path": "anno1/7-AspettiOrganizzativiGestionaliCybersec/M1 - Introduzione alla Cyber Security/U1 - Cenni Storici/Documentazione/Documento di Tim Berners-Lee.md",
-      "size": 45,
+      "size": 67,
       "ext": ".md"
     },
     {
@@ -9740,12 +9750,12 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/0_Intro all'insegnamento.md",
-      "size": 3092,
+      "size": 3047,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/1_minimo_iterativo/1_minimo_iterativo.c",
-      "size": 1434,
+      "size": 1399,
       "ext": ".c"
     },
     {
@@ -9755,7 +9765,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/2_minimo_ricorsivo/2_minimo_ricorsivo.c",
-      "size": 986,
+      "size": 952,
       "ext": ".c"
     },
     {
@@ -9765,7 +9775,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/3_switch_colori/switch_colori.c",
-      "size": 2106,
+      "size": 2038,
       "ext": ".c"
     },
     {
@@ -9775,7 +9785,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/4_esempio_puntatori/esempio_puntatori.c",
-      "size": 361,
+      "size": 348,
       "ext": ".c"
     },
     {
@@ -9785,12 +9795,12 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/5_esempio_mapping/esempio_mapping.c",
-      "size": 673,
+      "size": 644,
       "ext": ".c"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/6_SelectionSortAnalisi/selsort.c",
-      "size": 1975,
+      "size": 1926,
       "ext": ".c"
     },
     {
@@ -9804,13 +9814,13 @@
       "ext": ".md"
     },
     {
-      "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Lezioni_Presenza2025/Lezione 29 settembre 2025.md",
-      "size": 17658,
+      "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Lezioni_Presenza_Ariel_2025_2026/Lezione 29 settembre 2025.md",
+      "size": 17008,
       "ext": ".md"
     },
     {
-      "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Lezioni_Presenza2025/Lezione 3 ottobre 2025.md",
-      "size": 8122,
+      "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Lezioni_Presenza_Ariel_2025_2026/Lezione 3 ottobre 2025.md",
+      "size": 7867,
       "ext": ".md"
     },
     {
@@ -9850,7 +9860,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L1_Introduzione.md",
-      "size": 8418,
+      "size": 9003,
       "ext": ".md"
     },
     {
@@ -9890,7 +9900,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/0_Ripasso_Puntatori/1_Intro_Puntatori.c",
-      "size": 1285,
+      "size": 1257,
       "ext": ".c"
     },
     {
@@ -9900,7 +9910,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/0_Ripasso_Puntatori/2_Call_by_Value.c",
-      "size": 246,
+      "size": 233,
       "ext": ".c"
     },
     {
@@ -9910,22 +9920,22 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/0_Ripasso_Puntatori/3_Call_by_Reference.c",
-      "size": 169,
+      "size": 157,
       "ext": ".c"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/1_Esempio_Lista/lista.c",
-      "size": 761,
+      "size": 731,
       "ext": ".c"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/2_Lista_con_Cursori/lista_con_cursori.c",
-      "size": 1345,
+      "size": 1304,
       "ext": ".c"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/3_Programmare_con_le_Liste/0_specifica.c",
-      "size": 6962,
+      "size": 6751,
       "ext": ".c"
     },
     {
@@ -9935,7 +9945,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/3_Programmare_con_le_Liste/rango_lista.c",
-      "size": 6848,
+      "size": 6625,
       "ext": ".c"
     },
     {
@@ -9945,7 +9955,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/4_Pile/intro_pile.c",
-      "size": 5474,
+      "size": 5271,
       "ext": ".c"
     },
     {
@@ -9955,7 +9965,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/4_Pile/pila_vettoriale.c",
-      "size": 2184,
+      "size": 2106,
       "ext": ".c"
     },
     {
@@ -9965,7 +9975,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/5_Programmare_con_le_Pile/programmare_con_le_pile.c",
-      "size": 12640,
+      "size": 12232,
       "ext": ".c"
     },
     {
@@ -11139,6 +11149,11 @@
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20251018183441.png",
+      "size": 15714,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260425211921.png",
       "size": 142144,
       "ext": ".png"
@@ -11159,24 +11174,139 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723011808.png",
+      "size": 479293,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012001.png",
+      "size": 459341,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012011.png",
+      "size": 390357,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012740.png",
+      "size": 458315,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012746.png",
+      "size": 366457,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012755.png",
+      "size": 350943,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723014119.png",
+      "size": 282638,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723014129.png",
+      "size": 349540,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723014134.png",
+      "size": 363138,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723014140.png",
+      "size": 280436,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/L0 - Intro UD2.md",
       "size": 893,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/L1_Heap.md",
-      "size": 6750,
+      "size": 8342,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/L2_HeapSort_e_SelectionSort.md",
-      "size": 6602,
+      "size": 6626,
       "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD3/trees_intro.c",
+      "size": 3503,
+      "ext": ".c"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/Intro M4.md",
       "size": 1368,
       "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005126.png",
+      "size": 352845,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005144.png",
+      "size": 45623,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005437.png",
+      "size": 37955,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005539.png",
+      "size": 67870,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005923.png",
+      "size": 200788,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005955.png",
+      "size": 183079,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722164024.png",
+      "size": 115538,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722165222.png",
+      "size": 292698,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722165412.png",
+      "size": 220989,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722165522.png",
+      "size": 252474,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722170120.png",
+      "size": 441565,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260804163534.png",
+      "size": 290306,
+      "ext": ".png"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/L0 - Intro UD1.md",
@@ -11185,242 +11315,537 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/L1_Grafi_definizioni_e_modelli.md",
-      "size": 6047,
+      "size": 6418,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/L2_Grafi_specifica_e_realizzazioni.md",
-      "size": 7020,
+      "size": 7036,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/L3_Programmare_con_grafi.md",
-      "size": 4583,
+      "size": 4434,
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/imgs/Pasted image 20260722170919.png",
+      "size": 172927,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/imgs/Pasted image 20260722172043.png",
+      "size": 82832,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/imgs/Pasted image 20260722172057.png",
+      "size": 79765,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/imgs/Pasted image 20260804184248.png",
+      "size": 347330,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/L0 - Intro UD2.md",
-      "size": 1071,
+      "size": 1056,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/L1_Esplorazione_grafo.md",
-      "size": 4990,
+      "size": 4896,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/L2_Programmare_con_algo_visita.md",
-      "size": 5227,
+      "size": 6287,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/L3_Proprieta_grafo.md",
-      "size": 5883,
+      "size": 5723,
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/imgs/Pasted image 20260722193724.png",
+      "size": 238452,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/imgs/Pasted image 20260722193950.png",
+      "size": 703714,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/L0 - Intro UD1.md",
-      "size": 1394,
+      "size": 1365,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/L1_Insiemi_specifica_e_realizzazioni.md",
-      "size": 6893,
+      "size": 6877,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/L2_Programmare_con_insiemi.md",
-      "size": 3401,
+      "size": 3281,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/L3_MFSET.md",
-      "size": 6512,
+      "size": 6352,
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD2/imgs/Pasted image 20260722205358.png",
+      "size": 63551,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD2/L1_Dizionari_con_vettori_ordinati.md",
-      "size": 6216,
+      "size": 6060,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD2/L2_Tabelle_Hash.md",
-      "size": 6499,
+      "size": 6307,
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722213058.png",
+      "size": 251217,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722213135.png",
+      "size": 424340,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214019.png",
+      "size": 513735,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214055.png",
+      "size": 314767,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214135.png",
+      "size": 349921,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214229.png",
+      "size": 590028,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214255.png",
+      "size": 397350,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/L0 - Intro UD3.md",
-      "size": 1408,
+      "size": 1388,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/L1_Alberi_bilanciati_di_ricerca.md",
-      "size": 5639,
+      "size": 5830,
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722215650.png",
+      "size": 38405,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722215744.png",
+      "size": 29555,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722215904.png",
+      "size": 99139,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722220632.png",
+      "size": 30412,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722220700.png",
+      "size": 20897,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221057.png",
+      "size": 315603,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221114.png",
+      "size": 629421,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221244.png",
+      "size": 259773,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221309.png",
+      "size": 281524,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221327.png",
+      "size": 298058,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221345.png",
+      "size": 316848,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221446.png",
+      "size": 341199,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221507.png",
+      "size": 335054,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221537.png",
+      "size": 335054,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221557.png",
+      "size": 335054,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221619.png",
+      "size": 343769,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221646.png",
+      "size": 354931,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221730.png",
+      "size": 662002,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722222618.png",
+      "size": 632304,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L0 - Intro UD1.md",
-      "size": 990,
+      "size": 979,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L1_1_Problema_dei_cammini_minimi.md",
-      "size": 7119,
+      "size": 9318,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L1_2_Problema_dei_cammini_minimi.md",
-      "size": 4821,
+      "size": 4762,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L2_Algo_Dijkstra_Johnson.md",
-      "size": 6146,
+      "size": 6982,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L3_Algo_BellmanFordMoore_pila_PapeDesopo.md",
-      "size": 5553,
+      "size": 5417,
       "ext": ".md"
     },
     {
-      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L4_Confrontro_tra_complessita.md",
-      "size": 5326,
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L4_Confronto_tra_complessita.md",
+      "size": 5166,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L5_Applicazione_cammini_minimi.md",
-      "size": 6104,
+      "size": 5967,
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/imgs/Pasted image 20251018204450.png",
+      "size": 101086,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/imgs/Pasted image 20251018204522.png",
+      "size": 40593,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/imgs/Pasted image 20251018204548.png",
+      "size": 50517,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/L0 - Intro UD2.md",
-      "size": 1378,
+      "size": 1349,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/L1_Progetto_di_algoritmi.md",
-      "size": 6442,
+      "size": 6291,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/L2_Pseudocodice_e_problemi_computazionali.md",
-      "size": 8868,
+      "size": 8608,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L0 - Intro UD1.md",
-      "size": 1380,
+      "size": 1360,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L1_Complessita_algo_ricorsivi.md",
-      "size": 8169,
+      "size": 10636,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L2_Progetto_di_algo_Divide_et_Impera.md",
-      "size": 5757,
+      "size": 5600,
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD2/L1_Merge_sort.md",
+      "size": 11489,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD2/L2_Quick_sort.md",
+      "size": 17976,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD2/main.py",
+      "size": 316,
+      "ext": ".py"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD2/quicksort.py",
+      "size": 3262,
+      "ext": ".py"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD1/L0 - Intro UD1.md",
-      "size": 925,
+      "size": 906,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD1/L1_Progetto_algoritmi_greedy.md",
-      "size": 5342,
+      "size": 5211,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD1/L2_Problema_massima_diversita.md",
-      "size": 6864,
+      "size": 6635,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD2/L0 - Intro UD2.md",
-      "size": 1279,
+      "size": 1259,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD2/L1_Algoritmo_di_Kruskal.md",
-      "size": 6076,
+      "size": 5871,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD3/L0 - Intro UD3.md",
-      "size": 1570,
+      "size": 1544,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD3/L1_Algoritmo_di_Moore.md",
-      "size": 6230,
+      "size": 6016,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M09_BackTrack/UD1/L0 - Intro UD1.md",
-      "size": 1480,
+      "size": 1450,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M09_BackTrack/UD1/L1_Progetti_di_algoritmi_backtrack.md",
-      "size": 6255,
+      "size": 6150,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M09_BackTrack/UD2/L0 - Intro UD2.md",
-      "size": 2080,
+      "size": 2051,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M09_BackTrack/UD2/L1_Algoritmi_per_StringMatching.md",
-      "size": 6673,
+      "size": 6453,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD1/L0 - Intro UD1.md",
-      "size": 2024,
+      "size": 1998,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD1/L1_Progetto_di_algo_per_programmazione_dinamica.md",
-      "size": 8096,
+      "size": 7911,
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD2/imgs/Pasted image 20251018223729.png",
+      "size": 31662,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD2/L0 - Intro UD2.md",
-      "size": 1991,
+      "size": 1956,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD2/L1_Algoritmo_per_StringMatching_approssimato.md",
-      "size": 4905,
+      "size": 4753,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L0 - Intro UD1.md",
-      "size": 2042,
+      "size": 2017,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L1_Problemi_computazionali_e_certificati_polinomiali.md",
-      "size": 7758,
+      "size": 7579,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L2_NonDeterminismo_ed_enumerazione.md",
-      "size": 6999,
+      "size": 6816,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD2/L0 - Intro UD2.md",
-      "size": 931,
+      "size": 917,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD2/L1_Classi_P_e_NP.md",
-      "size": 6292,
+      "size": 6102,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L0 - Audit di copertura degli appelli.md",
+      "size": 9372,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L2 - Algoritmo di Prim e proprietà del taglio.md",
+      "size": 3732,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L3 - Fibonacci iterativo ricorsivo e dinamico.md",
+      "size": 2955,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L4 - Ricerca binaria di confine ed elemento maggioritario.md",
+      "size": 3463,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_10_gennaio_2025/esame_10_gennaio_2025_1.png",
+      "size": 321175,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_10_gennaio_2025/esame_10_gennaio_2025_2.png",
+      "size": 393956,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_10_gennaio_2025/Soluzione_Appello_10_01_2025.md",
+      "size": 10805,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_20_marzo_2026/esame_20_marzo_2026_1.png",
+      "size": 643944,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_20_marzo_2026/esame_20_marzo_2026_2.png",
+      "size": 618225,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_20_marzo_2026/Soluzione_Appello_20_03_2026.md",
+      "size": 10625,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_21_gennaio_2026/esame_21_gennaio_2026_1.png",
+      "size": 696349,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_21_gennaio_2026/esame_21_gennaio_2026_2.png",
+      "size": 193251,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_21_gennaio_2026/Soluzione_Appello_21_01_2026.md",
+      "size": 10587,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_22_novembre_2025/esame_22_novembre_2025_1.png",
+      "size": 720629,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_22_novembre_2025/Soluzione_Prova_In_Itinere_22_11_2025.md",
+      "size": 9387,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_gennaio_2026/esame_9_gennaio_2026_1.png",
+      "size": 525204,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_gennaio_2026/esame_9_gennaio_2026_2.png",
+      "size": 1008287,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_gennaio_2026/Soluzione_Appello_09_01_2026.md",
+      "size": 9709,
       "ext": ".md"
     },
     {
@@ -11545,7 +11970,7 @@
     },
     {
       "path": "anno2/2_Sistemi Operativi 1/M1_Architettura_del_calcolatore/UD1/imgs/Von_Neumann_Architecture-it.svg",
-      "size": 8784,
+      "size": 8501,
       "ext": ".svg"
     },
     {
@@ -11585,7 +12010,7 @@
     },
     {
       "path": "anno2/2_Sistemi Operativi 1/M2_Architettura_dei_SO/Intro M2.md",
-      "size": 2002,
+      "size": 1968,
       "ext": ".md"
     },
     {
@@ -11995,12 +12420,12 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/Intro all'Insegnamento.md",
-      "size": 2504,
+      "size": 2458,
       "ext": ".md"
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M1_Gestione_memoria_centrale/Intro M1.md",
-      "size": 713,
+      "size": 708,
       "ext": ".md"
     },
     {
@@ -12255,7 +12680,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M2_Gestione_IO/Intro M2.md",
-      "size": 1000,
+      "size": 988,
       "ext": ".md"
     },
     {
@@ -12270,7 +12695,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M2_Gestione_IO/UD1/L0 - Intro UD1.md",
-      "size": 800,
+      "size": 794,
       "ext": ".md"
     },
     {
@@ -12390,7 +12815,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M2_Gestione_IO/UD2/L0 - Intro UD2.md",
-      "size": 921,
+      "size": 908,
       "ext": ".md"
     },
     {
@@ -12415,7 +12840,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M3_FileSystem/Intro M3.md",
-      "size": 505,
+      "size": 502,
       "ext": ".md"
     },
     {
@@ -12495,7 +12920,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M3_FileSystem/UD1/L0 - Intro UD1.md",
-      "size": 549,
+      "size": 546,
       "ext": ".md"
     },
     {
@@ -12695,7 +13120,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M3_FileSystem/UD2/L0 - Intro UD2.md",
-      "size": 595,
+      "size": 591,
       "ext": ".md"
     },
     {
@@ -12780,7 +13205,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M3_FileSystem/UD3/L0 - Intro UD3.md",
-      "size": 557,
+      "size": 552,
       "ext": ".md"
     },
     {
@@ -12795,12 +13220,12 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M4_Sistemi_Distribuiti/Intro M4.md",
-      "size": 625,
+      "size": 620,
       "ext": ".md"
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M4_Sistemi_Distribuiti/UD1/L0 - Intro UD1.md",
-      "size": 580,
+      "size": 577,
       "ext": ".md"
     },
     {
@@ -12835,7 +13260,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M4_Sistemi_Distribuiti/UD2/L0 - Intro UD2.md",
-      "size": 575,
+      "size": 572,
       "ext": ".md"
     },
     {
@@ -12940,7 +13365,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M4_Sistemi_Distribuiti/UD3/L0 - Intro UD3.md",
-      "size": 533,
+      "size": 530,
       "ext": ".md"
     },
     {
@@ -12995,7 +13420,7 @@
     },
     {
       "path": "anno2/3_Sistemi Operativi 2/M4_Sistemi_Distribuiti/UD4/L0 - Intro UD4.md",
-      "size": 494,
+      "size": 491,
       "ext": ".md"
     },
     {
@@ -13005,12 +13430,12 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/Lezione 0 - Intro all'insegnamento.md",
-      "size": 4801,
+      "size": 4680,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M01_Intro_Basi_di_Dati/Intro M1.md",
-      "size": 877,
+      "size": 869,
       "ext": ".md"
     },
     {
@@ -13030,27 +13455,27 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M01_Intro_Basi_di_Dati/UD1/L0 - Intro UD1.md",
-      "size": 944,
+      "size": 937,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M01_Intro_Basi_di_Dati/UD1/L1 - Gestione dei dati - introduzione.md",
-      "size": 5546,
+      "size": 5374,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M01_Intro_Basi_di_Dati/UD1/L2 - Modelli dei dati.md",
-      "size": 6116,
+      "size": 5927,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M01_Intro_Basi_di_Dati/UD1/L3 - Utilizzo dei DBMS.md",
-      "size": 5622,
+      "size": 5490,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/Intro M2.md",
-      "size": 840,
+      "size": 833,
       "ext": ".md"
     },
     {
@@ -13070,22 +13495,22 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD1/L0 - Intro UD1.md",
-      "size": 1022,
+      "size": 1014,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD1/L1 - Introduzione al concetto di relazione.md",
-      "size": 6087,
+      "size": 6637,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD1/L2 - Introduzione al modello relazionale.md",
-      "size": 6731,
+      "size": 8233,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD1/L3 - Vincoli di integrità.md",
-      "size": 7566,
+      "size": 7617,
       "ext": ".md"
     },
     {
@@ -13210,47 +13635,47 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD2/L0 - Intro UD2.md",
-      "size": 1069,
+      "size": 1060,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD2/L1 - Introduzione all’algebra relazionale.md",
-      "size": 5693,
+      "size": 5562,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD2/L2 - Selezione e proiezione.md",
-      "size": 4752,
+      "size": 4526,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD2/L3 - Unione, differenza e intersezione.md",
-      "size": 4941,
+      "size": 4697,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD2/L4 - Prodotto cartesiano e Join.md",
-      "size": 7597,
+      "size": 8877,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD2/L5 - Equivalenza e ottimizzazione delle espressioni algebriche.md",
-      "size": 8297,
+      "size": 8387,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD2/L6 - Idiomi di interrogazione – esiste - per ogni, minimo - massimo.md",
-      "size": 5979,
+      "size": 6014,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD2/L7 - Idiomi di interrogazione - cardinalità e copertura.md",
-      "size": 4418,
+      "size": 4264,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD3/esercizi/E1 - esercizi ed eserciziario pdf.md",
-      "size": 244,
+      "size": 235,
       "ext": ".md"
     },
     {
@@ -13285,22 +13710,22 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD3/L0 - Intro UD3.md",
-      "size": 676,
+      "size": 671,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD3/L1_1 - Esercitazione di algebra relazionale.md",
-      "size": 4559,
+      "size": 4388,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M02_Modello_e_Algebra_Relazionali/UD3/L1_2 - Esercitazione di algebra relazionale.md",
-      "size": 4387,
+      "size": 4229,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/Intro M3.md",
-      "size": 1032,
+      "size": 1017,
       "ext": ".md"
     },
     {
@@ -13330,12 +13755,12 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD1/L0 - Intro UD1.md",
-      "size": 739,
+      "size": 734,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD1/L1 - Introduzione e Domini.md",
-      "size": 5255,
+      "size": 5056,
       "ext": ".md"
     },
     {
@@ -13380,17 +13805,17 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD2/L0 - Intro UD2.md",
-      "size": 688,
+      "size": 683,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD2/L1 - SELECT, FROM, WHERE.md",
-      "size": 5434,
+      "size": 5177,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD2/L2 - Join e variabili.md",
-      "size": 5004,
+      "size": 4823,
       "ext": ".md"
     },
     {
@@ -13450,22 +13875,22 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD3/L0 - Intro UD3.md",
-      "size": 866,
+      "size": 850,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD3/L1 - Ordinamenti, aggregazioni e raggruppamenti.md",
-      "size": 6446,
+      "size": 6162,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD3/L2 - Interrogazioni insiemistiche e nidificate.md",
-      "size": 6850,
+      "size": 6553,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD3/L3 - Funzioni scalari in SQL.md",
-      "size": 5576,
+      "size": 5390,
       "ext": ".md"
     },
     {
@@ -13490,12 +13915,12 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD4/L0 - Intro UD4.md",
-      "size": 803,
+      "size": 790,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD4/L1 - Inserimenti, cancellazioni e aggiornamenti.md",
-      "size": 5187,
+      "size": 4985,
       "ext": ".md"
     },
     {
@@ -13550,32 +13975,32 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD5/L0 - Intro UD5.md",
-      "size": 776,
+      "size": 771,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD5/L1 - Vincoli di integrità generici.md",
-      "size": 3486,
+      "size": 3354,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD5/L2 - Viste.md",
-      "size": 5902,
+      "size": 5671,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD5/L3 - Autorizzazioni e controllo dell’accesso.md",
-      "size": 6791,
+      "size": 6551,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD6/desktop.ini",
-      "size": 152,
+      "size": 149,
       "ext": ".ini"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD6/esercizi/E1 - Esercizi ed Eserciziario SQL.md",
-      "size": 276,
+      "size": 263,
       "ext": ".md"
     },
     {
@@ -13610,22 +14035,22 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD6/L0 - Intro UD6.md",
-      "size": 766,
+      "size": 753,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD6/L1 - Esercitazione SQL - Parte I.md",
-      "size": 2150,
+      "size": 2047,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M03_SQL/UD6/L2 - Esercitazione SQL - Parte II.md",
-      "size": 2192,
+      "size": 2082,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/Intro M4.md",
-      "size": 718,
+      "size": 714,
       "ext": ".md"
     },
     {
@@ -13645,22 +14070,22 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD1/L0 - Intro UD1.md",
-      "size": 776,
+      "size": 772,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD1/L1 - Ciclo di vita dei sistemi informativi.md",
-      "size": 5001,
+      "size": 4869,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD1/L2 - Raccolta e analisi dei requisiti.md",
-      "size": 6653,
+      "size": 6479,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD1/L3 - Fasi della progettazione.md",
-      "size": 7368,
+      "size": 7175,
       "ext": ".md"
     },
     {
@@ -13684,28 +14109,123 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260820234030.png",
+      "size": 1070048,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260820234525.png",
+      "size": 742277,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260820234807.png",
+      "size": 967557,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260820235228.png",
+      "size": 843138,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260820235447.png",
+      "size": 1502808,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260820235836.png",
+      "size": 383997,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821000304.png",
+      "size": 614276,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821000710.png",
+      "size": 720637,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821000735.png",
+      "size": 688620,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821002504.png",
+      "size": 762107,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821073253.png",
+      "size": 2554526,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821074833.png",
+      "size": 973391,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821075735.png",
+      "size": 666204,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821080420.png",
+      "size": 399515,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821080741.png",
+      "size": 638634,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821081115.png",
+      "size": 587545,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821081830.png",
+      "size": 923800,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/Pasted image 20260821082702.png",
+      "size": 1326445,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/imgs/telegram-cloud-photo-size-4-5782937752423829719-y.jpg",
+      "size": 166103,
+      "ext": ".jpg"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/L0 - Intro UD2.md",
-      "size": 565,
+      "size": 562,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/L1 - Modello E-R - Entità, relazioni e attributi.md",
-      "size": 7935,
+      "size": 7998,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/L2 - Modello E-R - Le cardinalità.md",
-      "size": 6951,
+      "size": 6560,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/L3 - Modello E-R - Identificatori e gerarchie.md",
-      "size": 8966,
+      "size": 8451,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD2/L4 - Modello E-R - Documentazione di schemi.md",
-      "size": 8563,
+      "size": 9680,
       "ext": ".md"
     },
     {
@@ -13724,23 +14244,83 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090057.png",
+      "size": 50132,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090110.png",
+      "size": 44700,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090125.png",
+      "size": 90154,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090155.png",
+      "size": 80493,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090240.png",
+      "size": 37241,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090308.png",
+      "size": 64631,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090526.png",
+      "size": 817830,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090634.png",
+      "size": 120912,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090729.png",
+      "size": 136989,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090819.png",
+      "size": 120237,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/Pasted image 20260821090829.png",
+      "size": 100995,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/imgs/telegram-cloud-photo-size-4-5782937752423829724-y.jpg",
+      "size": 71291,
+      "ext": ".jpg"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/L0 - Intro UD3.md",
-      "size": 601,
+      "size": 598,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/L1 - Strategie di progetto - Top-down.md",
-      "size": 7257,
+      "size": 7134,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/L2 - Strategie di progetto - Bottom-up, Inside-out e Mista.md",
-      "size": 7794,
+      "size": 7514,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD3/L3 - Qualità di schemi concettuali e strumenti di supporto.md",
-      "size": 7353,
+      "size": 7156,
       "ext": ".md"
     },
     {
@@ -13779,33 +14359,193 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821092506.png",
+      "size": 304747,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821093717.png",
+      "size": 36238,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821093738.png",
+      "size": 72792,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821102124.png",
+      "size": 69240,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821102353.png",
+      "size": 137014,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821105017.png",
+      "size": 856340,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821150713.png",
+      "size": 394975,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821152059.png",
+      "size": 971906,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821153000.png",
+      "size": 300310,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821155654.png",
+      "size": 359865,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821160218.png",
+      "size": 111076,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821160303.png",
+      "size": 368643,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821160438.png",
+      "size": 281171,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821160606.png",
+      "size": 526589,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821191632.png",
+      "size": 27324,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821192009.png",
+      "size": 27324,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821192234.png",
+      "size": 51977,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821192425.png",
+      "size": 28572,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821193051.png",
+      "size": 62787,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821193249.png",
+      "size": 131696,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821193555.png",
+      "size": 112116,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821194058.png",
+      "size": 167010,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821194235.png",
+      "size": 57586,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821194711.png",
+      "size": 80704,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821194752.png",
+      "size": 131036,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821194852.png",
+      "size": 111999,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821194922.png",
+      "size": 175053,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821195028.png",
+      "size": 168003,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821195104.png",
+      "size": 208185,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821195147.png",
+      "size": 162774,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/imgs/Pasted image 20260821195214.png",
+      "size": 197648,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/L0 - Intro UD4.md",
-      "size": 722,
+      "size": 718,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/L1 - Ristrutturazione di schemi E-R - Analisi delle ridondanze.md",
-      "size": 7201,
+      "size": 6571,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/L2 - Ristrutturazione di schemi E-R - Eliminazione delle gerarchie.md",
-      "size": 9068,
+      "size": 12013,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/L3 - Ristrutturazione di schemi E-R - Partizionamenti, accorpamenti e scelta degli identificatori.md",
+      "size": 17610,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/L4 - Traduzione verso il modello logico.md",
-      "size": 8271,
+      "size": 6733,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD4/L5 - Documentazione, verifica e progettazione fisica.md",
-      "size": 6369,
+      "size": 6173,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD5/esercizi/E1 - Esercizi ed Eserciziario SQL.md",
-      "size": 243,
+      "size": 231,
       "ext": ".md"
     },
     {
@@ -13830,42 +14570,42 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD5/L0 - Intro UD5.md",
-      "size": 710,
+      "size": 706,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD5/L1_1 - Esercitazione di progettazione concettuale - Schema E-R.md",
-      "size": 6182,
+      "size": 6002,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD5/L1_2 - Esercitazione di progettazione logica - Traduzione dello schema E-R.md",
-      "size": 6749,
+      "size": 6496,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD5/L2_1 - Esercitazione di progettazione concettuale (Schema E-R).md",
-      "size": 5776,
+      "size": 5597,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD5/L2_2 - Esercitazione di progettazione logica (Schema relazionale).md",
-      "size": 5806,
+      "size": 5571,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD5/L3_1 - Esercitazione di progettazione concettuale (Schema E-R).md",
-      "size": 5542,
+      "size": 5372,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M04_Progettazione_di_Basi_di_Dati/UD5/L3_2 - Esercitazione di progettazione logica (Schema relazionale).md",
-      "size": 6239,
+      "size": 6009,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/Intro M5.md",
-      "size": 800,
+      "size": 794,
       "ext": ".md"
     },
     {
@@ -13904,43 +14644,73 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/imgs/Pasted image 20260822214037.png",
+      "size": 67326,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/imgs/Pasted image 20260822214421.png",
+      "size": 45816,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/imgs/Pasted image 20260822214434.png",
+      "size": 45816,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/imgs/Pasted image 20260822214726.png",
+      "size": 81755,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/imgs/Pasted image 20260822214947.png",
+      "size": 82812,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/imgs/Pasted image 20260823013259.png",
+      "size": 1092889,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L0 - Intro UD1.md",
-      "size": 636,
+      "size": 632,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L1 - Moduli per l’accesso ai dati e gestione della memoria.md",
-      "size": 7117,
+      "size": 6914,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L2 - Organizzazione di file - Strutture sequenziali.md",
-      "size": 6284,
+      "size": 6094,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L3 - Organizzazione di file -Strutture hash-based.md",
-      "size": 5445,
+      "size": 5285,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L4 - Organizzazione di file - Gestione delle tuple nelle pagine.md",
-      "size": 5713,
+      "size": 5609,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L5 - Organizzazione di file - Strutture ad albero (B e B+).md",
-      "size": 7011,
+      "size": 7195,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M05_Organizzazione_Fisica_delle_Basi_di_Dati/UD1/L6 - Progettazione fisica e gestione delle interrogazioni.md",
-      "size": 8199,
+      "size": 7945,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/Intro M6.md",
-      "size": 1267,
+      "size": 1259,
       "ext": ".md"
     },
     {
@@ -13949,18 +14719,23 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD1/imgs/Pasted image 20260823023155.png",
+      "size": 565794,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD1/L0 - Intro UD1.md",
-      "size": 975,
+      "size": 969,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD1/L1 - Transazioni.md",
-      "size": 6301,
+      "size": 5913,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/esercizi/E1 - domande ed esercizi.md",
-      "size": 294,
+      "size": 282,
       "ext": ".md"
     },
     {
@@ -14004,24 +14779,64 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/imgs/Pasted image 20260823024016.png",
+      "size": 244232,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/imgs/Pasted image 20260825161030.png",
+      "size": 125218,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/imgs/Pasted image 20260825161119.png",
+      "size": 125218,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/imgs/Pasted image 20260825161135.png",
+      "size": 131166,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/imgs/Pasted image 20260825161241.png",
+      "size": 289424,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/imgs/telegram-cloud-photo-size-4-5796332368145616719-x.jpg",
+      "size": 11186,
+      "ext": ".jpg"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/L0 - Intro UD2.md",
-      "size": 1233,
+      "size": 1221,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/L1 - Gestore dell’affidabilità e organizzazione del log.md",
-      "size": 7050,
+      "size": 6900,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/L2 - Esecuzione di transazioni e scritture del log.md",
-      "size": 6618,
+      "size": 6356,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD2/L3 - Gestione dei guasti.md",
-      "size": 7267,
+      "size": 7099,
       "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/2plgraph.png",
+      "size": 151425,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/grafoprec.png",
+      "size": 46631,
+      "ext": ".png"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/Pasted image 20251125051815.png",
@@ -14114,53 +14929,98 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/Pasted image 20260823180716.png",
+      "size": 530796,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/Pasted image 20260823180901.png",
+      "size": 192416,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/Pasted image 20260823181122.png",
+      "size": 163054,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/Pasted image 20260823181322.png",
+      "size": 160292,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/Pasted image 20260823181428.png",
+      "size": 208402,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/Pasted image 20260823213658.png",
+      "size": 55408,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/Pasted image 20260824003734.png",
+      "size": 279715,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/telegram-cloud-photo-size-4-5791774608980645086-y.jpg",
+      "size": 68827,
+      "ext": ".jpg"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/imgs/telegram-cloud-photo-size-4-5791774608980645094-y.jpg",
+      "size": 66310,
+      "ext": ".jpg"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L0 - Intro UD3.md",
-      "size": 1359,
+      "size": 1350,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L1 - Anomalie delle transazioni concorrenti.md",
-      "size": 7306,
+      "size": 7164,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L2 - Schedule e serializzabilità.md",
-      "size": 5972,
+      "size": 5796,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L3 - View-serializzabilità.md",
-      "size": 6301,
+      "size": 9328,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L4 - Conflict-serializzabilità.md",
-      "size": 6776,
+      "size": 9521,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L5 - Locking a due fasi (2PL).md",
-      "size": 8055,
+      "size": 10414,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L6 - Timestamp.md",
-      "size": 7685,
+      "size": 7432,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L7 - Meccanismi per la gestione dei lock.md",
-      "size": 8026,
+      "size": 7778,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M06_Gestione_Transazioni/UD3/L8 - Deadlock.md",
-      "size": 8120,
+      "size": 7545,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/Intro M7.md",
-      "size": 966,
+      "size": 960,
       "ext": ".md"
     },
     {
@@ -14170,12 +15030,12 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD1/L0 - Intro UD1.md",
-      "size": 920,
+      "size": 912,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD1/L1 - Architettura Client-Server.md",
-      "size": 6356,
+      "size": 6207,
       "ext": ".md"
     },
     {
@@ -14195,22 +15055,22 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/L0 - Intro UD2.md",
-      "size": 1014,
+      "size": 1007,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/L1 - Introduzione alle basi di dati distribuite.md",
-      "size": 4970,
+      "size": 4869,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/L2 -  Frammentazione e allocazione dei dati.md",
-      "size": 5387,
+      "size": 5210,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD2/L3 - Accesso ai dati distribuiti.md",
-      "size": 6529,
+      "size": 6287,
       "ext": ".md"
     },
     {
@@ -14234,33 +15094,53 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/imgs/Pasted image 20260826025144.png",
+      "size": 338588,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/imgs/Pasted image 20260826032111.png",
+      "size": 417329,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/imgs/Pasted image 20260826172420.png",
+      "size": 252003,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/imgs/Pasted image 20260826172518.png",
+      "size": 446955,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L0 - Intro UD3.md",
-      "size": 923,
+      "size": 917,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L1 - Ottimizzazione, concorrenza e atomicità.md",
-      "size": 6761,
+      "size": 6596,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L2 - Controllo di concorrenza.md",
-      "size": 6875,
+      "size": 6815,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L3_1 - Protocollo di commit a due fasi.md",
-      "size": 6311,
+      "size": 5960,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M07_Architetture_Distribuite/UD3/L3_2 - Protocollo di commit a due fasi – Gestione dei guasti e ottimizzazioni.md",
-      "size": 6634,
+      "size": 7121,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/Intro M8.md",
-      "size": 1176,
+      "size": 1162,
       "ext": ".md"
     },
     {
@@ -14280,27 +15160,27 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/L0 - Intro UD1.md",
-      "size": 876,
+      "size": 870,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/L1 - Introduzione a XML.md",
-      "size": 6564,
+      "size": 6290,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/L2 - DTD e XML Schema.md",
-      "size": 8258,
+      "size": 7903,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M08_Dati_SemiStrutturati/UD1/L3 - XQuery.md",
-      "size": 7017,
+      "size": 6719,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/Intro M9.md",
-      "size": 1234,
+      "size": 1220,
       "ext": ".md"
     },
     {
@@ -14325,32 +15205,32 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L0 - Intro UD1.md",
-      "size": 1031,
+      "size": 1023,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L1 - Basi di dati attive e trigger.md",
-      "size": 7148,
+      "size": 6931,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L2 - Caratteristiche evolute delle regole attive.md",
-      "size": 6335,
+      "size": 6192,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L3 - Proprietà delle regole attive.md",
-      "size": 5884,
+      "size": 5726,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M09_Basi_di_Dati_Attive/UD1/L4 - Applicazioni ed esempi delle regole attive.md",
-      "size": 6940,
+      "size": 7243,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/Intro M10.md",
-      "size": 1301,
+      "size": 1285,
       "ext": ".md"
     },
     {
@@ -14394,38 +15274,173 @@
       "ext": ".png"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260826071731.png",
+      "size": 387394,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260826072032.png",
+      "size": 185770,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260826072127.png",
+      "size": 314789,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260826072244.png",
+      "size": 169911,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827181537.png",
+      "size": 58571,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827181601.png",
+      "size": 50452,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827181621.png",
+      "size": 52473,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827182149.png",
+      "size": 63273,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827183109.png",
+      "size": 606139,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827183428.png",
+      "size": 607466,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827183503.png",
+      "size": 183317,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827183532.png",
+      "size": 538008,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827183829.png",
+      "size": 325407,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/imgs/Pasted image 20260827184944.png",
+      "size": 368116,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/L0 - Intro UD1.md",
-      "size": 1374,
+      "size": 1364,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/L1 - OLTP vs OLAP.md",
-      "size": 5879,
+      "size": 5737,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/L2 - Il Data Warehouse.md",
-      "size": 7081,
+      "size": 6037,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/L3 - Rappresentazione multidimensionale dei dati.md",
-      "size": 6583,
+      "size": 6186,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/L4 - Realizzazione di un Data Warehouse.md",
-      "size": 7733,
+      "size": 7792,
       "ext": ".md"
     },
     {
       "path": "anno2/4_Basi Di Dati/M10_Basi_di_Dati_per_supporto_decisioni/UD1/L5 - Data Mining.md",
-      "size": 7408,
+      "size": 7535,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/Approfondimenti_per_Esame/L0 - Audit di copertura degli appelli 2026.md",
+      "size": 7268,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/Approfondimenti_per_Esame/L1 - Cardinalita minima e massima di espressioni relazionali.md",
+      "size": 4226,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/Approfondimenti_per_Esame/L2 - Conteggio degli schedule seriali equivalenti.md",
+      "size": 4128,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/Approfondimenti_per_Esame/L3 - Limiti per supporto e confidenza nelle regole di associazione.md",
+      "size": 3052,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_23_maggio_2026/esame_23_maggio_2026_1.jpg",
+      "size": 171827,
+      "ext": ".jpg"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_23_maggio_2026/esame_23_maggio_2026_2.jpg",
+      "size": 148408,
+      "ext": ".jpg"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_23_maggio_2026/Soluzione_Appello_23_05_2026.md",
+      "size": 17050,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_3_luglio_2026/esame3luglio26_1.jpg",
+      "size": 189380,
+      "ext": ".jpg"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_3_luglio_2026/esame3luglio26_2.jpg",
+      "size": 122239,
+      "ext": ".jpg"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_3_luglio_2026/Soluzione_Appello_03_07_2026.md",
+      "size": 19731,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_8_maggio_2026/esame_8_maggio_2026_1.png",
+      "size": 334584,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_8_maggio_2026/esame_8_maggio_2026_2.png",
+      "size": 390465,
+      "ext": ".png"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_8_maggio_2026/Soluzione_Appello_08_05_2026.md",
+      "size": 14585,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/L0 - Intro all'Insegnamento.md",
-      "size": 4029,
+      "size": 3928,
       "ext": ".md"
     },
     {
@@ -15020,22 +16035,22 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L4 - Hardware di rete.md",
-      "size": 6856,
+      "size": 6645,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L5 - Schede, connettori e hub.md",
-      "size": 7423,
+      "size": 7212,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L6 - Server, bus e stazioni di lavoro --.md",
-      "size": 6005,
+      "size": 5868,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L7 - I ripetitori e i bridge.md",
-      "size": 7032,
+      "size": 6827,
       "ext": ".md"
     },
     {
@@ -15045,7 +16060,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M1_Tecniche_comunicazione_digitale/UD4/L9 - Tecnologia di commutazione.md",
-      "size": 5146,
+      "size": 5016,
       "ext": ".md"
     },
     {
@@ -15075,12 +16090,12 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD1/L0 - Intro UD1.md",
-      "size": 1369,
+      "size": 1354,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD1/L1 - Introduzione al livello di rete.md",
-      "size": 9240,
+      "size": 9035,
       "ext": ".md"
     },
     {
@@ -15350,7 +16365,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD3/L0 - Intro UD3.md",
-      "size": 1554,
+      "size": 1529,
       "ext": ".md"
     },
     {
@@ -15455,27 +16470,27 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD4/L0 - Intro UD4.md",
-      "size": 1480,
+      "size": 1454,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD4/L1 - Indirizzi pubblici e privati.md",
-      "size": 5682,
+      "size": 5541,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD4/L2 - NAT avanzato.md",
-      "size": 6865,
+      "size": 6679,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD4/L3 - Configurazione NAT.md",
-      "size": 6807,
+      "size": 6634,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD4/L4 - Esercitazione fine unita.md",
-      "size": 305,
+      "size": 289,
       "ext": ".md"
     },
     {
@@ -15830,7 +16845,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD5/L0 - Intro UD5.md",
-      "size": 1696,
+      "size": 1662,
       "ext": ".md"
     },
     {
@@ -15950,7 +16965,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD6/L0 - Intro UD6.md",
-      "size": 794,
+      "size": 782,
       "ext": ".md"
     },
     {
@@ -16080,7 +17095,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD7/L0 - Intro UD7.md",
-      "size": 958,
+      "size": 942,
       "ext": ".md"
     },
     {
@@ -16185,17 +17200,17 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD8/L0 - Intro UD8.md",
-      "size": 707,
+      "size": 697,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD8/L1 - IPv6.md",
-      "size": 5849,
+      "size": 5720,
       "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD8/L2 - Indirizzi IPv6.md",
-      "size": 6532,
+      "size": 6342,
       "ext": ".md"
     },
     {
@@ -16260,7 +17275,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M2_Protocolli_rete_TCP_IP/UD9/L0 - Intro UD9.md",
-      "size": 895,
+      "size": 883,
       "ext": ".md"
     },
     {
@@ -16280,7 +17295,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M3_Protocolli_applicativi/Intro M3.md",
-      "size": 781,
+      "size": 776,
       "ext": ".md"
     },
     {
@@ -16390,7 +17405,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M3_Protocolli_applicativi/UD1/L0 - Intro UD1.md",
-      "size": 765,
+      "size": 760,
       "ext": ".md"
     },
     {
@@ -16520,7 +17535,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M3_Protocolli_applicativi/UD2/L0 - Intro UD2.md",
-      "size": 818,
+      "size": 812,
       "ext": ".md"
     },
     {
@@ -16625,7 +17640,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M3_Protocolli_applicativi/UD3/L0 - Intro UD3.md",
-      "size": 825,
+      "size": 818,
       "ext": ".md"
     },
     {
@@ -16835,7 +17850,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M3_Protocolli_applicativi/UD4/L0 - Intro UD4.md",
-      "size": 950,
+      "size": 942,
       "ext": ".md"
     },
     {
@@ -17000,7 +18015,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M4_Tecniche_programmazione_distribuita/UD1/L0 - Intro UD1.md",
-      "size": 988,
+      "size": 975,
       "ext": ".md"
     },
     {
@@ -17205,7 +18220,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/client1_museo 2.dSYM/Contents/Info.plist",
-      "size": 662,
+      "size": 642,
       "ext": ".plist"
     },
     {
@@ -17215,17 +18230,17 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/client1_museo 2.dSYM/Contents/Resources/Relocations/aarch64/client1_museo.yml",
-      "size": 268,
+      "size": 263,
       "ext": ".yml"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/client1_museo.c",
-      "size": 3946,
+      "size": 3838,
       "ext": ".c"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/client1_museo.dSYM/Contents/Info.plist",
-      "size": 662,
+      "size": 642,
       "ext": ".plist"
     },
     {
@@ -17235,7 +18250,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/client1_museo.dSYM/Contents/Resources/Relocations/aarch64/client1_museo.yml",
-      "size": 268,
+      "size": 263,
       "ext": ".yml"
     },
     {
@@ -17245,7 +18260,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/server_museo 2.dSYM/Contents/Info.plist",
-      "size": 661,
+      "size": 641,
       "ext": ".plist"
     },
     {
@@ -17255,17 +18270,17 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/server_museo 2.dSYM/Contents/Resources/Relocations/aarch64/server_museo.yml",
-      "size": 267,
+      "size": 262,
       "ext": ".yml"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/server_museo.c",
-      "size": 11350,
+      "size": 11069,
       "ext": ".c"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/server_museo.dSYM/Contents/Info.plist",
-      "size": 661,
+      "size": 641,
       "ext": ".plist"
     },
     {
@@ -17275,7 +18290,7 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/M5_Esame/implementazione_socket/server_museo.dSYM/Contents/Resources/Relocations/aarch64/server_museo.yml",
-      "size": 267,
+      "size": 262,
       "ext": ".yml"
     },
     {
@@ -17320,68 +18335,13 @@
     },
     {
       "path": "anno2/5_Reti di Calcolatori/Progetti/progetti.txt",
-      "size": 3084,
+      "size": 3032,
       "ext": ".txt"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/.gitignore",
       "size": 18,
       "ext": ""
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/arp.o",
-      "size": 8792,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/config.o",
-      "size": 4408,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/crouter",
-      "size": 45248,
-      "ext": ""
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/forward.o",
-      "size": 3736,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/icmp.o",
-      "size": 4584,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/log.o",
-      "size": 3816,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/main.o",
-      "size": 7784,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/netio.o",
-      "size": 5304,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/parse.o",
-      "size": 2072,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/rib.o",
-      "size": 7752,
-      "ext": ".o"
-    },
-    {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/build/ripd.o",
-      "size": 11248,
-      "ext": ".o"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/conf/frr/r2/ripd.conf",
@@ -17459,6 +18419,11 @@
       "ext": ".sh"
     },
     {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/cheatsheet_comandi.md",
+      "size": 17225,
+      "ext": ".md"
+    },
+    {
       "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/00_topologia.png",
       "size": 50583,
       "ext": ".png"
@@ -17502,6 +18467,11 @@
       "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/img/imunes_3_ping.png",
       "size": 16675,
       "ext": ".png"
+    },
+    {
+      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/presentazione_orale.md",
+      "size": 52545,
+      "ext": ".md"
     },
     {
       "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/relazione/relazione.md",
@@ -17639,11 +18609,6 @@
       "ext": ".sh"
     },
     {
-      "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/scenari/__pycache__/fuzz.cpython-310.pyc",
-      "size": 2159,
-      "ext": ".pyc"
-    },
-    {
       "path": "anno2/5_Reti di Calcolatori/Progetti/router_ipv4_C/test/scenari/fuzz.py",
       "size": 3397,
       "ext": ".py"
@@ -17660,12 +18625,12 @@
     },
     {
       "path": "anno2/6_Crittografia/LEZIONE 0 - Intro all'insegnamento.md",
-      "size": 4353,
+      "size": 4233,
       "ext": ".md"
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/Intro M1.md",
-      "size": 1517,
+      "size": 1491,
       "ext": ".md"
     },
     {
@@ -17750,17 +18715,17 @@
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/UD1/L0 - Intro UD1.md",
-      "size": 1457,
+      "size": 1434,
       "ext": ".md"
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/UD1/L1 - Crittografia – Note storiche.md",
-      "size": 8738,
+      "size": 8524,
       "ext": ".md"
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/UD1/L2 - Protocolli e scenari.md",
-      "size": 7187,
+      "size": 6990,
       "ext": ".md"
     },
     {
@@ -17865,12 +18830,12 @@
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/UD2/L0 - Intro UD2.md",
-      "size": 1419,
+      "size": 1392,
       "ext": ".md"
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/UD2/L1 - Crittografia e Stenografia.md",
-      "size": 8111,
+      "size": 7911,
       "ext": ".md"
     },
     {
@@ -17885,7 +18850,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/UD2/L4 - Sicurezza dei cifrari e crittoanalisi.md",
-      "size": 6734,
+      "size": 6549,
       "ext": ".md"
     },
     {
@@ -18025,7 +18990,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/UD3/L0 - Intro UD3.md",
-      "size": 1219,
+      "size": 1199,
       "ext": ".md"
     },
     {
@@ -18055,7 +19020,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M1_Crittografia_Classica/UD3/L5_2 - Crittoanalisi del Cifrario di Vigenère.md",
-      "size": 11271,
+      "size": 10780,
       "ext": ".md"
     },
     {
@@ -18185,7 +19150,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/Intro M2.md",
-      "size": 1323,
+      "size": 1305,
       "ext": ".md"
     },
     {
@@ -18225,12 +19190,12 @@
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD1/L0 - Intro UD1.md",
-      "size": 1167,
+      "size": 1150,
       "ext": ".md"
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD1/L1 - Cifrature a blocchi – introduzione.md",
-      "size": 4276,
+      "size": 4166,
       "ext": ".md"
     },
     {
@@ -18535,7 +19500,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD2/L0 - Intro UD2.md",
-      "size": 1359,
+      "size": 1340,
       "ext": ".md"
     },
     {
@@ -18725,7 +19690,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD3/L0 - Intro UD3.md",
-      "size": 1336,
+      "size": 1315,
       "ext": ".md"
     },
     {
@@ -18745,7 +19710,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD3/L4 - Decifratura dell’AES.md",
-      "size": 5923,
+      "size": 5682,
       "ext": ".md"
     },
     {
@@ -18820,22 +19785,22 @@
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD4/L0 - Intro UD4.md",
-      "size": 1154,
+      "size": 1138,
       "ext": ".md"
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD4/L1 - BlowFish.md",
-      "size": 6093,
+      "size": 5859,
       "ext": ".md"
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD4/L2 - RC5.md",
-      "size": 5769,
+      "size": 5540,
       "ext": ".md"
     },
     {
       "path": "anno2/6_Crittografia/M2_Cifrature_Simmetriche_Moderne/UD4/L3 - RC4.md",
-      "size": 5964,
+      "size": 5732,
       "ext": ".md"
     },
     {
@@ -18975,7 +19940,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M3_Cifrature_Asimmetriche/Intro M3.md",
-      "size": 871,
+      "size": 867,
       "ext": ".md"
     },
     {
@@ -18985,7 +19950,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M3_Cifrature_Asimmetriche/UD1/L0 - Intro UD1.md",
-      "size": 804,
+      "size": 797,
       "ext": ".md"
     },
     {
@@ -19040,7 +20005,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M3_Cifrature_Asimmetriche/UD2/L0 - Intro UD2.md",
-      "size": 800,
+      "size": 789,
       "ext": ".md"
     },
     {
@@ -19075,7 +20040,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M3_Cifrature_Asimmetriche/UD3/L0 - Intro UD3.md",
-      "size": 801,
+      "size": 788,
       "ext": ".md"
     },
     {
@@ -19115,7 +20080,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M3_Cifrature_Asimmetriche/UD4/L0 - Intro UD4.md",
-      "size": 893,
+      "size": 874,
       "ext": ".md"
     },
     {
@@ -19215,7 +20180,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M4_Funzioni_Hash_e_Mac/UD1/L0 - Intro UD1.md",
-      "size": 1161,
+      "size": 1147,
       "ext": ".md"
     },
     {
@@ -19250,7 +20215,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M4_Funzioni_Hash_e_Mac/UD2/L0 - Intro UD2.md",
-      "size": 895,
+      "size": 882,
       "ext": ".md"
     },
     {
@@ -19275,7 +20240,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M4_Funzioni_Hash_e_Mac/UD3/L0 - Intro UD3.md",
-      "size": 482,
+      "size": 473,
       "ext": ".md"
     },
     {
@@ -19380,7 +20345,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M5_Firme_Digitali/UD1/L0 - Intro UD1.md",
-      "size": 652,
+      "size": 642,
       "ext": ".md"
     },
     {
@@ -19390,7 +20355,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M5_Firme_Digitali/UD2/L0 - Intro UD2.md",
-      "size": 527,
+      "size": 518,
       "ext": ".md"
     },
     {
@@ -19410,7 +20375,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M5_Firme_Digitali/UD3/L0 - Intro UD3.md",
-      "size": 1183,
+      "size": 1157,
       "ext": ".md"
     },
     {
@@ -19475,7 +20440,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M6_Applicazioni_Crittografiche/UD1/L0 - Intro UD1.md",
-      "size": 731,
+      "size": 721,
       "ext": ".md"
     },
     {
@@ -19495,7 +20460,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M6_Applicazioni_Crittografiche/UD2/L0 - Intro UD2.md",
-      "size": 604,
+      "size": 595,
       "ext": ".md"
     },
     {
@@ -19525,7 +20490,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M6_Applicazioni_Crittografiche/UD3/L0 - Intro UD3.md",
-      "size": 807,
+      "size": 797,
       "ext": ".md"
     },
     {
@@ -19540,7 +20505,7 @@
     },
     {
       "path": "anno2/6_Crittografia/M6_Applicazioni_Crittografiche/UD4/L0 - Intro UD4.md",
-      "size": 812,
+      "size": 803,
       "ext": ".md"
     },
     {
@@ -20645,12 +21610,12 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/Intro all’insegnamento.md",
-      "size": 3576,
+      "size": 3503,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/Intro M1.md",
-      "size": 538,
+      "size": 534,
       "ext": ".md"
     },
     {
@@ -20690,17 +21655,17 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD1/L0 - Intro UD1.md",
-      "size": 577,
+      "size": 571,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD1/L1 - Definizione insiemistica di probabilità.md",
-      "size": 5875,
+      "size": 5666,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD1/L2 - Operazioni insiemistiche con gli eventi.md",
-      "size": 7864,
+      "size": 7575,
       "ext": ".md"
     },
     {
@@ -20855,32 +21820,32 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD2/L0 - Intro UD2.md",
-      "size": 658,
+      "size": 654,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD2/L1 - Il principio di moltiplicazione.md",
-      "size": 5470,
+      "size": 5268,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD2/L2 - Esperimenti compositi.md",
-      "size": 8199,
+      "size": 7927,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD2/L3 - Legge del prodotto per due eventi.md",
-      "size": 8201,
+      "size": 7938,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD2/L4 - Probabilità di un evento condizionato.md",
-      "size": 7912,
+      "size": 7634,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD2/L5 - Legge del prodotto per eventi indipendenti e applicazioni all’affidabilità.md",
-      "size": 6353,
+      "size": 6137,
       "ext": ".md"
     },
     {
@@ -21030,7 +21995,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD3/L0 - Intro UD3.md",
-      "size": 566,
+      "size": 562,
       "ext": ".md"
     },
     {
@@ -21040,17 +22005,17 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD3/L2 - Legge della Somma (o Legge delle Alternative).md",
-      "size": 6348,
+      "size": 6129,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD3/L3 - Legge della Somma per n cammini.md",
-      "size": 6490,
+      "size": 6246,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD3/L4 - Applicazioni della legge della somma all’affidabilità dei sistemi.md",
-      "size": 7020,
+      "size": 6793,
       "ext": ".md"
     },
     {
@@ -21115,12 +22080,12 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD4/L0 - Intro UD4.md",
-      "size": 552,
+      "size": 549,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD4/L1 - Legge dei grandi numeri per il conteggio.md",
-      "size": 7756,
+      "size": 7522,
       "ext": ".md"
     },
     {
@@ -21190,22 +22155,22 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD5/L0 - Intro UD5.md",
-      "size": 745,
+      "size": 739,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD5/L1 - Introduzione al Teorema di Bayes.md",
-      "size": 8085,
+      "size": 7857,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD5/L2 - Bayes – formulazione, terminologia ed esempi.md",
-      "size": 9927,
+      "size": 9633,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M1_Probabilita_elementare/UD5/L3 - Prior e Verosimiglianza.md",
-      "size": 8334,
+      "size": 7999,
       "ext": ".md"
     },
     {
@@ -21215,7 +22180,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M2_Variabili_aleatorie/Intro M2.md",
-      "size": 695,
+      "size": 689,
       "ext": ".md"
     },
     {
@@ -21445,7 +22410,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M2_Variabili_aleatorie/UD1/L0 - Intro UD1.md",
-      "size": 666,
+      "size": 660,
       "ext": ".md"
     },
     {
@@ -21480,7 +22445,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M2_Variabili_aleatorie/UD2/L0 - Intro UD2.md",
-      "size": 581,
+      "size": 577,
       "ext": ".md"
     },
     {
@@ -21490,7 +22455,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M2_Variabili_aleatorie/UD2/L2 - Densità Esponenziale Negativa.md",
-      "size": 5891,
+      "size": 5704,
       "ext": ".md"
     },
     {
@@ -21515,7 +22480,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M2_Variabili_aleatorie/UD3/L0 - Intro UD3.md",
-      "size": 723,
+      "size": 717,
       "ext": ".md"
     },
     {
@@ -21555,12 +22520,12 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M2_Variabili_aleatorie/UD4/L0 - Intro UD4.md",
-      "size": 630,
+      "size": 624,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M2_Variabili_aleatorie/UD4/L1 - Densità Gaussiana o Normale.md",
-      "size": 6596,
+      "size": 6375,
       "ext": ".md"
     },
     {
@@ -21575,12 +22540,12 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M2_Variabili_aleatorie/UD5_Approfondimenti_Esame/L2 - Approssimazione Normale della Binomiale e correzione di continuità.md",
-      "size": 5643,
+      "size": 5791,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M3_Argomenti_avanzati/Intro M3.md",
-      "size": 710,
+      "size": 704,
       "ext": ".md"
     },
     {
@@ -21625,7 +22590,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M3_Argomenti_avanzati/UD1/L0 - Intro UD1.md",
-      "size": 555,
+      "size": 551,
       "ext": ".md"
     },
     {
@@ -21640,17 +22605,17 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M3_Argomenti_avanzati/UD1/L3 - Funzioni generatrici della probabilità e somma di variabili aleatorie.md",
-      "size": 6721,
+      "size": 6474,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M3_Argomenti_avanzati/UD1/L4 - Somma di variabili aleatorie discrete notevoli.md",
-      "size": 6513,
+      "size": 6228,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M3_Argomenti_avanzati/UD1/L5 - Funzioni generatrici dei momenti e somma di variabili aleatorie continue notevoli.md",
-      "size": 6677,
+      "size": 6394,
       "ext": ".md"
     },
     {
@@ -21665,12 +22630,12 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M3_Argomenti_avanzati/UD2/L0 - Intro UD2.md",
-      "size": 1017,
+      "size": 1004,
       "ext": ".md"
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M3_Argomenti_avanzati/UD2/L1 - Dalla distribuzione al campione – Statistica descrittiva.md",
-      "size": 8581,
+      "size": 8337,
       "ext": ".md"
     },
     {
@@ -21690,7 +22655,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M3_Argomenti_avanzati/UD3/L0 - Intro UD3.md",
-      "size": 1226,
+      "size": 1213,
       "ext": ".md"
     },
     {
@@ -21725,7 +22690,7 @@
     },
     {
       "path": "anno2/7_Statistica e Analisi dei Dati/M4_Esami_svolti/esami_2025/3_esame_12_febbraio_2025_soluzione.md",
-      "size": 13338,
+      "size": 13347,
       "ext": ".md"
     },
     {
@@ -21764,13 +22729,43 @@
       "ext": ".pdf"
     },
     {
+      "path": "anno2/7_Statistica e Analisi dei Dati/M4_Esami_svolti/esami_2025/imgs/Pasted image 20260901130326.png",
+      "size": 67179,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/7_Statistica e Analisi dei Dati/M4_Esami_svolti/esami_2025/TemaEsameStatistica20260116online.pdf",
       "size": 49560,
       "ext": ".pdf"
     },
     {
+      "path": "anno2/7_Statistica e Analisi dei Dati/M5_Formulari_Esame/L0 - Guida rapida d'esame e tavole statistiche.md",
+      "size": 21861,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/7_Statistica e Analisi dei Dati/M5_Formulari_Esame/L1 - M1 Formulario - Probabilità elementare.md",
+      "size": 20695,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/7_Statistica e Analisi dei Dati/M5_Formulari_Esame/L2 - M2 Formulario - Variabili aleatorie e distribuzioni.md",
+      "size": 25574,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/7_Statistica e Analisi dei Dati/M5_Formulari_Esame/L3 - M3 Formulario - Somme, campionamento e inferenza.md",
+      "size": 27443,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/7_Statistica e Analisi dei Dati/M5_Formulari_Esame/L4 - Formule extra degli appelli, incongruenze e matrice di copertura.md",
+      "size": 23558,
+      "ext": ".md"
+    },
+    {
       "path": "anno3/1_Computer_Forensics/Lezione 0 - Intro all'insegnamento.md",
-      "size": 4266,
+      "size": 4182,
       "ext": ".md"
     },
     {
@@ -21965,22 +22960,22 @@
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD1 - Elementi, ruolo e criticità dell’informatica forense/L1.md",
-      "size": 16888,
+      "size": 16571,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD1 - Elementi, ruolo e criticità dell’informatica forense/L2.1.md",
-      "size": 11810,
+      "size": 11562,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD1 - Elementi, ruolo e criticità dell’informatica forense/L2.2.md",
-      "size": 6290,
+      "size": 6199,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD1 - Elementi, ruolo e criticità dell’informatica forense/L3.md",
-      "size": 11482,
+      "size": 11204,
       "ext": ".md"
     },
     {
@@ -22325,37 +23320,37 @@
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD2 – Fasi del trattamento del reperto informatico/L1.md",
-      "size": 37137,
+      "size": 36550,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD2 – Fasi del trattamento del reperto informatico/L2.md",
-      "size": 13828,
+      "size": 13576,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD2 – Fasi del trattamento del reperto informatico/L3.md",
-      "size": 13609,
+      "size": 13266,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD2 – Fasi del trattamento del reperto informatico/L4.md",
-      "size": 14339,
+      "size": 14085,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD2 – Fasi del trattamento del reperto informatico/L5.md",
-      "size": 24104,
+      "size": 23730,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD2 – Fasi del trattamento del reperto informatico/L6.md",
-      "size": 14633,
+      "size": 14291,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M1/UD2 – Fasi del trattamento del reperto informatico/L7.md",
-      "size": 12555,
+      "size": 12270,
       "ext": ".md"
     },
     {
@@ -22505,12 +23500,12 @@
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD1 - FileSystem/L1.md",
-      "size": 19274,
+      "size": 18875,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD1 - FileSystem/L2.md",
-      "size": 7082,
+      "size": 6881,
       "ext": ".md"
     },
     {
@@ -22785,82 +23780,82 @@
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/L1.md",
-      "size": 14419,
+      "size": 13949,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/L2.md",
-      "size": 39608,
+      "size": 37585,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/L3.md",
-      "size": 69478,
+      "size": 66017,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/L4.md",
-      "size": 11517,
+      "size": 11154,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/L5.md",
-      "size": 8305,
+      "size": 7958,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/L6.md",
-      "size": 8599,
+      "size": 8204,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/scripts/0_tracce.md",
-      "size": 6905,
+      "size": 6469,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/scripts/1_primoscript.sh",
-      "size": 355,
+      "size": 350,
       "ext": ".sh"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/scripts/2_somma.md",
-      "size": 5013,
+      "size": 4786,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD2 - Comandi Linux e Shell Scripting/scripts/2_somma.sh",
-      "size": 387,
+      "size": 369,
       "ext": ".sh"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD3 - Strumenti hardware e software per la Disk Forensics/L1.md",
-      "size": 8555,
+      "size": 8326,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD3 - Strumenti hardware e software per la Disk Forensics/L2.md",
-      "size": 7712,
+      "size": 7521,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M2/UD3 - Strumenti hardware e software per la Disk Forensics/L3.md",
-      "size": 7688,
+      "size": 7487,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M3/Intro M3 - Altri Ambiti dell'Informatica Forense.md",
-      "size": 65383,
+      "size": 63914,
       "ext": ".md"
     },
     {
       "path": "anno3/1_Computer_Forensics/M4/Intro M4 - Simulazione Dibattimentale.md",
-      "size": 32183,
+      "size": 31518,
       "ext": ".md"
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/Lezione 0 - Introduzione a Sicurezza dei Sistemi e delle Reti.md",
-      "size": 4410,
+      "size": 4297,
       "ext": ".md"
     },
     {
@@ -22885,37 +23880,37 @@
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M2/UD1/L1 - Standard di sicurezza.md",
-      "size": 9838,
+      "size": 9574,
       "ext": ".md"
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M2/UD1/L2 - Proprietà di sicurezza.md",
-      "size": 6997,
+      "size": 6798,
       "ext": ".md"
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M2/UD1/L3 - Minacce, risorse e attacchi.md",
-      "size": 8221,
+      "size": 7980,
       "ext": ".md"
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M2/UD1/L4 - Principi di sicurezza.md",
-      "size": 7412,
+      "size": 7233,
       "ext": ".md"
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M2/UD1/L5 - Attacchi e modelli di trust.md",
-      "size": 9455,
+      "size": 9152,
       "ext": ".md"
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M2/UD2/L1 - Tipi di malware.md",
-      "size": 8005,
+      "size": 7816,
       "ext": ".md"
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M2/UD2/L2 - Tipi di virus e propagazione.md",
-      "size": 6832,
+      "size": 6628,
       "ext": ".md"
     },
     {
@@ -23155,7 +24150,7 @@
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M4/UD1/L1 - Modello ISO OSI.md",
-      "size": 8234,
+      "size": 8024,
       "ext": ".md"
     },
     {
@@ -23325,7 +24320,7 @@
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M4/UD2/L8 - Esercizi di laboratorio/descrizione.txt",
-      "size": 780,
+      "size": 777,
       "ext": ".txt"
     },
     {
@@ -24280,7 +25275,7 @@
     },
     {
       "path": "anno3/2_Sicurezza_Sistemi_e_Reti/M5/UD3/L3 - IPS e strumenti avanzati.md",
-      "size": 9313,
+      "size": 9048,
       "ext": ".md"
     },
     {
@@ -24515,12 +25510,12 @@
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD1/L1 - Introduzione.md",
-      "size": 5254,
+      "size": 5139,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD1/L2 - Criteri dei Mercati.md",
-      "size": 12400,
+      "size": 12066,
       "ext": ".md"
     },
     {
@@ -24535,17 +25530,17 @@
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD2/L1 - Il Settore.md",
-      "size": 5511,
+      "size": 5400,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD2/L2 - Potenziali entranti del settore.md",
-      "size": 9228,
+      "size": 9066,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD2/L3 - Competitori operanti.md",
-      "size": 7003,
+      "size": 6834,
       "ext": ".md"
     },
     {
@@ -24565,27 +25560,27 @@
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD3/L1 - Imprese.md",
-      "size": 6472,
+      "size": 6255,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD3/L2 - Tassonomia delle imprese.md",
-      "size": 12221,
+      "size": 12030,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD3/L3 - Contabilità Esterna.md",
-      "size": 13013,
+      "size": 12839,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD3/L4 - Conto Economico.md",
-      "size": 8194,
+      "size": 8035,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M1_Eco/UD3/L5 - Struttura Organizzativa.md",
-      "size": 8689,
+      "size": 8550,
       "ext": ".md"
     },
     {
@@ -24635,17 +25630,17 @@
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD1/L1 - Analisi dei costi.md",
-      "size": 7857,
+      "size": 7797,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD1/L2 - Tipologie di costo.md",
-      "size": 8461,
+      "size": 8386,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD1/L3 - Analisi di Break Even e margine di contribuzione.md",
-      "size": 4804,
+      "size": 4729,
       "ext": ".md"
     },
     {
@@ -24685,22 +25680,22 @@
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD2/L1 - Catena del Valore.md",
-      "size": 9726,
+      "size": 9606,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD2/L2 - Valore e investimenti.md",
-      "size": 8220,
+      "size": 8089,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD2/L3 - Criteri di valutazione investimenti parte 1.md",
-      "size": 7779,
+      "size": 7600,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD2/L4 - Criteri di valutazione investimenti parte 2.md",
-      "size": 6369,
+      "size": 6255,
       "ext": ".md"
     },
     {
@@ -24735,242 +25730,242 @@
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD3/L1 - Intro Project Management.md",
-      "size": 5953,
+      "size": 5832,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD3/L2 - Definizione.md",
-      "size": 4898,
+      "size": 4819,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD3/L3 - Pianificazione e Sequenziamento.md",
-      "size": 5323,
+      "size": 5229,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M2_Gestione/UD3/L4 - Esecuzione e gestione.md",
-      "size": 4421,
+      "size": 4362,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M3_Etica/UD1/L1 - Intro Etica Informatica.md",
-      "size": 11004,
+      "size": 10923,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M3_Etica/UD1/L2 - Intro parte 2.md",
-      "size": 15187,
+      "size": 15090,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M3_Etica/UD2/L1 - Questioni Etiche parte 1.md",
-      "size": 14338,
+      "size": 14222,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M3_Etica/UD2/L2 - Questioni Etiche parte 2.md",
-      "size": 14095,
+      "size": 13990,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M4_Etica2/UD1/L1 - Una metodologia per affrontare le questioni etiche dell’ICT.md",
-      "size": 28135,
+      "size": 27484,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M4_Etica2/UD1/L2 - Come affrontare i Dilemmi Etici.md",
-      "size": 29284,
+      "size": 28967,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M5_Legali/UD1/L1 - Nuove Tecnologie e Proprietà Intellettuale.md",
-      "size": 17905,
+      "size": 17738,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M5_Legali/UD2/L1 - Privacy.md",
-      "size": 94886,
+      "size": 93522,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M6_Sociali/UD1/L1 - Premesse.md",
-      "size": 19249,
+      "size": 19043,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M6_Sociali/UD1/L2 - Un framework per i diritti di cittadinanza digitale - la tutela dei diritti.md",
-      "size": 17692,
+      "size": 16959,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M6_Sociali/UD2/L1 - Un framework per i diritti di cittadinanza digitale – Democrazia e partecipazione.md",
-      "size": 24432,
+      "size": 23880,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M6_Sociali/UD2/L2 - Elementi di progettazione di buoni ambienti online deliberativi.md",
-      "size": 6946,
+      "size": 6738,
       "ext": ".md"
     },
     {
       "path": "anno3/3_Aspetti_etici_legali_sociali_ed_economici_dell_informatica/M6_Sociali/UD2/L3 - Software Libero.md",
-      "size": 8725,
+      "size": 8320,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD1/L1 - Gli attori del processo penale.md",
-      "size": 9885,
+      "size": 9781,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD1/L2 - Le fasi del processo penale.md",
-      "size": 12343,
+      "size": 12189,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD1/L3 - I mezzi di ricerca delle prove nel processo penale.md",
-      "size": 9438,
+      "size": 9342,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD1/L4 - Gli accertamenti tecnici nel processo penale.md",
-      "size": 8315,
+      "size": 8219,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD2/L1 - Le parti del processo civile.md",
-      "size": 7355,
+      "size": 7267,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD2/L2 - Le diverse tipologie di procedimenti.md",
-      "size": 8962,
+      "size": 8866,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD2/L3 - Le fasi del procedimento civile.md",
-      "size": 8043,
+      "size": 7943,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD2/L4 - I mezzi di raccolta delle prove nel procedimento civile.md",
-      "size": 9387,
+      "size": 9267,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD2/L5 - Gli accertamenti tecnici nel procedimento civile.md",
-      "size": 9557,
+      "size": 9453,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD3/L1 - Definizione di documento informatico.md",
-      "size": 8207,
+      "size": 8115,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD3/L2 - Firme elettroniche — aspetti tecnici e giuridici.md",
-      "size": 8220,
+      "size": 8118,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD3/L3 - Il valore probatorio del documento informatico.md",
-      "size": 8461,
+      "size": 8363,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD4/L1 - La normativa privacy.md",
-      "size": 10444,
+      "size": 10319,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD4/L2 -  La responsabilità penale degli enti e il D.Lgs. 231 2001.md",
-      "size": 8760,
+      "size": 8612,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD4/L3 - Aspetti rilevanti sulla gestione dei sistemi informativi rispetto al D.Lgs. 231 2001.md",
-      "size": 7902,
+      "size": 7816,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD4/L4 - Jobs Act, controllo a distanza dei lavoratori e videosorveglianza.md",
-      "size": 8451,
+      "size": 8351,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD4/L5 - Jobs Act e controllo dei lavoratori tramite GPS e dispositivi mobili.md",
-      "size": 9999,
+      "size": 9883,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M1/UD4/L6 - Proprietà intellettuale, segreto industriale e diritto d’autore.md",
-      "size": 8981,
+      "size": 8846,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M2/UD1/L1 -  ISO IEC 27037.md",
-      "size": 12217,
+      "size": 11974,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M2/UD1/L2 -  ISO IEC 27035.md",
-      "size": 12298,
+      "size": 12040,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M2/UD1/L3 - ISO IEC 27043.md",
-      "size": 9930,
+      "size": 9714,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M2/UD1/L4 - ISO IEC 19011.md",
-      "size": 9003,
+      "size": 8820,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M2/UD2/L1 - La valutazione del rischio.md",
-      "size": 10717,
+      "size": 10492,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M2/UD2/L2 - Incident response.md",
-      "size": 9110,
+      "size": 8872,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M2/UD2/L3 - Forensic Readiness Plan.md",
-      "size": 6283,
+      "size": 6166,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M3/UD1/L1 - Gestione dei sistemi informativi in ambito aziendale per tutela della proprietà industriale.md",
-      "size": 9522,
+      "size": 9271,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M3/UD1/L2 - Gestione dei sistemi informativi in ambito aziendale per controllo del personale.md",
-      "size": 6822,
+      "size": 6686,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M3/UD1/L3 - Gestione dei sistemi informativi in ambito sanitario.md",
-      "size": 8573,
+      "size": 8383,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M3/UD1/L4 - Misure tecniche per certificazione di processi e software.md",
-      "size": 7089,
+      "size": 6946,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M3/UD2/L1 - Valutazione del rischio – Simulazione.md",
-      "size": 9341,
+      "size": 9200,
       "ext": ".md"
     },
     {
       "path": "anno3/4_Gestione_della_Sicurezza_nei_sistemi_informativi/M3/UD2/L2 - Risposta all’incidente – Simulazione.md",
-      "size": 6473,
+      "size": 6349,
       "ext": ".md"
     },
     {
@@ -24980,7 +25975,7 @@
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/5_Progettazione_di_Software_Sicuro.iml",
-      "size": 461,
+      "size": 451,
       "ext": ".iml"
     },
     {
@@ -24990,17 +25985,17 @@
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M1/UD1/L2 - Proprietà del software sicuro.md",
-      "size": 13529,
+      "size": 13058,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M1/UD2/L1 - Fasi di sviluppo del software.md",
-      "size": 11171,
+      "size": 10602,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M1/UD2/L2 - Modelli di ciclo di vita del software.md",
-      "size": 7705,
+      "size": 7336,
       "ext": ".md"
     },
     {
@@ -25010,97 +26005,97 @@
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M1/UD3/L1 - Ciclo di vulnerabilità.md",
-      "size": 8106,
+      "size": 7713,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M1/UD3/L2 - Attacchi a livello di progettazione.md",
-      "size": 7513,
+      "size": 7192,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M1/UD3/L3 - Attacchi a livello di implementazione ed operazione.md",
-      "size": 7740,
+      "size": 7350,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M2/UD1/L1 - Architettura sicura e introduzione ai principi guida.md",
-      "size": 9999,
+      "size": 9798,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M2/UD1/L2 - Linee guida e principi per architetture sicure pt1.md",
-      "size": 10539,
+      "size": 10204,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M2/UD1/L3 - Linee guida e principi per architetture sicure pt2.md",
-      "size": 16407,
+      "size": 16196,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M2/UD2/L1 - Criteri di scelta di tecnologie sicure.md",
-      "size": 10190,
+      "size": 9893,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M2/UD2/L2 - Il caso di studio di Java Sandbox.md",
-      "size": 9478,
+      "size": 9196,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD1/L1 - Proprietà delle Specifiche.md",
-      "size": 9320,
+      "size": 9135,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD1/L2 - Metodi di Specifica.md",
-      "size": 9541,
+      "size": 9342,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD2/L1 - Macchine a Stati Finiti di Base.md",
-      "size": 7952,
+      "size": 7723,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD2/L2 - Macchine a Stati Finiti con Output.md",
-      "size": 7973,
+      "size": 7742,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD2/L3 - Macchine a Stati Finiti Estese (EFSM).md",
-      "size": 8049,
+      "size": 7804,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD2/L4 - Communicating Finite State Machines (CFSM).md",
-      "size": 7780,
+      "size": 7534,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD2/L5 - Macchine di Stato UML — Stati Semplici.md",
-      "size": 7992,
+      "size": 7766,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD2/L6 - Macchine di Stato UML — Stati Composti.md",
-      "size": 7790,
+      "size": 7580,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD2/L7 - Modellare con le Macchine di Stato UML.md",
-      "size": 7160,
+      "size": 6963,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD3/L1 - I Principi del Design by Contract.md",
-      "size": 9069,
+      "size": 8785,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M3/UD3/L2 - Il Contratto nel Software Object Oriented — JML.md",
-      "size": 8031,
+      "size": 7756,
       "ext": ".md"
     },
     {
@@ -25110,22 +26105,22 @@
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M4/UD1/L1 - Sicurezza dei tipi nei linguaggi di programmazione.md",
-      "size": 9776,
+      "size": 9454,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M4/UD1/L2 - Alcune violazioni di sicurezza in C.md",
-      "size": 7891,
+      "size": 7636,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M4/UD1/L3 - Programmi sicuri in C.md",
-      "size": 7936,
+      "size": 7678,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M4/UD2/L1 - Macchine a stati finiti in Java.md",
-      "size": 9150,
+      "size": 8773,
       "ext": ".md"
     },
     {
@@ -25145,62 +26140,62 @@
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD1/L1 - Il ruolo del testing.md",
-      "size": 9178,
+      "size": 9004,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD1/L2 - Terminologia del testing.md",
-      "size": 9718,
+      "size": 9494,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD1/L3 - Tipi di testing.md",
-      "size": 7691,
+      "size": 7557,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD1/L4 - Tecniche per la validazione e verifica.md",
-      "size": 11204,
+      "size": 10965,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD2/L1 - Concetti base.md",
-      "size": 8874,
+      "size": 8599,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD2/L2 - I limiti del testing.md",
-      "size": 6689,
+      "size": 6543,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD3/L1 - Grafo di flusso di un programma.md",
-      "size": 6644,
+      "size": 6482,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD3/L2 - Copertura delle istruzioni e degli archi.md",
-      "size": 7283,
+      "size": 7062,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD3/L3 - Copertura delle decisioni e delle condizioni.md",
-      "size": 6095,
+      "size": 5932,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD3/L4 - MCC e MCDC.md",
-      "size": 6390,
+      "size": 6232,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD3/L5 - Valutare la copertura con Emma.md",
-      "size": 4141,
+      "size": 4048,
       "ext": ".md"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD3/L6 - JUnit.md",
-      "size": 7212,
+      "size": 6995,
       "ext": ".md"
     },
     {
@@ -25210,242 +26205,242 @@
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/DiningPhilosophers.java",
-      "size": 1459,
+      "size": 1420,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/DiningPhilosophersCoperturaCondizioni.java",
-      "size": 716,
+      "size": 688,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/DiningPhilosophersCoperturaDecisioni.java",
-      "size": 549,
+      "size": 530,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Fila.java",
-      "size": 2726,
+      "size": 2645,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/FilaCoperturaDecisioni.java",
-      "size": 641,
+      "size": 610,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/FilaTest.java",
-      "size": 781,
+      "size": 750,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/ForzaQuattro.java",
-      "size": 2191,
+      "size": 2115,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/ForzaQuattroCoperturaCondizioni.java",
-      "size": 1167,
+      "size": 1114,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/ForzaQuattroCoperturaDecisioni.java",
-      "size": 769,
+      "size": 740,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/GiocoDello8.java",
-      "size": 2282,
+      "size": 2203,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/GiocoDello8Test.java",
-      "size": 1901,
+      "size": 1846,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/KnightTour.java",
-      "size": 2184,
+      "size": 2097,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/KnightTourTest.java",
-      "size": 2070,
+      "size": 1999,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/NaturalSet.java",
-      "size": 2027,
+      "size": 1959,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/NaturalSetCoperturaDecisioni.java",
-      "size": 514,
+      "size": 492,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/NaturalSetTest.java",
-      "size": 1215,
+      "size": 1178,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/OraDiPunta.java",
-      "size": 2395,
+      "size": 2315,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/OraDiPuntaCoperturaIstruzioni.java",
-      "size": 1436,
+      "size": 1371,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/OraDiPuntaTest.java",
-      "size": 1283,
+      "size": 1244,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Ostello.java",
-      "size": 1732,
+      "size": 1674,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/OstelloCoperturaDecisioni.java",
-      "size": 1009,
+      "size": 969,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/OstelloTest.java",
-      "size": 1516,
+      "size": 1459,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/OttoRegineSimpl.java",
-      "size": 2016,
+      "size": 1932,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/OttoRegineSimplTest.java",
-      "size": 1774,
+      "size": 1721,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/ProdCons.java",
-      "size": 1486,
+      "size": 1433,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/ProdConsCoperturaCondizioni.java",
-      "size": 420,
+      "size": 400,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/ProdConsTest.java",
-      "size": 1104,
+      "size": 1070,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/QuadratoMagico3.java",
-      "size": 1633,
+      "size": 1573,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/QuadratoMagico3Test.java",
-      "size": 1476,
+      "size": 1421,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Queue.java",
-      "size": 2609,
+      "size": 2522,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/QueueTest.java",
-      "size": 1494,
+      "size": 1439,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Rubik2D.java",
-      "size": 1799,
+      "size": 1736,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Rubik2DCondizioni.java",
-      "size": 701,
+      "size": 666,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Rubik2Dtest.java",
-      "size": 823,
+      "size": 793,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Sokoban.java",
-      "size": 4363,
+      "size": 4176,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/SokobanTest.java",
-      "size": 2257,
+      "size": 2183,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Sudoku.java",
-      "size": 2033,
+      "size": 1952,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/SudokuCoperturaCondizioni.java",
-      "size": 1502,
+      "size": 1430,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/SudokuTest.java",
-      "size": 1755,
+      "size": 1703,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/TicTacToe.java",
-      "size": 1941,
+      "size": 1880,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/TicTacToeCoperturaCondizioni.java",
-      "size": 963,
+      "size": 914,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/TicTacToeCoperturaDecisioni.java",
-      "size": 582,
+      "size": 557,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/Tombola.java",
-      "size": 1207,
+      "size": 1176,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/TombolaCoperturaCondizioni.java",
-      "size": 976,
+      "size": 934,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/TombolaTest.java",
-      "size": 1691,
+      "size": 1641,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/UndirectedGraph.java",
-      "size": 3239,
+      "size": 3168,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/UndirectedGraphCoperturaCondizioni.java",
-      "size": 1412,
+      "size": 1359,
       "ext": ".java"
     },
     {
       "path": "anno3/5_Progettazione_di_Software_Sicuro/M5/UD4/SoluzioniEserciziarioPSS/UndirectedGraphTest.java",
-      "size": 955,
+      "size": 920,
       "ext": ".java"
     },
     {
@@ -26425,7 +27420,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/1_Teoria/l6/codici/intro_jml.java",
-      "size": 986,
+      "size": 964,
       "ext": ".java"
     },
     {
@@ -26505,12 +27500,12 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/esercizi/lab22maggio2026.java",
-      "size": 1685,
+      "size": 1639,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/esercizi/NaturalSet.java",
-      "size": 3405,
+      "size": 3320,
       "ext": ".java"
     },
     {
@@ -26525,12 +27520,12 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/esercizi/ProduttoreConsumatore.java",
-      "size": 3202,
+      "size": 3127,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/esercizi/README_esercizi.md",
-      "size": 116,
+      "size": 113,
       "ext": ".md"
     },
     {
@@ -26545,7 +27540,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/esercizi/Tombola.java",
-      "size": 2578,
+      "size": 2577,
       "ext": ".java"
     },
     {
@@ -26579,63 +27574,13 @@
       "ext": ".pdf"
     },
     {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/.classpath",
-      "size": 226,
-      "ext": ""
-    },
-    {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/.gitignore",
       "size": 6,
       "ext": ""
     },
     {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/.project",
-      "size": 467,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/bin/.classpath",
-      "size": 223,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/bin/.gitignore",
-      "size": 6,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/bin/.project",
-      "size": 467,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/bin/Counter.class",
-      "size": 712,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/bin/Examples.class",
-      "size": 3116,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/bin/PositiveCounter.class",
-      "size": 1186,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/bin/PositiveCounterWithInvariant.class",
-      "size": 1225,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/bin/SumProductExamples.class",
-      "size": 802,
-      "ext": ".class"
-    },
-    {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/src/Counter.java",
-      "size": 1789,
+      "size": 1744,
       "ext": ".java"
     },
     {
@@ -26645,53 +27590,23 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/src/PositiveCounter.java",
-      "size": 1182,
+      "size": 1147,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/src/PositiveCounterWithInvariant.java",
-      "size": 1383,
+      "size": 1343,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/Esercizi/src/SumProductExamples.java",
-      "size": 1713,
+      "size": 1663,
       "ext": ".java"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/GiocoDello8/.classpath",
-      "size": 226,
-      "ext": ""
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/GiocoDello8/.gitignore",
       "size": 6,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/GiocoDello8/.project",
-      "size": 416,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/GiocoDello8/bin/.classpath",
-      "size": 223,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/GiocoDello8/bin/.gitignore",
-      "size": 6,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/GiocoDello8/bin/.project",
-      "size": 416,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/GiocoDello8/bin/esercizioGiocoOttoJML.pdf",
-      "size": 105290,
-      "ext": ".pdf"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/GiocoDello8/esercizioGiocoOttoJML.pdf",
@@ -26705,13 +27620,8 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/javaEsami.iml",
-      "size": 434,
+      "size": 424,
       "ext": ".iml"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/.classpath",
-      "size": 226,
-      "ext": ""
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/.gitignore",
@@ -26719,44 +27629,9 @@
       "ext": ""
     },
     {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/.project",
-      "size": 414,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/bin/.classpath",
-      "size": 223,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/bin/.gitignore",
-      "size": 6,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/bin/.project",
-      "size": 414,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/bin/esercizioKnightTourJML.pdf",
-      "size": 85764,
-      "ext": ".pdf"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/bin/KnightTour.class",
-      "size": 1462,
-      "ext": ".class"
-    },
-    {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/esercizioKnightTourJML.pdf",
       "size": 85764,
       "ext": ".pdf"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/src/KnightTour.class",
-      "size": 1530,
-      "ext": ".class"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/KnightTour/src/KnightTour.java",
@@ -26764,44 +27639,9 @@
       "ext": ".java"
     },
     {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/.classpath",
-      "size": 226,
-      "ext": ""
-    },
-    {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/.gitignore",
       "size": 6,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/.project",
-      "size": 408,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/bin/.classpath",
-      "size": 223,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/bin/.gitignore",
-      "size": 6,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/bin/.project",
-      "size": 408,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/bin/esercizioSokobanJML.pdf",
-      "size": 157187,
-      "ext": ".pdf"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/bin/Sokoban.class",
-      "size": 1634,
-      "ext": ".class"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/javaEsami/Sokoban/esercizioSokobanJML.pdf",
@@ -26815,7 +27655,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l3/l3.iml",
-      "size": 438,
+      "size": 428,
       "ext": ".iml"
     },
     {
@@ -26829,54 +27669,9 @@
       "ext": ".pdf"
     },
     {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/.classpath",
-      "size": 226,
-      "ext": ""
-    },
-    {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/.gitignore",
       "size": 6,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/.project",
-      "size": 430,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/bin/.classpath",
-      "size": 223,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/bin/.gitignore",
-      "size": 6,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/bin/.project",
-      "size": 430,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/bin/CounterAssert.class",
-      "size": 1484,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/bin/imgs/Pasted image 20260508131909.png",
-      "size": 116398,
-      "ext": ".png"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/bin/l4.md",
-      "size": 17668,
-      "ext": ".md"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/bin/Lezione4.pdf",
-      "size": 998892,
-      "ext": ".pdf"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/imgs/Pasted image 20260508131909.png",
@@ -26895,53 +27690,13 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l4/src/CounterAssert.java",
-      "size": 1135,
+      "size": 1100,
       "ext": ".java"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/.classpath",
-      "size": 409,
-      "ext": ""
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/.gitignore",
       "size": 6,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/.project",
-      "size": 380,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/.vscode/settings.json",
-      "size": 149,
-      "ext": ".json"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/bin/Esempi.class",
-      "size": 1403,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/bin/EsempiAssert.class",
-      "size": 4226,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/bin/EsempiAssertArrayEquals.class",
-      "size": 1040,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/bin/Punto2D.class",
-      "size": 1957,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/bin/Sort.class",
-      "size": 1148,
-      "ext": ".class"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/pom.xml",
@@ -26950,12 +27705,12 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/src_test/EsempiAssert.java",
-      "size": 8780,
+      "size": 8573,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/src_test/EsempiAssertArrayEquals.java",
-      "size": 1119,
+      "size": 1084,
       "ext": ".java"
     },
     {
@@ -26965,7 +27720,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/01_esempi-base-junit/src/Punto2D.java",
-      "size": 1410,
+      "size": 1324,
       "ext": ".java"
     },
     {
@@ -26974,44 +27729,9 @@
       "ext": ".java"
     },
     {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/.classpath",
-      "size": 409,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/.project",
-      "size": 371,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/.vscode/settings.json",
-      "size": 149,
-      "ext": ".json"
-    },
-    {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/bin/.gitignore",
       "size": 73,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/bin/SumClass.class",
-      "size": 549,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/bin/SumTest.class",
-      "size": 776,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/bin/WrongSum1Test.class",
-      "size": 677,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/bin/WrongSum2Test.class",
-      "size": 1057,
-      "ext": ".class"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/pom.xml",
@@ -27020,53 +27740,28 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/src_test/SumTest.java",
-      "size": 682,
+      "size": 652,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/src_test/WrongSum1Test.java",
-      "size": 624,
+      "size": 598,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/src_test/WrongSum2Test.java",
-      "size": 1600,
+      "size": 1546,
       "ext": ".java"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/02_sumclass/src/SumClass.java",
-      "size": 620,
+      "size": 596,
       "ext": ".java"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/03_esercizi-junit/.classpath",
-      "size": 409,
-      "ext": ""
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/03_esercizi-junit/.gitignore",
       "size": 6,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/03_esercizi-junit/.project",
-      "size": 377,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/03_esercizi-junit/.vscode/settings.json",
-      "size": 149,
-      "ext": ".json"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/03_esercizi-junit/bin/KnightTour.class",
-      "size": 983,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/03_esercizi-junit/bin/Sokoban.class",
-      "size": 1167,
-      "ext": ".class"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/03_esercizi-junit/pom.xml",
@@ -27075,7 +27770,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/03_esercizi-junit/src/KnightTour.java",
-      "size": 702,
+      "size": 656,
       "ext": ".java"
     },
     {
@@ -27084,39 +27779,9 @@
       "ext": ".java"
     },
     {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/.classpath",
-      "size": 409,
-      "ext": ""
-    },
-    {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/.gitignore",
       "size": 6,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/.project",
-      "size": 377,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/.vscode/settings.json",
-      "size": 149,
-      "ext": ".json"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/bin/EsempioPerCoverageConLazy_CoperturaCondizioni.class",
-      "size": 992,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/bin/EsempioPerCoverageConLazy_CoperturaDecisioni.class",
-      "size": 755,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/bin/EsempioPerCoverageConLazy.class",
-      "size": 464,
-      "ext": ".class"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/pom.xml",
@@ -27140,48 +27805,13 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/04_copertura-lazy/src/EsempioPerCoverageConLazy.java",
-      "size": 183,
+      "size": 172,
       "ext": ".java"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/.classpath",
-      "size": 409,
-      "ext": ""
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/.gitignore",
       "size": 6,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/.project",
-      "size": 381,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/.vscode/settings.json",
-      "size": 149,
-      "ext": ".json"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/bin/EsempioPerCoverage_CoperturaCondizioni.class",
-      "size": 1326,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/bin/EsempioPerCoverage_CoperturaDecisioni.class",
-      "size": 1320,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/bin/EsempioPerCoverage_CoperturaIstruzioni.class",
-      "size": 1328,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/bin/EsempioPerCoverage.class",
-      "size": 580,
-      "ext": ".class"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/pom.xml",
@@ -27205,38 +27835,13 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/05_copertura-non-lazy/src/EsempioPerCoverage.java",
-      "size": 447,
+      "size": 420,
       "ext": ".java"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/06_esercizio-copertura-tictactoe/.classpath",
-      "size": 409,
-      "ext": ""
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/06_esercizio-copertura-tictactoe/.gitignore",
       "size": 6,
       "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/06_esercizio-copertura-tictactoe/.project",
-      "size": 392,
-      "ext": ""
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/06_esercizio-copertura-tictactoe/.vscode/settings.json",
-      "size": 149,
-      "ext": ".json"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/06_esercizio-copertura-tictactoe/bin/TicTacToeEsercizioCopertura.class",
-      "size": 998,
-      "ext": ".class"
-    },
-    {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/06_esercizio-copertura-tictactoe/bin/TicTacToeLazyEsercizioCopertura.class",
-      "size": 930,
-      "ext": ".class"
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/06_esercizio-copertura-tictactoe/pom.xml",
@@ -27304,11 +27909,6 @@
       "ext": ".pdf"
     },
     {
-      "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/lib/.project",
-      "size": 275,
-      "ext": ""
-    },
-    {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l5/lib/hamcrest-core-1.3.jar",
       "size": 45024,
       "ext": ".jar"
@@ -27335,7 +27935,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/l6/l6.md",
-      "size": 41661,
+      "size": 40642,
       "ext": ".md"
     },
     {
@@ -27345,7 +27945,7 @@
     },
     {
       "path": "anno3/5.1_PSS_corso_aggiornato/2_Laboratorio/laboratorio.iml",
-      "size": 506,
+      "size": 495,
       "ext": ".iml"
     },
     {
@@ -29485,77 +30085,77 @@
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L0 - Introduzione al Corso.md",
-      "size": 7682,
+      "size": 7436,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L01 - Introduzione ai sistemi biometrici.md",
-      "size": 26393,
+      "size": 25527,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L02 - Tratti biometrici e evoluzione della biometria.md",
-      "size": 29972,
+      "size": 28867,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L03 - Comparazione dei sistemi biometrici + Aspetti di Privacy, GDPR e AI Act.md",
-      "size": 15320,
+      "size": 14569,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L04 - Struttura dei sistemi biometrici e aspetti analitici del tratto.md",
-      "size": 29468,
+      "size": 28300,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L05 - Rappresentazione, Estrazione delle Caratteristiche, Matching e Indicizzazione nei DB biometrici.md",
-      "size": 11254,
+      "size": 10797,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L06A - Misura dei parametri di un sistema biometrico.md",
-      "size": 20009,
+      "size": 19256,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L07 - Impronte digitali – storia, classificazione e stato dell’arte.md",
-      "size": 29024,
+      "size": 27956,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L08 - Impronte Digitali, Sensori, Rappresentazione, Compressione e Non-Unicità.md",
-      "size": 11786,
+      "size": 11254,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L09 - Prefiltraggio, Enhancement e Feature Extraction nelle impronte digitali.md",
-      "size": 13324,
+      "size": 12662,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L10A - Algoritmi di Matching, Tassi di Errore e Stato dell’Arte.md",
-      "size": 9878,
+      "size": 9408,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L10B - Spoofing dei sensori di impronte - attacchi cooperativi e non-cooperativi.md",
-      "size": 10459,
+      "size": 10252,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L10C - Spoofing paper.md",
-      "size": 8056,
+      "size": 7785,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L11 - Sistemi biometrici basati sull’iride - fisiologia, sensori e IrisCode.md",
-      "size": 10683,
+      "size": 10271,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L12 - Algoritmi di enhancement, prefiltraggio e matching nei sistemi biometrici basati sull’iride.md",
-      "size": 13983,
+      "size": 13436,
       "ext": ".md"
     },
     {
@@ -29570,27 +30170,27 @@
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L13A - Iride, prestazioni, ottimizzazione e spoofing.md",
-      "size": 9833,
+      "size": 9462,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L13B - Come funziona l’Iris Recognition (Daugman).md",
-      "size": 8566,
+      "size": 8069,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L13C - Iride nel visibile, scenari operativi, spoofing e antispoofing.md",
-      "size": 16382,
+      "size": 15684,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L14 - Sistemi biometrici basati sul volto - introduzione, sensori 2D e algoritmi di prefiltraggio.md",
-      "size": 14065,
+      "size": 13534,
       "ext": ".md"
     },
     {
       "path": "anno3/6_Sistemi_Biometrici/L6B - Dispensa operativa sulla misura dei parametri dei sistemi biometrici.md",
-      "size": 11096,
+      "size": 10672,
       "ext": ".md"
     },
     {
@@ -29937,6 +30537,21 @@
       "path": "anno3/7_Sicurezza_Web&Mobile/M5/UD1/L3.md",
       "size": 14759,
       "ext": ".md"
+    },
+    {
+      "path": "extra/python_corso_completo/l1.py",
+      "size": 660,
+      "ext": ".py"
+    },
+    {
+      "path": "extra/python_corso_completo/l2.py",
+      "size": 1089,
+      "ext": ".py"
+    },
+    {
+      "path": "extra/scripting/pws/pws_fundamentals.ps1",
+      "size": 540,
+      "ext": ".ps1"
     }
   ]
 }

@@ -1,4 +1,4 @@
-# **M1 UD2 Lezione 1 - Distribuzione Geometrica**
+# **M2 UD2 Lezione 1 - Distribuzione Geometrica**
 
 ### **1. Genesi della distribuzione**
 
