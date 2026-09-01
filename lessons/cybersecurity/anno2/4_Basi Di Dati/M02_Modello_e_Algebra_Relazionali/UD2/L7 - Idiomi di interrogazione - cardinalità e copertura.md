@@ -19,12 +19,12 @@ L’obiettivo è individuare gli $A$ associati a **un certo numero di valori dis
 
 - **Almeno due $B$**:  
     $$  
-    \pi_A(r_{A=A' \land B \neq B'}(\rho_{A',B' \leftarrow A,B}(r)))  
+    \pi_A(r\bowtie_{A=A' \land B \neq B'}(\rho_{A',B' \leftarrow A,B}(r)))  
     $$
     
 - **Al più un $B$**:  
     $$  
-    \pi_A(r) - \pi_A(r_{A=A' \land B \neq B'}(\rho_{A',B' \leftarrow A,B}(r)))  
+    \pi_A(r) - \pi_A(r\bowtie_{A=A' \land B \neq B'}(\rho_{A',B' \leftarrow A,B}(r)))  
     $$
 
 ---
@@ -38,7 +38,7 @@ $$
 $$
 
 $$  
-\pi_M(\text{ESAMI}_{M=M' \land C \neq C'}(\rho_{M',C' \leftarrow M,C}(\text{ESAMI})))  
+\pi_M(\text{ESAMI}\bowtie_{M=M' \land C \neq C'}(\rho_{M',C' \leftarrow M,C}(\text{ESAMI})))  
 $$
 
 **REGISTRI**
@@ -69,7 +69,7 @@ R1 := \rho_{M,C \leftarrow Matr,Corso}(\pi_{Matr,Corso}(\text{REGISTRI}))
 $$
 
 $$  
-\text{ESAME} := \pi_M(R1_{M=M' \land C \neq C'}(\rho_{M',C' \leftarrow M,C}(R1)))  
+\text{ESAME} := \pi_M(R1\bowtie_{M=M' \land C \neq C'}(\rho_{M',C' \leftarrow M,C}(R1)))  
 $$
 
 $$  

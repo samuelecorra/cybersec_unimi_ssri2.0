@@ -121,6 +121,8 @@ Supponiamo quattro sotto-transazioni:
     
 - `t21` attende una risorsa controllata da `t11`.
 
+![](imgs/Pasted%20image%2020260826172420.png)
+
 Si genera così un ciclo di attesa tra due DBMS distinti:
 
 |Nodo|Transazioni attive|Tipo di attesa|
@@ -167,6 +169,8 @@ Per evitare ridondanza, la comunicazione avviene:
 - **solo se $i > j$**, cioè da un nodo con indice maggiore a uno con indice minore.
 
 #### **Esempio di propagazione**
+
+![](imgs/Pasted%20image%2020260826172518.png)
 
 - DBMS1 comunica a DBMS2: $(E_3 \rightarrow t_3 \rightarrow t_1 \rightarrow E_2)$
     

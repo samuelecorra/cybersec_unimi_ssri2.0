@@ -1,4 +1,4 @@
-# **M7 UD3 Lezione 3 (parte 2) - Protocollo di commit a due fasi – Gestione dei guasti e ottimizzazioni**
+	# **M7 UD3 Lezione 3 (parte 2) - Protocollo di commit a due fasi – Gestione dei guasti e ottimizzazioni**
 
 ### **1. Introduzione**
 
