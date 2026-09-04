@@ -177,7 +177,7 @@ $$
 
 ### **4. Esercizio 3 — KMP**
 
-**Traccia.** Applicare KMP a $S=\texttt{baebabababacaca}$ e $P=\texttt{ababaca}$, mostrando tutti i passi e, in particolare, il confronto eseguito dopo il backtracking.
+**Traccia.** Applicare KMP a $S=\texttt{bacbabababacaca}$ e $P=\texttt{ababaca}$, mostrando tutti i passi e, in particolare, il confronto eseguito dopo il backtracking.
 
 La funzione prefisso del pattern è
 
@@ -192,7 +192,7 @@ Indichiamo con $q$ la lunghezza del prefisso già riconosciuto.
 |---:|:---:|---|---:|
 | 0 | b | `b` $\ne P[0]=$ `a` | 0 |
 | 1 | a | corrisponde a $P[0]$ | 1 |
-| 2 | e | `e` $\ne P[1]$; fallback a $q=0$; `e` $\ne P[0]$ | 0 |
+| 2 | c | `c` $\ne P[1]$; fallback a $q=0$; `c` $\ne P[0]$ | 0 |
 | 3 | b | `b` $\ne P[0]$ | 0 |
 | 4 | a | match | 1 |
 | 5 | b | match | 2 |
