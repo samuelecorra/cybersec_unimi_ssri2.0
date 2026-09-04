@@ -1,8 +1,8 @@
-# **M11 Approfondimenti per l'esame - Lezione 0 - Audit di copertura degli appelli 2026**
+# **M11 Approfondimenti per l'esame - Lezione 0 - Audit di copertura degli appelli 2025-2026**
 
 ### **1. Obiettivo dell'audit**
 
-Questa unità nasce dal confronto puntuale tra i tre appelli disponibili del corso di Basi di Dati — 8 maggio, 23 maggio e 3 luglio 2026 — e tutte le lezioni dei moduli M1–M10.
+Questa unità nasce dal confronto puntuale tra i dieci appelli disponibili del corso di Basi di Dati — sei del 2025 e quattro del 2026 — e tutte le lezioni dei moduli M1–M10.
 
 L'obiettivo non è sostituire i moduli, ma verificare che ogni richiesta d'esame abbia:
 
@@ -16,10 +16,17 @@ L'obiettivo non è sostituire i moduli, ma verificare che ogni richiesta d'esame
 
 ### **2. Integrità delle fonti d'esame**
 
-Sono state esaminate visualmente tutte le sei immagini disponibili, due per appello.
+Sono state esaminate visualmente tutte le 35 pagine disponibili: 26 pagine nei sei PDF del 2025, 3 pagine nel PDF del 7 gennaio 2026 e 6 immagini per gli altri tre appelli 2026.
 
 |Appello|Pagine disponibili|Completezza materiale|
 |---|---:|---|
+|14 gennaio 2025|3|Completo|
+|4 febbraio 2025|6|Completo, incluse tutte le tabelle allegate|
+|26 maggio 2025|3|Completo|
+|13 giugno 2025|5|Completo, inclusi diagramma e fogli allegati|
+|4 luglio 2025|5|Completo, inclusi schema concettuale e tabelle|
+|18 settembre 2025|4|Completo, incluse tutte le tabelle allegate|
+|7 gennaio 2026|3|Completo|
 |8 maggio 2026|2|Il testo principale è presente; manca la tabella allegata dell'Esercizio 4 e lo schedule dell'Esercizio 3 è parzialmente coperto da annotazioni manoscritte|
 |23 maggio 2026|2|Mancano il foglio di affermazioni della Domanda 4 e le tabelle di richieste/risposte dell'Esercizio 1|
 |3 luglio 2026|2|Completo: tutte le richieste e tutti i dati necessari sono visibili|
@@ -30,8 +37,22 @@ Le parti mancanti non sono state ricostruite per congettura. Le soluzioni riport
 
 ### **3. Matrice appello → teoria**
 
+#### **3.1. Appelli 2025**
+
+|Appello|Argomenti richiesti|Copertura nei moduli M1–M10|Esito audit|
+|---|---|---|---|
+|14/01|integrità referenziale e `REFERENCES`; deadlock; cardinalità; recovery; VSR/CSR; SQL/algebra; E-R|[M2](<../../M02_Modello_e_Algebra_Relazionali/UD1/L3 - Vincoli di integrità.md>), [M3](<../../M03_SQL/UD5/L3 - Autorizzazioni e controllo dell’accesso.md>), [M4](<../../M04_Progettazione_di_Basi_di_Dati/UD2/L3 - Modello E-R - Identificatori e gerarchie.md>), [M6](<../../M06_Gestione_Transazioni/UD2/L3 - Gestione dei guasti.md>)|Completa|
+|04/02|ACIDe distribuite; distributività; cardinalità; timestamp; regole di associazione; SQL/algebra; E-R|[M2](<../../M02_Modello_e_Algebra_Relazionali/UD2/L5 - Equivalenza e ottimizzazione delle espressioni algebriche.md>), [M3](<../../M03_SQL/UD3/L2 - Interrogazioni insiemistiche e nidificate.md>), [M4](<../../M04_Progettazione_di_Basi_di_Dati/UD2/L1 - Modello E-R - Entità, relazioni e attributi.md>), [M6](<../../M06_Gestione_Transazioni/UD3/L6 - Timestamp.md>), [M10](<../../M10_Basi_di_Dati_per_supporto_decisioni/UD1/L5 - Data Mining.md>)|Completa|
+|26/05|integrità referenziale; timestamp mono/multi; cardinalità; cube/roll-up; VSR/CSR; SQL/algebra; E-R|[M2](<../../M02_Modello_e_Algebra_Relazionali/UD1/L3 - Vincoli di integrità.md>), [M3](<../../M03_SQL/UD1/L2 - Schemi, Tabelle e Vincoli.md>), [M4](<../../M04_Progettazione_di_Basi_di_Dati/UD2/L2 - Modello E-R - Le cardinalità.md>), [M6](<../../M06_Gestione_Transazioni/UD3/L3 - View-serializzabilità.md>), [M10](<../../M10_Basi_di_Dati_per_supporto_decisioni/UD1/L3 - Rappresentazione multidimensionale dei dati.md>)|Completa|
+|13/06|gerarchie e ristrutturazione; isolamento; trigger; cardinalità; 2PL; associazioni; SQL/algebra; E-R|[M4/UD4](<../../M04_Progettazione_di_Basi_di_Dati/UD4/L2 - Ristrutturazione di schemi E-R - Eliminazione delle gerarchie.md>), [M6](<../../M06_Gestione_Transazioni/UD3/L7 - Meccanismi per la gestione dei lock.md>), [M9](<../../M09_Basi_di_Dati_Attive/UD1/L1 - Basi di dati attive e trigger.md>), [M10](<../../M10_Basi_di_Dati_per_supporto_decisioni/UD1/L5 - Data Mining.md>)|Completa|
+|04/07|2PC; deadlock; cardinalità E-R; equivalenze; VSR/CSR/2PL/TS; SQL/algebra; E-R|[M2](<../../M02_Modello_e_Algebra_Relazionali/UD2/L4 - Prodotto cartesiano e Join.md>), [M4](<../../M04_Progettazione_di_Basi_di_Dati/UD2/L2 - Modello E-R - Le cardinalità.md>), [M6](<../../M06_Gestione_Transazioni/UD3/L6 - Timestamp.md>), [M7](<../../M07_Architetture_Distribuite/UD3/L3_1 - Protocollo di commit a due fasi.md>)|Completa|
+|18/09|2PC; timestamp; cardinalità; trigger; associazioni; SQL/algebra; E-R|[M2](<../../M02_Modello_e_Algebra_Relazionali/UD2/L7 - Idiomi di interrogazione - cardinalità e copertura.md>), [M3](<../../M03_SQL/UD3/L1 - Ordinamenti, aggregazioni e raggruppamenti.md>), [M4](<../../M04_Progettazione_di_Basi_di_Dati/UD2/L3 - Modello E-R - Identificatori e gerarchie.md>), [M6](<../../M06_Gestione_Transazioni/UD3/L6 - Timestamp.md>), [M7](<../../M07_Architetture_Distribuite/UD3/L3_2 - Protocollo di commit a due fasi – Gestione dei guasti e ottimizzazioni.md>), [M9](<../../M09_Basi_di_Dati_Attive/UD1/L1 - Basi di dati attive e trigger.md>)|Completa|
+
+#### **3.2. Appelli 2026**
+
 |Appello e quesito|Argomento richiesto|Copertura nei moduli M1–M10|Esito audit|
 |---|---|---|---|
+|07/01|ACIDe, deadlock, cardinalità, timestamp, SQL/algebra ed E-R|M2, M3, M4, M6, M7 e M10|Completa|
 |08/05 D1|ACID e impatto della distribuzione|[M6/UD1/L1](<../../M06_Gestione_Transazioni/UD1/L1 - Transazioni.md>), [M7/UD3/L1](<../../M07_Architetture_Distribuite/UD3/L1 - Ottimizzazione, concorrenza e atomicità.md>)|Completa|
 |08/05 D2|Prevenzione deadlock con timestamp, wait-die e wound-wait|[M6/UD3/L8](<../../M06_Gestione_Transazioni/UD3/L8 - Deadlock.md>)|Completa|
 |08/05 D3|Terminazione, confluenza, determinismo e grafo di attivazione|[M9/UD1/L3](<../../M09_Basi_di_Dati_Attive/UD1/L3 - Proprietà delle regole attive.md>)|Completa|
@@ -59,10 +80,10 @@ Le parti mancanti non sono state ricostruite per congettura. Le soluzioni riport
 
 ### **4. Esito complessivo**
 
-I moduli M1–M10 coprono tutte le **nozioni** nominate negli appelli. Le integrazioni necessarie riguardano il passaggio dalle definizioni alla soluzione rapida di tre famiglie di esercizi:
+I moduli M1–M10 coprono tutte le **nozioni** nominate nei dieci appelli. Le integrazioni necessarie riguardano il passaggio dalle definizioni alla soluzione rapida di tre famiglie di esercizi:
 
 1. [cardinalità minima e massima](<L1 - Cardinalita minima e massima di espressioni relazionali.md>);
 2. [conteggio degli schedule equivalenti](<L2 - Conteggio degli schedule seriali equivalenti.md>);
 3. [limiti per supporto e confidenza](<L3 - Limiti per supporto e confidenza nelle regole di associazione.md>).
 
-> ✅ Dopo queste integrazioni, la copertura teorica richiesta dai tre appelli è completa. Restano non determinabili soltanto le risposte che dipendono da allegati non forniti o da testo materialmente coperto nell'immagine sorgente.
+> ✅ I sei appelli 2025 sono completi e non introducono lacune ulteriori. La copertura teorica 2025-2026 è completa; restano non determinabili soltanto le parti degli appelli 2026 che dipendono da allegati non forniti o da testo materialmente coperto nella fonte.
