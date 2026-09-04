@@ -661,7 +661,7 @@ Sintassi:
 
 La dispensa mostra anche un esempio di pagina della documentazione ufficiale relativa alla direttiva `Files`.
 
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020260903181949.png)
 
 > 📌 I contenitori servono a definire lo scope delle regole: senza scope, una regola di accesso non dice chiaramente a quali risorse si applica.
 
