@@ -48,7 +48,7 @@ Poiché $a=b=2$ e $n^{\log_ba}=n$, il secondo caso del teorema dell'esperto dà 
 
 #### **1.4. Fibonacci iterativo e ricorsivo**
 
-> **Riferimento di teoria:** [Approfondimento — Fibonacci](../Approfondimenti_per_Esame/L3%20-%20Fibonacci%20iterativo%20ricorsivo%20e%20dinamico.md).
+> **Riferimento di teoria:** [M07/UD1 — Fibonacci: ricorsione vs. iterativo](../../M07_Divide_et_Impera/UD1/L3_Fibonacci_ricorsione_vs_iterativo.md).
 
 La versione iterativa calcola una sola volta $F_2,\ldots,F_n$: tempo $\Theta(n)$ e spazio $\Theta(1)$. La ricorsione ingenua soddisfa
 

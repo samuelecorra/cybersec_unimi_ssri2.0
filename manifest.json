@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-05T13:02:31.199Z",
+  "generatedAt": "2026-09-05T19:47:56.009Z",
   "root": "lessons/cybersecurity",
-  "totalFiles": 6232,
+  "totalFiles": 6234,
   "files": [
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD0 - Strumenti discreti e induzione/L1 - Sommatorie e produttorie.md",
@@ -11624,8 +11624,18 @@
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/ARI_M7_U1_L3_D.pdf",
+      "size": 56059,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/imgs/Pasted image 20260905185121.png",
+      "size": 16596,
+      "ext": ".png"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L0 - Intro UD1.md",
-      "size": 1360,
+      "size": 1680,
       "ext": ".md"
     },
     {
@@ -11636,6 +11646,11 @@
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L2_Progetto_di_algo_Divide_et_Impera.md",
       "size": 5600,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L3_Fibonacci_ricorsione_vs_iterativo.md",
+      "size": 17921,
       "ext": ".md"
     },
     {
@@ -11765,17 +11780,12 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L0 - Audit di copertura degli appelli.md",
-      "size": 12497,
+      "size": 12647,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L2 - Algoritmo di Prim e proprietà del taglio.md",
       "size": 3732,
-      "ext": ".md"
-    },
-    {
-      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L3 - Fibonacci iterativo ricorsivo e dinamico.md",
-      "size": 2955,
       "ext": ".md"
     },
     {
@@ -11795,7 +11805,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_10_gennaio_2025/Soluzione_Appello_10_01_2025.md",
-      "size": 10805,
+      "size": 10804,
       "ext": ".md"
     },
     {
@@ -11820,7 +11830,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_20_marzo_2026/Soluzione_Appello_20_03_2026.md",
-      "size": 10625,
+      "size": 10624,
       "ext": ".md"
     },
     {
@@ -11910,7 +11920,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/Soluzione_Seconda_Prova_In_Itinere_10_01_2025.md",
-      "size": 7392,
+      "size": 7391,
       "ext": ".md"
     },
     {

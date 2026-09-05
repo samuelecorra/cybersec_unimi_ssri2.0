@@ -87,10 +87,9 @@ Ogni domanda è stata confrontata con gli 11 moduli didattici esistenti. “Cope
 
 ### **3. Lacune colmate**
 
-L'audit iniziale aveva isolato cinque lacune sostanziali, concentrate in quattro lezioni. Due di esse — MergeSort e QuickSort, allora assenti come algoritmi concreti in M07 (che ne conteneva solo il paradigma Divide et Impera) — sono state nel frattempo scritte come lezioni autonome direttamente in [M07/UD2/L1](../../M07_Divide_et_Impera/UD2/L1_Merge_sort.md) e [L2](../../M07_Divide_et_Impera/UD2/L2_Quick_sort.md): non sono quindi più un'integrazione di questa unità, ma parte organica del modulo, e la lezione dedicata di Approfondimenti è stata rimossa. Le tre lacune originarie sono trattate in:
+L'audit iniziale aveva isolato cinque lacune sostanziali, concentrate in quattro lezioni. Tre di esse sono state nel frattempo scritte come lezioni autonome direttamente nel modulo di competenza, e non sono quindi più un'integrazione di questa unità ma parte organica del programma: **MergeSort** e **QuickSort** — allora assenti come algoritmi concreti in M07, che ne conteneva solo il paradigma Divide et Impera — in [M07/UD2/L1](../../M07_Divide_et_Impera/UD2/L1_Merge_sort.md) e [L2](../../M07_Divide_et_Impera/UD2/L2_Quick_sort.md); il confronto **Fibonacci ricorsivo contro iterativo** in [M07/UD1/L3](../../M07_Divide_et_Impera/UD1/L3_Fibonacci_ricorsione_vs_iterativo.md), che corrisponde alla dispensa ufficiale della docenza per quell'unità. Le relative lezioni di Approfondimenti sono state rimosse. Le due lacune che restano proprie di questa unità sono trattate in:
 
 - [L2 — Prim e proprietà del taglio](L2%20-%20Algoritmo%20di%20Prim%20e%20propriet%C3%A0%20del%20taglio.md): nozione di taglio, dimostrazione di sicurezza e algoritmo;
-- [L3 — Fibonacci](L3%20-%20Fibonacci%20iterativo%20ricorsivo%20e%20dinamico.md): confronto rigoroso tra le implementazioni;
 - [L4 — Ricerca di confine e maggioranza](L4%20-%20Ricerca%20binaria%20di%20confine%20ed%20elemento%20maggioritario.md): due schemi algoritmici ricorrenti negli esercizi.
 
 I PDF aggiunti hanno inoltre introdotto AVL, B-tree e alberi rosso-neri, che M05 anticipa senza sviluppare operativamente. Le soluzioni del 17 gennaio e del 9 giugno ne forniscono definizioni, convenzioni e trasformazioni complete senza presupporre materiale mancante.

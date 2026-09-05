@@ -72,7 +72,7 @@ Il risultato vale nei casi migliore, medio e peggiore: anche un vettore ordinato
 
 **Traccia.** Spiegare perché il calcolo iterativo di Fibonacci è lineare mentre quello ricorsivo è esponenziale.
 
-> **Riferimento di teoria:** [Approfondimento — Fibonacci](../Approfondimenti_per_Esame/L3%20-%20Fibonacci%20iterativo%20ricorsivo%20e%20dinamico.md).
+> **Riferimento di teoria:** [M07/UD1 — Fibonacci: ricorsione vs. iterativo](../../M07_Divide_et_Impera/UD1/L3_Fibonacci_ricorsione_vs_iterativo.md).
 
 L'algoritmo iterativo calcola una volta sola ciascuno dei valori $F_2,\ldots,F_n$ e mantiene gli ultimi due: $\Theta(n)$ tempo e $\Theta(1)$ spazio. La ricorsione ingenua esegue invece entrambe le chiamate `FIB(n-1)` e `FIB(n-2)` senza ricordare i risultati. La sua ricorrenza
 

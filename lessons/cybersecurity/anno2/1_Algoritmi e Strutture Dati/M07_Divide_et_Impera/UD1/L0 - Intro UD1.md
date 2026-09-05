@@ -15,6 +15,8 @@ In questa unità si analizzeranno dunque:
 - e i **gradi di libertà** che il progettista ha nel definire la dimensione dei sottoproblemi, il numero delle chiamate ricorsive e la modalità di combinazione delle soluzioni.
     
 
+L'unità si chiude con un **caso di studio** — il calcolo dei numeri di Fibonacci — che mette a confronto una soluzione ricorsiva e una iterativa dello stesso problema, mostrando come la sola traduzione letterale di una definizione ricorsiva possa produrre un algoritmo esponenziale dove ne basterebbe uno lineare.
+
 Comprendere lo schema generale significa quindi **imparare a riconoscere la logica nascosta** dietro gli algoritmi più efficienti e acquisire la capacità di **progettarne di nuovi** con un controllo consapevole sulla loro complessità computazionale.
 
 ---

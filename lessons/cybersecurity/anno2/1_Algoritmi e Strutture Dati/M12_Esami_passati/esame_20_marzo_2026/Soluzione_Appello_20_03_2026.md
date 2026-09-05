@@ -56,7 +56,7 @@ L'ordinamento costa $O(n\log n)$. Ogni lavoro causa un inserimento $O(\log n)$ e
 
 **Traccia.** Confrontare le versioni iterativa e ricorsiva di Fibonacci e indicare quale sia computazionalmente migliore.
 
-> **Riferimento di teoria:** [Approfondimento — Fibonacci](../Approfondimenti_per_Esame/L3%20-%20Fibonacci%20iterativo%20ricorsivo%20e%20dinamico.md).
+> **Riferimento di teoria:** [M07/UD1 — Fibonacci: ricorsione vs. iterativo](../../M07_Divide_et_Impera/UD1/L3_Fibonacci_ricorsione_vs_iterativo.md).
 
 La versione iterativa produce una volta sola ogni termine e conserva due valori: $\Theta(n)$ tempo, $\Theta(1)$ spazio. La ricorsione ingenua soddisfa
 
