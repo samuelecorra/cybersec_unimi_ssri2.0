@@ -13,9 +13,10 @@ Durante questa unità impareremo quindi a:
 
 - comprendere come un **insieme** può essere rappresentato attraverso un **albero di ricerca**;  
 - analizzare il **problema del bilanciamento** e capire perché è cruciale per le prestazioni;  
-- conoscere le **principali realizzazioni bilanciate** degli alberi di ricerca, che consentono di mantenere tempi di accesso ottimali.
+- conoscere le **principali realizzazioni bilanciate** degli alberi di ricerca, che consentono di mantenere tempi di accesso ottimali;
+- studiare in dettaglio gli **alberi rosso-neri**, la realizzazione bilanciata piu' diffusa nelle librerie standard.
 
-Questa unità introduce le basi concettuali che porteranno poi agli **alberi 2-3**, ai **B-alberi** e alle strutture più avanzate di organizzazione dati.
+Questa unita' introduce le basi concettuali che portano agli **alberi rosso-neri** (Lezione 2), agli **alberi 2-3**, ai **B-alberi** e alle strutture piu' avanzate di organizzazione dati.
 
 ---
 

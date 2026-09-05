@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-01T11:53:29.447Z",
+  "generatedAt": "2026-09-05T13:02:31.199Z",
   "root": "lessons/cybersecurity",
-  "totalFiles": 6110,
+  "totalFiles": 6232,
   "files": [
     {
       "path": "anno1/1_Analisi 1/M01_Matematica Liceale/UD0 - Strumenti discreti e induzione/L1 - Sommatorie e produttorie.md",
@@ -1205,7 +1205,7 @@
     },
     {
       "path": "anno1/1_Analisi 1/M11_Studio_di_Funzione/MCS_M11.zip",
-      "size": 134,
+      "size": 145427679,
       "ext": ".zip"
     },
     {
@@ -1380,7 +1380,7 @@
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/lc2/LC2Edit.cnt",
-      "size": 83,
+      "size": 87,
       "ext": ".cnt"
     },
     {
@@ -1395,12 +1395,12 @@
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/lc2/Readme.txt",
-      "size": 1557,
+      "size": 1603,
       "ext": ".txt"
     },
     {
       "path": "anno1/2_Architettura_Elaboratori/lc2/Simulate.cnt",
-      "size": 734,
+      "size": 759,
       "ext": ".cnt"
     },
     {
@@ -11450,12 +11450,17 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/L0 - Intro UD3.md",
-      "size": 1388,
+      "size": 1538,
       "ext": ".md"
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/L1_Alberi_bilanciati_di_ricerca.md",
       "size": 5830,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/L2_Alberi_rosso_neri.md",
+      "size": 27430,
       "ext": ".md"
     },
     {
@@ -11760,7 +11765,7 @@
     },
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L0 - Audit di copertura degli appelli.md",
-      "size": 9372,
+      "size": 12497,
       "ext": ".md"
     },
     {
@@ -11791,6 +11796,16 @@
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_10_gennaio_2025/Soluzione_Appello_10_01_2025.md",
       "size": 10805,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_17_gennaio_2025/algo_17_01_2025.pdf",
+      "size": 238362,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_17_gennaio_2025/Soluzione_Appello_17_01_2025.md",
+      "size": 9446,
       "ext": ".md"
     },
     {
@@ -11834,6 +11849,26 @@
       "ext": ".md"
     },
     {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_28_luglio_2025/algo28_07_2025.pdf",
+      "size": 177345,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_28_luglio_2025/Soluzione_Appello_28_07_2025.md",
+      "size": 8008,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_7_febbraio_2025/algo_07_02_2025.pdf",
+      "size": 115610,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_7_febbraio_2025/Soluzione_Appello_07_02_2025.md",
+      "size": 7573,
+      "ext": ".md"
+    },
+    {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_gennaio_2026/esame_9_gennaio_2026_1.png",
       "size": 525204,
       "ext": ".png"
@@ -11846,6 +11881,166 @@
     {
       "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_gennaio_2026/Soluzione_Appello_09_01_2026.md",
       "size": 9709,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_giugno_2025/algo_09_06_2025.pdf",
+      "size": 114454,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_giugno_2025/Soluzione_Appello_09_06_2025.md",
+      "size": 8248,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/2024-11-23-ppi.pdf",
+      "size": 122460,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/2025-01-10-spi.pdf",
+      "size": 158242,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/Soluzione_Prima_Prova_In_Itinere_23_11_2024.md",
+      "size": 8098,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/Soluzione_Seconda_Prova_In_Itinere_10_01_2025.md",
+      "size": 7392,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-10-06.pdf",
+      "size": 2268385,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-10-17.pdf",
+      "size": 1288582,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-10-24.pdf",
+      "size": 617025,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-10-31.pdf",
+      "size": 2347127,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-07.pdf",
+      "size": 2091708,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-17.pdf",
+      "size": 1637538,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-21.pdf",
+      "size": 1214263,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-24.pdf",
+      "size": 2069620,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-28.pdf",
+      "size": 1806946,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-12-01.pdf",
+      "size": 3588991,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-12-12.pdf",
+      "size": 1482454,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-12-15.pdf",
+      "size": 2478436,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-12-19.pdf",
+      "size": 2302399,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_01_12_2025.md",
+      "size": 26979,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_06_10_2025.md",
+      "size": 16538,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_07_11_2025.md",
+      "size": 20585,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_12_12_2025.md",
+      "size": 16667,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_15_12_2025.md",
+      "size": 21511,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_17_10_2025.md",
+      "size": 16700,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_17_11_2025.md",
+      "size": 20372,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_19_12_2025.md",
+      "size": 17890,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_21_11_2025.md",
+      "size": 12581,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_24_10_2025.md",
+      "size": 10530,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_24_11_2025.md",
+      "size": 17180,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_28_11_2025.md",
+      "size": 13090,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_31_10_2025.md",
+      "size": 19647,
       "ext": ".md"
     },
     {
@@ -15375,7 +15570,7 @@
     },
     {
       "path": "anno2/4_Basi Di Dati/M11_Esami_passati/Approfondimenti_per_Esame/L0 - Audit di copertura degli appelli 2026.md",
-      "size": 7268,
+      "size": 11117,
       "ext": ".md"
     },
     {
@@ -15424,6 +15619,16 @@
       "ext": ".md"
     },
     {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_7_gennaio_2026/BD-2026_01_07.pdf",
+      "size": 50414,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_7_gennaio_2026/Soluzione_Appello_07_01_2026.md",
+      "size": 17509,
+      "ext": ".md"
+    },
+    {
       "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_8_maggio_2026/esame_8_maggio_2026_1.png",
       "size": 334584,
       "ext": ".png"
@@ -15436,6 +15641,66 @@
     {
       "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esame_8_maggio_2026/Soluzione_Appello_08_05_2026.md",
       "size": 14585,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/BD-2025_01_14.pdf",
+      "size": 48052,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/BD-2025_02_04.pdf",
+      "size": 50593,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/BD-2025_05_26.pdf",
+      "size": 52100,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/BD-2025_06_13.pdf",
+      "size": 59759,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/BD-2025_07_04.pdf",
+      "size": 155808,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/BD-2025_09_18.pdf",
+      "size": 51335,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/Soluzione_Appello_04_02_2025.md",
+      "size": 6702,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/Soluzione_Appello_04_07_2025.md",
+      "size": 7243,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/Soluzione_Appello_13_06_2025.md",
+      "size": 8682,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/Soluzione_Appello_14_01_2025.md",
+      "size": 7979,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/Soluzione_Appello_18_09_2025.md",
+      "size": 7514,
+      "ext": ".md"
+    },
+    {
+      "path": "anno2/4_Basi Di Dati/M11_Esami_passati/esami2025/Soluzione_Appello_26_05_2025.md",
+      "size": 7155,
       "ext": ".md"
     },
     {
@@ -30314,6 +30579,31 @@
       "ext": ".md"
     },
     {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD2/imgs/Pasted image 20260902121048.png",
+      "size": 80842,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD2/imgs/Pasted image 20260902121058.png",
+      "size": 80842,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD2/imgs/Pasted image 20260902121148.png",
+      "size": 218860,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD2/imgs/Pasted image 20260902121405.png",
+      "size": 282282,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD2/imgs/Pasted image 20260902121621.png",
+      "size": 112356,
+      "ext": ".png"
+    },
+    {
       "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD2/L1.md",
       "size": 14251,
       "ext": ".md"
@@ -30340,7 +30630,7 @@
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD2/L6.md",
-      "size": 16571,
+      "size": 16665,
       "ext": ".md"
     },
     {
@@ -30359,23 +30649,168 @@
       "ext": ".pdf"
     },
     {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902131125.png",
+      "size": 16898,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902151542.png",
+      "size": 80686,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902152432.png",
+      "size": 84627,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902152456.png",
+      "size": 80731,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902152526.png",
+      "size": 84120,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902152609.png",
+      "size": 96285,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902152631.png",
+      "size": 159845,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902152702.png",
+      "size": 172118,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902152905.png",
+      "size": 80600,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902152920.png",
+      "size": 42203,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902153006.png",
+      "size": 268489,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902153015.png",
+      "size": 268489,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902153332.png",
+      "size": 30277,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902153342.png",
+      "size": 40378,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902153352.png",
+      "size": 54843,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902153421.png",
+      "size": 31527,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902153434.png",
+      "size": 36753,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902153529.png",
+      "size": 56852,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902192149.png",
+      "size": 29388,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902192229.png",
+      "size": 35940,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902192241.png",
+      "size": 58725,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902211129.png",
+      "size": 75432,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902211556.png",
+      "size": 124900,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902211946.png",
+      "size": 77449,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902212242.png",
+      "size": 164216,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902212428.png",
+      "size": 40973,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902212451.png",
+      "size": 154960,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902213050.png",
+      "size": 142161,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/imgs/Pasted image 20260902213126.png",
+      "size": 134481,
+      "ext": ".png"
+    },
+    {
       "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/L1.md",
       "size": 15985,
       "ext": ".md"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/L2.md",
-      "size": 23388,
+      "size": 23670,
       "ext": ".md"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/L3.md",
-      "size": 19571,
+      "size": 19759,
       "ext": ".md"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/L4.md",
-      "size": 23925,
+      "size": 24254,
       "ext": ".md"
     },
     {
@@ -30385,7 +30820,7 @@
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M3/UD3/L6.md",
-      "size": 21734,
+      "size": 21827,
       "ext": ".md"
     },
     {
@@ -30404,6 +30839,31 @@
       "ext": ".md"
     },
     {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD2/imgs/Pasted image 20260903185020.png",
+      "size": 340035,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD2/imgs/Pasted image 20260903185304.png",
+      "size": 213324,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD2/imgs/Pasted image 20260903185411.png",
+      "size": 296246,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD2/imgs/Pasted image 20260903190036.png",
+      "size": 86477,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD2/imgs/Pasted image 20260903190434.png",
+      "size": 263443,
+      "ext": ".png"
+    },
+    {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD2/L1.md",
       "size": 26802,
       "ext": ".md"
@@ -30419,19 +30879,64 @@
       "ext": ".md"
     },
     {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD3/imgs/Pasted image 20260902214809.png",
+      "size": 314359,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD3/imgs/Pasted image 20260902220211.png",
+      "size": 172065,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD3/imgs/Pasted image 20260902220339.png",
+      "size": 309191,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD3/imgs/Pasted image 20260902221645.png",
+      "size": 311130,
+      "ext": ".png"
+    },
+    {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD3/L1.md",
       "size": 14478,
       "ext": ".md"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD3/L2.md",
-      "size": 29356,
+      "size": 29253,
       "ext": ".md"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD3/L3.md",
-      "size": 29117,
+      "size": 29066,
       "ext": ".md"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD4/imgs/Pasted image 20260903191037.png",
+      "size": 203903,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD4/imgs/Pasted image 20260903192605.png",
+      "size": 86469,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD4/imgs/Pasted image 20260903192642.png",
+      "size": 324025,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD4/imgs/Pasted image 20260903192732.png",
+      "size": 242942,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD4/imgs/Pasted image 20260903192906.png",
+      "size": 219737,
+      "ext": ".png"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD4/L1.md",
@@ -30440,7 +30945,7 @@
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD4/L2.md",
-      "size": 28414,
+      "size": 28407,
       "ext": ".md"
     },
     {
@@ -30457,6 +30962,11 @@
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD5/L1/es_apache1.pdf",
       "size": 53736,
       "ext": ".pdf"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD5/L1/imgs/Pasted image 20260903181949.png",
+      "size": 719229,
+      "ext": ".png"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD5/L1/L1_Introduzione_ad_Apache.md",
@@ -30479,19 +30989,79 @@
       "ext": ".md"
     },
     {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903130137.png",
+      "size": 156536,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903130154.png",
+      "size": 349888,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903130212.png",
+      "size": 280844,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903130447.png",
+      "size": 429741,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903131317.png",
+      "size": 160077,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903132002.png",
+      "size": 257428,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903132930.png",
+      "size": 195252,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903133620.png",
+      "size": 182524,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/imgs/Pasted image 20260903133630.png",
+      "size": 227593,
+      "ext": ".png"
+    },
+    {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/L1.md",
-      "size": 21389,
+      "size": 21436,
       "ext": ".md"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/L2.md",
-      "size": 21242,
+      "size": 21289,
       "ext": ".md"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD6/L3.md",
-      "size": 18890,
+      "size": 18937,
       "ext": ".md"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD7/imgs/Pasted image 20260903140221.png",
+      "size": 191875,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD7/imgs/Pasted image 20260903140234.png",
+      "size": 161506,
+      "ext": ".png"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD7/imgs/Pasted image 20260903140237.png",
+      "size": 161506,
+      "ext": ".png"
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD7/L1.md",
@@ -30500,7 +31070,7 @@
     },
     {
       "path": "anno3/7_Sicurezza_Web&Mobile/M4/UD7/L2.md",
-      "size": 22495,
+      "size": 22588,
       "ext": ".md"
     },
     {
@@ -30519,8 +31089,13 @@
       "ext": ".pdf"
     },
     {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M5/UD1/L1/imgs/Pasted image 20260903142234.png",
+      "size": 791537,
+      "ext": ".png"
+    },
+    {
       "path": "anno3/7_Sicurezza_Web&Mobile/M5/UD1/L1/L1.md",
-      "size": 20143,
+      "size": 20190,
       "ext": ".md"
     },
     {
@@ -30537,6 +31112,41 @@
       "path": "anno3/7_Sicurezza_Web&Mobile/M5/UD1/L3.md",
       "size": 14759,
       "ext": ".md"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M6_Esami_passati/Guida_Ripasso_Ultime_Ore.md",
+      "size": 29946,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M6_Esami_passati/Soluzione_Appello_03_07_2026.md",
+      "size": 76644,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M6_Esami_passati/Soluzione_Appello_10_07_2026.md",
+      "size": 59480,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M6_Esami_passati/Soluzione_Appello_16_06_2026.md",
+      "size": 59869,
+      "ext": ".md"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M6_Esami_passati/traccia_10luglio2026.pdf",
+      "size": 41242,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M6_Esami_passati/traccia_16giugno2026.pdf",
+      "size": 50911,
+      "ext": ".pdf"
+    },
+    {
+      "path": "anno3/7_Sicurezza_Web&Mobile/M6_Esami_passati/traccia_3luglio2026.pdf",
+      "size": 46324,
+      "ext": ".pdf"
     },
     {
       "path": "extra/python_corso_completo/l1.py",
