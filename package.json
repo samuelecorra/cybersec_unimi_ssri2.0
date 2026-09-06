@@ -10,6 +10,7 @@
     "validate:hash-routing": "node scripts/validate-hash-routing.mjs",
     "test:hash-routing:e2e": "node scripts/run-hash-routing-e2e.mjs",
     "validate:source-renderer": "node scripts/validate-source-renderer.mjs",
+    "validate:sort-names": "node scripts/validate-sort-names.mjs",
     "test:source-renderer:e2e": "node scripts/run-source-renderer-e2e.mjs"
   },
   "dependencies": {

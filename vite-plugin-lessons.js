@@ -5,6 +5,7 @@ import {
   getFileKind,
   getSourceFileType,
 } from './src/utils/fileTypes.js';
+import { compareNames } from './src/utils/sortNames.js';
 
 const LESSONS_DIR = 'lessons';
 const VIRTUAL_TREE = 'virtual:lesson-tree';
@@ -109,7 +110,7 @@ export function scanDir(dir, base = '') {
     const aLeaf = a.type !== 'dir';
     const bLeaf = b.type !== 'dir';
     if (aLeaf !== bLeaf) return aLeaf ? 1 : -1;
-    return a.name.localeCompare(b.name, 'it', { numeric: true });
+    return compareNames(a.name, b.name);
   });
   return result;
 }
