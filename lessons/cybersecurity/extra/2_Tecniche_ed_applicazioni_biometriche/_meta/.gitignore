@@ -1,0 +1,4 @@
+# Regenerable extraction artefacts: rebuild with  python _meta/extract_pdf_text.py
+_text_cache/
+page_index.json
+__pycache__/
