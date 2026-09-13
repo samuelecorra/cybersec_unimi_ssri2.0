@@ -1,191 +1,584 @@
-
-## **Lezione 1: Classi P e NP**
+## **Lezione 1 — P, NP, Polynomial-Time Reductions and NP-Completeness / Classi P e NP, riduzioni polinomiali e NP-completezza**
 
 ### **1. Introduzione**
 
-Dopo aver distinto i problemi facili e difficili nel modulo precedente, in questa lezione si introduce la **classificazione formale dei problemi computazionali** in base al loro **grado di difficoltà**.  
-L’obiettivo è comprendere come, partendo da una definizione rigorosa di “tempo polinomiale”, si possano individuare classi di problemi accomunati dallo stesso livello di complessità.
+Nelle lezioni precedenti abbiamo visto:
+
+- la distinzione tra **trovare** e **verificare** una soluzione;
+- il concetto di **polynomial certificate / certificato polinomiale**;
+- la **nondeterministic computation / computazione non deterministica**;
+- la simulazione deterministica mediante **enumeration / enumerazione**.
+
+Ora possiamo formalizzare la classificazione dei problemi computazionali e introdurre lo strumento fondamentale per confrontarne la difficoltà:
+
+\[ \boxed{\text{Polynomial-Time Reduction / riduzione in tempo polinomiale}}. \]
+
+Da questo nasceranno le nozioni di:
+
+\[ \boxed{P,\quad NP,\quad NP\text{-hard},\quad NP\text{-complete}}. \]
 
 ---
 
-### **2. Questione aperta: P vs NP**
+# **2. Le classi P e NP**
 
-Abbiamo visto che un **algoritmo polinomiale deterministico** può simulare, in un certo senso, un **algoritmo non deterministico** nel visitare l’albero delle scelte.  
-La domanda fondamentale che guida la teoria della complessità è quindi:
+## **2.1 P — Polynomial Time**
 
-> **Esiste una simulazione polinomiale di un algoritmo non deterministico tramite un algoritmo deterministico?**
+La classe:
 
-In altre parole:
+\[ \boxed{P} \]
 
-> **P = NP ?**
+contiene tutti i **decision problems / problemi decisionali** risolvibili da un algoritmo **deterministico** in tempo polinomiale.
 
-Ad oggi, questa è una **questione aperta**: nessuno è riuscito a dimostrare né che P = NP, né che P ≠ NP.  
-È uno dei più grandi problemi irrisolti della matematica e dell’informatica.
+Formalmente:
 
----
+\[ \boxed{ P= \{L\mid L\text{ è decidibile deterministicamente in tempo polinomiale}\}. } \]
 
-### **3. Problemi NP-completi**
-
-Si è individuata una particolare classe di problemi, detti **NP-completi**, che presentano tre caratteristiche fondamentali:
-
-1. Sono risolvibili in **tempo polinomiale** da un **algoritmo non deterministico**.
-    
-2. **Non si conosce alcun algoritmo deterministico** in tempo polinomiale che li risolva.
-    
-3. Se si trovasse un algoritmo deterministico polinomiale per **uno solo di essi**, allora **tutti** i problemi in NP diventerebbero risolvibili in tempo polinomiale (cioè P = NP).
-    
-
-Questi problemi rappresentano dunque **il punto critico** tra ciò che è risolvibile in modo efficiente e ciò che non lo è.
+In termini intuitivi, $P$ rappresenta la classe dei problemi considerati **efficientemente risolvibili** nel modello teorico della complessità.
 
 ---
 
-### **4. Ipotesi di lavoro**
+## **2.2 NP — Nondeterministic Polynomial Time**
 
-Per lo studio della complessità si assume che:
+La classe:
 
-- I problemi siano considerati **in forma decisionale**, cioè con risposta “SÌ” o “NO”.
-    
-- Il linguaggio di riferimento includa le istruzioni **`choice`**, **`success`** e **`failure`**, usate nel modello non deterministico.
-    
-- I numeri utilizzati siano **codificati in modo conciso**, ossia in una base $b > 1$ (ad esempio binaria o decimale).
-    
+\[ \boxed{NP} \]
 
----
+contiene tutti i problemi decisionali risolvibili in tempo polinomiale da un algoritmo **non deterministico**.
 
-### **5. Le classi P e NP**
+Equivalentemente:
 
-#### **Classe P**
+> un problema appartiene a $NP$ se ogni sua **YES-instance** possiede un certificato di lunghezza polinomiale verificabile deterministicamente in tempo polinomiale.
 
-È la classe di **tutti i problemi decisionali risolvibili in tempo polinomiale** mediante **algoritmi deterministici**.  
-In pratica, raccoglie i **problemi “facili”**, per i quali esistono soluzioni efficienti.
+Quindi abbiamo le due caratterizzazioni equivalenti:
 
-#### **Classe NP**
-
-È la classe di **tutti i problemi decisionali risolvibili in tempo polinomiale da algoritmi non deterministici**.  
-Equivalente: tutti i problemi per cui **una soluzione può essere verificata in tempo polinomiale**.
-
-#### **Risultati noti**
-
-- È noto che **P ⊆ NP**.
-    
-- La questione **P = NP** rimane **aperta**.
-    
+\[ \boxed{ \text{Nondeterministic Polynomial Time} \iff \text{Polynomial-Time Verification} } \]
 
 ---
 
-### **6. Riducibilità polinomiale**
+# **3. Relazione tra P e NP**
 
-Dati due problemi decisionali $A$ e $B$, si dice che:
+Ogni algoritmo deterministico può essere considerato un caso particolare di algoritmo non deterministico.
 
-$$  
-A \preceq B  
-$$
+Pertanto:
 
-(se legge “A si riduce in tempo polinomiale a B”)  
-se esiste una **funzione di trasformazione polinomiale** $f$ tale che:
+\[ \boxed{P\subseteq NP}. \]
 
-$$  
-f : \text{(istanze di A)} \to \text{(istanze di B)}  
-$$
+La grande questione aperta è capire se questa inclusione sia stretta oppure no:
 
-e vale che:
+\[ \boxed{P\stackrel{?}{=}NP}. \]
 
-- $f$ è **computabile in tempo polinomiale** da un algoritmo deterministico;
-    
-- $x$ è istanza sì per $A$ **se e solo se** $f(x)$ è istanza sì per $B$.
-    
+Equivalentemente:
 
----
+> **Tutto ciò che può essere verificato in tempo polinomiale può anche essere trovato e deciso deterministicamente in tempo polinomiale?**
 
-#### **Conseguenze della riduzione**
+Ad oggi non sappiamo se:
 
-- Se $B \in \text{NP}$, allora anche $A \in \text{NP}$.
-    
-- Se $B \in \text{P}$, allora anche $A \in \text{P}$.
-    
-- Se $A$ richiede $\Omega(p(n))$ passi e $f$ è calcolabile in $O(p(n))$, allora anche $B$ è $\Omega(p(n))$.
-    
+\[ P=NP \]
 
-La **riduzione polinomiale** è quindi lo strumento con cui **si confrontano i livelli di difficoltà** dei problemi computazionali.
+oppure:
+
+\[ P\neq NP. \]
 
 ---
 
-### **7. Il Teorema di Cook-Levin**
+# **4. Polynomial-Time Reduction / Riduzione in tempo polinomiale**
 
-Il **Teorema di Cook-Levin (1971)** risponde alla domanda:
+Per confrontare formalmente la difficoltà di due problemi utilizziamo le **riduzioni polinomiali**.
 
-> “Esiste un problema in NP tale che, se fosse dimostrato appartenere a P, allora si avrebbe automaticamente P = NP?”
+Dati due problemi decisionali $A$ e $B$, scriviamo:
 
-La risposta è **sì**.
+\[ \boxed{A\leq_P B} \]
 
-#### **Enunciato**
+oppure, nella notazione della docente:
 
-Ogni problema in NP si **riduce in tempo polinomiale** al **problema del Domino Limitato** (equivalente al problema della soddisfacibilità booleana, SAT).
+\[ A\preceq B. \]
 
-#### **Conseguenze**
+Si legge:
 
-- **Corollario:**  
-    P = NP se e solo se **Domino Limitato ∈ P**.
-    
-- **Definizioni derivate:**
-    
-    - Un problema $A$ è **NP-arduo** se ogni $B ∈ NP$ si riduce a $A$.
-        
-    - Un problema $A$ è **NP-completo** se è **NP-arduo** e **$A ∈ NP$**.
-        
+> **$A$ si riduce in tempo polinomiale a $B$.**
 
----
+Significa che esiste una funzione:
 
-### **8. Dimostrare la NP-completezza**
+\[ f:\text{istanze di }A\rightarrow\text{istanze di }B \]
 
-Per dimostrare che un problema decisionale $A$ è **NP-completo**, si segue questo schema:
+tale che:
 
-1. Dimostrare che **$A ∈ NP$** (cioè che ha un certificato polinomiale).
-    
-2. Scegliere un problema noto **NP-completo** $B$.
-    
-3. Mostrare che **$B \preceq A$**, ossia che esiste una **riduzione polinomiale** da $B$ ad $A$.
-    
+1. $f$ è calcolabile deterministicamente in tempo polinomiale;
+2. per ogni istanza $x$:
 
-Non è necessario dimostrare la riduzione da **ogni** problema in NP:  
-basta mostrarla da **uno già noto NP-completo**, poiché la transitività delle riduzioni garantisce la validità del risultato.
+\[ \boxed{ x\in A \iff f(x)\in B. } \]
+
+In altre parole, trasformiamo efficientemente un'istanza di $A$ in un'istanza equivalente di $B$.
 
 ---
 
-### **9. Esempi di problemi NP-completi**
+# **5. Come va interpretata la direzione della riduzione**
 
-- Domino Limitato
-    
-- Soddisfacibilità Booleana (SAT)
-    
-- Circuito Hamiltoniano
-    
-- Problema della Cricca
-    
-- Colorazione dei grafi
-    
-- Insieme indipendente
-    
-- Problema dello Zaino
-    
-- Partizione
-    
-- Abbinamento tridimensionale (3DM)
-    
-- TSP (versione decisionale)
-    
+Se:
+
+\[ A\leq_P B, \]
+
+stiamo dicendo:
+
+> **se sapessi risolvere efficientemente $B$, saprei risolvere efficientemente anche $A$.**
+
+Infatti:
+
+\[ A \xrightarrow{\ f\ } B \xrightarrow{\text{algoritmo per }B} YES/NO. \]
+
+Quindi $B$ è, intuitivamente, **almeno difficile quanto $A$** rispetto alle riduzioni polinomiali.
+
+Questa direzione è fondamentale:
+
+\[ \boxed{ A\leq_P B \quad\Rightarrow\quad B\text{ è almeno difficile quanto }A. } \]
 
 ---
 
-### **10. In sintesi**
+# **6. Conseguenze fondamentali delle riduzioni**
 
-- Le **classi P e NP** forniscono una prima distinzione formale tra **problemi facili e difficili**.
-    
-- La **riducibilità polinomiale** è lo strumento per confrontare problemi tra loro.
-    
-- Il **Teorema di Cook-Levin** ha introdotto il concetto di **NP-completezza**, che unifica molti problemi difficili sotto un’unica categoria.
-    
-- Dimostrare che un problema è NP-completo significa collocarlo tra i **più complessi problemi risolvibili in tempo polinomiale non deterministico**.
-    
+Se:
 
-Con questa lezione si conclude il percorso iniziato con la nozione di “problema difficile” e si arriva alla **fondazione teorica moderna della complessità computazionale**.
+\[ A\leq_P B \]
+
+allora valgono in particolare queste proprietà.
+
+### Se $B\in P$
+
+\[ \boxed{ A\leq_P B \land B\in P \Rightarrow A\in P. } \]
+
+Perché possiamo trasformare $A$ in $B$ e poi usare l'algoritmo polinomiale per $B$.
+
+---
+
+### Se $B\in NP$
+
+\[ \boxed{ A\leq_P B \land B\in NP \Rightarrow A\in NP. } \]
+
+---
+
+### Uso contrario per dimostrare difficoltà
+
+Se sappiamo che $A$ è un problema difficile e mostriamo:
+
+\[ A\leq_P B, \]
+
+allora stiamo trasferendo la difficoltà verso $B$.
+
+Questa sarà precisamente la tecnica utilizzata per dimostrare la **NP-hardness**.
+
+> Non è invece corretto affermare in generale che una riduzione polinomiale trasferisca automaticamente uno specifico lower bound $\Omega(p(n))$ da $A$ a $B$ nella stessa identica forma: bisogna considerare anche il costo della riduzione e la dimensione dell'istanza prodotta.
+
+---
+
+# **7. Transitivity / Transitività delle riduzioni**
+
+Le riduzioni polinomiali sono transitive.
+
+Se:
+
+\[ A\leq_P B \]
+
+e:
+
+\[ B\leq_P C, \]
+
+allora:
+
+\[ \boxed{A\leq_P C}. \]
+
+Infatti possiamo comporre le due trasformazioni polinomiali:
+
+\[ A\rightarrow B\rightarrow C. \]
+
+Questa proprietà è ciò che rende possibile costruire una rete di problemi NP-completi partendo da pochi problemi iniziali.
+
+---
+
+# **8. NP-hard / NP-difficile**
+
+Un problema $A$ è:
+
+\[ \boxed{\text{NP-hard / NP-difficile}} \]
+
+se ogni problema appartenente a $NP$ si riduce polynomialmente ad $A$.
+
+Formalmente:
+
+\[ \boxed{ \forall B\in NP,\quad B\leq_P A. } \]
+
+Quindi $A$ è almeno difficile quanto ogni problema appartenente a $NP$.
+
+Attenzione:
+
+> Un problema NP-hard **non deve necessariamente appartenere a $NP$**.
+
+Può anche non essere un problema decisionale oppure trovarsi al di fuori di $NP$.
+
+---
+
+# **9. NP-complete / NP-completo**
+
+Un problema $A$ è:
+
+\[ \boxed{\text{NP-complete / NP-completo}} \]
+
+se valgono contemporaneamente:
+
+\[ \boxed{A\in NP} \]
+
+e:
+
+\[ \boxed{A\text{ è NP-hard}}. \]
+
+Quindi:
+
+\[ \boxed{ NP\text{-complete} = NP \cap NP\text{-hard}. } \]
+
+I problemi NP-completi sono quindi i problemi **più difficili all'interno di $NP$**, nel senso delle riduzioni polinomiali.
+
+---
+
+# **10. Perché gli NP-completi sono così importanti?**
+
+Supponiamo che $C$ sia NP-completo.
+
+Per definizione:
+
+\[ \forall A\in NP,\quad A\leq_P C. \]
+
+Ora immaginiamo di trovare un algoritmo deterministico polinomiale per $C$.
+
+Avremmo:
+
+\[ A \leq_P C \in P. \]
+
+Quindi:
+
+\[ A\in P \]
+
+per ogni $A\in NP$.
+
+Da cui:
+
+\[ NP\subseteq P. \]
+
+Ma sappiamo già che:
+
+\[ P\subseteq NP. \]
+
+Pertanto:
+
+\[ \boxed{P=NP}. \]
+
+Quindi:
+
+> **Se trovassimo un algoritmo deterministico polinomiale per un solo problema NP-completo, allora tutti i problemi di $NP$ diventerebbero polynomial-time solvable.**
+
+---
+
+# **11. Cook–Levin Theorem / Teorema di Cook–Levin**
+
+Il risultato fondamentale che diede origine alla teoria della NP-completezza è il:
+
+\[ \boxed{\text{Cook–Levin Theorem}} \]
+
+del 1971.
+
+Il suo enunciato standard è:
+
+\[ \boxed{\text{SAT è NP-completo}.} \]
+
+---
+
+## **11.1 SAT — Boolean Satisfiability Problem / Problema di soddisfacibilità booleana**
+
+Data una formula booleana, SAT chiede:
+
+> Esiste un'assegnazione di valori TRUE/FALSE alle variabili che renda vera la formula?
+
+Per esempio:
+
+\[ (x\lor y)\land(\neg x\lor z). \]
+
+La domanda è se esista almeno un'assegnazione di:
+
+\[ x,y,z\in\{TRUE,FALSE\} \]
+
+che renda vera l'intera formula.
+
+---
+
+## **11.2 Significato del teorema**
+
+Cook–Levin dimostra che:
+
+1. $SAT\in NP$;
+2. ogni problema $A\in NP$ può essere ridotto polynomialmente a SAT:
+
+\[ \boxed{ \forall A\in NP,\quad A\leq_P SAT. } \]
+
+Quindi SAT è contemporaneamente:
+
+\[ SAT\in NP \]
+
+e:
+
+\[ SAT\text{ è NP-hard}. \]
+
+Pertanto:
+
+\[ \boxed{SAT\text{ è NP-completo}.} \]
+
+---
+
+# **12. Nota sul Bounded Tiling / Domino Limitato**
+
+Nelle slide della docente il **Bounded Tiling Problem / Problema del Domino Limitato** viene utilizzato come problema fondamentale.
+
+È corretto studiarlo come problema NP-completo e utilizzarlo come base per successive riduzioni.
+
+Va però distinto dall'enunciato standard del Cook–Levin Theorem:
+
+\[ \boxed{\text{Cook--Levin dimostra direttamente che SAT è NP-completo}.} \]
+
+Una volta stabilita la NP-completezza di SAT, si possono poi dimostrare NP-completi molti altri problemi, tra cui opportune formulazioni di **Bounded Tiling**, mediante riduzioni polinomiali.
+
+Quindi, concettualmente:
+
+\[ SAT \leq_P \text{Bounded Tiling} \]
+
+insieme all'appartenenza del Bounded Tiling a $NP$, permette di stabilirne la NP-completezza.
+
+---
+
+# **13. Come si dimostra che un nuovo problema è NP-completo**
+
+Supponiamo di voler dimostrare che un nuovo problema $A$ sia NP-completo.
+
+La procedura standard è composta da **due parti**.
+
+## **Passo 1 — Dimostrare che $A\in NP$**
+
+Mostriamo che una YES-solution di $A$ possiede un certificato polinomiale verificabile in tempo polinomiale.
+
+\[ \boxed{A\in NP} \]
+
+---
+
+## **Passo 2 — Dimostrare che $A$ è NP-hard**
+
+Prendiamo un problema $B$ già noto NP-completo e costruiamo:
+
+\[ \boxed{B\leq_P A}. \]
+
+Attenzione alla direzione:
+
+\[ \boxed{ \text{problema NP-completo noto} \longrightarrow \text{nuovo problema} } \]
+
+e **non il contrario**.
+
+---
+
+## **Perché basta un solo problema NP-completo?**
+
+Poiché $B$ è NP-completo:
+
+\[ \forall X\in NP,\quad X\leq_P B. \]
+
+Se inoltre dimostriamo:
+
+\[ B\leq_P A, \]
+
+per transitività:
+
+\[ X\leq_P B\leq_P A \]
+
+e quindi:
+
+\[ \forall X\in NP,\quad X\leq_P A. \]
+
+Pertanto $A$ è NP-hard.
+
+Dato che avevamo già dimostrato:
+
+\[ A\in NP, \]
+
+concludiamo:
+
+\[ \boxed{A\text{ è NP-completo}.} \]
+
+---
+
+# **14. Schema da ricordare all'esame**
+
+Per dimostrare:
+
+\[ \boxed{A\text{ NP-completo}} \]
+
+devo mostrare:
+
+\[ \boxed{ \underbrace{A\in NP}_{\text{certificato + verifier}} } \]
+
+e:
+
+\[ \boxed{ \underbrace{B\leq_P A}_{B\text{ già NP-completo}} } \]
+
+Quindi:
+
+\[ \boxed{ A\in NP \quad+\quad B\leq_P A \quad\Longrightarrow\quad A\text{ NP-completo}. } \]
+
+Questo è lo schema fondamentale.
+
+---
+
+# **15. Esempi classici di problemi NP-completi**
+
+Tra i problemi NP-completi più importanti troviamo:
+
+- **SAT — Boolean Satisfiability Problem / soddisfacibilità booleana**;
+- **3-SAT**;
+- **CLIQUE / problema della cricca**;
+- **Independent Set / insieme indipendente**;
+- **Vertex Cover / copertura di vertici**;
+- **Hamiltonian Cycle / circuito hamiltoniano**;
+- **3-COLORABILITY / 3-colorabilità**;
+- **Decision TSP / TSP decisionale**;
+- **Subset Sum / somma di sottoinsiemi**;
+- **Partition / partizione**;
+- **Decision Knapsack / versione decisionale dello zaino**;
+- **3-Dimensional Matching — 3DM / abbinamento tridimensionale**;
+- opportune formulazioni del **Bounded Tiling Problem / Domino Limitato**.
+
+Attenzione alle formulazioni: per esempio,
+
+\[ 2\text{-COLORABILITY}\in P \]
+
+mentre:
+
+\[ 3\text{-COLORABILITY} \]
+
+è NP-completo.
+
+Analogamente, quando si parla di NP-completezza di problemi di ottimizzazione come TSP o Knapsack, si intende formalmente la loro **versione decisionale**.
+
+---
+
+# **16. Mappa concettuale finale**
+
+Possiamo finalmente organizzare tutto il modulo.
+
+### Problemi risolvibili deterministicamente in tempo polinomiale
+
+\[ \boxed{P} \]
+
+e:
+
+\[ P\subseteq NP. \]
+
+---
+
+### Problemi verificabili in tempo polinomiale
+
+\[ \boxed{NP} \]
+
+equivalentemente risolvibili in tempo polinomiale da una macchina non deterministica.
+
+---
+
+### Problemi almeno difficili quanto ogni problema di NP
+
+\[ \boxed{NP\text{-hard}}. \]
+
+---
+
+### Problemi contemporaneamente in NP e NP-hard
+
+\[ \boxed{NP\text{-complete}}. \]
+
+Quindi:
+
+\[ \boxed{ NP\text{-complete} = NP\cap NP\text{-hard}. } \]
+
+---
+
+# **17. Le frasi da sapere perfettamente all'esame**
+
+### **1. P**
+
+> $P$ è la classe dei problemi decisionali risolvibili deterministicamente in tempo polinomiale.
+
+---
+
+### **2. NP**
+
+> $NP$ è la classe dei problemi decisionali risolvibili nondeterministicamente in tempo polinomiale; equivalentemente, le YES-instances possiedono certificati polinomiali verificabili deterministicamente in tempo polinomiale.
+
+---
+
+### **3. Riduzione polinomiale**
+
+\[ A\leq_P B \]
+
+significa che possiamo trasformare in tempo polinomiale un'istanza di $A$ in un'istanza equivalente di $B$.
+
+La direzione va letta come:
+
+\[ \boxed{B\text{ è almeno difficile quanto }A}. \]
+
+---
+
+### **4. NP-hard**
+
+\[ \boxed{ A\text{ NP-hard} \iff \forall B\in NP,\ B\leq_P A. } \]
+
+---
+
+### **5. NP-complete**
+
+\[ \boxed{ A\text{ NP-completo} \iff A\in NP \land A\text{ NP-hard}. } \]
+
+---
+
+### **6. Metodo pratico per dimostrare NP-completezza**
+
+\[ \boxed{ A\in NP \quad+\quad B\leq_P A \text{ con }B\text{ NP-completo} } \]\[ \boxed{\Longrightarrow A\text{ NP-completo}.} \]
+
+---
+
+### **7. Cook–Levin**
+
+\[ \boxed{SAT\text{ è NP-completo}.} \]
+
+---
+
+# **18. Idea conclusiva del modulo**
+
+L'intero percorso può essere riassunto così:
+
+\[ \boxed{ \text{VERIFY} \longrightarrow NP } \]\[ \boxed{ \text{DETERMINISTIC POLYNOMIAL SOLVE} \longrightarrow P } \]
+
+e:
+
+\[ \boxed{ P\subseteq NP. } \]
+
+Le riduzioni permettono poi di confrontare la difficoltà dei problemi:
+
+\[ A\leq_P B \Rightarrow B\text{ è almeno difficile quanto }A. \]
+
+I problemi che stanno contemporaneamente in $NP$ e sono almeno difficili quanto tutto $NP$ sono:
+
+\[ \boxed{NP\text{-complete}}. \]
+
+Ed è proprio su questi problemi che si concentra la grande domanda:
+
+\[ \boxed{P\stackrel{?}{=}NP}. \]
+
+Se anche **un solo** problema NP-completo venisse risolto deterministicamente in tempo polinomiale, allora:
+
+\[ \boxed{P=NP}. \]
+
+Viceversa, dimostrare:
+
+\[ P\neq NP \]
+
+implicherebbe che **nessun problema NP-completo** può appartenere a $P$.
