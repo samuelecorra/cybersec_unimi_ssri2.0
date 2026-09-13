@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import remarkCallouts from "../utils/remarkCallouts.js";
+import remarkSourceComments from "../utils/remarkSourceComments.js";
 import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
 import { getParentPath } from "../utils/tree.js";
@@ -300,7 +301,7 @@ function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
         className={`viewer-content markdown-body${readingMode === 'dual' ? ' dual-page' : ''}`}
       >
         <ReactMarkdown
-          remarkPlugins={[remarkGfm, remarkMath, remarkCallouts]}
+          remarkPlugins={[remarkGfm, remarkMath, remarkCallouts, remarkSourceComments]}
           rehypePlugins={[rehypeKatex, rehypeHighlight]}
           components={components}>
           {content}

@@ -1,0 +1,1875 @@
+{
+  "date": "2026-09-11",
+  "initial_status": " M \"lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L1_Problemi_computazionali_e_certificati_polinomiali.md\"\n M \"lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD2/L1_Classi_P_e_NP.md\"\n?? \"lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD3_/\"\n?? \"lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L2_2.md\"\n?? \"lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/imgs/\"\n?? lessons/cybersecurity/extra/1_Intelligent_Systems/\n",
+  "note": "Status identical to first read: all course sources untracked; no original modified.",
+  "preexisting_algorithm_files": [
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/0_Intro all'insegnamento.md",
+      "sha256": "2a73a00417141f2c0e60106f538d32e2d8ba431057573533c944b35b6537bc63"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Intro M1.md",
+      "sha256": "6bbe9e7c9236842e62dbe0eae50bbec535bf01776f1e31b8e90d85e83651993e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Intro M2.md",
+      "sha256": "f509caf1b2927323ba41d0f80615363356cce7e91ac2f5c6927b7641592b1ef2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/Intro M3.md",
+      "sha256": "74c6f339de38b7300c15707d86e97f2ec6c701595b47fc6854efcd6de6fb7492"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/Intro M4.md",
+      "sha256": "9c212a2b001141f6221bf1f20a92eef16a3a1a4744da4ead301198616684ab4f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-10-06.pdf",
+      "sha256": "6ccd3ba4ce88b26a62331d210167eae1c4b4d24da315f1352953de57847ecfb4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-10-17.pdf",
+      "sha256": "cc74bcd6c8b0f99e0b8cdd774ff8252aa8b895b0649fc1b39c3004f22b5e540a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-10-24.pdf",
+      "sha256": "3a8ebcbbf408558bc2febcf6be4ce4ee09dbd2f39453e88cac8d1bede9a9ae12"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-10-31.pdf",
+      "sha256": "895e1cb95c703ddb7dc4383e8abfff305852918b74eafe3acd81d8e41f5eebd4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-07.pdf",
+      "sha256": "d8d598b52bdabc9a1c53b7225274aa347e9143feedf54592356b82391bd99939"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-17.pdf",
+      "sha256": "4c9d641c0def1aca7d654292f974f9958cdb96ceca655e1666deb145ff340532"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-21.pdf",
+      "sha256": "154bd87259fc7562ff39ce2736ad0a320a8c9977c79db717c0d1a1fd7603c0d3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-24.pdf",
+      "sha256": "bdb6948fd255a019529652732a05f751bece1db5c801716ecd90225ff5ea97b9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-11-28.pdf",
+      "sha256": "32ed21b1336685c4bc90c89f16cc0581c36d336bcab45112e58afb047acf2804"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-12-01.pdf",
+      "sha256": "7564db06ea575e7c8d9e1932f4c6bb037ca4aa0736cbdfabf20d59aa71de063c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-12-12.pdf",
+      "sha256": "9770a2ef946e7b17486e9513e9cbedf870b40412d5fba547f48643775116fa60"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-12-15.pdf",
+      "sha256": "5f70f8af0306624f78cdcddb0b37bb95cb8fea15f7e814d2e7bff0aef75dbc88"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/esercizi-2025-12-19.pdf",
+      "sha256": "984170e0fdca9dca3acc66ec020298d638480afc6bb239cd26d65bae1e16231e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_01_12_2025.md",
+      "sha256": "bae7926f2d7deecff30f8fd44ea24aaa9ad9bbd8528f293861ab558c0d3e37df"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_06_10_2025.md",
+      "sha256": "3b0d8e5e01c72e77d182382b74e95f92beef76c83e90ad8b838f837f934d7212"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_07_11_2025.md",
+      "sha256": "2db44e99637874f3ccd12ac2b72661473041fa2be64cb1b7d1776974453a815b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_12_12_2025.md",
+      "sha256": "9612ca44f48c473ab32d5506d779b19d63844cd0b5b11610848a89f5fc316198"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_15_12_2025.md",
+      "sha256": "d1bb5d3c5b971636ea77738579409d965007fc3520db44a3248764913c7d7443"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_17_10_2025.md",
+      "sha256": "533549c998d528b03fee262351e0147525dfbe80f15be4635f22fca53a9e2b10"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_17_11_2025.md",
+      "sha256": "9e86f8ad2e150b8dd85276d91a6a021f0625a393d1f525a8a128abe5ea98077d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_19_12_2025.md",
+      "sha256": "9e3d397057734337b77d00c3f044951d3451919465943b08a735a94d0c374f84"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_21_11_2025.md",
+      "sha256": "d85cf40a232eabb0a753269abc28c92064354476891f7bb5acf9c1ebd048a7c6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_24_10_2025.md",
+      "sha256": "2224e723ec9f13c535ac9d9e360232224ff07ed8cf1a913a77079398b55918ba"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_24_11_2025.md",
+      "sha256": "609868ddc9f73f3b27d65e51254f54e02d51a8ae0768b386a4b34361a763aeb7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_28_11_2025.md",
+      "sha256": "5c2c6678d292d5f28062c8d34695e8f29c7b7a8b0834f1eea972db844e9cac1c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M13_EserciziDellaProf/Soluzione_Esercitazione_31_10_2025.md",
+      "sha256": "58dfadfff2cd0f5ed25196d3640329902a9f0ec8d0d7820aad38979b1784c423"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L0 - Audit di copertura degli appelli.md",
+      "sha256": "318df50c562f62968ba8d8a192be82da850b653424c0ace8a16b622feac560be"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L2 - Algoritmo di Prim e proprietà del taglio.md",
+      "sha256": "a1ae4a493fc0505988e6577c8c550e4066cedf7eca5591c1540b6bedf45bf253"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/Approfondimenti_per_Esame/L4 - Ricerca binaria di confine ed elemento maggioritario.md",
+      "sha256": "3994cb7df49f553fb532427a0356353d59cd17dad1c369aaf693086a602b5963"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_10_gennaio_2025/esame_10_gennaio_2025_1.png",
+      "sha256": "b1cc9abf9bc0e2ff180cdaf3fb790848202e3e065b484eb10044b4b67bf30ce8"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_10_gennaio_2025/esame_10_gennaio_2025_2.png",
+      "sha256": "cec0f8b27031960bf323e605ef87b5c0bec3cceb34b48e2ab8e4d483c1ac8793"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_10_gennaio_2025/Soluzione_Appello_10_01_2025.md",
+      "sha256": "7613d26f8efa20558309ec0c1e0b6f88af738149ba2be86214c1698b81022690"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_17_gennaio_2025/algo_17_01_2025.pdf",
+      "sha256": "9e2e8b8e3b6a0e0d608bc346850b13241f3b9cbaf735896a781f88c6ae007445"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_17_gennaio_2025/Soluzione_Appello_17_01_2025.md",
+      "sha256": "09864c265518a6e84f9576ec57c6984a2ad1b91c39e73386c6168e1fb06e9192"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_20_marzo_2026/esame_20_marzo_2026_1.png",
+      "sha256": "a0adf1ab6ab416788f879973ec8bb7f3de672fe7590380fe480fb5a352c71434"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_20_marzo_2026/esame_20_marzo_2026_2.png",
+      "sha256": "7cf9a942340358fbcdd4a0a14f28eb70b344bb34ac5f23e5e5908d3bba09c80f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_20_marzo_2026/Soluzione_Appello_20_03_2026.md",
+      "sha256": "321da1e442f12f16072e4d427e426ad375d08757f50eb66035d09ab7e378343b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_21_gennaio_2026/esame_21_gennaio_2026_1.png",
+      "sha256": "86274faf5377dea750065e4732461fb3e42765ba62141d866d98be0a84ca2f23"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_21_gennaio_2026/esame_21_gennaio_2026_2.png",
+      "sha256": "d959a48cff1b0d762cedf989e155952b49cd62ff0ac0361c8eded5ce49d6409d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_21_gennaio_2026/Soluzione_Appello_21_01_2026.md",
+      "sha256": "ed404d2bd53e75ff33827b17fa74b398f3a37a351f98422f7837a3c3b16be6e3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_22_novembre_2025/esame_22_novembre_2025_1.png",
+      "sha256": "25491dd85ab668ffee619d1f4eef682974111021c33184aac9e8d8414a1010f8"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_22_novembre_2025/Soluzione_Prova_In_Itinere_22_11_2025.md",
+      "sha256": "76860fe76ab19cfb687d7d924cb18be19090a92c5f211d8d6fb490c400f6ed51"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_28_luglio_2025/algo28_07_2025.pdf",
+      "sha256": "85c0e621a4dd8a1a8f094a583de736c6de63e729b70e9d57832227d897b68754"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_28_luglio_2025/Soluzione_Appello_28_07_2025.md",
+      "sha256": "8fc7b04f2de001312322642f8f1a88fd7ef263c20f50d11aa08273e4424b8171"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_7_febbraio_2025/algo_07_02_2025.pdf",
+      "sha256": "ea44acf4636b43695b1250401603ac6b57898a5890bb8ca5d96edfb415432c68"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_7_febbraio_2025/Soluzione_Appello_07_02_2025.md",
+      "sha256": "1df132d0f7ed5e31dee3082a0d1affe6d8eac28ea3de0a7b1ef021bd14702c49"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_gennaio_2026/esame_9_gennaio_2026_1.png",
+      "sha256": "2658de61400cf8ca827e162d492dba65f12136e5e5faae7dec810812fe7f7223"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_gennaio_2026/esame_9_gennaio_2026_2.png",
+      "sha256": "0d167c7e0f6bfdc45ddf93ec7888dd1b8ed412894376db4d321b5d586c9b91b1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_gennaio_2026/Soluzione_Appello_09_01_2026.md",
+      "sha256": "c965b63c60c5cea9f1c62fd6aa10aeed6c7e56a2d084ecd0527dc929b0da9402"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_giugno_2025/algo_09_06_2025.pdf",
+      "sha256": "72fbbdc69572c7640395c1339818271b58135c1c5c6b4385e1f9aba62bca389c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/esame_9_giugno_2025/Soluzione_Appello_09_06_2025.md",
+      "sha256": "bc31511c41e0da4a52d8f7b05123ac12c76d667107a16cd7071437f3220aaf43"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/2024-11-23-ppi.pdf",
+      "sha256": "c8046c9b15e7e99da1927663de9be67f0adee9cda0beea317d33372aca3481d9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/2025-01-10-spi.pdf",
+      "sha256": "778f5846b0989ba849f9d5479a9ba68131722689ff746ca56db50caa229378a7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/Soluzione_Prima_Prova_In_Itinere_23_11_2024.md",
+      "sha256": "ec703d8ca518159e4dbbe53f24eb0466c96dc34f7c722e7f73bfabb040039ee4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M12_Esami_passati/prove_in_itenere_unite/Soluzione_Seconda_Prova_In_Itinere_10_01_2025.md",
+      "sha256": "12fa98d2021a8d23b195f3dd209d32c5bad5dd798a80254ba8375afe2e9d290e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L0 - Intro UD1.md",
+      "sha256": "390774ea3400f70ccc76d99019597a3068b0f9f8bb44f4fe50d039a317c1afd1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L1_Problemi_computazionali_e_certificati_polinomiali.md",
+      "sha256": "782b644cf353895429d9488d44f1c694ac821b9df5b8cd23c5535b9d99b610a1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L2_2.md",
+      "sha256": "7a8813fb3aeab423d61a89e816c89343d653d52989a7ca4c3677972837e0c83c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/L2_NonDeterminismo_ed_enumerazione.md",
+      "sha256": "e6fe06fb22e079f2b16e0395ee7c372ab8c760c352164422513c76dc03b7a24a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD2/L0 - Intro UD2.md",
+      "sha256": "bc335c6663748023424a736ef41c9a8744e5523b0c675eb7fc8a13dc0e084305"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD2/L1_Classi_P_e_NP.md",
+      "sha256": "c3b51c735d6456d950383faa9f933ad2dab067d8d770850f798d23c910b085af"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/imgs/Pasted image 20260907213118.png",
+      "sha256": "703de5031f79e371a7bb4ac3fe818d0a8b794622ff7a922e6c33f89be3e1a8e0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/imgs/Pasted image 20260907213157.png",
+      "sha256": "248efc97077b462596f742c82bd3a9064f19b67909f168c02ed007de17f68c2f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/imgs/Pasted image 20260907214648.png",
+      "sha256": "915618232e7dde6fafdf8d6c59d67f1651a26097a57b0f6b2c93e19d1dfd584b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M11_Teoria_Complessita/UD1/imgs/Pasted image 20260907215329.png",
+      "sha256": "18d16f446f8f2209241b2e2203dcf89daa050e797c301607a8674ecf9379bb8b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD1/L0 - Intro UD1.md",
+      "sha256": "85d83dd767ffd05adada52367d327aa62510fc5852947892052d7b255e11b563"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD1/L1_Progetto_di_algo_per_programmazione_dinamica.md",
+      "sha256": "d7d570fde7f5c1be43c67ade2fc2a381e5bd2748500c93093c55f3b425d53431"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD2/L0 - Intro UD2.md",
+      "sha256": "727a56e5a4a18b598222501a0c41910437f131d46e9a715b5ea2885806a7eaa9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD2/L1_Algoritmo_per_StringMatching_approssimato.md",
+      "sha256": "dd39b264a51ff20fb63f2aa71fad40e0a5216834b8a4781dbe7d1b17543673e8"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M10_Programmazione_Dinamica/UD2/imgs/Pasted image 20251018223729.png",
+      "sha256": "41869f3839f9a8cf2041ab88a9348463d34cccb62d62a573be4a133d0d77de46"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M09_BackTrack/UD1/L0 - Intro UD1.md",
+      "sha256": "0669ce69b55ea6aee360db5083468912cf61e3cbfa528fa73a81507e8bd142b6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M09_BackTrack/UD1/L1_Progetti_di_algoritmi_backtrack.md",
+      "sha256": "6d9ee54dab2e1e6193c91470f13b4466b05c15a5922bff30d178cbd581fed2a4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M09_BackTrack/UD2/L0 - Intro UD2.md",
+      "sha256": "3d38c86fabfc303373e6f81534b16b0c3706e447fb4df41d676f6f47c9b347a5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M09_BackTrack/UD2/L1_Algoritmi_per_StringMatching.md",
+      "sha256": "a384badf49f382ffc18179e9787649d55d19588afa03fb8cd3caf5fab1caf888"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD1/L0 - Intro UD1.md",
+      "sha256": "549d61c4ecc15b5c4f6ecdcdb27e5fc3753b9850187906071c67953c6262639b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD1/L1_Progetto_algoritmi_greedy.md",
+      "sha256": "ebda9e8062a335725e7eb082f23fc00870cc0a19b5e4f643b3315699964fabc9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD1/L2_Problema_massima_diversita.md",
+      "sha256": "35a90ee2532c6d2fb05c59d0719b5629d2bf989e0a2ed43826aad7dcf7ff35b6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD2/L0 - Intro UD2.md",
+      "sha256": "99e2b573acbafc3bc4cec50b789fed08a2e6d55f125195fbdd02f2980b0d278d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD2/L1_Algoritmo_di_Kruskal.md",
+      "sha256": "3dd6a5a60e58c2845f637bce03ac0eb3c390b2dd1d8d1dd3f0ec5c64f3a53f9e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD3/L0 - Intro UD3.md",
+      "sha256": "9ad36261fb93b4d829dd0ee94ed76853c90df43e1a7463b2ccac2614ca96b316"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M08_Greedy/UD3/L1_Algoritmo_di_Moore.md",
+      "sha256": "17f55c8a7dad0b0d6fb18caac36eaa8cab23497bf2dbd10c6ba116487e9d2421"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/ARI_M7_U1_L3_D.pdf",
+      "sha256": "a675e502f4192adfabd75c0976e4d70dd3f468eea771ad429c2ca9782f1e9f7d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L0 - Intro UD1.md",
+      "sha256": "78d17aaeec9c998a14099cb3f6b1e71e6dbb2100eb28f0db4ac6e5fada0caf73"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L1_Complessita_algo_ricorsivi.md",
+      "sha256": "df80f8d519dace0f4483db5d1a988b76bbc995e16e8d52e5854e5787c383d794"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L2_Progetto_di_algo_Divide_et_Impera.md",
+      "sha256": "53015356a336105b8230aa0ea5b45b40c6e47faa42cf549a7176acad3f0dab97"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/L3_Fibonacci_ricorsione_vs_iterativo.md",
+      "sha256": "60898886210ebceb5393cd83dfba23f99909c8c595bffabb89ae2e5dd8c772d4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD2/L1_Merge_sort.md",
+      "sha256": "ede441a42916675a0a715ffdfcdd821b018aa1caabae890bc50cf0a93985ebaa"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD2/L2_Quick_sort.md",
+      "sha256": "c31357b3058593457ebda0e2457559c9b4e0b7014507faee645fff36e2757274"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD2/main.py",
+      "sha256": "75121deaa7f58b947d121770cae2b29f3b4a94a55bda3b551cb35fda8793c747"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD2/quicksort.py",
+      "sha256": "38411a09842b2593c986520f38553e499ab10e0c244dbc8e41cde69f9862d5e0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M07_Divide_et_Impera/UD1/imgs/Pasted image 20260905185121.png",
+      "sha256": "9fa51af72a2e5a225d5f789efcf9f8c7631055d7ea4afa3bab36559d5ae1dc10"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L0 - Intro UD1.md",
+      "sha256": "ef9701b5ddb1e2cd885ea76f07c5f94f621c5387aba5e3c2d43d02dfcd58c84b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L1_1_Problema_dei_cammini_minimi.md",
+      "sha256": "82b1df34de49b7fa8a754044ec5eb21bfa3e472a1c9d714c19979e3d4a2d9df2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L1_2_Problema_dei_cammini_minimi.md",
+      "sha256": "dff10b73bdaef1e64fd329592637e3759e8fd7639f05fa7a4b459baadf0f0997"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L2_Algo_Dijkstra_Johnson.md",
+      "sha256": "b4db8bda28c74920a5b52e32696be4866bbae1871fb4b1d75c9220aeeb3714e9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L3_Algo_BellmanFordMoore_pila_PapeDesopo.md",
+      "sha256": "f1fa4f5f08b97df7d5c4b982a97bd138250b8e57c3bb6873830875fd390e87f7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L4_Confronto_tra_complessita.md",
+      "sha256": "87d50739b1d6990a7c496ec3af58ed9f028dd7acfb0d76e1f3c95f7330e75a2f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/L5_Applicazione_cammini_minimi.md",
+      "sha256": "45ca4ea7f338551f277290cf44a075c5bed80d7abf6e76f75f5457dce7ddeb48"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/L0 - Intro UD2.md",
+      "sha256": "39ad4426398fa9aa33833af990d686b32832ee846167fe9134af4b296a8b5279"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/L1_Progetto_di_algoritmi.md",
+      "sha256": "f7aa0fa50927eb315b21ec196bf315f0f696a52938bfbad0118a67b0d359a18b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/L2_Pseudocodice_e_problemi_computazionali.md",
+      "sha256": "47104c6a1b3c7895b996fa838f2851856ad3c528d8e01586931ccc3d8440cda0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/imgs/Pasted image 20251018204450.png",
+      "sha256": "509fe9118ee425068f2b8685f862c0c05bde7ff02fb9ecbcaa605ceeb9cbb758"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/imgs/Pasted image 20251018204522.png",
+      "sha256": "10a7cf27aa9dd67b1585edff7804ce2515c33d9a5c3627c178100c244faec4dd"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD2/imgs/Pasted image 20251018204548.png",
+      "sha256": "8f79991ccbc1ca3adf126f3ac0ecb097fbed9f16c12785934ba6a68945e2b8b7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722215650.png",
+      "sha256": "07543061b6feaac7aaa13e0dc1954484cf9b044a4b018b2092f7dd8009990bac"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722215744.png",
+      "sha256": "261fc9c65e2f33b32664b347ed5c874bdb6cdfb2bc9f11adb09fa9d336b0197f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722215904.png",
+      "sha256": "302980344698367ac3cbccc8f4405c29b9f2c4eb536f895d9147b3021765bcf1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722220632.png",
+      "sha256": "d2cb17c888ede83459b72aa230c18e6fee6598e3733d3cd8164cc2f5a10a4a29"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722220700.png",
+      "sha256": "1086cb8de16a2f37f5fc20e8eff365c35f51b9b726d176629d7ea86dbc5f5309"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221057.png",
+      "sha256": "748a7de89a9bf393115bea1a345aa618f345dd02aac485f5ca4adb3dce9f34ed"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221114.png",
+      "sha256": "6ab48fe92645da40a559c83af91fb12bd5addd0773b112833b719abb349578dd"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221244.png",
+      "sha256": "4e09c9c65bd5aea037da4925fee71de42341320b45dfa1b90a339007121e9d4f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221309.png",
+      "sha256": "b6820002f5a52aaf83ad4b008f7a052eea7f364afe690ee48058700f13cd3fa3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221327.png",
+      "sha256": "427615ddc9e9e0bc2e8963b41b2e4bf37889ffd8e8b6283ec90253562fc7f8d2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221345.png",
+      "sha256": "9e161cf232dc691e8d186fc730608de5382a63747fb98bb00bf388e5c24512a9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221446.png",
+      "sha256": "07afb977e6f6408de97d267d6ad88ae5e2e1d5795c4468e689f937449bdc5510"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221507.png",
+      "sha256": "c04a2708b88baee50167a0d7e8079cbd8f48f03b28b79226deb18a716888b2cc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221537.png",
+      "sha256": "c04a2708b88baee50167a0d7e8079cbd8f48f03b28b79226deb18a716888b2cc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221557.png",
+      "sha256": "c04a2708b88baee50167a0d7e8079cbd8f48f03b28b79226deb18a716888b2cc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221619.png",
+      "sha256": "7f57e85f11fe6deb590a4eeadea5664541f08381b72df98dadb0a0edfe04ffd0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221646.png",
+      "sha256": "a000b3edde75d0ae5f95d571af3e0a332711ba5d088659f268a351c3f8726c02"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722221730.png",
+      "sha256": "66dafdaf3a71a5e97e6f73c1100ce9cca6fbe014485db85e13cda44bf07eb947"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M06_Impatto_delle_DS_su_complessita_algo/UD1/imgs/Pasted image 20260722222618.png",
+      "sha256": "6b5b15950242d983d0ac96fa085056b1b6b4cb01c55b1ea69be71cc644542a3e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/L0 - Intro UD1.md",
+      "sha256": "fe426227893755899e2984a220785cd3e46fddcae9a0bb6748c5bf73e2aa5194"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/L1_Insiemi_specifica_e_realizzazioni.md",
+      "sha256": "dccc3c164781991f019391dd36f28b04edf84fe896d7472084259a444561f66d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/L2_Programmare_con_insiemi.md",
+      "sha256": "f8b690dbae3bdec4a6d0d422418ad1b25d98b3bf89a3e804e42715b72f966e75"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/L3_MFSET.md",
+      "sha256": "6c202994457ba0e07b23a4cfb11bb733ae07927454486d0cd6c32fa5a8d7326a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD2/L1_Dizionari_con_vettori_ordinati.md",
+      "sha256": "5a21f4cc0931da7aa21a922c9fa5131eb9224e9b3924d59d27473037aee9b68f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD2/L2_Tabelle_Hash.md",
+      "sha256": "265fa397d9cb38d18fba94681e6c8dc01ae7559200419a1b877fa2085eb929bb"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/L0 - Intro UD3.md",
+      "sha256": "ea1cfd3c070522f844c762748937d89797e4e6df75ed0d703eab5595a96f023d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/L1_Alberi_bilanciati_di_ricerca.md",
+      "sha256": "54c8a6a0976e9aef2abeece9fe41ce1e71e502e557786267d655a1537a873ebc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/L2_Alberi_rosso_neri.md",
+      "sha256": "d84f767d3a57396d921620fd426bde62fe36f6d9f8316cf65cb84c93a7a922ea"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722213058.png",
+      "sha256": "3875b8026423edc663ae0bac88ae51dbb67c774b2a4bba6884f86f1820e6df2f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722213135.png",
+      "sha256": "3b37d643d1b95ac64c9edc546df1d1e9868daf93bf8e413f249e7e575525dfe6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214019.png",
+      "sha256": "024e37f918bae3fe311f49ed9b4442bdb0fe75b2d8ef41c199b2739333aecc44"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214055.png",
+      "sha256": "20bf3ea0626672c1253ac31fdbab7c6250fd1c1ce74f800c07ef7eaee81d4f4b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214135.png",
+      "sha256": "30997505b6de2eec469d3acbb422a8cdd503f20b8553bc112d89f32520377cc7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214229.png",
+      "sha256": "3aec8fca85a711c82082a03bdc20e670a672507b4378ce045cdd0348c5a246f3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD3/imgs/Pasted image 20260722214255.png",
+      "sha256": "d6f33386d2dbb73bfded0389deeb0f776287cc8303a0e4c30f9c0a522e012aa9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD2/imgs/Pasted image 20260722205358.png",
+      "sha256": "07064f53f6da4f8bd91643220cfad7e2eec3df09ed23f2f6c5c1343c58bafce3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/imgs/Pasted image 20260722193724.png",
+      "sha256": "c74920d9c26cb0983192a091930f466777e8cd15b4d7c8f128287b218c0d3f1b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M05_DS_Orizzontali/UD1/imgs/Pasted image 20260722193950.png",
+      "sha256": "c66706af3e87b4ac3e1f22a359604e98beb030857a68cc26d5913b3b0b30f591"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/L0 - Intro UD1.md",
+      "sha256": "d2e1988e354a2470bbc5d20db492da32ba09236eaa023574cce331eeccf43e53"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/L1_Grafi_definizioni_e_modelli.md",
+      "sha256": "6e5191c28bbea119bd289d3ee8e69ac9f261de6eff8d82c867936a10bf167479"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/L2_Grafi_specifica_e_realizzazioni.md",
+      "sha256": "bb7ff9e3efa9e28b6c4c915a81d58d2ff400c77a357b717fcc20c65392406301"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/L3_Programmare_con_grafi.md",
+      "sha256": "71db12ac3f2e706b76e8a81ae1f63118ff3a3adf9f747b4c59da510c10a86c60"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/L0 - Intro UD2.md",
+      "sha256": "34cc49a74fe3545538c2ecbcef9c4c77d3704d940370670adde93e1de22d781b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/L1_Esplorazione_grafo.md",
+      "sha256": "3e6337c43bddd45c1b92addc34d7d6e847d91e8ccda1f958879c604c8bee99cb"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/L2_Programmare_con_algo_visita.md",
+      "sha256": "68af699b8e3c6727a26b32b9366766c28f404485fca329e2ce4e354e8a8cf61b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/L3_Proprieta_grafo.md",
+      "sha256": "5d375256747ae0681c8636c777e169df3824110520f020847634a44167bb8393"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD3_/bfs.py",
+      "sha256": "5b13f2bc066d26621e72def74c1e4ed9fdae4e478b544d934cb92b4d334fb0fe"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/imgs/Pasted image 20260722170919.png",
+      "sha256": "a33f3429f79d800090558af04eab063ab8d65accea478b8ed281531dd8336273"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/imgs/Pasted image 20260722172043.png",
+      "sha256": "396d4ae80e7aeb88f2d496bc4725c46888457702935d6b8afe1513fa6c2e3b53"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/imgs/Pasted image 20260722172057.png",
+      "sha256": "e18747cacac83054def5c48dbbd6ebd3be1037aa005ba1eddcaab0270aa6de8f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD2/imgs/Pasted image 20260804184248.png",
+      "sha256": "4565d134fdfc32e7c42652e8636c433c994b0d76be502ec9e0c32b70892a5acd"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005126.png",
+      "sha256": "b2efc32e8788078161664ac7db5408e4b856372d9391332e4024a4cc0fe25b03"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005144.png",
+      "sha256": "827adcfa3f68da42076def9c8b3093350a7d6d67ff214b099e6d92fb01e1ccd4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005437.png",
+      "sha256": "ecdd22b95f9a76f0cccc155c8e85e12bcf95d9349a232bbc23ff8bbd0341faab"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005539.png",
+      "sha256": "a0241717073bc0cee50a2423cf0ee255f3d3d7b11299606190585adb9858a4ce"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005923.png",
+      "sha256": "9444c9a78f70da06b4e4a8941d6fe3a3aade9331a0b5cc8162523761154b408b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722005955.png",
+      "sha256": "66197d0227d43ac5d5eeeea7e9c93847355009d7bebbe99dd2032c05c520b125"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722164024.png",
+      "sha256": "9101122368d50f0ec37a24405c505192bd3180d16cc70fbc8e0ad802c127608b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722165222.png",
+      "sha256": "0407113a87eb65394c0d3fa01ba3868f6a3e9b3d2801fceaeb938d4b90c194a0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722165412.png",
+      "sha256": "4e655ab2b04ff768a601daf6e9ad09409de201ee961863b7626cf4d9f06d25e8"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722165522.png",
+      "sha256": "7a6c6564cd2ec1dfb06b0f5660facb0d0c84db7f3607e7332137aea71b3bf3ad"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260722170120.png",
+      "sha256": "0e0def546391b7f083f10bdc58e1e11f4500c578066e6ff290fabc0a9e75f980"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M04_DS_Reticolari/UD1/imgs/Pasted image 20260804163534.png",
+      "sha256": "cfe6dab136ea66c766b6c146c7c7d0dcc02b2a41d82a09dd21edae12bf2fdc9d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/L0 - Intro UD1.md",
+      "sha256": "2a74bfcbb918036a23f9d2f112db6d035e779d1d96f0569ab9aa619914be6a17"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/L1_Alberi_Specifiche.md",
+      "sha256": "1610f7dbd478440946d63d6381b9077621d369106a2557b7b96a4f9954b5a2f9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/L2_Alberi_Algoritmi_visita.md",
+      "sha256": "9f967a0472423940c239c39e8cefdea86def4fa8f9296c83b2125f154ace35f3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/L3_Alberi_realizzazioni.md",
+      "sha256": "5676158f35a1bf596f7dbe3c69264cee465d839d81d694e3858d4da07a35735a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/L4_Programmare_con_alberi.md",
+      "sha256": "5634106ef7395c810f711e8564410d5ac3a913d71c0fdd5b6cb43e11f941bd17"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/L5_Alberi_binari.md",
+      "sha256": "7fd06ada2af19d4630a72a87c954c2c723c5bc0ab3b020a90057fe10095b8188"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/L6_Programmare_con_alberi_binari.md",
+      "sha256": "ae14dcee99569a6340cf94630b89a4b8fa9c37e556871647a3f43da8bd0952f1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/L7_Alberi_binari_e_complessita.md",
+      "sha256": "7a8ac750b5fd5a40823e49be8bdb8b6deb5259b396eb90bf41c77e3bb6bcf6ee"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/L0 - Intro UD2.md",
+      "sha256": "7c9ea56e3bcd07d268823b370bc5932a7e9d768eec7c07fbbc7a6751781b0123"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/L1_Heap.md",
+      "sha256": "cbc0af636205841a0348654919417adb27f9372d84322e7265198362c9472df6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/L2_HeapSort_e_SelectionSort.md",
+      "sha256": "c0f2208615565d3674d47888052e9f30bec2635b8ea8794b3118b46c439b1a9f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD3/trees_intro.c",
+      "sha256": "ba51689d916996a799a00c5ba5f6eaa1a6336e28ad108965cde6a43d570d2a21"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20251018183441.png",
+      "sha256": "55687fd8a8a9ba596f5acf191223c8c49234b43fa6190a6b5b1d3a4d1fa38b90"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260425211921.png",
+      "sha256": "3a0cb0376a4ffaa7b269ed7250e4e5e80ab6403d155c60f6856b79ce0a3070f1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260425211928.png",
+      "sha256": "6c01604ed3a6bae201d4ec74d35572b7727c152d1d510850d18bbc53a0fc81db"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260425211934.png",
+      "sha256": "ba648e60733e034b7f0bca04ee255d1d7fa343444773fd7586b20ca4a69d415a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260425211941.png",
+      "sha256": "9bf9ceb15e8a781235fcf2856a79261d618521a7e2794e558b1c9ea9f2d3d32c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723011808.png",
+      "sha256": "782389d243b8a5ec94ffca542813e17905709815624d82fac3fff0a21c05f61b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012001.png",
+      "sha256": "c2ff4161c33af08933178794ba6a0d160c7057048e0b17e00ab752f3fe2e80f9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012011.png",
+      "sha256": "dd5a985956a269c01d11ca57ae439bf6a04fb9cba99ac7502e024a83c399612e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012740.png",
+      "sha256": "0bb1c5d21c0ce0d53f90447d45e00decc0533fcb76205589521ef95aae6ded26"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012746.png",
+      "sha256": "f93b4feb4e7f0b4aca5586532e54f104ed103615b98c799f2d7482c34f75354b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723012755.png",
+      "sha256": "4998625d54a91c248acea7ef4028b0b8010de6683317d5670d4ccb316aae9002"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723014119.png",
+      "sha256": "07ad4a8979995166a3e001581ebf33935995a552f2a6dff98b2918d93ca200b0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723014129.png",
+      "sha256": "16c902d108ed12a3e08b3e25efe0be2b161a9cc03fd7d552e7123de7f6a70e19"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723014134.png",
+      "sha256": "db26f737c52cde0d927d540e1e1755528ef7ff2ac3d0709fc1f7ca5afa5a7a65"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD2/imgs/Pasted image 20260723014140.png",
+      "sha256": "848292e6dae5c28185830581d138068c4c3f8297b6dfa7ab8d4d175493ae9710"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/albero_decisionale_ordinare_numeri.png",
+      "sha256": "1092a187a096fbd53655453b15519b35b20756291ff289d8625c2ceb8f40f978"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/albero_genealogico_marquez.png",
+      "sha256": "5e2e8658a5e8bbbc3ec0cafc3c57f91cb7e2ae75294f812e06c66f34d61fd8ad"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/esempio_specifica.png",
+      "sha256": "91c7ea5e6d4f4013f6027a45c63c624715513c96757fe01ea45e69d3b80b5dcf"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/invisita.png",
+      "sha256": "79ff1c435dd88f5067d1473762fdf8dacf545c93edcf5e8b09f0f1892f7bf0d6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/Pasted image 20260425184033.png",
+      "sha256": "80ec2f0252fc576ffa9d3b25e757dcd3603c97b0e6d7a8f7a042e24b836b3c7a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/Pasted image 20260425191057.png",
+      "sha256": "dd5d3a69ca88c506c62efb7061bff0434cbd3164b512bcaa474880dc09b07f4f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/Pasted image 20260425191256.png",
+      "sha256": "4ab6ad493dbf18534dc33da3d2a561b5c07cb2369dd4f24db580b05b3f03a7c8"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/Pasted image 20260425192502.png",
+      "sha256": "1ebcb78d228eb39e2f220066bd67e053e447a53cb4d95ef56b89c88249966548"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/Pasted image 20260425193124.png",
+      "sha256": "f8b98ee5f4d8c59bc81a6f4ed3b6f44531047be279e54e98ff0c5b8d85381192"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/Pasted image 20260425194211.png",
+      "sha256": "88f053dcdc4307439435a1f431fd327f5e21c88871f823f58cb9500eb6d3b99a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/postvisita.png",
+      "sha256": "bd7b49261aaca410bb4d1db50a0df2a445eb5abb2f2ffba97befd67181d2d200"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/previsita.png",
+      "sha256": "d2656711bbec7d08e7aab60d24dcd1bec1a4cf2159d902c08f4212fa2fb31bd7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M03_DS_Alberi/UD1/imgs/terminologia_alberi_formale.png",
+      "sha256": "928459e6a93e8411880ae0bb63b102d7ec26d8c432168baae857b27f3022fcde"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L0 - Intro UD1.md",
+      "sha256": "9396f119bd5f2162e07517073ddca20790ec65a0ca7a45fa736e4dc9bec322fd"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L0 - Intro UD2.md",
+      "sha256": "4fa1f2c2d0ecbf85a9fc6cbe81dedb70f29057c4b30bc0d7b1bceae77927266e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD3/L0 - Intro UD3.md",
+      "sha256": "73ba55be9959a01db030b8401acbfc8c296bec82736e19efd6b4cf5afbd01610"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD3/L1/L1_Code.md",
+      "sha256": "ae0c0cabaa691c844e0a68108a1473f569493ad5396fc3104e36d184e33c8667"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD3/L2/L2_Programmare_con_Code.md",
+      "sha256": "39e4e9b02ac2faf77f26fa109675efb5a8df8b3ff5ad081e14e99c0ada5ca0d4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/L1_Pile.md",
+      "sha256": "1fdc5f4c91557e0d9c343f2117ad3550116fb447db8ab201bdef19efb68bc7e4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/L2_Programmare_con_pile.md",
+      "sha256": "7a3324a91534c42cfd91f4fcde2f9acae69f553bb08506505dae0dfad42d90d1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251027210206.png",
+      "sha256": "ddaae7a694a4664cbad21bdea4031d937184b4d64cb83d417254735c5384725a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251027210307.png",
+      "sha256": "6058ba78ec1a8d910596eca0f22349d5eac34f3298a4cbf7c28268aca38c10e9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251027210328.png",
+      "sha256": "f882c778ce82aca22518548c57218ec9dc3b159e9c048e158ed56193afc11671"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251027214035.png",
+      "sha256": "a995765a4469e6376e8af335d44e3d013b7d2aa4b14ca9f595e97b3d1ff087cc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251027215505.png",
+      "sha256": "a8f9251c87cc520915da003c7c2d7e4fbe86ae5cce6baa413a8bf4fec47d3946"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251027225748.png",
+      "sha256": "a32453f0cfc071f7417f614472b5b8895cc62571675bed20435a863d83538fd9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251027225941.png",
+      "sha256": "a32453f0cfc071f7417f614472b5b8895cc62571675bed20435a863d83538fd9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251027230514.png",
+      "sha256": "a32453f0cfc071f7417f614472b5b8895cc62571675bed20435a863d83538fd9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028000035.png",
+      "sha256": "8aacf60735316f2d122c7dd284bff47fe568a4762172c7c0a106fbf80457ada3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028000213.png",
+      "sha256": "6e834029fca2c14bb7b7f54417527659f867625e4fb3e10b69517d3ed216a2df"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028000435.png",
+      "sha256": "a1eee857f28de5b0264b55befb0e90db75785b3de392e2f9ea1b178d8bfdf884"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028000527.png",
+      "sha256": "a1eee857f28de5b0264b55befb0e90db75785b3de392e2f9ea1b178d8bfdf884"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028001418.png",
+      "sha256": "59c29e3d6a7fc3985297d9d91936dbb3dd5556a472c9bf41ee28b785ddcb09a1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028003053.png",
+      "sha256": "59c29e3d6a7fc3985297d9d91936dbb3dd5556a472c9bf41ee28b785ddcb09a1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028005752.png",
+      "sha256": "2ce18d0327c9f31767bcbba6e8f093dbeb211a429491f3408bb8dfab627f3fe8"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028010040.png",
+      "sha256": "040c0b182f3c2c61398d047d5894614be3200cf266e7683019c0169a4bc7da03"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028034402.png",
+      "sha256": "063d5fb93c213319605fd33fe038f26e163219e808a4346e3768c714a30462c2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028035104.png",
+      "sha256": "5a4c33b774fbd4d216e6ce1aa9f3a6c0b511cdad39088ce308411c0beb14a2d0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028035129.png",
+      "sha256": "8cf5f7aa4f8c2ef2910d07e37a889a673c216232992c43d0f656509a8da637c6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028035201.png",
+      "sha256": "6311594acb9c0e206d348871051e77ed578b83e3f4ca8f486247d43176a6eafc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028035247.png",
+      "sha256": "6d8c40ae2013a41bf7689fb81278d53c5b41a9ff8b01ae380d7a95575eb65178"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028040607.png",
+      "sha256": "8dbcf1d19fd25f5b9fc22c4da229d109130562adbe753de2e66f5a32a5d3402f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028041045.png",
+      "sha256": "d0cc22f55bcd77a4b26fe2ad9631da509cb819a42bf144217a9bd738e9b14ff5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028041718.png",
+      "sha256": "ddefd5a0fc7468d926624666c76b32c7e9c60a1e294dc0591ba0e95fc76e2312"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028053234.png",
+      "sha256": "8e02fb8a082f784130747ff0fc8842b684fd8a2149c2b8c65153786ad46aeb89"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028053245.png",
+      "sha256": "ee256ee682190ccabb92802f633917c0ccea249dd5b798cc24c0dc1b88db1dd6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028053525.png",
+      "sha256": "124bd90ef1ac57d205bce432c86479b093f07f9d3ae9f4c44e597866152c02d7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028055946.png",
+      "sha256": "3c8b64ba31ba6d9d35417c69266b3981638947617460dfcb62907045a90bf042"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028064329.png",
+      "sha256": "96973e53a0d327f3658e6a27e5ef8216bbee4809b78b79788506b8cb42ac0e21"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028064350.png",
+      "sha256": "81e2e83145566301464bc6f644356be7bba47aa98e76f692496430ebe674c368"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028064424.png",
+      "sha256": "4a52d9098a2489a12b6f3a417f7b5dcab7a9049fd81b8e4646871bcb2bdb645f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251028064436.png",
+      "sha256": "803dc1f6b5be1e763f9bbfefcb62f5558a99e962c8e151de4770e9f6dfe3805a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251029063914.png",
+      "sha256": "52f2d8804fe40646e607758f3d744e95c0c97eeb3e7dd3413ffc8a4ded00393d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251031142029.png",
+      "sha256": "651dd471c609c1ce3390db8cdec25f76d9f63564a09383e460ae0c0e7b06b99b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/Pasted image 20251108151752.png",
+      "sha256": "15e5ce35b3d32638fe0dd721df381644489199f2f9118e90b6bf3fd9c57d5b30"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-27_21-22-46.jpg",
+      "sha256": "3f69f53746e45242136dc7e2bbbf00e8331d5bcd9cf764daa43df7ff5f43c857"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-27_21-55-00.jpg",
+      "sha256": "4d4e2cf5203c2f7289868bad5eb9123df80aa1b1a9345389b906c430abf57458"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-27_22-12-59 1.jpg",
+      "sha256": "9c087b7d5e10a4811fb4f13a971d6ac4826e4ed38b3f7e2fdbc2da49404c0b99"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-27_22-12-59.jpg",
+      "sha256": "9c087b7d5e10a4811fb4f13a971d6ac4826e4ed38b3f7e2fdbc2da49404c0b99"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-27_22-16-30.jpg",
+      "sha256": "66784e284d91edfcaac0c95e92e730e9b3d3202857540ea8d411e6505ffd1390"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-27_22-19-59.jpg",
+      "sha256": "3930335f9c903c828798164c79dce9dbeca6c0386015b95e3196fa11e93890d1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-27_22-34-55.jpg",
+      "sha256": "d50fdf067b662e67499eb8eb053a70f79dfe3edc9b32f006966c3de570849c1d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-27_22-36-20.jpg",
+      "sha256": "2c9f2f3443da8972dcb6a54861d18c2447fb476874f4ed5d51dd50cc18857cb1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-28_00-05-22.jpg",
+      "sha256": "c410e362d1ddab0dcffcf78a9051c9328d2ca826ed12b4407b55483deb73ff04"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-28_00-18-13.jpg",
+      "sha256": "ce873e32ed50dd4dadf3e010bb3666d0055ad32bf053dc4c97e4ead988f64e6a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L2/imgs/photo_2025-10-29_05-19-27.jpg",
+      "sha256": "22247ed3b69805faac35374dcf2f47a4d2c19c0f5adfba85c604209a2a746b7a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/10_notes8.jpg",
+      "sha256": "42d06e7ac988b3cc157b7eae68e1d25783888ec58673c211dfc10fc4c3473510"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/11_vs3.png",
+      "sha256": "e65bc1c7b6437286ac6c1274ef29dcbcce10b4a44e0726d617877d651991af95"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/12_vs4.png",
+      "sha256": "831735eb861c4da71e908e9f6bab4fd7c68859898859ecfa67c2aefaede16bea"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/13_vs5.png",
+      "sha256": "9c5b3b9e70f9c98aaa6a4adfdb6b8f81394a692d0c717a92a37e95c177d16128"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/14_vs6.png",
+      "sha256": "1d5bc46f5b472999bf26e4d39c0aaa4ac5832079adac38f491cde94396a6a3df"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/15_vs7.png",
+      "sha256": "00eb527b4a3c1ae2e81f9ceaf0668578566cb0b2a38422e25bb61b14991c8360"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/16_vs8.png",
+      "sha256": "7660b5371aafee870b0f07066a560ca2659525556b5c8e8aaceb8f7f5ccf705d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/17_vs9.png",
+      "sha256": "907bb71628ff7e1eb0c09ca7fe6ff6f4c4d4cf6f0ff4598d30753b9fea7f62ad"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/18_vs10.png",
+      "sha256": "6b82bdadab74210b300ef55bf1c8e0ea385c69c5d815aaab451e4edbc4eaf79c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/19_vs11.png",
+      "sha256": "82968b98ac7f769ac31803a6b363def2980555a6ae840e715e305e8bff3bd8c5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/1_notes1.jpg",
+      "sha256": "22247ed3b69805faac35374dcf2f47a4d2c19c0f5adfba85c604209a2a746b7a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/2_notes2.jpg",
+      "sha256": "4aa41b8802f8ab180ef927746bb4414ec8b77e68b2ea3e5256eaa74db72a4f4c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/3_notes3.jpg",
+      "sha256": "569d164da096261eba2e7554d1aaef29ef4055e6d27d985b7694a3dd2b4dd1e0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/4_notes4.jpg",
+      "sha256": "a20a343e1dbb8779ea7fa329337d33b7049d26d3f840dfd7bd7df2704517b577"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/5_notes5.jpg",
+      "sha256": "f17864e7cab0a6dcb8e8084ebed50184a1e8987dc99258012d906e6f8d87f8fe"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/6_vs1.png",
+      "sha256": "fb330f03e04e1fc6b73c8928d8112c16931a1055a0cf925a50237159e1d00256"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/7_vs2.png",
+      "sha256": "3a2b1390353cda0f16e34c0b4780717c62a84b2f55c3962593f80d623cd31e78"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/8_notes6.jpg",
+      "sha256": "ebab29db58e70acdef07672a50da4c54f61c71a3a56f01692a034a5a39c56b43"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD2/L1/imgs/9_notes7.jpg",
+      "sha256": "825269ac3dc9f421684e07969a742247f1f853cb6adc44d34f3d36b8b7f9cd4d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/L1_Liste.md",
+      "sha256": "f76850a1cbb1ad8fbf13de976bbd2aa202607e64225965a1c1f413ae460f843a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/L2_Programmare_con_Liste.md",
+      "sha256": "dffcaeaa196624115e06dc925d71704c8dd70faeeb54b12d82b81be6f1809e28"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/10_vs7.png",
+      "sha256": "50020fe1c2437cad407fd83c8796a42130ecc567ab0fb8cc21a78133f7cdcdf5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/11_vs8.png",
+      "sha256": "6afd36b771d034c6129148efccbd317eb1062932378bce02706c113e2f3ee6f6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/12_vs9.png",
+      "sha256": "41418bef545e2812364e20f414078b8168634595029eec154fdb66a1cc9cbd89"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/13_vs10.png",
+      "sha256": "61c1845eb116d2f101cffeaea63670c02216d86703a40571496bb3c340db40e7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/14_vs11.png",
+      "sha256": "854c7794e32e404cc90c31918ec2bf9cf43a848991116608e1078b74d1a71e3f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/15_vs12.png",
+      "sha256": "0625e50321ab8cc543f9c893664ea9b4adae3db94bd495881a752e71d30dbc79"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/16_vs13.png",
+      "sha256": "a5f21d737f4e4e34cdadb2064695e5d4caf695371a850e42814b2754ce807e22"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/17_notes1.jpg",
+      "sha256": "8565175ca2b547c1d58357d33eb35fbd173167361bcdfcadf51c0cc6fb735682"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/18_vs14.png",
+      "sha256": "f625d1de444f0d6ec3fb773ea998b509c394ea654026d6118997e6235fb49ed6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/19_notes2.jpg",
+      "sha256": "4bbbad4a5268f9d39052da417d7d84b4f373461fa2570bddfd1fa79d5125ab13"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/1_riassunto1.png",
+      "sha256": "62eaf09d67afbd25806e4ad22bfa9aa24227cba8a230f8bcc3a6a914e4f495cb"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/20_notes3.jpg",
+      "sha256": "d991b685cba44b5a808cd3d6b9d3a3cf3cbdf34e57c10cf142c84ce109bbb19c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/21_vs15.png",
+      "sha256": "3c8b64ba31ba6d9d35417c69266b3981638947617460dfcb62907045a90bf042"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/22_notes4.jpg",
+      "sha256": "a75a8cddc286cb105e491e34732218799c6ebadfcec167e1afac172047de5649"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/23_notes5.jpg",
+      "sha256": "4bbbad4a5268f9d39052da417d7d84b4f373461fa2570bddfd1fa79d5125ab13"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/24_notes6.jpg",
+      "sha256": "fc2cfe9b915bb01de9966134453c8f634589b1041e1ff36e88b956e10cf5deb4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/25_vs16.png",
+      "sha256": "fb72c299c4fc61cd62175174e4beef60e367989e1ef4f4637143f6f140ac96ae"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/26_notes7.jpg",
+      "sha256": "034d63d34c8fdb74a29df48663d5252ed75eb27e674350476e3483be254f47d2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/27_notes8.jpg",
+      "sha256": "312daa43d27e77f366490335e44f5b73ad1b4bb9f85a559b28a86fa3ccd93f3d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/28_notes9.jpg",
+      "sha256": "f78cbbea59b6d7dbb3a95996790c9491db75192afa3b502d6aea353753692e66"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/29_notes10.jpg",
+      "sha256": "82ead182bba93edf2ec603ff7b7e8e724adbfcf625f2d2db0f93117a75e3e80a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/2_riassunto2.png",
+      "sha256": "5db55c6750514e646792c1938bbc780befdabf92cbb2e6af3776c0aea6d2b492"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/30_vs17.png",
+      "sha256": "e3235879751c0f65db46e51d1771916c7e02a96eac4c5892f9fce6de1aa86aaa"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/31_vs18.png",
+      "sha256": "451ef94b6a24f26b8401fd757eaf1df24a135e1c01bc10b4996b19ae01b1b025"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/32_vs19.png",
+      "sha256": "c11a8e3271a978513083bcd95ed12349f58974bc422da454797d02a9f0915e9d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/3_riassunto3.png",
+      "sha256": "da3490bab0a39f557b3fc569328d1b341426e8660f42a1d1b4044e48405f4126"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/4_vs1.png",
+      "sha256": "c20270a53c7a6b6d7ec38ac0a6c247c3bdb71cfc30017df28b090a51042dbca4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/5_vs2.png",
+      "sha256": "e62644eaa4afdfe96ccc778d7dee1e33484c8d6ace76c27c18d0fcfabb7116c5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/6_vs3.png",
+      "sha256": "a4796771255894b228b2511fb9f50612edd817097fef8b3003d9393dc9834415"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/7_vs4.png",
+      "sha256": "a2a3d2dd7afae44ed41bca08a6e1f9e01500be76048cc999a7c42f511a032ac1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/8_vs5.png",
+      "sha256": "4e425ad9def3752692fb0a70e7cd3de11bcf27228ab1f71ae1ff693b12df90b2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/9_vs6.png",
+      "sha256": "260abfa3fdeea7871e3e5f371cc0178e8c6c942688f1c6e563da2fde68d86e62"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251027210206.png",
+      "sha256": "ddaae7a694a4664cbad21bdea4031d937184b4d64cb83d417254735c5384725a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251027210307.png",
+      "sha256": "6058ba78ec1a8d910596eca0f22349d5eac34f3298a4cbf7c28268aca38c10e9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251027210328.png",
+      "sha256": "f882c778ce82aca22518548c57218ec9dc3b159e9c048e158ed56193afc11671"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251027214035.png",
+      "sha256": "a995765a4469e6376e8af335d44e3d013b7d2aa4b14ca9f595e97b3d1ff087cc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251027215505.png",
+      "sha256": "a8f9251c87cc520915da003c7c2d7e4fbe86ae5cce6baa413a8bf4fec47d3946"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251027225748.png",
+      "sha256": "a32453f0cfc071f7417f614472b5b8895cc62571675bed20435a863d83538fd9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251027225941.png",
+      "sha256": "a32453f0cfc071f7417f614472b5b8895cc62571675bed20435a863d83538fd9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251027230514.png",
+      "sha256": "a32453f0cfc071f7417f614472b5b8895cc62571675bed20435a863d83538fd9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028000035.png",
+      "sha256": "8aacf60735316f2d122c7dd284bff47fe568a4762172c7c0a106fbf80457ada3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028000213.png",
+      "sha256": "6e834029fca2c14bb7b7f54417527659f867625e4fb3e10b69517d3ed216a2df"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028000435.png",
+      "sha256": "a1eee857f28de5b0264b55befb0e90db75785b3de392e2f9ea1b178d8bfdf884"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028000527.png",
+      "sha256": "a1eee857f28de5b0264b55befb0e90db75785b3de392e2f9ea1b178d8bfdf884"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028001418.png",
+      "sha256": "59c29e3d6a7fc3985297d9d91936dbb3dd5556a472c9bf41ee28b785ddcb09a1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028003053.png",
+      "sha256": "59c29e3d6a7fc3985297d9d91936dbb3dd5556a472c9bf41ee28b785ddcb09a1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028005752.png",
+      "sha256": "2ce18d0327c9f31767bcbba6e8f093dbeb211a429491f3408bb8dfab627f3fe8"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028010040.png",
+      "sha256": "040c0b182f3c2c61398d047d5894614be3200cf266e7683019c0169a4bc7da03"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028034402.png",
+      "sha256": "063d5fb93c213319605fd33fe038f26e163219e808a4346e3768c714a30462c2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028035104.png",
+      "sha256": "5a4c33b774fbd4d216e6ce1aa9f3a6c0b511cdad39088ce308411c0beb14a2d0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028035129.png",
+      "sha256": "8cf5f7aa4f8c2ef2910d07e37a889a673c216232992c43d0f656509a8da637c6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028035201.png",
+      "sha256": "6311594acb9c0e206d348871051e77ed578b83e3f4ca8f486247d43176a6eafc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028035247.png",
+      "sha256": "6d8c40ae2013a41bf7689fb81278d53c5b41a9ff8b01ae380d7a95575eb65178"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028040607.png",
+      "sha256": "8dbcf1d19fd25f5b9fc22c4da229d109130562adbe753de2e66f5a32a5d3402f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028041045.png",
+      "sha256": "d0cc22f55bcd77a4b26fe2ad9631da509cb819a42bf144217a9bd738e9b14ff5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028041718.png",
+      "sha256": "ddefd5a0fc7468d926624666c76b32c7e9c60a1e294dc0591ba0e95fc76e2312"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028053234.png",
+      "sha256": "8e02fb8a082f784130747ff0fc8842b684fd8a2149c2b8c65153786ad46aeb89"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028053245.png",
+      "sha256": "ee256ee682190ccabb92802f633917c0ccea249dd5b798cc24c0dc1b88db1dd6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028053525.png",
+      "sha256": "124bd90ef1ac57d205bce432c86479b093f07f9d3ae9f4c44e597866152c02d7"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028055946.png",
+      "sha256": "3c8b64ba31ba6d9d35417c69266b3981638947617460dfcb62907045a90bf042"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028064329.png",
+      "sha256": "96973e53a0d327f3658e6a27e5ef8216bbee4809b78b79788506b8cb42ac0e21"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028064350.png",
+      "sha256": "81e2e83145566301464bc6f644356be7bba47aa98e76f692496430ebe674c368"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028064424.png",
+      "sha256": "4a52d9098a2489a12b6f3a417f7b5dcab7a9049fd81b8e4646871bcb2bdb645f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251028064436.png",
+      "sha256": "803dc1f6b5be1e763f9bbfefcb62f5558a99e962c8e151de4770e9f6dfe3805a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029062250.png",
+      "sha256": "fb330f03e04e1fc6b73c8928d8112c16931a1055a0cf925a50237159e1d00256"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029062313.png",
+      "sha256": "3a2b1390353cda0f16e34c0b4780717c62a84b2f55c3962593f80d623cd31e78"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029063806.png",
+      "sha256": "e65bc1c7b6437286ac6c1274ef29dcbcce10b4a44e0726d617877d651991af95"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029063914.png",
+      "sha256": "52f2d8804fe40646e607758f3d744e95c0c97eeb3e7dd3413ffc8a4ded00393d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029064247.png",
+      "sha256": "831735eb861c4da71e908e9f6bab4fd7c68859898859ecfa67c2aefaede16bea"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029143545.png",
+      "sha256": "1d5bc46f5b472999bf26e4d39c0aaa4ac5832079adac38f491cde94396a6a3df"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029143559.png",
+      "sha256": "9c5b3b9e70f9c98aaa6a4adfdb6b8f81394a692d0c717a92a37e95c177d16128"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029143622.png",
+      "sha256": "00eb527b4a3c1ae2e81f9ceaf0668578566cb0b2a38422e25bb61b14991c8360"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029143645.png",
+      "sha256": "7660b5371aafee870b0f07066a560ca2659525556b5c8e8aaceb8f7f5ccf705d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029143708.png",
+      "sha256": "907bb71628ff7e1eb0c09ca7fe6ff6f4c4d4cf6f0ff4598d30753b9fea7f62ad"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029144538.png",
+      "sha256": "6b82bdadab74210b300ef55bf1c8e0ea385c69c5d815aaab451e4edbc4eaf79c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251029144603.png",
+      "sha256": "82968b98ac7f769ac31803a6b363def2980555a6ae840e715e305e8bff3bd8c5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251031142029.png",
+      "sha256": "651dd471c609c1ce3390db8cdec25f76d9f63564a09383e460ae0c0e7b06b99b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/Pasted image 20251108151752.png",
+      "sha256": "15e5ce35b3d32638fe0dd721df381644489199f2f9118e90b6bf3fd9c57d5b30"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-27_21-22-46.jpg",
+      "sha256": "3f69f53746e45242136dc7e2bbbf00e8331d5bcd9cf764daa43df7ff5f43c857"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-27_21-55-00.jpg",
+      "sha256": "4d4e2cf5203c2f7289868bad5eb9123df80aa1b1a9345389b906c430abf57458"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-27_22-12-59 1.jpg",
+      "sha256": "9c087b7d5e10a4811fb4f13a971d6ac4826e4ed38b3f7e2fdbc2da49404c0b99"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-27_22-12-59.jpg",
+      "sha256": "9c087b7d5e10a4811fb4f13a971d6ac4826e4ed38b3f7e2fdbc2da49404c0b99"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-27_22-16-30.jpg",
+      "sha256": "66784e284d91edfcaac0c95e92e730e9b3d3202857540ea8d411e6505ffd1390"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-27_22-19-59.jpg",
+      "sha256": "3930335f9c903c828798164c79dce9dbeca6c0386015b95e3196fa11e93890d1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-27_22-34-55.jpg",
+      "sha256": "d50fdf067b662e67499eb8eb053a70f79dfe3edc9b32f006966c3de570849c1d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-27_22-36-20.jpg",
+      "sha256": "2c9f2f3443da8972dcb6a54861d18c2447fb476874f4ed5d51dd50cc18857cb1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-28_00-05-22.jpg",
+      "sha256": "c410e362d1ddab0dcffcf78a9051c9328d2ca826ed12b4407b55483deb73ff04"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-28_00-18-13.jpg",
+      "sha256": "ce873e32ed50dd4dadf3e010bb3666d0055ad32bf053dc4c97e4ead988f64e6a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_05-19-27 1.jpg",
+      "sha256": "22247ed3b69805faac35374dcf2f47a4d2c19c0f5adfba85c604209a2a746b7a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_05-19-27.jpg",
+      "sha256": "22247ed3b69805faac35374dcf2f47a4d2c19c0f5adfba85c604209a2a746b7a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_05-38-40.jpg",
+      "sha256": "4aa41b8802f8ab180ef927746bb4414ec8b77e68b2ea3e5256eaa74db72a4f4c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_05-39-30.jpg",
+      "sha256": "569d164da096261eba2e7554d1aaef29ef4055e6d27d985b7694a3dd2b4dd1e0"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_05-40-18.jpg",
+      "sha256": "a20a343e1dbb8779ea7fa329337d33b7049d26d3f840dfd7bd7df2704517b577"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_05-40-41.jpg",
+      "sha256": "f17864e7cab0a6dcb8e8084ebed50184a1e8987dc99258012d906e6f8d87f8fe"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_06-31-56.jpg",
+      "sha256": "ebab29db58e70acdef07672a50da4c54f61c71a3a56f01692a034a5a39c56b43"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_06-34-11.jpg",
+      "sha256": "825269ac3dc9f421684e07969a742247f1f853cb6adc44d34f3d36b8b7f9cd4d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L2/imgs/photo_2025-10-29_06-34-16.jpg",
+      "sha256": "42d06e7ac988b3cc157b7eae68e1d25783888ec58673c211dfc10fc4c3473510"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/10_step1.jpg",
+      "sha256": "8e3d88e3b5d8ef00a1330471ff071d4933cc2433759a44d51e6f7de7cae2fe43"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/11_step2.jpg",
+      "sha256": "e75ab220b0ebab7fffb5aa2ad3202f6e29add4e5897de78e03d15cb77d627938"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/12_cursori1.png",
+      "sha256": "dbc0088c12e829cefe04d9bba0f7edc01598bddf2db84ddb269c2c77ee6f5972"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/13_cursori2.png",
+      "sha256": "fcb91e1034b4b1368d4d36ad708297d29232d73afbd006c3cf84633565f0b7b5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/13_cursori3.png",
+      "sha256": "535f3c2f65f552c656fa6701f7a3c273964b6f7ec222e7e1402f28d77a9102f4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/14_cursori4.png",
+      "sha256": "34db9147cf8326070b91f63eecf57aeb346ac130fe44117a5d828924389092af"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/15_cursori5.png",
+      "sha256": "abba15ea253c00f2b424b787250bc3e9a29ccfe252ce587624be7a7411d09711"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/16_c1.jpg",
+      "sha256": "ffb1eeb5078a02816322c28285598c6f395b96b08d75ab3c2de474b7c8c84677"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/17_chat1.png",
+      "sha256": "c7647f77000da0463cd15df2673715c816f11e2e3cb211ca09b3d95f56b5cb18"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/18_c2.jpg",
+      "sha256": "f80c50f75357d738797b2fe146157d378ef1590baaaf555facd7c4f637a28ecb"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/19_chat2.png",
+      "sha256": "a995765a4469e6376e8af335d44e3d013b7d2aa4b14ca9f595e97b3d1ff087cc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/1_lista_monodirezionale.png",
+      "sha256": "267d7e4e681006a59a3f6caed8cbf9150eef0f66abed1a64714e3429b8abba76"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/20_c3.jpg",
+      "sha256": "d9ef11fb9e9d2e0a17006a6b43083b88a9e706972354a232bc8d62413a70509e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/21_chat3.png",
+      "sha256": "4133540a1047e4e667e391adde14e4ec3896ddaed2a9394c5197dca29dffbd04"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/22_c4.jpg",
+      "sha256": "883ae0f19f46a47f0f40ba93656eff6d6f830f360eccdc57140284a03d16db12"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/23_chat4.png",
+      "sha256": "e626b0007f8818aa6b550014b42bf42ecc33f6d323c92fc02d94a447a0a43085"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/24_c5.jpg",
+      "sha256": "5f46d3806d867b2420e7140f6760b496769a44aa69104c6781541c014d3003e6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/25_chat5.png",
+      "sha256": "a8f9251c87cc520915da003c7c2d7e4fbe86ae5cce6baa413a8bf4fec47d3946"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/26_c6.jpg",
+      "sha256": "2c9f2f3443da8972dcb6a54861d18c2447fb476874f4ed5d51dd50cc18857cb1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/27_chat6.png",
+      "sha256": "b7846e0628c452d30ebeb5414fafc1965fb8255fca8ba5c6c0260de55385d593"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/28_c7.jpg",
+      "sha256": "e8c995a7bb714daf71e484bff8097a5c28d9112c4276ae6a1b58dca3d1d96081"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/29_chat7.png",
+      "sha256": "690cfd0f95bc93fca714bed8dc16b7a45ebb4b335ee63b3d896944217ccfee31"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/2_lista_bidirezionale.png",
+      "sha256": "ae116af9fb2418ebfe5f88f93ae234b2ff784f7806d81bf003786fdd19705561"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/30_c8.jpg",
+      "sha256": "9ca76abe8d886590c2d2e648a36c85dabc029fcc8cafd97e55adb7971cd47873"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/31_chat8.png",
+      "sha256": "b929f510a6addf64476c59be5c9f5929d6871da388f02c1eeac9444d5dfb5779"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/32_c9.jpg",
+      "sha256": "0b417ede3b12e0d672079c0306e1275212122aefe2e9c4fffce8f8ecc12f5d71"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/33_chat9.png",
+      "sha256": "44c08c5083c77d3a1c972bb3a4de2764726939d6db7d99054f0d6b8f22530472"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/34_c10.jpg",
+      "sha256": "9d96b193109d3f0470f0dfcaf2e7db5fd128a5be17e3a603f48802bee2f45196"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/35_c11.jpg",
+      "sha256": "0c26f7bb30e0358a955478ca7a35a11bb48dc22d6a13d45a2f50053ffcc9303b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/3_lista_bidirezionale_circolare.png",
+      "sha256": "f7abc5b76b92e14cbea4c1e209fa68f3c9f6bfe85933cf05685d0f16c5e3e376"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/4_lista_monodirezionale_sentinella.png",
+      "sha256": "e02239410dfa802f5e90014636c383955c015e822c718176e5750ebd496dd96f"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/5_lista_bidirezionale_sentinella.png",
+      "sha256": "e6f3ad1e0e364f1c61a7b6e4e956dc3328e6de15ff8cbf56abc8ffa6214f286b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/6_pre_inserimento.png",
+      "sha256": "24a83793d09a8a955551ed22a1848e9a819674ee93c24de89e1583b0397fd77b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/7_step1e2.jpg",
+      "sha256": "5be806918cd35b3e7f8318d9e47f09c28fb9e28072a48c693cdc148ca6af5d8b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/8_step3e4.jpg",
+      "sha256": "ec95c264e7bc6a746b1822deb54059556821bd1d83022e3532940ecf21e35088"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/9_situa_iniziale.png",
+      "sha256": "db07198176a5e62a8ac32c11f7cf2022cbd146fa62f7ba9a5b047ed1c62b6aa1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/Pasted image 20260423152307.png",
+      "sha256": "c737ba599456bec6264387828e0111add26916abc67d2bb4c9e5d767c5b72e78"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/UD1/L1/imgs/Pasted image 20260423173645.png",
+      "sha256": "92322ca27ed59102ed33aed94c7fe955239cda3609cbb20f634a862ec6d5ea01"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/0_Ripasso_Puntatori/1_Intro_Puntatori.c",
+      "sha256": "7622f251a6fb8ea01da5c659e0916a14798a425439c26bdeadba44ce421f0691"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/0_Ripasso_Puntatori/1_Intro_Puntatori.exe",
+      "sha256": "44c8d979bc24a1fe197a2567889885b774fecf9b6a5fc83968e0d36dd6a6cce2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/0_Ripasso_Puntatori/2_Call_by_Value.c",
+      "sha256": "6dc069ec793def23709cb0daecd788249fa03c2dcefeb66d6b77dd53549c0848"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/0_Ripasso_Puntatori/2_Call_by_Value.exe",
+      "sha256": "d00cec06166ce169694fb05226955614d51ef49fceda63b17841fd3297fbfc73"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/0_Ripasso_Puntatori/3_Call_by_Reference.c",
+      "sha256": "358f3e8111227e84273d442f7b3f76a5dc63c13c18ba43629b4ab9a740d399a6"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/1_Esempio_Lista/lista.c",
+      "sha256": "4aea20db9bdb93e5bddfe9251237544b839d584d22f50024716fbd9987a88aa1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/2_Lista_con_Cursori/lista_con_cursori.c",
+      "sha256": "8c01e15fa9a1b79d645d3326ef0738407fbfe14c3ffc4813dab075ae4ae29d63"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/3_Programmare_con_le_Liste/0_specifica.c",
+      "sha256": "54f56766a51ab93a8dd630b77db68fec063f091bced088501c05caf7ef6ba172"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/3_Programmare_con_le_Liste/0_specifica.exe",
+      "sha256": "eef431f34dc2be2cf7b74e3bc3cb88a27cec0d31568bd6e74a24064ae449866c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/3_Programmare_con_le_Liste/rango_lista.c",
+      "sha256": "36a35a342acf30ecee93d9e71abff0a951d77d1a7a046862c8e24263bb8dc729"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/3_Programmare_con_le_Liste/rango_lista.exe",
+      "sha256": "21c9a5ae47cb49b917b04f87042886061103d895c5ba8cac5b81a6d0f7cfc1d9"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/4_Pile/intro_pile.c",
+      "sha256": "4383612d1de5afcfb681cd8763c1d7dfef4aa2333aff0c8a943efc83e6e617cd"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/4_Pile/intro_pile.exe",
+      "sha256": "c102432cc14fd7663d23d8961e831dd782adc4ea3eee591779a076cdaa4033bc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/4_Pile/pila_vettoriale.c",
+      "sha256": "f950319368bdde90c8d801ee4fc11a8e73743d7c827e50b6675c2feb5f26c0ae"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/4_Pile/pila_vettoriale.exe",
+      "sha256": "27ddada87edb9c7ac07abbc00ba0d96aa17d4fbd41a288dd855720770335118c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/5_Programmare_con_le_Pile/programmare_con_le_pile.c",
+      "sha256": "40e59c82e9e2a729b92271d98cb2c89b06f7edc7500a9eea0d341845a4fe0b65"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/5_Programmare_con_le_Pile/programmare_con_le_pile.exe",
+      "sha256": "702173ff8638b4399e9a3edb6d968a03b4ffb80d7ef343c0a7700447a69cf616"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M02_DS_Lineari/Codici/6_Programmare_con_le_Code/programmare_con_le_code.c",
+      "sha256": "fe605f6b8efbb0f2fad16e99a66b41d1e2d68bde80634fa9878317c88b62c5f8"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Lezioni_Presenza_Ariel_2025_2026/Lezione 29 settembre 2025.md",
+      "sha256": "e9491aa9579f8f4f1899647aebde35acdc339fcdb5c4bb3ae644d7ab32cdb90a"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Lezioni_Presenza_Ariel_2025_2026/Lezione 3 ottobre 2025.md",
+      "sha256": "0ce07063b185cb18fa3c3309304732e08a5556ea381fc0bb2645990cc156ce4e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L0 - Intro UD1.md",
+      "sha256": "72d9ee66b02bb63fd65e4241abbaeb9e9d0a35e5e4b148fee8db22769cbfd99b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L1_Introduzione.md",
+      "sha256": "6201f0683e2a3dd116f8384dc043249fc07450258dcd93e7ad9e00c4d946decc"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L2_1_Efficienza_e_complessita.md",
+      "sha256": "bfbb46974a79a1ba393b7265b2814d1fb33fa3c6d641cf6e01f9e08ed38cede5"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L2_2_Efficienza_e_complessita.md",
+      "sha256": "fd1ea276b5d67eb661e50aefcfa4b76a370a3177003f52d557763c3aa734a38c"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L3_Complessita_per_induzione.md",
+      "sha256": "bb1e7076c7844baad8f1c7644db95dfbc00f3b15e733fdc79f5991267d33ee1d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/L4_Soluzione_di_problema_computazionale.md",
+      "sha256": "76f9d814c11a60a28d5e26f9406f0a11de321d5b0f2057f49aac309d007f628e"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD2/L0 - Intro UD2.md",
+      "sha256": "057047ec77a5d3035b449968bdcc24f9b020dccbbbd1da1ac12aefd6983ec2e3"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD2/L1_Aspetti_fondamentali_formalismo_rappresentazione_tipi_di_dati.md",
+      "sha256": "95057991434bc3b261ecf6471ba3fcd2b50829409b213731531c754014e90652"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD2/L2_Costruzione_ADT.md",
+      "sha256": "2b39f9f1887135957516225fd3c6ffaf524ecacf6322bfdddae9cf5c2021a996"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/imgs/Pasted image 20251025212411.png",
+      "sha256": "541e04d194bfe9703041e275c27668ab1cedcd7b46424b1204fd2d68cc9e08b1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/imgs/Pasted image 20251025215145.png",
+      "sha256": "7aae5f74470c4e5d506c9dc50b65b87cb11369663ff7524028df01bace7fd692"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/imgs/Pasted image 20251026114812.png",
+      "sha256": "060435169bf16fb5ff9b27bc583317bb4652e55133dd98a71d1fa6750159c33b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/imgs/Pasted image 20251026114850.png",
+      "sha256": "51eb3b10aae23b946323f81c97bd6178d5c51822d0a22e37f69c1fc10a442bd2"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/imgs/Pasted image 20251108151752.png",
+      "sha256": "15e5ce35b3d32638fe0dd721df381644489199f2f9118e90b6bf3fd9c57d5b30"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/UD1/imgs/Pasted image 20260422041142.png",
+      "sha256": "51f526f440ccb73d232bd0f07b8cf10317cb7b0960c152e8bbb9bfcba4bacf3d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/1_minimo_iterativo/1_minimo_iterativo.c",
+      "sha256": "d2352bc7c6cdb0bdfe55b5088b61f5f124458ac915ab76993eac3003f05dbac4"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/1_minimo_iterativo/1_minimo_iterativo.exe",
+      "sha256": "9503df7e8ccf8b2067a27e406940b5f99fd2277d75d1d55dc20bbbb85a582704"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/2_minimo_ricorsivo/2_minimo_ricorsivo.c",
+      "sha256": "3fed09eeb5a02913e77f09e43d0bc16b9d2758533cf1b141214f9d4256f06135"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/2_minimo_ricorsivo/2_minimo_ricorsivo.exe",
+      "sha256": "ceccb683ec69746222efc308b48c1ef247aacd88b2d57c0d3d1aa037add03ac1"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/3_switch_colori/switch_colori.c",
+      "sha256": "2965d4cb0fb98ddb6d077f390dec7b8f7c0405067a3ffddcb3cebeb5a4780348"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/3_switch_colori/switch_colori.exe",
+      "sha256": "7d62172d5001e864b6b3ff4a78ed5e5d56999ff0c2355066a172ee82a861467b"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/4_esempio_puntatori/esempio_puntatori.c",
+      "sha256": "a6b54d687d1e47dd4253fd8d289918dc75cc27e0a599e129fce16fb1b5058d23"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/4_esempio_puntatori/esempio_puntatori.exe",
+      "sha256": "70b8329594759105aa7eb85a7bd820fc0a964c14b9b7f0f685e46c04c73caaeb"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/5_esempio_mapping/esempio_mapping.c",
+      "sha256": "2787ffa1688873377f88becd20f850553702e4668a0cfceb2ff1bdaa3771a02d"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/6_SelectionSortAnalisi/selsort.c",
+      "sha256": "7709e563ed9f1abd94ac5d3a83f7fd85f769bbfbba5f1526a7c2ffb128579265"
+    },
+    {
+      "path": "lessons/cybersecurity/anno2/1_Algoritmi e Strutture Dati/M01_Elementi_Fondamentali_DS_e_Algo/Codici/6_SelectionSortAnalisi/selsort.exe",
+      "sha256": "5ed78f885320441afbb5afb0b53bed0e222ae7956465fc627e83157b8fcfacd7"
+    }
+  ]
+}

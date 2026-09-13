@@ -1,0 +1,397 @@
+{
+  "date": "2026-09-11",
+  "sources": [
+    {
+      "path": "Intro_Corso.md",
+      "bytes": 315,
+      "sha256": "d46e9212946192a37a47474613b299284747da3cd3c300479290b035f06995cd",
+      "extension": ".md"
+    },
+    {
+      "path": "Lezione00_RAG_Jarvis_for_IS4/RAG.md",
+      "bytes": 373,
+      "sha256": "b044368bd777ded0fd6a23cf59c54a17171b055c39c567a6d7081290b1381b65",
+      "extension": ".md"
+    },
+    {
+      "path": "Lezione01/Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "bytes": 5790894,
+      "sha256": "49a1f29d180b73591bfceffb5c844f44872b4b52e34c4ae672daa822dc0012b7",
+      "extension": ".pdf",
+      "pages": 82
+    },
+    {
+      "path": "Lezione02/Lesson_02_Regulatios_InputSpace_Pertubations_XAI_Gestalt_Opinions_Drivers.pdf",
+      "bytes": 4920950,
+      "sha256": "46938d25a6a53741a6a16aa867aba88b9aa8ac769f672735abc74bcff5f1566b",
+      "extension": ".pdf",
+      "pages": 84
+    },
+    {
+      "path": "Lezione03/Lesson_03_The_AI_Apocalypse_Matrix.pdf",
+      "bytes": 1566380,
+      "sha256": "0e8524eb0310368e3a9618bdbecf2940218a97a8faae62ec58c22700425d654d",
+      "extension": ".pdf",
+      "pages": 2
+    },
+    {
+      "path": "Lezione03/Lesson_03_Tools_AITaxonomy_SensorApplications.pdf",
+      "bytes": 5953384,
+      "sha256": "8f66e715967f68aa6517c340ea5c3d5bc108f7ef6d49566fd199c63f551a3898",
+      "extension": ".pdf",
+      "pages": 85
+    },
+    {
+      "path": "Lezione04/Lesson_04_MachineLearningBasics_Trends_Simulation.pdf",
+      "bytes": 4316405,
+      "sha256": "c048079c45be1a9f527a847b147935cb4e80c313d96a9f5b007133b98d8fcb65",
+      "extension": ".pdf",
+      "pages": 77
+    },
+    {
+      "path": "Lezione05/Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf",
+      "bytes": 4012360,
+      "sha256": "b3fbd5df11886b766fa7e3e7c421d70dd3bf3a84aa465bea8b4961138e269cc0",
+      "extension": ".pdf",
+      "pages": 72
+    },
+    {
+      "path": "Lezione06/Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf",
+      "bytes": 3843010,
+      "sha256": "932f58a14c3cddc11e3df7a892bd6c313815d213988d41b925cfc5c1fcfeb7d9",
+      "extension": ".pdf",
+      "pages": 85
+    },
+    {
+      "path": "Lezione07/laboratory_COLAB_IRIS_Dataset.ipynb",
+      "bytes": 22593,
+      "sha256": "6de8900cc569099dd40002fa9c65426fe4d65b38409ba68f66a571a5b4be8709",
+      "extension": ".ipynb",
+      "cells": {
+        "code": 1
+      }
+    },
+    {
+      "path": "Lezione07/laboratory_colab_numparam_nn.ipynb",
+      "bytes": 3405,
+      "sha256": "ac9d614ecab6b403a907814eda5efde0777473e096317e9b8f9f31b06b1859f2",
+      "extension": ".ipynb",
+      "cells": {
+        "code": 1
+      }
+    },
+    {
+      "path": "Lezione07/Lesson_07__laboratory_colab_iris_dataset.py",
+      "bytes": 1473,
+      "sha256": "9ef4272749cf6c796db8711d387136834904030786fa26721b2b6ca5ab6c37e2",
+      "extension": ".py"
+    },
+    {
+      "path": "Lezione07/Lesson_07_NumberOfParameters_DataLeakage.pdf",
+      "bytes": 3967728,
+      "sha256": "9f5bb1f3174bd145a46b1cf7be219712b43af5356a7978a751641b0e1fb3ac5f",
+      "extension": ".pdf",
+      "pages": 73
+    },
+    {
+      "path": "Lezione08/Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf",
+      "bytes": 4212859,
+      "sha256": "43fa844f4695a42cbcd13ac8bf69246f2254521cda6c78d2e197239f257ef537",
+      "extension": ".pdf",
+      "pages": 69
+    },
+    {
+      "path": "Lezione08/python_image_hash.py",
+      "bytes": 505,
+      "sha256": "06c7dba44ffbd15a7c051effd164e85b64d1d770ff33cd94c419e7e9b0fcda72",
+      "extension": ".py"
+    },
+    {
+      "path": "Lezione09/code/__no__lesson_09_code_STEP2_finding_similarity.m",
+      "bytes": 6648,
+      "sha256": "7c1e780ea6895ab89d47d3d63e2e7929c6193205de4b05f2245b0725487f316d",
+      "extension": ".m"
+    },
+    {
+      "path": "Lezione09/code/lesson_09_code_STEP1.m",
+      "bytes": 2931,
+      "sha256": "03a62a273da95e70f2c252925539f42fcb54a7efb372adb7db299642c553d906",
+      "extension": ".m"
+    },
+    {
+      "path": "Lezione09/code/lesson_09_code_STEP2.m",
+      "bytes": 6361,
+      "sha256": "5fd5a1cf7ce7acf3347e54a1eeddcb74da4cbbf9417ee826df3417921503cf9a",
+      "extension": ".m"
+    },
+    {
+      "path": "Lezione09/code/Lesson_09_SimilarityInImages_imagehash.ipynb",
+      "bytes": 1188442,
+      "sha256": "55e358c1afde4b1df6999b22494424fae226200e665b8a057bc5eea3f6b3af47",
+      "extension": ".ipynb",
+      "cells": {
+        "code": 6
+      }
+    },
+    {
+      "path": "Lezione09/images/dog1.jpg",
+      "bytes": 276654,
+      "sha256": "7402dbc25ba2d64dc6f7864118cc1ad6f89cc0d2bd4334f9c214a3ef8ab92191",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/dog2.jpg",
+      "bytes": 276402,
+      "sha256": "93282170dae5fd550e1c1381f4b25f517f859a4ff7385916a6b7088187977551",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/dog3.jpg",
+      "bytes": 414497,
+      "sha256": "dd2254415372cf2824c409eee94909a1ff5401c9585a7af16fcbc56f5e837df7",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/dog4.jpg",
+      "bytes": 237651,
+      "sha256": "4bb55c98d239987431acbfb00a45a04ef88faab5696bacb9272a2d77c2840710",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/find_difference_image_1.jpg",
+      "bytes": 151738,
+      "sha256": "2b092deb9032a321b9d08fff3ef54e5d62bf3a28605295ac22379579ca7e1929",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/find_difference_image_2.jpg",
+      "bytes": 214008,
+      "sha256": "a54835b4376886156c2c481000d845ad68e11ad26c3c94462dd7be9744cd6cc8",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/find_difference_image_3.jpg",
+      "bytes": 11764,
+      "sha256": "3b6d2fe38b4d1ecec18c44f1d0da57f90c956fe8caea465cb32358e7382258ef",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/ice_creams.jpg",
+      "bytes": 251594,
+      "sha256": "2b7e0ecbb22775df15e18975186412a7b929c0c312a35be3e738ac91cbcbecc1",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/icecream2.jpg",
+      "bytes": 25975,
+      "sha256": "4b23a14ba812c84dca2038ad809c653580efcdc2ae338186f04fbf8c657a1ded",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/images/panda.jpg",
+      "bytes": 109330,
+      "sha256": "0605072986c78a4ffe01302b7b3df4ae33d02a9b8923f0aee5bc4c193375b396",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione09/Lesson_09_CodingWithImages_CodingSimilarity.pdf",
+      "bytes": 4830905,
+      "sha256": "fa044f9d5a9df16dd31d30200f7057055f107ad67d514343df94578e49d6d1cc",
+      "extension": ".pdf",
+      "pages": 69
+    },
+    {
+      "path": "Lezione10/Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf",
+      "bytes": 6930380,
+      "sha256": "a38bca7ea913eff03478ccc09d43cf338a326ba9d002417978f7fb5f58b8f045",
+      "extension": ".pdf",
+      "pages": 76
+    },
+    {
+      "path": "Lezione11/Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf",
+      "bytes": 8803683,
+      "sha256": "3f234415a637ec5ed63617f61c756edbd43d68fc95aa3c35f79986b61a7c3cd1",
+      "extension": ".pdf",
+      "pages": 100
+    },
+    {
+      "path": "Lezione12/Lesson_12_Decision_Tree_Random_Forests_Exam_Simulation.pdf",
+      "bytes": 4311196,
+      "sha256": "5a8c02b3ec762bf6faf837461bcf5af5989fa815e87ce030279414bae83c610c",
+      "extension": ".pdf",
+      "pages": 112
+    },
+    {
+      "path": "Lezione12/Lesson_12_Exam_Simulation_Scores.pdf",
+      "bytes": 101191,
+      "sha256": "7bc01314780a05bf0f91fcbd665f13b291270506f3c73a0826b1ac90e3b2b377",
+      "extension": ".pdf",
+      "pages": 1
+    },
+    {
+      "path": "Lezione13/Lesson_13_LLM_MultimodalModels.pdf",
+      "bytes": 3755452,
+      "sha256": "1b1ddf122f0c192fdc5cab811dd8478a7c8e68f8b4a4de785cb33d9ea9ecab0e",
+      "extension": ".pdf",
+      "pages": 51
+    },
+    {
+      "path": "Lezione14/Lesson_14_Workflow_Optimization_DatasetPartitioning_AccuracyAssessment.pdf",
+      "bytes": 4585936,
+      "sha256": "fe65743c940fc37234f588e5894d8855b4316330d32277bf5174d41a9545d421",
+      "extension": ".pdf",
+      "pages": 80
+    },
+    {
+      "path": "Lezione15/Lesson_15_Agents_for_Machine_Learning_Applications_Fabio_v1.pdf",
+      "bytes": 4001951,
+      "sha256": "b2ff7fe899f7a224c8fa0e846ee5fe828dce7ddb38b6e006aacb72da109635a3",
+      "extension": ".pdf",
+      "pages": 74
+    },
+    {
+      "path": "Lezione16/Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf",
+      "bytes": 4220969,
+      "sha256": "151c2ae1f63acc70067d13effef142df27050fa18df68bc776c7284e175f5b91",
+      "extension": ".pdf",
+      "pages": 106
+    },
+    {
+      "path": "Lezione16/Lesson_16_iris.dat",
+      "bytes": 4551,
+      "sha256": "6f608b71a7317216319b4d27b4d9bc84e6abd734eda7872b71a458569e2656c0",
+      "extension": ".dat"
+    },
+    {
+      "path": "Lezione16/Lesson_16_laboratory_COLAB_IRIS_Dataset.ipynb",
+      "bytes": 79487,
+      "sha256": "06f0669ac185b4d0df965fff715ae1da95eeea43378b1797c1d9e544d491cb0f",
+      "extension": ".ipynb",
+      "cells": {
+        "markdown": 18,
+        "code": 18
+      }
+    },
+    {
+      "path": "Lezione16/Lesson_16_laboratory_MATLAB_IRIS_Dataset.m",
+      "bytes": 3172,
+      "sha256": "8fb19d85374a2525c9d2e8c615b6ff3d5106765b91130c8a3bda7cb7da461d25",
+      "extension": ".m"
+    },
+    {
+      "path": "Lezione17/Lesson_16_decision_tree_wine_confusionmatrix_crossvalidation.py",
+      "bytes": 4818,
+      "sha256": "7852085917d5489caca1cfb614124909c1a871a69e6237d09653b606ec939905",
+      "extension": ".py"
+    },
+    {
+      "path": "Lezione17/Lesson_16_laboratory_COLAB_linear_regressors.ipynb",
+      "bytes": 25658,
+      "sha256": "997d4b0308de47773dcc8b544dbd6789c1b15f6f84ba38584628349cf87d9c19",
+      "extension": ".ipynb",
+      "cells": {
+        "markdown": 5,
+        "code": 5
+      }
+    },
+    {
+      "path": "Lezione17/Lesson_16_laboratory_MATLAB_linear_and_neural.m",
+      "bytes": 3613,
+      "sha256": "a9da65c83d4415f54713ecce3f05ce2fbaf32d1b01a473f5b345ae0fd6694860",
+      "extension": ".m"
+    },
+    {
+      "path": "Lezione17/Lesson_17_AgentContext_LinearRegressionAndClassification_Coding_FFNN_overfitting.pdf",
+      "bytes": 6972179,
+      "sha256": "29ed7292cc4a340bef58b550cd0a1a43613219201f78fc2922dd04aabe45d63b",
+      "extension": ".pdf",
+      "pages": 112
+    },
+    {
+      "path": "Lezione18/Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf",
+      "bytes": 3281684,
+      "sha256": "98c7fa8622bb6b670da25ee025c56cf2adb63bea4c5c390ef1344031788743c6",
+      "extension": ".pdf",
+      "pages": 50
+    },
+    {
+      "path": "Lezione18/Lesson_18_Laboratory_COLAB_DimensionalityReduction.ipynb",
+      "bytes": 211430,
+      "sha256": "e9ebda6ec94aad879bb02294f67477dd76d4fd5794e0e6ca7ad2081b03c35496",
+      "extension": ".ipynb",
+      "cells": {
+        "code": 1
+      }
+    },
+    {
+      "path": "Lezione19/Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf",
+      "bytes": 7083819,
+      "sha256": "0bc74590e9d1fa5d2072cd6f5df95cc936b3aa3cdcb45a644d152cff079417a9",
+      "extension": ".pdf",
+      "pages": 122
+    },
+    {
+      "path": "Lezione19/Lesson_19_laboratory_MATLAB_Knn.m",
+      "bytes": 1361,
+      "sha256": "23be868be73f91ed650dc59378e5fbb237156853eac56c44289380dd78b8c416",
+      "extension": ".m"
+    },
+    {
+      "path": "Lezione20/Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf",
+      "bytes": 3922310,
+      "sha256": "990c0d5abddce08e528c5fef5adf7e51160d0bfab0a5390c549c9b972526a5f1",
+      "extension": ".pdf",
+      "pages": 84
+    },
+    {
+      "path": "Lezione21/Image_classification_Inception_v3_COLAB.ipynb",
+      "bytes": 131364,
+      "sha256": "d27b14339286fd70f207f8a26114f73552137c6e5e159b08d8512c99853855a6",
+      "extension": ".ipynb",
+      "cells": {
+        "markdown": 9,
+        "code": 7
+      }
+    },
+    {
+      "path": "Lezione21/Lesson_21_IntroducitonToDeepLearingModels_ConvolutionalNeuralNetworks.pdf",
+      "bytes": 7067103,
+      "sha256": "76cb2da72000339d1b75148628463a6640d03401d0ee4e32565157ba7f82a5f4",
+      "extension": ".pdf",
+      "pages": 95
+    },
+    {
+      "path": "Lezione21/Truck.jpg",
+      "bytes": 593821,
+      "sha256": "0545f06a6e89622c06d7c4023e2d8b8d2d8f1a41189dba3afcfa752acdeaa7e9",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione21/Truck299.jpg",
+      "bytes": 57211,
+      "sha256": "8316d54b92587e06ccc2713efd23522bb99cae45581113b1ef14e8d45b227356",
+      "extension": ".jpg"
+    },
+    {
+      "path": "Lezione22/Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf",
+      "bytes": 6451313,
+      "sha256": "961dd604b232c9e7d220a0ca0f5e2bdddd0d87d09ff6400d848f4d8ca7f3845b",
+      "extension": ".pdf",
+      "pages": 91
+    },
+    {
+      "path": "Lezione23/Lesson_23_IntelligentVisionSystems_Applications_ObjectDetectionSegmentationRecognition_Machine Learning_Hardware.pdf",
+      "bytes": 9945656,
+      "sha256": "802b3abc09242e551b34852bd0cea0409a543ac5a6c4e81d1b4c348115976592",
+      "extension": ".pdf",
+      "pages": 95
+    },
+    {
+      "path": "Lezione24/Lesson_24_Machine_Learning_Software_Cloud_Services.pdf",
+      "bytes": 9688754,
+      "sha256": "c91ce95a62d733502008a0fbbc4ccd887fdc2faa507f10608c57da4099d735e0",
+      "extension": ".pdf",
+      "pages": 121
+    }
+  ]
+}

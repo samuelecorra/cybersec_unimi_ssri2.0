@@ -1,0 +1,1181 @@
+{
+  "source": "Lezione01/Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+  "date": "2026-09-11",
+  "method": "Native text for all 82 pages + all 14 six-page contact sheets; individual enlarged pages for dense raster content.",
+  "detail_pages": [
+    34,
+    35,
+    38,
+    42,
+    44,
+    45,
+    46,
+    49,
+    53,
+    54,
+    56,
+    59,
+    60,
+    61,
+    62,
+    67,
+    76
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "text_read": true,
+      "visual_read": true,
+      "section": "Introduzione",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Titolo, docente e nome IS4 incorporati; fascia fotografica di copertina decorativa, ripetuta nei separatori.",
+      "visuals": []
+    },
+    {
+      "page": 2,
+      "text_read": true,
+      "visual_read": true,
+      "section": "Introduzione; §§1–10",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Indice: introduzione, progressi, corso, esame, bias, limiti e applicazioni. Tutti i nuclei rappresentati.",
+      "visuals": []
+    },
+    {
+      "page": 3,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Domande guida sul sistema intelligente e sui suoi usi; copertina e cervello stilizzato non aggiungono contenuto.",
+      "visuals": []
+    },
+    {
+      "page": 4,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tutte le sette sigle conservate. Precisazione distinta su testing e validation, accostati nella slide.",
+      "visuals": []
+    },
+    {
+      "page": 5,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Definizione operativa e quattro capacità cognitive; elaborazione dati, predizioni e insight.",
+      "visuals": []
+    },
+    {
+      "page": 6,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tutti i dieci esempi conservati; sensore, chatbot e radiografie letti visivamente.",
+      "visuals": [
+        "IS01-V01"
+      ]
+    },
+    {
+      "page": 7,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Diffusione, lavoro/economie, pattern, rilevazione precoce e risorse. Fotogrammi fantascientifici spiegati come contrasto retorico, non risultati tecnici.",
+      "visuals": []
+    },
+    {
+      "page": 8,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Grafico Google Trends letto: crescita dell’interesse, distinta da accuratezza e adozione.",
+      "visuals": [
+        "IS01-V02"
+      ]
+    },
+    {
+      "page": 9,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Elenco completo dei settori e sottocasi finanziari; fotografia di cockpit illustrativa senza dati aggiuntivi.",
+      "visuals": []
+    },
+    {
+      "page": 10,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Task completi, inclusi OCR, scrittura, voce, volti, creatività, giochi, NLP e controllo; foto con telefono non aggiunge un caso diverso.",
+      "visuals": []
+    },
+    {
+      "page": 11,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§1.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Applicazioni informatiche e invito al progetto personale; freccia di enfasi non è un’architettura. Space exploration contestualizzato dagli esempi areas/cities/houses.",
+      "visuals": []
+    },
+    {
+      "page": 12,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Diagramma dei quattro contenuti e interconnessioni; confini fuzzy esplicitati.",
+      "visuals": [
+        "IS01-V03"
+      ]
+    },
+    {
+      "page": 13,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Teoria, pattern matching, apprendimento, analisi/elaborazione, feature extraction/fusion. Diagramma duplicato di p12; clipart decorativa.",
+      "visuals": []
+    },
+    {
+      "page": 14,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Toolbox SW/HW, flessibilità, MATLAB/TensorFlow/Colab, CUDA, edge e fog. Diagramma duplicato di p12.",
+      "visuals": []
+    },
+    {
+      "page": 15,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Overviews, stato dell’arte, settori, strumenti, dataset, limiti/trend e presenza all’esame. Diagramma duplicato p12 e clipart ornamentali.",
+      "visuals": []
+    },
+    {
+      "page": 16,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Casi d’uso, gestione dati, I/O, risultati, codice e strumenti. Diagramma duplicato p12.",
+      "visuals": []
+    },
+    {
+      "page": 17,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Flusso lezioni-laboratori simulati-esame; dettagli delle attività conservati.",
+      "visuals": [
+        "IS01-V04"
+      ]
+    },
+    {
+      "page": 18,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Avviso amministrativo di riscaricare i PDF aggiornati. Immagini e meme decorativi omessi.",
+      "visuals": []
+    },
+    {
+      "page": 19,
+      "text_read": true,
+      "visual_read": true,
+      "section": "Introduzione; §2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Separatore IS4, duplicato del titolo; fascia fotografica ripetuta.",
+      "visuals": []
+    },
+    {
+      "page": 20,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Livelli di astrazione dalla teoria alle applicazioni e agli use cases.",
+      "visuals": [
+        "IS01-V05"
+      ]
+    },
+    {
+      "page": 21,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Competenze ulteriori rispetto all’addestramento NN: dati, modelli, errori, settori e toolbox.",
+      "visuals": []
+    },
+    {
+      "page": 22,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "ML diverso da deep NN; analogia visiva martello-chiodo e rischio della monocultura tecnica.",
+      "visuals": [
+        "IS01-V06"
+      ]
+    },
+    {
+      "page": 23,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Stato dell’arte storico, best practices, ricerca/mercato, fusione dati e confronti fair. Illustrazione dashboard ornamentale.",
+      "visuals": []
+    },
+    {
+      "page": 24,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§2.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Feature comuni/distintive, tabelle e grafici prima di training-validation-deployment. Dashboard duplicata p23.",
+      "visuals": []
+    },
+    {
+      "page": 25,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Separatore esame; clipart priva di quesiti didattici leggibili da ricostruire.",
+      "visuals": []
+    },
+    {
+      "page": 26,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§3.1–3.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Ambiti esame e consiglio di interrogarsi su tutte le slide. Foto aula/cartello decorativi.",
+      "visuals": []
+    },
+    {
+      "page": 27,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§3.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Solo scritto, nessun progetto, simulazioni e dettagli durante il corso; duplicato parziale p28.",
+      "visuals": []
+    },
+    {
+      "page": 28,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§3.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Prova in laboratorio PC, niente orale/progetti, casi di design e interpretazione codice, domande dal materiale.",
+      "visuals": []
+    },
+    {
+      "page": 29,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§3.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Barratura VISIVA della vecchia penalità -1: regola sostitutiva nessun peso negativo. Durata, appelli e divieto materiale conservati.",
+      "visuals": [
+        "IS01-V07"
+      ]
+    },
+    {
+      "page": 30,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§3.1–3.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Iscrizione obbligatoria ogni appello, nessuna reiscrizione automatica. Calendario illustrativo senza scadenza specifica.",
+      "visuals": []
+    },
+    {
+      "page": 31,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§3.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tabella ricostruita esattamente: 49/35/12/65; fiducia 67/75/99,9/80%. Regola di esclusione, non calcolo probabilistico.",
+      "visuals": []
+    },
+    {
+      "page": 32,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§3.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Scorrere tutte le slide, essere specifici, usare simulazioni per ragionamento e autovalutazione.",
+      "visuals": []
+    },
+    {
+      "page": 33,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§4",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Separatore panoramica e accelerazione; diagramma quattro settori duplicato p12, copertina ripetuta.",
+      "visuals": []
+    },
+    {
+      "page": 34,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§4.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Pagina quasi tutta raster: letti tutti i sei strati e relative etichette. Icone AI/A senza espansione non interpretate come nuovi concetti.",
+      "visuals": [
+        "IS01-V08"
+      ]
+    },
+    {
+      "page": 35,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§4.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Embedding, tutti i sette vettori con coordinate, corrispondenze dei due documenti. Date del PDF preservate e precisazione Transformer 2017 separata.",
+      "visuals": [
+        "IS01-V09"
+      ]
+    },
+    {
+      "page": 36,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§4.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Analogia Parigi/Francia/Tokyo/Giappone e calzini/piedi/guanti/mani.",
+      "visuals": [
+        "IS01-V10"
+      ]
+    },
+    {
+      "page": 37,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§4.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tre conversazioni raster lette: capitali, indumenti e automobili-città/formiche-colonia.",
+      "visuals": [
+        "IS01-V11"
+      ]
+    },
+    {
+      "page": 38,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§4.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tabella IMO letta ingrandita: tutte le 8 righe, punteggi e contesti preservati. Distinti grading ufficiale e claim esterno.",
+      "visuals": [
+        "IS01-V12"
+      ]
+    },
+    {
+      "page": 39,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§4.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Confronto biologico storico, 302/7000 e 10^11/10^3, data Nature; limiti della comparabilità esplicitati.",
+      "visuals": [
+        "IS01-V13"
+      ]
+    },
+    {
+      "page": 40,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Griglia di pattern artificiali, classi e setup AlexNet/ImageNet. Esempi rappresentativi e placeholder per tutta la griglia.",
+      "visuals": [
+        "IS01-V32"
+      ]
+    },
+    {
+      "page": 41,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Otto immagini simili a rumore, tutte le etichette conservate; non confondere con sole perturbazioni impercettibili.",
+      "visuals": [
+        "IS01-V33"
+      ]
+    },
+    {
+      "page": 42,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tabella 3 società e infografica 6 società lette ingrandite, valori e indicatori conservati. Periodi eterogenei, ricavi diversi da utili e da ricavi AI.",
+      "visuals": [
+        "IS01-V14"
+      ]
+    },
+    {
+      "page": 43,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Lista prodotti/versioni trascritta come contenuto della fonte, esempi storici e priorità dei modelli locali. Loghi decorativi esclusi.",
+      "visuals": []
+    },
+    {
+      "page": 44,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Schema storico Copilot con flusso contesto/suggerimenti e frammento merge_sort letto. merge assente e parametro list segnalati; pannello JS parzialmente tagliato, illustra editor senza programma completo.",
+      "visuals": [
+        "IS01-V15"
+      ]
+    },
+    {
+      "page": 45,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Multimodalità e screenshot: nove mele, bullone sellino, manuale e attrezzi. Quattro modalità esplicitate.",
+      "visuals": [
+        "IS01-V16"
+      ]
+    },
+    {
+      "page": 46,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tutte le componenti: immagine-encoder-latente-decoder, collage Cage, proteina e Nobel 2024. Lo schema non è da solo l’algoritmo di diffusione.",
+      "visuals": [
+        "IS01-V17"
+      ]
+    },
+    {
+      "page": 47,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.4",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Robotica, Optimus, manipolazione, magazzino, Boston Dynamics/Agility e atlante umanoidi: panoramica visiva conservata, nessun confronto quantitativo dedotto dalle foto.",
+      "visuals": [
+        "IS01-V18"
+      ]
+    },
+    {
+      "page": 48,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.4",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Cloud/edge, calcolo-storage remoti, latenza/privacy/energia locali; nomi produttori e limite delle garanzie esplicitati.",
+      "visuals": [
+        "IS01-V19"
+      ]
+    },
+    {
+      "page": 49,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.5",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Piramide 4 rischi e tutte le 5 date lette ingrandite. Calendario attribuito al PDF, non verifica esaustiva delle norme correnti.",
+      "visuals": [
+        "IS01-V21"
+      ]
+    },
+    {
+      "page": 50,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§5.4",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Self-supervised e continual distinti; pretext/target task, knowledge transfer, static/adaptive ML; esempi radiografie, wav2vec 2.0 e guida autonoma.",
+      "visuals": [
+        "IS01-V20"
+      ]
+    },
+    {
+      "page": 51,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Separatore sugli LLM come strumenti: tema incorporato; diagramma dei settori duplicato p12.",
+      "visuals": []
+    },
+    {
+      "page": 52,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Pipeline completa e ruolo congiunto Human Intelligence + LLM; frecce lette.",
+      "visuals": [
+        "IS01-V22"
+      ]
+    },
+    {
+      "page": 53,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Schermata tree/NN: struttura, feature importance, white-box e IF-THEN; testo finale della schermata tagliato nella fonte, nessuna continuazione inventata.",
+      "visuals": [
+        "IS01-V23"
+      ]
+    },
+    {
+      "page": 54,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Codice screenshot trascritto integralmente; assunzione RGB e assenza training/classificatore chiarite; coda esplicativa tagliata nella fonte non inventata.",
+      "visuals": [
+        "IS01-V24"
+      ]
+    },
+    {
+      "page": 55,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.1; §6.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Analisi/report/documentazione più schema prompt-context-LLM-output con feedback; accesso effettivo ai dati distinto dalla capacità dichiarata.",
+      "visuals": [
+        "IS01-V25"
+      ]
+    },
+    {
+      "page": 56,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Definizione hallucination, trascrizione numerica anomala e falsa capitale di Marte; la sequenza ripetitiva è output errato illustrativo, non dataset da ricopiare.",
+      "visuals": [
+        "IS01-V26"
+      ]
+    },
+    {
+      "page": 57,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.4",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Privacy, NDA/GDPR e privacy layer; frecce input e output sensibili lette e spiegate.",
+      "visuals": [
+        "IS01-V27"
+      ]
+    },
+    {
+      "page": 58,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.4; §8",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Bias dei dati di training, obsolescenza e specializzazione di dominio.",
+      "visuals": []
+    },
+    {
+      "page": 59,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.5",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Biografia falsa di matematico Bicocca; contenuto identificato come output errato, non fatto biografico.",
+      "visuals": [
+        "IS01-V28"
+      ]
+    },
+    {
+      "page": 60,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.5",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Aggiunta contesto Milano; falsa statistica e falsa paternità del libro; copertina Lai/Xing verifica interna. Prezzo/rating del negozio non pertinenti e omessi.",
+      "visuals": [
+        "IS01-V29"
+      ]
+    },
+    {
+      "page": 61,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.5",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Sette autodescrizioni dei limiti del modello, input e Gestalt; contraddizione apparente sui bias chiarita.",
+      "visuals": [
+        "IS01-V30"
+      ]
+    },
+    {
+      "page": 62,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§6.5",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Risposta versione 4, cutoff settembre 2021, maggiore pertinenza e limiti; risposta successiva differente. Nessun dato di carriera assunto come verificato.",
+      "visuals": [
+        "IS01-V31"
+      ]
+    },
+    {
+      "page": 63,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Gatto-scatola classificato Snail e persona con passeggino in attraversamento; conseguenze dipendono dal task.",
+      "visuals": [
+        "IS01-V34"
+      ]
+    },
+    {
+      "page": 64,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Separatore Natural Interaction, limite centrale; visuali di copertina/settori duplicati.",
+      "visuals": []
+    },
+    {
+      "page": 65,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Promessa di interazione tramite linguaggio/gesti/emozioni; foto bambino-robot pertinente.",
+      "visuals": [
+        "IS01-V35"
+      ]
+    },
+    {
+      "page": 66,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Quattro modalità e tutte le applicazioni: voce, gesti, aptica, visione/emozioni. Fotografie e landmark conservati.",
+      "visuals": [
+        "IS01-V36"
+      ]
+    },
+    {
+      "page": 67,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Context-aware sensing, feedback adattivo e architettura multimodale completa; encoder/proiezioni/LLM/uscite spiegati.",
+      "visuals": [
+        "IS01-V37"
+      ]
+    },
+    {
+      "page": 68,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tassi storici e opinione Ng contestualizzati; <5% diverso da 5%, esempio 800x0,05=40. Titoli professionali di footer non riprodotti come incarichi attuali.",
+      "visuals": []
+    },
+    {
+      "page": 69,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.4",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Voice picking: fotografie, produttività/accuratezza/sicurezza e rimando esterno conservato nel registro fonti.",
+      "visuals": [
+        "IS01-V38"
+      ]
+    },
+    {
+      "page": 70,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§7.4",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Cobot/Cooperative Robots, cooperazione fisica e istruzione mediante tablet.",
+      "visuals": [
+        "IS01-V39"
+      ]
+    },
+    {
+      "page": 71,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§8.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Separatore bias con analogia del bambino e di chi insegna; copertina e schema ripetuti.",
+      "visuals": []
+    },
+    {
+      "page": 72,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§8.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Definizione bias cognitivi, caso CEO di Koller e immagini ricerca; illustrazione Harriet Lee-Merrion ornamentale non estratta.",
+      "visuals": [
+        "IS01-V40"
+      ]
+    },
+    {
+      "page": 73,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§8.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Intero esempio ospedali/fratture/apparecchi e correlazione spuria; radiografia conservata come visuale del caso.",
+      "visuals": [
+        "IS01-V41"
+      ]
+    },
+    {
+      "page": 74,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§9.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Separatore Data Knowledge Spectrum, domanda sulla conoscenza; copertina e schema ripetuti.",
+      "visuals": []
+    },
+    {
+      "page": 75,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§9.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Assi DATA/KNOWLEDGE, quattro regioni, Deep/Trad. NN, riferimento Watt-Borhani-Katsaggelos ed etimo; curva qualitativa non formula quantitativa.",
+      "visuals": [
+        "IS01-V42"
+      ]
+    },
+    {
+      "page": 76,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§9.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Grafici crescita illimitata/logistica, K=2000 nell’esempio, sequenza giorni 0–6 e Paramecium per mL; nessun punto campionato inventato.",
+      "visuals": [
+        "IS01-V43"
+      ]
+    },
+    {
+      "page": 77,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§9.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Task di object detection con cinque etichette/riquadri e immagini etichettate; posizione sullo spettro.",
+      "visuals": [
+        "IS01-V44"
+      ]
+    },
+    {
+      "page": 78,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§9.4",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Log senza label, assenza di modello noto e apprendimento non supervisionato; impossibilità circoscritta al training supervisionato diretto.",
+      "visuals": [
+        "IS01-V45"
+      ]
+    },
+    {
+      "page": 79,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§10.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Separatore use case veicoli autonomi; copertina e quattro settori ripetuti.",
+      "visuals": []
+    },
+    {
+      "page": 80,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§10.1",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Ottobot e tutte le funzioni annotate, assenza GPS dichiarata, elaborazioni locali; video collegato ma non allegato.",
+      "visuals": [
+        "IS01-V46"
+      ]
+    },
+    {
+      "page": 81,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§10.2",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Tutte le 7 funzioni con tutte le tecnologie e modelli conservate in tabella; descrizione generale distinta dall’hardware effettivo di Ottobot.",
+      "visuals": []
+    },
+    {
+      "page": 82,
+      "text_read": true,
+      "visual_read": true,
+      "section": "§10.3",
+      "result": "incorporated; boilerplate/duplicate omitted as documented",
+      "note": "Sintesi completa: teoria, esperienza, metodologia, toolbox, bias, interazione, spiegabilità, spettro ed esame. Foto promemoria decorativa.",
+      "visuals": []
+    }
+  ],
+  "visuals": [
+    {
+      "id": "IS01-V01",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 6,
+      "type": "esempi visivi",
+      "description": "Sensore visivo, chatbot e radiografie con mappe di evidenziazione"
+    },
+    {
+      "id": "IS01-V02",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 8,
+      "type": "grafico",
+      "description": "Schermata Google Trends mondiale della ricerca AI dal 2004, con crescita finale dell’interesse"
+    },
+    {
+      "id": "IS01-V03",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 12,
+      "type": "schema",
+      "description": "Quattro settori Theory of AI, Tools, Overviews e Use cases con frecce di collegamento"
+    },
+    {
+      "id": "IS01-V04",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 17,
+      "type": "percorso didattico",
+      "description": "Lezioni in aula e laboratorio simulato confluiscono nell’esame scritto"
+    },
+    {
+      "id": "IS01-V05",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 20,
+      "type": "schema",
+      "description": "Freccia dei livelli di astrazione dalla teoria ai casi d’uso"
+    },
+    {
+      "id": "IS01-V06",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 22,
+      "type": "analogia visiva",
+      "description": "Martello e chiodo come richiamo al rischio di usare un solo strumento per ogni problema"
+    },
+    {
+      "id": "IS01-V07",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 29,
+      "type": "annotazione significativa",
+      "description": "Regola della penalità negativa barrata e sostituita da No more negative weights"
+    },
+    {
+      "id": "IS01-V08",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 34,
+      "type": "mappa concettuale",
+      "description": "Layers of AI: AI classica, ML, reti neurali, deep learning, AI generativa e agentica"
+    },
+    {
+      "id": "IS01-V09",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 35,
+      "type": "grafici di embedding",
+      "description": "Vettori con assi wings-engine-sky e corrispondenze fra i due documenti Boston-Seattle"
+    },
+    {
+      "id": "IS01-V10",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 36,
+      "type": "analogia visiva",
+      "description": "Calzini rispetto ai piedi e guanti rispetto alle mani"
+    },
+    {
+      "id": "IS01-V11",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 37,
+      "type": "schermate",
+      "description": "Risposte alle analogie capitali-paesi, calzini-guanti e automobili-formiche"
+    },
+    {
+      "id": "IS01-V12",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 38,
+      "type": "tabella di confronto",
+      "description": "IMO human vs AI, punteggi e distinzione fra valutazione ufficiale ed esterna"
+    },
+    {
+      "id": "IS01-V13",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 39,
+      "type": "confronto illustrativo",
+      "description": "C. elegans, ape, rana e cervello umano nel confronto storico con le reti artificiali"
+    },
+    {
+      "id": "IS01-V14",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 42,
+      "type": "tabella e infografica",
+      "description": "Dati FY2025 e infografica Big Tech con ricavi e indicatori di adozione, di periodi differenti"
+    },
+    {
+      "id": "IS01-V15",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 44,
+      "type": "architettura e codice",
+      "description": "Schema storico modello-servizio Copilot-editor e frammento ricorsivo merge_sort"
+    },
+    {
+      "id": "IS01-V16",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 45,
+      "type": "esempi multimodali",
+      "description": "Conteggio delle nove mele e conversazione su bicicletta, manuale e attrezzi"
+    },
+    {
+      "id": "IS01-V17",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 46,
+      "type": "architettura ed esempi scientifici",
+      "description": "Encoder-bottleneck-decoder, variazioni di Nicolas Cage, struttura proteica e Nobel per la chimica 2024"
+    },
+    {
+      "id": "IS01-V18",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 47,
+      "type": "panoramica robotica",
+      "description": "Manipolazione industriale, robot di magazzino, Boston Dynamics, Agility Robotics e atlante umanoidi 2024"
+    },
+    {
+      "id": "IS01-V19",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 48,
+      "type": "confronto",
+      "description": "AI cloud con calcolo e storage remoti rispetto a elaborazione edge sul dispositivo"
+    },
+    {
+      "id": "IS01-V20",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 50,
+      "type": "workflow",
+      "description": "Pretext task e trasferimento verso target task; confronto Static ML e Adaptive ML"
+    },
+    {
+      "id": "IS01-V21",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 49,
+      "type": "piramide e cronologia",
+      "description": "Livelli di rischio dell’AI Act e calendario rappresentato nel PDF"
+    },
+    {
+      "id": "IS01-V22",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 52,
+      "type": "pipeline",
+      "description": "Clean data, exploration, question, build model, interpretation e presentation con Human Intelligence più LLM"
+    },
+    {
+      "id": "IS01-V23",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 53,
+      "type": "schermata di confronto",
+      "description": "Decision tree e rete neurale rispetto a struttura interpretabile, feature importance e regole IF-THEN"
+    },
+    {
+      "id": "IS01-V24",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 54,
+      "type": "codice in schermata",
+      "description": "Prompt Keras e modello Sequential con Input 256x256x3 e Conv2D a 25 filtri 3x3"
+    },
+    {
+      "id": "IS01-V25",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 55,
+      "type": "schema",
+      "description": "Utente e prompt alimentano la context window, seguita da LLM, output e ciclo di feedback"
+    },
+    {
+      "id": "IS01-V26",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 56,
+      "type": "esempi di errore",
+      "description": "Trascrizione numerica anomala e schema della falsa capitale di Marte"
+    },
+    {
+      "id": "IS01-V27",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 57,
+      "type": "architettura",
+      "description": "Privacy layer fra prompt con PII e strumenti LLM, controllo degli input e degli output"
+    },
+    {
+      "id": "IS01-V28",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 59,
+      "type": "schermata annotata",
+      "description": "Biografia inventata di Fabio Scotti, segnalata dal docente come errata"
+    },
+    {
+      "id": "IS01-V29",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 60,
+      "type": "confronto documentale",
+      "description": "Risposta con contesto universitario e copertina che smentisce l’attribuzione del libro"
+    },
+    {
+      "id": "IS01-V30",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 61,
+      "type": "schermata e annotazioni",
+      "description": "Autodescrizione dei limiti del modello e richiamo a input, contesto e Gestalt"
+    },
+    {
+      "id": "IS01-V31",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 62,
+      "type": "confronto di risposte",
+      "description": "ChatGPT 4 dichiara cutoff e limiti; una risposta successiva mostra variazione temporale"
+    },
+    {
+      "id": "IS01-V32",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 40,
+      "type": "griglia sperimentale",
+      "description": "Pattern artificiali associati da AlexNet a classi di oggetti pur non riconoscibili come tali"
+    },
+    {
+      "id": "IS01-V33",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 41,
+      "type": "griglia sperimentale",
+      "description": "Immagini simili a rumore con etichette robin, cheetah, armadillo, lesser panda, centipede, peacock, jackfruit e bubble"
+    },
+    {
+      "id": "IS01-V34",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 63,
+      "type": "confronto di scenari",
+      "description": "Gatto nella scatola etichettato Snail e attraversamento pedonale con passeggino"
+    },
+    {
+      "id": "IS01-V35",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 65,
+      "type": "fotografia applicativa",
+      "description": "Bambino che interagisce con robot sociale nella presentazione della Natural Interaction"
+    },
+    {
+      "id": "IS01-V36",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 66,
+      "type": "esempi multimodali",
+      "description": "Comandi vocali, gesti e segni, simulazione aptica e rilevamento di punti del volto"
+    },
+    {
+      "id": "IS01-V37",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 67,
+      "type": "architettura multimodale",
+      "description": "Encoder e proiezioni di ingresso, LLM centrale, proiezioni di uscita e generatori per immagini-audio-video; esempi contestuali"
+    },
+    {
+      "id": "IS01-V38",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 69,
+      "type": "fotografie applicative",
+      "description": "Operatori di magazzino con cuffie durante il prelievo guidato dalla voce"
+    },
+    {
+      "id": "IS01-V39",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 70,
+      "type": "esempio di interazione",
+      "description": "Manipolatore cooperativo con guida umana e insegnamento mediante tablet"
+    },
+    {
+      "id": "IS01-V40",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 72,
+      "type": "risultati di ricerca",
+      "description": "Composizione delle immagini CEO usata per illustrare bias di rappresentazione"
+    },
+    {
+      "id": "IS01-V41",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 73,
+      "type": "esempio radiografico",
+      "description": "Radiografia associata al caso del modello che riconosce l’ospedale anziché la frattura"
+    },
+    {
+      "id": "IS01-V42",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 75,
+      "type": "grafico concettuale",
+      "description": "Curva DATA-KNOWLEDGE con assenza di conoscenza, comprensione parziale, modello matematico e leggi naturali"
+    },
+    {
+      "id": "IS01-V43",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 76,
+      "type": "grafici ed esempio biologico",
+      "description": "Crescita illimitata, crescita logistica con K, sequenza giorni 0-6 e fitting di Paramecium nel tempo"
+    },
+    {
+      "id": "IS01-V44",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 77,
+      "type": "task e dataset",
+      "description": "Oggetti localizzati tramite bounding box e raccolta di immagini con etichette"
+    },
+    {
+      "id": "IS01-V45",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 78,
+      "type": "task e dati",
+      "description": "Domanda sui comportamenti di attacco e molti log senza etichette, sul lato povero di conoscenza dello spettro"
+    },
+    {
+      "id": "IS01-V46",
+      "source": "Lesson_01_Introduction_Exam_Natural_Interaction_Data_Knowledge_tradeoff.pdf",
+      "page": 80,
+      "type": "architettura applicativa annotata",
+      "description": "Ottobot con navigazione, mappa, visione, sensori, autodiagnosi, edge, folla e interazione umana"
+    }
+  ],
+  "policy": "Historical inspection completed before TEXT_FIRST_OVERRIDE; do not repeat systematic rendering."
+}
