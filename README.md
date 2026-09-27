@@ -1,33 +1,20 @@
 # SSRI 2.0
 
-> Archivio **open source e senza fini di lucro** delle lezioni del corso di laurea online **SSRI — Sicurezza dei Sistemi e delle Reti Informatiche** (Università degli Studi di Milano), realizzato da uno studente per tutti gli studenti del corso.
+> Archivio pubblico di materiali di studio per **SSRI — Sicurezza dei Sistemi e delle Reti Informatiche** dell'Università degli Studi di Milano, organizzato e mantenuto da uno studente per la comunità del corso.
 
 **🌐 Consultabile online:** <https://samuelecorra.github.io/cybersec_unimi_ssri2.0/>
 
-Nato come archivio personale locale, il progetto è oggi una web app pubblica distribuita via GitHub Pages (oltre 120 deploy all'attivo) e in continuo aggiornamento.
+Nato dall'esigenza di organizzare e consultare più facilmente gli appunti del percorso, il progetto è cresciuto in un archivio navigabile con una web app pubblica. I materiali sono una risorsa di studio indipendente e complementare.
 
 ---
 
 ## Perché esiste questo progetto
 
-Il corso di laurea SSRI viene erogato interamente online attraverso la piattaforma ufficiale <https://ssrionline.unimi.it/>. Pur riconoscendo il valore del percorso e del corpo docente, è doveroso constatare — con il massimo rispetto istituzionale — che i materiali didattici messi a disposizione presentano criticità oggettive e note alla comunità studentesca:
-
-- **Obsolescenza dei contenuti**: buona parte delle slide non riceve aggiornamenti sostanziali da circa il 2015, con riferimenti tecnici ormai superati dallo stato dell'arte.
-- **Qualità tipografica e strutturale limitata**: formule non renderizzate correttamente, impaginazione datata, assenza di una navigazione moderna tra gli argomenti.
-- **Divario tra videolezione e slide**: una parte significativa delle spiegazioni dei docenti — spesso la più preziosa — esiste solo nel parlato e non è riportata in alcun documento.
-
-Questo repository è il risultato di **mesi di lavoro sistematico** per colmare quel divario: non una critica fine a sé stessa, ma una risposta costruttiva. Una laurea triennale in sicurezza informatica è già di per sé impegnativa; affrontarla con materiali inadeguati la rende inutilmente più ardua.
+Seguire un corso interamente online significa passare tra lezioni, appunti e argomenti collegati. Ho creato questo archivio per raccogliere i materiali di studio in un formato ricercabile e navigabile, rendere più chiari i collegamenti tra i temi e poter correggere e ampliare le note nel tempo. È un progetto personale costruito a partire da un'esigenza concreta di studio, non una risorsa ufficiale dell'Università.
 
 ## Come sono nate queste lezioni
 
-Il flusso di lavoro dietro ogni lezione:
-
-1. **Registrazione integrale** di tutte le videolezioni dei docenti.
-2. **Trascrizione fedele al 100%** del parlato tramite Apple Intelligence.
-3. **Rielaborazione con Claude Code** (Anthropic): con molta pazienza — e moltissimi token — ogni trascrizione è stata trasformata in una lezione Markdown completa, che integra tutto ciò che il docente diceva a voce ma non era scritto nei lucidi, senza lasciare impliciti i passaggi matematici e logici.
-4. **Aggiornamento dei contenuti al 2026**: dove le lezioni originali citavano nozioni superate, il materiale è stato allineato allo stato dell'arte. Un esempio fra i tanti: nelle lezioni di Crittografia si indicava RSA a 512 bit come dimensione di sicurezza di riferimento; qui viene correttamente indicato che oggi il minimo raccomandato è **2048 bit**. Interventi analoghi sono presenti in tutto l'archivio.
-
-Il risultato: lezioni con **formule matematiche renderizzate perfettamente** (inline e block-level, KaTeX), callout didattici, tabelle, diagrammi e — punto fondamentale — il **tono narrativo originale dei professori**, preservato in ogni lezione. Chi studia da qui ritrova la voce del proprio docente, non un riassunto anonimo. Ed è esattamente questo che rende realistico ambire al **30 e lode** in ogni esame.
+Le lezioni sono organizzate in Markdown e possono includere formule KaTeX, tabelle, diagrammi e collegamenti tra argomenti. La web app aggiunge ricerca e navigazione, così i contenuti possono essere consultati come un archivio coerente invece che come file isolati. I materiali sono appunti di studio e vanno verificati con le fonti del corso; segnalazioni e correzioni sono benvenute.
 
 ## Cosa contiene
 
@@ -43,11 +30,7 @@ Ove possibile (in particolare **Crittografia** e **Reti di Calcolatori**) sono p
 
 ## Posizionamento e finalità
 
-Sia chiaro, senza ambiguità:
-
-- Questo progetto **non intende sostituirsi** ai materiali ufficiali dell'Università degli Studi di Milano, né essere proposto ai docenti come fonte canonica da adottare nei corsi.
-- È un lavoro **gratuito, senza fini di lucro**, condiviso da uno studente con i propri colleghi perché possano vivere pienamente l'esperienza della laurea triennale.
-- È **open source**, e l'open source vince sempre: la conoscenza migliora quando è libera di essere letta, corretta e migliorata da chiunque. Contributi, segnalazioni di errori e pull request sono benvenuti.
+Questo archivio è indipendente e non sostituisce i materiali o le indicazioni ufficiali del corso. È condiviso come risorsa di studio; chiunque può esaminarne i contenuti e proporre correzioni tramite issue o pull request.
 
 ---
 
