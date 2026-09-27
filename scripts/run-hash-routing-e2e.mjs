@@ -3,7 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const baseUrl = process.env.HASH_ROUTING_BASE_URL || 'http://127.0.0.1:5194/';
+const defaultBasePath = process.env.GITHUB_ACTIONS === 'true' ? '/cybersec_unimi_ssri2.0/' : '/';
+const baseUrl = process.env.HASH_ROUTING_BASE_URL || new URL(defaultBasePath, 'http://127.0.0.1:5194').href;
 const viteEntry = path.join(repoRoot, 'node_modules', 'vite', 'bin', 'vite.js');
 
 function waitForExit(child) {

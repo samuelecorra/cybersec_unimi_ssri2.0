@@ -54,8 +54,8 @@ await check('deep link e refresh della lezione', async () => {
   await page.waitForSelector('.markdown-body');
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForSelector('.markdown-body');
-  const current = await page.locator('.breadcrumb-current').textContent();
-  if (!current?.includes('README')) throw new Error('lezione non ripristinata');
+  const current = await page.locator('.markdown-body h1').textContent();
+  if (!current?.includes('Teoria C')) throw new Error('contenuto della lezione non ripristinato');
   if (windowHash(await page.url()) !== hashFor(lessonPath)) throw new Error('hash lezione alterato');
 });
 
@@ -87,7 +87,7 @@ await check('migrazione trasparente dello stato localStorage senza hash', async 
     localStorage.setItem('cyberlocker:currentFile', JSON.stringify(path));
     localStorage.setItem('cyberlocker:viewMode', JSON.stringify('viewer'));
   }, lessonPath);
-  await page.goto(BASE, { waitUntil: 'networkidle' });
+  await page.goto(`${BASE}?legacy-state-test=1`, { waitUntil: 'networkidle' });
   await page.waitForSelector('.markdown-body');
   if (windowHash(await page.url()) !== hashFor(lessonPath)) throw new Error('stato precedente non migrato');
 });
