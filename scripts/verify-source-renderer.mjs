@@ -156,7 +156,7 @@ try {
   await page.goto(BASE, { waitUntil: 'networkidle' });
   await page.locator('button[title="Apri sidebar"]').click();
   await page.fill('.search-input', 'PongGame.java');
-  const result = page.locator('.search-result-item', { hasText: 'PongGame.java' }).first();
+  const result = page.locator('.sidebar button', { hasText: 'PongGame.java' }).first();
   await result.waitFor({ state: 'visible', timeout: 5000 });
   await result.click();
   await page.waitForSelector('.source-viewer');
