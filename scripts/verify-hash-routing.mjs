@@ -87,7 +87,7 @@ await check('migrazione trasparente dello stato localStorage senza hash', async 
     localStorage.setItem('cyberlocker:currentFile', JSON.stringify(path));
     localStorage.setItem('cyberlocker:viewMode', JSON.stringify('viewer'));
   }, lessonPath);
-  await page.goto(BASE, { waitUntil: 'networkidle' });
+  await page.goto(`${BASE}?legacy-state-test=1`, { waitUntil: 'networkidle' });
   await page.waitForSelector('.markdown-body');
   if (windowHash(await page.url()) !== hashFor(lessonPath)) throw new Error('stato precedente non migrato');
 });
