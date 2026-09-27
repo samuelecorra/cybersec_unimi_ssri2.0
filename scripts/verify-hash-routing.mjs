@@ -54,8 +54,8 @@ await check('deep link e refresh della lezione', async () => {
   await page.waitForSelector('.markdown-body');
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForSelector('.markdown-body');
-  const current = await page.locator('.breadcrumb-current').textContent();
-  if (!current?.includes('README')) throw new Error('lezione non ripristinata');
+  const current = await page.locator('.markdown-body h1').textContent();
+  if (!current?.includes('Teoria C')) throw new Error('contenuto della lezione non ripristinato');
   if (windowHash(await page.url()) !== hashFor(lessonPath)) throw new Error('hash lezione alterato');
 });
 
