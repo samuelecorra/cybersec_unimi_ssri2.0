@@ -1,9 +1,7 @@
 import { appendFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
 
 const root = path.resolve(process.env.PAGES_DIST_DIR || "dist");
-const MiB = 1024 * 1024;
 const ARTIFACT_LIMIT_BYTES = 1_000_000_000;
 // Estimated from the most recent measured Pages artifact/raw-dist pair. This is a projection, not a second archive build.
 const ARTIFACT_TO_RAW_RATIO = 0.9462035274591719;
@@ -42,7 +40,7 @@ async function walk(directory) {
 }
 
 await walk(root);
-largest.sort((a, b) => b.bytes - a.bytes || a.path.localeCompare(b.path));
+largest.sort((a, b) => b.bytes - a.bytes || (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
 const projectedArtifactBytes = Math.round(totals.bytes * ARTIFACT_TO_RAW_RATIO);
 const warning = projectedArtifactBytes > ARTIFACT_LIMIT_BYTES;
 const format = (value) => `${value.toLocaleString("en-US")} B`;
