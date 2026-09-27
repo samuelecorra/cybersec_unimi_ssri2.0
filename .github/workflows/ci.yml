@@ -24,5 +24,6 @@ jobs:
       - run: npm run validate:source-renderer
       - run: npm run validate:sort-names
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
       - run: npm run test:hash-routing:e2e
       - run: npm run test:source-renderer:e2e
