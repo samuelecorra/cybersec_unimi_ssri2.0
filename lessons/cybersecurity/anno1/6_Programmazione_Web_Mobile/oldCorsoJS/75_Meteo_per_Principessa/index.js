@@ -6,8 +6,8 @@ const inputCitta = document.querySelector(".inputCitta");
 
 const card = document.querySelector(".card");
 
-// Ora usiamo l'API key fornitaci dal sito:
-const API_KEY = "1bcb5b7041cb394939b48f326c85bb64";
+// Inserisci qui la tua chiave OpenWeatherMap locale; non pubblicarla né committarla.
+const API_KEY = "YOUR_OPENWEATHER_API_KEY";
 
 formMeteo.addEventListener("submit", async (event) => {
     // ATTENZIONE: i form possiedono un comportamento di default, ovvero
