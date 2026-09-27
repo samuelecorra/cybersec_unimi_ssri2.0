@@ -14,7 +14,7 @@
     "test:source-renderer:e2e": "node scripts/run-source-renderer-e2e.mjs"
   },
   "dependencies": {
-    "esbuild": "^0.28.0",
+    "esbuild": "^0.28.2",
     "highlight.js": "^11.10.0",
     "katex": "^0.16.33",
     "react": "^18.3.1",
@@ -32,6 +32,6 @@
     "@vitejs/plugin-react": "^4.3.4",
     "playwright": "^1.60.0",
     "tailwindcss": "^4.3.0",
-    "vite": "^6.4.2"
+    "vite": "^8.3.1"
   }
 }
