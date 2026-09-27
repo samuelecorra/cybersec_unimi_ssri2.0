@@ -17,7 +17,7 @@ Obiettivo dell’esercizio:
   - meta tag per rendere la pagina **indicizzabile** e con link **follow** per i robot;
   - una **favicon**.
 
-![alt text](esercizio_finale/image.png)
+![alt text](esercizio_1finale/image.png)
 
 In pratica: pochissimi tag HTML, ma usati già **con criterio professionale** (SEO, accessibilità, struttura).
 
