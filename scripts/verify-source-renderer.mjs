@@ -55,7 +55,7 @@ for (const testCase of CASES) {
       const encodedPath = path.split('/').map(segment => encodeURIComponent(segment)
         .replace(/%26/gi, '&')
         .replace(/%2B/gi, '+')).join('/');
-      const response = await fetch(`/lessons/${encodedPath}`);
+      const response = await fetch(new URL(`lessons/${encodedPath}`, document.baseURI));
       const raw = response.ok ? await response.text() : '';
       const source = document.querySelector('.source-code code');
       const text = source?.textContent ?? '';
@@ -110,7 +110,7 @@ for (const mediaCase of MEDIA_CASES) {
       const encodedPath = path.split('/').map(segment => encodeURIComponent(segment)
         .replace(/%26/gi, '&')
         .replace(/%2B/gi, '+')).join('/');
-      const response = await fetch(`/lessons/${encodedPath}`);
+      const response = await fetch(new URL(`lessons/${encodedPath}`, document.baseURI));
       const mediaElement = document.querySelector(kind === 'image' ? '.asset-image' : '.asset-audio');
       if (kind === 'image' && mediaElement && !mediaElement.complete) {
         await new Promise(resolve => mediaElement.addEventListener('load', resolve, { once: true }));
@@ -154,7 +154,7 @@ try {
 
 try {
   await page.goto(BASE, { waitUntil: 'networkidle' });
-  await page.click('.sidebar-toggle');
+  await page.locator('button[title="Apri sidebar"]').click();
   await page.fill('.search-input', 'PongGame.java');
   const result = page.locator('.search-result-item', { hasText: 'PongGame.java' }).first();
   await result.waitFor({ state: 'visible', timeout: 5000 });
