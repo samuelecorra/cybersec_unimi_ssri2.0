@@ -33,6 +33,10 @@ jobs:
         env:
           GITHUB_ACTIONS: 'true'
 
+      - name: Report Pages payload size (non-blocking)
+        continue-on-error: true
+        run: node scripts/report-pages-size.mjs
+
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: dist
