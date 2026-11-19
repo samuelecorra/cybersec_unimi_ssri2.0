@@ -54,8 +54,7 @@ Il docente annota: il ML è **induzione** (Lezione 03, §4).
 
 La p. 7 riassume i **tre concetti** da applicare.
 
-<!-- SOURCE_VISUAL id="IS04-V01" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="7" type="schema" description="I tre concetti da applicare nella scelta tra programmazione classica e ML" reason="Contenuto presente solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002041228.png)
 
 #### **1.3. Le scelte di progetto classiche**
 
@@ -84,11 +83,17 @@ Il concetto di approccio a **scatola nera, grigia o bianca** esiste già nell’
 > - **Scatola grigia**: si conosce una parte, come l’architettura o i dati di addestramento, ma non il comportamento dettagliato.
 > - **Scatola nera**: si osservano solo input e output.
 
+![](imgs/Pasted%20image%2020261002041415.png)
+
 > 📌 **Regola di sicurezza** (p. 11). Se scarichi e usi un modello di cui **non capisci il funzionamento**, allora **per te è una scatola nera**, e **devi gestirlo come una scatola nera**.
+
+![](imgs/Pasted%20image%2020261002041429.png)
 
 Anche **capendo il modello**, il numero di parametri può essere così alto da rendere **impossibile** capirne davvero il comportamento (p. 12, da TechTarget).
 
 **Posso usare una scatola nera?** (p. 13)
+
+![](imgs/Pasted%20image%2020261002041540.png)
 
 | Condizione | Risposta |
 |---|---|
@@ -99,13 +104,13 @@ Anche **capendo il modello**, il numero di parametri può essere così alto da r
 
 Si può anche provare a **guardare dentro** la scatola nera (p. 14): è il tema della XAI (Lezione 02, §5).
 
+![](imgs/Pasted%20image%2020261002041557.png)
+
 > 💡 **Il collegamento con l’AI Act.** Le condizioni del «sì» sono le stesse misure che l’AI Act chiede ai sistemi ad alto rischio: controlli esterni, supervisione umana, gestione del rischio (Lezione 02, §1.4).
 
-<!-- SOURCE_VISUAL id="IS04-V02" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="12" type="immagine" description="Il problema della scatola nera: troppi parametri per capire il comportamento (TechTarget)" reason="Illustrazione della slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002041505.png)
 
-<!-- SOURCE_VISUAL id="IS04-V03" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="14" type="immagine" description="Guardare dentro la scatola nera" reason="Pagina con sola immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
 
 ---
 
@@ -142,18 +147,15 @@ Le pp. 18–19 mostrano altri modelli recenti e modelli **locali** (fonte: *IEEE
 
 > 💡 **Che cosa si confronta (nota didattica).** I «100 000 miliardi di parametri» del cervello corrispondono all’ordine di grandezza delle **sinapsi**. Il confronto è solo indicativo: una sinapsi non equivale a un peso di una rete artificiale.
 
-<!-- SOURCE_VISUAL id="IS04-V04" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="18" type="grafico" description="Dimensioni di altri modelli recenti a confronto con il cervello umano" reason="Valori dei modelli presenti solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042114.png)
 
-<!-- SOURCE_VISUAL id="IS04-V05" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="19" type="grafico" description="Dimensioni di modelli locali a confronto con il cervello umano" reason="Valori dei modelli presenti solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042134.png)
 
 #### **3.2. Oligopolio e limiti dei modelli grandi**
 
 **Un oligopolio dell’AI?** (p. 20). I modelli più grandi sono in mano a **grandi aziende**: per i modelli di queste dimensioni, «**make or buy**» (costruire in casa o comprare) è ancora un’opzione praticabile?
 
-<!-- SOURCE_VISUAL id="IS04-V06" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="20" type="schema" description="AI e grandi aziende: oligopolio e scelta make or buy" reason="Contenuto presente solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042146.png)
 
 **Più grande è meglio?** In alcuni casi **no** (p. 21). Alcuni modelli molto grandi (oltre 1 000 miliardi di parametri) sembrano **meno «ristretti»** dei precedenti, ma:
 
@@ -181,11 +183,9 @@ Il ciclo di base (pp. 22–24) è: **modello → addestramento → valutazione**
 | **una volta** | durante lo **sviluppo** |
 | **ogni settimana, giorno o ora** | nelle applicazioni di **apprendimento continuo** (*continual learning*) |
 
-<!-- SOURCE_VISUAL id="IS04-V07" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="23" type="diagramma" description="Ciclo modello, addestramento, valutazione" reason="Ciclo presente solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042405.png)
 
-<!-- SOURCE_VISUAL id="IS04-V08" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="24" type="diagramma" description="Il ciclo eseguito una volta nello sviluppo o periodicamente nel continual learning" reason="Ciclo presente solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042423.png)
 
 #### **4.2. Esempio: classificatore cane/gatto**
 
@@ -205,8 +205,7 @@ La prima regola taglia il piano con due soglie; la seconda con una **retta**. In
 
 > 💡 **Che cosa cambia.** La forma della decisione può essere la stessa, per esempio una retta. Nel ML però **i coefficienti li trovano i dati**, e $F$ può anche essere una funzione molto più complessa di una retta, cosa impossibile da scrivere a mano.
 
-<!-- SOURCE_VISUAL id="IS04-V09" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="25" type="grafico" description="Classificatore cane/gatto nel piano altezza-peso: regole classiche contro modello addestrato F(X)" reason="Frontiere di decisione e definizione grafica di F visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042440.png)
 
 #### **4.3. Il ML come giardinaggio**
 
@@ -224,8 +223,7 @@ La prima regola taglia il piano con due soglie; la seconda con una **retta**. In
 
 **Esempio: una rete neurale** (p. 28). Da qui in avanti, senza perdita di generalità, si fa riferimento alle reti **feed-forward**. Input: **età, sesso, altezza, peso**; output: **sovrappeso sì/no**.
 
-<!-- SOURCE_VISUAL id="IS04-V10" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="28" type="diagramma" description="Rete neurale feed-forward con input età, sesso, altezza, peso e output sovrappeso sì/no" reason="Struttura della rete visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042607.png)
 
 **Sistemi di riconoscimento di pattern** (p. 29). Lo schema ha due rami:
 
@@ -236,8 +234,7 @@ La prima regola taglia il piano con due soglie; la seconda con una **retta**. In
 
 > ⚠️ **La stessa estrazione nei due rami.** Le feature in fase di test devono essere estratte **esattamente come** in addestramento: se cambia l’acquisizione o l’estrazione, il modello riceve dati diversi da quelli su cui ha imparato.
 
-<!-- SOURCE_VISUAL id="IS04-V11" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="29" type="diagramma" description="Sistema di riconoscimento di pattern con rami di addestramento e di test" reason="Blocchi e frecce visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042620.png)
 
 #### **4.4. I tre componenti: rappresentazione, valutazione, ottimizzazione**
 
@@ -261,10 +258,15 @@ Esistono **decine di migliaia** di algoritmi di machine learning e **centinaia d
 - *ensemble* di modelli;
 - ecc.
 
+![](imgs/Pasted%20image%2020261002042656.png)
+
+![](imgs/Pasted%20image%2020261002042705.png)
+
 Le rappresentazioni hanno **caratteristiche diverse** (p. 32). Una è l’essere **autodidatta**: il modello dovrebbe potersi **aggiornare** con nuove informazioni quando diventano disponibili. La domanda da porsi: **quali caratteristiche contano per la mia applicazione?** L’elenco completo è nella figura.
 
-<!-- SOURCE_VISUAL id="IS04-V12" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="32" type="tabella" description="Caratteristiche delle diverse rappresentazioni, tra cui l’aggiornamento autodidatta" reason="Elenco delle caratteristiche presente solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042741.png)
+
+---
 
 **Valutazione** (p. 33):
 
@@ -279,17 +281,20 @@ Le rappresentazioni hanno **caratteristiche diverse** (p. 32). Una è l’essere
 - divergenza di Kullback-Leibler;
 - ecc.
 
+![](imgs/Pasted%20image%2020261002042904.png)
+
 Esempio di probabilità a posteriori: dato l’input $x$, qual è la probabilità che sia un cane, cioè che valga l’ipotesi $c$? In formula $P(c \mid x)$.
 
 > 📌 **Due misure in formula (nota didattica).** L’**entropia** di una distribuzione $p$ su $C$ classi misura l’incertezza; la **divergenza di Kullback-Leibler** misura quanto una distribuzione $q$ si discosta da $p$:
 > $$H(p) = -\sum_{i=1}^{C} p_i \log p_i \qquad\qquad D_{KL}(p \,\|\, q) = \sum_{i=1}^{C} p_i \log \frac{p_i}{q_i}$$
 
+---
+
 **Accuratezza contro margine** (p. 34). Le frontiere di decisione $H_2$ e $H_3$ hanno **entrambe accuratezza 100%** (errore nullo), ma **margini diversi**. Si vuole **aumentare il margine**: si preferisce $H_3$.
 
 > 💡 **Perché il margine conta.** Il margine è la distanza tra la frontiera e i punti più vicini. Una frontiera che passa rasente ai dati classifica bene l’addestramento, ma basta un piccolo spostamento di un nuovo punto per sbagliare, come negli esempi avversari (Lezione 02, §4). Un margine ampio dà **generalizzazione** e **robustezza**: è l’idea alla base delle *support vector machine*.
 
-<!-- SOURCE_VISUAL id="IS04-V13" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="34" type="grafico" description="Frontiere H2 e H3 con accuratezza 100% ma margini diversi" reason="Posizione delle frontiere e dei punti visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002042928.png)
 
 **Ottimizzazione** (p. 35):
 
@@ -298,6 +303,8 @@ Esempio di probabilità a posteriori: dato l’input $x$, qual è la probabilit�
 | **combinatoria** | ricerca **greedy** |
 | **convessa** | **discesa del gradiente** |
 | **vincolata** | **programmazione lineare** |
+
+![](imgs/Pasted%20image%2020261002043021.png)
 
 > 📌 **Discesa del gradiente (nota didattica).** Per minimizzare una funzione di errore $L(\theta)$ si aggiornano i parametri nella direzione opposta al gradiente, con passo $\eta > 0$ (*learning rate*):
 > $$\theta \leftarrow \theta - \eta\, \nabla_\theta L(\theta)$$
@@ -317,22 +324,17 @@ _(slide pp. 36–40)_
 - **Internet of Everything** (IoE), secondo la definizione di **Cisco**;
 - **intelligenza artificiale**, con un’importanza crescente in ogni applicazione.
 
-La p. 38 rinvia all’allegato (§7) per i dettagli.
+![](imgs/Pasted%20image%2020261002043923.png)
 
 > 💡 **IoT contro IoE (nota didattica).** Nella definizione di Cisco, l’Internet of Everything collega non solo gli **oggetti** (IoT), ma anche **persone, processi e dati**. Industria 4.0 indica la fabbrica connessa e automatizzata; Industria 5.0 rimette al centro la collaborazione **uomo-macchina**, la sostenibilità e la resilienza.
-
-<!-- SOURCE_VISUAL id="IS04-V14" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="38" type="infografica" description="Ere digitali e sfide recenti, con rinvio all’allegato" reason="Contenuto presente solo nell’infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Sistemi autonomi in agricoltura** (p. 39, **AgXeed**): un unico mezzo autonomo per irrorazione, sarchiatura, pacciamatura, lavorazione del terreno, semina, diserbo, falciatura, andanatura e voltatura del fieno.
 
 **Sistemi autonomi per gli anziani** (p. 40, **Toyota Research Institute**, TRI): robot che lavorano in **case e ambienti diversi**, per riordinare, pulire, **percepire e afferrare oggetti trasparenti**. Il gruppo *Tactile* di TRI sviluppa **sensori tattili molto cedevoli** e gli algoritmi per usarli (progetto **Punyo**).
 
-<!-- SOURCE_VISUAL id="IS04-V15" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="39" type="immagini" description="Mezzi agricoli autonomi AgXeed e relative lavorazioni" reason="Esempio visivo" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002044023.png)
 
-<!-- SOURCE_VISUAL id="IS04-V16" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="40" type="immagini" description="Robot per l’assistenza agli anziani del Toyota Research Institute e sensori tattili Punyo" reason="Esempio visivo" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002044041.png)
 
 ---
 
@@ -399,8 +401,7 @@ _(slide pp. 43–66)_
 
 **Risposta: 1.** Commento: è proprio la rappresentazione corretta, che permette di capire i modelli di AI **in un quadro comune** (feature 1…4, oggetti *i, j, k*: Lezione 02, §3.2).
 
-<!-- SOURCE_VISUAL id="IS04-V17" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="54" type="schema" description="Commento alla D6: oggetti come punti nello spazio delle feature" reason="Disposizione dei punti visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002044511.png)
 
 **D7** (pp. 55–56). È corretto dire che una delle caratteristiche chiave di un sistema intelligente artificiale è la **capacità di imparare** (anche solo in senso limitato) e/o **migliorare nel tempo**. 1. **Vero**; 2. Falso.
 
@@ -423,8 +424,7 @@ _(slide pp. 43–66)_
 
 **Risposta: 3.** Il commento rimanda a un esempio visivo (Lezione 02, §6).
 
-<!-- SOURCE_VISUAL id="IS04-V18" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="60" type="immagine" description="Esempio visivo a commento della domanda sulla Gestalt" reason="Esempio presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002044728.png)
 
 **D10** (pp. 61–62). Le attività a) **selezione** dei dati, b) **filtraggio** dei dati, c) **miglioramento** (*enhancing*) dei dati:
 1. fanno parte del lavoro normale dello specialista di AI;
@@ -438,11 +438,11 @@ _(slide pp. 43–66)_
 
 **Risposta: 2**, evidenziata sulla slide senza commento. L’errore quadratico è nell’elenco delle misure di **valutazione** (§4.4).
 
+![](imgs/Pasted%20image%2020261002044844.png)
+
 **D12** (pp. 65–66). Oggi l’uso dei metodi classici di **estrazione delle feature** e di **analisi dei dati** è superato, perché il deep learning li ha resi obsoleti e non sono più presenti nella pratica comune. 1. Vero; 2. **Falso**.
 
 **Risposta: 2.** Commento: **gran parte del lavoro** consiste nel **preparare, studiare e validare i dati** per creare dataset efficienti, **anche con strumenti classici**.
-
-> ⚠️ **Refusi nelle slide della simulazione.** «What king of model» (*kind*), «weigth», «ASWER», «machine learining», «understating» (*understanding*). Non cambiano il senso delle domande.
 
 #### **6.3. E gli argomenti che non sono nella simulazione?**
 
@@ -468,17 +468,23 @@ L’allegato (pp. 69–70) è un’estensione concettuale sulla **trasformazione
 
 Le fasi precedenti sono indicate solo nella figura.
 
-<!-- SOURCE_VISUAL id="IS04-V19" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="72" type="diagramma" description="Le quattro fasi delle ere digitali fino al mondo autonomo" reason="Nomi delle prime fasi presenti solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002045056.png)
 
 **Economia collaborativa** (p. 73). Si basa su **piattaforme** che collegano utenti, dati e servizi. Le aziende non producono più solo beni, ma offrono **piattaforme** in cui **gli utenti creano valore** condividendo, noleggiando e possedendo in comune le risorse.
 
+![](imgs/Pasted%20image%2020261002045122.png)
+
 La p. 74 unisce **robot, autonomia e sistemi intelligenti**.
 
-<!-- SOURCE_VISUAL id="IS04-V20" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="74" type="immagini" description="Robot, autonomia e sistemi intelligenti" reason="Contenuto presente solo nelle immagini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002045142.png)
 
 > 📌 **Lo Stack di Bratton** (p. 75). Per il sociologo **Benjamin H. Bratton**, i diversi generi di calcolo (reti elettriche intelligenti, piattaforme cloud, app mobili, città intelligenti, Internet of Things, automazione) non sono specie che evolvono ciascuna per conto proprio. Formano un **tutto coerente**: una **megastruttura accidentale** chiamata «**The Stack**», che è insieme un **apparato computazionale** e una **nuova architettura di governo**. «Siamo dentro lo Stack, e lo Stack è dentro di noi.»
+
+![](imgs/Pasted%20image%2020261002045206.png)
+
+---
+
+![](imgs/Pasted%20image%2020261002045242.png)
 
 **Che cosa mostra il diagramma** (pp. 76–77). Il mondo oggi è organizzato da un **sistema computazionale globale** fatto di **strati interconnessi**, non solo da Stati o aziende. Tutte le frecce significano che **tutto è interconnesso**: tecnologia e politica, dati e identità, infrastrutture ed economia. Esempi nel diagramma:
 
@@ -487,9 +493,6 @@ La p. 74 unisce **robot, autonomia e sistemi intelligenti**.
 - **piattaforme** → mercati → città.
 
 Conclusione: la tecnologia **sta dando forma alla società**, non si limita a supportarla.
-
-<!-- SOURCE_VISUAL id="IS04-V21" source="Lesson_04_MachineLearningBasics_Trends_Simulation.pdf" page="76" type="diagramma" description="Diagramma dello Stack di Bratton con gli strati interconnessi" reason="Pagina senza testo estraibile" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 

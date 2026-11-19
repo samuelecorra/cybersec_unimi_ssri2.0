@@ -1,46 +1,34 @@
 ## **Lezione 3: Narrow AI, tassonomia dell’apprendimento, sensori intelligenti e strumenti**
 
-La terza lezione del corso **IS4** fa quattro cose. Distingue l’**AI ristretta** (Narrow AI), quella che usiamo oggi, dall’**AI generale** (AGI), ancora teorica, e discute come si potrebbe riconoscere un’intelligenza «umana». Costruisce una **tassonomia** dei metodi di apprendimento: regressione, classificazione, clustering, apprendimento per rinforzo, apprendimento deduttivo, induttivo e trasduttivo. Introduce la **valutazione** di un sistema intelligente e le prime applicazioni ai **sensori**. Prepara infine gli **strumenti** del corso (MATLAB, Colab, Anaconda, IDE, Keras) e dà un metodo di studio.
+In questa lezione il percorso parte da una distinzione fondamentale: l’AI ristretta, progettata per compiti specifici, e l’AGI, un’intelligenza generale ancora ipotetica. Da qui nasce la domanda su come valutare le capacità di una macchina. Passiamo poi ai principali modi di apprendere — regressione, classificazione, clustering, rinforzo, deduzione, induzione e trasduzione — e vediamo come valutare i sistemi e applicarli ai sensori. Chiudiamo con gli strumenti di lavoro e un metodo per interiorizzare la teoria.
 
-Fonti: [PDF principale della Lezione 03](Lesson_03_Tools_AITaxonomy_SensorApplications.pdf), 85 pagine, e [The AI Apocalypse Matrix](Lesson_03_The_AI_Apocalypse_Matrix.pdf), 2 pagine tratte da *IEEE Spectrum*, agosto 2023. Le righe `_(slide …)_` rimandano al PDF principale, le righe `_(matrix …)_` all’articolo. Dichiarazioni, prodotti e versioni degli strumenti descrivono il materiale acquisito; le note didattiche aggiunte sono segnalate. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
+Approfondimento collegato: [The AI Apocalypse Matrix](Lesson_03_The_AI_Apocalypse_Matrix.pdf), pubblicato da *IEEE Spectrum* nell’agosto 2023. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
 
-### **0. Struttura della lezione**
+### **0. Il percorso della lezione**
 
-_(slide pp. 1–2)_
+Il percorso si sviluppa in quattro passaggi: distinguere AI ristretta e generale; capire come si misurano le capacità delle macchine; ordinare i metodi di apprendimento e i criteri di valutazione; collegare l’AI ai sensori e agli strumenti con cui si progetta.
 
-Titolo originale: *Narrow AI, Toolboxes, Taxonomy of AI systems and Introduction to sensor in applications*. L’indice (p. 2) elenca:
-
-1. **preparare gli strumenti** (MATLAB, Colab e altre risorse);
-2. in questo campo, per costruire competenze serve l’**interiorizzazione** delle conoscenze;
-3. **tassonomia** dei metodi di machine learning, con approfondimento su Narrow AI, regressione, classificazione, clustering, apprendimento deduttivo e induttivo;
-4. **panoramica dell’AI applicata ai sensori**: sensori intelligenti, reti di sensori, strumentazione avanzata e sensori virtuali.
-
----
 
 ### **1. Narrow AI e General AI**
 
 #### **1.1. Due punti di vista**
 
-_(slide pp. 3–4)_
+Quando si parla di intelligenza artificiale, è utile distinguere **due prospettive**: la **Narrow AI**, progettata per compiti circoscritti, e la **General AI**, capace in ipotesi di affrontare una gamma ampia di attività.
 
-Nello stato dell’arte convivono **due punti di vista** sull’intelligenza artificiale: la **Narrow AI** e la **General AI** (p. 3). La p. 4 li confronta solo graficamente.
+![](imgs/Pasted%20image%2020261002032915.png)
 
-<!-- SOURCE_VISUAL id="IS03-V01" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="3" type="schema" description="Narrow AI e General AI come punti di vista presenti nello stato dell’arte" reason="Confronto grafico dei due concetti" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS03-V02" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="4" type="immagine" description="Illustrazione di confronto tra Narrow AI e General AI" reason="Pagina senza testo estraibile" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002032923.png)
 
 #### **1.2. Narrow AI**
 
-_(slide pp. 5–8)_
+![](imgs/Pasted%20image%2020261002033107.png)
 
-> 📌 **Narrow AI** (p. 5), detta anche **Artificial Narrow Intelligence** (ANI) o **Weak AI**. Indica sistemi di AI **progettati e addestrati** per svolgere **un compito specifico** o un insieme ristretto di compiti, di solito in un **dominio limitato**.
+> 📌 **Narrow AI**, detta anche **Artificial Narrow Intelligence** (ANI) o **Weak AI**. Indica sistemi di AI **progettati e addestrati** per svolgere **un compito specifico** o un insieme ristretto di compiti, di solito in un **dominio limitato**.
 > - Esempio: un modello addestrato a riconoscere **immagini di gatti** sa fare solo quello e **non generalizza** ad altri tipi di immagini o di compiti.
 > - È oggi la forma **predominante** di AI: riconoscimento vocale, riconoscimento di immagini, elaborazione del linguaggio naturale.
 > - È tipicamente **monomodale**: solo immagini, solo suoni, e così via.
 
-**Che cosa manca alla Narrow AI** (p. 6):
+**Che cosa manca alla Narrow AI**:
 
 - **autoconsapevolezza**;
 - **coscienza**;
@@ -48,61 +36,50 @@ _(slide pp. 5–8)_
 - un’**intelligenza genuina** paragonabile a quella umana;
 - e naturalmente la **Gestalt**: la capacità di cambiare dinamicamente il **contesto**, il **livello di dettaglio** e il **livello di astrazione** per capire meglio i dati, secondo la propria esperienza e conoscenza (Lezione 02, §6).
 
-La p. 7 riassume i **vantaggi** della Narrow AI (fonte: Spiceworks); la p. 8 ne mostra le **sfide**, che il corso affronterà rivedendo e provando tecniche diverse.
+La Narrow AI offre vantaggi pratici nei compiti ben definiti, ma presenta anche sfide che incontreremo durante il corso.
 
-> 💡 **Vantaggi e sfide tipici (nota didattica).** In genere si citano come vantaggi la **velocità** e la **ripetibilità** su compiti ben definiti, la riduzione del lavoro manuale e l’accuratezza in domini ristretti. Come sfide, la **mancanza di generalizzazione** fuori dal dominio di addestramento, la **dipendenza dai dati** (qualità, quantità, bias), la scarsa **spiegabilità** e la **fragilità** davanti a input inattesi. Le voci esatte delle due slide vanno verificate sulle immagini.
+> 💡 **Vantaggi e sfide tipici.** I sistemi ristretti possono essere veloci, ripetibili e accurati nel proprio dominio, riducendo il lavoro manuale. Fuori da quel dominio, però, possono non generalizzare; dipendono dalla qualità e quantità dei dati, possono essere difficili da spiegare e fragili davanti a input inattesi.
 
-<!-- SOURCE_VISUAL id="IS03-V03" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="7" type="infografica" description="Vantaggi della Narrow AI (Spiceworks)" reason="Elenco dei vantaggi presente solo nell’infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002033128.png)
 
-<!-- SOURCE_VISUAL id="IS03-V04" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="8" type="infografica" description="Sfide della Narrow AI affrontate durante il corso" reason="Elenco delle sfide presente solo nell’infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
+![](imgs/Pasted%20image%2020261002033140.png)
 #### **1.3. General AI**
 
-_(slide pp. 9–11)_
-
-> 📌 **General AI** (p. 9), detta anche **Strong AI** o **Artificial General Intelligence** (AGI). Indica sistemi con un’intelligenza **simile a quella umana**, capaci di **ragionare, apprendere e adattarsi** a un’ampia gamma di compiti e situazioni.
+> 📌 **General AI**, detta anche **Strong AI** o **Artificial General Intelligence** (AGI). Indica sistemi con un’intelligenza **simile a quella umana**, capaci di **ragionare, apprendere e adattarsi** a un’ampia gamma di compiti e situazioni.
 > - Sarebbe in grado di svolgere **qualsiasi compito intellettuale** che un essere umano sa svolgere, e forse di **superarlo** in alcuni ambiti.
 > - È ancora un **concetto teorico**, anche se sono in corso progressi significativi.
 
-> ⚠️ **Un problema di definizione.** Non esiste una definizione standard di che cosa sia «simile all’umano»: per questo sarà **difficile definire l’AGI** (p. 9), e quindi anche stabilire quando la si sarà raggiunta.
+> ⚠️ **Un problema di definizione.** Non esiste una definizione standard di che cosa sia «simile all’umano»: per questo sarà **difficile definire l’AGI**, e quindi anche stabilire quando la si sarà raggiunta.
 
-La slide rimanda a un video (con il commento ironico «disorganizzato… cominciamo dalle tue email»); la p. 10 contiene solo un’immagine.
+Un esempio video usa con ironia la frase «disorganizzato… cominciamo dalle tue email» per introdurre la promessa di assistenti capaci di agire in contesti quotidiani.
 
-<!-- SOURCE_VISUAL id="IS03-V05" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="10" type="immagine" description="Illustrazione sulla General AI" reason="Pagina con sola immagine e piè di pagina" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002033231.png)
 
-**Alcune dichiarazioni sull’AGI** (p. 11), da **Sam Altman** (7 gennaio 2025):
+**Alcune dichiarazioni sull’AGI**, da **Sam Altman** (7 gennaio 2025):
 
 - «Credo che raggiungeremo l’AGI **prima di quanto pensi** la maggior parte delle persone, e **conterà molto meno**»;
 - la superintelligenza potrebbe arrivare in «**qualche migliaio di giorni**», cioè circa **5–10 anni**;
 - «nel **2025** potremmo vedere i primi **agenti di AI “entrare nella forza lavoro”** e cambiare in modo sostanziale la produzione delle aziende».
 
-La slide sottolinea le formule prudenti usate («potremmo vedere», «è possibile») e ricorda che il settore è **molto competitivo**: OpenAI, Google (DeepMind), Meta, Anthropic e xAI **gareggiano** per raggiungere l’AGI. Tra le fonti c’è anche un articolo di PCMag su un cofondatore di Google secondo cui servirebbero **settimane da 60 ore** per arrivare all’AGI.
+Queste dichiarazioni usano formule prudenti («potremmo vedere», «è possibile») e arrivano da un settore **molto competitivo**: OpenAI, Google (DeepMind), Meta, Anthropic e xAI **gareggiano** per raggiungere l’AGI. Un articolo di PCMag riporta inoltre l’affermazione di un cofondatore di Google secondo cui per arrivare all’AGI servirebbero **settimane da 60 ore**.
 
 > 💡 **Leggere le dichiarazioni.** Le frasi al condizionale e le stime in «migliaia di giorni» non sono previsioni verificabili: fanno parte della comunicazione di aziende in competizione. È lo stesso invito alla lettura critica delle opinioni della Lezione 02, §7.
 
 #### **1.4. Il dibattito sull’AGI e la «AI Apocalypse Matrix»**
 
-_(slide pp. 12–13)_
-
-**Le questioni principali** (p. 13):
+**Le questioni principali**:
 
 - l’AGI **non è una soglia scientifica unica e condivisa**;
 - ricercatori diversi intendono **cose diverse**: flessibilità di livello umano, **trasferimento tra domini**, risoluzione autonoma di problemi, **utilità economica**;
 - le affermazioni sull’AGI vanno interpretate distinguendo se sono:
-  1. un’affermazione **scientifica**;
-  2. un’affermazione sulle **capacità ingegneristiche**;
-  3. un’affermazione sull’**impatto economico**;
-  4. una forma di **comunicazione pubblica** o una mossa **strategica**.
+ 1. un’affermazione **scientifica**;
+ 2. un’affermazione sulle **capacità ingegneristiche**;
+ 3. un’affermazione sull’**impatto economico**;
+ 4. una forma di **comunicazione pubblica** o una mossa **strategica**.
 
-La p. 12 richiama il **panel di IEEE Spectrum** (2023) sull’AGI, che corrisponde all’articolo allegato.
+Il dibattito è illustrato anche dal **panel di IEEE Spectrum** sull’AGI, pubblicato nel 2023.
 
-<!-- SOURCE_VISUAL id="IS03-V06" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="12" type="immagine" description="Panel di IEEE Spectrum 2023 sull’AGI" reason="Contenuto presente solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-_(matrix pp. 1–2)_
+![](imgs/Pasted%20image%2020261002033454.png)
 
 **The AI Apocalypse Matrix** (*IEEE Spectrum*, agosto 2023, di Eliza Strickland e Glenn Zorpette). L’articolo parte da due domande su GPT-4:
 
@@ -129,7 +106,7 @@ L’articolo ricorda due iniziative del 2023: la **lettera aperta** di marzo che
 
 I 23 esperti sono: Christof Koch, Jaron Lanier, Andrew Ng, Max Tegmark, Yann LeCun, Gary Marcus, Meredith Whittaker, Eliezer Yudkowsky, Margaret Mitchell, Melanie Mitchell, Dan Hendrycks, Geoffrey Hinton, Emily M. Bender, Yoshua Bengio, Sébastien Bubeck, Joy Buolamwini, Nick Bostrom, Rodney Brooks, Timnit Gebru, Alison Gopnik, Sam Altman, Jacob Andreas, Marc Andreessen.
 
-**Citazioni riportate nella matrice** (p. 2):
+**Citazioni riportate nella matrice**:
 
 | Chi | Citazione |
 |---|---|
@@ -143,26 +120,21 @@ I 23 esperti sono: Christof Koch, Jaron Lanier, Andrew Ng, Max Tegmark, Yann LeC
 
 > ⚠️ **Da verificare sulla figura.** La posizione di ciascun esperto nei quadranti è visibile solo nella grafica e non viene ricostruita qui. Nell’articolo compaiono due piccoli refusi: «MARK ANDREESSEN» nella citazione, contro «Marc Andreessen» nell’elenco, e «Sante Fe Institute» invece di **Santa Fe Institute**.
 
-<!-- SOURCE_VISUAL id="IS03-V07" source="Lesson_03_The_AI_Apocalypse_Matrix.pdf" page="2" type="matrice" description="AI Apocalypse Matrix: 23 esperti collocati per probabilità di AGI e probabilità di disastro, con le citazioni" reason="Posizione degli esperti nei quadranti visibile solo nella grafica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 > 💡 **Perché la matrice è utile.** Separa due domande che nel dibattito pubblico si confondono: «**arriveremo** all’AGI?» e «**sarebbe pericolosa**?». Si può credere all’AGI senza temere l’apocalisse (LeCun) oppure preoccuparsi soprattutto dei **danni già presenti**, come bias e disinformazione, indipendentemente dall’AGI (Margaret Mitchell).
-
----
 
 ### **2. Come misurare l’intelligenza di una macchina**
 
-_(slide pp. 14–20)_
-
 #### **2.1. Il test di Turing**
 
-> 📌 **Test di Turing** (p. 14). Proposto da **Alan Turing** nel **1950**, misura la capacità di una macchina di mostrare un comportamento intelligente **indistinguibile** da quello umano.
+> 📌 **Test di Turing**. Proposto da **Alan Turing** nel **1950**, misura la capacità di una macchina di mostrare un comportamento intelligente **indistinguibile** da quello umano.
 > - Un **giudice umano** conversa in linguaggio naturale con **un umano e una macchina**, senza vederli.
 > - Se il giudice **non riesce a distinguere** in modo affidabile la macchina dall’umano, la macchina **supera il test**.
 
-> ⚠️ **Il limite del test.** Il test di Turing misura la **capacità conversazionale**, **non l’intelligenza generale** (p. 14).
+> ⚠️ **Il limite del test.** Il test di Turing misura la **capacità conversazionale**, **non l’intelligenza generale**.
 
-**Test recenti** (p. 15, da un articolo di *Nature* del 2023):
+![](imgs/Pasted%20image%2020261002033559.png)
+
+**Test recenti** (un articolo di *Nature* del 2023 osserva che):
 
 - gli attuali sistemi di AI **imitano in modo convincente** la conversazione umana, mettendo in crisi i metodi di valutazione tradizionali;
 - **ChatGPT ha superato il test di Turing**;
@@ -171,9 +143,11 @@ _(slide pp. 14–20)_
 
 > 💡 **Precisazione (nota didattica).** L’articolo citato (*ChatGPT broke the Turing test — the race is on for new ways to assess AI*) è un articolo giornalistico della sezione notizie di *Nature*, non uno studio sperimentale. Il senso è che il test di Turing, nella sua forma conversazionale, **non distingue più** i modelli linguistici dagli umani e quindi non basta come misura.
 
+![](imgs/Pasted%20image%2020261002033707.png)
+
 #### **2.2. ConceptARC e altri test**
 
-**Un test di pensiero astratto che batte le macchine** (p. 16): finora i sistemi di AI **non hanno raggiunto prestazioni umane** nel test **ConceptARC**. Le pp. 17–18 propongono di provarlo e chiedono: quale caratteristica della mia intelligenza sto usando per risolvere il puzzle?
+**Un test di pensiero astratto che batte le macchine**: finora i sistemi di AI **non hanno raggiunto prestazioni umane** nel test **ConceptARC**. Le propongono di provarlo e chiedono: quale caratteristica della mia intelligenza sto usando per risolvere il puzzle?
 
 - un **tentativo casuale**?
 - l’**elaborazione visiva**?
@@ -182,72 +156,52 @@ _(slide pp. 14–20)_
 
 > 💡 **Come è fatto un puzzle ARC (nota didattica).** Nei benchmark della famiglia ARC (*Abstraction and Reasoning Corpus*) si vedono poche coppie di griglie colorate «input → output» e bisogna **indovinare la regola** di trasformazione, poi applicarla a una nuova griglia. ConceptARC organizza i puzzle per **concetti** (per esempio «sopra/sotto», «dentro/fuori», «stesso/diverso»). Pochi esempi e una regola astratta: è l’opposto dell’addestramento su milioni di dati tipico della Narrow AI.
 
-La p. 19 presenta **ARC-AGI-3**, la p. 20 **altri test recenti**.
+Tra gli altri riferimenti si trovano **ARC-AGI-3** e ulteriori test recenti.
 
-<!-- SOURCE_VISUAL id="IS03-V08" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="17" type="puzzle" description="Esempio di puzzle del test ConceptARC da risolvere in aula" reason="Griglie del puzzle visibili solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002033756.png)
 
-<!-- SOURCE_VISUAL id="IS03-V09" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="18" type="puzzle" description="Puzzle ConceptARC con domande su quale capacità si usa per risolverlo" reason="Griglie del puzzle visibili solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002033813.png)
 
-<!-- SOURCE_VISUAL id="IS03-V10" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="19" type="immagine" description="Benchmark ARC-AGI-3" reason="Contenuto presente solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS03-V11" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="20" type="immagine" description="Altri test recenti per valutare le capacità dell’AI" reason="Nomi e contenuti dei test presenti solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
----
+![](imgs/Pasted%20image%2020261002033828.png)
 
 ### **3. Una tassonomia dei metodi di apprendimento**
 
 #### **3.1. Un quadro comune per molte applicazioni**
 
-_(slide pp. 21–24)_
+I sistemi intelligenti sono applicati a problemi molto diversi, ma è possibile ricondurli a un quadro comune. Per scegliere un metodo, chiediamoci quale compito stiamo affrontando e quale capacità vogliamo automatizzare. Una **tassonomia** ci aiuta a organizzare queste possibilità.
 
-I sistemi intelligenti hanno **moltissime applicazioni**, ma rientrano in un **quadro generale** (p. 21). Le pp. 22–23 mostrano la varietà dei temi e chiedono **quale tipo di lavoratore** un sistema intelligente stia imitando.
+![](imgs/Pasted%20image%2020261002033947.png)
 
-C’è un modo intelligente per **raggruppare** le applicazioni dell’AI? **Sì** (p. 24): una **tassonomia generale**.
-
-<!-- SOURCE_VISUAL id="IS03-V12" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="22" type="collage" description="Varietà di temi e applicazioni dei sistemi intelligenti" reason="Contenuto presente solo nel collage" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS03-V13" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="23" type="immagine" description="Quale tipo di lavoratore imita un sistema intelligente" reason="Contenuto presente solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034043.png)
 
 #### **3.2. La tassonomia del machine learning**
 
-_(slide pp. 25–28)_
+Possiamo ora costruire una **tassonomia del machine learning** distinguendo i modi in cui il sistema riceve il segnale di apprendimento.
 
-Le pp. 25–28 costruiscono passo per passo la **tassonomia del ML** in forma grafica.
-
-> 💡 **La struttura classica (nota didattica).** Le tassonomie di questo tipo dividono il machine learning in tre rami, coerenti con le slide successive:
+> 💡 **La struttura classica (nota didattica).** Le tassonomie di questo tipo dividono il machine learning in tre rami, che ritroveremo nei compiti successivi:
 > - **apprendimento supervisionato**: **classificazione** (output discreto) e **regressione** (output continuo);
 > - **apprendimento non supervisionato**: **clustering** (e riduzione della dimensionalità);
 > - **apprendimento per rinforzo**: un agente impara da **ricompense**.
 >
 > Le etichette esatte e gli esempi dei rami vanno verificati sulle quattro immagini.
 
-<!-- SOURCE_VISUAL id="IS03-V14" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="25" type="tassonomia" description="Tassonomia del machine learning, passo 1" reason="Rami della tassonomia presenti solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034122.png)
 
-<!-- SOURCE_VISUAL id="IS03-V15" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="26" type="tassonomia" description="Tassonomia del machine learning, passo 2" reason="Rami della tassonomia presenti solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034135.png)
 
-<!-- SOURCE_VISUAL id="IS03-V16" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="27" type="tassonomia" description="Tassonomia del machine learning, passo 3" reason="Rami della tassonomia presenti solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034145.png)
 
-<!-- SOURCE_VISUAL id="IS03-V17" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="28" type="tassonomia" description="Tassonomia del machine learning, passo 4" reason="Rami della tassonomia presenti solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034154.png)
 
 #### **3.3. Regressione, classificazione e clustering**
 
-_(slide pp. 29–31)_
+![](imgs/Pasted%20image%2020261002034356.png)
 
-| Compito | Che cosa fa (slide) | Esempio (slide) |
+| Compito | Che cosa fa | Esempio |
 |---|---|---|
-| **Regressione** (p. 29) | predice un **output a valori continui**; calcola la relazione probabilistica tra variabili per **previsione**; è il modello statistico che predice **dati numerici** invece di etichette; può individuare **tendenze** nei dati storici | predire il **reddito** di una persona da età, istruzione, … |
-| **Classificazione** (p. 30) | predice un **numero discreto di valori**: i dati vengono categorizzati sotto **etichette** e l’etichetta viene predetta per i nuovi dati | email **spam / non spam**; classificazione di input in 2D |
-| **Clustering** (p. 31) | **partiziona** il dataset in gruppi, i **cluster**, di elementi simili: punti dello stesso cluster **molto simili**, punti di cluster diversi **diversi**; trova raggruppamenti in dati **non etichettati** | punti nel piano 2D |
+| **Regressione** | predice un **output a valori continui**; calcola la relazione probabilistica tra variabili per **previsione**; è il modello statistico che predice **dati numerici** invece di etichette; può individuare **tendenze** nei dati storici | predire il **reddito** di una persona da età, istruzione, … |
+| **Classificazione** | predice un **numero discreto di valori**: i dati vengono categorizzati sotto **etichette** e l’etichetta viene predetta per i nuovi dati | email **spam / non spam**; classificazione di input in 2D |
+| **Clustering** | **partiziona** il dataset in gruppi, i **cluster**, di elementi simili: punti dello stesso cluster **molto simili**, punti di cluster diversi **diversi**; trova raggruppamenti in dati **non etichettati** | punti nel piano 2D |
 
 In formula (nota didattica), con il modello visto come funzione $\text{Out} = F(X)$ (Lezione 02, §3):
 
@@ -257,40 +211,35 @@ Nel clustering non esiste un output «giusto» da imparare: l’algoritmo assegn
 
 > ⚠️ **Classificazione contro clustering.** Entrambi producono gruppi, ma la classificazione **impara da esempi etichettati** (le classi sono note in anticipo), mentre il clustering **scopre** i gruppi in dati **senza etichette**.
 
-<!-- SOURCE_VISUAL id="IS03-V18" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="30" type="grafico" description="Esempio di classificazione con input 2D" reason="Punti e frontiera visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034415.png)
 
-<!-- SOURCE_VISUAL id="IS03-V19" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="31" type="grafico" description="Esempio di clustering di punti 2D" reason="Gruppi di punti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
+![](imgs/Pasted%20image%2020261002034429.png)
 #### **3.4. Apprendimento per rinforzo**
 
-_(slide pp. 32–36)_
+> 📌 **Reinforcement learning**. I modelli di apprendimento per rinforzo usano dinamiche opposte, **ricompense e punizioni**, per «rinforzare» diversi tipi di conoscenza. È una tecnica **sempre più diffusa** nelle soluzioni di AI moderne.
 
-> 📌 **Reinforcement learning** (p. 32). I modelli di apprendimento per rinforzo usano dinamiche opposte, **ricompense e punizioni**, per «rinforzare» diversi tipi di conoscenza. È una tecnica **sempre più diffusa** nelle soluzioni di AI moderne.
-
-**Esempio: il robot aspirapolvere** (pp. 32–33). Il robot può sviluppare comportamenti come:
+**Esempio: il robot aspirapolvere**. Il robot può sviluppare comportamenti come:
 
 - **passeggiata casuale** (*random walk*);
 - andare **il più dritto possibile**;
 - **spirale**.
 
-Politiche e ricompense diverse (p. 33):
+Politiche e ricompense diverse:
 
 | Problema | Politica | Ricompensa |
 |---|---|---|
 | pulire una stanza | seguire **file parallele** nella stanza | pulire una **superficie più grande** con la stessa batteria |
 | uscire da un labirinto | tenere **la mano sul muro** (meglio che girare a caso) | **uscire** dal labirinto con **meno passi** |
 
-**Obiettivo** (p. 34): ottenere **la massima ricompensa possibile**.
+**Obiettivo**: ottenere **la massima ricompensa possibile**.
 
-<!-- SOURCE_VISUAL id="IS03-V20" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="32" type="illustrazione" description="Comportamenti di un robot aspirapolvere: random walk, linea retta, spirale" reason="Traiettorie visibili solo nell’illustrazione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034507.png)
 
-<!-- SOURCE_VISUAL id="IS03-V21" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="35" type="diagramma" description="Ciclo agente-ambiente con rete neurale che approssima la politica" reason="Frecce del ciclo visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034522.png)
 
-**Gli elementi** (p. 35):
+![](imgs/Pasted%20image%2020261002034626.png)
+
+**Gli elementi**:
 
 | Elemento | Significato |
 |---|---|
@@ -307,7 +256,9 @@ Politiche e ricompense diverse (p. 33):
 > $$J(\theta) = \mathbb{E}_{\pi_\theta}\!\left[\sum_{t=0}^{\infty} \gamma^{t}\, r_{t+1}\right], \qquad 0 \le \gamma < 1$$
 > Il fattore di sconto $\gamma$ pesa meno le ricompense lontane nel tempo.
 
-**Esempio: il braccio robotico** (p. 36). Un braccio con **più giunti** deve **afferrare un oggetto** posto in una posizione casuale su un tavolo; è comandato dalle **coppie** applicate ai giunti e riceve ricompense in base a quanto si avvicina all’oggetto e lo afferra.
+**Esempio: il braccio robotico**. Un braccio con **più giunti** deve **afferrare un oggetto** posto in una posizione casuale su un tavolo; è comandato dalle **coppie** applicate ai giunti e riceve ricompense in base a quanto si avvicina all’oggetto e lo afferra.
+
+![](imgs/Pasted%20image%2020261002034715.png)
 
 | Componente | Nel problema del braccio |
 |---|---|
@@ -321,61 +272,49 @@ Politiche e ricompense diverse (p. 33):
 
 #### **3.5. Tipi di apprendimento ed etichette**
 
-_(slide pp. 37–38)_
-
-| Tipo | Dati di addestramento (p. 37) |
+| Tipo | Dati di addestramento |
 |---|---|
 | **Supervisionato** (induttivo) | includono gli **output desiderati** (etichette) |
 | **Non supervisionato** | **non** includono gli output desiderati |
 | **Semi-supervisionato** | includono **pochi** output desiderati |
 | **Per rinforzo** | **ricompense** ottenute da sequenze di azioni |
 
-La p. 38 propone un altro punto di vista sui tipi di apprendimento, in forma grafica.
+Un’altra classificazione distingue i tipi di apprendimento in base al modo in cui il sistema riceve dati ed etichette.
 
-<!-- SOURCE_VISUAL id="IS03-V22" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="38" type="schema" description="Tipi di apprendimento: un altro punto di vista" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
----
+![](imgs/Pasted%20image%2020261002034750.png)
 
 ### **4. Apprendimento deduttivo, induttivo e trasduttivo**
 
-_(slide pp. 39–50)_
-
 #### **4.1. Regole o dati?**
 
-La domanda della sezione (p. 39): si **impara dai dati** o si **applicano regole**? Le pp. 40–41 e 44 confrontano i due approcci con lo schema del *Knowledge Base* di **William M. K. Trochim**:
+Una distinzione fondamentale riguarda il punto di partenza: si **impara dai dati** oppure si **applicano regole**? Lo schema del *Knowledge Base* di **William M. K. Trochim** mette a confronto questi due percorsi:
 
 | | **Deduttivo** | **Induttivo** |
 |---|---|---|
 | Punto di partenza | regole **if-then**, nessun dato | **nessuna conoscenza** precedente, solo **dati** |
-| Diffusione | — | **la maggior parte dei metodi di AI** (p. 44) |
+| Diffusione | — | **la maggior parte dei metodi di AI** |
 
-> 💡 **Lo schema di Trochim (nota didattica).** Il ragionamento **deduttivo** va «dall’alto in basso»: teoria → ipotesi → osservazioni → conferma. Quello **induttivo** va «dal basso in alto»: osservazioni → individuazione di schemi → ipotesi provvisoria → teoria. Le frecce delle slide vanno verificate sulle immagini.
+> 💡 **Lo schema di Trochim (nota didattica).** Il ragionamento **deduttivo** va «dall’alto in basso»: teoria → ipotesi → osservazioni → conferma. Quello **induttivo** va «dal basso in alto»: osservazioni → individuazione di schemi → ipotesi provvisoria → teoria. La direzione delle frecce rende intuitiva la differenza fra i due percorsi.
 
-<!-- SOURCE_VISUAL id="IS03-V23" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="40" type="schema" description="Approccio deduttivo con regole if-then e nessun dato (Trochim, Knowledge Base)" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034814.png)
 
-<!-- SOURCE_VISUAL id="IS03-V24" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="41" type="schema" description="Confronto deduttivo e induttivo: regole senza dati contro dati senza conoscenza precedente" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034826.png)
 
-<!-- SOURCE_VISUAL id="IS03-V25" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="44" type="schema" description="Deduttivo contro induttivo con l’indicazione che l’induttivo è la maggior parte dei metodi di AI" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002034943.png)
 
 #### **4.2. Due esempi mnemonici**
 
-> 📌 **Apprendimento deduttivo** (p. 42). Una tecnica di AI che **parte da un insieme di regole** e le applica per prendere decisioni su dati nuovi; poi può **inferire regole nuove**, più efficienti nel contesto in cui vanno applicate. È l’«**esperto di dominio che tramanda le regole**».
+> 📌 **Apprendimento deduttivo**. Una tecnica di AI che **parte da un insieme di regole** e le applica per prendere decisioni su dati nuovi; poi può **inferire regole nuove**, più efficienti nel contesto in cui vanno applicate. È l’«**esperto di dominio che tramanda le regole**».
 
 L’esempio mnemonico: la **nonna** ti dà le regole per scegliere un buon fidanzato. Se sei d’accordo, **erediti la conoscenza** della sua esperienza e la applichi alla scelta del nuovo partner; poi puoi anche **adattare le regole** ai tempi moderni.
 
-> 📌 **Apprendimento induttivo** (p. 43). Si basa sull’**inferire una regola generale** da dataset di coppie **input-output**. È il «**learner senza conoscenza a priori**».
+> 📌 **Apprendimento induttivo**. Si basa sull’**inferire una regola generale** da dataset di coppie **input-output**. È il «**learner senza conoscenza a priori**».
 
 L’esempio mnemonico: non vuoi regole, vuoi farti la conoscenza **con l’esperienza** (solo dati, nessuna regola). «Le ultime 10 volte che sono entrato in tangenziale a Milano alle 17:30 sono rimasto in coda» → **nuova regola generale**: evitare di partire nelle ore di traffico intenso. L’immagine è James Dean in *Gioventù bruciata* (*Rebel Without a Cause*, 1955): il ribelle che non accetta regole ricevute.
 
 #### **4.3. Trasduzione**
 
-_(slide pp. 45–46)_
-
-Dal libro *The Nature of Statistical Learning Theory* (p. 45):
+Dal libro *The Nature of Statistical Learning Theory*:
 
 | Processo | Definizione |
 |---|---|
@@ -383,24 +322,24 @@ Dal libro *The Nature of Statistical Learning Theory* (p. 45):
 | **Deduzione** | ricavare i **valori della funzione data** nei punti di interesse |
 | **Trasduzione** | ricavare i **valori della funzione sconosciuta** nei punti di interesse **direttamente dai dati** |
 
+![](imgs/Pasted%20image%2020261002035051.png)
+
 > 💡 **In una riga (nota didattica).** Induzione e poi deduzione: dati → **modello generale** → risposta nel punto. Trasduzione: dati → risposta nel punto, **senza passare** da un modello generale. Il libro citato è di **Vladimir Vapnik**.
 
-La trasduzione va **dal particolare al particolare**, da punti di dati a punti di dati (p. 46). Esempi:
+La trasduzione va **dal particolare al particolare**, da punti di dati a punti di dati. Esempi:
 
 - **k-Nearest Neighbors**: un algoritmo che **non modella** i dati di addestramento, ma li **usa direttamente** ogni volta che serve una predizione;
-- **linguistica**: un insieme di regole che trasforma esempi di una lingua in un’altra; molti compiti di **NLP** si possono vedere come trasduzione, perché il modello converte una stringa in un’altra (p. 45);
+- **linguistica**: un insieme di regole che trasforma esempi di una lingua in un’altra; molti compiti di **NLP** si possono vedere come trasduzione, perché il modello converte una stringa in un’altra;
 - **predizione di sequenze**: un modello che produce un passo temporale di output per ogni passo di input, per esempio le **reti neurali ricorrenti**.
 
 #### **4.4. L’apprendimento induttivo in dettaglio**
 
-_(slide pp. 47–50)_
-
-**Dati: esempi di una funzione** $(X, F(X))$ (p. 47).
+**Dati: esempi di una funzione** $(X, F(X))$.
 
 - **Caso monodimensionale**: coppie come $X = 0{,}2 \to Y = 32$ e $X = 0{,}5 \to Y = 52$, …
 - **Caso N-dimensionale**: ogni input (un vettore, per esempio un’immagine) ha un’etichetta, come $Y = 1$, $Y = 1$, $Y = 2$.
 
-**Obiettivo: creare una funzione di predizione** $F(X)$ per esempi nuovi (p. 48):
+**Obiettivo: creare una funzione di predizione** $F(X)$ per esempi nuovi:
 
 | Tipo di $F(X)$ | Compito |
 |---|---|
@@ -408,13 +347,11 @@ _(slide pp. 47–50)_
 | **continua** | **regressione** |
 | $F(X) = \text{Probabilità}(X)$ | **stima di probabilità**; esempio nel piano altezza (cm) – peso (kg) |
 
-<!-- SOURCE_VISUAL id="IS03-V26" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="47" type="esempi" description="Esempi di funzione (X, F(X)) nel caso 1D e nel caso N-dimensionale con etichette" reason="Input N-dimensionali visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002035244.png)
 
-<!-- SOURCE_VISUAL id="IS03-V27" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="48" type="grafico" description="Stima di probabilità nel piano altezza-peso" reason="Distribuzione visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002035321.png)
 
-**Vantaggi dell’apprendimento induttivo** (p. 49):
+**Vantaggi dell’apprendimento induttivo**:
 
 - **alleggerisce il collo di bottiglia dell’acquisizione della conoscenza**: niente regole, niente equazioni, solo dati;
 - **non richiede ingegneri della conoscenza**;
@@ -422,7 +359,7 @@ _(slide pp. 47–50)_
 - è **adattivo**: si adatta alle condizioni che cambiano;
 - **migra facilmente** a domini nuovi.
 
-**Generalizzazione** (p. 50). Il modello addestrato può **estendere** la capacità di risolvere il problema dalla specifica applicazione a casi più generali, **SE** (e «ci sono molti se»):
+**Generalizzazione**. Il modello addestrato può **estendere** la capacità di risolvere il problema dalla specifica applicazione a casi più generali, **SE** (e «ci sono molti se»):
 
 - il dataset è **buono e completo**;
 - il metodo di apprendimento e il modello sono **abbastanza potenti**;
@@ -430,28 +367,24 @@ _(slide pp. 47–50)_
 
 > ⚠️ **I «se» della generalizzazione.** L’induzione non garantisce nulla fuori dai dati visti: se il dataset non copre certe situazioni, il modello non ha modo di conoscerle. È il motivo per cui il corso dedicherà molto spazio a qualità, completezza e partizione dei dati.
 
----
-
 ### **5. Valutazione di un sistema intelligente**
 
-_(slide pp. 51–56)_
+Dopo aver scelto un metodo e addestrato un modello, resta la domanda decisiva: **funziona per l’applicazione a cui è destinato?** La valutazione è articolata e considera più aspetti:
 
-La domanda di fondo (p. 51): **il mio modello va bene per la mia applicazione?** È un campo di ricerca **complesso e articolato**; gli aspetti seguenti saranno approfonditi nel corso (p. 52).
-
-**Obiettivo della valutazione** (p. 52):
+**Obiettivo della valutazione**:
 
 - garantire che il sistema **soddisfi le aspettative di prestazione**;
 - garantire **sicurezza e affidabilità**;
 - individuare le **aree da migliorare**.
 
-| Aspetto | Contenuto (slide) |
+| Aspetto | Che cosa valutare |
 |---|---|
-| **Metriche** (p. 53) | accuratezza, precisione, recall, F1; AUC e curva ROC; MAE, MSE, RMSE; **soddisfazione e usabilità**, **ergonomia** (in futuro anche l’esperienza d’uso: il modello è empatico? assertivo? gentile? prolisso?); **etica ed equità** (è stato creato con dati distorti?) |
-| **Metodi di validazione** (p. 54) | suddivisione **training/validation/test**; **cross-validation**; **bootstrap**; in futuro forse test basati sull’esperienza d’uso o test «psicologici» |
-| **Benchmarking** (p. 55) | confronto con **modelli precedenti** o con le **prestazioni umane**; standard e benchmark di settore; **classifiche pubbliche** (leaderboard) |
-| **Prestazioni reali** (p. 55) | studi con utenti e **test sul campo**; valutazione di **robustezza e generalizzabilità**; **stress test** |
-| **Monitoraggio continuo** (p. 56) | rilevamento del **data drift**; strategie di **riaddestramento**; **allarmi** di degrado delle prestazioni |
-| **Etica e conformità** (p. 56) | analisi di **bias ed equità**; valutazione di **privacy e sicurezza**; verifiche di conformità normativa (**AI Act 2024**) |
+| **Metriche** | accuratezza, precisione, recall, F1; AUC e curva ROC; MAE, MSE, RMSE; **soddisfazione e usabilità**, **ergonomia** (in futuro anche l’esperienza d’uso: il modello è empatico? assertivo? gentile? prolisso?); **etica ed equità** (è stato creato con dati distorti?) |
+| **Metodi di validazione** | suddivisione **training/validation/test**; **cross-validation**; **bootstrap**; in futuro forse test basati sull’esperienza d’uso o test «psicologici» |
+| **Benchmarking** | confronto con **modelli precedenti** o con le **prestazioni umane**; standard e benchmark di settore; **classifiche pubbliche** (leaderboard) |
+| **Prestazioni reali** | studi con utenti e **test sul campo**; valutazione di **robustezza e generalizzabilità**; **stress test** |
+| **Monitoraggio continuo** | rilevamento del **data drift**; strategie di **riaddestramento**; **allarmi** di degrado delle prestazioni |
+| **Etica e conformità** | analisi di **bias ed equità**; valutazione di **privacy e sicurezza**; verifiche di conformità normativa (**AI Act 2024**) |
 
 > 📌 **Le metriche principali (nota didattica).** Per un classificatore binario, con veri positivi $TP$, falsi positivi $FP$, veri negativi $TN$ e falsi negativi $FN$:
 > $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \qquad \text{Precision} = \frac{TP}{TP + FP} \qquad \text{Recall} = \frac{TP}{TP + FN}$$
@@ -462,20 +395,12 @@ La domanda di fondo (p. 51): **il mio modello va bene per la mia applicazione?**
 
 > 💡 **Perché non basta l’accuratezza.** Se il 99% delle email non è spam, un classificatore che risponde sempre «non spam» ha accuratezza 99% ma recall 0 sullo spam. Precisione, recall e F1 mostrano ciò che l’accuratezza nasconde quando le classi sono **sbilanciate**. Lo stesso messaggio torna in §8: «non considerare solo l’accuratezza».
 
----
-
 ### **6. AI e sensori**
 
-_(slide pp. 57–62)_
-
-La panoramica (p. 57) tocca **sensori intelligenti**, **controllo ambientale** e **sensori virtuali**.
-
-<!-- SOURCE_VISUAL id="IS03-V28" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="57" type="immagine" description="Panoramica: sensori intelligenti, controllo ambientale e sensori virtuali" reason="Contenuto presente solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
+L’AI può elaborare le misure prodotte da **sensori intelligenti**, contribuire al **controllo ambientale** e stimare grandezze tramite **sensori virtuali**.
 #### **6.1. Sensori intelligenti e reti di sensori**
 
-**Sensori intelligenti** (p. 58), temi principali:
+**Sensori intelligenti**, temi principali:
 
 - sistemi **multisensore eterogenei**;
 - **analisi dei dati** dei sensori;
@@ -487,47 +412,44 @@ La panoramica (p. 57) tocca **sensori intelligenti**, **controllo ambientale** e
 
 **Esempio: Nest.** Nest Labs è stata fondata nel **2010** da **Tony Fadell** e **Matt Rogers**, ex ingegneri Apple; il prodotto di punta era il **Nest Learning Thermostat** (dal 2011), un termostato che impara le abitudini degli utenti. **Google** ha acquisito Nest Labs per **3,2 miliardi di dollari** nel **gennaio 2014**, quando l’azienda aveva 280 dipendenti.
 
-**Reti di sensori** (p. 59), temi principali:
+![](imgs/Pasted%20image%2020261002035942.png)
+
+**Reti di sensori**, temi principali:
 
 - **struttura** e **funzioni**;
 - **adattività** e **gestione**;
 - **analisi distribuita** dei dati;
 - **tolleranza ai guasti** e **diagnosi**.
 
-<!-- SOURCE_VISUAL id="IS03-V29" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="58" type="immagine" description="Esempio di sensore intelligente: Nest Learning Thermostat" reason="Esempio visivo" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS03-V30" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="59" type="immagine" description="Esempio di rete di sensori" reason="Esempio visivo" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002040013.png)
 
 #### **6.2. Strumentazione e sensori virtuali**
 
-**Strumentazione e misure** (p. 60):
+**Strumentazione e misure**:
 
 - acquisizione ed elaborazione di misure da sensori in **infrastrutture avanzate e adattive**;
 - **fusione di dati** multisensoriali;
 - **sensori virtuali** basati sull’AI: l’AI offre alternative **praticabili ed economiche** a strumenti di misura fisici **costosi o poco pratici**.
 
-> 📌 **Sensore virtuale** (pp. 60–61). Un sistema **software** che **stima una grandezza fisica** usando i dati di **più sensori reali** e **modelli computazionali**. Usa le informazioni disponibili da altre misure e dai parametri di processo per calcolare una **stima** della grandezza di interesse. **Sostituisce o affianca** i sensori fisici quando la misura diretta è **costosa, poco pratica o impossibile**.
+> 📌 **Sensore virtuale**. Un sistema **software** che **stima una grandezza fisica** usando i dati di **più sensori reali** e **modelli computazionali**. Usa le informazioni disponibili da altre misure e dai parametri di processo per calcolare una **stima** della grandezza di interesse. **Sostituisce o affianca** i sensori fisici quando la misura diretta è **costosa, poco pratica o impossibile**.
 
-**Flusso di lavoro di un sensore virtuale basato sull’AI** (p. 61), dai sensori fisici (PS) ai sensori virtuali (VS):
+**Flusso di lavoro di un sensore virtuale basato sull’AI**, dai sensori fisici (PS) ai sensori virtuali (VS):
 
 1. **raccolta e armonizzazione** dei dati;
 2. **estrazione delle feature**;
 3. **modellazione e stima**;
 4. **validazione e rifinitura**.
 
-<!-- SOURCE_VISUAL id="IS03-V31" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="61" type="diagramma" description="Sensori fisici (PS) e sensori virtuali (VS) con il flusso di lavoro in quattro passi" reason="Collegamenti tra sensori fisici e virtuali visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002040056.png)ì
 
-**Vantaggi principali** (p. 62):
+**Vantaggi principali**:
 
 - **riduzione dei costi**: servono meno sensori fisici;
 - **maggiore affidabilità**: ridondanza e correzione degli errori;
 - **fusione dei dati** migliore: integrazione di più fonti;
 - **capacità predittive** migliori: stime basate sul ML.
 
-**Applicazioni tipiche** (p. 62):
+**Applicazioni tipiche**:
 
 | Settore | Esempio |
 |---|---|
@@ -538,6 +460,8 @@ La panoramica (p. 57) tocca **sensori intelligenti**, **controllo ambientale** e
 
 **Esempio**: un sensore virtuale basato sull’AI che stima lo **stato di carica** (SOC, *State Of Charge*) di una batteria a partire da **tensione, corrente e temperatura**.
 
+![](imgs/Pasted%20image%2020261002040150.png)
+
 In formula (nota didattica), un sensore virtuale è ancora una funzione appresa dai dati:
 
 $$\widehat{\text{SOC}}(t) = F\big(V(t),\, I(t),\, T(t)\big)$$
@@ -546,15 +470,11 @@ dove $F$ si addestra su dati in cui il SOC è stato misurato con metodi di labor
 
 > 💡 **Perché il SOC non si misura direttamente.** La carica residua di una batteria non ha un sensore dedicato: dipende in modo non lineare da tensione, corrente assorbita, temperatura e invecchiamento. Un modello che unisce queste misure è l’esempio tipico di grandezza che «si può solo stimare».
 
----
-
 ### **7. Gli strumenti del corso**
-
-_(slide pp. 63–79)_
 
 #### **7.1. MATLAB, Colab e Keras**
 
-Qualche nota per **preparare gli strumenti** delle prossime lezioni (pp. 63–64), che saranno ripresi in dettaglio più avanti. Gli strumenti principali del corso sono:
+Qualche nota per **preparare gli strumenti** delle prossime lezioni, che saranno ripresi in dettaglio più avanti. Gli strumenti principali del corso sono:
 
 - **MATLAB**: moltissimi strumenti e funzioni;
 - **Colab**: server online, TPU, …;
@@ -562,14 +482,14 @@ Qualche nota per **preparare gli strumenti** delle prossime lezioni (pp. 63–64
 
 Offrono il **miglior compromesso** tra usabilità e complessità, con una buona curva di apprendimento, e supportano Keras e molte **reti neurali pre-addestrate**.
 
-**Strumento 1: MATLAB** (pp. 65–66):
+**Strumento 1: MATLAB**:
 
 - è il **primo strumento** del corso: non solo machine learning, ma molto di più, con **migliaia di funzioni** ben documentate e potenti;
 - gli studenti UNIMI possono scaricare una **licenza gratuita** (istruzioni sul portale d’Ateneo, o cercando «UNIMI MATLAB»), anche per installazioni su macchine offline;
 - conviene scaricare **l’ultima versione**, perché i toolbox migliorano rapidamente;
 - installare **tutti i toolbox**; se mancano spazio su disco o banda, almeno quelli principali del corso.
 
-| Toolbox MATLAB principali per il corso (p. 66) |
+| Toolbox MATLAB principali per il corso |
 |---|
 | Deep Learning Toolbox |
 | Fuzzy Logic Toolbox |
@@ -578,22 +498,22 @@ Offrono il **miglior compromesso** tra usabilità e complessità, con una buona 
 | Signal Processing Toolbox |
 | Computer Vision Toolbox |
 
-La slide invita anche a scegliere altri toolbox per i **progetti futuri**: per gli studenti sono gratuiti.
+Per i **progetti futuri** si possono inoltre scegliere altri toolbox disponibili gratuitamente agli studenti.
 
-**Strumento 2: Google Colab** (pp. 67–68):
+**Strumento 2: Google Colab**:
 
 - **Colab** (*Colaboratory*) è un ambiente di **notebook Jupyter gratuito**, senza configurazione, che gira **interamente nel cloud**;
 - permette di **scrivere ed eseguire codice**, **salvare e condividere** le analisi e accedere a **risorse di calcolo potenti**, tutto gratis dal browser;
 - è **molto utile** per ottimizzare il tempo del corso senza perdersi in dettagli tecnici.
 
-> ⚠️ **Colab non è obbligatorio** (p. 68). Richiede un account Google per salvare dati e codice. Le alternative, meno immediate, sono:
+> ⚠️ **Colab non è obbligatorio**. Richiede un account Google per salvare dati e codice. Le alternative, meno immediate, sono:
 > - usare **MATLAB** per tutto;
 > - installare strumenti locali (Jupyter Notebook, Anaconda, Python, …), probabilmente con una **GPU**;
 > - creare un **account Google dedicato** senza informazioni personali.
 >
-> La slide avverte: per queste alternative **non chiedete assistenza**.
+> Per queste alternative il corso non fornisce assistenza tecnica.
 
-**Keras** (p. 77):
+**Keras**:
 
 - la **libreria Python per il deep learning**: un’API di alto livello per reti neurali, scritta in Python e capace di girare sopra **TensorFlow, CNTK o Theano**, pensata per una **sperimentazione rapida**;
 - motto: «dall’idea al risultato con il **minor ritardo possibile**»;
@@ -606,7 +526,7 @@ La slide invita anche a scegliere altri toolbox per i **progetti futuri**: per g
 
 #### **7.2. Anaconda, Jupyter e gli IDE**
 
-**Strumento 3: Anaconda** (pp. 69–70):
+**Strumento 3: Anaconda**:
 
 - uno strumento potente per il **calcolo scientifico** e l’**analisi dei dati**, che semplifica la **gestione dei pacchetti** e il deployment; molto usato da data scientist, ricercatori e sviluppatori;
 - è una **distribuzione di Python e R**;
@@ -614,43 +534,33 @@ La slide invita anche a scegliere altri toolbox per i **progetti futuri**: per g
 - ha un ottimo **sistema di gestione dei pacchetti**: installare, aggiornare e gestire versioni diverse di pacchetti e dipendenze;
 - **Anaconda Navigator** è l’applicazione desktop per gestire applicazioni, pacchetti e **ambienti** senza riga di comando.
 
-**Jupyter Notebook e Colab** (pp. 71–72): Colab è **pronto all’uso** e più **indipendente dall’hardware** (per esempio si può provare il codice su TPU), con alcune limitazioni poco rilevanti per il corso.
+**Jupyter Notebook e Colab**: Colab è **pronto all’uso** e più **indipendente dall’hardware** (per esempio si può provare il codice su TPU), con alcune limitazioni poco rilevanti per il corso.
 
-**Oppure un IDE** (*Integrated Development Environment*, pp. 73–75):
+**Oppure un IDE** (*Integrated Development Environment*, ):
 
-| IDE | Caratteristiche (slide) |
+| IDE | Caratteristiche |
 |---|---|
-| **Visual Studio Community** (p. 74) | versione **gratuita** e completa di Visual Studio per studenti, contributori open source e sviluppatori individuali; ottimi strumenti di **debug**. Strumenti utili per i sistemi intelligenti: GitHub Copilot, ML.NET Model Builder, IntelliCode, estensione Azure Machine Learning, TensorFlow.NET Tools, Bito (assistente alternativo a Copilot), **Python Tools for Visual Studio** (estensione open source che trasforma Visual Studio in un IDE Python, con NumPy, Pandas e scikit-learn) |
-| **Visual Studio Code** (p. 75) | IDE **gratuito, leggero e flessibile**, con ottimo supporto a **Python**, estensioni e flussi di lavoro per lo sviluppo di AI: GitHub, estensioni, **agenti di programmazione**, Copilot, «tutto a un clic» |
+| **Visual Studio Community** | versione **gratuita** e completa di Visual Studio per studenti, contributori open source e sviluppatori individuali; ottimi strumenti di **debug**. Strumenti utili per i sistemi intelligenti: GitHub Copilot, ML.NET Model Builder, IntelliCode, estensione Azure Machine Learning, TensorFlow.NET Tools, Bito (assistente alternativo a Copilot), **Python Tools for Visual Studio** (estensione open source che trasforma Visual Studio in un IDE Python, con NumPy, Pandas e scikit-learn) |
+| **Visual Studio Code** | IDE **gratuito, leggero e flessibile**, con ottimo supporto a **Python**, estensioni e flussi di lavoro per lo sviluppo di AI: GitHub, estensioni, **agenti di programmazione**, Copilot, «tutto a un clic» |
 
-La p. 76 presenta un **confronto finale** tra gli strumenti, esplicitamente **non oggetto d’esame**.
-
-<!-- SOURCE_VISUAL id="IS03-V33" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="73" type="immagine" description="Uso di un IDE come alternativa ai notebook" reason="Illustrazione della slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS03-V34" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="76" type="tabella" description="Confronto finale tra gli strumenti (non oggetto d’esame)" reason="Tabella presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261002040833.png)
 
 #### **7.3. Sondaggio in aula e il quarto strumento**
 
-**Sondaggio** (p. 78): quanti di voi
+**Sondaggio**: quanti di voi
 
 - sanno programmare in **MATLAB o Python**?
 - hanno già **addestrato una rete neurale**, sui **propri dati** e non su un dataset standard?
 - usano **Colab**?
 - quale libreria usano per **grafici** e rappresentazioni?
 
-> 📌 **Strumento 4: pazienza e teoria** (p. 79). Questo **non** è un corso «come creare una rete neurale» né una «guida passo passo». Prima delle attività di laboratorio e di programmazione bisogna affrontare alcuni **temi teorici** rilevanti.
-
----
+> 📌 **Strumento 4: pazienza e teoria**. Questo **non** è un corso «come creare una rete neurale» né una «guida passo passo». Prima delle attività di laboratorio e di programmazione bisogna affrontare alcuni **temi teorici** rilevanti.
 
 ### **8. Come studiare il corso: l’interiorizzazione**
 
-_(slide pp. 80–84)_
+**Dalla superficialità all’interiorizzazione.** Come si impara la teoria dell’AI? Lavorando e progettando **con «il libro» in mano**, oppure **a mani libere**, con la conoscenza nello zaino? **La conoscenza vera richiede interiorizzazione.** Il libro esiste davvero, ma il docente chiede di **non comprarlo**.
 
-**Dalla superficialità all’interiorizzazione** (p. 80). Come si impara la teoria dell’AI (p. 81)? Lavorando e progettando **con «il libro» in mano**, oppure **a mani libere**, con la conoscenza nello zaino? **La conoscenza vera richiede interiorizzazione.** Il libro esiste davvero, ma il docente chiede di **non comprarlo**.
-
-**Come ottenere l’interiorizzazione** (pp. 82–84). Soprattutto nel machine learning bisogna:
+**Come ottenere l’interiorizzazione**. Soprattutto nel machine learning bisogna:
 
 1. **studiare la teoria** e le relative **ipotesi di lavoro**;
 2. studiare **quanti più casi d’uso possibile**, per allargare il proprio punto di vista;
@@ -666,8 +576,6 @@ Inoltre:
 - migliorare il progetto **partendo dalle esperienze e dalle scoperte precedenti**: «**sulle spalle dei giganti**». L’analisi dello stato dell’arte è **fondamentale**.
 
 > 💡 **Il collegamento con il quarto driver.** L’elenco coincide con il «cervello del progettista» della Lezione 02, §9: conoscere più modelli, confrontarli, chiedersi che cosa imparano ed evitare la forza bruta è ciò che distingue chi **progetta** un sistema intelligente da chi **esegue** un tutorial.
-
----
 
 ### **9. Distinzioni da non confondere**
 
@@ -686,13 +594,9 @@ Inoltre:
 | **Sensore fisico** / **sensore virtuale** | misura diretta / stima software da altre misure e modelli |
 | **Colab** / **MATLAB** / **IDE locale** | notebook nel cloud con account Google / ambiente con toolbox e licenza UNIMI / sviluppo locale con gestione degli ambienti |
 
----
-
 ### **10. Sintesi della lezione**
 
-_(slide p. 85)_
-
-> ✅ **Punti principali** (p. 85).
+> ✅ **Punti principali**.
 > - **Preparare gli strumenti**: MATLAB con i toolbox principali, Colab (o le sue alternative), Anaconda e Jupyter, un IDE, Keras.
 > - In questo campo, per creare competenze serve l’**interiorizzazione**: teoria, molti casi d’uso, applicazione e confronto critico.
 > - La **Narrow AI** è l’AI di oggi: specifica e monomodale, senza Gestalt. L’**AGI** è ancora teorica e **manca di una definizione condivisa**; sulle sue probabilità e sui suoi rischi gli esperti sono divisi.
