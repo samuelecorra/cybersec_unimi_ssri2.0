@@ -12,6 +12,7 @@ import { getFileKind } from "../utils/fileTypes.js";
 
 function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
+  const imageLoading = dirPath.split("/").includes("1_Intelligent_Systems") ? "eager" : "lazy";
   const [lightboxSrc, setLightboxSrc] = useState(null);
   const [lightboxAlt, setLightboxAlt] = useState("");
   const [zoom, setZoom] = useState(1);
@@ -168,7 +169,7 @@ function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
               src={resolvedSrc}
               alt={alt || ""}
               className="md-image"
-              loading="lazy"
+              loading={imageLoading}
               onClick={() => openLightbox(resolvedSrc, alt)}
               {...props}
             />
@@ -179,7 +180,7 @@ function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
             src={src}
             alt={alt || ""}
             className="md-image"
-            loading="lazy"
+            loading={imageLoading}
             onClick={() => openLightbox(src, alt)}
             {...props}
           />
