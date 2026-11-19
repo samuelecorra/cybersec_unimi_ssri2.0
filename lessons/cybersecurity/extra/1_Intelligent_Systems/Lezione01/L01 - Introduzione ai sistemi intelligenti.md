@@ -306,6 +306,20 @@ In un flusso tipico, un servizio riceve dal contesto dell’editor le informazio
 
 ![](imgs/Pasted%20image%2020260930003758.png)
 
+Il frammento divide ricorsivamente la lista in due metà fino a ottenere sottoliste di un solo elemento, poi affida a `merge` la fusione ordinata:
+
+```python
+def merge_sort(list):
+    if len(list) <= 1:
+        return list
+    mid = len(list) // 2
+    left = merge_sort(list[:mid])
+    right = merge_sort(list[mid:])
+    return merge(left, right)
+```
+
+`merge` non è definita, quindi il frammento non è eseguibile da solo; inoltre il parametro `list` nasconde il nome della funzione predefinita Python. Il codice illustra la ricorsione, ma va completato e corretto prima dell’esecuzione.
+
 Un'applicazione concreta sono le ghost suggestions:
 
 ![](imgs/Pasted%20image%2020261119134133.png)

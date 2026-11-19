@@ -42,6 +42,11 @@ int KMP(const char *P, const char *T, int n, int m)
     int i, j;
     int *back;
 
+    // Il pattern vuoto si trova all’inizio del testo (posizione 1, 1-based).
+    if (m == 0) {
+        return 1;
+    }
+
     // m+1 celle perché usiamo realmente back[1] ... back[m].
     back = malloc((m + 1) * sizeof(int));
 
