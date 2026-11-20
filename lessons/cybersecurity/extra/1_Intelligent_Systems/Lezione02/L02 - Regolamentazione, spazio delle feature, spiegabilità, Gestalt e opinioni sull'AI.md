@@ -100,8 +100,7 @@ L’AI Act è entrato in vigore il **1° agosto 2024**. Le sue disposizioni hann
 
 Il quadro è stato modificato dal **Regolamento (UE) 2026/1744**, entrato in vigore il 27 luglio 2026 nell’ambito del Digital Omnibus sull’AI. La modifica non sposta in blocco tutti gli obblighi: alcune disposizioni specifiche dell’articolo 5 e la transizione di marcatura per i sistemi generativi già sul mercato hanno la scadenza ravvicinata del 2 dicembre 2026; i termini per i sistemi ad alto rischio sono invece il 2 dicembre 2027 (Allegato III) e il 2 agosto 2028 (Allegato I). L’articolo 50(2) riguarda marcature leggibili automaticamente per contenuti sintetici e prevede condizioni e limiti: la data transitoria non va estesa indistintamente a ogni fornitore o contenuto. Consultare il [testo ufficiale del Regolamento](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744) e la [pagina della Commissione europea sull’AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai).
 
-<!-- SOURCE_VISUAL id="IS02-V03" source="Lesson_02_v2_Regulations_XAI_Gestalt_NaturalInteraction.pdf" page="13" type="cronologia normativa" description="Decorrenze già applicabili e proroghe del Digital Omnibus per gli obblighi ad alto rischio" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120151449.png)
 
 > ⚠️ **Applicazione progressiva.** L’entrata in vigore del regolamento, la decorrenza di un singolo obbligo e l’inizio delle regole per una specifica categoria di sistemi sono momenti diversi. La data corretta dipende dall’obbligo e dalla classificazione del caso d’uso.
 
@@ -134,7 +133,11 @@ L’AI dialoga con discipline diverse. Per costruire un sistema di machine learn
 
 La **Computational Intelligence** è un’area collegata all’AI. Nel testo di **A. P. Engelbrecht**, _Computational Intelligence: An Introduction_ (2006), è descritta attraverso i meccanismi adattivi che rendono possibile un comportamento intelligente in ambienti complessi e mutevoli.
 
+![](imgs/Pasted%20image%2020261120152816.png)
+
 > 💡 Tra i paradigmi associati alla Computational Intelligence rientrano reti neurali artificiali, calcolo evolutivo, swarm intelligence, sistemi immunitari artificiali e sistemi fuzzy.
+
+![](imgs/Pasted%20image%2020261002025025.png)
 
 **La definizione della IEEE Computational Intelligence Society**: la **teoria, progettazione, applicazione e sviluppo** di paradigmi computazionali **ispirati alla biologia e al linguaggio**, con enfasi su:
 
@@ -146,8 +149,6 @@ La **Computational Intelligence** è un’area collegata all’AI. Nel testo di 
 - **sistemi intelligenti ibridi** che contengono questi paradigmi.
 
 Possiamo ora classificare i principali metodi di **machine learning**.
-
-![](imgs/Pasted%20image%2020261002025025.png)
 
 ![](imgs/Pasted%20image%2020261002025523.png)
 
@@ -267,6 +268,8 @@ I modelli neurali sono spesso descritti come **«scatole nere»**: osserviamo l�
 
 **Il compromesso interpretabilità-accuratezza**: i modelli più interpretabili tendono a essere meno accurati e viceversa. Yi Mei mette a confronto gli approcci alla spiegabilità di ieri e di oggi.
 
+![](imgs/Pasted%20image%2020261120154641.png)
+
 > 💡 **Come leggere il compromesso.** Una regressione lineare o un albero poco profondo si leggono direttamente, ma possono non catturare relazioni complesse. Una rete profonda cattura relazioni molto complesse, ma i suoi milioni di parametri non hanno un significato leggibile. La XAI cerca di spostare questa frontiera: mantenere l’accuratezza del modello complesso aggiungendo spiegazioni.
 
 ![](imgs/Pasted%20image%2020261002030753.png)
@@ -313,25 +316,29 @@ Un sistema intelligente entra spesso in relazione diretta con le persone. In que
 
 L’interazione naturale mira a rendere lo scambio più vicino a quello umano. I sistemi di deep learning hanno ampliato le capacità di elaborazione del linguaggio, dei gesti e delle emozioni; la loro affidabilità dipende però dalla modalità e dall’ambiente d’uso.
 
-| Modalità | Tecnologie e applicazioni |
-|---|---|
-| **Voce e linguaggio** | riconoscimento vocale e NLP per diagnosi sanitarie, domotica e navigazione dei veicoli |
-| **Gesti** | robot industriali controllati con gesti, formazione in realtà aumentata e traduzione della lingua dei segni |
-| **Feedback aptico** | simulazioni per addestramento chirurgico, dispositivi sanitari indossabili e diagnostica industriale |
-| **Riconoscimento visivo ed emotivo** | analisi del sentiment dei clienti, coinvolgimento degli studenti e monitoraggio della salute mentale |
+| Modalità                                               | Tecnologie e applicazioni                                                                                                                              |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Voce e linguaggio**                                  | riconoscimento vocale e NLP per diagnosi sanitarie, domotica e navigazione dei veicoli                                                                 |
+| **Gesti**                                              | robot industriali controllati con gesti, formazione in realtà aumentata e traduzione della lingua dei segni                                            |
+| **Feedback aptico**                                    | simulazioni per addestramento chirurgico, dispositivi sanitari indossabili e diagnostica industriale                                                   |
+| **Riconoscimento visivo ed emotivo**                   | analisi del sentiment dei clienti, coinvolgimento degli studenti e monitoraggio della salute mentale                                                   |
 | **Interazione multimodale e consapevole del contesto** | combinazione di più segnali, sensori contestuali e feedback adattivo in manutenzione predittiva, apprendimento adattivo e gestione del traffico urbano |
 
-<!-- SOURCE_VISUAL id="IS02-V01" source="Lesson_02_v2_Regulations_XAI_Gestalt_NaturalInteraction.pdf" page="47-48" type="modalità e tecnologie" description="Modalità di interazione naturale, sensori contestuali, feedback adattivo e applicazioni multimodali" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120155549.png)
+
+![](imgs/Pasted%20image%2020261120155636.png)
 
 Il riconoscimento vocale mostra perché una metrica media non basta a valutare un sistema operativo. Su benchmark puliti, i sistemi automatici di speech recognition possono raggiungere un **Word Error Rate (WER) intorno all’1–3%**. In ambienti reali, rumore, accenti, lingua, vocabolario e dominio possono alzare sensibilmente il tasso d’errore. Anche un WER medio basso può nascondere una parola critica fraintesa: la valutazione deve quindi considerare l’effetto dell’errore sul compito completo, non soltanto la trascrizione.
 
 Nel **voice picking** in logistica, per esempio, l’operatore riceve istruzioni vocali mentre prepara gli ordini. Un errore di riconoscimento può rallentare il lavoro, compromettere la correttezza del prelievo o incidere sulla sicurezza. Il sistema va valutato in relazione a produttività, accuratezza e condizioni operative.
 
-<!-- SOURCE_VISUAL id="IS02-V02" source="Lesson_02_v2_Regulations_XAI_Gestalt_NaturalInteraction.pdf" page="50-51" type="voice picking e robot collaborativi" description="Sistema vocale per il prelievo in logistica e applicazioni avanzate con robot collaborativi" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120155721.png)
 
 Le applicazioni avanzate comprendono anche i **cobot** (_collaborative robots_), robot progettati per operare a fianco delle persone. In questi sistemi, percezione dell’ambiente, comunicazione e controllo devono lavorare insieme per coordinare le azioni in sicurezza.
+
+![](imgs/Pasted%20image%2020261120155835.png)
+
+---
 
 ### **7. La Gestalt umana**
 
@@ -367,25 +374,22 @@ La stessa scena può essere organizzata in più modi: ciò che in una lettura è
 
 La percezione raggruppa gli elementi usando indizi locali e relazioni tra parti. La tavola seguente raccoglie le principali leggi illustrate: 
 
-| Legge | Come organizza la scena |
-|---|---|
-| **Prossimità** | Elementi vicini tendono a essere percepiti come un gruppo. |
-| **Somiglianza** | Elementi con caratteristiche visive simili vengono raggruppati. |
-| **Inclusione** | Gli elementi racchiusi entro un contorno comune sono letti come un insieme. |
-| **Simmetria** | Configurazioni simmetriche tendono a essere percepite come unità. |
-| **Chiusura** | Il sistema percettivo completa contorni incompleti e riconosce forme non disegnate per intero. |
-| **Continuità** | Tratti allineati o con andamento regolare vengono interpretati come parti di un percorso continuo. |
-| **Connessione** | Elementi collegati da una linea o da un legame visivo sono percepiti come appartenenti allo stesso gruppo. |
-| **Figura e sfondo** | Una regione emerge come figura mentre le aree circostanti assumono il ruolo di sfondo; l’interpretazione può alternarsi. |
-| **Prägnanz** («buona forma») | La scena viene organizzata nella configurazione più semplice e stabile compatibile con gli stimoli. |
+| Legge                              | Come organizza la scena                                                                                                    |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Prossimità**                     | Elementi vicini tendono a essere percepiti come un gruppo.                                                                 |
+| **Somiglianza**                    | Elementi con caratteristiche visive simili vengono raggruppati.                                                            |
+| **Inclusione**                     | Gli elementi racchiusi entro un contorno comune sono letti come un insieme.                                                |
+| **Simmetria**                      | Configurazioni simmetriche tendono a essere percepite come unità.                                                          |
+| **Chiusura**                       | Il sistema percettivo completa contorni incompleti e riconosce forme non disegnate per intero.                             |
+| **Continuità**                     | Tratti allineati o con andamento regolare vengono interpretati come parti di un percorso continuo.                         |
+| **Connessione**                    | Elementi collegati da una linea o da un legame visivo sono percepiti come appartenenti allo stesso gruppo.                 |
+| **Figura e sfondo**                | Una regione emerge come figura mentre le aree circostanti assumono il ruolo di sfondo; l’interpretazione può alternarsi.   |
+| **Prägnanz** («buona forma»)       | La scena viene organizzata nella configurazione più semplice e stabile compatibile con gli stimoli.                        |
 | **Destino comune** (_common fate_) | Elementi che si muovono nella stessa direzione o con lo stesso andamento vengono percepiti come un unico insieme dinamico. |
 
-<!-- SOURCE_VISUAL id="IS02-V04" source="Lesson_02_v2_Regulations_XAI_Gestalt_NaturalInteraction.pdf" page="56-57" type="tavola delle leggi gestaltiche" description="Prossimità, somiglianza, inclusione, simmetria, chiusura, continuità, connessione, figura-sfondo e destino comune" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120160209.png)
 
 La prossimità e la somiglianza operano già in una disposizione statica; il destino comune richiede invece di osservare come gli elementi cambiano nel tempo. La figura-sfondo evidenzia che il riconoscimento dipende anche dal modo in cui la scena viene segmentata.
-
-![](imgs/Pasted%20image%2020261002031340.png)
 
 ![](imgs/Pasted%20image%2020261002031358.png)
 

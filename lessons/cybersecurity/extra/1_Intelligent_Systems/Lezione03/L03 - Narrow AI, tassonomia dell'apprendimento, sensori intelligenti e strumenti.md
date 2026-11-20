@@ -117,8 +117,6 @@ I 23 esperti sono: Christof Koch, Jaron Lanier, Andrew Ng, Max Tegmark, Yann LeC
 | **Margaret Mitchell** | **ignorare i danni attuali** è un privilegio che alcuni di noi non hanno |
 | **Gary Marcus** | c’è ancora **moltissimo lavoro** da fare per avere macchine che **comprendano e ragionino** davvero sul mondo |
 
-> ⚠️ **Da verificare sulla figura.** La posizione di ciascun esperto nei quadranti è visibile solo nella grafica e non viene ricostruita qui. Nell’articolo compaiono due piccoli refusi: «MARK ANDREESSEN» nella citazione, contro «Marc Andreessen» nell’elenco, e «Sante Fe Institute» invece di **Santa Fe Institute**.
-
 > 💡 **Perché la matrice è utile.** Separa due domande che nel dibattito pubblico si confondono: «**arriveremo** all’AGI?» e «**sarebbe pericolosa**?». Si può credere all’AGI senza temere l’apocalisse (LeCun) oppure preoccuparsi soprattutto dei **danni già presenti**, come bias e disinformazione, indipendentemente dall’AGI (Margaret Mitchell).
 
 ### **2. Come misurare l’intelligenza di una macchina**
@@ -134,9 +132,6 @@ I 23 esperti sono: Christof Koch, Jaron Lanier, Andrew Ng, Max Tegmark, Yann LeC
 
 Una prova pubblicata nel 2026 ha usato un protocollo a tre partecipanti: in due studi preregistrati, GPT-4.5 accompagnato da una persona testuale è stato identificato come umano nel 73% delle valutazioni; Llama 3.1 405B ha raggiunto il 56% (Jones e Bergen, 2026, [PNAS](https://doi.org/10.1073/pnas.2524472123)). Il risultato riguarda l’indistinguibilità conversazionale in quel protocollo, non il trasferimento generale tra compiti. Una persona definisce ruolo, stile, obiettivi e vincoli della risposta; non aggiunge capacità intrinseche al modello.
 
-<!-- SOURCE_VISUAL id="IS03-V02" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="15" type="tabella" description="Confronto dei risultati del test di Turing a tre partecipanti per GPT-4.5 e Llama 3.1 405B" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ![](imgs/Pasted%20image%2020261002033559.png)
 
 **Nel 2023** un articolo di *Nature* osservava che i modelli conversazionali stavano mettendo in crisi il test tradizionale e spingevano verso prove di logica e ragionamento visivo. Quell’articolo giornalistico è una fotografia del dibattito dell’epoca; la capacità conversazionale va misurata con protocolli controllati e non basta come indice di intelligenza generale.
@@ -148,6 +143,8 @@ Una prova pubblicata nel 2026 ha usato un protocollo a tre partecipanti: in due 
 
 ![](imgs/Pasted%20image%2020261002033707.png)
 
+---
+
 #### **2.2. ConceptARC e altri test**
 
 **ConceptARC** propone puzzle di astrazione che richiedono di inferire una regola da pochi esempi. Il benchmark è utile per interrogare le capacità di generalizzazione; i risultati dipendono dalla versione, dal protocollo e dai modelli valutati. La consegna invita a chiedersi: quale caratteristica della mia intelligenza sto usando per risolvere il puzzle?
@@ -157,21 +154,23 @@ Una prova pubblicata nel 2026 ha usato un protocollo a tre partecipanti: in due 
 - l’**elaborazione linguistica**?
 - la **Gestalt**?
 
+![](imgs/Pasted%20image%2020261120170732.png)
+
+![](imgs/Pasted%20image%2020261120170744.png)
+
 > 💡 **Come è fatto un puzzle ARC (nota didattica).** Nei benchmark della famiglia ARC (*Abstraction and Reasoning Corpus*) si vedono poche coppie di griglie colorate «input → output» e bisogna **indovinare la regola** di trasformazione, poi applicarla a una nuova griglia. ConceptARC organizza i puzzle per **concetti** (per esempio «sopra/sotto», «dentro/fuori», «stesso/diverso»). Pochi esempi e una regola astratta: è l’opposto dell’addestramento su milioni di dati tipico della Narrow AI.
 
 Tra gli altri riferimenti si trovano **ARC-AGI-3** e ulteriori test recenti.
-
-![](imgs/Pasted%20image%2020261002033756.png)
 
 ![](imgs/Pasted%20image%2020261002033813.png)
 
 ![](imgs/Pasted%20image%2020261002033828.png)
 
+---
 
-ARC-AGI-3, introdotto nel 2026, sposta la valutazione da puzzle statici ad ambienti interattivi: un agente deve esplorare, inferire obiettivi, costruire un modello del mondo e adattarsi a feedback limitati. I punteggi ARC riportati il 22 settembre 2026 mostrano una forte dipendenza dal protocollo. GPT-6 Astra (configurazione Max) ottiene 97,5% su ARC-AGI-1, 95,0% su ARC-AGI-2 e 62,71% su ARC-AGI-3 con harness Standard; il risultato pubblicato per ARC-AGI-3 sale al 99,95% con Provider Adapter, che conserva lo stato di ragionamento tra richieste e applica compattazione. Anche i costi differiscono. Questi numeri descrivono configurazioni e harness specifici e sono uno snapshot datato, non una proprietà atemporale del modello.
+ARC-AGI-3, introdotto nel 2026, sposta la valutazione da puzzle statici ad ambienti interattivi: un agente (sistema che usa un modello e strumenti per perseguire un obiettivo attraverso più passaggi; Lezione 15, §1) deve esplorare, inferire obiettivi, costruire un modello del mondo e adattarsi a feedback limitati. I punteggi ARC riportati il 22 settembre 2026 mostrano una forte dipendenza dal protocollo. GPT-6 Astra, nella configurazione Max (livello massimo di ragionamento), ottiene 97,5% su ARC-AGI-1, 95,0% su ARC-AGI-2 e 62,71% su ARC-AGI-3 con harness Standard (ambiente di valutazione standard: regole, strumenti e impostazioni con cui si esegue la prova). Il risultato pubblicato per ARC-AGI-3 sale al 99,95% con Provider Adapter (adattatore del fornitore), un componente che collega il modello alla prova e può mantenerne lo stato di sessione tra richieste. In questo caso conserva le informazioni necessarie a proseguire il compito e compatta il contesto, cioè ne riduce la cronologia quando diventa troppo lunga. Anche i costi differiscono. I numeri dipendono quindi dall’ambiente di valutazione e dalla configurazione usati e rappresentano una fotografia datata, non una proprietà atemporale del modello. La struttura degli agenti, la gestione del contesto e questi adattatori saranno approfonditi nella Lezione 15.
 
-<!-- SOURCE_VISUAL id="IS03-V03" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="20" type="tabella" description="Confronto ARC-AGI-1, 2 e 3 e differenza tra harness Standard e Provider Adapter" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120171046.png)
 
 #### **2.3. Il ciclo di vita dei benchmark**
 
@@ -184,11 +183,11 @@ Un benchmark misura una capacità definita da compiti e regole precise. Nel temp
 | MMLU (2021) | conoscenze accademiche ampie | ampiezza non elimina memorizzazione, contaminazione o ottimizzazione specifica |
 | SWE-bench Verified (2024) | correzione autonoma di problemi software | un audit del 2026 ha individuato problemi in parte delle specifiche e dei test, riducendo il valore del benchmark come misura di capacità di frontiera ([audit OpenAI, 8 luglio 2026](https://openai.com/index/separating-signal-from-noise-coding-evaluations/)) |
 
-Per confrontare sistemi, occorre riportare versione del benchmark, split, prompt o harness, configurazione del modello, costo e data. Un risultato elevato su un compito statico non equivale a capacità generale. La fotografia numerica del deck è datata 22 settembre 2026 e descrive GPT-6 Astra. Il 17 novembre sono stati rilasciati GPT-6.2 Astra e Sol; i punteggi qui riportati restano un confronto storico relativo a configurazioni specifiche. [Risultati ARC Prize](https://arcprize.org/results), [aggiornamento ufficiale GPT-6.2](https://openai.com/index/introducing-gpt-6-2-astra-sol/).
+Per confrontare sistemi, occorre riportare versione del benchmark, partizione dei dati (split), istruzione data al modello (prompt), ambiente di valutazione e configurazione del modello, costo e data. Un risultato elevato su un compito statico non equivale a capacità generale. La fotografia numerica del materiale è datata 22 settembre 2026 e descrive GPT-6 Astra. Il 17 novembre sono stati rilasciati GPT-6.2 Astra e Sol; i punteggi qui riportati restano un confronto storico relativo a configurazioni specifiche. [Risultati ARC Prize](https://arcprize.org/results), [aggiornamento ufficiale GPT-6.2](https://openai.com/index/introducing-gpt-6-2-astra-sol/).
 
-<!-- SOURCE_VISUAL id="IS03-V01" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="16" type="tabella" description="Ciclo di vita dei benchmark con esempi HellaSwag, GSM8K, MMLU e SWE-bench Verified" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120170646.png)
 
+---
 
 ### **3. Una tassonomia dei metodi di apprendimento**
 
@@ -219,14 +218,27 @@ Possiamo ora costruire una **tassonomia del machine learning** distinguendo i mo
 | Self-supervised | obiettivi costruiti da $x$ | predizione del token successivo, mascheramento, apprendimento di rappresentazioni |
 | Semi-supervisionato | pochi esempi etichettati e molti non etichettati | classificazione o regressione con supervisione parziale |
 | Per rinforzo | ricompense da interazione sequenziale | politiche e decisioni nel tempo |
+![](imgs/Pasted%20image%2020261120171853.png)
 
 ![](imgs/Pasted%20image%2020261002034122.png)
 
+---
+
 ![](imgs/Pasted%20image%2020261002034135.png)
+
+![](imgs/Pasted%20image%2020261120172132.png)
+
+---
 
 ![](imgs/Pasted%20image%2020261002034145.png)
 
+![](imgs/Pasted%20image%2020261120172208.png)
+
+---
+
 ![](imgs/Pasted%20image%2020261002034154.png)
+
+![](imgs/Pasted%20image%2020261120172227.png)
 
 #### **3.3. Regressione, classificazione e clustering**
 
@@ -272,9 +284,13 @@ Politiche e ricompense diverse:
 
 ![](imgs/Pasted%20image%2020261002034522.png)
 
-![](imgs/Pasted%20image%2020261002034626.png)
+![](imgs/Pasted%20image%2020261120172450.png)
 
 Un’illustrazione generata automaticamente di un labirinto mostra un percorso arancione che attraversa i muri. L’esempio ricorda che un’immagine plausibile non garantisce una geometria corretta: i contenuti generati vanno verificati prima di usarli come dimostrazione o riferimento.
+
+---
+
+![](imgs/Pasted%20image%2020261002034626.png)
 
 **Gli elementi**:
 
@@ -320,6 +336,8 @@ Un’altra classificazione distingue i tipi di apprendimento in base al modo in 
 
 ![](imgs/Pasted%20image%2020261002034750.png)
 
+![](imgs/Pasted%20image%2020261120173042.png)
+
 ### **4. Apprendimento deduttivo, induttivo e trasduttivo**
 
 #### **4.1. Regole o dati?**
@@ -330,6 +348,10 @@ Una distinzione fondamentale riguarda il punto di partenza: si **impara dai dati
 |---|---|---|
 | Punto di partenza | regole e conoscenze esplicite, poi applicate a un caso | esempi osservati, senza regole di dominio esplicite; le scelte di modello e obiettivo incorporano comunque assunzioni |
 | Diffusione | — | **la maggior parte dei metodi di AI** |
+
+---
+
+![](imgs/Pasted%20image%2020261120173349.png)
 
 > 💡 **Lo schema di Trochim (nota didattica).** Il ragionamento **deduttivo** va «dall’alto in basso»: teoria → ipotesi → osservazioni → conferma. Quello **induttivo** va «dal basso in alto»: osservazioni → individuazione di schemi → ipotesi provvisoria → teoria. La direzione delle frecce rende intuitiva la differenza fra i due percorsi.
 
@@ -343,9 +365,13 @@ Una distinzione fondamentale riguarda il punto di partenza: si **impara dai dati
 
 > 📌 **Apprendimento deduttivo**. Una tecnica di AI che **parte da un insieme di regole** e le applica per prendere decisioni su dati nuovi; poi può **inferire regole nuove**, più efficienti nel contesto in cui vanno applicate. È l’«**esperto che applica regole esplicite a nuovi casi**».
 
+![](imgs/Pasted%20image%2020261120173410.png)
+
 L’esempio mnemonico: la **nonna** ti dà le regole per scegliere un buon fidanzato. Se sei d’accordo, **erediti la conoscenza** della sua esperienza e la applichi alla scelta del nuovo partner; poi puoi anche **adattare le regole** ai tempi moderni.
 
 > 📌 **Apprendimento induttivo**. Inferisce un modello generale da esempi input-output. Non richiede regole di dominio scritte in anticipo, ma usa sempre un bias induttivo definito dalla rappresentazione, dal modello e dall’obiettivo.
+
+![](imgs/Pasted%20image%2020261120173437.png)
 
 L’esempio mnemonico: non ricevi una regola esplicita e impari dai casi osservati; il modello incorpora comunque assunzioni. «Le ultime 10 volte che sono entrato in tangenziale a Milano alle 17:30 sono rimasto in coda» → **nuova regola generale**: evitare di partire nelle ore di traffico intenso. L’immagine è James Dean in *Gioventù bruciata* (*Rebel Without a Cause*, 1955): il ribelle che non accetta regole ricevute.
 
@@ -358,6 +384,8 @@ Dal libro *The Nature of Statistical Learning Theory*:
 | **Induzione** | ricavare **la funzione** dai dati disponibili |
 | **Deduzione** | ricavare i **valori della funzione data** nei punti di interesse |
 | **Trasduzione** | ricavare i **valori della funzione sconosciuta** nei punti di interesse **direttamente dai dati** |
+
+![](imgs/Pasted%20image%2020261120173613.png)
 
 ![](imgs/Pasted%20image%2020261002035051.png)
 
@@ -435,7 +463,7 @@ Dopo aver scelto un metodo e addestrato un modello, resta la domanda decisiva: *
 | **Metodi di validazione** | split training/validation/test, cross-validation e bootstrap; split per gruppi o soggetti quando esistono misure ripetute e split temporali per previsioni e processi non stazionari |
 | **Benchmarking** | confronto con **modelli precedenti** o con le **prestazioni umane**; standard e benchmark di settore; **classifiche pubbliche** (leaderboard) |
 | **Prestazioni reali** | studi con utenti e **test sul campo**; valutazione di **robustezza e generalizzabilità**; **stress test** |
-| **Monitoraggio continuo** | rilevamento del **data drift**; strategie di **riaddestramento**; **allarmi** di degrado delle prestazioni |
+| **Monitoraggio continuo** | rilevamento del **data drift** (cambiamento nella distribuzione dei dati in ingresso, approfondito nella Lezione 11, §4); strategie di **riaddestramento**; **allarmi** di degrado delle prestazioni |
 | **Etica e conformità** | analisi di **bias ed equità**; valutazione di **privacy e sicurezza**; verifiche di conformità normativa |
 
 > 📌 **Le metriche principali (nota didattica).** Per un classificatore binario, con veri positivi $TP$, falsi positivi $FP$, veri negativi $TN$ e falsi negativi $FN$:

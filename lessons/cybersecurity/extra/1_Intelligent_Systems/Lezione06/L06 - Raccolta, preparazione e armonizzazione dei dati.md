@@ -397,12 +397,12 @@ Una rappresentazione esemplifica il passaggio dall’«**entropia**» a **dati s
 <!-- SOURCE_VISUAL id="IS06-V11" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="44" type="illustrazione" description="Dall’entropia dei dati grezzi ai dati strutturati" reason="Illustrazione della trasformazione" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **7.2. Pre-elaborazione e data wrangling**
+#### **7.2. Pre-elaborazione e data wrangling (preparazione operativa dei dati)**
 
 
 **Preparazione dei dati**: una parte **molto importante** della data science. Comprende la **pulizia dei dati** (*data cleaning*) e l’**ingegneria delle feature** (*feature engineering*), due passi **obbligatori** per ottenere accuratezza e prestazioni migliori nei progetti di machine learning e deep learning.
 
-La distinzione tra **pre-elaborazione** (*preprocessing*) e **data wrangling** comprende anche la visualizzazione dei dati e l’ingegneria delle feature.
+La distinzione tra **pre-elaborazione** (*preprocessing*) e **data wrangling** (ispezione, pulizia, integrazione e trasformazione dei dati grezzi) comprende anche la visualizzazione dei dati e l’ingegneria delle feature.
 
 <!-- SOURCE_VISUAL id="IS06-V12" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="47" type="schema" description="Preparazione dei dati: pre-elaborazione e data wrangling" reason="Relazione tra i concetti visibile solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -636,7 +636,7 @@ La scelta del rimedio dipende dal meccanismo che genera l’assenza. Tre categor
 
 Rimuovere righe incomplete non è una pulizia neutra: cambia la popolazione osservata. In MAR può eliminare quasi tutti i dati di un sito; in MNAR può nascondere proprio gli eventi estremi. Prima di scegliere una strategia, misurare il tasso di assenza per feature e gruppo e verificare se gli schemi delle mancanze sono informativi.
 
-> ⚠️ **Imputazione e data leakage.** Ogni statistica di imputazione si stima sul solo insieme di addestramento. La media o mediana congelata si applica poi a validation e test; lo stesso vale per normalizzazione, PCA e selezione delle feature. Calcolare l’imputazione prima della suddivisione trasferisce informazioni dai dati di valutazione alla pipeline e rende la misura ottimistica.
+> ⚠️ **Imputazione e dispersione di informazioni (data leakage).** Ogni statistica di imputazione si stima sul solo insieme di addestramento. La media o mediana congelata si applica poi a validation e test; lo stesso vale per normalizzazione, PCA e selezione delle feature. Calcolare l’imputazione prima della suddivisione trasferisce informazioni dai dati di valutazione alla pipeline e rende la misura ottimistica.
 
 <!-- SOURCE_VISUAL id="IS06-V24" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="75" type="schema" description="Riepilogo delle strategie per i dati mancanti" reason="Schema di riepilogo presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
