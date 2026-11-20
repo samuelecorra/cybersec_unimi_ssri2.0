@@ -232,7 +232,7 @@ La sezione presenta altri modi di valutare un modello: **mappe di salienza**, **
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 📌 **Analisi di sensibilità**. Un insieme di metodi per **quantificare** come l’**incertezza sull’uscita** di un modello dipende dall’incertezza sui suoi **input** o sulla sua **rappresentazione interna**. Valuta quanto il modello è «sensibile» a:
-> - **fluttuazioni dei parametri**. Esempio: eseguendo il modello su una **NPU veloce a 8 bit**, i risultati sono **diversi** da quelli di TensorFlow sul PC;
+> - **fluttuazioni dei parametri**. Esempio: eseguendo il modello su una **NPU (*Neural Processing Unit*, unità di elaborazione neurale) veloce a 8 bit**, i risultati sono **diversi** da quelli di TensorFlow sul PC;
 > - **i dati su cui è costruito**. Esempio: rimescolando i dati tra training e validation, **l’accuratezza cambia molto**.
 
 > 💡 **Due esempi, due cause (nota didattica).** Il primo è l’effetto della **quantizzazione** (la quantizzazione riduce la precisione dei pesi): passare da pesi a 32 bit a interi a 8 bit introduce piccoli errori che possono spostare un punto oltre la frontiera di decisione. Il secondo è la **varianza** della variabilità tra campioni di addestramento e verifica: se una nuova divisione dei dati cambia molto l’accuratezza, la stima non è affidabile e il modello è instabile.
@@ -616,7 +616,7 @@ confusionMatrix = confusionmat(ldaClass,T)
 > - `resubPredict` predice **gli stessi dati usati per addestrare** (resubstitution): l’errore ottenuto è una stima con **bias ottimistico** (Lezione 14, §3.1), non un errore di generalizzazione. Per una stima corretta serve una divisione o una cross-validation, per esempio con `crossval` o `cvpartition`.
 > - `confusionmat(group, grouphat)` si aspetta prima le etichette **vere** e poi quelle **predette**. Lo script le passa in ordine inverso (`ldaClass`, `T`), quindi nella matrice ottenuta le **righe** sono le classi **predette** e le colonne quelle vere: va letta di conseguenza.
 
-> 💡 **Due linguaggi, due classificatori.** Il notebook usa un **1-NN** su una divisione a metà, lo script una **LDA** su tutti i dati. Il confronto è istruttivo: l’errore dello script è misurato sui dati di addestramento, quello del notebook su dati mai visti. Per confrontare davvero i due metodi bisognerebbe valutarli con lo **stesso** schema di validazione.
+> 💡 **Due linguaggi, due classificatori.** Il notebook usa un **1-NN** su una divisione a metà, lo script una **LDA (*Linear Discriminant Analysis*, analisi discriminante lineare)** su tutti i dati. Il confronto è istruttivo: l’errore dello script è misurato sui dati di addestramento, quello del notebook su dati mai visti. Per confrontare davvero i due metodi bisognerebbe valutarli con lo **stesso** schema di validazione.
 
 ---
 

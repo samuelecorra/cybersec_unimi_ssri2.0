@@ -6,7 +6,7 @@ Il percorso parte dalla definizione di sistema intelligente, passa dalla progett
 
 ### **0. JARVIS: recuperare le fonti e controllarne l’attualità**
 
-Un sistema basato su **RAG** (*Retrieval-Augmented Generation*) cerca informazioni in una raccolta di documenti e le usa per formulare una risposta. JARVIS, un assistente basato su RAG, mostra due proprietà utili: può recuperare un passaggio pertinente e citarne la fonte, ma la risposta dipende dai documenti disponibili e dal loro aggiornamento.
+Un sistema basato su **RAG** (*Retrieval-Augmented Generation*, generazione aumentata dal recupero) cerca informazioni in una raccolta di documenti e le usa per formulare una risposta. JARVIS, un assistente basato su RAG, mostra due proprietà utili: può recuperare un passaggio pertinente e citarne la fonte, ma la risposta dipende dai documenti disponibili e dal loro aggiornamento.
 
 Alla domanda se sia possibile portare gli appunti all’esame, JARVIS risponde di no e cita la fonte che stabilisce le regole. Alla domanda sulla scadenza per i sistemi ad alto rischio, invece, restituisce il 2 agosto 2026 perché la base documentale conserva una data precedente.
 
@@ -26,7 +26,7 @@ Lo stesso meccanismo permette di collegare una risposta documentata all’indivi
 
 Il progetto comincia dalle persone che useranno il sistema e dal bisogno da soddisfare. Le esigenze diventano **requisiti**, poi vengono raccolte e organizzate in documenti.
 
-Una base di conoscenza, una wiki o un *second brain* può aiutare a conservare informazioni e decisioni; gli LLM e gli agenti possono assistere nell’analisi, purché le loro proposte siano controllate. Il passaggio successivo consiste nel tradurre i requisiti in **specifiche e decisioni di progetto finite e verificabili**.
+Una base di conoscenza, una wiki o un *second brain* («secondo cervello», archivio personale di conoscenze) può aiutare a conservare informazioni e decisioni; gli LLM (*Large Language Model*, modello linguistico di grandi dimensioni) e gli agenti possono assistere nell’analisi, purché le loro proposte siano controllate. Il passaggio successivo consiste nel tradurre i requisiti in **specifiche e decisioni di progetto finite e verificabili**.
 
 Solo allora si definiscono sensori, acquisizione dei dati, filtraggio e armonizzazione, controlli di qualità e di leakage, addestramento e valutazione dei modelli. Il modello entra dunque in una catena più ampia, che termina nel dispositivo o servizio usato sul campo.
 
@@ -84,20 +84,20 @@ Tra gli esempi rientrano assistenti virtuali come Siri e Alexa, veicoli autonomi
 
 Per orientarsi in questa varietà, conviene separare tre livelli che spesso vengono confusi:
 - Il **settore** è l’ambiente di applicazione: aviazione, informatica, educazione, finanza, industria pesante, ospedali e medicina, marketing, media, musica, editoria e notizie, assistenza clienti online o telefonica, manutenzione delle telecomunicazioni, giocattoli e giochi, trasporti. In finanza rientrano trading algoritmico, analisi di mercato e data mining, finanza personale, gestione di portafoglio e valutazione del credito.
-- Il **task** è il problema informatico: OCR (_Optical Character Recognition_), riconoscimento della scrittura, della voce o dei volti; creatività artificiale; computer vision, realtà virtuale ed elaborazione delle immagini; diagnosi; teoria dei giochi e pianificazione strategica; bot e AI dei videogiochi; NLP (_Natural Language Processing_), traduzione e chatbot; controllo non lineare e robotica.
+- Il **task** è il problema informatico: OCR (_Optical Character Recognition_, riconoscimento ottico dei caratteri), riconoscimento della scrittura, della voce o dei volti; creatività artificiale; computer vision, realtà virtuale ed elaborazione delle immagini; diagnosi; teoria dei giochi e pianificazione strategica; bot e AI dei videogiochi; NLP (_Natural Language Processing_, elaborazione del linguaggio naturale), traduzione e chatbot; controllo non lineare e robotica.
 #### **2.4. Tecnologie e modelli nei sistemi autonomi**
 
 Un sistema autonomo combina funzioni di navigazione, controllo, pianificazione, interazione, manutenzione e percezione. Ogni funzione richiede sensori o strumenti specifici e può integrare modelli di AI con metodi classici.
 
 | Funzione | Tecnologie | Modelli e metodi |
 |---|---|---|
-| Navigazione e localizzazione | SLAM (_Simultaneous Localization and Mapping_), GNSS (GPS, RTK), lidar, localizzazione basata su telecamere | Deep Reinforcement Learning per la pianificazione del percorso; filtri di Kalman per la fusione sensoriale |
-| Attuazione e controllo | Motori brushless, attuatori idraulici, controllori PID/MPC | Controllo adattivo; Reinforcement Learning per la stabilità dinamica |
-| Pianificazione del percorso | Algoritmi di ricerca come A*, mappe 3D, reti neurali predittive | CNN + LSTM per anticipare gli ostacoli |
-| Interazione uomo–macchina (HMI) | NLP (_Natural Language Processing_), riconoscimento di volti e gesti | Transformer come ChatGPT e BERT; analisi del sentiment basata sulla visione |
-| Diagnostica e manutenzione predittiva | Fusione di sensori IMU, vibrazioni e temperatura; edge computing | Modelli predittivi per serie temporali, come RNN e LSTM |
-| Percezione dell’ambiente | Lidar, radar, telecamere stereoscopiche, sensori a ultrasuoni | Object detection con YOLO e Faster R-CNN; PointNet per dati lidar |
-| Edge AI ed elaborazione in tempo reale | FPGA, TPU, Nvidia Jetson per l’inferenza locale | Reti neurali quantizzate per ridurre il costo energetico del calcolo |
+| Navigazione e localizzazione | SLAM (_Simultaneous Localization and Mapping_, localizzazione e mappatura simultanee); GNSS (_Global Navigation Satellite System_, sistema globale di navigazione satellitare), con GPS (_Global Positioning System_, sistema di posizionamento globale) e RTK (_Real-Time Kinematic_, posizionamento cinematico in tempo reale); lidar e telecamere | Apprendimento per rinforzo profondo (*Deep Reinforcement Learning*) per pianificare il percorso; filtri di Kalman per la fusione sensoriale |
+| Attuazione e controllo | Motori brushless, attuatori idraulici, controllori PID (_Proportional–Integral–Derivative_, proporzionale–integrale–derivativo) e MPC (_Model Predictive Control_, controllo predittivo basato su modello) | Controllo adattivo; apprendimento per rinforzo (*Reinforcement Learning*) per la stabilità dinamica |
+| Pianificazione del percorso | Algoritmi di ricerca come A*, mappe 3D, reti neurali predittive | CNN (_Convolutional Neural Network_, rete neurale convoluzionale) e LSTM (_Long Short-Term Memory_, memoria a breve e lungo termine) per anticipare gli ostacoli |
+| Interazione uomo–macchina, HMI (*Human–Machine Interaction*, interazione uomo–macchina) | Elaborazione del linguaggio naturale (NLP, già definita sopra), riconoscimento di volti e gesti | Transformer come ChatGPT e BERT (*Bidirectional Encoder Representations from Transformers*, rappresentazioni bidirezionali dei testi tramite Transformer); analisi del sentiment basata sulla visione |
+| Diagnostica e manutenzione predittiva | Fusione di sensori IMU (_Inertial Measurement Unit_, unità di misura inerziale), vibrazioni e temperatura; calcolo vicino alla sorgente (*edge computing*) | Modelli predittivi per serie temporali, come RNN (_Recurrent Neural Network_, rete neurale ricorrente) e LSTM (già definita sopra) |
+| Percezione dell’ambiente | Lidar, radar, telecamere stereoscopiche, sensori a ultrasuoni | Rilevamento di oggetti con YOLO (_You Only Look Once_, «guarda una sola volta») e Faster R-CNN (_Faster Region-based Convolutional Neural Network_, rete neurale convoluzionale veloce basata su regioni); PointNet per dati lidar |
+| AI al margine della rete ed elaborazione in tempo reale | FPGA (_Field-Programmable Gate Array_, matrice di porte logiche programmabile), TPU (_Tensor Processing Unit_, unità di elaborazione dei tensori) e Nvidia Jetson per l’inferenza locale | Reti neurali quantizzate per ridurre il costo energetico del calcolo |
 
 SLAM costruisce la mappa mentre stima la posizione del sistema; GNSS comprende sistemi satellitari come GPS e tecniche RTK. IMU indica un’unità di misura inerziale, PID un controllo proporzionale–integrale–derivativo e MPC un _Model Predictive Control_. FPGA e TPU sono piattaforme hardware; YOLO, Faster R-CNN e PointNet sono metodi di elaborazione. La quantizzazione riduce la precisione numerica per contenere i costi di calcolo ed energia, valutando l’effetto sulle prestazioni.
 
@@ -127,7 +127,7 @@ La **teoria** fornisce ciò che serve a capire il funzionamento: pattern matchin
 
 Gli **strumenti software** servono ad analizzare, trasformare e visualizzare dati e a costruire ambienti di apprendimento. Fra gli strumenti software si incontrano MATLAB, TensorFlow e Google Colab, con l’invito a mantenere flessibilità nella scelta.
 
-La parte **hardware** considera CUDA, schede dedicate, edge e fog computing: luogo di esecuzione e risorse disponibili sono parte del progetto. Le **overviews / panoramiche** orientano nello stato dell’arte: che cosa si può fare nei diversi mercati, quali strumenti e dataset servono, quali limiti restano e quali direzioni di ricerca stanno emergendo.
+La parte **hardware** considera CUDA (_Compute Unified Device Architecture_, architettura unificata di calcolo per GPU), CPU (_Central Processing Unit_, unità centrale di elaborazione), GPU (_Graphics Processing Unit_, unità di elaborazione grafica), edge e fog computing: luogo di esecuzione e risorse disponibili sono parte del progetto. Le **overviews / panoramiche** orientano nello stato dell’arte: che cosa si può fare nei diversi mercati, quali strumenti e dataset servono, quali limiti restano e quali direzioni di ricerca stanno emergendo.
 
 **Anche queste informazioni fanno parte del programma d’esame.** Gli **use cases / casi d’uso** rendono operativi i concetti attraverso esempi, gestione dei dati, input e output, risultati attesi, codice e frammenti di programma, strumenti hardware e software.
 
@@ -208,7 +208,7 @@ Una mappa attribuita a Harry Ratcliffe organizza queste idee in sei livelli. È 
 - **Machine Learning:** apprendimento supervisionato, non supervisionato e per rinforzo; classificazione e regressione. I primi tre termini indicano modalità di apprendimento; gli ultimi due sono task: assegnare categorie o stimare valori numerici.
 - **Neural Networks:** percettroni, funzioni di costo, backpropagation, funzioni di attivazione e strati nascosti. La funzione di costo misura l’errore; la backpropagation calcola come i parametri contribuiscono a tale errore.
 - **Deep Learning:** Transformer, LSTM (_Long Short-Term Memory_), RNN (_Recurrent Neural Networks_), CNN (_Convolutional Neural Networks_) e autoencoder. Le famiglie si distinguono per le rappresentazioni e le strutture dei dati che elaborano; una LSTM, per esempio, è una rete ricorrente.
-- **Generative AI:** LLM (_Large Language Models_), diffusion models, modelli multimodali e VAE (_Variational Autoencoders_), usati per generare contenuti.
+- **Generative AI:** LLM (_Large Language Models_), diffusion models, modelli multimodali e VAE (_Variational Autoencoders_, autoencoder variazionali), usati per generare contenuti.
 - **Agentic AI:** memoria, pianificazione, uso di strumenti ed esecuzione di azioni orientate a un obiettivo. L’unità di lavoro diventa una sequenza di attività, non una singola risposta.
 
 L’attenzione si sposta dalla singola risposta a una sequenza di attività orientate a un obiettivo. Questi richiami spiegano il diagramma senza anticipare l’intera teoria delle lezioni successive.
@@ -268,9 +268,9 @@ Il numero di componenti, da solo, non ordina in modo universale l’intelligenza
 
 Il modello dots-note-3.0 di RedNote avrebbe risolto tutti e sei i problemi dell’IMO 2026, ottenendo 42 punti su 42 in una valutazione esterna. La pagina ufficiale dell’[IMO 2026](https://www.imo-official.org/editions/2026/) presenta i risultati della competizione e segnala sette punteggi perfetti, senza elencare un sistema AI tra i concorrenti: il punteggio del modello va quindi distinto dalla classifica ufficiale.
 
-I modelli *frontier* sono disponibili via cloud/API; i modelli *open-weight* possono essere eseguiti localmente o su server aziendali. La fotografia al **20 novembre 2026** comprende GPT-6.2 Astra e Sol, Claude Fable 5.2 e Opus 5.5, Gemini 4 Neon e Carbon, Muse Wonder e Muse Wonder Full, Muse Spark 1.3 e Grok 4.6. Claude Mythos 5.2, annunciato insieme a Fable 5.2 il 9 novembre, è accessibile tramite programmi di verifica per organizzazioni autorizzate; non va presentato come un prodotto disponibile indistintamente. GPT-6.2 Astra/Sol sono stati annunciati il 17 novembre, Gemini 4 Neon il 18 novembre e Muse Wonder il 12 ottobre. È una fotografia temporale, non un catalogo stabile: nomi, versioni, disponibilità e prezzi cambiano rapidamente. Le descrizioni di capacità e i confronti prestazionali riportati dagli annunci sono dichiarazioni dei produttori. [OpenAI](https://openai.com/index/introducing-gpt-6-2-astra-sol/), [Anthropic](https://www.anthropic.com/claude-fable-and-mythos-5-2), [Google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/), [Meta](https://ai.meta.com/research/).
+I modelli *frontier* sono disponibili via cloud o API (_Application Programming Interface_, interfaccia di programmazione delle applicazioni); i modelli *open-weight* possono essere eseguiti localmente o su server aziendali. La fotografia al **20 novembre 2026** comprende GPT-6.2 Astra e Sol, Claude Fable 5.2 e Opus 5.5, Gemini 4 Neon e Carbon, Muse Wonder e Muse Wonder Full, Muse Spark 1.3 e Grok 4.6. Claude Mythos 5.2, annunciato insieme a Fable 5.2 il 9 novembre, è accessibile tramite programmi di verifica per organizzazioni autorizzate; non va presentato come un prodotto disponibile indistintamente. GPT-6.2 Astra/Sol sono stati annunciati il 17 novembre, Gemini 4 Neon il 18 novembre e Muse Wonder il 12 ottobre. È una fotografia temporale, non un catalogo stabile: nomi, versioni, disponibilità e prezzi cambiano rapidamente. Le descrizioni di capacità e i confronti prestazionali riportati dagli annunci sono dichiarazioni dei produttori. [OpenAI](https://openai.com/index/introducing-gpt-6-2-astra-sol/), [Anthropic](https://www.anthropic.com/claude-fable-and-mythos-5-2), [Google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/), [Meta](https://ai.meta.com/research/).
 
-L’esecuzione locale può mantenere i dati sul dispositivo o sull’infrastruttura aziendale, ma la riservatezza dipende da tutta la configurazione: dove gira il modello, quali servizi di supporto vengono chiamati e come vengono trattati prompt e log. La memoria GPU disponibile (VRAM) è un vincolo pratico importante; non determina da sola qualità e adeguatezza del modello.
+L’esecuzione locale può mantenere i dati sul dispositivo o sull’infrastruttura aziendale, ma la riservatezza dipende da tutta la configurazione: dove gira il modello, quali servizi di supporto vengono chiamati e come vengono trattati prompt e log. La memoria video della GPU, o VRAM (_Video Random-Access Memory_, memoria video ad accesso casuale), è un vincolo pratico importante; non determina da sola qualità e adeguatezza del modello.
 
 ![](imgs/Pasted%20image%2020261119133610.png)
 
@@ -382,7 +382,7 @@ La prima distinzione riguarda **da dove viene la supervisione**, la seconda **qu
 
 Il corso introduce anche l’AI Act, l’uso responsabile e la mitigazione dei bias. La classificazione distingue rischio inaccettabile, alto, limitato — con specifici obblighi di trasparenza — e minimo.
 
-Il calendario originario scandiva l’entrata in vigore il 1° agosto 2024, i divieti dal 2 febbraio 2025, gli obblighi GPAI e le autorità nazionali dal 2 agosto 2025 e l’applicazione generale dal 2 agosto 2026. Il Regolamento (UE) 2026/1744 ha poi modificato alcune decorrenze: specifiche disposizioni dell’articolo 5 si applicano dal **2 dicembre 2026**; per i sistemi generativi già immessi sul mercato prima del 2 agosto 2026, il termine transitorio per adeguarsi all’obbligo di marcatura dell’articolo 50(2) è il 2 dicembre 2026; le scadenze per i sistemi ad alto rischio sono il 2 dicembre 2027 per quelli dell’Allegato III e il 2 agosto 2028 per quelli dell’Allegato I. Il calendario va letto disposizione per disposizione e in base alla categoria del sistema. [Regolamento (UE) 2026/1744](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744).
+Il calendario originario scandiva l’entrata in vigore il 1° agosto 2024, i divieti dal 2 febbraio 2025, gli obblighi per i sistemi di intelligenza artificiale per finalità generali (GPAI, *General-Purpose AI*, AI per finalità generali) e le autorità nazionali dal 2 agosto 2025 e l’applicazione generale dal 2 agosto 2026. Il Regolamento (UE) 2026/1744 ha poi modificato alcune decorrenze: specifiche disposizioni dell’articolo 5 si applicano dal **2 dicembre 2026**; per i sistemi generativi già immessi sul mercato prima del 2 agosto 2026, il termine transitorio per adeguarsi all’obbligo di marcatura dell’articolo 50(2) è il 2 dicembre 2026; le scadenze per i sistemi ad alto rischio sono il 2 dicembre 2027 per quelli dell’Allegato III e il 2 agosto 2028 per quelli dell’Allegato I. Il calendario va letto disposizione per disposizione e in base alla categoria del sistema. [Regolamento (UE) 2026/1744](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744).
 
 ![](imgs/Pasted%20image%2020261002020217.png)
 
@@ -416,7 +416,7 @@ from tensorflow.keras.layers import Conv2D, Input
 
 # Define the model
 model = Sequential([
-    Input(shape=(256, 256, 3)),  # Input shape for 256x256 RGB images
+    Input(shape=(256, 256, 3)),  # Input shape for 256x256 RGB (*Red, Green, Blue*, rosso, verde e blu) images
     Conv2D(filters=25, kernel_size=(3, 3), activation="relu")
 ])
 
@@ -452,7 +452,7 @@ Anche una risposta utile può contenere un singolo elemento inventato che rende 
 
 #### **7.4. Privacy, bias e dipendenza dai dati di training**
 
-Un rischio concreto è esporre dati riservati usando servizi LLM pubblici, con possibili incompatibilità con NDA e GDPR. Il diagramma interpone un **privacy layer** fra il prompt con dati personali (_PII, Personally Identifiable Information_) e il servizio: il flusso di andata rimuove i dati identificativi e quello di ritorno è controllato prima dell’output all’utente.
+Un rischio concreto è esporre dati riservati usando servizi LLM pubblici, con possibili incompatibilità con NDA e GDPR. Il diagramma interpone un **privacy layer** fra il prompt con dati personali (PII, *Personally Identifiable Information*, informazioni personali identificabili) e il servizio: il flusso di andata rimuove i dati identificativi e quello di ritorno è controllato prima dell’output all’utente.
 
 Il riquadro contempla anche informazioni sensibili nella risposta; il controllo non riguarda quindi solo il prompt.
 

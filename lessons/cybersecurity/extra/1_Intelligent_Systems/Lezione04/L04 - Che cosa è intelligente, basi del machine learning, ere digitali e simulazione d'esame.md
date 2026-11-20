@@ -122,7 +122,7 @@ La domanda: qual è la **dimensione giusta** di un modello di ML?
 
 > ⚠️ **Sui 45 TB (nota didattica).** Nell’articolo di GPT-3, 45 TB è la dimensione del testo **grezzo** di Common Crawl **prima del filtraggio**; dopo il filtraggio ne restano circa 570 GB. Il salto rispetto a GPT-2 resta enorme, ma è bene non leggere il dato come testo effettivamente usato.
 
-**Dimensioni pubblicate e non pubblicate.** I conteggi dei parametri permettono confronti solo parziali: per modelli MoE occorre distinguere parametri totali e attivi per token, mentre per molti modelli proprietari il dato non viene divulgato.
+**Dimensioni pubblicate e non pubblicate.** I conteggi dei parametri permettono confronti solo parziali: per modelli MoE (*Mixture of Experts*, miscela di esperti) occorre distinguere parametri totali e attivi per token, mentre per molti modelli proprietari il dato non viene divulgato.
 
 | Famiglia (dati pubblicati entro il 2026) | Dimensioni dichiarate | Che cosa mostra |
 |---|---|---|

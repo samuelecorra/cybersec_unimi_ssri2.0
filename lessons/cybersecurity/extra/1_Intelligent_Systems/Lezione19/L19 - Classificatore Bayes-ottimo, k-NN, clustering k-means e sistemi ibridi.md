@@ -459,7 +459,7 @@ La scelta dipende dall’**applicazione**.
 
 > 📌 **Pipeline** (p. 82). Dati grezzi → **ispezione visiva** → **codifica** (categorico → numerico) → **scalatura** → **clustering** (k-means: metodo, metrica, numero $K$ di cluster) → **PCA** (**solo per la visualizzazione**, Lezione 18, §2.2).
 
-> 📌 **Metodo del gomito** (p. 83). Si traccia la **somma dei quadrati entro i cluster** (WCSS) in funzione del numero di cluster $k$. Il $k$ ottimale è il «**punto di gomito**», dove la **diminuzione** della WCSS **rallenta**: aggiungere altri cluster dà rendimenti decrescenti. Il gomito si può individuare anche con una **regressione lineare** sugli ultimi punti.
+> 📌 **Metodo del gomito** (p. 83). Si traccia la **somma dei quadrati entro i cluster** (WCSS (*Within-Cluster Sum of Squares*, somma dei quadrati entro i cluster)) in funzione del numero di cluster $k$. Il $k$ ottimale è il «**punto di gomito**», dove la **diminuzione** della WCSS **rallenta**: aggiungere altri cluster dà rendimenti decrescenti. Il gomito si può individuare anche con una **regressione lineare** sugli ultimi punti.
 
 > 💡 **Perché serve il gomito (nota didattica).** La WCSS **diminuisce sempre** all’aumentare di $k$, e vale 0 con $k = n$ (ogni punto è il suo centro): scegliere il $k$ con la WCSS minima porterebbe sempre all’over-clustering. Il gomito cerca invece il punto oltre il quale un cluster in più «spiega» poco.
 
@@ -470,7 +470,7 @@ La scelta dipende dall’**applicazione**.
 | **silhouette score** | misura la **coerenza** dei cluster |
 | **gap statistic** | confronta con una **distribuzione nulla** (dati senza struttura) |
 | **indice di Davies-Bouldin** | misura **separazione** e **compattezza** dei cluster |
-| **BIC/AIC** per i GMM | criteri di selezione per i **modelli a misture gaussiane**: bilanciano bontà del fit e complessità, **penalizzando** i parametri in più |
+| **BIC (*Bayesian Information Criterion*, criterio di informazione bayesiano)/AIC (*Akaike Information Criterion*, criterio di informazione di Akaike)** per i GMM (*Gaussian Mixture Model*, modello a miscela gaussiana) | criteri di selezione per i **modelli a misture gaussiane**: bilanciano bontà del fit e complessità, **penalizzando** i parametri in più |
 | **indice di Calinski-Harabasz** | rapporto tra varianza **tra** i cluster e **dentro** i cluster |
 
 > 📌 **Silhouette (nota didattica).** Per un punto $i$, sia $a(i)$ la distanza media dagli altri punti del **suo** cluster e $b(i)$ la distanza media dai punti del cluster **più vicino** tra gli altri:

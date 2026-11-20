@@ -8,7 +8,7 @@ La ventiduesima lezione del corso **IS4** affronta il problema pratico dei model
 - le CNN come **estrattori automatici di feature**;
 - l’**addestramento greedy strato per strato**, la soluzione storica ai problemi di addestramento delle reti profonde.
 
-La parte conclusiva è dedicata ai **modelli generativi**: GAN, **modelli di diffusione** e il rischio del **Model Autophagy Disorder**. Chiudono la lezione i **limiti attuali** (scaling laws) e l’uso di **LLM e agenti** nella progettazione del ML.
+La parte conclusiva è dedicata ai **modelli generativi**: GAN (*Generative Adversarial Network*, rete generativa avversaria), **modelli di diffusione** e il rischio del **Model Autophagy Disorder**. Chiudono la lezione i **limiti attuali** (scaling laws) e l’uso di **LLM e agenti** nella progettazione del ML.
 
 
 ### **0. Struttura della lezione**
@@ -54,7 +54,7 @@ La parte conclusiva è dedicata ai **modelli generativi**: GAN, **modelli di dif
 #### **1.2. Che cos’è un autoencoder**
 
 
-> 📌 **Autoencoder (AE)**. Una rete che:
+> 📌 **Autoencoder (AE, rete codificatrice e decodificatrice)**. Una rete che:
 > - cerca di creare **feature generiche** dai dati (**codifica**, *encoding*);
 > - impara la **funzione identità** (uscita = ingresso) imparando le **sotto-feature importanti**;
 > - si addestra perché $X' = X$, con la **backpropagation** come una normale rete feed-forward.
@@ -150,7 +150,7 @@ Un **Masked Autoencoder (MAE)** apprende una rappresentazione visiva senza etich
 
 - le **CNN grandi** richiedono **settimane** di addestramento su **più GPU** con dataset come ImageNet;
 - molti ricercatori **pubblicano** la CNN finale perché altri la usino per il **fine-tuning**;
-- fonti principali: **Hugging Face Hub**, **Keras Applications / KerasHub**, i modelli di **PyTorch TorchVision**, **TensorFlow Hub**, **ONNX Model Zoo**.
+- fonti principali: **Hugging Face Hub**, **Keras Applications / KerasHub**, i modelli di **PyTorch TorchVision**, **TensorFlow Hub**, **ONNX (*Open Neural Network Exchange*, formato aperto per l’interoperabilità tra reti neurali) Model Zoo**.
 
 > 📌 **Fine-tuning a partire da una CNN pubblica**. Una CNN addestrata per il **problema 1** (classificare volto, corpo, cane, cavallo, …) si riusa per il **problema 2** (volto sì/no):
 > - gli strati **convolutivi** vengono **congelati** (*FREEZE*): i loro pesi non cambiano;
@@ -232,7 +232,7 @@ La p. 31 lo mostra con l’**accuratezza di validazione** sul vecchio compito ch
 | Tecnica | Idea | Costo o limite |
 |---|---|---|
 | **Rehearsal** | strategia semplice e intuitiva: si **mescolano i vecchi dati ai nuovi** durante l’addestramento, così il modello ricorda i vecchi compiti | richiede di **conservare i vecchi dati**, costoso in risorse |
-| **Elastic Weight Consolidation** (EWC) | aggiunge un semplice **termine di regolarizzazione** alla funzione di costo che **preserva i pesi importanti** per i vecchi compiti | popolare perché semplice |
+| **EWC** (*Elastic Weight Consolidation*, consolidamento elastico dei pesi) | aggiunge un semplice **termine di regolarizzazione** alla funzione di costo che **preserva i pesi importanti** per i vecchi compiti | popolare perché semplice |
 | **Knowledge distillation** | il nuovo modello (**studente**) si addestra a **riprodurre le uscite** del vecchio (**insegnante**), conservandone la conoscenza | serve il vecchio modello durante l’addestramento |
 | **Architetture dinamiche** | metodi come **PathNet** o le **Progressive Neural Networks** **modificano l’architettura** per i nuovi compiti | più complessi, ma efficaci |
 
@@ -333,7 +333,7 @@ La slide di apertura presenta l’idea come **miglioramento dell’approccio PCA
 
 > 💡 **Perché funziona con pochi dati (nota didattica).** Il classificatore lineare sopra le 4096 feature, con $C$ classi, ha $4096\,C + C$ parametri: per un problema a 2 classi sono $8194$, contro i circa 60 milioni di AlexNet. È l’opzione 1 del §2 portata all’estremo, e ricollega le Lezioni 08, §3.2 («estrazione delle feature neurale + classificatore o distanza classica») e 18, §2 (PCA): cambia solo **chi** costruisce lo spazio delle feature.
 
-**Lo stato dell’arte**. Oggi lo stesso flusso si fa spesso con **ResNet**, **EfficientNet**, **ConvNeXt**, **vision transformer**, **encoder di tipo CLIP** o modelli pre-addestrati **specifici del dominio** (lezione successiva).
+**Lo stato dell’arte**. Oggi lo stesso flusso si fa spesso con **ResNet**, **EfficientNet**, **ConvNeXt**, **vision transformer**, **encoder di tipo CLIP (*Contrastive Language–Image Pre-training*, preaddestramento contrastivo su testo e immagini)** o modelli pre-addestrati **specifici del dominio** (lezione successiva).
 
 ---
 
@@ -468,7 +468,7 @@ Il testo della slide scrive «weight gg» dove si intende il *weight sharing*.
 > - Nel **text-to-image**, un **encoder di testo** converte il prompt in **embedding** che **condizionano** il modello di diffusione, guidando ogni passo di pulizia verso un’immagine coerente con il prompt. **CLIP** è comune in modelli come **Stable Diffusion v1**, ma i sistemi moderni usano anche altri encoder, come **T5**.
 > - Sono oggi uno degli **approcci dominanti** per la generazione di immagini di alta qualità, l’**editing**, l’**inpainting**, la **super-risoluzione** e il text-to-image. Si usano anche per la **data augmentation**.
 
-> 💡 **La diffusione in formula (nota didattica).** Nella formulazione più diffusa (DDPM), l’immagine $\mathbf{x}_0$ corrotta al passo $t$ si ottiene in un colpo solo:
+> 💡 **La diffusione in formula (nota didattica).** Nella formulazione più diffusa (DDPM (*Denoising Diffusion Probabilistic Model*, modello probabilistico di diffusione con denoising)), l’immagine $\mathbf{x}_0$ corrotta al passo $t$ si ottiene in un colpo solo:
 > $$\mathbf{x}_t = \sqrt{\bar{\alpha}_t}\, \mathbf{x}_0 + \sqrt{1 - \bar{\alpha}_t}\, \boldsymbol{\varepsilon}, \qquad \boldsymbol{\varepsilon} \sim \mathcal{N}(\mathbf{0}, I)$$
 > dove $\bar{\alpha}_t$ scende da circa 1 (immagine pulita) a circa 0 (rumore puro). La rete $\boldsymbol{\varepsilon}_\theta$ impara a **indovinare il rumore** aggiunto:
 > $$\mathcal{L} = \mathbb{E}\left[\lVert \boldsymbol{\varepsilon} - \boldsymbol{\varepsilon}_\theta(\mathbf{x}_t, t) \rVert^2\right]$$
@@ -509,7 +509,7 @@ E si risolvono applicazioni diverse: **sintesi di immagini**, **data augmentatio
 
 > ⚠️ **Midjourney non è una GAN (nota didattica).** La p. 75 illustra l’elenco con una «colomba meccanica» creata con **Midjourney**, che è un sistema basato su **modelli di diffusione** (§8.2), non su GAN. Gli usi elencati valgono in generale per i **modelli generativi**. Anche i «dati sintetici per la privacy» vanno verificati: un generatore addestrato su pochi dati può **memorizzare** e riprodurre esempi reali.
 
-> 📌 **L’effetto MAD** (*Model Autophagy Disorder*, pp. 76–77). **Il peggior nemico dell’AI potrebbe essere l’AI stessa.**
+> 📌 **L’effetto MAD** (*Model Autophagy Disorder*, disturbo da autofagia dei modelli, pp. 76–77). **Il peggior nemico dell’AI potrebbe essere l’AI stessa.**
 > - Uno studio della **Rice University** e di **Stanford** (arXiv 2307.01850) ha mostrato che addestrare i modelli su **dati sintetici** sembra causarne l’**erosione**, almeno sul lungo periodo.
 > - MAD indica questa apparente «**autoallergia**» del software.
 > - Molti modelli vengono così addestrati, **senza saperlo**, su quantità crescenti di **dati già sintetizzati**.

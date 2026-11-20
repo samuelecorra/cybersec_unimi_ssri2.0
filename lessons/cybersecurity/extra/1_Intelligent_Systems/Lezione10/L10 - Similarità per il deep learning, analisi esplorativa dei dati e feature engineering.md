@@ -1,6 +1,6 @@
 ## **Lezione 10: Similarità per il deep learning, analisi esplorativa dei dati e feature engineering**
 
-La lezione tratta la preparazione dei dati come passaggio che trasforma misure grezze in rappresentazioni utilizzabili: si estraggono feature da finestre temporali, si esplorano distribuzioni e gruppi, si costruiscono feature e si applicano trasformazioni di scala. Un esempio audio segue l’intera catena fino agli MFCC. Il paradosso di Simpson mostra perché i confronti aggregati possono invertirsi quando cambia la composizione dei gruppi. La diagnosi statistica si estende anche a input, pesi, attivazioni e uscite di una rete.
+La lezione tratta la preparazione dei dati come passaggio che trasforma misure grezze in rappresentazioni utilizzabili: si estraggono feature da finestre temporali, si esplorano distribuzioni e gruppi, si costruiscono feature e si applicano trasformazioni di scala. Un esempio audio segue l’intera catena fino agli MFCC (*Mel-Frequency Cepstral Coefficients*, coefficienti cepstrali in scala Mel). Il paradosso di Simpson mostra perché i confronti aggregati possono invertirsi quando cambia la composizione dei gruppi. La diagnosi statistica si estende anche a input, pesi, attivazioni e uscite di una rete.
 
 
 ### **0. Panoramica**
@@ -15,7 +15,7 @@ L’indice elenca:
 2. **analisi esplorativa dei dati**;
 3. **feature engineering**;
 4. **pre-elaborazione dei dati** da un punto di vista statistico;
-5. **applicazione dell’EDA alle reti neurali**: input, pesi, attivazioni, uscite;
+5. **applicazione dell’analisi esplorativa dei dati (EDA, *Exploratory Data Analysis*) alle reti neurali**: input, pesi, attivazioni, uscite;
 6. punti principali.
 
 > ⚠️ La pagina introduttiva contiene un titolo incongruente con il resto del materiale; i temi trattati qui sono similarità, analisi esplorativa e feature engineering.
@@ -218,7 +218,7 @@ Nelle applicazioni **audio** (riconoscimento vocale, classificazione musicale, r
 
 **La forma delle distribuzioni**. Esempio: nell’**errore di una regressione** contano molto **posizione e ampiezza delle code**, perché un errore **positivo** e uno **negativo** possono avere conseguenze diverse (sovrastimare o sottostimare una domanda, una scorta, un consumo).
 
-**Le distribuzioni dicono di più**. Due distribuzioni possono avere quasi la **stessa media** e lo **stesso IQR** (*InterQuartile Range*), ma **forma** e **intervallo dei valori** molto diversi.
+**Le distribuzioni dicono di più**. Due distribuzioni possono avere quasi la **stessa media** e lo stesso IQR (*InterQuartile Range*, intervallo interquartile), ma **forma** e **intervallo dei valori** molto diversi.
 
 > 📌 **Quartili e IQR (nota didattica).** $Q_1$ e $Q_3$ sono i valori sotto cui cade rispettivamente il 25% e il 75% dei dati; la mediana è $Q_2$.
 > $$\text{IQR} = Q_3 - Q_1$$
@@ -278,7 +278,7 @@ Il comando disegna un boxplot dei **consumi** (miglia per gallone) **per ogni Pa
 | Livello | Che cosa si ottimizza | Usa le etichette? | Operazioni (figura) |
 |---|---|---|---|
 | **(A)** **una feature alla volta** | una **colonna** di $X$ | no | **rimozione degli outlier**; **armonizzazione** (cm/mm/m → m; similarità → distanze); **normalizzazione/standardizzazione** (§5) |
-| **(B)** **tutte le feature insieme** | le **colonne** di $X$ nel loro insieme | **no** | **rimuovere feature fortemente correlate**; **creare combinazioni potenti**; **analisi delle componenti principali** (PCA) e altri metodi di **riduzione della dimensionalità** |
+| **(B)** **tutte le feature insieme** | le **colonne** di $X$ nel loro insieme | **no** | **rimuovere feature fortemente correlate**; **creare combinazioni potenti**; analisi delle componenti principali, PCA (*Principal Component Analysis*, analisi delle componenti principali) e altri metodi di **riduzione della dimensionalità** |
 | **(C)** **tutto il dataset** | $X$ **e** $Y$ | **sì** | **estrazione** delle feature; **selezione** delle feature; feature engineering guidata dall’obiettivo |
 
 > 💡 **Esempi per livello (nota didattica).**
@@ -363,7 +363,7 @@ Le formule di min-max e z-score sono quelle standard (nota didattica); il clippi
 | **che cosa analizzare** | **distribuzione**, **outlier**, **correlazioni**, **dimensionalità** e **sparsità** delle feature di input |
 | **perché** | *garbage in, garbage out*: input di scarsa qualità **limitano l’apprendimento**; individuare feature **ridondanti, rumorose o mancanti** migliora pre-elaborazione e generalizzazione |
 | **come** | metriche statistiche (media, deviazione standard, minimo, massimo); **PCA** o **t-SNE** per la struttura; **matrici di correlazione**; controllo dello **sbilanciamento tra classi** |
-| **visualizzazione** | istogrammi, scatter plot, boxplot; **heatmap** delle correlazioni a coppie; **t-SNE/UMAP** per embedding in 2D |
+| **visualizzazione** | istogrammi, scatter plot, boxplot; **heatmap** delle correlazioni a coppie; t-SNE (*t-distributed Stochastic Neighbor Embedding*, incorporamento stocastico di vicini con distribuzione t) e UMAP (*Uniform Manifold Approximation and Projection*, approssimazione e proiezione uniforme della varietà) per embedding in 2D |
 
 **La scalatura migliora l’apprendimento**. Con due input $x_1$, $x_2$ e i pesi $w_1$, $w_2$, l’algoritmo di apprendimento **minimizza l’errore** $J(\mathbf{W})$ regolando **iterativamente** (discesa del gradiente) il vettore dei parametri $\mathbf{W}$. Con una **scalatura adeguata** servono **meno iterazioni** per raggiungere lo stesso minimo nello spazio dei parametri.
 
@@ -419,13 +419,13 @@ Le formule di min-max e z-score sono quelle standard (nota didattica); il clippi
 
 Un segnale $x(t)$ diventa utilizzabile da un modello quando viene rappresentato da un insieme compatto di misure $f=\phi(x)$. Per segnali continui si usano finestre scorrevoli: ogni finestra è un’osservazione e produce un vettore di feature. Se il segnale ha $N$ campioni, la finestra $L$ e il passo $H$, il numero di finestre è $N_w=\left\lfloor\frac{N-L}{H}\right\rfloor+1$. Per esempio, un segnale di 10 secondi, segmentato in finestre di 2 secondi con passo di 1 secondo, genera 9 osservazioni con sovrapposizione del 50%.
 
-Le feature temporali includono media, varianza, RMS, attraversamenti dello zero, asimmetria e curtosi; quelle in frequenza possono includere energia per banda e baricentro spettrale. La scelta dipende dal fenomeno: due segnali possono avere RMS simili ma componenti periodiche diverse, visibili nello spettro. Uno spettrogramma conserva anche l’asse temporale, mostrando come le frequenze cambiano da una finestra alla successiva. Un vettore di feature non è una copia neutra del segnale: conserva proprietà ritenute utili al compito e scarta il resto.
+Le feature temporali includono media, varianza, RMS (*Root Mean Square*, radice quadratica media), attraversamenti dello zero, asimmetria e curtosi; quelle in frequenza possono includere energia per banda e baricentro spettrale. La scelta dipende dal fenomeno: due segnali possono avere RMS simili ma componenti periodiche diverse, visibili nello spettro. Uno spettrogramma conserva anche l’asse temporale, mostrando come le frequenze cambiano da una finestra alla successiva. Un vettore di feature non è una copia neutra del segnale: conserva proprietà ritenute utili al compito e scarta il resto.
 
 La provenienza e il contesto sono parte dell’interpretazione: tipo di sensore, calibrazione, firmware, luogo, frequenza di campionamento e regime operativo possono cambiare il significato di un valore. Una stessa vibrazione può essere normale a pieno carico e anomala al minimo.
 
 #### **7.1. Dal parlato ai coefficienti MFCC**
 
-Nell’esempio, la frase “Everybody dance now” è campionata a 16 kHz per 1,407 secondi: 22.516 campioni mono a 16 bit. Il segnale viene suddiviso in finestre di 25 ms (400 campioni) con passo di 10 ms (160 campioni), dunque sovrapposte per il 60%. Per ciascuna finestra, la pipeline applica pre-enfasi $y[n]=x[n]-0{,}97x[n-1]$, finestra di Hamming, FFT di lunghezza 512, spettro di potenza, 26 filtri triangolari sulla scala mel, logaritmo e trasformata discreta del coseno. Si conservano 12 coefficienti, escludendo $c_0$, associato soprattutto all’energia complessiva.
+Nell’esempio, la frase “Everybody dance now” è campionata a 16 kHz per 1,407 secondi: 22.516 campioni mono a 16 bit. Il segnale viene suddiviso in finestre di 25 ms (400 campioni) con passo di 10 ms (160 campioni), dunque sovrapposte per il 60%. Per ciascuna finestra, la pipeline applica pre-enfasi $y[n]=x[n]-0{,}97x[n-1]$, finestra di Hamming, FFT (*Fast Fourier Transform*, trasformata rapida di Fourier) di lunghezza 512, spettro di potenza, 26 filtri triangolari sulla scala mel, logaritmo e trasformata discreta del coseno. Si conservano 12 coefficienti, escludendo $c_0$, associato soprattutto all’energia complessiva.
 
 Gli MFCC descrivono la forma dello spettro, legata alle caratteristiche del tratto vocale; non rappresentano direttamente il pitch né trascrivono le parole. Si ottiene una sequenza di 139 vettori da 12 numeri. Le distanze tra i vettori medi delle tre parole mostrano quanto le sezioni differiscano in questa registrazione, ma un singolo estratto non costituisce una valutazione del riconoscimento vocale: voce, musica, tagli e catena di registrazione cambiano i valori.
 

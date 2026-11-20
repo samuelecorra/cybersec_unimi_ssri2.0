@@ -1,6 +1,6 @@
-## **Lezione 5: Progettazione dei sistemi intelligenti, AutoML, edge-fog-cloud e IoT**
+## **Lezione 5: Progettazione dei sistemi intelligenti, AutoML, edge-fog-cloud e Internet of Things (IoT)**
 
-Un sistema di machine learning richiede decisioni progettuali lungo tutto il ciclo di vita. Mette a confronto un approccio ingenuo, «raccolgo i dati, addestro, misuro l’accuratezza e rilascio», con le **dieci regole** di un progetto maturo, che toccano utenti, metriche, dati, limiti, test, monitoraggio, equità, spiegabilità, privacy e sicurezza. Presenta poi il **flusso di lavoro** del machine learning e i criteri per **scegliere la tecnica** giusta, a partire dal rasoio di Occam. Chiude con l’automazione del progetto (**AutoML** e **NAS**), con la domanda su **dove** eseguire il calcolo (edge, fog, cloud) e con una panoramica dell’**Internet of Things**.
+Un sistema di machine learning richiede decisioni progettuali lungo tutto il ciclo di vita. Mette a confronto un approccio ingenuo, «raccolgo i dati, addestro, misuro l’accuratezza e rilascio», con le **dieci regole** di un progetto maturo, che toccano utenti, metriche, dati, limiti, test, monitoraggio, equità, spiegabilità, privacy e sicurezza. Presenta poi il **flusso di lavoro** del machine learning e i criteri per **scegliere la tecnica** giusta, a partire dal rasoio di Occam. Chiude con l’automazione del progetto (**AutoML**, apprendimento automatico automatizzato, e **NAS**, *Neural Architecture Search*, ricerca automatica di architetture neurali), con la domanda su **dove** eseguire il calcolo (edge, fog, cloud) e con una panoramica dell’**Internet of Things**.
 
 Le versioni e le funzionalità dei servizi commerciali sono indicate secondo la documentazione disponibile al 20 novembre 2026.
 
@@ -287,9 +287,9 @@ Tre versioni del flusso di lavoro mettono a confronto:
 |---|---|
 | Progettazione esplicita | flusso di ML **«rigoroso»** (*strict*) |
 | Pratica applicativa | il ML **nella pratica** |
-| Automazione di alcune fasi | flusso **rivisto**: «**fai il salto che ti serve!**», con l’**AutoML** e la **Neural Architecture Search** (NAS) che automatizzano alcuni passi |
+| Automazione di alcune fasi | flusso **rivisto**: «**fai il salto che ti serve!**», con l’**AutoML** e la **Neural Architecture Search** (NAS, ricerca automatica dell’architettura neurale) che automatizzano alcuni passi |
 
-Un modello del ciclo di vita del ML è descritto in *Assuring the Machine Learning Lifecycle: Desiderata, Methods, and Challenges* (ACM Computing Surveys, vol. 54, n. 5, art. 111, giugno 2021).
+Un modello del ciclo di vita del ML è descritto in *Assuring the Machine Learning Lifecycle: Desiderata, Methods, and Challenges* (ACM, *Association for Computing Machinery*, associazione per l’informatica; *Computing Surveys*, vol. 54, n. 5, art. 111, giugno 2021).
 
 > 💡 **Le fasi del ciclo di vita (nota didattica).** Nell’articolo il ciclo di vita del ML ha quattro fasi, ciascuna con i propri requisiti di garanzia: **gestione dei dati** (raccolta, pre-elaborazione, aumento), **apprendimento del modello** (scelta, addestramento, iperparametri), **verifica del modello** (test, verifica formale) e **rilascio** (integrazione, monitoraggio, aggiornamento). La differenza tra le diverse versioni del flusso operativo va letta sulle figure.
 
@@ -410,7 +410,7 @@ La domanda progettuale è **dove** eseguire il calcolo. L’architettura edge–
 >
 > | Livello | Dove | Caratteristiche tipiche |
 > |---|---|---|
-> | **Edge** | sul dispositivo o vicinissimo al sensore (telecamera, PLC, smartphone) | latenza minima, funziona anche senza rete, dati sensibili che restano in locale; risorse di calcolo ed energia limitate |
+> | **Edge** | sul dispositivo o vicinissimo al sensore (telecamera, PLC, *Programmable Logic Controller*, controllore logico programmabile, smartphone) | latenza minima, funziona anche senza rete, dati sensibili che restano in locale; risorse di calcolo ed energia limitate |
 > | **Fog** | nodi intermedi della rete locale (gateway, server di stabilimento) | aggrega più dispositivi, pre-elabora e filtra i dati, risponde in tempi brevi |
 > | **Cloud** | data center remoti | potenza di calcolo e memoria quasi illimitate, addestramento dei modelli grandi, visione globale; latenza e dipendenza dalla connessione |
 >
@@ -442,9 +442,9 @@ La domanda progettuale è **dove** eseguire il calcolo. L’architettura edge–
 
 L’IoT è il **calcolo su dispositivi (piccoli)**.
 
-**Origini**. Dal **anni 2000**, con la progressiva diffusione di **IPv6**, e dal **2007**, quando è uscita l’estensione di rete wireless **6LoWPAN**, praticamente **tutti i dispositivi collegati via IP**, cablati e wireless, possono essere connessi. Queste reti, l’«Internet of Things», suscitano grande interesse tra chi sviluppa **reti di controllo industriale**.
+**Origini**. Dal **anni 2000**, con la progressiva diffusione di **IPv6**, e dal **2007**, quando è uscita l’estensione di rete wireless **6LoWPAN**, praticamente **tutti i dispositivi collegati tramite IP (*Internet Protocol*, protocollo Internet)**, cablati e wireless, possono essere connessi. Queste reti, l’«Internet of Things», suscitano grande interesse tra chi sviluppa **reti di controllo industriale**.
 
-> ⚠️ **Sulle date (nota didattica).** Le specifiche di IPv6 risalgono agli anni ’90 (RFC 1883 del 1995, RFC 2460 del 1998); il 2000 va letto come l’inizio della sua diffusione. Lo standard 6LoWPAN, che porta IPv6 su reti wireless a basso consumo (IEEE 802.15.4), è l’RFC 4944 del **2007**.
+> ⚠️ **Sulle date (nota didattica).** Le specifiche di IPv6 risalgono agli anni ’90 (RFC, *Request for Comments*, documenti di specifica Internet, 1883 del 1995 e 2460 del 1998); il 2000 va letto come l’inizio della sua diffusione. Lo standard 6LoWPAN, che porta IPv6 su reti wireless a basso consumo (IEEE 802.15.4), è l’RFC 4944 del **2007**.
 
 | **Idee e miti del passato** | **Presente e futuro** |
 |---|---|
@@ -471,7 +471,7 @@ L’IoT è il **calcolo su dispositivi (piccoli)**.
 | **IoT commerciale** | **controllo dell’inventario**, tracciatori di dispositivi, **dispositivi medici** connessi |
 | **IoT industriale** | contatori elettrici connessi, sistemi di acque reflue, misuratori di portata, monitoraggio di **condotte**, **robot di produzione** e altri dispositivi e sistemi industriali connessi |
 
-#### **6.4. Tre famiglie di comunicazione: consumer, industriale, M2M**
+#### **6.4. Tre famiglie di comunicazione: consumer, industriale e M2M (*Machine-to-Machine*, macchina a macchina)**
 
 Le tre famiglie di comunicazione IoT si confrontano attraverso quattro caratteristiche: **tempo reale**, **determinismo**, **interazione umana**, **sicurezza**. In un sistema **deterministico** ogni azione (causa) produce una reazione (effetto) prevedibile.
 
@@ -487,7 +487,7 @@ Le tre famiglie di comunicazione IoT si confrontano attraverso quattro caratteri
 | Comunicazione | client/server, spesso con **grandi flussi** di dati | **molti-a-molti**: gruppi di nodi lavorano insieme a un **singolo compito** | client/server con **piccole quantità** di dati: identificatore del dispositivo, **coordinate**, **marca temporale** |
 | Requisiti chiave | — | **resilienza ai guasti**, **recupero dei pacchetti**, **sicurezza**, connettività fisica in ambienti con **forti interferenze elettromagnetiche**, **servizi di controllo** | gli oggetti localizzati **hanno valore**, e ne ha la conoscenza della loro posizione: c’è un **costo** quando l’informazione **manca o non è affidabile** |
 
-Un esempio di M2M sono le applicazioni **Vehicle to Everything** (V2X), presentate nelle applicazioni di comunicazione tra veicoli.
+Un esempio di M2M sono le applicazioni V2X (*Vehicle-to-Everything*, comunicazione del veicolo con ogni elemento circostante), presentate nelle applicazioni di comunicazione tra veicoli.
 
 <!-- SOURCE_VISUAL id="IS05-V26" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="70" type="diagramma" description="Struttura tipica dei nodi IIoT con connessioni molti-a-molti" reason="Topologia visibile solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->

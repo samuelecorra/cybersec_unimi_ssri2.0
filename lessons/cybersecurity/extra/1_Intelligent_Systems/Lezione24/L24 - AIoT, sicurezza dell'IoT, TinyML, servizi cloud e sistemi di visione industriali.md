@@ -9,7 +9,7 @@ La progressione parte dalla rappresentazione delle immagini con ViT, poi passa a
 
 1. **Vision Transformer**: patch, token, self-attention e uso come estrattore di feature;
 2. **AIoT** e collocazione dell’inferenza;
-3. **sicurezza dell’IoT**, aggiornamenti OTA e riferimenti normativi;
+3. **sicurezza dell’IoT**, aggiornamenti OTA (*Over-the-Air*, aggiornamento o trasferimento via rete) e riferimenti normativi;
 4. piattaforme, schede, **TinyML** e servizi cloud;
 5. sistemi di visione per industria, logistica e trasporti;
 6. obiettivi di progetto dell’**Industria 4.0 e 5.0**.
@@ -64,7 +64,7 @@ La pipeline PyTorch carica pesi e trasformazioni associate al modello, prepara u
 #### **2.1. Che cos’è e che cosa lo rende possibile**
 
 
-> 📌 **Artificial Intelligence of Things (AIoT)**.
+> 📌 **Artificial Intelligence of Things (AIoT, intelligenza artificiale delle cose)**.
 > - L’AIoT **combina l’infrastruttura IoT con i modelli di AI**. I dispositivi IoT **raccolgono dati** dai processi fisici.
 > - L’AI **trasforma questi dati** in **predizioni**, **allarmi di anomalia**, **azioni ottimizzate** e **supporto alle decisioni**.
 > - La tecnologia AIoT crea «**macchine che imparano dai dati**».
@@ -101,8 +101,8 @@ La pipeline PyTorch carica pesi e trasformazioni associate al modello, prepara u
 | Componente | Esempi |
 |---|---|
 | **runtime embedded** | FreeRTOS, Eclipse ThreadX, Linux embedded |
-| **runtime di AI** | TensorFlow Lite, ONNX Runtime, SDK dei produttori |
-| **protocolli di comunicazione** | MQTT, HTTP/REST, OPC UA, Modbus, CAN bus |
+| **runtime di AI** | TensorFlow Lite, ONNX Runtime, SDK (*Software Development Kit*, kit di sviluppo software) dei produttori |
+| **protocolli di comunicazione** | MQTT (*Message Queuing Telemetry Transport*, protocollo di messaggistica e telemetria), HTTP (*Hypertext Transfer Protocol*, protocollo di trasferimento ipertestuale)/REST (*Representational State Transfer*, stile architetturale per servizi web), OPC UA (*Open Platform Communications Unified Architecture*, architettura unificata di comunicazione per sistemi industriali), Modbus, CAN (*Controller Area Network*, rete locale di controllo) bus |
 | **servizi cloud/edge** | AWS IoT Greengrass, Azure IoT, piattaforme «in stile» Google Cloud IoT/Vertex AI |
 | **API e strumenti MLOps** | endpoint dei modelli, aggiornamenti OTA, logging, monitoraggio, pipeline di riaddestramento |
 
@@ -166,10 +166,10 @@ La pipeline PyTorch carica pesi e trasformazioni associate al modello, prepara u
 
 **Sei principi di cybersicurezza dell’IoT nello stack**. Lo stack distribuisce i sei principi distribuiti sui livelli dello stack, con al centro gli **aggiornamenti OTA**. Sono impiegate le sigle dei sistemi aziendali collegati:
 
-- **PLM** (*Product Lifecycle Management*);
+- **PLM** (*Product Lifecycle Management*, gestione del ciclo di vita del prodotto);
 - **ERP** (*Enterprise Resource Planning*);
-- **SCM** (*Supply Chain Management*);
-- **CRM** (*Customer Relationship Management*).
+- **SCM** (*Supply Chain Management*, gestione della catena di fornitura);
+- **CRM** (*Customer Relationship Management*, gestione delle relazioni con i clienti).
 
 <!-- SOURCE_VISUAL id="IS24-V06" source="L24-web.pdf" page="21" type="schema" description="Sei principi di cybersicurezza dell’IoT nello stack con aggiornamenti OTA e sistemi PLM, ERP, SCM, CRM" reason="I sei principi sono presenti solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -177,9 +177,9 @@ La pipeline PyTorch carica pesi e trasformazioni associate al modello, prepara u
 > 📌 **OTA** (*Over-the-Air*, p. 18). Un **metodo standardizzato** per inviare **aggiornamenti di software e firmware** ai dispositivi IoT **da remoto**, **senza accesso fisico**.
 > - È diventato una **pietra angolare** degli ecosistemi IoT moderni: permette miglioramenti e **patch di sicurezza** per auto connesse, sensori intelligenti, macchinari industriali.
 > - Per garantire **integrità** e **riservatezza** durante la trasmissione si usano protocolli di comunicazione sicuri:
->   - **HTTPS**;
+>   - **HTTPS** (*Hypertext Transfer Protocol Secure*, protocollo sicuro di trasferimento ipertestuale);
 >   - **MQTT**, protocollo di messaggistica **leggero** progettato per comunicare in modo efficiente in ambienti con **risorse limitate**;
->   - **TLS**, protocollo crittografico che **cifra i dati**, **autentica gli estremi** della comunicazione e ne garantisce l’**integrità**.
+>   - **TLS** (*Transport Layer Security*, sicurezza del livello di trasporto), protocollo crittografico che **cifra i dati**, **autentica gli estremi** della comunicazione e ne garantisce l’**integrità**.
 
 > ⚠️ **MQTT da solo non è sicuro (nota didattica).** HTTPS è HTTP su TLS; MQTT invece è un protocollo di messaggistica che **diventa sicuro solo se trasportato su TLS** (tipicamente sulla porta 8883) e con autenticazione dei dispositivi. Un aggiornamento OTA robusto richiede inoltre:
 > - la **firma digitale del firmware**, verificata dal dispositivo prima di installarlo: TLS protegge il canale, ma non dice se il firmware viene dal produttore;
@@ -219,16 +219,16 @@ La pipeline PyTorch carica pesi e trasformazioni associate al modello, prepara u
 > | **sicurezza nel ciclo di vita** | aggiornamenti di software e firmware per correggere le vulnerabilità |
 > | **trasparenza e documentazione** | — |
 
-> ⚠️ **Le date del CRA (nota didattica).** La data generale di applicazione è l’11 dicembre 2027; alcuni obblighi decorrono prima. Il Cyber Resilience Act è il **Regolamento (UE) 2024/2847**:
+> ⚠️ **Le date del CRA (*Cyber Resilience Act*, regolamento sulla resilienza informatica) (nota didattica).** La data generale di applicazione è l’11 dicembre 2027; alcuni obblighi decorrono prima. Il Cyber Resilience Act è il **Regolamento (UE) 2024/2847**:
 > - è **entrato in vigore** il 10 dicembre 2024;
 > - gli **obblighi di segnalazione** delle vulnerabilità sfruttate e degli incidenti si applicano dall’**11 settembre 2026**;
 > - la **generalità degli obblighi** si applica dall’**11 dicembre 2027**.
 >
 > Come per l’AI Act (Lezione 02, §2), conviene ricordare la logica a scadenze successive più che una sola data.
 
-**Stato operativo (20 novembre 2026).** ENISA ha attivato la **Single Reporting Platform** l’11 settembre 2026, in coincidenza con l’applicazione degli obblighi dell’articolo 14 per i fabbricanti. La versione iniziale consente le segnalazioni obbligatorie di vulnerabilità attivamente sfruttate e incidenti gravi con impatto sui prodotti digitali; la segnalazione volontaria dell’articolo 15 sarà introdotta in una fase successiva. Gli obblighi pertinenti agli steward open-source hanno una decorrenza successiva, l’11 dicembre 2027. [FAQ ENISA sulla piattaforma](https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions).
+**Stato operativo (20 novembre 2026).** ENISA (*European Union Agency for Cybersecurity*, Agenzia dell’Unione europea per la cybersicurezza) ha attivato la **Single Reporting Platform** l’11 settembre 2026, in coincidenza con l’applicazione degli obblighi dell’articolo 14 per i fabbricanti. La versione iniziale consente le segnalazioni obbligatorie di vulnerabilità attivamente sfruttate e incidenti gravi con impatto sui prodotti digitali; la segnalazione volontaria dell’articolo 15 sarà introdotta in una fase successiva. Gli obblighi pertinenti agli steward open-source hanno una decorrenza successiva, l’11 dicembre 2027. [FAQ ENISA sulla piattaforma](https://www.enisa.europa.eu/topics/product-security/vulnerability-services/eu-incident-response-and-cyber-crisis-management/single-reporting-platform-srp/frequently-asked-questions).
 
-> 📌 **NIST IoT Cybersecurity Framework** (USA, p. 21). Un framework **volontario** statunitense per proteggere dispositivi ed ecosistemi IoT, organizzato in cinque funzioni. Esempio di una **fabbrica intelligente** con sensori IoT:
+> 📌 **NIST (*National Institute of Standards and Technology*, Istituto nazionale statunitense per gli standard e la tecnologia) IoT Cybersecurity Framework** (USA, p. 21). Un framework **volontario** statunitense per proteggere dispositivi ed ecosistemi IoT, organizzato in cinque funzioni. Esempio di una **fabbrica intelligente** con sensori IoT:
 >
 > | Funzione | Nella fabbrica |
 > |---|---|
@@ -238,7 +238,7 @@ La pipeline PyTorch carica pesi e trasformazioni associate al modello, prepara u
 > | **Respond** | **isolare** un sensore compromesso |
 > | **Recover** | **aggiornare il firmware** e rafforzare la sicurezza |
 
-> ⚠️ **Quale documento NIST.** Le cinque funzioni sono quelle del **NIST Cybersecurity Framework** generale. La versione **CSF 2.0** (febbraio 2024) ne aggiunge una sesta, **Govern**, che riguarda strategia, ruoli e responsabilità. Le raccomandazioni specifiche per i dispositivi IoT sono nella serie **NIST IR 8259** (capacità di base richieste ai produttori). Il quadro distingue tra obblighi per i prodotti venduti nell’UE (CRA) e raccomandazioni volontarie del framework negli USA.
+> ⚠️ **Quale documento NIST.** Le cinque funzioni sono quelle del **NIST Cybersecurity Framework** generale. La versione **CSF (*Cybersecurity Framework*, quadro di riferimento per la cybersicurezza) 2.0** (febbraio 2024) ne aggiunge una sesta, **Govern**, che riguarda strategia, ruoli e responsabilità. Le raccomandazioni specifiche per i dispositivi IoT sono nella serie **NIST IR 8259** (capacità di base richieste ai produttori). Il quadro distingue tra obblighi per i prodotti venduti nell’UE (CRA) e raccomandazioni volontarie del framework negli USA.
 
 ---
 
@@ -304,11 +304,11 @@ La p. 33 presenta **Microsoft Azure IoT**.
 <!-- SOURCE_VISUAL id="IS24-V14" source="L24-web.pdf" page="100" type="schema" description="Architettura di Microsoft Azure IoT" reason="Pagina con solo schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 **Eclipse ThreadX, già Azure RTOS**. Una **suite di sviluppo embedded** con un sistema operativo **piccolo ma potente**, che offre prestazioni affidabili e **velocissime** su dispositivi con risorse limitate.
+> 📌 **Eclipse ThreadX, già Azure RTOS (*Real-Time Operating System*, sistema operativo in tempo reale)**. Una **suite di sviluppo embedded** con un sistema operativo **piccolo ma potente**, che offre prestazioni affidabili e **velocissime** su dispositivi con risorse limitate.
 > - **Facile da usare**.
 > - **Portabile**: supporta i più diffusi **microcontrollori a 32 bit** e gli strumenti di sviluppo embedded, con **riuso** di progetti e conoscenze precedenti.
 > - **Collaudato sul mercato**: oltre **6,2 miliardi di dispositivi** nel mondo.
-> - **Sicuro**: **IPsec** a livello IP, **TLS** e **DTLS** a livello socket.
+> - **Sicuro**: **IPsec** (*Internet Protocol Security*, sicurezza del protocollo Internet) a livello IP, **TLS** e **DTLS** (*Datagram Transport Layer Security*, sicurezza del livello di trasporto per datagrammi) a livello socket.
 > - Il firmware si può aggiornare **over-the-air** con la gestione automatica dei dispositivi.
 
 #### **4.4. Google Coral**
@@ -608,7 +608,7 @@ La p. 62 avverte: **le cose cambiano in fretta**.
 > - a **bassa latenza**;
 > - **altamente affidabile**
 >
-> tra un’ampia gamma di sensori legati al **trasporto** e al **traffico**. Le reti mobili **5G** saranno fondamentali per la connettività **veicolo-veicolo** (V2V) e **veicolo-infrastruttura** (V2I).
+> tra un’ampia gamma di sensori legati al **trasporto** e al **traffico**. Le reti mobili **5G** saranno fondamentali per la connettività **veicolo-veicolo** (V2V (*Vehicle-to-Vehicle*, comunicazione veicolo-veicolo)) e **veicolo-infrastruttura** (V2I (*Vehicle-to-Infrastructure*, comunicazione veicolo-infrastruttura)).
 
 La p. 80 mostra la **road map del V2X** (da leggere pensando anche alle auto elettriche e ibride).
 
@@ -632,7 +632,7 @@ La p. 80 mostra la **road map del V2X** (da leggere pensando anche alle auto ele
 #### **10.2. Sistemi di trasporto intelligenti**
 
 
-> 📌 **Sistemi di trasporto intelligenti (ITS)**. Sistemi avanzati di gestione del **trasporto** e del **traffico** a livello di autostrada, città o regione, che permettono agli utenti di essere **meglio informati** e di usare le reti di trasporto in modo **più sicuro**, **coordinato** e «**intelligente**» grazie all’AI. Esempi:
+> 📌 **Sistemi di trasporto intelligenti (ITS (*Intelligent Transportation Systems*, sistemi di trasporto intelligenti))**. Sistemi avanzati di gestione del **trasporto** e del **traffico** a livello di autostrada, città o regione, che permettono agli utenti di essere **meglio informati** e di usare le reti di trasporto in modo **più sicuro**, **coordinato** e «**intelligente**» grazie all’AI. Esempi:
 > - **chiamata dei soccorsi** quando avviene un incidente;
 > - **telecamere** per far rispettare il codice della strada;
 > - **segnali** che cambiano il limite di velocità in base alle condizioni del traffico e del meteo;
@@ -654,7 +654,7 @@ La p. 80 mostra la **road map del V2X** (da leggere pensando anche alle auto ele
 <!-- SOURCE_VISUAL id="IS24-V32" source="L24-web.pdf" page="106" type="immagine" description="Pirelli Cyber: da un sensore al cloud" reason="Pagina con sola immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 **Da un piccolo sensore alla smart city**. **ADAS** (*Advanced Driver Assistance Systems*) potenziati dal **5G**, in un progetto di **Pirelli**, **Ericsson**, **Audi**, **TIM**, **Italdesign** e **KTH**:
+> 📌 **Da un piccolo sensore alla smart city**. **ADAS** (*Advanced Driver Assistance Systems*, sistemi avanzati di assistenza alla guida) potenziati dal **5G**, in un progetto di **Pirelli**, **Ericsson**, **Audi**, **TIM**, **Italdesign** e **KTH**:
 > 1. i **sensori negli pneumatici** sono **a contatto con la strada**;
 > 2. i sensori **rilevano pericoli** sul fondo stradale (**acqua**, **scarsa aderenza**, …);
 > 3. l’auto **adatta** il proprio **controllo** e i sistemi di **assistenza alla guida**;
@@ -864,7 +864,7 @@ L’allegato, esplicitamente **non oggetto d’esame**, descrive **4 caratterist
 
 | Caratteristica | Contenuto (slide) |
 |---|---|
-| **1. Integrazione verticale** dei sistemi di produzione intelligenti | usa i **sistemi di produzione cyber-fisici** (CPPS) perché gli impianti reagiscano rapidamente a variazioni della **domanda**, delle **scorte** e ai **guasti**. Le **fabbriche intelligenti** si **auto-organizzano** e permettono una produzione **personalizzata** sul cliente, dal mercato alla produzione |
+| **1. Integrazione verticale** dei sistemi di produzione intelligenti | usa i **sistemi di produzione cyber-fisici** (CPPS (*Cyber-Physical Production Systems*, sistemi di produzione ciberfisici)) perché gli impianti reagiscano rapidamente a variazioni della **domanda**, delle **scorte** e ai **guasti**. Le **fabbriche intelligenti** si **auto-organizzano** e permettono una produzione **personalizzata** sul cliente, dal mercato alla produzione |
 | **2. Integrazione orizzontale** tramite una nuova generazione di **reti globali della catena del valore** | reti locali e globali collegano tramite CPPS **logistica**, **magazzino**, **produzione**, **marketing** e **vendite**. Le reti sono **ottimizzate in tempo reale**, con **trasparenza** e **flessibilità** per rispondere più in fretta a problemi e guasti e un’**ottimizzazione globale** migliore. La **storia di ogni parte o prodotto** è registrata e consultabile in qualsiasi momento: **tracciabilità** costante |
 | **3. Ingegneria continua** lungo tutta la catena del valore | lo **sviluppo** e la **produzione** di **nuovi prodotti** e **sistemi produttivi** sono integrati e coordinati con il **ciclo di vita** dei prodotti, creando sinergie tra sviluppo del prodotto e sistemi di produzione: sviluppo → produzione → ciclo di vita |
 | **4. Accelerazione** tramite **tecnologie esponenziali** | l’Industria 4.0 richiede soluzioni di automazione **altamente cognitive** e **altamente autonome**. Per aumentare ancora l’autonomia e accelerare **individualizzazione** e **flessibilità** servono **intelligenza artificiale**, **robotica avanzata** e **tecnologie dei sensori** |

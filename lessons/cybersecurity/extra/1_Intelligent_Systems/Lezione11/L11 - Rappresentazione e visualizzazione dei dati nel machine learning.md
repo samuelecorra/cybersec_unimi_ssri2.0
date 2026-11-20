@@ -100,7 +100,7 @@ Un esempio semplice per rivedere le tecniche appena studiate, in **Google Colab*
 | **tutte le feature insieme** | — | come capire che cosa succede **in molte dimensioni**? |
 | **tutte le feature e le etichette** | — | come capirlo in molte dimensioni **e con le etichette**? |
 
-**E le immagini?**. Un esempio è la visualizzazione del dataset **CIFAR-10**.
+**E le immagini?**. Un esempio è la visualizzazione del dataset CIFAR-10 (*Canadian Institute for Advanced Research*, raccolta di immagini in dieci classi).
 
 > 💡 **CIFAR-10 (nota didattica).** È un dataset di **60 000 immagini a colori 32 × 32** pixel divise in **10 classi** (aereo, automobile, uccello, gatto, cervo, cane, rana, cavallo, nave, camion). Visualizzarlo significa di solito mostrare una griglia di esempi per classe, oppure proiettare le immagini in 2D (per esempio con t-SNE) per vedere quali classi si mescolano.
 
@@ -151,7 +151,7 @@ Le date di applicazione dell’AI Act sono state modificate dal Regolamento (UE)
 #### **4.3. Il Population Stability Index**
 
 
-> 📌 **Population Stability Index** (PSI). Un indice numerico che confronta la **distribuzione dei dati di addestramento** (riferimento) con la **distribuzione attuale dei dati in produzione**. Aiuta a rilevare il **drift degli input**, che può portare a **bias**, **degrado dell’accuratezza** o necessità di **ricalibrare e riaddestrare**: verifica se il modello rilasciato riceve ancora dati **familiari**.
+> 📌 **Population Stability Index**, PSI (indice di stabilità della popolazione). Un indice numerico che confronta la **distribuzione dei dati di addestramento** (riferimento) con la **distribuzione attuale dei dati in produzione**. Aiuta a rilevare il **drift degli input**, che può portare a **bias**, **degrado dell’accuratezza** o necessità di **ricalibrare e riaddestrare**: verifica se il modello rilasciato riceve ancora dati **familiari**.
 >
 > Si divide la feature in intervalli (bin); se $p_i$ è la **percentuale** di campioni nel bin $i$ nei dati di riferimento e $q_i$ la percentuale nello stesso bin nei dati di produzione (per esempio dell’ultimo mese):
 > $$\text{PSI} = \sum_{i} (q_i - p_i) \ln\frac{q_i}{p_i}$$
@@ -227,7 +227,7 @@ Qual è la rete migliore? NN1 ha la confidenza più alta, ma **la predizione è 
 
 **Visualizzare i kernel delle CNN: quali pattern rilevano?** I kernel appresi attivano risposte elevate in corrispondenza delle strutture per cui sono diventati sensibili. Si possono quindi associare a ciascun filtro gli esempi del dataset che producono l’attivazione più alta, rendendo più leggibile il comportamento dei filtri.
 
-**Visualizzazioni dei modelli**: forse **troppo dense**? Esempio: **DQNViz**, un approccio di *visual analytics* per capire le **Deep Q-Networks** (DQN), un tipo di modello di **apprendimento per rinforzo profondo**.
+**Visualizzazioni dei modelli**: forse **troppo dense**? Esempio: **DQNViz**, un approccio di *visual analytics* per capire le **Deep Q-Networks**, DQN (reti Q profonde), un tipo di modello di **apprendimento per rinforzo profondo**.
 
 <!-- SOURCE_VISUAL id="IS11-V15" source="Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf" page="40" type="immagini" description="Kernel di una CNN (quadrati grigi) ed esempi che li attivano al massimo (quadrati colorati)" reason="Kernel ed esempi visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -263,7 +263,7 @@ Le proiezioni in PCA, t-SNE e UMAP riducono lo spazio a due dimensioni. PCA forn
 
 Nei modelli, una matrice di pesi può essere resa come immagini: i 64 pesi che collegano gli input pixel a un neurone diventano una tessera 8×8; istogrammi e statistiche aiutano a riconoscere scale anomale e unità inattive. Le mappe delle attivazioni mostrano quali unità rispondono alle diverse classi e possono rivelare neuroni che non si attivano mai. I kernel di una CNN si interpretano confrontandoli con le porzioni di immagine che producono risposte elevate. Mappe di salienza e SmoothGrad evidenziano regioni che influenzano il punteggio, ma restano strumenti diagnostici e non spiegazioni definitive.
 
-Per misurare le prestazioni, matrice di confusione e tassi per classe indicano dove si concentrano gli errori. Nel caso delle cifre, i 19 errori comprendono tre “3” classificati come “8”. L’accuratezza media va affiancata da analisi per slice: classe, quantità d’inchiostro, illuminazione o fornitore possono individuare gruppi deboli che scompaiono nella media. La reliability diagram confronta confidenza e frequenza osservata; un modello calibrato che assegna confidenza 0,8 risulta corretto circa nell’80% dei casi corrispondenti. L’ECE è una media pesata degli scarti per bin. Calibrazione e accuratezza sono proprietà diverse: un modello ben calibrato può comunque sbagliare spesso.
+Per misurare le prestazioni, matrice di confusione e tassi per classe indicano dove si concentrano gli errori. Nel caso delle cifre, i 19 errori comprendono tre “3” classificati come “8”. L’accuratezza media va affiancata da analisi per slice: classe, quantità d’inchiostro, illuminazione o fornitore possono individuare gruppi deboli che scompaiono nella media. La reliability diagram confronta confidenza e frequenza osservata; un modello calibrato che assegna confidenza 0,8 risulta corretto circa nell’80% dei casi corrispondenti. L’ECE (*Expected Calibration Error*, errore atteso di calibrazione) è una media pesata degli scarti per bin. Calibrazione e accuratezza sono proprietà diverse: un modello ben calibrato può comunque sbagliare spesso.
 
 La permutation importance misura di quanto cala una metrica quando i valori di una feature vengono rimescolati. Indica quanto il modello dipende da quella variabile nel dataset valutato; non prova che la variabile sia una causa fisica. Feature correlate possono condividere l’importanza, rendendo instabile il confronto.
 
@@ -419,7 +419,7 @@ La galleria MATLAB include esempi di **annotazioni**, **mappe di colore** e **li
 |---|---|
 | | **distribuzioni nel tempo**: assenza di dati, vincitori, eventi |
 | | **fenomeni complessi** |
-| | **vaccinazione contro il morbillo** (dati OMS) |
+| | **vaccinazione contro il morbillo** (dati dell’OMS, Organizzazione Mondiale della Sanità) |
 | | grafico nel grafico, vettori in linee 3D (galleria MATLAB) |
 | | strumenti online per la visualizzazione **interattiva**, per esempio **observablehq.com** |
 | | esempi grafici senza testo |

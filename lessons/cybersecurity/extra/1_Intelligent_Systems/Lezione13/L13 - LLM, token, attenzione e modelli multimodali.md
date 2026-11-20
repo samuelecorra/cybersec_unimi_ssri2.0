@@ -70,7 +70,7 @@ Gli LLM moderni si usano soprattutto come modelli **generativi**, ma molte appli
 |---|---|---|
 | **estrazione del sentiment** | classificare il tono di un testo | **accuratezza** (frazione di predizioni corrette), **precisione** (frazione di positivi predetti che sono veri positivi), **recall** (frazione di veri positivi recuperati), **F1** (media armonica di precisione e recall) |
 | **riconoscimento delle entità** (NER, ) | identificare e classificare le **entità** citate nel testo: nomi, organizzazioni, luoghi, date, codici, quantità | accuratezza, precisione, recall, F1, calcolate a livello di **token** o di **intervallo di entità**, di solito **per tipo** di entità |
-| **traduzione automatica** | produrre un testo in un’altra lingua | **BLEU**: sovrapposizione di **n-grammi** con traduzioni di riferimento; **ROUGE**: sovrapposizione con riassunti o testi di riferimento; **perplessità**: quanto una sequenza è **inattesa** per il modello |
+| **traduzione automatica** | produrre un testo in un’altra lingua | **BLEU (*Bilingual Evaluation Understudy*, valutazione bilingue automatica)**: sovrapposizione di **n-grammi** con traduzioni di riferimento; **ROUGE (*Recall-Oriented Understudy for Gisting Evaluation*, valutazione orientata al richiamo per la sintesi)**: sovrapposizione con riassunti o testi di riferimento; **perplessità**: quanto una sequenza è **inattesa** per il modello |
 
 > 📌 **n-gramma**. Una sequenza **contigua** di $n$ parole, caratteri o token estratta da un testo. Per esempio, i bigrammi di «il gatto dorme» sono «il gatto» e «gatto dorme».
 

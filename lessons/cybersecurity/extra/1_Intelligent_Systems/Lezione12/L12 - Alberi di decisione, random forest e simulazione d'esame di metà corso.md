@@ -79,7 +79,7 @@ L’esempio dei **dati sulla frutta** mostra come un albero di decisione separa 
 
 
 
-**Un esempio sintetico di frontiere**. Trentadue frutti simulati sono descritti da larghezza e altezza in centimetri, con etichette mela, arancia e limone. Ogni nodo confronta una feature con una soglia; cinque test producono regioni rettangolari e regole if–then equivalenti all’albero. La figura delle regioni descrive il modello addestrato su quei punti: da sola non misura l’accuratezza su frutti nuovi. Il confronto con k-NN e SVM mostra che classificatori diversi inducono frontiere geometriche differenti sugli stessi dati.
+**Un esempio sintetico di frontiere**. Trentadue frutti simulati sono descritti da larghezza e altezza in centimetri, con etichette mela, arancia e limone. Ogni nodo confronta una feature con una soglia; cinque test producono regioni rettangolari e regole if–then equivalenti all’albero. La figura delle regioni descrive il modello addestrato su quei punti: da sola non misura l’accuratezza su frutti nuovi. Il confronto con k-NN e SVM (*Support Vector Machine*, macchina a vettori di supporto) mostra che classificatori diversi inducono frontiere geometriche differenti sugli stessi dati.
 
 <!-- SOURCE_VISUAL id="IS12-27-V01" source="L12-web.pdf" page="12" type="grafico" description="32 osservazioni sintetiche, larghezza e altezza, colorate per classe" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -103,9 +103,9 @@ Per controllare la conoscenza contenuta in un albero si guardano:
 
 La profondità è come il numero di passi con cui il «piccolo detective» arriva alla decisione. Gli alberi di decisione sono **molto veloci**: pochi `if`.
 
-**2) Impurità di Gini**. Misura la **purezza dei nodi**: la **probabilità** che un elemento scelto a caso sia **classificato in modo sbagliato** se lo si etichettasse secondo la distribuzione delle classi nel nodo. Si usa per valutare le divisioni in algoritmi come **CART**.
+**2) Impurità di Gini**. Misura la **purezza dei nodi**: la **probabilità** che un elemento scelto a caso sia **classificato in modo sbagliato** se lo si etichettasse secondo la distribuzione delle classi nel nodo. Si usa per valutare le divisioni in algoritmi come CART (*Classification and Regression Trees*, alberi di classificazione e regressione).
 
-**Entropia**. Misura l’**incertezza** in un nodo: quanto sono **mescolate** le classi; entropia più alta significa più confusione. Si usa negli algoritmi **ID3** e **C4.5**. Viene dalla **teoria dell’informazione** (Shannon, 1948), e la **base del logaritmo** definisce l’unità di informazione. In questo contesto l’«informazione» è una cosa **negativa**: significa che il nodo ha **troppa incertezza**.
+**Entropia**. Misura l’**incertezza** in un nodo: quanto sono **mescolate** le classi; entropia più alta significa più confusione. Si usa negli algoritmi ID3 (*Iterative Dichotomiser 3*, algoritmo iterativo di costruzione degli alberi) e C4.5. Viene dalla **teoria dell’informazione** (Shannon, 1948), e la **base del logaritmo** definisce l’unità di informazione. In questo contesto l’«informazione» è una cosa **negativa**: significa che il nodo ha **troppa incertezza**.
 
 - **Entropia minima** (zero): **nessuna incertezza**, tutti i campioni appartengono a **una sola classe**.
 - **Entropia massima**: tutte le classi sono **ugualmente probabili**; nel caso **binario** $H_{\max} = 1$.
@@ -311,7 +311,7 @@ Un albero espone la gerarchia di test e le regioni in cui assegna classi. La let
 <!-- SOURCE_VISUAL id="IS12-27-V04" source="L12-web.pdf" page="31" type="schema" description="Campionamento bootstrap con ripetizioni e tre alberi differenti" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-In un esempio sintetico, **32 frutti** sono descritti da larghezza e altezza e assegnati a tre classi. Ogni confine della mappa corrisponde a una regola su una feature; le regioni rettangolari sono l’effetto delle soglie parallele agli assi. k-NN produce frontiere determinate dai vicini, mentre una SVM RBF può generare confini curvi. Il confronto mostra la forma degli ipotizzatori, non quale modello generalizzi meglio senza una valutazione valida.
+In un esempio sintetico, **32 frutti** sono descritti da larghezza e altezza e assegnati a tre classi. Ogni confine della mappa corrisponde a una regola su una feature; le regioni rettangolari sono l’effetto delle soglie parallele agli assi. k-NN produce frontiere determinate dai vicini, mentre una SVM con kernel RBF (*Radial Basis Function*, funzione di base radiale) può generare confini curvi. Il confronto mostra la forma degli ipotizzatori, non quale modello generalizzi meglio senza una valutazione valida.
 
 Alberi e random forest possono essere **strumenti per descrivere i dati**. Imparando una gerarchia di regole, un albero mostra:
 

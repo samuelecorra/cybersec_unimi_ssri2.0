@@ -16,7 +16,7 @@ Il percorso va dalla definizione e dal funzionamento degli agenti alle scelte di
 
 ### **1. Che cos’è un agente**
 
-**Esempio di implementazione, aggiornato al 20 novembre 2026.** L’OpenAI Agents API è in beta pubblica e consente sessioni durevoli con strumenti propri e server MCP. Un aggiornamento della lista degli strumenti sostituisce l’intera lista configurata; strumenti function e MCP aggiornati diventano effettivi alla successiva chiamata del modello, mentre gli strumenti integrati al turno successivo. Dal 30 ottobre la compattazione del contesto è asincrona per impostazione predefinita e può aumentare l’uso di token. Sono comportamenti specifici di questa API, non proprietà generali degli agenti. Nelle integrazioni vanno quindi registrati strumenti, permessi e transizioni di stato. [Changelog API OpenAI](https://developers.openai.com/api/docs/changelog).
+**Esempio di implementazione, aggiornato al 20 novembre 2026.** L’OpenAI Agents API è in beta pubblica e consente sessioni durevoli con strumenti propri e server MCP (*Model Context Protocol*, protocollo di contesto per modelli). Un aggiornamento della lista degli strumenti sostituisce l’intera lista configurata; strumenti function e MCP aggiornati diventano effettivi alla successiva chiamata del modello, mentre gli strumenti integrati al turno successivo. Dal 30 ottobre la compattazione del contesto è asincrona per impostazione predefinita e può aumentare l’uso di token. Sono comportamenti specifici di questa API, non proprietà generali degli agenti. Nelle integrazioni vanno quindi registrati strumenti, permessi e transizioni di stato. [Changelog API OpenAI](https://developers.openai.com/api/docs/changelog).
 
 __
 
@@ -281,7 +281,7 @@ __
 > - i **vincoli**;
 > - il **formato di output** richiesto.
 
-**Che cosa comporta**. Progettare **prompt di sistema strutturati** che definiscono **ruolo**, **obiettivi**, **vincoli** e **uso degli strumenti** (API, MCP, …), e guidano **flussi autonomi a più passi** invece di singole interazioni. Per ottenere output coerenti e di qualità si usano tecniche come **ReAct** (*Reasoning + Acting*) e **esempi few-shot**, sia positivi sia negativi.
+**Che cosa comporta**. Progettare **prompt di sistema strutturati** che definiscono **ruolo**, **obiettivi**, **vincoli** e **uso degli strumenti** (API, MCP, …), e guidano **flussi autonomi a più passi** invece di singole interazioni. Per ottenere output coerenti e di qualità si usano tecniche come **ReAct** (*Reasoning and Acting*, ragionamento e azione) e **esempi few-shot**, sia positivi sia negativi.
 
 > 📌 **Dalle domande migliori al contesto di lavoro**. Un prompt è solo **una parte** di un sistema agentico. Per un agente bisogna progettare:
 > - **istruzioni**;
@@ -622,7 +622,7 @@ L’agente correla fino a 10.000 eventi orari provenienti da identità, endpoint
 
 #### **5.5. Mappatura geospaziale da immagini aeree**
 
-Per 5.000 immagini da drone, immagini e metadati di volo vengono georeferenziati; poi si rimuovono duplicati, si rilevano difetti candidati e si producono poligoni GIS con confidenza e ID delle immagini sorgente. Le regioni a bassa confidenza passano a un revisore. Metriche: copertura, IoU dei poligoni, falsi allarmi per km² e validità dell’esportazione GIS.
+Per 5.000 immagini da drone, immagini e metadati di volo vengono georeferenziati; poi si rimuovono duplicati, si rilevano difetti candidati e si producono poligoni GIS (*Geographic Information System*, sistema informativo geografico) con confidenza e ID delle immagini sorgente. Le regioni a bassa confidenza passano a un revisore. Metriche: copertura, IoU (*Intersection over Union*, rapporto tra area di intersezione e area di unione) dei poligoni, falsi allarmi per km² e validità dell’esportazione GIS.
 
 <!-- SOURCE_VISUAL id="IS15-V27" source="L15-web.pdf" page="92" type="schema" description="Pipeline geospaziale da 5000 immagini a mappa GIS revisionata" reason="Passaggi di georeferenziazione, detection e verifica mostrati in figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->

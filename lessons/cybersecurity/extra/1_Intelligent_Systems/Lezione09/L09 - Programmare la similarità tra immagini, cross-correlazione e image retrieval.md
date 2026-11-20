@@ -39,18 +39,18 @@ with open('dog1.jpg', 'wb') as handler:
 
 from matplotlib import pyplot as plt
 img_color1 = cv2.imread('dog1.jpg')
-img_color1 = cv2.cvtColor(img_color1, cv2.COLOR_BGR2RGB)
+img_color1 = cv2.cvtColor(img_color1, cv2.COLOR_BGR2RGB)  # BGR (Blue, Green, Red: blu, verde, rosso) viene convertito in RGB.
 plt.imshow(img_color1)
 plt.show()
 ```
 
-> ⚠️ **OpenCV legge in BGR.** `cv2.imread` restituisce i canali nell’ordine **blu, verde, rosso**, mentre matplotlib si aspetta **RGB**: senza la conversione `COLOR_BGR2RGB` le immagini appaiono con rossi e blu scambiati. È il «colorspace corretto» della.
+> ⚠️ **OpenCV legge in BGR (*Blue, Green, Red*, blu, verde, rosso).** `cv2.imread` restituisce i canali nell’ordine **blu, verde, rosso**, mentre matplotlib si aspetta **RGB**: senza la conversione `COLOR_BGR2RGB` le immagini appaiono con rossi e blu scambiati. È il «colorspace corretto» della.
 
 **Calcolo degli hash e delle distanze**: con `imagehash` la sottrazione tra due hash restituisce direttamente la **distanza di Hamming**.
 
 ```python
 import imagehash
-from PIL import Image
+from PIL import Image  # Python Imaging Library, libreria di immagini per Python
 
 hash1 = imagehash.average_hash(Image.open('dog1.jpg'))
 hash2 = imagehash.average_hash(Image.open('dog2.jpg'))
@@ -98,7 +98,7 @@ Gli hash a 64 bit dell’originale sono `0000d0e8ffffffff` (aHash) e `d94d2c351d
 
 **Il nucleo della cross-correlazione**. Nelle applicazioni di elaborazione delle immagini, luminosità di immagine e template possono variare per **illuminazione** ed **esposizione**. Per questo le immagini si possono prima **normalizzare**, di solito **a ogni passo**, **sottraendo la media** e **dividendo per la deviazione standard**. Si ripete poi il calcolo **spostando** la sottoimmagine $f(x+i, y+j)$ e si cerca dove la correlazione normalizzata è **massima**.
 
-> 📌 **Correlazione incrociata normalizzata** (NCC). Con template $t(x, y)$ e sottoimmagine $f$ di $n$ pixel, medie $\bar{t}$, $\bar{f}$ e deviazioni standard $\sigma_t$, $\sigma_f$:
+> 📌 **Correlazione incrociata normalizzata** (NCC, *Normalized Cross-Correlation*, correlazione incrociata normalizzata). Con template $t(x, y)$ e sottoimmagine $f$ di $n$ pixel, medie $\bar{t}$, $\bar{f}$ e deviazioni standard $\sigma_t$, $\sigma_f$:
 > $$\text{NCC}(i, j) = \frac{1}{n} \sum_{x, y} \frac{\big(f(x+i, y+j) - \bar{f}\big)\,\big(t(x, y) - \bar{t}\big)}{\sigma_f \, \sigma_t}$$
 > Vale **1** per una corrispondenza perfetta, **0** in assenza di correlazione, **−1** per un’immagine «in negativo». Il miglior allineamento è $(i^*, j^*) = \arg\max_{i,j} \text{NCC}(i, j)$.
 
