@@ -140,9 +140,6 @@ Al 20 novembre 2026, GPT-6.2 Astra e GPT-6.2 Sol sono disponibili dal 17 novembr
 
 Fonti primarie per i valori pubblicati: [Meta Llama](https://ai.meta.com/resources/models-and-libraries/llama-downloads/), [rilasci Google Gemma](https://ai.google.dev/gemma/docs/releases). La lista è uno snapshot: versioni e disponibilità cambiano rapidamente.
 
-<!-- SOURCE_VISUAL id="IS04-V01" source="L04-main-web.pdf" page="17-18" type="tabella" description="Famiglie di modelli con parametri totali e attivi e confronto cronologico delle dimensioni dichiarate" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 #### **3.2. Oligopolio e limiti dei modelli grandi**
 
 **Un oligopolio dell’AI?**. I modelli più grandi sono in mano a **grandi aziende**: per i modelli di queste dimensioni, «**make or buy**» (costruire in casa o comprare) è ancora un’opzione praticabile?
@@ -210,7 +207,11 @@ La prima regola taglia il piano con due soglie; la seconda con una **retta**. In
 - far sì che **i computer si programmino da soli**;
 - **scrivere software** è il collo di bottiglia: **lasciamo lavorare i dati**.
 
-**Esempio: una rete neurale**. Da qui in avanti, senza perdita di generalità, si fa riferimento alle reti **feed-forward**. Input: **età, sesso, altezza, peso**; output: **sovrappeso sì/no**.
+**Esempio: una rete neurale**. Da qui in avanti, senza perdita di generalità, si fa riferimento alle reti **feed-forward**. Input: **età, sesso, altezza, peso**; output: **sovrappeso sì/no**. Per una rete feed-forward semplice, la relazione si scrive:
+
+$$x = [x_1, \ldots, x_d]^\top \longmapsto \hat{y} = F(x; \theta)$$
+
+dove $\theta$ raccoglie pesi e bias appresi.
 
 ![](imgs/Pasted%20image%2020261002042607.png)
 
@@ -235,6 +236,8 @@ Esistono **decine di migliaia** di algoritmi di machine learning e **centinaia d
 > 3. **ottimizzazione**: come si cerca il modello migliore.
 
 > 💡 **Da dove viene lo schema (nota didattica).** La scomposizione «apprendimento = rappresentazione + valutazione + ottimizzazione» è resa celebre da Pedro Domingos, *A Few Useful Things to Know about Machine Learning* (2012), da cui provengono anche gli elenchi delle, 33 e 35.
+
+![](imgs/Pasted%20image%2020261120191205.png)
 
 **Rappresentazione**:
 

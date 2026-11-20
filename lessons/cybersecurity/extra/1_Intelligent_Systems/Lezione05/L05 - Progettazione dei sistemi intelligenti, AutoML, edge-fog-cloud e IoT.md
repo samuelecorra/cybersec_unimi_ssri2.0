@@ -56,8 +56,7 @@ L’impatto reale di un sistema si valuta dall’**esperienza degli utenti final
 | **una sola risposta** | quando la soluzione ha **alta probabilità** di soddisfare utenti e casi d’uso diversi; esempio: «**infarto rilevato**» |
 | **alcune opzioni** | quando è più appropriato lasciare la scelta all’utente; esempio: **un coupon** proposto da un sistema di raccomandazione |
 
-<!-- SOURCE_VISUAL id="IS05-V01" source="L05-web.pdf" page="6" type="esempi" description="Output singolo (infarto rilevato) contro alcune opzioni (coupon da un sistema di raccomandazione)" reason="Esempi visivi dei due tipi di output" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120194929.png)
 
 **b) Incorporare nel progetto i possibili feedback negativi**, già **prima del rilascio completo**, anche nell’apprendimento. Per farlo bisogna definire un **insieme adeguato di utenti**. Per una specifica classe di utenti si vogliono **escludere o limitare** alcuni output pericolosi. Seguono **test dal vivo** e iterazioni su gruppi ristretti di utenti o di traffico, per esempio **bambini** o **anziani**.
 
@@ -67,8 +66,7 @@ L’impatto reale di un sistema si valuta dall’**esperienza degli utenti final
 > $$L(a, p, n) = \max\!\Big( \lVert f(a) - f(p) \rVert^2 - \lVert f(a) - f(n) \rVert^2 + \alpha,\; 0 \Big)$$
 > La perdita è nulla solo quando il negativo è più lontano del positivo **almeno di** $\alpha$.
 
-<!-- SOURCE_VISUAL id="IS05-V02" source="L05-web.pdf" page="7" type="schema" description="Triplet loss con ancora, positivo e negativo" reason="Disposizione dei tre campioni visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120195023.png)
 
 **c) Coinvolgere utenti diversi** e considerare **più scenari d’uso**. Così si raccolgono feedback lungo tutto lo sviluppo e si **aumenta il numero di persone** che beneficiano della tecnologia.
 
@@ -78,8 +76,7 @@ $$\text{dati storici dell’utente} + \underbrace{\text{riconoscimento dell’et
 
 Un sistema che stima l’età può evitare di proporre film inadatti a un bambino, e adattare le proposte agli utenti anziani.
 
-<!-- SOURCE_VISUAL id="IS05-V03" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="8" type="diagramma" description="Sistema con riconoscimento dell’età, dati storici dell’utente e raccomandazione del film" reason="Collegamenti tra i moduli visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120195056.png)
 
 **Salvaguardie (guardrail)**: vincoli che impediscono al sistema comportamenti indesiderati. La lezione ne distingue due tipi.
 
@@ -95,9 +92,6 @@ Un sistema che stima l’età può evitare di proporre film inadatti a un bambin
 
 Nel machine learning classico i controlli si applicano ai dati e alla funzione obiettivo: si rimuovono campioni rumorosi o avversari, si previene la dispersione di informazioni tra addestramento e valutazione (*data leakage*), si progetta la funzione di perdita e si aggiungono test di sicurezza. Un agente basato su modelli linguistici richiede anche protezioni durante l’esecuzione: validazione degli input e delle istruzioni, rilevamento di prompt injection e tentativi di aggiramento, controllo degli output, permessi limitati, approvazione umana prima di azioni rilevanti e monitoraggio delle operazioni. La Lezione 15 approfondisce gli attacchi alle istruzioni e le difese nel contesto degli agenti (§§ 3 e 5).
 
-<!-- SOURCE_VISUAL id="IS05-V28" source="L05-web.pdf" page="9-10" type="tabella" description="Confronto tra guardrail applicati ai modelli classici durante addestramento e validazione e quelli applicati agli agenti a runtime" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 #### **1.3. Regola 2: metriche per addestramento e monitoraggio**
 
 Per capire i compromessi tra i vari **errori** e l’**esperienza utente** conviene considerare **più metriche essenziali**, non una sola. Le metriche possono includere:
@@ -106,6 +100,8 @@ Per capire i compromessi tra i vari **errori** e l’**esperienza utente** convi
 - variabili che seguono le **prestazioni complessive** del sistema;
 - indicatori della **salute del prodotto** nel breve e lungo periodo, come il **tasso di clic** degli utenti;
 - quantità che controllano i tassi di **falsi positivi** e **falsi negativi** nelle diverse categorie del prodotto.
+
+![](imgs/Pasted%20image%2020261120195340.png)
 
 La **scelta delle metriche** dipende dal **contesto** e dagli **obiettivi** del sistema.
 
@@ -120,12 +116,13 @@ La **scelta delle metriche** dipende dal **contesto** e dagli **obiettivi** del 
 - Misurare le prestazioni in **addestramento** e **in esercizio** è una sfida continua: durante l’addestramento bisogna cercare le possibili **distorsioni** (*skew*) e correggerle subito, modificando i dati di addestramento o ristrutturando la **funzione obiettivo**.
 - Il **bias dei dati** si affronta analizzando a fondo i dati grezzi in ingresso.
 
+![](imgs/Pasted%20image%2020261120195430.png)
+
 Un esempio è la ricerca di immagini per «**CEO**», i cui risultati possono riflettere squilibri di genere e rappresentazione.
 
 > 💡 **Che cosa mostra l’esempio (nota didattica).** Una ricerca di immagini per «CEO» ha a lungo restituito quasi solo uomini bianchi. Un modello addestrato su quelle immagini assocerebbe il ruolo a genere ed etnia: non per un difetto dell’algoritmo, ma perché i dati **riflettono uno squilibrio** della realtà e di chi pubblica le immagini.
 
-<!-- SOURCE_VISUAL id="IS05-V04" source="L05-web.pdf" page="12" type="schermata" description="Risultati di Google Immagini per la parola CEO come esempio di bias nei dati" reason="Immagini dei risultati visibili solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+---
 
 #### **1.5. Regola 4: i limiti del dataset e del modello**
 
@@ -137,8 +134,7 @@ Capire i **limiti** del dataset e del modello è essenziale per tenere traccia d
 >
 > Serve attenzione quando la correlazione **non è ovvia**, quando si usa una **scatola nera** con input numerosi e complessi, e nei campi applicativi in cui **non si è esperti**.
 
-<!-- SOURCE_VISUAL id="IS05-V05" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="14" type="illustrazione" description="Correlazione contro causalità: gelati e scottature guidati dal caldo" reason="Illustrazione dell’esempio" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120195547.png)
 
 **Portata dell’addestramento**:
 
@@ -147,6 +143,8 @@ Capire i **limiti** del dataset e del modello è essenziale per tenere traccia d
 - i **limiti** (di dati o di modello) vanno **comunicati agli utenti**: per esempio, che il modello è stato addestrato su **poche immagini** di **una certa regione**. Informando gli utenti si ottengono **feedback migliori**.
 
 Nel confronto, un **albero di decisione** è preferito per la spiegabilità, anche se offre un’accuratezza inferiore.
+
+![](imgs/Pasted%20image%2020261120195734.png)
 
 **Discussione: prestazioni contro bias**. Un dataset **DS** contiene immagini di **strisce pedonali**, con e senza pedoni, e serve ad addestrare un **rilevatore di pedoni**.
 
@@ -169,8 +167,9 @@ Nel confronto, un **albero di decisione** è preferito per la spiegabilità, anc
 
 > 💡 **Come si risponde (nota didattica).** Il 2% in più di M2 ha senso solo se il modello guarda i pedoni. Una **mappa di salienza** evidenzia i pixel che hanno pesato di più nella decisione; un **test di occlusione** copre una parte dell’immagine e osserva se la predizione cambia. Se coprendo il pedone M2 continua a «vederlo», sta usando lo sfondo. Anche un test su immagini di **altre città, orari o condizioni meteo** rivela il bias. In un’applicazione critica, un M1 al 95% di cui si capiscono gli errori è spesso la scelta più sicura.
 
-<!-- SOURCE_VISUAL id="IS05-V06" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="16" type="immagini" description="Dataset di strisce pedonali con e senza pedoni e modelli M1 e M2" reason="Immagini dello scenario visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120195749.png)
+
+---
 
 #### **1.6. Regola 5: verificare che il sistema funzioni come previsto**
 
@@ -181,13 +180,11 @@ Nel confronto, un **albero di decisione** è preferito per la spiegabilità, anc
 | **test di unità** | provare **ogni componente** del sistema **in isolamento**; per esempio il modulo di riconoscimento dell’età confrontando l’**età stimata** con l’**età reale** |
 | **test di integrazione** | capire come i singoli componenti di ML **interagiscono** con gli altri componenti del sistema |
 
-<!-- SOURCE_VISUAL id="IS05-V07" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="18" type="diagramma" description="Test di unità del modulo di età (età reale contro stimata) e test di integrazione con il sistema di raccomandazione" reason="Configurazioni dei test visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120200137.png)
 
 **Aggiungere la confidenza**. Conviene inserire nel sistema **controlli di qualità o di confidenza**, per evitare di produrre subito una risposta in caso di **guasti imprevisti**. Esempio: se una feature importante **viene improvvisamente a mancare**, il sistema può **astenersi** dal produrre una predizione. Nell’esempio del film: se il riconoscimento dell’età **fallisce** o ha **confidenza troppo bassa**, il sistema di raccomandazione non deve usare quel valore.
 
-<!-- SOURCE_VISUAL id="IS05-V08" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="19" type="diagramma" description="Guasto o confidenza troppo bassa del modulo di età che blocca la raccomandazione" reason="Punto di guasto visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120200226.png)
 
 **Come si ottiene la confidenza**. In molte reti neurali si può estrarre la confidenza dell’output; i controlli dipendono dalla famiglia di modello. Tre idee:
 
@@ -201,8 +198,7 @@ Nel confronto, un **albero di decisione** è preferito per la spiegabilità, anc
 
 > ⚠️ **La softmax non basta da sola.** Le probabilità della softmax sommano sempre a 1, anche per un input che non somiglia a nessuna classe: una rete può dare 0,99 a un’immagine di rumore (trattazione della calibrazione delle probabilità e dei dati fuori distribuzione). Per questo è utile aggiungere una classe «nessuno» e controllare la **distanza** dagli esempi noti nello spazio delle feature.
 
-<!-- SOURCE_VISUAL id="IS05-V09" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="20" type="schema" description="Strato softmax, classe none e punto di input troppo lontano nello spazio delle feature" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120200400.png)
 
 #### **1.7. Regola 6: monitorare e aggiornare dopo il rilascio**
 
@@ -215,6 +211,8 @@ Nel confronto, un **albero di decisione** è preferito per la spiegabilità, anc
 1. **monitorare**: seguire le metriche (accuratezza, feedback degli utenti) per individuare i problemi;
 2. **analizzare**: confrontare il modello **in esercizio** (attuale) con il modello **candidato** (aggiornato);
 3. **aggiornare**: riaddestrare o regolare il sistema, **testando con cura** la qualità.
+
+![](imgs/Pasted%20image%2020261120200506.png)
 
 #### **1.8. Regola 7: garantire l’equità**
 
@@ -232,8 +230,7 @@ Un esempio con due gruppi confronta tassi d’errore del **12%** e del **3%**.
 
 > 💡 **Leggere l’esempio (nota didattica).** Un errore medio basso può nascondere un gruppo per cui il sistema sbaglia **quattro volte di più** (12% contro 3%). Per questo l’equità si valuta misurando le metriche **separatamente per gruppo**, non solo sull’intero dataset.
 
-<!-- SOURCE_VISUAL id="IS05-V10" source="L05-web.pdf" page="23" type="esempio" description="Due gruppi di utenti con errore del 12% e del 3%" reason="Gruppi a cui si riferiscono gli errori visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120200707.png)
 
 #### **1.9. Regola 8: interpretabilità e spiegabilità**
 
@@ -246,12 +243,15 @@ Un esempio con due gruppi confronta tassi d’errore del **12%** e del **3%**.
 | Natura | **intrinseca** al progetto del modello: i modelli semplici «mostrano la loro logica» | sforzo **estrinseco**, **a posteriori**, per decodificare modelli complessi |
 | Caratteristica | «**capisco da solo**» | «**mi serve uno strumento** per capire» |
 
+![](imgs/Pasted%20image%2020261120200854.png)
+
 > ⚠️ Interpretabilità e spiegabilità vanno definite in modo coerente: descrivono aspetti distinti della comprensione di un modello.
+
+![](imgs/Pasted%20image%2020261120200811.png)
 
 **L’approccio a moduli** aiuta a gestire interpretabilità e spiegabilità: nel sistema del film, alcuni moduli possono essere **più interpretabili** e altri **meno**, e ciascuno si sceglie in base alla sua criticità.
 
-<!-- SOURCE_VISUAL id="IS05-V11" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="26" type="diagramma" description="Approccio a moduli con parti più e meno interpretabili nel sistema di raccomandazione" reason="Assegnazione dei livelli di interpretabilità visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120200911.png)
 
 #### **1.10. Regola 9: garantire la privacy**
 
@@ -261,12 +261,15 @@ Un esempio con due gruppi confronta tassi d’errore del **12%** e del **3%**.
 
 **Memorizzazione estraibile**. I dati di addestramento di **ChatGPT** possono essere esposti con un «**divergence attack**». Lo studio si concentrava sulla *extractable memorization*: la parte di dati memorizzati che qualcuno può **recuperare** dal modello con domande o prompt specifici. L’obiettivo era vedere se un soggetto esterno potesse **estrarre dati** appresi dal modello **senza sapere** in anticipo che cosa ci fosse nel training set.
 
+![](imgs/Pasted%20image%2020261120201048.png)
+
 **L’attacco**. I ricercatori hanno usato un prompt semplice: «**Ripeti la parola “poem” all’infinito**». Il comando ha fatto **deviare** ChatGPT dalle risposte allineate, fino a rilasciare **dati di addestramento**. Nell’esempio con la parola «book», il modello prima ripete correttamente, poi passa a **contenuti casuali**. Il testo è colorato in tonalità di rosso secondo la **lunghezza delle corrispondenze di k-grammi** con il dataset di addestramento: le sequenze lunghe, come un brano della serie *Modern Faerie Tale*, difficilmente sono casuali e indicano **memorizzazione diretta**.
+
+![](imgs/Pasted%20image%2020261120201136.png)
 
 > 💡 **Lo studio (nota didattica).** Si tratta di Nasr e colleghi, *Scalable Extraction of Training Data from (Production) Language Models* (2023). Un k-gramma è una sequenza di $k$ token consecutivi: se l’output contiene lunghe sequenze **identiche** a documenti di addestramento, la coincidenza casuale è praticamente impossibile. L’attacco è stato poi mitigato da OpenAI, ma mostra che un modello può **ricordare alla lettera** dati personali visti in addestramento.
 
-<!-- SOURCE_VISUAL id="IS05-V12" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="30" type="schermata" description="Output del divergence attack con la parola book e testo colorato secondo le corrispondenze di k-grammi" reason="Colorazione del testo visibile solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120201146.png)
 
 #### **1.11. Regola 10: garantire la sicurezza**
 
@@ -293,17 +296,14 @@ Un modello del ciclo di vita del ML è descritto in *Assuring the Machine Learni
 
 > 💡 **Le fasi del ciclo di vita (nota didattica).** Nell’articolo il ciclo di vita del ML ha quattro fasi, ciascuna con i propri requisiti di garanzia: **gestione dei dati** (raccolta, pre-elaborazione, aumento), **apprendimento del modello** (scelta, addestramento, iperparametri), **verifica del modello** (test, verifica formale) e **rilascio** (integrazione, monitoraggio, aggiornamento). La differenza tra le diverse versioni del flusso operativo va letta sulle figure.
 
-<!-- SOURCE_VISUAL id="IS05-V13" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="33" type="diagramma" description="Flusso di lavoro rigoroso del machine learning" reason="Passi del flusso presenti solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120201314.png)
 
-<!-- SOURCE_VISUAL id="IS05-V14" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="34" type="diagramma" description="Il machine learning nella pratica" reason="Passi del flusso presenti solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120201405.png)
 
-<!-- SOURCE_VISUAL id="IS05-V15" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="36" type="diagramma" description="Flusso di lavoro rivisto con i salti resi possibili da AutoML e NAS" reason="Passi saltati visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120201446.png)
 
-<!-- SOURCE_VISUAL id="IS05-V16" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="37" type="diagramma" description="Ciclo di vita del machine learning (ACM Computing Surveys 2021)" reason="Fasi del ciclo presenti solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120201457.png)
+
 
 ---
 
@@ -315,9 +315,6 @@ Un modello del ciclo di vita del ML è descritto in *Assuring the Machine Learni
 > - Scegliere una tecnica richiede una **conoscenza profonda** sia del **problema** sia delle **tecniche** considerate.
 > - **Non iniziare ad addestrare** un modello se non si è sicuri del **problema**, del **significato di input e output** e delle tecniche che si stanno applicando.
 > - I problemi reali possono richiedere una **combinazione di tecniche** (AI e non AI) per una soluzione (sub)ottima, **non solo un modello più grande**: **approcci ibridi**. Nel sistema del film, i moduli possono avere **più** o **meno** spiegabilità.
-
-<!-- SOURCE_VISUAL id="IS05-V17" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="38" type="diagramma" description="Approccio ibrido con moduli a maggiore o minore spiegabilità" reason="Assegnazione dei livelli di spiegabilità visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Passi possibili**:
 
@@ -338,7 +335,9 @@ Un modello del ciclo di vita del ML è descritto in *Assuring the Machine Learni
 | possibilità di integrazione in sistemi embedded | facilità o difficoltà di calcolo |
 | facilità d’uso | |
 
-> ⚠️ **Nota poco chiara.** La dicitura «COOrdinate format» non è spiegata e non è possibile determinarne il significato dal contesto.
+![](imgs/Pasted%20image%2020261120201750.png)
+
+![](imgs/Pasted%20image%2020261120201757.png)
 
 #### **3.2. Il rasoio di Occam**
 
@@ -355,7 +354,11 @@ Un modello del ciclo di vita del ML è descritto in *Assuring the Machine Learni
 - **aumentare gradualmente** topologia e numero di neuroni;
 - andare «**in profondità**» **solo se è davvero necessario**.
 
+![](imgs/Pasted%20image%2020261120202102.png)
+
 > 💡 **Perché partire dal semplice.** Un modello semplice fornisce una **baseline**: se una rete profonda non la supera in modo netto, la complessità in più non è giustificata. Inoltre un modello semplice si addestra in secondi, si spiega facilmente e rivela subito problemi nei dati che una rete grande nasconderebbe.
+
+![](imgs/Pasted%20image%2020261120202134.png)
 
 ---
 
@@ -367,8 +370,7 @@ Un modello del ciclo di vita del ML è descritto in *Assuring the Machine Learni
 
 > ⚠️ **Il prezzo dell’automazione**. La maggior parte dei passi del **progetto generale**, per esempio il progetto **centrato sull’uomo**, andrà (probabilmente) **persa**.
 
-<!-- SOURCE_VISUAL id="IS05-V18" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="45" type="diagramma" description="Processo AutoML dal dataset grezzo al modello rilasciabile" reason="Passi del processo presenti solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120202156.png)
 
 > 📌 **Neural Architecture Search** (NAS). Sottocampo dell’AutoML: tecnica per **automatizzare il progetto delle reti neurali artificiali**. La NAS ha prodotto reti **alla pari o migliori** di quelle progettate a mano. I metodi si classificano secondo tre elementi:
 
@@ -380,16 +382,15 @@ Un modello del ciclo di vita del ML è descritto in *Assuring the Machine Learni
 
 > ⚠️ **Precisazione (nota didattica).** Il materiale descrive la stima come «senza costruire e addestrare» la rete. È l’obiettivo delle strategie più efficienti (predittori, condivisione dei pesi, addestramenti ridotti); l’approccio base, invece, **addestra** ogni candidata ed è molto costoso.
 
-<!-- SOURCE_VISUAL id="IS05-V19" source="L05-web.pdf" page="45" type="diagramma" description="NAS: spazio di ricerca, strategia di ricerca e stima delle prestazioni" reason="Ciclo della ricerca visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 **Servizi commerciali**:
 
 - **Azure Machine Learning AutoML** supporta, tra gli altri, compiti tabellari, previsione di serie temporali, classificazione di immagini, object detection e segmentazione di istanze; per testo include classificazione ed estrazione di entità. Le funzionalità dipendono dalla versione e dal tipo di job. [Documentazione Microsoft](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-define-task-type).
 - **Google Cloud AutoML** era una famiglia di servizi per addestrare modelli personalizzati. La denominazione e i prodotti autonomi mostrati nelle vecchie schermate non descrivono l’offerta attuale: le capacità sono state ricondotte a Vertex AI e varie esperienze AutoML autonome sono state ritirate o sostituite. Per esempio, l’addestramento AutoML per classificazione ed estrazione di entità testuali non è più disponibile nella forma precedente; verificare sempre le note di rilascio di Vertex AI. [Documentazione Google Cloud](https://docs.cloud.google.com/vertex-ai/docs/release-notes).
 
-<!-- SOURCE_VISUAL id="IS05-V20" source="L05-web.pdf" page="45" type="schermata" description="Servizio Azure AutoML" reason="Pagina con sola schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120202338.png)
+
+![](imgs/Pasted%20image%2020261120202354.png)
+
 
 ---
 
@@ -399,38 +400,35 @@ Nel 2026, il progetto open source **autoresearch** esplora un ciclo essenziale d
 
 Nel grafico di una notte di esperimenti, 83 prove sono state eseguite e 15 mantenute; il valore `val_bpb` (bit per byte sul testo di validazione) deve diminuire. Il ciclo accelera l’esplorazione; ottimizzare ripetutamente sulla stessa validation può però trasformarla in un insieme di addestramento indiretto. Servono un test tenuto separato, registri riproducibili, limiti di risorse e revisione dei cambiamenti; l’autonomia dell’agente non rende automaticamente scientifica la conclusione.
 
-<!-- SOURCE_VISUAL id="IS05-V29" source="L05-web.pdf" page="49-50" type="grafico" description="Esperimenti autoresearch ripetuti con un modello nanochat su una GPU, confrontati tramite validation bits per byte" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120202542.png)
+
+![](imgs/Pasted%20image%2020261120202508.png)
 
 ### **5. Edge, fog e cloud: dove si calcola?**
 
 La domanda progettuale è **dove** eseguire il calcolo. L’architettura edge–fog–cloud distribuisce elaborazione e comunicazione tra dispositivi, nodi intermedi e cloud.
 
 > 📌 **I tre livelli (nota didattica).**
->
-> | Livello | Dove | Caratteristiche tipiche |
-> |---|---|---|
-> | **Edge** | sul dispositivo o vicinissimo al sensore (telecamera, PLC, *Programmable Logic Controller*, controllore logico programmabile, smartphone) | latenza minima, funziona anche senza rete, dati sensibili che restano in locale; risorse di calcolo ed energia limitate |
-> | **Fog** | nodi intermedi della rete locale (gateway, server di stabilimento) | aggrega più dispositivi, pre-elabora e filtra i dati, risponde in tempi brevi |
-> | **Cloud** | data center remoti | potenza di calcolo e memoria quasi illimitate, addestramento dei modelli grandi, visione globale; latenza e dipendenza dalla connessione |
->
-> Uno schema frequente: si **addestra nel cloud** e si esegue l’**inferenza sull’edge**; il fog fa da filtro e da ponte. La ripartizione concreta dipende dalla topologia e dai vincoli del processo.
+
+| Livello | Dove | Caratteristiche tipiche |
+|---|---|---|
+| **Edge** | sul dispositivo o vicinissimo al sensore (telecamera, PLC, *Programmable Logic Controller*, controllore logico programmabile, smartphone) | latenza minima, funziona anche senza rete, dati sensibili che restano in locale; risorse di calcolo ed energia limitate |
+| **Fog** | nodi intermedi della rete locale (gateway, server di stabilimento) | aggrega più dispositivi, pre-elabora e filtra i dati, risponde in tempi brevi |
+| **Cloud** | data center remoti | potenza di calcolo e memoria quasi illimitate, addestramento dei modelli grandi, visione globale; latenza e dipendenza dalla connessione |
+
+Uno schema frequente: si **addestra nel cloud** e si esegue l’**inferenza sull’edge**; il fog fa da filtro e da ponte. La ripartizione concreta dipende dalla topologia e dai vincoli del processo.
 
 > 💡 **La relazione con i requisiti di calcolo.** Il limite dei modelli enormi «un dispositivo autonomo non può sfruttare modelli grandi nel cloud» (vincoli di memoria, energia e latenza dei modelli) è proprio il motivo per cui la scelta del livello di calcolo fa parte del progetto.
 
-<!-- SOURCE_VISUAL id="IS05-V21" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="52" type="schema" description="L’edge: calcolo vicino ai dispositivi" reason="Pagina con solo schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120202623.png)
 
-<!-- SOURCE_VISUAL id="IS05-V22" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="53" type="schema" description="Catena edge, fog, cloud" reason="Livelli e flussi visibili solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120202705.png)
 
-<!-- SOURCE_VISUAL id="IS05-V23" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="54" type="infografica" description="Opportunità della combinazione tra AI e fog computing" reason="Elenco delle opportunità presente solo nell’infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120202720.png)
 
 **Caso d’uso edge-cloud**: la soluzione di calcolo per l’AI **Huawei Atlas**, presentata con un video.
 
-<!-- SOURCE_VISUAL id="IS05-V24" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="55" type="immagine" description="Caso d’uso edge-cloud Huawei Atlas AI Computing Solution" reason="Contenuto presente solo nell’immagine e nel video collegato" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120202735.png)
 
 **Un mondo digitale**. Gli attori affrontano **sfide enormi**, ma nel mondo ci sono iniziative rilevanti: **IoT**, **Industria 4.0** (ora **5.0**) e **AI**, con un’importanza crescente in ogni applicazione (trasformazione digitale industriale).
 
@@ -441,6 +439,8 @@ La domanda progettuale è **dove** eseguire il calcolo. L’architettura edge–
 #### **6.1. Origini, miti e presente**
 
 L’IoT è il **calcolo su dispositivi (piccoli)**.
+
+![](imgs/Pasted%20image%2020261120202831.png)
 
 **Origini**. Dal **anni 2000**, con la progressiva diffusione di **IPv6**, e dal **2007**, quando è uscita l’estensione di rete wireless **6LoWPAN**, praticamente **tutti i dispositivi collegati tramite IP (*Internet Protocol*, protocollo Internet)**, cablati e wireless, possono essere connessi. Queste reti, l’«Internet of Things», suscitano grande interesse tra chi sviluppa **reti di controllo industriale**.
 
@@ -475,8 +475,7 @@ L’IoT è il **calcolo su dispositivi (piccoli)**.
 
 Le tre famiglie di comunicazione IoT si confrontano attraverso quattro caratteristiche: **tempo reale**, **determinismo**, **interazione umana**, **sicurezza**. In un sistema **deterministico** ogni azione (causa) produce una reazione (effetto) prevedibile.
 
-<!-- SOURCE_VISUAL id="IS05-V25" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="66" type="tabella" description="Tre famiglie di comunicazione IoT confrontate per tempo reale, determinismo, interazione umana e sicurezza" reason="Valori del confronto presenti solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120203137.png)
 
 | | **IoT consumer** | **IoT industriale** (IIoT) | **Machine to Machine** (M2M) |
 |---|---|---|---|
@@ -487,15 +486,20 @@ Le tre famiglie di comunicazione IoT si confrontano attraverso quattro caratteri
 | Comunicazione | client/server, spesso con **grandi flussi** di dati | **molti-a-molti**: gruppi di nodi lavorano insieme a un **singolo compito** | client/server con **piccole quantità** di dati: identificatore del dispositivo, **coordinate**, **marca temporale** |
 | Requisiti chiave | — | **resilienza ai guasti**, **recupero dei pacchetti**, **sicurezza**, connettività fisica in ambienti con **forti interferenze elettromagnetiche**, **servizi di controllo** | gli oggetti localizzati **hanno valore**, e ne ha la conoscenza della loro posizione: c’è un **costo** quando l’informazione **manca o non è affidabile** |
 
+![](imgs/Pasted%20image%2020261120203411.png)
+
+![](imgs/Pasted%20image%2020261120204219.png)
+
 Un esempio di M2M sono le applicazioni V2X (*Vehicle-to-Everything*, comunicazione del veicolo con ogni elemento circostante), presentate nelle applicazioni di comunicazione tra veicoli.
 
-<!-- SOURCE_VISUAL id="IS05-V26" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="70" type="diagramma" description="Struttura tipica dei nodi IIoT con connessioni molti-a-molti" reason="Topologia visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120203427.png)
 
 **Applicazioni tipiche dell’IIoT**. Secondo **Oxford Economics**, società leader nelle previsioni globali e nell’analisi quantitativa, l’IIoT è una delle **grandi tendenze future**, con implicazioni significative per l’economia globale. Riguarda:
 
 - **manifattura**, **estrazione mineraria**, **agricoltura**, **petrolio e gas**, **servizi di pubblica utilità**;
 - i **beni fisici durevoli** in generale, e le organizzazioni che gestiscono **ospedali, magazzini e porti** o offrono **trasporti, logistica e servizi sanitari**.
+
+![](imgs/Pasted%20image%2020261120204244.png)
 
 L’idea di base: **sensori integrati** in oggetti e macchinari, con **connessione wireless**.
 
@@ -507,8 +511,9 @@ L’impatto globale dell’IoT si vede nella **smart city**.
 
 > 💡 **Un nome per il passo successivo (nota didattica).** La definizione coincide con quella di **Internet of Everything** (IoE) vista nella trasformazione digitale industriale: non solo oggetti connessi, ma anche persone, processi e dati.
 
-<!-- SOURCE_VISUAL id="IS05-V27" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="72" type="infografica" description="La smart city come impatto globale dell’IoT" reason="Pagina con sola infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120204259.png)
+
+![](imgs/Pasted%20image%2020261120204343.png)
 
 ---
 
