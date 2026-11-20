@@ -77,7 +77,7 @@ def normalize(text):
     return re.sub(r"\n{3,}", "\n\n", text)
 
 
-def process_pdf(pdf, lesson):
+def process_pdf(pdf, lesson, cache=CACHE):
     doc = fitz.open(pdf)
     rows, chunks = [], []
     for i, page in enumerate(doc, start=1):
@@ -87,7 +87,7 @@ def process_pdf(pdf, lesson):
                      "img_area": round(img_area, 3), "n_images": n_img, "flag": classify(text, img_area, n_img)})
         chunks.append(PAGE_SEP.format(n=i) + text)
     doc.close()
-    out = CACHE / lesson
+    out = cache / lesson
     out.mkdir(parents=True, exist_ok=True)
     (out / f"{pdf.stem}.txt").write_text("".join(chunks), encoding="utf-8")
     return rows
@@ -96,18 +96,30 @@ def process_pdf(pdf, lesson):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--lesson")
+    ap.add_argument("--edition", help="Extract only PDFs stored in sources_<edition>")
     args = ap.parse_args()
     target = None
     if args.lesson:
         target = args.lesson if args.lesson.startswith("Lezione") else f"Lezione{int(args.lesson):02d}"
-    pdfs = sorted(COURSE.glob("Lezione*/**/*.pdf"))
+    if args.edition:
+        edition_dir = f"sources_{args.edition}"
+        cache = META / f"_text_cache_{args.edition}"
+        index_path = META / f"page_index_{args.edition}.json"
+        report_path = META / f"EXTRACTION_REPORT_{args.edition}.md"
+        pdfs = sorted(COURSE.glob(f"Lezione*/{edition_dir}/*.pdf"))
+    else:
+        cache = CACHE
+        index_path = META / "page_index.json"
+        report_path = META / "EXTRACTION_REPORT.md"
+        pdfs = sorted(COURSE.glob("Lezione*/**/*.pdf"))
     if target:
         pdfs = [p for p in pdfs if target in p.parts]
+    if not pdfs:
+        sys.exit("No matching PDFs found")
     rows = []
     for pdf in pdfs:
         lesson = next(p for p in pdf.parts if p.startswith("Lezione"))
-        rows.extend(process_pdf(pdf, lesson))
-    index_path = META / "page_index.json"
+        rows.extend(process_pdf(pdf, lesson, cache))
     merged = []
     if index_path.exists() and target:
         merged = [r for r in json.loads(index_path.read_text(encoding="utf-8")) if r["lesson"] != target]
@@ -129,7 +141,7 @@ def main():
             totals[k] += c[k]
         lines.append(f"| {lesson} | {len({r['pdf'] for r in lr})} | {len(lr)} | " + " | ".join(str(c[k]) for k in order) + " |")
     lines.append(f"| **Totale** | | **{len(merged)}** | " + " | ".join(f"**{totals[k]}**" for k in order) + " |")
-    (META / "EXTRACTION_REPORT.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    report_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"PDF: {len({(r['lesson'], r['pdf']) for r in rows})}  pagine: {len(merged)}")
     for k in order:
         print(f"  {k:<22}{totals[k]}")

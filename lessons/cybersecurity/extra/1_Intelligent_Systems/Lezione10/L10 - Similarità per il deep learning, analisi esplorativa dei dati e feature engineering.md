@@ -1,18 +1,15 @@
 ## **Lezione 10: Similarità per il deep learning, analisi esplorativa dei dati e feature engineering**
 
-La decima lezione del corso **IS4** chiude il discorso sulla cross-correlazione e apre il lavoro statistico sui dati. Le soluzioni dei compiti mostrano l’**autocorrelazione** e perché i massimi della correlazione vanno **normalizzati**. L’esempio dei gelati mostra che un piccolo **kernel** che «cerca» un pattern è esattamente ciò che fa uno strato di una **rete convoluzionale**. La seconda parte è dedicata all’**analisi esplorativa dei dati** (EDA): contesto dei dati, segnali nel tempo e in frequenza, statistica descrittiva, boxplot e outlier. Seguono la **feature engineering**, la **normalizzazione** delle feature (scalatura, clipping, logaritmo, z-score) e l’idea di analizzare statisticamente non solo gli input di una rete, ma anche **pesi**, **attivazioni** e **uscite**.
+La lezione tratta la preparazione dei dati come passaggio che trasforma misure grezze in rappresentazioni utilizzabili: si estraggono feature da finestre temporali, si esplorano distribuzioni e gruppi, si costruiscono feature e si applicano trasformazioni di scala. Un esempio audio segue l’intera catena fino agli MFCC. Il paradosso di Simpson mostra perché i confronti aggregati possono invertirsi quando cambia la composizione dei gruppi. La diagnosi statistica si estende anche a input, pesi, attivazioni e uscite di una rete.
 
-Fonte: [PDF della Lezione 10](Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf), 76 pagine, nessun supplemento. Il codice citato alle pp. 25 e 46 è riportato nel testo; quello dei gelati coincide con il file `code/lesson_09_code_STEP2.m` della Lezione 09. Le note didattiche aggiunte sono segnalate. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
 
-### **0. Struttura della lezione**
+### **0. Panoramica**
 
-_(slide pp. 1–3)_
 
-Titolo originale: *Similarity and Deep Learning (with coding), Exploratory Data Analysis, Feature engineering*.
 
-**Nota sulla simulazione d’esame** (p. 2): avvicinandosi a **metà del corso**, nella Lezione 13 o 14 si farà una **simulazione dell’esame** per verificare preparazione e metodo di studio.
+**Simulazione d’esame.** Le domande di riepilogo permettono di verificare la comprensione dei concetti e il metodo di ragionamento.
 
-L’indice (p. 3) elenca:
+L’indice elenca:
 
 1. la **similarità come strumento** per il deep learning;
 2. **analisi esplorativa dei dati**;
@@ -21,21 +18,20 @@ L’indice (p. 3) elenca:
 5. **applicazione dell’EDA alle reti neurali**: input, pesi, attivazioni, uscite;
 6. punti principali.
 
-> ⚠️ **Numerazione della slide.** La p. 3 è intitolata «Lesson 11: Outline», ma il contenuto è quello di questa **Lezione 10**, come confermano il titolo del PDF e i punti principali (p. 76).
+> ⚠️ La pagina introduttiva contiene un titolo incongruente con il resto del materiale; i temi trattati qui sono similarità, analisi esplorativa e feature engineering.
 
 ---
 
 ### **1. Soluzioni dei compiti: autocorrelazione e normalizzazione**
 
-_(slide pp. 4–10)_
 
-Le soluzioni riguardano i compiti MATLAB della Lezione 09, §4.4.
+I compiti MATLAB applicano i metodi di similarità a immagini e segnali.
 
-**Compito 1** (p. 5): come cambia la correlazione se si usa come sottoimmagine **lo stesso template**, cioè $\text{CRR}(x, x)$?
+**Compito 1**: come cambia la correlazione se si usa come sottoimmagine **lo stesso template**, cioè $\text{CRR}(x, x)$?
 
-> 📌 **Autocorrelazione** (p. 5). La correlazione di un’immagine con se stessa si chiama **autocorrelazione**. Il picco è **stretto** e il massimo è **netto e ben separato**.
+> 📌 **Autocorrelazione**. La correlazione di un’immagine con se stessa si chiama **autocorrelazione**. Il picco è **stretto** e il massimo è **netto e ben separato**.
 
-**Compito 2** (p. 6): come cambia se si usano **due immagini completamente diverse**? Le pp. 7–8 mostrano i risultati in forma grafica.
+**Compito 2**: come cambia se si usano **due immagini completamente diverse**? I risultati sono confrontati graficamente.
 
 <!-- SOURCE_VISUAL id="IS10-V01" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="5" type="grafico" description="Autocorrelazione del template: picco stretto con massimo netto e separato" reason="Forma della superficie visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -46,11 +42,11 @@ Le soluzioni riguardano i compiti MATLAB della Lezione 09, §4.4.
 <!-- SOURCE_VISUAL id="IS10-V03" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="8" type="grafico" description="Confronto delle superfici di correlazione per immagini uguali e diverse" reason="Pagina senza testo estraibile" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> ⚠️ **Confrontare i massimi richiede una normalizzazione** (pp. 9–10). Per confrontare i **valori massimi** di correlazioni diverse bisogna **normalizzare rispetto al numero di pixel**; in MATLAB, moltiplicando per $1/n$.
+> ⚠️ **Confrontare i massimi richiede una normalizzazione**. Per confrontare i **valori massimi** di correlazioni diverse bisogna **normalizzare rispetto al numero di pixel**; in MATLAB, moltiplicando per $1/n$.
 
 > 💡 **Perché (nota didattica).** `xcorr2` calcola una **somma** di prodotti, non una media. Due immagini grandi producono somme grandi anche se si somigliano poco, mentre due immagini piccole e identiche producono somme piccole. Dividendo per il numero $n$ di pixel sovrapposti si ottiene una **media**, confrontabile tra immagini di dimensioni diverse:
 > $$\text{CRR}_{\text{norm}}(i, j) = \frac{1}{n} \sum_{x, y} f(x+i, y+j)\, t(x, y)$$
-> La NCC della Lezione 09, §2, fa un passo in più: divide anche per le deviazioni standard.
+> La correlazione incrociata normalizzata (NCC) estende il confronto dividendo anche per le deviazioni standard.
 
 <!-- SOURCE_VISUAL id="IS10-V04" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="10" type="schermata" description="Confronto dei massimi di correlazione con normalizzazione 1/n in MATLAB" reason="Codice e valori visibili solo nella schermata" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -59,24 +55,23 @@ Le soluzioni riguardano i compiti MATLAB della Lezione 09, §4.4.
 
 ### **2. La similarità come strumento del deep learning**
 
-_(slide pp. 11–25)_
 
 #### **2.1. Correlazione e convoluzione**
 
-La similarità tramite convoluzione è la **base delle reti convoluzionali** (p. 11). Bisogna capire molto bene l’analisi di similarità tramite **cross-correlazione** (convoluzione), perché è quella usata nelle **CNN**, uno dei modelli di deep learning più famosi (p. 12).
+La similarità tramite convoluzione è la **base delle reti convoluzionali**. Bisogna capire molto bene l’analisi di similarità tramite **cross-correlazione** (convoluzione), perché è quella usata nelle **CNN**, uno dei modelli di deep learning più famosi.
 
-> 📌 **«Basta il segno meno!»** (pp. 12–13). Tra correlazione e convoluzione cambia **solo il segno** degli indici del kernel:
+> 📌 **«Basta il segno meno!»**. Tra correlazione e convoluzione cambia **solo il segno** degli indici del kernel:
 > $$(f \star t)(i, j) = \sum_{x, y} f(i + x, j + y)\, t(x, y) \qquad (f * t)(i, j) = \sum_{x, y} f(i - x, j - y)\, t(x, y)$$
-> Il segno meno equivale a **ruotare il kernel di 180°** prima di farlo scorrere (Lezione 09, §2). La p. 13 lo illustra graficamente.
+> Il segno meno equivale a **ruotare il kernel di 180°** prima di farlo scorrere. La lo illustra graficamente.
 
 <!-- SOURCE_VISUAL id="IS10-V05" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="13" type="schema" description="Correlazione e convoluzione differiscono solo per il segno meno: kernel ribaltato" reason="Schema del ribaltamento visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **2.2. Similarità interna: l’autocorrelazione dei gelati**
 
-**Similarità interna** (pp. 14–16). Applicando l’**autocorrelazione** a un’immagine con molti **gelati** simili, la superficie mostra **picchi alti e separati**: la correlazione rivela quanto l’immagine sia simile a se stessa **spostata**, e quindi la presenza di **pattern ripetuti**.
+**Similarità interna**. Applicando l’**autocorrelazione** a un’immagine con molti **gelati** simili, la superficie mostra **picchi alti e separati**: la correlazione rivela quanto l’immagine sia simile a se stessa **spostata**, e quindi la presenza di **pattern ripetuti**.
 
-<!-- SOURCE_VISUAL id="IS10-V06" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="14" type="immagini" description="Autocorrelazione come similarità interna dell’immagine dei gelati" reason="Immagine e superficie visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS10-V06" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="14" type="immagini" description="Autocorrelazione come similarità interna dell’immagine dei gelati" reason="Immagine e superficie visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 <!-- SOURCE_VISUAL id="IS10-V07" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="16" type="grafico" description="Autocorrelazione dei gelati con picchi alti e separati" reason="Picchi visibili solo nel grafico" -->
@@ -84,19 +79,18 @@ La similarità tramite convoluzione è la **base delle reti convoluzionali** (p.
 
 #### **2.3. Cercare un pattern con un kernel**
 
-_(slide pp. 17–22)_
 
-**Similarità generale tra pattern, non solo nelle immagini: nei dati** (pp. 17–18). Si prende un **singolo gelato** come «**kernel**» della ricerca. Le immagini sono **diverse, ma simili**: il gelato del kernel non è ritagliato dall’immagine grande.
+**Similarità generale tra pattern, non solo nelle immagini: nei dati**. Si prende un **singolo gelato** come «**kernel**» della ricerca. Le immagini sono **diverse, ma simili**: il gelato del kernel non è ritagliato dall’immagine grande.
 
-**Preparare un pattern simile** (p. 19): pensare in termini di **pattern**, non solo di immagini, e usare un kernel di **dimensione simile** agli oggetti da cercare.
+**Preparare un pattern simile**: pensare in termini di **pattern**, non solo di immagini, e usare un kernel di **dimensione simile** agli oggetti da cercare.
 
-**Il pattern è stato trovato** (pp. 20–21): la correlazione mostra **picchi** in corrispondenza dei gelati. L’immagine della slide è ingrandita per la visualizzazione.
+**Il pattern è stato trovato**: la correlazione mostra **picchi** in corrispondenza dei gelati. Il dettaglio è ingrandito per rendere visibili i picchi.
 
-**La controprova con il panda** (p. 22). Usando come kernel un **panda**, la correlazione diventa **rumorosa**. Si vedono comunque dei **picchi**, anche se rumorosi, perché il panda si comporta da **rilevatore di blob**: le sue macchie scure rispondono alle zone scure dell’immagine.
+**La controprova con il panda**. Usando come kernel un **panda**, la correlazione diventa **rumorosa**. Si vedono comunque dei **picchi**, anche se rumorosi, perché il panda si comporta da **rilevatore di blob**: le sue macchie scure rispondono alle zone scure dell’immagine.
 
 > 💡 **Che cosa insegna la controprova (nota didattica).** Un picco della correlazione non significa «ho trovato l’oggetto», ma «qui c’è qualcosa che **somiglia al kernel** secondo questa misura». Un kernel generico risponde a strutture generiche (macchie, bordi). Per questo servono **soglie** e **confronti normalizzati** (§1), e per questo le CNN usano **molti filtri** e più strati.
 
-<!-- SOURCE_VISUAL id="IS10-V08" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="17" type="immagini" description="Singolo gelato usato come kernel di ricerca nell’immagine dei gelati" reason="Immagini visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS10-V08" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="17" type="immagini" description="Singolo gelato usato come kernel di ricerca nell’immagine dei gelati" reason="Immagini visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 <!-- SOURCE_VISUAL id="IS10-V09" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="20" type="immagine" description="Pattern simile trovato nell’immagine (ingrandita)" reason="Posizione del pattern visibile solo nell’immagine" -->
@@ -110,7 +104,7 @@ _(slide pp. 17–22)_
 
 #### **2.4. Dalla correlazione alle CNN e ai difetti**
 
-**Convoluzione nel deep learning** (p. 23): la slide mostra un modello **CNN**, in cui ogni strato applica molti filtri convolutivi all’input.
+**Convoluzione nel deep learning**: un modello **CNN** applica, in cui ogni strato applica molti filtri convolutivi all’input.
 
 > 📌 **Uno strato convolutivo (nota didattica).** Ogni filtro $k$ di uno strato produce una **mappa di attivazione** facendo scorrere il kernel $W_k$ sull’input $X$, aggiungendo un bias e applicando una funzione di attivazione $\varphi$ (per esempio ReLU):
 > $$A_k(i, j) = \varphi\!\left( \sum_{x, y} X(i + x, j + y)\, W_k(x, y) + b_k \right)$$
@@ -119,12 +113,12 @@ _(slide pp. 17–22)_
 <!-- SOURCE_VISUAL id="IS10-V12" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="23" type="diagramma" description="Modello CNN di deep learning con strati convolutivi" reason="Architettura visibile solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Analisi di similarità per trovare difetti** (p. 24). Nelle applicazioni i **difetti** si possono trovare come **differenze** o **mancanze** nel pattern di similarità: in un prodotto con struttura regolare, un difetto «rompe» la ripetizione e il picco atteso si abbassa o scompare.
+**Analisi di similarità per trovare difetti**. Nelle applicazioni i **difetti** si possono trovare come **differenze** o **mancanze** nel pattern di similarità: in un prodotto con struttura regolare, un difetto «rompe» la ripetizione e il picco atteso si abbassa o scompare.
 
 <!-- SOURCE_VISUAL id="IS10-V13" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="24" type="immagini" description="Difetti individuati come mancanze nel pattern di similarità" reason="Esempio visivo dei difetti" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Il codice usato** (p. 25) è quello degli esperimenti sui gelati del file `lesson_09_code_STEP2.m`:
+**Il codice usato** è quello degli esperimenti sui gelati del file `lesson_09_code_STEP2.m`:
 
 ```matlab
 %% similarity
@@ -143,24 +137,23 @@ img_single_norm = img_single - mean(mean(img_single));
 crr6 = xcorr2( double( img_cream_norm) , double(img_single_norm) ) ;  % a panda as kernel
 ```
 
-> ⚠️ **Semplificazioni** (p. 25). Nelle sessioni di codice alcune parti della teoria sono state **semplificate**, per cogliere i concetti principali senza perdersi in dettagli tecnici fuori dall’ambito del corso. Qui, a differenza della Lezione 09, la conversione in `double` avviene **prima** della sottrazione della media, che quindi è corretta.
+> ⚠️ **Semplificazioni**. Nelle sessioni di codice alcune parti della teoria sono state **semplificate**, per cogliere i concetti principali senza perdersi in dettagli tecnici non necessari per comprendere i passaggi fondamentali. Qui la conversione in `double` avviene **prima** della sottrazione della media, evitando il troncamento che si verifica con il tipo intero `uint8`.
 
 ---
 
 ### **3. Analisi esplorativa dei dati (EDA)**
 
-_(slide pp. 26–46)_
 
 #### **3.1. Dove si colloca l’EDA**
 
-Obiettivo (p. 26): **capire che cosa c’è dentro i dati**. Richiami al flusso di lavoro del ML: il **passo 1** raccoglie i dati da query a database, file, formati personalizzati, flussi IoT/AIoT e piattaforme online (p. 27; Lezione 06, §3.1); il **passo 2** li prepara (p. 28).
+Obiettivo: **capire che cosa c’è dentro i dati**. Richiami al flusso di lavoro del ML: il **passo 1** raccoglie i dati da query a database, file, formati personalizzati, flussi IoT/AIoT e piattaforme online; il **passo 2** li prepara.
 
-> 📌 **I sottopassi del passo 2** (pp. 29–30).
-> - **2a)** *data munging* / **data wrangling**: pulire e strutturare (Lezione 06, §6.2);
+> 📌 **I sottopassi del passo 2**.
+> - **2a)** *data munging* / **data wrangling**: pulire e strutturare;
 > - **2b)** **analisi esplorativa dei dati** (EDA);
 > - **2c)** **feature engineering** (§4).
 
-Le pp. 31–32 mostrano lo schema dell’EDA per il ML e alcuni **strumenti MATLAB** per l’EDA.
+Lo schema dell’EDA per il machine learning comprende anche strumenti dedicati all’analisi esplorativa in MATLAB.
 
 <!-- SOURCE_VISUAL id="IS10-V14" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="31" type="schema" description="Analisi esplorativa dei dati per il ML con i riferimenti alle lezioni" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -170,24 +163,23 @@ Le pp. 31–32 mostrano lo schema dell’EDA per il ML e alcuni **strumenti MATL
 
 #### **3.2. Segnali nel tempo e dati non strutturati**
 
-_(slide pp. 33–39)_
 
-> 📌 **Estrazione delle feature** (p. 34). Il processo di trasformare i **dati grezzi** in un insieme di **feature utilizzabili** da un algoritmo di ML per addestrare un modello. È cruciale, perché **qualità e quantità** delle feature influenzano in modo significativo le prestazioni del modello.
+> 📌 **Estrazione delle feature**. Il processo di trasformare i **dati grezzi** in un insieme di **feature utilizzabili** da un algoritmo di ML per addestrare un modello. È cruciale, perché **qualità e quantità** delle feature influenzano in modo significativo le prestazioni del modello.
 
-**Il contesto dei dati** (p. 35):
+**Il contesto dei dati**:
 
 - **fonte**: sapere da dove vengono i dati aiuta a valutarne **qualità, affidabilità e pertinenza**;
 - **contesto temporale e spaziale**: per serie temporali e dati geografici è cruciale, perché i pattern **cambiano nel tempo** o **tra luoghi diversi**;
 - **primo passo**: che cos’è il dataset? Una **tabella** o un **flusso** di dati non ancora strutturato?
-- il tipo di sorgente IoT: **passiva** (dati solo su richiesta), **attiva** (flusso da assorbire quasi in tempo reale), **dinamica** (formato, frequenza e aggiornamenti *over the air* modificabili) (Lezione 05, §6.2).
+- il tipo di sorgente IoT: **passiva** (dati solo su richiesta), **attiva** (flusso da assorbire quasi in tempo reale), **dinamica** (formato, frequenza e aggiornamenti *over the air* modificabili).
 
-**Segnali nel tempo: quali informazioni estrarre?** (p. 36). Per i segnali **continui**, per ogni **frame** (finestra) di ogni segnale si estrae un insieme di feature, che rappresentano **caratteristiche diverse** del segnale in quella finestra. Si fa così perché è più facile analizzare e classificare **porzioni discrete** di dati che un segnale continuo.
+**Segnali nel tempo: quali informazioni estrarre?**. Per i segnali **continui**, per ogni **frame** (finestra) di ogni segnale si estrae un insieme di feature, che rappresentano **caratteristiche diverse** del segnale in quella finestra. Si fa così perché è più facile analizzare e classificare **porzioni discrete** di dati che un segnale continuo.
 
 > 💡 **Finestre e feature (nota didattica).** Un segnale campionato $s[n]$ si divide in frame di $L$ campioni, spesso sovrapposti. Da ogni frame si calcolano feature come media, energia o numero di passaggi per lo zero:
 > $$\mu_m = \frac{1}{L} \sum_{n=0}^{L-1} s[mH + n] \qquad E_m = \sum_{n=0}^{L-1} s[mH + n]^2$$
 > dove $H$ è il passo tra un frame e il successivo. Un’ora di segnale diventa così una **tabella**: una riga per frame, una colonna per feature.
 
-**Dominio del tempo o della frequenza?** (pp. 37–39):
+**Dominio del tempo o della frequenza?**:
 
 | Rappresentazione | Assi | Che cosa mostra |
 |---|---|---|
@@ -195,9 +187,9 @@ _(slide pp. 33–39)_
 | **dominio della frequenza** (spettro) | frequenza / ampiezza (o potenza), con anche la **fase** | ogni barra è l’ampiezza di una **componente in frequenza**: la **distribuzione dell’energia** tra le frequenze, cioè il contenuto **armonico** (vibrazioni, altezza, note musicali) |
 | **spettrogramma** | tempo / frequenza, con l’energia come colore | l’**ampiezza o energia** di una certa frequenza **in un certo istante** |
 
-Nelle applicazioni **audio** (riconoscimento vocale, classificazione musicale, rilevamento di eventi sonori) conviene analizzare il segnale **in entrambi i domini** (p. 38).
+Nelle applicazioni **audio** (riconoscimento vocale, classificazione musicale, rilevamento di eventi sonori) conviene analizzare il segnale **in entrambi i domini**.
 
-> 📌 **Esempio della slide** (p. 38). Un movimento ripetuto **12 volte in 10 secondi** produce energia alla frequenza
+> 📌 **Esempio.** Un movimento ripetuto **12 volte in 10 secondi** produce energia alla frequenza
 > $$f = \frac{12\ \text{ripetizioni}}{10\ \text{s}} = 1{,}2\ \text{Hz}$$
 > Nel dominio della frequenza compare un picco a 1,2 Hz, anche se nel dominio del tempo il segnale può apparire irregolare.
 
@@ -205,29 +197,28 @@ Nelle applicazioni **audio** (riconoscimento vocale, classificazione musicale, r
 > $$S(k) = \sum_{n=0}^{N-1} s[n]\, e^{-j 2\pi k n / N}$$
 > Lo spettrogramma è $|S_m(k)|^2$ calcolato frame per frame: una colonna di spettro per ogni istante.
 
-<!-- SOURCE_VISUAL id="IS10-V16" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="37" type="grafico" description="Segnale nel dominio del tempo e sua rappresentazione in frequenza" reason="Grafici visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS10-V16" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="37" type="grafico" description="Segnale nel dominio del tempo e sua rappresentazione in frequenza" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS10-V17" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="38" type="grafico" description="Dominio del tempo, modulo e fase in frequenza: 12 ripetizioni in 10 s con energia a 1,2 Hz" reason="Grafici visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS10-V17" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="38" type="grafico" description="Dominio del tempo, modulo e fase in frequenza: 12 ripetizioni in 10 s con energia a 1,2 Hz" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS10-V18" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="39" type="grafico" description="Spettrogramma con energia per frequenza e tempo" reason="Spettrogramma visibile solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS10-V18" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="39" type="grafico" description="Spettrogramma con energia per frequenza e tempo" reason="Spettrogramma visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **3.3. Statistica descrittiva, distribuzioni e boxplot**
 
-_(slide pp. 40–46)_
 
-**Funzioni MATLAB di base per la statistica descrittiva** (p. 41): comandi **molto semplici ed efficaci** per l’EDA, i cui valori si usano **anche nella feature engineering**.
+**Funzioni MATLAB di base per la statistica descrittiva**: comandi **molto semplici ed efficaci** per l’EDA, i cui valori si usano **anche nella feature engineering**.
 
-> 💡 **Le misure tipiche (nota didattica).** Le funzioni di base di MATLAB per la statistica descrittiva sono `mean`, `median`, `mode`, `std`, `var`, `min`, `max`, `range`, `quantile`/`prctile`, `iqr`, `skewness` e `kurtosis`. L’elenco esatto della slide va verificato sulla figura.
+> 💡 **Misure descrittive comuni.** In MATLAB si usano, tra le altre, `mean`, `median`, `mode`, `std`, `var`, `min`, `max`, `range`, `quantile`/`prctile`, `iqr`, `skewness` e `kurtosis`. La scelta dipende dalla distribuzione e dalla domanda dell’analisi.
 
 <!-- SOURCE_VISUAL id="IS10-V19" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="41" type="tabella" description="Funzioni MATLAB di base per la statistica descrittiva" reason="Elenco delle funzioni presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**La forma delle distribuzioni** (p. 42). Esempio: nell’**errore di una regressione** contano molto **posizione e ampiezza delle code**, perché un errore **positivo** e uno **negativo** possono avere conseguenze diverse (sovrastimare o sottostimare una domanda, una scorta, un consumo).
+**La forma delle distribuzioni**. Esempio: nell’**errore di una regressione** contano molto **posizione e ampiezza delle code**, perché un errore **positivo** e uno **negativo** possono avere conseguenze diverse (sovrastimare o sottostimare una domanda, una scorta, un consumo).
 
-**Le distribuzioni dicono di più** (p. 43). Due distribuzioni possono avere quasi la **stessa media** e lo **stesso IQR** (*InterQuartile Range*), ma **forma** e **intervallo dei valori** molto diversi.
+**Le distribuzioni dicono di più**. Due distribuzioni possono avere quasi la **stessa media** e lo **stesso IQR** (*InterQuartile Range*), ma **forma** e **intervallo dei valori** molto diversi.
 
 > 📌 **Quartili e IQR (nota didattica).** $Q_1$ e $Q_3$ sono i valori sotto cui cade rispettivamente il 25% e il 75% dei dati; la mediana è $Q_2$.
 > $$\text{IQR} = Q_3 - Q_1$$
@@ -239,7 +230,7 @@ _(slide pp. 40–46)_
 <!-- SOURCE_VISUAL id="IS10-V21" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="43" type="grafico" description="Distribuzioni con stessa media e IQR ma forma e intervallo diversi" reason="Forme delle distribuzioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Il boxplot** (pp. 44–45). Conviene scegliere **boxplot che mostrano gli outlier**. Gli **outlier** possono influenzare **moltissimo la normalizzazione** (§5).
+**Il boxplot**. Conviene scegliere **boxplot che mostrano gli outlier**. Gli **outlier** possono influenzare **moltissimo la normalizzazione** (§5).
 
 > 📌 **Come si legge un boxplot (nota didattica).** La scatola va da $Q_1$ a $Q_3$, con una linea sulla mediana. I «baffi» arrivano ai valori più estremi entro
 > $$\big[\, Q_1 - 1{,}5 \cdot \text{IQR},\; Q_3 + 1{,}5 \cdot \text{IQR} \,\big]$$
@@ -251,7 +242,7 @@ _(slide pp. 40–46)_
 <!-- SOURCE_VISUAL id="IS10-V23" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="45" type="grafico" description="Boxplot con outlier evidenziati" reason="Outlier visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Il boxplot in MATLAB** (p. 46), con il dataset di esempio `carsmall`:
+**Il boxplot in MATLAB**, con il dataset di esempio `carsmall`:
 
 ```matlab
 load carsmall
@@ -267,11 +258,10 @@ Il comando disegna un boxplot dei **consumi** (miglia per gallone) **per ogni Pa
 
 ### **4. Feature engineering**
 
-_(slide pp. 47–56)_
 
 #### **4.1. Il ciclo della feature engineering**
 
-**Progettare le proprie feature** (p. 47) è il sottopasso **2c** del flusso di lavoro (p. 48). È un ciclo (p. 49):
+**Progettare le proprie feature** è il sottopasso **2c** del flusso di lavoro. È un ciclo:
 
 1. fare **brainstorming** o provare feature;
 2. **decidere** quali feature creare;
@@ -280,24 +270,23 @@ _(slide pp. 47–56)_
 5. **migliorarle** se serve;
 6. tornare al brainstorming e alla creazione di altre feature **finché il lavoro non è finito**.
 
-**Modello di AI → $Y = \text{FUNC}(X)$** (p. 50). Per ogni dataset tutto consiste nel creare $X$ (feature, una riga per campione) e $Y$ (classe o valore da apprendere) (Lezione 06, §6.1).
+**Modello di AI → $Y = \text{FUNC}(X)$**. Per ogni dataset tutto consiste nel creare $X$ (feature, una riga per campione) e $Y$ (classe o valore da apprendere).
 
 #### **4.2. Tre livelli di intervento**
 
-_(slide pp. 51–56)_
 
-| Livello | Che cosa si ottimizza | Usa le etichette? | Operazioni (slide) |
+| Livello | Che cosa si ottimizza | Usa le etichette? | Operazioni (figura) |
 |---|---|---|---|
-| **(A)** **una feature alla volta** (pp. 51–52) | una **colonna** di $X$ | no | **rimozione degli outlier**; **armonizzazione** (cm/mm/m → m; similarità → distanze); **normalizzazione/standardizzazione** (§5) |
-| **(B)** **tutte le feature insieme** (pp. 53–54) | le **colonne** di $X$ nel loro insieme | **no** | **rimuovere feature fortemente correlate**; **creare combinazioni potenti**; **analisi delle componenti principali** (PCA) e altri metodi di **riduzione della dimensionalità** |
-| **(C)** **tutto il dataset** (pp. 55–56) | $X$ **e** $Y$ | **sì** | **estrazione** delle feature; **selezione** delle feature; feature engineering guidata dall’obiettivo |
+| **(A)** **una feature alla volta** | una **colonna** di $X$ | no | **rimozione degli outlier**; **armonizzazione** (cm/mm/m → m; similarità → distanze); **normalizzazione/standardizzazione** (§5) |
+| **(B)** **tutte le feature insieme** | le **colonne** di $X$ nel loro insieme | **no** | **rimuovere feature fortemente correlate**; **creare combinazioni potenti**; **analisi delle componenti principali** (PCA) e altri metodi di **riduzione della dimensionalità** |
+| **(C)** **tutto il dataset** | $X$ **e** $Y$ | **sì** | **estrazione** delle feature; **selezione** delle feature; feature engineering guidata dall’obiettivo |
 
 > 💡 **Esempi per livello (nota didattica).**
 > - **(A)**: convertire tutte le lunghezze in metri, poi standardizzare la colonna.
 > - **(B)**: se «altezza in cm» e «altezza in pollici» sono entrambe presenti, la correlazione è 1 e una va rimossa; oppure dal rapporto tra peso e altezza al quadrato si crea il BMI.
 > - **(C)**: con le etichette si misura quanto ciascuna feature **aiuta a predire** $Y$, e si tengono solo le più utili.
 
-> 📌 **Correlazione tra feature (nota didattica).** Due feature $x_a$ e $x_b$ con coefficiente di Pearson $|\rho_{ab}|$ vicino a 1 portano quasi la stessa informazione (Lezione 08, §2). La PCA trova invece le direzioni di **massima varianza** diagonalizzando la matrice di covarianza $\Sigma$:
+> 📌 **Correlazione tra feature (nota didattica).** Due feature $x_a$ e $x_b$ con coefficiente di Pearson $|\rho_{ab}|$ vicino a 1 portano quasi la stessa informazione. La PCA trova invece le direzioni di **massima varianza** diagonalizzando la matrice di covarianza $\Sigma$:
 > $$\Sigma\, \mathbf{v}_k = \lambda_k\, \mathbf{v}_k$$
 > Proiettando i dati sui primi autovettori $\mathbf{v}_k$ (con gli autovalori $\lambda_k$ più grandi) si riduce la dimensione conservando gran parte della varianza.
 
@@ -305,43 +294,42 @@ _(slide pp. 51–56)_
 
 ### **5. Normalizzazione delle feature**
 
-_(slide pp. 57–63)_
 
-La pre-elaborazione **da un punto di vista statistico** (p. 57) sta **a metà tra EDA e feature engineering**. Per i dataset dei sistemi intelligenti conta la **forma** delle distribuzioni, **non la grandezza** dei valori (p. 58).
+La pre-elaborazione **da un punto di vista statistico** sta **a metà tra EDA e feature engineering**. Per i dataset dei sistemi intelligenti conta la **forma** delle distribuzioni, **non la grandezza** dei valori.
 
-> 📌 **Obiettivo della normalizzazione** (p. 59). Trasformare le feature in modo che abbiano **scale simili**, migliorando **prestazioni** e **stabilità dell’addestramento** del modello.
+> 📌 **Obiettivo della normalizzazione**. Trasformare le feature in modo che abbiano **scale simili**, migliorando **prestazioni** e **stabilità dell’addestramento** del modello.
 
-**Quattro tecniche comuni** (p. 59):
+**Quattro tecniche comuni**:
 
 | Tecnica | Formula | Quando usarla |
 |---|---|---|
 | **scalatura in un intervallo** (min-max) | $x' = \dfrac{x - x_{\min}}{x_{\max} - x_{\min}}$ | valori distribuiti in modo abbastanza uniforme, senza outlier estremi |
-| **clipping** | $x' = \begin{cases} T & \text{se } x > T \\ x & \text{altrimenti} \end{cases}$ | **outlier estremi** da contenere (p. 62) |
-| **scalatura logaritmica** | $x' = \log(x)$ | distribuzioni a **legge di potenza** (p. 63) |
+| **clipping** | $x' = \begin{cases} T & \text{se } x > T \\ x & \text{altrimenti} \end{cases}$ | **outlier estremi** da contenere |
+| **scalatura logaritmica** | $x' = \log(x)$ | distribuzioni a **legge di potenza** |
 | **z-score** | $x' = \dfrac{x - \mu}{\sigma}$ | distribuzioni senza outlier estremi; media 0 e deviazione standard 1 |
 
-Le formule di min-max e z-score sono quelle standard (nota didattica); la regola del clipping è quella della slide.
+Le formule di min-max e z-score sono quelle standard (nota didattica); il clipping limita i valori estremi alla soglia scelta.
 
-**Una nota su z-score e min-max** (p. 60): la slide confronta graficamente le due trasformazioni sulla stessa distribuzione.
+**Una nota su z-score e min-max**: il confronto applica le due trasformazioni alla stessa distribuzione.
 
 <!-- SOURCE_VISUAL id="IS10-V24" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="60" type="grafico" description="Confronto tra normalizzazione z-score e min-max sulla stessa distribuzione" reason="Distribuzioni trasformate visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Esempio: il prezzo delle auto** (p. 61). A **0 €** non c’è nessuna auto, a **12 000 €** ce ne sono alcune, a **250 000 €** solo pochissime. La distribuzione ha una **coda lunga** verso i prezzi alti.
+**Esempio: il prezzo delle auto**. A **0 €** non c’è nessuna auto, a **12 000 €** ce ne sono alcune, a **250 000 €** solo pochissime. La distribuzione ha una **coda lunga** verso i prezzi alti.
 
 > 💡 **Perché min-max fallisce qui (nota didattica).** Con $x_{\min} = 5000$ € e $x_{\max} = 250\,000$ €, un’auto da 20 000 € diventa $x' = 15\,000 / 245\,000 \approx 0{,}06$: quasi tutte le auto finiscono schiacciate vicino a 0, e un solo modello di lusso decide la scala. Il logaritmo o il clipping restituiscono **risoluzione** alla parte in cui stanno quasi tutti i dati.
 
 <!-- SOURCE_VISUAL id="IS10-V25" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="61" type="grafico" description="Distribuzione dei prezzi delle auto con coda lunga verso i valori alti" reason="Distribuzione visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Clipping delle feature** (p. 62). Se il dataset contiene **outlier estremi**, si **limitano** tutti i valori sopra (o sotto) una certa soglia a un valore fisso.
+**Clipping delle feature**. Se il dataset contiene **outlier estremi**, si **limitano** tutti i valori sopra (o sotto) una certa soglia a un valore fisso.
 
-> 📌 **Consiglio: clipping sullo z-score** (p. 62). Limitare i valori a $\pm N\sigma$, per esempio a $\pm 3\sigma$, dove $\sigma$ è la **deviazione standard**:
+> 📌 **Consiglio: clipping sullo z-score**. Limitare i valori a $\pm N\sigma$, per esempio a $\pm 3\sigma$, dove $\sigma$ è la **deviazione standard**:
 > $$x' = \min\!\big(\max(x,\; \mu - 3\sigma),\; \mu + 3\sigma\big)$$
 
 > 💡 **Perché $3\sigma$ (nota didattica).** Per una distribuzione normale circa il **99,7%** dei valori cade entro $\pm 3\sigma$ dalla media: il clipping tocca solo i casi davvero anomali. Attenzione però: $\mu$ e $\sigma$ sono essi stessi influenzati dagli outlier, quindi con outlier molto grandi conviene stimarli su dati già ripuliti o usare mediana e IQR.
 
-**Scalatura logaritmica** (p. 63). Si usa quando **pochi valori** hanno **moltissimi punti** e la maggior parte dei valori ne ha **pochi**: è la **distribuzione a legge di potenza**. Il logaritmo comprime la coda e rende la distribuzione più equilibrata.
+**Scalatura logaritmica**. Si usa quando **pochi valori** hanno **moltissimi punti** e la maggior parte dei valori ne ha **pochi**: è la **distribuzione a legge di potenza**. Il logaritmo comprime la coda e rende la distribuzione più equilibrata.
 
 > ⚠️ **Logaritmo di zero (nota didattica).** $\log(0)$ non è definito: se la feature può valere 0 (per esempio un numero di acquisti) si usa $x' = \log(1 + x)$.
 
@@ -352,11 +340,10 @@ Le formule di min-max e z-score sono quelle standard (nota didattica); la regola
 
 ### **6. Analisi statistica nelle reti neurali**
 
-_(slide pp. 64–75)_
 
 #### **6.1. Dove guardare dentro una rete**
 
-**Dove analizzare** (p. 65): **non solo gli input**. In una rete ci sono quattro punti di osservazione:
+**Dove analizzare**: **non solo gli input**. In una rete ci sono quattro punti di osservazione:
 
 1. **input** $X_{ij}$;
 2. **pesi** $W_{ij}$;
@@ -368,9 +355,8 @@ _(slide pp. 64–75)_
 
 #### **6.2. Input e pesi**
 
-_(slide pp. 66–70)_
 
-**1) Input $X_{ij}$** (pp. 66–67):
+**1) Input $X_{ij}$**:
 
 | Aspetto | Contenuto |
 |---|---|
@@ -379,7 +365,7 @@ _(slide pp. 66–70)_
 | **come** | metriche statistiche (media, deviazione standard, minimo, massimo); **PCA** o **t-SNE** per la struttura; **matrici di correlazione**; controllo dello **sbilanciamento tra classi** |
 | **visualizzazione** | istogrammi, scatter plot, boxplot; **heatmap** delle correlazioni a coppie; **t-SNE/UMAP** per embedding in 2D |
 
-**La scalatura migliora l’apprendimento** (p. 68). Con due input $x_1$, $x_2$ e i pesi $w_1$, $w_2$, l’algoritmo di apprendimento **minimizza l’errore** $J(\mathbf{W})$ regolando **iterativamente** (discesa del gradiente) il vettore dei parametri $\mathbf{W}$. Con una **scalatura adeguata** servono **meno iterazioni** per raggiungere lo stesso minimo nello spazio dei parametri.
+**La scalatura migliora l’apprendimento**. Con due input $x_1$, $x_2$ e i pesi $w_1$, $w_2$, l’algoritmo di apprendimento **minimizza l’errore** $J(\mathbf{W})$ regolando **iterativamente** (discesa del gradiente) il vettore dei parametri $\mathbf{W}$. Con una **scalatura adeguata** servono **meno iterazioni** per raggiungere lo stesso minimo nello spazio dei parametri.
 
 > 💡 **Perché la scalatura accorcia il percorso (nota didattica).** Se $x_1$ vale migliaia e $x_2$ decimi, le curve di livello di $J$ nello spazio $(w_1, w_2)$ sono **ellissi molto allungate**. Il gradiente
 > $$\mathbf{W} \leftarrow \mathbf{W} - \eta\, \nabla J(\mathbf{W})$$
@@ -388,7 +374,7 @@ _(slide pp. 66–70)_
 <!-- SOURCE_VISUAL id="IS10-V28" source="Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf" page="68" type="grafico" description="Curve di livello dell’errore J nello spazio dei pesi con e senza scalatura degli input" reason="Percorsi della discesa del gradiente visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**2) Pesi $W_{ij}$** (pp. 69–70):
+**2) Pesi $W_{ij}$**:
 
 | Aspetto | Contenuto |
 |---|---|
@@ -403,9 +389,8 @@ _(slide pp. 66–70)_
 
 #### **6.3. Attivazioni e uscite**
 
-_(slide pp. 71–75)_
 
-**3) Attivazioni $Y_{ij}$** (pp. 71–72): l’uscita di ogni neurone **dopo la funzione di attivazione** (per esempio ReLU o sigmoide), che combina **attivazione e pesi**.
+**3) Attivazioni $Y_{ij}$**: l’uscita di ogni neurone **dopo la funzione di attivazione** (per esempio ReLU o sigmoide), che combina **attivazione e pesi**.
 
 | Aspetto | Contenuto |
 |---|---|
@@ -415,7 +400,7 @@ _(slide pp. 71–75)_
 
 > 💡 **Neuroni morti e saturazione (nota didattica).** $\text{ReLU}(z) = \max(0, z)$ ha derivata nulla per $z < 0$: se un neurone riceve sempre input negativi, il suo gradiente è sempre zero e **non impara più**. La sigmoide $\sigma(z) = 1/(1 + e^{-z})$ ha derivata $\sigma(z)\,(1 - \sigma(z))$, che tende a 0 quando $\sigma(z)$ è vicina a 0 o a 1: il neurone **saturo** impara lentissimamente. Un istogramma delle attivazioni con tutti i valori a zero, o ammassati agli estremi, rivela subito il problema.
 
-**4) Uscite ed errori $O_{ij}$** (pp. 73–74):
+**4) Uscite ed errori $O_{ij}$**:
 
 | Aspetto | Contenuto |
 |---|---|
@@ -424,13 +409,52 @@ _(slide pp. 71–75)_
 | **come** | **matrice di confusione**; accuratezza, precisione, recall e F1 **per classe**; **curve di calibrazione**; **istogrammi dell’errore** in funzione della confidenza |
 | **visualizzazione** | curve **ROC** e **precision-recall**; heatmap degli errori di classificazione; distribuzione dell’uscita **softmax**; errori **positivi** contro **negativi** |
 
-> 💡 **Calibrazione (nota didattica).** Un modello è **calibrato** se, tra tutte le predizioni fatte con confidenza 0,8, circa l’80% è corretto. Molte reti profonde sono **sovraconfidenti**: la curva di calibrazione confronta la confidenza dichiarata con l’accuratezza reale e mostra lo scarto (Lezione 05, §1.6).
+> 💡 **Calibrazione (nota didattica).** Un modello è **calibrato** se, tra tutte le predizioni fatte con confidenza 0,8, circa l’80% è corretto. Molte reti profonde sono **sovraconfidenti**: la curva di calibrazione confronta la confidenza dichiarata con l’accuratezza reale e mostra lo scarto.
 
-**Compito per casa** (p. 75, **non d’esame**): l’esempio di pre-elaborazione dei dati della documentazione MathWorks, con **statistiche di base**, **gestione degli outlier** e **clipping**.
+**Compito per casa**: l’esempio di pre-elaborazione dei dati della documentazione MathWorks, con **statistiche di base**, **gestione degli outlier** e **clipping**.
 
 ---
 
-### **7. Distinzioni da non confondere**
+### **7. Feature extraction da segnali e MFCC**
+
+Un segnale $x(t)$ diventa utilizzabile da un modello quando viene rappresentato da un insieme compatto di misure $f=\phi(x)$. Per segnali continui si usano finestre scorrevoli: ogni finestra è un’osservazione e produce un vettore di feature. Se il segnale ha $N$ campioni, la finestra $L$ e il passo $H$, il numero di finestre è $N_w=\left\lfloor\frac{N-L}{H}\right\rfloor+1$. Per esempio, un segnale di 10 secondi, segmentato in finestre di 2 secondi con passo di 1 secondo, genera 9 osservazioni con sovrapposizione del 50%.
+
+Le feature temporali includono media, varianza, RMS, attraversamenti dello zero, asimmetria e curtosi; quelle in frequenza possono includere energia per banda e baricentro spettrale. La scelta dipende dal fenomeno: due segnali possono avere RMS simili ma componenti periodiche diverse, visibili nello spettro. Uno spettrogramma conserva anche l’asse temporale, mostrando come le frequenze cambiano da una finestra alla successiva. Un vettore di feature non è una copia neutra del segnale: conserva proprietà ritenute utili al compito e scarta il resto.
+
+La provenienza e il contesto sono parte dell’interpretazione: tipo di sensore, calibrazione, firmware, luogo, frequenza di campionamento e regime operativo possono cambiare il significato di un valore. Una stessa vibrazione può essere normale a pieno carico e anomala al minimo.
+
+#### **7.1. Dal parlato ai coefficienti MFCC**
+
+Nell’esempio, la frase “Everybody dance now” è campionata a 16 kHz per 1,407 secondi: 22.516 campioni mono a 16 bit. Il segnale viene suddiviso in finestre di 25 ms (400 campioni) con passo di 10 ms (160 campioni), dunque sovrapposte per il 60%. Per ciascuna finestra, la pipeline applica pre-enfasi $y[n]=x[n]-0{,}97x[n-1]$, finestra di Hamming, FFT di lunghezza 512, spettro di potenza, 26 filtri triangolari sulla scala mel, logaritmo e trasformata discreta del coseno. Si conservano 12 coefficienti, escludendo $c_0$, associato soprattutto all’energia complessiva.
+
+Gli MFCC descrivono la forma dello spettro, legata alle caratteristiche del tratto vocale; non rappresentano direttamente il pitch né trascrivono le parole. Si ottiene una sequenza di 139 vettori da 12 numeri. Le distanze tra i vettori medi delle tre parole mostrano quanto le sezioni differiscano in questa registrazione, ma un singolo estratto non costituisce una valutazione del riconoscimento vocale: voce, musica, tagli e catena di registrazione cambiano i valori.
+
+<!-- SOURCE_VISUAL id="IS10-27-V01" source="L10-web.pdf" page="18" type="pipeline" description="Dal segnale audio alle finestre, spettro, bande mel e vettori MFCC" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+<!-- SOURCE_VISUAL id="IS10-27-V02" source="L10-web.pdf" page="19" type="tabella" description="Dodici coefficienti MFCC per finestre centrate su tre parole" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+### **8. Paradosso di Simpson: confrontare i gruppi prima del totale**
+
+Un confronto aggregato può invertire il risultato osservato in ciascun sottogruppo se le unità confrontate hanno composizioni diverse. Nel caso delle due linee di produzione, il tipo di prodotto (facile o difficile) influenza la probabilità di errore. Se una linea produce soprattutto prodotti difficili, il tasso complessivo può apparire peggiore anche quando, a parità di tipo, la sua prestazione è migliore. Il fenomeno è il paradosso di Simpson: l’aggregato mescola prestazione e composizione.
+
+Per interpretare il confronto occorre mostrare i conteggi e i tassi per strato, oltre al totale, e chiedersi quale popolazione e quale domanda interessino. La standardizzazione dei tassi può rendere i confronti più equi rispetto a una composizione scelta, ma non dimostra da sola un rapporto causale. La scelta di pesi e gruppi dipende dall’applicazione.
+
+<!-- SOURCE_VISUAL id="IS10-27-V03" source="L10-web.pdf" page="3" type="schema" description="Inversione del confronto aggregato rispetto ai tre sottogruppi: paradosso di Simpson" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+### **9. EDA: statistiche, outlier e dataset applicativi**
+
+Prima di modellare, identificare unità osservazionale, colonne, tipi, quantità di dati mancanti, scale e distribuzioni. Media, mediana e moda descrivono il centro; varianza e deviazione standard misurano dispersione, l’IQR è più robusto agli estremi, mentre asimmetria e curtosi descrivono forma e code. L’istogramma rende visibili multimodalità e asimmetrie che una media può nascondere. Per gli outlier va verificato se si tratta di errore o di un evento reale: eliminare automaticamente un valore raro può cancellare proprio un guasto utile da rilevare.
+
+L’appendice applica una prima passata di EDA a quattro dataset: Wisconsin Breast Cancer, California Housing, AI4I 2020 Predictive Maintenance e Air Quality UCI. Controlli minimi: dimensioni e tipi, valori mancanti anche codificati come sentinelle (nell’Air Quality il valore $-200$), statistiche delle feature numeriche, range, istogrammi e boxplot. Per ogni trasformazione occorre giustificare la scelta, mostrare prima e dopo e conservare l’unità o documentare la perdita di scala.
+
+Un riepilogo delle sole metriche non sostituisce la verifica del contesto produttivo e del protocollo di raccolta: una finestra di segnale è un’osservazione derivata, non necessariamente un campione indipendente. La suddivisione deve rispettare gruppi e tempo per evitare che finestre sovrapposte dello stesso oggetto finiscano sia in training sia in test.
+
+<!-- SOURCE_VISUAL id="IS10-27-V04" source="L10-web.pdf" page="81" type="schermata" description="Primo ciclo EDA sui dataset applicativi: dimensioni, tipi, missing, statistiche, distribuzioni e outlier" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+### **10. Distinzioni da non confondere**
 
 | Coppia | Differenza chiave |
 |---|---|
@@ -449,13 +473,14 @@ _(slide pp. 71–75)_
 
 ---
 
-### **8. Sintesi della lezione**
+### **11. Sintesi della lezione**
 
-_(slide p. 76)_
 
-> ✅ **Punti principali** (p. 76).
+> ✅ **Punti principali**.
 > - **La similarità come strumento per il deep learning**: autocorrelazione con picco netto, massimi da normalizzare per il numero di pixel, correlazione e convoluzione che differiscono solo per un segno, un kernel che cerca un pattern come fa un filtro di una CNN, difetti come mancanze nel pattern.
-> - **Analisi esplorativa dei dati**: contesto dei dati, segnali in frame, dominio del tempo e della frequenza, statistica descrittiva, forma delle distribuzioni, boxplot e outlier.
-> - **Feature engineering**: un ciclo iterativo su tre livelli, da una feature alla volta fino all’intero dataset con le etichette.
+> - **Estrazione di feature**: finestre sovrapposte, descrittori temporali e spettrali; MFCC come descrittori della forma dello spettro, non del pitch.
+> - **EDA**: contesto e provenienza dei dati, forme distributive, statistiche robuste, outlier e controlli sui dataset applicativi.
+> - **Feature engineering**: rappresentazione iterativa da valutare su un protocollo di training/validation corretto.
+> - **Simpson**: gli aggregati possono invertire i risultati stratificati; si confrontano gruppi e conteggi.
 > - **Pre-elaborazione statistica**: scalatura in un intervallo, clipping (per esempio a $\pm 3\sigma$), scalatura logaritmica, z-score.
 > - **EDA applicata alle reti neurali**: analizzare input, pesi, attivazioni e uscite, non solo gli input.

@@ -1,12 +1,11 @@
 ## **Lezione 19: Classificatore Bayes-ottimo, k-NN, clustering k-means e sistemi ibridi**
 
-La diciannovesima lezione del corso **IS4** parte da una domanda di fondo: **qual è l’errore minimo raggiungibile?** La risposta è il **classificatore Bayes-ottimo**, un limite teorico che può essere maggiore di zero quando le classi si sovrappongono. Da qui la lezione passa ai **modelli classici**, non neurali, e alla distinzione tra apprendimento **eager** e **lazy**, per arrivare al **k-Nearest Neighbors**: semplice, deterministico, spiegabile, e asintoticamente vicino al classificatore ottimo. Segue il **clustering k-means**, con l’algoritmo, i suoi limiti e i criteri per scegliere il numero di cluster. Chiude una panoramica degli altri approcci dell’intelligenza computazionale: **algoritmi genetici**, **logica fuzzy**, **swarm intelligence** e **sistemi ibridi**, con un esempio di ottimizzazione genetica dei parametri.
+La classificazione ha un limite teorico: l’errore Bayes-ottimo può restare maggiore di zero quando le classi si sovrappongono. Da qui si passa ai modelli classici, alla distinzione fra apprendimento eager e lazy, al k-Nearest Neighbors, al clustering k-means e agli approcci genetici, fuzzy, di sciame e ibridi.
 
-Fonti: [PDF della Lezione 19](Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf), 122 pagine, e lo script [Lesson_19_laboratory_MATLAB_Knn.m](Lesson_19_laboratory_MATLAB_Knn.m), letto integralmente. Le formule che nelle slide sono immagini sono riportate in forma standard; le note didattiche aggiunte sono segnalate. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
+Fonte primaria: [PDF aggiornato della Lezione 19](sources_2026-27/L19-web.pdf), 93 pagine di lezione e 19 pagine di appendice; supporto di codice MATLAB separato. La trattazione integra teoria, esempi e laboratorio mantenendo distinte le valutazioni illustrative dalle stime generalizzabili.
 
 ### **0. Struttura della lezione**
 
-_(slide pp. 1–3)_
 
 Titolo originale: *Bayes Optimal Classification, Nearest Neighbor Classifiers (kNN), Clustering (k means), Main intelligent systems approaches: Neural Networks, Fuzzy systems, Evolutionary, Hybrid systems*. L’indice (pp. 2–3) elenca:
 
@@ -22,7 +21,6 @@ Titolo originale: *Bayes Optimal Classification, Nearest Neighbor Classifiers (k
 
 ### **1. Il limite: la classificazione Bayes-ottima**
 
-_(slide pp. 4–15)_
 
 #### **1.1. Esiste un errore minimo**
 
@@ -32,7 +30,7 @@ Si insegue l’errore minimo, ma **qual è il limite** (p. 4)?
 
 **L’errore Bayes-ottimo** (p. 6). Quando le distribuzioni delle classi (per esempio «buono» e «cattivo» lungo una feature $F_1$) **non sono separate**, anche il **miglior classificatore** produce un errore legato alle **zone di sovrapposizione**, in 2D come in 3D.
 
-<!-- SOURCE_VISUAL id="IS19-V01" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="6" type="grafico" description="Distribuzioni sovrapposte delle classi buono e cattivo lungo F1, in 2D e 3D" reason="Sovrapposizione delle distribuzioni visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V01" source="L19-web.pdf" page="9" type="grafico" description="Distribuzioni sovrapposte delle classi buono e cattivo lungo F1, in 2D e 3D" reason="Sovrapposizione delle distribuzioni visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **1.2. Il classificatore Bayes-ottimo**
@@ -41,12 +39,12 @@ Si insegue l’errore minimo, ma **qual è il limite** (p. 4)?
 
 $$P(C = \text{arancia} \mid x) > P(C = \text{avocado} \mid x)$$
 
-Nella slide della p. 8 il testo dice per errore «classifichiamo l’oggetto come una **mela**», mentre le classi dell’esempio sono avocado e arancia.
+Nell’esempio compare per errore «classifichiamo l’oggetto come una **mela**», mentre le classi sono avocado e arancia.
 
 > 📌 **Classificatore Bayes-ottimo** (pp. 9, 11). Assegna la classe **più probabile** dato l’input. In forma standard:
 > $$\hat{c}(x) = \arg\max_{c} P(c \mid x) = \arg\max_{c} \, p(x \mid c)\, P(c)$$
 > - Nel mondo reale calcolare le probabilità può essere **molto inefficiente o impossibile**, soprattutto quando $x$ vive in uno spazio **ad alta dimensionalità**.
-> - Si possono calcolare le probabilità solo **conoscendo le distribuzioni**; la slide aggiunge anche feature **indipendenti** (ipotesi che però serve al Naive Bayes, §1.3).
+> - Si possono calcolare le probabilità solo **conoscendo le distribuzioni**; l’esempio considera anche feature **indipendenti** (ipotesi che però serve al Naive Bayes, §1.3).
 > - È un **concetto teorico**: **nessun altro metodo** di classificazione può fare **meglio in media**, a parità di spazio delle ipotesi e conoscenza a priori.
 > - **L’errore minimo possibile può essere maggiore di zero!**
 
@@ -54,15 +52,14 @@ Nella slide della p. 8 il testo dice per errore «classifichiamo l’oggetto com
 > $$P_e^{*} = \int \min\big( P(c_0)\, p(x \mid c_0),\; P(c_1)\, p(x \mid c_1) \big)\, dx$$
 > cioè l’**area della sovrapposizione** delle due curve pesate. Se le curve non si toccano, $P_e^* = 0$; se sono identiche e le classi equiprobabili, $P_e^* = 0{,}5$. Un modello che su un problema così dichiara lo 0% di errore sta quasi certamente **memorizzando** il training set.
 
-<!-- SOURCE_VISUAL id="IS19-V02" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="7" type="grafico" description="Densità stimate di D = rosso - verde per avocado e arance" reason="Curve di densità visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V02" source="L19-web.pdf" page="6" type="grafico" description="Densità stimate di D = rosso - verde per avocado e arance" reason="Curve di densità visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V03" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="10" type="grafico" description="Frontiera del classificatore Bayes-ottimo tra C0 e C1" reason="Frontiera e regioni visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V03" source="L19-web.pdf" page="9" type="grafico" description="Frontiera del classificatore Bayes-ottimo tra C0 e C1" reason="Frontiera e regioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **1.3. Naive Bayes**
 
-_(slide pp. 12–15)_
 
 La p. 13 illustra l’**ipotesi «naive»** sull’esempio avocado/arancia e sul dataset Iris.
 
@@ -79,17 +76,16 @@ La p. 13 illustra l’**ipotesi «naive»** sull’esempio avocado/arancia e sul
 
 La p. 15 mostra il **codice** del classificatore Naive Bayes.
 
-<!-- SOURCE_VISUAL id="IS19-V04" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="13" type="grafico" description="Ipotesi naive sull’esempio avocado/arancia e sul dataset Iris" reason="Distribuzioni visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V04" source="L19-web.pdf" page="11" type="grafico" description="Ipotesi naive sull’esempio avocado/arancia e sul dataset Iris" reason="Distribuzioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V05" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="15" type="schermata" description="Codice del classificatore Naive Bayes" reason="Codice presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS19-V05" source="L19-web.pdf" page="12" type="schermata" description="Codice del classificatore Naive Bayes" reason="Codice presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **2. Modelli classici e apprendimento eager o lazy**
 
-_(slide pp. 16–24)_
 
 #### **2.1. Perché i modelli classici contano**
 
@@ -120,10 +116,10 @@ Questi modelli sono **preferiti** quando **interpretabilità**, **semplicità** 
 
 Le immagini mnemoniche delle slide: l’eager learner vede «qualsiasi movimento casuale ⇒ è un topo!», cioè ha già costruito il concetto; il lazy learner ha memorizzato «tutto» e, davanti a un nuovo input, lo confronta con ciò che ha visto: «è molto simile a un computer da tavolo!» (pp. 21–22).
 
-<!-- SOURCE_VISUAL id="IS19-V06" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="21" type="illustrazione" description="Apprendimento eager: la regola generale costruita in addestramento (è un topo)" reason="Illustrazione della slide" -->
+<!-- SOURCE_VISUAL id="IS19-V06" source="L19-web.pdf" page="18" type="illustrazione" description="Apprendimento eager: la regola generale costruita in addestramento (è un topo)" reason="Illustrazione della slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V07" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="22" type="illustrazione" description="Apprendimento lazy: tutto memorizzato, confronto al momento della richiesta" reason="Illustrazione della slide" -->
+<!-- SOURCE_VISUAL id="IS19-V07" source="L19-web.pdf" page="19" type="illustrazione" description="Apprendimento lazy: tutto memorizzato, confronto al momento della richiesta" reason="Illustrazione della slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Compromessi** (p. 23):
@@ -144,7 +140,6 @@ Le immagini mnemoniche delle slide: l’eager learner vede «qualsiasi movimento
 
 ### **3. Il classificatore k-Nearest Neighbors**
 
-_(slide pp. 25–51)_
 
 #### **3.1. Perché il k-NN è indispensabile**
 
@@ -167,7 +162,6 @@ _(slide pp. 25–51)_
 
 #### **3.2. Definizione e frontiere di Voronoi**
 
-_(slide pp. 29–37)_
 
 > 📌 **L’idea di base** (p. 29). «Se cammina come un’anatra e fa qua qua come un’anatra, allora probabilmente è un’anatra.» Si calcola la **distanza** del record di test da **tutti** i campioni di training e si scelgono i $k$ record **più vicini**.
 
@@ -185,10 +179,10 @@ _(slide pp. 29–37)_
 
 > 💡 **Il pareggio con $k$ pari (nota didattica).** Con 2 vicini di classi diverse il voto è in parità: per due classi si sceglie di solito $k$ **dispari**; in alternativa si risolve il pareggio con il vicino più vicino o con i pesi sulla distanza.
 
-<!-- SOURCE_VISUAL id="IS19-V08" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="31" type="grafico" description="Uno, due e tre vicini più prossimi di un record x" reason="Cerchi dei vicini visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V08" source="L19-web.pdf" page="26" type="grafico" description="Uno, due e tre vicini più prossimi di un record x" reason="Cerchi dei vicini visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V09" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="32" type="grafico" description="Voto di maggioranza: blu con k = 1, verde con k = 3" reason="Punti e cerchi visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V09" source="L19-web.pdf" page="26" type="grafico" description="Voto di maggioranza: blu con k = 1, verde con k = 3" reason="Punti e cerchi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 📌 **Le frontiere del 1-NN: il diagramma di Voronoi** (p. 33). Il **diagramma di Voronoi** è una **partizione del piano** in regioni, ciascuna formata dai punti **più vicini** a uno dei punti di un certo insieme. Le frontiere di decisione del 1-NN sono i **bordi** delle celle di Voronoi dei campioni di training che separano classi diverse. Il diagramma di Voronoi di un insieme di punti è il **duale** della sua **triangolazione di Delaunay**.
@@ -197,10 +191,10 @@ La p. 34 mostra un diagramma di Voronoi in **3D**; le pp. 35–36 gli usi: **sci
 
 > 💡 **Un uso storico (nota didattica).** Nel 1854 John Snow mappò i morti di colera a Londra e mostrò che quasi tutti vivevano più vicini a una certa pompa d’acqua di Broad Street che a qualsiasi altra: in pratica disegnò una cella di Voronoi. È l’esempio classico dell’uso «epidemie» citato dalla slide.
 
-<!-- SOURCE_VISUAL id="IS19-V10" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="33" type="grafico" description="Diagramma di Voronoi come frontiere di decisione del 1-NN" reason="Celle del diagramma visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V10" source="L19-web.pdf" page="28" type="grafico" description="Diagramma di Voronoi come frontiere di decisione del 1-NN" reason="Celle del diagramma visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V11" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="36" type="immagine" description="Diagramma di Voronoi degli aeroporti del mondo su un globo 3D (Jason Davies)" reason="Immagine della slide" -->
+<!-- SOURCE_VISUAL id="IS19-V11" source="L19-web.pdf" page="31" type="immagine" description="Diagramma di Voronoi degli aeroporti del mondo su un globo 3D (Jason Davies)" reason="Immagine della slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Calcolo** (p. 37): la distanza tra due punti, per esempio **euclidea**,
@@ -211,7 +205,6 @@ poi il **voto di maggioranza** tra le etichette dei $k$ vicini; in alternativa s
 
 #### **3.3. Scelta di $k$, scala delle feature, dimensionalità**
 
-_(slide pp. 38–43)_
 
 **Scegliere $k$** (pp. 38–40):
 
@@ -225,10 +218,10 @@ La p. 40 mostra come la **complessità** del modello dipenda da $k$.
 
 > 💡 **Complessità e $k$ (nota didattica).** Con $k = 1$ la frontiera segue ogni singolo punto (massima complessità, rischio di overfitting); con $k = N$ il modello risponde sempre con la classe maggioritaria (minima complessità, underfitting). Un’indicazione intuitiva è che il k-NN ha circa $N/k$ «gradi di libertà efficaci»: aumentare $k$ equivale a semplificare il modello. Il $k$ giusto si sceglie con la cross-validation (Lezione 14).
 
-<!-- SOURCE_VISUAL id="IS19-V12" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="39" type="grafico" description="Frontiere più lisce con k alto: effetto di regolarizzazione" reason="Frontiere visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V12" source="L19-web.pdf" page="32" type="grafico" description="Frontiere più lisce con k alto: effetto di regolarizzazione" reason="Frontiere visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V13" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="40" type="grafico" description="Complessità del modello in funzione di k" reason="Pagina con solo grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V13" source="L19-web.pdf" page="32" type="grafico" description="Complessità del modello in funzione di k" reason="Pagina con solo grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > ⚠️ **Problemi di scala** (p. 41). Gli attributi possono dover essere **scalati** perché la distanza non sia **dominata** da uno di essi. Esempio:
@@ -253,7 +246,6 @@ La p. 40 mostra come la **complessità** del modello dipenda da $k$.
 
 #### **3.4. Velocità, un esempio e bias induttivo**
 
-_(slide pp. 44–51)_
 
 **Problemi pratici** (p. 44): **velocità** e **maledizione della dimensionalità**.
 
@@ -271,18 +263,18 @@ Il tempo totale è **dominato dal calcolo delle distanze**. Si può essere più 
 
 > 💡 **Il conto per un’applicazione (nota didattica).** Con un milione di immagini descritte da 512 feature, ogni classificazione richiede circa $10^6 \times 512 \approx 5 \times 10^8$ operazioni solo per le distanze. È l’altra faccia del lazy learning (§2.2): addestramento istantaneo, uso costoso. Strutture come i k-d tree o gli indici approssimati dei database vettoriali (Lezione 06, §6.3) servono proprio a questo.
 
-<!-- SOURCE_VISUAL id="IS19-V14" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="46" type="grafico" description="Esempio di classificazione k-NN" reason="Pagina con solo grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V14" source="L19-web.pdf" page="24" type="grafico" description="Esempio di classificazione k-NN" reason="Pagina con solo grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Esempio con i dati sulla frutta** (pp. 46–50). Dati di training con etichette {mele, arance, limoni} e attributi {larghezza, altezza}. Un punto di test $(a, b)$ viene classificato **limone**, un punto $(c, d)$ **mela**. Con il voto di maggioranza tra i $k$ vicini, il valore di $k$ cambia l’effetto degli **outlier**; la p. 50 mostra le frontiere di decisione del **1-NN**.
 
-<!-- SOURCE_VISUAL id="IS19-V15" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="48" type="grafico" description="Punti di test classificati come limone e mela nel piano larghezza-altezza" reason="Punti di test visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V15" source="L19-web.pdf" page="40" type="grafico" description="Punti di test classificati come limone e mela nel piano larghezza-altezza" reason="Punti di test visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V16" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="49" type="grafico" description="Effetto di k e di un outlier nel voto di maggioranza" reason="Outlier e vicini visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V16" source="L19-web.pdf" page="27" type="grafico" description="Effetto di k e di un outlier nel voto di maggioranza" reason="Outlier e vicini visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V17" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="50" type="grafico" description="Frontiere di decisione del 1-NN sui dati della frutta" reason="Frontiere visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V17" source="L19-web.pdf" page="28" type="grafico" description="Frontiere di decisione del 1-NN sui dati della frutta" reason="Frontiere visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 📌 **Il bias induttivo del k-NN** (p. 51). Ogni k-NN incorpora tre scelte:
@@ -294,7 +286,6 @@ Il tempo totale è **dominato dal calcolo delle distanze**. Si può essere più 
 
 ### **4. Il k-NN in MATLAB**
 
-_(slide pp. 52–57)_
 
 Lo script [Lesson_19_laboratory_MATLAB_Knn.m](Lesson_19_laboratory_MATLAB_Knn.m) (pp. 52–55):
 
@@ -341,14 +332,13 @@ end
 
 > ⚠️ **Commenti da aggiornare.** Nello script la standardizzazione è accompagnata dal commento «vedi la lezione sulla codifica delle uscite», ma riguarda gli **input**; e il commento iniziale rimanda al codice LDA della «Lezione 14», che in questa edizione si trova nelle Lezioni 16 e 17.
 
-<!-- SOURCE_VISUAL id="IS19-V18" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="57" type="schermata" description="Riepilogo dei classificatori programmati finora in MATLAB e Python" reason="Pagina senza testo estraibile" -->
+<!-- SOURCE_VISUAL id="IS19-V18" source="L19-web.pdf" page="52" type="schermata" description="Riepilogo dei classificatori programmati finora in MATLAB e Python" reason="Pagina senza testo estraibile" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **5. Clustering con k-means**
 
-_(slide pp. 58–87)_
 
 #### **5.1. Perché il clustering**
 
@@ -366,10 +356,10 @@ Una buona risposta è il **clustering**.
 
 **Esempio** (p. 63): estrarre gruppi da un dataset non supervisionato di volti, secondo attributi come bambino/adulto, maschio/femmina, felice/neutro/triste, capelli lunghi/calvo, barba/rasato, occhiali da sole/occhiali/nessuno.
 
-<!-- SOURCE_VISUAL id="IS19-V19" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="62" type="grafico" description="Esempio di clustering di punti" reason="Pagina con solo grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V19" source="L19-web.pdf" page="57" type="grafico" description="Esempio di clustering di punti" reason="Pagina con solo grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V20" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="63" type="immagini" description="Volti raggruppati per attributi: età, sesso, espressione, capelli, barba, occhiali" reason="Immagini visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS19-V20" source="L19-web.pdf" page="56" type="immagini" description="Volti raggruppati per attributi: età, sesso, espressione, capelli, barba, occhiali" reason="Immagini visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Perché si fa clustering** (p. 64):
@@ -383,7 +373,6 @@ Una buona risposta è il **clustering**.
 
 #### **5.2. L’algoritmo**
 
-_(slide pp. 65–73)_
 
 Le pp. 65–70 mostrano l’algoritmo passo per passo, con distanza **euclidea** e $k = 3$ centri $k_1, k_2, k_3$:
 
@@ -393,10 +382,10 @@ Le pp. 65–70 mostrano l’algoritmo passo per passo, con distanza **euclidea**
 4. si ripetono assegnazione e spostamento;
 5. **condizione di uscita**: i centri **non si spostano più**.
 
-<!-- SOURCE_VISUAL id="IS19-V21" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="65" type="grafico" description="k-means passo 1: inizializzazione casuale dei tre centri" reason="Posizione dei centri visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V21" source="L19-web.pdf" page="60" type="grafico" description="k-means passo 1: inizializzazione casuale dei tre centri" reason="Posizione dei centri visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V22" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="70" type="grafico" description="k-means passo 5: i centri non si spostano più, condizione di uscita" reason="Cluster finali visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V22" source="L19-web.pdf" page="61" type="grafico" description="k-means passo 5: i centri non si spostano più, condizione di uscita" reason="Cluster finali visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 📌 **L’obiettivo del k-means** (pp. 71–72, formula standard). Date $n$ osservazioni $(\mathbf{x}_1, \dots, \mathbf{x}_n)$, il k-means cerca di dividerle in $k \le n$ insiemi $S = \{S_1, \dots, S_k\}$ che **minimizzano la somma dei quadrati entro i cluster**:
@@ -420,16 +409,15 @@ Le pp. 65–70 mostrano l’algoritmo passo per passo, con distanza **euclidea**
 
 #### **5.3. Pregi e limiti**
 
-_(slide pp. 74–79)_
 
 > ⚠️ **Minimi locali e outlier** (pp. 74–75). Il k-means **converge a un minimo locale**, non necessariamente a quello **globale**: con un’inizializzazione sfortunata i centri possono fermarsi in una configurazione peggiore. Inoltre è sensibile agli **outlier**, che spostano i centri.
 
 > 💡 **Il rimedio pratico (nota didattica).** Si esegue il k-means **più volte** con inizializzazioni diverse e si tiene la soluzione con la somma dei quadrati più bassa; l’inizializzazione **k-means++** sceglie i centri iniziali distanti tra loro e riduce i risultati cattivi. In scikit-learn il parametro `n_init` fa proprio questo.
 
-<!-- SOURCE_VISUAL id="IS19-V23" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="74" type="grafico" description="k-means fermo in un minimo locale invece del minimo globale" reason="Configurazioni dei centri visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V23" source="L19-web.pdf" page="64" type="grafico" description="k-means fermo in un minimo locale invece del minimo globale" reason="Configurazioni dei centri visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V24" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="75" type="grafico" description="Effetto degli outlier sui centri del k-means" reason="Outlier e centri visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V24" source="L19-web.pdf" page="65" type="grafico" description="Effetto degli outlier sui centri del k-means" reason="Outlier e centri visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 | **Punti di forza** (p. 76) | **Debolezze** (p. 77) |
@@ -443,7 +431,7 @@ _(slide pp. 74–79)_
 
 La p. 78 confronta il **comportamento di diversi metodi di clustering** su diversi dataset.
 
-<!-- SOURCE_VISUAL id="IS19-V25" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="78" type="griglia di grafici" description="Comportamento di diversi metodi di clustering su diversi dataset" reason="Griglia di risultati visibile solo nella figura" -->
+<!-- SOURCE_VISUAL id="IS19-V25" source="L19-web.pdf" page="67" type="griglia di grafici" description="Comportamento di diversi metodi di clustering su diversi dataset" reason="Griglia di risultati visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Clustering esclusivo e sovrapposto** (p. 79):
@@ -457,7 +445,6 @@ La scelta dipende dall’**applicazione**.
 
 #### **5.4. Scegliere $k$ e usare i cluster**
 
-_(slide pp. 80–87)_
 
 **Come scegliere $k$** (pp. 80–81):
 
@@ -467,7 +454,7 @@ _(slide pp. 80–87)_
 - nell’apprendimento non supervisionato il **vero $k$ non è noto**: si può fissare un $k$ piccolo per **studiare la struttura** dei dati e **confrontare rappresentazioni** di feature diverse;
 - esistono tecniche avanzate: il **metodo del gomito** e il **silhouette score**.
 
-<!-- SOURCE_VISUAL id="IS19-V26" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="80" type="grafico" description="Under-clustering e over-clustering" reason="Cluster visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V26" source="L19-web.pdf" page="69" type="grafico" description="Under-clustering e over-clustering" reason="Cluster visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 📌 **Pipeline** (p. 82). Dati grezzi → **ispezione visiva** → **codifica** (categorico → numerico) → **scalatura** → **clustering** (k-means: metodo, metrica, numero $K$ di cluster) → **PCA** (**solo per la visualizzazione**, Lezione 18, §2.2).
@@ -505,28 +492,26 @@ Nell’esempio della slide le etichette «cluster normale» e «cluster di attac
 > - punti **lontani dai centroidi**;
 > - cluster **piccoli o isolati**.
 
-<!-- SOURCE_VISUAL id="IS19-V27" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="83" type="grafico" description="Metodo del gomito: WCSS in funzione del numero di cluster" reason="Curva e gomito visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V27" source="L19-web.pdf" page="71" type="grafico" description="Metodo del gomito: WCSS in funzione del numero di cluster" reason="Curva e gomito visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V28" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="85" type="grafico" description="Nuovo campione posizionato rispetto ai cluster normale e di attacco, etichettati a posteriori" reason="Posizione del campione visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V28" source="L19-web.pdf" page="73" type="grafico" description="Nuovo campione posizionato rispetto ai cluster normale e di attacco, etichettati a posteriori" reason="Posizione del campione visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **6. Esempi in Python: clienti e sensori di gas**
 
-_(slide pp. 88–106)_
 
 #### **6.1. Clienti: età e punteggio di spesa**
 
 Un esempio semplice in Colab (pp. 88–98) che ripete i passi di EDA della Lezione 11, §2: **pandas** per caricare i dati, selezione delle feature (nel progetto ci si concentra su **età** e **punteggio di spesa**), `.head`, `.shape`, `.info`, `.isnull`, `plt.hist` e un grafico dei dati. Poi il **k-means** (p. 97), con la dimensione dei marker come ulteriore informazione: **in più di 3 dimensioni il clustering aiuta ancora di più**. Il risultato (p. 98) è lo stesso della Lezione 11: un cluster di clienti **giovani** con **alto punteggio di spesa**, a cui mandare **spesso coupon e offerte dedicate**, da verificare con un confronto controllato.
 
-<!-- SOURCE_VISUAL id="IS19-V29" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="97" type="grafico" description="k-means su età e punteggio di spesa con dimensione dei marker" reason="Cluster colorati visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V29" source="L19-web.pdf" page="79" type="grafico" description="k-means su età e punteggio di spesa con dimensione dei marker" reason="Cluster colorati visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **6.2. Segnali da sensori reali (non d’esame)**
 
-_(slide pp. 99–106)_
 
 Un esempio da un’**applicazione industriale** (p. 99), presentato come **ripasso**, **non d’esame**. Lo script `gas_clustering.py` usa il file `ethylene_methane2_red.txt` (p. 100), che contiene le **serie temporali** di **16 sensori chimici** esposti a **miscele di gas** a concentrazioni variabili. Colonne: **tempo** (s), concentrazione di **metano** (ppm), concentrazione di **etilene** (ppm), **letture dei 16 sensori**: **16 canali = spazio delle feature a 16 dimensioni**.
 
@@ -543,20 +528,19 @@ Un esempio da un’**applicazione industriale** (p. 99), presentato come **ripas
 
 > 💡 **Non supervisionato per scelta (nota didattica).** Il file contiene le concentrazioni dei gas, che potrebbero fare da target; l’esempio le **toglie** per vedere se i sensori da soli rivelano gli stati del sistema. Le concentrazioni restano utili **dopo**, per verificare che i cluster trovati corrispondano davvero a condizioni diverse. Il k-means lavora sui dati **standardizzati**, perché i 16 sensori hanno scale diverse (§3.3).
 
-<!-- SOURCE_VISUAL id="IS19-V30" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="103" type="grafici" description="Distribuzioni dei 16 sensori con correlazioni e distribuzioni multimodali" reason="Istogrammi visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS19-V30" source="L19-web.pdf" page="109" type="grafici" description="Distribuzioni dei 16 sensori con correlazioni e distribuzioni multimodali" reason="Istogrammi visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V31" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="104" type="grafico" description="t-SNE dei 16 sensori che conferma gli stati del sistema" reason="Proiezione visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V31" source="L19-web.pdf" page="110" type="grafico" description="t-SNE dei 16 sensori che conferma gli stati del sistema" reason="Proiezione visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS19-V32" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="106" type="grafico" description="Clustering nelle componenti t-SNE dei segnali dei sensori" reason="Pagina con solo grafico" -->
+<!-- SOURCE_VISUAL id="IS19-V32" source="L19-web.pdf" page="112" type="grafico" description="Clustering nelle componenti t-SNE dei segnali dei sensori" reason="Pagina con solo grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **7. Altri approcci: evolutivi, fuzzy, swarm e sistemi ibridi**
 
-_(slide pp. 107–120)_
 
 #### **7.1. Algoritmi genetici**
 
@@ -571,14 +555,13 @@ _(slide pp. 107–120)_
 
 > 📌 **Insiemi e regole fuzzy (nota didattica).** In logica booleana un elemento **appartiene o no** a un insieme. In logica fuzzy ha un **grado di appartenenza** $\mu(x) \in [0, 1]$. Esempio: per l’insieme «temperatura calda», $\mu(18\,°\text{C}) = 0$, $\mu(24\,°\text{C}) = 0{,}5$, $\mu(30\,°\text{C}) = 1$. Una **regola fuzzy** ha la forma «**se** la temperatura è calda **e** l’umidità è alta **allora** la ventola è veloce»: il grado con cui la regola si attiva dipende dai gradi di appartenenza (per esempio il minimo tra i due), e le uscite delle regole si combinano in un valore numerico finale. È lo stesso principio del Fuzzy C-Means del §5.3: appartenenze parziali invece di confini netti.
 
-<!-- SOURCE_VISUAL id="IS19-V33" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="110" type="grafico" description="Logica fuzzy contro logica booleana" reason="Confronto grafico delle funzioni di appartenenza" -->
+<!-- SOURCE_VISUAL id="IS19-V33" source="L19-web.pdf" page="84" type="grafico" description="Logica fuzzy contro logica booleana" reason="Confronto grafico delle funzioni di appartenenza" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 📌 **Swarm intelligence** (p. 112). Ispirata al comportamento degli **insetti sociali** come le formiche e ad altre società animali, come **stormi di uccelli** o **banchi di pesci**. È caratterizzata da comportamenti **decentralizzati** e **auto-organizzati**, capacità di **risolvere problemi complessi** e di **ottimizzazione**.
 
 #### **7.3. Sistemi intelligenti ibridi**
 
-_(slide pp. 113–120)_
 
 > 📌 **Sistema intelligente ibrido** (p. 114). «Un sistema software che impiega, **in parallelo**, una **combinazione** di metodi e tecniche dell’intelligenza artificiale.»
 
@@ -590,7 +573,7 @@ _(slide pp. 113–120)_
 
 La p. 116 mostra **ibridi semplici**, con i moduli **in parallelo**, non incorporati. **Esempi di combinazioni** (p. 117): sistemi **neuro-fuzzy**, **genetico-fuzzy**, **genetico-neurali**, **neuro-fuzzy-genetici**, **sistemi esperti ibridi o neurali**, sistemi di **swarm intelligence**, e molti altri.
 
-<!-- SOURCE_VISUAL id="IS19-V34" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="116" type="diagramma" description="Esempi di sistemi ibridi semplici con moduli in parallelo" reason="Pagina con solo diagramma" -->
+<!-- SOURCE_VISUAL id="IS19-V34" source="L19-web.pdf" page="89" type="diagramma" description="Esempi di sistemi ibridi semplici con moduli in parallelo" reason="Pagina con solo diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **7.4. Ottimizzazione genetica dei parametri**
@@ -607,7 +590,7 @@ Gli input $X_1, \dots, X_n$ passano per i moduli, che producono **pre-classifica
 
 > 💡 **Perché la forza bruta non basta (nota didattica).** Se ognuno dei 5 parametri può assumere 20 valori, le configurazioni sono $20^5 = 3{,}2$ milioni. Ognuna richiede di addestrare tre modelli e di valutarli con una cross-validation (Lezione 14): anche a un secondo per configurazione sarebbero più di un mese di calcolo. Un algoritmo genetico ne valuta qualche centinaio o migliaio, concentrandosi sulle zone promettenti.
 
-<!-- SOURCE_VISUAL id="IS19-V35" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="118" type="diagramma" description="Sistema ibrido con k-NN, albero di decisione e rete feed-forward e i loro cinque parametri" reason="Collegamenti tra i moduli visibili solo nel diagramma" -->
+<!-- SOURCE_VISUAL id="IS19-V35" source="L19-web.pdf" page="90" type="diagramma" description="Sistema ibrido con k-NN, albero di decisione e rete feed-forward e i loro cinque parametri" reason="Collegamenti tra i moduli visibili solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Popolazione e selezione** (p. 119). Ogni **individuo** è un vettore dei 5 parametri, con la sua **fitness**. Nella tabella della slide la colonna è intitolata «Fitness (Accuracy)» e contiene valori come **3,3%**, **3,1%** e **4,1%**; si seleziona il **più adatto**, o gli $N$ più adatti.
@@ -623,7 +606,7 @@ Gli input $X_1, \dots, X_n$ passano per i moduli, che producono **pre-classifica
 | #12 | **figlio**: una parte dei parametri dalla madre e una dal padre, separate da un **punto di crossover** | 2,8% |
 | #12 mutato | **figlio mutato**: **mutazione** in una posizione e con un’intensità casuali, qui $(\text{Par.}\#4, -5)$, cioè 5 neuroni in meno nel secondo strato | 2,8% |
 
-<!-- SOURCE_VISUAL id="IS19-V36" source="Lesson_19_Bayes-Optimal_kNN_Clustering_Intelligent_systems_types_NN_Fuzzy_Evo_Others.pdf" page="120" type="tabella" description="Crossover tra madre e padre e mutazione del figlio sui cinque parametri" reason="Valori dei parametri presenti solo nella tabella" -->
+<!-- SOURCE_VISUAL id="IS19-V36" source="L19-web.pdf" page="92" type="tabella" description="Crossover tra madre e padre e mutazione del figlio sui cinque parametri" reason="Valori dei parametri presenti solo nella tabella" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
@@ -652,7 +635,6 @@ Gli input $X_1, \dots, X_n$ passano per i moduli, che producono **pre-classifica
 
 ### **9. Sintesi della lezione**
 
-_(slide pp. 121–122)_
 
 > ✅ **Punti principali** (pp. 121–122).
 > - **Classificazione Bayes-ottima**: il limite teorico dell’errore, che può essere maggiore di zero; il Naive Bayes come sua approssimazione pratica.
@@ -661,3 +643,34 @@ _(slide pp. 121–122)_
 > - **Clustering k-means**: obiettivo, algoritmo, minimi locali, scelta di $k$ (gomito, silhouette), assegnazione di nuovi campioni, differenza dal rilevamento di anomalie.
 > - **Principali tipi di intelligenza computazionale**: sistemi **fuzzy**, **evolutivi**, **swarm**, **ibridi**.
 > - **Ottimizzazione genetica dei parametri** di un sistema ibrido: popolazione, fitness, crossover e mutazioni.
+
+
+### **Aggiornamenti dell’edizione 2026/27**
+
+#### **7. La distanza definisce la nozione di vicinanza**
+
+Il k-NN è deterministico a parità di dati, metrica e regola per i pareggi; la sua semplicità lo rende utile come riferimento e strumento di debug. La nozione di vicino dipende però dalla rappresentazione. Con la distanza euclidea il punto query $q=(1,1)$ è più vicino ad $a=(1{,}5,0{,}6)$ che a $b=(3,3)$; con la distanza coseno, che confronta l’orientamento, $b$ è il più vicino. La similarità coseno dipende dall’origine: sottrarre la media può cambiare due vettori paralleli in vettori opposti. La media va stimata sul training set.
+
+Con feature espresse in unità diverse, la variabile dal range numerico maggiore può dominare la distanza. In un esempio sintetico di altezza, peso e glicemia, la scala determina quali caratteristiche governano il vicinato; la normalizzazione va scelta in base al problema e validata insieme alla metrica. Su embedding normalizzati a norma unitaria, distanza euclidea e coseno ordinano i vicini nello stesso modo. Una mappa PCA bidimensionale serve solo a visualizzare i vettori: la predizione avviene nello spazio embedding completo.
+
+<!-- SOURCE_VISUAL id="IS19-26-V31" source="L19-web.pdf" page="35" type="grafico" description="Vicini diversi secondo distanza euclidea e distanza coseno" reason="La figura confronta la geometria delle due metriche" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS19-26-V32" source="L19-web.pdf" page="39" type="grafico" description="Effetto della scala delle feature sulla distanza tra pazienti sintetici" reason="Confronto geometrico prima e dopo la normalizzazione" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **8. Rappresentare, valutare e applicare i metodi**
+
+Il materiale aggiornato rende esplicito il flusso per k-NN su MATLAB e scikit-learn, il ruolo dei dati e la valutazione con cross-validation. Per i 150 campioni Iris, la cross-validation a 10 fold sul 5-NN restituisce un errore medio di 0,0533. Il valore è specifico di quella configurazione e del dataset.
+
+Per il clustering senza etichette, ogni riga dei sensori di gas è un punto in $\mathbb{R}^{16}$; tempo e concentrazioni note descrivono il contesto e non sono incluse nella matrice delle feature usata nell’esempio. Il dataset UCI completo contiene circa 4,18 milioni di righe e 19 colonne: tempo, due set-point dei gas e 16 canali. L’esercizio usa una versione ridotta a una riga al secondo. L’analisi esplorativa verifica forma, tipi, valori mancanti e distribuzioni prima della selezione dei soli canali sensore e dell’applicazione di t-SNE e k-means. Le etichette di concentrazione possono interpretare i gruppi dopo la clusterizzazione, ma non guidano il raggruppamento.
+
+La ricerca genetica dei parametri richiede una funzione di fitness definita sul compito: nell’esempio, gli individui sono configurazioni di parametri valutate mediante errore di validazione, da minimizzare. Algoritmi genetici, logica fuzzy, intelligenza di sciame e reti neurali possono essere combinati quando l’integrazione affronta un limite concreto; il termine «ibrido» descrive la composizione di metodi, non garantisce prestazioni migliori.
+
+<!-- SOURCE_VISUAL id="IS19-26-V33" source="L19-web.pdf" page="81" type="tabella" description="Campi e prime righe del dataset di sensori per gas UCI" reason="Tabella con misure e metadati del campione" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS19-26-V34" source="L19-web.pdf" page="91" type="tabella" description="Individui e rispettivi errori di validazione nella selezione genetica" reason="Tabella numerica della funzione fitness" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+
