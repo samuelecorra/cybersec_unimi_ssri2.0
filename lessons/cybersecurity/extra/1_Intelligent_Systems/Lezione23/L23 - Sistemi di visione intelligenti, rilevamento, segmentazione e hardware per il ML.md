@@ -7,7 +7,7 @@ La ventitreesima lezione del corso **IS4** porta il deep learning nelle **applic
 - **segmentazione semantica**;
 - **segmentazione per istanze**.
 
-Per ciascuno spiega **che cosa restituisce** e **che cosa permette di misurare**. Seguono le soluzioni **classiche, profonde e ibride**, i modelli **SAM** e **SAM 2**, le reti **completamente convolutive** con upsampling e un **caso d’uso con i droni**. La seconda parte è dedicata all’**hardware per il ML** (CPU, GPU, TPU, NPU, VPU), all’**edge** e agli strumenti di ottimizzazione come **OpenVINO** ed **Edge Impulse**.
+Per ciascuno spiega **che cosa restituisce** e **che cosa permette di misurare**. Seguono le soluzioni **classiche, profonde e ibride**, i modelli **SAM** (*Segment Anything Model*, modello Segment Anything) e **SAM 2** (seconda versione del modello Segment Anything), le reti **completamente convolutive** con upsampling e un **caso d’uso con i droni**. La seconda parte è dedicata all’**hardware per il ML** (CPU, GPU, TPU, NPU, VPU (*Vision Processing Unit*, unità di elaborazione visiva)), all’**edge** e agli strumenti di ottimizzazione come **OpenVINO** ed **Edge Impulse**.
 
 
 ### **0. Struttura della lezione**
@@ -110,7 +110,7 @@ La p. 20 riprende la definizione del rilevamento con il bounding box $\{x_1, y_1
 > 3. si scartano quelli che hanno con esso un’IoU (Lezione 21, §6.3) sopra una soglia, per esempio 0,5;
 > 4. si ripete con i box rimasti.
 >
-> Con oggetti **davvero sovrapposti**, come due persone una davanti all’altra, i loro box hanno IoU alta e la NMS rischia di **eliminarne uno**: in scene complesse questa soppressione può eliminare un oggetto reale.
+> Con oggetti **davvero sovrapposti**, come due persone una davanti all’altra, i loro box hanno IoU alta e la NMS (*Non-Maximum Suppression*, soppressione dei rilevamenti non massimi) rischia di **eliminarne uno**: in scene complesse questa soppressione può eliminare un oggetto reale.
 
 **Stima della posa del corpo articolato: OpenPose**. Un sistema **open source** e **in tempo reale** per la stima **2D della posa di più persone**, che trova i punti chiave (*keypoint*) del **corpo**, dei **piedi**, di **polsi e mani** e del **volto**.
 
@@ -211,7 +211,7 @@ La p. 25 confronta la **classificazione/rilevamento** di oggetti con il **ML cla
 
 > 📌 **Segmentazione: la «definizione»**.
 > - **Dividere** o **separare** un’immagine in **regioni**.
-> - Serve a facilitare il **riconoscimento**, la **comprensione** e l’elaborazione delle **regioni di interesse** (ROI).
+> - Serve a facilitare il **riconoscimento**, la **comprensione** e l’elaborazione delle **regioni di interesse** (ROI (*Region of Interest*, regione di interesse)).
 > - È un **problema mal posto**: la **definizione di regione dipende dal contesto**.
 
 > 💡 **Mal posto in pratica (nota didattica).** In una foto di una facciata, la «regione» giusta può essere l’intero edificio (per una mappa urbana), ogni finestra (per un conteggio) o ogni mattone (per un’ispezione dei danni). Nessun algoritmo può scegliere senza sapere **a che cosa serve** la segmentazione: è lo stesso principio della Lezione 08 sulle soglie di similarità che dipendono dall’applicazione.
@@ -318,7 +318,7 @@ La p. 49 richiama la **segmentazione semantica**.
 
 > 💡 **Quanto costa (nota didattica).** Un’immagine $224 \times 224$ ha 50 176 pixel: con una finestra per pixel servono 50 176 passaggi in avanti della rete per **una sola immagine**, e finestre vicine ripetono quasi gli stessi calcoli. Una rete **completamente convolutiva** risolve il problema con **un solo passaggio**, condividendo i calcoli tra tutti i pixel.
 
-> 📌 **Una soluzione completamente convolutiva**. La **Fully Convolutional Network** (FCN) con **downsampling e upsampling** ha una struttura **encoder/decoder**:
+> 📌 **Una soluzione completamente convolutiva**. La **FCN** (*Fully Convolutional Network*, rete completamente convoluzionale) con **downsampling e upsampling** ha una struttura **encoder/decoder**:
 > - l’**encoder** riduce la risoluzione ed estrae feature sempre più astratte;
 > - il **decoder** riporta le mappe alla **risoluzione dell’immagine** con operazioni di upsampling («**deconvoluzioni**»);
 > - l’uscita ha un **vettore di punteggi di classe per ogni pixel**.
@@ -377,7 +377,7 @@ La p. 57 mostra esempi di **classificazione di immagini con il deep learning**.
 ### **5. Caso d’uso: riconoscimento di oggetti da drone**
 
 
-**Riconoscimento di oggetti da UAV**. Un **UAV** (*Unmanned Aerial Vehicle*) è un velivolo senza pilota, un drone; la p. 59 ne mostra gli usi applicativi.
+**Riconoscimento di oggetti da UAV** (*Unmanned Aerial Vehicle*, velivolo senza pilota). Un UAV è un drone; la p. 59 ne mostra gli usi applicativi.
 
 <!-- SOURCE_VISUAL id="IS23-V31" source="L23-web.pdf" page="65" type="immagini" description="Droni negli usi applicativi" reason="Pagina con sole immagini" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -448,8 +448,8 @@ La p. 57 mostra esempi di **classificazione di immagini con il deep learning**.
 | **CPU** (*Central Processing Unit*) | processore **generico**, **alta flessibilità**, **basso parallelismo** | adatta a **prototipi**, **pre-elaborazione**, **controllo del sistema**; **non** adatta all’addestramento di deep learning o all’inferenza complessa in tempo reale |
 | **GPU** (*Graphics Processing Unit*) | **parallelismo massiccio**, alta **larghezza di banda della memoria** | scelta **standard per addestrare le CNN**; usata anche per l’inferenza a lotti o in tempo reale su desktop e server |
 | **TPU** (*Tensor Processing Unit*) | acceleratore **specializzato** per le operazioni **tensoriali** | efficiente per addestramento e inferenza di **modelli standardizzati**; **flessibilità limitata**, uso tipicamente **in cloud** |
-| **NPU** (*Neural Processing Unit*) | acceleratore per l’**inferenza neurale a bassa potenza** | ideale per sistemi **embedded** e **in tempo reale**; ottimizzata per **latenza**, **consumo energetico** e **privacy sul dispositivo** |
-| **VPU** (*Vision Processing Unit*) | acceleratore **specializzato per l’elaborazione visiva** e la computer vision | ottimizzata per **pre-elaborazione**, **estrazione di feature** e **inferenza** su video e immagini; ideale per la biometria visiva embedded (volto, gesti, conteggio di persone); **compromesso tra GPU e NPU**, con buona efficienza e pipeline video dedicate |
+| **NPU** (*Neural Processing Unit*, unità di elaborazione neurale) | acceleratore per l’**inferenza neurale a bassa potenza** | ideale per sistemi **embedded** e **in tempo reale**; ottimizzata per **latenza**, **consumo energetico** e **privacy sul dispositivo** |
+| **VPU** (*Vision Processing Unit*, unità di elaborazione visiva) | acceleratore **specializzato per l’elaborazione visiva** e la computer vision | ottimizzata per **pre-elaborazione**, **estrazione di feature** e **inferenza** su video e immagini; ideale per la biometria visiva embedded (volto, gesti, conteggio di persone); **compromesso tra GPU e NPU**, con buona efficienza e pipeline video dedicate |
 
 Gli esempi di applicazione riguardano diversi esempi in termini di **biometria** (CNN biometriche, inferenza biometrica): il ragionamento vale per qualsiasi modello di visione.
 
@@ -494,7 +494,7 @@ Gli esempi di applicazione riguardano diversi esempi in termini di **biometria**
 > - L’**Arm AI Platform** è una piattaforma di calcolo completa: CPU **Arm Cortex**, GPU **Mali** e una linea di processori molto scalabili, dall’**IoT** alle **auto connesse** fino ai **server**.
 > - Offre funzioni per i framework di ML come **TensorFlow**, per progetti di **immagini e visione**, con **codice portabile** tra configurazioni Arm diverse.
 > - Le reti neurali spesso **non richiedono dati ad altissima precisione**: i calcoli si possono fare su **16 o perfino 8 bit**, invece che su 32 o 64 bit.
-> - Gran parte dell’elaborazione delle reti usa la **moltiplicazione di matrici in virgola fissa a 8 bit**. L’architettura **Armv8.2-A** ha introdotto istruzioni **NEON** SIMD (*single instruction, multiple data*) per la **mezza precisione** (FP16) e per il **prodotto scalare intero** (INT8), per accelerare le reti.
+> - Gran parte dell’elaborazione delle reti usa la **moltiplicazione di matrici in virgola fissa a 8 bit**. L’architettura **Armv8.2-A** ha introdotto istruzioni **NEON** SIMD (*Single Instruction, Multiple Data*, singola istruzione, dati multipli) per la **mezza precisione** (FP16, *16-bit floating point*, virgola mobile a 16 bit) e per il **prodotto scalare intero** (INT8, *8-bit integer*, intero a 8 bit), per accelerare le reti.
 > - Oggi il punto non è solo CPU contro GPU: i sistemi Arm usano il **calcolo eterogeneo**:
 >   - **CPU** per il controllo;
 >   - **GPU** per i carichi paralleli;
@@ -505,12 +505,12 @@ Gli esempi di applicazione riguardano diversi esempi in termini di **biometria**
 
 > 💡 **Che cosa vuol dire «8 bit» (nota didattica).** La **quantizzazione** rappresenta ogni valore reale $x$ con un intero $q$ a 8 bit, tramite una scala $s$ e uno zero $z$:
 > $$q = \operatorname{round}\left(\frac{x}{s}\right) + z, \qquad x \approx s\,(q - z)$$
-> Se i pesi di uno strato stanno in $[-1, 1]$, con 256 livelli la scala è $s = 2/255 \approx 0{,}0078$: l’errore massimo di arrotondamento è circa $0{,}004$. La memoria si riduce di 4 volte rispetto a FP32: ResNet-50, con circa 25,6 milioni di parametri, passa da circa 98 MB a circa 25 MB. Il prodotto di interi a 8 bit è inoltre molto più economico in silicio del prodotto in virgola mobile (Lezione 04, §3).
+> Se i pesi di uno strato stanno in $[-1, 1]$, con 256 livelli la scala è $s = 2/255 \approx 0{,}0078$: l’errore massimo di arrotondamento è circa $0{,}004$. La memoria si riduce di 4 volte rispetto a FP32 (*32-bit floating point*, virgola mobile a 32 bit): ResNet-50, con circa 25,6 milioni di parametri, passa da circa 98 MB a circa 25 MB. Il prodotto di interi a 8 bit è inoltre molto più economico in silicio del prodotto in virgola mobile (Lezione 04, §3).
 
 #### **6.4. TPU, edge TPU e acceleratori storici**
 
 
-> 📌 **Google TPU**. Una **Tensor Processing Unit** è un **acceleratore di AI** di tipo **ASIC** (circuito integrato specifico per l’applicazione) sviluppato da Google **specificamente per il machine learning con reti neurali**. L’esempio riporta un valore di picco di «275 TeraFlops» e aggiunge: «il tuo codice Colab gira (probabilmente) qui».
+> 📌 **Google TPU**. Una **Tensor Processing Unit** è un **acceleratore di AI** di tipo **ASIC** (*Application-Specific Integrated Circuit*, circuito integrato specifico per un’applicazione) sviluppato da Google **specificamente per il machine learning con reti neurali**. L’esempio riporta un valore di picco di «275 TeraFlops» e aggiunge: «il tuo codice Colab gira (probabilmente) qui».
 
 > ⚠️ **Colab e TPU (nota didattica).** In Colab il runtime predefinito è su **CPU**; GPU e TPU vanno scelte esplicitamente dal menu del tipo di runtime, e la loro disponibilità dipende dal piano. Il «probabilmente» dell’esempio va letto come «se hai scelto il runtime TPU».
 
@@ -529,9 +529,9 @@ Gli esempi di applicazione riguardano diversi esempi in termini di **biometria**
 <!-- SOURCE_VISUAL id="IS23-V41" source="L23-web.pdf" page="93" type="immagini" description="Supercomputer TPU a scala exaflop e Google Edge TPU" reason="Immagini presenti solo nell’esempio" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 💡 **FLOPS e TOPS (nota didattica).**
-> - I **FLOPS** (*floating-point operations per second*) misurano le operazioni in virgola mobile al secondo: si usano per l’addestramento su data center. Un exaflop vale $10^{18}$ FLOPS.
-> - I **TOPS** (*trillions of operations per second*) misurano le operazioni, spesso intere, degli acceleratori per l’inferenza all’edge.
+> 💡 **FLOPS (*Floating-Point Operations Per Second*, operazioni in virgola mobile al secondo) e TOPS (*Tera Operations Per Second*, tera-operazioni al secondo) (nota didattica).**
+> - I **FLOPS** (operazioni in virgola mobile al secondo) misurano le operazioni in virgola mobile al secondo: si usano per l’addestramento su data center. Un exaflop vale $10^{18}$ FLOPS.
+> - I **TOPS** (tera-operazioni al secondo) misurano le operazioni, spesso intere, degli acceleratori per l’inferenza all’edge.
 >
 > Le due misure non sono confrontabili direttamente: dicono quanto è veloce il chip, non quanto è veloce **un certo modello** su quel chip, che dipende anche da memoria e software.
 
@@ -575,7 +575,7 @@ Gli esempi di applicazione riguardano diversi esempi in termini di **biometria**
 >   - **riuso della memoria**;
 >   - **bilanciamento del carico**;
 >   - **parallelismo dell’inferenza** su **CPU, GPU e VPU**.
-> - Strumenti di ottimizzazione: il **Post-Training Optimization Tool** e il **Neural Network Compression Framework** (NNCF).
+> - Strumenti di ottimizzazione: il **Post-Training Optimization Tool** e il **Neural Network Compression Framework** (NNCF (*Neural Network Compression Framework*, framework per la compressione delle reti neurali)).
 
 <!-- SOURCE_VISUAL id="IS23-V46" source="L23-web.pdf" page="102" type="diagramma" description="Flusso di lavoro tipico con OpenVINO" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->

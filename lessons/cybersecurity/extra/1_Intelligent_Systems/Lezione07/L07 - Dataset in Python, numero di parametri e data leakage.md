@@ -259,7 +259,7 @@ Verifica: $\sqrt{138 \times 10^6} \approx 11\,747$ e $17^2 = 289 < 300$. La aggi
 
 > 💡 **Il confronto è intuitivo, non una formula di campionamento.** I parametri non corrispondono letteralmente a pixel né determinano da soli il numero di immagini necessario: contano anche struttura, regolarizzazione, diversità, qualità ed effettiva informatività dei dati. L’analogia rende visibile la scala dei pesi fra una rete piccola e VGGNet.
 
-Il confronto con un backbone visivo più recente chiarisce che le dimensioni continuano a crescere: **DINOv3 ViT-7B** (2025) è riportato con circa 7 miliardi di parametri e pesi aperti; a 16 bit i pesi occupano circa 14 GB, quindi l’esecuzione locale richiede una GPU di fascia alta. La dimensione dei pesi da sola non descrive i requisiti completi di inferenza: contano anche attivazioni, risoluzione, batch, contesto, precisione numerica e implementazione. Rimane il criterio progettuale: scegliere la capacità in rapporto alla quantità e complessità dei dati e ai vincoli del deployment.
+Il confronto con un backbone visivo più recente chiarisce che le dimensioni continuano a crescere: **DINOv3 ViT-7B** (ViT, *Vision Transformer*, trasformatore per immagini) (2025) è riportato con circa 7 miliardi di parametri e pesi aperti; a 16 bit i pesi occupano circa 14 GB, quindi l’esecuzione locale richiede una GPU di fascia alta. La dimensione dei pesi da sola non descrive i requisiti completi di inferenza: contano anche attivazioni, risoluzione, batch, contesto, precisione numerica e implementazione. Rimane il criterio progettuale: scegliere la capacità in rapporto alla quantità e complessità dei dati e ai vincoli del deployment.
 
 <!-- SOURCE_VISUAL id="IS07-V27" source="L07-web.pdf" page="39" type="confronto" description="Scala dei parametri di VGGNet rispetto ai backbone visivi contemporanei DINOv3 ViT-7B e ViT-22B" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -401,7 +401,7 @@ Nel dataset di addestramento e in quello di test compaiono cani e gatti **appare
 | Supply chain | prevedere la **domanda** di prodotto | individuare **pattern di domanda** per categorie di prodotto |
 | Ambiente | **previsioni meteo**, previsione della temperatura | classificare la **qualità dell’aria** dai sensori |
 | Finanza | previsione dei **prezzi delle azioni**, tendenze economiche | rilevamento di **frodi** nelle sequenze di transazioni |
-| Sanità | previsione dei **parametri vitali** del paziente | classificazione dell’**ECG** per le cardiopatie |
+| Sanità | previsione dei **parametri vitali** del paziente | classificazione dell’ECG (*Electrocardiogram*, elettrocardiogramma) per le cardiopatie |
 
 > ⚠️ **Il problema**. In entrambi i casi il modello funziona solo se i dati passati sono **coerenti**, cioè **non mescolati**, sia in **addestramento** (input del metodo di apprendimento) sia in **inferenza** (input del modello).
 

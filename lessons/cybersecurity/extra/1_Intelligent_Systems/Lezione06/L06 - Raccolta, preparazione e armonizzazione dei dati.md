@@ -1,6 +1,6 @@
 ## **Lezione 6: Raccolta, preparazione e armonizzazione dei dati**
 
-Ogni sistema intelligente parte dai **dati**: occorre raccoglierli, stimarne i volumi, armonizzare formati e unità, sincronizzare gli orologi e trattare errori, valori mancanti e fonti non strutturate. Il principio **GIGO** (*garbage in, garbage out*) ricorda che la qualità del modello dipende dalla qualità delle informazioni e delle trasformazioni a monte. Agenti, LLM e database vettoriali possono sostenere la preparazione, purché i risultati siano verificati.
+Ogni sistema intelligente parte dai **dati**: occorre raccoglierli, stimarne i volumi, armonizzare formati e unità, sincronizzare gli orologi e trattare errori, valori mancanti e fonti non strutturate. Il principio **GIGO** (*Garbage In, Garbage Out*, «spazzatura in ingresso, spazzatura in uscita») ricorda che la qualità del modello dipende dalla qualità delle informazioni e delle trasformazioni a monte. Agenti, LLM e database vettoriali possono sostenere la preparazione, purché i risultati siano verificati.
 
 
 ### **0. Panoramica**
@@ -86,8 +86,8 @@ La raccolta dei dati è il **passo 1** del flusso di lavoro del ML. **Nella prat
 - query classiche a **database**;
 - elaborazione di **file**;
 - **formati personalizzati**;
-- **flussi di dati** da IoT e AIoT;
-- **piattaforme online** (AWS, Azure, Google, …).
+- **flussi di dati** da IoT e AIoT (*Artificial Intelligence of Things*, intelligenza artificiale delle cose);
+- **piattaforme online** AWS (*Amazon Web Services*, servizi web Amazon), Azure, Google, …
 
 Le fonti capaci di generare dati sono moltissime e potenti; i dettagli tecnici di ciascuna richiedono procedure specifiche.
 
@@ -106,15 +106,17 @@ Le fonti capaci di generare dati sono moltissime e potenti; i dettagli tecnici d
 **Dati generati dai dispositivi IoT nel 2025**:
 
 - **41,6 miliardi** di dispositivi connessi;
-- **79,4 zettabyte** (ZB) di dati all’anno;
+- **79,4 zettabyte** (ZB, multiplo pari a $10^{21}$ byte) di dati all’anno;
 - fonti in crescita: **videosorveglianza**, dati della **casa intelligente**, **smartphone** (coordinate, sensori di salute, attività), dispositivi **indossabili** (smartwatch, braccialetti), **sensori**.
 
 > 📌 **Zettabyte.** Il prefisso *zetta* indica la moltiplicazione per la **settima potenza di 1000**:
 > $$1\ \text{ZB} = 1000^7\ \text{byte} = 10^{21}\ \text{byte}$$
 
-La **videosorveglianza** produrrà una **quota rilevante** dei dati IoT, e il **5G** abilita nuovi dispositivi.
+La **videosorveglianza** produrrà una **quota rilevante** dei dati IoT, e il **5G** (*fifth-generation mobile network*, rete mobile di quinta generazione) abilita nuovi dispositivi.
 
-**Esempio: coordinate GPS degli smartphone in Italia**. Si assumono circa **59 milioni** di residenti (dato ISTAT al 1º gennaio 2026, arrotondato), una quota di **0,83** con cellulare, una posizione al minuto e due coordinate da 8 byte ciascuna.
+**Esempio: coordinate GPS degli smartphone in Italia**. Si assumono circa **59 milioni** di residenti (dato ISTAT, Istituto Nazionale di Statistica, al 1º gennaio 2026, arrotondato), una quota di **0,83** con cellulare, una posizione al minuto e due coordinate da 8 byte ciascuna.
+
+I risultati sono espressi in terabyte (TB) per anno e megabyte (MB) al secondo.
 
 $$D = 59 \times 10^6 \times 0{,}83 \times 365 \times 24 \times 60 \times 2 \times 8 \approx 4{,}12 \times 10^{14}\ \text{byte} \approx 412\ \text{TB/anno}$$
 
@@ -148,9 +150,9 @@ Con tanti dati **serve il mining**: estrarre l’informazione utile.
 
 **Strumento: MATLAB Database Explorer**. Permette di **collegarsi rapidamente a un database**, esplorarne i dati e **importarli** nel workspace di MATLAB in modo visuale. Funzioni utili:
 
-- creare e configurare sorgenti dati **ODBC** e **JDBC**;
+- creare e configurare sorgenti dati ODBC (*Open Database Connectivity*, connettività aperta alle basi di dati) e JDBC (*Java Database Connectivity*, connettività Java alle basi di dati);
 - aprire **più connessioni** allo stesso database o a database diversi;
-- selezionare **tabelle e colonne** di interesse e rifinire la selezione con criteri di **query SQL**;
+- selezionare **tabelle e colonne** di interesse e rifinire la selezione con criteri di query SQL (*Structured Query Language*, linguaggio strutturato di interrogazione);
 - **anteprima** dei dati selezionati e opzioni di importazione personalizzate;
 - importare i dati nel workspace per l’analisi;
 - **salvare le query SQL** generate e **generare codice MATLAB**.
@@ -178,7 +180,7 @@ Il tema della sezione: **unità, formati e tempi esatti**.
 
 > 📌 **Armonizzazione dei dati (nota didattica).** È l’insieme delle operazioni che portano dati eterogenei a una rappresentazione **comune**: stesse unità, stessi formati, stesse convenzioni di riferimento, stessa scala temporale. Solo dopo l’armonizzazione i dati di fonti diverse si possono unire in un unico dataset.
 
-**Caso d’uso: la sonda persa per un errore di unità**. Nel **settembre 1999**, dopo quasi 10 mesi di viaggio verso Marte, la **Mars Climate Orbiter** è bruciata nell’atmosfera marziana e si è disintegrata, perché qualcuno **non aveva usato le unità metriche**: i valori erano espressi in **libbre-forza per secondo** invece che nell’unità SI, **newton per secondo**. La sonda era costata in totale **325 milioni di dollari**.
+**Caso d’uso: la sonda persa per un errore di unità**. Nel **settembre 1999**, dopo quasi 10 mesi di viaggio verso Marte, la **Mars Climate Orbiter** è bruciata nell’atmosfera marziana e si è disintegrata, perché qualcuno **non aveva usato le unità metriche**: i valori erano espressi in **libbre-forza per secondo** invece che nell’unità del SI (Sistema internazionale di unità di misura, *International System of Units*), **newton per secondo**. La sonda era costata in totale **325 milioni di dollari**.
 
 > 💡 **Quanto pesa l’errore (nota didattica).** $1\ \text{lbf} \cdot \text{s} \approx 4{,}45\ \text{N} \cdot \text{s}$: gli impulsi erano **sottostimati di circa 4,45 volte**. La traiettoria calcolata portava la sonda molto più vicino al pianeta del previsto. Due gruppi di lavoro usavano due sistemi di unità senza che nessuna interfaccia li convertisse: è esattamente un problema di armonizzazione.
 
@@ -208,7 +210,7 @@ Il tema della sezione: **unità, formati e tempi esatti**.
 <!-- SOURCE_VISUAL id="IS06-V08" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="33" type="schema" description="Non idealità del parco eolico: effetto ombra da est, effetto imbuto, clipping e curve di potenza diverse" reason="Schema del sito e delle curve visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Obiettivo e armonizzazione**. Creare un **dataset di 5 anni** unendo fonti con formati, unità di misura e sistemi di riferimento diversi: i dati meteo sulla **griglia** e a varie **altitudini** servono a prevedere la **potenza** (MW) e un **indice di variabilità** sul sito dell’impianto. La trasformazione deve convergere verso una convenzione dichiarata, per esempio °C, m/s, gradi da nord in senso orario, hPa, copertura nuvolosa fra 0 e 1 e tempo UTC in ISO 8601.
+**Obiettivo e armonizzazione**. Creare un **dataset di 5 anni** unendo fonti con formati, unità di misura e sistemi di riferimento diversi: i dati meteo sulla **griglia** e a varie **altitudini** servono a prevedere la **potenza** in megawatt (MW) e un **indice di variabilità** sul sito dell’impianto. La trasformazione deve convergere verso una convenzione dichiarata, per esempio °C, m/s, gradi da nord in senso orario, hPa, copertura nuvolosa fra 0 e 1 e tempi espressi in UTC (*Coordinated Universal Time*, tempo coordinato universale) secondo ISO (*International Organization for Standardization*, Organizzazione internazionale per la normazione) 8601, standard per la rappresentazione di date e orari.
 
 | Grandezza | Unità comune |
 |---|---|
@@ -275,16 +277,16 @@ Un cambio di fornitore durante una serie storica può introdurre una discontinui
 
 | Soluzione | Accuratezza | Note |
 |---|---|---|
-| **1. NTP** (*Network Time Protocol*) con un **time server pubblico** su Internet | **decine di ms** su Internet pubblica; **1 ms** in rete locale in condizioni ideali | protocollo per sincronizzare gli orologi su reti a pacchetto a **latenza variabile**, progettato per mitigare la latenza di rete; richiede di aprire nel firewall la **porta UDP 123** |
+| **1. NTP** (*Network Time Protocol*, protocollo di sincronizzazione dell’ora in rete) con un **time server pubblico** su Internet | **decine di ms** su Internet pubblica; **1 ms** in rete locale in condizioni ideali | protocollo per sincronizzare gli orologi su reti a pacchetto a **latenza variabile**, progettato per mitigare la latenza di rete; richiede di aprire nel firewall la **porta UDP** (*User Datagram Protocol*, protocollo datagrammi utente) **123** |
 | **2. Time server dedicato** dietro il firewall | dispositivi sincronizzati entro **0,5–2 ms** | |
-| **3. PTP** (*Precision Time Protocol*, standard **IEEE 1588**) | sotto il microsecondo con marcatura temporale hardware | |
+| **3. PTP** (*Precision Time Protocol*, protocollo di precisione per la sincronizzazione temporale, standard IEEE 1588 dell’Institute of Electrical and Electronics Engineers, Istituto degli ingegneri elettrici ed elettronici) | sotto il microsecondo con marcatura temporale hardware | |
 
 **Esempio: la borsa**. La sincronizzazione è essenziale per gestire **liste degli ordini**, prezzi e dati.
 
 | Aspetto | Valore |
 |---|---|
-| volumi | Bloomberg Ticker Plant: circa **200 miliardi** di messaggi al giorno; OPRA (SIP delle opzioni USA): capacità di circa **1000 miliardi** al giorno (dopo Pillar, 2024); **micro-picchi** fino a **187 milioni** di messaggi al secondo |
-| latenza | latenza mediana OPRA circa **20 μs** (prima del 2024 circa 540 μs); *tick-to-trade* su **FPGA**: **100–500 ns**; un ritardo di **50 μs** fa perdere la posizione in coda e peggiora i prezzi di esecuzione |
+| volumi | Bloomberg Ticker Plant: circa **200 miliardi** di messaggi al giorno; OPRA (*Options Price Reporting Authority*, autorità che coordina la pubblicazione dei prezzi delle opzioni negli Stati Uniti; SIP, *Securities Information Processor*, sistema di consolidamento dei dati di mercato): capacità di circa **1000 miliardi** al giorno (dopo Pillar, 2024); **micro-picchi** fino a **187 milioni** di messaggi al secondo |
+| latenza | latenza mediana OPRA circa **20 μs** (prima del 2024 circa 540 μs); *tick-to-trade* su FPGA (*Field-Programmable Gate Array*, matrice di porte logiche programmabile): **100–500 ns**; un ritardo di **50 μs** fa perdere la posizione in coda e peggiora i prezzi di esecuzione |
 | AI | circa il **70%** del volume azionario USA è **trading algoritmico guidato dall’AI** |
 | sincronizzazione | **NTP non basta più**: con circa 1 ms è **1000 volte troppo grossolano**; la finanza usa **PTP (IEEE 1588)** con marcatura temporale **hardware**, sotto il microsecondo o al nanosecondo |
 
@@ -292,12 +294,12 @@ Un cambio di fornitore durante una serie storica può introdurre una discontinui
 
 #### **5.3. Sincronizzazione risolta, dati ancora sparsi**
 
-**Esempio**. Un **time server** che prende il riferimento dal **GPS** permette alle unità di misura e di memorizzazione collegate in LAN di lavorare con l’**ora corretta**.
+**Esempio**. Un **time server** che prende il riferimento dal **GPS** permette alle unità di misura e di memorizzazione collegate in LAN (*Local Area Network*, rete locale) di lavorare con l’**ora corretta**.
 
 <!-- SOURCE_VISUAL id="IS06-V10" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="40" type="schema" description="Time server sincronizzato con il GPS che serve le unità di misura in LAN" reason="Topologia visibile solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Ma i dati restano sparsi**. Secondo il comportamento dei sensori collegati, i dati arrivano con **marche temporali diverse** e possono **mancare**. La sincronizzazione è risolta, ma **non la sparsità** delle tuple. Esempio di tabella nel database:
+**Ma i dati restano sparsi**. Secondo il comportamento dei sensori collegati, i dati arrivano con **marche temporali diverse** e possono **mancare**. La sincronizzazione è risolta, ma **non la sparsità** delle tuple. I valori assenti sono indicati con NaN (*Not a Number*, valore numerico non definito o mancante). Esempio di tabella nel database:
 
 | Marca temporale del server | T1 (K) | T2 (K) | Speed1 (m/s) | Speed2 (m/s) | RPM1 |
 |---|---|---|---|---|---|
@@ -326,14 +328,14 @@ Il confronto tra le due rappresentazioni chiarisce il rapporto tra i concetti.
 
 | | **Dati strutturati** («bene!») | **Dati non strutturati** («male…») |
 |---|---|---|
-| Dove stanno | di solito in **database relazionali** (RDBMS) | in qualunque altro posto, anche in database **non relazionali** (NoSQL) |
+| Dove stanno | di solito in database relazionali (RDBMS, *Relational Database Management System*, sistema di gestione di basi di dati relazionali) | in qualunque altro posto, anche in database non relazionali (NoSQL, *Not Only SQL*, non solo SQL) |
 | Forma | campi con dati di **lunghezza definita**: numeri di telefono, codici fiscali, CAP; anche stringhe di lunghezza variabile, come i nomi, dentro **record** | hanno una **struttura interna**, ma **non** secondo **modelli o schemi predefiniti** |
 | Origine | umana o automatica, purché creati **dentro una struttura RDBMS** | testuali o non testuali, generati da **persone** o **macchine** |
 | Ricerca | **facilmente interrogabili** da query umane e da algoritmi, grazie a tipi di dato e nomi dei campi (alfabetico, numerico, valuta, data) | gli strumenti di analisi tradizionali **non riescono a interpretarli** direttamente |
 
 I **dati semi-strutturati** combinano una struttura parziale con contenuti flessibili.
 
-> 💡 **Semi-strutturati (nota didattica).** Hanno etichette o marcatori che separano gli elementi, ma senza uno schema rigido: JSON, XML, file di log con campi ricorrenti. L’**email** è l’esempio della: i **metadati** (mittente, data, oggetto) sono strutturati, il **corpo del messaggio** no.
+> 💡 **Semi-strutturati (nota didattica).** Hanno etichette o marcatori che separano gli elementi, ma senza uno schema rigido: JSON (*JavaScript Object Notation*, notazione a oggetti JavaScript), XML (*Extensible Markup Language*, linguaggio di marcatura estensibile) e file di log con campi ricorrenti. L’**email** è l’esempio della: i **metadati** (mittente, data, oggetto) sono strutturati, il **corpo del messaggio** no.
 
 <!-- SOURCE_VISUAL id="IS06-V26" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="80" type="infografica" description="Dati semi-strutturati" reason="Pagina con sola infografica" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -360,7 +362,7 @@ I **dati semi-strutturati** combinano una struttura parziale con contenuti fless
 | **sorveglianza digitale** | foto e video di sorveglianza |
 | **dati dei sensori** | traffico, meteo, sensori oceanografici |
 
-**Un esempio web di trasformazione dei dati**. **RDFa** (*Resource Description Framework in Attributes*) è una **raccomandazione W3C** che aggiunge a HTML, XHTML e ai documenti XML un insieme di **attributi** per incorporare **metadati ricchi** nelle pagine web: così una parte del contenuto di una pagina diventa leggibile dalle macchine.
+**Un esempio web di trasformazione dei dati**. RDFa (*Resource Description Framework in Attributes*, quadro di descrizione delle risorse negli attributi) è una raccomandazione del W3C (*World Wide Web Consortium*, consorzio internazionale per gli standard web) che aggiunge a HTML (*HyperText Markup Language*, linguaggio di marcatura ipertestuale), XHTML (*Extensible HyperText Markup Language*, linguaggio di marcatura ipertestuale estensibile) e XML un insieme di attributi per incorporare metadati nelle pagine web: così una parte del contenuto di una pagina diventa leggibile dalle macchine.
 
 <!-- SOURCE_VISUAL id="IS06-V27" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="83" type="esempio di codice" description="Pagina web arricchita con attributi RDFa" reason="Esempio di markup presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -484,8 +486,8 @@ Il **data wrangling** si articola in passi operativi per ispezionare, correggere
 
 **Agenti di AI per il data wrangling**:
 
-- **Claude Code**, **Cowork**, **Codex CLI**, **Gemini CLI**: pulizia **autonoma** dei dati, **inferenza dello schema**, **risoluzione delle entità**, generazione di **espressioni regolari** a partire da esempi;
-- uso tipico: «dato questo CSV disordinato con **formati di data e unità misti**, normalizzalo» → l’agente **scrive, esegue e testa** la pipeline;
+- **Claude Code**, **Cowork**, **Codex CLI** (*Command-Line Interface*, interfaccia a riga di comando), **Gemini CLI**: pulizia **autonoma** dei dati, **inferenza dello schema**, **risoluzione delle entità**, generazione di **espressioni regolari** a partire da esempi;
+- uso tipico: «dato questo CSV (*Comma-Separated Values*, valori separati da virgola) disordinato con **formati di data e unità misti**, normalizzalo» → l’agente **scrive, esegue e testa** la pipeline;
 - il ruolo umano si sposta **dallo scrivere la trasformazione al validarla**.
 
 Gli agenti possono anche sostenere la **creazione di database**.
@@ -496,7 +498,7 @@ Gli agenti possono anche sostenere la **creazione di database**.
 **LLM per l’estrazione strutturata da dati non strutturati**:
 
 - **input**: testo libero (referti, email, note cliniche, PDF) → **output**: record **JSON tipizzati** o Markdown;
-- **sostituisce** gran parte delle pipeline di **NER** e di parsing basato su regole;
+- **sostituisce** gran parte delle pipeline di **NER (*Named Entity Recognition*, riconoscimento di entità nominate)** e di parsing basato su regole;
 - esempio: **1000 referti di laboratorio** in PDF → un **DataFrame** con **15 colonne normalizzate**, con un solo prompt.
 
 > 📌 **Named Entity Recognition** (NER). Tecnica classica di NLP che **estrae entità con nome** dal testo libero: persone, luoghi, date, quantità, organizzazioni, codici medici, ecc.
@@ -516,7 +518,7 @@ L’indice conserva identificativi dei documenti, embedding e metadati; il testo
 
 Una scansione esatta confronta la query $q\in\mathbb{R}^d$ con tutti gli $N$ vettori, con costo dell’ordine di $O(Nd)$. Per collezioni grandi si usano indici di ricerca approssimata dei vicini (*Approximate Nearest Neighbours*, ANN): riducono il numero di confronti e restituiscono vicini molto buoni, senza garantire che coincidano sempre con quelli esatti.
 
-**HNSW** (*Hierarchical Navigable Small World*) costruisce un grafo multilivello fra vettori. La ricerca parte da pochi nodi di un livello superiore, si sposta verso nodi progressivamente più vicini alla query e scende verso livelli più densi fino a selezionare i candidati. È una strategia di indicizzazione, non una nuova misura di similarità.
+HNSW (*Hierarchical Navigable Small World*, piccolo mondo gerarchico navigabile) costruisce un grafo multilivello fra vettori. La ricerca parte da pochi nodi di un livello superiore, si sposta verso nodi progressivamente più vicini alla query e scende verso livelli più densi fino a selezionare i candidati. È una strategia di indicizzazione, non una nuova misura di similarità.
 
 <!-- SOURCE_VISUAL id="IS06-V29" source="L06-web.pdf" page="79" type="diagramma" description="Ricerca approssimata HNSW: navigazione da livelli sparsi a livelli densi del grafo di embedding" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -549,7 +551,7 @@ In un flusso di armonizzazione automatizzata, l’agente esamina file grezzi, pr
 
 > 📌 **NaN**. *Not a Number*: un valore di un tipo numerico che si interpreta come **indefinito, non rappresentabile o mancante**, codificato secondo lo standard **IEEE 754**.
 
-> ⚠️ **NaN esiste solo per i numeri in virgola mobile**. Gli interi non possono contenere NaN: per questo le librerie moderne (pandas `Int64`, Arrow, Polars) hanno introdotto un marcatore **NA** indipendente dal tipo per le colonne che ammettono valori nulli.
+> ⚠️ **NaN esiste solo per i numeri in virgola mobile**. Gli interi non possono contenere NaN: per questo le librerie moderne (pandas `Int64`, Arrow, Polars) hanno introdotto un marcatore NA (*Not Available*, valore non disponibile) indipendente dal tipo per le colonne che ammettono valori nulli.
 
 > 💡 **Una proprietà di NaN (nota didattica).** Per IEEE 754 un NaN **non è uguale a nulla, nemmeno a se stesso**: `NaN == NaN` è falso. Per trovarlo si usano funzioni dedicate come `isnan` in MATLAB o `isna` in pandas; e qualsiasi somma che coinvolge un NaN dà NaN, per cui una media calcolata senza gestirli risulta NaN.
 
@@ -630,13 +632,13 @@ La scelta del rimedio dipende dal meccanismo che genera l’assenza. Tre categor
 
 | Meccanismo | Significato | Esempio e conseguenza |
 |---|---|---|
-| **MCAR** (*Missing Completely At Random*) | La mancanza non dipende né dalle variabili osservate né dal valore mancante. | Pacchetto perso per un errore casuale di comunicazione. Eliminare i casi o imputarli può ridurre l’efficienza, senza introdurre sistematicamente distorsione. |
-| **MAR** (*Missing At Random*) | La mancanza dipende da variabili osservate, ma non dal valore mancante una volta considerate quelle variabili. | Un esame è più spesso assente in un ospedale o in una fascia d’età. L’eliminazione semplice può sottorappresentare quel gruppo; l’imputazione può usare le variabili osservate correlate. |
-| **MNAR** (*Missing Not At Random*) | La probabilità di mancanza dipende dal valore non osservato stesso. | Un sensore si protegge quando la vibrazione supera il proprio intervallo. Gli estremi spariscono e la media osservata sottostima quella reale. Occorrono un indicatore di mancanza, un sensore adeguato e conoscenza del processo. |
+| **MCAR** (*Missing Completely At Random*, mancanza completamente casuale) | La mancanza non dipende né dalle variabili osservate né dal valore mancante. | Pacchetto perso per un errore casuale di comunicazione. Eliminare i casi o imputarli può ridurre l’efficienza, senza introdurre sistematicamente distorsione. |
+| **MAR** (*Missing At Random*, mancanza casuale condizionata alle variabili osservate) | La mancanza dipende da variabili osservate, ma non dal valore mancante una volta considerate quelle variabili. | Un esame è più spesso assente in un ospedale o in una fascia d’età. L’eliminazione semplice può sottorappresentare quel gruppo; l’imputazione può usare le variabili osservate correlate. |
+| **MNAR** (*Missing Not At Random*, mancanza non casuale, dipendente dal valore mancante) | La probabilità di mancanza dipende dal valore non osservato stesso. | Un sensore si protegge quando la vibrazione supera il proprio intervallo. Gli estremi spariscono e la media osservata sottostima quella reale. Occorrono un indicatore di mancanza, un sensore adeguato e conoscenza del processo. |
 
 Rimuovere righe incomplete non è una pulizia neutra: cambia la popolazione osservata. In MAR può eliminare quasi tutti i dati di un sito; in MNAR può nascondere proprio gli eventi estremi. Prima di scegliere una strategia, misurare il tasso di assenza per feature e gruppo e verificare se gli schemi delle mancanze sono informativi.
 
-> ⚠️ **Imputazione e dispersione di informazioni (data leakage).** Ogni statistica di imputazione si stima sul solo insieme di addestramento. La media o mediana congelata si applica poi a validation e test; lo stesso vale per normalizzazione, PCA e selezione delle feature. Calcolare l’imputazione prima della suddivisione trasferisce informazioni dai dati di valutazione alla pipeline e rende la misura ottimistica.
+> ⚠️ **Imputazione e dispersione di informazioni (data leakage).** Ogni statistica di imputazione si stima sul solo insieme di addestramento. La media o mediana congelata si applica poi a validation e test; lo stesso vale per normalizzazione, PCA (*Principal Component Analysis*, analisi delle componenti principali) e selezione delle feature. Calcolare l’imputazione prima della suddivisione trasferisce informazioni dai dati di valutazione alla pipeline e rende la misura ottimistica.
 
 <!-- SOURCE_VISUAL id="IS06-V24" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="75" type="schema" description="Riepilogo delle strategie per i dati mancanti" reason="Schema di riepilogo presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->

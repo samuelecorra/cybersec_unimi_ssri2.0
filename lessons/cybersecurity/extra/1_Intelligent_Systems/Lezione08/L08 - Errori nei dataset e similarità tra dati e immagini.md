@@ -14,7 +14,7 @@ La trattazione si articola nei seguenti temi:
 1. **errori di etichettatura**: errori dei supervisori, cambiamenti nel tempo, controlli;
 2. **similarità e distanza**: il quadro generale del pattern recognition;
 3. **metriche nei dataset**: euclidea, Manhattan, coseno, Chebyshev, Minkowski;
-4. **metriche per le immagini**: istogrammi, SIFT, SURF, aHash, dHash, pHash.
+4. **metriche per le immagini**: istogrammi, SIFT (*Scale-Invariant Feature Transform*, trasformata di caratteristiche invarianti alla scala), SURF (*Speeded-Up Robust Features*, caratteristiche robuste accelerate), aHash, dHash, pHash.
 
 **Dalla qualità dei dati alla ricerca.** Un dataset affidabile richiede una sequenza di decisioni: raccolta e armonizzazione, prevenzione del leakage, controllo di etichette e duplicati, scelta delle rappresentazioni e ricerca di elementi simili.
 
@@ -84,7 +84,7 @@ La stessa dinamica si presenta fuori dalla medicina: un difetto di produzione pu
 <!-- SOURCE_VISUAL id="IS08-V04" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="12" type="immagini" description="Radiografia etichettata polmonite batterica e seconda radiografia con diagnosi covid-19" reason="Radiografie visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Errori di interscambio e conversione automatica**. Un’etichetta viene creata **automaticamente** con una regola sul BMI:
+**Errori di interscambio e conversione automatica**. Un’etichetta viene creata **automaticamente** con una regola sul BMI (*Body Mass Index*, indice di massa corporea, IMC):
 
 $$\text{BMI} = \frac{\text{massa [kg]}}{\text{altezza [m]}^2}, \qquad \text{se } 25{,}0 < \text{BMI} < 30 \;\Rightarrow\; y = \text{sovrappeso}$$
 
@@ -137,7 +137,7 @@ Quale opzione scegliere dipende dal contesto: il dataset è **enorme**? I dati s
 **Il problema**. Con dati o vettori grandi, un confronto diretto `if (x_i == x_j)` richiede di confrontare **elemento per elemento** o **pixel per pixel**: richiede tempo, anche se è perfettamente **parallelizzabile** (adatto alle GPU con CUDA). Alternative:
 
 - usare un **hash del file** standard, se già disponibile;
-- gli algoritmi classici **MD5** e **SHA-1**;
+- gli algoritmi classici MD5 (*Message-Digest Algorithm 5*, algoritmo di digest dei messaggi versione 5) e SHA-1 (*Secure Hash Algorithm 1*, algoritmo di hash sicuro versione 1);
 - calcolare le informazioni di **hash delle immagini offline**;
 - usare **funzioni di hash specifiche per immagini** (§5.4).
 
@@ -166,7 +166,7 @@ Il file viene letto **in binario** (`'rb'`), e dei byte si calcolano i due hash 
 
 > 📌 **Che cosa verifica l’hash del file**.
 > - Cambiare **anche un solo pixel** produce un hash **completamente diverso**.
-> - Modificare i **metadati EXIF** (posizione, data) cambia l’hash, **anche se l’immagine appare identica**.
+> - Modificare i metadati EXIF (*Exchangeable Image File Format*, formato di file immagine scambiabile) (posizione, data) cambia l’hash, **anche se l’immagine appare identica**.
 > - Il metodo **non verifica la similarità visiva**: controlla solo l’**identità binaria esatta**.
 > - MD5 e SHA-1 hanno numeri di bit diversi, ma per questo scopo vanno **bene entrambi**; **MD5 è più veloce**.
 > - Per prestazioni migliori conviene **calcolare e memorizzare prima** gli hash di tutte le immagini, e confrontarli poi in un **ciclo separato e ottimizzato**.
@@ -526,7 +526,7 @@ I tre metodi hanno **passi iniziali simili**: guardano rispettivamente la **medi
 |---|---|---|---|
 | 1. ridurre la dimensione | **8 × 8** (R, G, B) | **32 × 32** (R, G, B) | **9 × 8** (R, G, B) |
 | 2. ridurre a grigio | 8 × 8 = 64 pixel | 32 × 32 | **72** pixel grigi |
-| 3. trasformare | — | calcolare la **DCT** (*Discrete Cosine Transform*), che separa l’immagine in un insieme di **frequenze**, come fanno JPEG e molti altri formati | calcolare le **differenze tra pixel adiacenti** (direzioni relative del gradiente): 9 pixel per riga danno **8 differenze**, e **8 righe × 8 differenze = 64 bit** |
+| 3. trasformare | — | calcolare la DCT (*Discrete Cosine Transform*, trasformata discreta del coseno), che separa l’immagine in un insieme di **frequenze**, come fanno JPEG (*Joint Photographic Experts Group*, gruppo congiunto di esperti di fotografia) e molti altri formati | calcolare le **differenze tra pixel adiacenti** (direzioni relative del gradiente): 9 pixel per riga danno **8 differenze**, e **8 righe × 8 differenze = 64 bit** |
 | 4. ridurre | — | tenere solo la parte **in alto a sinistra 8 × 8** della DCT (le basse frequenze) | — |
 | 5. soglia | la **media dei grigi** | la **media $T$** dei valori DCT, calcolata sui **63 valori** esclusa la prima componente | confronto tra pixel vicini |
 | 6. ridurre a bit | un bit per pixel in base al confronto con la media | un bit per coefficiente in base al confronto con $T$ | ogni bit indica se il pixel **a sinistra** è **più luminoso** di quello a destra |
@@ -573,7 +573,7 @@ d879f8f89b1bbf
 
 L’**iscrizione** (*enrollment*) inserisce gli elementi nell’indice: lo stesso encoder trasforma ogni immagine o testo in un vettore $z\in\mathbb{R}^d$, che viene memorizzato nel database. La rete è addestrata prima e non memorizza il database. In fase di ricerca si codifica la query con lo stesso encoder e si recuperano i $k$ vettori più vicini.
 
-Con $N$ vettori di dimensione $d$, la scansione esaustiva costa $O(Nd)$ per query: per $N=10^8$ e $d=512$ comporta circa $5{,}1\cdot10^{10}$ operazioni. Gli indici ANN (*Approximate Nearest Neighbour*) esaminano solo una parte dei vettori. **HNSW** costruisce un grafo multilivello navigabile; **FAISS** è una libreria per la ricerca vettoriale esatta e approssimata. La velocità si ottiene accettando che talvolta il vero vicino non venga recuperato. La metrica pratica è `recall@k`, frazione dei veri $k$ vicini che l’indice trova.
+Con $N$ vettori di dimensione $d$, la scansione esaustiva costa $O(Nd)$ per query: per $N=10^8$ e $d=512$ comporta circa $5{,}1\cdot10^{10}$ operazioni. Gli indici ANN (*Approximate Nearest Neighbour*) esaminano solo una parte dei vettori. HNSW (*Hierarchical Navigable Small World*, piccolo mondo gerarchico navigabile) costruisce un grafo multilivello; FAISS (*Facebook AI Similarity Search*, ricerca della similarità con vettori sviluppata da Facebook AI Research) è una libreria per la ricerca vettoriale esatta e approssimata. La velocità si ottiene accettando che talvolta il vero vicino non venga recuperato. La metrica pratica è `recall@k`, frazione dei veri $k$ vicini che l’indice trova.
 
 La stessa pipeline supporta il recupero di immagini, la ricerca di duplicati e volti, i database vettoriali e il RAG. L’encoder e i suoi vettori devono restare coerenti: per cercare nello stesso spazio, sia l’archivio sia la query passano per lo stesso modello.
 

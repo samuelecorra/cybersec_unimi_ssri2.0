@@ -135,7 +135,7 @@ Il tema: come gestire **distribuzioni sbilanciate** delle classi.
 <!-- SOURCE_VISUAL id="IS14-V10" source="L14-web.pdf" page="26" type="grafico" description="Sovracampionamento e sottocampionamento delle classi" reason="Distribuzioni prima e dopo visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 **SMOTE** (*Synthetic Minority Over-sampling Technique*, ). Tecnica di campionamento a livello di dati che affronta lo sbilanciamento **generando campioni sintetici** della classe minoritaria, **invece di duplicare** quelli esistenti. Per ogni campione minoritario $x$:
+> 📌 **SMOTE** (*Synthetic Minority Over-sampling Technique*, tecnica di sovracampionamento sintetico della classe minoritaria). Tecnica di campionamento a livello di dati che affronta lo sbilanciamento **generando campioni sintetici** della classe minoritaria, **invece di duplicare** quelli esistenti. Per ogni campione minoritario $x$:
 > - si trovano i suoi $k$ **vicini più prossimi** della classe minoritaria;
 > - si genera un nuovo campione **sul segmento** tra $x$ e uno dei vicini.
 >
@@ -308,7 +308,7 @@ Le  mostrano l’**overfitting in 1D** (un regressore che passa per tutti i punt
 
 #### **5.1. k-fold cross validation**
 
-> 📌 **k-Fold Cross Validation** (k-FCV, ). Lo schema **più comune**:
+> 📌 **k-Fold Cross Validation** (k-FCV, validazione incrociata in $k$ partizioni). Lo schema **più comune**:
 > 1. il dataset originale viene **diviso a caso** in $k$ **fold** (partizioni) di **uguale dimensione**;
 > 2. dei $k$ fold, **uno** si tiene come dati di **validazione** per testare il modello, e i **restanti $k - 1$** servono a **costruirlo**;
 > 3. il processo si **ripete $k$ volte**, usando **ogni fold esattamente una volta** come validazione.
@@ -363,7 +363,7 @@ La  la presenta come una partizione **più bilanciata** tra training e test.
 
 #### **5.3. Leave-one-out e leave-one-person-out**
 
-**Leave-one-out** (LOO, ), da considerare **se si è in underfitting** con k-FCV e 5×2 CV:
+**Leave-one-out** (LOO, *Leave-One-Out*, esclusione di una sola osservazione a ogni iterazione), da considerare **se si è in underfitting** con k-FCV e 5×2 CV:
 
 - è il **caso estremo** della k-FCV: $k$ è uguale al **numero di esempi** del dataset;
 - a ogni passo **un solo esempio** serve a **testare** il modello, e **tutti gli altri** a **addestrarlo**.
@@ -373,7 +373,7 @@ La  la presenta come una partizione **più bilanciata** tra training e test.
 <!-- SOURCE_VISUAL id="IS14-V25" source="L14-web.pdf" page="75" type="diagramma" description="Leave-one-out: un solo esempio di test a ogni passo" reason="Schema delle partizioni visibile solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 **Leave-one-PERSON-out** (LOPO, ). Si lascia fuori, a ogni passo, **tutti i dati di una persona**. Si usa in **biometria**, **screening medico** e simili, ed è **critico per i modelli grandi e profondi**. La variante **L(N)PO** lascia fuori **N persone** alla volta.
+> 📌 **Leave-one-PERSON-out** (LOPO, *Leave-One-Person-Out*, esclusione di una persona a ogni iterazione). Si lascia fuori, a ogni passo, **tutti i dati di una persona**. Si usa in **biometria**, **screening medico** e simili, ed è **critico per i modelli grandi e profondi**. La variante **L(N)PO** lascia fuori **N persone** alla volta.
 
 Il confronto mostra la divisione per persona con una divisione **mescolata** (MIX): con LOPO «è **più difficile usare il colore dei capelli**».
 

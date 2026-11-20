@@ -107,7 +107,7 @@ UMAP, PaCMAP e TriMAP, come t-SNE, sono spesso impiegate per visualizzare. Il lo
 
 #### **3.3. ICA e sorgenti indipendenti**
 
-L’**Analisi delle Componenti Indipendenti (ICA)** cerca di ricostruire sorgenti statisticamente indipendenti a partire da osservazioni che ne sono miscele. Se $\mathbf{x}=A\mathbf{s}$, con $\mathbf{s}$ sorgenti e $A$ matrice di miscelazione, l’ICA stima componenti che separino le sorgenti sotto ipotesi quali indipendenza, non gaussianità e miscelazione lineare. Un’applicazione intuitiva è separare voci registrate da più microfoni; in un esempio con due voci e rumore, una componente può essere riconosciuta come rumore e scartata.
+L’**Analisi delle Componenti Indipendenti** (ICA, *Independent Component Analysis*) cerca di ricostruire sorgenti statisticamente indipendenti a partire da osservazioni che ne sono miscele. Se $\mathbf{x}=A\mathbf{s}$, con $\mathbf{s}$ sorgenti e $A$ matrice di miscelazione, l’ICA stima componenti che separino le sorgenti sotto ipotesi quali indipendenza, non gaussianità e miscelazione lineare. Un’applicazione intuitiva è separare voci registrate da più microfoni; in un esempio con due voci e rumore, una componente può essere riconosciuta come rumore e scartata.
 
 ### **4. Embedding come feature apprese**
 

@@ -120,7 +120,7 @@ Il materiale di NVIDIA presenta **tassonomia**, **approccio** del deep learning 
 
 - **Fukushima** (1980): il **Neocognitron**;
 - **LeCun** (1998): le **reti neurali convoluzionali**, con somiglianze al Neocognitron;
-- i **MLP con molti strati** e backpropagation erano stati tentati presto, **senza molto successo**: erano **molto lenti** e soffrivano della **diffusione del gradiente** (il vanishing gradient, Lezione 20, §6.3);
+- i **MLP** (*Multi-Layer Perceptron*, perceptron multistrato) con molti strati e backpropagation erano stati tentati presto, **senza molto successo**: erano **molto lenti** e soffrivano della **diffusione del gradiente** (il vanishing gradient, Lezione 20, §6.3);
 - lavori recenti hanno mostrato **grandi miglioramenti**:
   - addestrando «**con pazienza**» MLP più profondi con la backpropagation su **macchine veloci** (GPU);
   - adottando la funzione di attivazione **ReLU**;
@@ -391,7 +391,7 @@ Ogni documento diventa allora un vettore sulle parole del dizionario. Esistono m
 > ⚠️ **Precisazioni sui numeri (nota didattica).**
 > - AlexNet parte da immagini ridimensionate a $256 \times 256$, ma la rete riceve **ritagli** di $224 \times 224$ (227 nell’implementazione originale).
 > - Nel conteggio di LeNet-5 cambia il risultato a seconda che si contino gli strati di sottocampionamento: la descrizione originale elenca 7 strati (convoluzioni, sottocampionamenti e strati completamente connessi).
-> - L’esempio descrive ImageNet come «oltre 14 milioni di immagini in 1000 classi». Il dataset completo ha circa 14 milioni di immagini in oltre 20 000 categorie; la **competizione ILSVRC**, su cui si misura il 92,7%, ne usa un sottoinsieme di circa **1,28 milioni** di immagini di training in **1000 classi**.
+> - L’esempio descrive ImageNet come «oltre 14 milioni di immagini in 1000 classi». Il dataset completo ha circa 14 milioni di immagini in oltre 20 000 categorie; la **competizione ILSVRC (*ImageNet Large Scale Visual Recognition Challenge*, sfida ImageNet di riconoscimento visivo su larga scala)**, su cui si misura il 92,7%, ne usa un sottoinsieme di circa **1,28 milioni** di immagini di training in **1000 classi**.
 
 > 📌 **Accuratezza top-5 (nota didattica).** Una predizione conta come corretta se la classe vera è **tra le 5** con punteggio più alto. Con 1000 classi, molte simili tra loro (decine di razze di cani), la top-5 misura se il modello «ci va vicino»; la **top-1** chiede che la prima risposta sia esatta ed è sempre più bassa.
 

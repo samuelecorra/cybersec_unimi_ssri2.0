@@ -47,7 +47,7 @@ La definizione normativa descrive il comportamento del sistema: riceve input, li
 | Livello | Che cosa comprende | Conseguenza |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | **Rischio inaccettabile** | sistemi considerati una **chiara minaccia** per sicurezza, mezzi di sussistenza e diritti delle persone: dal **social scoring** da parte dei governi ai **giocattoli con assistente vocale** che incoraggiano comportamenti pericolosi | **vietati** |
-| **Rischio alto** | infrastrutture critiche (trasporti); istruzione e formazione professionale (valutazione degli esami); componenti di sicurezza di prodotti (chirurgia assistita da robot); lavoro e gestione dei lavoratori (software di selezione dei CV); servizi essenziali pubblici e privati (credit scoring che nega un prestito); forze dell’ordine (valutazione dell’affidabilità delle prove); migrazione, asilo e frontiere (verifica dei documenti di viaggio) | **obblighi rigorosi** prima dell’immissione sul mercato |
+| **Rischio alto** | infrastrutture critiche (trasporti); istruzione e formazione professionale (valutazione degli esami); componenti di sicurezza di prodotti (chirurgia assistita da robot); lavoro e gestione dei lavoratori (software di selezione dei CV (*Curriculum Vitae*, curriculum delle esperienze formative e professionali)); servizi essenziali pubblici e privati (credit scoring che nega un prestito); forze dell’ordine (valutazione dell’affidabilità delle prove); migrazione, asilo e frontiere (verifica dei documenti di viaggio) | **obblighi rigorosi** prima dell’immissione sul mercato |
 | **Rischio limitato** | sistemi con **obblighi di trasparenza**: con un **chatbot** l’utente deve sapere che interagisce con una macchina, per decidere consapevolmente se continuare | trasparenza |
 | **Rischio minimo o nullo** | videogiochi con AI, **filtri antispam**; la **grande maggioranza** dei sistemi in uso nell’UE | nessun obbligo specifico |
 
@@ -80,7 +80,7 @@ La classificazione dipende dal contesto d’impiego: lo stesso modello può oper
 
 Per immettere sul mercato un sistema ad alto rischio occorre seguire un processo di conformità e documentazione.
 
-> 💡 **Il processo di conformità.** In sintesi, il fornitore sviluppa il sistema, ne valuta la conformità, lo registra quando previsto e firma la dichiarazione di conformità prima di apporre la **marcatura CE** e immetterlo sul mercato. Se durante il ciclo di vita intervengono **modifiche sostanziali**, la valutazione va ripetuta.
+> 💡 **Il processo di conformità.** In sintesi, il fornitore sviluppa il sistema, ne valuta la conformità, lo registra quando previsto e firma la dichiarazione di conformità prima di apporre la marcatura CE (*Conformité Européenne*, conformità europea) e immetterlo sul mercato. Se durante il ciclo di vita intervengono **modifiche sostanziali**, la valutazione va ripetuta.
 
 ![](imgs/Pasted%20image%2020261002024755.png)
 
@@ -160,7 +160,7 @@ Possiamo ora classificare i principali metodi di **machine learning**.
 > $$\text{Out} = F(X)$$
 > dove $X$ è il **vettore di input** e $\text{Out}$ il **vettore di output**. Se $X\in\mathbb{R}^{n}$ e $\text{Out}\in\mathbb{R}^{m}$, $n$ è il numero di feature d’ingresso e $m$ il numero di uscite. In classificazione, $m$ può corrispondere al numero di classi; in regressione scalare, $m=1$. L’uscita può quindi essere un singolo numero, un vettore o una matrice.
 
-Una singola immagine RGB di $256\times256$ pixel contiene $n=196\,608$ valori d’ingresso. Con le 1.000 classi di ImageNet, il classificatore produce $m=1\,000$ uscite.
+Una singola immagine RGB (*Red, Green, Blue*, rosso, verde, blu) di $256\times256$ pixel contiene $n=196\,608$ valori d’ingresso. Con le 1.000 classi di ImageNet, il classificatore produce $m=1\,000$ uscite.
 
 ![](imgs/Pasted%20image%2020261002025633.png)
 
@@ -199,7 +199,7 @@ Nello spazio delle feature la rete separa le regioni associate a «negozi di sca
 
 ### **4. Problema: gli attacchi avversari**
 
-Anche i modelli neurali profondi **possono essere attaccati**. Come mostra il lavoro di I. Goodfellow presentato al NIPS 2016 Workshop on Bayesian Deep Learning, piccole distorsioni o perturbazioni progettate possono produrre **errori**:
+Anche i modelli neurali profondi **possono essere attaccati**. Come mostra il lavoro di I. Goodfellow presentato al NIPS (*Neural Information Processing Systems*, sistemi di elaborazione delle informazioni neurali) 2016 Workshop on Bayesian Deep Learning, piccole distorsioni o perturbazioni progettate possono produrre **errori**:
 
 - si scelgono gli **input peggiori** (_worst case inputs_) da perturbare con **pattern additivi progettati**;
 - **non tutte le regioni** dell’input si prestano a creare esempi avversari.
@@ -241,7 +241,7 @@ I modelli neurali sono spesso descritti come **«scatole nere»**: osserviamo l�
 
 #### **5.2. Explainable Artificial Intelligence**
 
-> 📌 **XAI**. Un insieme di **processi e metodi** che permette agli utenti umani di:
+> 📌 **XAI** (*Explainable Artificial Intelligence*, intelligenza artificiale spiegabile). È un insieme di **processi e metodi** che permette agli utenti umani di:
 >
 > - **comprendere** e **fidarsi** dei risultati prodotti dagli algoritmi di machine learning;
 > - **descrivere** il modello, il suo **impatto atteso** e i **possibili bias**.
@@ -288,7 +288,7 @@ I modelli neurali sono spesso descritti come **«scatole nere»**: osserviamo l�
 
 > 💡 **Model drift (nota didattica).** Un modello è addestrato su dati di un certo periodo; se nel tempo cambiano i dati in ingresso (per esempio le abitudini dei clienti) o la relazione tra input e output, le sue prestazioni peggiorano senza che nessuno modifichi il modello. Monitorare il drift significa accorgersene prima che le decisioni sbagliate si accumulino.
 
-**Dashboard per l’approvazione di prestiti** (IBM Watson Explainable AI):
+**Dashboard per l’approvazione di prestiti** (IBM, *International Business Machines*, azienda informatica internazionale, Watson Explainable AI):
 
 - una **spiegazione testuale** della decisione;
 - la classe predetta, **Risk** (prestito non concesso) o **No Risk** (prestito concesso), con la sua **confidenza**;
@@ -328,7 +328,7 @@ L’interazione naturale mira a rendere lo scambio più vicino a quello umano. I
 
 ![](imgs/Pasted%20image%2020261120155636.png)
 
-Il riconoscimento vocale mostra perché una metrica media non basta a valutare un sistema operativo. Su benchmark puliti, i sistemi automatici di speech recognition possono raggiungere un **Word Error Rate (WER) intorno all’1–3%**. In ambienti reali, rumore, accenti, lingua, vocabolario e dominio possono alzare sensibilmente il tasso d’errore. Anche un WER medio basso può nascondere una parola critica fraintesa: la valutazione deve quindi considerare l’effetto dell’errore sul compito completo, non soltanto la trascrizione.
+Il riconoscimento vocale mostra perché una metrica media non basta a valutare un sistema operativo. Su benchmark puliti, i sistemi automatici di speech recognition possono raggiungere un **Word Error Rate (WER, tasso di errore sulle parole) intorno all’1–3%**. In ambienti reali, rumore, accenti, lingua, vocabolario e dominio possono alzare sensibilmente il tasso d’errore. Anche un WER medio basso può nascondere una parola critica fraintesa: la valutazione deve quindi considerare l’effetto dell’errore sul compito completo, non soltanto la trascrizione.
 
 Nel **voice picking** in logistica, per esempio, l’operatore riceve istruzioni vocali mentre prepara gli ordini. Un errore di riconoscimento può rallentare il lavoro, compromettere la correttezza del prelievo o incidere sulla sicurezza. Il sistema va valutato in relazione a produttività, accuratezza e condizioni operative.
 
@@ -465,7 +465,7 @@ Un modello puro realizza una mappatura tra input e output. Un agente può invece
 - combinare fonti eterogenee e chiedere chiarimenti alle persone;
 - produrre raccomandazioni o avviare azioni autorizzate.
 
-Gli agenti basati su LLM e modelli multimodali sono utili quando occorre osservare, ragionare e agire su dati diversi. Un assistente per la manutenzione industriale può consultare manuali, allarmi e immagini delle macchine; un sistema di monitoraggio ambientale può integrare immagini satellitari, misure dei sensori e regolamenti; un assistente per la supply chain può collegare email, eventi ERP, previsioni della domanda e immagini del magazzino. Gli stessi strumenti possono supportare etichettatura e trasformazione dei dati.
+Gli agenti basati su LLM e modelli multimodali sono utili quando occorre osservare, ragionare e agire su dati diversi. Un assistente per la manutenzione industriale può consultare manuali, allarmi e immagini delle macchine; un sistema di monitoraggio ambientale può integrare immagini satellitari, misure dei sensori e regolamenti; un assistente per la supply chain può collegare email, eventi ERP (*Enterprise Resource Planning*, pianificazione delle risorse aziendali), previsioni della domanda e immagini del magazzino. Gli stessi strumenti possono supportare etichettatura e trasformazione dei dati.
 
 L’accesso a strumenti amplia le capacità del sistema e introduce nuovi requisiti: permessi minimi, tracciabilità delle azioni, conferma umana per operazioni rilevanti e gestione degli errori delle fonti.
 

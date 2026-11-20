@@ -2,7 +2,7 @@
 
 Le capacità di una macchina si misurano attraverso prove definite e benchmark con limiti espliciti. I metodi di apprendimento si organizzano distinguendo il segnale usato per imparare dal tipo di risultato prodotto: regressione, classificazione, clustering, riduzione dimensionale o politica di controllo. Da qui si passa ai ragionamenti deduttivo, induttivo e trasduttivo, alla valutazione operativa, ai sensori intelligenti e agli strumenti per costruire esperimenti riproducibili.
 
-Approfondimento: [The AI Apocalypse Matrix](sources_2026-27/Lesson_03_The_AI_Apocalypse_Matrix.pdf), pubblicato da *IEEE Spectrum* nell’agosto 2023.
+Approfondimento: [The AI Apocalypse Matrix](sources_2026-27/Lesson_03_The_AI_Apocalypse_Matrix.pdf), pubblicato da *IEEE* (*Institute of Electrical and Electronics Engineers*, Istituto degli ingegneri elettrici ed elettronici) Spectrum nell’agosto 2023.
 
 ### **0. Il percorso della lezione**
 
@@ -13,7 +13,7 @@ La trattazione procede in quattro passaggi: distinguere AI ristretta e generale;
 
 #### **1.1. Due punti di vista**
 
-La distinzione riguarda l’ampiezza delle capacità: la **Narrow AI** è progettata per compiti circoscritti; la **General AI** (AGI) indicherebbe la capacità di apprendere, ragionare e adattarsi in domini diversi.
+La distinzione riguarda l’ampiezza delle capacità: la **Narrow AI** è progettata per compiti circoscritti; la **General AI**, o AGI (*Artificial General Intelligence*, intelligenza artificiale generale), indicherebbe la capacità di apprendere, ragionare e adattarsi in domini diversi.
 
 ![](imgs/Pasted%20image%2020261002032915.png)
 
@@ -23,7 +23,7 @@ La distinzione riguarda l’ampiezza delle capacità: la **Narrow AI** è proget
 
 ![](imgs/Pasted%20image%2020261002033107.png)
 
-> 📌 **Narrow AI**, detta anche **Artificial Narrow Intelligence** (ANI) o **Weak AI**. Indica sistemi di AI **progettati e addestrati** per svolgere **un compito specifico** o un insieme ristretto di compiti, di solito in un **dominio limitato**.
+> 📌 **Narrow AI**, detta anche ANI (*Artificial Narrow Intelligence*, intelligenza artificiale ristretta) o **Weak AI**. Indica sistemi di AI **progettati e addestrati** per svolgere **un compito specifico** o un insieme ristretto di compiti, di solito in un **dominio limitato**.
 > - Esempio: un modello addestrato a riconoscere **immagini di gatti** sa fare solo quello e **non generalizza** ad altri tipi di immagini o di compiti.
 > - È oggi la forma **predominante** di AI: riconoscimento vocale, immagini e linguaggio naturale. Un sistema ristretto può elaborare più modalità: «ristretto» descrive l’ampiezza delle capacità, non il numero di tipi di input.
 
@@ -130,7 +130,7 @@ I 23 esperti sono: Christof Koch, Jaron Lanier, Andrew Ng, Max Tegmark, Yann LeC
 > ⚠️ **Il limite del test.** Il test di Turing misura la **capacità conversazionale**, **non l’intelligenza generale**.
 
 
-Una prova pubblicata nel 2026 ha usato un protocollo a tre partecipanti: in due studi preregistrati, GPT-4.5 accompagnato da una persona testuale è stato identificato come umano nel 73% delle valutazioni; Llama 3.1 405B ha raggiunto il 56% (Jones e Bergen, 2026, [PNAS](https://doi.org/10.1073/pnas.2524472123)). Il risultato riguarda l’indistinguibilità conversazionale in quel protocollo, non il trasferimento generale tra compiti. Una persona definisce ruolo, stile, obiettivi e vincoli della risposta; non aggiunge capacità intrinseche al modello.
+Una prova pubblicata nel 2026 ha usato un protocollo a tre partecipanti: in due studi preregistrati, GPT-4.5 accompagnato da una persona testuale è stato identificato come umano nel 73% delle valutazioni; Llama 3.1 405B ha raggiunto il 56% (Jones e Bergen, 2026, [PNAS (*Proceedings of the National Academy of Sciences*, Atti dell’Accademia nazionale delle scienze degli Stati Uniti)](https://doi.org/10.1073/pnas.2524472123)). Il risultato riguarda l’indistinguibilità conversazionale in quel protocollo, non il trasferimento generale tra compiti. Una persona definisce ruolo, stile, obiettivi e vincoli della risposta; non aggiunge capacità intrinseche al modello.
 
 ![](imgs/Pasted%20image%2020261002033559.png)
 
@@ -160,7 +160,7 @@ Una prova pubblicata nel 2026 ha usato un protocollo a tre partecipanti: in due 
 
 > 💡 **Come è fatto un puzzle ARC (nota didattica).** Nei benchmark della famiglia ARC (*Abstraction and Reasoning Corpus*) si vedono poche coppie di griglie colorate «input → output» e bisogna **indovinare la regola** di trasformazione, poi applicarla a una nuova griglia. ConceptARC organizza i puzzle per **concetti** (per esempio «sopra/sotto», «dentro/fuori», «stesso/diverso»). Pochi esempi e una regola astratta: è l’opposto dell’addestramento su milioni di dati tipico della Narrow AI.
 
-Tra gli altri riferimenti si trovano **ARC-AGI-3** e ulteriori test recenti.
+Tra gli altri riferimenti si trovano **ARC-AGI-3** (*Abstraction and Reasoning Corpus for Artificial General Intelligence*, corpus di astrazione e ragionamento per l’intelligenza artificiale generale) e ulteriori test recenti.
 
 ![](imgs/Pasted%20image%2020261002033813.png)
 
@@ -179,9 +179,9 @@ Un benchmark misura una capacità definita da compiti e regole precise. Nel temp
 | Benchmark | Capacità bersaglio | Limite da tenere presente |
 |---|---|---|
 | HellaSwag (2019) | completamento di scenari di senso comune | la saturazione riduce la capacità di separare i modelli migliori |
-| GSM8K (2021) | problemi matematici di livello scolastico | misura una porzione circoscritta del ragionamento |
-| MMLU (2021) | conoscenze accademiche ampie | ampiezza non elimina memorizzazione, contaminazione o ottimizzazione specifica |
-| SWE-bench Verified (2024) | correzione autonoma di problemi software | un audit del 2026 ha individuato problemi in parte delle specifiche e dei test, riducendo il valore del benchmark come misura di capacità di frontiera ([audit OpenAI, 8 luglio 2026](https://openai.com/index/separating-signal-from-noise-coding-evaluations/)) |
+| GSM8K (*Grade School Math 8K*, problemi matematici di livello scolastico, raccolta da 8.000 quesiti) (2021) | problemi matematici di livello scolastico | misura una porzione circoscritta del ragionamento |
+| MMLU (*Massive Multitask Language Understanding*, comprensione linguistica su molteplici attività) (2021) | conoscenze accademiche ampie | ampiezza non elimina memorizzazione, contaminazione o ottimizzazione specifica |
+| SWE-bench (*Software Engineering Benchmark*, benchmark per l’ingegneria del software) Verified (2024) | correzione autonoma di problemi software | un audit del 2026 ha individuato problemi in parte delle specifiche e dei test, riducendo il valore del benchmark come misura di capacità di frontiera ([audit OpenAI, 8 luglio 2026](https://openai.com/index/separating-signal-from-noise-coding-evaluations/)) |
 
 Per confrontare sistemi, occorre riportare versione del benchmark, partizione dei dati (split), istruzione data al modello (prompt), ambiente di valutazione e configurazione del modello, costo e data. Un risultato elevato su un compito statico non equivale a capacità generale. La fotografia numerica del materiale è datata 22 settembre 2026 e descrive GPT-6 Astra. Il 17 novembre sono stati rilasciati GPT-6.2 Astra e Sol; i punteggi qui riportati restano un confronto storico relativo a configurazioni specifiche. [Risultati ARC Prize](https://arcprize.org/results), [aggiornamento ufficiale GPT-6.2](https://openai.com/index/introducing-gpt-6-2-astra-sol/).
 
@@ -298,7 +298,7 @@ Un’illustrazione generata automaticamente di un labirinto mostra un percorso a
 |---|---|
 | **Agente** | l’entità che prende le decisioni per **massimizzare la ricompensa** |
 | **Stato** $s$ | la rappresentazione della condizione corrente dell’ambiente, osservata dall’agente |
-| **Rete neurale profonda** (DNN) | usata dall’agente per **approssimare la politica** $\pi$, che associa stati e azioni |
+| **Rete neurale profonda**, DNN (*Deep Neural Network*, rete neurale profonda) | usata dall’agente per **approssimare la politica** $\pi$, che associa stati e azioni |
 | **Politica** $\pi_\theta(s, a)$ | funzione che dà la **probabilità di scegliere l’azione** $a$ nello stato $s$; $\theta$ sono i parametri della rete |
 | **Azione** | la decisione o il movimento che l’agente compie in base alla politica |
 | **Ambiente** | il sistema esterno in cui l’agente opera |
@@ -460,14 +460,14 @@ Dopo aver scelto un metodo e addestrato un modello, resta la domanda decisiva: *
 
 | Aspetto | Che cosa valutare |
 |---|---|
-| **Metriche** | accuratezza, precisione, recall, F1, curva ROC e AUC, MAE, MSE e RMSE; usabilità, soddisfazione, ergonomia, equità e bias |
+| **Metriche** | accuratezza, precisione e richiamo (*recall*); F1 (*F1-score*, misura armonica di precisione e richiamo con pari peso); curva ROC (*Receiver Operating Characteristic*, caratteristica operativa del ricevitore) e AUC (*Area Under the Curve*, area sottesa alla curva); MAE (*Mean Absolute Error*, errore assoluto medio), MSE (*Mean Squared Error*, errore quadratico medio) e RMSE (*Root Mean Squared Error*, radice dell’errore quadratico medio); usabilità, soddisfazione, ergonomia, equità e distorsioni (*bias*) |
 | **Metodi di validazione** | split training/validation/test, cross-validation e bootstrap; split per gruppi o soggetti quando esistono misure ripetute e split temporali per previsioni e processi non stazionari |
 | **Benchmarking** | confronto con **modelli precedenti** o con le **prestazioni umane**; standard e benchmark di settore; **classifiche pubbliche** (leaderboard) |
 | **Prestazioni reali** | studi con utenti e **test sul campo**; valutazione di **robustezza e generalizzabilità**; **stress test** |
 | **Monitoraggio continuo** | rilevamento del **data drift** (cambiamento nella distribuzione dei dati in ingresso, approfondito nella Lezione 11, §4); strategie di **riaddestramento**; **allarmi** di degrado delle prestazioni |
 | **Etica e conformità** | analisi di **bias ed equità**; valutazione di **privacy e sicurezza**; verifiche di conformità normativa |
 
-> 📌 **Le metriche principali (nota didattica).** Per un classificatore binario, con veri positivi $TP$, falsi positivi $FP$, veri negativi $TN$ e falsi negativi $FN$:
+> 📌 **Le metriche principali (nota didattica).** Per un classificatore binario, con veri positivi (TP, *True Positive*), falsi positivi (FP, *False Positive*), veri negativi (TN, *True Negative*) e falsi negativi (FN, *False Negative*):
 > $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \qquad \text{Precision} = \frac{TP}{TP + FP} \qquad \text{Recall} = \frac{TP}{TP + FN}$$
 > $$F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
 > Per una regressione con valori veri $y_i$ e predetti $\hat{y}_i$ su $n$ esempi:
@@ -475,6 +475,8 @@ Dopo aver scelto un metodo e addestrato un modello, resta la domanda decisiva: *
 > La curva **ROC** traccia il tasso di veri positivi contro il tasso di falsi positivi al variare della soglia; l’**AUC** è l’area sotto questa curva.
 
 > 💡 **Perché non basta l’accuratezza.** Se il 99% delle email non è spam, un classificatore che risponde sempre «non spam» ha accuratezza 99% ma recall 0 sullo spam. Precisione, recall e F1 mostrano ciò che l’accuratezza nasconde quando le classi sono **sbilanciate**. Lo stesso messaggio torna in §8: «non considerare solo l’accuratezza».
+
+![](imgs/Pasted%20image%2020261120180032.png)
 
 ### **6. AI e sensori**
 
@@ -514,7 +516,7 @@ L’AI può elaborare le misure prodotte da **sensori intelligenti**, contribuir
 
 > 📌 **Sensore virtuale**. Un sistema **software** che **stima una grandezza fisica** usando i dati di **più sensori reali** e **modelli computazionali**. Usa le informazioni disponibili da altre misure e dai parametri di processo per calcolare una **stima** della grandezza di interesse. **Sostituisce o affianca** i sensori fisici quando la misura diretta è **costosa, poco pratica o impossibile**.
 
-**Flusso di lavoro di un sensore virtuale basato sull’AI**, dai sensori fisici (PS) ai sensori virtuali (VS):
+**Flusso di lavoro di un sensore virtuale basato sull’AI**, dai sensori fisici (PS (*Physical Sensor*, sensore fisico), *Physical Sensor*, sensore fisico) ai sensori virtuali (VS (*Virtual Sensor*, sensore virtuale), *Virtual Sensor*, sensore virtuale):
 
 1. **raccolta e armonizzazione** dei dati;
 2. **estrazione delle feature**;
@@ -539,7 +541,7 @@ L’AI può elaborare le misure prodotte da **sensori intelligenti**, contribuir
 | **monitoraggio ambientale** | **qualità dell’aria**, rilevamento di **contaminazione dell’acqua** |
 | **Industria 4.0** | **manutenzione predittiva** |
 
-**Esempio**: un sensore virtuale basato sull’AI che stima lo **stato di carica** (SOC, *State Of Charge*) di una batteria a partire da **tensione, corrente e temperatura**.
+**Esempio**: un sensore virtuale basato sull’AI che stima lo **stato di carica** (SOC (*State of Charge*, stato di carica), *State Of Charge*) di una batteria a partire da **tensione, corrente e temperatura**.
 
 ![](imgs/Pasted%20image%2020261002040150.png)
 
@@ -596,7 +598,7 @@ Per i **progetti futuri** si possono inoltre scegliere altri toolbox disponibili
 
 **Keras**:
 
-- la **libreria Python per il deep learning**: un’API di alto livello per reti neurali, scritta in Python e capace di girare sopra **TensorFlow, CNTK o Theano**, pensata per una **sperimentazione rapida**;
+- la **libreria Python per il deep learning**: un’API di alto livello per reti neurali, scritta in Python e capace di girare sopra **TensorFlow, CNTK (*Microsoft Cognitive Toolkit*, strumentario cognitivo Microsoft) o Theano**, pensata per una **sperimentazione rapida**;
 - motto: «dall’idea al risultato con il **minor ritardo possibile**»;
 - **non serve scaricarla**: è già disponibile in MATLAB e in Colab.
 
@@ -605,7 +607,7 @@ Per i **progetti futuri** si possono inoltre scegliere altri toolbox disponibili
 <!-- SOURCE_VISUAL id="IS03-V32" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="70" type="immagine" description="Apertura della sezione sugli strumenti software" reason="Illustrazione della sezione" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **7.2. Anaconda, Jupyter e gli IDE**
+#### **7.2. Anaconda, Jupyter e gli ambienti di sviluppo integrati (IDE, *Integrated Development Environment*)**
 
 **Anaconda è una distribuzione possibile, non un requisito.** Include strumenti e librerie per calcolo scientifico e gestione degli ambienti; Miniforge/conda-forge è un’alternativa distinta.
 
@@ -655,7 +657,7 @@ Per interiorizzare i metodi occorre collegare ipotesi, esempi, applicazioni e co
 Inoltre:
 
 - costruirsi un **portfolio** di modelli e metodi di apprendimento, il più ampio possibile;
-- tenersi aggiornati sullo **stato dell’arte** (SOA) e sulle tendenze;
+- tenersi aggiornati sullo **stato dell’arte** (*state of the art*) e sulle tendenze;
 - **scegliere sempre tra soluzioni diverse**;
 - **non considerare solo l’accuratezza**: c’è un’ampia gamma di **figure di merito** da considerare nel progetto (applicazioni successive);
 - migliorare il progetto **partendo dalle esperienze e dalle scoperte precedenti**: «**sulle spalle dei giganti**». L’analisi dello stato dell’arte è **fondamentale**.
@@ -674,7 +676,7 @@ Inoltre:
 | **Supervisionato** / **semi-supervisionato** / **non supervisionato** / **self-supervised** / **rinforzo** | etichette / poche etichette / nessuna etichetta esterna / obiettivi ricavati dai dati / ricompense da interazione |
 | **Politica stocastica** / **deterministica** | distribuzione di probabilità sulle azioni / azione esatta |
 | **Deduttivo** / **induttivo** | dalle regole ai dati («la nonna») / dai dati alla regola («la tangenziale alle 17:30») |
-| **Induzione** / **trasduzione** | dati → funzione generale / dati → valori nei punti di interesse, senza modello generale (k-NN) |
+| **Induzione** / **trasduzione** | dati → funzione generale / dati → valori nei punti di interesse, senza modello generale (k-NN, *k-Nearest Neighbors*, metodo dei $k$ vicini più prossimi) |
 | **Precision** / **recall** | quanti positivi predetti sono veri / quanti positivi veri sono trovati |
 | **Sensore fisico** / **sensore virtuale** | misura diretta / stima software da altre misure e modelli |
 | **Colab** / **MATLAB** / **IDE locale** | notebook nel cloud con account Google / ambiente con toolbox e licenza UNIMI / sviluppo locale con gestione degli ambienti |
