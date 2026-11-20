@@ -604,8 +604,7 @@ Per i **progetti futuri** si possono inoltre scegliere altri toolbox disponibili
 
 > 💡 CNTK e Theano sono progetti storici. Keras 3 è un’API di alto livello con backend TensorFlow, JAX o PyTorch; va scelta la versione compatibile con l’ambiente di esecuzione.
 
-<!-- SOURCE_VISUAL id="IS03-V32" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="70" type="immagine" description="Apertura della sezione sugli strumenti software" reason="Illustrazione della sezione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+---
 
 #### **7.2. Anaconda, Jupyter e gli ambienti di sviluppo integrati (IDE, *Integrated Development Environment*)**
 
@@ -642,8 +641,7 @@ Gli ambienti `venv`, `uv` e Miniforge/conda-forge isolano dipendenze e configura
 
 Durante sviluppo e laboratorio si possono usare assistenti di programmazione quando l’attività lo consente, ma chi consegna resta responsabile di correttezza, test, sicurezza e licenze e deve saper spiegare il codice. In una prova d’esame, chatbot, ricerca web e materiali esterni sono esclusi salvo diversa indicazione esplicita.
 
-<!-- SOURCE_VISUAL id="IS03-V04" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="71" type="diagramma" description="Flusso riproducibile dai dati e sensori fino a esplorazione, addestramento, valutazione e distribuzione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261120183619.png)
 
 ### **8. Come consolidare la conoscenza**
 
