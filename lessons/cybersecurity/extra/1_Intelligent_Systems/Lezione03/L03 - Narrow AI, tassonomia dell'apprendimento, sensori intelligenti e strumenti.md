@@ -444,12 +444,13 @@ Tre casi aiutano a distinguere i segnali di apprendimento: classificare componen
 | Applicare regole esplicite su vibrazione e temperatura a una macchina | conoscenze e regole di un esperto più misure correnti | deduzione | le regole producono una conclusione specifica senza addestrare un modello |
 | Imparare a navigare in un magazzino ricevendo ricompense per destinazione, collisioni e mosse | feedback da interazioni ripetute | apprendimento per rinforzo | le ricompense guidano l’ottimizzazione di una politica di azione |
 
-<!-- SOURCE_VISUAL id="IS03-V05" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="52-57" type="tabella" description="Tre quesiti applicativi per distinguere induzione supervisionata, deduzione e apprendimento per rinforzo" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+---
 
 ### **5. Valutazione di un sistema intelligente**
 
 Dopo aver scelto un metodo e addestrato un modello, resta la domanda decisiva: **funziona per l’applicazione a cui è destinato?** La valutazione è articolata e considera più aspetti:
+
+![](imgs/Pasted%20image%2020261120175303.png)
 
 **Obiettivo della valutazione**:
 
