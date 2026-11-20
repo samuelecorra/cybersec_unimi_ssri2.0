@@ -81,19 +81,19 @@ Un sistema che stima l’età può evitare di proporre film inadatti a un bambin
 <!-- SOURCE_VISUAL id="IS05-V03" source="Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf" page="8" type="diagramma" description="Sistema con riconoscimento dell’età, dati storici dell’utente e raccomandazione del film" reason="Collegamenti tra i moduli visibili solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Guardrail**: vincoli che impediscono al sistema comportamenti indesiderati. La lezione ne distingue due tipi.
+**Salvaguardie (guardrail)**: vincoli che impediscono al sistema comportamenti indesiderati. La lezione ne distingue due tipi.
 
-| | **Guardrail nel ML classico** | **Guardrail nei sistemi ad agenti** |
+| | **Protezioni operative (guardrail) nel ML classico** | **Protezioni operative (guardrail) per gli agenti** |
 |---|---|---|
 | Livello | **addestramento e validazione** | **allineamento ed esecuzione** (runtime) |
-| Strumenti | **controllo dei dati**: rimuovere campioni rumorosi o avversari, **evitare il data leakage**; **progetto della perdita**: per esempio la triplet loss, imporre comportamenti desiderati contro indesiderati; **vincoli sul modello**: regolarizzazione, selezione delle feature | **vincoli su input e prompt**: rilevamento di **prompt injection** e **jailbreak**; **filtraggio e moderazione dell’output**; **regole di policy** (che cosa è permesso o vietato); **supervisione umana** a runtime: approvazione *human-in-the-loop*, escalation, *red teaming*; **vincoli sul recupero** (grounding con RAG) |
+| Strumenti | **controllo dei dati**: rimuovere campioni rumorosi o avversari, **evitare la dispersione di informazioni tra addestramento e test (data leakage)**; **progetto della perdita**: per esempio la triplet loss, imporre comportamenti desiderati contro indesiderati; **vincoli sul modello**: regolarizzazione, selezione delle feature | **vincoli su input e istruzioni**: rilevamento dell’**iniezione di prompt** (*prompt injection*, istruzioni ostili nascoste nei contenuti forniti al modello) e dei tentativi di **aggirare le protezioni** (*jailbreak*); **filtraggio e moderazione dell’output**; **regole d’uso** (*policy*); **supervisione umana** durante l’esecuzione: approvazione *human-in-the-loop* (intervento umano nel ciclo operativo), escalation e *red teaming* (prove controllate in cui si simulano attacchi); **ancoraggio alle fonti** con RAG (*grounding*) |
 | Obiettivo | dare forma alla **rappresentazione interna** del modello | controllare il **comportamento esterno** del sistema |
 
 > 💡 **Data leakage (nota didattica).** Si ha quando informazioni che non sarebbero disponibili al momento della predizione finiscono nei dati di addestramento: per esempio lo stesso paziente presente sia nel training sia nel test, oppure una feature calcolata usando l’etichetta. Il modello sembra ottimo in validazione e fallisce in esercizio.
 
 ##### **Guardrail per l’apprendimento classico e per gli agenti**
 
-Nel machine learning classico i controlli si applicano ai dati e alla funzione obiettivo: si rimuovono campioni rumorosi o avversari, si previene il data leakage, si progetta la loss e si aggiungono test di sicurezza. Un agente basato su modelli linguistici richiede anche protezioni al momento dell’uso: validazione degli input e delle istruzioni, rilevamento di prompt injection e jailbreak, controllo degli output, permessi limitati, approvazione umana prima di azioni rilevanti e monitoraggio delle operazioni. Questi livelli si completano: il controllo in fase di addestramento non sostituisce quello a runtime.
+Nel machine learning classico i controlli si applicano ai dati e alla funzione obiettivo: si rimuovono campioni rumorosi o avversari, si previene la dispersione di informazioni tra addestramento e valutazione (*data leakage*), si progetta la funzione di perdita e si aggiungono test di sicurezza. Un agente basato su modelli linguistici richiede anche protezioni durante l’esecuzione: validazione degli input e delle istruzioni, rilevamento di prompt injection e tentativi di aggiramento, controllo degli output, permessi limitati, approvazione umana prima di azioni rilevanti e monitoraggio delle operazioni. La Lezione 15 approfondisce gli attacchi alle istruzioni e le difese nel contesto degli agenti (§§ 3 e 5).
 
 <!-- SOURCE_VISUAL id="IS05-V28" source="L05-web.pdf" page="9-10" type="tabella" description="Confronto tra guardrail applicati ai modelli classici durante addestramento e validazione e quelli applicati agli agenti a runtime" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->

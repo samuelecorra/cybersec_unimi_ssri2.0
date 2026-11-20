@@ -130,7 +130,7 @@ Riguarda i **passi 3–4** del flusso di lavoro. Serve per:
 **Dashboard di rilascio e monitoraggio del drift**:
 
 - **monitorare dati e prestazioni** del modello **in produzione**;
-- rilevare il **data drift** e il **concept drift**;
+- rilevare il **data drift** (cambiamento della distribuzione degli input) e il **concept drift** (cambiamento della relazione tra input e risultato);
 - **attivare allarmi** e intervenire **presto**.
 
 > 💡 **Data drift e concept drift (nota didattica).** Con il **data drift** cambia la distribuzione degli **input** $P(X)$: per esempio arrivano clienti più anziani di quelli visti in addestramento. Con il **concept drift** cambia la **relazione** tra input e output $P(Y \mid X)$: gli stessi clienti, a parità di caratteristiche, iniziano a comportarsi diversamente. Il primo si vede guardando solo gli input; il secondo richiede le etichette vere, o almeno un segnale sulle uscite.
