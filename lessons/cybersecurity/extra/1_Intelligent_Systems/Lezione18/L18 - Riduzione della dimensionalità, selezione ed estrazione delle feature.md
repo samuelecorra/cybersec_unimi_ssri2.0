@@ -1,455 +1,178 @@
 ## **Lezione 18: Riduzione della dimensionalità, selezione ed estrazione delle feature**
 
-La diciottesima lezione del corso **IS4** è la seconda parte della **feature engineering** e tratta la **riduzione della dimensionalità**. Le strade sono due. La **selezione delle feature** sceglie un sottoinsieme delle feature originali, con metodi **filtro**, **wrapper** o **embedded** e con strategie di ricerca in avanti e all’indietro. L’**estrazione delle feature** ne costruisce di nuove combinando quelle esistenti: la **PCA**, il metodo non supervisionato più importante, l’**LDA**, che usa le etichette, la **t-SNE** non lineare per la visualizzazione e l’**ICA** per separare sorgenti indipendenti. Il laboratorio in Colab applica PCA, t-SNE ed eliminazione ricorsiva delle feature al dataset di **cifre scritte a mano** di scikit-learn.
-
-Fonti: [PDF della Lezione 18](Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf), 50 pagine, e il notebook [Lesson_18_Laboratory_COLAB_DimensionalityReduction.ipynb](Lesson_18_Laboratory_COLAB_DimensionalityReduction.ipynb), letto integralmente (le immagini dei grafici incorporate nel notebook non sono state visualizzate). Le formule che nelle slide sono immagini sono riportate in forma standard; le note didattiche aggiunte sono segnalate. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
-
-### **0. Struttura della lezione**
-
-_(slide pp. 1–5)_
-
-Titolo originale: *Feature engineering Part 2: Dimensionality reduction. Feature Selection and Extraction*. L’indice (p. 2) elenca:
-
-1. **selezione delle feature**: metodi **filtro**, **wrapper**, **embedded**;
-2. **estrazione delle feature**: **PCA**, **analisi discriminante lineare**, **t-SNE**, **analisi delle componenti indipendenti**;
-3. **codice** per la feature engineering;
-4. punti principali.
-
-> 📌 **Estrazione e selezione** (p. 3).
-> - **Estrazione**: ricavare **feature utili** dai dati esistenti, creando nuove feature (PCA; le CNN nelle lezioni successive).
-> - **Selezione**: scegliere un **sottoinsieme** dell’insieme originale di feature (per esempio con i wrapper).
-
-**La pipeline della feature engineering** (p. 4):
-
-$$\text{omogeneizzazione} \to \text{valori non validi} \to \text{valori mancanti} \to \text{coerenza} \to \text{codifica categorica} \to \text{rimozione outlier} \to$$
-$$\to \text{scomposizione} \to \text{aggregazione} \to \text{trasformazione} \to \text{normalizzazione} \to \text{riduzione della dimensionalità} \to \text{classificatore / regressore}$$
-
-In un’applicazione tipica (p. 5) i metodi di feature engineering trasformano l’input $\mathbf{x}$ in $\mathbf{x}_{\text{engineered}}$, che poi entra nel classificatore o nel regressore.
-
-> 💡 **La pipeline riassume il corso (nota didattica).** I primi passi sono quelli delle Lezioni 06 e 16 (armonizzazione, dati mancanti, codifica delle categorie), la normalizzazione è quella della Lezione 10, §5. La riduzione della dimensionalità viene **per ultima**: selezionare o combinare feature ha senso solo dopo che i dati sono puliti e confrontabili.
-
-<!-- SOURCE_VISUAL id="IS18-V01" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="3" type="grafico" description="Estrazione contro selezione delle feature (quantdare.com)" reason="Schema grafico dei due approcci" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS18-V02" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="5" type="diagramma" description="Metodi di feature engineering tra input x e classificatore o regressore" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
----
+La riduzione della dimensionalità interviene dopo la preparazione dei dati e prima del modello. Può conservare alcune variabili originarie oppure trasformarle in una rappresentazione più compatta. La scelta dipende dallo scopo: mantenere feature interpretabili, comprimere i dati, separare sorgenti, visualizzare strutture o produrre rappresentazioni da usare in un classificatore.
 
 ### **1. Selezione delle feature**
 
-_(slide pp. 6–15)_
+#### **1.1. Selezione ed estrazione**
 
-#### **1.1. Perché selezionare**
+La **selezione** mantiene un sottoinsieme delle feature originarie: una variabile selezionata conserva il proprio significato fisico, come un sensore o un pixel. L’**estrazione** costruisce nuove feature combinando quelle originarie; le componenti ottenute possono mescolare informazioni provenienti da più sensori o pixel. Entrambe riducono la dimensionalità, ma solo la selezione conserva direttamente l’identità delle variabili iniziali.
 
-La domanda (p. 6): **quanto è importante ciascuna feature?**
+Nella pipeline di preparazione, la riduzione segue omogeneizzazione, correzione dei valori non validi e mancanti, verifica della coerenza, codifica delle categorie, trattamento degli outlier, scomposizione, aggregazione, trasformazione e normalizzazione. In un caso industriale, per esempio, sei segnali rumorosi possono essere trasformati in tre descrittori più stabili, poi usati da un classificatore o da un regressore.
 
-> 📌 **L’idea generale** (p. 7). Feature **irrilevanti** o solo parzialmente rilevanti possono **peggiorare** le prestazioni del modello. Selezionarle:
-> - **riduce l’overfitting** dovuto al rumore;
-> - **può migliorare l’accuratezza**;
-> - **riduce il tempo di addestramento**, perché la matrice $X$ è più piccola.
-
-> 💡 **Il legame con i gradi di libertà (nota didattica).** Ogni feature in più aggiunge parametri al modello: in una rete, un peso per ogni neurone del primo strato. Togliere feature inutili abbassa i gradi di libertà a parità di dati (Lezione 07, §2), e quindi il rischio di overfitting.
-
-#### **1.2. Filtri, wrapper, metodi embedded**
-
-_(slide pp. 8–12)_
-
-| | **Filtri** (p. 9) | **Wrapper** (p. 10) | **Metodi embedded** (p. 11) |
-|---|---|---|---|
-| **Criterio** | misurare la **rilevanza** di una feature o di un sottoinsieme | misurare l’**utilità** di un sottoinsieme | misurare l’**utilità** di un sottoinsieme |
-| **Ricerca** | di solito **ordinare** le feature (classifica delle singole feature o sottoinsiemi annidati) | esplorare lo **spazio di tutti i sottoinsiemi** | ricerca **guidata dal processo di apprendimento** |
-| **Valutazione** | **test statistici** | **modello + cross-validation** | **cross-validation** |
-| **Risultati** | relativamente **robusti all’overfitting**; possono **non scegliere** le feature più «utili» | in principio trovano le feature **più utili**, ma sono **soggetti a overfitting** | **simili ai wrapper**, ma **meno costosi** e **meno soggetti a overfitting** |
-| **Esempi** | preferire feature con **alta varianza**; preferire feature **poco correlate** (similarità → cross-correlazione): tra $N$ feature molto correlate, **tenerne una** | modelli tipici: **k-NN** o **reti neurali** | **specifici** di una certa macchina di apprendimento: la selezione avviene **implicitamente durante l’addestramento** |
-
-<!-- SOURCE_VISUAL id="IS18-V03" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="8" type="schema" description="Metodi filtro, wrapper ed embedded a confronto (quantdare.com)" reason="Schema presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS18-26-V01" source="L18-web.pdf" page="3" type="schema" description="Estrazione di nuove feature a confronto con selezione di feature originarie" reason="Schema visivo che distingue le due operazioni" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 💡 **Perché i wrapper vanno in overfitting (nota didattica).** Un wrapper prova moltissimi sottoinsiemi e tiene quello con il miglior risultato in cross-validation. Con tanti tentativi, qualche sottoinsieme «vince» per caso sui dati disponibili: è la stessa trappola del provare dieci architetture e scegliere la migliore sul test (Lezione 14, §4.3). Per una stima onesta la selezione va fatta **dentro** ogni fold, e il risultato finale verificato su dati mai usati.
-
-**Esempio di metodo embedded con le reti neurali** (p. 12). Con input **normalizzati** (stesso intervallo), se un **peso dello strato di ingresso** tende a zero, l’algoritmo di addestramento ha considerato quella feature **poco rilevante** per l’uscita: se $W_4 \to 0$, o se tutti i pesi $W_{5i}$ che partono dalla feature 5 tendono a zero, quella feature «**non sta lavorando**».
-
-> ⚠️ **La normalizzazione è indispensabile.** Se una feature è in millimetri e un’altra in chilometri, i pesi hanno scale diverse per compensare le unità: un peso piccolo può moltiplicare valori enormi. Solo con input sulla stessa scala il modulo del peso dice qualcosa sull’importanza (Lezione 10, §5).
-
-<!-- SOURCE_VISUAL id="IS18-V04" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="12" type="diagramma" description="Rete neurale in cui pesi di ingresso tendenti a zero indicano feature poco rilevanti" reason="Pesi della rete visibili solo nel diagramma" -->
+<!-- SOURCE_VISUAL id="IS18-26-V02" source="L18-web.pdf" page="5" type="diagramma" description="Sei segnali grezzi trasformati in tre feature per classificazione o regressione" reason="Esempio visivo del passaggio da segnali a feature" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **1.3. Selezione in avanti e all’indietro**
+Le feature irrilevanti aggiungono rumore; quelle ridondanti ripetono informazioni già presenti. La loro rimozione può ridurre l’overfitting e il tempo di addestramento, e talvolta migliorare le prestazioni. I tre approcci principali differiscono per come scelgono le variabili:
 
-_(slide pp. 13–15)_
+| Approccio | Criterio e ricerca | Valutazione e limiti |
+|---|---|---|
+| **Filtro** | Assegna un punteggio alle feature usando statistiche dei dati, come varianza, correlazione o informazione mutua; spesso ordina le variabili. | Non addestra un modello, tende a essere robusto all’overfitting ma può ignorare feature utili solo in combinazione. |
+| **Wrapper** | Prova sottoinsiemi e usa un algoritmo di apprendimento come funzione di valutazione; può usare k-NN o una rete neurale. | Il modello viene addestrato per ogni candidato, spesso con cross-validation: ricerca costosa e rischio di overfitting. |
+| **Embedded** | La selezione avviene durante l’addestramento, guidata dall’algoritmo. Esempi: penalizzazione L1, importanza negli alberi. | È legata al modello, con costi e rischio di overfitting in genere inferiori ai wrapper. |
 
-**Selezione in avanti con un wrapper** (p. 13), detta anche **SFS** (*Sequential Forward Selection*). Si rappresenta ogni configurazione come una stringa di bit (0 = feature non attiva, 1 = attiva):
+Nei metodi filtro, feature sulla stessa scala con alta varianza possono risultare più informative; una correlazione elevata fra variabili suggerisce ridondanza. Un criterio univariato, tuttavia, può perdere relazioni che emergono soltanto considerando più feature insieme. I wrapper misurano l’utilità sul compito, ma la selezione va eseguita all’interno dei fold di addestramento: scegliere variabili usando anche i dati di test rende ottimistica la valutazione. Nei metodi embedded, i pesi d’ingresso che vengono spinti verso zero possono indicare scarsa rilevanza, purché gli input siano normalizzati e si interpreti il peso nel contesto del modello.
 
-1. si prova ogni feature **da sola** e si sceglie la **più saliente**;
-2. si aggiunge a quella, una alla volta, ciascuna delle feature rimaste, e si sceglie il **sottogruppo più saliente**;
-3. si continua finché si aggiungono feature.
-
-Con 4 feature si provano $4 + 3 + 2 + 1 = 10$ configurazioni. Il numero di tutte le configurazioni con $m$ feature attive su $n$ è il coefficiente binomiale
-
-$$C(n, m) = \binom{n}{m} = \frac{n!}{m!\,(n - m)!}$$
-
-(nella slide scritto «(n!)/k!(n-k!)», con variabili e parentesi non coerenti).
-
-> 💡 **SFS contro ricerca esaustiva (nota didattica).** Provare **tutti** i sottoinsiemi non vuoti di $n$ feature richiede
-> $$\sum_{m=1}^{n} \binom{n}{m} = 2^n - 1$$
-> configurazioni: 15 con 4 feature, ma oltre un milione con 20 feature e circa $10^{19}$ con 64 (i pixel del laboratorio). La SFS ne prova solo $n + (n-1) + \dots + 1 = n(n+1)/2$: 210 con 20 feature. Il prezzo è che è **greedy**: una feature scelta all’inizio non viene più tolta, e due feature utili solo **insieme** possono non essere mai scelte.
-
-**Selezione in avanti con un metodo embedded** (p. 14). La ricerca è **guidata**: **non si considerano percorsi alternativi**, e con 4 feature si provano solo **4 configurazioni**, tra cui si sceglie la migliore.
-
-> 💡 **Da dove vengono le 4 configurazioni (nota didattica).** Se il modello fornisce già un **ordine di importanza** delle feature (per esempio dai pesi, p. 12), basta aggiungerle in quell’ordine: {1}, {1, 2}, {1, 2, 3}, {1, 2, 3, 4}. Si valuta ogni configurazione una sola volta, invece di confrontare a ogni passo tutte le feature rimaste.
-
-**Eliminazione all’indietro con un wrapper** (p. 15), detta anche **SBS** (*Sequential Backward Selection*): si parte da **tutte** le feature e si **toglie**, a ogni passo, quella la cui assenza peggiora meno il modello.
-
-<!-- SOURCE_VISUAL id="IS18-V05" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="13" type="diagramma" description="Selezione sequenziale in avanti con wrapper: configurazioni di bit provate a ogni passo" reason="Configurazioni visibili solo nel diagramma" -->
+<!-- SOURCE_VISUAL id="IS18-26-V03" source="L18-web.pdf" page="9" type="schema" description="Confronto tra metodi filtro, wrapper ed embedded" reason="Schema riassuntivo dei tre criteri di selezione" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS18-V06" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="14" type="diagramma" description="Selezione in avanti guidata (embedded) con 4 configurazioni" reason="Configurazioni visibili solo nel diagramma" -->
+#### **1.2. Ricerca sequenziale: SFS, SBS e RFE**
+
+La **Sequential Forward Selection (SFS)** è una ricerca wrapper greedy: parte dall’insieme vuoto, aggiunge a ogni passaggio la feature che produce il miglior punteggio in cross-validation e conserva il miglior sottoinsieme incontrato lungo il percorso. La scelta è irreversibile; alternative scartate non vengono riprese.
+
+Con $d$ feature, i sottoinsiemi di cardinalità $j$ sono ${d \choose j}=\frac{d!}{j!(d-j)!}$. Il numero di sottoinsiemi non vuoti nella ricerca esaustiva è $2^d-1$. La SFS valuta $d+(d-1)+\dots+1=\frac{d(d+1)}{2}$ candidati nel percorso massimo: con 4 feature ne prova 10 su 15 possibili, con 20 ne prova 210 su 1.048.575. Il risparmio computazionale comporta il rischio di una scelta iniziale che impedisca combinazioni migliori.
+
+La **Sequential Backward Selection (SBS)** parte da tutte le feature e rimuove a ogni passaggio quella la cui eliminazione danneggia meno il punteggio. La **Recursive Feature Elimination (RFE)** segue un principio affine: addestra ripetutamente un modello, elimina le feature meno importanti e assegna un rango a ciascuna. Una feature con rango 1 è l’ultima rimasta e, secondo il modello scelto, la più utile.
+
+Nel laboratorio si usa una SVM lineare per classificare immagini sintetiche da $8\times8$ pixel, rappresentate da 64 valori; le etichette sono dieci cifre. La RFE calcola i ranghi dei pixel. Il confronto fra 5-NN e diverse quantità di pixel, con selezione ripetuta dentro ciascun fold, dà accuratezza media del 45,8%, 83,4%, 96,3%, 98,2% e 98,6% usando rispettivamente 2, 5, 10, 20 e 64 pixel. Dieci pixel mantengono quindi gran parte della prestazione dell’insieme completo nel dataset sintetico dell’esperimento.
+
+<!-- SOURCE_VISUAL id="IS18-26-V04" source="L18-web.pdf" page="12" type="diagramma" description="Spazio dei sottoinsiemi esplorato dalla selezione SFS" reason="La figura mostra candidati e percorso greedy" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS18-V07" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="15" type="diagramma" description="Eliminazione sequenziale all’indietro (SBS) con wrapper" reason="Pagina con solo diagramma" -->
+<!-- SOURCE_VISUAL id="IS18-26-V05" source="L18-web.pdf" page="22" type="tabella" description="Matrice dei ranghi RFE dei 64 pixel" reason="Ranghi numerici per la posizione dei pixel" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
----
-
-### **2. Estrazione delle feature: la PCA**
-
-_(slide pp. 16–29)_
-
-#### **2.1. L’idea**
-
-> 📌 **Principal Component Analysis** (p. 16). La **più importante** tecnica di riduzione della dimensionalità **non supervisionata**, cioè che **non usa etichette**.
-
-**Esempio** (p. 17): dati descritti da **3 feature** (Gene1, Gene2, Gene3) con 4 classi vengono rappresentati da **2 feature**, le **componenti principali** PC1 e PC2, conservando la separazione. **Si tratta di trovare un sottospazio opportunamente traslato e ruotato** che descriva i dati.
-
-<!-- SOURCE_VISUAL id="IS18-V08" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="17" type="grafico" description="PCA da tre geni a due componenti principali con quattro classi" reason="Nuvole di punti visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS18-26-V06" source="L18-web.pdf" page="24" type="grafico" description="Accuratezza 5-NN al variare del numero di pixel selezionati con RFE" reason="Confronto prestazionale riportato per il dataset sintetico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Applicazioni della PCA** (p. 18): **visualizzazione** dei dati; **compressione** e riduzione della dimensionalità; **riduzione del rumore**; **classificazione**; analisi delle **tendenze**; **analisi fattoriale**; **estrazione delle feature**; **dentro le reti neurali** e i modelli di **deep learning**, per la **creazione automatica di feature**.
+### **2. Estrazione: analisi delle componenti principali**
 
-> 📌 **L’idea della PCA** (pp. 19–21).
-> - È **NON SUPERVISIONATA**: non usa etichette.
-> - Dati punti in uno spazio a $d$ dimensioni, li **proietta** in uno spazio a **meno dimensioni** conservando **quanta più informazione possibile**: per esempio la migliore approssimazione **planare** di dati 3D, o la migliore approssimazione a **12 dimensioni** di dati a 10 000.
-> - In particolare sceglie la proiezione che **minimizza l’errore quadratico** nella **ricostruzione** dei dati originali.
-> - È la **proiezione ortogonale** su uno spazio lineare di dimensione più bassa che **massimizza la varianza** dei dati proiettati e, equivalentemente, **minimizza la distanza quadratica media** tra i punti e le loro proiezioni.
-> - I vettori partono dal **centro di massa** dei dati. La **prima componente principale** (PC1) punta nella direzione di **massima varianza**; ogni componente successiva è **ortogonale** alle precedenti e punta nella direzione di massima varianza del **sottospazio residuo**.
+#### **2.1. Geometria e obiettivo della PCA**
 
-> 💡 **Perché massimizzare la varianza equivale a minimizzare l’errore (nota didattica).** Per ogni punto centrato $\mathbf{x}$ e direzione unitaria $\mathbf{u}$, il teorema di Pitagora dà
-> $$\lVert \mathbf{x} \rVert^2 = (\mathbf{u}^\top \mathbf{x})^2 + \lVert \mathbf{x} - (\mathbf{u}^\top \mathbf{x})\,\mathbf{u} \rVert^2$$
-> La lunghezza del punto è fissa: aumentare la parte proiettata (la varianza lungo $\mathbf{u}$) fa diminuire la parte perpendicolare (l’errore di ricostruzione). I due criteri della slide sono lo stesso problema visto da due lati.
+La **Principal Component Analysis (PCA)** è una trasformazione lineare non supervisionata: non usa le etichette. Centra i dati e li proietta su assi ortogonali, ciascuno combinazione lineare delle feature originarie. La prima componente, PC1, segue la direzione di massima varianza; ogni componente successiva è ortogonale alle precedenti e massimizza la varianza residua.
 
-<!-- SOURCE_VISUAL id="IS18-V09" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="20" type="grafico" description="Proiezione su u1 che massimizza la varianza e minimizza le distanze dei punti" reason="Proiezioni visibili solo nel grafico" -->
+La proiezione su un sottospazio di dimensione inferiore massimizza la varianza conservata ed equivale a minimizzare l’errore quadratico medio di ricostruzione. Per dati centrati, la norma quadrata di un punto si scompone nella norma della sua proiezione e nell’errore ortogonale; la quantità totale è fissa, quindi massimizzare la prima riduce il secondo.
+
+Per una matrice $X\in\mathbb{R}^{N\times d}$, con un campione per riga, si sottrae la media delle colonne e si calcola la covarianza $C=\frac{1}{N-1}X_c^\top X_c$. Gli autovettori di $C$ definiscono gli assi principali e gli autovalori ne misurano la varianza. Se $W$ contiene i primi $k$ autovettori, la rappresentazione ridotta è $Z=X_cW$; la frazione di varianza trattenuta è $\frac{\sum_{j=1}^k\lambda_j}{\sum_{j=1}^d\lambda_j}$. La divisione per $N$ invece di $N-1$ cambia la scala degli autovalori, ma non gli autovettori.
+
+Nel caso illustrativo di tre geni e 240 cellule, la proiezione preserva la varianza complessiva: le varianze nelle coordinate centrate sono 27,9, 20,3 e 12,4; nelle componenti sono 40,0, 19,7 e 0,8. La terza componente contiene una quota piccola. In un esempio a dieci feature, PC1 e PC2 trattengono il 60%; il gomito della curva suggerisce due dimensioni per la visualizzazione, mentre una soglia del 90% richiede otto componenti. La scelta di $k$ dipende dal compromesso tra compressione, ricostruzione e prestazione sul compito.
+
+La PCA non crea cluster e non considera i colori di un grafico: le etichette possono essere sovrapposte dopo il calcolo per aiutare la lettura. Per una pipeline predittiva si normalizzano le variabili quando le scale differiscono e si stimano scaler e PCA esclusivamente sul training set. La validazione di un classificatore su cifre sintetiche mostra accuratezza 0,98 con PCA a 10 componenti e 0,67 con 2 componenti; 20 componenti bastano a superare il 90% della varianza nell’esempio. La PCA è usata per visualizzazione, compressione, riduzione del rumore, analisi delle tendenze e pre-elaborazione.
+
+<!-- SOURCE_VISUAL id="IS18-26-V07" source="L18-web.pdf" page="27" type="grafico" description="Proiezione PCA di tre geni su due componenti principali" reason="Nuvola tridimensionale e piano proiettato" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS18-V10" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="21" type="grafico" description="Componenti principali PC1 e PC2 ortogonali dal centro di massa" reason="Direzioni visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS18-26-V08" source="L18-web.pdf" page="37" type="grafico" description="Autovalori, varianza cumulativa e criterio del gomito per scegliere k" reason="La scelta illustrata dipende dalla forma della curva" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **2.2. Visualizzare dati non supervisionati**
+#### **2.2. PCA sulle immagini di cifre**
 
-_(slide pp. 22–27)_
+La PCA porta 1.800 immagini sintetiche da 64 pixel a due componenti, che spiegano circa il 34% della varianza (19% e 15%). I colori delle classi aiutano a osservare la proiezione, ma non entrano nell’algoritmo. L’esempio rende visibile la differenza tra usare due pixel arbitrari e costruire combinazioni lineari che raccolgono più variazione.
 
-La PCA è un metodo **semplice ma efficace** per trovare le $k$ componenti più salienti di dati non supervisionati (p. 22).
-
-**Visualizzare dati ad alta dimensionalità** (p. 23):
-
-- l’apprendimento **non supervisionato** lavora tipicamente in spazi di feature **ad alta dimensionalità**;
-- i dataset reali, per esempio **NSL-KDD**, contengono **decine** di feature numeriche e categoriche;
-- la visualizzazione umana è limitata a 1D, 2D e 3D (con efficacia limitata);
-- **distanze**, **similarità** e **struttura dei cluster** sono definite nello spazio **originale**, che **non si può visualizzare direttamente**.
-
-> 📌 **Che cosa fa e che cosa non fa la PCA** (pp. 24–25).
-> - È una tecnica di riduzione **lineare** e **non supervisionata**: **non usa etichette** né informazioni sulle classi.
-> - **Proietta** i dati su un nuovo insieme di **assi ortogonali**; ogni asse (componente principale) è una **combinazione lineare** delle feature originali e cattura la **massima varianza possibile**.
-> - Le prime due componenti (PC1, PC2) conservano la **frazione più grande** della varianza e permettono una **visualizzazione in 2D**.
-> - Si sceglie la **dimensione $K$** dell’uscita, con $K < M$ (dettaglio non d’esame).
->
-> **NOTA!** La PCA **non fa clustering**, **non usa le etichette**, e **dopo** un clustering si applica **solo** per visualizzarlo.
-
-**Esempi** (pp. 26–27):
-
-| Caso | Che cosa mostra |
-|---|---|
-| da **3 a 2 dimensioni** (p. 26) | nello spazio originale struttura e separabilità sono difficili da interpretare; la PCA proietta sulle **due combinazioni lineari più informative** delle feature, **senza usare le etichette** |
-| da **10 a 2 dimensioni** (p. 27) | in 10 dimensioni si possono usare solo **tabelle** o **sotto-proiezioni**; i dati contengono **4 cluster rumorosi sovrapposti**, e dopo la PCA le **etichette servono solo per colorare** il grafico |
-
-> 💡 **NSL-KDD (nota didattica).** È un dataset classico di **rilevamento delle intrusioni** di rete: ogni connessione è descritta da 41 feature (durata, protocollo, servizio, byte scambiati, numero di errori, …) e marcata come normale o come un tipo di attacco. È un esempio tipico di dati in cui la PCA serve a **guardare** una struttura che a occhio nudo è invisibile.
-
-<!-- SOURCE_VISUAL id="IS18-V11" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="26" type="grafico" description="PCA da 3 a 2 dimensioni senza etichette" reason="Grafici prima e dopo visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS18-26-V09" source="L18-web.pdf" page="45" type="grafico" description="Proiezione PCA delle cifre sintetiche colorata per etichetta" reason="Mappa bidimensionale delle osservazioni" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS18-V12" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="27" type="grafico" description="PCA da 10 a 2 dimensioni con quattro cluster rumorosi sovrapposti" reason="Proiezione visibile solo nel grafico" -->
+### **3. LDA, t-SNE, ICA e mappe di visualizzazione**
+
+#### **3.1. LDA**
+
+L’**Analisi Discriminante Lineare (LDA)** usa le etichette per trovare combinazioni lineari che separino le classi. Può ridurre le dimensioni prima di un altro classificatore oppure fungere da classificatore lineare. Il numero di componenti è al massimo $\min(d,C-1)$, dove $C$ è il numero di classi: dieci cifre e 64 pixel consentono al più nove direzioni discriminanti. Il criterio di Fisher confronta la dispersione fra le classi con quella interna alle classi. Nell’esempio di quattro stati cellulari, PCA privilegia un effetto comune di dimensione cellulare; LDA utilizza le etichette e ottiene, con 5-NN, 98% contro il 79% della proiezione PCA a due dimensioni.
+
+#### **3.2. t-SNE e metodi per visualizzare**
+
+La **t-SNE** (*t-distributed Stochastic Neighbor Embedding*) è una mappa non lineare che mira a conservare le relazioni fra vicini. È adatta all’esplorazione in due o tre dimensioni. Le distanze fra gruppi e le loro dimensioni nel disegno non sono interpretabili come distanze globali nello spazio originale; inoltre, la procedura standard non offre una trasformazione per collocare nuovi campioni. La mappa serve a osservare i dati, non a certificare accuratezza o generalizzazione.
+
+Su 1.797 cifre reali da $8\times8$, la t-SNE produce gruppi visivamente più separati della PCA. La divergenza di Kullback–Leibler confronta le probabilità di vicinanza nello spazio originale e nella mappa; in un’esecuzione il valore finale è 0,71. Questo numero misura la discrepanza dell’obiettivo di embedding, non la qualità di un classificatore.
+
+Cinque tecniche applicate ai dati con scopi diversi:
+
+| Metodo | Relazione ottimizzata | Uso tipico |
+|---|---|---|
+| **PCA** | Assi lineari che trattengono la varianza | Compressione e proiezione di nuovi dati |
+| **t-SNE** | Probabilità dei vicinati locali | Visualizzazione esplorativa |
+| **UMAP** | Grafo fuzzy dei vicini | Visualizzazione della struttura locale |
+| **PaCMAP** | Coppie vicine, intermedie e lontane | Bilanciare struttura locale e più ampia |
+| **TriMAP** | Vincoli relativi fra triplette | Esplorare relazioni più globali |
+
+UMAP, PaCMAP e TriMAP, come t-SNE, sono spesso impiegate per visualizzare. Il loro risultato dipende da obiettivo, parametri e inizializzazione; assi e coordinate non sono confrontabili tra metodi. Si possono applicare a Iris (150 campioni, 4 misure), Wine (178 campioni, 13 misure) e MNIST. Nelle proiezioni non supervisionate le etichette servono a colorare i punti, non a stimare la mappa. Una maggiore separazione visiva non dimostra che un classificatore funzionerà meglio.
+
+<!-- SOURCE_VISUAL id="IS18-26-V10" source="L18-web.pdf" page="48" type="grafico" description="Proiezione LDA guidata dalle classi e confronto con PCA" reason="Il confronto geometrico mostra direzioni di separazione" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **2.3. L’algoritmo**
-
-_(slide pp. 28–29)_
-
-> 📌 **PCA con la matrice di covarianza campionaria** (p. 28, formule in forma standard). Dati $\{\mathbf{x}_1, \dots, \mathbf{x}_m\}$:
-> $$\bar{\mathbf{x}} = \frac{1}{m} \sum_{i=1}^{m} \mathbf{x}_i \qquad \Sigma = \frac{1}{m} \sum_{i=1}^{m} (\mathbf{x}_i - \bar{\mathbf{x}})(\mathbf{x}_i - \bar{\mathbf{x}})^{\top}$$
-> - i **vettori della base PCA** sono gli **autovettori** di $\Sigma$;
-> - un **autovalore più grande** indica un autovettore **più importante**;
-> - in pseudocodice: `x_reduced = PCA(x, k)`, per esempio con $k = 3$.
-
-**I passi** (p. 29), con $X$ matrice $N \times m$ in cui ogni punto $\mathbf{x}_i$ è un **vettore colonna**:
-
-1. **sottrarre la media** $\bar{\mathbf{x}}$ da ogni vettore colonna di $X$;
-2. calcolare la **matrice di covarianza** $\Sigma \propto X X^{\top}$;
-3. calcolare **autovalori e autovettori** $\{\lambda_i, \mathbf{u}_i\}$ di $\Sigma$, ordinati con $\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_N$;
-4. restituire le prime $k$ coppie $\{\lambda_i, \mathbf{u}_i\}_{i=1..k}$: le **$k$ componenti principali**.
-
-> 💡 **Proiezione e varianza spiegata (nota didattica).** Con $U_k = [\mathbf{u}_1, \dots, \mathbf{u}_k]$, un punto si riduce e si ricostruisce così:
-> $$\mathbf{z} = U_k^{\top} (\mathbf{x} - \bar{\mathbf{x}}) \in \mathbb{R}^k \qquad \hat{\mathbf{x}} = \bar{\mathbf{x}} + U_k\, \mathbf{z}$$
-> L’autovalore $\lambda_i$ è la varianza dei dati lungo $\mathbf{u}_i$, quindi la frazione di varianza conservata dalle prime $k$ componenti è
-> $$\frac{\lambda_1 + \dots + \lambda_k}{\lambda_1 + \dots + \lambda_N}$$
-> Esempio: con autovalori $(4;\ 1;\ 0{,}5;\ 0{,}5)$ le prime due componenti conservano $5/6 \approx 83\%$ della varianza. Si sceglie spesso $k$ come il più piccolo valore che supera una soglia, per esempio il 90% o il 95%.
-
-> ⚠️ **Scale diverse (nota didattica).** La PCA cerca la varianza massima: una feature in euro con varianza $10^6$ dominerà una feature in metri con varianza 1, anche se è meno informativa. Prima della PCA le feature vanno di solito **standardizzate** con lo z-score, calcolando media e deviazione standard **sul solo training set** (Lezione 14, §4.3).
-
----
-
-### **3. Altre tecniche di estrazione: LDA, t-SNE, ICA**
-
-_(slide pp. 30–34)_
-
-#### **3.1. Analisi discriminante lineare**
-
-> 📌 **LDA** (p. 31). Trova una **combinazione lineare** delle feature che **caratterizza o separa le classi**. La combinazione ottenuta si può usare come **classificatore lineare** oppure per **ridurre la dimensionalità** prima di un classificatore. La slide confronta una **rotazione sbagliata**, in cui le classi proiettate si **sovrappongono**, con la **rotazione migliore**, in cui sono separate.
-
-La slide rimanda alla «Lezione 14» per il codice del classificatore LDA di Fisher; in questa edizione del corso il codice è presentato nelle Lezioni 16 (§7.3) e 17 (§4.3), con il criterio di Fisher.
-
-> ⚠️ **PCA e LDA non sono intercambiabili (nota didattica).** La PCA cerca la direzione di **massima varianza** senza guardare le classi; la LDA quella di **massima separazione** tra le classi. Se le classi differiscono lungo una direzione di varianza piccola, la PCA può scartarla proprio perché «poco varia», mentre la LDA la sceglie. In compenso la LDA richiede le etichette, e con $C$ classi produce al massimo $C - 1$ dimensioni.
-
-<!-- SOURCE_VISUAL id="IS18-V13" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="31" type="grafico" description="LDA: rotazione sbagliata con classi sovrapposte contro rotazione migliore" reason="Proiezioni visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS18-26-V11" source="L18-web.pdf" page="56" type="tabella" description="Confronto tra PCA, t-SNE, UMAP, PaCMAP e TriMAP" reason="Tabella comparativa dei meccanismi e degli usi" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **3.2. t-SNE**
+#### **3.3. ICA e sorgenti indipendenti**
 
-> 📌 **t-Distributed Stochastic Neighbor Embedding** (p. 32). Una tecnica **non lineare** di riduzione della dimensionalità, particolarmente adatta alla **visualizzazione** e all’elaborazione di dataset **ad alta dimensionalità**. Qui il metodo di embedding si usa per l’**estrazione** delle feature, non per la selezione. In pseudocodice: `x_reduced = tSNE(x, k)` con $k$ **al massimo 2 o 3**.
+L’**Analisi delle Componenti Indipendenti (ICA)** cerca di ricostruire sorgenti statisticamente indipendenti a partire da osservazioni che ne sono miscele. Se $\mathbf{x}=A\mathbf{s}$, con $\mathbf{s}$ sorgenti e $A$ matrice di miscelazione, l’ICA stima componenti che separino le sorgenti sotto ipotesi quali indipendenza, non gaussianità e miscelazione lineare. Un’applicazione intuitiva è separare voci registrate da più microfoni; in un esempio con due voci e rumore, una componente può essere riconosciuta come rumore e scartata.
 
-**Esempio su MNIST** (p. 32): **60 000** immagini di training, $28 \times 28 = 784$ feature, 10 classi (le cifre da 0 a 9). Rispetto alla PCA, la t-SNE mostra una **separazione migliore** delle classi.
+### **4. Embedding come feature apprese**
 
-> ⚠️ **Come leggere un grafico t-SNE (nota didattica).**
-> - La t-SNE conserva soprattutto i **vicinati locali**: punti vicini nello spazio originale restano vicini, ma le **distanze tra cluster** e le **dimensioni** dei cluster nel grafico **non hanno un significato** affidabile.
-> - Il risultato dipende da parametri come la **perplessità** e dal **seme casuale**: esecuzioni diverse danno disegni diversi.
-> - Non fornisce una funzione per proiettare **nuovi punti**, a differenza della PCA: serve per **esplorare**, raramente come passo di una pipeline di produzione.
+Un **embedding** è un vettore prodotto da un estrattore appreso: $z=f_\theta(x)\in\mathbb{R}^d$. Contenuti simili dovrebbero avere rappresentazioni vicine secondo una metrica scelta. Un embedding può essere visualizzato con PCA o t-SNE oppure passato a un classificatore leggero. La mappa bidimensionale è uno strumento di osservazione; le decisioni si basano sul vettore completo o su un modello validato.
 
-<!-- SOURCE_VISUAL id="IS18-V14" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="32" type="grafico" description="PCA contro t-SNE sul dataset MNIST: separazione migliore delle classi" reason="Nuvole colorate visibili solo nel grafico" -->
+La similarità coseno fra due vettori è $\cos(z_a,z_b)=\frac{z_a\cdot z_b}{\|z_a\|\|z_b\|}$; la distanza coseno è $1-\cos(z_a,z_b)$. Il confronto riguarda la direzione dei vettori. Per esempio, $(1,2)$ e $(2,1)$ hanno coseno $4/5=0{,}8$. Le singole coordinate di un embedding generalmente non hanno interpretazione semantica autonoma.
+
+Il PDF descrive EmbeddingGemma 2 come codificatore multimodale da circa 740 milioni di parametri, con vettori da 768 dimensioni; la verifica delle modalità, dimensioni e provenienza è riportata nella figura con i metadati del progetto. Il flusso illustrato converte immagini MNIST in vettori, poi confronta cinque proiezioni 2D. Il contenuto si aggiorna rapidamente: dimensioni e modalità vanno lette come snapshot del materiale, non come specifica permanente del prodotto.
+
+#### **4.1. Aggiornamento dei modelli decisionali (20 novembre 2026)**
+
+La rassegna del materiale fotografa prodotti e versioni di fine ottobre 2026. Alcuni riferimenti sono già superati: OpenAI ha portato la Decisions API in disponibilità generale il 22 ottobre e indica `gpt-6-luna` come modello supportato; Perplexity ha annunciato la famiglia `pplx-decider` 1.3 il 12 novembre; Cloudflare ha aggiunto Clef-omni con input audio e video il 9 ottobre. TypeSafe ha pubblicato Jev 1.14 il 14 ottobre. Microsoft documenta Microsoft-Decision-1 nel catalogo Foundry, mentre AWS descrive Strands Decider 2B come modello sperimentale open source. I numeri di latenza, prezzo e benchmark della tabella restano quelli dichiarati nelle fonti e nelle condizioni dell’istantanea, non risultati direttamente comparabili. ([OpenAI](https://developers.openai.com/api/docs/guides/decisions), [Perplexity](https://community.perplexity.ai/c/announcements/9), [Cloudflare](https://developers.cloudflare.com/changelog/post/2026-10-09-clef-omni-workers-ai/), [TypeSafe](https://typesafe.ai/blog/jev-1-14), [Microsoft](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision), [AWS](https://aws.amazon.com/blogs/machine-learning/cut-generative-ai-costs-code-for-rules-models-for-judgment/))
+
+<!-- SOURCE_VISUAL id="IS18-26-V12" source="L18-web.pdf" page="63" type="diagramma" description="Codificatore multimodale EmbeddingGemma 2 e vettore da 768 componenti" reason="Schema delle modalità di input e della rappresentazione appresa" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **3.3. Analisi delle componenti indipendenti**
+### **5. Modelli System 1 e decisioni veloci**
 
-> 📌 **ICA** (*Independent Component Analysis*, pp. 33–34). Usata spesso nell’**elaborazione dei segnali** e nelle **applicazioni industriali**. Esempi della slide:
-> - **3 persone che parlano** registrate da **4 microfoni**;
-> - **2 persone + rumore** forte registrate da **3 microfoni**: dai 3 segnali, provenienti da 2 sorgenti indipendenti più rumore, l’ICA ricava 3 segnali trasformati, e **il terzo si può scartare**.
+#### **5.1. Rappresentazione, costo e confini del compito**
 
-> 💡 **Il problema del «cocktail party» (nota didattica).** Ogni microfono registra una **miscela lineare** delle sorgenti:
-> $$\mathbf{x} = A\,\mathbf{s}$$
-> dove $\mathbf{s}$ sono le sorgenti (le voci), $A$ la matrice di miscelazione (che dipende dalle posizioni) e $\mathbf{x}$ i segnali registrati. L’ICA stima una matrice $W \approx A^{-1}$ tale che le componenti di $\mathbf{y} = W\mathbf{x}$ siano **statisticamente indipendenti**. La PCA cercherebbe invece componenti **scorrelate** e di varianza massima, che in generale **non** coincidono con le voci separate. In ambito industriale lo stesso schema separa, per esempio, le vibrazioni di due macchine vicine misurate da più accelerometri.
+La seconda parte introduce modelli progettati per decisioni brevi, frequenti e con risposte vincolate. L’idea è investire calcolo nella progettazione e usare poi una valutazione rapida per ogni nuovo caso: un classificatore o encoder produce una rappresentazione riutilizzabile, mentre il compito operativo specifica le opzioni e la soglia d’azione.
 
-<!-- SOURCE_VISUAL id="IS18-V15" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="33" type="schema" description="ICA: tre persone e quattro microfoni, due persone più rumore e tre microfoni" reason="Schema delle sorgenti e dei microfoni" -->
+La distinzione fra una fase di progettazione lenta e una fase d’uso rapida si applica anche a filtri, PCA, reti addestrate e ricerca wrapper. Filtri e PCA richiedono un costo di stima iniziale, poi elaborano campioni nuovi; t-SNE standard ricostruisce la mappa e non colloca direttamente nuovi punti; SFS comporta fino a $d(d+1)/2$ addestramenti per fold. La scelta va valutata su costo iniziale, costo per campione e possibilità di elaborare nuovi dati.
+
+Gli errori di ragionamento descritti da Kahneman hanno analoghi nella progettazione: una selezione può nascondere feature scartate ma utili congiuntamente; correlazione o varianza possono sostituire impropriamente la metrica del compito; scala e inizializzazione possono ancorare la visualizzazione; una probabilità del modello può essere scambiata per certezza. Cross-validation annidata, dati tenuti da parte, confronti fra più inizializzazioni e calibrazione aiutano a controllare questi effetti.
+
+#### **5.2. Domande tipizzate: Choice, Score e Noul**
+
+Un modello di decisione tipizzata riceve uno stato (testo, JSON o immagine) e una o più domande strutturate. Può valutare più quesiti sul medesimo stato e restituire risposte tipizzate; il codice applicativo usa gli output per instradare o autorizzare azioni. I tre primitivi descritti sono:
+
+| Primitivo | Output | Esempio di lettura |
+|---|---|---|
+| **Choice** | Distribuzione sulle opzioni finite | Selezionare la categoria con probabilità maggiore |
+| **Score** | Distribuzione su livelli ordinali | Calcolare un punteggio atteso, per esempio 3,8 su 5 |
+| **Noul** | Probabilità che una proposizione sì/no sia vera | Valutare se un pacco è danneggiato |
+
+Per Choice, i punteggi delle opzioni vengono normalizzati con softmax: $p_c=\frac{e^{z_c}}{\sum_{j=1}^K e^{z_j}}$. Se $z=(2,0{,}5,-1)$, si ottiene circa $(0{,}79,0{,}17,0{,}04)$. Per Score, una distribuzione sui livelli consente di calcolare il valore atteso. Per Noul, l’uscita è $p=P(q\text{ vera}\mid x)$; la confidenza nella risposta selezionata è $\max(p,1-p)$.
+
+Una soglia centrale può inviare i casi incerti a una persona o a un sistema più lento: per esempio si agisce sopra 0,9 o sotto 0,1, e si inoltra il resto. Le soglie sono scelte di policy, determinate dai costi di falsi positivi e falsi negativi; la probabilità deve essere calibrata sul dominio d’uso. Un output formalmente valido può comunque essere falso: validità del formato, correttezza e calibrazione sono proprietà distinte.
+
+<!-- SOURCE_VISUAL id="IS18-26-V13" source="L18-web.pdf" page="77" type="diagramma" description="Flusso di stato, domande tipizzate, risposte e decisione nel codice" reason="Schema del flusso operativo" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS18-V16" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="34" type="grafico" description="Tre segnali da due sorgenti indipendenti più rumore, con il terzo segnale trasformato da scartare" reason="Forme d’onda visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS18-26-V14" source="L18-web.pdf" page="79" type="tabella" description="Primitivi Choice, Score e Noul con output probabilistici" reason="Esempi di output e interpretazione" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
----
+#### **5.3. Calibrazione, soglie e cascata**
 
-### **4. Laboratorio: riduzione della dimensionalità in Colab**
+La calibrazione chiede se, fra le previsioni con confidenza 90%, circa il 90% sia corretto. L’errore di calibrazione attesa si calcola dividendo le previsioni in $B$ intervalli e aggregando gli scarti fra accuratezza e confidenza media: $\mathrm{ECE}=\sum_{b=1}^{B}\frac{n_b}{N}|\mathrm{acc}_b-\mathrm{conf}_b|$. Su 540 cifre di test, l’esperimento riportato passa da accuratezza 98% ed ECE 0,008 in distribuzione a 40% ed ECE 0,466 dopo uno spostamento delle immagini e l’aggiunta di rumore. La confidenza può quindi restare alta quando l’input cambia distribuzione.
 
-_(slide pp. 35–49)_
+Una cascata usa il sistema rapido per proporre una risposta e inoltra i casi con rischio atteso elevato a un controllo più lento. Se $C_{err}$ è il costo di un errore e $C_2$ il costo del controllo, si inoltra quando $(1-p_{sel})C_{err}>C_2$. Con $C_{err}=100$ e $C_2=5$, la soglia è 0,95. Le stime di tempo e costo riportate per prodotti specifici sono snapshot vendor o benchmark; hardware, rete e prompt differiscono, quindi i valori non costituiscono confronti universali.
 
-#### **4.1. Il dataset delle cifre**
+Le applicazioni adatte comprendono instradamento di richieste, controlli di accesso agli strumenti, ranking, ispezione visiva e classificazione di avvisi di filiera. Limiti frequenti sono l’assenza di spiegazioni, debolezza nell’aritmetica e nel conteggio, vulnerabilità agli input manipolativi e calo fuori distribuzione. Prima del rilascio occorrono esempi etichettati del contesto reale, esecuzione in modalità ombra, misure di latenza nella rete effettiva e verifica indipendente della calibrazione.
 
-Il laboratorio (p. 35) usa **codice Python in Colab** per estrazione e selezione delle feature, con il dataset **`sklearn.datasets.load_digits`** (p. 36): ogni esempio è un’**immagine 8 × 8** di una cifra scritta a mano, con **1797 campioni**, molti meno di MNIST.
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.datasets import load_digits
-
-digits = load_digits()
-print(digits.data.shape)       # (1797, 64)
-print(digits.data[0].shape)    # (64,)
-print(digits.data[0])          # 64 livelli di grigio tra 0 e 16
-print(digits.target[0])        # 0
-
-plt.gray()
-plt.matshow(digits.images[0])
-plt.show()
-```
-
-`shape` è una **tupla** che indica il numero di dimensioni dell’array (p. 37): 1797 campioni con **64 feature**, i pixel dell’immagine 8 × 8 **srotolati** in un vettore. Il primo campione è uno **0**.
-
-Si disegnano poi **due sole feature** per vedere la loro correlazione:
-
-```python
-plt.scatter(digits.data[:, 1], digits.data[:, 2],
-            c=digits.target, edgecolor='none', alpha=0.5,
-            cmap=plt.cm.get_cmap('jet', 10))
-plt.xlabel('Feature 1')
-plt.ylabel('Feature 2')
-plt.colorbar();
-```
-
-> 📌 **L’effetto della quantizzazione** (p. 39). I pixel hanno solo **17 livelli di grigio** (da 0 a 16): nello scatter plot di due feature i punti cadono su una **griglia** e si **sovrappongono**, e non si vedono **cluster**.
-
-<!-- SOURCE_VISUAL id="IS18-V17" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="38" type="schermata" description="Caricamento del dataset delle cifre e visualizzazione di un’immagine 8x8" reason="Pagina senza testo estraibile" -->
+<!-- SOURCE_VISUAL id="IS18-26-V15" source="L18-web.pdf" page="84" type="grafico" description="Diagramma di affidabilità e cambiamento della calibrazione dopo data shift" reason="Curva di calibrazione e valori sperimentali" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS18-V18" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="39" type="grafico" description="Scatter di due pixel: effetto della quantizzazione a 17 livelli e nessun cluster" reason="Griglia di punti visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS18-26-V16" source="L18-web.pdf" page="85" type="diagramma" description="Cascata tra decisione rapida e controllo lento con soglia di rischio" reason="Flusso di escalation basato sul costo atteso" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-#### **4.2. PCA e t-SNE**
+### **6. Riepilogo**
 
-_(slide pp. 40–44)_
+La selezione mantiene feature originali: filtri classificano le variabili con statistiche, wrapper confrontano sottoinsiemi rispetto a un modello ed embedded selezionano durante l’addestramento. SFS e SBS effettuano una ricerca greedy; RFE elimina ricorsivamente le feature meno utili secondo un modello. La PCA proietta senza etichette sugli assi ortogonali che massimizzano la varianza; LDA utilizza le classi e produce al più $C-1$ dimensioni; ICA cerca sorgenti indipendenti. t-SNE, UMAP, PaCMAP e TriMAP offrono mappe esplorative con obiettivi diversi, le cui geometrie non sono direttamente confrontabili. Gli embedding appresi diventano feature per ispezione o classificazione. Nelle decisioni tipizzate, soglie, controllo a cascata e calibrazione collegano le probabilità alle conseguenze operative.
 
-**Riduzione con la PCA** (pp. 37, 40–41), estrazione delle feature da 64 a 2 dimensioni:
+### **7. Procedura PCA**
 
-```python
-from sklearn.decomposition import PCA
+Per $X\in\mathbb{R}^{N\times d}$, con campioni in riga: (1) sottrarre a ogni riga la media $\bar{x}$; (2) calcolare $C=\frac{1}{N-1}X_c^\top X_c$; (3) ordinare gli autovalori $\lambda_1\ge\dots\ge\lambda_d$ e i relativi autovettori; (4) formare $W=[u_1,\dots,u_k]$; (5) proiettare $Z=X_cW$. Ogni colonna di $W$ ha norma unitaria e il proprio autovalore misura la varianza della componente. PC1 massimizza la varianza fra le direzioni unitarie; PC2 massimizza quella residua restando ortogonale a PC1.
 
-pca = PCA(2)                                  # project from 64 to 2 dimensions
-projected = pca.fit_transform(digits.data)
-print(digits.data.shape)                      # (1797, 64)
-print(projected.shape)                        # (1797, 2)
-
-# PCA is unsupervised --> no labels are used! (le etichette servono solo per il colore)
-plt.scatter(projected[:, 0], projected[:, 1],
-            c=digits.target, edgecolor='none', alpha=0.5,
-            cmap=plt.cm.get_cmap('jet', 10))
-plt.xlabel('component 1')
-plt.ylabel('component 2')
-plt.colorbar();
-```
-
-**Riduzione con la t-SNE** (pp. 42–44):
-
-```python
-from sklearn.manifold import TSNE
-
-tsne = TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)
-tsne_results = tsne.fit_transform(digits.data)   # no y labels
-
-plt.scatter(tsne_results[:,0], tsne_results[:,1],
-            c=digits.target, edgecolor='none', alpha=0.5,
-            cmap=plt.cm.get_cmap('jet', 10))
-plt.xlabel('tsne-2d-one')
-plt.ylabel('tsne-2d-one')
-plt.colorbar();
-```
-
-L’output salvato riporta, tra l’altro, i **121 vicini più prossimi** calcolati per i 1797 campioni, e una **divergenza KL** di 61,49 dopo 250 iterazioni con *early exaggeration* e di **0,96** dopo 300 iterazioni.
-
-| Metodo | Risultato (slide) |
-|---|---|
-| **PCA** (pp. 40–41) | le 10 cifre formano gruppi **parzialmente sovrapposti** |
-| **t-SNE** (pp. 43–44) | «per 1797 campioni **non è male**»; **buon risultato**: le cifre formano gruppi ben distinti, con lo stesso tipo di grafico della PCA |
-
-> 💡 **Perché la t-SNE separa meglio (nota didattica).** La PCA può solo **ruotare e proiettare** linearmente: se le cifre stanno su superfici curve nello spazio a 64 dimensioni, una proiezione piana le sovrappone. La t-SNE costruisce invece una mappa **non lineare** che cerca di mantenere vicini i punti che erano vicini, e minimizza la divergenza KL tra le distribuzioni dei vicinati nei due spazi: è il valore 0,96 stampato dal notebook.
-
-> ⚠️ **API cambiate (nota didattica).** Nelle versioni recenti di scikit-learn il parametro `n_iter` di `TSNE` si chiama `max_iter`, e in matplotlib `plt.cm.get_cmap` è stato sostituito da `plt.get_cmap` o `matplotlib.colormaps`. Nel grafico t-SNE entrambi gli assi sono etichettati «tsne-2d-one»: il secondo dovrebbe essere «tsne-2d-two».
-
-<!-- SOURCE_VISUAL id="IS18-V19" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="40" type="grafico" description="Proiezione PCA delle cifre sulle prime due componenti" reason="Pagina senza testo estraibile" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS18-V20" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="41" type="grafico" description="Proiezione PCA delle cifre colorata per classe" reason="Pagina senza testo estraibile" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS18-V21" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="43" type="grafico" description="Proiezione t-SNE delle 1797 cifre" reason="Nuvole di punti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS18-V22" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="44" type="grafico" description="Confronto PCA e t-SNE sulle cifre" reason="Grafici a confronto visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-#### **4.3. Selezione con l’eliminazione ricorsiva delle feature**
-
-_(slide pp. 45–49)_
-
-**Selezione delle feature con la Recursive Feature Elimination** (RFE, p. 45), con un **wrapper SVM** (si può provare anche con k-NN, LDA, reti neurali, …). La domanda: **quale pixel è più significativo per riconoscere la classe?**
-
-```python
-from sklearn.svm import SVC
-from sklearn.feature_selection import RFE
-
-X = digits.images.reshape((len(digits.images), -1))   # immagini srotolate in 64 valori (0-16)
-y = digits.target
-
-# Create the RFE object and rank each pixel
-svc = SVC(kernel="linear", C=1)
-rfe = RFE(estimator=svc, n_features_to_select=1, step=1)
-rfe.fit(X, y)
-ranking = rfe.ranking_.reshape(digits.images[0].shape)   # di nuovo come immagine 8x8
-
-print("ranking of the pixel w.r.t the classification capability")
-print(ranking)
-
-plt.matshow(ranking, cmap=plt.cm.Blues)
-plt.colorbar()
-plt.title("Ranking of pixels with RFE")
-plt.show()
-```
-
-Le pp. 46–47 mostrano l’immagine **srotolata** di una cifra (livelli di grigio 0–16), la **classifica** delle feature con RFE, la definizione del **classificatore wrapper** (SVM) e il **reshape** dei risultati nella forma delle immagini delle cifre.
-
-La classifica salvata nel notebook (1 = pixel più importante, 64 = meno importante):
-
-$$\text{ranking} = \begin{bmatrix}
-64 & 50 & 31 & 23 & 10 & 17 & 34 & 51 \\
-57 & 37 & 30 & 43 & 14 & 32 & 44 & 52 \\
-54 & 41 & 19 & 15 & 28 & 8 & 39 & 53 \\
-55 & 45 & 9 & 18 & 20 & 38 & 1 & 59 \\
-63 & 42 & 25 & 35 & 29 & 16 & 2 & 62 \\
-61 & 40 & 5 & 11 & 13 & 6 & 4 & 58 \\
-56 & 47 & 26 & 36 & 24 & 3 & 22 & 48 \\
-60 & 49 & 7 & 27 & 33 & 21 & 12 & 46
-\end{bmatrix}$$
-
-> 📌 **Pixel più e meno importanti** (pp. 48–49). Poiché il wrapper è una SVM che **classifica la cifra**, la classifica dice quali pixel servono di più a **distinguere le cifre**: il pixel con **rank = 1** è il più importante, i pixel con rank alto sono i meno importanti.
-
-> 💡 **Leggere la matrice (nota didattica).** I pixel più importanti (1, 2, 3, 4) stanno nella parte **centrale-destra** dell’immagine, dove le diverse cifre differiscono di più. I meno importanti (64, 63, 62, 61, …) stanno sulle **colonne esterne**, soprattutto gli **angoli**: in quasi tutte le cifre quei pixel sono sempre 0, quindi non portano informazione. Con `n_features_to_select=1` e `step=1` la RFE addestra la SVM **63 volte**, eliminando a ogni giro il pixel con il peso minore: è una **eliminazione all’indietro** (§1.3) guidata dai pesi del modello.
-
-> ⚠️ **Tutto il dataset.** Come negli esempi di laboratorio precedenti, la RFE è eseguita su **tutti** i 1797 campioni: per usare la classifica in un modello da valutare, la selezione andrebbe ripetuta **dentro** ogni fold di cross-validation, altrimenti la stima finale è ottimistica.
-
-<!-- SOURCE_VISUAL id="IS18-V23" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="46" type="schermata" description="Immagine srotolata di una cifra e classifica delle feature con RFE" reason="Schermata del codice e dell’output" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS18-V24" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="48" type="immagine" description="Mappa della classifica dei pixel: più importanti e meno importanti per la classificazione" reason="Mappa di colore visibile solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS18-V25" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="49" type="immagine" description="Pixel con rank 1 e pixel meno importanti nell’immagine 8x8" reason="Mappa di colore visibile solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
----
-
-### **5. Distinzioni da non confondere**
-
-| Coppia | Differenza chiave |
-|---|---|
-| **Selezione** / **estrazione** | sottoinsieme delle feature originali, interpretabili / feature nuove come combinazioni delle originali |
-| **Filtro** / **wrapper** / **embedded** | rilevanza con test statistici, robusto ma può mancare le feature utili / utilità con modello e CV, potente ma in overfitting / selezione durante l’addestramento, meno costosa |
-| **SFS** / **SBS** | parte da nessuna feature e aggiunge / parte da tutte e toglie |
-| **SFS** / **ricerca esaustiva** | $n(n+1)/2$ configurazioni, greedy / $2^n - 1$ configurazioni |
-| **Wrapper in avanti** / **embedded in avanti** | confronta a ogni passo tutte le feature rimaste / segue l’ordine dato dal modello |
-| **Massima varianza** / **minimo errore di ricostruzione** | due formulazioni equivalenti della PCA |
-| **Autovettore** / **autovalore** | direzione della componente / varianza lungo quella direzione |
-| **PCA** / **LDA** | non supervisionata, massima varianza / supervisionata, massima separazione, al più $C - 1$ dimensioni |
-| **PCA** / **t-SNE** | lineare, proietta nuovi punti, distanze globali leggibili / non lineare, vicinati locali, solo esplorazione in 2-3D |
-| **PCA** / **ICA** | componenti scorrelate a varianza massima / componenti statisticamente indipendenti (separazione delle sorgenti) |
-| **PCA** / **clustering** | proietta i dati / raggruppa i dati; la PCA si usa dopo per visualizzare |
-| **Rank 1** / **rank 64** in RFE | pixel più utile per distinguere le cifre / pixel quasi sempre nullo, ai bordi |
-
----
-
-### **6. Sintesi della lezione**
-
-_(slide p. 50)_
-
-> ✅ **Punti principali** (p. 50).
-> - **Feature engineering, parte 2: riduzione della dimensionalità**, ultimo passo della pipeline prima del modello.
-> - **Selezione delle feature**: metodi **filtro** (test statistici, varianza, correlazione), **wrapper** (modello più cross-validation, rischio di overfitting), **embedded** (selezione durante l’addestramento, pesi che tendono a zero); ricerca in avanti (SFS) e all’indietro (SBS).
-> - **Estrazione delle feature**:
->   - **PCA**: non supervisionata, lineare, autovettori della matrice di covarianza, varianza spiegata dagli autovalori;
->   - **LDA**: supervisionata, massima separazione delle classi;
->   - **t-SNE**: non lineare, per visualizzare in 2-3 dimensioni;
->   - **ICA**: separazione di sorgenti indipendenti.
-> - **Codice** della riduzione della dimensionalità in Python-Colab: PCA e t-SNE sulle cifre scritte a mano, classifica dei pixel con RFE e SVM.

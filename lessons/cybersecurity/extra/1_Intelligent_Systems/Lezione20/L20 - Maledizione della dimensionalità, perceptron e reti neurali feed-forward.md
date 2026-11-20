@@ -1,12 +1,12 @@
 ## **Lezione 20: Maledizione della dimensionalità, perceptron e reti neurali feed-forward**
 
-La ventesima lezione del corso **IS4** comincia con un avvertimento: **aggiungere feature non è sempre utile**, perché al crescere delle dimensioni lo spazio diventa quasi vuoto e i dati necessari crescono in modo esponenziale (la **maledizione della dimensionalità**). Poi entra nelle **reti neurali**: dal neurone biologico al neurone artificiale, dal **perceptron** di Rosenblatt con la sua regola di apprendimento, fino alle **reti multistrato** addestrate con la **backpropagation** e ai suoi problemi, il **gradiente che svanisce** o **esplode**. Un allegato non d’esame svolge a mano un passo di backpropagation sulla rete che risolve lo **XOR**.
+L’aumento delle feature può peggiorare le prestazioni perché i dati diventano radi nello spazio ad alta dimensionalità. La trattazione passa dai neuroni biologici al neurone artificiale, al perceptron con la sua regola di apprendimento, alle reti multistrato addestrate con backpropagation e ai problemi dei gradienti che svaniscono o esplodono. L’appendice svolge a mano un passo di backpropagation sulla rete XOR.
 
-Fonte: [PDF della Lezione 20](Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf), 84 pagine, nessun supplemento. Molte slide sono di Ruggero Donida Labati e Fabio Scotti. Le formule che nelle slide sono rese in modo illeggibile dal testo estratto sono riportate in forma standard; i calcoli numerici dell’allegato sono stati ricontrollati. Le note didattiche aggiunte sono segnalate. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
+Fonte primaria: [PDF aggiornato L20-web.pdf](sources_2026-27/L20-web.pdf), 66 pagine principali e 10 di appendice. L’appendice comprende codice per il fit polinomiale e un esempio svolto di backpropagation.
 
 ### **0. Struttura della lezione**
 
-_(slide pp. 1–2)_
+__
 
 Titolo originale: *Curse of dimensionality, Neurons, Perceptrons, Feedforward neural networks and their Learning Methods*. L’indice (p. 2) elenca:
 
@@ -21,7 +21,7 @@ Titolo originale: *Curse of dimensionality, Neurons, Perceptrons, Feedforward ne
 
 ### **1. La maledizione della dimensionalità**
 
-_(slide pp. 3–13)_
+__
 
 #### **1.1. Aggiungere feature non è sempre una buona idea**
 
@@ -29,7 +29,7 @@ Ogni volta che si vuole aggiungere una nuova feature, conviene pensarci (p. 3).
 
 > 📌 **Feature irrilevanti** (p. 4). Aggiungere feature **irrilevanti o rumorose** aumenta la dimensionalità **senza aggiungere informazione utile**, e in certi casi può **disgregare un cluster denso**. Nell’esempio della slide due cluster sono **ben separati** nello spazio $x_1$–$x_2$; aggiungendo una feature **casuale** $x_3$, i punti si **disperdono**, le **distanze** tra campioni diventano meno significative e classificare o raggruppare diventa **più difficile**.
 
-<!-- SOURCE_VISUAL id="IS20-V01" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="4" type="grafico" description="Due cluster separati in x1-x2 che si disperdono aggiungendo una feature casuale x3" reason="Nuvole di punti visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V01" source="L20-web.pdf" page="4" type="grafico" description="Due cluster separati in x1-x2 che si disperdono aggiungendo una feature casuale x3" reason="Nuvole di punti visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 C’è anche un’altra ragione (p. 5): creare o aggiungere feature **può essere utile**, ma con **svantaggi rilevanti**.
@@ -47,10 +47,10 @@ Con **una feature** divisa in **3 bin** le classi si sovrappongono; si aggiunge 
 
 > 📌 **Il problema** (pp. 8–9). All’aumentare della dimensionalità, il **numero di bin** necessari a coprire lo spazio cresce **esponenzialmente**, e **non ci sono abbastanza dati** per popolarli. Trovare la classe prevalente in ogni bin, o le **probabilità condizionate** $p(x \mid C)$, diventa **molto difficile** in alta dimensionalità. Al crescere di $D$ la **quantità di dati necessaria cresce esponenzialmente** con $D$: si costruisce uno **spazio quasi vuoto**.
 
-<!-- SOURCE_VISUAL id="IS20-V02" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="7" type="grafico" description="Algoritmo dei bin con una feature divisa in 3 intervalli e classi sovrapposte" reason="Bin e punti visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V02" source="L20-web.pdf" page="7" type="grafico" description="Algoritmo dei bin con una feature divisa in 3 intervalli e classi sovrapposte" reason="Bin e punti visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V03" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="8" type="grafico" description="Bin in 1D, 2D e 3D con dati sempre più sparsi" reason="Griglie dei bin visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V03" source="L20-web.pdf" page="8" type="grafico" description="Bin in 1D, 2D e 3D con dati sempre più sparsi" reason="Griglie dei bin visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **I numeri** (p. 10). Con **10 bin per dimensione**:
@@ -68,7 +68,7 @@ Il numero stimato di **atomi nell’universo** è tra $10^{78}$ e $10^{82}$: con
 
 > 💡 **Quanti dati servirebbero (nota didattica).** Per avere in media anche solo **un campione per bin** servono $10^d$ campioni: 100 in 2D, un milione in 6D, $10^{10}$ in 10D. Un dataset industriale di 100 000 campioni con 10 feature lascia quindi vuoti 99 999 bin su 100 000. È per questo che nessun metodo può «riempire» lo spazio: deve **sfruttare una struttura** dei dati.
 
-<!-- SOURCE_VISUAL id="IS20-V04" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="10" type="schema" description="Numero di bin 10 alla d confrontato con il numero di atomi nell’universo" reason="Formule e figure rese come immagine" -->
+<!-- SOURCE_VISUAL id="IS20-V04" source="L20-web.pdf" page="10" type="schema" description="Numero di bin 10 alla d confrontato con il numero di atomi nell’universo" reason="Formule e figure rese come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **1.3. Come affrontarla**
@@ -91,14 +91,14 @@ Il numero stimato di **atomi nell’universo** è tra $10^{78}$ e $10^{82}$: con
 > $$\binom{d + p}{p}$$
 > termini, costante compresa. Con $d = 10$ e $p = 3$ sono $\binom{13}{3} = 286$ coefficienti; con $d = 100$ e $p = 3$ sono $\binom{103}{3} = 176\,851$. Espandere le feature per catturare non linearità fa crescere rapidamente i parametri, e con loro la fame di dati: è un altro volto della maledizione.
 
-<!-- SOURCE_VISUAL id="IS20-V05" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="12" type="grafico" description="Adattamento di polinomi di grado crescente ai dati" reason="Curve di adattamento visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V05" source="L20-web.pdf" page="12" type="grafico" description="Adattamento di polinomi di grado crescente ai dati" reason="Curve di adattamento visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **2. Dal neurone biologico al neurone artificiale**
 
-_(slide pp. 14–22)_
+__
 
 #### **2.1. Il cervello e i neuroni**
 
@@ -106,12 +106,12 @@ _(slide pp. 14–22)_
 
 > ⚠️ **Stime diverse (nota didattica).** Le stime più citate oggi indicano circa **86 miliardi** di neuroni e un numero di sinapsi dell’ordine di $10^{14}$–$10^{15}$; la Lezione 04, §3.1, parlava infatti di circa 100 000 miliardi di «parametri». Le cifre della slide, riprese da testi classici, sono più basse, ma il messaggio non cambia: un sistema di scala enorme che funziona con la potenza di una lampadina.
 
-<!-- SOURCE_VISUAL id="IS20-V06" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="16" type="immagine" description="Il cervello: miliardi di neuroni e sinapsi con soli 20 W di consumo" reason="Illustrazione della slide" -->
+<!-- SOURCE_VISUAL id="IS20-V06" source="L20-web.pdf" page="16" type="immagine" description="Il cervello: miliardi di neuroni e sinapsi con soli 20 W di consumo" reason="Illustrazione della slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Il neurone** (p. 17). Ogni neurone ha una **struttura molto semplice**, ma l’**insieme** di questi elementi ha una **potenza di elaborazione enorme**. Un neurone è formato da un **corpo cellulare** (soma), da un certo numero di fibre, i **dendriti**, e da una singola fibra lunga, l’**assone**.
 
-<!-- SOURCE_VISUAL id="IS20-V07" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="17" type="illustrazione" description="Struttura del neurone: soma, dendriti, assone e connessioni" reason="Illustrazione anatomica della slide" -->
+<!-- SOURCE_VISUAL id="IS20-V07" source="L20-web.pdf" page="15" type="illustrazione" description="Struttura del neurone: soma, dendriti, assone e connessioni" reason="Illustrazione anatomica della slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **2.2. L’analogia**
@@ -127,15 +127,15 @@ _(slide pp. 14–22)_
 
 Una rete artificiale (p. 20) ha uno **strato di ingresso** che riceve i **segnali di input**, uno o più **strati intermedi** e uno **strato di uscita** che produce i **segnali di output**.
 
-<!-- SOURCE_VISUAL id="IS20-V08" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="18" type="illustrazione" description="Somiglianza tra neurone biologico e neurone artificiale" reason="Pagina con sola illustrazione" -->
+<!-- SOURCE_VISUAL id="IS20-V08" source="L20-web.pdf" page="18" type="illustrazione" description="Somiglianza tra neurone biologico e neurone artificiale" reason="Pagina con sola illustrazione" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V09" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="20" type="diagramma" description="Rete neurale artificiale con strato di ingresso, intermedio e di uscita" reason="Struttura della rete visibile solo nel diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V09" source="L20-web.pdf" page="19" type="diagramma" description="Rete neurale artificiale con strato di ingresso, intermedio e di uscita" reason="Struttura della rete visibile solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **2.3. Caratteristiche delle reti neurali artificiali**
 
-_(slide pp. 21–22)_
+__
 
 | Caratteristica | Significato (slide) |
 |---|---|
@@ -152,7 +152,7 @@ _(slide pp. 21–22)_
 
 ### **3. Reti neurali artificiali: una panoramica**
 
-_(slide pp. 23–33)_
+__
 
 La p. 24 mostra **applicazioni tipiche** delle reti neurali.
 
@@ -163,42 +163,42 @@ La p. 24 mostra **applicazioni tipiche** delle reti neurali.
 
 > 📌 **Rete feed-forward** (p. 26). Una struttura **a strati** formata da un certo numero di elementi di elaborazione **omogenei** e **semplici**, ma **non lineari**. Tutta l’elaborazione è **locale** a un elemento di elaborazione ed è **asincrona**.
 
-<!-- SOURCE_VISUAL id="IS20-V10" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="24" type="immagini" description="Applicazioni tipiche delle reti neurali" reason="Pagina con sole immagini" -->
+<!-- SOURCE_VISUAL id="IS20-V10" source="L20-web.pdf" page="22" type="immagini" description="Applicazioni tipiche delle reti neurali" reason="Pagina con sole immagini" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 La p. 27 presenta le reti a **funzioni di base radiale** (RBF).
 
 > 💡 **RBF in una riga (nota didattica).** Invece del prodotto scalare pesato, i neuroni nascosti di una rete RBF rispondono in base alla **distanza** dell’input da un centro, per esempio con $\varphi(\mathbf{x}) = \exp\big(-\lVert \mathbf{x} - \mathbf{c} \rVert^2 / 2\sigma^2\big)$: ogni neurone è acceso solo vicino al suo centro. Per questo la Lezione 19, §2.2, le classifica tra i metodi neurali **basati su istanze**.
 
-<!-- SOURCE_VISUAL id="IS20-V11" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="27" type="diagramma" description="Rete neurale a funzioni di base radiale" reason="Pagina con solo diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V11" source="L20-web.pdf" page="24" type="diagramma" description="Rete neurale a funzioni di base radiale" reason="Pagina con solo diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Addestramento** (pp. 28–29). Durante l’addestramento la rete è **costretta ad aggiustare i suoi parametri** in modo che la **risposta** ai dati di ingresso diventi **più vicina alla risposta desiderata**.
 
-<!-- SOURCE_VISUAL id="IS20-V12" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="29" type="diagramma" description="Addestramento della rete: confronto tra uscita e risposta desiderata" reason="Pagina con solo diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V12" source="L20-web.pdf" page="25" type="diagramma" description="Addestramento della rete: confronto tra uscita e risposta desiderata" reason="Pagina con solo diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 Le pp. 30–33 introducono le **reti di deep learning**, il confronto tra **ML classico e deep learning** (il deep learning **ha bisogno di molti dati**) e le **reti convoluzionali**.
 
 > 💡 **Il grafico «dati contro prestazioni» (nota didattica).** Il confronto classico mostra che con **pochi dati** i metodi classici sono competitivi o migliori, mentre con **moltissimi dati** le prestazioni del deep learning continuano a salire quando quelle dei metodi classici si appiattiscono. È coerente con la maledizione della dimensionalità e con il conteggio dei parametri (Lezione 07): più parametri richiedono più dati.
 
-<!-- SOURCE_VISUAL id="IS20-V13" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="30" type="diagramma" description="Reti di deep learning" reason="Pagina con solo diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V13" source="L20-web.pdf" page="27" type="diagramma" description="Reti di deep learning" reason="Pagina con solo diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V14" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="31" type="schema" description="Machine learning classico contro deep learning" reason="Pagina con solo schema" -->
+<!-- SOURCE_VISUAL id="IS20-V14" source="L20-web.pdf" page="28" type="schema" description="Machine learning classico contro deep learning" reason="Pagina con solo schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V15" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="32" type="grafico" description="Prestazioni del ML classico e del deep learning in funzione della quantità di dati" reason="Curve visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V15" source="L20-web.pdf" page="28" type="grafico" description="Prestazioni del ML classico e del deep learning in funzione della quantità di dati" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V16" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="33" type="diagramma" description="Architettura di una rete neurale convoluzionale" reason="Pagina con solo diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V16" source="L20-web.pdf" page="28" type="diagramma" description="Architettura di una rete neurale convoluzionale" reason="Pagina con solo diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **4. Il neurone come elemento di calcolo**
 
-_(slide pp. 34–37)_
+__
 
 **Schema del neurone** (p. 35): i **segnali di input** $x_1, \dots, x_n$ arrivano con i **pesi** $w_1, \dots, w_n$; il neurone applica una funzione $f(\cdot)$ e produce il **segnale di output** $Y$, che può raggiungere più neuroni.
 
@@ -206,10 +206,10 @@ _(slide pp. 34–37)_
 > $$X = \sum_{i=1}^{n} x_i w_i \qquad Y = \begin{cases} +1 & \text{se } X \ge \theta \\ -1 & \text{se } X < \theta \end{cases}$$
 > Lo schema ha due blocchi: il **combinatore lineare** (la somma pesata) e il **limitatore rigido** (*hard limiter*).
 
-<!-- SOURCE_VISUAL id="IS20-V17" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="35" type="diagramma" description="Neurone con input pesati, funzione di attivazione e uscite" reason="Pagina con solo diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V17" source="L20-web.pdf" page="30" type="diagramma" description="Neurone con input pesati, funzione di attivazione e uscite" reason="Pagina con solo diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V18" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="36" type="diagramma" description="Modello base del neurone con combinatore lineare, soglia e limitatore rigido" reason="Formule e schema resi come immagine" -->
+<!-- SOURCE_VISUAL id="IS20-V18" source="L20-web.pdf" page="31" type="diagramma" description="Modello base del neurone con combinatore lineare, soglia e limitatore rigido" reason="Formule e schema resi come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Funzioni di attivazione** (p. 37). La slide le confronta con alcune annotazioni: **non lineare**, **non «ben» derivabile**, **senza saturazione** (*non clipping*), **intervallo di ingresso limitato**, capacità di gestire gli **«spike»**.
@@ -226,14 +226,14 @@ _(slide pp. 34–37)_
 >
 > La derivabilità conta perché l’addestramento con la backpropagation (§6) usa la **derivata** della funzione di attivazione.
 
-<!-- SOURCE_VISUAL id="IS20-V19" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="37" type="grafico" description="Funzioni di attivazione con annotazioni su non linearità, derivabilità e saturazione" reason="Grafici delle funzioni visibili solo nella figura" -->
+<!-- SOURCE_VISUAL id="IS20-V19" source="L20-web.pdf" page="32" type="grafico" description="Funzioni di attivazione con annotazioni su non linearità, derivabilità e saturazione" reason="Grafici delle funzioni visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **5. Il perceptron**
 
-_(slide pp. 38–52)_
+__
 
 #### **5.1. Un solo neurone può imparare?**
 
@@ -245,15 +245,15 @@ La p. 40 mostra il **perceptron a un solo strato con due ingressi**.
 > $$\sum_{i=1}^{n} x_i w_i - \theta = 0$$
 > Con due ingressi è la **retta** $x_1 w_1 + x_2 w_2 - \theta = 0$, cioè la forma della p. 41 $x_2 = m\,x_1 + q$ con $m = -w_1/w_2$ e $q = \theta/w_2$; con tre ingressi è un **piano** $x_1 w_1 + x_2 w_2 + x_3 w_3 - \theta = 0$ (p. 42).
 
-<!-- SOURCE_VISUAL id="IS20-V20" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="40" type="diagramma" description="Perceptron a un solo strato con due ingressi" reason="Schema presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS20-V20" source="L20-web.pdf" page="34" type="diagramma" description="Perceptron a un solo strato con due ingressi" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V21" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="42" type="grafico" description="Separabilità lineare: retta per il perceptron a due ingressi e piano per quello a tre" reason="Regioni di decisione visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V21" source="L20-web.pdf" page="36" type="grafico" description="Separabilità lineare: retta per il perceptron a due ingressi e piano per quello a tre" reason="Regioni di decisione visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **5.2. Come impara**
 
-_(slide pp. 43–47)_
+__
 
 > 📌 **Imparare significa…** (p. 43) fare **piccoli aggiustamenti dei pesi** per ridurre la **differenza** tra l’uscita **effettiva** e quella **desiderata** del perceptron. I pesi iniziali sono assegnati **a caso**, di solito nell’intervallo $[-0{,}5;\ 0{,}5]$, e poi aggiornati per ottenere uscite coerenti con gli esempi di training.
 
@@ -283,7 +283,7 @@ $$\Delta w_i(p) = \alpha \cdot x_i(p) \cdot e(p) \qquad w_i(p + 1) = w_i(p) + \D
 
 #### **5.3. Esempio: l’operazione AND**
 
-_(slide pp. 48–51)_
+__
 
 Il perceptron impara l’**AND logico** (pp. 48–51), con tasso di apprendimento $\alpha = 0{,}1$. Nel passo mostrato dalla slide i pesi correnti sono $w_1 = 0{,}3$ e $w_2 = -0{,}1$, l’ingresso è $(x_1, x_2) = (1, 0)$, l’uscita desiderata è 0 ma il perceptron risponde 1, quindi $e = -1$:
 
@@ -303,7 +303,7 @@ L’ingresso $x_2 = 0$ **non produce correzione** (nella slide il secondo aggior
 >
 > La terza riga è quella della slide. Si ripetono le epoche finché un’intera epoca passa senza errori. La tabella completa delle slide va verificata sull’immagine.
 
-<!-- SOURCE_VISUAL id="IS20-V22" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="48" type="tabella" description="Tabella dell’addestramento del perceptron sull’AND per epoche" reason="Valori della tabella presenti solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS20-V22" source="L20-web.pdf" page="44" type="tabella" description="Tabella dell’addestramento del perceptron sull’AND per epoche" reason="Valori della tabella presenti solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **5.4. Il limite: lo XOR**
@@ -312,14 +312,14 @@ L’ingresso $x_2 = 0$ **non produce correzione** (nella slide il secondo aggior
 
 > 💡 **Perché nessuna retta funziona (nota didattica).** Serve $w_1 \cdot 0 + w_2 \cdot 0 < \theta$, quindi $\theta > 0$; poi $w_1 \ge \theta$ e $w_2 \ge \theta$; ma allora $w_1 + w_2 \ge 2\theta > \theta$ e il punto (1,1) verrebbe classificato 1 invece di 0. Le condizioni sono **incompatibili**. È il limite reso celebre da Minsky e Papert (1969), superato solo con **più strati** (§6 e §7).
 
-<!-- SOURCE_VISUAL id="IS20-V23" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="52" type="grafico" description="AND, OR e XOR nel piano: i primi due separabili con una retta, lo XOR no" reason="Disposizione dei punti visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V23" source="L20-web.pdf" page="46" type="grafico" description="AND, OR e XOR nel piano: i primi due separabili con una retta, lo XOR no" reason="Disposizione dei punti visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **6. Reti multistrato e backpropagation**
 
-_(slide pp. 53–72)_
+__
 
 #### **6.1. Il perceptron multistrato**
 
@@ -334,7 +334,7 @@ _(slide pp. 53–72)_
 
 > ⚠️ **CNN** (p. 55). Le reti convoluzionali hanno **molti più strati**, ma quegli strati **funzionano in modo piuttosto diverso**.
 
-<!-- SOURCE_VISUAL id="IS20-V24" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="54" type="diagramma" description="Perceptron multistrato con strato di ingresso, due strati nascosti e strato di uscita" reason="Struttura della rete visibile solo nel diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V24" source="L20-web.pdf" page="48" type="diagramma" description="Perceptron multistrato con strato di ingresso, due strati nascosti e strato di uscita" reason="Struttura della rete visibile solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Apprendimento** (p. 56). Procede come nel perceptron: si presenta un insieme di pattern di training, la rete calcola l’uscita, e se c’è un **errore** (una differenza tra uscita effettiva e desiderata) i pesi vengono **aggiustati** per ridurlo.
@@ -345,12 +345,12 @@ _(slide pp. 53–72)_
 
 > 💡 **Il problema che la backpropagation risolve (nota didattica).** Per il perceptron l’errore è noto perché si conosce l’uscita desiderata. Per un neurone nascosto no (p. 55). La backpropagation **distribuisce** l’errore dell’uscita ai neuroni nascosti in proporzione a quanto ciascuno vi ha contribuito, cioè ai pesi che li collegano all’uscita.
 
-<!-- SOURCE_VISUAL id="IS20-V25" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="58" type="diagramma" description="Rete a tre strati addestrata con la backpropagation" reason="Pagina con solo diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V25" source="L20-web.pdf" page="50" type="diagramma" description="Rete a tre strati addestrata con la backpropagation" reason="Pagina con solo diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **6.2. I 4 passi dell’algoritmo**
 
-_(slide pp. 59–66)_
+__
 
 **Passo 1: inizializzazione** (p. 59), **neurone per neurone**. Tutti i pesi e le soglie della rete ricevono numeri casuali **uniformemente distribuiti** in un piccolo intervallo:
 $$\left( -\frac{2{,}4}{F_i},\; +\frac{2{,}4}{F_i} \right)$$
@@ -390,7 +390,7 @@ Le formule dei gradienti $\delta$ sono **non d’esame** (pp. 64–65).
 
 #### **6.3. I problemi della backpropagation**
 
-_(slide pp. 67–69)_
+__
 
 > ⚠️ **Instabilità del gradiente** (p. 67). I problemi principali sono il **gradiente che svanisce** e il **gradiente che esplode**. La **scelta della funzione di attivazione** è **cruciale** per il comportamento del gradiente durante l’apprendimento.
 
@@ -400,15 +400,15 @@ _(slide pp. 67–69)_
 
 > 💡 **I numeri del problema (nota didattica).** La derivata della sigmoide vale **al massimo 0,25**. Propagando all’indietro attraverso $L$ strati, il gradiente si moltiplica per un fattore di questo tipo a ogni strato: con pesi dell’ordine di 1, dopo 10 strati si arriva a $0{,}25^{10} \approx 9{,}5 \times 10^{-7}$, e i primi strati non imparano più. Se invece i pesi sono grandi, per esempio 5, il fattore per strato può superare 1 e il prodotto **esplode**. Rimedi diffusi: attivazioni **ReLU**, **inizializzazione** accurata, **normalizzazione** degli strati, **clipping** del gradiente e connessioni residue.
 
-<!-- SOURCE_VISUAL id="IS20-V26" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="68" type="grafico" description="Vanishing gradient con la sigmoide e dipendenza dai pesi dello strato precedente" reason="Grafici visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS20-V26" source="L20-web.pdf" page="61" type="grafico" description="Vanishing gradient con la sigmoide e dipendenza dai pesi dello strato precedente" reason="Grafici visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V27" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="69" type="grafico" description="Exploding gradient e funzione di perdita di un peso e un bias con discontinuità del gradiente" reason="Superficie della perdita visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V27" source="L20-web.pdf" page="62" type="grafico" description="Exploding gradient e funzione di perdita di un peso e un bias con discontinuità del gradiente" reason="Superficie della perdita visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **6.4. Una rete feed-forward in MATLAB**
 
-_(slide pp. 70–72)_
+__
 
 Le pp. 70–71 sono grafiche. **Il codice MATLAB** (p. 72):
 
@@ -425,17 +425,17 @@ In **Colab** questo **nascondere i dettagli** è **meno evidente**: il codice es
 
 > ⚠️ **Che cosa fa `train` di default (nota didattica).** A differenza degli esempi della Lezione 17, §7.2, qui non si impostano `divideParam`: `train` divide automaticamente i dati in training, validation e test (per default 70%, 15%, 15%) e usa la validation per l’**early stopping**. `perform(net, y, t)` calcolato su tutti i dati mescola quindi errori di training e di test.
 
-<!-- SOURCE_VISUAL id="IS20-V28" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="70" type="immagine" description="Illustrazione introduttiva all’esempio pratico" reason="Pagina senza testo estraibile" -->
+<!-- SOURCE_VISUAL id="IS20-V28" source="L20-web.pdf" page="65" type="immagine" description="Illustrazione introduttiva all’esempio pratico" reason="Pagina senza testo estraibile" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V29" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="71" type="immagine" description="Esempio pratico della lezione" reason="Pagina con sola immagine" -->
+<!-- SOURCE_VISUAL id="IS20-V29" source="L20-web.pdf" page="65" type="immagine" description="Esempio pratico della lezione" reason="Pagina con sola immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **7. Allegato: backpropagation a mano sullo XOR (non d’esame)**
 
-_(slide pp. 74–84)_
+__
 
 L’allegato (pp. 74–75) **non è oggetto d’esame**, ma è utile per **verificare la comprensione**: si calcola la backpropagation «**con la matita**».
 
@@ -450,12 +450,12 @@ L’allegato (pp. 74–75) **non è oggetto d’esame**, ma è utile per **verif
 | $w_{35}$, $w_{45}$ | −1,2; 1,1 |
 | $\theta_3$, $\theta_4$, $\theta_5$ | 0,8; −0,1; 0,3 |
 
-<!-- SOURCE_VISUAL id="IS20-V30" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="76" type="diagramma" description="Rete a tre strati per lo XOR con neuroni 3, 4, 5, pesi e ingressi fissi -1" reason="Collegamenti della rete visibili solo nel diagramma" -->
+<!-- SOURCE_VISUAL id="IS20-V30" source="L20-web.pdf" page="71" type="diagramma" description="Rete a tre strati per lo XOR con neuroni 3, 4, 5, pesi e ingressi fissi -1" reason="Collegamenti della rete visibili solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **7.2. Passo in avanti**
 
-_(slide pp. 78–79)_
+__
 
 Esempio di training: $x_1 = x_2 = 1$, uscita desiderata $y_{d,5} = 0$.
 
@@ -470,7 +470,7 @@ $$e = y_{d,5} - y_5 = 0 - 0{,}5097 = -0{,}5097$$
 
 #### **7.3. Passo all’indietro**
 
-_(slide pp. 80–81)_
+__
 
 **Gradiente del neurone di uscita** e correzioni, con $\alpha = 0{,}1$:
 
@@ -502,7 +502,7 @@ Correzioni dei pesi nascosti:
 
 #### **7.4. Aggiornamento e convergenza**
 
-_(slide pp. 82–84)_
+__
 
 | Parametro | Aggiornamento | Nuovo valore |
 |---|---|---|
@@ -520,10 +520,10 @@ Il processo di addestramento si **ripete** finché la **somma degli errori quadr
 
 > 💡 **Perché due neuroni nascosti bastano (nota didattica).** Ciascun neurone nascosto traccia una **retta** nel piano degli ingressi, come un perceptron. Il neurone di uscita combina le due regioni: per esempio un neurone nascosto si attiva per «almeno un ingresso a 1» (OR) e l’altro per «entrambi a 1» (AND); l’uscita risponde 1 quando il primo è attivo e il secondo no, che è esattamente lo XOR. È il superamento del limite del §5.4.
 
-<!-- SOURCE_VISUAL id="IS20-V31" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="83" type="grafico" description="Curva di apprendimento della rete per lo XOR: somma degli errori quadratici per epoca" reason="Andamento della curva visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS20-V31" source="L20-web.pdf" page="58" type="grafico" description="Curva di apprendimento della rete per lo XOR: somma degli errori quadratici per epoca" reason="Andamento della curva visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS20-V32" source="Lesson_20_Course-of-dimensionality_FeedForwardNeuralNetwork_Learning.pdf" page="84" type="tabella" description="Risultati finali della rete a tre strati addestrata sullo XOR" reason="Pesi e uscite finali presenti solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS20-V32" source="L20-web.pdf" page="59" type="tabella" description="Risultati finali della rete a tre strati addestrata sullo XOR" reason="Pesi e uscite finali presenti solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
@@ -547,7 +547,6 @@ Il processo di addestramento si **ripete** finché la **somma degli errori quadr
 
 ### **9. Sintesi della lezione**
 
-_(slide p. 73)_
 
 > ✅ **Punti principali** (p. 73).
 > - **Maledizione della dimensionalità**: al crescere delle dimensioni i dati necessari crescono esponenzialmente ($10^d$ bin), lo spazio diventa quasi vuoto e le distanze perdono significato; rimedi: selezione delle feature, riduzione della dimensionalità, controllo della complessità.
@@ -555,3 +554,6 @@ _(slide p. 73)_
 > - **Le equazioni dell’apprendimento**: $\Delta w_i(p) = \alpha \cdot x_i(p) \cdot e(p)$, base di tutti i metodi di apprendimento delle reti.
 > - **Reti neurali multistrato**: teoria della backpropagation in quattro passi, gradienti dell’errore, problemi del gradiente che svanisce o esplode, applicazione a un esempio semplice (lo XOR, nell’allegato).
 > - **Reti feed-forward in MATLAB** (introduzione): `feedforwardnet`, `train`, `perform`.
+
+
+L’appendice include anche un esempio di regressione polinomiale cubica con sei coppie di dati, in cui i coefficienti sono stimati con polyfit e si calcola una previsione in un punto intermedio. Con due feature e grado tre, l’espansione produce dieci termini; il modello resta lineare nei coefficienti anche se è non lineare rispetto agli input.

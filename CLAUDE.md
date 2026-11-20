@@ -199,17 +199,22 @@ Do not remove existing lesson content. At most correct inaccurate or poorly expl
   - Hardware: CPU/GPU/TPU/NPU/VPU in tabella (esempi biometrici segnalati), GPU contro CPU con energia per inferenza calcolata, ARM e calcolo eterogeneo, quantizzazione INT8 in formula, TPU e Trillium (Colab e TPU segnalato), Edge TPU, FLOPS e TOPS, Movidius storico; OpenVINO con incoerenza VPU e POT sostituito da NNCF, codice ricostruito; Edge Impulse non d’esame.
   54 formule KaTeX, 48 placeholder, 0 rendering.
 - Lezione24 — AIoT, sicurezza dell’IoT, TinyML, servizi cloud e sistemi di visione industriali: [COMPLETED] — 121/121 pagine, nessun supplemento.
+- Edizione 2026/27 — prima tranche Lezioni 02–12: [TESTO COMPLETATO] — PDF nuovi conservati in `sources_2026-27/`; confronto testuale e revisione editoriale allineati, copertura per pagina registrata, segnaposto preservati e controllati (uno per ogni commento `SOURCE_VISUAL`). Limite noto: restano 180 riferimenti visuali ereditati la cui pagina nei nuovi PDF non è stata mappata con affidabilità; elenco e PDF aggiornato corrispondente in `_meta/VISUAL_REMAP_PENDING_2026-27.md`. Stato dettagliato in `_meta/REVISION_PROGRESS_2026-27.md`.
+- Edizione 2026/27 — seconda tranche Lezioni 13–24: [COMPLETED] — 12 PDF copiati in `sources_2026-27/`; 1.196/1.196 pagine elaborate con testo nativo e copertura pagina-sezione; 433 placeholder visuali allineati ai PDF aggiornati. Nessun rendering sistematico né OCR. Dettagli in `_meta/REVISION_PROGRESS_2026-27.md` e nei tre registri `SOURCE_COVERAGE_2026-27_L13-L16.md`, `SOURCE_COVERAGE_2026-27_L17-L20.md`, `SOURCE_COVERAGE_2026-27_L21-L24.md`.
+- Edizione 2026/27 — riallineamento dei 180 riferimenti visuali legacy delle lezioni 02–12: [NEXT TASK], tracciati in `_meta/VISUAL_REMAP_PENDING_2026-27.md`.
+
   - Parte A: AIoT con tabella cloud/edge/dispositivo e conto della banda, hardware e software abilitanti con nomi di prodotto aggiornati (IoT Core ritirato, LiteRT), qualità del dato sui «152 gradi», esempi consumer e #LookUp.
   - Sicurezza IoT: OTA (MQTT sicuro solo su TLS, firma del firmware, rollback) con codice MQTT/TLS ricostruito; Cyber Resilience Act con requisiti e date corrette (Reg. UE 2024/2847: segnalazioni dall’11/09/2026, obblighi dall’11/12/2027); NIST con CSF 2.0 e IR 8259.
   - Piattaforme e schede: AWS IoT, FreeRTOS, Greengrass, MATLAB/ThingSpeak, Azure IoT ed Eclipse ThreadX, Google Coral, ATmega328P con conto della memoria, Raspberry Pi AI Kit, STM32 e MAX78000, LSM6DSOX con albero nel sensore; punti principali della parte A incoerenti segnalati.
   - Parte B: TinyML e convertitore TFLite ricostruito, MLaaS con chiamata REST, IaaS/PaaS/SaaS con tabella delle responsabilità; applicazioni della visione (sorveglianza con nota AI Act, fumo come ibrido, lenti liquide, droni), V2X con conto della latenza, platooning, ITS, Pirelli Cyber Tyre su sensore/edge/fog/cloud.
   - Industria 4.0 (principi, digital twin) e 5.0 (tre valori UE); visione industriale con illuminazione, IEEE 1588, costi e anomalie con autoencoder e soglia in formula; simulazione d’esame con numerazione delle lezioni segnalata; allegato non d’esame.
   5 formule KaTeX, 49 placeholder, 0 rendering.
+- Audit evoluzione AI (20 settembre–20 novembre 2026): [COMPLETED] — riesaminate le 24 lezioni e applicati aggiornamenti datati a Lezioni 01, 02, 11, 13, 15, 23 e 24 su modelli, snapshot economico, AI Act, API agentiche/MCP, SAM 3.1 e hardware di accelerazione, stato operativo CRA/ENISA; conservati i contenuti metodologici stabili. Rapporto: `_meta/AI_EVOLUTION_AUDIT_2026-09-20_2026-11-20.md`.
 - Chiusura del corso: [COMPLETED] — 24/24 lezioni e 2.068/2.068 pagine registrate in `_meta/SOURCE_COVERAGE.md`, 761 placeholder SOURCE_VISUAL, 1.445 formule KaTeX con 0 errori; nelle Lezioni 02–24 nessun rendering sistematico. Tutti i supplementi letti integralmente; le immagini di input (Lezione09, Lezione21) sono inventariate ma non visualizzate. Restano:
   - l’inserimento manuale delle immagini nei placeholder;
   - la distribuzione web dei supplementi .py/.m/.ipynb/.dat, non copiati dalla build;
   - la verifica sulle slide dei valori marcati come ricostruiti.
-  Originali immutabili; nessun commit né push.
+  Sorgenti e appunti preservati; le modifiche editoriali di questo audit sono incluse nel push e nel deploy richiesti.
 
 ### Sistemi Operativi 1 [COMPLETED]
 

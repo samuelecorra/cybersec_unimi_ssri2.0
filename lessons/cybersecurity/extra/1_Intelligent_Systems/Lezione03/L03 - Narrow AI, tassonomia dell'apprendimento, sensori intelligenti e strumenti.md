@@ -1,19 +1,19 @@
 ## **Lezione 3: Narrow AI, tassonomia dell’apprendimento, sensori intelligenti e strumenti**
 
-In questa lezione il percorso parte da una distinzione fondamentale: l’AI ristretta, progettata per compiti specifici, e l’AGI, un’intelligenza generale ancora ipotetica. Da qui nasce la domanda su come valutare le capacità di una macchina. Passiamo poi ai principali modi di apprendere — regressione, classificazione, clustering, rinforzo, deduzione, induzione e trasduzione — e vediamo come valutare i sistemi e applicarli ai sensori. Chiudiamo con gli strumenti di lavoro e un metodo per interiorizzare la teoria.
+Le capacità di una macchina si misurano attraverso prove definite e benchmark con limiti espliciti. I metodi di apprendimento si organizzano distinguendo il segnale usato per imparare dal tipo di risultato prodotto: regressione, classificazione, clustering, riduzione dimensionale o politica di controllo. Da qui si passa ai ragionamenti deduttivo, induttivo e trasduttivo, alla valutazione operativa, ai sensori intelligenti e agli strumenti per costruire esperimenti riproducibili.
 
-Approfondimento collegato: [The AI Apocalypse Matrix](Lesson_03_The_AI_Apocalypse_Matrix.pdf), pubblicato da *IEEE Spectrum* nell’agosto 2023. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
+Approfondimento: [The AI Apocalypse Matrix](sources_2026-27/Lesson_03_The_AI_Apocalypse_Matrix.pdf), pubblicato da *IEEE Spectrum* nell’agosto 2023.
 
 ### **0. Il percorso della lezione**
 
-Il percorso si sviluppa in quattro passaggi: distinguere AI ristretta e generale; capire come si misurano le capacità delle macchine; ordinare i metodi di apprendimento e i criteri di valutazione; collegare l’AI ai sensori e agli strumenti con cui si progetta.
+La trattazione procede in quattro passaggi: distinguere AI ristretta e generale; capire come si misurano le capacità delle macchine; ordinare i metodi di apprendimento e i criteri di valutazione; collegare l’AI ai sensori e agli strumenti con cui si progetta.
 
 
 ### **1. Narrow AI e General AI**
 
 #### **1.1. Due punti di vista**
 
-Quando si parla di intelligenza artificiale, è utile distinguere **due prospettive**: la **Narrow AI**, progettata per compiti circoscritti, e la **General AI**, capace in ipotesi di affrontare una gamma ampia di attività.
+La distinzione riguarda l’ampiezza delle capacità: la **Narrow AI** è progettata per compiti circoscritti; la **General AI** (AGI) indicherebbe la capacità di apprendere, ragionare e adattarsi in domini diversi.
 
 ![](imgs/Pasted%20image%2020261002032915.png)
 
@@ -25,18 +25,17 @@ Quando si parla di intelligenza artificiale, è utile distinguere **due prospett
 
 > 📌 **Narrow AI**, detta anche **Artificial Narrow Intelligence** (ANI) o **Weak AI**. Indica sistemi di AI **progettati e addestrati** per svolgere **un compito specifico** o un insieme ristretto di compiti, di solito in un **dominio limitato**.
 > - Esempio: un modello addestrato a riconoscere **immagini di gatti** sa fare solo quello e **non generalizza** ad altri tipi di immagini o di compiti.
-> - È oggi la forma **predominante** di AI: riconoscimento vocale, riconoscimento di immagini, elaborazione del linguaggio naturale.
-> - È tipicamente **monomodale**: solo immagini, solo suoni, e così via.
+> - È oggi la forma **predominante** di AI: riconoscimento vocale, immagini e linguaggio naturale. Un sistema ristretto può elaborare più modalità: «ristretto» descrive l’ampiezza delle capacità, non il numero di tipi di input.
 
-**Che cosa manca alla Narrow AI**:
+**Limiti tipici dei sistemi ristretti**:
 
 - **autoconsapevolezza**;
 - **coscienza**;
 - **emozioni**;
 - un’**intelligenza genuina** paragonabile a quella umana;
-- e naturalmente la **Gestalt**: la capacità di cambiare dinamicamente il **contesto**, il **livello di dettaglio** e il **livello di astrazione** per capire meglio i dati, secondo la propria esperienza e conoscenza (Lezione 02, §6).
+- e naturalmente la **Gestalt**: la capacità di cambiare dinamicamente il **contesto**, il **livello di dettaglio** e il **livello di astrazione** per capire meglio i dati, secondo la propria esperienza e conoscenza (sezione sulla Gestalt).
 
-La Narrow AI offre vantaggi pratici nei compiti ben definiti, ma presenta anche sfide che incontreremo durante il corso.
+La Narrow AI offre vantaggi pratici nei compiti ben definiti e richiede verifiche di robustezza, qualità dei dati, spiegabilità e controllo dei bias.
 
 > 💡 **Vantaggi e sfide tipici.** I sistemi ristretti possono essere veloci, ripetibili e accurati nel proprio dominio, riducendo il lavoro manuale. Fuori da quel dominio, però, possono non generalizzare; dipendono dalla qualità e quantità dei dati, possono essere difficili da spiegare e fragili davanti a input inattesi.
 
@@ -63,7 +62,7 @@ Un esempio video usa con ironia la frase «disorganizzato… cominciamo dalle tu
 
 Queste dichiarazioni usano formule prudenti («potremmo vedere», «è possibile») e arrivano da un settore **molto competitivo**: OpenAI, Google (DeepMind), Meta, Anthropic e xAI **gareggiano** per raggiungere l’AGI. Un articolo di PCMag riporta inoltre l’affermazione di un cofondatore di Google secondo cui per arrivare all’AGI servirebbero **settimane da 60 ore**.
 
-> 💡 **Leggere le dichiarazioni.** Le frasi al condizionale e le stime in «migliaia di giorni» non sono previsioni verificabili: fanno parte della comunicazione di aziende in competizione. È lo stesso invito alla lettura critica delle opinioni della Lezione 02, §7.
+> 💡 **Leggere le dichiarazioni.** Le frasi al condizionale e le stime in «migliaia di giorni» non sono previsioni verificabili: fanno parte della comunicazione di aziende in competizione. È lo stesso invito alla lettura critica delle opinioni della .
 
 #### **1.4. Il dibattito sull’AGI e la «AI Apocalypse Matrix»**
 
@@ -132,22 +131,26 @@ I 23 esperti sono: Christof Koch, Jaron Lanier, Andrew Ng, Max Tegmark, Yann LeC
 
 > ⚠️ **Il limite del test.** Il test di Turing misura la **capacità conversazionale**, **non l’intelligenza generale**.
 
+
+Una prova pubblicata nel 2026 ha usato un protocollo a tre partecipanti: in due studi preregistrati, GPT-4.5 accompagnato da una persona testuale è stato identificato come umano nel 73% delle valutazioni; Llama 3.1 405B ha raggiunto il 56% (Jones e Bergen, 2026, [PNAS](https://doi.org/10.1073/pnas.2524472123)). Il risultato riguarda l’indistinguibilità conversazionale in quel protocollo, non il trasferimento generale tra compiti. Una persona definisce ruolo, stile, obiettivi e vincoli della risposta; non aggiunge capacità intrinseche al modello.
+
+<!-- SOURCE_VISUAL id="IS03-V02" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="15" type="tabella" description="Confronto dei risultati del test di Turing a tre partecipanti per GPT-4.5 e Llama 3.1 405B" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
 ![](imgs/Pasted%20image%2020261002033559.png)
 
-**Test recenti** (un articolo di *Nature* del 2023 osserva che):
+**Nel 2023** un articolo di *Nature* osservava che i modelli conversazionali stavano mettendo in crisi il test tradizionale e spingevano verso prove di logica e ragionamento visivo. Quell’articolo giornalistico è una fotografia del dibattito dell’epoca; la capacità conversazionale va misurata con protocolli controllati e non basta come indice di intelligenza generale.
 
 - gli attuali sistemi di AI **imitano in modo convincente** la conversazione umana, mettendo in crisi i metodi di valutazione tradizionali;
 - **ChatGPT ha superato il test di Turing**;
 - questo ha avviato una **corsa** a nuovi metodi di valutazione, capaci di misurare **logica e ragionamento**;
 - i compiti di **logica e ragionamento visivo** sono indicati come l’area in cui servono tecniche di valutazione migliori.
 
-> 💡 **Precisazione (nota didattica).** L’articolo citato (*ChatGPT broke the Turing test — the race is on for new ways to assess AI*) è un articolo giornalistico della sezione notizie di *Nature*, non uno studio sperimentale. Il senso è che il test di Turing, nella sua forma conversazionale, **non distingue più** i modelli linguistici dagli umani e quindi non basta come misura.
-
 ![](imgs/Pasted%20image%2020261002033707.png)
 
 #### **2.2. ConceptARC e altri test**
 
-**Un test di pensiero astratto che batte le macchine**: finora i sistemi di AI **non hanno raggiunto prestazioni umane** nel test **ConceptARC**. Le propongono di provarlo e chiedono: quale caratteristica della mia intelligenza sto usando per risolvere il puzzle?
+**ConceptARC** propone puzzle di astrazione che richiedono di inferire una regola da pochi esempi. Il benchmark è utile per interrogare le capacità di generalizzazione; i risultati dipendono dalla versione, dal protocollo e dai modelli valutati. La consegna invita a chiedersi: quale caratteristica della mia intelligenza sto usando per risolvere il puzzle?
 
 - un **tentativo casuale**?
 - l’**elaborazione visiva**?
@@ -164,6 +167,29 @@ Tra gli altri riferimenti si trovano **ARC-AGI-3** e ulteriori test recenti.
 
 ![](imgs/Pasted%20image%2020261002033828.png)
 
+
+ARC-AGI-3, introdotto nel 2026, sposta la valutazione da puzzle statici ad ambienti interattivi: un agente deve esplorare, inferire obiettivi, costruire un modello del mondo e adattarsi a feedback limitati. I punteggi ARC riportati il 22 settembre 2026 mostrano una forte dipendenza dal protocollo. GPT-6 Astra (configurazione Max) ottiene 97,5% su ARC-AGI-1, 95,0% su ARC-AGI-2 e 62,71% su ARC-AGI-3 con harness Standard; il risultato pubblicato per ARC-AGI-3 sale al 99,95% con Provider Adapter, che conserva lo stato di ragionamento tra richieste e applica compattazione. Anche i costi differiscono. Questi numeri descrivono configurazioni e harness specifici e sono uno snapshot datato, non una proprietà atemporale del modello.
+
+<!-- SOURCE_VISUAL id="IS03-V03" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="20" type="tabella" description="Confronto ARC-AGI-1, 2 e 3 e differenza tra harness Standard e Provider Adapter" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+#### **2.3. Il ciclo di vita dei benchmark**
+
+Un benchmark misura una capacità definita da compiti e regole precise. Nel tempo può perdere potere discriminante: i modelli si avvicinano al massimo, i dati possono entrare nei corpora di addestramento e le procedure di ottimizzazione possono favorire il test stesso. Il ciclo tipico è quindi: benchmark informativo → ottimizzazione diffusa → possibile saturazione o contaminazione → revisione o sostituzione.
+
+| Benchmark | Capacità bersaglio | Limite da tenere presente |
+|---|---|---|
+| HellaSwag (2019) | completamento di scenari di senso comune | la saturazione riduce la capacità di separare i modelli migliori |
+| GSM8K (2021) | problemi matematici di livello scolastico | misura una porzione circoscritta del ragionamento |
+| MMLU (2021) | conoscenze accademiche ampie | ampiezza non elimina memorizzazione, contaminazione o ottimizzazione specifica |
+| SWE-bench Verified (2024) | correzione autonoma di problemi software | un audit del 2026 ha individuato problemi in parte delle specifiche e dei test, riducendo il valore del benchmark come misura di capacità di frontiera ([audit OpenAI, 8 luglio 2026](https://openai.com/index/separating-signal-from-noise-coding-evaluations/)) |
+
+Per confrontare sistemi, occorre riportare versione del benchmark, split, prompt o harness, configurazione del modello, costo e data. Un risultato elevato su un compito statico non equivale a capacità generale. La fotografia numerica del deck è datata 22 settembre 2026 e descrive GPT-6 Astra. Il 17 novembre sono stati rilasciati GPT-6.2 Astra e Sol; i punteggi qui riportati restano un confronto storico relativo a configurazioni specifiche. [Risultati ARC Prize](https://arcprize.org/results), [aggiornamento ufficiale GPT-6.2](https://openai.com/index/introducing-gpt-6-2-astra-sol/).
+
+<!-- SOURCE_VISUAL id="IS03-V01" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="16" type="tabella" description="Ciclo di vita dei benchmark con esempi HellaSwag, GSM8K, MMLU e SWE-bench Verified" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+
 ### **3. Una tassonomia dei metodi di apprendimento**
 
 #### **3.1. Un quadro comune per molte applicazioni**
@@ -178,12 +204,21 @@ I sistemi intelligenti sono applicati a problemi molto diversi, ma è possibile 
 
 Possiamo ora costruire una **tassonomia del machine learning** distinguendo i modi in cui il sistema riceve il segnale di apprendimento.
 
-> 💡 **La struttura classica (nota didattica).** Le tassonomie di questo tipo dividono il machine learning in tre rami, che ritroveremo nei compiti successivi:
+> 💡 **Una tassonomia ridotta.** Uno schema introduttivo raggruppa i metodi in tre rami classici; una classificazione più completa distingue anche self-supervised e semi-supervised e tiene separati paradigma di apprendimento e tipo di compito:
 > - **apprendimento supervisionato**: **classificazione** (output discreto) e **regressione** (output continuo);
 > - **apprendimento non supervisionato**: **clustering** (e riduzione della dimensionalità);
 > - **apprendimento per rinforzo**: un agente impara da **ricompense**.
 >
-> Le etichette esatte e gli esempi dei rami vanno verificati sulle quattro immagini.
+
+> 📌 **Due assi da tenere distinti.** Il paradigma descrive il segnale disponibile durante l’apprendimento; il compito descrive l’uscita prodotta. Classificazione e regressione sono compiti che possono essere supervisionati; clustering e riduzione dimensionale sono tipicamente non supervisionati; il rinforzo apprende una politica da ricompense. L’apprendimento **self-supervised** ricava gli obiettivi dai dati stessi ed è centrale nel preaddestramento dei modelli fondazionali.
+
+| Paradigma | Segnale | Esempi di compito o uscita |
+|---|---|---|
+| Supervisionato | etichette desiderate $y$ | classificazione, regressione |
+| Non supervisionato | dati $x$ senza etichette esterne | clustering, riduzione dimensionale |
+| Self-supervised | obiettivi costruiti da $x$ | predizione del token successivo, mascheramento, apprendimento di rappresentazioni |
+| Semi-supervisionato | pochi esempi etichettati e molti non etichettati | classificazione o regressione con supervisione parziale |
+| Per rinforzo | ricompense da interazione sequenziale | politiche e decisioni nel tempo |
 
 ![](imgs/Pasted%20image%2020261002034122.png)
 
@@ -203,7 +238,7 @@ Possiamo ora costruire una **tassonomia del machine learning** distinguendo i mo
 | **Classificazione** | predice un **numero discreto di valori**: i dati vengono categorizzati sotto **etichette** e l’etichetta viene predetta per i nuovi dati | email **spam / non spam**; classificazione di input in 2D |
 | **Clustering** | **partiziona** il dataset in gruppi, i **cluster**, di elementi simili: punti dello stesso cluster **molto simili**, punti di cluster diversi **diversi**; trova raggruppamenti in dati **non etichettati** | punti nel piano 2D |
 
-In formula (nota didattica), con il modello visto come funzione $\text{Out} = F(X)$ (Lezione 02, §3):
+In formula (nota didattica), con il modello visto come funzione $\text{Out} = F(X)$ (rappresentazione interna del modello):
 
 $$\text{regressione: } F: \mathbb{R}^N \to \mathbb{R} \qquad\qquad \text{classificazione: } F: \mathbb{R}^N \to \{1, 2, \dots, C\}$$
 
@@ -239,6 +274,8 @@ Politiche e ricompense diverse:
 
 ![](imgs/Pasted%20image%2020261002034626.png)
 
+Un’illustrazione generata automaticamente di un labirinto mostra un percorso arancione che attraversa i muri. L’esempio ricorda che un’immagine plausibile non garantisce una geometria corretta: i contenuti generati vanno verificati prima di usarli come dimostrazione o riferimento.
+
 **Gli elementi**:
 
 | Elemento | Significato |
@@ -268,7 +305,7 @@ Politiche e ricompense diverse:
 | **Ricompensa** $R$ | **+10** se afferra l’oggetto; **+1** se la pinza si avvicina; **−1** per coppie eccessive (efficienza); **−5** se l’oggetto cade |
 | **Ambiente** | un simulatore fisico come **PyBullet**, **MuJoCo** o **Gazebo** |
 
-> 💡 **La ricompensa è una scelta di progetto.** Il −1 sulle coppie eccessive non serve ad afferrare l’oggetto, ma a farlo **in modo efficiente**; il +1 di avvicinamento dà un segnale anche prima del successo finale, che altrimenti sarebbe raro. Una ricompensa progettata male porta l’agente a ottimizzare la cosa sbagliata: è un esempio del «quarto driver», il cervello del progettista (Lezione 02, §9).
+> 💡 **La ricompensa è una scelta di progetto.** La penalità sulle coppie eccessive orienta il braccio verso un’afferrata **efficiente**; il +1 di avvicinamento dà un segnale anche prima del successo finale, che altrimenti sarebbe raro. Una ricompensa progettata male porta l’agente a ottimizzare la cosa sbagliata: mostra il ruolo delle scelte progettuali nel definire l’obiettivo da ottimizzare.
 
 #### **3.5. Tipi di apprendimento ed etichette**
 
@@ -291,7 +328,7 @@ Una distinzione fondamentale riguarda il punto di partenza: si **impara dai dati
 
 | | **Deduttivo** | **Induttivo** |
 |---|---|---|
-| Punto di partenza | regole **if-then**, nessun dato | **nessuna conoscenza** precedente, solo **dati** |
+| Punto di partenza | regole e conoscenze esplicite, poi applicate a un caso | esempi osservati, senza regole di dominio esplicite; le scelte di modello e obiettivo incorporano comunque assunzioni |
 | Diffusione | — | **la maggior parte dei metodi di AI** |
 
 > 💡 **Lo schema di Trochim (nota didattica).** Il ragionamento **deduttivo** va «dall’alto in basso»: teoria → ipotesi → osservazioni → conferma. Quello **induttivo** va «dal basso in alto»: osservazioni → individuazione di schemi → ipotesi provvisoria → teoria. La direzione delle frecce rende intuitiva la differenza fra i due percorsi.
@@ -304,13 +341,13 @@ Una distinzione fondamentale riguarda il punto di partenza: si **impara dai dati
 
 #### **4.2. Due esempi mnemonici**
 
-> 📌 **Apprendimento deduttivo**. Una tecnica di AI che **parte da un insieme di regole** e le applica per prendere decisioni su dati nuovi; poi può **inferire regole nuove**, più efficienti nel contesto in cui vanno applicate. È l’«**esperto di dominio che tramanda le regole**».
+> 📌 **Apprendimento deduttivo**. Una tecnica di AI che **parte da un insieme di regole** e le applica per prendere decisioni su dati nuovi; poi può **inferire regole nuove**, più efficienti nel contesto in cui vanno applicate. È l’«**esperto che applica regole esplicite a nuovi casi**».
 
 L’esempio mnemonico: la **nonna** ti dà le regole per scegliere un buon fidanzato. Se sei d’accordo, **erediti la conoscenza** della sua esperienza e la applichi alla scelta del nuovo partner; poi puoi anche **adattare le regole** ai tempi moderni.
 
-> 📌 **Apprendimento induttivo**. Si basa sull’**inferire una regola generale** da dataset di coppie **input-output**. È il «**learner senza conoscenza a priori**».
+> 📌 **Apprendimento induttivo**. Inferisce un modello generale da esempi input-output. Non richiede regole di dominio scritte in anticipo, ma usa sempre un bias induttivo definito dalla rappresentazione, dal modello e dall’obiettivo.
 
-L’esempio mnemonico: non vuoi regole, vuoi farti la conoscenza **con l’esperienza** (solo dati, nessuna regola). «Le ultime 10 volte che sono entrato in tangenziale a Milano alle 17:30 sono rimasto in coda» → **nuova regola generale**: evitare di partire nelle ore di traffico intenso. L’immagine è James Dean in *Gioventù bruciata* (*Rebel Without a Cause*, 1955): il ribelle che non accetta regole ricevute.
+L’esempio mnemonico: non ricevi una regola esplicita e impari dai casi osservati; il modello incorpora comunque assunzioni. «Le ultime 10 volte che sono entrato in tangenziale a Milano alle 17:30 sono rimasto in coda» → **nuova regola generale**: evitare di partire nelle ore di traffico intenso. L’immagine è James Dean in *Gioventù bruciata* (*Rebel Without a Cause*, 1955): il ribelle che non accetta regole ricevute.
 
 #### **4.3. Trasduzione**
 
@@ -334,7 +371,7 @@ La trasduzione va **dal particolare al particolare**, da punti di dati a punti d
 
 #### **4.4. L’apprendimento induttivo in dettaglio**
 
-**Dati: esempi di una funzione** $(X, F(X))$.
+**Dati: esempi di una funzione** $(X, F(X))$. Un learner induttivo non parte da regole di dominio esplicite, ma non è privo di assunzioni: classe di modelli, rappresentazione, feature, obiettivo e procedura di addestramento determinano il **bias induttivo**, cioè le preferenze che guidano la generalizzazione.
 
 - **Caso monodimensionale**: coppie come $X = 0{,}2 \to Y = 32$ e $X = 0{,}5 \to Y = 52$, …
 - **Caso N-dimensionale**: ogni input (un vettore, per esempio un’immagine) ha un’etichetta, come $Y = 1$, $Y = 1$, $Y = 2$.
@@ -365,7 +402,22 @@ La trasduzione va **dal particolare al particolare**, da punti di dati a punti d
 - il metodo di apprendimento e il modello sono **abbastanza potenti**;
 - ecc.
 
-> ⚠️ **I «se» della generalizzazione.** L’induzione non garantisce nulla fuori dai dati visti: se il dataset non copre certe situazioni, il modello non ha modo di conoscerle. È il motivo per cui il corso dedicherà molto spazio a qualità, completezza e partizione dei dati.
+> ⚠️ **I «se» della generalizzazione.** L’induzione non garantisce nulla fuori dai dati visti: se il dataset non copre certe situazioni, il modello non può inferire in modo affidabile casi assenti dai dati. Perciò qualità, copertura e partizione dei dati vanno valutate in rapporto all’uso previsto.
+
+#### **4.5. Applicare i concetti a casi d’uso**
+
+Tre casi aiutano a distinguere i segnali di apprendimento: classificare componenti industriali accettabili o difettosi da immagini etichettate è apprendimento induttivo; applicare regole di sicurezza definite da esperti a misure correnti è ragionamento deduttivo; un robot che esplora un magazzino e riceve ricompense per il raggiungimento della destinazione apprende per rinforzo.
+
+#### **4.6. Tre casi per distinguere apprendimento e ragionamento**
+
+| Caso | Segnale disponibile | Processo prevalente | Perché |
+|---|---|---|---|
+| Classificare componenti industriali da immagini con etichette accettabile/difettoso | esempi input-output | induzione supervisionata | dai campioni si stima una funzione da applicare a immagini nuove |
+| Applicare regole esplicite su vibrazione e temperatura a una macchina | conoscenze e regole di un esperto più misure correnti | deduzione | le regole producono una conclusione specifica senza addestrare un modello |
+| Imparare a navigare in un magazzino ricevendo ricompense per destinazione, collisioni e mosse | feedback da interazioni ripetute | apprendimento per rinforzo | le ricompense guidano l’ottimizzazione di una politica di azione |
+
+<!-- SOURCE_VISUAL id="IS03-V05" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="52-57" type="tabella" description="Tre quesiti applicativi per distinguere induzione supervisionata, deduzione e apprendimento per rinforzo" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ### **5. Valutazione di un sistema intelligente**
 
@@ -379,12 +431,12 @@ Dopo aver scelto un metodo e addestrato un modello, resta la domanda decisiva: *
 
 | Aspetto | Che cosa valutare |
 |---|---|
-| **Metriche** | accuratezza, precisione, recall, F1; AUC e curva ROC; MAE, MSE, RMSE; **soddisfazione e usabilità**, **ergonomia** (in futuro anche l’esperienza d’uso: il modello è empatico? assertivo? gentile? prolisso?); **etica ed equità** (è stato creato con dati distorti?) |
-| **Metodi di validazione** | suddivisione **training/validation/test**; **cross-validation**; **bootstrap**; in futuro forse test basati sull’esperienza d’uso o test «psicologici» |
+| **Metriche** | accuratezza, precisione, recall, F1, curva ROC e AUC, MAE, MSE e RMSE; usabilità, soddisfazione, ergonomia, equità e bias |
+| **Metodi di validazione** | split training/validation/test, cross-validation e bootstrap; split per gruppi o soggetti quando esistono misure ripetute e split temporali per previsioni e processi non stazionari |
 | **Benchmarking** | confronto con **modelli precedenti** o con le **prestazioni umane**; standard e benchmark di settore; **classifiche pubbliche** (leaderboard) |
 | **Prestazioni reali** | studi con utenti e **test sul campo**; valutazione di **robustezza e generalizzabilità**; **stress test** |
 | **Monitoraggio continuo** | rilevamento del **data drift**; strategie di **riaddestramento**; **allarmi** di degrado delle prestazioni |
-| **Etica e conformità** | analisi di **bias ed equità**; valutazione di **privacy e sicurezza**; verifiche di conformità normativa (**AI Act 2024**) |
+| **Etica e conformità** | analisi di **bias ed equità**; valutazione di **privacy e sicurezza**; verifiche di conformità normativa |
 
 > 📌 **Le metriche principali (nota didattica).** Per un classificatore binario, con veri positivi $TP$, falsi positivi $FP$, veri negativi $TN$ e falsi negativi $FN$:
 > $$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \qquad \text{Precision} = \frac{TP}{TP + FP} \qquad \text{Recall} = \frac{TP}{TP + FN}$$
@@ -470,11 +522,11 @@ dove $F$ si addestra su dati in cui il SOC è stato misurato con metodi di labor
 
 > 💡 **Perché il SOC non si misura direttamente.** La carica residua di una batteria non ha un sensore dedicato: dipende in modo non lineare da tensione, corrente assorbita, temperatura e invecchiamento. Un modello che unisce queste misure è l’esempio tipico di grandezza che «si può solo stimare».
 
-### **7. Gli strumenti del corso**
+### **7. Strumenti e ambienti di lavoro**
 
 #### **7.1. MATLAB, Colab e Keras**
 
-Qualche nota per **preparare gli strumenti** delle prossime lezioni, che saranno ripresi in dettaglio più avanti. Gli strumenti principali del corso sono:
+Qualche nota per **preparare gli strumenti** delle applicazioni successive, che saranno ripresi in dettaglio più avanti. Gli strumenti principali  sono:
 
 - **MATLAB**: moltissimi strumenti e funzioni;
 - **Colab**: server online, TPU, …;
@@ -484,12 +536,12 @@ Offrono il **miglior compromesso** tra usabilità e complessità, con una buona 
 
 **Strumento 1: MATLAB**:
 
-- è il **primo strumento** del corso: non solo machine learning, ma molto di più, con **migliaia di funzioni** ben documentate e potenti;
+- è il **primo strumento** : non solo machine learning, ma molto di più, con **migliaia di funzioni** ben documentate e potenti;
 - gli studenti UNIMI possono scaricare una **licenza gratuita** (istruzioni sul portale d’Ateneo, o cercando «UNIMI MATLAB»), anche per installazioni su macchine offline;
 - conviene scaricare **l’ultima versione**, perché i toolbox migliorano rapidamente;
-- installare **tutti i toolbox**; se mancano spazio su disco o banda, almeno quelli principali del corso.
+- installare **tutti i toolbox**; se mancano spazio su disco o banda, almeno quelli principali .
 
-| Toolbox MATLAB principali per il corso |
+| Toolbox MATLAB per attività ingegneristiche |
 |---|
 | Deep Learning Toolbox |
 | Fuzzy Logic Toolbox |
@@ -504,14 +556,14 @@ Per i **progetti futuri** si possono inoltre scegliere altri toolbox disponibili
 
 - **Colab** (*Colaboratory*) è un ambiente di **notebook Jupyter gratuito**, senza configurazione, che gira **interamente nel cloud**;
 - permette di **scrivere ed eseguire codice**, **salvare e condividere** le analisi e accedere a **risorse di calcolo potenti**, tutto gratis dal browser;
-- è **molto utile** per ottimizzare il tempo del corso senza perdersi in dettagli tecnici.
+- è **molto utile** per ottimizzare il tempo senza perdersi in dettagli tecnici.
 
 > ⚠️ **Colab non è obbligatorio**. Richiede un account Google per salvare dati e codice. Le alternative, meno immediate, sono:
 > - usare **MATLAB** per tutto;
 > - installare strumenti locali (Jupyter Notebook, Anaconda, Python, …), probabilmente con una **GPU**;
 > - creare un **account Google dedicato** senza informazioni personali.
 >
-> Per queste alternative il corso non fornisce assistenza tecnica.
+> La scelta dell’ambiente dipende dall’hardware disponibile, dalle dipendenze e dai requisiti di privacy.
 
 **Keras**:
 
@@ -519,14 +571,14 @@ Per i **progetti futuri** si possono inoltre scegliere altri toolbox disponibili
 - motto: «dall’idea al risultato con il **minor ritardo possibile**»;
 - **non serve scaricarla**: è già disponibile in MATLAB e in Colab.
 
-> 💡 **Aggiornamento (nota didattica).** CNTK e Theano non sono più sviluppati. Le versioni recenti di Keras (Keras 3) girano sopra **TensorFlow, JAX o PyTorch**. Il ruolo di Keras come API di alto livello resta invariato.
+> 💡 CNTK e Theano sono progetti storici. Keras 3 è un’API di alto livello con backend TensorFlow, JAX o PyTorch; va scelta la versione compatibile con l’ambiente di esecuzione.
 
-<!-- SOURCE_VISUAL id="IS03-V32" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="63" type="immagine" description="Apertura della sezione sugli strumenti per le prossime lezioni" reason="Illustrazione della sezione" -->
+<!-- SOURCE_VISUAL id="IS03-V32" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="70" type="immagine" description="Apertura della sezione sugli strumenti software" reason="Illustrazione della sezione" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **7.2. Anaconda, Jupyter e gli IDE**
 
-**Strumento 3: Anaconda**:
+**Anaconda è una distribuzione possibile, non un requisito.** Include strumenti e librerie per calcolo scientifico e gestione degli ambienti; Miniforge/conda-forge è un’alternativa distinta.
 
 - uno strumento potente per il **calcolo scientifico** e l’**analisi dei dati**, che semplifica la **gestione dei pacchetti** e il deployment; molto usato da data scientist, ricercatori e sviluppatori;
 - è una **distribuzione di Python e R**;
@@ -534,9 +586,9 @@ Per i **progetti futuri** si possono inoltre scegliere altri toolbox disponibili
 - ha un ottimo **sistema di gestione dei pacchetti**: installare, aggiornare e gestire versioni diverse di pacchetti e dipendenze;
 - **Anaconda Navigator** è l’applicazione desktop per gestire applicazioni, pacchetti e **ambienti** senza riga di comando.
 
-**Jupyter Notebook e Colab**: Colab è **pronto all’uso** e più **indipendente dall’hardware** (per esempio si può provare il codice su TPU), con alcune limitazioni poco rilevanti per il corso.
+**Jupyter Notebook e Colab**: Colab è **pronto all’uso** e più **indipendente dall’hardware** (per esempio si può accedere a un acceleratore gestito), con limiti di disponibilità e risorse che dipendono dal servizio.
 
-**Oppure un IDE** (*Integrated Development Environment*, ):
+**Oppure un IDE** (*Integrated Development Environment*):
 
 | IDE | Caratteristiche |
 |---|---|
@@ -545,22 +597,26 @@ Per i **progetti futuri** si possono inoltre scegliere altri toolbox disponibili
 
 ![](imgs/Pasted%20image%2020261002040833.png)
 
-#### **7.3. Sondaggio in aula e il quarto strumento**
+#### **7.3. Pazienza e basi teoriche**
 
-**Sondaggio**: quanti di voi
+> 📌 **Teoria e pazienza.** La competenza richiede di comprendere ipotesi, dati, valutazione e ragioni per cui un metodo funziona o fallisce; la familiarità con i passaggi di uno strumento da sola non basta.
 
-- sanno programmare in **MATLAB o Python**?
-- hanno già **addestrato una rete neurale**, sui **propri dati** e non su un dataset standard?
-- usano **Colab**?
-- quale libreria usano per **grafici** e rappresentazioni?
+#### **7.4. Un flusso software aggiornato e riproducibile**
 
-> 📌 **Strumento 4: pazienza e teoria**. Questo **non** è un corso «come creare una rete neurale» né una «guida passo passo». Prima delle attività di laboratorio e di programmazione bisogna affrontare alcuni **temi teorici** rilevanti.
+Nel settembre 2026 NVIDIA ha annunciato un accordo per acquisire Hugging Face per circa 12,93 miliardi di dollari. Al 20 novembre 2026 si tratta ancora di un’operazione annunciata, con chiusura prevista nella prima metà del 2027; l’annuncio dichiara che la piattaforma resterà aperta e non vincolata all’hardware NVIDIA. La neutralità futura dell’ecosistema resta una questione da osservare. [Annuncio NVIDIA](https://nvidianews.nvidia.com/news/nvidia-to-acquire-hugging-face).
 
-### **8. Come studiare il corso: l’interiorizzazione**
+Una configurazione di lavoro attuale combina Python con NumPy, pandas e Matplotlib per dati e visualizzazione; scikit-learn per il machine learning classico; PyTorch o Keras per il deep learning; Hugging Face per modelli e artefatti preaddestrati; MATLAB quando è utile un ambiente integrato di calcolo ingegneristico. Per modelli locali si possono usare runtime come Ollama o LM Studio, verificando memoria, licenza, quantizzazione e lunghezza del contesto.
 
-**Dalla superficialità all’interiorizzazione.** Come si impara la teoria dell’AI? Lavorando e progettando **con «il libro» in mano**, oppure **a mani libere**, con la conoscenza nello zaino? **La conoscenza vera richiede interiorizzazione.** Il libro esiste davvero, ma il docente chiede di **non comprarlo**.
+Gli ambienti `venv`, `uv` e Miniforge/conda-forge isolano dipendenze e configurazioni. Un progetto riproducibile conserva in Git il codice e i file di ambiente, registra versioni dei dati, split, semi casuali e parametri degli esperimenti; segreti, pesi e grandi artefatti generati restano fuori dal repository salvo scelta esplicita. Jupyter/Colab accelera le prove, mentre un IDE come Visual Studio Code è adatto a progetti con più file. I notebook cloud richiedono autorizzazione prima di caricare dati personali, riservati o industriali.
 
-**Come ottenere l’interiorizzazione**. Soprattutto nel machine learning bisogna:
+Durante sviluppo e laboratorio si possono usare assistenti di programmazione quando l’attività lo consente, ma chi consegna resta responsabile di correttezza, test, sicurezza e licenze e deve saper spiegare il codice. In una prova d’esame, chatbot, ricerca web e materiali esterni sono esclusi salvo diversa indicazione esplicita.
+
+<!-- SOURCE_VISUAL id="IS03-V04" source="Lesson_03_Tools_AITaxonomy_SensorApplications.pdf" page="71" type="diagramma" description="Flusso riproducibile dai dati e sensori fino a esplorazione, addestramento, valutazione e distribuzione" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+### **8. Come consolidare la conoscenza**
+
+Per interiorizzare i metodi occorre collegare ipotesi, esempi, applicazioni e confronto tra alternative. Nel machine learning è utile:
 
 1. **studiare la teoria** e le relative **ipotesi di lavoro**;
 2. studiare **quanti più casi d’uso possibile**, per allargare il proprio punto di vista;
@@ -572,21 +628,21 @@ Inoltre:
 - costruirsi un **portfolio** di modelli e metodi di apprendimento, il più ampio possibile;
 - tenersi aggiornati sullo **stato dell’arte** (SOA) e sulle tendenze;
 - **scegliere sempre tra soluzioni diverse**;
-- **non considerare solo l’accuratezza**: c’è un’ampia gamma di **figure di merito** da considerare nel progetto (prossime lezioni);
+- **non considerare solo l’accuratezza**: c’è un’ampia gamma di **figure di merito** da considerare nel progetto (applicazioni successive);
 - migliorare il progetto **partendo dalle esperienze e dalle scoperte precedenti**: «**sulle spalle dei giganti**». L’analisi dello stato dell’arte è **fondamentale**.
 
-> 💡 **Il collegamento con il quarto driver.** L’elenco coincide con il «cervello del progettista» della Lezione 02, §9: conoscere più modelli, confrontarli, chiedersi che cosa imparano ed evitare la forza bruta è ciò che distingue chi **progetta** un sistema intelligente da chi **esegue** un tutorial.
+> 💡 La conoscenza del problema aiuta a scegliere dati, metodi e metriche pertinenti e a progettare confronti equi tra soluzioni.
 
 ### **9. Distinzioni da non confondere**
 
 | Coppia | Differenza chiave |
 |---|---|
-| **Narrow AI** / **AGI** | compito specifico, monomodale, oggi predominante / intelligenza generale di tipo umano, ancora teorica |
+| **Narrow AI** / **AGI** | capacità circoscritte, anche multimodali / capacità generali trasferibili tra domini, senza definizione condivisa |
 | **Probabilità di AGI** / **probabilità di disastro** | i due assi separati della AI Apocalypse Matrix |
 | **Test di Turing** / **ConceptARC** | abilità conversazionale / pensiero astratto su pochi esempi |
 | **Regressione** / **classificazione** | output continuo / output discreto (etichette) |
 | **Classificazione** / **clustering** | classi note e dati etichettati / gruppi scoperti in dati non etichettati |
-| **Supervisionato** / **semi-supervisionato** / **non supervisionato** / **rinforzo** | tutte le etichette / poche etichette / nessuna etichetta / ricompense da sequenze di azioni |
+| **Supervisionato** / **semi-supervisionato** / **non supervisionato** / **self-supervised** / **rinforzo** | etichette / poche etichette / nessuna etichetta esterna / obiettivi ricavati dai dati / ricompense da interazione |
 | **Politica stocastica** / **deterministica** | distribuzione di probabilità sulle azioni / azione esatta |
 | **Deduttivo** / **induttivo** | dalle regole ai dati («la nonna») / dai dati alla regola («la tangenziale alle 17:30») |
 | **Induzione** / **trasduzione** | dati → funzione generale / dati → valori nei punti di interesse, senza modello generale (k-NN) |
@@ -599,9 +655,9 @@ Inoltre:
 > ✅ **Punti principali**.
 > - **Preparare gli strumenti**: MATLAB con i toolbox principali, Colab (o le sue alternative), Anaconda e Jupyter, un IDE, Keras.
 > - In questo campo, per creare competenze serve l’**interiorizzazione**: teoria, molti casi d’uso, applicazione e confronto critico.
-> - La **Narrow AI** è l’AI di oggi: specifica e monomodale, senza Gestalt. L’**AGI** è ancora teorica e **manca di una definizione condivisa**; sulle sue probabilità e sui suoi rischi gli esperti sono divisi.
-> - Il **test di Turing** misura la conversazione, non l’intelligenza generale; test come **ConceptARC** e ARC-AGI mettono ancora in difficoltà le macchine.
+> - La **Narrow AI** copre capacità circoscritte, anche con input multimodali. L’**AGI** resta priva di una definizione condivisa; le previsioni sulla sua comparsa e sui rischi associati richiedono un criterio di valutazione esplicito.
+> - Il **test di Turing** misura l’indistinguibilità conversazionale secondo uno specifico protocollo. ConceptARC e ARC-AGI esplorano l’astrazione e l’interazione in compiti differenti; i risultati vanno letti con data, versione e protocollo.
 > - **Tassonomia**: regressione e classificazione (supervisionate), clustering (non supervisionato), apprendimento per rinforzo con agente, stato, azione, politica e ricompensa.
 > - **Deduttivo** contro **induttivo**: la maggior parte dei metodi di AI è induttiva e generalizza solo se dati e modello sono adeguati; la **trasduzione** va dal particolare al particolare.
-> - La **valutazione** comprende metriche, validazione, benchmarking, test sul campo, monitoraggio continuo ed etica/conformità.
+> - La **valutazione** comprende metriche quantitative e qualitative, validazione, benchmark, test sul campo, monitoraggio e requisiti etici e normativi.
 > - **AI e sensori**: sensori intelligenti, reti di sensori, strumentazione avanzata e **sensori virtuali**, come la stima dello stato di carica di una batteria.

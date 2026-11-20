@@ -1,13 +1,12 @@
 ## **Lezione 2: Regolamentazione, spazio delle feature, spiegabilità, Gestalt e opinioni sull’AI**
 
-La seconda lezione del corso **IS4** mette in relazione regole, tecnica e responsabilità. Partiamo dall’AI Act e dai diversi livelli di rischio; poi entriamo nel funzionamento dei modelli, nello spazio delle feature e negli attacchi avversari. Da qui nasce il problema della spiegabilità. Il percorso si allarga infine alla percezione umana, alla Gestalt, alle opinioni sull’AI e alla maturità delle tecnologie.
+Norme, capacità tecniche e qualità delle decisioni si incontrano nella progettazione dei sistemi intelligenti. La regolazione europea definisce obblighi in base ai rischi; il funzionamento dei modelli introduce problemi di robustezza e spiegabilità; l’interazione con le persone porta infine a considerare percezione, agenti e responsabilità di progetto.
 
-Materiale di riferimento: [PDF del corso](Lesson_02_Regulatios_InputSpace_Pertubations_XAI_Gestalt_Opinions_Drivers.pdf). [Indice del corso](../L0%20-%20Indice%20del%20corso.md) · [Lezione 01](../Lezione01/L01%20-%20Introduzione%20ai%20sistemi%20intelligenti.md).
+### **0. Quadro d’insieme**
 
-### **0. Il percorso della lezione**
+Il filo conduttore è la responsabilità lungo tutto il ciclo di vita: definire il contesto d’uso, capire che cosa calcola il modello, misurare i suoi limiti e rendere le decisioni controllabili. L’interazione naturale e gli agenti ampliano il sistema oltre la singola previsione, mentre la conoscenza di chi progetta orienta dati, modelli e verifiche.
 
-La lezione procede dal quadro normativo alle domande tecniche: come apprendono i modelli, perché possono sbagliare e come rendere comprensibili le loro decisioni. Chiude collegando queste questioni alla percezione umana e al modo in cui valutiamo le promesse dell’AI.
-
+---
 
 ### **1. La regolamentazione europea dell’AI**
 
@@ -35,13 +34,13 @@ Le regole distinguono i sistemi in base al rischio e associano a ciascun livello
 
 Esempi citati: una donna morta in Arizona dopo essere stata investita da un’auto a guida autonoma di **Uber** a Tempe (fonte CNN, 2018); **bot finanziari** che comprano e vendono azioni; un’AI che decide se concedere un **prestito**; il calcolo del costo di un’**assicurazione** con l’AI.
 
-> 💡 **Il filo con il resto della lezione.** Il secondo motivo, «non si sa perché il sistema ha deciso», è esattamente il problema della spiegabilità del §5. Le regole e le tecniche XAI rispondono alla stessa mancanza.
+La difficoltà di ricostruire le ragioni di una decisione diventa centrale quando si definiscono i requisiti di trasparenza e le tecniche di spiegazione.
 
 **Che cosa è «intelligente» per la legge**. Secondo l’AI Act un **sistema di AI** è un sistema basato su macchina, progettato per operare con **diversi livelli di autonomia**, che, per obiettivi espliciti o impliciti, **deduce dall’input** che riceve come generare **output** quali previsioni, contenuti, raccomandazioni o decisioni in grado di **influenzare ambienti fisici o virtuali**.
 
 > ⚠️ **Una precisazione sulla definizione.** L’art. 3 del Regolamento (UE) 2024/1689 specifica che il sistema può presentare **adattabilità dopo la diffusione**. La formulazione inglese riportata qui è abbreviata e, senza quel passaggio, risulta sintatticamente incompleta («may exhibit, for explicit or implicit objectives, infers…»).
 
-> 💡 **Una definizione funzionale.** La legge non definisce l’AI con una tecnica (reti neurali, alberi di decisione…) ma con ciò che il sistema **fa**: ricavare output da input con un certo grado di autonomia. È la stessa impostazione operativa della Lezione 01, §1.1.
+La definizione normativa descrive il comportamento del sistema: riceve input, li elabora con un certo grado di autonomia e genera output capaci di influenzare un ambiente fisico o virtuale.
 
 #### **1.3. I quattro livelli di rischio**
 
@@ -56,7 +55,7 @@ Il rischio inaccettabile diventa concreto quando un sistema incoraggia comportam
 
 ![](imgs/Pasted%20image%2020261002024716.png)
 
-> 💡 **Il rischio dipende dall’uso, non dalla tecnica.** Lo stesso modello di classificazione può essere a rischio minimo in un filtro antispam e ad alto rischio nella selezione dei CV. Chi progetta un sistema intelligente deve quindi chiedersi prima di tutto **in quale contesto** verrà usato.
+La classificazione dipende dal contesto d’impiego: lo stesso modello può operare in un filtro antispam a rischio minimo oppure contribuire alla selezione dei CV, un ambito ad alto rischio. La valutazione parte quindi dalla finalità e dagli effetti del sistema.
 
 #### **1.4. Gestione e obblighi per i sistemi ad alto rischio**
 
@@ -85,17 +84,26 @@ Per immettere sul mercato un sistema ad alto rischio occorre seguire un processo
 
 ![](imgs/Pasted%20image%2020261002024755.png)
 
-> 📌 **Collegamento con il corso.** Qualità dei dataset, tracciabilità, documentazione, robustezza e accuratezza non sono solo obblighi legali: sono i temi tecnici di molte lezioni successive (raccolta e armonizzazione dei dati, errori nei dataset, partizione dei dati, valutazione dell’accuratezza).
+Qualità dei dati, tracciabilità, documentazione, supervisione, robustezza e accuratezza sono requisiti di progettazione che permettono di controllare il sistema anche dopo la sua immissione sul mercato.
 
-L’AI Act è entrato in vigore il **1° agosto 2024**, ma le disposizioni si applicano in modo **scaglionato**:
+L’AI Act è entrato in vigore il **1° agosto 2024**. Le sue disposizioni hanno date di applicazione diverse; alcune scadenze per i sistemi ad alto rischio sono state successivamente prorogate:
 
-| Categoria | Data di applicazione |
-| --------------------------------------------------------- | ----------------------------------------------- |
-| sistemi **vietati** | dal **2 febbraio 2025** |
-| sistemi di AI per **finalità generali** (general-purpose) | obblighi specifici dal **2 agosto 2025** |
-| sistemi ad **alto rischio** | conformità richiesta entro il **2 agosto 2026** |
+| Obbligo | Decorrenza aggiornata |
+|---|---|
+| divieti relativi alle pratiche di AI a rischio inaccettabile | dal **2 febbraio 2025** |
+| specifiche disposizioni aggiuntive dell’articolo 5 introdotte dal Regolamento (UE) 2026/1744 | dal **2 dicembre 2026** |
+| obblighi per i modelli di AI per finalità generali | dal **2 agosto 2025** |
+| obblighi di trasparenza | dal **2 agosto 2026** |
+| adeguamento alla marcatura dei contenuti sintetici (art. 50(2)) per sistemi già sul mercato prima del 2 agosto 2026 | entro il **2 dicembre 2026** |
+| sistemi ad alto rischio dell’**Allegato III** (casi d’uso, per esempio lavoro e istruzione) | **2 dicembre 2027** |
+| sistemi ad alto rischio dell’**Allegato I** incorporati in prodotti regolamentati | **2 agosto 2028** |
 
-> ⚠️ **Un dettaglio sulle scadenze (nota didattica).** Nel regolamento la data del 2 agosto 2026 riguarda in generale i sistemi ad alto rischio dell’allegato III; per i sistemi ad alto rischio che sono componenti di sicurezza di prodotti già regolati (allegato I) il termine è il **2 agosto 2027**. Eventuali rinvii successivi alla data del materiale vanno verificati sulle fonti ufficiali.
+Il quadro è stato modificato dal **Regolamento (UE) 2026/1744**, entrato in vigore il 27 luglio 2026 nell’ambito del Digital Omnibus sull’AI. La modifica non sposta in blocco tutti gli obblighi: alcune disposizioni specifiche dell’articolo 5 e la transizione di marcatura per i sistemi generativi già sul mercato hanno la scadenza ravvicinata del 2 dicembre 2026; i termini per i sistemi ad alto rischio sono invece il 2 dicembre 2027 (Allegato III) e il 2 agosto 2028 (Allegato I). L’articolo 50(2) riguarda marcature leggibili automaticamente per contenuti sintetici e prevede condizioni e limiti: la data transitoria non va estesa indistintamente a ogni fornitore o contenuto. Consultare il [testo ufficiale del Regolamento](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744) e la [pagina della Commissione europea sull’AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai).
+
+<!-- SOURCE_VISUAL id="IS02-V03" source="Lesson_02_v2_Regulations_XAI_Gestalt_NaturalInteraction.pdf" page="13" type="cronologia normativa" description="Decorrenze già applicabili e proroghe del Digital Omnibus per gli obblighi ad alto rischio" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> ⚠️ **Applicazione progressiva.** L’entrata in vigore del regolamento, la decorrenza di un singolo obbligo e l’inizio delle regole per una specifica categoria di sistemi sono momenti diversi. La data corretta dipende dall’obbligo e dalla classificazione del caso d’uso.
 
 ### **2. Che cos’è un sistema intelligente**
 
@@ -143,21 +151,23 @@ Possiamo ora classificare i principali metodi di **machine learning**.
 
 ![](imgs/Pasted%20image%2020261002025523.png)
 
-### **3. Una rete addestrata è una funzione non lineare**
+### **3. Il modello addestrato come funzione non lineare**
 
-#### **3.1. Nessuna magia: solo funzioni**
+#### **3.1. Dall’input all’output**
 
-> 📌 **Modello addestrato come funzione**. Un modello di machine learning addestrato è **soltanto una funzione**, in generale **non lineare**:
+> 📌 **Modello addestrato come funzione**. Un modello di machine learning addestrato calcola una funzione, in generale **non lineare**:
 > $$\text{Out} = F(X)$$
-> dove $X$ è il **vettore di input** e $\text{Out}$ il **vettore di output**. L’uscita può essere un **singolo valore** (intero o reale) oppure un **vettore** o una **matrice**.
+> dove $X$ è il **vettore di input** e $\text{Out}$ il **vettore di output**. Se $X\in\mathbb{R}^{n}$ e $\text{Out}\in\mathbb{R}^{m}$, $n$ è il numero di feature d’ingresso e $m$ il numero di uscite. In classificazione, $m$ può corrispondere al numero di classi; in regressione scalare, $m=1$. L’uscita può quindi essere un singolo numero, un vettore o una matrice.
+
+Una singola immagine RGB di $256\times256$ pixel contiene $n=196\,608$ valori d’ingresso. Con le 1.000 classi di ImageNet, il classificatore produce $m=1\,000$ uscite.
 
 ![](imgs/Pasted%20image%2020261002025633.png)
 
-> 💡 **Che cosa cambia l’addestramento.** Prima dell’addestramento $F$ ha una forma fissata (per esempio una rete con una certa architettura) e parametri qualsiasi. L’addestramento sceglie i parametri in modo che $F$ produca gli output desiderati sugli esempi. Dopo, il modello non «ragiona»: calcola $F(X)$ per ogni nuovo input. Capire questo toglie la «magia» e rende naturali i problemi dei paragrafi successivi.
+> 💡 **Che cosa cambia l’addestramento.** Prima dell’addestramento $F$ ha un’architettura fissata e parametri ancora da stimare. L’addestramento seleziona questi parametri affinché la funzione produca output adeguati sugli esempi disponibili. Durante l’inferenza, il modello applica la funzione appresa a ogni nuovo input.
 
 #### **3.2. Spazio di input e spazio interno delle feature**
 
-Nello spazio delle feature la rete **non «pensa», ma «misura»**.
+La rete trasforma l’input in misure nello **spazio interno delle feature**, dove le rappresentazioni possono essere confrontate e le decisioni calcolate.
 
 | Spazio | Descrizione |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -173,6 +183,9 @@ dove $\phi$ sono gli strati interni che costruiscono la **rappresentazione** e $
 ![](imgs/Pasted%20image%2020261002025715.png)
 
 ![](imgs/Pasted%20image%2020261002025741.png)
+
+---
+
 #### **3.3. Frontiere di decisione**
 
 Nello spazio delle feature la rete separa le regioni associate a «negozi di scarpe», «struzzi» e «aspirapolvere» con **frontiere di decisione**. Come può una **piccola distorsione dell’immagine di un negozio di scarpe** farlo classificare come uno **struzzo** o un **aspirapolvere**? Perché la rete, per esempio un rilevatore visivo di oggetti, è una **funzione non lineare**: le frontiere possono passare **molto vicino** ai punti degli esempi, e un piccolo spostamento dell’input può spingere il punto nella regione sbagliata.
@@ -196,9 +209,9 @@ Anche i modelli neurali profondi **possono essere attaccati**. Come mostra il la
 
 **Una «vista» migliore**: con una rete **AlexNet** «off the shelf», addestrata su **ImageNet** (1,3 milioni di immagini), si parte da un’immagine simile nello spazio interno delle feature e la si modifica fino a cambiarne la classe.
 
-**O anche peggio**: con la stessa rete si ottengono immagini che non assomigliano a nulla ma vengono classificate con sicurezza. La domanda del docente: **la si può considerare uno strumento di elaborazione delle immagini sicuro e robusto?** Durante il corso si vedrà come **testare e prevenire** questi esiti indesiderati.
+Con la stessa rete si possono ottenere anche immagini prive di una forma riconoscibile per una persona, ma classificate con sicurezza. La domanda tecnica è se un classificatore che produce questi risultati possa essere considerato **robusto**. La risposta richiede valutazioni progettate per misurare il comportamento del modello in condizioni avverse.
 
-> 💡 **Collegamento con la Lezione 01.** La Lezione 01, §7.1, ha già mostrato pattern artificiali e immagini simili a rumore classificati con alta confidenza. Qui l’accento è sul meccanismo: la rete misura distanze in uno spazio delle feature che non coincide con la percezione umana, e le frontiere di decisione possono essere raggiunte con spostamenti minimi.
+Il meccanismo dipende dalla rappresentazione: il modello misura distanze nel proprio spazio delle feature, che può divergere dalla percezione umana, e una perturbazione minima può portare il campione oltre una frontiera di decisione.
 
 ![](imgs/Pasted%20image%2020261002030232.png)
 
@@ -294,11 +307,37 @@ I modelli neurali sono spesso descritti come **«scatole nere»**: osserviamo l�
 
 ![](imgs/Pasted%20image%2020261002031158.png)
 
-### **6. La Gestalt umana**
+### **6. Interazione naturale tra persone e sistemi intelligenti**
+
+Un sistema intelligente entra spesso in relazione diretta con le persone. In questi casi la qualità della previsione è solo una parte del risultato: il sistema deve interpretare richieste, segnali e condizioni operative, quindi restituire risposte comprensibili e adatte al contesto.
+
+L’interazione naturale mira a rendere lo scambio più vicino a quello umano. I sistemi di deep learning hanno ampliato le capacità di elaborazione del linguaggio, dei gesti e delle emozioni; la loro affidabilità dipende però dalla modalità e dall’ambiente d’uso.
+
+| Modalità | Tecnologie e applicazioni |
+|---|---|
+| **Voce e linguaggio** | riconoscimento vocale e NLP per diagnosi sanitarie, domotica e navigazione dei veicoli |
+| **Gesti** | robot industriali controllati con gesti, formazione in realtà aumentata e traduzione della lingua dei segni |
+| **Feedback aptico** | simulazioni per addestramento chirurgico, dispositivi sanitari indossabili e diagnostica industriale |
+| **Riconoscimento visivo ed emotivo** | analisi del sentiment dei clienti, coinvolgimento degli studenti e monitoraggio della salute mentale |
+| **Interazione multimodale e consapevole del contesto** | combinazione di più segnali, sensori contestuali e feedback adattivo in manutenzione predittiva, apprendimento adattivo e gestione del traffico urbano |
+
+<!-- SOURCE_VISUAL id="IS02-V01" source="Lesson_02_v2_Regulations_XAI_Gestalt_NaturalInteraction.pdf" page="47-48" type="modalità e tecnologie" description="Modalità di interazione naturale, sensori contestuali, feedback adattivo e applicazioni multimodali" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Il riconoscimento vocale mostra perché una metrica media non basta a valutare un sistema operativo. Su benchmark puliti, i sistemi automatici di speech recognition possono raggiungere un **Word Error Rate (WER) intorno all’1–3%**. In ambienti reali, rumore, accenti, lingua, vocabolario e dominio possono alzare sensibilmente il tasso d’errore. Anche un WER medio basso può nascondere una parola critica fraintesa: la valutazione deve quindi considerare l’effetto dell’errore sul compito completo, non soltanto la trascrizione.
+
+Nel **voice picking** in logistica, per esempio, l’operatore riceve istruzioni vocali mentre prepara gli ordini. Un errore di riconoscimento può rallentare il lavoro, compromettere la correttezza del prelievo o incidere sulla sicurezza. Il sistema va valutato in relazione a produttività, accuratezza e condizioni operative.
+
+<!-- SOURCE_VISUAL id="IS02-V02" source="Lesson_02_v2_Regulations_XAI_Gestalt_NaturalInteraction.pdf" page="50-51" type="voice picking e robot collaborativi" description="Sistema vocale per il prelievo in logistica e applicazioni avanzate con robot collaborativi" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+Le applicazioni avanzate comprendono anche i **cobot** (_collaborative robots_), robot progettati per operare a fianco delle persone. In questi sistemi, percezione dell’ambiente, comunicazione e controllo devono lavorare insieme per coordinare le azioni in sicurezza.
+
+### **7. La Gestalt umana**
 
 ![](imgs/Pasted%20image%2020261002031211.png)
 
-#### **6.1. Il tutto è più della somma delle parti**
+#### **7.1. Il tutto è più della somma delle parti**
 
 Perché siamo ancora **lontani dal cervello umano**?
 
@@ -308,9 +347,9 @@ Perché siamo ancora **lontani dal cervello umano**?
 > - «apprendere è **più che suscitare risposte meccaniche**»;
 > - **esperienze e percezioni** di chi apprende influenzano molto il modo in cui apprende.
 >
-> Questa caratteristica del cervello umano è **difficile da imitare** con i modelli di AI attuali.
+La percezione gestaltica organizza gli elementi in configurazioni globali: la lettura dell’insieme dipende dai rapporti fra le parti e può cambiare quando cambia la loro disposizione.
 
-#### **6.2. Figura e sfondo**
+#### **7.2. Figura e sfondo**
 
 Una parte dell’immagine può essere **«solo rumore»** per un pattern oppure la **feature più saliente** per un altro. Esempi classici:
 
@@ -320,18 +359,31 @@ Una parte dell’immagine può essere **«solo rumore»** per un pattern oppure 
 | immagine composta | **scimmia**, **leone** oppure **albero** |
 | immagine composta | **volto** di donna oppure **uomo che suona il sassofono** |
 
-> 💡 **Perché è difficile per una rete.** Un classificatore assegna a ogni pixel un peso fisso rispetto a una classe. Il cervello, invece, **riorganizza** la stessa scena: ciò che era sfondo diventa figura. Non esiste una sola risposta «giusta»; conta l’organizzazione globale.
+La stessa scena può essere organizzata in più modi: ciò che in una lettura è sfondo, in un’altra diventa figura. Il riconoscimento richiede di combinare relazioni globali, contesto e aspettative percettive, oltre alle caratteristiche locali dei pixel.
 
 ![](imgs/Pasted%20image%2020261002031227.png)
 
-#### **6.3. Leggi dell’organizzazione percettiva**
+#### **7.3. Leggi dell’organizzazione percettiva**
 
-La percezione visiva segue alcune **leggi di organizzazione**:
+La percezione raggruppa gli elementi usando indizi locali e relazioni tra parti. La tavola seguente raccoglie le principali leggi illustrate: 
 
-| Legge | Contenuto |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Prägnanz** («buona forma», ) | gli oggetti vengono percepiti nel modo **più semplice possibile**: si vede una serie di **cerchi sovrapposti** invece di un insieme di linee curve collegate |
-| **Destino comune** (_common fate_, ) | gli elementi che si muovono con la **stessa velocità e/o direzione** vengono percepiti come parti di **un unico stimolo** |
+| Legge | Come organizza la scena |
+|---|---|
+| **Prossimità** | Elementi vicini tendono a essere percepiti come un gruppo. |
+| **Somiglianza** | Elementi con caratteristiche visive simili vengono raggruppati. |
+| **Inclusione** | Gli elementi racchiusi entro un contorno comune sono letti come un insieme. |
+| **Simmetria** | Configurazioni simmetriche tendono a essere percepite come unità. |
+| **Chiusura** | Il sistema percettivo completa contorni incompleti e riconosce forme non disegnate per intero. |
+| **Continuità** | Tratti allineati o con andamento regolare vengono interpretati come parti di un percorso continuo. |
+| **Connessione** | Elementi collegati da una linea o da un legame visivo sono percepiti come appartenenti allo stesso gruppo. |
+| **Figura e sfondo** | Una regione emerge come figura mentre le aree circostanti assumono il ruolo di sfondo; l’interpretazione può alternarsi. |
+| **Prägnanz** («buona forma») | La scena viene organizzata nella configurazione più semplice e stabile compatibile con gli stimoli. |
+| **Destino comune** (_common fate_) | Elementi che si muovono nella stessa direzione o con lo stesso andamento vengono percepiti come un unico insieme dinamico. |
+
+<!-- SOURCE_VISUAL id="IS02-V04" source="Lesson_02_v2_Regulations_XAI_Gestalt_NaturalInteraction.pdf" page="56-57" type="tavola delle leggi gestaltiche" description="Prossimità, somiglianza, inclusione, simmetria, chiusura, continuità, connessione, figura-sfondo e destino comune" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+La prossimità e la somiglianza operano già in una disposizione statica; il destino comune richiede invece di osservare come gli elementi cambiano nel tempo. La figura-sfondo evidenzia che il riconoscimento dipende anche dal modo in cui la scena viene segmentata.
 
 ![](imgs/Pasted%20image%2020261002031340.png)
 
@@ -343,55 +395,22 @@ La percezione visiva segue alcune **leggi di organizzazione**:
 
 ![](imgs/Pasted%20image%2020261002031551.png)
 
-#### **6.4. Mettere alla prova ChatGPT-4**
+#### **7.4. Verificare la lettura gestaltica con un modello visivo**
 
-Per osservare questi limiti, il docente propone a **ChatGPT-4** due immagini basate sulla Gestalt.
+Un test del 2024 ha sottoposto a **ChatGPT-4** due immagini costruite per mettere alla prova il destino comune e il rapporto figura-sfondo.
 
 | Test | Risposta del modello | Esito |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | **destino comune + figura/sfondo** | descrive **figure stilizzate ripetute** in sequenza, che suggeriscono movimento o progressione, su uno **zigzag** che potrebbe rappresentare montagne o un grafico, forse un elemento di identità visiva sul tema della crescita o del lavoro di squadra | **mancato**: invertendo lo sfondo, le figure sono **frecce** |
-| **Prägnanz** («buona forma», ) | riconosce la forma | **«Nice job!»** |
+| **Prägnanz** («buona forma») | riconosce la forma | **«Nice job!»** |
 
-> 💡 **Che cosa mostra il test.** Il modello descrive molto bene le **parti** (sagome, zigzag, ritmo), ma non esegue la **riorganizzazione figura-sfondo** che fa emergere le frecce. È un esempio concreto del limite del §6.1: descrivere le parti non equivale a percepire il tutto. Il risultato riguarda la versione del modello usata dal docente.
+Il primo risultato descrive le **parti** — sagome, zigzag e ritmo — senza individuare le frecce che emergono invertendo lo sfondo; nel secondo riconosce la forma semplice. Il confronto mostra che descrivere dettagli locali e interpretare la struttura globale sono capacità distinte.
+
+> 💡 **Aggiornamento sui modelli visivi (20 novembre 2026).** Il test con GPT-4 è un’osservazione storica legata a una versione specifica. OpenAI ha annunciato **GPT-6.2 Astra** e **GPT-6.2 Sol** il 17 novembre 2026; entrambi accettano testo e immagini. Un singolo esempio non consente di concludere che un modello possieda o non possieda una capacità percettiva generale: occorrono prove controllate su più immagini e condizioni. [Note ufficiali sui modelli OpenAI](https://help.openai.com/en/articles/9624314-model-release-notes), [documentazione GPT-6.2 Astra](https://developers.openai.com/api/docs/models/gpt-6.2-astra).
 
 ![](imgs/Pasted%20image%2020261002031632.png)
 
 ![](imgs/Pasted%20image%2020261002031715.png)
-
-### **7. Opinioni sull’AI**
-
-#### **7.1. Il pubblico: il sondaggio britannico**
-
-Nel novembre 2022 l’**Ada Lovelace Institute**, insieme all’**Alan Turing Institute**, ha condotto in Gran Bretagna un **sondaggio nazionale rappresentativo** sugli atteggiamenti verso l’AI, coinvolgendo **4.000 adulti**. I risultati mostrano un’opinione pubblica sfumata, con valutazioni diverse a seconda dell’uso considerato.
-
-**Sintesi**:
-
-- per la **maggior parte** degli usi dell’AI chiesti, le persone hanno opinioni **nel complesso positive**, ma esprimono **preoccupazioni** su alcuni usi;
-- approfondendo, il pubblico britannico ha opinioni **molto sfumate** su vantaggi e svantaggi dei **diversi** usi;
-- il pubblico **vuole una regolamentazione** delle tecnologie di AI, anche se questo varia con l’**età**.
-
-![](imgs/Pasted%20image%2020261002031749.png)
-
-![](imgs/Pasted%20image%2020261002031805.png)
-
-![](imgs/Pasted%20image%2020261002031816.png)
-
-#### **7.2. Gli esperti**
-
-| Chi                                                    | Opinione                                                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Bill Gates**, Microsoft                              | «Una svolta nel machine learning varrebbe **dieci Microsoft**»                                                                                                                                                                                                                                                                                                                        |
-| **Tony Tether**, DARPA                                 | «Il machine learning è la **prossima Internet**»                                                                                                                                                                                                                                                                                                                                      |
-| **John Hennessy**, Stanford                            | «Il machine learning è **la novità del momento**»                                                                                                                                                                                                                                                                                                                                     |
-| **Stephen Hawking**                                    | ==l’AI sarà «**la cosa migliore o la peggiore**» per l’umanità; lo sviluppo di un’AI completa potrebbe segnare **la fine della specie umana**: si riprogetterebbe da sola a velocità crescente, e gli umani, limitati dalla lenta evoluzione biologica, **non potrebbero competere**==                                                                                                |
-| **Larry Page**, Google                                 | l’AI sarebbe **la versione definitiva di Google**, il motore di ricerca che capisce tutto il Web e ciò che vuoi; «siamo lontanissimi», ma ci si avvicina un passo alla volta                                                                                                                                                                                                          |
-| **Elon Musk** («probabilmente cambiando opinione»)     | il progresso dell’AI (non quella «ristretta») è **quasi esponenziale**; il rischio di qualcosa di seriamente pericoloso è in un orizzonte di **cinque anni, dieci al massimo**; serve una **supervisione regolatoria** nazionale e internazionale: «con l’intelligenza artificiale **evochiamo il demone**»                                                                           |
-| **Bill Gates**, opinione recente                       | gli umani **dovrebbero preoccuparsi**; prima le macchine faranno molti lavori senza essere superintelligenti, e sarà positivo se gestito bene; qualche decennio dopo l’intelligenza sarà abbastanza forte da **destare preoccupazione**; «sono d’accordo con Elon Musk». La citazione ricorda anche che **Microsoft ha investito 10 miliardi di dollari** in OpenAI (Bloomberg, 2023) |
-| **Andrew Ng**, informatico con oltre 167.000 citazioni | preoccuparsi oggi di una superintelligenza malvagia è come **preoccuparsi della sovrappopolazione su Marte**: non ci siamo ancora nemmeno atterrati; «l’AI è la **nuova elettricità**»                                                                                                                                                                                                |
-
-A questo punto, prova a formulare la tua opinione: quali applicazioni ti sembrano promettenti e quali richiedono più cautela?
-
-> 💡 **Leggere le opinioni.** Le citazioni coprono quasi tutto lo spettro: entusiasmo economico, rischio esistenziale, cautela regolatoria, scetticismo sul rischio a breve. Il fatto che la stessa persona (Gates, Musk) cambi posizione nel tempo mostra che non sono conclusioni scientifiche, ma valutazioni legate al momento e al ruolo di chi parla.
 
 ### **8. Usabilità e maturità delle tecnologie**
 
@@ -401,16 +420,18 @@ Un esempio di tecnologia che ambisce a cambiare il modo in cui le persone intera
 
 **Un esempio di interazione avanzata**:
 
-- **Noland Arbaugh** è il **primo paziente** Neuralink con il chip **Telepathy** impiantato nel cervello, che gli permette di usare dispositivi elettronici **solo con il pensiero**;
-- è rimasto **paralizzato dalle spalle in giù** dopo un incidente subacqueo otto anni prima; come primo passo **gioca a scacchi e a Civilization**;
-- il sistema comprende **batteria**, **caricatore wireless**, **processore**, **I/O**, **elettrodi** e **involucro**;
-- un **robot chirurgico** impianta fili ultrasottili con **1024 elettrodi**, più sottili di un capello, nelle regioni specifiche del cervello.
+- nel **2024**, **Noland Arbaugh** è stato il primo partecipante del trial clinico PRIME a ricevere l’impianto N1 di Neuralink;
+- dopo una lesione midollare, ha usato l’interfaccia per controllare un cursore e giocare a scacchi e a *Civilization VI*;
+- l’impianto registra attività neurale con **1.024 elettrodi distribuiti su 64 fili flessibili**; un robot chirurgico inserisce i fili nella corteccia;
+- elettronica, batteria ricaricabile per induzione e collegamento wireless trasmettono i segnali a un’applicazione esterna, che li decodifica in comandi.
+
+Il dispositivo resta **sperimentale**: il trial PRIME valuta sicurezza e funzionalità iniziale del sistema. Neuralink riferiva **21 partecipanti** nei propri aggiornamenti del 28 gennaio 2026; il dato è una dichiarazione aziendale riferita a quella data. [Studio PRIME e descrizione tecnica](https://neuralink.com/updates/prime-study-progress-update/), [aggiornamenti dello studio](https://neuralink.com/updates/).
 
 ![](imgs/Pasted%20image%2020261002031954.png)
 
 ![](imgs/Pasted%20image%2020261002032103.png)
 
-#### **8.2. Il «Hype cycle» di Gartner**
+#### **8.2. L'«Hype cycle» di Gartner**
 
 > 📌 **Hype cycle**. Grafico di **Gartner**, società statunitense di ricerca e consulenza IT, che rappresenta **maturità, adozione e applicazione sociale** di tecnologie specifiche, con le **aspettative** in funzione del **tempo**.
 
@@ -429,15 +450,28 @@ L’**hype cycle** applicato all’AI e al machine learning colloca queste tecno
 
 ![](imgs/Pasted%20image%2020261002032157.png)
 
-### **9. I quattro driver dell’AI**
+### **9. Agenti per sistemi intelligenti**
 
-**I tre driver «classici»** dell’AI sono presentati graficamente; il testo nativo conserva esplicitamente gli **algoritmi**, con un richiamo al **deep learning** e l’invito «tenetelo a mente».
+In molte applicazioni il compito non termina con una previsione. Il sistema deve anche interpretare un obiettivo, coordinare più passaggi, consultare fonti diverse e sostenere una decisione. Un **agente** estende il modello con un’interfaccia verso strumenti, dati e persone.
 
-Tre risorse sostengono il progresso dell’AI: **dati**, **potenza di calcolo** e **algoritmi**. Il deep learning è un esempio di come questi fattori possano combinarsi.
+Un modello puro realizza una mappatura tra input e output. Un agente può invece:
+
+- interpretare un obiettivo e suddividerlo in sotto-compiti;
+- consultare database, documenti e altri strumenti;
+- combinare fonti eterogenee e chiedere chiarimenti alle persone;
+- produrre raccomandazioni o avviare azioni autorizzate.
+
+Gli agenti basati su LLM e modelli multimodali sono utili quando occorre osservare, ragionare e agire su dati diversi. Un assistente per la manutenzione industriale può consultare manuali, allarmi e immagini delle macchine; un sistema di monitoraggio ambientale può integrare immagini satellitari, misure dei sensori e regolamenti; un assistente per la supply chain può collegare email, eventi ERP, previsioni della domanda e immagini del magazzino. Gli stessi strumenti possono supportare etichettatura e trasformazione dei dati.
+
+L’accesso a strumenti amplia le capacità del sistema e introduce nuovi requisiti: permessi minimi, tracciabilità delle azioni, conferma umana per operazioni rilevanti e gestione degli errori delle fonti.
+
+### **10. I quattro driver dell’AI**
+
+Tre risorse sostengono il progresso dell’AI: **dati**, **modelli** e **potenza di calcolo**, resa disponibile in particolare dalle GPU. Gli algoritmi definiscono come costruire e addestrare i modelli; nel deep learning, la disponibilità di GPU può incidere in modo rilevante su tempi e costi.
 
 ![](imgs/Pasted%20image%2020261002032417.png)
 
-> 📌 **Il quarto driver: il cervello del progettista**. È ciò che trasforma dati, calcolo e algoritmi in un sistema che funziona:
+> 📌 **Il quarto driver: la conoscenza di chi progetta**. È ciò che orienta dati, modelli e calcolo verso un sistema utile:
 >
 > - **conoscenza a priori** del problema;
 > - **selezione** dei dati;
@@ -450,9 +484,30 @@ Tre risorse sostengono il progresso dell’AI: **dati**, **potenza di calcolo** 
 > - **sistemi ibridi**;
 > - **divide et impera**.
 
-> 💡 **Il senso del quarto driver.** Più dati e più calcolo non sostituiscono le scelte di progetto. È lo stesso messaggio della Lezione 01 (il martello e il chiodo, lo spettro dati-conoscenza): conoscere il processo permette di usare meno dati, modelli più semplici e spiegabili, esperimenti meglio progettati.
+> 💡 **Il senso del quarto driver.** La conoscenza del problema permette di selezionare dati pertinenti, scegliere modelli proporzionati e progettare esperimenti informativi. Questa attività riduce l’uso indiscriminato della forza bruta e favorisce sistemi più controllabili.
 
-### **10. Distinzioni da non confondere**
+### **11. Opinioni sull’AI: previsioni, rischi e priorità attuali**
+
+Le valutazioni sull’intelligenza artificiale riflettono aspettative e rischi diversi. Le dichiarazioni storiche aiutano a vedere come il dibattito sia cambiato nel tempo; per orientarsi oggi occorre distinguere le previsioni già verificabili dalle questioni ancora aperte.
+
+| Voce e periodo | Posizione espressa |
+|---|---|
+| **Stephen Hawking** | l’AI potrebbe diventare «la cosa migliore o la peggiore» per l’umanità; un’AI completa potrebbe riprogettarsi a velocità crescente e superare gli esseri umani, limitati dall’evoluzione biologica |
+| **Elon Musk, 2014–2017** | il progresso dell’AI generale sarebbe vicino a una crescita esponenziale; Musk collocava entro cinque anni, al massimo dieci, il rischio di un evento seriamente pericoloso e chiedeva una supervisione regolatoria. La finestra temporale indicata è trascorsa senza l’evento previsto |
+| **Bill Gates, 2015** | le macchine potrebbero prima svolgere molti lavori senza essere superintelligenti, con effetti positivi se ben gestite; una capacità molto maggiore avrebbe richiesto cautela. Nel 2023 Microsoft ha investito 10 miliardi di dollari in OpenAI, mostrando che attenzione ai rischi e investimento nell’AI possono coesistere |
+
+Nel dibattito del **2026** ricorrono quattro prospettive:
+
+- **la crescita per scaling continua**: modelli più grandi restano la via per migliorare i sistemi di frontiera;
+- **lo scaling incontra rendimenti ridotti**: i progressi dipendono sempre più da strumenti, memoria e agenti;
+- **il rischio principale è operativo**: sistemi ordinari, distribuiti su larga scala e gestiti male possono produrre danni concreti;
+- **il rischio è anche la concentrazione**: pochi fornitori controllano modelli da cui dipendono molte organizzazioni.
+
+Queste posizioni restano controverse. Per valutarle servono evidenze su capacità, costi, incidenti, distribuzione dei benefici e concentrazione del mercato, oltre alle previsioni sul futuro.
+
+**Domanda di riflessione:** quali applicazioni dell’AI offrono benefici concreti e quali richiedono verifiche, supervisione o limiti più severi?
+
+### **12. Distinzioni da non confondere**
 
 | Coppia | Differenza chiave |
 | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
@@ -466,16 +521,19 @@ Tre risorse sostengono il progresso dell’AI: **dati**, **potenza di calcolo** 
 | **Minima modifica che ribalta** / **massima modifica che mantiene** | spiegazione controfattuale / stabilità della decisione |
 | **Prägnanz** / **destino comune** | forma più semplice / elementi con stesso moto come unico stimolo |
 | **Hype** / **maturità** | aspettative / produttività reale |
-| **Tre driver classici** / **quarto driver** | risorse (tra cui algoritmi) / scelte e conoscenza del progettista |
+| **Tre driver classici** / **quarto driver** | dati, modelli e GPU / conoscenza e scelte di progetto |
 
-### **11. Sintesi della lezione**
+### **13. Sintesi della lezione**
 
 > ✅ **Punti principali**.
 >
-> - L’AI è ormai **quasi ovunque** (anche per effetto dell’hype) e continua a migliorare, ma **non si sa esattamente che cosa impari** una rete neurale.
-> - Alcune caratteristiche umane rilevanti, come la **Gestalt**, **non sono (ancora) disponibili**.
+> - Un sistema di AI si valuta nel contesto d’uso e lungo il suo ciclo di vita, tenendo conto dei rischi e degli obblighi applicabili.
+> - Un modello addestrato realizza una funzione dai vettori di input alle uscite; le sue rappresentazioni interne possono divergere dalla percezione umana.
 > - **Piccole perturbazioni** dell’input possono provocare **grandi cambiamenti** nell’output di una rete: servono test e contromisure.
-> - La **XAI** risponde alla mancanza di spiegabilità con confidenza, contributi delle feature e spiegazioni controfattuali.
-> - L’**AI Act** classifica i sistemi per **rischio** e impone ai sistemi ad alto rischio dati di qualità, tracciabilità, documentazione, supervisione umana e robustezza, con scadenze dal 2025 al 2026.
-> - Le **opinioni** sull’AI sono **molto diverse**, tra pubblico ed esperti.
-> - Il **quarto driver**, il cervello del progettista, è **il più importante**.
+> - La **XAI** presenta fattori, confidenza e cambiamenti controfattuali; interpretabilità e spiegabilità descrivono aspetti diversi della comprensione del modello.
+> - L’interazione naturale combina voce, gesti, feedback aptico, visione e sensori contestuali. La qualità va misurata sul compito e sulle sue condizioni reali.
+> - Gli agenti estendono i modelli con strumenti e accesso a fonti di dati; permessi, tracciabilità e supervisione diventano requisiti di progetto.
+> - La Gestalt descrive come figura, sfondo e relazioni globali organizzino la percezione; le prove su modelli visivi vanno ripetute su più esempi.
+> - Le scadenze dell’AI Act sono progressive: per l’alto rischio, Allegato III dal **2 dicembre 2027** e Allegato I dal **2 agosto 2028**.
+> - Dati, modelli e GPU sono driver tecnici; la conoscenza di chi progetta orienta la scelta e l’uso di ciascuna risorsa.
+> - Le opinioni sull’AI comprendono previsioni storiche e questioni ancora aperte, come la continuità dello scaling, i rischi operativi e la concentrazione del mercato.

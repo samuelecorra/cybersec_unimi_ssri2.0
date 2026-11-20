@@ -8,15 +8,11 @@ La ventiduesima lezione del corso **IS4** affronta il problema pratico dei model
 - le CNN come **estrattori automatici di feature**;
 - l’**addestramento greedy strato per strato**, la soluzione storica ai problemi di addestramento delle reti profonde.
 
-La seconda parte è dedicata ai **modelli generativi**: GAN, **modelli di diffusione** e il rischio del **Model Autophagy Disorder**. Chiudono la lezione i **limiti attuali** (scaling laws) e l’uso di **LLM e agenti** nella progettazione del ML.
+La parte conclusiva è dedicata ai **modelli generativi**: GAN, **modelli di diffusione** e il rischio del **Model Autophagy Disorder**. Chiudono la lezione i **limiti attuali** (scaling laws) e l’uso di **LLM e agenti** nella progettazione del ML.
 
-Fonte: [PDF della Lezione 22](Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf), 91 pagine, senza supplementi. Molte slide sono adattate da materiali di Tony Martinez; la sezione sulle GAN è di Ruggero Donida Labati e Fabio Scotti. Le note didattiche aggiunte e i frammenti di codice ricostruiti sono segnalati. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
 
 ### **0. Struttura della lezione**
 
-_(slide pp. 1–2)_
-
-Titolo originale: *Autoencoders, Fine Tuning and Transfer Knowledge, Automatic Feature Extraction, Training of Deep Learning Models*. L’indice (p. 2) elenca:
 
 1. **autoencoder**;
 2. **addestramento e progetto** dei modelli di deep learning: **fine-tuning**, **transfer knowledge**, **data augmentation**, **oblio catastrofico**;
@@ -29,39 +25,36 @@ Titolo originale: *Autoencoders, Fine Tuning and Transfer Knowledge, Automatic F
 
 ### **1. Autoencoder: deep learning non supervisionato**
 
-_(slide pp. 3–17)_
 
 #### **1.1. Perché l’apprendimento non supervisionato**
 
-_(slide pp. 3–6)_
 
-> 📌 **Apprendimento non supervisionato** (p. 4). Si addestra **senza etichette**. È utile perché:
+> 📌 **Apprendimento non supervisionato**. Si addestra **senza etichette**. È utile perché:
 > - può usare **dati non etichettati**, disponibili in quantità praticamente **illimitata**;
 > - il modello si può poi **rifinire** con le tecniche supervisionate standard, per esempio la backpropagation come in una normale rete feed-forward;
 > - serve quando le **etichette sono poche**: un dataset **parzialmente etichettato**, cioè **semi-supervisionato**.
 
-**L’idea di fondo** (p. 5). Senza etichette, i metodi cercano di **modellare la distribuzione dei dati di input**, per esempio i cluster. Si ottimizza:
+**L’idea di fondo**. Senza etichette, i metodi cercano di **modellare la distribuzione dei dati di input**, per esempio i cluster. Si ottimizza:
 
 - l’**errore di ricostruzione**, oppure
 - la **log-verosimiglianza** dei dati.
 
-| Modelli non supervisionati (p. 5) | Dove li abbiamo visti |
+| Modelli non supervisionati | Dove li abbiamo visti |
 |---|---|
 | **PCA**, **k-means** (di base) | Lezione 18, §2; Lezione 19 |
 | **Independent Component Analysis** | Lezione 18, §3.3 |
-| **denoising autoencoder**, **sparse autoencoder** | questa lezione (evidenziati nella slide come argomento di oggi) |
+| **denoising autoencoder**, **sparse autoencoder** | questa lezione (trattati come temi centrali) |
 | **Restricted Boltzmann Machine**, **sparse coding**, … | citati soltanto |
 
-**L’obiettivo** (p. 6) è **addestrare efficacemente gli strati nascosti** di una rete profonda. È un compito difficile (§6), e la slide annuncia la soluzione: **autoencoder** e **greedy layer-wise training** (§7).
+**L’obiettivo** è **addestrare efficacemente gli strati nascosti** di una rete profonda. È un compito difficile (§6), e la soluzione consiste in **autoencoder** e **greedy layer-wise training** (§7).
 
-<!-- SOURCE_VISUAL id="IS22-V01" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="6" type="diagramma" description="Rete profonda con strati nascosti da addestrare: il compito difficile risolto con gli autoencoder" reason="Diagramma presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V01" source="L22-web.pdf" page="6" type="diagramma" description="Rete profonda con strati nascosti da addestrare: il compito difficile risolto con gli autoencoder" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **1.2. Che cos’è un autoencoder**
 
-_(slide pp. 7–13)_
 
-> 📌 **Autoencoder (AE)** (p. 7). Una rete che:
+> 📌 **Autoencoder (AE)**. Una rete che:
 > - cerca di creare **feature generiche** dai dati (**codifica**, *encoding*);
 > - impara la **funzione identità** (uscita = ingresso) imparando le **sotto-feature importanti**;
 > - si addestra perché $X' = X$, con la **backpropagation** come una normale rete feed-forward.
@@ -76,29 +69,29 @@ _(slide pp. 7–13)_
 > - il **denoising autoencoder** riceve un input corrotto $\tilde{\mathbf{x}} = \mathbf{x} + \boldsymbol{\varepsilon}$ ma deve ricostruire $\mathbf{x}$ pulito;
 > - lo **sparse autoencoder** aggiunge al costo una penalità come $\lambda \sum_j |h_j|$, che tiene attive poche unità alla volta.
 
-> 💡 **Autoencoder e PCA (nota didattica).** Un autoencoder **lineare** (senza funzioni di attivazione) addestrato con l’errore quadratico impara lo **stesso sottospazio** delle prime $k$ componenti principali. Le non linearità permettono all’autoencoder di catturare strutture **curve** che la PCA non vede. Anche la slide p. 14 lo ricorda: la PCA è un metodo non supervisionato **come** gli autoencoder.
+> 💡 **Autoencoder e PCA (nota didattica).** Un autoencoder **lineare** (senza funzioni di attivazione) addestrato con l’errore quadratico impara lo **stesso sottospazio** delle prime $k$ componenti principali. Le non linearità permettono all’autoencoder di catturare strutture **curve** che la PCA non vede. Anche la PCA è un metodo non supervisionato **come** gli autoencoder.
 
-<!-- SOURCE_VISUAL id="IS22-V02" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="7" type="diagramma" description="Autoencoder con ingresso X, collo di bottiglia e uscita X’" reason="Architettura presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V02" source="L22-web.pdf" page="7" type="diagramma" description="Autoencoder con ingresso X, collo di bottiglia e uscita X’" reason="Architettura presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Autoencoder impilati** (*stacked auto-encoders*, pp. 8–12). Si impilano **molti autoencoder** (anche sparsi) in successione e li si addestra con il **greedy layer-wise training**:
 
-1. si addestra il primo autoencoder: **uscita = ingresso**, la stessa immagine; ogni neurone d’uscita ricostruisce, per esempio, il **livello di grigio di un pixel** (p. 8);
-2. si **elimina lo strato d’uscita del decoder** e si **tengono i parametri** dell’encoder (p. 9); l’uscita nascosta diventa l’ingresso del secondo autoencoder, che si addestra allo stesso modo;
-3. la **regola d’oro** (p. 10): **ridurre il numero di neuroni** procedendo verso le uscite;
-4. si fa un addestramento **supervisionato sull’ultimo strato** (p. 11). È possibile perché si hanno gli **ingressi $X$ e i pesi degli AE**, quindi si possono calcolare gli ingressi dello strato finale ($h_1, h_2, \dots$), e si hanno le **etichette** nel vettore $Y$;
+1. si addestra il primo autoencoder: **uscita = ingresso**, la stessa immagine; ogni neurone d’uscita ricostruisce, per esempio, il **livello di grigio di un pixel**;
+2. si **elimina lo strato d’uscita del decoder** e si **tengono i parametri** dell’encoder; l’uscita nascosta diventa l’ingresso del secondo autoencoder, che si addestra allo stesso modo;
+3. la **regola d’oro**: **ridurre il numero di neuroni** procedendo verso le uscite;
+4. si fa un addestramento **supervisionato sull’ultimo strato**. È possibile perché si hanno gli **ingressi $X$ e i pesi degli AE**, quindi si possono calcolare gli ingressi dello strato finale ($h_1, h_2, \dots$), e si hanno le **etichette** nel vettore $Y$;
 5. infine si fa un addestramento **supervisionato di tutta la rete** per **rifinire tutti i pesi** (*fine-tuning*, p. 12).
 
-<!-- SOURCE_VISUAL id="IS22-V03" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="8" type="diagramma" description="Primo autoencoder impilato: si addestra con uscita uguale all’ingresso" reason="Diagramma presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V03" source="L22-web.pdf" page="8" type="diagramma" description="Primo autoencoder impilato: si addestra con uscita uguale all’ingresso" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V04" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="10" type="diagramma" description="Autoencoder impilati con numero di neuroni decrescente verso le uscite" reason="Diagramma presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V04" source="L22-web.pdf" page="10" type="diagramma" description="Autoencoder impilati con numero di neuroni decrescente verso le uscite" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V05" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="12" type="diagramma" description="Fine-tuning supervisionato dell’intera rete dopo il pre-addestramento" reason="Diagramma presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V05" source="L22-web.pdf" page="34" type="diagramma" description="Fine-tuning supervisionato dell’intera rete dopo il pre-addestramento" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> ⚠️ **Lo stato dell’arte** (p. 13).
+> ⚠️ **Lo stato dell’arte**.
 > - Il greedy layer-wise training con autoencoder è stato **storicamente molto importante** per **inizializzare** le reti profonde, prima che le ricette di addestramento moderne diventassero robuste.
 > - Oggi è **meno comune** per CNN standard e transformer, perché si usano:
 >   - **inizializzazioni** e **normalizzazioni** migliori;
@@ -111,64 +104,74 @@ _(slide pp. 7–13)_
 
 #### **1.3. Applicazioni degli autoencoder**
 
-_(slide pp. 14–17)_
 
-**Riduzione della dimensionalità** (p. 14). Esempio sul dataset **MNIST**: immagini $28 \times 28$ in bianco e nero di singole cifre, ridotte dalle **784 dimensioni** originali a **2**. Nello spazio 2D le cifre formano gruppi distinti. (Nel testo della slide «28×28» compare duplicato.)
+**Riduzione della dimensionalità**. Esempio sul dataset **MNIST**: immagini $28 \times 28$ in bianco e nero di singole cifre, ridotte dalle **784 dimensioni** originali a **2**. Nello spazio 2D le cifre formano gruppi distinti. (Nel testo della slide «28×28» compare duplicato.)
 
-**Usare solo il decoder** (p. 15). Dopo l’addestramento si può usare **solo il decoder**, dandogli in ingresso vettori 2D scelti a mano: per esempio l’ingresso $[20, 20]$ produce un’immagine di cifra. La slide invita a notare l’interessante **continuità dello spazio latente**: punti vicini producono immagini simili.
+**Usare solo il decoder**. Dopo l’addestramento si può usare **solo il decoder**, dandogli in ingresso vettori 2D scelti a mano: per esempio l’ingresso $[20, 20]$ produce un’immagine di cifra. Si osserva l’interessante **continuità dello spazio latente**: punti vicini producono immagini simili.
 
 > 💡 **Codifica come compressione (nota didattica).** Da 784 valori a 2 il fattore di compressione è $784 / 2 = 392$. La ricostruzione non sarà perfetta, ma conserva ciò che distingue le cifre.
 >
 > ⚠️ In un autoencoder **semplice** la continuità dello spazio latente **non è garantita**: tra due gruppi possono esserci zone vuote, e il decoder produce immagini senza senso. Gli **autoencoder variazionali** (VAE) aggiungono un termine che regolarizza lo spazio latente proprio per renderlo continuo e campionabile, e sono il ponte verso i modelli generativi del §8.
 
-<!-- SOURCE_VISUAL id="IS22-V06" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="14" type="grafico" description="Cifre MNIST proiettate da 784 a 2 dimensioni con un autoencoder" reason="Nuvola di punti visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS22-V06" source="L22-web.pdf" page="10" type="grafico" description="Cifre MNIST proiettate da 784 a 2 dimensioni con un autoencoder" reason="Nuvola di punti visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V07" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="15" type="immagini" description="Decoder usato da solo: il vettore latente [20, 20] genera un’immagine di cifra" reason="Immagini generate visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V07" source="L22-web.pdf" page="12" type="immagini" description="Decoder usato da solo: il vettore latente [20, 20] genera un’immagine di cifra" reason="Immagini generate visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Riduzione del rumore** (p. 16): un autoencoder di denoising ripara immagini con **pixel mancanti**, **rumore** e **barre**.
+**Riduzione del rumore**: un autoencoder di denoising ripara immagini con **pixel mancanti**, **rumore** e **barre**.
 
-**Colorazione automatica** (p. 17): un autoencoder riceve l’immagine in scala di grigi e ricostruisce i colori.
+**Colorazione automatica**: un autoencoder riceve l’immagine in scala di grigi e ricostruisce i colori.
 
-<!-- SOURCE_VISUAL id="IS22-V08" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="16" type="immagini" description="Denoising con autoencoder: pixel mancanti, rumore e barre" reason="Esempi visivi presenti solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V08" source="L22-web.pdf" page="13" type="immagini" description="Denoising con autoencoder: pixel mancanti, rumore e barre" reason="Esempi visivi presenti solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V09" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="17" type="immagini" description="Colorazione automatica con autoencoder" reason="Pagina con sole immagini" -->
+<!-- SOURCE_VISUAL id="IS22-V09" source="L22-web.pdf" page="14" type="immagini" description="Colorazione automatica con autoencoder" reason="Pagina con sole immagini" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
-### **2. Transfer learning e fine-tuning**
+#### **1.4. Masked Autoencoders**
 
-_(slide pp. 18–26)_
+Un **Masked Autoencoder (MAE)** apprende una rappresentazione visiva senza etichette nascondendo una parte dei patch dell’immagine. Per esempio, un’immagine può essere suddivisa in patch da $16\times16$ pixel e circa il 75% dei patch può essere mascherato; l’encoder elabora soltanto quelli visibili e un decoder leggero ricostruisce i patch mancanti. La funzione obiettivo misura la differenza tra patch ricostruiti e originali. Il rapporto di mascheramento elevato riduce il calcolo dell’encoder e obbliga la rete a inferire struttura e contesto. Dopo il pre-addestramento, si riusa l’encoder come estrattore di feature o si rifinisce l’intero modello su un compito etichettato.
 
-**Sfruttare addestramento e conoscenza precedenti** (p. 18). I metodi di ML **tradizionali** devono **ricominciare da capo** l’apprendimento ogni volta che cambiano il **dominio applicativo** o il dataset (p. 19). Il **transfer learning** riusa ciò che un modello ha già imparato, per **evitare l’overfitting** e **migliorare l’apprendimento**. La p. 20 mostra l’idea come percorso: un primo passo su scene **senza sfondo** porta a un apprendimento migliore, che nel secondo passo permette di affrontare **scene più complesse**.
-
-<!-- SOURCE_VISUAL id="IS22-V10" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="19" type="diagramma" description="ML tradizionale che riparte da zero contro transfer learning" reason="Schema presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V39" source="L22-web.pdf" page="17" type="schema" description="Masked Autoencoder: patch visibili elaborati dall’encoder e patch mascherati ricostruiti dal decoder" reason="La mascheratura e il percorso di ricostruzione sono relazioni grafiche essenziali" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**I modelli pre-addestrati sono disponibili online** (p. 21):
+### **2. Transfer learning e fine-tuning**
+
+
+**Sfruttare addestramento e conoscenza precedenti**. I metodi di ML **tradizionali** devono **ricominciare da capo** l’apprendimento ogni volta che cambiano il **dominio applicativo** o il dataset. Il **transfer learning** riusa ciò che un modello ha già imparato, per **evitare l’overfitting** e **migliorare l’apprendimento**. La p. 20 mostra l’idea come percorso: un primo passo su scene **senza sfondo** porta a un apprendimento migliore, che nel secondo passo permette di affrontare **scene più complesse**.
+
+<!-- SOURCE_VISUAL id="IS22-V10" source="L22-web.pdf" page="40" type="diagramma" description="ML tradizionale che riparte da zero contro transfer learning" reason="Schema presente solo come immagine" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+**I modelli pre-addestrati sono disponibili online**:
 
 - le **CNN grandi** richiedono **settimane** di addestramento su **più GPU** con dataset come ImageNet;
 - molti ricercatori **pubblicano** la CNN finale perché altri la usino per il **fine-tuning**;
 - fonti principali: **Hugging Face Hub**, **Keras Applications / KerasHub**, i modelli di **PyTorch TorchVision**, **TensorFlow Hub**, **ONNX Model Zoo**.
 
-> 📌 **Fine-tuning a partire da una CNN pubblica** (p. 22). Una CNN addestrata per il **problema 1** (classificare volto, corpo, cane, cavallo, …) si riusa per il **problema 2** (volto sì/no):
+> 📌 **Fine-tuning a partire da una CNN pubblica**. Una CNN addestrata per il **problema 1** (classificare volto, corpo, cane, cavallo, …) si riusa per il **problema 2** (volto sì/no):
 > - gli strati **convolutivi** vengono **congelati** (*FREEZE*): i loro pesi non cambiano;
 > - la parte **completamente connessa** viene **rifinita** (*TUNE*) sul nuovo problema.
 
-<!-- SOURCE_VISUAL id="IS22-V11" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="22" type="diagramma" description="Fine-tuning: strati convolutivi congelati e rete completamente connessa rifinita per il nuovo problema" reason="Diagramma presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V11" source="L22-web.pdf" page="45" type="diagramma" description="Fine-tuning: strati convolutivi congelati e rete completamente connessa rifinita per il nuovo problema" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Il fine-tuning è molto efficace** (p. 23). È oggi uno dei **flussi di lavoro pratici dominanti** nel deep learning, e la stessa idea vale non solo per le CNN ma anche per **vision transformer**, **modelli multimodali**, **modelli vocali** e **LLM**.
+**Il fine-tuning è molto efficace**. È oggi uno dei **flussi di lavoro pratici dominanti** nel deep learning, e la stessa idea vale non solo per le CNN ma anche per **vision transformer**, **modelli multimodali**, **modelli vocali** e **LLM**.
 
 > 📌 **Tre opzioni di fine-tuning** (pp. 24–26, sull’esempio di AlexNet).
 > 1. **Sostituire e riaddestrare il classificatore** in cima alla rete convolutiva, sul nuovo dataset.
 > 2. **Tenere fissi alcuni dei primi strati**, per timore di overfitting, e rifinire solo una **porzione di livello più alto** della rete. La motivazione: le feature dei **primi strati** sono **più generiche** (rilevatori di bordi, di macchie di colore) e utili a molti compiti, mentre gli **strati successivi** diventano **sempre più specifici** per le classi del dataset originale.
 > 3. **Rifinire tutti i pesi** della rete pre-addestrata, continuando la backpropagation.
 
-<!-- SOURCE_VISUAL id="IS22-V12" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="26" type="diagramma" description="Le tre opzioni di fine-tuning su AlexNet" reason="Architettura presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V12" source="L22-web.pdf" page="46" type="diagramma" description="Le tre opzioni di fine-tuning su AlexNet" reason="Architettura presente solo come immagine" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> 📌 **Low-Rank Adaptation (LoRA).** Per adattare un modello molto grande si possono congelare i pesi originali $W_0$ e addestrare soltanto una correzione a basso rango: $W = W_0 + BA$, dove $B$ e $A$ hanno rango $r$ piccolo. Una matrice densa $d_{out}\times d_{in}$ richiederebbe $d_{out}d_{in}$ parametri; l’adattamento LoRA ne aggiunge circa $r(d_{out}+d_{in})$. La riduzione permette di conservare una base condivisa e memorizzare adapter più leggeri per compiti diversi. È applicabile a LLM e modelli visivi; la scelta del rango e dei moduli da adattare resta parte della validazione.
+
+<!-- SOURCE_VISUAL id="IS22-V40" source="L22-web.pdf" page="47" type="schema" description="LoRA: pesi originali congelati più correzione a basso rango ottenuta da due matrici adattabili" reason="Il diagramma confronta l’aggiornamento denso e il percorso a basso rango" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **Quale opzione scegliere (nota didattica, regola pratica diffusa).** Dipende da quanti dati si hanno e da quanto il nuovo problema somiglia a quello originale:
@@ -180,7 +183,7 @@ _(slide pp. 18–26)_
 >
 > Nel fine-tuning si usa di solito un **learning rate piccolo**, perché i pesi di partenza sono già buoni e un passo grande li distruggerebbe (è anche un rimedio all’oblio catastrofico del §3).
 
-> 💡 **Il fine-tuning in Keras (ricostruzione didattica, non trascritta dalle slide).** Keras non include AlexNet; l’esempio usa VGG16 per il problema «volto sì/no».
+> 💡 **Il fine-tuning in Keras (esempio ricostruito).** Keras non include AlexNet; l’esempio usa VGG16 per il problema «volto sì/no».
 > ```python
 > import keras
 >
@@ -209,25 +212,24 @@ _(slide pp. 18–26)_
 
 ### **3. L’oblio catastrofico**
 
-_(slide pp. 27–34)_
 
 > 📌 **Oblio catastrofico** (*catastrophic forgetting*, detto anche *catastrophic interference*, pp. 28–29). Il fenomeno per cui una rete neurale **dimentica le informazioni già apprese** quando ne impara di nuove, con una **perdita significativa di conoscenza**. Si osserva quando una rete viene addestrata **in sequenza** su compiti diversi: mentre impara i nuovi compiti, le sue prestazioni su quelli precedenti **peggiorano in modo marcato**.
 
-**Dove è rilevante oggi** (p. 30): **apprendimento continuo**, **personalizzazione**, **adattamento di dominio**, **fine-tuning di grandi modelli pre-addestrati**, anche LLM e LMM.
+**Dove è rilevante oggi**: **apprendimento continuo**, **personalizzazione**, **adattamento di dominio**, **fine-tuning di grandi modelli pre-addestrati**, anche LLM e LMM.
 
 La p. 31 lo mostra con l’**accuratezza di validazione** sul vecchio compito che crolla durante l’addestramento sul nuovo. La p. 32 lo mostra con le **frontiere di decisione**: la nuova frontiera separa bene i **nuovi dati**, ma **dimentica** come separare i **vecchi**.
 
-<!-- SOURCE_VISUAL id="IS22-V13" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="31" type="grafico" description="Oblio catastrofico misurato con l’accuratezza di validazione sui compiti precedenti" reason="Curve visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS22-V13" source="L22-web.pdf" page="56" type="grafico" description="Oblio catastrofico misurato con l’accuratezza di validazione sui compiti precedenti" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V14" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="32" type="grafico" description="Frontiera di decisione vecchia e nuova: la nuova dimentica come separare i vecchi dati" reason="Frontiere visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS22-V14" source="L22-web.pdf" page="58" type="grafico" description="Frontiera di decisione vecchia e nuova: la nuova dimentica come separare i vecchi dati" reason="Frontiere visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **Perché succede (nota didattica).** La backpropagation sposta **tutti** i pesi nella direzione che riduce l’errore **sui dati che vede in quel momento**. Se i dati vecchi non ci sono più, niente impedisce ai pesi di allontanarsi dai valori che servivano per il vecchio compito. È l’opposto di quello che accade nel cervello, dove la conoscenza precedente viene in larga parte conservata.
 
-**Come mitigarlo** (pp. 33–34). È ancora un **problema aperto** della ricerca, **senza una soluzione completa**. Si può provare con:
+**Come mitigarlo**. È ancora un **problema aperto** della ricerca, **senza una soluzione completa**. Si può provare con:
 
-| Tecnica | Idea (slide) | Costo o limite |
+| Tecnica | Idea | Costo o limite |
 |---|---|---|
 | **Rehearsal** | strategia semplice e intuitiva: si **mescolano i vecchi dati ai nuovi** durante l’addestramento, così il modello ricorda i vecchi compiti | richiede di **conservare i vecchi dati**, costoso in risorse |
 | **Elastic Weight Consolidation** (EWC) | aggiunge un semplice **termine di regolarizzazione** alla funzione di costo che **preserva i pesi importanti** per i vecchi compiti | popolare perché semplice |
@@ -246,25 +248,24 @@ La p. 31 lo mostra con l’**accuratezza di validazione** sul vecchio compito ch
 
 ### **4. Data augmentation**
 
-_(slide pp. 35–43)_
 
-**I modelli profondi hanno bisogno di grandi dataset** (p. 36). Il grafico confronta ML classico e deep learning: con pochi dati il ML classico può essere migliore; al crescere dei dati il deep learning continua a migliorare, mentre il classico si ferma.
+**I modelli profondi hanno bisogno di grandi dataset**. Il grafico confronta ML classico e deep learning: con pochi dati il ML classico può essere migliore; al crescere dei dati il deep learning continua a migliorare, mentre il classico si ferma.
 
-<!-- SOURCE_VISUAL id="IS22-V15" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="36" type="grafico" description="Prestazioni al crescere dei dati: ML classico contro deep learning" reason="Curve visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS22-V15" source="L22-web.pdf" page="63" type="grafico" description="Prestazioni al crescere dei dati: ML classico contro deep learning" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 **Data augmentation** (p. 37). È **l’alleato per superare l’overfitting**: bisogna ricordare che si possono avere **più di 100 milioni di parametri liberi** da fissare. **Ma** la data augmentation **non risolve da sola l’applicazione**: servono comunque **buoni dati reali**.
+> 📌 **Data augmentation**. È **l’alleato per superare l’overfitting**: bisogna ricordare che si possono avere **più di 100 milioni di parametri liberi** da fissare. **Ma** la data augmentation **non risolve da sola l’applicazione**: servono comunque **buoni dati reali**.
 
-| Tipo (slide) | Esempi |
+| Tipo | Esempi |
 |---|---|
-| **#1 rotazioni, traslazioni, scale** (p. 38) | la stessa immagine di una pallina da tennis presentata in **posizioni**, **scale** e **rotazioni** diverse, così la CNN impara a rilevarla in ogni caso |
-| **#2 rumore** (p. 39) | rumore di tipi diversi (**gaussiano**, **additivo**, **moltiplicativo**), condizioni applicative, **rumore del sensore** (sui pixel), **risoluzioni**, **ambienti** (interni, esterni, sfondi) |
-| **#3 condizioni diverse simulate** (p. 40), anche per grandi dataset | **perturbazione dei landmark** per l’allineamento del volto, **ribaltamento**, **ritaglio**, **dominanti di colore**, **sfocatura**; lo si fa **usando CNN pubbliche**; bisogna **riprodurre le condizioni reali** durante l’addestramento |
-| **stato dell’arte** (p. 41) | **CutMix**, **MixUp**, **Cutout**, **RandAugment**, **AutoAugment**, generazione di **dati sintetici**, **domain randomization**, augmentation **generativa** |
+| **#1 rotazioni, traslazioni, scale** | la stessa immagine di una pallina da tennis presentata in **posizioni**, **scale** e **rotazioni** diverse, così la CNN impara a rilevarla in ogni caso |
+| **#2 rumore** | rumore di tipi diversi (**gaussiano**, **additivo**, **moltiplicativo**), condizioni applicative, **rumore del sensore** (sui pixel), **risoluzioni**, **ambienti** (interni, esterni, sfondi) |
+| **#3 condizioni diverse simulate**, anche per grandi dataset | **perturbazione dei landmark** per l’allineamento del volto, **ribaltamento**, **ritaglio**, **dominanti di colore**, **sfocatura**; lo si fa **usando CNN pubbliche**; bisogna **riprodurre le condizioni reali** durante l’addestramento |
+| **stato dell’arte** | **CutMix**, **MixUp**, **Cutout**, **RandAugment**, **AutoAugment**, generazione di **dati sintetici**, **domain randomization**, augmentation **generativa** |
 
-I toolbox avanzati hanno funzioni apposite (p. 38). In MATLAB, per esempio, `imageDataAugmenter` **ribalta a caso** le immagini di addestramento lungo l’**asse verticale** e le **trasla** a caso.
+I toolbox avanzati hanno funzioni apposite. In MATLAB, per esempio, `imageDataAugmenter` **ribalta a caso** le immagini di addestramento lungo l’**asse verticale** e le **trasla** a caso.
 
-> 💡 **Il codice MATLAB (ricostruzione didattica, non trascritta dalle slide).**
+> 💡 **Il codice MATLAB (esempio ricostruito).**
 > ```matlab
 > augmenter = imageDataAugmenter( ...
 >     'RandXReflection', true, ...          % ribaltamento sinistra-destra
@@ -275,60 +276,71 @@ I toolbox avanzati hanno funzioni apposite (p. 38). In MATLAB, per esempio, `ima
 > ```
 > Il ribaltamento «lungo l’asse verticale» è lo scambio sinistra-destra. Le trasformazioni vengono applicate **a caso a ogni epoca**, senza salvare copie su disco: la rete non vede mai due volte esattamente la stessa immagine.
 
-<!-- SOURCE_VISUAL id="IS22-V16" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="38" type="immagini" description="Data augmentation della pallina da tennis con posizioni, scale e rotazioni" reason="Esempi visivi presenti solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V16" source="L22-web.pdf" page="66" type="immagini" description="Data augmentation della pallina da tennis con posizioni, scale e rotazioni" reason="Esempi visivi presenti solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V17" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="39" type="immagini" description="Data augmentation con rumore di tipi diversi" reason="Esempi visivi presenti solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V17" source="L22-web.pdf" page="67" type="immagini" description="Data augmentation con rumore di tipi diversi" reason="Esempi visivi presenti solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V18" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="40" type="immagini" description="Condizioni simulate: landmark perturbati, ribaltamento, ritaglio, dominanti di colore, sfocatura" reason="Esempi visivi presenti solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V18" source="L22-web.pdf" page="68" type="immagini" description="Condizioni simulate: landmark perturbati, ribaltamento, ritaglio, dominanti di colore, sfocatura" reason="Esempi visivi presenti solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V19" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="41" type="immagini" description="Tecniche moderne di augmentation: CutMix, MixUp, Cutout" reason="Esempi visivi presenti solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V19" source="L22-web.pdf" page="71" type="immagini" description="Tecniche moderne di augmentation: CutMix, MixUp, Cutout" reason="Esempi visivi presenti solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **MixUp e CutMix (nota didattica).** MixUp crea un esempio nuovo **mescolando due immagini e le loro etichette**:
 > $$\tilde{\mathbf{x}} = \lambda\, \mathbf{x}_i + (1 - \lambda)\, \mathbf{x}_j, \qquad \tilde{\mathbf{y}} = \lambda\, \mathbf{y}_i + (1 - \lambda)\, \mathbf{y}_j, \qquad \lambda \in [0, 1]$$
 > con etichette one-hot. Con $\lambda = 0{,}7$, un’immagine di gatto e una di cane danno un’immagine sovrapposta con etichetta $[0{,}7;\ 0{,}3]$. CutMix incolla invece un **rettangolo** di un’immagine dentro l’altra, e pesa le etichette con la **frazione di area** incollata. Cutout si limita a **cancellare** un rettangolo.
 
-> ⚠️ **L’augmentation deve conservare l’etichetta** (p. 42). Una rotazione è utile per un rilevatore di palline da tennis, ma può essere **sbagliata** per le cifre **6 e 9**, per i **segnali stradali**, per le **immagini mediche** o per i **difetti che dipendono dall’orientazione**.
+**Policy casuali e difetti rari.** RandAugment riduce la ricerca degli iperparametri scegliendo un numero prefissato di trasformazioni e un livello di intensità; TrivialAugment campiona una trasformazione e la sua intensità in modo semplice, mentre AugMix combina più trasformazioni per rendere il modello più robusto alle variazioni. Per difetti industriali rari, il **Copy-Paste** inserisce il difetto ritagliato con la sua maschera su immagini di prodotti conformi: la diversità dipende dalla qualità delle maschere, dalla compatibilità del contesto e dalla conservazione delle caratteristiche fisiche del difetto. I modelli di diffusione possono generare varianti condizionate, ma ogni immagine sintetica va controllata per artefatti e fedeltà al processo reale.
+
+<!-- SOURCE_VISUAL id="IS22-V46" source="L22-web.pdf" page="71" type="tabella" description="Confronto tra policy RandAugment, TrivialAugment e AugMix" reason="La tabella sintetizza le differenze tra strategie di trasformazione" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS22-V47" source="L22-web.pdf" page="72" type="schema" description="Copy-Paste di pochi difetti reali con maschera su numerosi prodotti conformi" reason="Il montaggio e l’uso della maschera sono visivi" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+**Pre-addestramento contrastivo senza etichette.** Da un’immagine non etichettata si producono due viste tramite trasformazioni casuali. L’encoder genera due embedding che vengono avvicinati nello spazio latente; embedding di immagini diverse sono spinti a restare separati. Il modello apprende così feature riutilizzabili senza etichette, per poi applicare un classificatore o una ricerca per similarità. In un’ispezione industriale si possono raccogliere molte immagini di parti senza difetti annotati, pre-addestrare l’encoder con viste diverse e rifinire il sistema su un numero limitato di difetti etichettati.
+
+<!-- SOURCE_VISUAL id="IS22-V48" source="L22-web.pdf" page="77" type="schema" description="Due viste trasformate della stessa immagine come coppia positiva per pre-addestramento contrastivo" reason="La relazione positiva tra viste e negative tra esempi è rappresentata graficamente" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> ⚠️ **L’augmentation deve conservare l’etichetta**. Una rotazione è utile per un rilevatore di palline da tennis, ma può essere **sbagliata** per le cifre **6 e 9**, per i **segnali stradali**, per le **immagini mediche** o per i **difetti che dipendono dall’orientazione**.
 
 > ⚠️ **Augmentation e data leakage (nota didattica).** Le copie aumentate di un’immagine sono quasi duplicati. Se si aumenta il dataset **prima** di dividerlo, versioni della stessa immagine finiscono sia nel training sia nel test, ed è il «déjà vu» della Lezione 07, §3.4. La regola è: **prima si divide**, poi si aumenta **solo il training set**.
 
 La p. 43 mostra il deep learning **aiutato da un’augmentation adeguata**: con i dati aumentati la curva del deep learning supera quella del ML classico già con meno dati reali.
 
-<!-- SOURCE_VISUAL id="IS22-V20" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="43" type="grafico" description="Deep learning con data augmentation confrontato con il ML classico" reason="Curve visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS22-V20" source="L22-web.pdf" page="75" type="grafico" description="Deep learning con data augmentation confrontato con il ML classico" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **5. Estrazione automatica delle feature con i modelli profondi**
 
-_(slide pp. 44–47)_
 
-La slide di apertura (p. 44) presenta l’idea come **miglioramento dell’approccio PCA** tramite il deep learning: invece di una proiezione lineare, si usano le attivazioni di una rete profonda.
+La slide di apertura presenta l’idea come **miglioramento dell’approccio PCA** tramite il deep learning: invece di una proiezione lineare, si usano le attivazioni di una rete profonda.
 
-> 📌 **CNN come estrattori di feature** (pp. 45–46).
+> 📌 **CNN come estrattori di feature**.
 > 1. In una CNN pre-addestrata si **rimuove l’ultimo strato completamente connesso**, per esempio quello che produce i **1000 punteggi delle classi** di ImageNet.
 > 2. Si tratta il resto della CNN come un **estrattore di feature fisso** per il nuovo dataset. In AlexNet si ottiene un **vettore a 4096 dimensioni** per ogni immagine: le attivazioni dello strato nascosto **immediatamente prima del classificatore**.
 > 3. Estratti i codici a 4096 dimensioni per tutte le immagini, si addestra un **classificatore lineare** (per esempio una **SVM lineare** o un **classificatore softmax**) sul nuovo dataset: le **mie immagini** e le **mie classi**, al posto delle classi di AlexNet.
 >
 > ⚠️ Nota della slide: è importante che le feature siano **«ReLU-ate»**, cioè **azzerate sotto lo zero**, se lo erano anche durante l’addestramento della CNN (come accade di solito).
 
-<!-- SOURCE_VISUAL id="IS22-V21" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="46" type="diagramma" description="AlexNet come estrattore di feature a 4096 dimensioni seguito dal mio classificatore" reason="Schema presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V21" source="L22-web.pdf" page="49" type="diagramma" description="AlexNet come estrattore di feature a 4096 dimensioni seguito dal mio classificatore" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **Perché funziona con pochi dati (nota didattica).** Il classificatore lineare sopra le 4096 feature, con $C$ classi, ha $4096\,C + C$ parametri: per un problema a 2 classi sono $8194$, contro i circa 60 milioni di AlexNet. È l’opzione 1 del §2 portata all’estremo, e ricollega le Lezioni 08, §3.2 («estrazione delle feature neurale + classificatore o distanza classica») e 18, §2 (PCA): cambia solo **chi** costruisce lo spazio delle feature.
 
-**Lo stato dell’arte** (p. 47). Oggi lo stesso flusso si fa spesso con **ResNet**, **EfficientNet**, **ConvNeXt**, **vision transformer**, **encoder di tipo CLIP** o modelli pre-addestrati **specifici del dominio** (lezione successiva).
+**Lo stato dell’arte**. Oggi lo stesso flusso si fa spesso con **ResNet**, **EfficientNet**, **ConvNeXt**, **vision transformer**, **encoder di tipo CLIP** o modelli pre-addestrati **specifici del dominio** (lezione successiva).
 
 ---
 
 ### **6. Progettare e addestrare i modelli profondi**
 
-_(slide pp. 48–52)_
 
-**Affrontare la complessità di oltre 100 milioni di parametri** (p. 48).
+**Affrontare la complessità di oltre 100 milioni di parametri**.
 
 **Il progetto** (p. 49, dalla lezione precedente). Mentre **tutti i pesi vengono addestrati**, la **struttura** (topologia) della CNN è di solito **progettata a mano per tentativi**:
 
@@ -339,7 +351,7 @@ _(slide pp. 48–52)_
 
 > ⚠️ **Kernel o feature map? (nota didattica).** La Lezione 21 (p. 65 di quella lezione) diceva di ridurre la **dimensione delle feature map**, non dei kernel. È la versione più aderente alla pratica: la risoluzione spaziale si riduce con pooling e stride, mentre i kernel sono spesso $3 \times 3$ in tutti gli strati (VGG16). Quando le reti usano kernel grandi, li usano semmai nei **primi** strati (AlexNet parte con $11 \times 11$).
 
-> 📌 **Suggerimenti per l’addestramento** (p. 50).
+> 📌 **Suggerimenti per l’addestramento**.
 > - Si addestra con la **backpropagation**.
 > - Si usa la **condivisione dei pesi** in ogni feature map.
 > - Si **inizializzano a caso** i pesi di tutta la rete, oppure si usano **modelli pre-addestrati**.
@@ -350,7 +362,7 @@ Il testo della slide scrive «weight gg» dove si intende il *weight sharing*.
 
 > 💡 **Equivarianza e invarianza (nota didattica).** Una funzione $f$ è **equivariante** a una traslazione $T$ se $f(T\mathbf{x}) = T f(\mathbf{x})$: spostando l’oggetto, la risposta nella feature map **si sposta allo stesso modo**. È **invariante** se $f(T\mathbf{x}) = f(\mathbf{x})$: la risposta **non cambia**. La convoluzione dà equivarianza, il pooling (Lezione 21, §2.3) aggiunge un po’ di invarianza.
 
-**I problemi dell’addestramento delle reti profonde** (pp. 51–52):
+**I problemi dell’addestramento delle reti profonde**:
 
 1. i **primi strati** di un MLP **non si addestrano bene**:
    - **diffusione del gradiente**: l’errore si **attenua** propagandosi verso i primi strati, e l’addestramento diventa **molto lento**;
@@ -366,24 +378,23 @@ Il testo della slide scrive «weight gg» dove si intende il *weight sharing*.
 
 ### **7. Greedy layer-wise training**
 
-_(slide pp. 53–60)_
 
-**Una soluzione molto efficiente** ai problemi del §6 (p. 53): usare l’apprendimento **non supervisionato come inizializzazione**, addestrando ogni strato **come un autoencoder** ed «esportandolo» nella rete (p. 54).
+**Una soluzione molto efficiente** ai problemi del §6: usare l’apprendimento **non supervisionato come inizializzazione**, addestrando ogni strato **come un autoencoder** ed «esportandolo» nella rete.
 
-> 📌 **Greedy layer-wise training: riepilogo** (pp. 55–58).
+> 📌 **Greedy layer-wise training: riepilogo**.
 > 1. Si **addestra il primo strato** con i dati **senza etichette** (non supervisionato).
 > 2. Si **congelano** i parametri del primo strato e si addestra il **secondo**, usando l’**uscita del primo** come ingresso non supervisionato.
 > 3. Si **ripete** per tutti gli strati desiderati.
 > 4. Si usano le **uscite dell’ultimo strato** come ingressi di uno strato o modello **supervisionato**, e si addestrano gli ultimi strati supervisionati, **lasciando congelati** i pesi precedenti (nella slide, per esempio, un classificatore binario).
 > 5. Si **scongelano tutti i pesi** e si **rifinisce l’intera rete** con un addestramento supervisionato, partendo dai pesi del pre-addestramento.
 
-<!-- SOURCE_VISUAL id="IS22-V22" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="54" type="diagramma" description="Strato addestrato come autoencoder ed esportato nella rete profonda" reason="Diagramma presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V22" source="L22-web.pdf" page="29" type="diagramma" description="Strato addestrato come autoencoder ed esportato nella rete profonda" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V23" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="59" type="diagramma" description="Rete profonda costruita con il greedy layer-wise training" reason="Diagramma presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V23" source="L22-web.pdf" page="35" type="diagramma" description="Rete profonda costruita con il greedy layer-wise training" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Perché funziona** (p. 60):
+**Perché funziona**:
 
 - evita molti dei problemi dell’addestramento supervisionato di una rete profonda;
 - ogni strato riceve **tutta l’attenzione dell’apprendimento** a turno, perché in quel momento è l’unico strato «in cima»;
@@ -394,7 +405,7 @@ _(slide pp. 53–60)_
 
 > ✅ **I problemi del §6 e le risposte.**
 >
-> | Problema | Risposta del greedy layer-wise training | Risposta moderna (p. 13) |
+> | Problema | Risposta del greedy layer-wise training | Risposta moderna |
 > |---|---|---|
 > | primi strati che non imparano | ogni strato si addestra da solo, a turno | connessioni residue, normalizzazione |
 > | gradiente instabile | la rete profonda si addestra solo alla fine, già inizializzata | inizializzazioni migliori, ReLU |
@@ -405,55 +416,52 @@ _(slide pp. 53–60)_
 
 ### **8. Modelli generativi: GAN e diffusione**
 
-_(slide pp. 61–77)_
 
 #### **8.1. Generative Adversarial Networks**
 
-_(slide pp. 61–67)_
 
-**Creare un pattern o un’immagine da un numero casuale** (p. 61): un **punto di vista diverso** per addestrare le reti profonde.
+**Creare un pattern o un’immagine da un numero casuale**: un **punto di vista diverso** per addestrare le reti profonde.
 
-> 📌 **Come si usa una GAN** (p. 62).
+> 📌 **Come si usa una GAN**.
 > 1. Un **dataset noto** serve come dati di addestramento iniziali per il **discriminatore**.
 > 2. Si esegue l’**addestramento della GAN**.
 > 3. Si usa il **generatore** $G(\cdot)$ nella propria applicazione.
 >
-> **Due reti in competizione** (p. 64): il **generatore** crea immagini a partire da rumore casuale, il **discriminatore** cerca di distinguere le immagini vere da quelle generate. La slide invita a notare la **«forma» degli strati convolutivi**: nel generatore le mappe **crescono** da un vettore piccolo fino all’immagine, nel discriminatore **si riducono** fino alla decisione vero/falso.
+> **Due reti in competizione**: il **generatore** crea immagini a partire da rumore casuale, il **discriminatore** cerca di distinguere le immagini vere da quelle generate. Si osserva la **«forma» degli strati convolutivi**: nel generatore le mappe **crescono** da un vettore piccolo fino all’immagine, nel discriminatore **si riducono** fino alla decisione vero/falso.
 
-<!-- SOURCE_VISUAL id="IS22-V24" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="62" type="diagramma" description="Schema d’uso di una GAN: dataset noto, addestramento, uso del generatore" reason="Diagramma presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V24" source="L22-web.pdf" page="79" type="diagramma" description="Schema d’uso di una GAN: dataset noto, addestramento, uso del generatore" reason="Diagramma presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V25" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="64" type="diagramma" description="Generatore e discriminatore in competizione, con la forma degli strati convolutivi" reason="Architettura presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V25" source="L22-web.pdf" page="79" type="diagramma" description="Generatore e discriminatore in competizione, con la forma degli strati convolutivi" reason="Architettura presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **Il gioco a due in formula (nota didattica).** Il discriminatore $D$ restituisce la probabilità che un’immagine sia vera; il generatore $G$ trasforma un rumore $\mathbf{z}$ in un’immagine. L’addestramento risolve
 > $$\min_G \max_D \; \mathbb{E}_{\mathbf{x} \sim p_{\text{dati}}}\left[\log D(\mathbf{x})\right] + \mathbb{E}_{\mathbf{z} \sim p_{\mathbf{z}}}\left[\log\left(1 - D(G(\mathbf{z}))\right)\right]$$
 > $D$ vuole questo valore **alto** (riconosce i veri, scarta i falsi); $G$ lo vuole **basso** (inganna $D$). All’equilibrio ideale le immagini generate sono indistinguibili dalle vere e $D$ risponde $0{,}5$ a tutto. In pratica l’addestramento è **instabile**: se $D$ vince troppo presto, $G$ non riceve gradiente utile; un altro guasto tipico è il **mode collapse**, in cui $G$ produce sempre poche immagini simili.
 
-**Vera o creata da una GAN?** (p. 63): è **falsa**. Usi delle GAN:
+**Vera o creata da una GAN?**: è **falsa**. Usi delle GAN:
 
 - **data augmentation**;
 - **attacchi**;
 - **simulazione di condizioni diverse** (*style transfer*): **invecchiamento** del volto, **giorno/notte**, **inverno/estate**.
 
-<!-- SOURCE_VISUAL id="IS22-V26" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="63" type="immagini" description="Usi delle GAN: invecchiamento, giorno e notte, inverno ed estate" reason="Esempi visivi presenti solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V26" source="L22-web.pdf" page="85" type="immagini" description="Usi delle GAN: invecchiamento, giorno e notte, inverno ed estate" reason="Esempi visivi presenti solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Vera o generata da una rete?** (pp. 65–66). Il sito *thispersondoesnotexist.com* mostra volti **immaginati** da una GAN, **StyleGAN2** (dicembre 2019, Karras e altri, NVIDIA). La p. 66 mostra esempi di volti falsi.
+**Vera o generata da una rete?**. Il sito *thispersondoesnotexist.com* mostra volti **immaginati** da una GAN, **StyleGAN2** (dicembre 2019, Karras e altri, NVIDIA). La p. 66 mostra esempi di volti falsi.
 
-<!-- SOURCE_VISUAL id="IS22-V27" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="66" type="immagini" description="Esempi di volti falsi generati da una GAN" reason="Pagina con sole immagini" -->
+<!-- SOURCE_VISUAL id="IS22-V27" source="L22-web.pdf" page="80" type="immagini" description="Esempi di volti falsi generati da una GAN" reason="Pagina con sole immagini" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> ⚠️ **Manca ancora la «Gestalt»** (p. 67). L’**analisi del contesto** rivela gli errori della GAN: la **fusione delle feature di livelli diversi** non è **ancora perfettamente realistica** (orecchini diversi, sfondi incoerenti, dettagli che non stanno insieme). Con StyleGAN2 i risultati sono migliorati. È la Gestalt della Lezione 02, §6: il tutto è più della somma delle parti, e le parti generate bene non bastano a fare un tutto coerente.
+> ⚠️ **Manca ancora la «Gestalt»**. L’**analisi del contesto** rivela gli errori della GAN: la **fusione delle feature di livelli diversi** non è **ancora perfettamente realistica** (orecchini diversi, sfondi incoerenti, dettagli che non stanno insieme). Con StyleGAN2 i risultati sono migliorati. È la Gestalt della Lezione 02, §6: il tutto è più della somma delle parti, e le parti generate bene non bastano a fare un tutto coerente.
 
-<!-- SOURCE_VISUAL id="IS22-V28" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="67" type="immagini" description="Errori di contesto nei volti generati che rivelano la GAN" reason="Dettagli visibili solo nelle immagini" -->
+<!-- SOURCE_VISUAL id="IS22-V28" source="L22-web.pdf" page="81" type="immagini" description="Errori di contesto nei volti generati che rivelano la GAN" reason="Dettagli visibili solo nelle immagini" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **8.2. Modelli di diffusione e arte generata**
 
-_(slide pp. 68–73)_
 
-> 📌 **Modelli di diffusione** (pp. 68–69).
+> 📌 **Modelli di diffusione**.
 > - Generano dati **imparando a invertire un processo graduale di aggiunta di rumore**.
 > - **In addestramento**, il modello osserva immagini **progressivamente corrotte dal rumore** e impara a **prevedere come togliere quel rumore**, passo dopo passo.
 > - **In generazione**, si parte da **rumore casuale** e lo si **ripulisce iterativamente** fino a ottenere un’immagine realistica.
@@ -466,36 +474,32 @@ _(slide pp. 68–73)_
 > $$\mathcal{L} = \mathbb{E}\left[\lVert \boldsymbol{\varepsilon} - \boldsymbol{\varepsilon}_\theta(\mathbf{x}_t, t) \rVert^2\right]$$
 > È un **denoising autoencoder** (§1.2) ripetuto su molti livelli di rumore. Rispetto alle GAN l’addestramento è **stabile** (non c’è un gioco a due), ma la generazione è più **lenta**, perché richiede molti passi.
 
-<!-- SOURCE_VISUAL id="IS22-V29" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="68" type="diagramma" description="Processo di diffusione: aggiunta graduale di rumore e pulizia iterativa" reason="Schema presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS22-V29" source="L22-web.pdf" page="88" type="diagramma" description="Processo di diffusione: aggiunta graduale di rumore e pulizia iterativa" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Sony World Photography Awards 2023** (p. 70, BBC del 18/04/2023). L’opera dell’artista tedesco **Boris Eldagsen**, *Pseudomnesia: The Electrician*, vinse la categoria *creative open*. Il vincitore **rifiutò il premio** rivelando che l’immagine era stata **creata con l’AI**.
 
-<!-- SOURCE_VISUAL id="IS22-V30" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="70" type="immagine" description="Pseudomnesia: The Electrician di Boris Eldagsen, Sony World Photography Awards 2023" reason="Immagine presente solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V30" source="L22-web.pdf" page="90" type="immagine" description="Pseudomnesia: The Electrician di Boris Eldagsen, Sony World Photography Awards 2023" reason="Immagine presente solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 La p. 71 riprende il tema: **manca la Gestalt**… ma **oggi**?
 
-<!-- SOURCE_VISUAL id="IS22-V31" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="71" type="immagini" description="Manca la Gestalt, ma che dire di oggi: immagini generate recenti" reason="Pagina con sole immagini" -->
+<!-- SOURCE_VISUAL id="IS22-V31" source="L22-web.pdf" page="92" type="immagini" description="Manca la Gestalt, ma che dire di oggi: immagini generate recenti" reason="Pagina con sole immagini" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Style transfer con CNN (GAN)** (p. 72): combinazioni di contenuto e stile da apprezzare con calma; la slide annuncia che nelle lezioni successive si vedrà come farlo.
+**Style transfer con CNN (GAN)**: combinazioni di contenuto e stile da apprezzare con calma; la slide annuncia che nelle lezioni successive si vedrà come farlo.
 
-<!-- SOURCE_VISUAL id="IS22-V32" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="72" type="immagini" description="Combinazioni di contenuto e stile ottenute con lo style transfer" reason="Pagina con sole immagini" -->
+<!-- SOURCE_VISUAL id="IS22-V32" source="L22-web.pdf" page="83" type="immagini" description="Combinazioni di contenuto e stile ottenute con lo style transfer" reason="Pagina con sole immagini" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Arte con le GAN** (p. 73). Il **25 ottobre 2018** Christie’s vendette per **432 000 dollari** un ritratto **generato da una GAN**, basato su **codice open source** scritto da **Robbie Barrat** (Stanford).
+**Arte con le GAN**. Il **25 ottobre 2018** Christie’s vendette per **432 000 dollari** un ritratto **generato da una GAN**, basato su **codice open source** scritto da **Robbie Barrat** (Stanford).
 
 > 💡 **Il contesto (nota didattica).** Il ritratto è *Edmond de Belamy*, presentato dal collettivo francese **Obvious**. La vendita aprì anche una discussione sul **merito** e sulla **paternità**: il codice di partenza era di Barrat, che non partecipò alla vendita.
 
-<!-- SOURCE_VISUAL id="IS22-V33" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="73" type="immagine" description="Ritratto generato da una GAN venduto da Christie’s nel 2018" reason="Immagine presente solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 #### **8.3. Usi delle GAN e Model Autophagy Disorder**
 
-_(slide pp. 74–77)_
 
-**Non solo volti** (pp. 74–75). Con le GAN si possono creare:
+**Non solo volti**. Con le GAN si possono creare:
 
 - **voci** (text-to-speech);
 - **dati biometrici**, per esempio **impronte digitali**;
@@ -510,9 +514,9 @@ E si risolvono applicazioni diverse: **sintesi di immagini**, **data augmentatio
 > - MAD indica questa apparente «**autoallergia**» del software.
 > - Molti modelli vengono così addestrati, **senza saperlo**, su quantità crescenti di **dati già sintetizzati**.
 >
-> **Conclusione** (p. 77): **senza abbastanza dati reali freschi** a ogni generazione di un **ciclo autofago**, i futuri modelli generativi sono destinati a veder **calare progressivamente** la loro **qualità** (precisione) o la loro **diversità** (recall). La slide mostra l’esempio con **riaddestramenti successivi di StyleGAN-2**. I dati sintetici richiedono **tracciabilità della provenienza**, **filtraggio**, **controllo della diversità** e **validazione**.
+> **Conclusione**: **senza abbastanza dati reali freschi** a ogni generazione di un **ciclo autofago**, i futuri modelli generativi sono destinati a veder **calare progressivamente** la loro **qualità** (precisione) o la loro **diversità** (recall). La slide mostra l’esempio con **riaddestramenti successivi di StyleGAN-2**. I dati sintetici richiedono **tracciabilità della provenienza**, **filtraggio**, **controllo della diversità** e **validazione**.
 
-<!-- SOURCE_VISUAL id="IS22-V34" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="77" type="immagini" description="Degrado dei volti generati con riaddestramenti successivi di StyleGAN-2" reason="Sequenza di immagini visibile solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS22-V34" source="L22-web.pdf" page="94" type="immagini" description="Degrado dei volti generati con riaddestramenti successivi di StyleGAN-2" reason="Sequenza di immagini visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **«Mucche che mangiano altre mucche» (nota didattica).** Il motto delle slide richiama la **encefalopatia spongiforme bovina** («mucca pazza», in inglese *mad cow*), diffusa dall’uso di farine animali nell’alimentazione dei bovini. Un modello che si nutre dei prodotti di altri modelli perde a ogni generazione le **code della distribuzione**, cioè i casi rari: prima scompare la diversità, poi arrivano gli artefatti. Il legame con il corso è la regola «dati reali, di qualità, controllati» della Lezione 06.
@@ -521,27 +525,26 @@ E si risolvono applicazioni diverse: **sintesi di immagini**, **data augmentatio
 
 ### **9. I limiti attuali del ML**
 
-_(slide pp. 78–81)_
 
-**Più dati? Più parametri? È la strada giusta per sistemi migliori?** (p. 78)
+**Più dati? Più parametri? È la strada giusta per sistemi migliori?**
 
-**La frontiera del calcolo efficiente** (p. 79). La slide mostra l’**aumento esponenziale del calcolo di addestramento** dei modelli GPT di OpenAI dal 2018 al 2023.
+**La frontiera del calcolo efficiente**. La slide mostra l’**aumento esponenziale del calcolo di addestramento** dei modelli GPT di OpenAI dal 2018 al 2023.
 
 - Le **curve blu** (a) mostrano che modelli **sempre più grandi** richiedono **più calcolo** per raggiungere errori più bassi.
 - La **linea rossa tratteggiata** (b) è la **frontiera del calcolo efficiente**: oltre di essa, altro calcolo produce **rendimenti decrescenti** nel miglioramento delle prestazioni.
 - Nella zona sotto la frontiera **non ci sono modelli**: nessun modello riesce a fare meglio di quanto il calcolo investito consenta.
 
-**Scaling laws per i modelli linguistici** (p. 80). Le prestazioni **migliorano** (l’errore scende) con diverse misure di calcolo: **addestramento più lungo**, **dataset più grandi**, **più parametri**. La tendenza è regolare.
+**Scaling laws per i modelli linguistici**. Le prestazioni **migliorano** (l’errore scende) con diverse misure di calcolo: **addestramento più lungo**, **dataset più grandi**, **più parametri**. La tendenza è regolare.
 
-**Limiti per i ViT** (p. 81). I **Vision Transformer** (ViT) sono reti profonde comuni per le immagini: usano l’architettura **transformer**, nata per il linguaggio (BERT, GPT, Lezione 13, §5), per elaborare dati visivi. Anche nei ViT l’errore di addestramento segue un andamento **molto simile** a quello dei LLM.
+**Limiti per i ViT**. I **Vision Transformer** (ViT) sono reti profonde comuni per le immagini: usano l’architettura **transformer**, nata per il linguaggio (BERT, GPT, Lezione 13, §5), per elaborare dati visivi. Anche nei ViT l’errore di addestramento segue un andamento **molto simile** a quello dei LLM.
 
-<!-- SOURCE_VISUAL id="IS22-V35" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="79" type="grafico" description="Frontiera del calcolo efficiente per i modelli GPT dal 2018 al 2023" reason="Curve visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS22-V35" source="L22-web.pdf" page="96" type="grafico" description="Frontiera del calcolo efficiente per i modelli GPT dal 2018 al 2023" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V36" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="80" type="grafico" description="Scaling laws: errore in funzione di calcolo, dati e parametri" reason="Curve in scala logaritmica visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS22-V36" source="L22-web.pdf" page="96" type="grafico" description="Scaling laws: errore in funzione di calcolo, dati e parametri" reason="Curve in scala logaritmica visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS22-V37" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="81" type="grafico" description="Andamento dell’errore di addestramento nei Vision Transformer" reason="Curve visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS22-V37" source="L22-web.pdf" page="95" type="grafico" description="Andamento dell’errore di addestramento nei Vision Transformer" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 📌 **Leggere una scaling law (nota didattica).** Le leggi di Kaplan e altri (2020) hanno forma di **legge di potenza**. Per il numero di parametri $N$:
@@ -552,18 +555,17 @@ _(slide pp. 78–81)_
 
 ### **10. LLM, agenti e progettazione del ML**
 
-_(slide pp. 82–90)_
 
-**Che cosa può fare uno strumento come ChatGPT per il progettista di ML** (p. 82).
+**Che cosa può fare uno strumento come ChatGPT per il progettista di ML**.
 
-> 📌 **Nemico o alleato?** (p. 83).
+> 📌 **Nemico o alleato?**.
 > - Come tutti i modelli linguistici, ChatGPT si può vedere come un **alleato** per chi analizza dati e progetta modelli, **non come un nemico**.
 > - È **cruciale** esercitare il **pensiero critico**, **validare** i risultati e **verificare in modo indipendente** le informazioni fornite.
 > - Come modello linguistico **non ha accesso** a dati **in tempo reale** o **specifici del dominio**: le risposte si basano su **pattern appresi** da informazioni preesistenti.
 
 > ⚠️ **Precisazioni (nota didattica).** L’ultimo punto descrive il modello «nudo». Gli assistenti attuali possono cercare sul web, leggere file e usare una base di conoscenza (la RAG della Lezione 15, §4): l’accesso ai dati del dominio c’è, ma **non** rende le risposte automaticamente corrette. Resta poi il problema opposto: prima di incollare un dataset aziendale in un servizio esterno, valgono le regole su **privacy e riservatezza** della Lezione 15, §2.
 
-**Dove può aiutare** (pp. 84–86):
+**Dove può aiutare**:
 
 | Compito | Che cosa può fare (slide) |
 |---|---|
@@ -575,9 +577,9 @@ _(slide pp. 82–90)_
 | 6. **Ricerca e comprensione concettuale** | spiegazioni su concetti statistici, tecniche di ML, buone pratiche; rassegna della letteratura; ispirazione |
 | anche | applicazioni specifiche come **serie temporali** e **NLP**, e altro |
 
-**Creare un dizionario dei dati** (pp. 87–88). Alla richiesta «*give me a data dictionary of the iris dataset*», il modello descrive i campi; per l’ultimo, «**Species**», spiega che è una **variabile categorica** con tre categorie distinte: **Setosa**, **Versicolor** e **Virginica**. Alla richiesta di un dizionario per **un proprio dataset**, il modello **usa il contesto** fornito (intestazioni, esempi) per costruirlo.
+**Creare un dizionario dei dati**. Alla richiesta «*give me a data dictionary of the iris dataset*», il modello descrive i campi; per l’ultimo, «**Species**», spiega che è una **variabile categorica** con tre categorie distinte: **Setosa**, **Versicolor** e **Virginica**. Alla richiesta di un dizionario per **un proprio dataset**, il modello **usa il contesto** fornito (intestazioni, esempi) per costruirlo.
 
-<!-- SOURCE_VISUAL id="IS22-V38" source="Lesson_22_Autoencoders_AutomaticFeatureExtraction_TransferKnowledge_TrainingDeepModels.pdf" page="87" type="schermata" description="Dizionario dei dati del dataset Iris generato da ChatGPT" reason="Risposta del modello presente solo come schermata" -->
+<!-- SOURCE_VISUAL id="IS22-V38" source="L22-web.pdf" page="99" type="schermata" description="Dizionario dei dati del dataset Iris generato da ChatGPT" reason="Risposta del modello presente solo come schermata" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **Com’è fatto il dizionario di Iris (nota didattica).** Serve a verificare la risposta del modello, invece di fidarsi:
@@ -592,14 +594,14 @@ _(slide pp. 82–90)_
 >
 > Il dataset ha 150 campioni, 50 per specie, senza valori mancanti (Lezioni 07 e 16).
 
-> 📌 **Progettare il ML con gli agenti** (p. 89). I modelli linguistici **non sono solo assistenti di chat**. I **sistemi agentici** possono:
+> 📌 **Progettare il ML con gli agenti**. I modelli linguistici **non sono solo assistenti di chat**. I **sistemi agentici** possono:
 > - **ispezionare le cartelle** di un progetto e **leggere i dataset**;
 > - **scrivere script** ed **eseguire esperimenti**;
 > - **generare grafici**, **confrontare metriche** e **documentare** i risultati.
 >
 > Il **progettista resta responsabile** di **validazione**, **controlli sul data leakage**, **disegno sperimentale** e **interpretazione** (Lezione 15, §1).
 
-**Gli agenti e la «corsa all’oro»** (p. 90). Durante le corse all’oro (le migrazioni di massa in cerca d’oro, soprattutto nel XIX secolo) **la maggior parte** dei partecipanti **non si arricchì**, e anzi affrontò difficoltà o perdite. **Alcuni** fecero grandi profitti **non estraendo oro**, ma con le **attività di contorno**. Questo richiamo storico aiuta a **riformulare** che cosa LLM e agenti possono fare nel proprio lavoro: pensare a **nuove attività** aiutate, basate o migliorate da questi strumenti, e **non** a qualcosa «**contro**» di loro o che ne viene «**sostituito**».
+**Gli agenti e la «corsa all’oro»**. Durante le corse all’oro (le migrazioni di massa in cerca d’oro, soprattutto nel XIX secolo) **la maggior parte** dei partecipanti **non si arricchì**, e anzi affrontò difficoltà o perdite. **Alcuni** fecero grandi profitti **non estraendo oro**, ma con le **attività di contorno**. Questo richiamo storico aiuta a **riformulare** che cosa LLM e agenti possono fare nel proprio lavoro: pensare a **nuove attività** aiutate, basate o migliorate da questi strumenti, e **non** a qualcosa «**contro**» di loro o che ne viene «**sostituito**».
 
 > 💡 **Picconi e pale (nota didattica).** Il detto americano è «*sell picks and shovels*»: nella corsa all’oro guadagnava con certezza chi vendeva gli attrezzi. Per un progettista di sistemi intelligenti il valore è nelle attività attorno al modello, che il corso ha coperto una per una: dati puliti e armonizzati, validazione corretta, monitoraggio, integrazione nel processo industriale.
 
@@ -630,9 +632,8 @@ _(slide pp. 82–90)_
 
 ### **12. Sintesi della lezione**
 
-_(slide p. 91)_
 
-> ✅ **Punti principali** (p. 91).
+> ✅ **Punti principali**.
 > - **Autoencoder**: ricostruire l’input attraverso un collo di bottiglia per imparare feature senza etichette; autoencoder impilati; riduzione della dimensionalità, denoising, colorazione.
 > - **Addestramento e progetto dei modelli profondi**:
 >   - **fine-tuning** con strati congelati e rifiniti, nelle tre opzioni;

@@ -1,14 +1,12 @@
 ## **Lezione 16: Valutazione dell’accuratezza, dataset Iris, codifica delle variabili categoriche e laboratorio**
 
-La sedicesima lezione del corso **IS4** ha due parti. La **parte A** completa la valutazione dei modelli: le metriche dei **regressori** ($R^2$, MSE, RMSE, MAE) e dei **classificatori** (accuratezza e i suoi riferimenti, **matrice di confusione**, curva **ROC**), la valutazione dei **foundation model** usati in modalità **zero-shot** e **few-shot**, e altre verifiche come l’iniezione di rumore e l’**analisi di sensibilità**. Poi presenta il dataset **Iris** come «strumento di debug» e il problema delle variabili **categoriche**: codifica intera, label encoding, **one-hot** e dummy encoding. La **parte B** è il laboratorio: caricare, esplorare, normalizzare e classificare Iris in **Colab** e in **MATLAB**.
-
-Fonti: [PDF della Lezione 16](Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf), 106 pagine, e tre supplementi letti integralmente: il dataset [Lesson_16_iris.dat](Lesson_16_iris.dat), il notebook [Lesson_16_laboratory_COLAB_IRIS_Dataset.ipynb](Lesson_16_laboratory_COLAB_IRIS_Dataset.ipynb) e lo script [Lesson_16_laboratory_MATLAB_IRIS_Dataset.m](Lesson_16_laboratory_MATLAB_IRIS_Dataset.m). Le formule rese come immagini sono riportate in forma standard; le note didattiche aggiunte sono segnalate. [Indice del corso](../L0%20-%20Indice%20del%20corso.md).
+La valutazione di un sistema di apprendimento combina metriche numeriche, prove di robustezza e revisioni umane. Il percorso applica questi strumenti a regressori e classificatori, estende la valutazione ai foundation model, usa Iris per esplorare i dati e affronta la codifica delle variabili categoriche. Il laboratorio costruisce e analizza matrici di input e target in Colab e MATLAB.
 
 ### **0. Struttura della lezione**
 
-_(slide pp. 1–2)_
+__
 
-Titolo originale: *Part A and B: Basic datasets management, Coding in Matlab and Colab, One-hot encoding*. L’indice (p. 2) elenca:
+Il filo conduttore va dalle metriche alla validazione dei modelli con output aperti, poi usa Iris per controllare rappresentazioni e preprocessing prima del laboratorio:
 
 1. **valutazione dell’accuratezza e della confidenza** di classificatori e regressori: $R^2$, MSE, RMSE, matrice di confusione, ROC, analisi di sensibilità;
 2. **gestione di base dei dataset**, codice in MATLAB e Colab;
@@ -21,11 +19,11 @@ Titolo originale: *Part A and B: Basic datasets management, Coding in Matlab and
 
 ### **1. Valutare l’accuratezza**
 
-_(slide pp. 3–17)_
+__
 
 #### **1.1. In quale passo si usa**
 
-Valutazione di accuratezza e **confidenza** per classificatori e regressori (p. 3). Serve in tre passi del flusso di lavoro (p. 4):
+Valutazione di accuratezza e **confidenza** per classificatori e regressori. Serve in tre passi del flusso di lavoro:
 
 | Passo | Chi la usa | Su quali dati |
 |---|---|---|
@@ -37,9 +35,9 @@ Espressione generale: $Y = \text{function}(X, \text{params})$, con metriche dive
 
 #### **1.2. Regressori**
 
-_(slide pp. 5–8)_
+__
 
-**Esempio** (p. 5). Per Amazon si costruisce un regressore che, dai dati dell’utente (età, città, livello di istruzione, ora del giorno, importo dell’ordine precedente, giorni dall’ultimo ordine), **predice l’importo in euro del prossimo ordine** entro una settimana:
+**Esempio**. Per Amazon si costruisce un regressore che, dai dati dell’utente (età, città, livello di istruzione, ora del giorno, importo dell’ordine precedente, giorni dall’ultimo ordine), **predice l’importo in euro del prossimo ordine** entro una settimana:
 
 $$\text{euro\_prossimo\_ordine} = \text{function}(\text{età}, \text{città}, \text{istruzione}, \text{ora}, \text{importo\_precedente}, \text{giorni\_dall’ultimo})$$
 
@@ -49,14 +47,14 @@ Come dimostrare che il regressore è **buono**? Con quali **figure di merito** m
 > $$R^2 = 1 - \frac{\sum_{i} (y_i - \hat{y}_i)^2}{\sum_{i} (y_i - \bar{y})^2} = 1 - \frac{\text{somma dei quadrati dei residui}}{\text{somma totale dei quadrati}}$$
 > $$\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \qquad \text{RMSE} = \sqrt{\text{MSE}} \qquad \text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|$$
 
-| Metrica | Significato (slide) | Meglio se | Intervallo | Unità |
+| Metrica | Significato | Meglio se | Intervallo | Unità |
 |---|---|---|---|---|
-| **$R^2$** (p. 6) | **proporzione della variabilità** dell’uscita **spiegata** dalle variabili predittive: variabilità non spiegata (rispetto all’uscita del modello) su variabilità totale (rispetto alla media) | **più alto** | $(-\infty, 1]$ per dataset particolari o modelli cattivi; di solito $[0, 1]$ | **adimensionale** |
-| **MSE** (p. 7) | errore quadratico medio | **più basso** | $[0, +\infty)$ | **quadrato** dell’unità di $y$ (per esempio €²) |
-| **RMSE** (p. 7) | **errore medio** del modello nel predire l’uscita di un’osservazione | **più basso** | $[0, +\infty)$ | **stessa unità** di $y$ (per esempio €) |
-| **MAE** (p. 8) | media dei valori assoluti degli errori | **più basso** | $[0, +\infty)$ | stessa unità di $y$ |
+| **$R^2$** | **proporzione della variabilità** dell’uscita **spiegata** dalle variabili predittive: variabilità non spiegata (rispetto all’uscita del modello) su variabilità totale (rispetto alla media) | **più alto** | $(-\infty, 1]$ per dataset particolari o modelli cattivi; di solito $[0, 1]$ | **adimensionale** |
+| **MSE** | errore quadratico medio | **più basso** | $[0, +\infty)$ | **quadrato** dell’unità di $y$ (per esempio €²) |
+| **RMSE** | **errore medio** del modello nel predire l’uscita di un’osservazione | **più basso** | $[0, +\infty)$ | **stessa unità** di $y$ (per esempio €) |
+| **MAE** | media dei valori assoluti degli errori | **più basso** | $[0, +\infty)$ | stessa unità di $y$ |
 
-> ⚠️ **Outlier** (pp. 7–8). MSE e RMSE sono **sensibili agli outlier**; il MAE lo è **meno**.
+> ⚠️ **Outlier**. MSE e RMSE sono **sensibili agli outlier**; il MAE lo è **meno**.
 
 > 💡 **Esempio numerico (nota didattica).** Con valori veri $y = (10, 20, 30)$ € e predizioni $\hat{y} = (12, 18, 40)$ €, gli errori sono $(-2, 2, -10)$:
 > - $\text{MAE} = (2 + 2 + 10)/3 \approx 4{,}67$ €;
@@ -67,26 +65,26 @@ Come dimostrare che il regressore è **buono**? Con quali **figure di merito** m
 
 #### **1.3. Classificatori: l’accuratezza e i suoi riferimenti**
 
-_(slide pp. 9–11)_
+__
 
-**Esempio** (p. 9). Per un ospedale si costruisce un classificatore che **diagnostica precocemente il prediabete** dai dati del paziente e dagli esami del sangue (sesso, età, peso, emoglobina glicata, …): $\text{presenza\_diabete} = \text{function}(\text{sesso}, \text{età}, \text{GL}, \dots)$. Come dimostrare che è buono? Una figura di merito tipica è l’**accuratezza**.
+**Esempio**. Per un ospedale si costruisce un classificatore che **diagnostica precocemente il prediabete** dai dati del paziente e dagli esami del sangue (sesso, età, peso, emoglobina glicata, …): $\text{presenza\_diabete} = \text{function}(\text{sesso}, \text{età}, \text{GL}, \dots)$. Come dimostrare che è buono? Una figura di merito tipica è l’**accuratezza**.
 
-> 📌 **Accuratezza** (p. 10). Il **rapporto** (percentuale) tra risultati predetti che **coincidono** con quelli attesi. Con 1000 risultati e 850 corretti, l’accuratezza è **0,85**, cioè **85%**. Vale $\text{accuratezza} = 1 - \text{errore}$ (a volte si parla di accuratezza intendendo l’errore).
+> 📌 **Accuratezza**. Il **rapporto** (percentuale) tra risultati predetti che **coincidono** con quelli attesi. Con 1000 risultati e 850 corretti, l’accuratezza è **0,85**, cioè **85%**. Vale $\text{accuratezza} = 1 - \text{errore}$ (a volte si parla di accuratezza intendendo l’errore).
 
-> ⚠️ **Buoni riferimenti per l’accuratezza** (p. 11). Se training e test sono **sbilanciati** verso una classe, il modello può predire **tutto** come quella classe.
+> ⚠️ **Buoni riferimenti per l’accuratezza**. Se training e test sono **sbilanciati** verso una classe, il modello può predire **tutto** come quella classe.
 > - **Classificatore casuale**: `out = rand()`. Che accuratezza ha? A volte il 50%.
 > - **Classificatore «non così stupido»**: `out = classe_più_presente(dataset)`.
 > - Esempio: nei dati di training del **Titanic** il 68% delle persone è morto; un modello che predice «tutti morti» ha accuratezza **68%**.
 >
 > **Dire «1% di errore» può essere molto buono, o molto cattivo!**
 
-> 💡 **Quanto vale il caso (nota didattica).** Il 50% del classificatore casuale vale per **due classi bilanciate**; con $C$ classi bilanciate l’accuratezza attesa è $1/C$ (33% su Iris). Il classificatore della classe maggioritaria è il **riferimento minimo** da battere: un modello al 70% sul Titanic è appena 2 punti sopra il «tutti morti» (Lezione 14, §2.1).
+> 💡 **Quanto vale il caso (nota didattica).** Il 50% del classificatore casuale vale per **due classi bilanciate**; con $C$ classi bilanciate l’accuratezza attesa è $1/C$ (33% su Iris). Il classificatore della classe maggioritaria è il **riferimento minimo** da battere: un modello al 70% sul Titanic è appena 2 punti sopra il «tutti morti» Il confronto con la classe maggioritaria costituisce il riferimento minimo da superare.
 
 #### **1.4. La matrice di confusione**
 
-_(slide pp. 12–16)_
+__
 
-> 📌 **Matrice di confusione** (pp. 12–13). Una misura a **quattro quadranti** per un problema binario (per esempio «cane» contro «non cane»):
+> 📌 **Matrice di confusione**. Una misura a **quattro quadranti** per un problema binario (per esempio «cane» contro «non cane»):
 >
 > | | **Predetto falso** | **Predetto vero** |
 > |---|---|---|
@@ -106,17 +104,17 @@ _(slide pp. 12–16)_
 >
 > Il 93% sembra ottimo, ma per uno screening medico la sensibilità del 60% è il vero problema. Per confronto, il modello «tutti sani» avrebbe accuratezza 90% e sensibilità 0%.
 
-**Matrice di confusione multiclasse** (pp. 14–16), sul dataset **CIFAR-10**. Come leggerla: i valori **sulla diagonale** sono le predizioni **corrette**; **fuori dalla diagonale** ci sono gli **errori**. Esempi della slide: **26 uccelli** reali sono stati confusi con **aeroplani**; **111 cani** reali sono stati confusi con **gatti**. Servono più esempi?
+**Matrice di confusione multiclasse**, sul dataset **CIFAR-10**. Come leggerla: i valori **sulla diagonale** sono le predizioni **corrette**; **fuori dalla diagonale** ci sono gli **errori**. Esempi nel confronto: **26 uccelli** reali sono stati confusi con **aeroplani**; **111 cani** reali sono stati confusi con **gatti**. Servono più esempi?
 
 > 💡 **Che cosa se ne ricava (nota didattica).** Gli errori non sono distribuiti a caso: cani e gatti si confondono tra loro molto più che con i camion. Questo dice **dove** intervenire, per esempio raccogliere più immagini che distinguano cani e gatti o aggiungere feature utili a separarli, mentre l’accuratezza complessiva non lo mostrerebbe.
 
-<!-- SOURCE_VISUAL id="IS16-V01" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="12" type="tabella" description="Matrice di confusione a quattro quadranti con TN, FP, FN, TP" reason="Tabella resa come immagine" -->
+<!-- SOURCE_VISUAL id="IS16-V01" source="L16-web.pdf" page="12" type="tabella" description="Matrice di confusione a quattro quadranti con TN, FP, FN, TP" reason="Tabella resa come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V02" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="14" type="tabella" description="Matrice di confusione multiclasse su CIFAR-10" reason="Valori della matrice presenti solo nell’immagine" -->
+<!-- SOURCE_VISUAL id="IS16-V02" source="L16-web.pdf" page="14" type="tabella" description="Matrice di confusione multiclasse su CIFAR-10" reason="Valori della matrice presenti solo nell’immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V03" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="16" type="tabella" description="Lettura della matrice multiclasse: 26 uccelli confusi con aeroplani, 111 cani confusi con gatti" reason="Valori evidenziati presenti solo nell’immagine" -->
+<!-- SOURCE_VISUAL id="IS16-V03" source="L16-web.pdf" page="16" type="tabella" description="Lettura della matrice multiclasse: 26 uccelli confusi con aeroplani, 111 cani confusi con gatti" reason="Valori evidenziati presenti solo nell’immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **1.5. La curva ROC**
@@ -127,55 +125,55 @@ _(slide pp. 12–16)_
 > $$\text{TPR}(\theta) = \frac{TP}{TP + FN} \qquad \text{FPR}(\theta) = \frac{FP}{FP + TN} = 1 - \text{specificità}$$
 > Abbassando la soglia si trovano più positivi veri ma anche più falsi allarmi: il punto si sposta verso l’alto a destra. Una curva che passa **vicino all’angolo in alto a sinistra** indica un buon classificatore; la **diagonale** corrisponde al caso. L’area sotto la curva (**AUC**) riassume la curva in un numero tra 0,5 (caso) e 1 (perfetto).
 
-<!-- SOURCE_VISUAL id="IS16-V04" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="17" type="grafico" description="Curva ROC di un rilevatore con soglia variabile" reason="Curva visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS16-V04" source="L16-web.pdf" page="18" type="grafico" description="Curva ROC di un rilevatore con soglia variabile" reason="Curva visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **2. Foundation model: zero-shot e few-shot**
 
-_(slide pp. 18–27)_
+__
 
 #### **2.1. Un nuovo approccio all’addestramento**
 
-**Dalla validazione guidata dai dati all’adattamento guidato dalla rappresentazione** (p. 18).
+**Dalla validazione guidata dai dati all’adattamento guidato dalla rappresentazione**.
 
-| Pipeline | Passi (p. 19) |
+| Pipeline | Passi |
 |---|---|
 | **tradizionale** | raccolta dei dati → feature engineering → addestramento → cross-validation → rilascio |
 | **nuova (aggiuntiva)** | analisi dei dati supervisionati e non → **foundation model pre-addestrati** → **ancoraggio semantico** → adattamento **zero/few-shot** → **validazione con l’uomo nel ciclo** |
 
 Il **collo di bottiglia** della validazione si sposta dalla **disponibilità dei dati** alla **qualità della rappresentazione** e all’**ancoraggio semantico**.
 
-> 📌 **Foundation model** (p. 20). Modelli su **larga scala** pre-addestrati su dataset **enormi e diversificati**, che imparano **rappresentazioni generali** trasferibili tra compiti, adattabili con **prompting**, **fine-tuning** o apprendimento **zero/few-shot**.
+> 📌 **Foundation model**. Modelli su **larga scala** pre-addestrati su dataset **enormi e diversificati**, che imparano **rappresentazioni generali** trasferibili tra compiti, adattabili con **prompting**, **fine-tuning** o apprendimento **zero/few-shot**.
 >
-> Perché contano in IS4:
+> Perché sono utili nei sistemi applicativi:
 > - forniscono una forte **comprensione semantica** di codice, log e testo;
 > - permettono di **ragionare** su minacce o situazioni **mai viste** senza addestramento specifico;
-> - fanno da **base** per sistemi industriali zero-shot e few-shot, **per la progettazione e l’addestramento, non per il rilascio in tempo reale**.
+> - possono fornire una base per prototipi industriali zero-shot e few-shot; prima di un impiego operativo servono validazione sul dominio, misure di latenza e controlli di sicurezza.
 >
 > I foundation model spostano il ML dall’**addestramento specifico** all’**adattamento guidato dalla conoscenza**.
 
-<!-- SOURCE_VISUAL id="IS16-V05" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="19" type="diagramma" description="Pipeline tradizionale e nuova pipeline con foundation model e adattamento zero/few-shot" reason="Confronto delle pipeline reso graficamente" -->
+<!-- SOURCE_VISUAL id="IS16-V05" source="L16-web.pdf" page="21" type="diagramma" description="Pipeline tradizionale e nuova pipeline con foundation model e adattamento zero/few-shot" reason="Confronto delle pipeline reso graficamente" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **2.2. Zero-shot e few-shot**
 
-> 📌 **Che cosa sono e che cosa non sono** (pp. 21–22). Zero-shot e few-shot **non** sono modelli specifici, **non** sono algoritmi di addestramento, **non** sono architetture. Sono **paradigmi di inferenza e adattamento**: modi di usare un modello addestrato su **compiti o classi nuove**.
+> 📌 **Che cosa sono e che cosa non sono**. Zero-shot e few-shot **non** sono modelli specifici, **non** sono algoritmi di addestramento, **non** sono architetture. Sono **paradigmi di inferenza e adattamento**: modi di adattare in inferenza un modello pre-addestrato a un compito o a esempi nuovi.
 >
 > | | **Zero-Shot Learning** (ZSL) | **Few-Shot Learning** (FSL) |
 > |---|---|---|
 > | Esempi etichettati | **nessuno** | **pochissimi** (per esempio 1–10) |
 > | Su che cosa si basa | istruzioni, descrizioni, **conoscenza semantica** | **rappresentazioni forti** apprese nel pre-addestramento |
 >
-> Zero-shot e few-shot descrivono **come si usa** un modello, non **che tipo di modello** è.
+> Zero-shot e few-shot indicano la quantità di esempi forniti al momento dell’inferenza. Nel riconoscimento zero-shot di classi mai viste, la decisione può basarsi su descrizioni semantiche delle classi.
 
-**Esempio zero-shot** (p. 23). Nessun esempio fornito; decisione basata solo sulla conoscenza semantica e sul riconoscimento di pattern.
+**Esempio zero-shot**. Nessun esempio fornito; decisione basata solo sulla conoscenza semantica e sul riconoscimento di pattern.
 
 - **Prompt**: «Sei un analista di manutenzione industriale. Questo comportamento della macchina è anomalo? *Il motore mostra vibrazioni crescenti dopo l’avvio, la temperatura sale di 12 °C in 20 minuti e l’allarme A17 compare in modo intermittente.*»
 - **Output del modello**: «Probabile comportamento anomalo. Il pattern suggerisce un possibile problema meccanico o termico, come usura dei cuscinetti, disallineamento o lubrificazione insufficiente. Si raccomanda un’ispezione.»
 
-**Esempio few-shot** (p. 24). Il modello **impara il pattern** da pochi esempi etichettati e adatta la decisione, con **maggiore coerenza** sui campioni simili.
+**Esempio few-shot**. Il modello **impara il pattern** da pochi esempi etichettati e adatta la decisione, con **maggiore coerenza** sui campioni simili.
 
 - **Prompt**: tre esempi etichettati, poi il caso da analizzare.
   - Esempio 1 (**anomalo**): vibrazioni in aumento dopo l’avvio, temperatura +15 °C, allarme A17 intermittente; motivo: possibile usura dei cuscinetti o problema di lubrificazione.
@@ -184,27 +182,25 @@ Il **collo di bottiglia** della validazione si sposta dalla **disponibilità dei
   - Caso da analizzare: lo stesso dell’esempio zero-shot.
 - **Output del modello**: «Probabile caso anomalo. I sintomi sono vicini all’esempio 1: vibrazioni crescenti, deriva di temperatura e allarme A17 intermittente. Possibile causa: usura dei cuscinetti, disallineamento o lubrificazione insufficiente.»
 
-> ⚠️ **Residui di un’altra lezione.** Nelle pp. 23–24 alcune note laterali parlano di «comandi codificati», «nuova famiglia di attacchi» e, alla p. 27, di «analisti di sicurezza»: sono residui di una versione dell’esempio in ambito di sicurezza informatica, mentre i prompt riguardano la manutenzione industriale. Il concetto non cambia.
-
-<!-- SOURCE_VISUAL id="IS16-V06" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="24" type="esempio" description="Prompt few-shot con tre esempi di manutenzione e risposta del modello" reason="Impaginazione di prompt e risposta resa graficamente" -->
+<!-- SOURCE_VISUAL id="IS16-V06" source="L16-web.pdf" page="27" type="esempio" description="Prompt few-shot con tre esempi di manutenzione e risposta del modello" reason="Impaginazione di prompt e risposta resa graficamente" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Usare un LLM generico** (p. 25) come ChatGPT o Gemini: passare dall’estrazione delle feature e dalla classificazione a «**parlare con l’LLM**». La slide lo presenta come ciò che si vorrebbe avere, **non ancora possibile oggi con alta accuratezza**.
+**Usare un LLM generico** come ChatGPT o Gemini: passare dall’estrazione delle feature e dalla classificazione a «**parlare con l’LLM**». Questa modalità può produrre ipotesi linguistiche, ma non sostituisce un classificatore validato su soglie, storico e casi specifici.
 
-<!-- SOURCE_VISUAL id="IS16-V07" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="25" type="schema" description="Dall’estrazione delle feature e classificazione al dialogo con un LLM generico" reason="Schema presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS16-V07" source="L16-web.pdf" page="32" type="schema" description="Dall’estrazione delle feature e classificazione al dialogo con un LLM generico" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **2.3. Valutare i foundation model**
 
-_(slide pp. 26–27)_
+__
 
-**Perché la valutazione non è banale** (p. 26):
+**Perché la valutazione non è banale**:
 
 - le predizioni sono spesso **semantiche ed esplicative**, non semplici etichette di classe;
 - i modelli zero/few-shot lavorano con **pochi dati** e con **spostamenti della distribuzione**;
 - le ipotesi della **cross-validation classica** possono non valere.
 
-**Strategie di valutazione** (p. 27):
+**Strategie di valutazione**:
 
 | Strategia | Come |
 |---|---|
@@ -219,46 +215,46 @@ Per i foundation model la valutazione si sposta dalla **pura accuratezza statist
 
 ### **3. Altre verifiche: input modificati, salienza, rumore, sensibilità**
 
-_(slide pp. 28–32)_
+__
 
-La sezione (p. 28) presenta altri modi di valutare un modello: **mappe di salienza**, **test di iniezione**, **sensibilità**.
+La sezione presenta altri modi di valutare un modello: **mappe di salienza**, **test di iniezione**, **sensibilità**.
 
-**Modificare gli input** (p. 29). Due reti riconoscono lo stesso cane con confidenza diversa (NN1: 0,95; NN2: 0,89): conviene provare a **modificare l’input** e osservare come cambiano le uscite.
+**Modificare gli input**. Due reti riconoscono lo stesso cane con confidenza diversa (NN1: 0,95; NN2: 0,89): conviene provare a **modificare l’input** e osservare come cambiano le uscite.
 
-**Controllare anche con le mappe di salienza** (p. 30; Lezione 11, §5.1). La predizione di NN1 (cane = 0,95) è corretta, ma **guarda i pixel sbagliati**: ci si può fidare anche se sembra accurata?
+**Controllare anche con le mappe di salienza** (controllare anche che la rete usi le regioni pertinenti dell’immagine). La predizione di NN1 (cane = 0,95) è corretta, ma **guarda i pixel sbagliati**: ci si può fidare anche se sembra accurata?
 
-**Aggiungere una discreta quantità di rumore** (p. 31). Con un’immagine rumorosa la stessa rete NN1 passa da «cane = 0,95» a «**camion = 0,78**»: è un esempio di **analisi di sensibilità** del modello.
+**Aggiungere una discreta quantità di rumore**. Con un’immagine rumorosa la stessa rete NN1 passa da «cane = 0,95» a «**camion = 0,78**»: è un esempio di **analisi di sensibilità** del modello.
 
-<!-- SOURCE_VISUAL id="IS16-V08" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="29" type="immagini" description="Due reti che riconoscono il cane con confidenza 0,95 e 0,89 su input modificati" reason="Immagini visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS16-V08" source="L16-web.pdf" page="40" type="immagini" description="Due reti che riconoscono il cane con confidenza 0,95 e 0,89 su input modificati" reason="Immagini visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V09" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="31" type="immagini" description="Rumore aggiunto all’immagine: NN1 passa da cane 0,95 a camion 0,78" reason="Immagini visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS16-V09" source="L16-web.pdf" page="42" type="immagini" description="Rumore aggiunto all’immagine: NN1 passa da cane 0,95 a camion 0,78" reason="Immagini visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 **Analisi di sensibilità** (p. 32). Un insieme di metodi per **quantificare** come l’**incertezza sull’uscita** di un modello dipende dall’incertezza sui suoi **input** o sulla sua **rappresentazione interna**. Valuta quanto il modello è «sensibile» a:
+> 📌 **Analisi di sensibilità**. Un insieme di metodi per **quantificare** come l’**incertezza sull’uscita** di un modello dipende dall’incertezza sui suoi **input** o sulla sua **rappresentazione interna**. Valuta quanto il modello è «sensibile» a:
 > - **fluttuazioni dei parametri**. Esempio: eseguendo il modello su una **NPU veloce a 8 bit**, i risultati sono **diversi** da quelli di TensorFlow sul PC;
 > - **i dati su cui è costruito**. Esempio: rimescolando i dati tra training e validation, **l’accuratezza cambia molto**.
 
-> 💡 **Due esempi, due cause (nota didattica).** Il primo è l’effetto della **quantizzazione** (Lezione 04, §3.2): passare da pesi a 32 bit a interi a 8 bit introduce piccoli errori che possono spostare un punto oltre la frontiera di decisione. Il secondo è la **varianza** della Lezione 14, §5.5: se una nuova divisione dei dati cambia molto l’accuratezza, la stima non è affidabile e il modello è instabile.
+> 💡 **Due esempi, due cause (nota didattica).** Il primo è l’effetto della **quantizzazione** (la quantizzazione riduce la precisione dei pesi): passare da pesi a 32 bit a interi a 8 bit introduce piccoli errori che possono spostare un punto oltre la frontiera di decisione. Il secondo è la **varianza** della variabilità tra campioni di addestramento e verifica: se una nuova divisione dei dati cambia molto l’accuratezza, la stima non è affidabile e il modello è instabile.
 
 ---
 
 ### **4. Il dataset Iris come strumento di debug**
 
-_(slide pp. 33–55)_
+__
 
 #### **4.1. La regola d’oro e il dataset**
 
-La lezione è **teoria + laboratorio** (p. 33). A questo punto si è al passo 2, pronti per l’addestramento (p. 34).
+La lezione è **teoria + laboratorio**. A questo punto si è al passo 2, pronti per l’addestramento.
 
-> 📌 **Regola d’oro n. 1: iniziare con un dataset semplice e noto** (p. 35). Per verificare **conoscenze**, **strumenti** di elaborazione dei dati, **modelli** e **metodi di apprendimento**:
+> 📌 **Regola d’oro n. 1: iniziare con un dataset semplice e noto**. Per verificare **conoscenze**, **strumenti** di elaborazione dei dati, **modelli** e **metodi di apprendimento**:
 > - **non** iniziare con il dataset reale della propria applicazione;
 > - iniziare con un dataset **noto e facile**, con **uscite note**;
 > - grafici, accuratezza e risultati sono **ben documentati**, e si possono **confrontare** i propri risultati con la letteratura.
 >
-> Ogni volta che si prova un nuovo strumento, **partire da qualcosa di noto** (p. 36).
+> Ogni volta che si prova un nuovo strumento, **partire da qualcosa di noto**.
 
-**Il dataset Iris** (pp. 37–42):
+**Il dataset Iris**:
 
 | Aspetto | Contenuto |
 |---|---|
@@ -267,23 +263,23 @@ La lezione è **teoria + laboratorio** (p. 33). A questo punto si è al passo 2,
 | **campioni** | **150** (50 per classe) |
 | **origine** | introdotto dallo statistico e biologo britannico **Ronald Fisher** nell’articolo del **1936** «The use of multiple measurements in taxonomic problems» (*Annals of Eugenics* 7, 179–188), per quantificare la variazione morfologica di tre specie affini di iris |
 | **uso storico** | Fisher sviluppò un modello per **distinguere le specie** combinando le quattro feature: ne fece l’esempio classico dell’**analisi discriminante** |
-| **scheda** (p. 41) | 6 variabili, 150 osservazioni, uso libero: codice della specie, nome della specie, larghezza e lunghezza del petalo, larghezza e lunghezza del sepalo |
+| **scheda** | 6 variabili, 150 osservazioni, uso libero: codice della specie, nome della specie, larghezza e lunghezza del petalo, larghezza e lunghezza del sepalo |
 
 Fisher è definito «un genio che creò quasi da solo le **fondamenta della statistica moderna**». La p. 42 mostra i **dati grezzi** e il significato delle tre classi. Nella scheda della p. 41 il titolo dell’articolo è scritto «Axonomic» per «Taxonomic».
 
-<!-- SOURCE_VISUAL id="IS16-V10" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="39" type="immagini" description="Le tre specie di iris: setosa, versicolor, virginica" reason="Foto dei fiori visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS16-V10" source="L16-web.pdf" page="49" type="immagini" description="Le tre specie di iris: setosa, versicolor, virginica" reason="Foto dei fiori visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V11" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="42" type="tabella" description="Dati grezzi di Iris e significato delle tre classi" reason="Tabella resa come immagine" -->
+<!-- SOURCE_VISUAL id="IS16-V11" source="L16-web.pdf" page="52" type="tabella" description="Dati grezzi di Iris e significato delle tre classi" reason="Tabella resa come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 Il file [Lesson_16_iris.dat](Lesson_16_iris.dat) contiene le 150 righe del dataset nel formato UCI: quattro valori numerici separati da virgole e il nome della specie, per esempio `5.1,3.5,1.4,0.2,Iris-setosa`; le righe sono ordinate per classe (50 setosa, 50 versicolor, 50 virginica).
 
-**$Y = \text{FUNC}(X)$, tutto qui** (p. 43). Per ogni dataset si tratta di creare $X$ (le 4 feature per campione) e $Y$ (l’identificativo della classe, per esempio 1 = «setosa»).
+**$Y = \text{FUNC}(X)$, tutto qui**. Per ogni dataset si tratta di creare $X$ (le 4 feature per campione) e $Y$ (l’identificativo della classe, per esempio 1 = «setosa»).
 
 #### **4.2. EDA e visualizzazione su Iris**
 
-_(slide pp. 44–54)_
+__
 
 | Pagina | Grafico | Che cosa insegna |
 |---|---|---|
@@ -295,30 +291,30 @@ _(slide pp. 44–54)_
 | p. 51 | **grafici di correlazione** | relazioni tra coppie di feature |
 | p. 52 | **PCA** su Iris | riduce la dimensionalità conservando il più possibile le **caratteristiche spaziali**, **senza bisogno di etichette**: da $F_1, \dots, F_4$ a $F_1', \dots, F_4'$ |
 
-<!-- SOURCE_VISUAL id="IS16-V12" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="44" type="grafico" description="Boxplot delle feature di Iris" reason="Boxplot visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS16-V12" source="L16-web.pdf" page="54" type="grafico" description="Boxplot delle feature di Iris" reason="Boxplot visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V13" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="45" type="grafico" description="Grafico parallelo del dataset Iris" reason="Linee dei campioni visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS16-V13" source="L16-web.pdf" page="55" type="grafico" description="Grafico parallelo del dataset Iris" reason="Linee dei campioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V14" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="46" type="grafico" description="Grafico parallelo con un altro toolbox: servono unità o scale simili" reason="Grafico visibile solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS16-V14" source="L16-web.pdf" page="56" type="grafico" description="Grafico parallelo con un altro toolbox: servono unità o scale simili" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V15" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="47" type="grafico" description="Grafico parallelo dopo l’armonizzazione con z-score" reason="Grafico visibile solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS16-V15" source="L16-web.pdf" page="57" type="grafico" description="Grafico parallelo dopo l’armonizzazione con z-score" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V16" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="50" type="grafico" description="Grafico parallelo del Titanic con osservazioni su equipaggio, sesso e bambini in prima classe" reason="Flussi del grafico visibili solo nella figura" -->
+<!-- SOURCE_VISUAL id="IS16-V16" source="L16-web.pdf" page="59" type="grafico" description="Grafico parallelo del Titanic con osservazioni su equipaggio, sesso e bambini in prima classe" reason="Flussi del grafico visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V17" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="51" type="grafico" description="Grafici di correlazione delle feature di Iris" reason="Grafici visibili solo nella slide" -->
+<!-- SOURCE_VISUAL id="IS16-V17" source="L16-web.pdf" page="61" type="grafico" description="Grafici di correlazione delle feature di Iris" reason="Grafici visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V18" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="52" type="grafico" description="PCA sul dataset Iris" reason="Proiezione visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS16-V18" source="L16-web.pdf" page="62" type="grafico" description="PCA sul dataset Iris" reason="Proiezione visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-> 📌 **Perché Iris è un buon strumento di debug** (p. 53). **Nessun dato mancante**, **nessun errore di etichettatura**, **nessuna scalatura necessaria** (tutte le feature sono in centimetri e su scale simili). Per questo il corso userà il dataset di Fisher **come strumento di debug**. Negli esempi successivi si userà la **notazione di TensorFlow**, la libreria software libera e open source di Google per la programmazione a flusso di dati e differenziabile.
+> 📌 **Perché Iris è un buon strumento di debug**. **Nessun dato mancante**, **nessun errore di etichettatura**, **nessuna scalatura necessaria** (tutte le feature sono in centimetri e su scale simili). Per questo il dataset di Fisher è utile **come strumento di debug**. Negli esempi successivi si userà la **notazione di TensorFlow**, la libreria software libera e open source di Google per la programmazione a flusso di dati e differenziabile.
 
-**Il pairplot** (p. 54), con seaborn:
+**Il pairplot**, con seaborn:
 
 ```python
 # Plot the dataset
@@ -332,7 +328,7 @@ Il grafico mostra tutte le coppie di feature come scatter plot colorati per spec
 
 #### **4.3. Prepararsi all’apprendimento**
 
-**I passi** (p. 55):
+**I passi**:
 
 1. **codifica**: codifica **intera** e codifica **one-hot** (§5);
 2. **preparare le feature di input** (§6);
@@ -343,13 +339,13 @@ Il grafico mostra tutte le coppie di feature come scatter plot colorati per spec
 
 ### **5. Dati categorici e codifiche**
 
-_(slide pp. 56–67)_
+__
 
 #### **5.1. Il problema**
 
-**Clustering e classificazione con dati categorici** (p. 56): come applicare le tecniche supervisionate e non supervisionate del corso quando un elemento del vettore di input **non è un valore numerico**? **L’apprendimento può essere influenzato dal modo in cui si elencano le classi** (p. 57).
+**Clustering e classificazione con dati categorici**: come applicare le tecniche supervisionate e non supervisionate quando un elemento del vettore di input **non è un valore numerico**? **L’apprendimento può essere influenzato dal modo in cui si elencano le classi**.
 
-**Feature categoriche in IS4** (p. 58). I dataset industriali **raramente** contengono solo valori numerici: **log** ed **eventi** includono spesso attributi categorici da gestire con attenzione.
+**Feature categoriche in IS4**. I dataset industriali **raramente** contengono solo valori numerici: **log** ed **eventi** includono spesso attributi categorici da gestire con attenzione.
 
 #### **5.2. Codifica intera per le feature ordinali**
 
@@ -364,7 +360,7 @@ _(slide pp. 56–67)_
 
 #### **5.3. Label encoding e i suoi limiti**
 
-**Label encoding** (p. 61). Assegna un **intero unico** a ogni valore categorico distinto. Esempio con gli indirizzi IP di destinazione di una rete mesh IoT:
+**Label encoding**. Assegna un **intero unico** a ogni valore categorico distinto. Esempio con gli indirizzi IP di destinazione di una rete mesh IoT:
 
 | `dst_ip` | Codice |
 |---|---|
@@ -374,7 +370,7 @@ _(slide pp. 56–67)_
 
 Che cosa fa: assegna un **identificativo** a ogni IP; conserva l’**identità**, **non la semantica**; introduce un **ordine numerico artificiale**, che **può essere dannoso** per alcuni metodi di addestramento.
 
-**Quando si può usare** (p. 62):
+**Quando si può usare**:
 
 | **Scenari accettabili** | **Sconsigliato per** |
 |---|---|
@@ -382,13 +378,13 @@ Che cosa fa: assegna un **identificativo** a ogni IP; conserva l’**identità**
 | **hashing** o indicizzazione | **DBSCAN** |
 | come **passo intermedio** prima degli **embedding** | qualsiasi modello **basato su distanze** o **lineare** |
 
-> ⚠️ **«Codifica pigra»: l’esempio degli IP** (p. 62). Il label encoding è **arbitrario** e **nasconde la natura gerarchica** degli indirizzi IP. «La difficoltà di fondo è che gli IP funzionano come **identificativi categorici**, ma seguono una **logica gerarchica** (rete, sottorete, host) che la codifica standard spesso non cattura.» Il modello deve lavorare di più, con più divisioni, per «riscoprire» che 192.168.1.1 e 192.168.1.2 sono **correlati**. **BISOGNA CODIFICARE CON GIUDIZIO!**
+> ⚠️ **«Codifica pigra»: l’esempio degli IP**. Il label encoding è **arbitrario** e **nasconde la natura gerarchica** degli indirizzi IP. «La difficoltà di fondo è che gli IP funzionano come **identificativi categorici**, ma seguono una **logica gerarchica** (rete, sottorete, host) che la codifica standard spesso non cattura.» Il modello deve lavorare di più, con più divisioni, per «riscoprire» che 192.168.1.1 e 192.168.1.2 sono **correlati**. **BISOGNA CODIFICARE CON GIUDIZIO!**
 
 > 💡 **Codificare con giudizio (nota didattica).** Per gli IP si possono estrarre feature che riflettono la gerarchia: i quattro ottetti separati, un indicatore «rete privata / pubblica», il prefisso di sottorete (per esempio 192.168.1.0/24). Così due host della stessa sottorete condividono gran parte delle feature, e la loro vicinanza diventa visibile al modello.
 
 #### **5.4. One-hot e dummy encoding**
 
-> 📌 **One-hot encoding** (p. 63). **Perché serve una codifica**: i valori categorici **non hanno un ordine naturale**; una mappatura numerica diretta (per esempio tcp = 1, udp = 2) introduce **distanze artificiali**, e i calcoli di distanza diventano **senza senso**.
+> 📌 **One-hot encoding**. **Perché serve una codifica**: i valori categorici **non hanno un ordine naturale**; una mappatura numerica diretta (per esempio tcp = 1, udp = 2) introduce **distanze artificiali**, e i calcoli di distanza diventano **senza senso**.
 >
 > Ogni feature categorica con $C$ valori possibili viene trasformata in **$C$ dimensioni binarie**, di cui **esattamente una è attiva** (valore 1). Esempio con `protocol` ∈ {tcp, udp, icmp}, da 1 feature a 3:
 > $$\text{tcp} = [1, 0, 0] \qquad \text{udp} = [0, 1, 0] \qquad \text{icmp} = [0, 0, 1]$$
@@ -397,41 +393,41 @@ Che cosa fa: assegna un **identificativo** a ogni IP; conserva l’**identità**
 > $$\lVert [1,0,0] - [0,1,0] \rVert = \sqrt{2}$$
 > uguale per ogni coppia: nessuna categoria è «più vicina» di un’altra.
 
-**Dopo il one-hot** (p. 64):
+**Dopo il one-hot**:
 
 - si possono calcolare **distanze valide** e stimare la **covarianza** in modo significativo;
 - l’**aumento della dimensionalità** è **atteso e voluto**;
 - si può applicare la **PCA** dopo la codifica, per **ridurre** la dimensionalità, **eliminare ridondanze** e **visualizzare** i dati.
 
-<!-- SOURCE_VISUAL id="IS16-V19" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="63" type="schema" description="One-hot encoding del protocollo da 1 feature a 3 feature binarie" reason="Schema della trasformazione reso graficamente" -->
+<!-- SOURCE_VISUAL id="IS16-V19" source="L16-web.pdf" page="75" type="schema" description="One-hot encoding del protocollo da 1 feature a 3 feature binarie" reason="Schema della trasformazione reso graficamente" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V20" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="64" type="schema" description="One-hot seguito da PCA per ridurre la dimensionalità" reason="Schema presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS16-V20" source="L16-web.pdf" page="76" type="schema" description="One-hot seguito da PCA per ridurre la dimensionalità" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Dummy encoding** (p. 65). Converte una variabile categorica con $C$ valori in **variabili binarie**: ogni categoria è rappresentata da un **indicatore** (1 se presente, 0 se assente). Per una feature con $C$ categorie produce **$C$ oppure $C - 1$** feature binarie.
+**Dummy encoding**. Converte una variabile categorica con $C$ valori in **variabili binarie**: ogni categoria è rappresentata da un **indicatore** (1 se presente, 0 se assente). Per una feature con $C$ categorie produce **$C$ oppure $C - 1$** feature binarie.
 
 > 💡 **Perché $C - 1$ (nota didattica).** Se si conoscono $C - 1$ indicatori, l’ultimo è determinato: vale 1 solo quando tutti gli altri valgono 0. Con $C$ indicatori le colonne sono **linearmente dipendenti** (la loro somma è sempre 1), e nei modelli lineari con intercetta questo rende i coefficienti non univoci. Eliminando una categoria di riferimento il problema scompare; per alberi e reti neurali si usano di solito tutte le $C$ colonne.
 
-<!-- SOURCE_VISUAL id="IS16-V21" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="65" type="schema" description="Dummy encoding con C o C-1 variabili binarie" reason="Esempio reso graficamente" -->
+<!-- SOURCE_VISUAL id="IS16-V21" source="L16-web.pdf" page="77" type="schema" description="Dummy encoding con C o C-1 variabili binarie" reason="Esempio reso graficamente" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Codifica intera, di nuovo** (p. 66). Ogni valore unico riceve un intero, per esempio «rosso» = 1, «verde» = 2, «blu» = 3: è la **label encoding** o **integer encoding**, facilmente **reversibile**, e per alcune variabili può bastare. Gli interi hanno una **relazione d’ordine naturale**, che gli algoritmi possono essere in grado di sfruttare.
+**Codifica intera, di nuovo**. Ogni valore unico riceve un intero, per esempio «rosso» = 1, «verde» = 2, «blu» = 3: è la **label encoding** o **integer encoding**, facilmente **reversibile**, e per alcune variabili può bastare. Gli interi hanno una **relazione d’ordine naturale**, che gli algoritmi possono essere in grado di sfruttare.
 
-> ⚠️ **Colori e ordine.** L’ordine degli interi è utile solo se la variabile è **ordinale** (§5.2). Per i colori non esiste un ordine naturale, quindi «rosso < verde < blu» è **artificiale**: è esattamente il problema che il one-hot risolve (p. 63).
+> ⚠️ **Colori e ordine.** L’ordine degli interi è utile solo se la variabile è **ordinale** (§5.2). Per i colori non esiste un ordine naturale, quindi «rosso < verde < blu» è **artificiale**: è esattamente il problema che il one-hot risolve.
 
 La p. 67 ricorda che esistono **molte altre tecniche** per codificare i dati categorici.
 
-<!-- SOURCE_VISUAL id="IS16-V22" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="67" type="infografica" description="Altre tecniche di codifica dei dati categorici" reason="Elenco presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS16-V22" source="L16-web.pdf" page="78" type="infografica" description="Altre tecniche di codifica dei dati categorici" reason="Elenco presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **6. Strumenti: one-hot, normalizzazione e divisione dei dati**
 
-_(slide pp. 68–74)_
+__
 
-**One-hot encoding in MATLAB** (p. 69):
+**One-hot encoding in MATLAB**:
 
 ```matlab
 labels = ["red"; "blue"; "red"; "green"; "yellow"; "blue"];  % 6 elements
@@ -450,7 +446,7 @@ labels = onehotencode(labels,2)
 
 Le categorie vengono **ordinate alfabeticamente** (blue, green, red, yellow): la prima riga, «red», ha l’1 nella **terza** colonna; la quinta, «yellow», nella quarta.
 
-**Preparare le feature di input** (p. 70). Per migliorare la discesa del gradiente si normalizzano i valori con `normalize()`; `X_data` conterrà le feature normalizzate per addestrare la rete.
+**Preparare le feature di input**. Per migliorare la discesa del gradiente si normalizzano i valori con `normalize()`; `X_data` conterrà le feature normalizzate per addestrare la rete.
 
 ```python
 from sklearn.preprocessing import normalize
@@ -463,54 +459,54 @@ X_data = normalize(X_data)
 > - `sklearn.preprocessing.normalize` **non** fa una min-max per feature: porta **ogni campione** (ogni riga) a **norma unitaria** L2. Per portare ogni feature in $[0, 1]$ si usa `MinMaxScaler`, per lo z-score `StandardScaler`.
 > - `DataFrame.as_matrix()` è stato rimosso da pandas: oggi si scrive `dataset[FEATURES].to_numpy()`.
 
-**Dividere training e test** (pp. 71–72). I due vettori `X_data` e `y` contengono tutto ciò che serve per addestrare una rete (per esempio con TensorFlow). Si dividono in **training** e **test**, per **prevenire l’overfitting** e ottenere un **benchmark** migliore delle prestazioni:
+**Dividere training e test**. I due vettori `X_data` e `y` contengono tutto ciò che serve per addestrare una rete (per esempio con TensorFlow). Si dividono in **training** e **test**, per **prevenire l’overfitting** e ottenere un **benchmark** migliore delle prestazioni:
 
 ```python
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X_data, Y, test_size=0.3, random_state=1)
 ```
 
-Qui il 30% dei campioni va nel test; `random_state=1` rende la divisione **riproducibile**. La slide avverte di usare questo parametro **con giudizio nel caso delle serie temporali**.
+Qui il 30% dei campioni va nel test; `random_state=1` rende la divisione **riproducibile**. Per le serie temporali una divisione casuale può mescolare passato e futuro: occorre usare una partizione cronologica.
 
 > 💡 **Il perché dell’avvertenza (nota didattica).** `train_test_split` **mescola** i campioni prima di dividerli (`shuffle=True` per default): con una serie temporale mette il futuro nel training (Lezione 14, §6). Per le serie temporali si usa `shuffle=False` o uno schema a finestre.
 
-<!-- SOURCE_VISUAL id="IS16-V23" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="72" type="schema" description="Divisione della matrice X e del vettore Y in training e test" reason="Schema presente solo come immagine" -->
+<!-- SOURCE_VISUAL id="IS16-V23" source="L16-web.pdf" page="84" type="schema" description="Divisione della matrice X e del vettore Y in training e test" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Il passo successivo è l’apprendimento** (p. 73): con le esercitazioni in MATLAB e Colab si è pronti a creare i **primi classificatori**.
+**Il passo successivo è l’apprendimento**: con le esercitazioni in MATLAB e Colab si è pronti a creare i **primi classificatori**.
 
 ---
 
 ### **7. Parte B: il laboratorio**
 
-_(slide pp. 75–105)_
+__
 
 #### **7.1. Organizzazione e metodo**
 
-La p. 75 apre la parte B, intitolata per errore «LESSON 15 Part B». Il laboratorio (p. 76) è in file separati, con un esempio **Colab** e uno **MATLAB**, basati su **Iris**.
+La p. 75 apre la parte B, intitolata per errore «LESSON 15 Part B». Il laboratorio è in file separati, con un esempio **Colab** e uno **MATLAB**, basati su **Iris**.
 
-> 📌 **Che cosa c’è all’esame** (p. 77). Non si scrive codice (esatto), ma è importante studiare l’applicazione pratica dei concetti. **Verrà chiesto di commentare esempi di codice.**
+> 📌 **Che cosa c’è all’esame**. Non si scrive codice (esatto), ma è importante studiare l’applicazione pratica dei concetti. **Verrà chiesto di commentare esempi di codice.**
 
-| **Colab** (p. 78) | **MATLAB** (p. 78) |
+| **Colab** | **MATLAB** |
 |---|---|
 | preparazione dell’ambiente | caricamento del dataset |
 | caricamento dei dati | creazione delle strutture dati $X$ e $Y$ |
 | analisi preliminare, grafici, normalizzazione, esempio di classificazione | analisi preliminare, grafici, normalizzazione, esempio di classificazione |
 
-**La cosa migliore da fare** (pp. 79–82): **scaricare gli esempi e farli girare**. Sono commentati: esplorare il codice, modificarlo, aggiungere grafici. Per Colab: caricare il notebook su Google Drive, aprirlo con Colab (Chrome con login), leggere i commenti ed eseguire le celle una per una o con «Run all».
+**La cosa migliore da fare**: **scaricare gli esempi e farli girare**. Sono commentati: esplorare il codice, modificarlo, aggiungere grafici. Per Colab: caricare il notebook su Google Drive, aprirlo con Colab (Chrome con login), leggere i commenti ed eseguire le celle una per una o con «Run all».
 
-<!-- SOURCE_VISUAL id="IS16-V24" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="82" type="schermata" description="Esecuzione delle celle del notebook in Colab" reason="Interfaccia visibile solo nella schermata" -->
+<!-- SOURCE_VISUAL id="IS16-V24" source="L16-web.pdf" page="100" type="schermata" description="Esecuzione delle celle del notebook in Colab" reason="Interfaccia visibile solo nella schermata" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **7.2. Il notebook Colab**
 
-_(slide pp. 83–105)_
+__
 
 Le pp. 83–96 ripetono i passi del laboratorio della Lezione 07, §1: import di pandas, NumPy e matplotlib, caricamento del CSV UCI con i nomi delle colonne, `info()` (150 righe, 4 colonne `float64` e la classe `object`), `head(n)`, separazione di `x` (150 × 4) e `y` (150), conversione in NumPy e slicing per colonna e per riga. La p. 88 aggiunge che in `drop` il parametro `axis` indica se eliminare **righe** (0 o `'index'`) o **colonne** (1 o `'columns'`).
 
 Il notebook `Lesson_16_laboratory_COLAB_IRIS_Dataset.ipynb` prosegue così:
 
-**Normalizzazione** (pp. 97–99): portare i dati nell’intervallo $[0, 1]$ con la min-max, $\dfrac{x - \min(x)}{\max(x) - \min(x)}$; la slide confronta l’istogramma dei dati **non normalizzati** e **normalizzati**.
+**Normalizzazione**: portare i dati nell’intervallo $[0, 1]$ con la min-max, $\dfrac{x - \min(x)}{\max(x) - \min(x)}$; il confronto tra istogrammi mostra dei dati **non normalizzati** e **normalizzati**.
 
 ```python
 xNumpy_Norm = (xNumpy - np.min(xNumpy)) / (np.max(xNumpy) - np.min(xNumpy))
@@ -523,7 +519,7 @@ plt.hist(xNumpy_Norm[:,0])
 
 > ⚠️ **Una min-max globale, non per feature (nota didattica).** `np.min(xNumpy)` e `np.max(xNumpy)` sono il minimo e il massimo **dell’intera matrice** (0,1 e 7,9 su Iris), non di ogni colonna. Infatti l’output salvato mostra la prima feature tra **0,538 e 1**, non tra 0 e 1: $(4{,}3 - 0{,}1)/7{,}8 \approx 0{,}538$. Per normalizzare **ogni feature** si scrive `np.min(xNumpy, axis=0)` e `np.max(xNumpy, axis=0)`. Nel notebook la matrice normalizzata serve solo per i grafici: il classificatore è addestrato su `xNumpy`.
 
-**Conversione della classe da categorica a numerica** (pp. 100–101):
+**Conversione della classe da categorica a numerica**:
 
 ```python
 yNumpy, dummy = pd.factorize(yNumpy)
@@ -532,7 +528,7 @@ print(yNumpy)   # 50 zeri, 50 uno, 50 due
 
 `pd.factorize` assegna un intero a ogni valore distinto nell’ordine in cui compare: setosa → 0, versicolor → 1, virginica → 2. È una **label encoding** (§5.3), accettabile qui perché serve solo come **etichetta di classe**, non come feature di input.
 
-**Visualizzazione** (pp. 102–105). Visualizzare feature e classi dà un **primo controllo visivo** della capacità discriminante. Il limite: si vedono solo **2 o 3 dimensioni**, e anche un dataset semplice come Iris ha 4 feature. Si procede così: (1) scegliere le feature da disegnare; (2) assegnare il **colore** in base alla classe.
+**Visualizzazione**. Visualizzare feature e classi dà un **primo controllo visivo** della capacità discriminante. Il limite: si vedono solo **2 o 3 dimensioni**, e anche un dataset semplice come Iris ha 4 feature. Si procede così: (1) scegliere le feature da disegnare; (2) assegnare il **colore** in base alla classe.
 
 ```python
 feat0 = xNumpy_Norm[:,0]
@@ -546,21 +542,21 @@ plt.show()
 # lo stesso con feat2 = xNumpy_Norm[:,2] e feat3 = xNumpy_Norm[:,3]
 ```
 
-| Coppia di feature | Risultato (slide) |
+| Coppia di feature | Risultato |
 |---|---|
 | **Feat0 + Feat1** (lunghezza e larghezza del sepalo, p. 104) | **buona** discriminazione per la **classe 0**; **cattiva** per le classi 1 e 2, che sono **mescolate** |
 | **Feat2 + Feat3** (lunghezza e larghezza del petalo, p. 105) | **discriminazione migliore** per **tutte** le classi |
 
-<!-- SOURCE_VISUAL id="IS16-V25" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="99" type="grafico" description="Istogramma della prima feature dopo la normalizzazione" reason="Istogramma visibile solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS16-V25" source="L16-web.pdf" page="111" type="grafico" description="Istogramma della prima feature dopo la normalizzazione" reason="Istogramma visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V26" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="104" type="grafico" description="Scatter Feat0 contro Feat1: classe 0 separata, classi 1 e 2 mescolate" reason="Punti colorati visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS16-V26" source="L16-web.pdf" page="115" type="grafico" description="Scatter Feat0 contro Feat1: classe 0 separata, classi 1 e 2 mescolate" reason="Punti colorati visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V27" source="Lesson_16_DataSetCreation_IntegerAndOneHotEncoding_LABORATORY_DatasetCreation_Visualization_CodingExamples.pdf" page="105" type="grafico" description="Scatter Feat2 contro Feat3: discriminazione migliore per tutte le classi" reason="Punti colorati visibili solo nel grafico" -->
+<!-- SOURCE_VISUAL id="IS16-V27" source="L16-web.pdf" page="116" type="grafico" description="Scatter Feat2 contro Feat3: discriminazione migliore per tutte le classi" reason="Punti colorati visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-**Classificazione con k-NN** (nel notebook, dopo le slide). Divisione a metà, classificatore **1-NN** con distanza euclidea, matrice di confusione e accuratezza:
+**Classificazione con k-NN** (nel notebook, dopo il materiale). Divisione a metà, classificatore **1-NN** con distanza euclidea, matrice di confusione e accuratezza:
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -593,8 +589,8 @@ Lo script `Lesson_16_laboratory_MATLAB_IRIS_Dataset.m` segue gli stessi passi:
 | Blocco | Istruzioni principali | Che cosa fa |
 |---|---|---|
 | **scaricare e leggere** | `websave('iris.dat', url)`, `textscan(fid,'%f%f%f%f%s','delimiter',',')` | salva il file UCI e legge quattro colonne numeriche e una di testo; il commento ricorda che equivale a `load fisheriris` |
-| **matrice delle feature** | `P = measurements;` `plotmatrix(P)` | la $X$ del corso e il suo scatter plot a coppie |
-| **target** | ciclo con `switch species{i}` | la $Y$ del corso: setosa → 0, versicolor → 1, virginica → 2 |
+| **matrice delle feature** | `P = measurements;` `plotmatrix(P)` | la matrice $X$ delle feature e il relativo scatter plot a coppie |
+| **target** | ciclo con `switch species{i}` | il vettore target $Y$: setosa → 0, versicolor → 1, virginica → 2 |
 | **statistiche descrittive** | `mean`, `std`, `min`, `max` per colonna, stampate con `fprintf` | primo controllo delle feature |
 | **grafici** | `gscatter(P(:,i), P(:,j), species, 'rgb', 'osd')` in una griglia 4 × 4 | tutte le coppie di feature colorate per specie, con le etichette in centimetri |
 | **classificatore** | `lda = fitcdiscr(P,T);` `ldaClass = resubPredict(lda);` | **analisi discriminante lineare**, lo stesso metodo di Fisher |
@@ -649,9 +645,9 @@ confusionMatrix = confusionmat(ldaClass,T)
 
 ### **9. Sintesi della lezione**
 
-_(slide pp. 74, 106)_
+__
 
-> ✅ **Punti principali** (p. 74).
+> ✅ **Punti principali**.
 > - Il dataset di **Fisher Iris** come «**strumento di debug**»: nessun dato mancante, nessun errore di etichettatura, risultati noti in letteratura.
 > - **One-hot encoding**, e più in generale la codifica dei dati categorici: intera per le feature ordinali, one-hot o dummy per quelle nominali, con giudizio per casi come gli indirizzi IP.
 > - **Creare le matrici** $X$ e $Y$ per l’apprendimento.
@@ -659,4 +655,4 @@ _(slide pp. 74, 106)_
 > - **Grafici utili** per il ML: boxplot, grafici paralleli, pairplot, scatter plot per coppie di feature; la **visualizzazione dei dati** è molto utile.
 > - **Valutazione dell’accuratezza**: $R^2$, MSE, RMSE e MAE per i regressori; accuratezza con i suoi riferimenti, matrice di confusione e ROC per i classificatori; valutazione operativa per i foundation model e analisi di sensibilità.
 
-> ⚠️ **Punti principali della p. 106.** La slide finale della parte B riporta i punti principali della **Lezione 10** (similarità per il deep learning, EDA, feature engineering, EDA applicata alle reti), non quelli di questo laboratorio. La sintesi qui sopra segue invece la p. 74 e i contenuti effettivi della lezione.
+> ⚠️ **Nota redazionale.** La pagina conclusiva della parte B riporta accidentalmente i punti principali della **Lezione 10** (similarità per il deep learning, EDA, feature engineering, EDA applicata alle reti), non quelli di questo laboratorio. La sintesi qui sopra segue invece la p. 74 e i contenuti effettivi della lezione.

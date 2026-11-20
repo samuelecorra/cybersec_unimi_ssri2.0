@@ -268,7 +268,7 @@ Il numero di componenti, da solo, non ordina in modo universale l’intelligenza
 
 Il modello dots-note-3.0 di RedNote avrebbe risolto tutti e sei i problemi dell’IMO 2026, ottenendo 42 punti su 42 in una valutazione esterna. La pagina ufficiale dell’[IMO 2026](https://www.imo-official.org/editions/2026/) presenta i risultati della competizione e segnala sette punteggi perfetti, senza elencare un sistema AI tra i concorrenti: il punteggio del modello va quindi distinto dalla classifica ufficiale.
 
-I modelli *frontier* sono disponibili via cloud/API; i modelli *open-weight* possono essere eseguiti localmente o su server aziendali. La fotografia aggiornata comprende GPT-6.2 Astra e Sol, Claude Fable 5.2 e Opus 5.5, Gemini 4 Carbon, Muse Spark 1.3 e Grok 4.6. È una fotografia temporale, non un catalogo stabile: i nomi e le versioni cambiano rapidamente.
+I modelli *frontier* sono disponibili via cloud/API; i modelli *open-weight* possono essere eseguiti localmente o su server aziendali. La fotografia al **20 novembre 2026** comprende GPT-6.2 Astra e Sol, Claude Fable 5.2 e Opus 5.5, Gemini 4 Neon e Carbon, Muse Wonder e Muse Wonder Full, Muse Spark 1.3 e Grok 4.6. Claude Mythos 5.2, annunciato insieme a Fable 5.2 il 9 novembre, è accessibile tramite programmi di verifica per organizzazioni autorizzate; non va presentato come un prodotto disponibile indistintamente. GPT-6.2 Astra/Sol sono stati annunciati il 17 novembre, Gemini 4 Neon il 18 novembre e Muse Wonder il 12 ottobre. È una fotografia temporale, non un catalogo stabile: nomi, versioni, disponibilità e prezzi cambiano rapidamente. Le descrizioni di capacità e i confronti prestazionali riportati dagli annunci sono dichiarazioni dei produttori. [OpenAI](https://openai.com/index/introducing-gpt-6-2-astra-sol/), [Anthropic](https://www.anthropic.com/claude-fable-and-mythos-5-2), [Google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/), [Meta](https://ai.meta.com/research/).
 
 L’esecuzione locale può mantenere i dati sul dispositivo o sull’infrastruttura aziendale, ma la riservatezza dipende da tutta la configurazione: dove gira il modello, quali servizi di supporto vengono chiamati e come vengono trattati prompt e log. La memoria GPU disponibile (VRAM) è un vincolo pratico importante; non determina da sola qualità e adeguatezza del modello.
 
@@ -281,6 +281,8 @@ L’esecuzione locale può mantenere i dati sul dispositivo o sull’infrastrutt
 La crescita dell’AI ha anche una dimensione economica, visibile negli investimenti e nei ricavi delle imprese. La tabella, riferita all’anno fiscale 2025, riporta i valori seguenti.
 
 Sono dati legati al periodo indicato, non una fotografia aggiornata del mercato.
+
+Come riferimento più recente, NVIDIA ha comunicato il 17 novembre 2026 ricavi trimestrali per **115,8 miliardi di dollari** nel terzo trimestre dell’anno fiscale 2027, di cui **107,6 miliardi** nel Data Center. È un dato aziendale riferito al trimestre concluso il 25 ottobre, non una misura del mercato AI complessivo né una stima causale del contributo dell’AI ai ricavi di ogni impresa. [Risultati ufficiali NVIDIA](https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027).
 
 | Società | Ricavi, miliardi USD | Utile netto, miliardi USD | Indicazione sulla crescita attribuita all’AI |
 |---|---:|---:|---|
@@ -380,7 +382,7 @@ La prima distinzione riguarda **da dove viene la supervisione**, la seconda **qu
 
 Il corso introduce anche l’AI Act, l’uso responsabile e la mitigazione dei bias. La classificazione distingue rischio inaccettabile, alto, limitato — con specifici obblighi di trasparenza — e minimo.
 
-Il calendario originario scandiva l’entrata in vigore il 1° agosto 2024, i divieti dal 2 febbraio 2025, gli obblighi GPAI e le autorità nazionali dal 2 agosto 2025 e l’applicazione generale dal 2 agosto 2026. Il Regolamento (UE) 2026/1744 ha poi spostato le scadenze per i sistemi ad alto rischio: 2 dicembre 2027 per quelli dell’Allegato III e 2 agosto 2028 per quelli dell’Allegato I. Il calendario va quindi letto nella sua versione aggiornata e in base alla categoria del sistema.
+Il calendario originario scandiva l’entrata in vigore il 1° agosto 2024, i divieti dal 2 febbraio 2025, gli obblighi GPAI e le autorità nazionali dal 2 agosto 2025 e l’applicazione generale dal 2 agosto 2026. Il Regolamento (UE) 2026/1744 ha poi modificato alcune decorrenze: specifiche disposizioni dell’articolo 5 si applicano dal **2 dicembre 2026**; per i sistemi generativi già immessi sul mercato prima del 2 agosto 2026, il termine transitorio per adeguarsi all’obbligo di marcatura dell’articolo 50(2) è il 2 dicembre 2026; le scadenze per i sistemi ad alto rischio sono il 2 dicembre 2027 per quelli dell’Allegato III e il 2 agosto 2028 per quelli dell’Allegato I. Il calendario va letto disposizione per disposizione e in base alla categoria del sistema. [Regolamento (UE) 2026/1744](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744).
 
 ![](imgs/Pasted%20image%2020261002020217.png)
 
@@ -506,9 +508,6 @@ Non si tratta necessariamente di fotografie naturali alterate impercettibilmente
 
 Il passaggio dall’umorismo alla preoccupazione serve a ricordare che **la conseguenza dell’errore dipende dal task**: sbagliare il riconoscimento in un veicolo autonomo ha implicazioni diverse da una didascalia buffa. Una verifica concreta consiste nel chiedersi che cosa accadrebbe se un veicolo autonomo dotato di sole telecamere RGB interpretasse male la scena. Il rischio dipende dagli oggetti e dalle relazioni che l’immagine consente di rilevare, dalla robustezza della percezione e dalle misure previste quando il sistema è incerto.
 
-<!-- SOURCE_VISUAL id="IS01-V51" source="Lesson_01_v2_Introduction_Exam_DataKnowledge_Spectrum.pdf" page="59" type="immagine di percezione" description="Scena stradale usata per discutere gli errori di un veicolo autonomo con telecamere RGB" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ![](imgs/Pasted%20image%2020261002023057.png)
 
 #### **8.2. Che cosa significa interagire naturalmente**
@@ -608,9 +607,6 @@ L’inciso etimologico su _speciō_, “guardare”, accompagna il termine _spec
 
 ![](imgs/Pasted%20image%2020261002023631.png)
 
-<!-- SOURCE_VISUAL id="IS01-V53" source="Lesson_01_v2_Introduction_Exam_DataKnowledge_Spectrum.pdf" page="63" type="grafico concettuale" description="Data-Knowledge Spectrum con conoscenza crescente verso destra e indicazioni qualitative per reti neurali profonde e tradizionali" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 Quando una legge o una struttura affidabile è già nota, i dati possono servire soprattutto a stimarne pochi parametri. Quando manca questa conoscenza, il modello deve ricavare anche una rappresentazione e relazioni più complesse, e tipicamente richiede più dati. **Il grafico è qualitativo**: non fornisce una formula per calcolare il numero di esempi necessari e non afferma che più dati compensino qualsiasi difetto di qualità.
 
 #### **10.2. Primo esempio: crescita di una popolazione e fitting**
@@ -621,9 +617,6 @@ I dati sperimentali riguardano una popolazione di **Paramecium** per millilitro,
 
 ![](imgs/Pasted%20image%2020261002023649.png)
 
-<!-- SOURCE_VISUAL id="IS01-V54" source="Lesson_01_v2_Introduction_Exam_DataKnowledge_Spectrum.pdf" page="64" type="grafico di fitting" description="Crescita della popolazione e adattamento di un modello semplice ai dati" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 In questo caso abbiamo già un **modello specifico e semplice**. Fare _fitting_ significa adattarne i parametri ai dati osservati.
 
 Non serve imporre una rete enorme per riscoprire da zero una struttura già nota: aumentare i gradi di libertà senza una ragione complica il problema. L’esempio illustra la forma della crescita, senza fornire un’equazione o i valori numerici dei singoli punti.
@@ -633,9 +626,6 @@ Non serve imporre una rete enorme per riscoprire da zero una struttura già nota
 Nel rilevamento visivo degli oggetti, gli ingressi sono immagini e il task comprende l’identificazione e la localizzazione degli oggetti. Si possono immaginare riquadri che identificano un notebook, un laptop, gli occhiali, un telefono e una tazza di caffè in una fotografia; un insieme di immagini etichettate fornisce gli esempi da cui apprendere.
 
 ![](imgs/Pasted%20image%2020261002023708.png)
-
-<!-- SOURCE_VISUAL id="IS01-V55" source="Lesson_01_v2_Introduction_Exam_DataKnowledge_Spectrum.pdf" page="65" type="esempio di object detection" description="Immagine etichettata con oggetti localizzati mediante riquadri" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 Non si dispone di una piccola formula esplicita che trasformi ogni possibile immagine negli oggetti presenti. Occorre apprendere relazioni più generali, ma le **label / etichette** forniscono almeno il risultato desiderato per gli esempi.
 
@@ -649,9 +639,6 @@ Nel caso di sicurezza si dispone di milioni di log, **senza etichette**, e si ce
 
 ![](imgs/Pasted%20image%2020261002023722.png)
 
-<!-- SOURCE_VISUAL id="IS01-V56" source="Lesson_01_v2_Introduction_Exam_DataKnowledge_Spectrum.pdf" page="66" type="esempio di rilevamento non supervisionato" description="Log di attacchi senza etichette e domanda su quali comportamenti identificare" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 Senza etichette non si può addestrare direttamente un classificatore supervisionato di attacchi. Si possono invece cercare strutture o anomalie con metodi non supervisionati, che richiedono interpretazione. Un’anomalia non è automaticamente un attacco: può essere un comportamento raro ma legittimo.
 
 Modelli generali capaci di lavorare senza label possono aiutare a individuare pattern; l’assenza di etichette, da sola, non impone una rete neurale grande. Il confronto fra i tre casi conduce alle domande progettuali fondamentali: **che cosa sappiamo del processo, quali dati abbiamo, quali risultati conosciamo già e quale parte dobbiamo apprendere?**
@@ -664,9 +651,6 @@ Consideriamo **Ottobot di Ottonomy**, un robot autonomo per la consegna di cibo,
 
 ![](imgs/Pasted%20image%2020261002023739.png)
 
-<!-- SOURCE_VISUAL id="IS01-V57" source="Lesson_01_v2_Introduction_Exam_DataKnowledge_Spectrum.pdf" page="68" type="schema di sistema autonomo" description="Robot di consegna e sottosistemi per interazione, sensori, visione, navigazione, gestione della folla ed elaborazione edge" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 Per portare a termine una consegna non basta classificare una fotografia. Il robot deve stimare dove si trova, riconoscere ciò che lo circonda, scegliere un percorso, controllare i movimenti, interagire con la persona e rilevare problemi interni.
 
 Alcune elaborazioni devono avvenire localmente: affidare ogni decisione a una comunicazione remota introduce una dipendenza incompatibile con determinate esigenze di reazione.
@@ -677,8 +661,7 @@ Una **mappa generale delle componenti per sistemi autonomi** collega tecniche di
 
 Le funzioni si distribuiscono fra localizzazione, controllo, pianificazione, interazione, manutenzione, percezione ed elaborazione edge, ciascuna associata a tecnologie e metodi differenti.
 
-<!-- SOURCE_VISUAL id="IS01-V52" source="Lesson_01_v2_Introduction_Exam_DataKnowledge_Spectrum.pdf" page="21" type="tabella tecnica" description="Funzioni di un sistema autonomo associate a tecnologie e modelli: localizzazione, controllo, pianificazione, interazione, manutenzione, percezione ed edge AI" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261119231612.png)
 
 Per leggere la tabella: **SLAM** significa _Simultaneous Localization and Mapping_, cioè localizzazione e costruzione della mappa contemporanee; **GNSS** indica sistemi satellitari di navigazione, con GPS e tecniche RTK (_Real-Time Kinematic_) citati come riferimenti. **IMU** è un’unità di misura inerziale. **PID** indica un controllo proporzionale–integrale–derivativo e **MPC** un _Model Predictive Control_. FPGA e TPU sono piattaforme hardware, mentre YOLO, Faster R-CNN e PointNet sono modelli/famiglie di elaborazione. **Quantizzare** significa usare rappresentazioni numeriche a precisione ridotta, con effetti da valutare su costo e accuratezza.
 
