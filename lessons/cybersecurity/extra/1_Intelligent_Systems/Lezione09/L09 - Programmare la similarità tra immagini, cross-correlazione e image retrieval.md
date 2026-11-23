@@ -24,6 +24,8 @@ Chiudono la lezione i punti principali e un’appendice con la ricetta MATLAB.
 
 **Dove si colloca la lezione.** Il percorso del corso procede per strati. Le lezioni precedenti hanno insegnato ad **acquisire, pulire e armonizzare** i dati (Lezione 6), a confrontare la **capacità del modello con i dati disponibili** evitando il leakage (Lezione 7) e a **rappresentare** i dati definendo feature, firme e distanze (Lezione 8). Questa lezione è il passo successivo: la **similarità in pratica**, cioè come usare un punteggio per fare *match*, *classificare* e *ordinare*. Più avanti nel corso arriveranno gli **embedding appresi** e i sistemi **retrieval-augmented** (Lezione 15), che riusano esattamente lo stesso scheletro.
 
+![](imgs/Pasted%20image%2020261123143805.png)
+
 La lezione risponde a tre domande, ciascuna con il proprio strumento:
 
 | Domanda | Strumento |
@@ -51,8 +53,7 @@ $$\hat{y}=g(z).$$
 
 Questa scomposizione separa **due problemi di progetto** distinti: *come rappresentare* i dati ($\phi$) e *come prendere la decisione* ($g$). Nel flusso di lavoro classico l’ottimizzazione regola soprattutto $g$, per esempio i pesi di una rete con strato di input, strato nascosto e strato di output; la scelta di $\phi$ è invece spesso **ingegnerizzata dal progettista**.
 
-<!-- SOURCE_VISUAL id="IS09-V01" source="L09.pdf" page="5" type="schema" description="Estrazione delle feature seguita da una rete (input, hidden, output) e confronto con un'estrazione banale che alimenta una rete profonda a tre strati nascosti" reason="Topologie delle reti visibili solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123143832.png)
 
 > 📌 **L’estrazione delle feature definisce che cosa il classificatore può «vedere».** Se $\phi$ scarta un’informazione, nessun $g$, per quanto potente, potrà recuperarla. Viceversa, una **rappresentazione debole** (un’estrazione «banale», per esempio i pixel grezzi) **spinge la complessità nel classificatore**: per compensare servono reti più profonde, con più strati nascosti, più parametri e quindi più dati (si ricordi il bilancio tra gradi di libertà e dati della Lezione 7).
 
@@ -64,8 +65,7 @@ $$z=\phi_\theta(x).$$
 
 Le **attivazioni degli strati nascosti** di una rete addestrata diventano allora un vettore di feature che può essere **riusato da un altro modello a valle**. La progettazione delle feature, però, **non è scomparsa**: è stata spostata. Oggi la rappresentazione è plasmata dalla combinazione di **dati + obiettivo di addestramento + architettura**: chi sceglie quali dati usare, quale funzione obiettivo ottimizzare e quale rete adottare sta ancora, indirettamente, decidendo quali aspetti dell’input verranno conservati.
 
-<!-- SOURCE_VISUAL id="IS09-V02" source="L09.pdf" page="6" type="figura" description="Attivazioni nascoste di una rete riusate come vettore di feature per un modello a valle" reason="Figura raster della slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123143857.png)
 
 #### **1.3. Dalle feature apprese a un confronto esplicito**
 
@@ -75,12 +75,15 @@ $$d(z_q,z_i)=\lVert z_q-z_i\rVert_2=\sqrt{\sum_{j=1}^{D}\big(z_{q,j}-z_{i,j}\big
 
 > 💡 **Scatola nera sì, regola di confronto no.** L’embedding appreso può restare una scatola nera (non sappiamo interpretare le singole componenti di $z$), ma la **regola di matching** — quale distanza, quale soglia, quale ordinamento — è un oggetto semplice che si può **ispezionare e testare**. È un modo concreto per recuperare un po’ della spiegabilità discussa nella Lezione 2: si separa la parte opaca (l’encoder) dalla parte verificabile (il confronto).
 
-<!-- SOURCE_VISUAL id="IS09-V03" source="L09.pdf" page="7" type="figura" description="Encoder che produce vettori di riferimento z_i confrontati con il vettore della probe z_q" reason="Figura raster della slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123144148.png)
 
 #### **1.4. Richiamo dalla Lezione 8: una firma e una distanza**
 
-L’esempio più semplice di questo schema è l’**hash percettivo** visto nella Lezione 8. Due immagini $I_1$ e $I_2$ passano ciascuna attraverso la stessa trasformazione $T(\cdot)$: riduzione a $8\times 8$ pixel in scala di grigi e **soglia** sulla media. Ogni immagine diventa così una **firma** binaria
+L’esempio più semplice di questo schema è l’**hash percettivo** visto nella Lezione 8. 
+
+![](imgs/Pasted%20image%2020261123144216.png)
+
+Due immagini $I_1$ e $I_2$ passano ciascuna attraverso la stessa trasformazione $T(\cdot)$: riduzione a $8\times 8$ pixel in scala di grigi e **soglia** sulla media. Ogni immagine diventa così una **firma** binaria
 
 $$h,\;h'\in\{0,1\}^{64}.$$
 
@@ -88,8 +91,6 @@ L’elaborazione successiva è la **distanza di Hamming**, che conta i bit diver
 
 $$d_H(h,h')=\sum_{j=1}^{64}\big[h_j\neq h'_j\big]\;\in\{0,1,\dots,64\}.$$
 
-<!-- SOURCE_VISUAL id="IS09-V04" source="L09.pdf" page="8" type="schema" description="Due immagini, hash T 8x8 grigio con soglia, firme h e h' e distanza di Hamming d_H" reason="Schema a blocchi della pipeline hash" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 | | Contenuto |
 |---|---|
@@ -106,6 +107,8 @@ $$d_H(h,h')=\sum_{j=1}^{64}\big[h_j\neq h'_j\big]\;\in\{0,1,\dots,64\}.$$
 #### **2.1. Che cosa si produce e che cosa si riusa?**
 
 Costruire o configurare un sistema intelligente può avvenire in tre modi. In tutti si sta costruendo o configurando un modello; ciò che cambia è l’**asset riutilizzabile** che resta alla fine:
+
+![](imgs/Pasted%20image%2020261123144313.png)
 
 | Modalità | Input | Operazione | Output (asset) |
 |---|---|---|---|
@@ -124,8 +127,7 @@ Un input — un’immagine (IMG), un testo (TXT) o un segnale (SIGN) — può es
 
 In entrambi i casi segue un **confronto**: similarità coseno, distanza euclidea, distanza di Hamming o prodotto scalare, che produce un punteggio di similarità $s$ o una distanza $d$.
 
-<!-- SOURCE_VISUAL id="IS09-V05" source="L09.pdf" page="11" type="schema" description="Trasformazione progettata e encoder appreso per immagini, testi e segnali, seguiti dallo stesso blocco di confronto" reason="Schema a due rami con icone delle modalità" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123144404.png)
 
 > 📌 **Dove sta il guadagno.** Nella rappresentazione progettata la regola è **specificata dall’ingegnere**; in quella appresa è **l’addestramento a determinarne i parametri**. In molti sistemi attuali il guadagno maggiore viene dal **migliorare $\phi(\cdot)$ mantenendo semplice la regola di confronto**: la distanza resta un coseno o un’euclidea, mentre l’encoder diventa sempre più ricco.
 
@@ -133,8 +135,7 @@ In entrambi i casi segue un **confronto**: similarità coseno, distanza euclidea
 
 Un encoder per le immagini, uno per i testi e uno per i segnali possono proiettare i rispettivi input in uno **spazio allineato**. In quello spazio i vettori provenienti da modalità diverse diventano **confrontabili**, e il confronto alimenta una decisione: un *match*, una classe, un risultato di retrieval ordinato o un’altra azione.
 
-<!-- SOURCE_VISUAL id="IS09-V06" source="L09.pdf" page="12" type="schema" description="Encoder di immagine, testo e segnale che proiettano in uno spazio allineato, confronto e decisione (match, classe, rank, azione)" reason="Schema dello spazio condiviso" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123144425.png)
 
 > ⚠️ **L’allineamento non è automatico.** Due encoder diversi producono vettori comparabili solo se sono stati **addestrati insieme** perché lo siano (lo si vedrà nel §8.6 con le coppie immagine-testo). Avere la stessa dimensione non basta.
 
@@ -145,8 +146,7 @@ L’esempio della slide usa due oggetti, un **quadrato rosso** e un **triangolo 
 - **Caso A — la rappresentazione conserva solo il colore.** Misurando la distanza lungo l’asse del colore, il quadrato rosso ha distanza **0** dalla query: è il vicino più prossimo.
 - **Caso B — la rappresentazione conserva solo la forma.** Misurando lungo l’asse della forma, è il triangolo blu ad avere distanza **0**: il vicino più prossimo cambia.
 
-<!-- SOURCE_VISUAL id="IS09-V07" source="L09.pdf" page="13" type="grafico" description="Due piani colore-forma: con la sola componente colore il più vicino alla query è il quadrato rosso, con la sola forma è il triangolo blu" reason="Posizioni degli oggetti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123144436.png)
 
 > 📌 **La formula della distanza può restare identica.** Cambiare la rappresentazione cambia i **vicinati**, e quindi il **significato di «simile»**. Non esiste una similarità «in assoluto»: esiste una similarità *rispetto a una rappresentazione*. Questa osservazione spiega quasi tutti i successi e i fallimenti che si incontreranno nella lezione.
 
@@ -160,6 +160,8 @@ Lo stesso punteggio $s(z_q,z_i)$ o la stessa distanza $d(z_q,z_i)$ possono alime
 | **MATCH** (verificare) | si applica una **soglia** | **accetta / rifiuta** |
 | **RANK** (ordinare) | si **ordinano** i punteggi | una **lista ordinata**, il top-$k$ |
 
+![](imgs/Pasted%20image%2020261123144451.png)
+
 Le tre decisioni condividono la rappresentazione a monte e differiscono **soltanto per la regola** applicata al punteggio.
 
 ##### **2.5.1. CLASSIFY — assegnare una probe a una classe**
@@ -167,12 +169,16 @@ Le tre decisioni condividono la rappresentazione a monte e differiscono **soltan
 - **Input**: una probe $x$ (immagine, testo o segnale).
 - **Output**: un’etichetta tra $C$ classi; nel caso più semplice **non serve una gallery esterna**.
 
+![](imgs/Pasted%20image%2020261123144515.png)
+
 Il sistema addestrato converte la rappresentazione $z=\phi(x)$ in **punteggi di classe** (o la confronta con **prototipi** di classe) e restituisce una sola decisione di classe.
 
 ##### **2.5.2. MATCH — confrontare una probe con un riferimento**
 
 - **Input**: una probe $x$ e **un** riferimento memorizzato $z_r$.
 - **Output**: una decisione **binaria**, *match* oppure *no match*.
+
+![](imgs/Pasted%20image%2020261123144525.png)
 
 Il confronto produce $s(z_q,z_r)$ o $d(z_q,z_r)$, e una **soglia** $\tau$ converte quell’unico punteggio in una decisione binaria. Con una distanza la regola è
 
@@ -185,6 +191,8 @@ con una similarità il verso si inverte ($s\ge\tau$). La soglia **va calibrata p
 - **Input**: una probe $q$ e una **gallery** di $N$ vettori memorizzati $\{z_i\}_{i=1}^N$.
 - **Output**: la lista **ordinata** degli $N$ elementi, oppure i suoi primi $k$.
 
+![](imgs/Pasted%20image%2020261123144544.png)
+
 Il retrieval **conserva la struttura del vicinato** invece di comprimerla subito in una sola decisione binaria o di classe: l’utente (o un passo successivo) vede *chi* è vicino e *quanto*.
 
 #### **2.6. Il $k$-NN collega retrieval e classificazione**
@@ -194,8 +202,7 @@ Il metodo dei **$k$ vicini più prossimi** ($k$-*Nearest Neighbours*, $k$-NN) mo
 - **Classificazione** ($k=1$): si prende il vicino più prossimo e si assegna alla probe **la classe memorizzata con esso**. Con $k>1$ le $k$ etichette **votano**.
 - **Retrieval**: si identificano i primi $k$ vicini e si **restituiscono i vicini stessi**, come lista ordinata.
 
-<!-- SOURCE_VISUAL id="IS09-V08" source="L09.pdf" page="18" type="schema" description="Probe e vicinato top-k con punti di classe A e classe B: stessa ricerca, due usi" reason="Disposizione dei punti visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123144631.png)
 
 ##### **2.6.1. Classificare con il voto degli esempi più vicini**
 
@@ -233,8 +240,7 @@ Una query (la stella) viene etichettata dal voto dei suoi $k$ punti etichettati 
 | 5 | 1–4 | triangolo |
 | 15 | 2–13 | triangolo |
 
-<!-- SOURCE_VISUAL id="IS09-V09" source="L09.pdf" page="20" type="grafico" description="Query a stella con i vicinati per k = 1, 5 e 15 su punti cerchi e triangoli" reason="Posizioni dei punti e raggi dei vicinati visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123145352.png)
 
 > 📌 **$k$ piccolo segue il rumore, $k$ grande liscia la frontiera.** Con $k=1$ la decisione dipende da un singolo punto, che può essere un esempio etichettato male o un outlier; con $k$ grande la decisione diventa più stabile ma può ignorare strutture locali reali. È un primo incontro con il compromesso **bias-varianza** (Lezioni 14 e 17): $k$ piccolo = bassa distorsione e alta varianza, $k$ grande = il contrario. Nei problemi binari si sceglie spesso $k$ dispari per evitare pareggi.
 
@@ -242,8 +248,7 @@ Una query (la stella) viene etichettata dal voto dei suoi $k$ punti etichettati 
 
 Si consideri un dataset con due feature: l’**altezza in cm**, con dispersione di circa 10, e il **reddito in euro all’anno**, con dispersione di circa 10 000. In unità grezze, una differenza di 1000 euro pesa nella distanza euclidea come una differenza di 1000 cm: **il reddito decide da solo**, e l’altezza diventa irrilevante. Nella slide il voto 5-NN è **2–3 con le unità grezze** e **1–4 dopo la standardizzazione**, e i due insiemi di vicini **non condividono nemmeno un punto**.
 
-<!-- SOURCE_VISUAL id="IS09-V10" source="L09.pdf" page="21" type="grafico" description="Vicini 5-NN altezza-reddito in unità grezze e dopo standardizzazione: due insiemi disgiunti" reason="Posizioni dei punti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123145414.png)
 
 La standardizzazione (*z-score*, ripresa nella Lezione 10) porta ogni feature a media nulla e deviazione standard unitaria:
 
@@ -258,6 +263,9 @@ $$x'_j=\frac{x_j-\mu_j}{\sigma_j}.$$
 | **classico** | IMG / SIGN | **ingegnerizzata** | correlazione / distanza | match, classificazione o ranking |
 | **attuale** | IMG / TXT / SIGN | **encoder appreso** / embedding | similarità vettoriale / ricerca | recupero, *grounding* o decisione |
 
+![](imgs/Pasted%20image%2020261123145442.png)
+
+
 - **Esempio classico**: hash dell’immagine → distanza di Hamming → ranking o soglia.
 - **Esempio attuale**: embedding appreso → similarità coseno → retrieval vettoriale.
 
@@ -270,17 +278,18 @@ Una rappresentazione progettata molto semplice è l’**istogramma dei colori**.
 - **Input**: un’immagine RGB con $N$ pixel, valori da 0 a 255 (l’esempio è una foto di foresta di $3072\times 2048$ pixel).
 - **Output**: un vettore di **768 numeri** ($3\times 256$).
 
+![](imgs/Pasted%20image%2020261123145512.png)
+
 La costruzione procede in tre passi:
 
 1. per ogni canale $c\in\{R,G,B\}$ si conta la frazione di pixel con valore $k$:
 $$h_c(k)=\frac{\#\{\text{pixel con valore }k\}}{N},\qquad k=0,\dots,255;$$
 2. si concatenano i tre istogrammi: $h=[h_R,h_G,h_B]$, un vettore di 768 valori;
 3. si confrontano due immagini $I$ e $J$ con la distanza
-$$d(I,J)=\frac{1}{3}\sum_{c}\frac{1}{255}\sum_{k=0}^{255}\Big|F^{I}_c(k)-F^{J}_c(k)\Big|,$$
-dove $F_c$ è l’**istogramma cumulativo** del canale $c$, $F_c(k)=\sum_{j\le k}h_c(j)$.
 
-<!-- SOURCE_VISUAL id="IS09-V11" source="L09.pdf" page="23" type="figura e grafico" description="Foto FOREST 3072x2048 e i suoi istogrammi normalizzati dei canali R, G, B" reason="Immagine e forma degli istogrammi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+$$d(I,J)=\frac{1}{3}\sum_{c}\frac{1}{255}\sum_{k=0}^{255}\Big|F^{I}_c(k)-F^{J}_c(k)\Big|,$$
+
+dove $F_c$ è l’**istogramma cumulativo** del canale $c$, $F_c(k)=\sum_{j\le k}h_c(j)$.
 
 > 💡 **Perché gli istogrammi cumulativi (nota didattica).** La distanza tra istogrammi cumulativi in una dimensione coincide con la **distanza di Wasserstein** (detta anche *Earth Mover’s Distance*): misura quanta «massa» di pixel bisogna spostare, e di quanto, per trasformare una distribuzione nell’altra. A differenza del confronto bin per bin, una lieve variazione di tonalità sposta un po’ la massa e produce una distanza piccola, invece di svuotare un bin e riempirne un altro. I fattori $1/255$ e $1/3$ normalizzano il risultato in $[0,1]$. Poiché gli istogrammi sono **normalizzati** per $N$, la dimensione dell’immagine non conta.
 
@@ -293,8 +302,7 @@ dove $F_c$ è l’**istogramma cumulativo** del canale $c$, $F_c(k)=\sum_{j\le k
 
 Nell’esempio della slide un **pappagallo** e un **mango** sono oggetti diversi, eppure i loro istogrammi di colore formano la **coppia più vicina**: distanza **0,077**, contro **0,164** e **0,185** rispetto alla foresta. Le statistiche di colore ignorano la forma: oggetti diversi con colori simili risultano simili.
 
-<!-- SOURCE_VISUAL id="IS09-V12" source="L09.pdf" page="24" type="figura e grafico" description="Pappagallo, mango e foresta con i loro istogrammi e le distanze 0.077, 0.164, 0.185" reason="Immagini e istogrammi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123145926.png)
 
 #### **2.9. Quale strumento di confronto risponde alla domanda?**
 
@@ -320,8 +328,7 @@ L’hash risponde a «quanto sono simili due immagini intere». La **cross-corre
 - **Esempio su immagine**: una scena e un **kernel periorbitale** (la regione dell’occhio) alla stessa scala; si fa scorrere il kernel e si assegna un punteggio a ogni posizione.
 - **Esempio su segnale**: un lungo segnale simile a un ECG e un singolo complesso **P–QRS–T** ritagliato; la stessa idea in una dimensione.
 
-<!-- SOURCE_VISUAL id="IS09-V13" source="L09.pdf" page="27" type="figure" description="Scena con kernel periorbitale e segnale ECG con complesso P-QRS-T ritagliato" reason="Immagini e segnale visibili solo nelle figure" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123150010.png)
 
 > 📌 **Il picco dice due cose.** La cross-correlazione restituisce un **punteggio in funzione dello spostamento**. Il **picco** indica sia **quanto bene** il pattern corrisponde (la sua altezza) sia **dove** avviene il miglior allineamento (la sua posizione).
 
@@ -336,6 +343,8 @@ $$C(\tau_0)=\sum_{t=0}^{N-1}s(t+\tau_0)\,k(t).$$
 
 Con $\tau_0=1{,}15$ s il kernel è fermo in un punto del segnale; $t$ è l’indice del campione nel kernel ($0,\dots,28$), e per ogni $t$ si moltiplicano $s(t+\tau_0)$ e $k(t)$.
 
+![](imgs/Pasted%20image%2020261123150140.png)
+
 **Esempio svolto.** In questa posizione la finestra **coincide** con il kernel, quindi ogni prodotto è un quadrato:
 
 - per $t=6$: $0{,}133\times 0{,}133=0{,}018$;
@@ -344,9 +353,6 @@ Con $\tau_0=1{,}15$ s il kernel è fermo in un punto del segnale; $t$ è l’ind
 
 Poiché la finestra è uguale al kernel, ogni prodotto è un quadrato e quindi è $\ge 0$: non ci sono termini negativi che riducano la somma. Ripetendo il calcolo per ogni $\tau$ si ottiene la curva. (La **convoluzione** è la stessa somma con il kernel **ribaltato nel tempo**: §3.4.)
 
-<!-- SOURCE_VISUAL id="IS09-V14" source="L09.pdf" page="28" type="grafico" description="Finestra del segnale e kernel di 29 campioni sovrapposti allo spostamento tau0 = 1.15 s, con i prodotti campione per campione" reason="Campioni e prodotti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 #### **3.3. L’output: il punteggio a ogni spostamento**
 
 - **Input**: segnale $s$ di **1500 campioni** (3 s a 500 Hz); kernel $k$ di **435 campioni** (0,87 s).
@@ -354,8 +360,7 @@ Poiché la finestra è uguale al kernel, ogni prodotto è un quadrato e quindi �
 
 Il numero di valori si spiega così: il kernel deve stare **interamente** dentro il segnale, quindi il suo primo campione può occupare le posizioni da 0 a $1500-435$, cioè $1066$ posizioni (è la modalità *valid*, §3.7). Ogni punto della curva è un punteggio come la somma del paragrafo precedente, calcolato a un altro spostamento $\tau$ e **normalizzato**. Il picco (**1,00 a $\tau=1{,}15$ s**) marca il miglior allineamento; gli **altri battiti** producono picchi più bassi, perché sono complessi cardiaci simili ma non identici a quello ritagliato.
 
-<!-- SOURCE_VISUAL id="IS09-V15" source="L09.pdf" page="29" type="grafico" description="Curva NCC(tau) su 1066 spostamenti con picco 1.00 a 1.15 s e picchi minori agli altri battiti" reason="Forma della curva visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123150338.png)
 
 #### **3.4. Correlazione e convoluzione sono strettamente imparentate**
 
@@ -410,13 +415,11 @@ $$\text{NCC}(i,j)=\frac{1}{n}\sum_{x,y}\frac{\big(f(x,y)-\mu_f\big)\,\big(t(x+i,
 
 Il primo esempio è costruito apposta: un’immagine contiene un **pattern triangolare** e un **quadrato** come distrattore. Il kernel (visibile nella slide) è il triangolo. La NCC ha il picco **dove il pattern triangolare è presente**; il quadrato, che ha una forma diversa, produce un punteggio più basso.
 
-<!-- SOURCE_VISUAL id="IS09-V16" source="L09.pdf" page="32" type="figura" description="Immagine con triangolo e quadrato distrattore, kernel triangolare e mappa NCC con picco sul triangolo" reason="Immagini e mappa visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151030.png)
 
 **Perché normalizzare? La luminosità può ingannare la somma grezza.** La correlazione grezza (senza normalizzazione) **premia i valori di pixel grandi e positivi**, per cui un **distrattore luminoso** può dominare la mappa anche se ha la forma sbagliata. La NCC rimuove la **media locale** e la **scala**, così è la **forma** del pattern a guidare il punteggio.
 
-<!-- SOURCE_VISUAL id="IS09-V17" source="L09.pdf" page="33" type="figura" description="Confronto tra correlazione grezza attratta da un distrattore luminoso e NCC che trova il pattern corretto" reason="Mappe visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151044.png)
 
 > 💡 **Perché la somma grezza sbaglia (nota didattica).** Senza normalizzazione il punteggio è $\sum f\cdot t$: una finestra uniformemente bianca (tutti valori alti) produce una somma grande con *qualunque* kernel a valori positivi, indipendentemente dalla forma. La NCC confronta invece le **deviazioni dalla media**: una finestra uniforme ha $\sigma_t\approx 0$ e nessuna struttura da correlare.
 
@@ -443,8 +446,7 @@ Conta anche la **dimensione dell’output**: le modalità **valid**, **same** e 
 
 La stessa mappa NCC può essere mostrata come **heatmap** o come **superficie 3D**. A sinistra la slide mostra l’immagine $I$ e il template $T$, cioè che cosa si sta cercando. Heatmap e superficie contengono **la stessa informazione**; la superficie rende più evidenti il **picco dominante** e il «paesaggio» delle risposte circostanti.
 
-<!-- SOURCE_VISUAL id="IS09-V18" source="L09.pdf" page="35" type="grafico" description="Immagine I, template T, mappa NCC come heatmap e come superficie 3D con il picco dominante" reason="Mappe visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151101.png)
 
 #### **3.8. Pattern periodici e istanze multiple**
 
@@ -455,8 +457,7 @@ La stessa mappa NCC può essere mostrata come **heatmap** o come **superficie 3D
 
 Il **centro** (spostamento nullo) vale 1 **per costruzione**, perché lì l’immagine è perfettamente sovrapposta a se stessa. Gli **altri picchi** stanno ai **periodi** del pattern: spostando l’immagine di un periodo, i coni tornano a sovrapporsi ad altri coni. Un pattern periodico produce quindi un **reticolo di picchi**. La dimensione è quella *full*: con immagine e kernel uguali, $(M+M-1)\times(N+N-1)$.
 
-<!-- SOURCE_VISUAL id="IS09-V19" source="L09.pdf" page="36" type="figura e grafico" description="Immagine periodica di coni gelato e sua autocorrelazione con reticolo di picchi e centro pari a 1" reason="Reticolo dei picchi visibile solo nella mappa" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151120.png)
 
 ##### **3.8.2. Un kernel, molte corrispondenze: un picco per ogni istanza**
 
@@ -464,16 +465,14 @@ Il **centro** (spostamento nullo) vale 1 **per costruzione**, perché lì l’im
 - **Venti picchi separati superano 0,5**, uno per cono; la posizione esatta del ritaglio raggiunge **1,00**.
 - Una **struttura ripetuta** crea **picchi ripetuti** al **periodo spaziale** del pattern.
 
-<!-- SOURCE_VISUAL id="IS09-V20" source="L09.pdf" page="37" type="figura e grafico" description="Kernel di un cono ritagliato dal campo e mappa NCC same-size con venti picchi sopra 0.5" reason="Picchi visibili solo nella mappa" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151128.png)
 
 ##### **3.8.3. Un kernel che non c’è nell’immagine ha comunque un massimo**
 
 - **Riga superiore**: il kernel è **un altro disegno** (un cono con la ciliegina, ridimensionato alla scala dei coni). Il punteggio migliore è solo **0,27**.
 - **Riga inferiore**: il kernel è ritagliato dal campo. Stessa immagine, stessa scala: **venti picchi**, massimo **1,00**.
 
-<!-- SOURCE_VISUAL id="IS09-V21" source="L09.pdf" page="38" type="figura e grafico" description="Kernel estraneo (cono con ciliegina, massimo 0.27) contro kernel ritagliato dal campo (venti picchi, massimo 1.00)" reason="Confronto tra le due mappe visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151139.png)
 
 > ⚠️ **Una mappa di risposta non è mai vuota.** L’argmax esiste sempre, anche quando il pattern non c’è: la decisione *trovato / non trovato* richiede una **soglia sul valore del picco**. Le soglie si **calibrano su esempi etichettati**, non si indovinano guardando un’immagine sola. È lo stesso principio del MATCH (§2.5.2), applicato alla localizzazione.
 
@@ -485,8 +484,7 @@ Il **centro** (spostamento nullo) vale 1 **per costruzione**, perché lì l’im
 - La **larghezza del picco** dice **con quanta precisione** è determinata la posizione.
 - I **pattern lisci** (senza dettagli fini) possono creare **picchi larghi** anche con un massimo elevato.
 
-<!-- SOURCE_VISUAL id="IS09-V22" source="L09.pdf" page="39" type="figura e grafico" description="Immagine lunare 678x559 con kernel 120x120, mappa NCC con picco 1.00 e mappa grezza attratta dalla zona luminosa" reason="Mappe e posizioni dei picchi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151147.png)
 
 > 💡 **Perché un pattern liscio dà un picco largo (nota didattica).** Se il kernel varia lentamente, spostandolo di qualche pixel la finestra resta molto simile a se stessa e la NCC cala poco: il punteggio è alto in un intorno ampio e la posizione è ambigua. Un kernel ricco di bordi e angoli cambia invece bruscamente appena lo si sposta, e il picco diventa appuntito. Per questo i punti di interesse dei descrittori locali (SIFT, Lezione 8) si scelgono proprio negli angoli.
 
@@ -498,8 +496,7 @@ Il **centro** (spostamento nullo) vale 1 **per costruzione**, perché lì l’im
 - **Echi**: altri angoli sinistri ottengono **0,81** e **0,76** (in verde acqua); il bordo sinistro della torre forma una **cresta**.
 - Un **kernel esplorativo** di questo tipo è di fatto un **rilevatore di angoli o di blob**; una **soglia** (per esempio 0,7) decide quali risposte tenere. I filtri delle CNN fanno qualcosa di molto simile, ma **appreso**.
 
-<!-- SOURCE_VISUAL id="IS09-V23" source="L09.pdf" page="40" type="figura e grafico" description="Scena 1920x3251 con kernel d'angolo 99x94, corrispondenza esatta 1.00 ed echi 0.81 e 0.76 su altri angoli" reason="Posizioni delle risposte visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151207.png)
 
 #### **3.10. Dalla correlazione locale alle reti neurali convoluzionali**
 
@@ -507,8 +504,9 @@ Ogni stadio convolutivo di una CNN fa scorrere **filtri appresi** sull’input e
 
 L’esempio è il primo strato di **AlexNet**: **96 kernel** di $11\times 11\times 3$, divisi in due metà da 48 (la rete era distribuita su due GPU). In alto compaiono bordi in scala di grigi, in basso macchie di colore.
 
-<!-- SOURCE_VISUAL id="IS09-V24" source="L09.pdf" page="41" type="figura" description="Schema di uno stadio convolutivo e i 96 kernel 11x11x3 del primo strato di AlexNet (bordi grigi e macchie di colore)" reason="Kernel appresi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151219.png)
+
+![](imgs/Pasted%20image%2020261123151234.png)
 
 > 📌 **La CNN generalizza il template matching.** Invece di un kernel scelto a mano (il cono, l’angolo), la rete impara **centinaia di kernel** che rispondono ai pattern utili per il compito, e impila più stadi in modo che gli strati profondi rispondano a combinazioni di pattern (Lezione 21). La lettura di una feature map resta quella della mappa NCC: valore, posizione, numero di picchi.
 
@@ -542,8 +540,7 @@ Il retrieval ordina una gallery rispetto a una probe. La pipeline è:
 
 Le firme della gallery $\{h(g_i)\}_{i=1}^N$ sono **calcolate una volta sola e memorizzate**.
 
-<!-- SOURCE_VISUAL id="IS09-V25" source="L09.pdf" page="44" type="schema" description="Pipeline di retrieval: probe, firma, distanza da tutte le firme della gallery precalcolate, ordinamento, top-k o soglia, lista ordinata" reason="Schema a blocchi della pipeline" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151255.png)
 
 > 📌 **Costo di una query.** Poiché la gallery è precalcolata, ogni query costa **una firma** e **$N$ distanze economiche** ($N$ = numero di immagini della gallery). Con firme di 64 bit una distanza di Hamming è uno XOR seguito da un conteggio dei bit: milioni di confronti al secondo anche su hardware modesto. Per gallery enormi si usano indici di ricerca approssimata dei vicini (ANN, Lezione 8).
 
@@ -588,8 +585,7 @@ $$\text{gap}=\min d_{\text{non correlati}}-\max d_{\text{rilevanti}}.$$
 - Nell’esperimento #2 (§8.4) le stesse misure si comportano diversamente: **aHash** ha un margine di **+16 bit**, **dHash** di **−6 bit**.
 - $P@k$, $R@k$ e AP rispondono a «**quanto è buono l’ordine**»; il margine risponde a «**posso accettare o rifiutare automaticamente**».
 
-<!-- SOURCE_VISUAL id="IS09-V26" source="L09.pdf" page="46" type="grafico" description="Distanze degli elementi rilevanti e non correlati su un asse, con il gap tra il massimo dei rilevanti e il minimo dei non correlati" reason="Disposizione delle distanze visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151320.png)
 
 > 💡 **Ordine per query, soglia globale (nota didattica).** Con **una sola** probe, un margine positivo equivale a un ranking in cui tutti i rilevanti precedono tutti i non correlati; un margine negativo implica che almeno un elemento non correlato si infila davanti a un rilevante. La distinzione diventa davvero importante quando le probe sono **molte**: ogni query può avere un ordinamento perfetto, ma con distanze tipiche diverse (una probe ha i duplicati a 3 bit e gli estranei a 20, un’altra i duplicati a 18 e gli estranei a 30). Il ranking resta perfetto in entrambi i casi, mentre una **soglia unica** $\tau$ per tutte le query non esiste. Per questo $\tau$ va **calibrata su molte coppie etichettate**.
 
@@ -601,6 +597,8 @@ $$\text{gap}=\min d_{\text{non correlati}}-\max d_{\text{rilevanti}}.$$
 | **distanza** | **Hamming**, in bit, da 0 a 64 | **coseno / euclidea**, adimensionale |
 | **pregi** | **minuscolo, veloce, spiegabile** | **più grande, appreso** |
 | **che cosa cattura** | **copie** e **modifiche lievi** | **significato simile** |
+
+![](imgs/Pasted%20image%2020261123151336.png)
 
 > 📌 **La logica resta identica.** Il ranking, il top-$k$ e la logica della soglia sono **gli stessi** con un hash e con un embedding: cambia soltanto il modo in cui si calcola la firma. È per questo che quanto si impara sugli hash si trasferisce direttamente ai moderni database vettoriali.
 
@@ -717,8 +715,7 @@ print(knn.score(sc.transform(X_test), y_test))         # accuratezza in [0,1]
 
 Il classico gioco enigmistico presenta **due disegni quasi identici** in cui trovare tutte le differenze. Le avete trovate tutte? Ne siete sicuri? **Un programma può trovarle per noi?**
 
-<!-- SOURCE_VISUAL id="IS09-V27" source="L09.pdf" page="54" type="figura" description="I due disegni quasi identici del gioco trova le differenze" reason="Disegni visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151410.png)
 
 #### **6.2. Come automatizzare il compito?**
 
@@ -730,8 +727,7 @@ La pipeline ha cinque blocchi:
 4. **sogliare** la differenza;
 5. **raggruppare** i cambiamenti in **riquadri**, e produrre un’immagine con i riquadri da rivedere.
 
-<!-- SOURCE_VISUAL id="IS09-V28" source="L09.pdf" page="55" type="schema" description="Pipeline: due immagini grigie, allineamento con picco NCC, sottrazione con segno, soglia, raggruppamento in riquadri" reason="Schema a blocchi con anteprima dell'immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151422.png)
 
 - Che cosa serve: il **concetto di cross-correlazione tra immagini** e poche righe di codice.
 - I due disegni **non hanno la stessa dimensione**, quindi **non si possono sottrarre direttamente**.
@@ -757,8 +753,7 @@ La pipeline ha cinque blocchi:
 
 **Obiettivo.** Stimare la **traslazione** dell’immagine 2 dentro l’immagine 1, confrontare **solo il contenuto sovrapposto** e restituire **regioni candidate** per l’ispezione umana.
 
-<!-- SOURCE_VISUAL id="IS09-V29" source="L09.pdf" page="57" type="figura" description="Le due immagini del puzzle 736x555 e 691x505 convertite in grigio" reason="Immagini visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151502.png)
 
 #### **6.5. Esperimento I — stimare la traslazione**
 
@@ -772,8 +767,7 @@ L’immagine più piccola $I_2$ fa da kernel e scorre dentro $I_1$. La mappa *va
 
 La slide mostra anche la **NCC completa**: tutti gli spostamenti con almeno il **25% di sovrapposizione**, una mappa di $1426\times 1059$; in grigio le zone non calcolate. Il codice restituisce solo la **finestra arancione** ($46\times 51$ pixel), mostrata ingrandita ×30.
 
-<!-- SOURCE_VISUAL id="IS09-V30" source="L09.pdf" page="58" type="grafico" description="Mappa NCC completa 1426x1059 con la finestra valid 46x51 evidenziata in arancione e ingrandita x30, massimo 0.817 in (18, 25)" reason="Mappa e zoom visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151517.png)
 
 > 💡 **Perché 0,817 e non 1 (nota didattica).** Le due immagini *non* sono uguali: proprio le differenze del puzzle abbassano la correlazione. Il picco resta comunque nettamente il massimo, perché la gran parte del disegno coincide. È lo stesso fenomeno degli «echi» del §3.9.1, letto al contrario: un punteggio alto ma non perfetto segnala un pattern quasi uguale.
 
@@ -788,8 +782,7 @@ delta = (aligned.astype(np.int16)
 - $\Delta>0$: inchiostro solo in $I_2$. $\Delta<0$: inchiostro solo in $I_1$.
 - Una sottrazione in `uint8` **andrebbe in wrap-around**.
 
-<!-- SOURCE_VISUAL id="IS09-V31" source="L09.pdf" page="59" type="figura" description="Immagine della differenza con segno delta in [-255, 255]" reason="Immagine della differenza visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151531.png)
 
 > 💡 **Perché il segno ha quel verso (nota didattica).** Nelle immagini grigie l’inchiostro nero ha valore basso e la carta bianca valore alto. Dove $I_2$ ha inchiostro e $I_1$ no, la finestra allineata di $I_1$ vale circa 255 e $I_2$ circa 0, quindi $\Delta=I_1-I_2>0$: il dettaglio è presente **solo in $I_2$**. Il caso opposto dà $\Delta<0$.
 
@@ -809,8 +802,7 @@ print(cv2.subtract(a, b))                        # [0]    saturazione
 
 > 📌 **Che cosa significa wrap-around.** Un `uint8` può memorizzare soltanto i 256 valori $0,\dots,255$. I risultati si calcolano **modulo 256**, come le ore su un orologio: sotto lo 0 si riparte da 255. Così $10-20=-10$ diventa $-10+256=246$; lo stesso accade sopra il massimo: $250+10=260$ diventa $4$. **Il risultato sembra valido ma è sbagliato, e nessun errore viene segnalato.**
 
-<!-- SOURCE_VISUAL id="IS09-V32" source="L09.pdf" page="60" type="schema" description="Orologio modulo 256 che illustra il wrap-around di 10 - 20 in uint8" reason="Illustrazione dell'orologio modulare" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151548.png)
 
 > ⚠️ **Wrap-around e saturazione sono entrambi sbagliati, in modi diversi.** Il wrap-around trasforma una piccola differenza negativa in un valore **grande positivo**, quindi crea falsi «dettagli aggiunti»; la saturazione azzera tutte le differenze negative, quindi **cancella** i dettagli rimossi. Solo il tipo con segno conserva entrambe le informazioni.
 
@@ -826,8 +818,9 @@ print(added.sum(), removed.sum())        # 5571 3912
 - La maggior parte dei pixel ha $\Delta=0$; i cambiamenti vivono nelle **code** della distribuzione oltre $\pm T$ (linee tratteggiate nell’istogramma).
 - Il risultato sono **due matrici booleane** ($691\times 505$): **5571** pixel aggiunti e **3912** rimossi. Invertite, mostrano inchiostro nero su carta bianca.
 
-<!-- SOURCE_VISUAL id="IS09-V33" source="L09.pdf" page="61" type="grafico e figure" description="Istogramma di delta con soglie tratteggiate a +-127 e le due maschere booleane dei dettagli aggiunti e rimossi" reason="Forma dell'istogramma e maschere visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151603.png)
+
+![](imgs/Pasted%20image%2020261123151611.png)
 
 > 💡 **Perché $T=127$ (nota didattica).** È circa metà della dinamica 0–255: una differenza deve corrispondere almeno a «mezzo passaggio» tra bianco e nero per essere considerata inchiostro. Le piccole differenze attorno allo zero vengono da **bordi** leggermente disallineati, dalla **compressione JPEG** e dal **rumore**, e devono restare sotto soglia. La scelta è empirica: va validata, come dice il §6.8.
 
@@ -838,8 +831,7 @@ print(added.sum(), removed.sum())        # 5571 3912
 - Il programma restituisce **candidati**, non **verdetti semantici**: una persona, o un classificatore successivo, può accettarli o rifiutarli.
 - Gli script completi saranno pubblicati sul sito del corso. **Soglia, raggruppamento e allineamento cambiano le regioni**: vanno validati per l’applicazione.
 
-<!-- SOURCE_VISUAL id="IS09-V34" source="L09.pdf" page="62" type="figura" description="Overlay con i 10 riquadri di revisione ottenuti da 15 componenti connesse" reason="Posizione dei riquadri visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151624.png)
 
 > ✅ **La pipeline in quattro passi.** **Allineare** con il picco NCC → **sottrarre** in un tipo con segno → **sogliare** in aggiunte e rimozioni → **raggruppare** le componenti in riquadri da rivedere. L’ordine conta: senza allineamento ogni pixel del disegno diventerebbe una falsa differenza.
 
@@ -855,8 +847,7 @@ print(added.sum(), removed.sum())        # 5571 3912
 
 Il **rumore nasconde il ritardo**: a occhio il lag è difficile da individuare, mentre il picco della NCC lo trova: **+23 campioni = 230 ms** (dati sintetici).
 
-<!-- SOURCE_VISUAL id="IS09-V35" source="L09.pdf" page="64" type="grafico e schema" description="Due serie rumorose sfasate, curva di correlazione con picco a +23 campioni, e schema di un fronte d'onda che raggiunge due microfoni a distanza d" reason="Segnali, picco e geometria dei microfoni visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151636.png)
 
 **Da dove viene il suono?** Auricolari e telefoni fanno esattamente questo con i loro microfoni. In un **array di microfoni**, un fronte d’onda piano che arriva con angolo $\theta$ raggiunge il secondo microfono dopo aver percorso un tratto aggiuntivo $\Delta=d\sin\theta$, quindi con un ritardo
 
@@ -902,8 +893,7 @@ Nell’ispezione industriale il pezzo prodotto si confronta con un **campione di
 
 L’esempio della slide riguarda **difetti di tessuti e maglieria**.
 
-<!-- SOURCE_VISUAL id="IS09-V36" source="L09.pdf" page="66" type="figure" description="Esempi di difetti su tessuto e maglia confrontati con il campione di riferimento" reason="Immagini dei difetti visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151705.png)
 
 > ⚠️ **Il limite della variabilità naturale.** Anche tra **pezzi buoni** resta una differenza (piccole variazioni di trama, di posizione, di illuminazione). La soglia scambia **falsi allarmi** con **difetti mancati**: va scelta su **pezzi buoni e difettosi etichettati**, come ogni soglia di questa lezione. Il tema verrà ripreso nella Lezione 24 con il rilevamento di anomalie tramite autoencoder.
 
@@ -916,8 +906,7 @@ L’esempio della slide riguarda **difetti di tessuti e maglieria**.
 | prospettiva, deformazione | **cala e si allarga** | feature locali o modelli appresi |
 | oggetto diverso, stessa classe | **picco basso** | una rappresentazione che codifichi il **significato**: gli embedding |
 
-<!-- SOURCE_VISUAL id="IS09-V37" source="L09.pdf" page="67" type="figure" description="Miniature di esempio (originale e modificata) per ogni riga della tabella: traslazione, rotazione, prospettiva, oggetto diverso" reason="Miniature visibili solo nella tabella della slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151720.png)
 
 > 📌 **La similarità vale quanto le invarianze della rappresentazione.** Ogni riga della tabella dice la stessa cosa. **Confrontare pixel è già una rappresentazione**, con le sue invarianze (traslazione, guadagno, offset) e le sue fragilità (rotazione, scala, semantica). Le lezioni successive la sostituiscono con **rappresentazioni apprese**.
 
@@ -933,8 +922,7 @@ L’esempio della slide riguarda **difetti di tessuti e maglieria**.
 - **Input**: una foto del piatto scattata con il telefono (pixel RGB).
 - **Output**: classe del cibo o della ricetta, **quantità in grammi**, **calorie in kcal**.
 
-<!-- SOURCE_VISUAL id="IS09-V38" source="L09.pdf" page="69" type="figura" description="Illustrazione di un'app contacalorie (MyFitnessPal) che riconosce un piatto" reason="Schermata dell'app visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151732.png)
 
 Il compito si scompone in due sotto-problemi: **classificare** il cibo o la ricetta e **misurare** la quantità (g). Il deep learning può farlo, ma richiede un **modello**, una **topologia** e soprattutto un **dataset**. Ed è qui il problema: **non si hanno dati**. Servono immagini etichettate **molto specifiche** (piatti, porzioni, luci, angolazioni). Un’app semplice ha valore solo se si riesce a **costruire il dataset**. Come?
 
@@ -945,8 +933,7 @@ Il compito si scompone in due sotto-problemi: **classificare** il cibo o la rice
 - Un **sistema di image retrieval** può fare la **selezione automaticamente**.
 - Lo stesso vale per le **mucche**, o per la prossima applicazione.
 
-<!-- SOURCE_VISUAL id="IS09-V39" source="L09.pdf" page="70" type="figura" description="Esempi di immagini di risotto da raccogliere per il dataset" reason="Immagini visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151739.png)
 
 #### **8.3. Esperimento di retrieval #1**
 
@@ -957,8 +944,7 @@ La **probe** (una foto di risotto) passa per l’**estrazione delle feature** (a
 - **Input**: una probe e una gallery di $N$ immagini (qui 12).
 - **Output**: una distanza per ogni immagine della gallery; per `00001.jpg`, $d_H=3$ bit.
 
-<!-- SOURCE_VISUAL id="IS09-V40" source="L09.pdf" page="71" type="schema" description="Probe di risotto, estrazione aHash, distanza di Hamming, gallery con database delle feature e risultato 00001.jpg a 3 bit" reason="Schema con immagini di probe e gallery" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151748.png)
 
 ##### **8.3.2. Ordinare per più feature: una policy**
 
@@ -977,8 +963,7 @@ Tra parentesi la distanza: in **bit** per gli hash, **adimensionale** per l’is
 - **Input**: una probe e le distanze delle immagini della gallery per 4 feature.
 - **Output**: un file selezionato, **`00001.jpg`**, nei primi tre posti di **tre** feature (aHash, dHash, istogramma); è la **vincitrice** del ranking.
 
-<!-- SOURCE_VISUAL id="IS09-V41" source="L09.pdf" page="72" type="figure" description="Miniature della probe di risotto e dell'immagine vincitrice 00001.jpg accanto alla tabella di ranking" reason="Miniature visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151759.png)
 
 > 💡 **Perché un voto tra feature (nota didattica).** Ogni feature ha invarianze diverse (§8.4): una foto ribaltata può sfuggire al dHash ma non all’istogramma, due piatti dello stesso colore possono avere forme diverse. Una regola di **voto** è più robusta di una sola distanza e resta **spiegabile**: si può dire perché un’immagine è stata scelta («è tra le prime tre per aHash, dHash e istogramma»). Si noti che `34384.jpg` compare due volte, ma solo in due feature: non supera la policy.
 
@@ -992,8 +977,7 @@ Ora ci si chiede come i **fattori** influenzano le metriche presentate: la **ste
 - **Input**: una probe (un corgi), 12 immagini nella gallery (8 modifiche, 4 non correlate) e **5 misure**: aHash, dHash, pHash (Hamming, 0–64 bit), istogramma di colore (0–1), correlazione dei pixel ($1-\rho$, 0–2).
 - **Output**: 5 distanze per immagine della gallery e 5 ranking.
 
-<!-- SOURCE_VISUAL id="IS09-V42" source="L09.pdf" page="73" type="figura" description="Probe (corgi), le 8 modifiche in verde e le 4 immagini non correlate in rosso" reason="Immagini della gallery visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151810.png)
 
 > 💡 **Perché $1-\rho$ va da 0 a 2 (nota didattica).** La correlazione di Pearson $\rho$ tra i pixel sta in $[-1,1]$; trasformarla in $1-\rho$ la rende una **distanza** (piccola = simile): vale 0 per immagini identiche a meno di guadagno e offset, 1 per immagini scorrelate e 2 per un’immagine in negativo.
 
@@ -1050,8 +1034,7 @@ L’aHash calcolato a mano **coincide con quello della libreria su 64 bit su 64*
 - **Ribaltata**: l’istogramma di colore vale **0,00** (ignora la geometria), mentre il dHash segna **35 bit**.
 - **Più luminosa**: l’istogramma vale **0,69**, quasi come un intruso; gli hash restano bassi.
 
-<!-- SOURCE_VISUAL id="IS09-V43" source="L09.pdf" page="76" type="grafico" description="Matrice delle distanze (righe: 8 modifiche verdi e 4 intrusi rossi; colonne: 5 misure), scuro = vicino" reason="Valori della matrice resi solo come mappa di colore" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151839.png)
 
 ##### **8.4.4. Quale misura sopravvive?**
 
@@ -1062,6 +1045,8 @@ L’aHash calcolato a mano **coincide con quello della libreria su 64 bit su 64*
 | ruotata 10° | 10 | 24 | 28 | 0,19 | 0,39 |
 | ribaltata | 14 | 35 | 26 | 0,00 | 0,36 |
 | **non correlata (minimo)** | **30** | **29** | **28** | **0,76** | **0,99** |
+
+![](imgs/Pasted%20image%2020261123151859.png)
 
 - **Nessuna misura è invariante a tutto**: scegliere la misura **è** scegliere le invarianze.
 - **Istogramma di colore**: ribaltamento $=0$, ma **ingannato dalla luminosità**. **Hash**: l’opposto.
@@ -1101,8 +1086,7 @@ $$\cos(u,v)=\frac{u\cdot v}{\lVert u\rVert\,\lVert v\rVert},\qquad u\cdot v=\sum
 
 Posizioni e valori di coseno della figura sono **illustrativi**, non calcolati da un modello.
 
-<!-- SOURCE_VISUAL id="IS09-V44" source="L09.pdf" page="79" type="grafico" description="Vettori embedding con angoli e valori di coseno illustrativi, coppie sopra e sotto la soglia tau" reason="Geometria dei vettori visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151913.png)
 
 > 💡 **Il coseno guarda la direzione (nota didattica).** Il coseno dipende solo dall’**angolo** tra i vettori, non dalla loro lunghezza: due embedding che puntano nella stessa direzione hanno coseno 1 anche se uno è il doppio dell’altro. Se gli embedding sono normalizzati a lunghezza unitaria, coseno e distanza euclidea danno lo stesso ordinamento, perché $\lVert u-v\rVert^2=2-2\cos(u,v)$.
 
@@ -1119,8 +1103,7 @@ Tre descrizioni di prodotto:
 | **sulle lettere** (Hamming) | 26 lettere diverse | **3** lettere diverse | **sbagliato**: A sembra più vicino a C |
 | **sugli embedding** | A e B **dentro** il cerchio di raggio $\tau$ | C **fuori** | **giusto** (illustrativo) |
 
-<!-- SOURCE_VISUAL id="IS09-V45" source="L09.pdf" page="80" type="grafico" description="Distanze sulle lettere tra A, B, C e posizioni degli embedding con A e B dentro il cerchio tau e C fuori" reason="Confronto grafico tra i due spazi" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151926.png)
 
 > 📌 **Il significato non è l’ortografia.** «*shoes*» e «*socks*» differiscono in sole tre lettere (h/o, o/c, e/k), ma indicano oggetti diversi; «*shoes*» e «*sneakers*» non hanno quasi lettere in comune, ma indicano lo stesso oggetto. Lettere e parole non vedono i sinonimi; gli embedding confrontano il **significato**.
 
@@ -1131,8 +1114,9 @@ Un **encoder di immagini** $\phi_{\text{img}}$ e un **encoder di testi** $\phi_{
 - **Input**: un’immagine $I$ e un testo $T$.
 - **Output**: due vettori $z_I,z_T\in\mathbb{R}^d$ e la loro similarità.
 
-<!-- SOURCE_VISUAL id="IS09-V46" source="L09.pdf" page="81" type="schema" description="Encoder immagine e testo che proiettano nello spazio condiviso, con la frase vicina e quella lontana, e matrice 3x3 di similarità dog/panda/risotto" reason="Schema dello spazio condiviso e matrice visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123151938.png)
+
+
 
 > ⚠️ **Stessa dimensione $\neq$ stesso spazio.** Sono due reti diverse, **comparabili solo perché addestrate insieme**.
 
@@ -1142,11 +1126,7 @@ $$S_{ij}=\cos\big(\phi_{\text{img}}(I_i),\,\phi_{\text{text}}(T_j)\big).$$
 
 L’obiettivo è rendere **alta la diagonale** (le coppie vere) e **basso il resto**. Valori illustrativi, non prodotti da un modello:
 
-| | «dog» | «panda» | «risotto» |
-|---|---:|---:|---:|
-| immagine del cane | **0,92** | 0,18 | 0,10 |
-| immagine del panda | 0,15 | **0,90** | 0,12 |
-| immagine del risotto | 0,08 | 0,11 | **0,88** |
+![](imgs/Pasted%20image%2020261123151953.png)
 
 > 💡 **Apprendimento contrastivo (nota didattica).** Questo schema è quello dei modelli contrastivi immagine-testo come CLIP: in ogni batch le $N$ coppie vere sono gli esempi positivi e le $N^2-N$ combinazioni sbagliate i negativi. La funzione di perdita (una cross-entropy sulle righe e sulle colonne di $S$, Lezione 22) spinge ogni immagine verso la propria descrizione e lontano dalle altre. Una volta addestrato, il sistema permette di cercare immagini con una frase, o di classificare un’immagine confrontandola con le descrizioni testuali delle classi.
 
@@ -1158,8 +1138,7 @@ La slide disegna a mano una proiezione 2D concettuale (non dati reali):
 - in **rosso**, un **vicino «vicino ma diverso»** (un prodotto diverso che però gli somiglia) che cade **anch’esso dentro** il cerchio: un **falso positivo**;
 - gli embedding reali hanno **centinaia di dimensioni**; un’immagine 2D è solo un’intuizione.
 
-<!-- SOURCE_VISUAL id="IS09-V47" source="L09.pdf" page="82" type="schema" description="Proiezione 2D disegnata a mano: query q, cerchio di raggio tau con duplicati verdi e un falso positivo rosso" reason="Disposizione concettuale visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123152003.png)
 
 #### **8.7. Quattro affermazioni sul retrieval: quali sono sbagliate?**
 
@@ -1205,8 +1184,7 @@ La slide mostra due richieste a un agente di programmazione e due risposte **sim
 
 **Esempio** ($N=5$ elementi, distanza di Hamming in bit). Il top-2 è $\{g_1,g_4\}$. Con $\tau=5$ l’insieme accettato è lo stesso; con $\tau=9$ si aggiunge $g_5$; con $\tau=2$ è **vuoto**. Il ranking è lo stesso; **cambia la regola di decisione**.
 
-<!-- SOURCE_VISUAL id="IS09-V48" source="L09.pdf" page="86" type="tabella" description="Tabella dell'esempio con cinque elementi g1-g5 e le loro distanze di Hamming dalla query" reason="I valori delle distanze sono contenuti solo nell'immagine della tabella" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123152037.png)
 
 > 💡 **Top-$k$ contro soglia (nota didattica).** Il top-$k$ restituisce **sempre** $k$ elementi, anche quando nessuno è davvero simile: è adatto a mostrare suggerimenti a una persona. La soglia restituisce un numero **variabile** di elementi, anche zero: è adatta a decisioni automatiche («esiste un duplicato?»). I due criteri si possono combinare: «i primi $k$, purché sotto $\tau$».
 
