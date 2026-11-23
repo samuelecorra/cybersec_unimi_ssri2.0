@@ -2,6 +2,9 @@
 
 I riferimenti seguenti non hanno avuto una corrispondenza testuale abbastanza affidabile per aggiornare automaticamente la pagina. Sono conservati senza modifiche nel Markdown. Usare la descrizione per individuare la slide corrispondente nei PDF in `sources_2026-27/` e poi sostituire il riferimento o inserire lo screenshot.
 
+> **Aggiornamento 2026-11-23.** Le lezioni 09–12 sono state riscritte sui PDF 2026/27: i loro riferimenti legacy (87 righe) sono stati risolti e rimossi da questa tabella.
+
+
 | Lezione | ID | Riferimento conservato | PDF aggiornato | Descrizione |
 |---|---|---|---|---|
 | L05 | IS05-V03 | Lesson_05_DesignOfIntelligentSystems_EdgeFogCloud_IoT.pdf:8 | L05-web.pdf | Sistema con riconoscimento dell’età, dati storici dell’utente e raccomandazione del film |
@@ -97,90 +100,3 @@ I riferimenti seguenti non hanno avuto una corrispondenza testuale abbastanza af
 | L08 | IS08-V24 | Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf:59 | L08-web.pdf | Ricostruzione 3D da viste diverse con i punti SIFT corrispondenti |
 | L08 | IS08-V25 | Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf:61 | L08-web.pdf | SURF: filtri a scatola che approssimano gaussiana e LoG |
 | L08 | IS08-V26 | Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf:62 | L08-web.pdf | Istogrammi simili di una banana e di una spiaggia |
-| L09 | IS09-V01 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:7 | L09.pdf | Download delle immagini in Colab |
-| L09 | IS09-V02 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:9 | L09.pdf | Immagini del cane originale, ribaltato, saturato, ritagliato e del panda visualizzate in Colab |
-| L09 | IS09-V03 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:10 | L09.pdf | Calcolo dell’aHash e della distanza di Hamming in Colab |
-| L09 | IS09-V04 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:13 | L09.pdf | Correlazione incrociata normalizzata tra template e sottoimmagine con lo spostamento f(x+i,y+j) |
-| L09 | IS09-V05 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:16 | L09.pdf | Convoluzione e correlazione come base delle reti neurali convoluzionali |
-| L09 | IS09-V06 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:17 | L09.pdf | Gioco trova le differenze con due disegni quasi identici |
-| L09 | IS09-V07 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:21 | L09.pdf | I due passi: trovare la foglia e trovare le differenze (DELTA) |
-| L09 | IS09-V08 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:23 | L09.pdf | Caricamento dell’immagine RGB uint8 in MATLAB |
-| L09 | IS09-V09 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:26 | L09.pdf | Visualizzazione delle immagini con handle e scala automatica |
-| L09 | IS09-V10 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:28 | L09.pdf | Immagini convertite in grigio e invertite con il disegno bianco su sfondo nero |
-| L09 | IS09-V11 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:31 | L09.pdf | Immagine dopo la sottrazione della media: scura, con media 20.2077, minimo 0, massimo 229 |
-| L09 | IS09-V12 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:34 | L09.pdf | Superficie 3D dell’output di xcorr2 |
-| L09 | IS09-V13 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:35 | L09.pdf | Massimo della cross-correlazione come picco sulla superficie |
-| L09 | IS09-V14 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:37 | L09.pdf | Visualizzazione finale: correlazione, template e foglia trovata nella posizione del massimo |
-| L09 | IS09-V15 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:40 | L09.pdf | Due immagini di dimensioni diverse da allineare prima della sottrazione |
-| L09 | IS09-V16 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:44 | L09.pdf | Output di xcorr2 con immagini bianche: picco sopra una grande collina |
-| L09 | IS09-V17 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:46 | L09.pdf | Template, img_diff con la sottoimmagine spostata e bordi copiati, e sottrazione |
-| L09 | IS09-V18 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:52 | L09.pdf | Cast a double per memorizzare i valori negativi dell’immagine delta |
-| L09 | IS09-V19 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:54 | L09.pdf | Controllo dell’immagine delta |
-| L09 | IS09-V20 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:55 | L09.pdf | Istogramma dell’immagine delta lineare e logaritmico, con stretching |
-| L09 | IS09-V21 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:56 | L09.pdf | Istogramma annotato: pixel cancellati, invariati e aggiunti, soglie, bordi e rumore |
-| L09 | IS09-V22 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:59 | L09.pdf | Immagine delta separata in aggiunte e cancellazioni |
-| L09 | IS09-V23 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:60 | L09.pdf | Panoramica dell’intero processo per trovare le differenze |
-| L09 | IS09-V24 | Lesson_09_CodingWithImages_CodingSimilarity.pdf:66 | L09.pdf | Ricerca di immagini di risotto: probe, gallery e distanza tra aHash |
-| L10 | IS10-V01 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:5 | L10-web.pdf | Autocorrelazione del template: picco stretto con massimo netto e separato |
-| L10 | IS10-V02 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:7 | L10-web.pdf | Correlazione tra due immagini completamente diverse |
-| L10 | IS10-V03 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:8 | L10-web.pdf | Confronto delle superfici di correlazione per immagini uguali e diverse |
-| L10 | IS10-V04 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:10 | L10-web.pdf | Confronto dei massimi di correlazione con normalizzazione 1/n in MATLAB |
-| L10 | IS10-V05 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:13 | L10-web.pdf | Correlazione e convoluzione differiscono solo per il segno meno: kernel ribaltato |
-| L10 | IS10-V06 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:14 | L10-web.pdf | Autocorrelazione come similarità interna dell’immagine dei gelati |
-| L10 | IS10-V07 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:16 | L10-web.pdf | Autocorrelazione dei gelati con picchi alti e separati |
-| L10 | IS10-V08 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:17 | L10-web.pdf | Singolo gelato usato come kernel di ricerca nell’immagine dei gelati |
-| L10 | IS10-V09 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:20 | L10-web.pdf | Pattern simile trovato nell’immagine (ingrandita) |
-| L10 | IS10-V10 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:21 | L10-web.pdf | Picchi della correlazione in corrispondenza dei gelati |
-| L10 | IS10-V11 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:22 | L10-web.pdf | Controprova con il panda come kernel: correlazione rumorosa con picchi da rilevatore di blob |
-| L10 | IS10-V12 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:23 | L10-web.pdf | Modello CNN di deep learning con strati convolutivi |
-| L10 | IS10-V13 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:24 | L10-web.pdf | Difetti individuati come mancanze nel pattern di similarità |
-| L10 | IS10-V14 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:31 | L10-web.pdf | Analisi esplorativa dei dati per il ML con i riferimenti alle lezioni |
-| L10 | IS10-V15 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:32 | L10-web.pdf | Strumenti di analisi esplorativa dei dati in MATLAB |
-| L10 | IS10-V16 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:37 | L10-web.pdf | Segnale nel dominio del tempo e sua rappresentazione in frequenza |
-| L10 | IS10-V17 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:38 | L10-web.pdf | Dominio del tempo, modulo e fase in frequenza: 12 ripetizioni in 10 s con energia a 1,2 Hz |
-| L10 | IS10-V18 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:39 | L10-web.pdf | Spettrogramma con energia per frequenza e tempo |
-| L10 | IS10-V19 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:41 | L10-web.pdf | Funzioni MATLAB di base per la statistica descrittiva |
-| L10 | IS10-V20 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:42 | L10-web.pdf | Distribuzione dell’errore di regressione con code positive e negative |
-| L10 | IS10-V21 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:43 | L10-web.pdf | Distribuzioni con stessa media e IQR ma forma e intervallo diversi |
-| L10 | IS10-V22 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:44 | L10-web.pdf | Struttura di un boxplot |
-| L10 | IS10-V23 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:45 | L10-web.pdf | Boxplot con outlier evidenziati |
-| L10 | IS10-V24 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:60 | L10-web.pdf | Confronto tra normalizzazione z-score e min-max sulla stessa distribuzione |
-| L10 | IS10-V25 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:61 | L10-web.pdf | Distribuzione dei prezzi delle auto con coda lunga verso i valori alti |
-| L10 | IS10-V26 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:63 | L10-web.pdf | Distribuzione a legge di potenza prima e dopo la scalatura logaritmica |
-| L10 | IS10-V27 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:65 | L10-web.pdf | Rete neurale con i quattro punti di analisi: input, pesi, attivazioni, uscite ed errori |
-| L10 | IS10-V28 | Lesson_10_ExploratoryDataAnalysis_FeatureEngineering_DataStatisticalAnalysis.pdf:68 | L10-web.pdf | Curve di livello dell’errore J nello spazio dei pesi con e senza scalatura degli input |
-| L11 | IS11-V01 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:4 | L11-web-v24.pdf | Passi 2-5 del flusso di lavoro del ML con i tre momenti in cui si usa la visualizzazione |
-| L11 | IS11-V02 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:13 | L11-web-v24.pdf | Output di .shape e .describe() in Colab con un controllo evidenziato |
-| L11 | IS11-V03 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:16 | L11-web-v24.pdf | Istogrammi delle feature con plt.hist |
-| L11 | IS11-V04 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:17 | L11-web-v24.pdf | Grafico delle feature del dataset dell’esempio |
-| L11 | IS11-V05 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:18 | L11-web-v24.pdf | Cluster di clienti giovani con punteggio di spesa alto |
-| L11 | IS11-V06 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:24 | L11-web-v24.pdf | Visualizzazione del dataset CIFAR-10 |
-| L11 | IS11-V07 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:25 | L11-web-v24.pdf | Facets, strumento open source per visualizzare i dati di addestramento |
-| L11 | IS11-V08 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:28 | L11-web-v24.pdf | Dashboard di monitoraggio del drift con il PSI per feature |
-| L11 | IS11-V09 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:30 | L11-web-v24.pdf | Formula del PSI con p_i e q_i e confronto delle distribuzioni su un mese |
-| L11 | IS11-V10 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:31 | L11-web-v24.pdf | PSI applicato a una feature di input: distribuzione di riferimento contro produzione |
-| L11 | IS11-V11 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:33 | L11-web-v24.pdf | PSI applicato alla distribuzione delle uscite di un classificatore |
-| L11 | IS11-V12 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:36 | L11-web-v24.pdf | Esempio di mappe di salienza con gradiente semplice e SmoothGrad (PAIR) |
-| L11 | IS11-V13 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:38 | L11-web-v24.pdf | Due reti che riconoscono il cane con confidenza 0,95 e 0,92 |
-| L11 | IS11-V14 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:39 | L11-web-v24.pdf | Mappe di salienza delle due reti: NN1 guarda i pixel sbagliati |
-| L11 | IS11-V15 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:40 | L11-web-v24.pdf | Kernel di una CNN (quadrati grigi) ed esempi che li attivano al massimo (quadrati colorati) |
-| L11 | IS11-V16 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:41 | L11-web-v24.pdf | DQNViz: visual analytics per le Deep Q-Networks |
-| L11 | IS11-V17 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:44 | L11-web-v24.pdf | TensorBoard con metriche di addestramento |
-| L11 | IS11-V19 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:53 | L11-web-v24.pdf | Codifica dei dati con indizi visivi |
-| L11 | IS11-V20 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:54 | L11-web-v24.pdf | Le caratteristiche visive non sono tutte dello stesso tipo |
-| L11 | IS11-V21 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:59 | L11-web-v24.pdf | Guida alla scelta del tipo di grafico |
-| L11 | IS11-V22 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:60 | L11-web-v24.pdf | Guida alla scelta del tipo di grafico (continua) |
-| L11 | IS11-V23 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:63 | L11-web-v24.pdf | Confidenza con popolazione uniforme e non uniforme |
-| L11 | IS11-V24 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:64 | L11-web-v24.pdf | Intervalli di confidenza di una rete addestrata, più ampi dove mancano i dati |
-| L11 | IS11-V25 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:70 | L11-web-v24.pdf | Struttura di un grafico semplice ma completo |
-| L11 | IS11-V26 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:71 | L11-web-v24.pdf | Distribuzioni nel tempo con assenza di dati, vincitori ed eventi |
-| L11 | IS11-V27 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:72 | L11-web-v24.pdf | Visualizzazione di fenomeni complessi |
-| L11 | IS11-V29 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:76 | L11-web-v24.pdf | Esempio di visualizzazione senza testo (1) |
-| L11 | IS11-V30 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:77 | L11-web-v24.pdf | Esempio di visualizzazione senza testo (2) |
-| L11 | IS11-V31 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:78 | L11-web-v24.pdf | Esempio di visualizzazione senza testo (3) |
-| L11 | IS11-V33 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:85 | L11-web-v24.pdf | Isosuperficie come rappresentazione delle decisioni di un sistema intelligente |
-| L11 | IS11-V34 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:86 | L11-web-v24.pdf | Monte Sant’Elena prima e dopo l’eruzione del 1980 |
-| L11 | IS11-V35 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:88 | L11-web-v24.pdf | Funzione peaks con il massimo evidenziato |
-| L11 | IS11-V36 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:92 | L11-web-v24.pdf | Discesa del gradiente stocastica in un problema non convesso |
-| L11 | IS11-V37 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:94 | L11-web-v24.pdf | Fette di un volume 3D per evitare l’occlusione tra voxel |
-| L11 | IS11-V38 | Lesson_11_DataRapresentation_and_Visualization_in_ML.pdf:98 | L11-web-v24.pdf | Uso umoristico della visualizzazione con uno spazio di input per confronti |

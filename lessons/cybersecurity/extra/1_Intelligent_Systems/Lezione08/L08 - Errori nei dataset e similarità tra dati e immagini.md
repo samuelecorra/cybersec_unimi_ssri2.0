@@ -3,9 +3,6 @@
 Gli errori nei dati possono nascere dalle etichette, dalla loro provenienza, dal tempo o da duplicati. La seconda parte sviluppa la nozione di similarità: il confronto dipende dalla rappresentazione scelta e dallo scopo, dalla verifica di file identici alla ricerca semantica e alla corrispondenza di punti fisici fra immagini.
 
 
-<!-- SOURCE_VISUAL id="IS08-V40" source="L08-mindmap.pdf" page="1" type="mappa concettuale" description="Mappa della lezione su etichette, duplicati, similarità e rappresentazioni" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 ### **0. Panoramica**
 
 
@@ -29,7 +26,11 @@ La trattazione si articola nei seguenti temi:
 
 La preparazione dei dati è il **passo 2** del flusso di lavoro del ML. È **troppo spesso sottovalutata**, e se fatta male provoca una **perdita rilevante di prestazioni**.
 
+![](imgs/Pasted%20image%2020261123113612.png)
+
 > 📌 **Ground truth**. Le etichette sono le **fondamenta** per addestrare e valutare i modelli, soprattutto nell’apprendimento supervisionato. La *ground truth* è l’insieme delle **etichette che il modello dovrebbe imparare a predire** o approssimare. Le etichette sono spesso **codificate**: 1 = «auto», 2 = «camion», …
+
+![](imgs/Pasted%20image%2020261123113702.png)
 
 | Uso delle etichette | Perché conta |
 |---|---|
@@ -39,14 +40,13 @@ La preparazione dei dati è il **passo 2** del flusso di lavoro del ML. È **tro
 | **interpretabilità** | le etichette aiutano a **spiegare** le decisioni del modello: un dataset supervisionato favorisce la spiegabilità |
 | **transfer learning** | dati etichettati di un dominio servono a **pre-addestrare** modelli per compiti o domini **correlati**, risparmiando tempo e risorse quando le etichette del dominio di destinazione sono **scarse**; si possono anche **aggiungere immagini specifiche** in base alle etichette presenti in due database DB1 e DB2 |
 
-<!-- SOURCE_VISUAL id="IS08-V01" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="7" type="grafico" description="Più etichette riducono la complessità necessaria del modello sullo spettro dati-conoscenza" reason="Posizione dei modelli sullo spettro visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123113722.png)
 
-<!-- SOURCE_VISUAL id="IS08-V02" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="8" type="grafico" description="Grafico accuratezza contro operazioni per confrontare modelli, costruibile solo con le etichette" reason="Modelli e valori del grafico visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123113831.png)
 
-<!-- SOURCE_VISUAL id="IS08-V03" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="9" type="schema" description="Transfer learning tra due database DB1 e DB2 con etichette car" reason="Schema del trasferimento visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123114109.png)
+
+![](imgs/Pasted%20image%2020261123114119.png)
 
 #### **1.2. Errori nelle etichette**
 
@@ -54,46 +54,49 @@ La preparazione dei dati è il **passo 2** del flusso di lavoro del ML. È **tro
 **Esempi già visti**:
 
 - il **campione è corretto, ma l’etichetta è sbagliata**: un’immagine etichettata «CAT» che non è un gatto;
-- il **campione è fuorviante o incompleto** (data leakage): il frammento audio etichettato «yes» che contiene anche «you», la cellula ritagliata male.
+- il **campione è fuorviante o incompleto** (data leakage): il frammento audio etichettato «love» che contiene anche «you», la cellula ritagliata male.
+
+![](imgs/Pasted%20image%2020261123114224.png)
 
 **Errori diretti del supervisore**. Le etichette dei dataset vengono tipicamente da **supervisori umani**, che possono sbagliare. Esempio: una **diagnosi medica** con input radiografie ed esami del sangue e output la diagnosi, per esempio «sano».
+
+![](imgs/Pasted%20image%2020261123114250.png)
 
 #### **1.3. Provenienza, incertezza e cambiamento delle etichette**
 
 Ogni etichetta dovrebbe essere accompagnata dai metadati che ne permettono la verifica: **chi** l’ha assegnata (esperto, annotatore, regola o modello), **quando** è stata assegnata e quale **versione** delle linee guida, dello strumento o del software è stata usata. Conservare queste informazioni accanto a $y$ rende le etichette tracciabili e confrontabili; valori prodotti da procedure diverse non sono automaticamente equivalenti.
 
+![](imgs/Pasted%20image%2020261123114308.png)
+
 Anche due esperti possono dissentire: la *ground truth* è una decisione operativa documentata, non sempre una verità priva d’incertezza. Il coefficiente **κ di Cohen** corregge l’accordo osservato $p_o$ per l’accordo atteso per caso $p_e$:
 
 $$\kappa=\frac{p_o-p_e}{1-p_e}$$
 
-Con 100 esempi, 85 accordi osservati e un accordo casuale atteso pari a 0,5, si ottiene $\kappa=(0{,}85-0{,}5)/(1-0{,}5)=0{,}70$. $\kappa=1$ indica accordo perfetto, $\kappa=0$ un accordo pari al caso. I disaccordi possono richiedere una terza valutazione, un voto di maggioranza, etichette probabilistiche oppure un flag di incertezza. La qualità delle annotazioni pone un limite alla prestazione misurabile: se gli annotatori non concordano oltre una certa soglia, aumentare il numero di esempi senza migliorare linee guida o informazioni non risolve il problema.
+Con 100 esempi, 85 accordi osservati e un accordo casuale atteso pari a 0,5, si ottiene 
 
-<!-- SOURCE_VISUAL id="IS08-V31" source="L08-web.pdf" page="14" type="schema" description="Provenienza dell’etichetta: procedura, annotatore, data e versione del protocollo" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+$$\kappa=(0{,}85-0{,}5)/(1-0{,}5)=0{,}70$$
 
-<!-- SOURCE_VISUAL id="IS08-V32" source="L08-web.pdf" page="15" type="schema" description="Accordo fra due annotatori e coefficiente κ di Cohen con gestione dei disaccordi" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+ $\kappa=1$ indica accordo perfetto, $\kappa=0$ un accordo pari al caso. I disaccordi possono richiedere una terza valutazione, un voto di maggioranza, etichette probabilistiche oppure un flag di incertezza. La qualità delle annotazioni pone un limite alla prestazione misurabile: se gli annotatori non concordano oltre una certa soglia, aumentare il numero di esempi senza migliorare linee guida o informazioni non risolve il problema.
+
+![](imgs/Pasted%20image%2020261123114738.png)
 
 **La diagnosi cambia nel tempo**. Una prima radiografia viene etichettata «**polmonite batterica**»; una **seconda radiografia**, fatta con una **macchina migliore**, porta alla diagnosi di «**covid-19**». Se l’etichetta della prima immagine **non viene aggiornata**, il modello impara un’associazione sbagliata, e questo **limita la capacità** del modello di fare **diagnosi precoce**: proprio le immagini iniziali, le più utili per anticipare la malattia, hanno l’etichetta errata. Sulla figura «pneumonia» è scritto «penumonia».
 
+![](imgs/Pasted%20image%2020261123114957.png)
+
 La stessa dinamica si presenta fuori dalla medicina: un difetto di produzione può essere confermato solo nel collaudo finale o dopo un reso; un guasto può verificarsi settimane dopo la misura; una transazione può essere riconosciuta come frode solo dopo il chargeback; una misura ambientale può essere corretta quando si completa la calibrazione. Il campione può quindi essere disponibile al tempo $t_0$, mentre l’etichetta arriva più tardi o viene revisionata. Occorre registrare la data della misura e quella dell’etichetta e usare suddivisioni temporali coerenti: un addestramento non può usare in anticipo un esito che in produzione non sarebbe ancora noto.
 
-<!-- SOURCE_VISUAL id="IS08-V33" source="L08-web.pdf" page="17" type="timeline" description="Etichetta ritardata o aggiornata dopo l’osservazione: campione, arrivo dell’esito e revisione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V04" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="12" type="immagini" description="Radiografia etichettata polmonite batterica e seconda radiografia con diagnosi covid-19" reason="Radiografie visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123115105.png)
 
 **Errori di interscambio e conversione automatica**. Un’etichetta viene creata **automaticamente** con una regola sul BMI (*Body Mass Index*, indice di massa corporea, IMC):
 
 $$\text{BMI} = \frac{\text{massa [kg]}}{\text{altezza [m]}^2}, \qquad \text{se } 25{,}0 < \text{BMI} < 30 \;\Rightarrow\; y = \text{sovrappeso}$$
 
-Applicata a **Yuri Chechi** (con il nome trascritto come «Jury»), campione olimpico agli **anelli** nel **1996**, fotografato nel 2022 a oltre 50 anni, dopo una **conversione automatica di formato** la regola produce l’etichetta «**grasso**».
+Applicata a **Yuri Chechi**, campione olimpico agli **anelli** nel **1996**, fotografato nel 2022 a oltre 50 anni, dopo una **conversione automatica di formato** la regola produce l’etichetta «**grasso**».
+
+![](imgs/Pasted%20image%2020261123115237.png)
 
 > 💡 **Perché la regola sbaglia (nota didattica).** Il BMI non distingue **massa muscolare** da massa grassa: un atleta molto muscoloso può superare 25 senza essere sovrappeso. Un’etichetta generata da una regola automatica eredita tutti i **limiti della regola**, e una conversione di unità o di formato sbagliata può spostare i valori in una fascia diversa senza che nessuno se ne accorga.
-
-<!-- SOURCE_VISUAL id="IS08-V05" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="13" type="immagine" description="Atleta olimpico etichettato automaticamente come sovrappeso dalla regola sul BMI" reason="Immagine dell’esempio" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **1.4. Controlli di base: i duplicati**
 
@@ -105,17 +108,25 @@ Applicata a **Yuri Chechi** (con il nome trascritto come «Jury»), campione oli
 | duplicati con **la stessa etichetta** | **nessun problema di addestramento**, ma spreco di spazio, memoria e tempo di elaborazione |
 | duplicati con **etichette opposte** ($x_1 = x_2$, ma $y_1$ = «gatto» e $y_2$ = «cane») | **problemi di addestramento**: il modello riceve due risposte contraddittorie per lo stesso input |
 
+![](imgs/Pasted%20image%2020261123115802.png)
+
 **Il costo del controllo**. Il controllo va fatto sul database di addestramento **e** su quello di validazione, e non è facile con database grandi (oltre un milione di immagini). Un semplice confronto **uno contro N** richiede
 
 $$\text{iterazioni} = N\,(N-1)$$
 
 **Esempio: il dataset Serengeti**:
 
+![](imgs/Pasted%20image%2020261123120010.png)
+
 - **non etichettato**: **3,2 milioni** di immagini, corrispondenti a **1,2 milioni** di eventi di cattura (sequenze di immagini; in totale 7,1 milioni di immagini). Il non supervisionato **non è da buttare**: serve per la messa a punto, l’estrazione delle feature, altri studi;
 - **test set etichettato**: etichettato da **volontari**, **17 400** eventi di cattura;
 - un controllo di base richiede, si possono arrivare a centinaia di milioni di confronti; con $N$ elementi, confrontare tutte le coppie ordinate richiede $N(N-1)$ operazioni.
 
 > ⚠️ **Verifica del numero.** Con $N = 17\,400$ si ottiene $N(N-1) = 17\,400 \times 17\,399 \approx 302{,}7$ milioni, non 285 milioni. Inoltre ogni coppia viene contata due volte: le coppie **distinte** da confrontare sono $N(N-1)/2 \approx 151{,}4$ milioni. L’ordine di grandezza, centinaia di milioni di confronti, resta il messaggio della figura.
+
+![](imgs/Pasted%20image%2020261123120134.png)
+
+---
 
 **Una procedura molto semplice**, solo come primo passo dell’analisi:
 
@@ -126,6 +137,8 @@ $$\text{iterazioni} = N\,(N-1)$$
      - **opzione 1**: rimuovere il campione;
      - **opzione 2**: chiedere assistenza a un supervisore (**seconda lettura**), poi **correggere l’etichetta** e unire il campione, oppure scartarlo;
    - **no** (caso buono): **scartare uno dei due** campioni, aggiornare gli indici $i, j$ e **tornare al passo 1**.
+
+![](imgs/Pasted%20image%2020261123120150.png)
 
 Quale opzione scegliere dipende dal contesto: il dataset è **enorme**? I dati sono **costosi**?
 
@@ -173,14 +186,13 @@ Il file viene letto **in binario** (`'rb'`), e dei byte si calcolano i due hash 
 
 > 💡 **Perché memorizzare gli hash (nota didattica).** Confrontare due stringhe di 32 caratteri (MD5 = 128 bit) è molto più rapido che confrontare due immagini da milioni di pixel. Anzi, inserendo gli hash in un **dizionario** i duplicati esatti si trovano in **una sola passata**, in tempo proporzionale a $N$, invece dei $N(N-1)/2$ confronti a coppie. MD5 e SHA-1 non sono più sicuri contro chi **fabbrica** collisioni di proposito, ma per trovare duplicati accidentali restano adatti.
 
-<!-- SOURCE_VISUAL id="IS08-V06" source="L08-web.pdf" page="89" type="schermata" description="Due immagini con hash MD5 e SHA-1 diversi dopo la modifica di un pixel o dei metadati EXIF" reason="Immagini e hash visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 Per immagini, vettori e altri dati non strutturati, la ridondanza si valuta con una misura di similarità, per esempio:
 
 $$\text{se } \operatorname{similarità}(x_i, x_j) > \text{soglia fissata}$$
 
 perché due campioni «uguali» possono differire per **rumore** o **correzioni di colore**, **punto di vista**, **momento o luogo** di acquisizione.
+
+![](imgs/Pasted%20image%2020261123120411.png)
 
 La quantità di confronti cresce quadraticamente: il numero di coppie distinte è $\binom{N}{2}=N(N-1)/2$. Con 17 400 campioni si ottengono circa 151 milioni di coppie; su milioni di immagini il confronto esaustivo diventa impraticabile, quindi si usano indici o una generazione preliminare di candidati. Per decidere se due elementi sono duplicati serve una soglia $\tau$ calibrata sul compito e su coppie etichettate.
 
@@ -193,8 +205,6 @@ Le nozioni di similarità si dispongono su livelli diversi. L’**identità esat
 | Ritraggono lo stesso punto fisico? | Descrittori locali, corrispondenze e verifica geometrica. |
 | Hanno significato simile? | Embedding appresi e distanza L2 o coseno; anche embedding multimodali per immagine e testo. |
 
-<!-- SOURCE_VISUAL id="IS08-V34" source="L08-web.pdf" page="61" type="schema" description="Livelli di confronto da identità binaria a similarità percettiva e semantica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
@@ -207,8 +217,7 @@ La domanda della sezione: che cosa è **rilevante** e che cosa è **inutile**?
 
 > 📌 **La metrica dipende dall’applicazione**. La metrica di similarità da scegliere **dipende dal tipo di applicazione**.
 
-<!-- SOURCE_VISUAL id="IS08-V07" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="23" type="immagini" description="Riconoscimento facciale delle mucche con macchie del muso e del corpo come feature" reason="Immagini dell’esempio visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123120525.png)
 
 **Perché controllare la similarità**:
 
@@ -225,15 +234,13 @@ Esempio: due cani **molto simili** sono **troppo simili** per insegnare a un mod
 | **identificazione** del singolo individuo | **ottimi campioni** |
 | **rilevamento** del volto o del muso | **ridondanti**: meglio aggiungere **altre immagini** |
 
-<!-- SOURCE_VISUAL id="IS08-V08" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="25" type="immagini" description="Coppie di immagini molto simili: ottime per l’identificazione, ridondanti per il rilevamento" reason="Immagini dell’esempio visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123120621.png)
 
 **Similarità e data augmentation**. **Troppa similarità** spreca spazio e tempo. **Ma** la **data augmentation**, che crea copie modificate delle stesse immagini (per esempio lo stesso «hotdog» ruotato o ritagliato), **migliora la generalizzazione**: la capacità del modello di imparare dai dati disponibili e applicare ciò che ha imparato altrove. La data augmentation sarà trattata nella parte di deep learning.
 
 > 💡 **Nessuna contraddizione.** I duplicati **accidentali** non aggiungono informazione; le varianti **controllate** della data augmentation insegnano al modello che rotazione, luminosità o ritaglio **non cambiano la classe**. La differenza sta nell’intenzione: la seconda introduce proprio le variazioni che il modello deve imparare a ignorare.
 
-<!-- SOURCE_VISUAL id="IS08-V09" source="L08-web.pdf" page="30" type="immagini" description="Data augmentation: varianti della stessa immagine di hotdog" reason="Varianti visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123120727.png)
 
 **Similarità nei dataset in generale**. La lezione si concentra sulle immagini, ma l’approccio vale per dati di ogni tipo:
 
@@ -244,6 +251,8 @@ Esempio: due cani **molto simili** sono **troppo simili** per insegnare a un mod
   - **coefficiente di correlazione di Pearson**;
   - misure di **complessità, coerenza, struttura, entropia**;
   - …
+
+![](imgs/Pasted%20image%2020261123121332.png)
 
 > 📌 **Mahalanobis e Pearson (nota didattica).** La distanza di Mahalanobis tiene conto della **covarianza** $S$ dei dati: pesa meno le direzioni in cui i dati variano molto. Il coefficiente di Pearson misura la **correlazione lineare** tra due vettori:
 > $$d_M(\mathbf{x}, \mathbf{y}) = \sqrt{(\mathbf{x} - \mathbf{y})^{\top} S^{-1} (\mathbf{x} - \mathbf{y})} \qquad \rho(\mathbf{x}, \mathbf{y}) = \frac{\sum_i (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_i (x_i - \bar{x})^2}\,\sqrt{\sum_i (y_i - \bar{y})^2}}$$
@@ -258,9 +267,15 @@ Esempio: due cani **molto simili** sono **troppo simili** per insegnare a un mod
 
 La similarità è **la base della maggior parte dei metodi di machine learning**. Lo schema del sistema di pattern recognition ha un ramo di **addestramento** (acquisizione → database → estrazione delle feature → training) e uno di **test** (acquisizione → estrazione delle feature → **matching** → esito, per esempio «mela»).
 
+![](imgs/Pasted%20image%2020261123121418.png)
+
 La similarità **non serve solo a pulire il dataset**: il blocco di **matching** confronta le feature del nuovo campione con quelle del database usando proprio una **misura di similarità o distanza**, e produce l’esito «classe $x$».
 
+![](imgs/Pasted%20image%2020261123121559.png)
+
 **Lo spazio di input**. Estrarre un **vettore di feature** da dati strutturati o non strutturati permette di ragionare **in un quadro comune**: oggetti come un panda, un volto, un fungo diventano **punti**.
+
+![](imgs/Pasted%20image%2020261123121636.png)
 
 **Dallo spazio di input allo spazio delle feature**. L’estrazione delle feature trasforma
 
@@ -268,10 +283,21 @@ $$[\,\text{input}_1, \text{input}_2, \dots, \text{input}_N\,] \;\longrightarrow\
 
 > 📌 **Ingegneria delle feature**. Un buon progetto delle feature dà **meno dimensioni** e **cluster migliori**.
 
-<!-- SOURCE_VISUAL id="IS08-V10" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="32" type="schema" description="Dallo spazio di input a N dimensioni allo spazio delle feature a M dimensioni con cluster migliori" reason="Disposizione dei punti nei due spazi visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123121856.png)
 
-#### **3.2. Dove agisce la rete neurale**
+---
+
+#### **3.2. Encoding e Representation Space**
+
+![](imgs/Pasted%20image%2020261123123935.png)
+
+![](imgs/Pasted%20image%2020261123123946.png)
+
+![](imgs/Pasted%20image%2020261123123954.png)
+
+#### **3.3. Dove agisce la rete neurale**
+
+![](imgs/Pasted%20image%2020261123124024.png)
 
 Il pattern recognition si può organizzare in modi diversi, secondo **quale parte** dello schema viene affidata a una rete neurale:
 
@@ -281,7 +307,13 @@ Il pattern recognition si può organizzare in modi diversi, secondo **quale part
 | **rete come funzione di similarità** | la rete svolge **solo il matching**; database ed estrazione delle feature restano fuori | **più bassa** |
 | **rete profonda** | **tutti i passi**, estrazione delle feature compresa, sono **dentro** il modello | tutta nella rete |
 
+![](imgs/Pasted%20image%2020261123124138.png)
+
+![](imgs/Pasted%20image%2020261123124311.png)
+
 **Estrazione banale contro ingegneria delle feature**:
+
+![](imgs/Pasted%20image%2020261123124330.png)
 
 | Estrazione delle feature | Rete necessaria | Commento |
 |---|---|---|
@@ -290,35 +322,17 @@ Il pattern recognition si può organizzare in modi diversi, secondo **quale part
 | **neurale** | **rete più semplice** | si usa una rete per estrarre le feature dai suoi **strati nascosti** |
 | **neurale + distanza classica** | **nessuna rete** nel matching: basta una **distanza euclidea** | investire calcolo **nel primo passo** permette **decisioni semplici** e **migliora la spiegabilità** |
 
+![](imgs/Pasted%20image%2020261123124426.png)
+
+![](imgs/Pasted%20image%2020261123124451.png)
+
 > ⚠️ **Stesso estrattore per database e test**. Il database deve contenere **lo stesso tipo di feature** prodotto dall’estrattore usato in test: se si cambia estrattore, le feature del database vanno **ricalcolate**.
+
+![](imgs/Pasted%20image%2020261123124525.png)
 
 > 💡 **Il senso dell’ultimo schema (nota didattica).** È l’idea degli **embedding**: una rete pre-addestrata trasforma ogni immagine in un vettore, e due immagini simili hanno vettori vicini. A quel punto riconoscere, deduplicare o cercare immagini è solo una questione di **distanze**, e la decisione è spiegabile: «questa immagine è la più vicina a quella».
 
 Una rete neurale può realizzare tre funzioni diverse: classificare $x$ direttamente in una classe $y$; codificare $x$ in un vettore $z=f_\theta(x)$ (*embedding*); oppure apprendere una funzione di similarità $s(z_i,z_j)$ fra coppie, come nelle reti siamesi. La scelta della rappresentazione precede quella della metrica e determina che cosa il confronto può rilevare. Dati tabellari si codificano con colonne normalizzate e variabili one-hot; testo, immagini e audio possono essere trasformati da encoder appresi. In entrambi i casi si confrontano vettori nello stesso spazio.
-
-<!-- SOURCE_VISUAL id="IS08-V35" source="L08-web.pdf" page="38" type="schema" description="Codifica di dati strutturati o non strutturati in vettori nello spazio di rappresentazione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V36" source="L08-web.pdf" page="41" type="schema" description="Tre ruoli di una rete neurale: classificatore, encoder embedding e modello di metric learning" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V11" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="33" type="diagramma" description="Rete neurale che mappa memorizzazione e matching" reason="Blocchi affidati alla rete visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V12" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="34" type="diagramma" description="Rete neurale usata solo come funzione di similarità" reason="Blocchi affidati alla rete visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V13" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="35" type="diagramma" description="Rete profonda che contiene tutti i passi del pattern recognition" reason="Blocchi affidati alla rete visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V14" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="36" type="diagramma" description="Estrazione banale di molte feature rumorose con rete complessa" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V15" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="38" type="diagramma" description="Estrazione neurale delle feature dagli strati nascosti con rete più semplice" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V16" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="39" type="diagramma" description="Feature neurali confrontate con una distanza euclidea classica" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
@@ -352,15 +366,15 @@ Le metriche principali descrivono similarità e distanza attraverso formule e ra
 | **Chebyshev** | $d_\infty(\mathbf{p}, \mathbf{q}) = \max_{i} \lvert p_i - q_i \rvert$ | L-infinito, Lmax, distanza «della scacchiera» |
 | **Minkowski** | $d_p(\mathbf{p}, \mathbf{q}) = \left( \sum_{i=1}^{N} \lvert p_i - q_i \rvert^{p} \right)^{1/p}$ | generalizza le precedenti |
 
-<!-- SOURCE_VISUAL id="IS08-V17" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="42" type="formule" description="Formule e grafici delle distanze euclidea, Manhattan e coseno" reason="Formule presenti solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123125054.png)
 
 **La metrica coseno**. Misura l’**angolo** tra i due vettori, non la loro lunghezza. Lo schema della indica tre casi: vettori con la **stessa direzione** (valore 1), **ortogonali** (valore 0), **opposti** (valore −1).
 
+![](imgs/Pasted%20image%2020261123125114.png)
+
 > ⚠️ **Similarità o distanza coseno?** Questa quantità è talvolta chiamata «distanza» che va da 1 a −1, ma quei valori sono della **similarità** coseno $\cos\theta$: vale 1 quando i vettori sono allineati. La **distanza** coseno usata nelle librerie è di solito $1 - \cos\theta$, che vale 0 per vettori allineati e 2 per vettori opposti.
 
-<!-- SOURCE_VISUAL id="IS08-V18" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="44" type="schema" description="Idea della metrica coseno con vettori allineati, ortogonali e opposti" reason="Vettori dello schema visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123125124.png)
 
 **Distanza di Chebyshev**. Dà la **componente di modulo massimo** del vettore differenza. Esempio: per $X = [-6, 4, 2]$ la norma L-infinito rispetto all’origine è
 
@@ -370,8 +384,9 @@ $$\lVert X \rVert_\infty = \max(\lvert -6 \rvert, \lvert 4 \rvert, \lvert 2 \rve
 
 La **confronta** graficamente le metriche.
 
-<!-- SOURCE_VISUAL id="IS08-V19" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="46" type="grafico" description="Confronto grafico tra le metriche di distanza" reason="Confronto presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123125224.png)
+
+![](imgs/Pasted%20image%2020261123125330.png)
 
 **Distanza di Minkowski**. Il parametro $p$ la trasforma nelle altre:
 
@@ -387,16 +402,15 @@ Con due dimensioni ($N = 2$), la mostra l’insieme dei punti a **distanza unita
 
 > ⚠️ **«Adimensionale».** La definisce la metrica «adimensionale». La distanza di Minkowski ha in realtà la **stessa unità di misura delle feature**, ed è adimensionale solo se le feature sono state **normalizzate**. Per lo stesso motivo, feature con scale diverse vanno normalizzate prima di calcolarla.
 
-<!-- SOURCE_VISUAL id="IS08-V20" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="48" type="grafico" description="Cerchi unitari della distanza di Minkowski per diversi valori di p in due dimensioni" reason="Forme dei cerchi visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123125410.png)
 
-<!-- SOURCE_VISUAL id="IS08-V21" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="49" type="tabella" description="Panoramica delle metriche di base" reason="Tabella presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123125510.png)
 
 ---
 
 ### **5. Similarità tra immagini**
 
+![](imgs/Pasted%20image%2020261123125554.png)
 
 #### **5.1. Usi e approcci**
 
@@ -409,11 +423,13 @@ Con due dimensioni ($N = 2$), la mostra l’insieme dei punti a **distanza unita
 
 **Tre scenari d’uso principali**:
 
-| Scenario | Descrizione |
-|---|---|
-| **pulire i dataset** | i dataset disordinati sono critici per il progettista, ed eliminare i duplicati a mano è un processo **faticoso** |
-| **ricerca per similarità** | data un’immagine, trovare immagini **visivamente simili** nella libreria multimediale o nei dati degli utenti |
-| **tracciare i cambiamenti** | individuare **modifiche** difficili da vedere in immagini di un progetto o di un’area monitorata |
+| Scenario                    | Descrizione                                                                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **pulire i dataset**        | i dataset disordinati sono critici per il progettista, ed eliminare i duplicati a mano è un processo **faticoso** |
+| **ricerca per similarità**  | data un’immagine, trovare immagini **visivamente simili** nella libreria multimediale o nei dati degli utenti     |
+| **tracciare i cambiamenti** | individuare **modifiche** difficili da vedere in immagini di un progetto o di un’area monitorata                  |
+
+![](imgs/Pasted%20image%2020261123125629.png)
 
 **Tre approcci principali**:
 
@@ -421,13 +437,33 @@ Con due dimensioni ($N = 2$), la mostra l’insieme dei punti a **distanza unita
 2. **istogrammi**;
 3. **hash delle immagini**: aHash, dHash, pHash.
 
+
+![](imgs/Pasted%20image%2020261123125727.png)
+
+---
+
+![](imgs/Pasted%20image%2020261123130713.png)
+
+![](imgs/Pasted%20image%2020261123130722.png)
+
+![](imgs/Pasted%20image%2020261123130742.png)
+
+---
+
 #### **5.2. Corrispondenza di keypoint: SIFT e SURF**
+
+![](imgs/Pasted%20image%2020261123132510.png)
+
+![](imgs/Pasted%20image%2020261123132559.png)
+
+![](imgs/Pasted%20image%2020261123132625.png)
 
 
 **Procedura**:
 
 1. calcolare un’**astrazione** dell’informazione dell’immagine e decidere **localmente, in ogni punto**, se lì esiste una feature del tipo cercato;
 2. **confrontare** le feature rilevate tra le due immagini.
+
 
 | **Pro** | **Contro** |
 |---|---|
@@ -452,12 +488,13 @@ Con due dimensioni ($N = 2$), la mostra l’insieme dei punti a **distanza unita
 2. **localizzazione** dei keypoint: i candidati vengono localizzati e **raffinati**, eliminando i punti a **basso contrasto**;
 3. assegnazione dell’**orientazione** a ogni keypoint in base al **gradiente locale**, e generazione del **descrittore** locale da **modulo e orientazione** del gradiente.
 
+![](imgs/Pasted%20image%2020261123132751.png)
+
 > 📌 **Differenza di Gaussiane (nota didattica).** Si sfoca l’immagine $I$ con due gaussiane di scala $\sigma$ e $k\sigma$ e si sottraggono i risultati:
 > $$D(x, y, \sigma) = \big(G(x, y, k\sigma) - G(x, y, \sigma)\big) * I(x, y)$$
 > I massimi e i minimi di $D$ nello spazio e nella scala sono i candidati keypoint: punti che restano «notevoli» anche ingrandendo o rimpicciolendo l’immagine. Il descrittore SIFT standard è un vettore di **128** valori.
 
-<!-- SOURCE_VISUAL id="IS08-V22" source="L08-web.pdf" page="82" type="immagine" description="Output tipico di SIFT con keypoint, scale e orientazioni" reason="Keypoint visibili solo nell’immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123132816.png)
 
 **Come si usa SIFT**:
 
@@ -467,8 +504,7 @@ Con due dimensioni ($N = 2$), la mostra l’insieme dei punti a **distanza unita
 
 SIFT è soprattutto una tecnica di **corrispondenza di feature locali**, non un metodo per decidere se due immagini hanno lo stesso significato. È adatto a registrare immagini della stessa scena, unire panorami, localizzare un oggetto che cambia scala o orientamento, stimare struttura 3D e movimento della camera, supportare visual localization e SLAM o allineare un riferimento per ispezionare un difetto. Si rilevano keypoint, se ne descrivono i dintorni, si confrontano i descrittori e si verificano geometricamente le corrispondenze. Un embedding globale può dire che due immagini sono simili; i keypoint aiutano a stabilire quali parti rappresentano lo stesso punto fisico.
 
-<!-- SOURCE_VISUAL id="IS08-V37" source="L08-web.pdf" page="79" type="schema" description="Pipeline da keypoint e descrittori locali a corrispondenze, verifica geometrica e posa o ricostruzione 3D" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123132913.png)
 
 **Esempi d’uso**:
 
@@ -476,11 +512,9 @@ SIFT è soprattutto una tecnica di **corrispondenza di feature locali**, non un 
 - **stima robusta**: in visione artificiale serve a ottenere risultati affidabili anche con dati **rumorosi o imperfetti**. Identificando gli **stessi punti** dell’oggetto in **viste diverse** si può **ricostruire il modello 3D** dell’oggetto e della scena;
 - **robot con telecamere** ricostruiscono la scena davanti a loro **durante il movimento**: SIFT abilita molte funzionalità avanzate dei sistemi intelligenti.
 
-<!-- SOURCE_VISUAL id="IS08-V23" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="58" type="immagini" description="Oggetto trovato con SIFT in una scena complessa con scala e rotazione diverse" reason="Corrispondenze dei keypoint visibili solo nelle immagini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+**![](imgs/Pasted%20image%2020261123132928.png)
 
-<!-- SOURCE_VISUAL id="IS08-V24" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="59" type="immagini" description="Ricostruzione 3D da viste diverse con i punti SIFT corrispondenti" reason="Viste e ricostruzione visibili solo nelle immagini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123132943.png)
 
 **SURF in tre passi**:
 
@@ -490,8 +524,7 @@ SIFT è soprattutto una tecnica di **corrispondenza di feature locali**, non un 
 
 > 💡 **Perché l’immagine integrale accelera (nota didattica).** Nell’immagine integrale ogni pixel contiene la somma di tutti i pixel sopra e a sinistra. La somma su un rettangolo qualsiasi si ottiene allora con **4 accessi**, indipendentemente dalla sua dimensione: un filtro a scatola grande costa quanto uno piccolo.
 
-<!-- SOURCE_VISUAL id="IS08-V25" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="61" type="schema" description="SURF: filtri a scatola che approssimano gaussiana e LoG" reason="Forma dei filtri visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123133007.png)
 
 #### **5.3. Confronto di istogrammi**
 
@@ -509,16 +542,22 @@ SIFT è soprattutto una tecnica di **corrispondenza di feature locali**, non un 
 
 > 💡 **Perché banana e spiaggia si somigliano.** L’istogramma conta **quanti pixel** hanno ciascun colore, ma perde **dove** si trovano. Una banana gialla su sfondo chiaro e una spiaggia di sabbia hanno distribuzioni di colore simili. Calcolare istogrammi **per blocchi** recupera un po’ di informazione spaziale.
 
-<!-- SOURCE_VISUAL id="IS08-V26" source="Lesson_08_ErrorsInDatasets_SimilarityInDatasets_and_images.pdf" page="62" type="immagini" description="Istogrammi simili di una banana e di una spiaggia" reason="Immagini e istogrammi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123133056.png)
 
 #### **5.4. Hash delle immagini: aHash, pHash, dHash**
 
+![](imgs/Pasted%20image%2020261123130831.png)
 
 > 📌 **Hash di un’immagine**. L’immagine viene ridotta a un piccolo **codice hash**, una specie di **impronta digitale**, identificandone le **feature salienti** e calcolando l’hash di una loro **rappresentazione compatta**, invece che dei dati grezzi del file. Due immagini si confrontano **contando le posizioni di bit diverse**: la **distanza di Hamming**.
 > $$d_H(\mathbf{h}_1, \mathbf{h}_2) = \sum_{i=1}^{64} \big[\, h_{1,i} \neq h_{2,i} \,\big]$$
 
+![](imgs/Pasted%20image%2020261123131116.png)
+
+![](imgs/Pasted%20image%2020261123131829.png)
+
 > ⚠️ **Hash del file contro hash percettivo.** MD5 e SHA-1 (§1.4) cambiano completamente per un solo pixel diverso: controllano l’**identità binaria**. Gli hash percettivi sono progettati al contrario: immagini **visivamente simili** hanno hash **uguali o con pochi bit diversi**, quindi una piccola distanza di Hamming.
+
+![](imgs/Pasted%20image%2020261123131917.png)
 
 I tre metodi hanno **passi iniziali simili**: guardano rispettivamente la **media**, la **percezione** (frequenze) e le **differenze** (gradiente), e producono una feature **binaria** a 64 bit.
 
@@ -533,15 +572,14 @@ I tre metodi hanno **passi iniziali simili**: guardano rispettivamente la **medi
 | 7. unire | i bit in un **intero a 64 bit**: l’hash | i bit in un **intero a 64 bit** | i bit in un **intero a 64 bit** |
 
 > 📌 **La regola del bit (nota didattica).** Nel testo delle figure la soglia è scritta in modo contratto («0 if gray > below the mean gray», «0 if DCT > below T»). Nella formulazione standard, per aHash
-> $$h_i = \begin{cases} 1 & \text{se } g_i > \bar{g} \\ 0 & \text{altrimenti} \end{cases} \qquad \bar{g} = \frac{1}{64} \sum_{i=1}^{64} g_i$$
+> $$h_i = \begin{cases} 1 & \text{se } g_i > \bar{g} \\\\ 0 & \text{altrimenti} \end{cases} \qquad \bar{g} = \frac{1}{64} \sum_{i=1}^{64} g_i$$
 > e analogamente per pHash con $T$ al posto di $\bar{g}$. La convenzione opposta (1 sotto la media) funziona allo stesso modo, purché sia usata per tutte le immagini.
 
 > 💡 **Perché si esclude il primo coefficiente DCT (nota didattica).** Il primo valore in alto a sinistra è la componente **continua** (DC): rappresenta la luminosità **media** dell’immagine ed è molto più grande degli altri. Includerlo sposterebbe la media $T$ e renderebbe l’hash sensibile alla semplice luminosità.
 
 > ⚠️ **Descrizione di dHash.** La prima frase della dice che dHash confronta ogni differenza «con la media delle differenze», ma i passi successivi descrivono il confronto diretto tra **pixel adiacenti** («il pixel a sinistra è più luminoso di quello a destra?»): è questa la regola di dHash. Il metodo è **molto veloce** perché non richiede né medie né trasformate.
 
-<!-- SOURCE_VISUAL id="IS08-V27" source="L08-web.pdf" page="92" type="schema" description="pHash: riduzione 32x32, DCT e blocco 8x8 in alto a sinistra" reason="Passaggi grafici della trasformata visibili solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123131535.png)
 
 **Immagini con lo stesso hash**. Le immagini con hash uguale e l’uso della libreria Python **ImageHash**:
 
@@ -553,11 +591,9 @@ d879f8f89b1bbf
 
 > ⚠️ **aHash, non pHash.** La descrizione dell’esempio menziona immagini con lo stesso **pHash**, ma il codice usa `average_hash`, cioè **aHash**. Per il pHash la libreria offre `imagehash.phash`. L’esempio è quello della documentazione di ImageHash.
 
-<!-- SOURCE_VISUAL id="IS08-V28" source="L08-web.pdf" page="93" type="immagini" description="Immagini diverse con lo stesso hash percettivo e codice ImageHash" reason="Immagini con hash uguale visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123131552.png)
 
-<!-- SOURCE_VISUAL id="IS08-V29" source="L08-web.pdf" page="94" type="schema" description="dHash: riduzione 9x8, differenze tra pixel adiacenti e hash a 64 bit" reason="Passaggi grafici visibili solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123131617.png)
 
 #### **5.5. Copyright e video fingerprinting**
 
@@ -566,22 +602,21 @@ d879f8f89b1bbf
 - Il metodo esatto **non è divulgato**, per non aiutare le **contromisure**.
 - Nel **video fingerprinting** tecniche simili a **pHash e SIFT** vengono applicate a **suoni** e **gruppi di fotogrammi** per creare un **identificatore unico**.
 
-<!-- SOURCE_VISUAL id="IS08-V30" source="L08-web.pdf" page="75" type="immagine" description="Content ID di YouTube e video fingerprinting" reason="Immagine della figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123131640.png)
 
 #### **5.6. Embedding e ricerca dei vicini**
 
 L’**iscrizione** (*enrollment*) inserisce gli elementi nell’indice: lo stesso encoder trasforma ogni immagine o testo in un vettore $z\in\mathbb{R}^d$, che viene memorizzato nel database. La rete è addestrata prima e non memorizza il database. In fase di ricerca si codifica la query con lo stesso encoder e si recuperano i $k$ vettori più vicini.
 
+![](imgs/Pasted%20image%2020261123132325.png)
+
+![](imgs/Pasted%20image%2020261123132340.png)
+
 Con $N$ vettori di dimensione $d$, la scansione esaustiva costa $O(Nd)$ per query: per $N=10^8$ e $d=512$ comporta circa $5{,}1\cdot10^{10}$ operazioni. Gli indici ANN (*Approximate Nearest Neighbour*) esaminano solo una parte dei vettori. HNSW (*Hierarchical Navigable Small World*, piccolo mondo gerarchico navigabile) costruisce un grafo multilivello; FAISS (*Facebook AI Similarity Search*, ricerca della similarità con vettori sviluppata da Facebook AI Research) è una libreria per la ricerca vettoriale esatta e approssimata. La velocità si ottiene accettando che talvolta il vero vicino non venga recuperato. La metrica pratica è `recall@k`, frazione dei veri $k$ vicini che l’indice trova.
 
+![](imgs/Pasted%20image%2020261123132350.png)
+
 La stessa pipeline supporta il recupero di immagini, la ricerca di duplicati e volti, i database vettoriali e il RAG. L’encoder e i suoi vettori devono restare coerenti: per cercare nello stesso spazio, sia l’archivio sia la query passano per lo stesso modello.
-
-<!-- SOURCE_VISUAL id="IS08-V38" source="L08-web.pdf" page="72" type="schema" description="Indicizzazione offline e ricerca online di immagini o testi mediante lo stesso encoder e top-k ANN" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS08-V39" source="L08-web.pdf" page="74" type="schema" description="Indice ANN e ricerca HNSW con pochi candidati, riordinamento esatto e richiamo recall@k" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
@@ -618,3 +653,5 @@ La stessa pipeline supporta il recupero di immagini, la ricerca di duplicati e v
 > - **Metriche nei dataset**: euclidea, Manhattan, coseno, Chebyshev, Minkowski.
 > - **Immagini e ricerca**: identità binaria con hash di contenuto, quasi duplicati con hash percettivi, corrispondenze fisiche con SIFT/SURF, similarità semantica con embedding e ricerca top-$k$ approssimata.
 > - La rappresentazione, la metrica e il compito stabiliscono quale significato dare alla parola «simile».
+
+![](imgs/Pasted%20image%2020261123133322.png)

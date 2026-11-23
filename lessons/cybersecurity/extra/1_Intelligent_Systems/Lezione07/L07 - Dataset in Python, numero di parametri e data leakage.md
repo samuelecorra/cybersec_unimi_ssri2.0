@@ -124,16 +124,14 @@ Le domande della sezione: **quanto è complesso** il modello? **Quanti dati** se
 
 Il principio **GIGO** resta valido: dati di bassa qualità compromettono l’apprendimento. Il problema si aggrava se si aggiungono pre-filtraggio o ingegneria delle feature inadeguati, una scelta sbagliata del modello, un addestramento scorretto o overfitting.
 
-<!-- SOURCE_VISUAL id="IS07-V04" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="26" type="illustrazione" description="Ancora peggio: pre-filtraggio sbagliato, modello sbagliato, reti addestrate male o in overfitting" reason="Illustrazione della figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122133842.png)
 
 **Lo spettro dati-conoscenza**. Le reti neurali tradizionali e le **reti profonde** si collocano verso l’estremo in cui si sa **poco** del processo e servono **molti dati**. La domanda da porsi: che cosa sai davvero
 
 1. dei **dati** che hai e della tua **applicazione**?
 2. del **modello di AI** che vuoi applicare?
 
-<!-- SOURCE_VISUAL id="IS07-V05" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="27" type="grafico" description="Spettro dati-conoscenza con la posizione delle reti tradizionali e profonde (Watt, Borhani, Katsaggelos)" reason="Posizione dei modelli sullo spettro visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122133834.png)
 
 #### **2.2. L’analogia meccanica**
 
@@ -147,8 +145,7 @@ $$\text{PZ}_1 = \{x_1, y_1, \alpha_1\}, \quad \text{PZ}_2 = \{x_2, y_2, \alpha_2
 
 Il modello è **completo** quando tutti gli elementi sono **posizionati**, cioè quando i loro parametri sono **fissati**; per questo conteggio si trascurano le differenze tra tipi di vincolo.
 
-<!-- SOURCE_VISUAL id="IS07-V06" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="29" type="illustrazione" description="Insieme di componenti meccanici, ciascuno con x, y e alpha" reason="Disposizione dei componenti visibile solo nell’illustrazione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122133908.png)
 
 **Similitudine 1: pesi e parametri**. **Prima dell’addestramento** i pesi della rete **non sono configurati**, come componenti non ancora posizionati; **dopo l’addestramento** sono **configurati**.
 
@@ -160,11 +157,9 @@ Il modello è **completo** quando tutti gli elementi sono **posizionati**, cioè
 | Obiettivo | classificare correttamente in uscita gli input $[x_1, \dots, x_4]$ | ottenere una **deformazione minima** in uscita per tutti gli input (la figura cita $x_1$ e $x_2$) |
 | Criterio | **errore minimo** in apprendimento | **deformazione minima** in addestramento |
 
-<!-- SOURCE_VISUAL id="IS07-V07" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="31" type="illustrazione" description="Pesi non configurati prima dell’addestramento e configurati dopo" reason="Analogia visibile solo nell’illustrazione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122134253.png)
 
-<!-- SOURCE_VISUAL id="IS07-V08" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="32" type="illustrazione" description="Struttura meccanica con spostamento, forze e deformazione confrontata con una rete neurale" reason="Collegamento tra input e struttura visibile solo nell’illustrazione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122134330.png)
 
 #### **2.3. Contare i parametri di una rete neurale**
 
@@ -204,10 +199,7 @@ Output salvato di `model.summary()`:
 | `dense_1` (Dense) | (None, 1) | 6 |
 | **Totale** | | **31** (tutti addestrabili) |
 
-> ⚠️ **Commento sbagliato nel notebook.** La prima cella contiene il commento `# define the 784-256-128-10 architecture using Keras`, residuo di un altro esempio: la rete definita è **4-5-1**, come confermano i 31 parametri.
-
-<!-- SOURCE_VISUAL id="IS07-V09" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="33" type="diagramma" description="Rete 4-5-1 con i pesi e i bias b1-b6" reason="Collegamenti della rete visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122143908.png)
 
 #### **2.4. Quanti dati? I modelli lineari**
 
@@ -217,6 +209,12 @@ Output salvato di `model.summary()`:
 | **lineare 1D** | $z = w_1 x + b$ (cioè $z = \alpha x + \beta$) | $w_1, b$ → **2** | **2 punti** |
 | **lineare 2D** | $z = \mathbf{w} \cdot \mathbf{x} + b$ con $\mathbf{x} = (x_1, x_2)$ | $w_1, w_2, b$ → **3** | **3 punti** |
 | **lineare 3D** | $z = \mathbf{w} \cdot \mathbf{x} + b$ con $\mathbf{x} = (x_1, x_2, x_3)$ | $w_1, w_2, w_3, b$ → **4** | **4 punti** |
+
+![](imgs/Pasted%20image%2020261122174233.png)
+
+![](imgs/Pasted%20image%2020261122174243.png)
+
+![](imgs/Pasted%20image%2020261122174253.png)
 
 Per descrivere completamente il modello bisogna **fissare tutti i parametri**, e ogni punto dato fornisce **un’equazione**. Il modello lineare 3D è anche l’**uscita lineare di un neurone**. La stessa approssimazione può essere utile anche per sistemi **non lineari**, pur senza valere in modo esatto.
 
@@ -232,8 +230,7 @@ Un esempio considera un database con **#Data = 10** vettori e **#Inputs = 5**.
 
 > 💡 **Applicare la regola all’esempio (nota didattica).** Con 5 input un modello lineare ha $5 + 1 = 6$ parametri: con 10 vettori $\text{DoF} \approx 6 - 10 < 0$, i dati bastano. Una rete 5-2-1 ha invece $(5+1) \cdot 2 + (2+1) \cdot 1 = 15$ parametri: $\text{DoF} \approx 15 - 10 = 5 > 0$, e la rete può «ricordare» i 10 esempi invece di imparare la regola.
 
-<!-- SOURCE_VISUAL id="IS07-V10" source="L07-web.pdf" page="34" type="schema" description="Gradi di libertà come parametri meno dati, con esempio di database da 10 vettori e 5 input" reason="Formula e tabella del database resi graficamente" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122174412.png)
 
 #### **2.5. Troppi parametri**
 
@@ -242,11 +239,9 @@ Un esempio considera un database con **#Data = 10** vettori e **#Inputs = 5**.
 
 > 📌 **Errore di generalizzazione e gradi di libertà**. Se nella rete restano troppi pesi «liberi», cioè **pochi dati rispetto ai parametri** e quindi DoF alto, la **capacità di generalizzazione** tende a essere **scarsa**: l’**errore di cross-validation aumenta**. Anche modelli profondi valutati su dataset standard possono mostrare errori di generalizzazione quando la capacità supera l’informazione disponibile.
 
-<!-- SOURCE_VISUAL id="IS07-V11" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="39" type="illustrazione" description="Modello con numero di parametri corretto contro eccessivo dopo l’addestramento" reason="Confronto visibile solo nell’illustrazione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123020506.png)
 
-<!-- SOURCE_VISUAL id="IS07-V12" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="40" type="grafico" description="Errore di cross-validation in funzione dei gradi di libertà ed esempi su grandi dataset" reason="Andamento dell’errore visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123020534.png)
 
 **Una prospettiva intuitiva: 1 parametro = 1 pixel**.
 
@@ -255,20 +250,17 @@ Un esempio considera un database con **#Data = 10** vettori e **#Inputs = 5**.
 | **VGGNet** (2014) | **138 milioni** | circa **11 700 × 11 700** pixel | un **campo da beach volley** |
 | **rete feed-forward tradizionale** | **meno di 300** | circa **17 × 17** pixel | un **francobollo** |
 
+![](imgs/Pasted%20image%2020261123020648.png)
+
 Verifica: $\sqrt{138 \times 10^6} \approx 11\,747$ e $17^2 = 289 < 300$. La aggiunge che un’immagine da 10 000 × 10 000 pixel ha 100 milioni di pixel, meno dei parametri di VGGNet.
 
 > 💡 **Il confronto è intuitivo, non una formula di campionamento.** I parametri non corrispondono letteralmente a pixel né determinano da soli il numero di immagini necessario: contano anche struttura, regolarizzazione, diversità, qualità ed effettiva informatività dei dati. L’analogia rende visibile la scala dei pesi fra una rete piccola e VGGNet.
 
+![](imgs/Pasted%20image%2020261123020735.png)
+
 Il confronto con un backbone visivo più recente chiarisce che le dimensioni continuano a crescere: **DINOv3 ViT-7B** (ViT, *Vision Transformer*, trasformatore per immagini) (2025) è riportato con circa 7 miliardi di parametri e pesi aperti; a 16 bit i pesi occupano circa 14 GB, quindi l’esecuzione locale richiede una GPU di fascia alta. La dimensione dei pesi da sola non descrive i requisiti completi di inferenza: contano anche attivazioni, risoluzione, batch, contesto, precisione numerica e implementazione. Rimane il criterio progettuale: scegliere la capacità in rapporto alla quantità e complessità dei dati e ai vincoli del deployment.
 
-<!-- SOURCE_VISUAL id="IS07-V27" source="L07-web.pdf" page="39" type="confronto" description="Scala dei parametri di VGGNet rispetto ai backbone visivi contemporanei DINOv3 ViT-7B e ViT-22B" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS07-V13" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="41" type="illustrazione" description="VGGNet con 138 milioni di parametri come campo da beach volley contro rete tradizionale come francobollo" reason="Confronto visivo delle superfici" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS07-V14" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="42" type="illustrazione" description="Un parametro per pixel: immagine di VGGNet contro immagine 17x17" reason="Confronto visivo delle immagini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123020830.png)
 
 > ✅ **In breve**. Il numero di parametri del modello va **regolato con cura** in base a:
 > - la **dimensione dei dataset**: numero di vettori e numero di input;
@@ -280,15 +272,17 @@ Il confronto con un backbone visivo più recente chiarisce che le dimensioni con
 
 ### **3. Data leakage**
 
+![](imgs/Pasted%20image%2020261123020903.png)
 
 #### **3.1. Che cos’è**
 
 Il data leakage è **uno dei fattori più rilevanti e limitanti** e riguarda il **passo 2** del flusso di lavoro, la preparazione dei dati.
 
+![](imgs/Pasted%20image%2020261123021053.png)
+
 > 📌 **Data leakage**. È la causa di modelli di ML o deep learning **non validi**, per un’**ottimizzazione eccessiva** del modello applicato. La vignetta riassume il rischio: un modello può apparire eccellente durante l’addestramento e rivelare l’overfitting soltanto dopo il rilascio.
 
-<!-- SOURCE_VISUAL id="IS07-V15" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="46" type="vignetta" description="Modello soddisfatto dell’apprendimento che scopre l’overfitting dopo il rilascio" reason="Vignetta della figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123021113.png)
 
 **Due problemi principali**:
 
@@ -301,13 +295,14 @@ L’esempio confronta due file di dati: un campione sano `Health_0001.dat` e uno
 
 > 💡 **Un indizio nel nome del file (nota didattica).** Se l’etichetta è scritta nel **nome del file** («Health» o «Ill») e quel nome, o un identificativo derivato, finisce tra le feature, il modello impara a leggere il nome invece dei valori clinici: prestazioni perfette in laboratorio, inutilità totale su pazienti nuovi.
 
-<!-- SOURCE_VISUAL id="IS07-V16" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="47" type="esempio" description="File Health_0001.dat e Ill_0001.dat con valori simili e classi diverse" reason="Contenuto dei file mostrato solo graficamente" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123021124.png)
 
 #### **3.2. A) Mancano feature rilevanti**
 
 
 Se si vuole usare una feature per l’analisi predittiva, ma quella feature **non è presente** al momento dell’addestramento, si introduce leakage nel modello. **Esempio**: si vuole aggiungere al dataset la concentrazione dell’**ormone X** per predire il **tumore Z**, ma l’ormone X **non è (quasi) presente** nel dataset di addestramento dei soggetti sani.
+
+![](imgs/Pasted%20image%2020261123021204.png)
 
 **Esempio 1: cani e gatti**. Nel dataset di **addestramento**:
 
@@ -315,6 +310,10 @@ Se si vuole usare una feature per l’analisi predittiva, ma quella feature **no
 - tutti i **gatti** hanno le **orecchie dritte**.
 
 Che cosa c’è che non va? È probabile l’**overfitting**: il sistema **non impara le vere differenze** tra cani e gatti, ma **regole semplificate**: «i cani sono gialli», «i gatti hanno le orecchie dritte».
+
+![](imgs/Pasted%20image%2020261123021305.png)
+
+![](imgs/Pasted%20image%2020261123021315.png)
 
 | Fase di test | Esito |
 |---|---|
@@ -327,14 +326,9 @@ Che cosa c’è che non va? È probabile l’**overfitting**: il sistema **non i
 
 > 💡 **Scorciatoie spurie.** L’esempio rientra nella famiglia delle feature che «dicono troppo»: più precisamente, il modello sfrutta una scorciatoia (*shortcut learning*), come il colore, correlata per caso con la classe nei dati di addestramento. Servono esempi più vari e rappresentativi, oltre a controlli che verifichino quali segnali usa il modello.
 
-<!-- SOURCE_VISUAL id="IS07-V17" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="50" type="immagini" description="Dataset di addestramento con cani gialli e gatti con orecchie dritte" reason="Immagini del dataset visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123021414.png)
 
-<!-- SOURCE_VISUAL id="IS07-V18" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="53" type="immagini" description="Errori di generalizzazione in test: cane piccolo grigio con orecchie dritte" reason="Immagini del test visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS07-V19" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="54" type="immagini" description="Errore di generalizzazione in test: gatto giallo" reason="Immagini del test visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+---
 
 #### **3.3. B) Si aggiunge qualcosa in più**
 
@@ -345,6 +339,8 @@ Che cosa c’è che non va? È probabile l’**overfitting**: il sistema **non i
 >
 > È **uno dei casi più subdoli** di data leakage: la correlazione fra ospedale e classe può far sembrare diagnostico un semplice indizio del centro di acquisizione.
 
+![](imgs/Pasted%20image%2020261123021451.png)
+
 **Esempio 2: cellule sane e leucemiche**. Immagini di globuli bianchi per addestrare un classificatore **sano / leucemia**:
 
 - le cellule **sane** vengono dall’**ospedale A**;
@@ -353,9 +349,6 @@ Che cosa c’è che non va? È probabile l’**overfitting**: il sistema **non i
 Le immagini dell’ospedale B sono **leggermente più grandi**, di **colore più chiaro** e con un **livello di rumore diverso**. Il modello può imparare a controllare **solo dimensione, colore e rumore** («ospedale B = tumore») invece della **forma** delle cellule.
 
 > 💡 **Come si evita (nota didattica).** Ogni ospedale deve fornire **entrambe** le classi, e le immagini vanno **armonizzate** (dimensione, colore, rumore) prima dell’addestramento. Un test utile: addestrare un modello a riconoscere **l’ospedale** di provenienza; se ci riesce facilmente, anche il classificatore di malattia può sfruttare quell’informazione.
-
-<!-- SOURCE_VISUAL id="IS07-V20" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="59" type="immagini" description="Cellule sane dall’ospedale A e leucemiche dall’ospedale B con differenze di dimensione, colore e rumore" reason="Differenze tra le immagini visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 **Come può avvenire il leakage**:
 
@@ -370,10 +363,9 @@ Il caso inverso (addestramento nel test) è «leggermente migliore, ma comunque 
 
 > 💡 **Perché uno è peggio dell’altro (nota didattica).** Se $V_1$ entra nell’addestramento, il modello ha già visto una parte del test: l’errore misurato su $V_1$ è falsamente basso e **tutta la stima** risulta ottimistica. Se $T_3$ entra nel test, il test contiene dati già visti e l’errore è ottimistico su quella porzione, ma l’addestramento resta pulito.
 
-<!-- SOURCE_VISUAL id="IS07-V21" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="60" type="schema" description="Leakage tra porzioni di addestramento T e di validazione V: casi leggermente e molto gravi" reason="Schema delle porzioni visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 **B2) Dati futuri nei dati passati**: informazioni che nella realtà sarebbero disponibili solo **dopo** l’istante della predizione entrano nei dati usati per addestrare (§3.5).
+
+![](imgs/Pasted%20image%2020261123022050.png)
 
 **B3) Uso dei dati fuori dall’ambito dell’algoritmo**. Esempio: un classificatore per la diagnosi addestrato su un dataset di **adulti** e usato anche per i **bambini**.
 
@@ -382,10 +374,9 @@ Il caso inverso (addestramento nel test) è «leggermente migliore, ma comunque 
 
 Nel dataset di addestramento e in quello di test compaiono cani e gatti **apparentemente diversi**. Dov’è il problema? Il **«déjà vu»**: il **riuso degli stessi campioni**, o di **parti ritagliate** di essi, oppure il riuso degli **stessi utenti**, produce una **generalizzazione scarsa**. **L’indipendenza statistica è rilevante!**
 
-> 💡 **Un esempio concreto (nota didattica).** In un sistema di riconoscimento vocale, se le registrazioni della stessa persona finiscono sia in addestramento sia in test, il modello può riconoscere **la voce** invece delle **parole**. La regola è dividere per **utente** (o per paziente, per macchina, per sessione), non per singolo campione.
+![](imgs/Pasted%20image%2020261123022216.png)
 
-<!-- SOURCE_VISUAL id="IS07-V22" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="63" type="immagini" description="Déjà vu: gli stessi campioni o loro ritagli in addestramento e test" reason="Campioni riusati visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+> 💡 **Un esempio concreto (nota didattica).** In un sistema di riconoscimento vocale, se le registrazioni della stessa persona finiscono sia in addestramento sia in test, il modello può riconoscere **la voce** invece delle **parole**. La regola è dividere per **utente** (o per paziente, per macchina, per sessione), non per singolo campione.
 
 > 📌 **In breve: due fonti principali di data leakage**.
 > - **A. Attributi delle feature**: le variabili **dicono troppo**.
@@ -393,6 +384,8 @@ Nel dataset di addestramento e in quello di test compaiono cani e gatti **appare
 
 #### **3.5. Serie temporali: un caso speciale**
 
+
+![](imgs/Pasted%20image%2020261123022409.png)
 
 | | **Previsione di serie temporali** | **Classificazione di serie temporali** |
 |---|---|---|
@@ -403,9 +396,15 @@ Nel dataset di addestramento e in quello di test compaiono cani e gatti **appare
 | Finanza | previsione dei **prezzi delle azioni**, tendenze economiche | rilevamento di **frodi** nelle sequenze di transazioni |
 | Sanità | previsione dei **parametri vitali** del paziente | classificazione dell’ECG (*Electrocardiogram*, elettrocardiogramma) per le cardiopatie |
 
+![](imgs/Pasted%20image%2020261123024217.png)
+
+![](imgs/Pasted%20image%2020261123024242.png)
+
 > ⚠️ **Il problema**. In entrambi i casi il modello funziona solo se i dati passati sono **coerenti**, cioè **non mescolati**, sia in **addestramento** (input del metodo di apprendimento) sia in **inferenza** (input del modello).
 
 **Controllare il leakage nelle serie temporali**. Dividere una serie temporale in addestramento e test è un problema **soggetto a errori**: bisogna fare **molta attenzione**. In questi schemi, con certe suddivisioni la **continuità temporale** è garantita solo «a breve termine»: nella prima suddivisione i dati di **validazione** sono **nel passato** rispetto all’addestramento, nella seconda l’addestramento ha una **discontinuità temporale**. In un altro schema la continuità temporale è **pienamente garantita**.
+
+![](imgs/Pasted%20image%2020261123024330.png)
 
 > 📌 **Validazione «in avanti» (nota didattica).** Lo schema sicuro addestra sempre sul passato e verifica sul futuro immediato, allargando progressivamente la finestra:
 >
@@ -416,9 +415,6 @@ Nel dataset di addestramento e in quello di test compaiono cani e gatti **appare
 > | 3 | $[t_1, t_{3k}]$ | $[t_{3k+1}, t_{4k}]$ |
 >
 > Una suddivisione **casuale** dei campioni, normale per dati indipendenti, qui mette **il futuro nell’addestramento** (leakage di tipo B2).
-
-<!-- SOURCE_VISUAL id="IS07-V23" source="L07-web.pdf" page="62" type="schema" description="Suddivisioni di una serie temporale con continuità temporale parziale o pienamente garantita" reason="Posizione delle porzioni nel tempo visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **3.6. Il problema del ritaglio (cropping)**
 
@@ -433,8 +429,7 @@ Esempi:
 - **audio**: il frammento selezionato per addestrare la parola «**YES**» è **troppo lungo** e contiene anche «**YOU**» (dalla frase «yes, you are»);
 - **immagini**: la **cellula** selezionata è **ritagliata male**, con **parti mancanti** o **altre cellule** nel riquadro.
 
-<!-- SOURCE_VISUAL id="IS07-V24" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="69" type="esempi" description="Ritaglio sbagliato: frammento audio YES che contiene YOU e cellula ritagliata male" reason="Forme d’onda e ritagli visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123024451.png)
 
 > 📌 **Il problema del ritaglio**. È una forma di data leakage **molto diffusa**, che colpisce molti tipi di dataset e applicazioni. Si verifica quando un modello **impara pattern da dati ritagliati** o **distorti dal contesto**: prestazioni **ingannevolmente alte** e **generalizzazione scarsa**.
 
@@ -447,18 +442,41 @@ Esempi:
 | **dati strutturati** | in diagnosi medica, se l’addestramento contiene **solo i casi estremi**, il modello **fallisce sui casi intermedi** |
 | **testo** | un modello di sentiment addestrato su post dei social si affida a **frasi troncate** invece del contesto completo |
 
+![](imgs/Pasted%20image%2020261123024547.png)
+
+![](imgs/Pasted%20image%2020261123024727.png)
+
 **Evitare con cura le feature indesiderate**: il ritaglio può includere la scala in centimetri o millimetri come feature spuria.
 
 > 💡 **Il righello nelle immagini dermatologiche (nota didattica).** In alcune fotografie di lesioni sospette compare un righello graduato. Un classificatore può apprendere l’associazione spuria «righello presente = lesione maligna» invece delle caratteristiche della lesione. La scala in centimetri e millimetri diventa così una feature indesiderata, da escludere con un ritaglio corretto.
 
-<!-- SOURCE_VISUAL id="IS07-V25" source="Lesson_07_NumberOfParameters_DataLeakage.pdf" page="72" type="immagini" description="Feature indesiderate da evitare: scale in cm e mm e ritaglio" reason="Pagina con sole immagini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123024604.png)
+
+![](imgs/Pasted%20image%2020261123024747.png)
+
+Ci sono dei segnali d'avvertimento che possono indicare un plausibile data leakage:
+
+1. Too good to be true 
+2. One feature explains almost everything 
+3. Features not available at prediction time 
+4. Performance drops outside the experiment 
+5. Shortcuts in the data
 
 #### **3.7. Controlli pratici per scoprire il leakage**
 
+![](imgs/Pasted%20image%2020261123025001.png)
+
 Una buona verifica usa controlli indipendenti. Prestazioni insolitamente alte richiedono un confronto con baseline semplici e risultati plausibili per il problema; una feature dominante va esaminata per capire se è disponibile al momento della previsione. Per ogni colonna occorre quindi fissare il tempo $t_0$ della decisione e scartare valori che diventano noti dopo $t_0$, come una diagnosi finale o il motivo di una cancellazione.
 
+![](imgs/Pasted%20image%2020261123111428.png)
+
 Altri controlli cercano duplicati esatti e quasi duplicati fra training e test, sovrapposizioni di pazienti, utenti, sessioni, dispositivi o registrazioni e trasformazioni adattate sull’intero dataset. Normalizzazione, imputazione, selezione delle feature e augmentation devono essere apprese solo all’interno della partizione di training, preferibilmente in una pipeline riproducibile.
+
+![](imgs/Pasted%20image%2020261123111539.png)
+
+![](imgs/Pasted%20image%2020261123111608.png)
+
+![](imgs/Pasted%20image%2020261123111645.png)
 
 | Verifica | Procedura | Segnale da approfondire |
 |---|---|---|
@@ -472,41 +490,47 @@ Altri controlli cercano duplicati esatti e quasi duplicati fra training e test, 
 
 Il test delle etichette permutate è un **controllo negativo**, non una prova definitiva: può non rilevare una feature che contenga già direttamente il target. Nel controllo avversario, invece, la nuova etichetta indica l’origine (training o test), non la classe applicativa. AUC circa 0,5 significa che il classificatore non distingue le distribuzioni; un valore alto indica differenze da spiegare e non dimostra da solo la presenza di leakage.
 
+![](imgs/Pasted%20image%2020261123112426.png)
+
 Per verificare righe condivise si può usare un’intersezione fra tabelle, ad esempio `pd.merge(train, test, how="inner")`; un risultato non vuoto richiede un controllo. Nei dati reali, ID, provenienza e hash sono preferibili ai soli valori di colonna, perché osservazioni distinte possono coincidere sui campi registrati.
 
-<!-- SOURCE_VISUAL id="IS07-V28" source="L07-web.pdf" page="74" type="tabella" description="Tassonomia dei controlli di leakage: duplicati, gruppi, pipeline, etichette permutate, split cronologici e validation avversaria" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261123112435.png)
+
+![](imgs/Pasted%20image%2020261123112505.png)
+
+![](imgs/Pasted%20image%2020261123112611.png)
+
+![](imgs/Pasted%20image%2020261123112622.png)
+
+---
+
+
 
 L’audit è particolarmente importante quando gli agenti contribuiscono alla creazione dei dati, delle feature o delle etichette. Un’inferenza errata dello schema, un’allucinazione o un contesto incompleto possono introdurre errori plausibili e difficili da notare. Conservare prompt, codice e log, controllare un campione manualmente e chiedersi per ogni feature quando diventa disponibile permette di ricostruire la provenienza e ripetere i controlli.
 
+![](imgs/Pasted%20image%2020261123112657.png)
+
+![](imgs/Pasted%20image%2020261123112707.png)
+
 Due verifiche assistite rendono concreti questi controlli. Nel primo caso, un hash percettivo individua una foto di cane quasi duplicata tra le cartelle di training e test, con distanza di Hamming pari a 2; va rimossa da una partizione oppure si deve dividere per immagine originale, così che i ritagli della stessa foto restino insieme. Nel secondo, un classificatore che usa soltanto dimensioni e colore medio delle immagini di cellule raggiunge il 97% quando le immagini sane provengono dall’ospedale A e quelle leucemiche dall’ospedale B. Il modello riconosce il centro di acquisizione: è un confondimento di sorgente e una scorciatoia, non necessariamente leakage in senso stretto. I numeri sono un output simulato e vanno ricalcolati sui dati effettivi.
-
-<!-- SOURCE_VISUAL id="IS07-V30" source="L07-web.pdf" page="79" type="esempio" description="Near-duplicate fotografico trovato fra training e test con hash percettivo" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS07-V31" source="L07-web.pdf" page="80" type="schema" description="Shortcut ospedale-classe rilevato usando solo dimensioni e colore medio delle immagini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS07-V29" source="L07-web.pdf" page="81" type="schema" description="Rischi di leakage introdotti da agenti nella creazione delle feature e controlli di audit" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
 ### **4. Distinzioni da non confondere**
 
-| Coppia | Differenza chiave |
-|---|---|
-| **`x`** / **`y`** nel laboratorio | matrice delle feature (150 × 4) / vettore delle classi (150) |
-| **Slicing per colonna** / **per riga** | una feature `xNumpy[:, j]` / un campione `xNumpy[i, :]` |
-| **Indice 1 in Python** / **in MATLAB** | secondo elemento / primo elemento |
-| **DoF** / **#Par** | parametri indipendenti che definiscono la configurazione / numero di pesi del modello: legati, non identici |
-| **DoF < 0** / **DoF > 0** | più dati che parametri: modello determinato / più parametri che dati: flessibilità eccessiva e overfitting |
-| **Leakage A** / **leakage B** | le feature dicono troppo o manca una feature rilevante / dati usati nella fase sbagliata o informazioni esterne |
-| **Addestramento nel test** / **test nell’addestramento** | leggermente grave / molto grave |
-| **Leakage B1** / **B2** / **B3** | dal test all’addestramento / dal futuro al passato / fuori dall’ambito (adulti → bambini) |
-| **Divisione per campione** / **per utente** | può mettere la stessa persona in addestramento e test / garantisce l’indipendenza statistica |
-| **Previsione** / **classificazione di serie temporali** | valori futuri / etichette sulla sequenza |
-| **Suddivisione casuale** / **in avanti** | adatta a dati indipendenti / obbligatoria per le serie temporali |
+| Coppia                                                   | Differenza chiave                                                                                               |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **`x`** / **`y`** nel laboratorio                        | matrice delle feature (150 × 4) / vettore delle classi (150)                                                    |
+| **Slicing per colonna** / **per riga**                   | una feature `xNumpy[:, j]` / un campione `xNumpy[i, :]`                                                         |
+| **Indice 1 in Python** / **in MATLAB**                   | secondo elemento / primo elemento                                                                               |
+| **DoF** / **#Par**                                       | parametri indipendenti che definiscono la configurazione / numero di pesi del modello: legati, non identici     |
+| **DoF < 0** / **DoF > 0**                                | più dati che parametri: modello determinato / più parametri che dati: flessibilità eccessiva e overfitting      |
+| **Leakage A** / **leakage B**                            | le feature dicono troppo o manca una feature rilevante / dati usati nella fase sbagliata o informazioni esterne |
+| **Addestramento nel test** / **test nell’addestramento** | leggermente grave / molto grave                                                                                 |
+| **Leakage B1** / **B2** / **B3**                         | dal test all’addestramento / dal futuro al passato / fuori dall’ambito (adulti → bambini)                       |
+| **Divisione per campione** / **per utente**              | può mettere la stessa persona in addestramento e test / garantisce l’indipendenza statistica                    |
+| **Previsione** / **classificazione di serie temporali**  | valori futuri / etichette sulla sequenza                                                                        |
+| **Suddivisione casuale** / **in avanti**                 | adatta a dati indipendenti / obbligatoria per le serie temporali                                                |
 
 ---
 

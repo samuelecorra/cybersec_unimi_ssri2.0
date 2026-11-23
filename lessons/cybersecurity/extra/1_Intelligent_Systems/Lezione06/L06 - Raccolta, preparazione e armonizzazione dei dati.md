@@ -5,6 +5,7 @@ Ogni sistema intelligente parte dai **dati**: occorre raccoglierli, stimarne i v
 
 ### **0. Panoramica**
 
+![](imgs/Pasted%20image%2020261122001102.png)
 
 La trattazione si articola nei seguenti temi:
 
@@ -12,6 +13,8 @@ La trattazione si articola nei seguenti temi:
 2. **preparazione dei dati**: controllo dei dati, dati non strutturati, armonizzazione, analisi, filtraggio;
 3. **LLM e agenti** nella preparazione dei dati;
 4. punti principali.
+
+![](imgs/Pasted%20image%2020261122000227.png)
 
 ---
 
@@ -30,13 +33,13 @@ La simulazione serve a **verificare la preparazione**, **non a studiare**.
 
 > ⚠️ **Pesi delle risposte.** Questa simulazione breve non assegna pesi negativi; una simulazione precedente ammetteva una penalità per risposte particolarmente inappropriate. Le regole effettive dipendono dalle istruzioni dell’esame.
 
-| Domanda | Opzioni | Risposta e commento |
-|---|---|---|
-| **D1**. Quali fasi descrivono un progetto di machine learning? | 1. rappresentazione; 2. rappresentazione e valutazione; 3. rappresentazione, valutazione e ottimizzazione; 4. nessuna delle altre | **3** |
-| **D2**. Il clustering richiede necessariamente dati etichettati? | 1. sì; 2. no | **2** |
-| **D3**. In quali condizioni è ammissibile usare una soluzione a scatola nera? | 1. mai; 2. se rischio, validazione esterna, monitoraggio e recupero dagli errori sono adeguati; 3. sempre | **2** |
-| **D4**. Un classificatore può ottimizzare accuratezza e margine? | 1. solo l’accuratezza; 2. solo il margine; 3. entrambi, se il metodo lo consente | **3** |
-| **D5**. Su quale criterio si basa la regolamentazione europea dell’AI? | 1. elenco dei soli casi d’uso; 2. rischio dell’applicazione; 3. combinazione di elenco di pratiche e classificazione basata sul rischio; 4. nessuno dei precedenti | **3** |
+| Domanda                                                                       | Opzioni                                                                                                                                                            | Risposta e commento |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
+| **D1**. Quali fasi descrivono un progetto di machine learning?                | 1. rappresentazione; 2. rappresentazione e valutazione; 3. rappresentazione, valutazione e ottimizzazione; 4. nessuna delle altre                                  | **3**               |
+| **D2**. Il clustering richiede necessariamente dati etichettati?              | 1. sì; 2. no                                                                                                                                                       | **2**               |
+| **D3**. In quali condizioni è ammissibile usare una soluzione a scatola nera? | 1. mai; 2. se rischio, validazione esterna, monitoraggio e recupero dagli errori sono adeguati; 3. sempre                                                          | **2**               |
+| **D4**. Un classificatore può ottimizzare accuratezza e margine?              | 1. solo l’accuratezza; 2. solo il margine; 3. entrambi, se il metodo lo consente                                                                                   | **3**               |
+| **D5**. Su quale criterio si basa la regolamentazione europea dell’AI?        | 1. elenco dei soli casi d’uso; 2. rischio dell’applicazione; 3. combinazione di elenco di pratiche e classificazione basata sul rischio; 4. nessuno dei precedenti | **3**               |
 
 > 💡 **Perché D5 è «entrambi».** L’AI Act classifica per **livello di rischio**, ma per definire i livelli usa **elenchi di casi d’uso**: le pratiche vietate e le categorie ad alto rischio (infrastrutture critiche, istruzione, lavoro, credito, forze dell’ordine, migrazione) sono elencate esplicitamente.
 
@@ -45,6 +48,7 @@ La simulazione serve a **verificare la preparazione**, **non a studiare**.
 
 ### **2. Il valore dell’analisi dei dati**
 
+![](imgs/Pasted%20image%2020261122000646.png)
 
 **Discussione aperta in aula**:
 
@@ -57,21 +61,17 @@ Un’autovalutazione iniziale delle proprie competenze e degli strumenti usati p
 Secondo **Gartner**, l’analisi dei dati crea valore nelle diverse fasi decisionali; una valutazione personale delle competenze può collegare queste capacità alle opportunità professionali.
 
 > 💡 **Il modello di Gartner (nota didattica).** Lo schema più noto di Gartner sull’analisi dei dati ha quattro livelli, con **valore** e **difficoltà** crescenti:
->
-> | Livello | Domanda |
-> |---|---|
-> | **descrittiva** | che cosa è successo? |
-> | **diagnostica** | perché è successo? |
-> | **predittiva** | che cosa succederà? |
-> | **prescrittiva** | che cosa bisogna fare perché succeda? |
->
-> 
 
-<!-- SOURCE_VISUAL id="IS06-V01" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="16" type="grafico" description="Valore dell’analisi dei dati secondo Gartner, con l’AI che aiuta in tutte le fasi" reason="Livelli e assi del grafico visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+| Livello          | Domanda                               |
+| ---------------- | ------------------------------------- |
+| **descrittiva**  | che cosa è successo?                  |
+| **diagnostica**  | perché è successo?                    |
+| **predittiva**   | che cosa succederà?                   |
+| **prescrittiva** | che cosa bisogna fare perché succeda? |
 
-<!-- SOURCE_VISUAL id="IS06-V02" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="17" type="grafico" description="Valore dell’analisi dei dati secondo Gartner collegato allo stipendio atteso" reason="Annotazioni del grafico visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122000949.png)
+
+![](imgs/Pasted%20image%2020261122001003.png)
 
 ---
 
@@ -91,15 +91,13 @@ La raccolta dei dati è il **passo 1** del flusso di lavoro del ML. **Nella prat
 
 Le fonti capaci di generare dati sono moltissime e potenti; i dettagli tecnici di ciascuna richiedono procedure specifiche.
 
-<!-- SOURCE_VISUAL id="IS06-V03" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="19" type="diagramma" description="Passo 1 del flusso di lavoro del ML: raccolta dei dati" reason="Posizione del passo nel flusso visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122001139.png)
 
 > 📌 **Raccolta dei dati**. Il processo di **raccogliere e misurare** informazioni su **variabili di interesse** in un sistema stabilito. Si usa nelle scienze fisiche, nel settore industriale, negli affari, nelle discipline umanistiche e nelle scienze sociali, in generale in tutte le discipline che studiano la società e la cultura umana. L’AI si usa in tutti questi settori, anche con dati **fortemente non strutturati** come il testo grezzo.
 
 > ⚠️ **GIGO: garbage in, garbage out**. **Nessuna rete neurale «magica» vi salverà** da dati spazzatura.
 
-<!-- SOURCE_VISUAL id="IS06-V04" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="22" type="illustrazione" description="GIGO: nessuna rete neurale magica salva da dati spazzatura" reason="Illustrazione della figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122001154.png)
 
 #### **3.2. Quanti dati: l’esplosione dell’IoT**
 
@@ -126,11 +124,7 @@ $$\frac{4{,}12 \times 10^{14}\ \text{byte}}{365\cdot24\cdot3600\ \text{s}} \appr
 
 > ⚠️ **Ordine di grandezza e assunzioni.** Il valore dipende dal tasso di acquisizione, dalla popolazione e dalla rappresentazione numerica delle coordinate. Con le ipotesi date si ottengono circa **412 TB all’anno** e **13 MB/s** medi; il flusso reale non è costante né tutte le applicazioni memorizzano ogni posizione.
 
-<!-- SOURCE_VISUAL id="IS06-V32" source="L06-web.pdf" page="11" type="calcolo" description="Stima del volume annuale e della velocità media dei dati GPS da smartphone in Italia" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS06-V05" source="L06-web.pdf" page="12" type="illustrazione" description="Big Data: serve il data mining" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122001603.png)
 
 Con tanti dati **serve il mining**: estrarre l’informazione utile.
 
@@ -176,6 +170,8 @@ Il tema della sezione: **unità, formati e tempi esatti**.
 - **dimensioni**;
 - …
 
+![](imgs/Pasted%20image%2020261122002010.png)
+
 > 📌 **Eterogeneità**. In statistica indica che popolazioni, campioni o risultati sono **diversi** tra loro; è l’opposto dell’**omogeneità**, in cui popolazione, dati o risultati sono **uguali**.
 
 > 📌 **Armonizzazione dei dati (nota didattica).** È l’insieme delle operazioni che portano dati eterogenei a una rappresentazione **comune**: stesse unità, stessi formati, stesse convenzioni di riferimento, stessa scala temporale. Solo dopo l’armonizzazione i dati di fonti diverse si possono unire in un unico dataset.
@@ -184,13 +180,14 @@ Il tema della sezione: **unità, formati e tempi esatti**.
 
 > 💡 **Quanto pesa l’errore (nota didattica).** $1\ \text{lbf} \cdot \text{s} \approx 4{,}45\ \text{N} \cdot \text{s}$: gli impulsi erano **sottostimati di circa 4,45 volte**. La traiettoria calcolata portava la sonda molto più vicino al pianeta del previsto. Due gruppi di lavoro usavano due sistemi di unità senza che nessuna interfaccia li convertisse: è esattamente un problema di armonizzazione.
 
-<!-- SOURCE_VISUAL id="IS06-V06" source="L06-web.pdf" page="17" type="immagine" description="Mars Climate Orbiter distrutta per l’uso di libbre-forza per secondo al posto di newton per secondo" reason="Immagine del caso d’uso" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122002021.png)
 
 #### **4.2. Caso d’uso: previsione della produzione eolica**
 
 
 **Il problema**: come modellare la **specificità** di un sito? Contano le **brezze** del mattino e del pomeriggio, le **colline** e le **occlusioni**.
+
+![](imgs/Pasted%20image%2020261122002103.png)
 
 **Fonti di dati diverse**:
 
@@ -198,19 +195,23 @@ Il tema della sezione: **unità, formati e tempi esatti**.
 - i dati di previsione **differiscono** da quelli della stazione di misura del sito, perché riferiti a **luoghi diversi**;
 - la **griglia** dei dati meteo si trova a un’**altitudine diversa** rispetto all’impianto.
 
+![](imgs/Pasted%20image%2020261122002226.png)
+
 **Non idealità**:
 
 - **colline e occlusioni** cambiano l’efficienza dell’impianto: per esempio con vento **da est** la potenza è **molto bassa** (effetto «**ombra**»), mentre altre conformazioni creano un effetto «**imbuto**»;
 - le turbine hanno una **velocità minima** per iniziare a girare (**clipping**);
 - **turbine uguali** hanno **curve velocità/potenza diverse** a causa delle condizioni circostanti.
 
-<!-- SOURCE_VISUAL id="IS06-V07" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="31" type="mappa" description="Sito eolico con brezze, colline e occlusioni" reason="Conformazione del sito visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122002247.png)
 
-<!-- SOURCE_VISUAL id="IS06-V08" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="33" type="schema" description="Non idealità del parco eolico: effetto ombra da est, effetto imbuto, clipping e curve di potenza diverse" reason="Schema del sito e delle curve visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122002349.png)
+
+---
 
 **Obiettivo e armonizzazione**. Creare un **dataset di 5 anni** unendo fonti con formati, unità di misura e sistemi di riferimento diversi: i dati meteo sulla **griglia** e a varie **altitudini** servono a prevedere la **potenza** in megawatt (MW) e un **indice di variabilità** sul sito dell’impianto. La trasformazione deve convergere verso una convenzione dichiarata, per esempio °C, m/s, gradi da nord in senso orario, hPa, copertura nuvolosa fra 0 e 1 e tempi espressi in UTC (*Coordinated Universal Time*, tempo coordinato universale) secondo ISO (*International Organization for Standardization*, Organizzazione internazionale per la normazione) 8601, standard per la rappresentazione di date e orari.
+
+![](imgs/Pasted%20image%2020261122002405.png)
 
 | Grandezza | Unità comune |
 |---|---|
@@ -221,6 +222,8 @@ Il tema della sezione: **unità, formati e tempi esatti**.
 | copertura nuvolosa | scala **da 0 a 1** |
 
 Le fonti possono codificare la direzione «da cui proviene» il vento oppure «verso cui soffia»; alcune forniscono direttamente le componenti $u$ e $v$. La stessa variabile fisica produce numeri diversi se cambiano origine dell’angolo, verso di rotazione o convenzione.
+
+![](imgs/Pasted%20image%2020261122002515.png)
 
 > 💡 **Due convenzioni per l’angolo del vento.** In meteorologia l’angolo indica **da dove proviene** il vento, in senso orario da nord. In matematica e in molti modelli numerici si usa l’angolo del **vettore** velocità, **verso dove** va, in senso antiorario dall’asse est. Per queste due convenzioni la conversione è
 > $$\theta_{\text{met}} = \left(270^\circ - \theta_{\text{mat}}\right) \bmod 360^\circ$$
@@ -240,19 +243,13 @@ Se si dispone delle componenti cartesiane, la velocità è $s=\sqrt{u^2+v^2}$; l
 
 Un cambio di fornitore durante una serie storica può introdurre una discontinuità artificiale: nell’esempio, il valore medio passa da 6,9 m/s a 25,2 nella nuova fonte grezza e torna a 7,0 m/s dopo la conversione da km/h. Il modello non armonizzato rischia di imparare l’identità del fornitore invece delle condizioni meteorologiche. Conservare la provenienza e le unità originali, convertire all’ingestione, confrontare le fonti nel periodo di sovrapposizione e verificare i punti di cambiamento.
 
-<!-- SOURCE_VISUAL id="IS06-V33" source="L06-web.pdf" page="24" type="tabella" description="Confronto tra unità, convenzioni e timestamp di tre sorgenti eolica e relativo schema armonizzato" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122002719.png)
 
-<!-- SOURCE_VISUAL id="IS06-V34" source="L06-web.pdf" page="25" type="tabella" description="Conversioni di temperatura, velocità, pressione, copertura nuvolosa, direzione e altezza del vento" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122002713.png)
 
-<!-- SOURCE_VISUAL id="IS06-V35" source="L06-web.pdf" page="26" type="grafico" description="Cambio fornitore e falsa discontinuità della velocità del vento prima e dopo l’armonizzazione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122002804.png)
 
 > ⚠️ **Temperatura in °C e kelvin.** La conversione $T[\text{K}] = T[°\text{C}] + 273{,}15$ è banale, ma dimenticarla sposta tutti i valori di 273: un modello addestrato su una fonte e usato sull’altra produce previsioni prive di senso, senza alcun messaggio d’errore.
-
-<!-- SOURCE_VISUAL id="IS06-V09" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="34" type="schema" description="Dataset di 5 anni per la previsione eolica: griglia meteo, altitudini, predizione di MW e variabilità, due definizioni dell’angolo del vento" reason="Griglia e definizioni degli angoli visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
@@ -275,11 +272,13 @@ Un cambio di fornitore durante una serie storica può introdurre una discontinui
 
 #### **5.2. Tre soluzioni**
 
-| Soluzione | Accuratezza | Note |
-|---|---|---|
-| **1. NTP** (*Network Time Protocol*, protocollo di sincronizzazione dell’ora in rete) con un **time server pubblico** su Internet | **decine di ms** su Internet pubblica; **1 ms** in rete locale in condizioni ideali | protocollo per sincronizzare gli orologi su reti a pacchetto a **latenza variabile**, progettato per mitigare la latenza di rete; richiede di aprire nel firewall la **porta UDP** (*User Datagram Protocol*, protocollo datagrammi utente) **123** |
-| **2. Time server dedicato** dietro il firewall | dispositivi sincronizzati entro **0,5–2 ms** | |
-| **3. PTP** (*Precision Time Protocol*, protocollo di precisione per la sincronizzazione temporale, standard IEEE 1588 dell’Institute of Electrical and Electronics Engineers, Istituto degli ingegneri elettrici ed elettronici) | sotto il microsecondo con marcatura temporale hardware | |
+| Soluzione                                                                                                                                                                                                                        | Accuratezza                                                                         | Note                                                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. NTP** (*Network Time Protocol*, protocollo di sincronizzazione dell’ora in rete) con un **time server pubblico** su Internet                                                                                                | **decine di ms** su Internet pubblica; **1 ms** in rete locale in condizioni ideali | protocollo per sincronizzare gli orologi su reti a pacchetto a **latenza variabile**, progettato per mitigare la latenza di rete; richiede di aprire nel firewall la **porta UDP** (*User Datagram Protocol*, protocollo datagrammi utente) **123** |
+| **2. Time server dedicato** dietro il firewall                                                                                                                                                                                   | dispositivi sincronizzati entro **0,5–2 ms**                                        |                                                                                                                                                                                                                                                     |
+| **3. PTP** (*Precision Time Protocol*, protocollo di precisione per la sincronizzazione temporale, standard IEEE 1588 dell’Institute of Electrical and Electronics Engineers, Istituto degli ingegneri elettrici ed elettronici) | sotto il microsecondo con marcatura temporale hardware                              |                                                                                                                                                                                                                                                     |
+
+![](imgs/Pasted%20image%2020261122003027.png)
 
 **Esempio: la borsa**. La sincronizzazione è essenziale per gestire **liste degli ordini**, prezzi e dati.
 
@@ -290,16 +289,19 @@ Un cambio di fornitore durante una serie storica può introdurre una discontinui
 | AI | circa il **70%** del volume azionario USA è **trading algoritmico guidato dall’AI** |
 | sincronizzazione | **NTP non basta più**: con circa 1 ms è **1000 volte troppo grossolano**; la finanza usa **PTP (IEEE 1588)** con marcatura temporale **hardware**, sotto il microsecondo o al nanosecondo |
 
+![](imgs/Pasted%20image%2020261122003110.png)
+
 > ⚠️ **Numeri che cambiano.** Volumi e latenze dei mercati variano rapidamente: vanno letti come ordini di grandezza, non come valori da memorizzare.
 
 #### **5.3. Sincronizzazione risolta, dati ancora sparsi**
 
 **Esempio**. Un **time server** che prende il riferimento dal **GPS** permette alle unità di misura e di memorizzazione collegate in LAN (*Local Area Network*, rete locale) di lavorare con l’**ora corretta**.
 
-<!-- SOURCE_VISUAL id="IS06-V10" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="40" type="schema" description="Time server sincronizzato con il GPS che serve le unità di misura in LAN" reason="Topologia visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122003212.png)
 
 **Ma i dati restano sparsi**. Secondo il comportamento dei sensori collegati, i dati arrivano con **marche temporali diverse** e possono **mancare**. La sincronizzazione è risolta, ma **non la sparsità** delle tuple. I valori assenti sono indicati con NaN (*Not a Number*, valore numerico non definito o mancante). Esempio di tabella nel database:
+
+![](imgs/Pasted%20image%2020261122003232.png)
 
 | Marca temporale del server | T1 (K) | T2 (K) | Speed1 (m/s) | Speed2 (m/s) | RPM1 |
 |---|---|---|---|---|---|
@@ -323,8 +325,9 @@ Le sorgenti IoT possono essere:
 
 Il confronto tra le due rappresentazioni chiarisce il rapporto tra i concetti.
 
-<!-- SOURCE_VISUAL id="IS06-V25" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="77" type="infografica" description="Confronto tra dati strutturati e non strutturati" reason="Pagina senza testo estraibile" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122011211.png)
+
+![](imgs/Pasted%20image%2020261122011252.png)
 
 | | **Dati strutturati** («bene!») | **Dati non strutturati** («male…») |
 |---|---|---|
@@ -337,8 +340,7 @@ I **dati semi-strutturati** combinano una struttura parziale con contenuti fless
 
 > 💡 **Semi-strutturati (nota didattica).** Hanno etichette o marcatori che separano gli elementi, ma senza uno schema rigido: JSON (*JavaScript Object Notation*, notazione a oggetti JavaScript), XML (*Extensible Markup Language*, linguaggio di marcatura estensibile) e file di log con campi ricorrenti. L’**email** è l’esempio della: i **metadati** (mittente, data, oggetto) sono strutturati, il **corpo del messaggio** no.
 
-<!-- SOURCE_VISUAL id="IS06-V26" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="80" type="infografica" description="Dati semi-strutturati" reason="Pagina con sola infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122011443.png)
 
 **Dati non strutturati generati da persone**:
 
@@ -364,8 +366,7 @@ I **dati semi-strutturati** combinano una struttura parziale con contenuti fless
 
 **Un esempio web di trasformazione dei dati**. RDFa (*Resource Description Framework in Attributes*, quadro di descrizione delle risorse negli attributi) è una raccomandazione del W3C (*World Wide Web Consortium*, consorzio internazionale per gli standard web) che aggiunge a HTML (*HyperText Markup Language*, linguaggio di marcatura ipertestuale), XHTML (*Extensible HyperText Markup Language*, linguaggio di marcatura ipertestuale estensibile) e XML un insieme di attributi per incorporare metadati nelle pagine web: così una parte del contenuto di una pagina diventa leggibile dalle macchine.
 
-<!-- SOURCE_VISUAL id="IS06-V27" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="83" type="esempio di codice" description="Pagina web arricchita con attributi RDFa" reason="Esempio di markup presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122011658.png)
 
 **Reti neurali e dati non strutturati**. **Non è strettamente obbligatorio** avere dati strutturati per usare il ML. Esempi di **classificazione del testo**:
 
@@ -374,8 +375,9 @@ I **dati semi-strutturati** combinano una struttura parziale con contenuti fless
 - **etichettare automaticamente** le richieste dei clienti;
 - **categorizzare** gli articoli di notizie in argomenti predefiniti.
 
-<!-- SOURCE_VISUAL id="IS06-V28" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="84" type="infografica" description="Esempi di classificazione del testo con reti neurali" reason="Icone degli esempi visibili solo nell’infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122011746.png)
+
+![](imgs/Pasted%20image%2020261122011915.png)
 
 ---
 
@@ -387,7 +389,11 @@ I **dati semi-strutturati** combinano una struttura parziale con contenuti fless
 
 Obiettivo della sezione: passare da dati **rumorosi, disordinati, non strutturati** al **dataset perfetto** per la fase di apprendimento. È il **passo 2** del flusso di lavoro del ML.
 
+![](imgs/Pasted%20image%2020261122012032.png)
+
 Una rappresentazione esemplifica il passaggio dall’«**entropia**» a **dati strutturati**, come una riga di valori numerici (5.1, 3.5, 1.4, 0.2).
+
+![](imgs/Pasted%20image%2020261122012203.png)
 
 > 📌 **Y = FUNC(X), tutto qui**. Per ogni dataset di machine learning, e in ogni toolbox, **tutto consiste nel creare X e Y**:
 > - $X$: la matrice delle **feature**, una riga per **campione**;
@@ -396,8 +402,7 @@ Una rappresentazione esemplifica il passaggio dall’«**entropia**» a **dati s
 > 💡 **Un campione riconoscibile (nota didattica).** La riga 5.1, 3.5, 1.4, 0.2 è il primo campione del dataset **Iris**: lunghezza e larghezza del sepalo, lunghezza e larghezza del petalo in centimetri, con classe *Iris setosa*. In forma matriciale, con $n$ campioni e $d$ feature:
 > $$X \in \mathbb{R}^{n \times d}, \qquad Y \in \{1, \dots, C\}^{n} \text{ (classificazione)} \quad \text{oppure} \quad Y \in \mathbb{R}^{n} \text{ (regressione)}$$
 
-<!-- SOURCE_VISUAL id="IS06-V11" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="44" type="illustrazione" description="Dall’entropia dei dati grezzi ai dati strutturati" reason="Illustrazione della trasformazione" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122012253.png)
 
 #### **7.2. Pre-elaborazione e data wrangling (preparazione operativa dei dati)**
 
@@ -406,11 +411,13 @@ Una rappresentazione esemplifica il passaggio dall’«**entropia**» a **dati s
 
 La distinzione tra **pre-elaborazione** (*preprocessing*) e **data wrangling** (ispezione, pulizia, integrazione e trasformazione dei dati grezzi) comprende anche la visualizzazione dei dati e l’ingegneria delle feature.
 
-<!-- SOURCE_VISUAL id="IS06-V12" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="47" type="schema" description="Preparazione dei dati: pre-elaborazione e data wrangling" reason="Relazione tra i concetti visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122012307.png)
 
-<!-- SOURCE_VISUAL id="IS06-V13" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="48" type="schema" description="Ridefinizione di pre-elaborazione e data wrangling con visualizzazione e ingegneria delle feature" reason="Relazione tra i concetti visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122012423.png)
+
+![](imgs/Pasted%20image%2020261122012748.png)
+
+---
 
 > 📌 **Prima di tutto**. «È un **mito assoluto** che si possa lanciare un algoritmo sui dati grezzi e veder **saltare fuori le intuizioni**» (**Jeffrey Heer**, esperto di visualizzazione dell’informazione e analisi interattiva dei dati alla University of Washington).
 > - Il problema del data wrangling **cresce** con i dati non strutturati e i formati diversi che arrivano da sensori, online e database tradizionali.
@@ -418,14 +425,9 @@ La distinzione tra **pre-elaborazione** (*preprocessing*) e **data wrangling** (
 
 Il **data wrangling** si articola in passi operativi per ispezionare, correggere e trasformare i dati.
 
-<!-- SOURCE_VISUAL id="IS06-V14" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="50" type="illustrazione" description="Illustrazione introduttiva sul data wrangling" reason="Pagina senza testo estraibile" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122012836.png)
 
-<!-- SOURCE_VISUAL id="IS06-V15" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="52" type="diagramma" description="Passi del data wrangling" reason="Sequenza dei passi visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS06-V16" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="53" type="diagramma" description="Attività del data wrangling" reason="Attività visibili solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122012909.png)
 
 **I compiti del data wrangling**:
 
@@ -444,8 +446,7 @@ Il **data wrangling** si articola in passi operativi per ispezionare, correggere
 3. **trasformazione** dei dati;
 4. **riduzione** dei dati.
 
-<!-- SOURCE_VISUAL id="IS06-V17" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="56" type="schema" description="Le quattro operazioni della pre-elaborazione: pulizia, integrazione, trasformazione, riduzione" reason="Schema delle operazioni" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122012812.png)
 
 > 📌 **Che cosa cercare con pre-elaborazione e visualizzazione**. Sono tra i primi passi per **capire i dati**. Servono a trovare:
 > - **outlier**;
@@ -466,12 +467,15 @@ Il **data wrangling** si articola in passi operativi per ispezionare, correggere
 | **dati rumorosi, errati, outlier** | problemi tecnologici del dispositivo di acquisizione, errori umani nell’inserimento |
 | **dati incoerenti** | **duplicati**, errori di inserimento, codici o nomi sbagliati: in generale **violazioni dei vincoli** sui dati |
 
+![](imgs/Pasted%20image%2020261122013115.png)
+
 > 💡 **Scale diverse: normalizzazione (nota didattica).** Due tecniche classiche per portare le feature su scale confrontabili:
 > $$x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}} \in [0, 1] \qquad\qquad z = \frac{x - \mu}{\sigma}$$
 > La normalizzazione min-max è sensibile agli outlier; lo z-score centra i dati in media nulla e deviazione standard unitaria. I parametri ($x_{\min}$, $x_{\max}$, $\mu$, $\sigma$) si stimano **solo sui dati di addestramento**, così la validazione resta indipendente.
 
 #### **7.3. Strumenti, agenti e LLM**
 
+![](imgs/Pasted%20image%2020261122014915.png)
 
 **Strumenti di pre-elaborazione**:
 
@@ -492,14 +496,19 @@ Il **data wrangling** si articola in passi operativi per ispezionare, correggere
 
 Gli agenti possono anche sostenere la **creazione di database**.
 
-<!-- SOURCE_VISUAL id="IS06-V18" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="60" type="schermata" description="Agenti di AI per il data wrangling e la creazione di database" reason="Pagina con sola schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122014950.png)
+
+![](imgs/Pasted%20image%2020261122015229.png)
+
+![](imgs/Pasted%20image%2020261122015240.png)
 
 **LLM per l’estrazione strutturata da dati non strutturati**:
 
 - **input**: testo libero (referti, email, note cliniche, PDF) → **output**: record **JSON tipizzati** o Markdown;
 - **sostituisce** gran parte delle pipeline di **NER (*Named Entity Recognition*, riconoscimento di entità nominate)** e di parsing basato su regole;
 - esempio: **1000 referti di laboratorio** in PDF → un **DataFrame** con **15 colonne normalizzate**, con un solo prompt.
+
+![](imgs/Pasted%20image%2020261122015452.png)
 
 > 📌 **Named Entity Recognition** (NER). Tecnica classica di NLP che **estrae entità con nome** dal testo libero: persone, luoghi, date, quantità, organizzazioni, codici medici, ecc.
 
@@ -510,21 +519,27 @@ Gli agenti possono anche sostenere la **creazione di database**.
 - permettono **ricerca semantica**, **RAG** e **deduplicazione per significato**, non per corrispondenza di stringhe;
 - pipeline tipica: documento grezzo → **modello di embedding** → **database vettoriale** → **query di similarità**.
 
+![](imgs/Pasted%20image%2020261122015531.png)
+
 > 📌 **Similarità coseno (nota didattica).** La query di similarità confronta di solito i vettori con la similarità coseno:
 > $$\cos(\mathbf{u}, \mathbf{v}) = \frac{\mathbf{u} \cdot \mathbf{v}}{\lVert \mathbf{u} \rVert \, \lVert \mathbf{v} \rVert} \in [-1, 1]$$
 > Due frasi con significato simile hanno embedding vicini (coseno prossimo a 1) anche se non condividono parole: per questo la deduplicazione «per significato» trova «auto rossa» e «vettura di colore rosso».
 
+![](imgs/Pasted%20image%2020261122015939.png)
+
+![](imgs/Pasted%20image%2020261122020355.png)
+
 L’indice conserva identificativi dei documenti, embedding e metadati; il testo originale viene recuperato dopo la ricerca. In fase di **indicizzazione**, ogni documento viene eventualmente suddiviso in blocchi, trasformato nello stesso spazio vettoriale e associato ai metadati. In fase di **query**, anche la domanda è convertita con lo stesso modello e si recuperano i $k$ vettori più vicini. Cambiare modello di embedding richiede di ricostruire i vettori, perciò la versione va registrata.
+
+![](imgs/Pasted%20image%2020261122020208.png)
 
 Una scansione esatta confronta la query $q\in\mathbb{R}^d$ con tutti gli $N$ vettori, con costo dell’ordine di $O(Nd)$. Per collezioni grandi si usano indici di ricerca approssimata dei vicini (*Approximate Nearest Neighbours*, ANN): riducono il numero di confronti e restituiscono vicini molto buoni, senza garantire che coincidano sempre con quelli esatti.
 
 HNSW (*Hierarchical Navigable Small World*, piccolo mondo gerarchico navigabile) costruisce un grafo multilivello fra vettori. La ricerca parte da pochi nodi di un livello superiore, si sposta verso nodi progressivamente più vicini alla query e scende verso livelli più densi fino a selezionare i candidati. È una strategia di indicizzazione, non una nuova misura di similarità.
 
-<!-- SOURCE_VISUAL id="IS06-V29" source="L06-web.pdf" page="79" type="diagramma" description="Ricerca approssimata HNSW: navigazione da livelli sparsi a livelli densi del grafo di embedding" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122015801.png)
 
-<!-- SOURCE_VISUAL id="IS06-V30" source="L06-web.pdf" page="81" type="schema" description="Percorsi di indicizzazione dei documenti e query verso recupero top-k, contesto e risposta citata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122020504.png)
 
 Una dimostrazione con ChromaDB indicizza tre brevi note con metadati e interroga la raccolta con la frase «cardiac infarct». Il recupero trova note sull’infarto miocardico anche senza parole identiche, eventualmente filtrando per reparto. Le distanze restituite dipendono dalla metrica dell’indice.
 
@@ -538,8 +553,6 @@ Una dimostrazione con ChromaDB indicizza tre brevi note con metadati e interroga
 
 In un flusso di armonizzazione automatizzata, l’agente esamina file grezzi, profila colonne, unità, intervalli e valori mancanti, scrive il codice di conversione, genera test e documenta le assunzioni. Le regole possono imporre di non modificare gli originali, conservare i valori mancanti con flag dedicati, registrare ogni conversione e chiedere conferma quando un’unità è ambigua. Il risultato utile comprende tabella pulita, codice riproducibile, test e rapporto delle decisioni. La revisione umana verifica soprattutto provenienza, fuso orario, convenzione dell’angolo, duplicati e NaN.
 
-<!-- SOURCE_VISUAL id="IS06-V31" source="L06-web.pdf" page="74" type="schema" description="Flusso di data wrangling assistito da agente: ispezione, codice e test con validazione umana" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 
@@ -553,6 +566,8 @@ In un flusso di armonizzazione automatizzata, l’agente esamina file grezzi, pr
 
 > ⚠️ **NaN esiste solo per i numeri in virgola mobile**. Gli interi non possono contenere NaN: per questo le librerie moderne (pandas `Int64`, Arrow, Polars) hanno introdotto un marcatore NA (*Not Available*, valore non disponibile) indipendente dal tipo per le colonne che ammettono valori nulli.
 
+![](imgs/Pasted%20image%2020261122013258.png)
+
 > 💡 **Una proprietà di NaN (nota didattica).** Per IEEE 754 un NaN **non è uguale a nulla, nemmeno a se stesso**: `NaN == NaN` è falso. Per trovarlo si usano funzioni dedicate come `isnan` in MATLAB o `isna` in pandas; e qualsiasi somma che coinvolge un NaN dà NaN, per cui una media calcolata senza gestirli risulta NaN.
 
 **Esempio: tre ospedali che uniscono i dati**. Tre ospedali uniscono i dati dei loro pazienti sugli **esami del sangue**, ma i laboratori hanno **sistemi e strumenti diversi** con un **numero diverso di feature**. Qui l’**armonizzazione** è cruciale, perché le fonti sono diverse: per esempio mg/dL e mmol/L.
@@ -561,8 +576,7 @@ In un flusso di armonizzazione automatizzata, l’agente esamina file grezzi, pr
 > $$c\,[\text{mmol/L}] = \frac{c\,[\text{mg/dL}] \times 10}{180{,}16} \approx \frac{c\,[\text{mg/dL}]}{18}$$
 > quindi 90 mg/dL ≈ 5,0 mmol/L. Il fattore **cambia per ogni analita**: usare lo stesso numero per colesterolo e glucosio è un errore di armonizzazione.
 
-<!-- SOURCE_VISUAL id="IS06-V19" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="66" type="tabella" description="Tre ospedali con esami del sangue su feature diverse e valori mancanti" reason="Struttura delle tabelle degli ospedali visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122013436.png)
 
 #### **8.2. Eliminare feature o record?**
 
@@ -570,18 +584,15 @@ In un flusso di armonizzazione automatizzata, l’agente esamina file grezzi, pr
 
 **Rimuovere i vettori incompleti**. «Addio Jamie e il signor “35 Male”»: da **6 record** si passa a **4** completi. Questa **perdita di informazione** è accettabile per la tua applicazione?
 
-<!-- SOURCE_VISUAL id="IS06-V20" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="67" type="tabella" description="Rimozione della feature 12 incompleta" reason="Tabella dell’esempio visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122013506.png)
 
-<!-- SOURCE_VISUAL id="IS06-V21" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="68" type="tabella" description="Rimozione dei record incompleti: da 6 a 4 record" reason="Tabella dell’esempio visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122013534.png)
 
 > 📌 **Un buco «topologico»**. Nel piano delle feature $f_1$, $f_2$ i campioni sono «scarto» (x) o «buono» (o). La **matrice dei dati è completa**, ma lo **spazio delle feature non è coperto uniformemente**. Senza un’adeguata **visualizzazione dei dati** è difficile accorgersene.
 
-> 💡 **Perché il valore è pericoloso.** Nessuna cella è NaN, quindi nessun controllo automatico segnala il problema. Ma nella regione vuota il modello **non ha mai visto esempi** e deciderà a caso: è il limite della generalizzazione.
+![](imgs/Pasted%20image%2020261122013617.png)
 
-<!-- SOURCE_VISUAL id="IS06-V22" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="69" type="grafico" description="Dati completi ma spazio delle feature f1-f2 non coperto uniformemente" reason="Regione vuota visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+> 💡 **Perché il valore è pericoloso.** Nessuna cella è NaN, quindi nessun controllo automatico segnala il problema. Ma nella regione vuota il modello **non ha mai visto esempi** e deciderà a caso: è il limite della generalizzazione.
 
 #### **8.3. Tre strategie**
 
@@ -591,7 +602,11 @@ In un flusso di armonizzazione automatizzata, l’agente esamina file grezzi, pr
 - **non va usato** quando i valori mancanti sono **moltissimi**;
 - **non va usato** quando il problema si può **risolvere alla radice**: debug, riprogettazione, ripetizione dell’esperimento, invece di ignorare la causa.
 
+![](imgs/Pasted%20image%2020261122013706.png)
+
 **2. Riempire a mano i valori mancanti**. È **uno dei metodi migliori**, ma con dataset **grandi** e molti valori mancanti diventa **troppo lento**. Nelle **sperimentazioni mediche** ogni singolo dato è **importante e costoso**: escludere un vettore **non è una buona prima strategia**. Una vignetta ironizza sull’impossibilità pratica di ripetere una raccolta costosa solo perché alcuni sensori hanno prodotto valori mancanti.
+
+![](imgs/Pasted%20image%2020261122013743.png)
 
 **3. Riempire con valori calcolati**:
 
@@ -609,8 +624,7 @@ In un flusso di armonizzazione automatizzata, l’agente esamina file grezzi, pr
 > 📌 **Interpolazione lineare (nota didattica).** Se il valore manca all’istante $t$, compreso tra due istanti noti $t_1 < t < t_2$:
 > $$\hat{x}(t) = x(t_1) + \frac{x(t_2) - x(t_1)}{t_2 - t_1}\,(t - t_1)$$
 
-<!-- SOURCE_VISUAL id="IS06-V23" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="73" type="grafico" description="Serie F con valori mancanti riempiti per interpolazione lineare (TF)" reason="Andamento della serie visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122014016.png)
 
 **Soluzioni possibili in breve**:
 
@@ -636,12 +650,19 @@ La scelta del rimedio dipende dal meccanismo che genera l’assenza. Tre categor
 | **MAR** (*Missing At Random*, mancanza casuale condizionata alle variabili osservate) | La mancanza dipende da variabili osservate, ma non dal valore mancante una volta considerate quelle variabili. | Un esame è più spesso assente in un ospedale o in una fascia d’età. L’eliminazione semplice può sottorappresentare quel gruppo; l’imputazione può usare le variabili osservate correlate. |
 | **MNAR** (*Missing Not At Random*, mancanza non casuale, dipendente dal valore mancante) | La probabilità di mancanza dipende dal valore non osservato stesso. | Un sensore si protegge quando la vibrazione supera il proprio intervallo. Gli estremi spariscono e la media osservata sottostima quella reale. Occorrono un indicatore di mancanza, un sensore adeguato e conoscenza del processo. |
 
+![](imgs/Pasted%20image%2020261122014232.png)
+
+![](imgs/Pasted%20image%2020261122014246.png)
+
+![](imgs/Pasted%20image%2020261122014441.png)
+
 Rimuovere righe incomplete non è una pulizia neutra: cambia la popolazione osservata. In MAR può eliminare quasi tutti i dati di un sito; in MNAR può nascondere proprio gli eventi estremi. Prima di scegliere una strategia, misurare il tasso di assenza per feature e gruppo e verificare se gli schemi delle mancanze sono informativi.
+
+![](imgs/Pasted%20image%2020261122014533.png)
 
 > ⚠️ **Imputazione e dispersione di informazioni (data leakage).** Ogni statistica di imputazione si stima sul solo insieme di addestramento. La media o mediana congelata si applica poi a validation e test; lo stesso vale per normalizzazione, PCA (*Principal Component Analysis*, analisi delle componenti principali) e selezione delle feature. Calcolare l’imputazione prima della suddivisione trasferisce informazioni dai dati di valutazione alla pipeline e rende la misura ottimistica.
 
-<!-- SOURCE_VISUAL id="IS06-V24" source="Lesson_06_DataGathering_DataPreprocessing_DataHarmonization.pdf" page="75" type="schema" description="Riepilogo delle strategie per i dati mancanti" reason="Schema di riepilogo presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261122014637.png)
 
 ---
 
