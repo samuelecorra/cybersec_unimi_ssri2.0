@@ -15,10 +15,10 @@ La revisione confronta contenuti, struttura, esempi e dati soggetti a cambiament
 | 06 | 1 / 85 | 1 / 85 | 0 | TESTO ALLINEATO | Integrati armonizzazione multifornitore, conversioni eoliche, MCAR/MAR/MNAR, leakage dell’imputazione e ricerca vettoriale/HNSW; stima GPS aggiornata con le ipotesi 2026. Copertura dettagliata in `SOURCE_COVERAGE_L06-08_2026-27.md`. |
 | 07 | 1 / 73 | 1 / 82 | +9 | TESTO ALLINEATO | Integrati laboratorio con coding agent, DINOv3 come esempio datato e controlli nuovi di leakage: split, negative control, validation avversaria e audit degli agenti. Copertura dettagliata in `SOURCE_COVERAGE_L06-08_2026-27.md`. |
 | 08 | 1 / 69 | 2 / 95 | +26 | TESTO ALLINEATO | Integrati provenienza/disaccordo delle etichette, ritardi, livelli di similarità, embedding/ANN e corrispondenze locali; coperto il supplemento mind map. Copertura dettagliata in `SOURCE_COVERAGE_L06-08_2026-27.md`. |
-| 09 | 1 / 69 | 1 / 91 | +22 | TESTO ALLINEATO | Rappresentazioni, k-NN, retrieval, metriche e casi d’uso aggiornati; copertura in `SOURCE_COVERAGE_2026-27_L09-L12.md`. Restano riferimenti visuali e numeri di pagina legacy nel testo preesistente: mapping puntuale ancora necessario. |
-| 10 | 1 / 76 | 1 / 82 | +6 | TESTO ALLINEATO | Integrati estrazione delle feature, MFCC, Simpson, dataset ed EDA; copertura in `SOURCE_COVERAGE_2026-27_L09-L12.md`. Alcuni riferimenti a figure/pagine dell’edizione precedente restano da riallineare. |
-| 11 | 1 / 100 | 1 / 154 | +54 | TESTO ALLINEATO | Versione v24: aggiunti diagnostica visuale, costi/prestazioni operative e visual analytics con agenti; copertura in `SOURCE_COVERAGE_2026-27_L09-L12.md`. Restano riferimenti visuali legacy da riallineare. |
-| 12 | 2 / 113 | 1 / 93 | −20 | TESTO ALLINEATO | Integrati esempio sintetico dei frutti, correzioni sul dataset Wine e simulazione aggiornata a dieci quesiti; copertura in `SOURCE_COVERAGE_2026-27_L09-L12.md`. La scheda punteggi precedente è conservata separatamente; possibili riferimenti visuali legacy richiedono mapping puntuale. |
+| 09 | 1 / 69 | 1 / 91 | +22 | COMPLETATA | Riscritta il 2026-11-23 nell'ordine delle 91 slide (sezioni 0, A–F, appendice MATLAB); 48 placeholder solo su `L09.pdf`; Colab sugli hash e percorso MATLAB in due passi conservati nel §11. Copertura in `SOURCE_COVERAGE_2026-27_L09-L12.md`. |
+| 10 | 1 / 76 | 1 / 82 | +6 | COMPLETATA | Riscritta il 2026-11-23: estrazione delle feature, MFCC con tabella dei coefficienti, feature engineering (A)/(B)/(C) e scaling, Simpson con appendice Python, EDA e diagnostica; 39 placeholder su `L10-web.pdf`; soluzioni dei compiti di correlazione conservate nel §9. |
+| 11 | 1 / 100 | 1 / 154 | +54 | COMPLETATA | Riscritta il 2026-11-23 sulle 154 slide v24: visualizzazione classica, PSI con tabella, esperimento sulle cifre, prestazioni e costi, operazione, agenti, quattro viste di Simpson, appendice MATLAB; 108 placeholder su `L11-web-v24.pdf`; nota AI Act 2026/1744 conservata. |
+| 12 | 2 / 113 | 1 / 93 | −20 | COMPLETATA | Riscritta il 2026-11-23: alberi, Gini/entropia con dimostrazione del massimo, bootstrap svolto, random forest, Wine, 10 quesiti con risposte lette dai riquadri gialli vettoriali; le 10 domande aggiuntive della simulazione 2025/26 conservate nel §6.2; 22 placeholder su `L12-web.pdf`. |
 
 ## Estrazione della prima tranche
 
@@ -29,7 +29,7 @@ La revisione confronta contenuti, struttura, esempi e dati soggetti a cambiament
 
 ## Stato editoriale e limite residuo
 
-Le lezioni 02–12 sono state confrontate con i PDF 2026/27 e il testo è stato riallineato. I placeholder presenti corrispondono uno a uno ai commenti `SOURCE_VISUAL`. Restano **180 riferimenti visuali preesistenti** la cui pagina aggiornata non è stata associata con sufficiente affidabilità; sono elencati in `VISUAL_REMAP_PENDING_2026-27.md`, mantenuti senza modifiche per evitare indicazioni errate. Per quei casi il PDF nuovo corretto è indicato nella tabella e la descrizione aiuta a individuare la figura, ma il numero pagina va ancora riallineato prima che il riferimento sia pronto per lo screenshot.
+Le lezioni 02–12 sono state confrontate con i PDF 2026/27 e il testo è stato riallineato. I placeholder presenti corrispondono uno a uno ai commenti `SOURCE_VISUAL`. Restavano **180 riferimenti visuali preesistenti** la cui pagina aggiornata non è stata associata con sufficiente affidabilità; sono elencati in `VISUAL_REMAP_PENDING_2026-27.md`, mantenuti senza modifiche per evitare indicazioni errate. Per quei casi il PDF nuovo corretto è indicato nella tabella e la descrizione aiuta a individuare la figura, ma il numero pagina va ancora riallineato prima che il riferimento sia pronto per lo screenshot.
 
 ## Registro di completamento
 
@@ -59,3 +59,8 @@ Totale tranche: **12 PDF, 1.196 pagine**. Estratte in modalità text-first; flag
 
 
 Copertura pagina-sezione per le lezioni 13–24: `SOURCE_COVERAGE_2026-27_L13-L16.md`, `SOURCE_COVERAGE_2026-27_L17-L20.md` e `SOURCE_COVERAGE_2026-27_L21-L24.md`; **1.196/1.196 pagine** registrate. Per questa tranche non sono state renderizzate pagine né usato OCR; i PDF sono stati elaborati con estrazione nativa. I placeholder delle 12 lezioni sono stati controllati e puntano ai PDF aggiornati.
+
+
+## Aggiornamento 2026-11-23 — Lezioni 09–12
+
+Le lezioni 09–12 sono state riscritte integralmente seguendo l'impaginazione dei PDF 2026/27. Tutti i loro placeholder puntano ora ai nuovi PDF (217 in totale), quindi gli 87 riferimenti legacy di queste lezioni sono stati rimossi da `VISUAL_REMAP_PENDING_2026-27.md`. Restano da riallineare i riferimenti legacy delle lezioni 02–08 elencati in quel file.
