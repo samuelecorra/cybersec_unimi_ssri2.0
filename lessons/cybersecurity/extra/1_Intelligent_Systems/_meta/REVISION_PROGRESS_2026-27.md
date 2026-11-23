@@ -64,3 +64,25 @@ Copertura pagina-sezione per le lezioni 13–24: `SOURCE_COVERAGE_2026-27_L13-L1
 ## Aggiornamento 2026-11-23 — Lezioni 09–12
 
 Le lezioni 09–12 sono state riscritte integralmente seguendo l'impaginazione dei PDF 2026/27. Tutti i loro placeholder puntano ora ai nuovi PDF (217 in totale), quindi gli 87 riferimenti legacy di queste lezioni sono stati rimossi da `VISUAL_REMAP_PENDING_2026-27.md`. Restano da riallineare i riferimenti legacy delle lezioni 02–08 elencati in quel file.
+
+## Aggiornamento 2026-11-23 — Lezioni 13–24
+
+Dopo le lezioni 09–12, anche le lezioni 13–24 sono state riscritte end-to-end nell'ordine delle slide 2026/27, con la stessa procedura: estrazione parola per parola con PyMuPDF (comprese le celle numeriche isolate), stima delle figure da blocchi immagine e tracciati vettoriali, nessun rendering né OCR. Il controllo iniziale aveva mostrato placeholder mancanti su molte pagine visive e contenuti compressi rispetto alle nuove slide. Testo, tabelle, formule e codice sono trascritti e resi narrativi; i placeholder sono riservati a figure, grafici, schermate e schemi e puntano solo ai PDF `sources_2026-27/`. Le note didattiche, il codice ricostruito e i paragrafi datati dell'audit del 20 novembre 2026 delle versioni precedenti sono conservati; il materiale non più presente nelle slide è in sezioni di approfondimento (per esempio L17 §10 Iris in MATLAB, L18 §11 notebook t-SNE con `n_iter`, L21 §10 notebook Inception, L24 §14 simulazione d'esame).
+
+| Lezione | Pagine | Placeholder | Formule KaTeX | Note principali |
+|---|---:|---:|---:|---|
+| 13 | 70 | 40 | 189 | BLEU con i bigrammi fuori dalla matematica |
+| 14 | 97 | 56 | 279 | bilanciamento, partizione, validazione incrociata |
+| 15 | 99 | 37 | 58 | agenti, sovranità, Rule of Two, RAG; paragrafi datati conservati |
+| 16 | 116 | 42 | 201 | metriche, foundation model, Iris, codifiche, laboratorio |
+| 17 | 89 | 40 | 365 | contesto (350N−100, costo quadratico), Wine 97,75%/100%/CV 0,871, bias-varianza, LDA, gradiente svolto, Anscombe, `r2_score` invertito |
+| 18 | 93 | 54 | 586 | SFS/SBS/RFE con ranking 8×8, PCA svolta, LDA, t-SNE e KL, cinque mappe, EmbeddingGemma 2, System One, ECE, cascata |
+| 19 | 112 | 80 | 408 | Bayes-ottimo, k-NN, coseno e origine, embedding di gatti/cani e scatole, k-means, anomalie, GA |
+| 20 | 76 | 46 | 639 | bin $b^d$, perceptron AND completo, XOR, backpropagation svolta; segno di Δθ5 corretto nell'edizione 2026/27 |
+| 21 | 109 | 64 | 516 | Keras, due loss, CNN-A 137 660 parametri e 98,65%, AlexNet 62,4 M, transfer learning, YOLO, profilazione |
+| 22 | 102 | 84 | 428 | autoencoder e anomalie, BatchNorm, Adam, greedy layer-wise, LoRA, oblio e rehearsal, augmentation, GAN, diffusione, MAD |
+| 23 | 112 | 85 | 248 | compiti definiti dall'uscita, SAM 1–3, convoluzione trasposta, ResNet-50, drone, hardware, memoria e quantizzazione |
+| 24 | 121 | 85 | 123 | ViT, AIoT, sicurezza e OTA, CRA/NIST, RTOS, schede, TinyML, MLaaS, V2X, Cyber Tyre, Industria 4.0/5.0 |
+| **Totale** | **1.196** | **713** | **4.040** | 0 errori KaTeX, 0 placeholder fuori pagina o spaiati, tabelle con riga vuota prima |
+
+I tre registri `SOURCE_COVERAGE_2026-27_L13-L16.md`, `SOURCE_COVERAGE_2026-27_L17-L20.md` e `SOURCE_COVERAGE_2026-27_L21-L24.md` sono stati rigenerati con una riga per pagina (titolo della slide, sezione di destinazione, placeholder). Gli identificativi dei placeholder sono stati rinumerati (`IS13-V01`…); in queste lezioni non era ancora stata incollata alcuna immagine, quindi nulla è andato perso.
