@@ -48,8 +48,6 @@ La sequenza corretta è **dati grezzi → EDA → conclusioni, poi ML**. L’ana
 ![](imgs/Pasted%20image%2020261123200816.png)
 
 
-<!-- SOURCE_VISUAL id="IS11-V01" source="L11-web-v24.pdf" page="5" type="schema" description="Flusso di lavoro del ML in cinque passi con i tre momenti I, II, III della visualizzazione" reason="Schema del flusso visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123200926.png)
 
@@ -57,8 +55,6 @@ La sequenza corretta è **dati grezzi → EDA → conclusioni, poi ML**. L’ana
 
 Il proverbio inglese (*a picture is worth a thousand words*) è illustrato da una curva: con un solo sguardo racconta ciò che una **tabella di 28 valori annuali** nasconderebbe — una tendenza, un’inversione, un’anomalia.
 
-<!-- SOURCE_VISUAL id="IS11-V02" source="L11-web-v24.pdf" page="6" type="grafico" description="Curva di 28 valori annuali che mostra a colpo d'occhio la tendenza nascosta nella tabella" reason="Curva visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123200938.png)
 
@@ -73,8 +69,6 @@ Gli argomenti della parte classica sono: che cos’è la visualizzazione dei dat
 - Per questo la **riduzione della dimensionalità** è così importante: la PCA trasforma per esempio **4 feature** $F_1,\dots,F_4$ in nuove feature $F'_1,\dots,F'_4$, di cui **2 salienti** possono essere disegnate.
 - Conviene inoltre aggiungere informazione **oltre i 2–3 assi** (colore, forma, dimensione: §1.6).
 
-<!-- SOURCE_VISUAL id="IS11-V03" source="L11-web-v24.pdf" page="8" type="schema" description="PCA da 4 feature F1-F4 a 2 feature salienti F'1, F'2" reason="Schema presente solo come figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201042.png)
 
@@ -95,8 +89,6 @@ Ogni metodo restituisce **2 coordinate** per campione. Due indicatori misurano q
 | **cifre** (64 feature, 10 classi) | 60% · 0,83 | 98% · 0,99 | 98% · 0,99 |
 | **stati della macchina** (8 feature, 3 stati) | 100% · 0,91 | 100% · 0,96 | 100% · 0,95 |
 
-<!-- SOURCE_VISUAL id="IS11-V04" source="L11-web-v24.pdf" page="9" type="grafico" description="Proiezioni PCA, t-SNE e UMAP delle cifre e degli stati della macchina con kNN e trustworthiness" reason="Nuvole di punti colorate per classe visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201054.png)
 
@@ -114,8 +106,6 @@ Ogni metodo restituisce **2 coordinate** per campione. Due indicatori misurano q
   3. confrontare gli acquisti delle due metà: **solo la differenza** dice se l’offerta funziona.
 - Verificare **privacy ed equità** prima di inviare qualunque offerta.
 
-<!-- SOURCE_VISUAL id="IS11-V05" source="L11-web-v24.pdf" page="10" type="grafico" description="Cluster di clienti giovani con spesa alta in un grafico età-spesa" reason="Cluster visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201121.png)
 
@@ -127,8 +117,6 @@ Ogni metodo restituisce **2 coordinate** per campione. Due indicatori misurano q
 
 All’inizio del Novecento gli psicologi della **Gestalt** osservarono che, quando degli elementi vengono riuniti in una figura, la figura acquista una **salienza percettiva** che **supera la somma delle sue parti** (Lezione 2).
 
-<!-- SOURCE_VISUAL id="IS11-V06" source="L11-web-v24.pdf" page="11" type="figura" description="Illustrazione gestaltica: elementi riuniti in una figura con salienza superiore alla somma delle parti" reason="Figura raster della slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201135.png)
 
@@ -136,8 +124,6 @@ All’inizio del Novecento gli psicologi della **Gestalt** osservarono che, quan
 
 $$\text{dati}\ \xrightarrow{\ \text{costruzione}\ }\ \text{immagine}\ \xrightarrow{\ \text{percezione}\ }\ \text{intuizione}.$$
 
-<!-- SOURCE_VISUAL id="IS11-V07" source="L11-web-v24.pdf" page="12" type="figura" description="Le due fasi di Bertin dai numeri all'intuizione e ritratto di Jacques Bertin" reason="Schema e fotografia visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201156.png)
 
@@ -152,8 +138,6 @@ $$\text{dati}\ \xrightarrow{\ \text{costruzione}\ }\ \text{immagine}\ \xrightarr
 
 Ogni grafico codifica i numeri con **indizi visivi** (*visual cues*): la **lunghezza** di una barra, la **pendenza** di una linea, l’**angolo** tra due linee, l’**area** di un disco, la **tinta** di un colore o la sua **intensità**.
 
-<!-- SOURCE_VISUAL id="IS11-V09" source="L11-web-v24.pdf" page="14" type="infografica" description="Indizi visivi: lunghezza, pendenza, angolo, area, tinta e intensità del colore" reason="Esempi di codifica visibili solo nell'infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201238.png)
 
@@ -161,8 +145,6 @@ Ogni grafico codifica i numeri con **indizi visivi** (*visual cues*): la **lungh
 
 Gli indizi si possono **ordinare**: dal più **preciso** (la **lunghezza allineata**, cioè barre con una base comune) al più **generico** (la **tinta**). Quando il lettore deve **confrontare valori con precisione**, si sceglie un indizio vicino alla **cima** della classifica.
 
-<!-- SOURCE_VISUAL id="IS11-V10" source="L11-web-v24.pdf" page="15" type="infografica" description="Classifica degli indizi visivi dal più preciso (lunghezza allineata) al più generico (tinta)" reason="Classifica visibile solo nell'infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201251.png)
 
@@ -176,8 +158,6 @@ L’elaborazione visiva avviene in tre passi:
 2. **scomposizione** dell’informazione retinica in un insieme di **rappresentazioni specializzate**;
 3. **ricomposizione** dell’informazione nella **percezione degli oggetti**.
 
-<!-- SOURCE_VISUAL id="IS11-V11" source="L11-web-v24.pdf" page="16" type="schema" description="I tre passi dell'elaborazione visiva dalla retina alla percezione degli oggetti" reason="Schema visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201306.png)
 
@@ -194,8 +174,6 @@ L’elaborazione visiva avviene in tre passi:
 | **test** | passo 4 | dove sbaglia il modello (matrice di confusione) |
 | **rilascio** | passo 5 | prestazioni nel tempo, drift (PSI), allarmi |
 
-<!-- SOURCE_VISUAL id="IS11-V12" source="L11-web-v24.pdf" page="17" type="grafico" description="Tre dashboard del corso: curve di addestramento, matrice di confusione, dashboard di rilascio con AUC, PSI e allarmi" reason="Tre dashboard visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201324.png)
 
@@ -209,8 +187,6 @@ Si parte dal **messaggio**: **distribuzione**, **relazione**, **confronto**, **c
 <!-- SOURCE_VISUAL id="IS11-V13" source="L11-web-v24.pdf" page="18" type="infografica" description="Guida alla scelta del grafico a partire dal messaggio" reason="Albero decisionale presente solo come infografica" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS11-V14" source="L11-web-v24.pdf" page="19" type="infografica" description="Guida alla scelta del grafico (continua): rami dalla domanda al tipo di grafico" reason="Albero decisionale presente solo come infografica" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201347.png)
 
@@ -224,8 +200,6 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 | confronto **tra molti elementi** | grafico a **barre orizzontali** (vendite in k€/mese di 10 reparti: alimentari, latticini, panetteria, giocattoli, libri, giardino, animali, sport, musica, utensili) | `plt.barh(departments, sales)` |
 | confronto **nel tempo**, molti periodi | grafico a **linee** (vendite per mese) | `plt.plot(months, sales, 'o-')` |
 
-<!-- SOURCE_VISUAL id="IS11-V15" source="L11-web-v24.pdf" page="20" type="grafico" description="Colonne per fasce d'età, barre per 10 reparti, linea delle vendite su 12 mesi" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201405.png)
 
@@ -239,8 +213,6 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 | una variabile, **molti dati** | **curva di densità** (istogramma a linea) | `plt.fill_between(xs, density)` |
 | **due variabili** | **scatter** (età e spesa) | `plt.scatter(age, spend)` |
 
-<!-- SOURCE_VISUAL id="IS11-V16" source="L11-web-v24.pdf" page="21" type="grafico" description="Istogramma bimodale delle età, curva di densità e scatter età-spesa" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201435.png)
 
@@ -254,8 +226,6 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 | **statica**, accumulo verso un totale | **cascata** (*waterfall*: ricavi +100, merci −45, personale −25, altro −10, profitto 20 k€) | `plt.bar(i, x, bottom=running)` |
 | **variabile nel tempo**, molti periodi | **aree impilate** (vendite di negozio, web e app per mese) | `plt.stackplot(months, shop, web, app)` |
 
-<!-- SOURCE_VISUAL id="IS11-V17" source="L11-web-v24.pdf" page="22" type="grafico" description="Torta delle fasce d'età, cascata dai ricavi al profitto, aree impilate per canale" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201502.png)
 
@@ -269,8 +239,6 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 | **tre variabili** | **bolle**: la dimensione (o il colore) codifica il reddito in k€ | `plt.scatter(age, spend, s=income)` |
 | aggiunta: tendenza e suo $r$ | **scatter con retta interpolata**, $r=-0{,}60$ | `plt.plot(xs, k*xs+q)` |
 
-<!-- SOURCE_VISUAL id="IS11-V18" source="L11-web-v24.pdf" page="23" type="grafico" description="Scatter età-spesa, grafico a bolle con il reddito, scatter con retta di tendenza r = -0.60" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201519.png)
 
@@ -294,8 +262,6 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 
 L’esempio è un **diagramma di Sankey** dei flussi di materiale in tonnellate al mese (100 t in totale): la **larghezza di ogni banda è la quantità** (§7.4).
 
-<!-- SOURCE_VISUAL id="IS11-V19" source="L11-web-v24.pdf" page="25" type="grafico" description="Diagramma di Sankey dei flussi di materiale: fornitori, produzione, clienti UE ed extra-UE, scarto, riciclo e smaltimento" reason="Bande del Sankey visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201552.png)
 
@@ -318,8 +284,6 @@ L’esempio è un **diagramma di Sankey** dei flussi di materiale in tonnellate 
 <!-- SOURCE_VISUAL id="IS11-V20" source="L11-web-v24.pdf" page="26" type="figura" description="Esempio di grafico con troppo design grafico" reason="Esempio negativo visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS11-V21" source="L11-web-v24.pdf" page="27" type="figura" description="Esempi di grafici che incoraggiano il confronto e mostrano più livelli di dettaglio" reason="Esempi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201625.png)
 
@@ -338,8 +302,6 @@ L’esempio è un **diagramma di Sankey** dei flussi di materiale in tonnellate 
 
 La dashboard tipica affianca quattro pannelli: **prestazioni nel tempo** (AUC da gennaio a maggio con soglia 0,6), **data drift** (PSI con soglia 0,1), **dati di training contro dati attuali** (densità di una feature), **allarmi e azioni** («rilevato drift alto», «prestazioni sotto soglia», «riaddestramento pianificato», «ultimo aggiornamento: 2 minuti fa»).
 
-<!-- SOURCE_VISUAL id="IS11-V22" source="L11-web-v24.pdf" page="29" type="schermata" description="Dashboard di rilascio: AUC nel tempo, PSI con soglia, densità training contro produzione, pannello allarmi" reason="Dashboard visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123201641.png)
 
@@ -377,8 +339,6 @@ Una feature standardizzata (z-score) è divisa in 5 bin; si confrontano le quote
 | $[1{,}5,3]$ | 0,10 | 0,22 | −0,12 | −0,7885 | 0,0946 |
 | **totale** | **1,00** | **1,00** | | | **PSI = 0,2577** |
 
-<!-- SOURCE_VISUAL id="IS11-V23" source="L11-web-v24.pdf" page="31" type="grafico" description="Istogrammi a 5 bin della feature nel riferimento (training) e nella produzione" reason="Istogrammi a confronto visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123202831.png)
 
@@ -403,8 +363,6 @@ Qui $\text{PSI}=0{,}2577$: i dati di produzione **si sono spostati verso z-score
 
 La slide sintetizza: l’AI Act europeo impone un monitoraggio continuo e rigoroso delle prestazioni per i sistemi «**ad alto rischio**» e per l’**AI per finalità generali** (GPAI, *General-Purpose AI*).
 
-<!-- SOURCE_VISUAL id="IS11-V24" source="L11-web-v24.pdf" page="32" type="grafico" description="Miniature del PSI nel tempo (input) e della densità dei punteggi (output)" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123202913.png)
 
@@ -432,8 +390,6 @@ Il modello rilasciato riceve, per ogni richiesta, un input $X$ e produce un punt
 
 La slide mostra la distribuzione dei punteggi $s=P(Y=1\mid X)$ nel **periodo di riferimento** (a sinistra) e nel **periodo attuale** (a destra), **50 000 previsioni** ciascuno.
 
-<!-- SOURCE_VISUAL id="IS11-V25" source="L11-web-v24.pdf" page="34" type="grafico" description="Distribuzione dei punteggi del classificatore nel periodo di riferimento e in quello attuale, PSI = 0.96" reason="Istogrammi dei punteggi visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123202942.png)
 
@@ -444,8 +400,6 @@ La slide mostra la distribuzione dei punteggi $s=P(Y=1\mid X)$ nel **periodo di 
 - **Input**: 52 settimane, 400 misure a settimana di una variabile di input; **riferimento**: le prime 12 settimane.
 - **Output**: PSI settimanale e accuratezza (%): **il PSI sale, poi l’accuratezza cala**.
 
-<!-- SOURCE_VISUAL id="IS11-V26" source="L11-web-v24.pdf" page="35" type="grafico" description="PSI settimanale con soglie 0.1 e 0.25 e accuratezza su 52 settimane: il PSI sale prima che l'accuratezza cali" reason="Andamento delle due curve visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203004.png)
 
@@ -469,8 +423,6 @@ Un grafico delle medaglie olimpiche nel tempo mostra come la visualizzazione pos
 
 Assenza di dati, vincitori, eventi: **i vuoti fanno parte della storia** (anni senza Giochi). La visualizzazione porta con sé la storia: un’ispirazione per le nostre tecniche.
 
-<!-- SOURCE_VISUAL id="IS11-V27" source="L11-web-v24.pdf" page="37" type="grafico" description="Streamgraph delle medaglie olimpiche nel tempo con i vuoti delle guerre, i boicottaggi e le squadre che si dividono o fondono" reason="Grafico visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203034.png)
 
@@ -478,8 +430,6 @@ Assenza di dati, vincitori, eventi: **i vuoti fanno parte della storia** (anni s
 
 Le **equazioni di Navier–Stokes** governano il moto di un fluido. Una buona visualizzazione mostra i **vortici** e la **transizione dal moto laminare a quello turbolento**, che le equazioni da sole non lasciano vedere. Il colore porta la **quarta grandezza**, il modulo della velocità [m/s]. La stessa abilità aiuta a leggere le **superfici di decisione complesse** delle reti neurali e dei modelli di machine learning.
 
-<!-- SOURCE_VISUAL id="IS11-V28" source="L11-web-v24.pdf" page="38" type="grafico" description="Simulazione di un fluido con vortici e transizione laminare-turbolenta, colore = modulo della velocità" reason="Visualizzazione scientifica visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203051.png)
 
@@ -487,8 +437,6 @@ Le **equazioni di Navier–Stokes** governano il moto di un fluido. Una buona vi
 
 Secondo l’**Organizzazione Mondiale della Sanità**, pur essendo disponibile un vaccino **sicuro ed economico**, nel **2018** ci sono stati oltre **140 000 morti** per morbillo nel mondo, per lo più **bambini sotto i cinque anni**. La vaccinazione contro il morbillo ha prodotto un **calo del 73%** delle morti tra il **2000** e il **2018** a livello mondiale. **Maurice Hilleman** (1919–2005), che sviluppò il vaccino contro il morbillo, è associato a circa **1 milione di morti evitate all’anno**.
 
-<!-- SOURCE_VISUAL id="IS11-V29" source="L11-web-v24.pdf" page="39" type="infografica" description="Infografica sul morbillo con i dati OMS 2000-2018 e ritratto di Maurice Hilleman" reason="Infografica visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203110.png)
 
@@ -507,8 +455,6 @@ Secondo l’**Organizzazione Mondiale della Sanità**, pur essendo disponibile u
 <!-- SOURCE_VISUAL id="IS11-V31" source="L11-web-v24.pdf" page="41" type="grafico" description="Monte Sant'Elena prima e dopo l'eruzione del 1980" reason="Superfici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS11-V32" source="L11-web-v24.pdf" page="42" type="grafico" description="Fette e proiezioni di un volume 3D per evitare l'occlusione tra voxel" reason="Fette visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203217.png)
 ![](imgs/Pasted%20image%2020261123203225.png)
@@ -523,8 +469,6 @@ La slide mostra una **risonanza magnetica** (MRI) rappresentata in 3D con superf
 <!-- SOURCE_VISUAL id="IS11-V33" source="L11-web-v24.pdf" page="43" type="figura" description="Risonanza magnetica rappresentata in 3D" reason="Immagine della MRI visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS11-V34" source="L11-web-v24.pdf" page="44" type="figura" description="Due formati diversi per lo stesso volume 3D a seconda dell'obiettivo" reason="Confronto dei formati visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203520.png)
 
@@ -532,8 +476,6 @@ La slide mostra una **risonanza magnetica** (MRI) rappresentata in 3D con superf
 
 La galleria (dettagli in appendice) comprende: **observablehq.com** ed esempi interattivi, **ggplot2 in R**, l’**anatomia di un grafico**, il **grafico nel grafico** e i **vettori 3D**, la **heatmap del morbillo**.
 
-<!-- SOURCE_VISUAL id="IS11-V35" source="L11-web-v24.pdf" page="45" type="figura" description="Galleria di sei miniature: observablehq, esempi interattivi, ggplot2, anatomia di un grafico, grafico nel grafico, heatmap del morbillo" reason="Miniature visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203531.png)
 
@@ -567,8 +509,6 @@ contour(P)
 - **Input**: la matrice `P` delle **altezze**, un valore per pixel ($x$, $y$, altezza: dati 3D). È una moneta da un centesimo (*penny*) scansionata in 3D.
 - **Output**: **quattro viste della stessa matrice**: superficie (`surf`), reticolo (`mesh`), mappa di colore vista dall’alto (`pcolor`), curve di livello (`contour`).
 
-<!-- SOURCE_VISUAL id="IS11-V36" source="L11-web-v24.pdf" page="47" type="grafico" description="Quattro viste della moneta: surf, mesh, pcolor, contour" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203609.png)
 
@@ -598,8 +538,6 @@ Lungo il processo di progettazione la visualizzazione si usa in questa **sequenz
 | **3C** prestazioni e fiducia | bande di previsione, residui, costo degli errori, ROC e PR, importanza delle variabili | matrice dei costi |
 | **3D** funzionamento e decisioni | carta di controllo, vita utile residua, drift, Pareto, flussi, pianificazioni | carta di controllo |
 
-<!-- SOURCE_VISUAL id="IS11-V37" source="L11-web-v24.pdf" page="50" type="grafico" description="Quattro viste esemplari: architettura del sistema, mappa del dataset, matrice dei costi, carta di controllo" reason="Quattro pannelli visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203654.png)
 
@@ -616,8 +554,6 @@ Dalla macchina al cloud e all’operatore: **ogni parte dell’architettura ha b
 | **cloud** | addestramento ML, MLOps | **training, validation, drift** (curve di perdita, miglior epoca 45) |
 | **operatore** | decisione con supporto del ML | **perché il modello dà l’allarme** (contributi delle variabili) |
 
-<!-- SOURCE_VISUAL id="IS11-V38" source="L11-web-v24.pdf" page="52" type="schema e grafici" description="Architettura macchina, edge, cloud, operatore con un grafico dedicato sotto ciascun componente" reason="Architettura e grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203712.png)
 
@@ -628,8 +564,6 @@ Dalla macchina al cloud e all’operatore: **ogni parte dell’architettura ha b
 - **Input**: vibrazione (g) e temperatura (°C) di una macchina, un valore al minuto, per **240 minuti**.
 - **Output**: i due segnali **sullo stesso asse dei tempi**, con la **finestra dell’anomalia** evidenziata.
 
-<!-- SOURCE_VISUAL id="IS11-V39" source="L11-web-v24.pdf" page="53" type="grafico" description="Vibrazione e temperatura su 240 minuti con doppio asse e intervallo anomalo 160-190 min evidenziato" reason="Segnali visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123203731.png)
 
@@ -673,8 +607,6 @@ I nomi delle variabili V3 e V4 compaiono solo nella figura.
 - **Input**: 360 campioni, 8 feature, 3 stati: **normale**, **usura**, **guasto**.
 - **Output**: 2 componenti principali, che spiegano il **68%** e il **15%** della varianza.
 
-<!-- SOURCE_VISUAL id="IS11-V41" source="L11-web-v24.pdf" page="55" type="grafico" description="Proiezione PCA dei 360 campioni sui primi due componenti (68% e 15%) con i tre stati normale, usura, guasto" reason="Cluster visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205105.png)
 
@@ -706,8 +638,6 @@ Cifre scritte a mano, una rete minuscola, **una vista per ogni domanda**.
 
 **Situazione iniziale**: rete non addestrata, accuratezza vicina al caso (circa 10%). **Finale**: rete addestrata, 95,2%.
 
-<!-- SOURCE_VISUAL id="IS11-V42" source="L11-web-v24.pdf" page="57" type="figura e grafico" description="Esempi delle dieci cifre 8x8 e istogramma del numero di immagini per classe" reason="Immagini e istogramma visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205119.png)
 
@@ -720,8 +650,6 @@ Le stesse **1797 immagini in 64 dimensioni** sono disegnate in 2D con tre metodi
 - La PCA è **lineare**; t-SNE **conserva i vicinati**.
 - **Dimensione e distanza dei cluster cambiano con la perplexity** (5 contro 50): leggere i **vicinati**, non le **distanze**.
 
-<!-- SOURCE_VISUAL id="IS11-V43" source="L11-web-v24.pdf" page="58" type="grafico" description="Le cifre proiettate con PCA, t-SNE perplexity 5 e t-SNE perplexity 50, colorate per classe" reason="Proiezioni visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205136.png)
 
@@ -738,8 +666,6 @@ Le stesse **1797 immagini in 64 dimensioni** sono disegnate in 2D con tre metodi
 - Un’immagine: $\mathbb{R}^{\text{altezza}[32]\times\text{larghezza}[32]\times\text{canali}[3]}$; la sua etichetta: una di 10 classi.
 - **Guardare dieci immagini casuali per classe** controlla già il **bilanciamento** e le **definizioni delle classi**: «*automobile*» indica berline e SUV, «*truck*» solo i camion grandi.
 
-<!-- SOURCE_VISUAL id="IS11-V44" source="L11-web-v24.pdf" page="59" type="figura" description="Griglia di dieci immagini casuali per ciascuna delle dieci classi di CIFAR-10" reason="Immagini visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205613.png)
 
@@ -749,8 +675,6 @@ Le stesse **1797 immagini in 64 dimensioni** sono disegnate in 2D con tre metodi
 
 **Leggere l’immagine di sinistra (Facets Dive)**: ogni miniatura è **un’immagine di CIFAR-10** e ogni riga è una **classe**, per esempio *airplane*. Dentro una riga le immagini sono **raggruppate per un valore**, qui il **colore**: si vede subito come i colori si distribuiscono in una classe (una riga di aerei è soprattutto cielo, blu e bianchi). In alto a destra lo stesso strumento su **dati di censimento**; in basso a destra le **statistiche per feature**, training contro test.
 
-<!-- SOURCE_VISUAL id="IS11-V45" source="L11-web-v24.pdf" page="60" type="schermata" description="Facets Dive su CIFAR-10 raggruppato per classe e colore, Facets su dati di censimento, statistiche per feature training contro test" reason="Interfaccia visibile solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205631.png)
 
@@ -763,8 +687,6 @@ Nella rete 64-16-10 completamente connessa, i **64 pesi di un’unità nascosta*
 - **Tessera**: i 64 pesi di un’unità nascosta come immagine $8\times 8$; il **rosso eccita**, il **blu inibisce**.
 - **Istogrammi**: **1024 pesi** nello strato 1 (deviazione standard **0,41**), **160** nello strato 2 (deviazione standard **0,71**). Controllare **scala**, **simmetria**, **unità morte**.
 
-<!-- SOURCE_VISUAL id="IS11-V46" source="L11-web-v24.pdf" page="61" type="grafico" description="Schema 64-16-10, i 16 pesi del primo strato come tessere 8x8 e gli istogrammi dei pesi dei due strati" reason="Tessere e istogrammi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205716.png)
 
@@ -776,8 +698,6 @@ Nella rete 64-16-10 completamente connessa, i **64 pesi di un’unità nascosta*
 
 I **quadrati grigi** sono i **kernel**; i **quadrati colorati** sono le **porzioni di immagine** di un dataset che producono la **risposta più alta** di quel kernel.
 
-<!-- SOURCE_VISUAL id="IS11-V47" source="L11-web-v24.pdf" page="62" type="figura" description="Kernel di una CNN (quadrati grigi) e porzioni di immagine che li attivano al massimo (quadrati colorati)" reason="Kernel e porzioni visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205725.png)
 
@@ -793,8 +713,6 @@ $$5{,}6\quad 0{,}0\quad 0{,}3\quad 0{,}0\quad 0{,}7\quad 0{,}6\quad 2{,}2\quad 1
 
 **12 unità su 16 sono attive**; le quattro a zero comprendono le unità mai attive sul test set (cerchiate in rosso tratteggiato nella figura).
 
-<!-- SOURCE_VISUAL id="IS11-V48" source="L11-web-v24.pdf" page="63" type="grafico" description="Heatmap 16 unità x 10 classi delle attivazioni medie e attivazioni delle 16 unità per un'immagine di un 3" reason="Heatmap e cerchi delle unità visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205934.png)
 
@@ -808,22 +726,16 @@ $$5{,}6\quad 0{,}0\quad 0{,}3\quad 0{,}0\quad 0{,}7\quad 0{,}6\quad 2{,}2\quad 1
 > - supportano l’**analisi degli errori** e l’**interpretabilità** del modello;
 > - sono uno **strumento diagnostico**, **non una spiegazione definitiva**.
 
-<!-- SOURCE_VISUAL id="IS11-V49" source="L11-web-v24.pdf" page="64" type="figura" description="Immagine e relativa mappa di salienza che evidenzia le regioni influenti" reason="Mappa visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123205953.png)
 
 **Esempio.** Ogni mappa è costruita dal **gradiente dell’uscita rispetto all’input**: mostra quali pixel sono stati rilevanti per la classe. **SmoothGrad** aggiunge **rumore gaussiano** pixel per pixel a **molte copie** dell’immagine e **fa la media dei gradienti** (dettagli nelle lezioni successive). Fonte: pair-code.github.io/saliency.
 
-<!-- SOURCE_VISUAL id="IS11-V50" source="L11-web-v24.pdf" page="65" type="figura" description="Mappe di salienza con gradiente semplice e SmoothGrad (PAIR)" reason="Mappe visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123210005.png)
 
 **Come si calcola.** Il **gradiente del punteggio della classe rispetto ai pixel di input** misura **quanto cambia il punteggio** quando ogni pixel viene **leggermente modificato**.
 
-<!-- SOURCE_VISUAL id="IS11-V51" source="L11-web-v24.pdf" page="66" type="schema" description="Calcolo della mappa di salienza come gradiente del punteggio di classe rispetto ai pixel" reason="Schema visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123210015.png)
 
@@ -845,8 +757,6 @@ Due reti classificano la stessa immagine. **Qual è la rete migliore?**
 ![](imgs/Pasted%20image%2020261123210334.png)
 
 
-<!-- SOURCE_VISUAL id="IS11-V52" source="L11-web-v24.pdf" page="68" type="figura" description="Due reti NN1 (cane 0.95) e NN2 (cane 0.92) con le rispettive mappe di salienza: NN1 guarda i pixel sbagliati" reason="Immagini e mappe visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123210347.png)
 
@@ -868,8 +778,6 @@ $$A=\text{softmax}\!\left(\frac{QK^\top}{\sqrt{d}}\right),$$
 
 dove $Q$ è il **vettore query** di ogni token (che cosa cerca), $K$ il **vettore key** (che cosa offre) e $d$ la **dimensione dei vettori** (qui 2); $\sqrt{d}$ **mantiene i punteggi moderati**. **Ogni riga somma a 1.**
 
-<!-- SOURCE_VISUAL id="IS11-V53" source="L11-web-v24.pdf" page="69" type="grafico" description="Blocco Transformer semplificato e heatmap 5x5 dell'attenzione sulla frase the pump is too hot" reason="Heatmap e schema del blocco visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123210434.png)
 
@@ -887,8 +795,6 @@ $\alpha$ (asse $x$) e $\beta$ (asse $y$) dicono **quanto ci si sposta** lungo ci
 
 **Che cosa si vede.** Allontanandosi dalla stella la perdita supera **4 agli angoli**: il minimo è un **bacino stretto**. È una fetta 2D di uno spazio a 1210 dimensioni (Li et al., NeurIPS 2018).
 
-<!-- SOURCE_VISUAL id="IS11-V54" source="L11-web-v24.pdf" page="70" type="grafico" description="Paesaggio della perdita di validation sul piano di due direzioni casuali attorno ai pesi addestrati, con la stella al minimo" reason="Mappa di colore del paesaggio visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123210644.png)
 
@@ -900,8 +806,6 @@ $\alpha$ (asse $x$) e $\beta$ (asse $y$) dicono **quanto ci si sposta** lungo ci
 
 Un esempio di **discesa del gradiente stocastica** in un problema di ottimizzazione **non convesso**: il percorso dei pesi su una superficie con più valli.
 
-<!-- SOURCE_VISUAL id="IS11-V55" source="L11-web-v24.pdf" page="71" type="grafico" description="Percorso della discesa del gradiente stocastica su una superficie non convessa" reason="Percorso dell'ottimizzazione visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123210756.png)
 
@@ -925,8 +829,6 @@ Due grafici per epoca (0–80): la perdita *cross-entropy* e l’accuratezza.
 - **Blu tratteggiato**: le **stesse immagini di training** valutate con le **etichette vere**: **0,14**, **sotto** la perdita di validation, come di consueto. **Una curva di training peggiore della validation suggerisce etichette sbagliate.**
 - **Miglior epoca di validation**: **74**, perdita **0,198**; l’accuratezza si stabilizza vicino al **95%**. TensorBoard disegna queste curve in tempo reale.
 
-<!-- SOURCE_VISUAL id="IS11-V56" source="L11-web-v24.pdf" page="73" type="grafico" description="Curve di perdita cross-entropy e accuratezza: training con etichette rumorose, training con etichette vere, validation" reason="Andamento delle curve visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123210945.png)
 
@@ -938,8 +840,6 @@ Due grafici per epoca (0–80): la perdita *cross-entropy* e l’accuratezza.
 
 La **mancanza di dati produce intervalli più ampi**: le bande si **allargano dove non esiste alcun punto di training** (punti rossi).
 
-<!-- SOURCE_VISUAL id="IS11-V57" source="L11-web-v24.pdf" page="74" type="grafico" description="Previsione di una rete con banda di confidenza che si allarga dove mancano i punti di training" reason="Bande e punti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123210937.png)
 
@@ -966,8 +866,6 @@ $N$ è il numero di immagini; $\bar{e}$ l’**errore medio** (bias) [°C]; $\sig
 - **Perché una campana?** Un errore è la **somma di molte piccole cause indipendenti** (rumore del sensore, etichette, approssimazione del modello), e somme di questo tipo **tendono a una gaussiana** (teorema del limite centrale).
 - **Stessa unità**: errori e $\sigma$ sono in °C, quindi la banda condivide l’asse con gli errori. $\sigma^2$ è in °C² e **non può**.
 
-<!-- SOURCE_VISUAL id="IS11-V58" source="L11-web-v24.pdf" page="76" type="grafico" description="Errori dei 200 campioni del dataset A con bande +-1 sigma e +-2 sigma e istogramma a campana" reason="Errori, bande e istogramma visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211019.png)
 
@@ -988,8 +886,6 @@ $h_j$ è l’attivazione dell’unità nascosta $j$; $w_{jk}$ e $b_k$ sono peso 
 
 **Esempio** (epoca 80): $z_3=+4{,}92$, $\sum_m e^{z_m}=140{,}5$, quindi $p_3=137/140{,}5=0{,}977$: **confidenza 0,98**.
 
-<!-- SOURCE_VISUAL id="IS11-V59" source="L11-web-v24.pdf" page="77" type="schema e grafico" description="Rete 64-16-10 con punteggi zk e probabilità softmax pk per un 3, e curve di punteggio e probabilità per epoca" reason="Schema e curve visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211053.png)
 
@@ -1017,8 +913,6 @@ La mappa ha la **confidenza** sull’asse verticale e la **variabilità** (std) 
 | **ambigui** | media | alta | esempi al confine, la rete cambia idea |
 | **difficili da imparare** | bassa | bassa | esempi che la rete non accetta mai: spesso **etichette sbagliate** |
 
-<!-- SOURCE_VISUAL id="IS11-V60" source="L11-web-v24.pdf" page="78" type="grafico" description="Mappa del dataset: confidenza media contro deviazione standard per le 1000 immagini, etichette originali e 50 invertite" reason="Disposizione dei punti nelle tre regioni visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211135.png)
 
@@ -1030,8 +924,6 @@ La mappa ha la **confidenza** sull’asse verticale e la **variabilità** (std) 
 
 TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere più facile **capire, fare debug e ottimizzare** i modelli. Si può usare per visualizzare il **grafo** TensorFlow, tracciare **metriche quantitative** sull’esecuzione del grafo e mostrare **dati aggiuntivi**, come le **immagini** che lo attraversano.
 
-<!-- SOURCE_VISUAL id="IS11-V61" source="L11-web-v24.pdf" page="79" type="schermata" description="Interfaccia di TensorBoard con metriche di addestramento e grafo" reason="Interfaccia visibile solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211145.png)
 
@@ -1042,8 +934,6 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 - Dice **quali classi** vengono confuse; **non dice perché**: bisogna guardare quelle immagini.
 - La si vedrà più in dettaglio più avanti nel corso (Lezione 16).
 
-<!-- SOURCE_VISUAL id="IS11-V62" source="L11-web-v24.pdf" page="80" type="grafico" description="Matrice di confusione 10x10 delle cifre con 378 corretti in diagonale e 19 errori, tra cui tre 3 previsti come 8" reason="Valori e colori della matrice visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211154.png)
 
@@ -1057,8 +947,6 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 
 **Istogramma delle confidenze.** Quante immagini di test cadono in ogni bin di confidenza. Qui la maggior parte delle immagini ha **confidenza molto alta**: il modello è sicuro sulla maggioranza. I punti del grafico di sinistra che provengono da **bin con poche immagini** sono **rumorosi**: non vanno sovrainterpretati.
 
-<!-- SOURCE_VISUAL id="IS11-V63" source="L11-web-v24.pdf" page="81" type="grafico" description="Diagramma di affidabilità con la diagonale di calibrazione perfetta e istogramma delle confidenze dei 397 test" reason="Punti e istogramma visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211207.png)
 
@@ -1075,8 +963,6 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 - **Slice per classe vera.** Una barra per cifra; la linea tratteggiata è l’**errore complessivo**. Le barre **sopra la linea** sono le classi in cui il sistema è **più debole** (qui **3 e 4**): è lì che conviene **aggiungere dati o correggere etichette** per primi.
 - **Slice per una proprietà misurabile.** Lo stesso grafico per una proprietà che si può calcolare **senza etichette**, qui la **quantità d’inchiostro** (leggera, media, pesante). **Barre piatte vicino alla linea**: il sistema **non dipende** da quella proprietà. Una barra alta rivelerebbe un **gruppo debole nascosto**.
 
-<!-- SOURCE_VISUAL id="IS11-V64" source="L11-web-v24.pdf" page="82" type="grafico" description="Tasso di errore per classe vera con l'errore complessivo tratteggiato, e per quantità d'inchiostro leggera, media, pesante" reason="Barre visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211244.png)
 
@@ -1092,8 +978,6 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 - **Input**: **156 valori settimanali** di domanda (pezzi/settimana); previsione sulle **ultime 52 settimane**.
 - **Output**: la previsione con le **bande all’80% e al 95%**, non un numero singolo.
 
-<!-- SOURCE_VISUAL id="IS11-V65" source="L11-web-v24.pdf" page="84" type="grafico" description="Fan chart della domanda settimanale: dati reali passati, previsione futura con bande all'80% e al 95%" reason="Bande della previsione visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211252.png)
 
@@ -1137,8 +1021,6 @@ $TP$: difetti trovati; $FN$: difetti mancati; $FP$: falsi allarmi; $TN$: pezzi b
 | **ROC** | tasso di veri positivi (TPR = recall) contro tasso di falsi positivi (FPR) | **AUC = 0,89** |
 | **Precision-Recall** | precisione contro recall | **AP = 0,70**, prevalenza = 0,16 |
 
-<!-- SOURCE_VISUAL id="IS11-V66" source="L11-web-v24.pdf" page="86" type="grafico" description="Curva ROC con AUC 0.89 e curva precision-recall con AP 0.70 e prevalenza 0.16" reason="Curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211319.png)
 
@@ -1156,8 +1038,6 @@ $TP$: difetti trovati; $FN$: difetti mancati; $FP$: falsi allarmi; $TN$: pezzi b
 | **ben calibrato** | 0,032 | il **73%** delle volte |
 | **sovraconfidente** | 0,108 | solo il **59%** delle volte |
 
-<!-- SOURCE_VISUAL id="IS11-V67" source="L11-web-v24.pdf" page="87" type="grafico" description="Curve di calibrazione di un modello ben calibrato (ECE 0.032) e di uno sovraconfidente (ECE 0.108)" reason="Curve rispetto alla diagonale visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211337.png)
 
@@ -1169,8 +1049,6 @@ $TP$: difetti trovati; $FN$: difetti mancati; $FP$: falsi allarmi; $TN$: pezzi b
 - **Input**: una **random forest** (Lezione 12), **4 variabili di processo** (temperatura, pressione, velocità, umidità), **1600 pezzi** di test.
 - **Output**: per ogni variabile, il **calo di accuratezza** quando i suoi valori vengono **rimescolati**.
 
-<!-- SOURCE_VISUAL id="IS11-V68" source="L11-web-v24.pdf" page="88" type="grafico" description="Barre di permutation importance per temperatura, pressione, velocità e umidità" reason="Lunghezze delle barre visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211347.png)
 
@@ -1190,8 +1068,6 @@ $TP$: difetti trovati; $FN$: difetti mancati; $FP$: falsi allarmi; $TN$: pezzi b
 - **Input**: **300 campioni** di vibrazione RMS (mm/s), uno ogni 10 minuti; media e deviazione standard stimate sui **primi 150 campioni sani**.
 - **Output**: **linea centrale**, limiti **$\pm 3\sigma$** e **punti di allarme**.
 
-<!-- SOURCE_VISUAL id="IS11-V69" source="L11-web-v24.pdf" page="90" type="grafico" description="Carta di controllo della vibrazione RMS con linea centrale, limiti +-3 sigma e punti di allarme" reason="Andamento e allarmi visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211400.png)
 
@@ -1209,8 +1085,6 @@ con $\mu$ e $\sigma$ stimati sul periodo sano (formula standard, nota didattica)
 - **Input**: **6 macchine**, indice di salute da 0 a 1 per ciclo operativo.
 - **Output**: **traiettorie di degradazione** e la **soglia di guasto a 0,2**.
 
-<!-- SOURCE_VISUAL id="IS11-V70" source="L11-web-v24.pdf" page="91" type="grafico" description="Traiettorie dell'indice di salute di 6 macchine per ciclo operativo con soglia di guasto a 0.2" reason="Traiettorie visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211425.png)
 
@@ -1224,8 +1098,6 @@ con $\mu$ e $\sigma$ stimati sul periodo sano (formula standard, nota didattica)
 - **Input**: **8 modelli ipotetici**, con **latenza** (ms, più bassa è meglio) e **qualità** (%, più alta è meglio), rilasciati **all’edge** o **nel cloud** (Edge S, Edge M, Edge L, Cloud S, Cloud L e i modelli B, C, D).
 - **Output**: i **modelli non dominati**, uniti dalla **frontiera**.
 
-<!-- SOURCE_VISUAL id="IS11-V71" source="L11-web-v24.pdf" page="92" type="grafico" description="Frontiera di Pareto tra latenza e qualità di 8 modelli edge e cloud, con i modelli dominati in grigio" reason="Posizione dei modelli visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211436.png)
 
@@ -1246,8 +1118,6 @@ con $\mu$ e $\sigma$ stimati sul periodo sano (formula standard, nota didattica)
 | produzione | 85 t | cliente UE 50 t, cliente extra-UE 35 t |
 | scarto | 15 t | riciclo 10 t, smaltimento 5 t |
 
-<!-- SOURCE_VISUAL id="IS11-V72" source="L11-web-v24.pdf" page="93" type="grafico" description="Sankey dei flussi di materiale con fornitori A, B, C, produzione, scarto, clienti, riciclo e smaltimento" reason="Bande del Sankey visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211504.png)
 
@@ -1259,8 +1129,6 @@ con $\mu$ e $\sigma$ stimati sul periodo sano (formula standard, nota didattica)
 - **Input**: **7 ordini** che attraversano **4 macchine** in sequenza (taglio, fresatura, tornitura, assemblaggio), durate casuali da 2 a 5 ore.
 - **Output**: una pianificazione con **macchine ferme** e **colli di bottiglia** (totale circa **39 h**, in ordine di arrivo, **non ottimizzata**).
 
-<!-- SOURCE_VISUAL id="IS11-V73" source="L11-web-v24.pdf" page="94" type="grafico" description="Gantt di 7 ordini su 4 macchine con tempi morti e colli di bottiglia, circa 39 ore" reason="Barre del Gantt visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211513.png)
 
@@ -1319,8 +1187,6 @@ Il **progettista** invia all’**agente** un prompt e i dati; l’agente **scriv
 
 La traccia d’esempio (esecuzione illustrativa, senza dati reali) mostra sei passi su un asse dei tempi: **pianificazione** (ragionamento), **lettura dei sensori** (chiamata a strumento), **recupero dei manuali** (chiamata a strumento), **valutazione del rischio** (controllo), **approvazione umana** (persona), **creazione dell’ordine di lavoro** (azione).
 
-<!-- SOURCE_VISUAL id="IS11-V74" source="L11-web-v24.pdf" page="99" type="grafico" description="Traccia di un agente come Gantt: pianificazione, lettura sensori, recupero manuali, valutazione del rischio, approvazione umana, ordine di lavoro" reason="Barre temporali della traccia visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211627.png)
 
@@ -1352,8 +1218,6 @@ ax.set_ylabel('pass rate (%)'); ax.legend()
 plt.savefig('grouped.pdf', bbox_inches='tight')
 ```
 
-<!-- SOURCE_VISUAL id="IS11-V75" source="L11-web-v24.pdf" page="100" type="grafico" description="Grafico a barre raggruppate prodotto dallo script: linee A e B per prodotti facili e difficili (95%, 90%, 72%, 70%)" reason="Grafico risultante visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123211700.png)
 
@@ -1733,8 +1597,6 @@ dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il val
 
 ##### **11.9.1. Istogramma 3D a barre**
 
-<!-- SOURCE_VISUAL id="IS11-V101" source="L11-web-v24.pdf" page="140" type="grafico" description="Istogramma bivariato 3D delle corse del bike sharing di Boston per durata e anno di nascita" reason="Grafico 3D visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123213733.png)
 
@@ -1752,8 +1614,6 @@ view(17,30)
 
 ##### **11.9.2. Trovare il massimo di una funzione 2D**
 
-<!-- SOURCE_VISUAL id="IS11-V102" source="L11-web-v24.pdf" page="142" type="grafico" description="Superficie peaks con il massimo marcato da una stella verde" reason="Superficie e punto visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123213818.png)
 
@@ -1776,8 +1636,6 @@ hold off;
 
 ##### **11.9.3. Vettori in 3D**
 
-<!-- SOURCE_VISUAL id="IS11-V103" source="L11-web-v24.pdf" page="144" type="grafico" description="Superficie z = x exp(-x^2-y^2) con i vettori normali in ogni punto della griglia" reason="Superficie e frecce visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123213902.png)
 
@@ -1796,8 +1654,6 @@ Si disegnano i **vettori normali** di $z=x\,e^{-x^2-y^2}$.
 
 ##### **11.9.4. Mostrare una proprietà in 3D**
 
-<!-- SOURCE_VISUAL id="IS11-V104" source="L11-web-v24.pdf" page="146" type="grafico" description="Superficie z = x exp(-x^2-y^2) colorata con la pendenza e barra dei colori" reason="Colorazione visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123213923.png)
 
@@ -1817,8 +1673,6 @@ Si mappa con una **tavolozza adatta** il **gradiente** di $z=x\,e^{-x^2-y^2}$.
 
 ##### **11.9.5. Ispezionare superfici di decisione aggiungendo le luci**
 
-<!-- SOURCE_VISUAL id="IS11-V105" source="L11-web-v24.pdf" page="148" type="grafico" description="Superficie sin(r)/r illuminata con luce e riflessi Phong" reason="Effetto dell'illuminazione visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123214019.png)
 
@@ -1838,8 +1692,6 @@ set(findobj(gca,'type','surface'), ...
 
 ##### **11.9.6. Dati 3D: vettori di velocità in un getto di fluido**
 
-<!-- SOURCE_VISUAL id="IS11-V106" source="L11-web-v24.pdf" page="150" type="grafico" description="Tre fette ortogonali del volume flow colorate per velocità, in prospettiva con luce" reason="Fette del volume visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123214055.png)
 
@@ -1890,15 +1742,11 @@ view(45,30); daspect([1,1,.4]); lightangle(45,30); lighting phong
 - **Il nostro test**: su questa piccola rete **non è più chiaro della matrice di confusione**; servono dati più grandi e più strutturati.
 - **Perché in appendice**: è una **tecnica di frontiera**; l’esame copre i concetti fondamentali della lezione.
 
-<!-- SOURCE_VISUAL id="IS11-V107" source="L11-web-v24.pdf" page="153" type="grafico" description="Grafo Ball Mapper delle 397 immagini di test in 26 nodi colorati per tasso di errore" reason="Grafo visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123214129.png)
 
 **La figura originale di Sankey**, con le sue molte biforcazioni, chiude l’appendice.
 
-<!-- SOURCE_VISUAL id="IS11-V108" source="L11-web-v24.pdf" page="154" type="figura" description="La figura originale di Sankey con molte biforcazioni" reason="Figura storica visibile solo nell'immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123214142.png)
 

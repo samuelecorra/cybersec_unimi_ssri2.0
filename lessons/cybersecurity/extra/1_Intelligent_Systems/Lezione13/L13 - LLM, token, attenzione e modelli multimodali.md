@@ -35,8 +35,6 @@ La lezione copre **solo ciò che serve per lavorare con gli agenti in modo consa
 
 > 📌 **Promemoria.** Quando si interagisce con un LLM si sta parlando con un **modello addestrato**: in sostanza una **matrice di pesi e di valori di probabilità**. L’obiettivo è **capire il sistema abbastanza bene da usarlo in modo sicuro, critico e produttivo**.
 
-<!-- SOURCE_VISUAL id="IS13-V01" source="L13-web.pdf" page="4" type="figura" description="Promemoria: l'interlocutore è un modello addestrato fatto di pesi e probabilità" reason="Illustrazioni visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123225240.png)
 
@@ -53,8 +51,6 @@ Che cos’è un LLM, che cos’è un agente, e dove si collocano nel flusso di l
 > - Nella forma più semplice riceve **testo in ingresso** e genera **testo in uscita**.
 > - Nei sistemi moderni riceve un **contesto più ampio** (istruzioni, cronologia della conversazione, file, risultati di strumenti, memoria) e produce la **continuazione più probabile**: una risposta, un riassunto, una spiegazione, del codice o un piano.
 
-<!-- SOURCE_VISUAL id="IS13-V02" source="L13-web.pdf" page="6" type="figura" description="Un LLM riceve un contesto e produce la continuazione più probabile" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123225353.png)
 
@@ -66,8 +62,6 @@ Che cos’è un LLM, che cos’è un agente, e dove si collocano nel flusso di l
 
 Gli agenti **non sono modelli separati**: sono **sistemi costruiti attorno a un LLM**. La differenza chiave è il **ciclo**: ricevere un obiettivo, chiamare il modello, usare contesto e strumenti, osservare i risultati e iterare.
 
-<!-- SOURCE_VISUAL id="IS13-V03" source="L13-web.pdf" page="7" type="figura" description="Il ciclo dell'agente attorno a un LLM: obiettivo, modello, strumenti, osservazione, iterazione" reason="Illustrazione del ciclo visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123225345.png)
 
@@ -116,8 +110,6 @@ La spina dorsale resta il flusso di lavoro del ML; gli agenti sono un **supporto
 
 **Usare gli agenti per migliorare il contesto di progetto.** Un agente può raccogliere vincoli, stato degli esperimenti, decisioni già prese e documenti del progetto, e restituirli in una forma che rende più informata ogni fase successiva (il *context engineering* della Lezione 15).
 
-<!-- SOURCE_VISUAL id="IS13-V04" source="L13-web.pdf" page="12" type="schema" description="Uso degli agenti per migliorare il contesto di progetto lungo il flusso di lavoro" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123225532.png)
 
@@ -140,8 +132,6 @@ Con un input testuale si distinguono tre famiglie di compiti:
 
 Gli LLM moderni si usano **soprattutto come modelli generativi**, ma molte applicazioni industriali hanno ancora bisogno di **classificazione** e di **estrazione a livello di token**.
 
-<!-- SOURCE_VISUAL id="IS13-V05" source="L13-web.pdf" page="14" type="schema" description="Classificazione, etichettatura a livello di token e generazione sullo stesso testo" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123225614.png)
 
@@ -162,8 +152,6 @@ $$\text{precisione}=\frac{TP}{TP+FP},\qquad \text{recall}=\frac{TP}{TP+FN},\qqua
 
 $$\text{precisione}=\frac{8}{10}=0{,}80,\qquad \text{recall}=\frac{8}{12}=0{,}67,\qquad F_1=\frac{2\cdot 0{,}80\cdot 0{,}67}{0{,}80+0{,}67}=0{,}73.$$
 
-<!-- SOURCE_VISUAL id="IS13-V06" source="L13-web.pdf" page="15" type="figura" description="Esempio di estrazione del sentiment da testi" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123225700.png)
 
@@ -175,8 +163,6 @@ $$\text{precisione}=\frac{8}{10}=0{,}80,\qquad \text{recall}=\frac{8}{12}=0{,}67
 
 Il NER si valuta a **livello di token** o a **livello di intervallo di entità** (*entity span*), di solito **per tipo di entità**, con accuratezza, precisione, recall e F1.
 
-<!-- SOURCE_VISUAL id="IS13-V07" source="L13-web.pdf" page="16" type="figura" description="Esempio di riconoscimento delle entità con i tipi evidenziati nel testo" reason="Entità evidenziate visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123225710.png)
 
@@ -194,8 +180,6 @@ Dal testo «*the machine stopped suddenly*»:
 | 2-gramma | *machine stopped* |
 | 3-gramma | *the machine stopped* |
 
-<!-- SOURCE_VISUAL id="IS13-V08" source="L13-web.pdf" page="17" type="figura" description="Esempio di traduzione automatica" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123225735.png)
 
@@ -280,8 +264,6 @@ Nel **BPE a livello di byte** (famiglia GPT) le unità di base sono i **256 byte
 
 ##### **3.1.2. Modi diversi di creare i token e il tokenizzatore**
 
-<!-- SOURCE_VISUAL id="IS13-V09" source="L13-web.pdf" page="23" type="schema" description="Modi diversi di creare i token: parola, sotto-parola, carattere" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123230342.png)
 
@@ -305,8 +287,6 @@ La parola deformata «*reaaaally*» non è nel vocabolario e diventa `[UNK]`; i 
 
 Come un testo grezzo diventa input numerico per un LLM: il **tokenizzatore** converte il testo in **token** e **ID dei token** (numeri interi, la posizione nel vocabolario), e lo **strato di embedding** associa a quegli ID dei **vettori densi**.
 
-<!-- SOURCE_VISUAL id="IS13-V10" source="L13-web.pdf" page="26" type="schema" description="Dal testo ai token, agli ID dei token e agli embedding densi" reason="Passaggi visibili solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123230440.png)
 
@@ -324,8 +304,6 @@ $$\langle\text{teddy bear},\text{book}\rangle=0,\qquad \langle\text{teddy bear},
 
 > 📌 **Per questo servono embedding (buoni!)**: collocano i **token correlati vicini** nello spazio vettoriale. Dimensioni: il vettore one-hot ha dimensione $|V|$ (il vocabolario, per esempio **50 000 numeri per token**); un embedding ha $d\ll|V|$ (per esempio **768**).
 
-<!-- SOURCE_VISUAL id="IS13-V11" source="L13-web.pdf" page="27" type="figura" description="Vettori one-hot ortogonali: teddy bear, book e soft hanno prodotto scalare nullo" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123230516.png)
 
@@ -340,8 +318,6 @@ $$\cos\text{-similarity}(\text{teddy bear},\text{soft})\ \text{alta (per esempio
 
 I valori sono illustrativi. Così «*teddy bear*» è **più vicino a «*soft*» che a «*book*»** nello spazio vettoriale appreso.
 
-<!-- SOURCE_VISUAL id="IS13-V12" source="L13-web.pdf" page="28" type="figura" description="Embedding appresi: teddy bear vicino a soft e lontano da book" reason="Posizioni nello spazio visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123230806.png)
 
@@ -370,8 +346,6 @@ Similarità e distanza coseno sono state introdotte nella Lezione 8.
 
 **Esempio**: $a=(1,1)$, $b=(2,2)$: stessa direzione, $b$ lungo il doppio. $\cos(a,b)=\dfrac{4}{\sqrt2\cdot\sqrt8}=\dfrac44=1$, ma la distanza euclidea è $\sqrt2\approx 1{,}41$.
 
-<!-- SOURCE_VISUAL id="IS13-V13" source="L13-web.pdf" page="31" type="grafico" description="Due vettori con la stessa direzione e lunghezze diverse: coseno 1, distanza euclidea 1.41" reason="Geometria dei vettori visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123231010.png)
 
@@ -398,8 +372,6 @@ Dollari per milione di token (scala logaritmica nella figura), con il costo di u
 | Claude Opus 5.5 | 4 | 20 | 0,018 $ | 18 000 $ |
 | GPT-6 Astra (ammiraglia) | 10 | 50 | 0,045 $ | 45 000 $ |
 
-<!-- SOURCE_VISUAL id="IS13-V14" source="L13-web.pdf" page="33" type="grafico" description="Barre in scala logaritmica dei prezzi per milione di token di input e output dei modelli" reason="Grafico a barre visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123231128.png)
 
@@ -418,8 +390,6 @@ Dollari per milione di token (scala logaritmica nella figura), con il costo di u
 - **Parole che compaiono in contesti simili tendono a ottenere vettori simili.**
 - Una parola → [Word2Vec] → un vettore.
 
-<!-- SOURCE_VISUAL id="IS13-V15" source="L13-web.pdf" page="34" type="figura" description="Word2Vec: una parola diventa un vettore denso" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123231234.png)
 
@@ -431,8 +401,6 @@ Dollari per milione di token (scala logaritmica nella figura), con il costo di u
 <!-- SOURCE_VISUAL id="IS13-V16" source="L13-web.pdf" page="35" type="schema" description="Finestra di contesto che scorre sul testo per creare le coppie parola-contesto di Word2Vec" reason="Finestre di contesto visibili solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS13-V17" source="L13-web.pdf" page="36" type="schema" description="Architettura di Word2Vec: input one-hot, strato latente denso, output sulle parole del contesto" reason="Struttura della rete visibile solo nel diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123231831.png)
 
@@ -465,8 +433,6 @@ Dollari per milione di token (scala logaritmica nella figura), con il costo di u
 
 Una rete **feed-forward** standard **non ricorda naturalmente** che cosa è venuto prima. Le **reti neurali ricorrenti** (RNN, *Recurrent Neural Network*) sono state introdotte per elaborare le sequenze **un passo alla volta**, mantenendo uno **stato interno** che porta l’informazione degli input precedenti: sono le **precursori degli LLM**.
 
-<!-- SOURCE_VISUAL id="IS13-V18" source="L13-web.pdf" page="39" type="schema" description="Rete ricorrente con stato interno che porta l'informazione degli input precedenti (la p. 40 mostra lo stesso schema srotolato: A cute teddy bear is reading tradotto in Un ours en peluche mignon lit)" reason="Struttura della rete visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123231953.png)
 
@@ -476,8 +442,6 @@ Lo schema srotolato della slide successiva mostra gli input $x_1,\dots,x_n$ («*
 
 **Esempio.** La frase «*The movie was great*» è la sequenza $x^{\langle 1\rangle}$ = «The», $x^{\langle 2\rangle}$ = «movie», $x^{\langle 3\rangle}$ = «was», $x^{\langle 4\rangle}$ = «great», con lunghezza $T_x=4$. Nella figura lo stato nascosto $h^{\langle t\rangle}$ è indicato con $a^{\langle t\rangle}$.
 
-<!-- SOURCE_VISUAL id="IS13-V19" source="L13-web.pdf" page="41" type="schema" description="RNN che elabora The movie was great un token alla volta con gli stati a<t>" reason="Catena degli stati visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232039.png)
 
@@ -495,8 +459,6 @@ Lo schema srotolato della slide successiva mostra gli input $x_1,\dots,x_n$ («*
 
 Pesi di attenzione illustrativi per la parola successiva: **reading 0,60**, **teddy bear 0,25**, **is 0,15**.
 
-<!-- SOURCE_VISUAL id="IS13-V20" source="L13-web.pdf" page="42" type="schema" description="Attenzione per la parola successiva con frecce di spessore proporzionale ai pesi: reading 0.60, teddy bear 0.25, is 0.15" reason="Frecce pesate visibili solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232058.png)
 
@@ -505,8 +467,6 @@ Pesi di attenzione illustrativi per la parola successiva: **reading 0,60**, **te
 - Introdotta nell’articolo del **2017** «***Attention Is All You Need***» (Vaswani et al.).
 - Risultati **allo stato dell’arte** nella traduzione automatica.
 
-<!-- SOURCE_VISUAL id="IS13-V21" source="L13-web.pdf" page="43" type="figura" description="Self-attention dall'articolo Attention Is All You Need" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232144.png)
 
@@ -550,8 +510,6 @@ Sequenza di $n=5$ token: «*A cute teddy bear reads*». Righe: il token che guar
 - **Finestra di contesto** = numero **massimo di token** (prompt + risposta) che il modello elabora **in una volta**.
 - **Elementi**: $n=5\to 25$; $n=1000\to 10^6$; $n=10\,000\to 10^8$: **10 volte più token = 100 volte più elementi**.
 
-<!-- SOURCE_VISUAL id="IS13-V23" source="L13-web.pdf" page="46" type="figura" description="Crescita quadratica della matrice di attenzione con la lunghezza del contesto" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232323.png)
 
@@ -576,8 +534,6 @@ $$\text{rappresentazione del token}=\text{embedding del token}+\text{codifica po
 
 Il Transformer elabora così sia **che cosa** è il token sia **dove** si trova nella sequenza.
 
-<!-- SOURCE_VISUAL id="IS13-V24" source="L13-web.pdf" page="48" type="schema" description="Dal testo agli embedding sommati alla codifica posizionale come input della self-attention" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232405.png)
 
@@ -594,8 +550,6 @@ $$q_i=W_Qx_i,\qquad k_i=W_Kx_i,\qquad v_i=W_Vx_i,\qquad s_{ij}=q_i\cdot k_j.$$
 
 $x_i$ è la rappresentazione del token (embedding + posizione, $d_{\text{model}}$ numeri); $W_Q,W_K\in\mathbb{R}^{d_k\times d_{\text{model}}}$ e $W_V\in\mathbb{R}^{d_v\times d_{\text{model}}}$ sono **appresi**. **Esempio**: $d_{\text{model}}=512$, $d_k=64$: $W_Q$ ha $64\cdot 512=32\,768$ numeri.
 
-<!-- SOURCE_VISUAL id="IS13-V25" source="L13-web.pdf" page="49" type="schema" description="Proiezioni Query, Key e Value della rappresentazione di un token" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232543.png)
 
@@ -643,8 +597,6 @@ $$\text{Attention}(Q,K,V)=\text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right
 
 Ognuna delle $h$ **teste** ha i propri $W_Q$, $W_K$, $W_V$; le $h$ uscite vengono **concatenate** e **mescolate da uno strato lineare**. **Esempio**: $h=8$, $d_k=64$, $d_{\text{model}}=8\cdot 64=512$.
 
-<!-- SOURCE_VISUAL id="IS13-V26" source="L13-web.pdf" page="52" type="schema" description="Attenzione multi-testa: h teste in parallelo, concatenazione e strato lineare" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232634.png)
 
@@ -654,8 +606,6 @@ Ognuna delle $h$ **teste** ha i propri $W_Q$, $W_K$, $W_V$; le $h$ uscite vengon
 
 > 📌 **Encoder-decoder.** Un modello encoder-decoder **trasforma una sequenza di ingresso in una sequenza di uscita**: prima **codifica** l’input in una **rappresentazione numerica compatta**, poi la **decodifica** nell’uscita desiderata. Si usa **anche per le immagini**.
 
-<!-- SOURCE_VISUAL id="IS13-V27" source="L13-web.pdf" page="53" type="schema" description="Architettura encoder-decoder per testo e per immagini" reason="Schema presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232926.png)
 
@@ -663,8 +613,6 @@ Ognuna delle $h$ **teste** ha i propri $W_Q$, $W_K$, $W_V$; le $h$ uscite vengon
 
 Il **Transformer** combina gli elementi visti: embedding, codifica posizionale, attenzione multi-testa, strati feed-forward, connessioni residue e normalizzazioni, impilati in un encoder e in un decoder.
 
-<!-- SOURCE_VISUAL id="IS13-V28" source="L13-web.pdf" page="54" type="schema" description="Architettura completa del Transformer" reason="Pagina con solo diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123232942.png)
 
@@ -674,8 +622,6 @@ Il **Transformer** combina gli elementi visti: embedding, codifica posizionale, 
 
 GPT tiene **solo la parte decoder** del Transformer originale (**decoder-only**). Il Transformer originale, usato nell’esempio della traduzione «*I like science*» → «*Ich mag Wissenschaft*», è un **encoder-decoder**.
 
-<!-- SOURCE_VISUAL id="IS13-V29" source="L13-web.pdf" page="55" type="schema" description="Transformer originale encoder-decoder e GPT decoder-only con l'esempio di traduzione" reason="Confronto delle architetture visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233018.png)
 
@@ -691,8 +637,6 @@ GPT tiene **solo la parte decoder** del Transformer originale (**decoder-only**)
 - **GPT** ha introdotto l’idea di un **Generative Pre-trained Transformer**: un modello basato sul Transformer, addestrato su grandi corpora di testo e usato per **generare testo token per token**.
 - Sistemi moderni come **ChatGPT**, **Gemini**, **Claude** e gli **assistenti di programmazione** sono costruiti attorno alla **stessa famiglia generale di modelli**.
 
-<!-- SOURCE_VISUAL id="IS13-V30" source="L13-web.pdf" page="57" type="figura" description="Dai Transformer ai sistemi moderni basati su LLM" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233054.png)
 
@@ -702,8 +646,6 @@ GPT tiene **solo la parte decoder** del Transformer originale (**decoder-only**)
 
 La slide mostra il passaggio dall’architettura del modello al **sistema** che lo circonda: il Transformer diventa il nucleo di un sistema con contesto, strumenti, memoria e controlli.
 
-<!-- SOURCE_VISUAL id="IS13-V31" source="L13-web.pdf" page="58" type="schema" description="Dal Transformer al sistema agentico con contesto, strumenti, memoria e controlli" reason="Passaggio architetturale illustrato solo graficamente" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233128.png)
 
@@ -719,8 +661,6 @@ I modelli multimodali moderni possono elaborare **diverse modalità di input**:
 - **documenti**;
 - **dati strutturati simili a quelli dei sensori**, **se rappresentati in modo adeguato**.
 
-<!-- SOURCE_VISUAL id="IS13-V32" source="L13-web.pdf" page="59" type="figura" description="Modalità di input di un modello multimodale" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233139.png)
 
@@ -731,8 +671,6 @@ I modelli multimodali moderni possono elaborare **diverse modalità di input**:
 - Il **testo diventa token**.
 - Le **immagini diventano patch visive** o **embedding visivi**.
 
-<!-- SOURCE_VISUAL id="IS13-V33" source="L13-web.pdf" page="60" type="schema" description="Testo convertito in token e immagine divisa in patch visive nello stesso spazio" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233202.png)
 
@@ -757,22 +695,16 @@ Un sistema di AI multimodale può combinare **diversi canali di ingresso e di us
 
 Un **modello promptable** svolge compiti diversi in base alle **istruzioni del prompt**, senza essere riaddestrato per ciascun compito: lo stesso modello descrive un’immagine, risponde a una domanda su di essa o estrae dati strutturati.
 
-<!-- SOURCE_VISUAL id="IS13-V34" source="L13-web.pdf" page="62" type="figura" description="Modelli guidati da prompt: lo stesso modello svolge compiti diversi secondo il prompt" reason="Pagina con sole immagini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233303.png)
 
 **Modelli promptable (modelli LLaVA).** LLaVA (*Large Language and Vision Assistant*) collega un encoder visivo a un LLM e risponde a domande sulle immagini. *Prospettiva 2026, non d’esame (LLaVA e altri nomi di prodotto).*
 
-<!-- SOURCE_VISUAL id="IS13-V35" source="L13-web.pdf" page="63" type="figura" description="Esempi dei modelli LLaVA guidati da prompt" reason="Esempi visibili solo nelle immagini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233337.png)
 
 **Ancora visiva: usi IS4 dei modelli promptable.**
 
-<!-- SOURCE_VISUAL id="IS13-V36" source="L13-web.pdf" page="64" type="figura" description="Usi IS4 dei modelli promptable" reason="Pagina con sola immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233425.png)
 
@@ -784,8 +716,6 @@ Un **modello promptable** svolge compiti diversi in base alle **istruzioni del p
 
 **Ancora visiva: i modelli promptable come strumenti di supporto in IS4.** Il ruolo corretto è quello di **supporto**: preparare report, descrivere difetti per un operatore, estrarre dati da documenti, lasciando la decisione critica a un modello validato o a una persona.
 
-<!-- SOURCE_VISUAL id="IS13-V37" source="L13-web.pdf" page="66" type="figura" description="I modelli promptable come strumenti di supporto in IS4" reason="Pagina con sola immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233517.png)
 
@@ -793,8 +723,6 @@ Un **modello promptable** svolge compiti diversi in base alle **istruzioni del p
 
 Un **router** (*gating network*, rete di instradamento) invia ogni token a **$k$ dei $E$ esperti**; **solo quei $k$ vengono calcolati**. Nella figura $k=1$ su $E=4$. **Parametri totali $\gg$ parametri attivi.**
 
-<!-- SOURCE_VISUAL id="IS13-V38" source="L13-web.pdf" page="67" type="schema" description="Mixture of experts: router che invia ogni token a uno dei quattro esperti" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233543.png)
 
@@ -804,8 +732,6 @@ Un **router** (*gating network*, rete di instradamento) invia ogni token a **$k$
 
 **Mixture of experts (esempio multimodale).** Lo stesso principio si applica ai modelli multimodali: esperti diversi possono specializzarsi su token di modalità diverse.
 
-<!-- SOURCE_VISUAL id="IS13-V39" source="L13-web.pdf" page="68" type="schema" description="Mixture of experts in un modello multimodale" reason="Pagina con solo diagramma" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233604.png)
 
@@ -818,8 +744,6 @@ Un **router** (*gating network*, rete di instradamento) invia ogni token a **$k$
 
 > 📌 **Agente.** Un agente **non è solo un modello linguistico**: è un **LLM inserito in un ciclo di lavoro** con **contesto**, **memoria**, **strumenti**, **controlli** ed eventualmente **approvazione umana**.
 
-<!-- SOURCE_VISUAL id="IS13-V40" source="L13-web.pdf" page="69" type="figura" description="L'agente come LLM inserito in un ciclo con contesto, memoria, strumenti, controlli e approvazione umana" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123233626.png)
 

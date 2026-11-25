@@ -43,8 +43,6 @@ Dati tabellari, partizioni e regole di decisione esplicite.
 - $y$ = **SÌ / NO**;
 - **14 record** illustrativi.
 
-<!-- SOURCE_VISUAL id="IS12-V01" source="L12-web.pdf" page="5" type="tabella" description="Tabella Play Tennis con i 14 record: Outlook, Temperature, Humidity (numerica), Windy e la decisione YES/NO" reason="I valori della tabella sono presenti solo nell'immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123214621.png)
 
@@ -64,8 +62,6 @@ L’albero di Play Tennis è:
   - **Overcast** (nuvoloso) → **YES**;
   - **Rain** (pioggia) → nodo **Windy**: se **No** → **YES**; se **Yes** → **NO**.
 
-<!-- SOURCE_VISUAL id="IS12-V02" source="L12-web.pdf" page="6" type="schema" description="Albero Play Tennis: Outlook alla radice, Humidity sotto Sunny con soglia 72.5%, YES sotto Overcast, Windy sotto Rain" reason="Struttura grafica dell'albero" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123214638.png)
 
@@ -83,8 +79,6 @@ Un esempio in due dimensioni ($x_1$, $x_2$):
 - un **test successivo su $x_2$** produce una **frontiera orizzontale** ($x_2\le 3$?);
 - **due regole definiscono un rettangolo allineato agli assi**: la classe 1 è il riquadro blu $x_1\le 4$ e $x_2\le 3$; tutto il resto è classe 0.
 
-<!-- SOURCE_VISUAL id="IS12-V03" source="L12-web.pdf" page="7" type="schema e grafico" description="Albero x1 <= 4?, x2 <= 3? e la corrispondente partizione del piano con il rettangolo della classe 1" reason="Partizione del piano visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215103.png)
 
@@ -110,8 +104,6 @@ Un esempio in due dimensioni ($x_1$, $x_2$):
 | **pregi** | **implementazione e potatura** più semplici | alberi **meno profondi** |
 | **esempio** | `sklearn.tree.DecisionTreeClassifier` costruisce **alberi binari** | il nodo Outlook di Play Tennis (tre rami) |
 
-<!-- SOURCE_VISUAL id="IS12-V04" source="L12-web.pdf" page="9" type="figura" description="Esempi di diramazione binaria e multipla" reason="Schemi delle diramazioni visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215232.png)
 
@@ -129,8 +121,6 @@ Tre classi diverse di oggetti fisici possono essere rappresentate dalle **stesse
 | **etichetta di classe** | $y\in\{a,o,l\}^{32}$: $a$ = mela (*apple*), $o$ = arancia (*orange*), $l$ = limone (*lemon*) |
 | **matrice dei dati** | $X\in\mathbb{R}^{32\times 2}$: **32 campioni**, **2 feature numeriche** |
 
-<!-- SOURCE_VISUAL id="IS12-V05" source="L12-web.pdf" page="10" type="figura" description="Mele, arance e limoni rappresentati da larghezza e altezza" reason="Illustrazione dei frutti visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215410.png)
 
@@ -138,15 +128,11 @@ Tre classi diverse di oggetti fisici possono essere rappresentate dalle **stesse
 
 **Il dataset simulato.** $X$ è mostrato in forma «feature per riga» per leggibilità (2 righe × 32 campioni); in scikit-learn è memorizzato come **32 righe × 2 colonne**. Il vettore delle classi $y$ ha 32 elementi.
 
-<!-- SOURCE_VISUAL id="IS12-V06" source="L12-web.pdf" page="11" type="tabella" description="Le 32 osservazioni simulate: larghezza, altezza e classe a/o/l" reason="I valori delle misure sono presenti solo nell'immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215424.png)
 
 **Le stesse 32 osservazioni nello spazio delle feature**: ogni punto è un campione (larghezza, altezza); il colore indica la classe $y$.
 
-<!-- SOURCE_VISUAL id="IS12-V07" source="L12-web.pdf" page="12" type="grafico" description="Scatter larghezza-altezza delle 32 osservazioni colorate per classe" reason="Posizioni dei punti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215436.png)
 
@@ -154,8 +140,6 @@ Tre classi diverse di oggetti fisici possono essere rappresentate dalle **stesse
 
 L’albero usa **soglie allineate agli assi**: $w=7{,}3$, $h=7{,}8$, $h=8{,}0$, $w=6{,}6$, $h=6{,}0$ ($w$ = larghezza, $h$ = altezza). **Ogni ramo testa una sola feature**; **ogni regione risultante predice una classe**. Sono 32 punti simulati: **non è una valutazione dell’accuratezza predittiva**.
 
-<!-- SOURCE_VISUAL id="IS12-V08" source="L12-web.pdf" page="13" type="grafico" description="Regioni di decisione rettangolari dell'albero sui frutti con le cinque soglie" reason="Regioni e punti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215444.png)
 
@@ -167,8 +151,6 @@ L’albero usa **soglie allineate agli assi**: $w=7{,}3$, $h=7{,}8$, $h=8{,}0$, 
     - **no** → **$w>6{,}6$?** → da un lato **arancia**, dall’altro **$h>6{,}0$?**, che separa **limone** e **arancia**;
   - **sì** (frutto largo) → **$h>7{,}8$?** → da un lato **arancia**, dall’altro **mela**.
 
-<!-- SOURCE_VISUAL id="IS12-V09" source="L12-web.pdf" page="14" type="schema" description="Albero dei frutti con i cinque test w > 7.3, h > 8.0, h > 7.8, w > 6.6, h > 6.0 e le foglie limone, arancia, mela" reason="Struttura dell'albero e assegnazione dei rami visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215505.png)
 
@@ -186,8 +168,6 @@ Gli **stessi 32 punti didattici**, tre classificatori diversi:
 
 $k$-NN e SVM sono presentati altrove nel corso (Lezioni 19 e successive).
 
-<!-- SOURCE_VISUAL id="IS12-V10" source="L12-web.pdf" page="15" type="grafico" description="Mappe di decisione di albero, kNN e SVM RBF sugli stessi 32 punti" reason="Forme delle frontiere visibili solo nei grafici" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215523.png)
 
@@ -207,8 +187,6 @@ Due strumenti:
 
 Si useranno gli stessi **NODI** e **FOGLIE** di Play Tennis.
 
-<!-- SOURCE_VISUAL id="IS12-V11" source="L12-web.pdf" page="17" type="schema" description="Lo stesso albero Play Tennis da tre punti di vista: struttura, profondità e regole" reason="Tre viste grafiche dell'albero" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215604.png)
 
@@ -232,15 +210,11 @@ Si useranno gli stessi **NODI** e **FOGLIE** di Play Tennis.
 
 La maggior parte delle previsioni richiede solo **un piccolo numero di test `if`**.
 
-<!-- SOURCE_VISUAL id="IS12-V12" source="L12-web.pdf" page="19" type="figura" description="Illustrazione della profondità come numero di decisioni dalla radice alla foglia" reason="Figura raster della slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215620.png)
 
 **Da un albero semplice a un albero molto profondo.** A profondità 2 l’albero è facile da ispezionare; **alberi più profondi possono essere molto più difficili da ispezionare e spiegare**.
 
-<!-- SOURCE_VISUAL id="IS12-V13" source="L12-web.pdf" page="20" type="figura" description="Confronto tra un albero di profondità 2 e un albero molto profondo" reason="Alberi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215630.png)
 
@@ -259,8 +233,6 @@ $$G=1-\sum_{k=1}^{K}p_k^2.$$
 ![](imgs/Pasted%20image%2020261123215648.png)
 
 
-<!-- SOURCE_VISUAL id="IS12-V14" source="L12-web.pdf" page="21" type="figura" description="Miscele di classi diverse con i corrispondenti valori dell'impurità di Gini" reason="Miscele illustrate visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215657.png)
 
@@ -337,8 +309,6 @@ $$IG=H(\text{padre})-\sum_{c}\frac{n_c}{n}H(c).$$
 
 Le tre misure hanno lo **stesso ordinamento di purezza**, ma **scale diverse**: sono **tutte nulle per i nodi puri** e **massime con etichette binarie bilanciate**.
 
-<!-- SOURCE_VISUAL id="IS12-V15" source="L12-web.pdf" page="26" type="grafico" description="Curve di Gini, entropia ed errore di classificazione in funzione della proporzione p per due classi" reason="Curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123215919.png)
 
@@ -412,8 +382,6 @@ $$X=[1\ 2\ 3\ 4\ 5\ 6\ 7],\qquad y=[0\ 0\ 1\ 1\ 2\ 2\ 2].$$
 
 Ogni albero usa **7 estrazioni accoppiate con reinserimento** (si estrae la coppia $(x_i,y_i)$, non $x$ e $y$ separatamente). **I duplicati e i campioni omessi generano regole diverse.**
 
-<!-- SOURCE_VISUAL id="IS12-V16" source="L12-web.pdf" page="31" type="schema" description="Training set originale, tre campioni bootstrap e i tre alberi con soglie diverse" reason="Schema grafico dei tre alberi" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123220112.png)
 
@@ -431,8 +399,6 @@ Ogni albero usa **7 estrazioni accoppiate con reinserimento** (si estrae la copp
   - **regressione**: **media** delle previsioni numeriche.
 - L’output finale combina tutti gli alberi; gli errori, se **imperfettamente correlati**, tendono a compensarsi.
 
-<!-- SOURCE_VISUAL id="IS12-V17" source="L12-web.pdf" page="32" type="schema" description="Random forest: lo stesso input valutato da più alberi bootstrap e voto di maggioranza" reason="Schema della foresta visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123220127.png)
 
@@ -446,8 +412,6 @@ Ogni albero usa **7 estrazioni accoppiate con reinserimento** (si estrae la copp
 
 Dopo la definizione dell’architettura: **100 alberi randomizzati** addestrati sugli **stessi 32 punti didattici**.
 
-<!-- SOURCE_VISUAL id="IS12-V18" source="L12-web.pdf" page="33" type="grafico" description="Regioni di decisione di una random forest di 100 alberi sui 32 frutti simulati" reason="Regioni visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123220137.png)
 
@@ -541,8 +505,6 @@ X, y = data.data, data.target
 
 Il vettore target $y$ contiene **un’etichetta di classe per campione**; la matrice delle feature $X$ contiene **13 misure per campione**.
 
-<!-- SOURCE_VISUAL id="IS12-V19" source="L12-web.pdf" page="43" type="schermata" description="Output Python del vettore y e delle prime righe della matrice X del dataset Wine" reason="Valori stampati visibili solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123220350.png)
 
@@ -563,8 +525,6 @@ clf.fit(X, y)
 
 **L’albero a profondità 3**, addestrato sui 178 campioni:
 
-<!-- SOURCE_VISUAL id="IS12-V20" source="L12-web.pdf" page="45" type="schema" description="Albero di decisione Wine con profondità massima 3: soglie, Gini, numero di campioni e classi in ogni nodo" reason="Nodi, soglie e valori visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123220404.png)
 
@@ -577,8 +537,6 @@ clf.fit(X, y)
 
 **L’albero a profondità 5.** Aumentare la profondità massima può **ridurre l’impurità di training**, ma può **aumentare la varianza** e la **complessità** dell’albero.
 
-<!-- SOURCE_VISUAL id="IS12-V21" source="L12-web.pdf" page="47" type="schema" description="Albero di decisione Wine con profondità massima 5" reason="Nodi, soglie e valori visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123220506.png)
 
@@ -630,8 +588,6 @@ print(export_text(clf,
 
 **Perché è utile?** Permette di **ispezionare esattamente quali feature e soglie** sono state scelte. **La leggibilità da sola non prova stabilità né equità.**
 
-<!-- SOURCE_VISUAL id="IS12-V22" source="L12-web.pdf" page="52" type="schermata" description="Output di export_text con le regole if-then dell'albero Wine" reason="Regole stampate visibili solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123220705.png)
 
