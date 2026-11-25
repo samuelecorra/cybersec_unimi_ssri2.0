@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "generatedAt": "2026-11-25T04:53:59.446Z",
+  "generatedAt": "2026-11-25T15:15:43.068Z",
   "stageRoot": ".cache/r2-upload",
-  "totalObjects": 4597,
-  "originalBytes": 2187148232,
-  "stagedBytes": 1565681342,
+  "totalObjects": 4806,
+  "originalBytes": 2240375449,
+  "stagedBytes": 1593353464,
   "losslessWebpCount": 3914,
   "losslessWebpBytesSaved": 621466890,
   "assets": {
@@ -36782,6 +36782,1678 @@
       "originalSize": 414962,
       "sourceSha256": "ad78756d50b4ac161c64897d89b4ccff20e9024c28de8e59acb76d055862dc19",
       "sha256": "0774618a3297775b6fd94eb54cc69242e1945665f8ab356348c84156382204cb",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060352.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060352.webp",
+      "size": 46938,
+      "originalSize": 119381,
+      "sourceSha256": "cb5c76f7bcc8d90a7d89a26f0a37afd0c35eecc6babf4c0d0790772a67d07ee2",
+      "sha256": "57674d045863ca57927b94d64ca7dc6a394d90dc4fef2428ba859d588efe59e4",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060425.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060425.webp",
+      "size": 61220,
+      "originalSize": 185211,
+      "sourceSha256": "cb6998e6bc6cf6a711a76c4799a48cc9a02af1c3b87d46e869fa3c23f5624764",
+      "sha256": "5aa0c8cca46ddf319cfc58936f0bb7a1d5a90cdd8e5506afc3888ec05dc4bd2a",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060449.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060449.webp",
+      "size": 165692,
+      "originalSize": 278683,
+      "sourceSha256": "7dd5f772cdb18f9a038475592260344317971fabadc155cb4e635546786d264b",
+      "sha256": "11f5bdcf9d0c2f64b243ec8f9f48205f3312a057aca3b2263cd856abf72a9872",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060518.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060518.webp",
+      "size": 18748,
+      "originalSize": 56539,
+      "sourceSha256": "1424332de588a8aec77973b71675f0ec16ac8f116bc1d5978604ae0224444259",
+      "sha256": "49f54ee08ae3dcb74fd5665c8fd94526f396ccd74ffc85fec1ec3ca43e30c244",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060546.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060546.webp",
+      "size": 54916,
+      "originalSize": 163600,
+      "sourceSha256": "427b653e56bdec498c9857878da5856d63f4b00b181582620c74e287692d2660",
+      "sha256": "0e39463ec6f9dada2cdaa9eaf678546ae2d3e0264ff16397265aa3deb5b79bd4",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060612.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060612.webp",
+      "size": 26180,
+      "originalSize": 89190,
+      "sourceSha256": "cb4876086bdbc7e317ff2b0fd6aca578d61b9dc8d4c3a10557ae917785d92967",
+      "sha256": "727558907e27d5729e0f23128928938ab01928788fa8b6186d3e0feee92e3012",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060626.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060626.webp",
+      "size": 28428,
+      "originalSize": 87197,
+      "sourceSha256": "a9a45d6323ba4ab0d5f9158c40eaa35ee51d733764984536cc728bd981137330",
+      "sha256": "4f8250f34d4ec8a0e3b1cf95a109a46f64876a7192ff8972c895c2f69255792f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060639.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060639.webp",
+      "size": 19740,
+      "originalSize": 47653,
+      "sourceSha256": "19eb065f1f72d1a231a5d479eec61294aafbba3f9e004a5381bfd0cc55fbba23",
+      "sha256": "7703e14c73c0b732a012483c5e604cbae8ad4c2a31fdcaea2f741474f7841151",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060749.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060749.webp",
+      "size": 263646,
+      "originalSize": 510305,
+      "sourceSha256": "2a466b1b7a4ab72c02c1444f7e93401ae8e5ba1dbaa4a81fd7493f56ba146bb4",
+      "sha256": "667d6599dcd7673ebf8fd382f5bce00e6b2de8369ab59510079de0b428cc9be8",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060919.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060919.webp",
+      "size": 100334,
+      "originalSize": 247398,
+      "sourceSha256": "042026a7f40495db7631c54c4dafe43fcc311193c23876dff0ad8a3e90c2af06",
+      "sha256": "a434d9d6c9b1f4b9f9d29e569bc6a41483101942f0009554b3ba25b56233863e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060934.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060934.webp",
+      "size": 237708,
+      "originalSize": 492185,
+      "sourceSha256": "466e9cdc4c5304421c275f04ff05a10c381d47095717f6bc0eadd1af2f0076ea",
+      "sha256": "9770c7d9293fbdc034028677d4b4dcfeabf7b51f2510faf169d49835c7d8160a",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060945.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125060945.webp",
+      "size": 122162,
+      "originalSize": 241850,
+      "sourceSha256": "b3f8d736e22d766cd5ea190361e387efb132673f9c534d7f2132e5b147896455",
+      "sha256": "b19ec9ae15530d0f3eca93e35dd112558758a192bdae29be7613d290d6d07f00",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061004.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061004.webp",
+      "size": 51212,
+      "originalSize": 138287,
+      "sourceSha256": "47a9c272a804395022281d9080a20940beb3da877486ea3d242817727014837c",
+      "sha256": "682b23ddf46f4bc00058e2d9028d148c997951ce0aa6724e32ca4f4a213b94e8",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061020.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061020.webp",
+      "size": 34692,
+      "originalSize": 99311,
+      "sourceSha256": "be9f8629d57e01bd0313e51f7b43315bfc98b99ee2ad003efe1994b2f4d2cf89",
+      "sha256": "73c6852ed5d5a60704e5ca2dbdd90036fcc84a28b609e3adfbc2fff96da5391e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061036.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061036.webp",
+      "size": 62542,
+      "originalSize": 172317,
+      "sourceSha256": "48b53816a87835bb026623e5294f9e403989033a8fb1747454c98213bc62665c",
+      "sha256": "61c68272d8ade05391b67f5018b04584d569f3961e8b80f2db64960b00b0aef3",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061115.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061115.webp",
+      "size": 132822,
+      "originalSize": 224289,
+      "sourceSha256": "ccc0ee7fc8fe447b1a1dd8842186d870a016c03ce42644e770473352b8614fe5",
+      "sha256": "1f0cc81e123c770548f46acb2927f243b55168b4d20524fa14bb4206c5e52741",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061127.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061127.webp",
+      "size": 28442,
+      "originalSize": 69470,
+      "sourceSha256": "6b7f47a97f41db62034f681311e8428c233935c8257a04c7ad9d2a6d2606d845",
+      "sha256": "fa0cddc461247fc71ed23bd1cb08c2b33d8a484ce75ae1965340cb431a5cd45b",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061137.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061137.webp",
+      "size": 227728,
+      "originalSize": 573620,
+      "sourceSha256": "add33514ec59865057de83097d74c102b065f4014287863ed8e1f1a76efde847",
+      "sha256": "154f79403a9da2acc820249d621afd939d8b4e53483f0760328dc6970c0314ef",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061157.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061157.webp",
+      "size": 67100,
+      "originalSize": 183861,
+      "sourceSha256": "022e8b2b814d7bef6d5f63cea0fc3f3f56dc19dacf9c00452373aa9edcec4534",
+      "sha256": "a9a932fae1667d831bbebac1ff015e6d1723e2b4a6313501c2a70ef78e71a65b",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061216.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061216.webp",
+      "size": 140080,
+      "originalSize": 325658,
+      "sourceSha256": "0018ec9206399fe29a13d1932dfe9cdc370c9e84d790ee471ebf82d40f93c73c",
+      "sha256": "26144a7c9cbc16dca50f01dfe47cbb45c4063832db52db7f1e88c77ecbfec578",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061244.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061244.webp",
+      "size": 35774,
+      "originalSize": 78482,
+      "sourceSha256": "64bea7029f801732c2b7f514f6cfb759f324e72901ac8fd822de1d5197c6181a",
+      "sha256": "a38f5a4ea313c3ce8a9592604ea175d279cdfe3e27a9f9b7e9f3fcc03b1acf30",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061258.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061258.webp",
+      "size": 27322,
+      "originalSize": 84779,
+      "sourceSha256": "5d577c5ca4e3514568d0184f1873e9b027427edb9f4f12d9c40f31382120429a",
+      "sha256": "c4ef628ce97442d930a5ea370b31972b007c5dbc5e8619870dba21f85ed2d5cb",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061322.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061322.webp",
+      "size": 34126,
+      "originalSize": 62406,
+      "sourceSha256": "262a1ab115d7ef630d3d54b1bdb775883d590f714020ae991ca9086a20644e40",
+      "sha256": "0b905c83d40109a679735d64222b0fbe520ddaf3f01def77d8de0a6aa1aeeeae",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061333.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061333.webp",
+      "size": 24336,
+      "originalSize": 71096,
+      "sourceSha256": "702f4413e543128f3c0d9cae7d153bbbac282bf7accfaa0041d6d2b03ae5f5f4",
+      "sha256": "e72aec916c1207af78beea441a6a73e73d5300d6ac19816585d02ef45714eb43",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061344.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061344.webp",
+      "size": 79002,
+      "originalSize": 227864,
+      "sourceSha256": "93c5d3cba1dc38d9ddbb38f0253e4bce968f3e2526986969b32ebc1947b74eb4",
+      "sha256": "fef4a9f95432b1d58f39ff9c891a93e2a2c0526e7f663d1f6a9128883f7e2672",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061402.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061402.webp",
+      "size": 48158,
+      "originalSize": 105570,
+      "sourceSha256": "9de0fe109394adab988fee8da5369f5feaa08967e3a026ea15f38e6869b30893",
+      "sha256": "8880d659de45dd63c267129056bf0a7b5042d739f0e37938703cf27fd7996649",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061526.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061526.webp",
+      "size": 29020,
+      "originalSize": 78826,
+      "sourceSha256": "0ce93b6a21f01d01a7665378066bf7f064308e6471a9df1248a18ff220d1c145",
+      "sha256": "d863999c82df2a38789995757c9866084f078a7698a25ffdcc71e070bf7cf8f2",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061538.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061538.webp",
+      "size": 22568,
+      "originalSize": 67259,
+      "sourceSha256": "989ceef4308235049533166ea25c008cb70406ceff1bc53a0c39a3dc6ef81d7d",
+      "sha256": "ff3e19a8ed0d35c06bfe9012b5bd8932aabdf75face1e81d545464976faa8413",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061556.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061556.webp",
+      "size": 42312,
+      "originalSize": 118175,
+      "sourceSha256": "be1f2111d75fa48c6e0b5de3c6d42cf08e2662b7caf8d7129002164befb02610",
+      "sha256": "4849694aa8f290644b7faf21291ed313c75955f19b21fa91abca43f2fae75b9d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061607.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061607.webp",
+      "size": 30138,
+      "originalSize": 67818,
+      "sourceSha256": "3eecfd3e4e93d1560c06f3ecfd85b5d4a1213de9d8e4b39d5a745904ec4fdf79",
+      "sha256": "b5b7c5eccb51e9c28320953ee9236ac987a79064a1217519c835d99a458115d2",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061706.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061706.webp",
+      "size": 35574,
+      "originalSize": 87219,
+      "sourceSha256": "083f5815ade0639030b390629b0bab1ef432daf874afa7bdf784815cbce0e47a",
+      "sha256": "f20f981d64d45310b0c21f0e1f93efd7911f2c4ae9d1fbf3c696b4836abdffb9",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061722.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061722.webp",
+      "size": 32482,
+      "originalSize": 86135,
+      "sourceSha256": "d15e1c50c518709cf169aa8ca04ddfd18cb8418adc443ed779becd28361d0b06",
+      "sha256": "c4b18a3439365612a525abb3dee9b6e00aca3d72e9a58b76b360e789afdaad8e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061753.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061753.webp",
+      "size": 25718,
+      "originalSize": 61809,
+      "sourceSha256": "b3db8d60dd361f9cebf7ae50e922dda7b18df3ff4d4281566f6c94f0d5cbfe10",
+      "sha256": "e84f7accb64e177af249ef07bdfb9444ccdb216b693acf1744f2046c4f03d655",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061829.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061829.webp",
+      "size": 24656,
+      "originalSize": 60062,
+      "sourceSha256": "87d41a11545b76599f9df1bda312668a1162e95cda61cf68de35288c934d7b9e",
+      "sha256": "bfad4251844077f621cdf06a0e01b6fc2b343e0e9bf30b18e058155fb8fb72d0",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061841.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061841.webp",
+      "size": 37772,
+      "originalSize": 103965,
+      "sourceSha256": "728ecd925bfda0f5ae4801ae977e1114b2d75240ba3024f884bbc11e29a1ea7d",
+      "sha256": "80f4803b79d9d1f98865bb9efe265218a302bf2c93c66b25f161fa8a95ed6c6d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061904.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061904.webp",
+      "size": 21262,
+      "originalSize": 56648,
+      "sourceSha256": "fb4db9c0b2a0160683804cd6eddcabfd611baf4181714c4a1a8277524b8476c4",
+      "sha256": "1d0fc244f790d028f43fcc1f2f899016c886cdea982018a50add7084eed084e9",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061940.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061940.webp",
+      "size": 22524,
+      "originalSize": 56004,
+      "sourceSha256": "f128a326e8042fb038362faabcee529a18baea380651e9f7a4b33a7d6b958120",
+      "sha256": "4027e07f4fdf0dcd41c8f61478357143fb63af0db1cee1f6809c13db82c62633",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061951.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125061951.webp",
+      "size": 71820,
+      "originalSize": 168564,
+      "sourceSha256": "ea92fe96b0032d6167e8aeced53f987fb8388d28b0e6bc27ffa4891e533dac0a",
+      "sha256": "0f1dd8526d4e873975cf1748eb3845fc4975d9d3f2be976a0aeaa38aa21e6e40",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062016.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062016.webp",
+      "size": 18014,
+      "originalSize": 49737,
+      "sourceSha256": "6eef7b9cf365902dfda5a4849cfe3f63f9f2f59247da084c590d26c627d401c6",
+      "sha256": "bd4d61f8b99dcf7aa6d4125b1371d045cb7ce908da30e2cb7ed3e09cbf09bcf4",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062033.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062033.webp",
+      "size": 216360,
+      "originalSize": 399678,
+      "sourceSha256": "9188553208f24b5241c2884a440e47922072d3d7a2398ca010006ce742ce24df",
+      "sha256": "3739ad6bb584b85d0a51398d77ccc4b1db7e6affc055ba29afd4308711d86279",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062044.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062044.webp",
+      "size": 122034,
+      "originalSize": 328836,
+      "sourceSha256": "966272ff0a7bf2323d0a976b097a245597fdf8b952b84ea0cb85c0ca53d96f94",
+      "sha256": "5b8c831033c20af9510127d9db0d4a389a5a69d6162d2bf3c90ed6333273fd76",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062053.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062053.webp",
+      "size": 246852,
+      "originalSize": 491165,
+      "sourceSha256": "3785ae4e222323f8e443bd4f6d889c0beb787eede1a34c18b10ce9ecd8b0c483",
+      "sha256": "296582a077deccdcafe194f68cf188ee9f1a1ea4d0cf7bf0a265f60007523440",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062106.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062106.webp",
+      "size": 614706,
+      "originalSize": 1138951,
+      "sourceSha256": "82b920da1199b8743fe2a133170d78a03e1c13832510a29759f00b3c69de562d",
+      "sha256": "14de4146389a9acbbc965b949fbafc4dff01daaf12c658c18e6c4db6f8f0cd42",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062116.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062116.webp",
+      "size": 68704,
+      "originalSize": 143302,
+      "sourceSha256": "7a01367fbab04fe82ca883d819741eb1ce1a7d184bae6c4b19ca082fe45fe5b3",
+      "sha256": "9a73212542ea80df87146a0a95ef250e886d62d1198cacd58adba4ff82141e40",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062137.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062137.webp",
+      "size": 19894,
+      "originalSize": 60688,
+      "sourceSha256": "68b93f634d45a30d40999d503a189bebbb3f35f85bc906187c82dd0327f1f3f9",
+      "sha256": "753df8dcfb1e48af5701622abbe0a341df2c2b4fa07f9c186c387f4796785f80",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062149.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062149.webp",
+      "size": 29006,
+      "originalSize": 71114,
+      "sourceSha256": "b22daeeb4beaa2dba95645f79ae208c7b5c195feb27863521511643b718458ba",
+      "sha256": "034781c57cd6cf2583ccb25950826824afc51c661cb8994fb4bf706c82b1cad4",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062231.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione20/imgs/Pasted image 20261125062231.webp",
+      "size": 27666,
+      "originalSize": 63224,
+      "sourceSha256": "ebd9fea260177a9966d3d5b97a3cd75d4d65b7f5ad2c952beaed83449e4f0ef5",
+      "sha256": "8c2c203db44eed768d539ba7232ce25b5d7ef7b25e85332b404a7d4610bfdc71",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125062319.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125062319.webp",
+      "size": 39536,
+      "originalSize": 84803,
+      "sourceSha256": "201b76647edfcfb0040e84db61705f878ac3fb372add5f91ab3d5198c3eed01d",
+      "sha256": "8e3a90a5e8adcb4be2eeddff81d4c27a6e82269f8bcc23384d815c371aaf55a0",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124401.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124401.webp",
+      "size": 34442,
+      "originalSize": 65387,
+      "sourceSha256": "f01f2ff7af33b1f8027ab1bec9f1e94f5363fa541464b1ef99778064efa612fb",
+      "sha256": "52f76797a6ff899282f4bf48849544b993b96a95fed9f1b46aad3a3404f5d5eb",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124419.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124419.webp",
+      "size": 23180,
+      "originalSize": 45496,
+      "sourceSha256": "0a001293c4d9db4ee76c450fa323a8a3aa4185b60d297bb8c559b9f0b7af088c",
+      "sha256": "6bc961f87bb301ff82118d8435d00fe6c7b76a23a696e360b9058f764812f3e8",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124453.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124453.webp",
+      "size": 38816,
+      "originalSize": 83084,
+      "sourceSha256": "0f8a03ab4b29ffcbd3011edb707d0acf13fd2c748d0f98e6b592a39ee05c8580",
+      "sha256": "11e6d85e82d08dc5ad46a8acbb19bf760bb0af8f8dc8712b892474991c466791",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124509.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124509.webp",
+      "size": 18940,
+      "originalSize": 35367,
+      "sourceSha256": "87cd794099b91969ccc5767a1865c124011ae2544044b3fda8a83f12b6fa89ec",
+      "sha256": "0d0953de66372b20e72fda386642256371209fcaf3c8b6c49c88329a45bc0d7b",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124727.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124727.webp",
+      "size": 27460,
+      "originalSize": 57829,
+      "sourceSha256": "e0d375caba9b98bd57863f147e59ae1e1d4703b2851bcec38421cc10d4a9e971",
+      "sha256": "8a0411beed870adb07ec0b91dfb443cea97d379697da1a837df581616ffce138",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124735.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124735.webp",
+      "size": 10768,
+      "originalSize": 19724,
+      "sourceSha256": "75560b9db0ad34a31d64573784fcfe5c149a50e5f7583f4fd02515f64977623f",
+      "sha256": "b8d8303d3c0a45fdde0c565635de7d560467e3c8088673f5e62ef05a1ae885cf",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124819.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124819.webp",
+      "size": 140872,
+      "originalSize": 272776,
+      "sourceSha256": "c6df069e775a28be816ed0d1452a8bf67f1a35dca7f44060f61e28945cd0ecae",
+      "sha256": "f6fd229e6ab3863535e948382f7332f24bec389b5f05588f7daf19bdcf007a19",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124837.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124837.webp",
+      "size": 24016,
+      "originalSize": 69034,
+      "sourceSha256": "bae3a7668e0fe490fda368765f19042a62e54fd0178b6cc79a8423c55539b34f",
+      "sha256": "cc4cf1cbea639b9195d1676abbbdf71ed41524e4f86e1d5775b1a51e1a1ac850",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124846.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124846.webp",
+      "size": 47738,
+      "originalSize": 94899,
+      "sourceSha256": "02148b7ad255eedd1f1ee88d49f3fe33f3656e6c9b5f301e4b36e0e422401ed2",
+      "sha256": "453b130d5e08765b1a3f8a6ed48beb847c617fcf92e3e08b786a6adea64a2c8f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124913.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124913.webp",
+      "size": 499468,
+      "originalSize": 831929,
+      "sourceSha256": "c7dbc01f8efdf8584723fb16d682ab1187cfe08fca6aac58161d4c067d0d21de",
+      "sha256": "06acc6b1937868f629a4814c5efbe820cd4f53097682643ffd921434b0b0320d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124921.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125124921.webp",
+      "size": 176784,
+      "originalSize": 400767,
+      "sourceSha256": "646e1f06035795d5f582b32b52f9a4e3370e4acc23a9338a7d4280b35f0f0177",
+      "sha256": "b5f89eb0c1bffd6cc57799a4a15f985fb412b35e4f2b41d6e9caa74ea9432263",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125008.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125008.webp",
+      "size": 651690,
+      "originalSize": 1129805,
+      "sourceSha256": "9d87e554420e4200728954741ee024d322c7241a62a49abbbc0db68384a3fde8",
+      "sha256": "45714cfc5286bc837e28877fc77e0fb1c8c6002445321d9aee1bd5a7ba29eed8",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125028.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125028.webp",
+      "size": 197546,
+      "originalSize": 430394,
+      "sourceSha256": "3d80ea7142f118cae9807e7db72264b8674e7a0c67327ae0622197d999a2c4a9",
+      "sha256": "78f28895bf2540ef37b002bdce9e1f14d118b543426998558477ad3df83b7589",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125115.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125115.webp",
+      "size": 405346,
+      "originalSize": 771556,
+      "sourceSha256": "cecd60919ec1b343ef3d04eea4456da66c7f23dd809b4936c2a8ce6c768761e6",
+      "sha256": "61c9cbfc5e5ef0c0c3796f9634b14aabc3604bde27bc835303c3cc79d12153be",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125128.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125128.webp",
+      "size": 76706,
+      "originalSize": 184930,
+      "sourceSha256": "a33f979ffe2c76c1c723c64b996baa1d92edbe023a2e8a08ba782e6bb4ffdcd0",
+      "sha256": "f7d61164a5a683638dbffd379b015b3107df96a3f2abfda1f068b8575627ea62",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125152.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125152.webp",
+      "size": 294150,
+      "originalSize": 613140,
+      "sourceSha256": "450624b57c62ea8a14cb17f93ed61c13854bee77f36e7431ddb358183377fd55",
+      "sha256": "b3ab092775d4a2cedd837457be998a584236699c16f0ddfc8ae1191b2a4d96fb",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125202.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125202.webp",
+      "size": 248500,
+      "originalSize": 463632,
+      "sourceSha256": "d6309095722a54cc4a2188f634d79f2c5807de09a44f8e305f7288a0c24ad1aa",
+      "sha256": "f0021c68ceee6ec6113a0c5059328a8f3829d0b9d209ef8ec54e246572076480",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125213.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125213.webp",
+      "size": 407974,
+      "originalSize": 639435,
+      "sourceSha256": "c55c110e50948d1990aa6ac3439181350442e12a7254bb5a5e6b42f14a66554c",
+      "sha256": "36fdefb3c694b87378ca0ba90843533b8e0242a8fdb3c0271663b36c2764664f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125244.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125244.webp",
+      "size": 189958,
+      "originalSize": 376905,
+      "sourceSha256": "4146b2123272050f4e16e0d745be99da576b42a7dbe7c5f5c91fb1e961337ce1",
+      "sha256": "1a0105ad8a8c8e08e0072f51e5144c0cbc0fa128cc2c96e10b1cea12d9790760",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125259.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125259.webp",
+      "size": 172132,
+      "originalSize": 267990,
+      "sourceSha256": "349df94151775530651a68c3576d02e0743f06e77631af845048523e07181691",
+      "sha256": "d22d3c3fce0bc94b45821f08866736b6ea8f23783cc5c7e78ebaf80ab49e750e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125315.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125315.webp",
+      "size": 103808,
+      "originalSize": 272057,
+      "sourceSha256": "72344874750f7aeda6a672350b6c21f8f1a0eae257c78c713f42ff24dd6a1f6e",
+      "sha256": "fc2e19cc52f72235e72749f7a10736ca291659671fc84d35088c19193b69b00b",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125335.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125335.webp",
+      "size": 61488,
+      "originalSize": 124215,
+      "sourceSha256": "b314f89b4cfca91633f74080365898c4a59cf906cbb7ae0b9bc13e502c50b86b",
+      "sha256": "41b3c4c1f6fcaa0a13f858dd50b9713b741f7d38e114f98a92c0bf9ce266fe77",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125349.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125125349.webp",
+      "size": 87430,
+      "originalSize": 141872,
+      "sourceSha256": "e58e16816536dd6f922f5507ed61c0d5643268a0ddb728f612a14e5242c48283",
+      "sha256": "7c2cccb3d4f8918f10fe2ccdf54a160f09b920ec0acf4c919470b5cf9fa967c3",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125130920.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125130920.webp",
+      "size": 161978,
+      "originalSize": 271581,
+      "sourceSha256": "774629f88e242ba230c62978bda87e55f9ff9433767a668cf8162ad236cb8119",
+      "sha256": "683306b8fc08da5bf10e1668388b776e2e74e19b544b78ef3260918942a8971a",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125130938.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125130938.webp",
+      "size": 162804,
+      "originalSize": 236565,
+      "sourceSha256": "75c78121cc5aa60e67e57e58c71a12a6128f8df8eead8e24fd24e0abe7389c5d",
+      "sha256": "6d1578431309b4ca5362e2e709a30248f3ea4ce6fe8717d764bf9285f044b679",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131007.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131007.webp",
+      "size": 133184,
+      "originalSize": 257091,
+      "sourceSha256": "aceb74d1f3a59228fec655d5c07f26e05d9e09770c8643fca8c45ae8da860a7d",
+      "sha256": "296e18ac1c18c78f489d807bd7291c58ec736d2b186f1aca42d64d6bbb3e6038",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131018.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131018.webp",
+      "size": 259628,
+      "originalSize": 453817,
+      "sourceSha256": "073db602856fb66eb1534825df4ab2e438ae4cbbeb00cdd57138acad68875c9d",
+      "sha256": "48c838c71ef38715afa656cbd9ccbdd3fc386288af23538712a1be1585a63e3e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131027.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131027.webp",
+      "size": 107194,
+      "originalSize": 222089,
+      "sourceSha256": "05c9c555d25f7d464483383d50c40b5ddd34e706ff0ec26df0a67b9272d8a4b0",
+      "sha256": "dac7c993aec5c5df1d898a9db3f6008020ec71f1e8ffdff5557c081b115720aa",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131057.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131057.webp",
+      "size": 16046,
+      "originalSize": 39271,
+      "sourceSha256": "f0bca94c3506b7d0008c4ec2c46334eff287320afebeacb481aebfd4ab23a150",
+      "sha256": "b308ceb1a38d28cc57d17dc8343d39d288f3ce55036c0f59dbc90b6232e80d83",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131121.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131121.webp",
+      "size": 25254,
+      "originalSize": 69304,
+      "sourceSha256": "3a4349406ec33c3c8b8ad57b233935e2d69fcf3cb3b1608fdaaee93a66693d34",
+      "sha256": "a39eb2ea75d3b6a876f80ec15e72a08a0a29485926ac4bf045d806d4b4623008",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131141.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131141.webp",
+      "size": 26648,
+      "originalSize": 68094,
+      "sourceSha256": "c82d700ac8a9335792e808077ebc290cdf3eed5a9112ce4d9513e8bac551e3fd",
+      "sha256": "c4d5c5b18201a2997ececfdab41f53bed39b47b8f40e8bb68f49cacb3f2a7859",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131157.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131157.webp",
+      "size": 45054,
+      "originalSize": 92064,
+      "sourceSha256": "668b9b6d490ca883557494e7ce6b5c0ee401a0c60afaccc51ce8a11120e771d2",
+      "sha256": "ff3612bd680feab4a38f32555396171b0f168a9c6cb21968fe1d820acc0bd0ac",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131214.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131214.webp",
+      "size": 26550,
+      "originalSize": 74335,
+      "sourceSha256": "194d97186c5af7a02db098c5beaa29a1f14170f9dc65d74dcbca30d73e22e09a",
+      "sha256": "fa479b09a50ece9ede85ef4a1b5657694aab31642a0f9071d75ba494e816397f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131229.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131229.webp",
+      "size": 149950,
+      "originalSize": 241618,
+      "sourceSha256": "4fa68e85772818476f209162378bdeac82f51d92f26de9827ea9af54b25bd340",
+      "sha256": "70acebb0703b598d0c8aa7f9b1eb6544dd3240df5701c829a2bc14854b188ef7",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131241.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131241.webp",
+      "size": 178738,
+      "originalSize": 336548,
+      "sourceSha256": "c95dcc6c09d43ece8e200c14a0ef43fb731b0891ff7954c1bc4e28ed75b2a106",
+      "sha256": "f495507a034be3b237186a69248e18d08b3d27baec455f4666fabfabb566a88a",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131253.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131253.webp",
+      "size": 155754,
+      "originalSize": 226833,
+      "sourceSha256": "19587715e7eeacae03c158e5b0d7e1da8dde906a3e43c01227bc8ba644c40a62",
+      "sha256": "af2314798678411d2c5233426565489bf12d1672a956c4f32a1619978d47b1d7",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131307.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131307.webp",
+      "size": 242996,
+      "originalSize": 383622,
+      "sourceSha256": "716abe69bf7fe08c3b76ddcf6ebfb9f717f120cacb7e5917d09fecf497120656",
+      "sha256": "2711388046138a3be0d8932482a0667e3b08218a1c5e635af446619db745e5c5",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131533.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131533.webp",
+      "size": 137620,
+      "originalSize": 275727,
+      "sourceSha256": "e4ea7e2c2d8fd80b12a6ce01c8a3406d75e286cff6d9716b07b1636b2a114c0a",
+      "sha256": "5187df9273a1753baaa1b56b6892227a362e36ae9246c88f7702b15ae4a0d4c9",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131545.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131545.webp",
+      "size": 32264,
+      "originalSize": 67789,
+      "sourceSha256": "dd27bf5a83dce0136651c1f0dfbc45595a109c877dabb10278a9c0a3ac99ee60",
+      "sha256": "ad9eaca16eba314650e669b70a971cd979a513c88468f63f03159f0350fccfc4",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131636.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131636.webp",
+      "size": 254244,
+      "originalSize": 401307,
+      "sourceSha256": "cb9ae6a6fc71a4e695dbd24e05e40b01c36fca9b13914cb7b6dc17cf515a7772",
+      "sha256": "b136e9b34c7c2f1e101d0c2c5d860f81c16d4c025dd28cdc253fe0fc9a62c52d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131645.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131645.webp",
+      "size": 96384,
+      "originalSize": 141360,
+      "sourceSha256": "157f2fff0a2298bb5c9d4c1fec01b9b066a2cdccd52f70de47333436eba00bb1",
+      "sha256": "9fb4dfbdb450bbfdce9b730070af75e1cb821742747995d2fb161893d6d91099",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131723.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131723.webp",
+      "size": 33368,
+      "originalSize": 60597,
+      "sourceSha256": "83bd485329212b24d532f6aa1a59193ee947058f67279d48e84d49f8f9059446",
+      "sha256": "2a260399136bba2c60c341dce99282de932af2132e7ea6d028ffeb82425edbdc",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131836.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131836.webp",
+      "size": 33050,
+      "originalSize": 63848,
+      "sourceSha256": "8c226dd47749b04028a35888ab22cb7c7d1d35ad859744c15cafc2cd8cdffee1",
+      "sha256": "60f3cea6d0932659f0c432d08c1dc2d627820ba35433e38a9f53b87e63b3f95b",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131848.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131848.webp",
+      "size": 46848,
+      "originalSize": 110979,
+      "sourceSha256": "f6dfb1576e6448bd443e55fa4c5483bf9150a21e3599fc83c17b821a8d333477",
+      "sha256": "bc346bffb5980f5c89451c00c50a2c49da66d6588ebaad643f8ae9440f6be511",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131906.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131906.webp",
+      "size": 43728,
+      "originalSize": 90691,
+      "sourceSha256": "3ea273d1055ce9d76c236d20aa906d04c129958c81b2e7f1f856b48b2b6f40cb",
+      "sha256": "deecbbe63b8983c73e99917a32dfb9fd7be817fa4b8667d4743576be1ee11005",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131943.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131943.webp",
+      "size": 9202,
+      "originalSize": 27194,
+      "sourceSha256": "13ea7526b82e543ed75e1962c46b34a472256c1ea77a826caf01fb2feb9b6f72",
+      "sha256": "958d7dd4bfad1ad5a591df5de76383be7f53cfebc19d4e927ba1d8cdf48f7bdb",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131951.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125131951.webp",
+      "size": 25408,
+      "originalSize": 49263,
+      "sourceSha256": "bfd7075d05b581de292c2c7eb64ead6d4afd46171f675f70e1045305c684a980",
+      "sha256": "2f2f106362956395cc075423d8e56876a921cacd7450ba1013b9829673d9c677",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132026.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132026.webp",
+      "size": 26252,
+      "originalSize": 48744,
+      "sourceSha256": "1e9c9102703ea4a14da0ae4f6d50b16e7063c767ddc442c8f06e73c268f78e05",
+      "sha256": "fa95307eca797fd8dfe9a1d6eeb275ee52dd042efa60e12a98d71037588c89f7",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132046.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132046.webp",
+      "size": 27104,
+      "originalSize": 57203,
+      "sourceSha256": "cb4273bbfecde8bc426b47eea3f747bd315a627b3de8a6be7b410fb38e7781a9",
+      "sha256": "3f7db1ebe7539c1835b99e49bf12e994b5e1613e6fa53539cc72599174a6ba39",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132127.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132127.webp",
+      "size": 22948,
+      "originalSize": 46418,
+      "sourceSha256": "080b3894efa884dec1bc823674556b4317f751e63369dc15b6ac7f367c2b52f2",
+      "sha256": "6deeffe69a5e5850c5f0933a9f888064d123e31627bde2d89201d55d565d5534",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132140.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132140.webp",
+      "size": 11170,
+      "originalSize": 18782,
+      "sourceSha256": "029eb6bb7c07baaa3afde4a82f564bfb7c96fa81a444dc58b1cf87dc1b6f32c0",
+      "sha256": "e543c86dd0c1aebf58d223b40d5f22ab8e909a5b54f63507d29a6bbce7e6422f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132204.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132204.webp",
+      "size": 143014,
+      "originalSize": 349270,
+      "sourceSha256": "e470e273b0d1305cd37cf382090c022a58cd2e79e5eab5ee8bc5153d8303e899",
+      "sha256": "5d296d8678a5558bb591fff6535199c43d1cd317c22fa2963f5f235cc53ada09",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132253.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132253.webp",
+      "size": 37988,
+      "originalSize": 79298,
+      "sourceSha256": "b82654ae7f0be7f949c16639bdd382b59c4328a579fc3aa3e138cbc97af47e32",
+      "sha256": "27b8a70467d0de340af57f06d5130a9997361d1559c66755102626c597f0ed8f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132357.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132357.webp",
+      "size": 93890,
+      "originalSize": 194779,
+      "sourceSha256": "385b83959d69bf493488b3425c88ab2897211fee767ff5f34310f0b0fbc92bf0",
+      "sha256": "935205d6e69a36c7366d056ff9a97be7702ef39a4e624fb4fbdabfbdfc51aa9b",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132405.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132405.webp",
+      "size": 80352,
+      "originalSize": 154198,
+      "sourceSha256": "5e06268becc9031f7ef060034e992e99a4a32ee09c5df5753e5808662cab4e1b",
+      "sha256": "43c1f7e48ac033a2ba92502832b79cb5f5ab0558d86ea4873d54a65dadc3eff3",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132433.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132433.webp",
+      "size": 21930,
+      "originalSize": 43632,
+      "sourceSha256": "30b4df2165854ff1723549c428e0674226c3fea4540b24a984024a21d7ac6df4",
+      "sha256": "6ac8525a1e0abdbd6d9eb627c09ed30a3ddf440dfa6b3d1926b49ffccf4f607b",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132443.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132443.webp",
+      "size": 45052,
+      "originalSize": 65160,
+      "sourceSha256": "3941cc73ea870669a0643aaca88d592a10551bd8882a59a3996ab63e9d16fe0e",
+      "sha256": "829378c9206b4da8a1dae38f752666ceb8dbd17aa3f864d3e4da33febe116327",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132451.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132451.webp",
+      "size": 77356,
+      "originalSize": 127229,
+      "sourceSha256": "def37175f51d3ac2f45f7d777b57a1ca734f0ed887c082a0849812bba68604ed",
+      "sha256": "91566ac4059a0cb06253054b6448b5f10c65b5975a09117947804998930bdcbf",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132500.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132500.webp",
+      "size": 42308,
+      "originalSize": 64928,
+      "sourceSha256": "874708709fa0b5c93ac747ab14b109a1240bba8ecb6275a8605d7127cab3de10",
+      "sha256": "896cf622f2205f28d1c9723d8b1d5dbd26e3557d36730fc56022e21197bd0023",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132535.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132535.webp",
+      "size": 156196,
+      "originalSize": 247878,
+      "sourceSha256": "215e1da1063d6c19df8ddd0fee8090637ba2fc2f4c8947862f32b3c24faa4389",
+      "sha256": "dff183629d527079c5cfce81896fa4d25d8565f188d7909b39ad3f8835b4d42f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132602.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132602.webp",
+      "size": 185014,
+      "originalSize": 283754,
+      "sourceSha256": "378b27894096bbbb079d8617e833affe8969212304d3c41846342ea58c0f3dc2",
+      "sha256": "b86384daa9926ed418b640936d5c52d0931f918fded26fca1dbbefc3fd4ce63c",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132632.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132632.webp",
+      "size": 52706,
+      "originalSize": 119085,
+      "sourceSha256": "de709d740454079ac43e10b37d309b1711912052069c1819e82d7fcad45000f2",
+      "sha256": "2987269e1524b2d6ac172dce6e6b3ac18c0b794ede0e8d6f35cc6cbbb8fa0196",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132652.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132652.webp",
+      "size": 183970,
+      "originalSize": 293836,
+      "sourceSha256": "5c084b5cc037249723990354995173d4381af66195f5ae032845b7332a6213b6",
+      "sha256": "cf327a140086efc2bdc8d902581b3f1e3acf51c29eda7425889905b8ab71e803",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132741.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132741.webp",
+      "size": 418868,
+      "originalSize": 753827,
+      "sourceSha256": "952fdd65b98a75f5407071bd90465e8eb235bb67c30f4a872d8766c08415efc6",
+      "sha256": "39ef40b7ef5033c028cbb5c28addcba0e34792c4beca284a74231d7e049acbf0",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132754.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132754.webp",
+      "size": 200008,
+      "originalSize": 385936,
+      "sourceSha256": "01c2a8e1e605d8645c30fb8865c57909bb66b7646b79263b4178d5e27d4174a1",
+      "sha256": "fbaf89d6ed83283d3e474e6a77db0a7c6a02b5fb34e1dab86ae4e65651e04471",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132808.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132808.webp",
+      "size": 35692,
+      "originalSize": 95239,
+      "sourceSha256": "21a91e5ed762e0d7b3838099197871425d6138f7ba264b1e34e7a268fa132485",
+      "sha256": "cd0f0c4a2a13014d09cef99c2ba80938d0a17ebcc02a2e2dff70492c32c35e63",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132818.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132818.webp",
+      "size": 188658,
+      "originalSize": 357289,
+      "sourceSha256": "86918992de74c45532bd12ae67a8cc35039196882f325424e356b6474a644e7a",
+      "sha256": "cfdc6ab0be28f869b7b9b597371c204a0e044245f9bb7521fd025591b8e5f980",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132830.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132830.webp",
+      "size": 262218,
+      "originalSize": 430581,
+      "sourceSha256": "50fb024f6f99182a0236442cb5cbccc2469cab66ed885df5c4381ab7618f10d3",
+      "sha256": "a2d7cbc4a2753e69674b7061ae6b093e5e26cc15ab0cc5ed1b863e0c1fc87b01",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132904.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132904.webp",
+      "size": 629996,
+      "originalSize": 968768,
+      "sourceSha256": "a348ac025287bb5e0519a3220588fdfd7e815e121b9145e7ee14dc2a22992328",
+      "sha256": "c44324e7853c4a286516a18b9b80c418bb640d3773cbbb0021b19eb2bdea6bf2",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132919.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132919.webp",
+      "size": 207264,
+      "originalSize": 380072,
+      "sourceSha256": "8124780e1cc13c5a006b9e5fb993da5fbce6af559c7b286d96a59a6603c977ba",
+      "sha256": "75ce72a2df7f5f91b43e253e167a63dd52805f77aa9d6266ef37f55241d2938d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132956.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125132956.webp",
+      "size": 378960,
+      "originalSize": 683987,
+      "sourceSha256": "c44f99a2d3dc0897370cf19f23751ca8d631f2abf650c99b5a0cd7c0673311c4",
+      "sha256": "6f246dff2860e634b4962a93f7f4553bb2fa972aa48c5ab4eaa6026df435282d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133042.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133042.webp",
+      "size": 23856,
+      "originalSize": 57273,
+      "sourceSha256": "057f9d6635075234d234e027b2a907e251915fc22f60a9ef1d6fac8fb4906ff7",
+      "sha256": "1d7858aae93a57ac851c6178c07ee5b5e1faebe62aa5731b41038c3112273e22",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133112.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133112.webp",
+      "size": 820264,
+      "originalSize": 1370144,
+      "sourceSha256": "d69831445f3809ba5509215d4cd03429495a873411bca404dafc963b6d887c96",
+      "sha256": "a7d131c93b54ea25f7182507ec0e51baa83978472a5bf4e4f84432eb19b8eb1e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133135.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133135.webp",
+      "size": 178732,
+      "originalSize": 431033,
+      "sourceSha256": "7fc2f825d784d187dc70e1946954e8e8e37be9e6cd38e893756645840cffe5f4",
+      "sha256": "2e68d4bb97b1ca6eb7f99be939525c60380ebe8283ff4ebad3a29aba364049f6",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133150.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133150.webp",
+      "size": 302420,
+      "originalSize": 598382,
+      "sourceSha256": "83555e55395c3334410a01ca6744dd05951245f6e770c4ad6bf63fd530a849e5",
+      "sha256": "0f0c21d18fdf15d2cc2b5b2a5882d70f30879331a97e8d7c6c95b6b1e7be24bd",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133159.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133159.webp",
+      "size": 101316,
+      "originalSize": 271664,
+      "sourceSha256": "1c47c50d82b9ada21641177d8e0e7f2b6b9694456a1ac16f994eb954d3a025f0",
+      "sha256": "19de3febabf4e7a179dbe481e296e0237e10430b43ec65b297044be809cb1afa",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133216.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133216.webp",
+      "size": 253472,
+      "originalSize": 551204,
+      "sourceSha256": "8496f0edac144336a278cf9b22f5b4f2b52e1899199ee5bca06d57045098620c",
+      "sha256": "afe2d8af6db9b9d681fad8153f93b91b08f1612a384aee3a1ab8f11b07e12b78",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133226.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione21/imgs/Pasted image 20261125133226.webp",
+      "size": 275254,
+      "originalSize": 495137,
+      "sourceSha256": "45ea63482414b740d4ea3af813925355cc797475221b28c852d594ea82986d54",
+      "sha256": "7a891e3c3c33a511ef9f4aa40206717742377a14190c513d81ba37533f02e07c",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133300.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133300.webp",
+      "size": 172242,
+      "originalSize": 322653,
+      "sourceSha256": "bddab1e28dc2a36433bf89162b89866f25d3f3d5b5a09ce286dfd388f3fb8e3e",
+      "sha256": "28136fe2ca3271feaf22b28c897300a13530c343bcbed362db1d8b385c647e31",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133331.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133331.webp",
+      "size": 304782,
+      "originalSize": 615848,
+      "sourceSha256": "115806c0e06a3bdf96b50d04972c1cb2ac8c224083e68e72bb37ac074a0db985",
+      "sha256": "9c3b101bfaecd2d3882351a3dc8c0eaf90fac14f102dc9e832eef0d91249609d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133347.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133347.webp",
+      "size": 48944,
+      "originalSize": 106606,
+      "sourceSha256": "3baebd3663d9756dc083540c71be4940ee33c21e8f7e3bc3901cdd9bed454d59",
+      "sha256": "dddb3a7ef65376f3070d608f33ace14314da5cc55b96b8423762377c0d1fbcd6",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133401.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133401.webp",
+      "size": 220220,
+      "originalSize": 405919,
+      "sourceSha256": "6e32d1c61e9a423f2c7409c1b1f9da969b308c101024e44555f986364b89145d",
+      "sha256": "79456ede692f29a65a81edbddb72783bf1e9fb434831e4684452abbd4af23a53",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133416.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133416.webp",
+      "size": 64454,
+      "originalSize": 152681,
+      "sourceSha256": "0a041c6aa9f10f4e02a6caec3bec132b7593a817d282f6f5ccbdcf10ce678435",
+      "sha256": "2c6363b692dc6a4f7a0506ce1a2d794297886e2ae1c7b38163e0ac22b726f674",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133430.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133430.webp",
+      "size": 59026,
+      "originalSize": 149670,
+      "sourceSha256": "eb198bfef1e93a7f6ab6d3aa7152417f800a00afd947999c528590fafdf64d03",
+      "sha256": "2bd4630b0e7deae9abfc8a4e9123768ade45626510e8ab7818a02bc2d85f99e5",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133443.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133443.webp",
+      "size": 37762,
+      "originalSize": 75333,
+      "sourceSha256": "df4e23a97f5ba17ac8ea2e5b9e16ab15af342aa6269772b1552427499d84ca34",
+      "sha256": "49508cd9074f14c5ef7e797f78ef4151de79592bb0739ea5b83061fcffbabcab",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133452.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133452.webp",
+      "size": 263462,
+      "originalSize": 519019,
+      "sourceSha256": "3b5db0de2547ed574040457802d6232f82e37cfd65385355b8fcbbf533397d5c",
+      "sha256": "f8e3f67b2ee11e73e19203daf4c28fd06d0f91335b900fbec774148c6023477f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133504.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133504.webp",
+      "size": 38024,
+      "originalSize": 105595,
+      "sourceSha256": "30b742769503d08edab9d24a592e7c55ba67c1a06d21db05d9d88667ba24f4d2",
+      "sha256": "a3abfd8600f9f4c7d671b6c9749bed711027e4e525b1c84c34c290898c733b8a",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133524.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133524.webp",
+      "size": 180950,
+      "originalSize": 428489,
+      "sourceSha256": "ff4c76620a627d465705c66b55925b21cb2ba745754c38207007474e4ecb739f",
+      "sha256": "744db4ec6c1876cc9af880b82db872f04eb3590c1bf6bb0a671afa47d45ecc66",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133537.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133537.webp",
+      "size": 308116,
+      "originalSize": 680853,
+      "sourceSha256": "6dbb84d8b5d2c518933f0bf652a5d398015698b376cb3a1f62991cfa34078c58",
+      "sha256": "68ddb77c1380bc0f07a6ed12783e76124d4da39309d1fa272069ef7c5b038863",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133548.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133548.webp",
+      "size": 231510,
+      "originalSize": 443420,
+      "sourceSha256": "486c4c772b40d278800beb587475c5942f6da64512ce977a0430b848d74a3e85",
+      "sha256": "2edfea16d720c9b8bab0882daae0db1c34915ea79e22091359a607772f94f2a5",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133652.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133652.webp",
+      "size": 48552,
+      "originalSize": 90100,
+      "sourceSha256": "89a1f7d898e531740659219fe99602125799332081a4c0c69fa1e0d1696dd8f1",
+      "sha256": "b01dad3777c9a1242895ba94849a440a395a6ecbb73c5d9ed5d3a5131e6e5c97",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133715.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133715.webp",
+      "size": 58828,
+      "originalSize": 144706,
+      "sourceSha256": "8add6152379781ef3550203783a6900ec13f79601a4156988b9fb9b4a1b37b96",
+      "sha256": "e117afc8aac0eabddf4dd5fa5cebe50b3d2d6f0c8e44731306b38f45a30c55ed",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133725.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133725.webp",
+      "size": 120100,
+      "originalSize": 222967,
+      "sourceSha256": "d4d301b00ee3d0bdfe6b2e19c199f03af584ab11bb91c68d952b70be6f63ab8c",
+      "sha256": "285f1284c491c0720a58ea037e4ccb2217e8a13fb61cf30c33047a4325e4a3da",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133749.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133749.webp",
+      "size": 92640,
+      "originalSize": 208051,
+      "sourceSha256": "12edb119bf1e54b342b9b665049bef3b185fb895ca5728f5333342c5c1aa187c",
+      "sha256": "3460797cd2a091af9fc8e3bda85ce9053c5d20e13a3d5d005371e86bbaad044c",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133757.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133757.webp",
+      "size": 72922,
+      "originalSize": 147003,
+      "sourceSha256": "cc9aff03386a559b0b31f1c59e5f331f9fc26ed8ddec0048f02e196b61b30eb7",
+      "sha256": "4a51ac10cd1b38c2fff643ee93c965425cb3c4728dee459ea188ddca06c8e9b3",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133807.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133807.webp",
+      "size": 36842,
+      "originalSize": 85113,
+      "sourceSha256": "f9bfef4a5e79450493d7e1b259ff1c8bbadf62f7577bbb1ba9bb67b37266d508",
+      "sha256": "ee7515aa993ac04ff47f9c16b3e085032c4576d23c7fbda966b26909944d8725",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133823.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125133823.webp",
+      "size": 20542,
+      "originalSize": 37318,
+      "sourceSha256": "efb9f769fbcaec5c008ca8b14c2c4c437fbabf47fef294c20f612948f5b6cc2f",
+      "sha256": "da01829678bb748c2aeefbff77ec7ded35d53cfacb3557d9c029de84f17cf528",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125134952.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125134952.webp",
+      "size": 7560,
+      "originalSize": 23167,
+      "sourceSha256": "2e112cbf2242e4563219c5296cc07ca598430986d90dd4a772cf3f40551e1276",
+      "sha256": "b880e96a5f8dac79caaca2632dfd76d020e363fb8333ba6962ba4b88d6aebcb9",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125135348.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125135348.webp",
+      "size": 41694,
+      "originalSize": 102602,
+      "sourceSha256": "167b48bab0b2af01c54f70853169257c2373f40c88a3678959e677583c557f75",
+      "sha256": "74a7809e24dbe0dff7eafb91a9b6103be91dd3bd7a389e3561227c6065f3e890",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125140857.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125140857.webp",
+      "size": 35378,
+      "originalSize": 110585,
+      "sourceSha256": "218d9cbd2d1e7991c03208d24eadc037ca563b9c16677eb9b20104c8c77bc743",
+      "sha256": "4d25531f510749711186561f506de48a0525b67be1f68049f70269c03d30c835",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141839.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141839.webp",
+      "size": 215750,
+      "originalSize": 480667,
+      "sourceSha256": "38599ed7817d0cd62138fe7a3708538d48123827ce4266a3bd2f92d155934df9",
+      "sha256": "bd475684c0264f1c71d087376e4684d279311c1b62dbebb7d1671bde047d8058",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141847.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141847.webp",
+      "size": 153706,
+      "originalSize": 265426,
+      "sourceSha256": "e852fe9bf88e2fea320dac72443a881e9b071a8fc0ca86699b44dbbcf10be314",
+      "sha256": "c68eb1409c71385a84014ec610b6009e5e3df9abee4bf64c1ced454ffbc2b2e8",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141858.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141858.webp",
+      "size": 155752,
+      "originalSize": 252632,
+      "sourceSha256": "ba4f34d3a0177840033c6554ada032982ba3f792f18b0816d65523b34e8429d1",
+      "sha256": "32114d343b850f0ca097be3236e5da60d53ef63d62da27141ba3b93b27fe7858",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141907.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141907.webp",
+      "size": 232882,
+      "originalSize": 349782,
+      "sourceSha256": "9f281f3aa7faff66d63012de765f4fc817c43f5edb28a0e2767dfc2b3e01756d",
+      "sha256": "a1dcd05f28823e13fe43a0ed21f55821b3f2a4dfa1331d6176b74197a4b97b1c",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141914.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141914.webp",
+      "size": 117896,
+      "originalSize": 207898,
+      "sourceSha256": "78dca4ff155d3455cef17520b01b5570437882eca5da480cfddab08fc72fefc6",
+      "sha256": "686e9ac7f99941dc41fe15be3818cfd0bafb53006ad613a3d916b2eb57604b04",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141921.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141921.webp",
+      "size": 259234,
+      "originalSize": 437573,
+      "sourceSha256": "490511c4940247e0531ac0a6a83a2e09d43af646e422bbfea62019ff42b907dc",
+      "sha256": "1f0627cfffdcffcd11cde310937ec1a05f76e8c5fbe579c501073d1b90a27ca1",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141934.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141934.webp",
+      "size": 102656,
+      "originalSize": 214286,
+      "sourceSha256": "7778bb4b10004d86a092b93973f6a09fcabc52d4a340fcf86a9be9ed0b789f55",
+      "sha256": "ab44bdfe841036d55abac3ec2c83b983aca9875eb5f28e836818f315eb8e81c8",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141949.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125141949.webp",
+      "size": 51988,
+      "originalSize": 106349,
+      "sourceSha256": "2a4b91d59b9b1ebbd34f5413a17c64f9f237a4f26bf06723f8dc3ac5fec539c0",
+      "sha256": "7ddbb9e34d8bc3a935a891d6ce340ffd5d1777f0e3d4d1e7517a5764863a0722",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142004.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142004.webp",
+      "size": 38216,
+      "originalSize": 73558,
+      "sourceSha256": "7ce616d5e9c92c579410c0e00c7aab6bba07a0aeb12dc5dad3f0ebb9eb03073d",
+      "sha256": "4748028b4e58ab823d2e98a4c9a6c1379976a3734fc7b35793656f939d773163",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142042.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142042.webp",
+      "size": 189748,
+      "originalSize": 307778,
+      "sourceSha256": "b762b40c9c02a4741cb8d3345dab4a1602cd7d47132aeea53a0eeca4cd2f7b20",
+      "sha256": "bc266461a34b7840c4a147ff493cddab8693744eb3f2b00a76360102cbae4e8f",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142050.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142050.webp",
+      "size": 188114,
+      "originalSize": 381463,
+      "sourceSha256": "60f9cfb123dcf580234527f5acec950538c7c23fd4f8fe1a9c58ac7761c20cb3",
+      "sha256": "6a2179fd94c58f98473d7a35efcb3f1cbe25b81edc24041539e4b708c0dbb0f8",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142113.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142113.webp",
+      "size": 184874,
+      "originalSize": 373896,
+      "sourceSha256": "9580f2fe588e2c4898c9b7713eb249c0e31d169e38834ba29dacef17aadb4044",
+      "sha256": "03689ff54e9265823464fb4f47cdf6f508b86e5a1f6c5b4df34c1ae361f70b2a",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142120.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142120.webp",
+      "size": 55530,
+      "originalSize": 115589,
+      "sourceSha256": "4a7a29b56b649444c86497ff081066d26d7277eeb065bc7c24c3fe2705df3ee6",
+      "sha256": "6586f33af97ef72913dc8e9df5ed5d857b7267f733119e9fcd958e602a8528c2",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142129.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142129.webp",
+      "size": 45530,
+      "originalSize": 81531,
+      "sourceSha256": "35730b3747e51b72dff754ea12382a2a55dd059d4dd328609c484d2ca9588ca9",
+      "sha256": "adb314008887319c6c1bd5262602d8b9a2f213495ed0c9711d4873d4710aafb0",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142143.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142143.webp",
+      "size": 29460,
+      "originalSize": 57455,
+      "sourceSha256": "9d37e28535f60a1ecf8f59fdee939d84fcd367614521142224da6b0fd8d5e10c",
+      "sha256": "d8859ab4ed1be2aedd26c7cbede06e18b49505ab2ba17767bf3d38cf69959fec",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142154.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142154.webp",
+      "size": 36632,
+      "originalSize": 65676,
+      "sourceSha256": "ac6d266adfbc65806e6c373267fe6badfa0cbd8d59aa81310ac504cf7997fee5",
+      "sha256": "d23ad9f7f97b087a88aeee3d2dbb3daf2bdb5da4e8029e7329516d74bde67169",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142306.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142306.webp",
+      "size": 90726,
+      "originalSize": 171574,
+      "sourceSha256": "abdb319f9a31eadeaec66605ededeed85148bf1a42320198afadcc6526e89083",
+      "sha256": "a5eddf3abf5f9cf9e131de6d02ff9d7d4b295916df6710d19adc1bace43c0178",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142314.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142314.webp",
+      "size": 124190,
+      "originalSize": 246234,
+      "sourceSha256": "d8918f2768c94fda81fe3977df29db5d7a18b83edf3313c9b125ef329d778db4",
+      "sha256": "2906789548ab873fc45a3644a8f13f2c58c9cf47b54413918f9da126dcdcc6ee",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142323.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142323.webp",
+      "size": 67934,
+      "originalSize": 130026,
+      "sourceSha256": "14cf474436a3d74b21ad0c5806501553cfad87c5ac7f45e1773dc65179f1c79a",
+      "sha256": "4c2f70fa0247d13bbb75f3409f8db13c816d797b03cbb6eba6d5a401a76040d4",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142331.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125142331.webp",
+      "size": 103970,
+      "originalSize": 250631,
+      "sourceSha256": "7a54702255468664dd5818761be531db46f748ce7993517ae1c198b3074c2923",
+      "sha256": "65b5249bd7f54648969a6e1611f39fb270de6f4f53d770cda2445fe54548b252",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125150404.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125150404.webp",
+      "size": 368978,
+      "originalSize": 708174,
+      "sourceSha256": "69f353389681c8a0d8f4383861d3fa9e7c74bd2f0f5aaab4fe259139d8bfe733",
+      "sha256": "88e6f4796ec03988835e797410d14e5e7ee5df8292b742f88534346191214207",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151017.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151017.webp",
+      "size": 65178,
+      "originalSize": 160290,
+      "sourceSha256": "08d7b3438e2a7942ae1bbd65cf5196d24c93adc9d2ec8bc92fd729b4d3c5ac36",
+      "sha256": "3b191a1352589cbf6b7c0f8c09016b9e378c4a88a10dfd57ae22a348da0bdba6",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151029.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151029.webp",
+      "size": 226644,
+      "originalSize": 482689,
+      "sourceSha256": "55809a2cadcc39471793f5c17b18c2c31484e7f999ab653c64106ea3f4e4563f",
+      "sha256": "a43896c0e66de37a5cd2166f643086750956368a8a28fa38422315b70e0889a6",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151049.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151049.webp",
+      "size": 40880,
+      "originalSize": 96218,
+      "sourceSha256": "72493e7c5db9dd4f99522af74e202f9dcff07b103572873e6be1b24ccba97b31",
+      "sha256": "c31145de28c373b59d4419eb05fe37e3c4b9df005ac8fc9b0031a58629bd0de2",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151105.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151105.webp",
+      "size": 91756,
+      "originalSize": 228054,
+      "sourceSha256": "37902eaf49bcc6885ac73794711b29be17d78a0aff3b477a3b05b1208a5efaa3",
+      "sha256": "94e543b89b920b8df4b7d74d8969b58e5a0671b2d63d163a0e1929a3eeed3952",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151154.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151154.webp",
+      "size": 119878,
+      "originalSize": 244185,
+      "sourceSha256": "4b2b0bb94c98872ae76f6c154d7facca4986207b28a4c0e6a0d0d28436cbe23a",
+      "sha256": "1225700fb8275227adbafe55e6bc6fccbb70684ef2cee3eb42bec71d797a44b3",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151217.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151217.webp",
+      "size": 35140,
+      "originalSize": 66169,
+      "sourceSha256": "7fb0d20b58ed3a1c148fe54b7f2320498da6c407a921a8b4f0efd95cb37721af",
+      "sha256": "ddaccb942e70e973804e328c3fe0cd88c63bc2b356a5736547e3d360565be642",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151233.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151233.webp",
+      "size": 165972,
+      "originalSize": 304855,
+      "sourceSha256": "0c65db7712363131ec33958def03af8fd22b60da3cdf5f4a8a95c153f4a87d8b",
+      "sha256": "e681bd46e4cd62a560687346d7ad517ebab7b7445f04951d6e44a512bda8600e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151254.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125151254.webp",
+      "size": 231736,
+      "originalSize": 442596,
+      "sourceSha256": "cf91f494b40bd3bcd937d2c7b1d5f468a7148b16246d69b12eba36c1380dbab1",
+      "sha256": "e3cac2233e5f1bbdb658a6dba1eb3bfc87cc9c3d670e7ac5c1330cf8a78dfced",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152612.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152612.webp",
+      "size": 542548,
+      "originalSize": 990024,
+      "sourceSha256": "6028d09519ae79e1f7be44b6474891f7a1bd95a0702288208c6fdba848df43ef",
+      "sha256": "9cd238860f97dca48b41f23e47f79c54ddaea3aac49014f5b066e2eb0e8b3f90",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152637.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152637.webp",
+      "size": 56328,
+      "originalSize": 96475,
+      "sourceSha256": "24a6c8382851bdcdeebdad3f566adbc3986000e48f616f7a4927b0a547385cdf",
+      "sha256": "7ad98134a50c9050b8bbd34ab9523f310d88a5ba2cf392946aaccc570fe06bc3",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152650.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152650.webp",
+      "size": 59822,
+      "originalSize": 143930,
+      "sourceSha256": "7fb2b02166fed85b6330061e078f2046ae59662987f9cb5a51f7060ea6f6ce09",
+      "sha256": "61ffc35fd7d947e45d714df23b5e769b1f2297f72d59c08693223a8054b01f67",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152707.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152707.webp",
+      "size": 117734,
+      "originalSize": 258773,
+      "sourceSha256": "c776e5b01a8311178c75f8b5938d46347ca1a6cdca2ca9a9fc641aaf207b846f",
+      "sha256": "be35237a739bd30d66ebb7c7f967dc014f009f0bf8a3d644a8d2e3b6c7b45022",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152716.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152716.webp",
+      "size": 70206,
+      "originalSize": 147931,
+      "sourceSha256": "d30aa341e4770f4d929e8c6c6800259f34074df731b7883081ac07e3b3dcdfa2",
+      "sha256": "ddedc874b1c717ab337a7ed01677131a159acf894d6a60f7b64eace404ea1067",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152725.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152725.webp",
+      "size": 352266,
+      "originalSize": 638057,
+      "sourceSha256": "b84787b7729959902eed9bd46565d3902345e3aec5c8db9683b6969d73a14fb2",
+      "sha256": "ce634e02d4f2d4c7f4a9dce8b63f834a5d76977bdf323682674d6bdd6e4ae6d5",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152739.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152739.webp",
+      "size": 573308,
+      "originalSize": 995640,
+      "sourceSha256": "04e1b85482d7fd9d54ca4bfc0fb35cac8a2cdf0bec5a9bc18b7c16caed5bba9b",
+      "sha256": "8e6ae18a687f327904fa8b0e2bb52e875d3e2de66f00a354a2533fb72d56d481",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152751.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152751.webp",
+      "size": 312820,
+      "originalSize": 684891,
+      "sourceSha256": "d9d074766addc87e7dd39cd127ba43fccfa0525e3aa009b24099cbf8fe15826d",
+      "sha256": "bfc6d76580ae182a5ecd299ff58ecf90d13e57fa6b6aad4c3005712aeb905aaf",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152806.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152806.webp",
+      "size": 349584,
+      "originalSize": 589222,
+      "sourceSha256": "fe27376bd866cfd0943f60759022a40febc776407f2d7e8dc47fe608e823ada2",
+      "sha256": "96960166a5c30942e5d8d396e364478198548d76e413f7a63beb619a3eba6e7b",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152832.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152832.webp",
+      "size": 34412,
+      "originalSize": 71952,
+      "sourceSha256": "d9f42744896e33d334d8b7ec9e6ceaf1c69a90e3b80a589610bb74f4ecf038b2",
+      "sha256": "0e23ba8adbe6b1fa8837ada5399730a7c86f098928fe6636e61d5ecec269fbef",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152842.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152842.webp",
+      "size": 43736,
+      "originalSize": 81427,
+      "sourceSha256": "1eff6cf90972a515b0cc6941f891d4e1245f8438d5190a5e233c5d04d021cd48",
+      "sha256": "59410a8d639ef55bb2d5754493ed0e26cbde80dc6c883ada4d1822a370ef42b3",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152852.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152852.webp",
+      "size": 37424,
+      "originalSize": 87979,
+      "sourceSha256": "c12a89ae3763bd12362ab0be72fcfb5f19bcdd0842a3cd269f1b64819617e268",
+      "sha256": "85bc691c96bfd522f3caddc61171b47ce82f0c9937d1a366256005ab593927c1",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152909.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152909.webp",
+      "size": 189478,
+      "originalSize": 271591,
+      "sourceSha256": "549f9a1c1fb0cfb491bc33dab64859f93449bdd1cf8acee5a75c1fb7411c7270",
+      "sha256": "2037554f778847c265e6bfbac1418b3dff917c547f7405aa5ac335b32b38941d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152923.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125152923.webp",
+      "size": 42086,
+      "originalSize": 84485,
+      "sourceSha256": "84d76ba334e3977c706d41132f7346e0dd13ce2d31d17aa3761b1aa1236d7c06",
+      "sha256": "a2b4a55c52820a1b6856a2bb238e6ada1eb05d0c28749e5fac7715ef03568f55",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153247.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153247.webp",
+      "size": 275134,
+      "originalSize": 456003,
+      "sourceSha256": "9391271b534d0c049a97047907fb2722243ea3d4b78c3399973df13c98da54f7",
+      "sha256": "6f1bc5da9e443cbc8d914369c3f06bea9ecab14ac5d94c0690c57d207ececb66",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153313.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153313.webp",
+      "size": 85982,
+      "originalSize": 167493,
+      "sourceSha256": "af4193d290529564316da1078aba3fcd0266435094b893117f8b2297d00395e3",
+      "sha256": "330f11563938da50e34d181c348939da9fa1eac2097c3d9c431228aa09459562",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153331.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153331.webp",
+      "size": 156770,
+      "originalSize": 250854,
+      "sourceSha256": "4d19ad981c4d73a5e6cba7d8905da232b45867531dd3f41ec8624062c7dbbc33",
+      "sha256": "6884a411085eb4d1e19200956b8233e8f95516a99f73446599a0dd48c878d47d",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153344.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153344.webp",
+      "size": 133248,
+      "originalSize": 219445,
+      "sourceSha256": "37041dcb8f9ca9e1e3822e4f721eb9f45a76814b77723d6cda46d9c8ef76bb9c",
+      "sha256": "a2a7f38456393dade1c4327dd586d38c7232fa68f05b0287cd63c84e79d0679e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153358.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153358.webp",
+      "size": 38830,
+      "originalSize": 84308,
+      "sourceSha256": "399cb68a6baec0fd5fa39581bf08cd93b2b7f38026624d4816514ea9c8646fda",
+      "sha256": "81492cb63e2cf4855614535d3c3ceeb5166bb32335dd53d82e49a2b915365745",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153446.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153446.webp",
+      "size": 91388,
+      "originalSize": 166520,
+      "sourceSha256": "2a9f169e550fc8ec6be9b85c2c0901bda73872eed5136a5684e3ee545b46c4d7",
+      "sha256": "cbdb37602ffea16577bd5b64febe4feb0457ef899e9bbd66b6fbf38d2509416e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153504.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153504.webp",
+      "size": 257554,
+      "originalSize": 482164,
+      "sourceSha256": "e951ee66cd0c22a901e6e60bdd3d7ece5cd2cf7d3236ec11ecde14be17ce2cd7",
+      "sha256": "caff922596daaca25971890775aff30c3f88dbd43ec40d2cf304e88087cb005c",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153539.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153539.webp",
+      "size": 54184,
+      "originalSize": 107068,
+      "sourceSha256": "82ff7c09d4ccf254601edbecc6e53ffc72549ee6a87e1fce426ca32fc4b3afe1",
+      "sha256": "9b40be5569e8c808d524981ce1b652a198a9b104c8326a065009d060a6228fda",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153610.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153610.webp",
+      "size": 235568,
+      "originalSize": 443646,
+      "sourceSha256": "7056cbd8461e437bb3fc9a28f926ae8a4966e5d52419f15e91fd73d686802e5c",
+      "sha256": "b24d50627e86c64214eaa7d9dce8fa6b1b5d9ae371b7b64c0b7749b9ce12187a",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153650.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153650.webp",
+      "size": 106974,
+      "originalSize": 199961,
+      "sourceSha256": "4d09bd213e18db056bc38bf3ecd58e52076ade841f9caaebd9985667741c8f6c",
+      "sha256": "b0d4ae4fa42edc65516d9eccc67b7787a8b331daa97a7bb337a374453dafd6f7",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153729.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153729.webp",
+      "size": 115098,
+      "originalSize": 187978,
+      "sourceSha256": "7143d04a2da34cac59b2594b2310b6610b9fffdf5c22b1f2a0466663db0d2c03",
+      "sha256": "98b238600e6c457f1c659ba5b6b7c7b80f8ea2a1e358569a4eed09df9882b56e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153807.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125153807.webp",
+      "size": 35780,
+      "originalSize": 68379,
+      "sourceSha256": "5f51963065ed33475fe714f91a0ac84c504e2ea15427841306e28840cca4276e",
+      "sha256": "0a87a2ef2f642186c0f760af7c41a0df861b8162436e8e7c047a6c466567986c",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155134.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155134.webp",
+      "size": 188406,
+      "originalSize": 342913,
+      "sourceSha256": "2b636ee846025e4445028abd6e507e946062e456ec55dd5e3c4fccc77b938a59",
+      "sha256": "243943ce6764d3c021452caed6145f680835ffc3380a90b317b94acf208de63e",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155228.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155228.webp",
+      "size": 33990,
+      "originalSize": 82136,
+      "sourceSha256": "76fd2b5653104d2ac0490d7f3edeabc22b556d29eb8880322391cf4fbda9bf23",
+      "sha256": "8cd45f2f75dca78e84e4d4ae9e7556651f6015d55c767a54b7df501bab2a4e04",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155256.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155256.webp",
+      "size": 129240,
+      "originalSize": 238360,
+      "sourceSha256": "876c679c5e68cfbc9fca1fcae73cb799339765a7c8e10822c13fd1b285f331b3",
+      "sha256": "bcb1c6bfd1f0725f4d67c559b263ea405b94e2d817ad92aa40a9b07695d84dac",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155826.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155826.webp",
+      "size": 52588,
+      "originalSize": 104542,
+      "sourceSha256": "ddda12fc76649f4403cbda28429a4ad3093bfba3ef2db6496577b5b2bc0ae7db",
+      "sha256": "b0c4be923d2f36a0516e0bb3b20ed2bdb8944a39f2e59927b937f72e460becaa",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155912.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155912.webp",
+      "size": 808970,
+      "originalSize": 1400936,
+      "sourceSha256": "d65a525a7fe6da32f71307a3ec39097e62dae33a482ac64abe121f9cb71c0259",
+      "sha256": "34fcc6e8872095e57c1e50aea5fafee8b3a9e10533a457e8025dd1bc9f492268",
+      "contentType": "image/webp"
+    },
+    "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155957.png": {
+      "key": "lessons/cybersecurity/extra/1_Intelligent_Systems/Lezione22/imgs/Pasted image 20261125155957.webp",
+      "size": 70166,
+      "originalSize": 142458,
+      "sourceSha256": "0ea49c4fffc53d01583e69fea22090923fd05fa92e9d10a7f4cab9474dfddfb6",
+      "sha256": "1af6e8272134f0fe46948c02d88bfc5da49261223074fe345ffcfbc85e8c89f1",
       "contentType": "image/webp"
     }
   }

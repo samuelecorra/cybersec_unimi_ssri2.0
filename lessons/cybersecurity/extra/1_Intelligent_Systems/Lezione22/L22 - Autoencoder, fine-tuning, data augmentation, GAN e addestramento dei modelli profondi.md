@@ -15,8 +15,7 @@ Il problema di partenza: **i modelli profondi hanno più di 100 milioni di param
 - **più dati**: data augmentation, GAN, modelli di diffusione, model autophagy disorder;
 - **confini**: scaling laws, LLM e agenti nella progettazione del ML.
 
-<!-- SOURCE_VISUAL id="IS22-V01" source="L22-web.pdf" page="2" type="grafico" description="Miniature della panoramica: PCA contro autoencoder sulle cifre e curve di oblio catastrofico con e senza rehearsal" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133300.png)
 
 ---
 
@@ -31,8 +30,7 @@ Lavorare in addestramento senza etichette.
 - **Può essere rifinito con tecniche supervisionate standard** (per esempio la backpropagation, come una normale rete feed-forward).
 - **Utile quando le etichette sono poche** → dataset parzialmente supervisionato (**semi-supervisionato**).
 
-<!-- SOURCE_VISUAL id="IS22-V02" source="L22-web.pdf" page="4" type="grafico" description="Immagini non etichettate e due etichettate (cane, auto) con la frontiera trovata usando tutti i punti" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133331.png)
 
 Richiamo dalla Lezione 19: il **k-means** raggruppa i campioni senza etichette; **qui è una rete a imparare la struttura**.
 
@@ -50,15 +48,13 @@ Richiamo dalla Lezione 19: il **k-means** raggruppa i campioni senza etichette; 
 
 (* esiste una versione supervisionata.)
 
-<!-- SOURCE_VISUAL id="IS22-V03" source="L22-web.pdf" page="5" type="schema" description="Mappa dei modelli superficiali e profondi, supervisionati e non supervisionati" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133347.png)
 
 #### **1.3. Obiettivo: addestrare in modo efficace gli strati nascosti**
 
 Addestrare gli strati nascosti è un **compito difficile**. **Soluzione: gli autoencoder e il greedy layer-wise training.** Adattato da © Tony Martinez.
 
-<!-- SOURCE_VISUAL id="IS22-V04" source="L22-web.pdf" page="6" type="figura" description="Rete profonda con gli strati nascosti difficili da addestrare" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133401.png)
 
 #### **1.4. Gli autoencoder (AE): la tecnica di base**
 
@@ -70,8 +66,7 @@ Addestrare gli strati nascosti è un **compito difficile**. **Soluzione: gli aut
 
 L’addestramento mira a $X=X'$, **con la backpropagation come in una rete feed-forward**.
 
-<!-- SOURCE_VISUAL id="IS22-V05" source="L22-web.pdf" page="7" type="schema" description="Autoencoder che riproduce l'ingresso X in uscita X'" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133416.png)
 
 #### **1.5. Gli autoencoder: la tecnica di base, $\hat{x}=x$**
 
@@ -83,8 +78,7 @@ L’addestramento mira a $X=X'$, **con la backpropagation come in una rete feed-
 
 $$E=\frac1d\sum_{i=1}^{d}(x_i-\hat{x}_i)^2.$$
 
-<!-- SOURCE_VISUAL id="IS22-V06" source="L22-web.pdf" page="8" type="schema" description="Autoencoder 5-2-5 con encoder, collo di bottiglia e decoder" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133430.png)
 
 **Pochi numeri bastano**: anche uno strato nascosto ($5\to 2\to 5$) compatta l’informazione in un solo passo. **Esempio**, $d=2$: $x=(0{,}8;\ 0{,}2)$, $\hat{x}=(0{,}7;\ 0{,}4)$: $E=\frac12(0{,}1^2+0{,}2^2)=\frac12(0{,}01+0{,}04)=0{,}025$.
 
@@ -98,8 +92,7 @@ $$E=\frac1d\sum_{i=1}^{d}(x_i-\hat{x}_i)^2.$$
 - Codice: $(-0{,}56;\ -0{,}47;\ -0{,}13;\ -0{,}05;\ 0{,}58;\ 0{,}18;\ 1{,}02;\ -0{,}03)$.
 - Uscita: $(0{,}00;\ 0{,}05;\ 0{,}54;\ 0{,}69;\ 0{,}64;\ 0{,}21;\ \dots)$.
 
-<!-- SOURCE_VISUAL id="IS22-V07" source="L22-web.pdf" page="9" type="figura" description="Immagine 8x8 d'ingresso, codice a 8 valori e ricostruzione dell'autoencoder" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133443.png)
 
 - **Nessuna etichetta necessaria**: **l’obiettivo della rete è il suo stesso ingresso**.
 - **Errore di addestramento**: $E=\frac{1}{64}\sum_{i=1}^{64}(x_i-\hat{x}_i)^2$, con $x_i$ il pixel $i$ dell’ingresso e $\hat{x}_i$ lo stesso pixel in uscita.
@@ -111,8 +104,7 @@ Nelle slide successive si chiama $d$ la dimensione d’ingresso e $m$ la dimensi
 
 **Esempio da MNIST** (cifre in bianco e nero $28\times 28$): dalle $d=784$ dimensioni originali a un **codice di $m=2$ numeri** ($z\in\mathbb{R}^2$). **Nota**: la PCA è un metodo non supervisionato, **come gli AE**.
 
-<!-- SOURCE_VISUAL id="IS22-V08" source="L22-web.pdf" page="10" type="grafico" description="Codice 2D di un autoencoder sulle cifre MNIST confrontato con la PCA" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133452.png)
 
 > 💡 **AE lineare = PCA (nota didattica).** Un autoencoder con un solo strato nascosto, attivazioni lineari e errore quadratico impara lo **stesso sottospazio** delle prime $m$ componenti principali (non necessariamente gli stessi assi). Con attivazioni non lineari e più strati può invece «piegare» lo spazio: per questo sulle cifre i gruppi del codice 2D sono di solito più separati di quelli della PCA a 2 componenti (34% della varianza, Lezione 18, §4.4).
 
@@ -124,8 +116,7 @@ Nelle slide successive si chiama $d$ la dimensione d’ingresso e $m$ la dimensi
 |---|---:|---:|---:|
 | errore medio di ricostruzione $E$ | 0,053 | 0,026 | 0,014 |
 
-<!-- SOURCE_VISUAL id="IS22-V09" source="L22-web.pdf" page="11" type="figura" description="Otto cifre d'ingresso e le loro ricostruzioni con codici di 2, 8 e 16 numeri" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133504.png)
 
 > 📌 **La dimensione del codice $m$ è una scelta di progetto**: $m$ **piccolo** = **compressione forte, uscita sfocata**; $m$ **grande** = **uscita fedele, meno compressione**.
 
@@ -138,8 +129,7 @@ Nelle slide successive si chiama $d$ la dimensione d’ingresso e $m$ la dimensi
 
 **Si osservi l’interessante continuità dello spazio latente!**
 
-<!-- SOURCE_VISUAL id="IS22-V10" source="L22-web.pdf" page="12" type="figura" description="Griglia di immagini prodotte dal decoder per diversi punti dello spazio latente 2D" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133524.png)
 
 > ⚠️ **La continuità non è garantita (nota didattica).** In un autoencoder **semplice** la continuità dello spazio latente **non è garantita**: tra due gruppi possono esserci zone vuote, e il decoder produce immagini senza senso. Gli **autoencoder variazionali** (VAE) aggiungono un termine che regolarizza lo spazio latente proprio per renderlo continuo e campionabile, e sono il ponte verso i modelli generativi del §6.
 
@@ -147,8 +137,7 @@ Nelle slide successive si chiama $d$ la dimensione d’ingresso e $m$ la dimensi
 
 **Denoising AE**: addestrato con un **ingresso rumoroso $\tilde{x}$** e il **bersaglio pulito $x$**. Pixel mancanti, rumore, barre.
 
-<!-- SOURCE_VISUAL id="IS22-V11" source="L22-web.pdf" page="13" type="figura" description="Immagini con pixel mancanti, rumore e barre e le ricostruzioni pulite del denoising autoencoder" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133537.png)
 
 > 💡 **Perché impara qualcosa di utile (nota didattica).** Un autoencoder normale potrebbe limitarsi a copiare; un denoising AE non può, perché l’ingresso è diverso dal bersaglio. Per togliere il rumore deve sapere che aspetto hanno le immagini «vere», cioè imparare la struttura dei dati. È anche il principio dei modelli di diffusione (§6.8), che tolgono il rumore un poco alla volta.
 
@@ -156,8 +145,7 @@ Nelle slide successive si chiama $d$ la dimensione d’ingresso e $m$ la dimensi
 
 **Input**: immagine grigia (1 canale). **Output**: immagine a colori (3 canali).
 
-<!-- SOURCE_VISUAL id="IS22-V12" source="L22-web.pdf" page="14" type="figura" description="Immagini grigie e le versioni colorate automaticamente da un autoencoder" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133548.png)
 
 #### **1.12. Autoencoder per il rilevamento di anomalie (industria)**
 
@@ -169,8 +157,7 @@ $$s(x)=\frac{1}{64}\sum_i(x_i-\hat{x}_i)^2$$
 
 → **confronto** $s(x)>\tau$? → buono / difettoso.
 
-<!-- SOURCE_VISUAL id="IS22-V13" source="L22-web.pdf" page="15" type="schema" description="Finestra di vibrazione, autoencoder addestrato su pezzi buoni, punteggio di ricostruzione e soglia" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133652.png)
 
 - **L’AE ha visto solo pezzi buoni**: li ricostruisce bene e **ricostruisce male un difetto**, quindi $s(x)$ è grande **proprio quando appare qualcosa di nuovo**.
 - **Per l’addestramento non servono esempi difettosi**: utile quando i difetti sono **rari** (prodotto buono ≫ prodotto difettoso).
@@ -178,8 +165,7 @@ $$s(x)=\frac{1}{64}\sum_i(x_i-\hat{x}_i)^2$$
 
 #### **1.13. Rilevamento di anomalie con AE: un esperimento su segnali di vibrazione**
 
-<!-- SOURCE_VISUAL id="IS22-V14" source="L22-web.pdf" page="16" type="grafico" description="Segnale difettoso e sua ricostruzione, istogramma dei punteggi di 500 finestre buone e 500 difettose con la soglia tau" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133715.png)
 
 - **Dati**: buono = 50 Hz + 150 Hz + rumore; **difettoso** = buono + **piccoli impatti ogni 16 ms** (difetto del cuscinetto).
 - **AE $64\to 16\to 4\to 16\to 64$**, addestrato su **1500 finestre buone**.
@@ -199,8 +185,7 @@ Dati sintetici (seme fisso): solo geometria, nessuna misura reale.
 3. **Token maschera grigi** prendono il posto delle patch nascoste.
 4. **Il decoder produce tutte le patch** (rosso); l’addestramento le confronta con il bersaglio, **l’immagine originale**.
 
-<!-- SOURCE_VISUAL id="IS22-V15" source="L22-web.pdf" page="17" type="schema" description="Masked autoencoder con patch nascoste, encoder sulle visibili, token maschera e decoder" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133725.png)
 
 > 💡 **Perché è scalabile (nota didattica).** Nell’articolo originale (He et al., 2021) si nasconde il **75%** delle patch: l’encoder lavora solo sul 25% visibile, ed è quattro volte più veloce. Ricostruire tre quarti di un’immagine da un quarto obbliga la rete a capire la scena (forme, oggetti), non a copiare pixel vicini. È la stessa idea del *masked language modeling* di BERT (Lezione 13) applicata alle immagini.
 
@@ -224,8 +209,7 @@ Richiamo dalla Lezione 21: **CNN-A e CNN-B**: convoluzione, pooling, testa densa
   - **diminuire la dimensione dei kernel**;
   - **aumentare il numero di feature map**.
 
-<!-- SOURCE_VISUAL id="IS22-V16" source="L22-web.pdf" page="19" type="schema" description="Architettura di una CNN con mappe sempre più piccole e numerose" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133749.png)
 
 > ⚠️ **Kernel o feature map? (nota didattica).** La Lezione 21 (§5.13) formula la regola come «diminuire la dimensione **delle mappe** e aumentarne il numero»; qui si parla di **kernel** più piccoli. Le due letture convivono: nelle reti storiche (AlexNet) i kernel scendevano da $11\times 11$ a $3\times 3$; nelle reti moderne i kernel sono quasi sempre $3\times 3$ e a diminuire è la dimensione spaziale delle mappe, mentre il numero di canali cresce.
 
@@ -237,8 +221,7 @@ Richiamo dalla Lezione 21: **CNN-A e CNN-B**: convoluzione, pooling, testa densa
   - peggiorato dal fatto che **gli ultimi due strati di solito possono imparare qualsiasi compito «abbastanza bene»**, quindi l’errore verso gli strati iniziali cala in fretta mentre gli strati alti «per lo più» risolvono il compito.
 - **Gli strati bassi non hanno mai l’opportunità di usare la loro capacità** per migliorare i risultati: **calcolano solo una feature map casuale**.
 
-<!-- SOURCE_VISUAL id="IS22-V17" source="L22-web.pdf" page="20" type="figura" description="Illustrazione della diffusione del gradiente verso i primi strati" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133757.png)
 
 #### **2.3. Suggerimenti per l’addestramento del deep learning**
 
@@ -250,8 +233,7 @@ Addestrati con la **backpropagation** (BP) (Lezione 20):
 
 **«Weight sharing»** (Lezione 21): **lo stesso kernel convolutivo è riusato in ogni posizione** dell’immagine. **Vantaggi**: **molti meno parametri addestrabili**, **feature map equivarianti alla traslazione**, **meno overfitting**.
 
-<!-- SOURCE_VISUAL id="IS22-V18" source="L22-web.pdf" page="21" type="schema" description="Strato 1D da 7 ingressi a 5 uscite con lo stesso kernel di 3 pesi in ogni posizione" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133807.png)
 
 Stesso colore = stesso peso: **un kernel** $(w_1,w_2,w_3)$ **in ogni posizione**. **Completamente connesso $7\to 5$: 35 pesi. Con il weight sharing: solo 3.**
 
@@ -269,8 +251,7 @@ Stesso colore = stesso peso: **un kernel** $(w_1,w_2,w_3)$ **in ogni posizione**
 | **regolarizzazione** (sotto) | **meno overfitting** di > 100M parametri |
 | **pre-addestramento self-supervised** | usa dati non etichettati **su tutta la rete**, non strato per strato |
 
-<!-- SOURCE_VISUAL id="IS22-V19" source="L22-web.pdf" page="22" type="schema" description="Blocco residuo y = x + F(x) con due strati conv, norm, ReLU e la scorciatoia" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133823.png)
 
 **Blocco residuo**: $y=x+F(x)$, con $F(x)$ fatto di 2 strati (conv, norm, ReLU) e la **scorciatoia** (*skip*): **il gradiente ha un percorso diretto attraverso la scorciatoia** (Lezione 21, §5.5).
 
@@ -286,8 +267,7 @@ $\mu_B,\sigma_B^2$: media e varianza degli $x_i$ sul batch; $\epsilon$: costante
 
 **Esempio**: $x=(2,4,6)$: $\mu_B=4$, $\sigma_B\approx 1{,}6$, quindi $\hat{x}\approx(-1{,}2;\ 0;\ +1{,}2)$.
 
-<!-- SOURCE_VISUAL id="IS22-V20" source="L22-web.pdf" page="23" type="grafico" description="Istogrammi delle attivazioni di un'unità prima (media 4, std 2) e dopo la BatchNorm (media 0, std 1)" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125134952.png)
 
 - **A che cosa serve**: mantiene le attivazioni di ogni strato in un **intervallo stabile**: il gradiente **né svanisce né esplode**, l’addestramento è **più veloce** e **tollera learning rate più grandi**.
 - **Dove**: **dopo una convoluzione o uno strato lineare, prima dell’attivazione**. La **LayerNorm** (statistiche sulle feature di **un campione**) si usa quando i **batch sono piccoli**, per esempio nei **Transformer**.
@@ -322,8 +302,7 @@ con $m_t=\beta_1m_{t-1}+(1-\beta_1)g_t$ e $v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2$.
 - **Weight decay**: minimizzare $E'=E+\lambda\sum_iw_i^2$; $\lambda\ge 0$ fissa **quanto vengono penalizzati i pesi grandi**.
 - **Dropout**: a ogni passo di addestramento **ogni unità nascosta viene spenta con probabilità $p$** (per esempio $p=0{,}5$); **in test si usano tutte le unità**.
 
-<!-- SOURCE_VISUAL id="IS22-V21" source="L22-web.pdf" page="25" type="schema" description="Un passo di dropout con le unità grigie spente" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125135348.png)
 
 **Dropout, un passo di addestramento**: le unità grigie sono spente, **la rete non può contare su nessuna singola unità**.
 
@@ -350,8 +329,7 @@ con $m_t=\beta_1m_{t-1}+(1-\beta_1)g_t$ e $v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2$.
 - **Parametri ≠ neuroni**: un parametro è **un peso o un bias**; **un neurone ha molti pesi**.
 - **Per un’applicazione**, **reti compatte** (MobileNetV3-Small: **2,5 M**) o **CNN ad hoc** spesso **bastano**.
 
-<!-- SOURCE_VISUAL id="IS22-V22" source="L22-web.pdf" page="27" type="grafico" description="Parametri addestrabili delle reti per la visione dal 2000 al 2025 in scala logaritmica" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125140857.png)
 
 Il grafico riporta anche LeNet-5 (7 strati), GoogLeNet (22 strati), EfficientNet-B0 (82 strati), ConvNeXt-T (18 blocchi), ViT-B/16 (12 blocchi) e una CNN ad hoc (4 blocchi conv), con la soglia in cui l’addestramento end-to-end diventa pratico.
 
@@ -368,37 +346,31 @@ Una soluzione storica all’addestramento delle reti profonde: è ancora valida?
 
 → **esportare lo strato: addestrarlo come un autoencoder!**
 
-<!-- SOURCE_VISUAL id="IS22-V23" source="L22-web.pdf" page="29" type="schema" description="Uno strato della rete addestrato come autoencoder" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125141839.png)
 
 #### **3.2. AE impilati (tecnica di base)**
 
 - **Impilare molti autoencoder (sparsi) in successione** e addestrarli con il **greedy layer-wise training**.
 - **Eliminare ogni volta lo strato d’uscita del decoder.**
 
-<!-- SOURCE_VISUAL id="IS22-V24" source="L22-web.pdf" page="30" type="schema" description="Primo autoencoder dello stack con il decoder da eliminare" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125141847.png)
 
 - **Tenere i parametri del primo strato, addestrare il secondo.**
 - Eliminare ogni volta lo strato d’uscita del decoder.
 
-<!-- SOURCE_VISUAL id="IS22-V25" source="L22-web.pdf" page="31" type="schema" description="Secondo autoencoder addestrato sopra il primo strato congelato" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125141858.png)
 
 - **La regola d’oro è ridurre il numero di neuroni andando verso le uscite.**
 
-<!-- SOURCE_VISUAL id="IS22-V26" source="L22-web.pdf" page="32" type="schema" description="Stack di autoencoder con strati sempre più piccoli" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125141907.png)
 
 - **Fare l’addestramento supervisionato sull’ultimo strato.** Si può fare perché si hanno **gli ingressi $x$ e i pesi degli AE** → **si possono calcolare gli ingressi dello strato finale** ($h_1,h_2,\dots$), e **le etichette $y$** dell’uscita.
 
-<!-- SOURCE_VISUAL id="IS22-V27" source="L22-web.pdf" page="33" type="schema" description="Addestramento supervisionato dell'ultimo strato sopra gli autoencoder impilati" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125141914.png)
 
 - **Poi fare l’addestramento supervisionato dell’intera rete per affinare tutti i pesi.**
 
-<!-- SOURCE_VISUAL id="IS22-V28" source="L22-web.pdf" page="34" type="schema" description="Fine-tuning supervisionato dell'intera rete" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125141921.png)
 
 Adattato da © Tony Martinez.
 
@@ -409,8 +381,7 @@ Adattato da © Tony Martinez.
 3. **Addestrare l’uscita**, etichetta $y$: si addestra $w_3$.
 4. **Fine-tuning di tutto** $W_1,W_2,w_3$, con $\alpha$ piccolo.
 
-<!-- SOURCE_VISUAL id="IS22-V29" source="L22-web.pdf" page="35" type="schema" description="I quattro passi del greedy layer-wise training con strati addestrati, congelati e decoder temporanei" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125141934.png)
 
 - **I passi 1–2 non richiedono etichette**: ogni strato è addestrato come **l’encoder di un autoencoder**. $W_1$: $5\times 3$ pesi, $W_2$: $3\times 2$, $w_3$: $2\times 1$ (**regola d’oro**: meno unità andando avanti, $5\to 3\to 2\to 1$).
 - **Il passo 3 usa le etichette $y$ solo per $w_3$**; il **passo 4 affina tutti i pesi con un learning rate piccolo $\alpha$**, partendo da una **buona inizializzazione**.
@@ -432,8 +403,7 @@ Adattato da © Tony Martinez.
     - l’**apprendimento inefficace degli strati iniziali**;
     - i **minimi locali delle reti profonde**.
 
-<!-- SOURCE_VISUAL id="IS22-V30" source="L22-web.pdf" page="37" type="figura" description="Paesaggio dell'errore con i pesi pre-addestrati in un buon bacino" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125141949.png)
 
 #### **3.6. Il greedy layer-wise training è ancora valido oggi?**
 
@@ -441,8 +411,7 @@ Adattato da © Tony Martinez.
 |---|---|---|---|
 | pre-addestramento layer-wise (Hinton; Bengio) | end-to-end: ReLU, dropout, GPU (AlexNet) | BatchNorm, reti residue (152 strati) | pre-addestramento self-supervised dell’intera rete (BERT, MAE) |
 
-<!-- SOURCE_VISUAL id="IS22-V31" source="L22-web.pdf" page="38" type="schema" description="Linea del tempo dal pre-addestramento layer-wise al self-supervised" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142004.png)
 
 > 📌 **La procedura: storica.** CNN e transformer standard **non si addestrano più strato per strato**: la ricetta moderna addestra **tutti gli strati insieme**. **L’idea: viva.** «**Pre-addestrare senza etichette, poi affinare con poche etichette**» è esattamente ciò che fanno oggi il **pre-addestramento self-supervised** e il **transfer learning**.
 
@@ -457,13 +426,11 @@ Sfruttare addestramento e conoscenza precedenti.
 
 Richiamo dalla Lezione 21: **una CNN pre-addestrata = backbone + testa; si riusa il backbone**. I **metodi di ML tradizionali** devono **ricominciare da capo** l’apprendimento ogni volta che cambiano il **dominio applicativo** o il **dataset**.
 
-<!-- SOURCE_VISUAL id="IS22-V32" source="L22-web.pdf" page="40" type="schema" description="ML tradizionale che riparte da zero per ogni compito contro transfer learning che riusa la conoscenza (ruder.io)" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142042.png)
 
 > 📌 **Definizione.** Il **transfer learning** migliora l’apprendimento di un **compito obiettivo** in un **dominio obiettivo** usando **la conoscenza appresa su un compito o dominio sorgente diverso**. http://ruder.io/transfer-learning/
 
-<!-- SOURCE_VISUAL id="IS22-V33" source="L22-web.pdf" page="41" type="schema" description="Dominio e compito sorgente contro dominio e compito obiettivo" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142050.png)
 
 #### **4.2. I modelli pre-addestrati sono disponibili online**
 
@@ -481,23 +448,20 @@ Richiamo dalla Lezione 21: **una CNN pre-addestrata = backbone + testa; si riusa
 
 #### **4.3. Il fine-tuning: partire da una CNN pubblica**
 
-<!-- SOURCE_VISUAL id="IS22-V34" source="L22-web.pdf" page="43" type="schema" description="Una CNN pubblica pre-addestrata riadattata al nuovo compito" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142113.png)
 
 > 📌 **Definizione.** Il **fine-tuning** **continua l’addestramento di un modello pre-addestrato sui dati del nuovo compito**, di solito con un **learning rate piccolo $\alpha$**.
 
 - **Il fine-tuning è oggi uno dei flussi di lavoro pratici dominanti del deep learning.**
 - **La stessa idea vale non solo per le CNN**, ma anche per **vision transformer, modelli multimodali, modelli del parlato e LLM**.
 
-<!-- SOURCE_VISUAL id="IS22-V35" source="L22-web.pdf" page="44" type="figura" description="Illustrazione dell'efficacia del fine-tuning" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142120.png)
 
 #### **4.4. Transfer learning: dalla CNN pre-addestrata al proprio compito**
 
 **Input** $I(x,y)$ ($224\times 224\times 3$) → **backbone pre-addestrato, congelato** → **embedding** $z$ (4096 numeri) → **nuova testa addestrata** ($4096\to 5$) → $\hat{y}$: **5 punteggi** (ok, graffio, ammaccatura, crepa, macchia).
 
-<!-- SOURCE_VISUAL id="IS22-V36" source="L22-web.pdf" page="45" type="schema" description="Backbone congelato, embedding da 4096 e nuova testa per cinque classi di difetti" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142129.png)
 
 - **Parametri addestrati**: $4096\times 5+5=20\,485$ (pesi + bias); **congelati**: circa **60 milioni** (backbone di tipo AlexNet).
 - È l’**opzione 1** dei passi successivi; le opzioni 2 e 3 **sbloccano anche gli strati più alti o tutti**, con un $\alpha$ piccolo.
@@ -513,8 +477,7 @@ Blocchi conv (da **generici** a **specifici**) → testa densa → $\hat{y}$; le
 | **2) strati alti + testa** | $\approx 10^6$–$10^7$ | **medi** (migliaia) | **overfitting** se i dati sono pochi |
 | **3) tutti i pesi, $\alpha$ piccolo** | tutti ($\approx 10^7$–$10^8$) | **molti** | overfitting, **oblio catastrofico** |
 
-<!-- SOURCE_VISUAL id="IS22-V37" source="L22-web.pdf" page="46" type="schema" description="Tre opzioni di fine-tuning con gli strati addestrati evidenziati" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142143.png)
 
 > 📌 **Regola pratica**: **meno dati si hanno e più sono simili alla sorgente, meno strati si sbloccano.**
 
@@ -532,8 +495,7 @@ Blocchi conv (da **generici** a **specifici**) → testa densa → $\hat{y}$; le
 - **LoRA, $r=8$**: $2\cdot 4096\cdot 8=65\,536$.
 - **Rapporto**: $65\,536/16\,777\,216\approx 0{,}4\%$.
 
-<!-- SOURCE_VISUAL id="IS22-V38" source="L22-web.pdf" page="47" type="schema" description="LoRA: matrice W congelata più il prodotto B per A addestrato" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142154.png)
 
 **Nata per i modelli linguistici**, usata anche per i **vision transformer**; lasciare $W$ intatta **limita anche l’oblio catastrofico** (§4.11).
 
@@ -550,13 +512,11 @@ Blocchi conv (da **generici** a **specifici**) → testa densa → $\hat{y}$; le
    - In un’**AlexNet** questo calcola un **vettore a 4096 dimensioni per ogni immagine**: le attivazioni dello strato nascosto **immediatamente prima del classificatore**.
    - **Nota**: controllare se queste feature sono «**ReLUed**» (sogliate a zero) se lo erano anche durante l’addestramento della CNN (come di solito accade).
 
-<!-- SOURCE_VISUAL id="IS22-V39" source="L22-web.pdf" page="49" type="schema" description="AlexNet senza l'ultimo strato usata come estrattore di un vettore da 4096" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142306.png)
 
 Una volta estratti i **codici a 4096 dimensioni** per tutte le immagini, si addestra un **classificatore lineare** (per esempio **SVM lineare o classificatore softmax**) per il nuovo dataset (il proprio dataset di immagini).
 
-<!-- SOURCE_VISUAL id="IS22-V40" source="L22-web.pdf" page="50" type="schema" description="Codici a 4096 dimensioni usati per addestrare un classificatore lineare" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142314.png)
 
 > 💡 **Il dettaglio della ReLU (nota didattica).** Se durante l’addestramento la ReLU veniva applicata dopo fc7, il classificatore originale ha sempre visto valori $\ge 0$. Prendere le attivazioni **prima** della ReLU dà valori anche negativi: l’informazione è la stessa, ma un classificatore lineare addestrato su feature di un tipo e usato sull’altro sbaglia. La regola è usare le feature nella stessa forma in cui le vedeva la rete.
 
@@ -568,8 +528,7 @@ La propria immagine $I(x,y)$ → **backbone pre-addestrato, congelato** → **em
 - **k-NN, coseno** → classe dell’immagine etichettata più vicina (Lezione 19);
 - **distanza dal normale** $s(z)>\tau$? → anomalia / OK.
 
-<!-- SOURCE_VISUAL id="IS22-V41" source="L22-web.pdf" page="51" type="schema" description="Un embedding da backbone congelato usato per classificatore lineare, k-NN e rilevamento di anomalie" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142323.png)
 
 Richiamo dalla Lezione 18: un **embedding** è una **rappresentazione vettoriale appresa**; ingressi simili danno vettori vicini. **Qui il backbone non viene mai riaddestrato: si estrae una volta, si riusa molte volte.** Si addestra **solo il blocco leggero a destra** (**o nulla**, per il k-NN).
 
@@ -583,8 +542,7 @@ Oggi lo stesso flusso si fa con **backbone più forti**:
 - **encoder immagine–testo** (tipo CLIP);
 - **modelli pre-addestrati specifici di dominio**.
 
-<!-- SOURCE_VISUAL id="IS22-V42" source="L22-web.pdf" page="52" type="figura" description="Backbone moderni per l'estrazione delle feature" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125142331.png)
 
 > 💡 **Prospettiva**: i nomi cambiano ogni anno; **il principio** (backbone congelato → embedding → modello leggero) **resta**. Gli embedding di EmbeddingGemma 2 usati nelle Lezioni 18 e 19 sono un esempio di questo stesso principio.
 
@@ -594,21 +552,18 @@ Dimenticare informazioni apprese in precedenza quando si imparano informazioni n
 
 > 📌 **Definizione.** L’**oblio catastrofico** (*catastrophic forgetting*) si verifica quando **le reti neurali dimenticano compiti appresi in precedenza** dopo essere state addestrate su **dati nuovi** o aver subito un **fine-tuning** per compiti specifici. Definizione da IBM Think (ibm.com/think).
 
-<!-- SOURCE_VISUAL id="IS22-V43" source="L22-web.pdf" page="54" type="figura" description="Illustrazione dell'oblio catastrofico" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125150404.png)
 
 - È un fenomeno osservato nel ML, **specificamente nelle reti neurali**.
 - **La capacità di ricordare informazioni apprese prima è gravemente compromessa quando la rete impara informazioni nuove.**
 - Si verifica quando una rete è **addestrata in sequenza su compiti diversi**: mentre impara i nuovi compiti, **le prestazioni sui compiti precedenti peggiorano in modo significativo**.
 - **Particolarmente rilevante** nel *continual learning*, nella **personalizzazione**, nell’**adattamento di dominio**, nel **fine-tuning di grandi modelli pre-addestrati**.
 
-<!-- SOURCE_VISUAL id="IS22-V44" source="L22-web.pdf" page="55" type="figura" description="Rete che perde le prestazioni sul compito precedente imparando quello nuovo" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125151017.png)
 
 **L’oblio catastrofico misurato con l’accuratezza sul test set.**
 
-<!-- SOURCE_VISUAL id="IS22-V45" source="L22-web.pdf" page="56" type="grafico" description="Accuratezza di test sui compiti vecchio e nuovo durante l'addestramento sequenziale" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125151029.png)
 
 #### **4.11. L’oblio misurato, e il rehearsal**
 
@@ -622,8 +577,7 @@ Dimenticare informazioni apprese in precedenza quando si imparano informazioni n
 | dopo B, **nessuna protezione** | **0,0%** | 96,3% |
 | dopo B, **rehearsal** (20% di A mescolato) | **93,7%** | 95,2% |
 
-<!-- SOURCE_VISUAL id="IS22-V46" source="L22-web.pdf" page="57" type="grafico" description="Accuratezza di test su A e su B per epoca con addestramento sequenziale e con rehearsal" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125151049.png)
 
 > 💡 **Perché si arriva a 0% (nota didattica).** Durante l’addestramento su B la rete vede solo le classi 5–9: la cross-entropy spinge le uscite 0–4 verso probabilità zero **per qualsiasi ingresso**, quindi anche un «2» viene classificato come una delle cifre 5–9. Non è solo dimenticare le feature: lo strato d’uscita impara che le classi 0–4 non esistono. Con il 20% di esempi di A nel batch le uscite 0–4 restano «vive», e si perdono solo 5,6 punti su A al costo di 1,1 punti su B.
 
@@ -637,8 +591,7 @@ Dimenticare informazioni apprese in precedenza quando si imparano informazioni n
 | dopo il solo compito 2 | 85,0% |
 | addestramento congiunto (ideale) | 96,3% |
 
-<!-- SOURCE_VISUAL id="IS22-V47" source="L22-web.pdf" page="58" type="grafico" description="Frontiera di decisione dopo il compito 1, dopo il solo compito 2 e con addestramento congiunto" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125151105.png)
 
 Dati sintetici (seme fisso): solo geometria, nessuna misura reale.
 
@@ -659,8 +612,7 @@ Dati sintetici (seme fisso): solo geometria, nessuna misura reale.
 - **Knowledge distillation**: il **modello nuovo (studente)** è addestrato a **riprodurre l’uscita del modello vecchio (insegnante)**, il che lo aiuta a conservare la conoscenza dei compiti vecchi.
 - **Architetture dinamiche**: metodi come «**PathNet**» o le «**Progressive Neural Networks**» **adattano l’architettura della rete ai nuovi compiti**. Più complessi, ma possono essere efficaci nel ridurre l’oblio catastrofico.
 
-<!-- SOURCE_VISUAL id="IS22-V48" source="L22-web.pdf" page="60" type="figura" description="Illustrazione di distillazione e architetture dinamiche" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125151154.png)
 
 #### **4.15. Knowledge distillation: etichette morbide da un insegnante**
 
@@ -679,8 +631,7 @@ con $z_i$ il punteggio d’uscita (logit) della classe $i$. **Logit dell’inseg
 | 1 | $(0{,}67;\ 0{,}24;\ 0{,}09)$ |
 | 4 | $(0{,}42;\ 0{,}33;\ 0{,}25)$ |
 
-<!-- SOURCE_VISUAL id="IS22-V49" source="L22-web.pdf" page="61" type="schema" description="Insegnante congelato e studente addestrato a riprodurne le probabilità ammorbidite" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125151217.png)
 
 **Una $T$ alta rivela quali classi sbagliate sono simili**: **più informazione dell’etichetta dura** $(1,0,0)$. **Due usi**: **conservare la conoscenza vecchia** (oblio) e **comprimere un modello grande in uno piccolo per un dispositivo edge** (Lezione 23).
 
@@ -697,8 +648,7 @@ Migliorare e ampliare il dataset di addestramento.
 
 **I modelli di DL hanno bisogno di grandi dataset per essere addestrati!**
 
-<!-- SOURCE_VISUAL id="IS22-V50" source="L22-web.pdf" page="63" type="grafico" description="Prestazioni di ML classico e deep learning al crescere dei dati" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125151233.png)
 
 #### **5.2. La data augmentation**
 
@@ -707,15 +657,13 @@ Migliorare e ampliare il dataset di addestramento.
 - **La vostra alleata contro i problemi di overfitting!** Si ricordi che si possono avere **> 100M parametri liberi** da fissare/regolare.
 - **La data augmentation non risolve da sola l’applicazione**: **servono comunque buoni dati reali**.
 
-<!-- SOURCE_VISUAL id="IS22-V51" source="L22-web.pdf" page="64" type="figura" description="Illustrazione della data augmentation" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125151254.png)
 
 #### **5.3. Le augmentation classiche in un’immagine**
 
 **Input**: un’immagine etichettata ($x$, $y=$ «gatto»). **Output**: **7 nuove immagini $T(x)$ con la stessa etichetta $y$**; $T(\cdot)$ è una **trasformazione casuale, estratta di nuovo a ogni epoca**. Foto: esempio «chelsea» di scikit-image (pubblico dominio).
 
-<!-- SOURCE_VISUAL id="IS22-V52" source="L22-web.pdf" page="65" type="figura" description="La foto del gatto e sette sue trasformazioni casuali con la stessa etichetta" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152612.png)
 
 #### **5.4. Augmentation n. 1: rotazioni, traslazioni, scale**
 
@@ -731,8 +679,7 @@ augimdsTrain = augmentedImageDatastore(inputSize(1:2),imdsTrain, ...
     'DataAugmentation',imageAugmenter);
 ```
 
-<!-- SOURCE_VISUAL id="IS22-V53" source="L22-web.pdf" page="66" type="figura" description="Pallina da tennis in posizioni, scale e rotazioni diverse" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152637.png)
 
 **Input**: le immagini di training `imdsTrain`. **Output**: un datastore che **restituisce una nuova variante casuale a ogni lettura**. `imageDataAugmenter` definisce le trasformazioni casuali: una **riflessione lungo l’asse verticale** e una **traslazione fino a ±30 pixel** su entrambi gli assi. **Ogni epoca vede varianti diverse dello stesso ingresso.**
 
@@ -740,8 +687,7 @@ augimdsTrain = augmentedImageDatastore(inputSize(1:2),imdsTrain, ...
 
 Immagine originale, etichetta $y=6$ → **augmentation $T$: rumore** → **6 varianti rumorose, ciascuna con etichetta $y=6$** → **la stessa rete, addestrata su tutte le varianti** (ingressi $x_1\dots x_{64}$, uscite punteggi $p_0\dots p_9$).
 
-<!-- SOURCE_VISUAL id="IS22-V54" source="L22-web.pdf" page="67" type="schema" description="Una cifra 6 e sei varianti rumorose che alimentano la stessa rete" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152650.png)
 
 **Rumore di tipi diversi** (gaussiano, additivo, moltiplicativo), **condizioni d’applicazione**, **rumore del sensore** (rumore di pixel), **risoluzioni**, **ambienti** (interno, esterno, sfondi)… **L’etichetta non cambia: la rete impara a ignorare il rumore.**
 
@@ -751,8 +697,7 @@ Immagine originale, etichetta $y=6$ → **augmentation $T$: rumore** → **6 var
 
 **Input**: un’immagine etichettata della linea (un pezzo con un graffio). **Output**: varianti **nelle condizioni dell’impianto**; l’etichetta resta «**difetto**». Immagini sintetiche illustrative.
 
-<!-- SOURCE_VISUAL id="IS22-V55" source="L22-web.pdf" page="68" type="figura" description="Un pezzo con un graffio in diverse condizioni simulate dell'impianto" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152707.png)
 
 #### **5.7. Data augmentation: lo stato dell’arte**
 
@@ -763,8 +708,7 @@ L’augmentation moderna comprende anche (passi successivi):
 - **Copy-Paste**: oggetti nuovi su sfondi nuovi;
 - **augmentation sintetica e generativa** (diffusione).
 
-<!-- SOURCE_VISUAL id="IS22-V56" source="L22-web.pdf" page="69" type="figura" description="Esempi di tecniche moderne di augmentation" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152716.png)
 
 #### **5.8. MixUp e CutMix: mescolare immagini ed etichette**
 
@@ -775,8 +719,7 @@ L’augmentation moderna comprende anche (passi successivi):
 
 **Esempio CutMix**: immagine $300\times 451$ pixel, riquadro $150\times 200$: area del riquadro $=30\,000$, immagine $=135\,300$; $\lambda=1-30\,000/135\,300=0{,}78$; etichetta $=(0{,}78$ gatto, $0{,}22$ tazza$)$.
 
-<!-- SOURCE_VISUAL id="IS22-V57" source="L22-web.pdf" page="70" type="figura" description="Esempi di MixUp e CutMix tra la foto del gatto e quella di una tazza" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152725.png)
 
 **Effetto**: **decisioni più lisce, meno eccesso di fiducia.**
 
@@ -788,15 +731,13 @@ L’augmentation moderna comprende anche (passi successivi):
 - **TrivialAugment** (riga superiore): **una sola operazione casuale con una forza casuale** per immagine; **niente da regolare**, un **default forte**.
 - **AugMix** (riga inferiore): **mescola diverse catene casuali e l’originale**; addestrata anche a **dare la stessa uscita sulle varianti** → **robustezza alle immagini corrotte**.
 
-<!-- SOURCE_VISUAL id="IS22-V58" source="L22-web.pdf" page="71" type="figura" description="Esempi di TrivialAugment e AugMix sulla stessa immagine" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152739.png)
 
 #### **5.10. Copy-Paste: difetti rari su molti pezzi buoni**
 
 **Input**: **pochi difetti reali con la loro maschera** + **molte immagini di pezzi buoni**. **Output**: **nuove immagini di difetti**, con etichette di box / maschera **gratis** (la posizione dell’incollaggio è nota). **Industria**: i difetti sono rari (prodotto buono ≫ difettoso), **i pezzi buoni costano poco**.
 
-<!-- SOURCE_VISUAL id="IS22-V59" source="L22-web.pdf" page="72" type="figura" description="Difetti reali incollati su immagini di pezzi buoni con le maschere" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152751.png)
 
 > ⚠️ **Controllo**: **illuminazione, scala e tessitura devono sembrare quelle di un difetto reale**; **validare e testare solo su difetti reali**. Dati sintetici (seme fisso).
 
@@ -804,8 +745,7 @@ L’augmentation moderna comprende anche (passi successivi):
 
 **Una rotazione è utile per un rilevatore di palline da tennis, ma può essere sbagliata per le cifre 6 e 9, i segnali stradali, le immagini mediche o i difetti sensibili all’orientamento.**
 
-<!-- SOURCE_VISUAL id="IS22-V60" source="L22-web.pdf" page="73" type="figura" description="Una cifra 6 ruotata che diventa un 9 e altri casi in cui la rotazione cambia l'etichetta" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152806.png)
 
 > 💡 **Altri esempi (nota didattica).** Un ribaltamento orizzontale scambia una freccia «svolta a sinistra» con «svolta a destra»; in una radiografia del torace sposta il cuore a destra (una condizione rara e diversa); per un graffio orientato lungo la direzione di lavorazione, la rotazione crea un difetto di tipo diverso. La scelta delle trasformazioni è conoscenza del dominio, non un default.
 
@@ -813,8 +753,7 @@ L’augmentation moderna comprende anche (passi successivi):
 
 **Immagine reale $x$**, etichetta $y$ → **modello di diffusione** image-to-image (rumore parziale; prompt: «**stesso pezzo, polveroso, poca luce**») → **varianti $\tilde{x}_1,\dots,\tilde{x}_n$, stessa etichetta $y$** → **filtro** (etichetta conservata?) → **solo training set**.
 
-<!-- SOURCE_VISUAL id="IS22-V61" source="L22-web.pdf" page="74" type="schema" description="Augmentation generativa con un modello di diffusione image-to-image e un filtro sull'etichetta" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152832.png)
 
 - L’immagine reale viene **solo parzialmente resa rumorosa e poi ripulita** (la diffusione è spiegata più avanti, §6.8): **l’oggetto e la sua etichetta sopravvivono**, cambiano sfondo, luce e stile.
 - **Utile per le classi rare** e per **condizioni difficili da fotografare** (notte, pioggia, sporco).
@@ -826,8 +765,7 @@ L’augmentation moderna comprende anche (passi successivi):
 
 Curve qualitative (nessun dato misurato) delle prestazioni (per esempio l’accuratezza) in funzione della **quantità di dati reali etichettati**: ML classico, deep learning, DL + augmentation; **stesse prestazioni, meno immagini**.
 
-<!-- SOURCE_VISUAL id="IS22-V62" source="L22-web.pdf" page="75" type="grafico" description="Curve qualitative di ML classico, deep learning e deep learning con augmentation" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152842.png)
 
 > 📌 **L’augmentation non crea informazione nuova, insegna invarianze**, quindi la rete ha bisogno di **meno immagini reali per le stesse prestazioni**.
 
@@ -837,8 +775,7 @@ Curve qualitative (nessun dato misurato) delle prestazioni (per esempio l’accu
 
 Immagine non etichettata $x$ → **augmentation casuale $T_1$** → vista 1 $x_1=T_1(x)$ → **encoder $f$** → $z_1=f(x_1)$; **augmentation casuale $T_2$** → vista 2 $x_2=T_2(x)$ → **encoder $f$** (**stessi pesi, condivisi**) → $z_2=f(x_2)$. **Loss**: $z_1$ vicino a $z_2$, **lontano dagli $z$ delle altre immagini**.
 
-<!-- SOURCE_VISUAL id="IS22-V63" source="L22-web.pdf" page="76" type="schema" description="Due viste aumentate della stessa immagine, encoder condiviso e loss contrastiva" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152852.png)
 
 $T_1,T_2$: **due trasformazioni casuali diverse** della stessa immagine (ritaglio, rotazione, cambio di colore, rumore), **estratte di nuovo a ogni passo**: ognuna riceve $x$ e ne restituisce una vista cambiata. L’**encoder $f$** (una CNN) riceve una vista e restituisce un **embedding $z$** (per esempio 128 numeri). **Uscita del metodo**: un **backbone pre-addestrato senza etichette**, poi **fine-tuning con poche etichette**. **Stesso obiettivo dell’autoencoder e del pre-addestramento greedy layer-wise, ma sull’intera rete insieme.**
 
@@ -853,8 +790,7 @@ $T_1,T_2$: **due trasformazioni casuali diverse** della stessa immagine (ritagli
 1. **Industria: ispezione visiva dei pezzi** (telecamera di linea, **nessuna etichetta di difetto**). Immagine non etichettata $x$ → vista 1 $T_1(x)$ (ritaglio, rotazione, luminosità), vista 2 $T_2(x)$ (ribaltamento, ritaglio, contrasto, rumore) → **encoder $f$, pre-addestrato senza etichette**, $z_1\approx z_2$ → **fine-tuning su pochi difetti etichettati** → difetto / nessun difetto per ogni pezzo.
 2. **Ambiente, veicoli: scene stradali** (telecamera su un veicolo, nessuna etichetta). Vista 1: ritaglio, variazione di colore; vista 2: **altro meteo** (per esempio con una GAN) → encoder $f$ → **fine-tuning su poche scene etichettate** → strada, ostacoli, condizione meteo.
 
-<!-- SOURCE_VISUAL id="IS22-V64" source="L22-web.pdf" page="77" type="schema" description="Pre-addestramento contrastivo per l'ispezione di pezzi e per scene stradali" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152909.png)
 
 > 📌 **Le augmentation conservano ciò che conta** (un difetto resta un difetto, una strada resta una strada) **e cambiano ciò che non dovrebbe contare** (posizione, luce, meteo). **Input**: immagini non etichettate; **output**: un backbone, poi un classificatore con poche etichette.
 
@@ -873,8 +809,7 @@ Generative Adversarial Networks: creare un pattern/un’immagine da un numero ca
 
 **Rumore $z$** (100 numeri casuali) → **generatore $G$** → **immagine falsa $G(z)$** ($64\times 64\times 3$) → **discriminatore $D$** ← **immagine vera $x$** (dal dataset) → $p\in[0,1]$, probabilità «vera»; **aggiornare $G$: fare in modo che $D$ dica «vera» sui falsi**.
 
-<!-- SOURCE_VISUAL id="IS22-V65" source="L22-web.pdf" page="79" type="schema" description="GAN con generatore da rumore, discriminatore che confronta immagini vere e false e aggiornamento di G" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125152923.png)
 
 **Passi alternati su un batch** (per esempio 64 veri + 64 falsi): **$D$ impara $p\to 1$ sui veri, $p\to 0$ sui falsi**; poi **$G$ impara a spingere il $p$ di $D$ verso 1 sui suoi falsi**. **Dopo l’addestramento si usa solo $G$**: numeri casuali in ingresso, **immagini nuove in uscita**.
 
@@ -886,13 +821,9 @@ Generative Adversarial Networks: creare un pattern/un’immagine da un numero ca
 
 **Domanda**: questa persona è vera o generata da una GAN? Decidere prima di girare pagina.
 
-<!-- SOURCE_VISUAL id="IS22-V66" source="L22-web.pdf" page="80" type="figura" description="Ritratto di una persona da classificare come vera o generata" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153247.png)
 
 **Risposta: è falsa** (generata da una GAN). Immaginata da una **StyleGAN2** (dicembre 2019), Karras et al. e Nvidia. https://www.thispersondoesnotexist.com/
-
-<!-- SOURCE_VISUAL id="IS22-V67" source="L22-web.pdf" page="81" type="figura" description="Lo stesso ritratto con la rivelazione che è generato da StyleGAN2" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > ⚠️ **Manca ancora la «Gestalt» (nota didattica).** L’**analisi del contesto** rivela spesso gli errori di una GAN: la **fusione delle feature di livelli diversi** non è sempre realistica (orecchini diversi, sfondi incoerenti, dettagli che non stanno insieme). È la Gestalt della Lezione 2: il tutto è più della somma delle parti, e le parti generate bene non bastano a fare un tutto coerente. Con StyleGAN2 e i modelli successivi questi indizi sono sempre più rari.
 
@@ -904,8 +835,7 @@ Un **generatore $G$ addestrato** riceve un **vettore casuale $z$** ($d=100$ nume
 - **Veicoli e scene stradali**: nuove auto, pedoni e situazioni di traffico per **testare i sistemi di assistenza alla guida su casi rari**.
 - **Macchine e ambiente**: immagini termiche sintetiche, segnali di sensori, immagini satellitari o meteo **dove i campioni reali sono scarsi, costosi o privati**.
 
-<!-- SOURCE_VISUAL id="IS22-V68" source="L22-web.pdf" page="82" type="figura" description="Esempi di immagini industriali generate da una GAN e l'evoluzione del realismo dei volti dal 2014" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153313.png)
 
 **Il realismo è molto migliorato** (volti sfocati nel 2014 → oggi): **l’ispezione visiva da sola non è più un rilevatore affidabile**.
 
@@ -916,8 +846,7 @@ Un **generatore $G$ addestrato** riceve un **vettore casuale $z$** ($d=100$ nume
 - $x_C$: auto di giorno, $x_S$: notte → $G(x_C,x_S)$: **la stessa scena di notte**.
 - $x_C$: strada d’estate, $x_S$: inverno, neve → $G(x_C,x_S)$: **strada invernale buia**.
 
-<!-- SOURCE_VISUAL id="IS22-V69" source="L22-web.pdf" page="83" type="figura" description="Style transfer da giorno a notte e da estate a inverno" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153331.png)
 
 **La stessa idea nell’industria**: render CAD → immagine realistica da telecamera; pezzo senza difetti → pezzo con un graffio sintetico; termico → visibile. **Uso**: **casi rari** (difetti, notte, neve) **senza fotografarli**. Immagini: disegni illustrativi.
 
@@ -928,8 +857,7 @@ Un **generatore $G$ addestrato** riceve un **vettore casuale $z$** ($d=100$ nume
 - $x_C$: neve, coperto, $x_S$: sereno → **stessa strada, senza neve**.
 - $x_C$: giorno di pioggia, $x_S$: notte → **stessa strada di notte**.
 
-<!-- SOURCE_VISUAL id="IS22-V70" source="L22-web.pdf" page="84" type="figura" description="La stessa strada trasformata da neve a sereno e da pioggia a notte" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153344.png)S
 
 #### **6.6. Style transfer con CNN (GAN): come è costruito**
 
@@ -937,8 +865,7 @@ Un **generatore $G$ addestrato** riceve un **vettore casuale $z$** ($d=100$ nume
 
 Immagine di contenuto $x_C$ → **encoder CNN** → **blocchi residui** (+ feature di stile dall’**encoder di stile** di $x_S$, + rumore $z$) → **decoder CNN** → immagine sintetica $\hat{x}$ → **discriminatore $D$** (← immagine reale del dominio obiettivo) → vera / sintetizzata.
 
-<!-- SOURCE_VISUAL id="IS22-V71" source="L22-web.pdf" page="85" type="schema" description="Architettura dello style transfer con encoder, blocchi residui, decoder, encoder di stile e discriminatore" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153358.png)
 
 **Segnali di addestramento**: **loss di contenuto** (oggetti e disposizione di $\hat{x}$ restano quelli di $x_C$), **loss di stile** (tessitura e statistiche del colore di $\hat{x}$ corrispondono a $x_S$) e la **loss avversaria**: $D$ è addestrato a distinguere il vero dal sintetizzato, $G$ a ingannarlo.
 
@@ -951,8 +878,7 @@ Una GAN **genera campioni nuovi che somigliano ai dati di training**. Usi nei do
 - **Ambiente, veicoli**: varianti di **neve, pioggia e notte** delle scene stradali; **super-risoluzione** di immagini satellitari; situazioni di guida rare, **senza problemi di privacy** (persone, targhe).
 - **Strumenti per immagini**: sintesi da testo a immagine, **restauro di immagini vecchie**.
 
-<!-- SOURCE_VISUAL id="IS22-V72" source="L22-web.pdf" page="86" type="figura" description="La «colomba meccanica» creata con Midjourney" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153446.png)
 
 - **Riservatezza**: lavorare su immagini sintetiche e **condividerle** con fornitori, studenti o servizi cloud **senza rivelare segreti industriali** o altri contenuti riservati (Lezione 15, sovranità dei dati).
 - **Sicurezza**: creare **situazioni pericolose** (incidenti, incendi, collisioni, guasti delle macchine) **senza produrle davvero**, danneggiare le attrezzature o mettere in pericolo le persone.
@@ -965,8 +891,7 @@ Una GAN **genera campioni nuovi che somigliano ai dati di training**. Usi nei do
 - Durante l’addestramento il modello osserva **immagini progressivamente corrotte dal rumore** e **impara a prevedere come togliere quel rumore passo dopo passo**.
 - In fase di generazione il processo **parte da rumore casuale** e lo **ripulisce iterativamente** finché si ottiene un’immagine realistica.
 
-<!-- SOURCE_VISUAL id="IS22-V73" source="L22-web.pdf" page="87" type="figura" description="Sequenza di immagini dal rumore all'immagine pulita in un modello di diffusione" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153504.png)
 
 #### **6.9. La diffusione: aggiungere rumore, imparare a toglierlo**
 
@@ -975,8 +900,7 @@ Una GAN **genera campioni nuovi che somigliano ai dati di training**. Usi nei do
 - **In avanti: aggiungere rumore** (nessun apprendimento): immagine pulita $x_0$ → un po’ di rumore $x_1$ → … → **rumore puro** $x_T$ ($T=1000$), immagini $64\times 64\times 3$.
 - **All’indietro**: immagine rumorosa $x_t$ → **rete di denoising** (prevede il rumore, guidata dal prompt «**un corgi che suona la tromba**») → si toglie una parte del rumore → $x_{t-1}$, meno rumorosa; **ripetere $T$ volte**.
 
-<!-- SOURCE_VISUAL id="IS22-V74" source="L22-web.pdf" page="88" type="schema" description="Processo in avanti di aggiunta di rumore e processo all'indietro di denoising guidato dal prompt" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153539.png)
 
 **Generazione**: si parte da **rumore puro $x_T$**; dopo **$T$ passi all’indietro** l’uscita $x_0$ è **un’immagine nuova che segue il prompt**.
 
@@ -992,15 +916,13 @@ Una GAN **genera campioni nuovi che somigliano ai dati di training**. Usi nei do
 
 Sono oggi **uno degli approcci dominanti** per la generazione di immagini di alta qualità, l’editing, l’*inpainting* (riempimento di parti mancanti), la super-risoluzione e i sistemi da testo a immagine. **Li usiamo per la data augmentation!**
 
-<!-- SOURCE_VISUAL id="IS22-V75" source="L22-web.pdf" page="89" type="schema" description="Encoder del testo che condiziona i passi di denoising di un modello di diffusione" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153610.png)
 
 #### **6.11. Sony World Photography Awards 2023**
 
 **BBC, 18/04/2023**: l’opera dell’artista tedesco **Boris Eldagsen**, intitolata ***Pseudomnesia: The Electrician***, ha vinto la categoria *creative open* del Sony World Photography Award della settimana precedente. **Il vincitore rifiuta il premio dopo aver rivelato che è una creazione dell’AI.**
 
-<!-- SOURCE_VISUAL id="IS22-V76" source="L22-web.pdf" page="90" type="figura" description="L'immagine Pseudomnesia: The Electrician di Boris Eldagsen" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153650.png)
 
 > 💡 **Il contesto (nota didattica).** Eldagsen dichiarò di aver partecipato per provocare una discussione: se una giuria di esperti non distingue un’immagine generata da una fotografia, il concorso deve dire che cosa intende per fotografia. È lo stesso punto del §6.3: l’ispezione visiva non basta più. Per i dati industriali significa tracciare la **provenienza** delle immagini (§6.14).
 
@@ -1013,8 +935,7 @@ Sono oggi **uno degli approcci dominanti** per la generazione di immagini di alt
 
 «**Mucche che mangiano altre mucche**» sono diventate pazze… (il richiamo è alla «mucca pazza», la BSE).
 
-<!-- SOURCE_VISUAL id="IS22-V77" source="L22-web.pdf" page="91" type="figura" description="Illustrazione del model autophagy disorder" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153729.png)
 
 #### **6.13. Il contenuto sintetico sta riempiendo il web**
 
@@ -1022,8 +943,7 @@ Sono oggi **uno degli approcci dominanti** per la generazione di immagini di alt
 - **Circa nov 2023**: circa il **39%** dei nuovi articoli web in inglese **generati dall’AI**.
 - **Nov 2024**: **oltre il 50%**: gli articoli dell’AI **superano quelli umani**; poi **all’incirca stabile** (fino a maggio 2025).
 
-<!-- SOURCE_VISUAL id="IS22-V78" source="L22-web.pdf" page="92" type="grafico" description="Quota di articoli web in inglese generati dall'AI da novembre 2022 a maggio 2025" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125153807.png)
 
 **Misurato su**: **65 000 articoli web in inglese**, campionati a caso dall’archivio **Common Crawl**, pubblicati da gennaio 2020 a maggio 2025, etichettati da un **rilevatore di testo AI** (falsi positivi 4,2%, falsi negativi 0,6%).
 
@@ -1037,8 +957,7 @@ Sono oggi **uno degli approcci dominanti** per la generazione di immagini di alt
 
 **Conclusione**: **senza abbastanza dati reali freschi a ogni generazione di un ciclo autofago**, i futuri modelli generativi sono **destinati a veder diminuire progressivamente la qualità (precisione) o la diversità (recall)**. Esempio con riaddestramenti successivi di **StyleGAN-2**.
 
-<!-- SOURCE_VISUAL id="IS22-V79" source="L22-web.pdf" page="93" type="figura" description="Volti generati da riaddestramenti successivi di StyleGAN-2 che perdono qualità o diversità" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125155134.png)
 
 **Lo stesso problema riguarda ora LLM e modelli d’immagine**: da ChatGPT (2022) Internet si è riempita di testi e immagini generati, quindi **un dataset sicuramente reale non è più disponibile di default**. **I dati sintetici richiedono provenienza, filtraggio, controllo della diversità e validazione.**
 
@@ -1049,8 +968,7 @@ Ogni generazione $t$ addestra un nuovo modello su un training set $D_t$; il mode
 - **Sostituire**: $D_t=S_{t-1}$, **solo i dati della generazione precedente**. **Risultato**: **i casi rari si perdono per primi, poi la diversità**.
 - **Accumulare**: $D_t=D_0\cup S_1\cup\dots\cup S_{t-1}$, **i dati reali originali $D_0$ più tutti i dati sintetici**. **Risultato**: **il degrado resta limitato**.
 
-<!-- SOURCE_VISUAL id="IS22-V80" source="L22-web.pdf" page="94" type="grafico" description="Diversità (deviazione standard dei dati) per generazione con strategia sostituire contro accumulare" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125155228.png)
 
 **Esperimento giocattolo**: ogni generazione **adatta una gaussiana a 10 campioni estratti dal modello precedente** (mediana di 300 esecuzioni). **Regole**: **tenere un insieme di riferimento reale**, **tracciare la provenienza**, **testare su dati reali**.
 
@@ -1071,8 +989,7 @@ Più dati? Più parametri? È la strada giusta per ottenere sistemi migliori?
 - **Bilanciamento (Chinchilla, 2022)**: **a calcolo fissato, $N$ e $D$ devono crescere insieme** (circa **20 token di addestramento per parametro**); **un modello più piccolo addestrato su più dati può battere uno più grande**.
 - **Per le applicazioni**: **backbone pre-addestrati compatti o CNN ad hoc, con buoni dati, spesso bastano**; **non scalare fine a se stesso**.
 
-<!-- SOURCE_VISUAL id="IS22-V81" source="L22-web.pdf" page="96" type="grafico" description="Errore di test in funzione di calcolo, dati e parametri in assi log-log" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125155256.png)
 
 > 💡 **Il conto dei rendimenti decrescenti (nota didattica).** Con $\alpha=0{,}076$ (un valore tipico per i parametri dei modelli linguistici), moltiplicare $N$ per 10 moltiplica la loss per $10^{-0{,}076}=0{,}84$: un miglioramento del 16%. Per dimezzare la loss serve un fattore $2^{1/0{,}076}\approx 9000$ nei parametri. Chinchilla: con 70 miliardi di parametri si dovrebbe addestrare su circa 1,4 mila miliardi di token. I **Vision Transformer** (ViT) applicano il transformer (Lezione 13) a patch d’immagine, come il MAE del §1.14, e seguono lo stesso andamento.
 
@@ -1089,8 +1006,7 @@ Che cosa può fare uno strumento come ChatGPT per aiutare il lavoro di un proget
 - È **cruciale esercitare il pensiero critico**, **validare i risultati** e **verificare in modo indipendente** le informazioni fornite.
 - In quanto modello linguistico, **non ha accesso a dati in tempo reale o specifici del dominio**: le sue risposte si basano su **pattern appresi da informazioni preesistenti**.
 
-<!-- SOURCE_VISUAL id="IS22-V82" source="L22-web.pdf" page="98" type="figura" description="Illustrazione: nemico o alleato" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125155826.png)
 
 > 💡 **Una precisazione aggiornata (nota didattica).** La frase sull’assenza di dati in tempo reale vale per il modello da solo; un assistente con strumenti (ricerca web, esecuzione di codice, RAG sui documenti aziendali) può leggere dati attuali e del dominio (Lezione 15). La regola della slide non cambia: ciò che produce va verificato, perché un’informazione recuperata può essere usata male e un calcolo può essere fatto sui dati sbagliati.
 
@@ -1121,8 +1037,7 @@ Si possono sfruttare assistenti tipo ChatGPT per **compiti diversi**: che cosa s
 
 #### **8.3. Progettare il ML con gli agenti**
 
-<!-- SOURCE_VISUAL id="IS22-V83" source="L22-web.pdf" page="100" type="figura" description="Progettazione del ML con agenti" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125155912.png)
 
 #### **8.4. Gli agenti e la «corsa all’oro»**
 
@@ -1130,8 +1045,7 @@ Si possono sfruttare assistenti tipo ChatGPT per **compiti diversi**: che cosa s
 - Alcuni guadagnarono **profitti sostanziali non estraendo l’oro**, ma con **attività collaterali**.
 - Questo richiamo storico aiuta a **riformulare ciò che LLM e agenti possono fare nel proprio lavoro**: **nuove attività aiutate, basate o migliorate da essi**, non «contro» di essi o «sostituite» da essi.
 
-<!-- SOURCE_VISUAL id="IS22-V84" source="L22-web.pdf" page="101" type="figura" description="Illustrazione della corsa all'oro" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125155957.png)
 
 > 💡 **Picconi e pale (nota didattica).** Il detto americano è «*sell picks and shovels*»: nella corsa all’oro guadagnava con certezza chi vendeva gli attrezzi. Per un progettista di sistemi intelligenti il valore è nelle attività attorno al modello, che il corso ha coperto una per una: dati puliti e armonizzati, validazione corretta, monitoraggio, integrazione nel processo industriale.
 
