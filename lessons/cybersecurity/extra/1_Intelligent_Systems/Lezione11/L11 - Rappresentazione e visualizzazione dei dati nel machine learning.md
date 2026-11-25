@@ -1368,6 +1368,8 @@ plt.savefig('grouped.pdf', bbox_inches='tight')
 
 #### **9.1. Il caso: gli stessi dati, quattro viste efficaci**
 
+![](imgs/Pasted%20image%2020261123211736.png)
+
 | Tipo di prodotto | Linea A: superati / totale | Linea B: superati / totale |
 |---|---|---|
 | **facile** | 19/20 | 90/100 |
@@ -1412,6 +1414,8 @@ Sono gli **stessi dati sintetici dell’esempio di Simpson** della lezione prece
 
 #### **9.5. Strumenti di BI e di monitoraggio con assistente AI**
 
+![](imgs/Pasted%20image%2020261123212443.png)
+
 | Tipo | Strumenti | Uso tipico |
 |---|---|---|
 | **visualizzazione degli esperimenti ML** | TensorBoard, Weights & Biases, MLflow, Neptune, ClearML | curve di addestramento, perdita, accuratezza, iperparametri, confronto tra modelli |
@@ -1444,6 +1448,10 @@ L’AI **automatizza la produzione**, non la **domanda** né l’**interpretazio
 > ⚠️ **L’agente ha i propri bias.** Disegna **ciò che gli è stato chiesto e ciò che è comune**, e può disegnare **rumore** o un’**interpretazione sbagliata** con **totale sicurezza**. **Comprensione ed esperienza restano al progettista.**
 
 #### **10.2. Alcune slide divertenti prima di chiudere (non d’esame)**
+
+![](imgs/Pasted%20image%2020261123212553.png)
+
+![](imgs/Pasted%20image%2020261123212614.png)
 
 Le ultime slide **non sono d’esame**: si può confrontare i diversi 007? Si è creativi? Si possono confrontare stili di vita diversi?
 
@@ -1481,6 +1489,8 @@ EDA in Python, dashboard, strumenti per i grafici, 3D con il codice, altre viste
 
 #### **11.1. Una pipeline di dati come grafo (DAG)**
 
+![](imgs/Pasted%20image%2020261123212647.png)
+
 - **Input**: dati grezzi dei sensori e i passi **ingest** (acquisizione), **clean** (valori mancanti), **feature** (finestre), **train** (modello), **validate** (test set), **deploy** (servizio).
 - **Output**: le **dipendenze** tra i passi (**grafo aciclico diretto**, DAG, *Directed Acyclic Graph*).
 
@@ -1492,6 +1502,8 @@ EDA in Python, dashboard, strumenti per i grafici, 3D con il codice, altre viste
 
 #### **11.2. Spazio e tempo: mappe di PM2.5**
 
+![](imgs/Pasted%20image%2020261123212658.png)
+
 - **Input**: griglia $80\times 80$ su $10\times 10$ km, PM2.5 (µg/m³) alle **06:00**, **12:00** e **18:00**.
 - **Output**: **tre mappe con la stessa scala di colore**.
 
@@ -1502,6 +1514,8 @@ EDA in Python, dashboard, strumenti per i grafici, 3D con il codice, altre viste
 - **Errore tipico**: **scale di colore diverse tra le mappe**; **interpolazione che inventa valori** dove non ci sono sensori.
 
 #### **11.3. Controllare le bande: la copertura dell’intervallo di previsione**
+
+![](imgs/Pasted%20image%2020261123212715.png)
 
 Nelle settimane di test $t$ i punti sono i valori reali $y_t$, la banda è $[L_t,U_t]$. La copertura è
 
@@ -1518,6 +1532,8 @@ dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il val
 
 #### **11.4. Controllare la previsione: i residui**
 
+![](imgs/Pasted%20image%2020261123212834.png)
+
 - **Input**: gli errori di previsione delle **52 settimane** di test (pezzi).
 - **Output**: tre pannelli: **errore nel tempo**, **autocorrelazione** (ACF), **istogramma**.
 
@@ -1530,6 +1546,12 @@ dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il val
 > 💡 **Che cosa dice l’ACF (nota didattica).** L’autocorrelazione al lag $k$ è la correlazione tra l’errore della settimana $t$ e quello della settimana $t-k$. Se il modello ha catturato tutta la struttura, i residui sono rumore e l’ACF resta entro le bande di confidenza (circa $\pm 2/\sqrt{N}$). Una barra alta al lag 52, per esempio, direbbe che il modello ha dimenticato la stagionalità annuale.
 
 #### **11.5. Curve di training e validation, attribuzione delle feature, calibrazione**
+
+![](imgs/Pasted%20image%2020261123213021.png)
+
+![](imgs/Pasted%20image%2020261123213031.png)
+
+![](imgs/Pasted%20image%2020261123213045.png)
 
 **Curve di training e validation.**
 
@@ -1560,6 +1582,12 @@ dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il val
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 #### **11.6. Dashboard di drift, matrice di confusione e ROC, salienza sintetica**
+
+![](imgs/Pasted%20image%2020261123213053.png)
+
+![](imgs/Pasted%20image%2020261123213102.png)
+
+![](imgs/Pasted%20image%2020261123213118.png)
 
 **Dashboard di drift e monitoraggio.**
 
@@ -1597,6 +1625,10 @@ dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il val
 
 #### **11.7. Frontiera di Pareto logistica, coordinate parallele e curve di apprendimento**
 
+![](imgs/Pasted%20image%2020261123213144.png)
+
+![](imgs/Pasted%20image%2020261123213220.png)
+
 **Frontiera di Pareto di 120 piani logistici.**
 
 - **Input**: 120 piani con **costo** (k€/mese), **emissioni** (t CO₂/mese) e **livello di servizio** (%). **Output**: i piani **non dominati** (la linea); il **colore** è il terzo obiettivo.
@@ -1619,6 +1651,30 @@ dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il val
 > 💡 **Come si leggono le coordinate parallele (nota didattica).** Ogni esperimento è una linea spezzata che attraversa assi verticali paralleli, uno per iperparametro più quello del punteggio. Colorando le linee per punteggio si vede quali combinazioni di valori portano ai risultati migliori: è un modo per rappresentare in 2D punti di uno spazio a 4 dimensioni senza proiettarli.
 
 #### **11.8. Galleria: penny, immagine, fusione di metodi, confidenza, strumenti**
+
+![](imgs/Pasted%20image%2020261123213246.png)
+
+![](imgs/Pasted%20image%2020261123213259.png)
+
+![](imgs/Pasted%20image%2020261123213337.png)
+
+![](imgs/Pasted%20image%2020261123213427.png)
+
+![](imgs/Pasted%20image%2020261123213446.png)
+
+![](imgs/Pasted%20image%2020261123213459.png)
+
+![](imgs/Pasted%20image%2020261123213525.png)
+
+![](imgs/Pasted%20image%2020261123213548.png)
+
+![](imgs/Pasted%20image%2020261123213557.png)
+
+![](imgs/Pasted%20image%2020261123213606.png)
+
+![](imgs/Pasted%20image%2020261123213620.png)
+
+![](imgs/Pasted%20image%2020261123213705.png)
 
 - **La moneta 3D scansionata**: i dispositivi di imaging 3D producono una **matrice di altezze**, un numero $z$ per pixel $(x,y)$ (il codice è nel §3.7).
 
@@ -1679,330 +1735,6 @@ dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il val
 
 <!-- SOURCE_VISUAL id="IS11-V101" source="L11-web-v24.pdf" page="140" type="grafico" description="Istogramma bivariato 3D delle corse del bike sharing di Boston per durata e anno di nascita" reason="Grafico 3D visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-| Tipo di prodotto | Linea A: superati / totale | Linea B: superati / totale |
-|---|---|---|
-| **facile** | 19/20 | 90/100 |
-| **difficile** | 72/100 | 14/20 |
-
-
-![](imgs/Pasted%20image%2020261123211736.png)
-
-**Prompt all’agente**: «*Ecco i conteggi di superamento di due linee di produzione per tipo di prodotto. Proponi quattro diverse visualizzazioni efficaci degli stessi dati, un messaggio ciascuna, e fornisci il codice.*»
-
-Sono gli **stessi dati sintetici dell’esempio di Simpson** della lezione precedente. **Otto numeri, quattro storie possibili.**
-
-#### **9.2. Quattro viste degli stessi otto numeri**
-
-| Vista | Che cosa mostra | Messaggio |
-|---|---|---|
-| **1. Aggregato** | un tasso per linea: A 75,8%, B 86,7% | **B è migliore** |
-| **2. Per tipo** | tasso per gruppo: facili 95% contro 90%, difficili 72% contro 70% | **A è migliore in entrambi** |
-| **3. Mix** | quota di prodotti facili e difficili: A 17%/83%, B 83%/17% (120 pezzi ciascuna) | **B produce soprattutto pezzi facili** |
-| **4. Punti** | tasso per gruppo e per «tutti», con l’area del punto = numero di pezzi | **tasso e numerosità insieme** |
-
-#### **9.3. Confrontare le quattro viste**
-
-| Vista | Correttezza | Informazione trasmessa | Possibile bias |
-|---|---|---|---|
-| **1 Aggregato** | numeri giusti, **confronto fuorviante** | un tasso per linea | **nasconde il mix di prodotti** (Simpson) |
-| **2 Per tipo** | giusta | il tasso in ogni gruppo | **nasconde la dimensione del campione** (20 contro 100 pezzi) |
-| **3 Mix** | giusta | **perché l’aggregato si inverte** | **non mostra alcun tasso**: spiega, non confronta |
-| **4 Punti** | giusta | tasso e dimensione insieme | l’**area si legge meno precisamente della lunghezza** (Bertin) |
-
-#### **9.4. Quale vista è quella giusta? Dipende dalla domanda**
-
-- La **vista 1** è **pulita e sbagliata** per una decisione sulle linee: nasconde che B produce l’**83% di pezzi facili** e A solo il **17%**.
-- La **vista 2** risponde a **quale linea è migliore, prodotto per prodotto**: A (95% contro 90%, 72% contro 70%).
-- La **vista 3** **spiega l’inversione**: il mix di pezzi facili e difficili, non la qualità della linea.
-- La **vista 4** mostra **tasso e dimensione del campione insieme**: le celle da **20 pezzi** sono le **meno affidabili**.
-- **Tutte e quattro sono grafici onesti degli stessi numeri**; solo **la domanda** decide quale mostrare.
-
-> 📌 **Il limite dell’agente.** L’agente può produrre le quattro viste **in un minuto**. **Non può sapere** che la decisione riguarda il **confronto tra linee a parità di difficoltà**.
-
-> 💡 **Perché le celle da 20 sono meno affidabili (nota didattica).** Con $n=20$ pezzi, un solo pezzo in più o in meno sposta il tasso di 5 punti percentuali; con $n=100$, di un punto. La differenza tra 72% (su 100) e 70% (su 20) è ben dentro questa incertezza: la vista 4 lo rende visibile, la vista 2 no.
-
-#### **9.5. Strumenti di BI e di monitoraggio con assistente AI**
-
-| Tipo | Strumenti | Uso tipico |
-|---|---|---|
-| **visualizzazione degli esperimenti ML** | TensorBoard, Weights & Biases, MLflow, Neptune, ClearML | curve di addestramento, perdita, accuratezza, iperparametri, confronto tra modelli |
-| **BI / dashboard con AI** | Tableau, Power BI, Zoho Analytics, Domo, ThoughtSpot | metriche di business, **query in linguaggio naturale**, monitoraggio dei KPI, report |
-| **osservabilità / monitoraggio operativo** (passo 5 del flusso) | Grafana, Datadog, Prometheus, Evidently AI, WhyLabs | sistemi in produzione, telemetria, drift, allarmi, affidabilità |
-
-> 📌 **Osservabilità.** Significa **monitorare un sistema rilasciato attraverso segnali misurabili**, per **capirne il comportamento**, **rilevare guasti** e **supportare azioni correttive**.
-
-**Esempio: Microsoft Power BI.** Si collega a dati di **molte sorgenti** e li visualizza su una **piattaforma unificata e scalabile** per la business intelligence **self-service e aziendale**.
-
-
-![](imgs/Pasted%20image%2020261123212443.png)
-
----
-
-### **10. Il progettista resta responsabile**
-
-
-L’AI **automatizza la produzione**, non la **domanda** né l’**interpretazione**.
-
-#### **10.1. L’agente non sostituisce il progettista**
-
-1. **Prima il messaggio**: scrivere che cosa il lettore deve concludere **prima** di chiedere qualunque grafico.
-2. **Ricalcolare due numeri a mano**: 19/20 è il 95%; la figura dice 95%?
-3. **Chiedere i gruppi**: dividere per **ogni confondente noto** prima di aggregare (paradosso di Simpson).
-4. **Chiedere il grafico opposto**: «quale vista contraddirebbe questa?».
-5. **Controllare assi e omissioni**: base dell’asse, scala, colore, che cosa è lasciato fuori.
-6. **Conservare dati e codice**: **una figura che non si può rigenerare non è un’evidenza**.
-
-> ⚠️ **L’agente ha i propri bias.** Disegna **ciò che gli è stato chiesto e ciò che è comune**, e può disegnare **rumore** o un’**interpretazione sbagliata** con **totale sicurezza**. **Comprensione ed esperienza restano al progettista.**
-
-#### **10.2. Alcune slide divertenti prima di chiudere (non d’esame)**
-
-Le ultime slide **non sono d’esame**: si può confrontare i diversi 007? Si è creativi? Si possono confrontare stili di vita diversi?
-
-- **Uso eccessivo della visualizzazione** (umorismo): anche per «applicazioni» molto particolari, la scelta di uno **spazio di input** adeguato permette **confronti** e dà **intuizioni**.
-
-
-![](imgs/Pasted%20image%2020261123212553.png)
-
-- **Sei creativo?** Come trovare il creativo **più simile a te**?
-  1. decidere lo **spazio di input**;
-  2. decidere la **metrica** (distanza);
-  3. **scorrere** i candidati per trovare il creativo più vicino.
-
-  Così si trova il **primo vicino più prossimo** (*first nearest neighbour*), un metodo tipico di ML (Lezione 9). **L’allineamento qui è critico**: si provi a pensare questo grafico senza.
-
-
-![](imgs/Pasted%20image%2020261123212614.png)
-
-#### **10.3. Punti principali**
-
-> ✅ **Punti principali della lezione.**
-> - Monitorare il **drift con il PSI** (sotto 0,1 stabile, da 0,1 a 0,25 moderato, sopra 0,25 significativo) **sulle feature e sul punteggio di uscita**.
-> - **Visualizzazione classica**: scegliere la **variabile visiva** (la **lunghezza allineata** è la più precisa) e il **grafico a partire dal messaggio**; **mostrare l’incertezza**.
-> - In **3D** preferire **superfici, fette e proiezioni**; **un concetto in un’immagine potente**.
-> - **Visualizzare l’AI**: **dati** (griglie, mappe del dataset), **modello** (pesi, attivazioni, salienza), **prestazioni** (curve, confusione, calibrazione, slice).
-> - **Proiezioni, salienza e attenzione sono diagnostiche, non prove.**
-> - Un **agente scrive grafici in pochi secondi**, ma **il progettista possiede il messaggio, i gruppi e le verifiche** (Simpson).
-
----
-
-### **11. Appendice: dettagli della visualizzazione**
-
-
-EDA in Python, dashboard, strumenti per i grafici, 3D con il codice, altre viste IS4.
-
-#### **11.1. Una pipeline di dati come grafo (DAG)**
-
-- **Input**: dati grezzi dei sensori e i passi **ingest** (acquisizione), **clean** (valori mancanti), **feature** (finestre), **train** (modello), **validate** (test set), **deploy** (servizio).
-- **Output**: le **dipendenze** tra i passi (**grafo aciclico diretto**, DAG, *Directed Acyclic Graph*).
-
-
-![](imgs/Pasted%20image%2020261123212647.png)
-
-- **Perché in IS4**: le pipeline devono essere **modulari e riproducibili**; **l’ordine decide che cosa il modello può vedere**.
-- **Errore tipico**: **data leakage**: normalizzare o costruire feature **sull’intero dataset prima della divisione** train/test (Lezioni 7 e 10).
-
-#### **11.2. Spazio e tempo: mappe di PM2.5**
-
-- **Input**: griglia $80\times 80$ su $10\times 10$ km, PM2.5 (µg/m³) alle **06:00**, **12:00** e **18:00**.
-- **Output**: **tre mappe con la stessa scala di colore**.
-
-
-![](imgs/Pasted%20image%2020261123212658.png)
-
-- **Perché in IS4**: le reti di sensori **ambientali e logistiche** producono dati con **coordinate**: bisogna scegliere **scala, interpolazione e istanti**.
-- **Errore tipico**: **scale di colore diverse tra le mappe**; **interpolazione che inventa valori** dove non ci sono sensori.
-
-#### **11.3. Controllare le bande: la copertura dell’intervallo di previsione**
-
-Nelle settimane di test $t$ i punti sono i valori reali $y_t$, la banda è $[L_t,U_t]$. La copertura è
-
-$$\text{PICP}=\frac{1}{N}\sum_{t=1}^{N}\mathbf{1}\big[y_t\in[L_t,U_t]\big],$$
-
-dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il valore reale al tempo $t$ (pezzi/settimana), $L_t$ e $U_t$ gli estremi inferiore e superiore dell’intervallo previsto, e $\mathbf{1}[\cdot]$ vale 1 se la condizione è vera e 0 altrimenti.
-
-
-![](imgs/Pasted%20image%2020261123212715.png)
-
-**Esempio**: intervallo **nominale al 90%**, il valore reale cade dentro **82 volte su 100** settimane: $\text{PICP}=0{,}82$. Il modello è **troppo sicuro di sé** (**sottocopertura**): **allargare le bande o ricalibrare**. Nello schizzo, **8 settimane su 10** sono dentro: $\text{PICP}=0{,}8$.
-
-> 💡 **PICP (nota didattica).** La sigla sta per *Prediction Interval Coverage Probability*, probabilità di copertura dell’intervallo di previsione. È per gli intervalli ciò che la calibrazione è per le probabilità di classe: un intervallo al 90% è onesto se contiene il valore vero circa il 90% delle volte. Una copertura troppo alta indica invece bande inutilmente larghe.
-
-#### **11.4. Controllare la previsione: i residui**
-
-- **Input**: gli errori di previsione delle **52 settimane** di test (pezzi).
-- **Output**: tre pannelli: **errore nel tempo**, **autocorrelazione** (ACF), **istogramma**.
-
-
-![](imgs/Pasted%20image%2020261123212834.png)
-
-- **Perché in IS4**: un **RMSE basso non dice che il modello sia adatto**: i residui mostrano **bias**, **stagionalità dimenticata**, **code pesanti**.
-- **Errore tipico**: fermarsi alla **metrica riassuntiva**; **barre dell’ACF oltre le linee tratteggiate** indicano **struttura rimasta negli errori**.
-
-> 💡 **Che cosa dice l’ACF (nota didattica).** L’autocorrelazione al lag $k$ è la correlazione tra l’errore della settimana $t$ e quello della settimana $t-k$. Se il modello ha catturato tutta la struttura, i residui sono rumore e l’ACF resta entro le bande di confidenza (circa $\pm 2/\sqrt{N}$). Una barra alta al lag 52, per esempio, direbbe che il modello ha dimenticato la stagionalità annuale.
-
-#### **11.5. Curve di training e validation, attribuzione delle feature, calibrazione**
-
-**Curve di training e validation.**
-
-- **Input**: la perdita di una rete a ogni epoca, **80 epoche**. **Output**: perdita di training e di validation; **miglior epoca 45**.
-- **Perché in IS4**: **convergenza, overfitting e generalizzazione**.
-- **Errore tipico**: leggere il **rumore della curva di validation come segnale**; **una sola esecuzione**.
-
-
-![](imgs/Pasted%20image%2020261123213021.png)
-
-**Attribuzione delle feature (illustrativa).**
-
-- **Input**: **5 variabili di processo** e il loro contributo a **una previsione** (valori illustrativi).
-- **Output**: barre di contributi positivi e negativi: vibrazione RMS **+0,54**, temperatura **+0,37**, pressione **−0,21**, ore di utilizzo **+0,17**, velocità **−0,09** (unità arbitrarie).
-- **Perché in IS4**: esamina le **ragioni apparenti** di una previsione e le **scorciatoie**.
-- **Errore tipico**: **non sono valori SHAP reali**: per un esperimento vero si applica un metodo di attribuzione a un modello addestrato.
-
-
-![](imgs/Pasted%20image%2020261123213031.png)
-
-**Diagramma di calibrazione.**
-
-- **Input**: confidenza prevista e frequenza osservata, un modello. **Output**: curva di calibrazione ed **ECE = 0,123**: il modello è **sovraconfidente**.
-- **Perché in IS4**: una **probabilità di guasto dichiarata** deve essere **utilizzabile nelle decisioni**.
-- **Errore tipico**: **confondere accuratezza e calibrazione**.
-
-
-![](imgs/Pasted%20image%2020261123213045.png)
-
-#### **11.6. Dashboard di drift, matrice di confusione e ROC, salienza sintetica**
-
-**Dashboard di drift e monitoraggio.**
-
-- **Input**: **180 giorni sintetici**, PSI e punteggio F1. **Output**: PSI e F1 **prima e dopo il cambiamento dei dati al giorno 105**.
-- **Perché in IS4**: l’AI **si degrada in produzione**: monitoraggio, allarmi, procedure di aggiornamento.
-- **Errore tipico**: guardare **solo l’accuratezza** e non gli input.
-
-
-![](imgs/Pasted%20image%2020261123213053.png)
-
-**Matrice di confusione e curva ROC.**
-
-| | Previsto: nessun guasto | Previsto: guasto |
-|---|---:|---:|
-| **vero: nessun guasto** | 769 | 31 |
-| **vero: guasto** | 29 | 171 |
-
-- **Input**: **1000 esempi sintetici** con classe vera e prevista. **Output**: conteggi per cella e curva ROC (**AUC 0,98**).
-- **Perché in IS4**: **quanti falsi allarmi e guasti mancati sono accettabili**.
-- **Errore tipico**: **scegliere la soglia senza i costi**.
-
-
-![](imgs/Pasted%20image%2020261123213102.png)
-
-> 💡 **Le metriche della matrice (nota didattica).** Accuratezza $(769+171)/1000=94\%$; recall $171/(171+29)=85{,}5\%$; precisione $171/(171+31)=84{,}7\%$; FPR $31/800=3{,}9\%$. Un AUC di 0,98 convive con 29 guasti mancati: l’AUC riassume tutte le soglie, la matrice ne fotografa una sola.
-
-**Mappa di salienza su un’immagine sintetica.**
-
-- **Input**: un’immagine sintetica $64\times 64$ con un **graffio**; una mappa di importanza $64\times 64$. **Output**: una **sovrapposizione** che mostra **dove guarda il modello** (tre pannelli: superficie, mappa di salienza, sovrapposizione).
-- **Perché in IS4**: nel **controllo qualità visivo** il modello deve guardare il **difetto**, non il **bordo** o la **luce**.
-- **Errore tipico**: è **illustrativa**: la mappa è **costruita a mano**, non estratta da una rete addestrata; fidarsi solo delle mappe che superano i **test di sanità** (*sanity checks*).
-
-
-![](imgs/Pasted%20image%2020261123213118.png)
-
-#### **11.7. Frontiera di Pareto logistica, coordinate parallele e curve di apprendimento**
-
-**Frontiera di Pareto di 120 piani logistici.**
-
-- **Input**: 120 piani con **costo** (k€/mese), **emissioni** (t CO₂/mese) e **livello di servizio** (%). **Output**: i piani **non dominati** (la linea); il **colore** è il terzo obiettivo.
-- **Perché in IS4**: il **formato naturale** per decisioni con **obiettivi in conflitto**.
-- **Errore tipico**: qui la frontiera usa **solo due obiettivi**; la **scelta finale va motivata**.
-
-
-![](imgs/Pasted%20image%2020261123213144.png)
-
-**Coordinate parallele e curve di apprendimento.**
-
-- **Input**: **40 esperimenti** con **3 iperparametri** ($\log_{10}$ del learning rate, profondità, $\log_2$ della dimensione del batch) e un punteggio di validation; **5 addestramenti con semi diversi**, 60 epoche.
-- **Output**: le **regioni efficaci** della configurazione; curve di training e validation.
-- **Perché in IS4**: regolare un modello in modo **documentabile**, con **più semi**.
-- **Errore tipico**: mostrare **un solo addestramento**; **pochi tentativi** rendono le regioni **inaffidabili**.
-
-
-![](imgs/Pasted%20image%2020261123213220.png)
-
-> 💡 **Come si leggono le coordinate parallele (nota didattica).** Ogni esperimento è una linea spezzata che attraversa assi verticali paralleli, uno per iperparametro più quello del punteggio. Colorando le linee per punteggio si vede quali combinazioni di valori portano ai risultati migliori: è un modo per rappresentare in 2D punti di uno spazio a 4 dimensioni senza proiettarli.
-
-#### **11.8. Galleria: penny, immagine, fusione di metodi, confidenza, strumenti**
-
-- **La moneta 3D scansionata**: i dispositivi di imaging 3D producono una **matrice di altezze**, un numero $z$ per pixel $(x,y)$ (il codice è nel §3.7).
-
-
-![](imgs/Pasted%20image%2020261123213246.png)
-
-- **La visualizzazione nel ML** serve per: dati di training, prestazioni del modello, interpretabilità e ispezione del modello, dati ad alta dimensionalità, didattica e comunicazione. Ora si rivede come gestire dati strutturati e immagini.
-- **L’immagine** (Bertin): il concetto chiave di Bertin, da cui la teoria prende il nome, è l’**immagine**. Semplificando, un’immagine è l’**unità percettiva fondamentale** di una visualizzazione. Una visualizzazione **ideale contiene una sola immagine**, per ottimizzarne l’«**efficienza**»: la velocità con cui l’osservatore estrae l’informazione. **Dove si sta perdendo energia? Basta un’occhiata.**
-
-![](imgs/Pasted%20image%2020261123213259.png)
-
-
-
-
-
-![](imgs/Pasted%20image%2020261123213337.png)
-
-- **Una fusione di metodi per le proprie applicazioni**: la visualizzazione dell’informazione è una fusione importante di **grafica**, **visualizzazione scientifica**, **gestione dei database** e **interazione uomo-macchina**. Nelle proprie applicazioni va usata per comunicare **risultati complessi come immagini comprensibili**, migliorando l’**HMI** (*Human-Machine Interface*, interfaccia uomo-macchina).
-
-
-![](imgs/Pasted%20image%2020261123213427.png)
-
-- **Confidenza**: la banda è l’**intervallo di confidenza al 95%**: **stretta dove la popolazione è uniforme**, **larga dove non lo è**.
-
-
-![](imgs/Pasted%20image%2020261123213446.png)
-
-- **Annotazioni, mappe di colore e limiti** (galleria MATLAB, it.mathworks.com/products/matlab/plot-gallery.html).
-
-
-![](imgs/Pasted%20image%2020261123213459.png)
-
-- **La struttura di un grafico molto semplice ma completo**: ogni elemento ha un **nome** e uno **scopo**: **figura**, **assi**, **titolo**, **etichette**, **tacche**, **griglia**, **legenda**, **marcatori**, **linee** e **bordi** (*spines*).
-
-
-![](imgs/Pasted%20image%2020261123213525.png)
-
-- **Grafico nel grafico, vettori in linee 3D** (galleria MATLAB).
-
-
-![](imgs/Pasted%20image%2020261123213548.png)
-
-- **Strumenti interattivi online: observablehq.com**, con la sua galleria di visualizzazioni interattive, e altri esempi di visualizzazione interattiva.
-
-![](imgs/Pasted%20image%2020261123213557.png)
-
-
-
-
-![](imgs/Pasted%20image%2020261123213606.png)
-
-> ⚠️ **Grafici belli, dati sbagliati.** La potenza grafica di grafici e diagrammi è **inutile** se i dati:
-> - **non sono rappresentativi**;
-> - sono **corrotti**;
-> - **non sono pre-elaborati correttamente**;
-> - sono **falsi** (per esempio per una data augmentation **eccessiva o sbagliata**).
->
-> Prima del grafico vanno verificate le quattro domande: rappresentativi? non corrotti? pre-elaborati correttamente? genuini?
-
-![](imgs/Pasted%20image%2020261123213620.png)
-
-
-
-
-- **La libreria ggplot2 di R.** **R** è un linguaggio di programmazione e un ambiente software **libero** per il **calcolo statistico** e la **grafica**, sostenuto dalla R Foundation for Statistical Computing; ggplot2 implementa la «grammatica della grafica» (dati, estetiche, geometrie, livelli).
-
-
-![](imgs/Pasted%20image%2020261123213705.png)
-
-#### **11.9. Grafici 3D con il codice MATLAB**
-
-##### **11.9.1. Istogramma 3D a barre**
 
 ![](imgs/Pasted%20image%2020261123213733.png)
 
