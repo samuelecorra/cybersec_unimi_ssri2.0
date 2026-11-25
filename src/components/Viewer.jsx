@@ -9,6 +9,7 @@ import rehypeKatex from "rehype-katex";
 import { getParentPath } from "../utils/tree.js";
 import { colorizeMathVariables } from "../utils/colorizeMathVariables.js";
 import { getFileKind } from "../utils/fileTypes.js";
+import { getLessonAssetUrl } from "../utils/r2Assets.js";
 
 function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
@@ -162,8 +163,7 @@ function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
             else if (p && p !== ".") resolved.push(p);
           }
           const resolvedPath = resolved.join("/");
-          const base = import.meta.env.BASE_URL;
-          const resolvedSrc = `${base}lessons/${encodeURI(resolvedPath)}`;
+          const resolvedSrc = getLessonAssetUrl(resolvedPath);
           return (
             <img
               src={resolvedSrc}

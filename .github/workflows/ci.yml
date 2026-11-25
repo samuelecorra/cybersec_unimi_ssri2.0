@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [main]
   push:
@@ -24,6 +25,9 @@ jobs:
       - run: npm run validate:source-renderer
       - run: npm run validate:sort-names
       - run: npm run build
+        env:
+          GITHUB_ACTIONS: 'true'
+          VITE_R2_PUBLIC_BASE_URL: 'https://assets.samuelecorra.dev'
       - run: npx playwright install --with-deps chromium
       - run: npm run test:hash-routing:e2e
       - run: npm run test:source-renderer:e2e

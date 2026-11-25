@@ -38,6 +38,40 @@ dist/
 .vite/
 .cache/
 
+# Lesson media and large binary course material live in Cloudflare R2.
+lessons/**/*.png
+lessons/**/*.jpg
+lessons/**/*.jpeg
+lessons/**/*.gif
+lessons/**/*.webp
+lessons/**/*.avif
+lessons/**/*.svg
+lessons/**/*.pdf
+lessons/**/*.zip
+lessons/**/*.7z
+lessons/**/*.rar
+lessons/**/*.tar
+lessons/**/*.gz
+lessons/**/*.tgz
+lessons/**/*.wav
+lessons/**/*.mp3
+lessons/**/*.m4a
+lessons/**/*.ogg
+lessons/**/*.mp4
+lessons/**/*.mov
+lessons/**/*.caffemodel
+lessons/**/*.pb
+lessons/**/*.onnx
+lessons/**/*.pt
+lessons/**/*.pth
+lessons/**/*.h5
+lessons/**/*.mat
+lessons/**/*.pcap
+lessons/**/*.pcapng
+lessons/**/*.exe
+lessons/**/*.jar
+tmp/pdfs/l02_page56.png
+
 # Logs
 *.log
 npm-debug.log*

@@ -1,10 +1,11 @@
 import { memo } from 'react';
 import { encodePathSegments, getMediaFileType } from '../utils/fileTypes.js';
+import { getLessonAssetUrl } from '../utils/r2Assets.js';
 
 function AssetViewer({ currentFile }) {
   const mediaType = getMediaFileType(currentFile);
   const fileName = currentFile.split('/').pop();
-  const sourceUrl = `${import.meta.env.BASE_URL}lessons/${encodePathSegments(currentFile)}`;
+  const sourceUrl = getLessonAssetUrl(currentFile);
 
   return (
     <section className="asset-viewer">

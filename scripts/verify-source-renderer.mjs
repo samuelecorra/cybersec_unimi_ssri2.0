@@ -106,18 +106,13 @@ const MEDIA_CASES = [
 for (const mediaCase of MEDIA_CASES) {
   try {
     await openFile(mediaCase.path, '.asset-viewer');
-    const report = await page.evaluate(async ({ path, kind, badge }) => {
-      const encodedPath = path.split('/').map(segment => encodeURIComponent(segment)
-        .replace(/%26/gi, '&')
-        .replace(/%2B/gi, '+')).join('/');
-      const response = await fetch(new URL(`lessons/${encodedPath}`, document.baseURI));
+    const report = await page.evaluate(async ({ kind, badge }) => {
       const mediaElement = document.querySelector(kind === 'image' ? '.asset-image' : '.asset-audio');
       if (kind === 'image' && mediaElement && !mediaElement.complete) {
         await new Promise(resolve => mediaElement.addEventListener('load', resolve, { once: true }));
       }
       return {
-        fetchStatus: response.status,
-        contentType: response.headers.get('content-type'),
+        mediaUrl: mediaElement?.currentSrc || mediaElement?.src,
         badge: document.querySelector('.source-language-badge')?.textContent?.trim(),
         element: Boolean(mediaElement),
         imageLoaded: kind !== 'image' || mediaElement?.naturalWidth > 0,
@@ -125,6 +120,9 @@ for (const mediaCase of MEDIA_CASES) {
         expectedBadge: badge,
       };
     }, mediaCase);
+    const mediaResponse = report.mediaUrl ? await page.request.get(report.mediaUrl) : null;
+    report.fetchStatus = mediaResponse?.status() ?? 0;
+    report.contentType = mediaResponse?.headers()['content-type'] ?? null;
     const ok = report.fetchStatus === 200
       && report.contentType?.startsWith(mediaCase.kind)
       && report.badge === mediaCase.badge

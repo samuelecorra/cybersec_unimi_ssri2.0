@@ -1,9 +1,9 @@
 import { memo, useMemo } from 'react';
+import { getLessonAssetUrl } from '../utils/r2Assets.js';
 
 function PdfViewer({ filePath }) {
   const url = useMemo(() => {
-    const base = import.meta.env.BASE_URL;
-    return `${base}lessons/${filePath}`;
+    return getLessonAssetUrl(filePath);
   }, [filePath]);
 
   return (

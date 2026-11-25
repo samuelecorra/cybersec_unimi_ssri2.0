@@ -101,3 +101,17 @@ Ogni push su `main` attiva la GitHub Action ([.github/workflows/deploy.yml](.git
 ---
 
 *Fatto con mesi di pazienza, da uno studente SSRI per gli studenti SSRI. Buono studio — e in bocca al lupo per il 30 e lode.*
+# External lesson assets (Cloudflare R2)
+
+Large lesson media is staged outside Git and served from the dedicated `cybersec-unimi-assets` R2 bucket. The generated `src/data/r2-assets.json` maps repository paths to immutable object keys; PNGs are converted to lossless WebP only when decoded pixels match exactly and the result is smaller. Other formats are copied byte-for-byte.
+
+To prepare and sync assets locally, set `CLOUDFLARE_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, and `R2_SECRET_ACCESS_KEY` in the process environment. Use an R2 token scoped to Object Read & Write for this bucket only; never commit credentials or put them in `.env` files tracked by Git.
+
+```sh
+npm run assets:r2:prepare
+npm run assets:r2:upload
+npm run assets:r2:detach
+```
+
+The staging directory `.cache/r2-upload/` is ignored by Git. The detach step removes migrated tracked assets from the Git index while preserving local files; `.gitignore` prevents them from being re-added. The uploader skips objects whose stored SHA-256 metadata and size already match. Production builds use the bucket's public custom domain, `https://assets.samuelecorra.dev`, through `VITE_R2_PUBLIC_BASE_URL`.
+
