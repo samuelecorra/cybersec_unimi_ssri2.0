@@ -14,8 +14,7 @@ La lezione parte da una domanda di fondo: **qual è l’errore minimo possibile?
 - **senza etichette**: clustering **k-means**, scelta di $k$, nuovi campioni e anomalie;
 - **oltre un solo metodo**: sistemi **genetici, fuzzy, swarm e ibridi**.
 
-<!-- SOURCE_VISUAL id="IS19-V01" source="L19-web.pdf" page="2" type="grafico" description="Frontiera k-NN e cluster usati come illustrazione della panoramica" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015331.png)
 
 ---
 
@@ -28,8 +27,7 @@ La lezione parte da una domanda di fondo: **qual è l’errore minimo possibile?
 
 Dato un problema/dataset specifico, con il tempo, facendo più tentativi e usando nuove tecniche (per esempio il deep learning), gli algoritmi di ML **possono superare gli umani… ma fino a un LIMITE!**
 
-<!-- SOURCE_VISUAL id="IS19-V02" source="L19-web.pdf" page="4" type="grafico" description="Prestazioni degli algoritmi nel tempo che superano quelle umane fino al limite Bayes-ottimo" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015423.png)
 
 > ⚠️ **Inseguire sempre lo 0% di errori può essere un errore!**
 
@@ -37,8 +35,7 @@ Dato un problema/dataset specifico, con il tempo, facendo più tentativi e usand
 
 **Ogni volta che le distribuzioni delle classi non sono separate, anche il miglior classificatore produce un errore legato alle sovrapposizioni.**
 
-<!-- SOURCE_VISUAL id="IS19-V03" source="L19-web.pdf" page="5" type="grafico" description="Distribuzioni di due classi sovrapposte con la zona di errore inevitabile" reason="Curve visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015433.png)
 
 #### **1.3. Il classificatore Bayes-ottimo: l’intuizione**
 
@@ -46,8 +43,7 @@ Due ipotesi: $h_0$ = l’input è un **avocado**, $h_1$ = l’input è un’**ar
 
 $$P(C=\text{arancia}\mid D)>P(C=\text{avocado}\mid D).$$
 
-<!-- SOURCE_VISUAL id="IS19-V04" source="L19-web.pdf" page="6" type="grafico" description="Distribuzioni di D = rosso meno verde per avocado e arance" reason="Curve visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015442.png)
 
 #### **1.4. Il classificatore Bayes-ottimo: la classe d’uscita**
 
@@ -59,8 +55,7 @@ con $\hat{y}$ la classe prevista, $C_k$ la classe $k$, $X$ il vettore delle feat
 
 $$y=\arg\max_cP(C=c\mid D)=\arg\max\{P(C=\text{Avocado}\mid D),\,P(C=\text{Arancia}\mid D)\}=\arg\max\{0{,}3;\ 0{,}7\}=\text{Arancia}.$$
 
-<!-- SOURCE_VISUAL id="IS19-V05" source="L19-web.pdf" page="7" type="grafico" description="Probabilità a posteriori di avocado e arancia per il valore osservato di D" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015505.png)
 
 #### **1.5. La classificazione Bayes-ottima con il teorema di Bayes**
 
@@ -77,8 +72,7 @@ con $P(X\mid C_k)$ la **verosimiglianza** (*likelihood*) di $X$ nella classe $k$
 - $P(C_k\mid X)$: **non è nota durante l’uso**. **Conoscerla esattamente = avere il classificatore perfetto.**
 - $P(X\mid C_k)$: **si stima dai dati**: in addestramento si hanno i valori $X$ di ogni classe (**difficile con molte feature**: vedi il Naive Bayes).
 
-<!-- SOURCE_VISUAL id="IS19-V06" source="L19-web.pdf" page="8" type="grafico" description="Verosimiglianze e prior delle classi nella regola di Bayes" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015535.png)
 
 > 💡 **Un esempio numerico (nota didattica).** Se gli avocado sono il 40% dei frutti ($P(C_0)=0{,}4$) e le arance il 60%, e per il $D$ osservato $p(D\mid\text{avocado})=0{,}5$ e $p(D\mid\text{arancia})=0{,}8$, i prodotti sono $0{,}4\cdot 0{,}5=0{,}20$ e $0{,}6\cdot 0{,}8=0{,}48$: si sceglie l’arancia. Normalizzando per $P(D)=0{,}20+0{,}48=0{,}68$ si ottengono le posteriori $0{,}29$ e $0{,}71$, vicine al $0{,}3/0{,}7$ della slide. La normalizzazione cambia i valori ma non il vincitore, ed è per questo che $P(X)$ si può ignorare.
 
@@ -89,8 +83,7 @@ con $P(X\mid C_k)$ la **verosimiglianza** (*likelihood*) di $X$ nella classe $k$
 - L’errore finale è dato dall’**area di sovrapposizione** rimasta tra le distribuzioni delle classi (ombreggiata nel grafico).
 - **Nessun algoritmo o dato aggiuntivo può eliminarlo**; **solo feature migliori**, che separano le classi, possono ridurlo.
 
-<!-- SOURCE_VISUAL id="IS19-V07" source="L19-web.pdf" page="9" type="grafico" description="Sovrapposizione ombreggiata delle distribuzioni delle classi, errore residuo del classificatore migliore" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015554.png)
 
 > 📌 **L’errore minimo può essere strettamente maggiore di zero.** La sovrapposizione ombreggiata è l’errore che resta **anche per il miglior classificatore**.
 
@@ -112,8 +105,7 @@ Quindi il classificatore Naive Bayes diventa
 
 $$\hat{y}=\arg\max_{C_k}P(C_k)\prod_{i=1}^{n}P(x_i\mid C_k).$$
 
-<!-- SOURCE_VISUAL id="IS19-V08" source="L19-web.pdf" page="10" type="grafico" description="Distribuzioni delle singole feature per classe usate dall'ipotesi naive" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015620.png)
 
 #### **1.8. La classificazione Naive Bayes**
 
@@ -161,8 +153,7 @@ Pro e contro dei modelli standard e non neurali.
 - Danno un **riferimento molto solido per l’accuratezza**.
 - **La spiegabilità è più alta**: per esempio nei modelli di deep learning la spiegabilità è molto difficile.
 
-<!-- SOURCE_VISUAL id="IS19-V09" source="L19-web.pdf" page="14" type="figura" description="Illustrazione: voglio farlo in modo diverso" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015648.png)
 
 #### **2.2. Esempi di metodi classici (non neurali)**
 
@@ -196,16 +187,14 @@ Una differenza importante da notare.
 - **Generalizzazioni e concetti** sono prodotti durante l’apprendimento.
 - Qualunque input viene poi classificato **direttamente**: «**è un topo!**».
 
-<!-- SOURCE_VISUAL id="IS19-V10" source="L19-web.pdf" page="18" type="figura" description="Apprendimento eager: un concetto generale costruito in addestramento classifica subito il topo" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015705.png)
 
 #### **3.3. Apprendimento lazy (basato sulle istanze)**
 
-- È molto simile a una **scrivania**: «tutto» viene conservato (1: input, 2: output).
+- È molto simile a una **pc da scrivania**: «tutto» viene conservato (1: input, 2: output).
 - **La generalizzazione oltre i dati di training è rimandata finché non arriva una richiesta al sistema.**
 
-<!-- SOURCE_VISUAL id="IS19-V11" source="L19-web.pdf" page="19" type="figura" description="Apprendimento lazy come una scrivania su cui sono conservati tutti gli input e gli output" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015720.png)
 
 #### **3.4. Eager contro lazy: costi ed esempi**
 
@@ -214,8 +203,7 @@ Una differenza importante da notare.
 | **Eager** | stimare un modello: **costoso** | **veloce**; memoria = dimensione del modello | alberi di decisione, SVM, modelli lineari/logistici, reti feed-forward e CNN |
 | **Lazy** (basato sulle istanze) | memorizzare e indicizzare i campioni: **economico** | **costosa**; la memoria **cresce con i dati** | k-NN, *case-based reasoning*, regressione pesata localmente |
 
-<!-- SOURCE_VISUAL id="IS19-V12" source="L19-web.pdf" page="20" type="figura" description="Una rete feed-forward come esempio eager e un k-NN come esempio lazy" reason="Illustrazioni visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015744.png)
 
 > 💡 **Il legame con il System 1 (nota didattica).** È l’asse veloce–lento della Lezione 18 (§8.6) visto dal lato dell’addestramento: l’eager paga una volta e decide in fretta (System 1), il lazy non paga nulla prima e paga a ogni richiesta. Il k-NN è anche il caso in cui «il modello» coincide con i dati: per rilasciarlo si consegna l’intero training set, con le conseguenze di memoria e di privacy che ne derivano.
 
@@ -241,8 +229,7 @@ I classificatori a vicini più prossimi (*Nearest Neighbor*).
 
 **Se sembra un’anatra e si comporta come un’anatra, esempi simili possono aiutarci a classificarla.** Esempi di training memorizzati (con la loro classe): **gallina, anatra, cigno, maiale**; una **richiesta sconosciuta** (classe = ?). Si misura la **similarità con la richiesta**; si prende la **classe dei $k$ esempi più simili**.
 
-<!-- SOURCE_VISUAL id="IS19-V13" source="L19-web.pdf" page="23" type="figura" description="Esempi memorizzati gallina, anatra, cigno e maiale con una richiesta sconosciuta" reason="Illustrazioni visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015759.png)
 
 > ⚠️ **Solo un’analogia**: per dati reali la similarità è definita da una **metrica di distanza nello spazio delle feature**, non dall’intuizione umana.
 
@@ -259,8 +246,7 @@ Nel piano ci sono solo gli animali di training, ognuno un vettore $x_i=(x_1,x_2)
 
 **Richiesta $x=(55,33)\Rightarrow$ 1-NN = anatra.**
 
-<!-- SOURCE_VISUAL id="IS19-V14" source="L19-web.pdf" page="24" type="grafico" description="Animali nel piano lunghezza-altezza con la richiesta e lo zoom sui vicini" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015814.png)
 
 #### **4.4. La classificazione k-NN: la pipeline**
 
@@ -270,8 +256,7 @@ Nel piano ci sono solo gli animali di training, ognuno un vettore $x_i=(x_1,x_2)
 
 $N$: campioni di training; $d$: feature; $y_i$: etichetta del campione $i$; $k$: vicini (**scelta nostra**).
 
-<!-- SOURCE_VISUAL id="IS19-V15" source="L19-web.pdf" page="25" type="schema" description="Pipeline del k-NN: distanze, selezione dei k più vicini e voto" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015827.png)
 
 > 📌 **Learner pigro**: **nulla viene stimato**; gli $N$ campioni vengono conservati e i **tre blocchi vengono eseguiti di nuovo per ogni richiesta**.
 
@@ -282,25 +267,23 @@ I **$k$ vicini più prossimi** sono i $k$ campioni di training con le **distanze
 - $k=1$: **1 cerchio blu ⇒ blu**.
 - $k=3$: **2 triangoli rossi + 1 blu ⇒ rosso**.
 
-<!-- SOURCE_VISUAL id="IS19-V16" source="L19-web.pdf" page="26" type="grafico" description="La stessa richiesta classificata blu con k = 1 e rossa con k = 3" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015842.png)
 
 #### **4.6. Far crescere $k$: chi entra nel voto**
 
-| $k$ | Entra | Distanza | Blu | Rossi | Classe |
-|---:|:---:|---:|---:|---:|---|
-| 1 | ● | 0,67 | 1 | 0 | blu |
-| 2 | ▲ | 1,00 | 1 | 1 | pareggio |
-| 3 | ▲ | 1,04 | 1 | 2 | rosso |
-| 4 | ● | 1,56 | 2 | 2 | pareggio |
-| 5 | ● | 1,66 | 3 | 2 | blu |
-| 6 | ▲ | 1,84 | 3 | 3 | pareggio |
-| 7 | ▲ | 2,19 | 3 | 4 | rosso |
+| $k$ | Entra | Distanza | Blu | Rossi | Classe   |
+| --: | :---: | -------: | --: | ----: | -------- |
+|   1 |   ●   |     0,67 |   1 |     0 | blu      |
+|   2 |   ▲   |     1,00 |   1 |     1 | pareggio |
+|   3 |   ▲   |     1,04 |   1 |     2 | rosso    |
+|   4 |   ●   |     1,56 |   2 |     2 | pareggio |
+|   5 |   ●   |     1,66 |   3 |     2 | blu      |
+|   6 |   ▲   |     1,84 |   3 |     3 | pareggio |
+|   7 |   ▲   |     2,19 |   3 |     4 | rosso    |
 
 - $k=5$: **3 blu, 2 rossi ⇒ blu**; $k=7$: **3 blu, 4 rossi ⇒ rosso**.
 
-<!-- SOURCE_VISUAL id="IS19-V17" source="L19-web.pdf" page="27" type="grafico" description="Vicinati con k = 5 e k = 7 attorno alla stessa richiesta" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015859.png)
 
 Ogni passo aggiunge il **campione successivo più vicino**. La risposta **cambia con $k$**: blu, rosso, blu, rosso. **Con due classi un $k$ dispari evita i pareggi.**
 
@@ -316,17 +299,15 @@ $$\{x:\ \|x-x_i\|=\|x-x_j\|\}.$$
 
 Quindi **la frontiera di decisione del 1-NN è lineare a tratti**: in 2D è fatta di **segmenti di retta**, ciascuno un pezzo dell’asse tra due campioni più vicini **di classi diverse** (in $d$ dimensioni: pezzi di iperpiani).
 
-<!-- SOURCE_VISUAL id="IS19-V18" source="L19-web.pdf" page="28" type="grafico" description="16 celle di Voronoi con la frontiera del 1-NN in tratto spesso" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015911.png)
 
-In grigio sottile: le **16 celle**, ognuna con l’etichetta del suo campione. In tratto spesso: la **frontiera del 1-NN**, una catena di segmenti di asse.
+In grigio chiaro: le **16 celle**, ognuna con l’etichetta del suo campione. In tratto spesso: la **frontiera del 1-NN**, una catena di segmenti di asse.
 
 > 💡 **Perché l’asse è una retta (nota didattica).** Sviluppando $\|x-x_i\|^2=\|x-x_j\|^2$ i termini $\|x\|^2$ si cancellano e resta $2(x_j-x_i)^\top x=\|x_j\|^2-\|x_i\|^2$: un’equazione **lineare** in $x$, cioè una retta in 2D e un iperpiano in $d$ dimensioni. Le celle tra campioni della stessa classe non contribuiscono alla frontiera: la frontiera usa solo i lati tra classi diverse.
 
 **Diagramma di Voronoi in $N$ dimensioni**: un esempio 3D.
 
-<!-- SOURCE_VISUAL id="IS19-V19" source="L19-web.pdf" page="29" type="figura" description="Diagramma di Voronoi tridimensionale" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015938.png)
 
 #### **4.8. Esempi d’uso di Voronoi**
 
@@ -335,13 +316,11 @@ In grigio sottile: le **16 celle**, ognuna con l’etichetta del suo campione. I
 - **ingegneria**: volumi liberi dei polimeri;
 - geometria; informatica; **civica e pianificazione**.
 
-<!-- SOURCE_VISUAL id="IS19-V20" source="L19-web.pdf" page="30" type="figura" description="Esempi di tassellazioni di Voronoi in natura e nelle applicazioni" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015946.png)
 
 **Un diagramma di Voronoi degli aeroporti del mondo** proiettato su un globo 3D (Jason Davies).
 
-<!-- SOURCE_VISUAL id="IS19-V21" source="L19-web.pdf" page="31" type="figura" description="Diagramma di Voronoi degli aeroporti del mondo su un globo 3D (Jason Davies)" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125015956.png)
 
 > 💡 **Un uso storico (nota didattica).** Nel 1854 John Snow mappò i morti di colera a Londra e mostrò che quasi tutti vivevano più vicini a una certa pompa d’acqua di Broad Street che a qualsiasi altra: in pratica disegnò una cella di Voronoi. È l’esempio classico dell’uso «epidemie» citato dalla slide.
 
@@ -351,8 +330,7 @@ In grigio sottile: le **16 celle**, ognuna con l’etichetta del suo campione. I
 - **$k$ grande**: frontiera **più liscia**, ma **piccoli gruppi possono sparire** (**underfitting**).
 - **Scegliere $k$ sui dati di validazione, mai sul training set.**
 
-<!-- SOURCE_VISUAL id="IS19-V22" source="L19-web.pdf" page="32" type="grafico" description="Frontiere di decisione del k-NN con k = 1, 5 e 15 sugli stessi dati" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020005.png)
 
 > 💡 **$k$ e la complessità (nota didattica).** È il dilemma bias-varianza della Lezione 17 con l’asse rovesciato: con $k=1$ la frontiera segue ogni punto (massima complessità, varianza alta); con $k=N$ il modello vota sempre la classe maggioritaria (minima complessità, bias alto). Sul training set il 1-NN ha sempre accuratezza 100% (ogni punto è il vicino di sé stesso): ecco perché $k$ non si sceglie lì.
 
@@ -374,8 +352,7 @@ con $c$ una classe; $[y_i=c]=1$ se il campione $i$ ha classe $c$, altrimenti 0; 
 - **Con i pesi, tutti i punti di training possono influenzare la risposta** (metodo di Shepard).
 - Pesi $1/\text{dist}^p$ per $p=1,2,4,16$: da **partizioni lisce** ($p$ piccolo) alle **regioni di Voronoi** ($p$ grande).
 
-<!-- SOURCE_VISUAL id="IS19-V23" source="L19-web.pdf" page="33" type="grafico" description="Partizioni del voto pesato per p = 1, 2, 4 e 16" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020019.png)
 
 > 💡 **Un esempio e un caso limite (nota didattica).** Con $k=3$, $p=2$, vicini blu a distanza 1 e rossi a distanza 2 e 2: pesi $1$ contro $\frac14+\frac14=0{,}5$, vince il blu anche se i rossi sono due. Con $p$ molto grande il vicino più vicino pesa infinitamente più degli altri, e il voto pesato diventa un 1-NN: da qui le regioni di Voronoi. Se una distanza è zero (la richiesta coincide con un campione) il peso è infinito: le implementazioni assegnano direttamente quella classe.
 
@@ -399,8 +376,7 @@ Con $q=(1,1)$, $a=(1{,}5;\ 0{,}6)$, $b=(3,3)$:
 | **Euclidea** | $\sqrt{0{,}25+0{,}16}=0{,}64$ | $\sqrt{4+4}=2{,}83$ | **$a$ (rosso)** |
 | **Coseno** | $2{,}1/(1{,}41\cdot 1{,}62)=0{,}92\Rightarrow\text{dist}_{\cos}=0{,}08$ | $6/(1{,}41\cdot 4{,}24)=1{,}00\Rightarrow\text{dist}_{\cos}=0{,}00$ | **$b$ (blu)** |
 
-<!-- SOURCE_VISUAL id="IS19-V24" source="L19-web.pdf" page="35" type="grafico" description="I punti q, a, b con il vicino euclideo a e il vicino coseno b" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020035.png)
 
 > 📌 **La distanza euclidea misura la posizione; il coseno misura la direzione.** $b=3q$: stessa direzione di $q$, quindi coseno 1, anche se è lontano.
 
@@ -414,8 +390,7 @@ Con $q=(1,1)$, $a=(1{,}5;\ 0{,}6)$, $b=(3,3)$:
 
 con la media di training $\mu=(0{,}5;\ 0{,}5)$.
 
-<!-- SOURCE_VISUAL id="IS19-V25" source="L19-web.pdf" page="36" type="grafico" description="Due punti nella stessa direzione dall'origine e in direzioni opposte dopo la centratura" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020047.png)
 
 - **Il coseno non è invariante per traslazione**: **una nuova origine cambia ogni angolo**.
 - **La centratura trasforma la similarità massima in minima** per gli stessi due punti.
@@ -427,8 +402,7 @@ con la media di training $\mu=(0{,}5;\ 0{,}5)$.
 
 Euclidea; coseno grezzo; coseno dopo la centratura. **Stessi 36 punti etichettati, stesso $k=1$.** Le regioni del coseno sono **spicchi a partire dall’origine** (+): grezza a sinistra, nella media di training $\mu$ dopo la centratura. **Nessuna delle tre è «migliore» in generale**: ognuna definisce una **nozione diversa di vicino**, e **solo i dati di validazione possono dire quale si adatta al compito**. Dati sintetici (seme fisso): solo geometria, nessuna misura reale.
 
-<!-- SOURCE_VISUAL id="IS19-V26" source="L19-web.pdf" page="37" type="grafico" description="Regioni del 1-NN sugli stessi 36 punti con distanza euclidea, coseno grezzo e coseno dopo la centratura" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020057.png)
 
 > 💡 **Perché spicchi (nota didattica).** Il coseno ignora la lunghezza dei vettori: tutti i punti su una semiretta uscente dall’origine hanno lo stesso coseno con qualsiasi altro punto. Le regioni di decisione sono quindi unioni di settori angolari con il vertice nell’origine, e spostando l’origine (centratura) si sposta il vertice di tutti gli spicchi.
 
@@ -453,13 +427,9 @@ $x_3$: glicemia a digiuno. **Valori sintetici per la didattica, non dati clinici
 - **Sembra tutto a posto!** Tre feature plausibili, dieci pazienti, un’etichetta chiara. **Ma guardiamo che cosa vede il k-NN** (slide successiva).
 - **Scalare non rende il k-NN «giusto»: decide quale feature conta.** Per il diabete la glicemia dovrebbe probabilmente pesare più dell’altezza: **scegliere feature e scala, poi validare**.
 
-<!-- SOURCE_VISUAL id="IS19-V27" source="L19-web.pdf" page="38" type="figura" description="Tabella dei dieci pazienti sintetici con altezza, peso e glicemia" reason="Grafica della tabella visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 #### **5.5. Che cosa «vede» la distanza euclidea**
 
-<!-- SOURCE_VISUAL id="IS19-V28" source="L19-web.pdf" page="39" type="grafico" description="Pazienti in unità grezze con la stessa scala sui due assi e dopo la normalizzazione min-max" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020140.png)
 
 - **A sinistra**: stessa lunghezza unitaria sui due assi, **come nella distanza**. L’altezza varia di **0,5**, la glicemia di **più di 100**: **i vicini sono scelti dalla sola glicemia (e dal peso)**; tutte le altezze (1,4–2,0 m) stanno in una linea sottile.
 - **A destra**: dopo la **normalizzazione min-max**.
@@ -473,8 +443,7 @@ Richiamo dalla Lezione 18: un **embedding** è il vettore $z\in\mathbb{R}^d$ cal
 
 Immagine $I(x,y)$ → **encoder di immagini** $f_\theta$ (pre-addestrato) → $z\in\mathbb{R}^d$ → **normalizzazione $\ell_2$** → $\hat{z}$ → **k-NN** con distanza coseno (sugli embedding etichettati di training) → classe; in parallelo, **PCA in 2D** → grafico 2D (**solo visualizzazione**).
 
-<!-- SOURCE_VISUAL id="IS19-V29" source="L19-web.pdf" page="40" type="schema" description="Pipeline encoder, normalizzazione l2, k-NN coseno e PCA solo per il grafico" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020149.png)
 
 Dopo la **normalizzazione $\ell_2$** ($\|\hat{z}\|=1$) **coseno e distanza euclidea danno gli stessi vicini**. **Il voto avviene in $\mathbb{R}^d$; la mappa PCA mostra soltanto i dati.** Misurato su 40 foto reali nei passi successivi.
 
@@ -485,16 +454,14 @@ Dopo la **normalizzazione $\ell_2$** ($\|\hat{z}\|=1$) **coseno e distanza eucli
 
 Foto: Wikimedia Commons (autori e licenze in `fonti-wikimedia-commons.md`).
 
-<!-- SOURCE_VISUAL id="IS19-V30" source="L19-web.pdf" page="41" type="figura" description="Le 40 foto di gatti e cani del dataset" reason="Fotografie visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020159.png)
 
 #### **5.8. I 40 embedding visti da PCA e t-SNE**
 
 - **PCA**: lineare; **2 componenti tengono il 90% della varianza**; le foto nuove si possono proiettare. Isolata: **la foto meno tipica**.
 - **t-SNE** (perplexity 10): **conserva solo i vicinati**: spazi vuoti, dimensioni dei gruppi e assi **non hanno significato**.
 
-<!-- SOURCE_VISUAL id="IS19-V31" source="L19-web.pdf" page="42" type="grafico" description="Mappe PCA e t-SNE dei 40 embedding di gatti e cani con le miniature delle foto" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020307.png)
 
 #### **5.9. Il coseno sugli embedding reali: attenzione all’origine**
 
@@ -505,8 +472,7 @@ Foto: Wikimedia Commons (autori e licenze in `fonti-wikimedia-commons.md`).
 | media tra classi | **0,970** | **−0,88** |
 | lettura | tutto è «simile» | **i due gruppi ora sono lontani** |
 
-<!-- SOURCE_VISUAL id="IS19-V32" source="L19-web.pdf" page="43" type="grafico" description="Matrici dei coseni 40x40 tra gli embedding prima e dopo la centratura sulla stessa scala di colori" reason="Mappe di colori visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020315.png)
 
 Stessa scala di colori: **i coseni grezzi sono tutti ≈ 1** (tutto rosso); **spostare l’origine nella media li allarga**. Embedding: EmbeddingGemma 2 (Ollama, 768 dimensioni), calcolati dall’autore.
 
@@ -546,8 +512,7 @@ quindi **euclidea e coseno ordinano i vicini nello stesso ordine**.
 - **Input**: $N=40$ foto di **scatole appiattite su una linea di produzione**, ● **20 integre**, ▲ **20 difettose** (strappate, piegate, disallineate).
 - **Stessa pipeline, nessuna modifica**: encoder $f_\theta$ (EmbeddingGemma 2, Ollama, 768 dimensioni) → $z_i\in\mathbb{R}^{768}$ → PCA, t-SNE, k-NN. **Nessuna rete è stata addestrata sulle scatole.**
 
-<!-- SOURCE_VISUAL id="IS19-V33" source="L19-web.pdf" page="45" type="figura" description="Le 40 foto di scatole integre e difettose su una linea di produzione" reason="Fotografie visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020347.png)
 
 #### **5.12. Perché è difficile: integra o difettosa?**
 
@@ -556,13 +521,11 @@ quindi **euclidea e coseno ordinano i vicini nello stesso ordine**.
 - **La maggior parte dei pixel è sfondo**: nastri, rulli, riflessi, altre scatole.
 - **Confrontare i pixel significherebbe confrontare gli sfondi**: serve una **rappresentazione del contenuto**, l’**embedding**.
 
-<!-- SOURCE_VISUAL id="IS19-V34" source="L19-web.pdf" page="46" type="figura" description="Una scatola integra e una difettosa a confronto" reason="Fotografie visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020354.png)
 
 #### **5.13. Scatole: PCA e t-SNE degli embedding**
 
-<!-- SOURCE_VISUAL id="IS19-V35" source="L19-web.pdf" page="47" type="grafico" description="Mappe PCA e t-SNE degli embedding delle scatole integre e difettose" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020400.png)
 
 **k-NN leave-one-out con distanza coseno: 100% ($k=1$), 100% ($k=5$).** Coseno medio **0,998 entro una classe, 0,990 tra classi**; dopo la centratura **0,69 e −0,71**. **Le stesse poche righe di codice che separavano gatti e cani ora separano le scatole buone da quelle difettose.**
 
@@ -572,8 +535,7 @@ quindi **euclidea e coseno ordinano i vicini nello stesso ordine**.
 
 **Dati grezzi** → **rappresentazione** → **pre-elaborazione** → **distanza** → **voto k-NN** → $\hat{y}$: **l’errore di validazione decide ogni scelta**.
 
-<!-- SOURCE_VISUAL id="IS19-V36" source="L19-web.pdf" page="48" type="schema" description="Catena dati, rappresentazione, pre-elaborazione, distanza e voto guidata dall'errore di validazione" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020411.png)
 
 | Distanza | Considera simili | Ignora |
 |---|---|---|
@@ -592,8 +554,7 @@ quindi **euclidea e coseno ordinano i vicini nello stesso ordine**.
 - **(−) Maledizione della dimensionalità**: con molte feature (irrilevanti), **tutte le distanze diventano simili** e «più vicino» perde significato.
 - **Rimedi**: selezione o estrazione delle feature (Lezione 18); la maledizione è studiata in dettaglio con le reti neurali (Lezione 20).
 
-<!-- SOURCE_VISUAL id="IS19-V37" source="L19-web.pdf" page="49" type="figura" description="Illustrazione dei problemi pratici del k-NN" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020422.png)
 
 > 💡 **La maledizione della dimensionalità in numeri (nota didattica).** In un ipercubo unitario a $d$ dimensioni con dati uniformi, per catturare il 10% dei punti serve un cubetto di lato $0{,}1^{1/d}$: in 2D il lato è circa 0,32, ma in 10D è circa **0,79**, quasi tutto il cubo. I «vicini» non sono più vicini, e le distanze tra punti diversi diventano quasi tutte simili. È il motivo per cui il k-NN funziona bene con poche feature ben scelte (o con embedding) e male con centinaia di feature grezze.
 
@@ -609,9 +570,6 @@ quindi **euclidea e coseno ordinano i vicini nello stesso ordine**.
   - $O(N+k\log k)$: mediana veloce;
 - **il tempo totale è dominato dal calcolo delle distanze**;
 - **si può essere più veloci se si accetta di sacrificare l’esattezza.**
-
-<!-- SOURCE_VISUAL id="IS19-V38" source="L19-web.pdf" page="50" type="figura" description="Illustrazione del costo computazionale del k-NN" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **Il conto per un’applicazione (nota didattica).** Con un milione di immagini descritte da 512 feature, ogni classificazione richiede circa $10^6\times 512\approx 5\times 10^8$ operazioni solo per le distanze, contro al più $10^6\log_2 10^6\approx 2\times 10^7$ per l’ordinamento: le distanze dominano. È l’altra faccia del lazy learning (§3.4): addestramento istantaneo, uso costoso. «Sacrificare l’esattezza» significa usare strutture come i k-d tree o gli indici approssimati (*approximate nearest neighbor*) dei database vettoriali (Lezione 6, §6.3; Lezione 15, RAG), che trovano vicini quasi certamente giusti in tempo sublineare.
 
@@ -790,22 +748,19 @@ Nelle applicazioni è **molto raro** riuscire a identificare i cluster nei dati 
 
 **Serve un metodo automatico!** (Con poche dimensioni i gruppi si vedono; con molte dimensioni: ???)
 
-<!-- SOURCE_VISUAL id="IS19-V39" source="L19-web.pdf" page="56" type="grafico" description="Cluster evidenti in poche dimensioni e invisibili in molte dimensioni" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020541.png)
 
 #### **7.3. Il clustering: definizione**
 
 > 📌 **Definizione.** L’**analisi dei cluster** (clustering) è il compito di **raggruppare un insieme di oggetti** in modo che gli oggetti dello **stesso gruppo** (detto **cluster**) siano **più simili** (posizione, feature, forme…) **tra loro** che a quelli degli **altri gruppi** (cluster).
 
-<!-- SOURCE_VISUAL id="IS19-V40" source="L19-web.pdf" page="57" type="figura" description="Gruppi percepiti a colpo d'occhio dalla Gestalt umana" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020553.png)
 
 La **Gestalt umana** percepisce i gruppi a colpo d’occhio (Lezione 2).
 
 **Fare gruppi di feature simili** (volti): bambino/adulto? Maschio/femmina? Felice/neutro/triste? Capelli lunghi/calvo? Barba/rasato? Occhiali da sole/occhiali/nessuno? … **Bisogna estrarre gruppi da un dataset di feature non supervisionato.**
 
-<!-- SOURCE_VISUAL id="IS19-V41" source="L19-web.pdf" page="58" type="figura" description="Volti raggruppabili secondo diverse caratteristiche" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020603.png)
 
 > ⚠️ **Lo stesso insieme, più raggruppamenti.** Gli stessi volti si possono raggruppare per età, per espressione o per occhiali: non esiste un clustering «giusto» in assoluto, ma solo uno utile per un compito. Le feature scelte decidono quale raggruppamento emerge (§7.12).
 
@@ -830,15 +785,13 @@ La **Gestalt umana** percepisce i gruppi a colpo d’occhio (Lezione 2).
 
 Colori e forme sono **indici di cluster, non etichette di classe**.
 
-<!-- SOURCE_VISUAL id="IS19-V42" source="L19-web.pdf" page="60" type="grafico" description="Passo 1 con tre centri casuali e passo 2 con l'assegnazione dei 60 punti alle celle di Voronoi" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020615.png)
 
 #### **7.6. Il k-means passo per passo (2/2): iterare finché nulla cambia**
 
 Partenza: centri casuali; iterazione 1: assegnazione + aggiornamento; **iterazione 2: 3 punti cambiano cluster**; it. 3: 4 punti; it. 4: 8 punti; it. 5: 12 punti; it. 6: 4 punti; **it. 7: nessun cambiamento → stop**.
 
-<!-- SOURCE_VISUAL id="IS19-V43" source="L19-web.pdf" page="61" type="grafico" description="Otto fotogrammi delle iterazioni del k-means con i centri che si spostano fino alla convergenza" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020627.png)
 
 - **Passo 3**: si sposta ogni centro nella **media dei suoi punti** (frecce).
 - **Passo 4**: si ripetono i passi 2–3.
@@ -864,8 +817,7 @@ dove $\mu_i$ è il **centro del cluster** (media dei punti di $S_i$), $\|\cdot\|
 4. Ristimare i $k$ centri come le **medie dei loro membri**.
 5. Se **nessun oggetto ha cambiato appartenenza** nell’ultima iterazione, fermarsi; altrimenti tornare al passo 3.
 
-<!-- SOURCE_VISUAL id="IS19-V44" source="L19-web.pdf" page="63" type="figura" description="Illustrazione dell'algoritmo di partizione del k-means" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020637.png)
 
 > 📌 **Convergenza.** Ogni passo 3 e ogni passo 4 possono **solo abbassare (o mantenere) l’obiettivo** della fase precedente: **l’algoritmo si ferma sempre, ma in un minimo locale**.
 
@@ -880,15 +832,13 @@ dove $\mu_i$ è il **centro del cluster** (media dei punti di $S_i$), $\|\cdot\|
 
 **Inizializzazioni casuali diverse possono finire in un minimo locale**; il minimo globale «**dovrebbe essere qui!**».
 
-<!-- SOURCE_VISUAL id="IS19-V45" source="L19-web.pdf" page="64" type="grafico" description="Due esecuzioni del k-means con inizializzazioni diverse, una delle quali finisce in un minimo locale" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020649.png)
 
 > 💡 **Il rimedio pratico (nota didattica).** Si esegue il k-means **più volte** con inizializzazioni diverse e si tiene la soluzione con la somma dei quadrati più bassa; l’inizializzazione **k-means++** sceglie i centri iniziali distanti tra loro (ogni nuovo centro con probabilità proporzionale al quadrato della distanza dal centro più vicino già scelto) e riduce i risultati cattivi. In scikit-learn il parametro `n_init` fa proprio questo, e `init="k-means++"` è il default.
 
 **I problemi del k-means con gli outlier**: un punto lontano sposta la media del suo cluster.
 
-<!-- SOURCE_VISUAL id="IS19-V46" source="L19-web.pdf" page="65" type="grafico" description="Un outlier che sposta il centro di un cluster nel k-means" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020658.png)
 
 #### **7.10. Punti di forza e debolezze del k-means**
 
@@ -900,15 +850,13 @@ dove $\mu_i$ è il **centro del cluster** (media dei punti di $S_i$), $\|\cdot\|
 | | **fallisce su forme non convesse** |
 | | **funziona meglio su gruppi compatti, all’incirca sferici** |
 
-<!-- SOURCE_VISUAL id="IS19-V47" source="L19-web.pdf" page="66" type="grafico" description="Esempi di clustering con k = 3 e k = 5 e casi di fallimento" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020706.png)
 
 > ⚠️ **Cluster ellittici (nota didattica).** Il k-means standard usa la distanza euclidea dal centro e tende a produrre cluster sferici e di dimensioni simili; per cluster ellittici o di dimensioni molto diverse funziona male. Servono varianti, come la distanza di Mahalanobis (Lezione 8) o i modelli a misture gaussiane (GMM). Per i dati categorici esiste il *k-modes*, che usa la moda al posto della media. Per le forme non convesse (due mezzelune, anelli concentrici) si usano metodi basati sulla densità come DBSCAN.
 
 **Comportamento diverso dei metodi di clustering**: la stessa nuvola di dati divisa in modo diverso da algoritmi diversi.
 
-<!-- SOURCE_VISUAL id="IS19-V48" source="L19-web.pdf" page="67" type="grafico" description="Confronto di diversi algoritmi di clustering su dataset di forme diverse" reason="Griglia di grafici visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020715.png)
 
 #### **7.11. Clustering esclusivo e sovrapposto**
 
@@ -917,8 +865,7 @@ dove $\mu_i$ è il **centro del cluster** (media dei punti di $S_i$), $\|\cdot\|
 - **Distinzione chiave**: il clustering esclusivo impone un confine «**duro**», quello sovrapposto permette un’appartenenza «**morbida**» o condivisa.
 - **Si sceglie rispetto alla propria applicazione.**
 
-<!-- SOURCE_VISUAL id="IS19-V49" source="L19-web.pdf" page="68" type="grafico" description="Clustering esclusivo contro clustering sovrapposto" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020722.png)
 
 > 💡 **Il Fuzzy C-Means (nota didattica).** Ogni punto $x_i$ ha un grado di appartenenza $u_{ij}\in[0,1]$ a ogni cluster $j$, con $\sum_ju_{ij}=1$; i centri sono medie pesate da $u_{ij}^m$ ($m>1$ regola quanto sono «morbidi» i confini). Un punto a metà tra due cluster ha appartenenze $0{,}5$ e $0{,}5$ invece di essere assegnato a forza a uno solo: è la logica fuzzy del §10.2 applicata al clustering.
 
@@ -930,15 +877,13 @@ dove $\mu_i$ è il **centro del cluster** (media dei punti di $S_i$), $\|\cdot\|
 - **$k$ troppo alto**: *over-clustering* (gruppi naturali **divisi**).
 - Un **$k$ piccolo e fisso** è utile per **confrontare rappresentazioni di feature**.
 
-<!-- SOURCE_VISUAL id="IS19-V50" source="L19-web.pdf" page="69" type="grafico" description="Effetto di un k troppo basso e troppo alto" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020731.png)
 
 #### **7.13. Una pipeline di clustering**
 
 **Dati grezzi** → **ispezione visiva** → **codifica** (categorico → numerico) → **scalatura** → **k-means** ($k$, distanza) → **indice di cluster**; in parallelo, **PCA** → mappa 2D (**solo visualizzazione**).
 
-<!-- SOURCE_VISUAL id="IS19-V51" source="L19-web.pdf" page="70" type="schema" description="Pipeline di clustering dall'ispezione dei dati all'indice di cluster" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020738.png)
 
 - **Le stesse scelte del k-NN**: **rappresentazione, scalatura e distanza** decidono quali punti formano un gruppo.
 - **La PCA disegna soltanto il risultato**; **i cluster vanno giudicati nello spazio delle feature originale (scalato)**.
@@ -947,8 +892,7 @@ dove $\mu_i$ è il **centro del cluster** (media dei punti di $S_i$), $\|\cdot\|
 
 Il **metodo del gomito** determina il numero di cluster disegnando la **somma dei quadrati entro i cluster** (WCSS, *Within-Cluster Sum of Squares*) in funzione di $k$. Un $k$ candidato sta vicino al «**gomito**», dove le ulteriori riduzioni della WCSS diventano piccole. **Il gomito può essere ambiguo o assente**; la scelta va confermata con indici di validità dei cluster e conoscenza del dominio.
 
-<!-- SOURCE_VISUAL id="IS19-V52" source="L19-web.pdf" page="71" type="grafico" description="Grafico a gomito della WCSS in funzione di k" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020746.png)
 
 > 💡 **Perché serve il gomito (nota didattica).** La WCSS **diminuisce sempre** all’aumentare di $k$, e vale 0 con $k=n$ (ogni punto è il suo centro): scegliere il $k$ con la WCSS minima porterebbe sempre a $k=n$. È lo stesso fenomeno dell’errore di training che scende con la complessità (Lezione 17): si cerca il punto in cui aggiungere complessità smette di rendere.
 
@@ -962,8 +906,7 @@ Il **metodo del gomito** determina il numero di cluster disegnando la **somma de
 
 I criteri d’informazione **bayesiano (BIC)** e **di Akaike (AIC)** bilanciano **adattamento e complessità del modello** penalizzando l’aggiunta di parametri.
 
-<!-- SOURCE_VISUAL id="IS19-V53" source="L19-web.pdf" page="72" type="grafico" description="Grafici degli indici avanzati per scegliere k" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020808.png)
 
 > 📌 **Silhouette (nota didattica).** Per un punto $i$, sia $a(i)$ la distanza media dagli altri punti del **suo** cluster e $b(i)$ la distanza media dai punti del cluster **più vicino** tra gli altri:
 > $$s(i)=\frac{b(i)-a(i)}{\max\big(a(i),\,b(i)\big)}\in[-1,1].$$
@@ -975,8 +918,7 @@ $$\hat{c}(x)=\arg\min_{j\in\{1,\dots,k\}}\|x-\mu_j\|,$$
 
 con $x$ il **nuovo prodotto**, sottoposto **alla stessa pre-elaborazione dei dati di training**; $\mu_j$ il centroide del cluster $j$; $\hat{c}$ l’indice del centroide più vicino. **Esempio**: $d_1=1{,}5<d_2=2{,}3\Rightarrow\hat{c}=1$.
 
-<!-- SOURCE_VISUAL id="IS19-V54" source="L19-web.pdf" page="73" type="grafico" description="Un nuovo prodotto assegnato al cluster dei prodotti buoni per distanza dai centroidi" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020825.png)
 
 - **Il clustering dà un indice, non un significato.**
 - Nomi come «**prodotti buoni**» o «**prodotti difettosi**» vengono dati **a posteriori da una persona** (per esempio un ispettore della qualità), **mai dall’algoritmo**.
@@ -991,8 +933,7 @@ con $x$ il **nuovo prodotto**, sottoposto **alla stessa pre-elaborazione dei dat
 | **non definisce le anomalie** | **lontane dai centroidi** |
 | | **cluster piccoli o isolati** |
 
-<!-- SOURCE_VISUAL id="IS19-V55" source="L19-web.pdf" page="74" type="grafico" description="Cluster e anomalie in regioni a bassa densità" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020836.png)
 
 > ⚠️ **Perché il k-means da solo non trova le anomalie (nota didattica).** Il k-means assegna **ogni** punto a un cluster, anomalie comprese: un guasto mai visto viene messo nel cluster più vicino come se fosse normale. E un gruppo di anomalie abbastanza numeroso può addirittura spostare un centroide verso di sé (§7.9). Serve un criterio aggiuntivo: la distanza dal centroide, la densità locale, o la dimensione del cluster.
 
@@ -1006,8 +947,7 @@ con $x_{(k)}$ il **$k$-esimo campione normale più vicino**; $s$ il **punteggio 
 
 **Esempio**: $k=5$, $\tau=1{,}27$ (**il 98% dei campioni normali ha $s\le\tau$**): un punto con $s=0{,}4\Rightarrow$ **normale**; un punto con $s=2{,}9\Rightarrow$ **anomalia**.
 
-<!-- SOURCE_VISUAL id="IS19-V56" source="L19-web.pdf" page="75" type="grafico" description="Dati normali, cerchi di raggio tau e un punto anomalo" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020844.png)
 
 **La stessa idea altrove**: distanza da un centroide; **errore di ricostruzione di un autoencoder** (Lezione 22).
 
@@ -1020,8 +960,7 @@ con $x_{(k)}$ il **$k$-esimo campione normale più vicino**; $s$ il **punteggio 
 | $x_A$ (stella) | 0,56; 0,65; 0,86 | 0,86 | $0{,}86\le 1{,}10$ | **normale** |
 | $x_B$ (triangolo) | 2,17; 2,28; 2,31 | 2,31 | $2{,}31>1{,}10$ | **anomalia** |
 
-<!-- SOURCE_VISUAL id="IS19-V57" source="L19-web.pdf" page="76" type="grafico" description="I punti xA e xB con i primi tre vicini e il cerchio di raggio tau" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020904.png)
 
 $\tau$ ricalcolato per $k=3$ sui dati normali. **Stessa regola**: anomalia **se meno di $k$ campioni normali stanno entro il raggio $\tau$**.
 
@@ -1038,8 +977,7 @@ In Python: un esempio semplice che ripassa le tecniche appena studiate.
 
 **Da dove vengono questi dati?** La tabella dei clienti caricata nell’esercizio Python (**200 clienti, 5 colonne**); si tengono **2 feature, Età e Spending Score** (punteggio di spesa). Passi di caricamento ed esplorazione (`.head`, `.shape`, `.info`, `.isnull`, istogrammi): appendice A5–A11 (§11).
 
-<!-- SOURCE_VISUAL id="IS19-V58" source="L19-web.pdf" page="78" type="grafico" description="Scatter dei 200 clienti per età e spending score" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020946.png)
 
 #### **8.2. Il k-means in Python**
 
@@ -1070,8 +1008,7 @@ plt.ylabel('Spending score')
 
 **Inviare spesso coupon e offerte dedicate!**
 
-<!-- SOURCE_VISUAL id="IS19-V59" source="L19-web.pdf" page="80" type="grafico" description="Quattro cluster di clienti con il gruppo dei giovani ad alta spesa evidenziato" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125020959.png)
 
 #### **8.4. In appendice: clustering di segnali di sensori di gas**
 
@@ -1081,8 +1018,7 @@ plt.ylabel('Spending score')
 
 Dati grezzi (prime righe della tabella) e cluster k-means ($k=2$; colore = indice di cluster, mostrati 2 dei 16 sensori).
 
-<!-- SOURCE_VISUAL id="IS19-V60" source="L19-web.pdf" page="81" type="grafico" description="Prime righe della tabella dei sensori di gas e due cluster k-means su due sensori" reason="Grafici e tabella visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021015.png)
 
 L’esempio completo (EDA, matrice di scatter, t-SNE, codice e risultati del k-means) è nell’appendice A12–A19 (§11.2): **non d’esame**, ma un buon ripasso della lezione.
 
@@ -1105,10 +1041,11 @@ Algoritmi genetici, logica fuzzy, swarm intelligence e sistemi ibridi.
 - Un GA **deve riconoscere una buona soluzione** (fitness), **non sapere come costruirla**.
 - **Input**: codifica di una soluzione + funzione di fitness; **output**: il miglior individuo trovato.
 
+![](imgs/Pasted%20image%2020261125021055.png)
+
 Ciclo: popolazione iniziale casuale → **ordinamento per fitness + selezione dei genitori** → **crossover + mutazione** → nuova prole → **selezione dei sopravvissuti** → nuova popolazione → … → miglior individuo (abbastanza buono o budget esaurito). Il calcolo evolutivo comprende **strategie evolutive**, **programmazione evolutiva**, **algoritmi genetici** e **programmazione genetica**.
 
-<!-- SOURCE_VISUAL id="IS19-V61" source="L19-web.pdf" page="83" type="schema" description="Ciclo dell'algoritmo genetico e tassonomia del calcolo evolutivo" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021101.png)
 
 > 💡 **Perché «riconoscere, non costruire» (nota didattica).** Per ottimizzare gli iperparametri di un sistema non serve sapere come il loro valore influisce sull’errore (nessun gradiente, Lezione 17): basta poter **misurare** l’errore di una configurazione. È ciò che rende i GA adatti a problemi in cui la funzione obiettivo è una scatola nera, discreta o non derivabile, come l’errore di validazione di un modello addestrato.
 
@@ -1121,8 +1058,9 @@ Ciclo: popolazione iniziale casuale → **ordinamento per fitness + selezione de
 
 Un **sistema fuzzy**: **numeri in ingresso** (*crisp*) → **fuzzificatore** → **regole e insiemi fuzzy** (inferenza) → **defuzzificatore** → **numero in uscita** (*crisp*).
 
-<!-- SOURCE_VISUAL id="IS19-V62" source="L19-web.pdf" page="84" type="schema" description="Logica booleana contro logica fuzzy e catena fuzzificatore, inferenza, defuzzificatore" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021111.png)
+
+![](imgs/Pasted%20image%2020261125021129.png)
 
 > 📌 **Insiemi e regole fuzzy (nota didattica).** In logica booleana un elemento **appartiene o no** a un insieme. In logica fuzzy ha un **grado di appartenenza** $\mu(x)\in[0,1]$. Esempio: per l’insieme «temperatura calda», $\mu(18\,°\text{C})=0$, $\mu(24\,°\text{C})=0{,}5$, $\mu(30\,°\text{C})=1$. Una **regola fuzzy** ha la forma «**se** la temperatura è calda **e** l’umidità è alta **allora** la ventola è veloce»: il grado con cui la regola si attiva dipende dai gradi di appartenenza (per esempio il minimo tra i due), e le uscite delle regole si combinano in un valore numerico finale (la defuzzificazione, per esempio con il baricentro). È lo stesso principio del Fuzzy C-Means del §7.11: appartenenze parziali invece di confini netti.
 
@@ -1136,8 +1074,9 @@ Ispirati al comportamento degli **insetti sociali** come le **formiche**, e di a
 - **risoluzione di problemi complessi**;
 - **capacità di ottimizzazione**.
 
-<!-- SOURCE_VISUAL id="IS19-V63" source="L19-web.pdf" page="85" type="figura" description="Formiche, stormi di uccelli e banchi di pesci come ispirazione della swarm intelligence" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021146.png)
+
+![](imgs/Pasted%20image%2020261125021153.png)
 
 > 💡 **Due esempi classici (nota didattica).** Nell’*Ant Colony Optimization* le formiche virtuali lasciano un «feromone» sui percorsi brevi, che attira altre formiche e si rinforza: si usa per problemi di instradamento (per esempio il commesso viaggiatore, la logistica). Nella *Particle Swarm Optimization* ogni particella è una soluzione candidata che si muove nello spazio dei parametri attratta dalla propria migliore posizione e da quella del gruppo. Nessuna particella conosce la soluzione: emerge dall’interazione.
 
@@ -1152,8 +1091,7 @@ Reti neurali, sistemi fuzzy e algoritmi genetici insieme.
 
 > 📌 **Definizione.** «Un **sistema software** che impiega, **in parallelo**, una **combinazione di metodi e tecniche** dell’intelligenza artificiale.»
 
-<!-- SOURCE_VISUAL id="IS19-V64" source="L19-web.pdf" page="87" type="figura" description="Illustrazione di un sistema intelligente ibrido" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021208.png)
 
 #### **10.2. Perché ibrido?**
 
@@ -1164,15 +1102,13 @@ Reti neurali, sistemi fuzzy e algoritmi genetici insieme.
   - **diverse tecniche di soft computing/AI**;
   - **incorporazione** (per esempio **neuro-fuzzy**).
 
-<!-- SOURCE_VISUAL id="IS19-V65" source="L19-web.pdf" page="88" type="figura" description="Le tecniche del soft computing" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021215.png)
 
 #### **10.3. Esempi di sistemi intelligenti ibridi**
 
 **Sistemi semplici «in parallelo»** (non incorporati). **Combinazioni comuni**: neuro-fuzzy; genetico-fuzzy; genetico-neurale; neuro-fuzzy-genetico; sistemi esperti ibridi / neurali; sistemi a intelligenza di sciame.
 
-<!-- SOURCE_VISUAL id="IS19-V66" source="L19-web.pdf" page="89" type="schema" description="Sistemi ibridi in parallelo e combinazioni comuni" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021226.png)
 
 > 💡 **Un esempio concreto (nota didattica).** Un sistema neuro-fuzzy usa una rete neurale per **imparare** dai dati le funzioni di appartenenza e i pesi delle regole di un sistema fuzzy: il risultato ha l’accuratezza appresa dalla rete e la leggibilità delle regole «se… allora…». Un sistema genetico-neurale usa un GA per scegliere l’architettura o gli iperparametri della rete (§10.4). Il System 1 + System 2 della Lezione 18 è anch’esso un ibrido: un classificatore veloce e un LLM o una persona.
 
@@ -1180,8 +1116,7 @@ Reti neurali, sistemi fuzzy e algoritmi genetici insieme.
 
 Anche **solo 4–5 parametri** nel progetto (come in un sistema ibrido) possono rendere il progetto **impossibile da risolvere con la forza bruta**: un algoritmo genetico può essere una buona soluzione.
 
-<!-- SOURCE_VISUAL id="IS19-V67" source="L19-web.pdf" page="90" type="schema" description="Un sistema ibrido con cinque parametri da ottimizzare con un algoritmo genetico" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021239.png)
 
 > 💡 **Perché la forza bruta non basta (nota didattica).** Se ognuno dei 5 parametri può assumere 20 valori, le configurazioni sono $20^5=3{,}2$ milioni. Ognuna richiede di addestrare il sistema e di valutarlo con una cross-validation (Lezione 14): anche a un secondo per configurazione sarebbero più di un mese di calcolo. Un algoritmo genetico ne valuta qualche centinaio o migliaio, concentrandosi sulle zone promettenti.
 
@@ -1219,11 +1154,9 @@ Dettagli di supporto e materiale di laboratorio: A2–A4 k-NN e modelli classici
 
 Le slide sono schermate del notebook: preparazione di Colab, importazione dei dati e selezione delle feature, poi cinque passi di esplorazione.
 
-<!-- SOURCE_VISUAL id="IS19-V68" source="L19-web.pdf" page="98" type="schermata" description="Preparazione di Colab per il clustering dei clienti" reason="Codice presente solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021330.png)
 
-<!-- SOURCE_VISUAL id="IS19-V69" source="L19-web.pdf" page="99" type="schermata" description="Importazione dei dati dei clienti e selezione delle feature" reason="Codice presente solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125021340.png)
 
 <!-- SOURCE_VISUAL id="IS19-V70" source="L19-web.pdf" page="100" type="schermata" description="Esplorazione 1: .head della tabella dei clienti" reason="Codice e output presenti solo come schermata" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->

@@ -17,6 +17,8 @@ La lezione unisce due fili. Il primo riguarda gli **agenti**: un LLM non ricorda
 7. **le prime reti neurali e l’overfitting!!**;
 8. punti principali e verifica della comprensione.
 
+![](imgs/Pasted%20image%2020261124044059.png)
+
 ---
 
 ### **1. La memoria degli agenti: la gestione del contesto**
@@ -42,15 +44,13 @@ Controllare, gestire, comprimere, ricominciare…
 
 > 📌 **Contesto.** Negli LLM e negli agenti il contesto è lo **stato informativo attivo** passato al modello **al momento dell’inferenza**. Comprende: **istruzioni dell’utente**, **cronologia della conversazione**, **documenti recuperati**, **risultati degli strumenti**, **regole di sistema**, **riassunti della memoria**, **definizioni degli strumenti disponibili**.
 
-<!-- SOURCE_VISUAL id="IS17-V01" source="L17-web.pdf" page="5" type="figura" description="Gli elementi che compongono il contesto inviato al modello" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124044136.png)
 
 #### **1.3. La dimensione del contesto aumenta!**
 
 Si ha **più spazio per dire qualcosa di significativo**.
 
-<!-- SOURCE_VISUAL id="IS17-V02" source="L17-web.pdf" page="6" type="grafico" description="Crescita nel tempo della finestra di contesto dei modelli" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124044240.png)
 
 - **A metà 2026**, una finestra di contesto da **1 milione di token** è lo standard dello stato dell’arte per i modelli cloud di fascia alta, e permette di elaborare **dataset immensi** — intere codebase o centinaia di documenti — **in un solo prompt**!
 - Una finestra da 1M di token equivale a circa **750 000 parole**, oltre **2000 pagine** di testo.
@@ -77,16 +77,13 @@ Verificato il 26 ottobre 2026 (documentazione Anthropic, OpenAI, Google AI; guid
 - Una chiamata a un LLM è **senza stato** (*stateless*). Dopo che il modello ha generato una risposta, il suo **contesto attivo interno viene scartato**.
 - Ciò che **persiste** non sta dentro l’LLM, ma nell’**applicazione circostante**, come ChatGPT, Claude Code, Codex, Cursor o un framework di agenti personalizzato: un’applicazione attorno all’LLM che **conserva la chat e i file modificati**.
 
-<!-- SOURCE_VISUAL id="IS17-V03" source="L17-web.pdf" page="9" type="figura" description="L'applicazione attorno all'LLM che conserva chat e file mentre il modello è senza stato" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124044513.png)
 
-<!-- SOURCE_VISUAL id="IS17-V04" source="L17-web.pdf" page="10" type="schema" description="Il contesto ricostruito e reinviato al modello a ogni turno di chat" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124044531.png)
 
 #### **1.5. Il contesto cresce nelle chat e con gli agenti**
 
-<!-- SOURCE_VISUAL id="IS17-V05" source="L17-web.pdf" page="11" type="schema" description="Il contesto che cresce turno dopo turno in una chat e in una sessione agentica" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124044654.png)
 
 **Un esempio di contesto che cresce.** Si assume: prompt di sistema = **200 token**, ogni messaggio dell’utente ≈ **50 token**, ogni risposta dell’assistente ≈ **300 token**.
 
@@ -103,14 +100,15 @@ Per esempio con $N=300$: $350\cdot 300-100=104\,900$ token.
 
 **Nota.** Una soluzione parziale: usare la **skill «caveman»**, che **minimizza le parole del prompt**, così ogni turno aggiunge meno token al contesto.
 
+![](imgs/Pasted%20image%2020261124044727.png)
+
 #### **1.6. Context rot: mai usare tutto il contesto fin dall’inizio**
 
 - La finestra di contesto **non va trattata solo come un limite rigido di memoria**.
 - Man mano che la conversazione cresce, la **qualità dell’uscita può peggiorare prima che il contesto sia tecnicamente pieno**: l’informazione rilevante diventa **più difficile da mettere in priorità**, le istruzioni possono **competere con il contenuto più vecchio**, e il modello può iniziare a **ignorare o usare male le evidenze**.
 - I sistemi pratici hanno quindi bisogno di **strategie di gestione del contesto** — recupero, riassunto, rotazione e **auto-compattazione** — **prima che la qualità crolli**.
 
-<!-- SOURCE_VISUAL id="IS17-V06" source="L17-web.pdf" page="13" type="grafico" description="Qualità dell'uscita che peggiora al crescere del contesto prima del limite tecnico" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124044758.png)
 
 #### **1.7. Tecniche di gestione del contesto**
 
@@ -126,9 +124,13 @@ Per esempio con $N=300$: $350\cdot 300-100=104\,900$ token.
 - **Output**: il contesto tiene un **puntatore da 30 token**; **150 token** vengono letti quando servono.
 - Contesto prima: sistema + compito + **piano 2000** + chat; dopo: sistema + compito + **30** + chat. **Su 10 turni: da 20 000 a 450 token.**
 
+![](imgs/Pasted%20image%2020261124044910.png)
+
 > 💡 **Il conto (nota didattica).** Senza offloading: $2000\cdot 10=20\,000$ token del piano reinviati. Con offloading: $30\cdot 10=300$ token di puntatore più una lettura di 150 token, totale 450, una riduzione di circa 44 volte.
 
 **Offloading con i documenti: dentro il prompt o fuori?**
+
+![](imgs/Pasted%20image%2020261124044921.png)
 
 | **A. Documenti dentro il prompt** | **B. Documenti fuori, riassunti nel prompt** |
 |---|---|
@@ -141,6 +143,8 @@ Per esempio con $N=300$: $350\cdot 300-100=104\,900$ token.
 
 **Esempio**: un **manuale di 200 pagine** (circa **100 000 token**) viene **indicizzato una volta** (offline) in chunk da circa 500 token; per una domanda dell’utente l’applicazione (*harness*, l’agente) recupera i **top-3 chunk**; il prompt contiene **domanda + 3 chunk = 1500 token**, e l’LLM dà una risposta **ancorata al manuale**. **Contesto: da 100 000 a 1500 token** (Lezione 15, §4).
 
+![](imgs/Pasted%20image%2020261124044931.png)
+
 ##### **1.7.3. Gestione 3: selezione dinamica degli strumenti**
 
 **Esporre solo gli strumenti rilevanti per il compito corrente.**
@@ -150,6 +154,8 @@ Per esempio con $N=300$: $350\cdot 300-100=104\,900$ token.
 - **Input**: il compito + **40 definizioni di strumenti** (200 token ciascuna).
 - Un **selettore di strumenti** sceglie per compito: `read_file` ✓, `search_code` ✓, `edit_file` ✓, `run_tests` ✓; `send_email`, `calendar`, `web_search`, `query_database`, `create_image`, `book_travel` ✗.
 - **Output**: 4 strumenti nel contesto. **Contesto: da 8000 a 800 token.**
+
+![](imgs/Pasted%20image%2020261124143700.png)
 
 > 💡 **Non solo token (nota didattica).** Un agente che vede 40 strumenti deve anche scegliere tra 40 possibilità a ogni passo, e può sbagliare strumento; uno che non vede `send_email` non può inviare e-mail per errore o per una prompt injection. La selezione degli strumenti riduce il costo **e** applica il principio del privilegio minimo (Lezione 15, §3.12).
 
@@ -162,6 +168,8 @@ Per esempio con $N=300$: $350\cdot 300-100=104\,900$ token.
 - **Input**: una cronologia di **3000 token** con un tentativo fallito e output duplicati degli strumenti.
 - **Output**: una cronologia pulita di **1200 token** + una **lezione di una riga**.
 
+![](imgs/Pasted%20image%2020261124143710.png)
+
 ##### **1.7.5. Gestione 5: riassunto**
 
 **Comprimere la conversazione e i risultati degli strumenti più vecchi in un riassunto.**
@@ -169,6 +177,8 @@ Per esempio con $N=300$: $350\cdot 300-100=104\,900$ token.
 **Esempio**: **60 turni da 30 000 token** diventano un **riassunto di 1500 token**; **decisioni, vincoli, numeri ed evidenze sono conservati alla lettera**. Il riassuntore è una chiamata all’LLM; gli ultimi turni restano **intatti**.
 
 > ⚠️ **Rischio**: un riassunto che **perde decisioni, vincoli, numeri o evidenze**. È il motivo per cui le istruzioni di compattazione vanno date in modo mirato (§1.8).
+
+![](imgs/Pasted%20image%2020261124143733.png)
 
 ##### **1.7.6. Gestione 6: quarantena**
 
@@ -179,6 +189,8 @@ Per esempio con $N=300$: $350\cdot 300-100=104\,900$ token.
 - **Input**: il compito «**confronta questi 5 articoli**».
 - Contesto prima: i 5 articoli letti nel contesto principale, **100 000 token**; dopo: sistema + compito + 5 risultati, **500 token**. La lettura rumorosa resta nei **cinque contesti dei sotto-agenti** (20 000 token ciascuno, poi scartati).
 
+![](imgs/Pasted%20image%2020261124143754.png)
+
 #### **1.8. Gestire il contesto durante un flusso agentico**
 
 - **Monitorare la crescita**: chat lunghe, file grandi, output ripetuti e risultati degli strumenti **consumano la finestra**.
@@ -186,8 +198,7 @@ Per esempio con $N=300$: $350\cdot 300-100=104\,900$ token.
 - **RAG o memoria di progetto** per la conoscenza stabile, invece di incollarla di nuovo.
 - **Compattare o ricominciare** quando le ipotesi sono superate o i rami sono abbandonati.
 
-<!-- SOURCE_VISUAL id="IS17-V07" source="L17-web.pdf" page="22" type="figura" description="Gestione del contesto durante un flusso agentico: monitorare, ridurre, RAG, compattare o ricominciare" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124143806.png)
 
 > ⚠️ **Segnale di rischio**: l’agente **dimentica i vincoli**, **mescola decisioni vecchie** o **legge le evidenze sbagliate**.
 
@@ -218,8 +229,7 @@ y_pred = clf_shallow.predict(X)
 
 **L’albero poco profondo non è un learner perfetto…** Le foglie contornate in arancione **mescolano ancora i cultivar**: per esempio una foglia con **6 campioni, 5 Grignolino e 1 Barbera**.
 
-<!-- SOURCE_VISUAL id="IS17-V08" source="L17-web.pdf" page="25" type="schema" description="Albero Wine di profondità 3 con le foglie impure contornate in arancione" reason="Nodi e foglie visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124144055.png)
 
 #### **2.2. Controllare l’accuratezza**
 
@@ -235,11 +245,9 @@ disp.plot(cmap='Blues')
 
 **Righe**: cultivar vero. **Colonne**: cultivar previsto. La **diagonale** conta i vini corretti: $57+70+47=174$ su 178.
 
-<!-- SOURCE_VISUAL id="IS17-V09" source="L17-web.pdf" page="26" type="grafico" description="Matrice di confusione dell'albero di profondità 3 sul training Wine" reason="Valori della matrice visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124144124.png)
 
-<!-- SOURCE_VISUAL id="IS17-V10" source="L17-web.pdf" page="27" type="grafico" description="Matrice di confusione dell'albero di profondità 3 (dettaglio)" reason="Valori della matrice visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124144142.png)
 
 #### **2.3. Calcolare l’accuratezza**
 
@@ -263,13 +271,11 @@ clf_deep = DecisionTreeClassifier(max_depth=5, random_state=0)
 clf_deep.fit(X, y)          # più livelli: più foglie
 ```
 
-<!-- SOURCE_VISUAL id="IS17-V11" source="L17-web.pdf" page="29" type="schema" description="Albero Wine di profondità 5" reason="Nodi e foglie visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124144230.png)
 
 **Abbiamo creato un learner perfetto**: **ogni cella fuori diagonale è zero**, nessun errore di training.
 
-<!-- SOURCE_VISUAL id="IS17-V12" source="L17-web.pdf" page="30" type="grafico" description="Matrice di confusione dell'albero di profondità 5: tutti i vini corretti sul training" reason="Valori della matrice visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124170230.png)
 
 ```python
 accuracy = (y == clf_deep.predict(X)).mean()
@@ -307,10 +313,11 @@ cv_scores = cross_val_score(clf_deep, X, y,
 cv_mean = cv_scores.mean()
 ```
 
+![](imgs/Pasted%20image%2020261124171648.png)
+
 **Input**: $X$ ($178\times 13$), $y$ (178 etichette). **Output**: **10 accuratezze**, una per fold di test (circa 18 vini ciascuno), e la loro **media**.
 
-<!-- SOURCE_VISUAL id="IS17-V13" source="L17-web.pdf" page="34" type="grafico" description="Accuratezza per fold della 10-fold CV dell'albero di profondità 5: non è così perfetto" reason="Barre per fold visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124171659.png)
 
 ```text
 Training accuracy       : 1.0
@@ -319,6 +326,8 @@ Mean CV accuracy        : 0.871
 ```
 
 > 📌 **Il divario di generalizzazione.** **Perfetto sul training set, tra 0,722 e 1,0 sui fold mai visti**: è il ***generalization gap***.
+
+![](imgs/Pasted%20image%2020261124171720.png)
 
 > 💡 **I conti e una sottigliezza (nota didattica).** La somma dei 10 punteggi è 8,705, quindi la media è 0,871: il 12,9% di errore contro lo 0% sul training. `cross_val_score` riaddestra un albero nuovo in ogni fold, con la stessa configurazione (Lezione 14, §6.2): misura la **procedura** «albero di profondità 5», non il singolo albero addestrato su tutti i dati. Con 178 vini e 10 fold, alcuni fold hanno 18 vini e altri 17, da cui valori come 0,941 ($16/17$) e 0,765 ($13/17$). Per le classi sbilanciate (59/71/48) scikit-learn usa di default fold stratificati per i classificatori.
 
@@ -333,8 +342,7 @@ Mean CV accuracy        : 0.871
 
 **Input** $x$ (1 feature, **7 punti di training**) → modello di complessità crescente → **output** $\hat{y}$ (la curva). Polinomi di **grado 1, 2 e 6** sugli stessi punti (errore sui dati nuovi misurato su **2000 punti freschi**).
 
-<!-- SOURCE_VISUAL id="IS17-V14" source="L17-web.pdf" page="37" type="grafico" description="Polinomi di grado 1, 2 e 6 sugli stessi 7 punti, con l'errore su 2000 punti nuovi" reason="Curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124171741.png)
 
 > 📌 **La curva complessa tocca ogni punto di training, eppure è peggiore sui dati nuovi**: il compromesso bias-varianza.
 
@@ -348,16 +356,13 @@ Mean CV accuracy        : 0.871
 - L’**accuratezza di validazione raggiunge un picco** e poi **si appiattisce o cala** → la classica **forma a U** (dell’errore).
 - **Dalla profondità 5 in poi** l’albero **memorizza** (bias ≈ 0) ma **non guadagna generalizzazione**.
 
-<!-- SOURCE_VISUAL id="IS17-V15" source="L17-web.pdf" page="38" type="grafico" description="Accuratezza di training e di validazione al variare della profondità da 1 a 10 con 10-fold CV" reason="Curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124171757.png)
 
 **Illustrazione bias-varianza** (dataset Wine, $n=178$), con i dati dietro il grafico.
 
-<!-- SOURCE_VISUAL id="IS17-V16" source="L17-web.pdf" page="39" type="grafico" description="Bias e varianza al variare della profondità sul dataset Wine, con la tabella dei dati" reason="Grafico e tabella visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124171807.png)
 
-<!-- SOURCE_VISUAL id="IS17-V17" source="L17-web.pdf" page="40" type="grafico" description="Il dilemma bias-varianza: errore totale, bias e varianza in funzione della complessità" reason="Curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124171816.png)
 
 #### **3.3. Il dilemma bias-varianza (regressore)**
 
@@ -370,8 +375,7 @@ La slide usa l’esempio di una **rotta di volo** da seguire:
 | l’errore è **grande e sistematico** | l’errore **cambia molto** e **non è stabile** |
 | **costantemente sotto** la rotta; **molto stabile** | **oscilla sopra e sotto** la rotta; **alta sensibilità** |
 
-<!-- SOURCE_VISUAL id="IS17-V18" source="L17-web.pdf" page="41" type="grafico" description="Esempio della rotta di volo: modello con alto bias troppo liscio e modello con alta varianza oscillante" reason="Curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124171826.png)
 
 > 📌 **Obiettivo: bias basso e varianza bassa** per un volo **sicuro e accurato**.
 
@@ -389,8 +393,7 @@ $$\underbrace{\mathbb{E}\big[(y-\hat{y})^2\big]}_{\text{errore quadratico atteso
 
 **Visualizzazione del compromesso.** Sull’asse orizzontale **non c’è il tempo né le epoche: c’è la complessità!**
 
-<!-- SOURCE_VISUAL id="IS17-V19" source="L17-web.pdf" page="43" type="grafico" description="Errore di training e di test in funzione della complessità del modello" reason="Curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261124172947.png)
 
 ---
 
@@ -402,8 +405,7 @@ $$\underbrace{\mathbb{E}\big[(y-\hat{y})^2\big]}_{\text{errore quadratico atteso
 - **PCA** (senza etichette): **input** $X$, **output** gli **assi di varianza massima**.
 - **LDA** (con etichette): **input** $X$ **e** $y$, **output** l’**asse che separa meglio le classi**.
 
-<!-- SOURCE_VISUAL id="IS17-V20" source="L17-web.pdf" page="45" type="grafico" description="La stessa nuvola di punti con la direzione PCA di massima varianza e la direzione LDA che separa le classi" reason="Direzioni visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004107.png)
 
 > 💡 **Perché possono essere diverse (nota didattica).** Due classi allungate e parallele hanno la massima varianza lungo la loro lunghezza: la PCA sceglie quella direzione, lungo la quale le due classi si sovrappongono completamente. La LDA, che conosce le etichette, sceglie la direzione perpendicolare, lungo la quale le classi sono separate. La varianza non è sinonimo di informazione utile per classificare.
 
@@ -413,12 +415,16 @@ $$\underbrace{\mathbb{E}\big[(y-\hat{y})^2\big]}_{\text{errore quadratico atteso
 - **Usando le etichette $y$** nell’analisi si può **migliorare ulteriormente** la feature engineering: la **PCA usa solo $X$** (non supervisionata), la **LDA usa $X$ e $y$** (supervisionata).
 - **La LDA di Fisher (1936)**: la **direzione che separa meglio le classi**. In MATLAB: `fitcdiscr`, `resubPredict`.
 
+![](imgs/Pasted%20image%2020261125004120.png)
+
 #### **4.3. Da 4 misure a una specie: un classificatore lineare**
 
 Oltre a dare una **rotazione migliore degli assi**, la LDA aiuta anche a **costruire un classificatore**.
 
 - **Addestramento**: feature $X$ ($N\times 4$, cm) e etichette $y$ ($N$) → addestramento LDA → **modello**: $w$ (4 numeri) e una soglia $t$.
 - **Uso**: un **fiore nuovo**, solo le feature $x=(x_1,x_2,x_3,x_4)^\top$ → modello LDA $(w,t)$ → **classe** $\in\{0,1,2\}$.
+
+![](imgs/Pasted%20image%2020261125004137.png)
 
 $x_1,\dots,x_4$: lunghezza del sepalo, larghezza del sepalo, lunghezza del petalo, larghezza del petalo. **Supervisionato**: le etichette $y$ si usano **solo nell’addestramento**.
 
@@ -428,8 +434,7 @@ $$z=W^\top x,$$
 
 con $W$ matrice di rotazione $2\times 2$ le cui colonne sono **LDA1** e **LDA2**, e $z_1=w^\top x$. **Input**: $N=240$ punti (120 blu, 120 rossi) con 2 feature $x_1,x_2$ e **classi sovrapposte**. **Output**: gli **stessi 240 punti** nei nuovi assi $z_1,z_2$: le **classi si separano lungo $z_1$**.
 
-<!-- SOURCE_VISUAL id="IS17-V21" source="L17-web.pdf" page="48" type="grafico" description="240 punti di due classi sovrapposte nelle feature originali e separati lungo z1 dopo la rotazione LDA" reason="Nuvole di punti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004150.png)
 
 #### **4.5. LDA passo per passo: matrici, proiezione, soglia**
 
@@ -440,6 +445,8 @@ Con $X$ ($N\times d$) e $y$ ($N$ etichette), due classi:
 3. **direzione di Fisher**: $w=S_W^{-1}(\mu_1-\mu_0)$ (vettore di $d$ numeri);
 4. **proiezione**: $z=w^\top x$ (prodotto scalare: da $d$ numeri a 1);
 5. **soglia**: $z>t\Rightarrow$ classe 1, con $t=w^\top\dfrac{\mu_0+\mu_1}{2}$.
+
+![](imgs/Pasted%20image%2020261125004202.png)
 
 > 💡 **Perché quella direzione (nota didattica).** Fisher cerca la direzione $w$ che massimizza il rapporto tra la distanza delle medie proiettate e la dispersione delle classi proiettate:
 > $$J(w)=\frac{\big(w^\top(\mu_1-\mu_0)\big)^2}{w^\top S_W\,w}.$$
@@ -458,8 +465,7 @@ print(P.shape, np.bincount(T))
 
 **Input**: $P$, 150 fiori × 4 feature (cm); $T$: 150 etichette (0 setosa, 1 versicolor, 2 virginica). **EDA minima**: **lunghezza e larghezza del petalo separano già la setosa**.
 
-<!-- SOURCE_VISUAL id="IS17-V22" source="L17-web.pdf" page="50" type="grafico" description="Lunghezza e larghezza del petalo di Iris: la setosa è già separata" reason="Punti colorati visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004215.png)
 
 `np.bincount(T)` conta le occorrenze di ogni etichetta: 50 per specie, un dataset bilanciato.
 
@@ -485,8 +491,7 @@ T_pred = lda.predict(P_va)        # testa sulla VALIDAZIONE
 
 **Righe**: specie vera. **Colonne**: specie prevista. La matrice di training mostra **3 errori su 105**; quella di validazione **1 errore su 45**.
 
-<!-- SOURCE_VISUAL id="IS17-V23" source="L17-web.pdf" page="52" type="grafico" description="Matrici di confusione della LDA su Iris: training (3 errori su 105) e validazione (1 errore su 45)" reason="Valori delle matrici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004232.png)
 
 > 💡 **La validazione migliore del training (nota didattica).** Accuratezza di training $102/105=97{,}1\%$, di validazione $44/45=97{,}8\%$: la validazione risulta leggermente migliore, il contrario di ciò che ci si aspetta. Con soli 45 fiori un errore in più o in meno sposta l’accuratezza di 2,2 punti: la differenza è dentro l’incertezza (Lezione 14, §4.2), e non indica un problema. La numerazione delle slide passa da (2/4) a (4/4): la parte (3/4) non è presente nel PDF.
 
@@ -507,8 +512,7 @@ Ogni giorno saranno disponibili **nuovi modelli o tecniche di apprendimento**. C
 - qual è la **complessità computazionale**: in **addestramento**, in **test/rilascio**; serve **CUDA** (cioè una GPU NVIDIA)?
 - quali **figure di merito** dell’accuratezza si possono usare? Recall? ROC? Quali **casi di valutazione**?
 
-<!-- SOURCE_VISUAL id="IS17-V24" source="L17-web.pdf" page="54" type="figura" description="Illustrazione del motto: usiamolo, non serve leggere la documentazione" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004319.png)
 
 **(continua)**:
 
@@ -526,8 +530,7 @@ Una **scheda piccola** ha poca memoria e modelli piccoli; un **server GPU** ha m
 - **Provare i nuovi modelli su un insieme di dataset standard** e confrontare **a) l’accuratezza** e **b) i tempi di calcolo**: **non solo il dataset Iris**.
 - **Ricordare il rasoio di Occam!** Stesse prestazioni ma più complessità: **ne vale la pena?**
 
-<!-- SOURCE_VISUAL id="IS17-V25" source="L17-web.pdf" page="57" type="figura" description="Applicazione di un nuovo classificatore su dataset standard" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004351.png)
 
 > ✅ **Checklist per un modello nuovo (nota didattica).** 1) Che cosa fa e su quali dati? 2) Quali librerie, quale licenza, quale hardware? 3) Costo in addestramento e in inferenza (tempo, memoria)? 4) Quanti dati servono? 5) Quali iperparametri contano? 6) Fine-tuning o riaddestramento? 7) Quali metriche e quali casi di test? 8) Funziona sui dataset standard e batte una baseline semplice? Se la risposta all’ultima domanda è no, il rasoio di Occam ha già deciso.
 
@@ -548,8 +551,7 @@ $$z=[w_1]\,[x_1]+b,$$
 
 cioè $z=w^\top x+b$ con una sola feature: $w_1\leftrightarrow m$, $b\leftrightarrow q$, $z\leftrightarrow y$.
 
-<!-- SOURCE_VISUAL id="IS17-V26" source="L17-web.pdf" page="59" type="grafico" description="Retta di regressione y = mx + q tra i punti" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004402.png)
 
 **Esempi di regressione lineare** (il modello è $z=w^\top x+b$):
 
@@ -559,8 +561,7 @@ cioè $z=w^\top x+b$ con una sola feature: $w_1\leftrightarrow m$, $b\leftrighta
 
 **Il caso del grafico**: 1 input, 1 output, **51 punti** $(x_i,t_i)$, con $t_i\approx 2x_i-5$ più rumore. Retta interpolata: $w\approx 2$, $b\approx -5$. **Nuovo input** $x_1=2$: $z=2\cdot 2-5=-1$.
 
-<!-- SOURCE_VISUAL id="IS17-V27" source="L17-web.pdf" page="60" type="grafico" description="51 punti rumorosi attorno a t = 2x - 5 con la retta interpolata" reason="Punti e retta visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004644.png)
 
 #### **6.2. La notazione con 3 e con $N$ feature di ingresso**
 
@@ -570,11 +571,15 @@ $$z=w_1x_1+w_2x_2+w_3x_3+b=[w_1\ w_2\ w_3]\begin{bmatrix}x_1\\x_2\\x_3\end{bmatr
 
 $x_1,x_2,x_3$: le 3 feature (input); $w_1,w_2,w_3$: **un peso per feature**; $b$: **bias**; $z$: l’uscita. **Esempio**: $w=(2,-1,0{,}5)$, $b=1$, $x=(1,3,4)$: $z=2-3+2+1=2$. Per **descrivere completamente** il modello servono **4 parametri**: $w_1,w_2,w_3,b$ → **servono 4 punti** (ma se ne useranno molti di più!).
 
+![](imgs/Pasted%20image%2020261125004707.png)
+
 **$N$ input, 1 output**:
 
 $$z=w_1x_1+\dots+w_Nx_N+b=\sum_{i=1}^{N}w_ix_i+b=w^\top x+b.$$
 
 $N$: numero di feature; $x_i$: la feature $i$; $w_i$: il suo peso; $b$: bias; $z$: l’uscita. **Esempio**, $N=2$: $w=(1,1)$, $b=-7$, $x=(5,5)$: $z=5+5-7=3$. Per fissare il modello servono **$N+1$ parametri** → **almeno $N+1$ punti** (ma se ne useranno molti di più!).
+
+![](imgs/Pasted%20image%2020261125004731.png)
 
 > 💡 **Perché $N+1$ punti e perché «molti di più» (nota didattica).** Con $N+1$ incognite servono almeno $N+1$ equazioni indipendenti: con esattamente $N+1$ punti l’iperpiano passa per tutti, rumore compreso (lo stesso problema del polinomio di grado 6 del §3.1). Con molti più punti i minimi quadrati fanno una **media** del rumore, e la stima dei parametri diventa stabile: è il bilancio tra gradi di libertà e dati della Lezione 7.
 
@@ -585,8 +590,7 @@ $N$: numero di feature; $x_i$: la feature $i$; $w_i$: il suo peso; $b$: bias; $z
 - **Regressore** (di nuovo 1 input): $z=wx+b$ con $w=2$, $b=-5$ (la retta interpolata sugli stessi dati). Input $x=2$: $z=2\cdot 2-5=-1$, **l’uscita è il numero $-1$**.
 - **Classificatore** (2 input): $z=w_1x_1+w_2x_2+b$ con $w=(1,1)$, $b=-7$. Input $x=(1,1)$: $z=1+1-7=-5$ (prima del sgn), quindi la classe è $\text{sgn}(-5)=-1$. Input $(5,5)$: $z=3$, **classe $+1$**.
 
-<!-- SOURCE_VISUAL id="IS17-V28" source="L17-web.pdf" page="63" type="grafico" description="Regressore lineare come retta e classificatore lineare come retta di separazione x1 + x2 = 7 tra due classi" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125004756.png)
 
 > 📌 **Stessa forma, uso diverso.** Regressore e classificatore lineari calcolano la stessa $z=w^\top x+b$: il regressore la restituisce come numero, il classificatore ne guarda solo il segno. La frontiera del classificatore è l’iperpiano $w^\top x+b=0$ (qui la retta $x_1+x_2=7$); è lo stesso schema del perceptron della Lezione 20.
 
@@ -676,8 +680,7 @@ $$R^2=1-\frac{\sum_i(t_i-z_i)^2}{\sum_i(t_i-\bar{t})^2}:$$
 
 la **frazione della varianza totale spiegata dal modello** (quartetto di **Anscombe**, *The American Statistician* 27(1), 1973).
 
-<!-- SOURCE_VISUAL id="IS17-V29" source="L17-web.pdf" page="68" type="grafico" description="I quattro grafici del quartetto di Anscombe con la stessa retta" reason="Forme dei quattro dataset visibili solo nei grafici" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125005038.png)
 
 > 📌 **Stesse statistiche, stessa retta, stesso $R^2=0{,}67$, quattro dataset molto diversi: disegnare sempre i dati!** È lo stesso messaggio della Lezione 10 (§5.3): un riassunto uguale non significa dati uguali.
 
@@ -702,10 +705,11 @@ In MATLAB `train(net1,x,t)`, in Python `LinearRegression().fit`. Si procede: add
 
 Si creano **51 punti** per l’equazione $t=2x-5$ più **rumore gaussiano**.
 
-<!-- SOURCE_VISUAL id="IS17-V30" source="L17-web.pdf" page="73" type="schermata" description="Codice MATLAB che crea 51 punti t = 2x - 5 con rumore gaussiano e il loro grafico" reason="Codice e grafico visibili solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125005107.png)
 
 > 💡 **Il codice di generazione (nota didattica, dallo script `Lesson_16_laboratory_MATLAB_linear_and_neural.m`).** La forma è del tipo `x = -3:0.12:3; t = 2*x - 5 + randn(size(x));`: 51 valori equispaziati tra $-3$ e $3$ (passo 0,12), e target sulla retta più rumore gaussiano di varianza unitaria.
+
+![](imgs/Pasted%20image%2020261125005128.png)
 
 **Creare e addestrare il regressore** (`net1 = newlind(x,t)`, **metodo #1**, diretto):
 
@@ -724,6 +728,8 @@ else % not optimized: the general learning of non-linear networks
 end
 ```
 
+![](imgs/Pasted%20image%2020261125005204.png)
+
 | Ramo | Che cosa fa |
 |---|---|
 | `if (1)` → `newlind(x,t)` | progetta lo strato lineare **risolvendo direttamente** i minimi quadrati (inversione della matrice dei dati): è la **forma chiusa** del §6.8 |
@@ -733,18 +739,15 @@ end
 
 **Il regressore creato**: uscita $=w\cdot\text{input}+b$.
 
-<!-- SOURCE_VISUAL id="IS17-V31" source="L17-web.pdf" page="75" type="schermata" description="Rappresentazione della rete lineare creata da newlind" reason="Schema della rete visibile solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125005218.png)
 
 **Accedere ai parametri.** In MATLAB il peso è `net1.IW{1,1}` (*Input Weights*) e il bias `net1.b{1}`.
 
-<!-- SOURCE_VISUAL id="IS17-V32" source="L17-web.pdf" page="76" type="schermata" description="Lettura del peso e del bias della rete lineare in MATLAB" reason="Valori visibili solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125005232.png)
 
 **Elaborare gli input e disegnare i risultati**: `y1 = net1(x)` applica la rete agli input; si disegnano i punti e la retta.
 
-<!-- SOURCE_VISUAL id="IS17-V33" source="L17-web.pdf" page="77" type="grafico" description="Punti di training e retta prodotta dalla rete lineare" reason="Grafico visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125005250.png)
 
 #### **7.3. Valutare l’accuratezza**
 
@@ -752,8 +755,7 @@ $$\text{MSE}=\frac1n\sum_{i=1}^{n}(\hat{y}_i-y_i)^2,\qquad R^2=1-\frac{\sum_i(y_
 
 > ⚠️ **ATTENZIONE.** Queste misure riguardano il **dataset di TRAINING**. Vanno **rifatte su un dataset di TEST**.
 
-<!-- SOURCE_VISUAL id="IS17-V34" source="L17-web.pdf" page="78" type="schermata" description="Calcolo di MSE e R^2 della rete lineare sul training in MATLAB" reason="Codice e valori visibili solo nella schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125005305.png)
 
 #### **7.4. Proviamo una rete neurale feed-forward!**
 
@@ -763,8 +765,7 @@ $$\text{MSE}=\frac1n\sum_{i=1}^{n}(\hat{y}_i-y_i)^2,\qquad R^2=1-\frac{\sum_i(y_
 | `net2 = train(net2,x,t);` | addestramento |
 | `y2 = net2(x)` | esecuzione |
 
-<!-- SOURCE_VISUAL id="IS17-V35" source="L17-web.pdf" page="79" type="schermata" description="Rete feed-forward con 3 neuroni in MATLAB" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125010206.png)
 
 ```matlab
 %% Occam's razor: start from a small network
@@ -780,8 +781,7 @@ y2 = net2(x);
 perf = perform(net2,y2,t) % error on **training**
 ```
 
-<!-- SOURCE_VISUAL id="IS17-V36" source="L17-web.pdf" page="80" type="schermata" description="Addestramento della rete da 3 neuroni: finestra di training, grafico delle prestazioni e struttura della rete" reason="Schermate visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125010236.png)
 
 > 💡 **Che cosa fanno le righe `divideParam` (nota didattica).** Per default `feedforwardnet` divide i dati in 70% training, 15% validation (per l’early stopping) e 15% test (Lezione 20). Qui le tre righe mettono il 100% nel training: la rete non ha alcun controllo dell’overfitting, ed è voluto per mostrarlo. **Parametri**: con 1 input, 3 neuroni nascosti e 1 output, la rete ha $3\cdot 1+3=6$ parametri nello strato nascosto e $3\cdot 1+1=4$ in quello di uscita, **10 in totale** contro 51 punti.
 
@@ -800,8 +800,7 @@ view(net3)
 y3 = net3(x);
 ```
 
-<!-- SOURCE_VISUAL id="IS17-V37" source="L17-web.pdf" page="81" type="schermata" description="Rete feed-forward da 100 neuroni sovradimensionata in MATLAB" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125010253.png)
 
 > 💡 **Il conto dei parametri (nota didattica).** Con 100 neuroni: $100\cdot 1+100=200$ parametri nello strato nascosto e $100+1=101$ in uscita, **301 parametri** per 51 punti: circa sei volte più gradi di libertà che dati.
 
@@ -826,8 +825,10 @@ legend('train data','nn100 on validation data')
 
 La stringa del titolo del grafico è conservata come nello script originale (compare nel grafico successivo, con il refuso «*liner*» per «*linear*»).
 
-> ⚠️ **I punti di test escono dall’intervallo di training (nota didattica).** I dati di training hanno $x\in[-3,3]$, mentre `x_bis` va da 0 a 10: da 0 a 3 la rete interpola, da 3 a 10 **estrapola** in una regione mai vista. Il comportamento caotico della rete grande si vede soprattutto lì, ma anche tra i punti di training la curva oscilla. È un test della generalizzazione e insieme dell’estrapolazione, due cose diverse.
+![](imgs/Pasted%20image%2020261125010405.png)
 
+> ⚠️ **I punti di test escono dall’intervallo di training (nota didattica).** I dati di training hanno $x\in[-3,3]$, mentre `x_bis` va da 0 a 10: da 0 a 3 la rete interpola, da 3 a 10 **estrapola** in una regione mai vista. Il comportamento caotico della rete grande si vede soprattutto lì, ma anche tra i punti di training la curva oscilla. È un test della generalizzazione e insieme dell’estrapolazione, due cose diverse.
+ì
 #### **7.6. …e abbiamo fatto overfitting (molto!)**
 
 | MSE (unità di $y$ al quadrato) | training (51 punti) | test (2000 punti nuovi) |
@@ -836,8 +837,6 @@ La stringa del titolo del grafico è conservata come nello script originale (com
 | FFNN, 3 neuroni | 0,76 | 1,16 |
 | FFNN, 100 neuroni | **0,20** | **1,66** |
 
-<!-- SOURCE_VISUAL id="IS17-V38" source="L17-web.pdf" page="83" type="grafico" description="Uscita della rete da 100 neuroni sui punti di training e sui punti nuovi: overfitting" reason="Curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 Replica in Python (scikit-learn, seme 1, $t=2x-5+$ rumore gaussiano unitario, $x\in[-3,3]$), non l’esecuzione MATLAB della lezione: **conta solo la tendenza**.
 
@@ -845,8 +844,7 @@ Replica in Python (scikit-learn, seme 1, $t=2x-5+$ rumore gaussiano unitario, $x
 
 **Da ricordare la prossima volta che si inizializza un modello con #DoF ≫ #campioni…**
 
-<!-- SOURCE_VISUAL id="IS17-V39" source="L17-web.pdf" page="84" type="figura" description="Avvertimento sui modelli con molti più gradi di libertà che campioni" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125010453.png)
 
 #### **7.7. Python in Colab: il file e i dati**
 
@@ -862,8 +860,7 @@ plt.scatter(x, t);
 
 **Output**: i dati, $x$ (50 valori in $[0,10]$) e $t$ (50 target). **Modello da trovare**: $z=wx+b$. Dati sparsi attorno a una retta con **pendenza $w=2$** e **intercetta $b=-5$**, più **rumore gaussiano** (varianza unitaria). **Stessa legge** dell’esercizio MATLAB ($t=2x-5+$ rumore): le due toolbox sono simmetriche.
 
-<!-- SOURCE_VISUAL id="IS17-V40" source="L17-web.pdf" page="85" type="grafico" description="Scatter dei 50 punti generati in Colab" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125010511.png)
 
 #### **7.8. Python: creare, disegnare e valutare il regressore**
 
@@ -891,6 +888,8 @@ R2 = r2_score(z, t)
 2. **Prevedere**: $z$ per ciascuno dei 50 input.
 3. **Disegnare**: i punti e la retta interpolata.
 4. **Accuratezza** (training): **MSE = 0,818** (unità di $t$ al quadrato), **RMSE = 0,905** (unità di $t$), **$R^2$ = 0,979**.
+
+![](imgs/Pasted%20image%2020261125010543.png)
 
 **Risultato** (esecuzione reale del codice): $w=2{,}03$, $b=-5{,}00$.
 
