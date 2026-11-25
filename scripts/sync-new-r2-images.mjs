@@ -36,7 +36,8 @@ for (const absolute of files) {
   currentEntries[source] = { size: stat.size, mtimeMs: stat.mtimeMs };
   const oldStat = savedState.entries?.[source];
   if (oldStat && oldStat.size === stat.size && oldStat.mtimeMs === stat.mtimeMs) continue;
-  if (!oldStat && full.assets[source]?.sourceSha256) continue;
+  if (!oldStat && full.assets[source]?.sourceSha256
+    && (path.extname(source).toLowerCase() !== '.png' || full.assets[source].key !== source)) continue;
   const bytes = await fs.readFile(absolute);
   const sourceSha256 = digest(bytes);
   const existing = full.assets[source];
