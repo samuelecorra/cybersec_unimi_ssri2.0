@@ -333,36 +333,6 @@ Il **Regolamento (UE) 2026/1744** è in vigore **dal 27 luglio 2026** e **modifi
 
 > 📌 **Regola di architettura.** Mantenere una **checklist di conformità datata**, non un’ipotesi legale codificata nel sistema. Le date si riferiscono a disposizioni specifiche; regole transitorie e settoriali possono differire (fonte: Reg. UE 2026/1744; AI Act, art. 113 consolidato; cronologia dell’AI Act Service Desk). Panoramica didattica, non consulenza legale.
 
-> 📌 **La posizione del data center non coincide con la giurisdizione sul fornitore.** È una panoramica didattica, non una consulenza legale: il caso concreto va verificato con l’ufficio legale e il DPO (*Data Protection Officer*, responsabile della protezione dei dati).
-
-> 💡 **Un esempio noto (nota didattica).** Il CLOUD Act statunitense (2018) permette alle autorità USA di chiedere a un fornitore americano i dati che controlla, anche se conservati all’estero. Un data center a Francoforte gestito da una società controllata da una capogruppo statunitense resta quindi esposto a questo tipo di richieste: è il conflitto di leggi che l’art. 48 del GDPR affronta.
-
-#### **2.5. Prima la sovranità dei dati**
-
-- Gli agenti di AI possono **spostare dati** attraverso prompt, file, recupero, strumenti, log e memoria.
-- Per le organizzazioni UE, **GDPR e AI Act** fanno di posizione, accesso e supervisione dei dati dei **vincoli di progetto**.
-
-**Domanda tecnica**: dove vengono **memorizzati, elaborati, trasferiti, registrati e conservati** i dati personali? **Esempio**: un agente di manutenzione può esporre **note dei lavoratori**, **log delle macchine**, **dati dei fornitori** o **rapporti di incidente**.
-
-> ⚠️ **L’adeguatezza degli USA è condizionata, non generale.** Copre le **organizzazioni certificate** nell’ambito dell’**EU-U.S. Data Privacy Framework**, non qualunque destinatario negli USA. Il quadro è stato confermato dal **Tribunale dell’UE il 3 settembre 2025**; è **pendente un ricorso** davanti alla Corte di giustizia (fonte: Commissione europea, verifica del 20 ottobre 2026).
-
-La sovranità viene introdotta **presto** perché **vincola l’architettura prima** di scegliere RAG, strumenti o un ciclo agentico.
-
-#### **2.6. AI Act: aggiornamento normativo 2026**
-
-Il **Regolamento (UE) 2026/1744** è in vigore **dal 27 luglio 2026** e **modifica il calendario di applicazione** dell’AI Act.
-
-| Data                | Disposizioni applicabili                                                                                                                  |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **2 febbraio 2025** | prime pratiche vietate e disposizioni generali (compresa l’**alfabetizzazione sull’AI**)                                                  |
-| **2 agosto 2025**   | obblighi per i **modelli di AI per finalità generali** e alcune disposizioni di governance                                                |
-| **2 agosto 2026**   | data di applicazione generale; **obblighi di trasparenza** e altre regole applicabili                                                     |
-| **2 dicembre 2026** | nuovi divieti sulla generazione di immagini intime non consensuali e di materiale pedopornografico; transizione specifica dell’art. 50(2) |
-| **2 dicembre 2027** | requisiti del capo III per i sistemi **ad alto rischio dell’Allegato III** (art. 6(2))                                                    |
-| **2 agosto 2028**   | requisiti del capo III per i sistemi ad alto rischio che sono **prodotti regolamentati dell’Allegato I** (art. 6(1))                      |
-
-> 📌 **Regola di architettura.** Mantenere una **checklist di conformità datata**, non un’ipotesi legale codificata nel sistema. Le date si riferiscono a disposizioni specifiche; regole transitorie e settoriali possono differire (fonte: Reg. UE 2026/1744; AI Act, art. 113 consolidato; cronologia dell’AI Act Service Desk). Panoramica didattica, non consulenza legale.
-
 **Aggiornamento normativo (20 novembre 2026).** Il Regolamento (UE) 2026/1744, in vigore dal 27 luglio 2026, ha modificato il calendario di applicazione dell’AI Act. Le scadenze dipendono dalle disposizioni e dalle categorie di sistema: tra le tappe indicate figurano il 2 dicembre 2026 per specifici divieti e transizioni, il 2 dicembre 2027 per requisiti di sistemi ad alto rischio dell’Allegato III e il 2 agosto 2028 per quelli relativi a prodotti regolamentati dell’Allegato I. Le regole transitorie e settoriali possono differire; occorre mantenere una verifica normativa datata. [Testo ufficiale del Regolamento 2026/1744](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744).
 
 #### **2.7. Quali dati richiedono una cura particolare?**

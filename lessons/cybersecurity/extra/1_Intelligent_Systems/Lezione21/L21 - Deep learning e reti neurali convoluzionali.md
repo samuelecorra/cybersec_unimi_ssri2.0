@@ -266,7 +266,13 @@ ax.plot_trisurf(x_new[:, 0], x_new[:, 1],
 
 ```python
 # X: (2000, 5) misure, y: (2000,) 0/1
-X = (X - X_tr.mean(0)) / X_tr.std(0)            # z-score
+# X_tr, X_val, X_te sono già separati (1280 / 320 / 400 pompe)
+mu_tr = X_tr.mean(0)
+sigma_tr = X_tr.std(0)
+sigma_tr[sigma_tr == 0] = 1                     # evita divisione per zero
+X_tr = (X_tr - mu_tr) / sigma_tr
+X_val = (X_val - mu_tr) / sigma_tr
+X_te = (X_te - mu_tr) / sigma_tr
 model = keras.Sequential([
     keras.Input(shape=(5,)),                    # x1..x5
     layers.Dense(4, activation="relu"),         # nascosto 1
@@ -275,7 +281,9 @@ model = keras.Sequential([
 model.compile("adam", "binary_crossentropy",
               metrics=["accuracy"])
 hist = model.fit(X_tr, y_tr, epochs=60,
-                 validation_split=0.2)
+                 validation_data=(X_val, y_val))
+# Anche una pompa nuova usa le statistiche di training:
+# x_nuova = (x_nuova - mu_tr) / sigma_tr
 ```
 
 - **Compito**: classificazione binaria (etichette 1 = la pompa **si è guastata entro 7 giorni**, 0 = no).
@@ -287,7 +295,7 @@ hist = model.fit(X_tr, y_tr, epochs=60,
 
 Richiamo dalla Lezione 20: **una rete feed-forward è una funzione** (l’esempio della pompa).
 
-> ⚠️ **Lo z-score con le statistiche del training (nota didattica).** La riga `X = (X - X_tr.mean(0)) / X_tr.std(0)` usa media e deviazione standard **del solo training set**, anche per validazione e test: è la regola anti-leakage della Lezione 10. Le cinque misure hanno scale molto diverse (1450 rpm contro 4,1 mm/s, Lezione 20, §3.2): senza z-score la velocità dominerebbe la prima somma pesata. La ReLU (§3.11) sostituisce la sigmoide negli strati nascosti.
+> ⚠️ **Lo z-score con le statistiche del training (nota didattica).** Media e deviazione standard si stimano **solo su `X_tr`** e si riusano senza ricalcolarle per validazione, test e nuove pompe: è la regola anti-leakage della Lezione 10. Le cinque misure hanno scale molto diverse (1450 rpm contro 4,1 mm/s, Lezione 20, §3.2): senza z-score la velocità dominerebbe la prima somma pesata. La ReLU (§3.11) sostituisce la sigmoide negli strati nascosti.
 
 #### **1.14. Addestrare e controllare: la curva di validazione**
 
