@@ -17,7 +17,8 @@
     "assets:r2:detach": "node scripts/detach-r2-assets.mjs",
     "assets:r2:hydrate": "node scripts/hydrate-r2-images.mjs",
     "assets:r2:clean-placeholders": "node scripts/clean-filled-visual-placeholders.mjs",
-    "assets:r2:install-hook": "node scripts/install-r2-hook.mjs"
+    "assets:r2:install-hook": "node scripts/install-r2-hook.mjs",
+    "assets:r2:optimize-existing": "node scripts/optimize-existing-r2-images.mjs"
   },
   "dependencies": {
     "esbuild": "^0.28.2",

@@ -113,7 +113,8 @@ npm run assets:r2:upload
 npm run assets:r2:detach
 npm run assets:r2:hydrate
 npm run assets:r2:install-hook
+npm run assets:r2:optimize-existing
 ```
 
-The staging directory `.cache/r2-upload/` is ignored by Git. The detach step removes migrated tracked assets from the Git index while preserving local files; `.gitignore` prevents them from being re-added. The uploader skips objects whose stored SHA-256 metadata and size already match. Production builds use the bucket's public custom domain, `https://assets.samuelecorra.dev`, through `VITE_R2_PUBLIC_BASE_URL`.
+The staging directory `.cache/r2-upload/` is ignored by Git. The detach step removes migrated tracked assets from the Git index while preserving local files; `.gitignore` prevents them from being re-added. `assets:r2:optimize-existing` performs a one-time lossless WebP pass over legacy PNGs, uploads smaller pixel-identical objects, and stages the updated manifests. The uploader skips objects whose stored SHA-256 metadata and size already match. Production builds use the bucket's public custom domain, `https://assets.samuelecorra.dev`, through `VITE_R2_PUBLIC_BASE_URL`.
 
