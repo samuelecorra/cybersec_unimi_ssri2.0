@@ -15,6 +15,8 @@ La lezione risponde a cinque domande pratiche che ogni progetto incontra. **Quan
 5. **Come lo programmo?** Normalizzazione, divisione train/test; laboratorio in MATLAB e Colab.
 6. Punti principali.
 
+![](imgs/Pasted%20image%2020261124032554.png)
+
 ---
 
 ### **1. Teoria: valutazione dell’accuratezza di classificatori e regressori**
@@ -27,6 +29,8 @@ La lezione risponde a cinque domande pratiche che ogni progetto incontra. **Quan
 | **#3** | il **metodo di apprendimento** (ottimizzazione dei parametri) | dataset di **training** |
 | **#4** | **voi**: valutazione della **generalizzazione** | dataset di **test** |
 | **#5** | **voi**: miglioramento dell’intero sistema (nuovi modelli, nuovi metodi di apprendimento, …) | — |
+
+![](imgs/Pasted%20image%2020261124032912.png)
 
 **Espressione generale**: $Y=f(X,\text{params})$. **Le metriche dipendono da $Y$**:
 
@@ -61,6 +65,8 @@ $$R^2=1-\frac{\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}=1-
 <!-- SOURCE_VISUAL id="IS16-V01" source="L16-web.pdf" page="6" type="grafico" description="Dati osservati, retta del modello e media per illustrare la variazione spiegata e non spiegata in R^2" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124032946.png)
+
 > 💡 **Perché $R^2$ può essere negativo (nota didattica).** $SS_{\text{tot}}$ è l’errore della baseline che prevede sempre la media. Se il modello sbaglia più della media, $SS_{\text{res}}>SS_{\text{tot}}$ e $R^2<0$: il modello è peggio che non usarlo. Sui dati di training un modello lineare con intercetta ha sempre $R^2\ge 0$; sul test no.
 
 ##### **1.2.2. Errore quadratico medio (MSE) e la sua radice (RMSE)**
@@ -94,6 +100,8 @@ $$\text{MAE}=\frac{1+0+3}{3}=1{,}33\ \text{EUR},\qquad \text{RMSE}=1{,}83\ \text
 
 <!-- SOURCE_VISUAL id="IS16-V02" source="L16-web.pdf" page="8" type="figura" description="Confronto tra errori assoluti e quadratici nel MAE e nel RMSE" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124034017.png)
 
 > 💡 **Quale scegliere (nota didattica).** Si ha sempre $\text{MAE}\le\text{RMSE}$, con uguaglianza solo se tutti gli errori hanno lo stesso valore assoluto. Un RMSE molto più grande del MAE segnala pochi errori grandi. Se un errore di 30 € è tre volte grave quanto uno di 10 €, il MAE descrive bene il costo; se è molto più che tre volte grave (per esempio una scorta esaurita), il RMSE è più adatto. Il MSE è anche la funzione obiettivo minimizzata dai minimi quadrati (Lezione 17).
 
@@ -138,8 +146,13 @@ la **percentuale di risultati previsti che coincidono con quelli attesi**. Si ha
 - $FN$: previsto **non** la classe ma **lo è**: **errore di tipo II**;
 - $TP$: previsto correttamente la classe (cane).
 
+![](imgs/Pasted%20image%2020261124034051.png)
+
+
 <!-- SOURCE_VISUAL id="IS16-V03" source="L16-web.pdf" page="12" type="figura" description="Matrice di confusione illustrata con immagini di cani (credito narkhede_sarang)" reason="Illustrazione visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124034101.png)
 
 > ⚠️ **Attenzione agli assi.** La figura della slide ha i valori **reali sulle colonne**, la tabella li ha **sulle righe**. Le librerie non sono uniformi (scikit-learn mette i reali sulle righe): va sempre controllato.
 
@@ -172,6 +185,8 @@ $$\text{accuratezza}=\frac{40+45}{100}=0{,}85,\quad \text{errore}=\frac{5+10}{10
 <!-- SOURCE_VISUAL id="IS16-V04" source="L16-web.pdf" page="14" type="grafico" description="Matrice di confusione 10x10 su CIFAR-10 con 9024 corretti su 10000" reason="Valori della matrice visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124034324.png)
+
 **Come leggerla.**
 
 - La **diagonale** contiene i valori **corretti**.
@@ -180,10 +195,14 @@ $$\text{accuratezza}=\frac{40+45}{100}=0{,}85,\quad \text{errore}=\frac{5+10}{10
 <!-- SOURCE_VISUAL id="IS16-V05" source="L16-web.pdf" page="15" type="grafico" description="Matrice CIFAR-10 con diagonale corretta ed errori fuori diagonale evidenziati" reason="Evidenziazioni visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124034334.png)
+
 **Esempi**: **26 uccelli** reali sono stati confusi con **aerei**; **111 cani** reali sono stati confusi con **gatti**. Servono altri esempi? Si sceglie una cella qualunque fuori diagonale: **riga = classe vera**, **colonna = classe prevista**.
 
 <!-- SOURCE_VISUAL id="IS16-V06" source="L16-web.pdf" page="16" type="grafico" description="Matrice CIFAR-10 con le celle uccello-aereo (26) e cane-gatto (111) evidenziate" reason="Celle evidenziate visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124034401.png)
 
 > 💡 **Le confusioni hanno senso (nota didattica).** Cani e gatti sono entrambi quadrupedi pelosi in immagini $32\times 32$; uccelli e aerei sono entrambi oggetti nel cielo. Le confusioni più frequenti rivelano somiglianze reali tra classi, e indicano dove servono più dati o feature migliori (Lezione 11, §5.17). Una matrice asimmetrica (111 cani → gatti, ma un numero diverso di gatti → cani) dice anche in quale direzione il modello «preferisce» sbagliare.
 
@@ -199,6 +218,8 @@ $$\text{TPR}=\frac{TP}{TP+FN}\quad\text{contro}\quad \text{FPR}=\frac{FP}{FP+TN}
 
 <!-- SOURCE_VISUAL id="IS16-V07" source="L16-web.pdf" page="17" type="schema e grafico" description="Rilevatore con somma pesata e soglia, e curva ROC con la diagonale del caso e la zona di miglioramento" reason="Schema e curva visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124034429.png)
 
 ##### **1.7.1. ROC: un punto per ogni soglia**
 
@@ -222,6 +243,8 @@ $$\text{TPR}=\frac{TP}{TP+FN}\quad\text{contro}\quad \text{FPR}=\frac{FP}{FP+TN}
 <!-- SOURCE_VISUAL id="IS16-V08" source="L16-web.pdf" page="18" type="grafico" description="Curva ROC costruita dai 10 punti della tabella, con la soglia che scende da 1 a 10" reason="Punti numerati della curva visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124034457.png)
+
 > 💡 **L’area sotto la curva (nota didattica).** Con la regola dei trapezi sui punti della tabella (partendo da $(0,0)$) l’area vale circa $0{,}91$: è l’**AUC**. Si interpreta come la probabilità che un positivo scelto a caso abbia un punteggio più alto di un negativo scelto a caso. Un classificatore casuale sta sulla diagonale (AUC = 0,5), uno perfetto passa per l’angolo $(0,1)$ (AUC = 1). Scegliere **dove** stare sulla curva, cioè la soglia, dipende dai costi dei due errori (Lezione 11, §6.3).
 
 ---
@@ -238,6 +261,8 @@ Il machine learning si è arricchito di nuove capacità grazie a **foundation mo
 | uscita: un’**etichetta di classe** («Dog») | uscita: **testo libero** («un animale a quattro zampe con la coda») |
 | **facile contare** giusti e sbagliati | **nessuna classe e nessun numero** da confrontare |
 
+![](imgs/Pasted%20image%2020261124034537.png)
+
 #### **2.2. L’evoluzione della pipeline di ML: stessi quattro passi, procedure diverse**
 
 | Passo | **Tradizionale** | **Nuovo** |
@@ -252,6 +277,8 @@ Sopra: si addestra, poi si fa la validazione incrociata. Sotto: si ancora e si a
 <!-- SOURCE_VISUAL id="IS16-V09" source="L16-web.pdf" page="21" type="schema" description="Pipeline tradizionale e nuova a confronto nei quattro passi: dati, rappresentazione, adattamento, controllo" reason="Schema a due righe visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124034549.png)
+
 **Che cosa significano i nuovi passi.** La pipeline tradizionale (raccolta dei dati → feature engineering → addestramento → validazione incrociata → rilascio) è affiancata da una pipeline **aggiuntiva** (analisi di dati supervisionati e non → foundation model pre-addestrato → ancoraggio semantico → adattamento zero/few-shot → validazione con l’umano nel ciclo):
 
 - **ancoraggio semantico**: collegare la **conoscenza generale** del modello al **nostro dominio** (termini, segnali, regole) con **contesto, manuali ed esempi**;
@@ -264,6 +291,8 @@ Un foundation model è addestrato **una volta** su **dati enormi e diversi** (te
 
 <!-- SOURCE_VISUAL id="IS16-V10" source="L16-web.pdf" page="23" type="schema" description="Foundation model addestrato su dati diversi e adattato a molti compiti" reason="Schema dati-modello-compiti visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124034646.png)
 
 > 📌 **Un modello generale, addestrato una volta su dati diversi, adattato a molti compiti.**
 
@@ -281,11 +310,15 @@ Un foundation model è addestrato **una volta** su **dati enormi e diversi** (te
 |---|---|
 | Classe = cane | «Un cane marrone seduto in casa che guarda la fotocamera.» |
 
+![](imgs/Pasted%20image%2020261124034718.png)
+
 > 📌 **I foundation model spostano il ML dall’addestramento specifico per compito all’adattamento guidato dalla conoscenza.**
 
 > ⚠️ **Un residuo di altri esempi.** La voce «ragionamento su minacce mai viste» proviene da un contesto di sicurezza informatica: in IS4 l’equivalente è il ragionamento su **guasti o anomalie mai visti**, come negli esempi di manutenzione del §2.7.
 
 #### **2.5. Foundation model: un compito addestrato o una descrizione a parole**
+
+![](imgs/Pasted%20image%2020261124034751.png)
 
 | **1. Addestrato su un compito specifico** | **2. Descrivere a parole** |
 |---|---|
@@ -309,6 +342,8 @@ Un foundation model è addestrato **una volta** su **dati enormi e diversi** (te
 <!-- SOURCE_VISUAL id="IS16-V11" source="L16-web.pdf" page="26" type="schema" description="Zero-shot con i soli nomi delle classi e few-shot con due esempi etichettati" reason="Schema con immagini visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124034818.png)
+
 **Zero-shot, one-shot, few-shot: stesso modello, prompt diversi.**
 
 | Modalità | Prompt | Uscita |
@@ -316,6 +351,8 @@ Un foundation model è addestrato **una volta** su **dati enormi e diversi** (te
 | **zero-shot** (0 esempi) | `Translate "Good morning" to French` | *Bonjour* |
 | **one-shot** (1 esempio) | `Translate to French: "Hello" -> "Bonjour"  "Goodbye" ->` | *Au revoir* |
 | **few-shot** (3 esempi) | `Translate to French: "Hello" -> "Bonjour"  "Yes" -> "Oui"  "No" -> "Non"  "Thank you" ->` | *Merci* |
+
+![](imgs/Pasted%20image%2020261124034832.png)
 
 **Il modello è lo stesso** in tutti e tre i casi: cambia solo il prompt.
 
@@ -331,6 +368,8 @@ Un foundation model è addestrato **una volta** su **dati enormi e diversi** (te
 
 <!-- SOURCE_VISUAL id="IS16-V12" source="L16-web.pdf" page="28" type="schema" description="Zero-shot con gli animali: attributi di zebra, muflone e giraffa e riconoscimento del cavallo alato mai visto" reason="Schema con immagini degli animali visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124034844.png)
 
 > 💡 **Perché funziona (nota didattica).** Il modello non impara «zebra» come etichetta isolata, ma come combinazione di attributi in uno **spazio semantico** condiviso con le descrizioni testuali. Una classe nuova descritta con attributi noti cade in un punto di quello spazio, e l’immagine nuova viene confrontata con quel punto: è il confronto in uno spazio allineato immagine-testo della Lezione 9 (§8.6).
 
@@ -385,6 +424,8 @@ Dall’**estrazione delle feature e classificazione** al «**parlare con l’LLM
 - I modelli zero/few-shot operano in condizioni di **scarsità di dati** e **spostamento di distribuzione**.
 - Le **ipotesi della validazione incrociata classica possono non valere**.
 
+![](imgs/Pasted%20image%2020261124035027.png)
+
 **La valutazione classica ha bisogno di etichette di classe e punteggi** (validazione incrociata con fold di test, curva ROC). **L’uscita di un foundation model è testo libero** («Comportamento probabilmente anomalo. Lo schema è compatibile con un guasto meccanico o termico iniziale…»): **nessuna etichetta e nessun punteggio** su cui fissare una soglia, quindi **non si può confrontare fold per fold**.
 
 #### **2.9. Strategie di valutazione: quattro modi per verificare**
@@ -409,6 +450,8 @@ Corrette: $38+44=82$, **accuratezza** $=82/100=0{,}82$; errori: $6+12=18$ (FP e 
 
 <!-- SOURCE_VISUAL id="IS16-V13" source="L16-web.pdf" page="35" type="schema" description="Foundation model che risponde no su un'immagine con un cane e matrice di confusione su 100 immagini" reason="Schema con immagine visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124035106.png)
 
 > 💡 **Il trucco (nota didattica).** Vincolare la risposta a «sì o no» trasforma un modello linguistico in un classificatore: le metriche classiche tornano utilizzabili. Il recall sui cani è $38/50=76\%$: il modello ne perde uno su quattro, un’informazione che l’accuratezza da sola (82%) non dà.
 
@@ -443,11 +486,15 @@ $$\text{errore}=-\ln p.$$
 <!-- SOURCE_VISUAL id="IS16-V14" source="L16-web.pdf" page="37" type="grafico" description="Curva dell'errore -ln p in funzione della confidenza data alla risposta corretta, con i due casi" reason="Curva visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124035141.png)
+
 > 💡 **Perché $p=0{,}05$ nel caso 2 (nota didattica).** Il modello dice «No» con confidenza 0,95: alla risposta giusta («Sì») assegna quindi $1-0{,}95=0{,}05$. La log loss punisce severamente gli errori sicuri, come nella Lezione 14 (§1.4): un modello che dice sempre «non lo so» con confidenza 0,5 avrebbe errore $\ln 2=0{,}69$ su ogni caso, meglio di un errore sicuro.
 
 ##### **2.9.4. Valutazione 4: validazione con l’umano nel ciclo**
 
 Il flusso: estratto di log (testo) → foundation model → **risposta + spiegazione** (testo libero) → **revisione dell’esperto**, che **concorda** oppure **corregge**; le correzioni **migliorano prompt ed esempi**.
+
+![](imgs/Pasted%20image%2020261124035239.png)
 
 **Esempio**: 20 risposte riviste; **concordanti 17**; corrette 3 (2 falsi allarmi, 1 mancato rilevamento).
 
@@ -471,6 +518,8 @@ Una rete NN1 riconosce un cane con **0,95**. Inserendo nell’immagine un oggett
 <!-- SOURCE_VISUAL id="IS16-V15" source="L16-web.pdf" page="40" type="figura" description="Immagine del cane con e senza una teiera inserita e le confidenze 0.95 e 0.89" reason="Immagini visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124035315.png)
+
 #### **3.2. Controllare anche con le mappe di salienza**
 
 | Rete | Previsione | Mappa di salienza |
@@ -483,12 +532,16 @@ Una rete NN1 riconosce un cane con **0,95**. Inserendo nell’immagine un oggett
 <!-- SOURCE_VISUAL id="IS16-V16" source="L16-web.pdf" page="41" type="figura" description="Mappe di salienza di NN1 (pixel sbagliati) e NN2 (il cane)" reason="Mappe visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124035338.png)
+
 #### **3.3. Aggiungere una giusta dose di rumore**
 
 **Analisi di sensibilità** di un modello: **stessa rete, stesso cane, cambia solo il rumore**. Senza rumore NN1 risponde **cane = 0,95**; con un po’ di rumore aggiunto all’immagine risponde **camion = 0,78**.
 
 <!-- SOURCE_VISUAL id="IS16-V17" source="L16-web.pdf" page="42" type="figura" description="Lo stesso cane classificato come cane 0.95 e, con rumore aggiunto, come camion 0.78" reason="Immagini visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124035351.png)
 
 > 💡 **Fragilità (nota didattica).** Un rumore che una persona quasi non nota fa cambiare classe con confidenza alta: è la stessa fragilità degli esempi avversari della Lezione 2. Un modello che cade così facilmente non è affidabile su immagini reali, che contengono sempre rumore di sensore e compressione.
 
@@ -507,6 +560,8 @@ Valuta quanto il modello è «sensibile»:
 <!-- SOURCE_VISUAL id="IS16-V18" source="L16-web.pdf" page="43" type="grafico" description="Tre divisioni train/test con accuratezze diverse e quantizzazione di un peso float32 sui livelli int8" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124035433.png)
+
 > 💡 **Il passo di quantizzazione (nota didattica).** I livelli `int8` vicini distano $1{,}2021-1{,}1810=0{,}0211$: è il passo della quantizzazione. L’errore massimo per un singolo peso è metà del passo, circa 0,0106; qui è 0,0032. Una NPU (*Neural Processing Unit*) lavora in `int8` per consumare meno energia e memoria (Lezione 23); la domanda è se la somma di tanti piccoli errori sposta le decisioni.
 
 ##### **3.4.1. Sensibilità in pratica: due esperimenti rapidi**
@@ -519,6 +574,8 @@ Valuta quanto il modello è «sensibile»:
 
 <!-- SOURCE_VISUAL id="IS16-V19" source="L16-web.pdf" page="44" type="grafico" description="Istogramma delle accuratezze di 30 divisioni casuali e confronto delle probabilità float32 e int8" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124035510.png)
 
 > 📌 **Lettura.** A: riportare una sola divisione può dare qualunque valore tra 82% e 100%; servono più divisioni e la loro deviazione standard (Lezione 14). B: per questo **piccolo modello** la NPU a 8 bit è **sicura**; per un **modello fragile** potrebbe non esserlo.
 
@@ -552,10 +609,14 @@ Partire da qualcosa di noto ogni volta che si prova un nuovo strumento.
 <!-- SOURCE_VISUAL id="IS16-V21" source="L16-web.pdf" page="48" type="figura" description="Ritratto di Ronald Fisher" reason="Fotografia visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124035634.png)
+
 **Le classi**: *Iris versicolor*, *Iris virginica*, *Iris setosa*.
 
 <!-- SOURCE_VISUAL id="IS16-V22" source="L16-web.pdf" page="49" type="figura" description="Fotografie delle tre specie: Iris versicolor, virginica e setosa" reason="Fotografie visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124035618.png)
 
 **Le feature.** Di ogni campione sono state misurate **quattro feature**: lunghezza e larghezza di **sepali e petali**, in centimetri. Sulla base della loro combinazione, Fisher sviluppò un modello per **distinguere le specie** tra loro (l’analisi discriminante lineare, LDA, Lezione 17).
 
@@ -588,6 +649,8 @@ Un boxplot riassume ogni feature con la **mediana**, i **quartili** (la scatola)
 <!-- SOURCE_VISUAL id="IS16-V23" source="L16-web.pdf" page="54" type="grafico" description="Boxplot della lunghezza del sepalo per le tre specie di iris" reason="Scatole visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124035823.png)
+
 #### **4.5. EDA: i grafici paralleli**
 
 **La visualizzazione è la chiave della comprensione!** (Un’immagine vale più di mille righe di tabella.) In un grafico a coordinate parallele ogni fiore è una linea spezzata che attraversa un asse verticale per ogni feature, colorata per specie (Lezione 11, §11.7).
@@ -595,10 +658,14 @@ Un boxplot riassume ogni feature con la **mediana**, i **quartili** (la scatola)
 <!-- SOURCE_VISUAL id="IS16-V24" source="L16-web.pdf" page="55" type="grafico" description="Coordinate parallele delle quattro feature di Iris colorate per specie" reason="Linee visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124035834.png)
+
 **Con un’altra toolbox.** Nota: qui servono **le stesse unità o una scala simile**!
 
 <!-- SOURCE_VISUAL id="IS16-V25" source="L16-web.pdf" page="56" type="grafico" description="Coordinate parallele di Iris prodotte con un'altra toolbox" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124035900.png)
 
 **Armonizzazione.** Con la media e la deviazione standard si possono **armonizzare** i valori (z-score):
 
@@ -609,7 +676,12 @@ con $x$ valore grezzo [cm], $\mu$ media della feature [cm], $\sigma$ sua deviazi
 <!-- SOURCE_VISUAL id="IS16-V26" source="L16-web.pdf" page="57" type="grafico" description="Coordinate parallele di Iris dopo lo z-score" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124035914.png)
+
 **Un caso più complesso.** In questo caso è **più difficile capire quale feature aiuterà meglio la classificazione**.
+
+![](imgs/Pasted%20image%2020261124035927.png)
+
 
 <!-- SOURCE_VISUAL id="IS16-V27" source="L16-web.pdf" page="58" type="grafico" description="Grafico parallelo di un caso più complesso (dati del Titanic)" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -618,6 +690,8 @@ con $x$ valore grezzo [cm], $\mu$ media della feature [cm], $\sigma$ sua deviazi
 
 <!-- SOURCE_VISUAL id="IS16-V28" source="L16-web.pdf" page="59" type="grafico" description="Grafico a categorie parallele del Titanic con bande proporzionali alle quote" reason="Bande visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124035947.png)
 
 **Che cosa si vede?** **Nessun bambino nell’equipaggio**; **soprattutto maschi**; **quasi nessun bambino in prima classe**; eccetera. Informazioni significative e intuizioni preziose si possono estrarre **solo osservando** il grafico. È lo stesso grafico a categorie parallele (alluvionale) dei dati del Titanic presentato in altre lezioni del corso.
 
@@ -633,7 +707,14 @@ con $x$ valore grezzo [cm], $\mu$ media della feature [cm], $\sigma$ sua deviazi
 <!-- SOURCE_VISUAL id="IS16-V30" source="L16-web.pdf" page="61" type="grafico" description="Matrice di scatter plot a coppie delle quattro feature di Iris" reason="Nuvole di punti visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124040127.png)
+
 **PCA sul dataset Iris.** La PCA **riduce la dimensionalità** di un dataset **conservando il più possibile le sue caratteristiche spaziali** (**non servono etichette**): **4 feature in ingresso** $F_1,\dots,F_4$, **4 componenti ordinate in uscita** $F'_1,\dots,F'_4$ (Lezione 18).
+
+![](imgs/Pasted%20image%2020261124040223.png)
+
+
+![](imgs/Pasted%20image%2020261124040232.png)
 
 **Armonizzazione dei dati di Iris**: **nessun dato mancante**, **nessun errore di etichettatura**, **nessuno scaling necessario**. Si userà il dataset Iris di Fisher **come strumento di debug**! Negli esempi successivi si usa la notazione di **Google TensorFlow**, una libreria software **libera e open source** per la programmazione **dataflow e differenziabile** su molti compiti.
 
@@ -651,6 +732,8 @@ plt.show()
 <!-- SOURCE_VISUAL id="IS16-V31" source="L16-web.pdf" page="64" type="grafico" description="Pairplot seaborn di Iris con le densità sulla diagonale" reason="Griglia di grafici visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124040302.png)
+
 > 💡 **I parametri (nota didattica).** `hue="species"` colora i punti per specie; `diag_kind="kde"` mette sulla diagonale la stima di densità (*Kernel Density Estimation*) di ogni feature invece dell’istogramma. Nelle versioni recenti di seaborn il parametro `size` è stato rinominato `height`.
 
 #### **4.7. Prepararsi ad apprendere**
@@ -661,6 +744,8 @@ Dai dati categorici grezzi (per esempio «dog», «apple», «10.0.0.5») si arr
 2. **preparare le feature di input**;
 3. **dividere** train / test;
 4. **addestramento**: rete neurale TensorFlow.
+
+![](imgs/Pasted%20image%2020261124040311.png)
 
 ---
 
@@ -675,6 +760,8 @@ Nel machine learning classico si addestrano i modelli su **matrici numeriche** $
 
 <!-- SOURCE_VISUAL id="IS16-V32" source="L16-web.pdf" page="68" type="figura" description="Una colonna di etichette categoriche trasformata in numeri" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124040342.png)
 
 **Esempi in applicazioni industriali e di manutenzione:**
 
@@ -729,6 +816,8 @@ Il **label encoding** assegna **un intero univoco a ogni valore distinto**, **ne
 
 <!-- SOURCE_VISUAL id="IS16-V34" source="L16-web.pdf" page="72" type="schema" description="Albero degli indirizzi IP (rete, sottorete, host) con le etichette del label encoding" reason="Albero visibile solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124040508.png)
 
 ##### **5.3.1. Label encoding su una feature nominale: i colori**
 
@@ -789,6 +878,8 @@ Il label encoding (intero) di una feature **nominale** assegna un intero a ogni 
 
 **L’aumento di dimensionalità è atteso e voluto.** Si può poi applicare la **PCA** per **ridurre la dimensionalità**, **eliminare la ridondanza** e **permettere la visualizzazione**: testo o JSON con tutti i valori categorici → codifica one-hot ($x$, $d$ valori) → PCA → $z$ compatto ($k<d$ valori).
 
+![](imgs/Pasted%20image%2020261124040549.png)
+
 #### **5.5. La codifica dummy**
 
 | id | X | X=a | X=b | X=c |
@@ -809,6 +900,8 @@ Eliminando la colonna X=c:
 
 > 📌 **Codifica dummy.** È la **one-hot con una colonna eliminata**: la categoria eliminata è quella **con tutti zeri** ($(0,0)$ significa c), il che **evita colonne ridondanti** (**multicollinearità**).
 
+![](imgs/Pasted%20image%2020261124040601.png)
+
 > 💡 **Perché la ridondanza dà fastidio (nota didattica).** Con la one-hot completa le colonne sommano sempre a 1: X=c è determinata dalle altre due ($1-\text{X=a}-\text{X=b}$). In una regressione lineare con intercetta questa dipendenza esatta rende la matrice $X^\top X$ non invertibile e i coefficienti non unici (Lezione 17). Con $C$ categorie la dummy usa $C-1$ colonne; per le reti neurali e gli alberi di solito si tiene la one-hot completa.
 
 #### **5.6. Altri metodi di codifica per i dati categorici**
@@ -817,6 +910,8 @@ Esistono molte altre tecniche per codificare dati categorici: **one-hot**, **dum
 
 <!-- SOURCE_VISUAL id="IS16-V35" source="L16-web.pdf" page="78" type="figura" description="Panoramica dei metodi di codifica dei dati categorici" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124040610.png)
 
 > 💡 **Tre di questi in breve (nota didattica).** La **count encoding** sostituisce ogni categoria con il numero di volte che compare nel dataset; la **binary encoding** scrive l’indice della categoria in binario (con 1000 categorie bastano 10 colonne invece di 1000); la **effect encoding** è come la dummy, ma la categoria di riferimento è codificata con $-1$ invece che con tutti zeri. Ogni scelta è un compromesso tra dimensione del vettore e informazione che si introduce.
 
@@ -913,12 +1008,16 @@ X_train, X_test, y_train, y_test = train_test_split(X_data, Y,
 
 **Un esempio giocattolo.** Con $X$ di 5 righe $[0,1],[2,3],[4,5],[6,7],[8,9]$ e `test_size=0.33`, **2 righe su 5 vanno nel test** ($[4,5]$ e $[2,3]$ nell’esempio) e le altre vengono **mescolate** nel training ($[8,9]$, $[0,1]$, $[6,7]$).
 
+![](imgs/Pasted%20image%2020261124040848.png)
+
 > 💡 **Perché 2 su 5 (nota didattica).** scikit-learn arrotonda per eccesso la dimensione del test: $0{,}33\cdot 5=1{,}65\to 2$. `random_state=1` fissa il mescolamento, così la divisione è **riproducibile**; senza, ogni esecuzione darebbe una divisione diversa (e, come visto nel §3.4.1, un’accuratezza diversa). Per le classi sbilanciate si aggiunge `stratify=Y` (Lezione 14, §6.4).
 
 **Lo stesso in Colab.**
 
 <!-- SOURCE_VISUAL id="IS16-V36" source="L16-web.pdf" page="85" type="schermata" description="Divisione train/test eseguita in Colab con l'output delle dimensioni" reason="Schermate visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124040918.png)
 
 **Il passo successivo è l’apprendimento.** Come si vede negli esercizi in MATLAB e Colab, si è ora pronti a creare i **primi classificatori**! (Ma prima, un bel respiro.)
 
@@ -975,14 +1074,22 @@ X_train, X_test, y_train, y_test = train_test_split(X_data, Y,
 <!-- SOURCE_VISUAL id="IS16-V37" source="L16-web.pdf" page="97" type="schermata" description="Script MATLAB d'esempio del laboratorio" reason="Schermata visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124041212.png)
+
 **Colab**: scaricare il codice, caricarlo sul proprio Google Drive, aprirlo con Colab e farlo girare (con Google Chrome, dopo il login): colab.research.google.com. Gli esempi sono commentati: esplorarli, modificarli, aggiungere nuovi grafici.
 
+![](imgs/Pasted%20image%2020261124041238.png)
+
 **Caricare il proprio `*.ipynb`.** Un file **IPYNB** è un **documento notebook** usato da **Jupyter Notebook**, un ambiente computazionale interattivo pensato per lavorare con Python e i propri dati: 1. aprire colab.research.google.com; 2. File → Upload notebook; 3. scegliere il file `.ipynb`.
+
+![](imgs/Pasted%20image%2020261124041250.png)
 
 **Farlo girare**: 1) leggere i commenti; 2) cliccare su `[ ]` per eseguire la cella, oppure «*Run all*».
 
 <!-- SOURCE_VISUAL id="IS16-V38" source="L16-web.pdf" page="100" type="schermata" description="Esecuzione delle celle in Colab con il pulsante della cella e Run all" reason="Schermata visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124041300.png)
 
 #### **7.4. Caricamento, EDA e grafici in Python/Colab (e uno sguardo a Matplotlib)**
 
@@ -1104,6 +1211,8 @@ xNumpy_Norm = (xNumpy - np.min(xNumpy)) / (np.max(xNumpy) - np.min(xNumpy))
 <!-- SOURCE_VISUAL id="IS16-V39" source="L16-web.pdf" page="111" type="grafico" description="Istogrammi della lunghezza del sepalo prima e dopo la normalizzazione globale" reason="Istogrammi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124041904.png)
+
 > 💡 **Perché 0,54 (nota didattica).** Con il minimo globale 0,1 (la larghezza minima di un petalo) e il massimo globale 7,9: $(4{,}3-0{,}1)/(7{,}9-0{,}1)=4{,}2/7{,}8\approx 0{,}54$. La feature non arriva mai a 0, perché il minimo usato appartiene a un’altra colonna. La min-max è anche lineare: la forma dell’istogramma non cambia (Lezione 10, §3.11).
 
 ##### **7.4.6. Conversione dei dati: da categorici a decimali**
@@ -1125,10 +1234,14 @@ Visualizzare feature e classi dà un **primo controllo visivo della capacità di
 <!-- SOURCE_VISUAL id="IS16-V40" source="L16-web.pdf" page="113" type="figura" description="Tentativo umoristico di disegnare un quarto asse" reason="Illustrazione visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124041929.png)
+
 **Usare la visualizzazione per gestire le 4 dimensioni di Iris**:
 
 1. **scegliere due feature** da disegnare (un piano 2D);
 2. **assegnare un colore** in base alla classe.
+
+![](imgs/Pasted%20image%2020261124041950.png)
 
 **Input**: 150 × 4 feature + 150 codici di classe. **Output**: uno scatter plot per coppia di feature.
 
@@ -1137,11 +1250,16 @@ Visualizzare feature e classi dà un **primo controllo visivo della capacità di
 | **Feat0 + Feat1** (lunghezza e larghezza del sepalo) | **buona discriminazione per la classe 0**; **cattiva per le classi 1 e 2** (le classi sono mescolate) |
 | **Feat2 + Feat3** (lunghezza e larghezza del petalo) | **discriminazione migliore per tutte le classi** |
 
+![](imgs/Pasted%20image%2020261124042003.png)
+
+
 <!-- SOURCE_VISUAL id="IS16-V41" source="L16-web.pdf" page="115" type="grafico" description="Scatter Feat0 contro Feat1: classe 0 separata, classi 1 e 2 mescolate" reason="Punti colorati visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 <!-- SOURCE_VISUAL id="IS16-V42" source="L16-web.pdf" page="116" type="grafico" description="Scatter Feat2 contro Feat3: discriminazione migliore per tutte le classi" reason="Punti colorati visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124042011.png)
 
 > 📌 **Morale: scegliere la coppia giusta di feature è già metà del classificatore.** Lo si vedrà nella Lezione 17, dove una sola regola sulla lunghezza del petalo separa la setosa dalle altre specie.
 

@@ -15,6 +15,8 @@ La lezione si articola in quattro parti:
 3. **dai dati al modello**: Play Tennis, frutti e UCI Wine;
 4. **esercitazione d’esame**: 10 quesiti in questo PDF, altri 10 in aula.
 
+![](imgs/Pasted%20image%2020261123214242.png)
+
 ---
 
 ### **1. Apprendimento interpretabile: gli alberi di decisione**
@@ -31,6 +33,8 @@ Dati tabellari, partizioni e regole di decisione esplicite.
 
 > 💡 **Perché nella sicurezza (nota didattica).** In un sistema che blocca una transazione o segnala un’intrusione, l’analista deve poter rispondere alla domanda «perché?». Un albero risponde con il percorso seguito («perché il numero di tentativi di accesso supera 5 *e* l’indirizzo non è noto»), che si può verificare, discutere e correggere. È anche la forma di spiegazione più vicina a quella richiesta dalle norme sulla trasparenza delle decisioni automatizzate (Lezione 2).
 
+![](imgs/Pasted%20image%2020261123214609.png)
+
 #### **1.2. Play Tennis: la tabella di training $X$ e l’etichetta $y$**
 
 **Si gioca a tennis?** È l’esempio classico dei dati tabellari:
@@ -41,6 +45,8 @@ Dati tabellari, partizioni e regole di decisione esplicite.
 
 <!-- SOURCE_VISUAL id="IS12-V01" source="L12-web.pdf" page="5" type="tabella" description="Tabella Play Tennis con i 14 record: Outlook, Temperature, Humidity (numerica), Windy e la decisione YES/NO" reason="I valori della tabella sono presenti solo nell'immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123214621.png)
 
 > ⚠️ **Nota sui dati.** L’esempio da 14 record include **un valore di umidità modificato** per illustrare l’albero compatto delle slide successive. La tabella non coincide quindi esattamente con la versione storica di Quinlan.
 
@@ -61,6 +67,8 @@ L’albero di Play Tennis è:
 <!-- SOURCE_VISUAL id="IS12-V02" source="L12-web.pdf" page="6" type="schema" description="Albero Play Tennis: Outlook alla radice, Humidity sotto Sunny con soglia 72.5%, YES sotto Overcast, Windy sotto Rain" reason="Struttura grafica dell'albero" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123214638.png)
+
 **Esempio svolto**: Outlook = Sunny, Humidity = 68% ⇒ **YES** (perché $68\le 72{,}5$).
 
 > 📌 **Ciò che l’albero dimostra e ciò che non dimostra.** Tutti i 14 esempi seguono le regole mostrate; **le prestazioni su dati non visti vanno comunque valutate**. Un albero che spiega perfettamente il training è un’ipotesi coerente con i dati, non una legge verificata.
@@ -77,6 +85,8 @@ Un esempio in due dimensioni ($x_1$, $x_2$):
 
 <!-- SOURCE_VISUAL id="IS12-V03" source="L12-web.pdf" page="7" type="schema e grafico" description="Albero x1 <= 4?, x2 <= 3? e la corrispondente partizione del piano con il rettangolo della classe 1" reason="Partizione del piano visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215103.png)
 
 > 📌 **Frontiere allineate agli assi.** Ogni nodo confronta **una sola feature** con una soglia ($x_j\le s$), quindi taglia lo spazio con un iperpiano **perpendicolare** a quell’asse. Il risultato è una partizione in **rettangoli** (iper-rettangoli in più dimensioni), e ogni foglia è uno di questi rettangoli.
 
@@ -103,7 +113,11 @@ Un esempio in due dimensioni ($x_1$, $x_2$):
 <!-- SOURCE_VISUAL id="IS12-V04" source="L12-web.pdf" page="9" type="figura" description="Esempi di diramazione binaria e multipla" reason="Schemi delle diramazioni visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123215232.png)
+
 > 💡 **Ogni divisione multipla si può rendere binaria (nota didattica).** Il nodo a tre rami «Outlook ∈ {Sunny, Overcast, Rain}» equivale a due nodi binari in cascata: «Outlook = Overcast?» e poi «Outlook = Sunny?». L’albero binario è più profondo di un livello, ma ogni nodo è più semplice; è il compromesso della tabella.
+
+![](imgs/Pasted%20image%2020261123215400.png)
 
 #### **1.7. Classificare i frutti: dagli oggetti alle feature**
 
@@ -118,6 +132,8 @@ Tre classi diverse di oggetti fisici possono essere rappresentate dalle **stesse
 <!-- SOURCE_VISUAL id="IS12-V05" source="L12-web.pdf" page="10" type="figura" description="Mele, arance e limoni rappresentati da larghezza e altezza" reason="Illustrazione dei frutti visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123215410.png)
+
 > ⚠️ **Esempio didattico.** Le misure dei frutti sono **simulate**, non osservazioni raccolte da frutti reali.
 
 **Il dataset simulato.** $X$ è mostrato in forma «feature per riga» per leggibilità (2 righe × 32 campioni); in scikit-learn è memorizzato come **32 righe × 2 colonne**. Il vettore delle classi $y$ ha 32 elementi.
@@ -125,10 +141,14 @@ Tre classi diverse di oggetti fisici possono essere rappresentate dalle **stesse
 <!-- SOURCE_VISUAL id="IS12-V06" source="L12-web.pdf" page="11" type="tabella" description="Le 32 osservazioni simulate: larghezza, altezza e classe a/o/l" reason="I valori delle misure sono presenti solo nell'immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123215424.png)
+
 **Le stesse 32 osservazioni nello spazio delle feature**: ogni punto è un campione (larghezza, altezza); il colore indica la classe $y$.
 
 <!-- SOURCE_VISUAL id="IS12-V07" source="L12-web.pdf" page="12" type="grafico" description="Scatter larghezza-altezza delle 32 osservazioni colorate per classe" reason="Posizioni dei punti visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215436.png)
 
 #### **1.8. Dalle misure dei frutti alle regioni di decisione**
 
@@ -136,6 +156,8 @@ L’albero usa **soglie allineate agli assi**: $w=7{,}3$, $h=7{,}8$, $h=8{,}0$, 
 
 <!-- SOURCE_VISUAL id="IS12-V08" source="L12-web.pdf" page="13" type="grafico" description="Regioni di decisione rettangolari dell'albero sui frutti con le cinque soglie" reason="Regioni e punti visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215444.png)
 
 **Le stesse frontiere sono semplici regole se-allora.** Si segue un percorso dall’alto verso il basso; il grafico e l’albero sono generati dalle **stesse cinque soglie**.
 
@@ -147,6 +169,8 @@ L’albero usa **soglie allineate agli assi**: $w=7{,}3$, $h=7{,}8$, $h=8{,}0$, 
 
 <!-- SOURCE_VISUAL id="IS12-V09" source="L12-web.pdf" page="14" type="schema" description="Albero dei frutti con i cinque test w > 7.3, h > 8.0, h > 7.8, w > 6.6, h > 6.0 e le foglie limone, arancia, mela" reason="Struttura dell'albero e assegnazione dei rami visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215505.png)
 
 > ⚠️ **Verso dei rami.** La slide etichetta esplicitamente «sì/no» solo ai primi due livelli, e con versi diversi (alla radice il ramo «no» è a sinistra, sotto $h>8{,}0$ il ramo «sì» è a sinistra). Per i nodi $w>6{,}6$, $h>6{,}0$ e $h>7{,}8$ l’assegnazione delle foglie va letta sulla figura. Una lettura coerente con la forma dei frutti è: largo e alto → arancia, largo e basso → mela; stretto e alto → limone.
 
@@ -164,6 +188,8 @@ $k$-NN e SVM sono presentati altrove nel corso (Lezioni 19 e successive).
 
 <!-- SOURCE_VISUAL id="IS12-V10" source="L12-web.pdf" page="15" type="grafico" description="Mappe di decisione di albero, kNN e SVM RBF sugli stessi 32 punti" reason="Forme delle frontiere visibili solo nei grafici" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215523.png)
 
 > 📌 **Le mappe di decisione descrivono decisioni di training, non superiorità validate.** Mostrano la **forma** delle ipotesi che ciascun modello può esprimere, non quale generalizzi meglio: per saperlo servono dati tenuti da parte. SVM (*Support Vector Machine*, macchina a vettori di supporto) con kernel RBF (*Radial Basis Function*, funzione di base radiale) usa somiglianze gaussiane tra i punti, da cui le frontiere curve.
 
@@ -183,6 +209,8 @@ Si useranno gli stessi **NODI** e **FOGLIE** di Play Tennis.
 
 <!-- SOURCE_VISUAL id="IS12-V11" source="L12-web.pdf" page="17" type="schema" description="Lo stesso albero Play Tennis da tre punti di vista: struttura, profondità e regole" reason="Tre viste grafiche dell'albero" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215604.png)
 
 **Un albero, tre punti di vista**: le regole effettive usano Outlook, Humidity e Windy; i percorsi numerici hanno **profondità massima 2**. **La profondità è il percorso più lungo dalla radice a una foglia.**
 
@@ -207,10 +235,14 @@ La maggior parte delle previsioni richiede solo **un piccolo numero di test `if`
 <!-- SOURCE_VISUAL id="IS12-V12" source="L12-web.pdf" page="19" type="figura" description="Illustrazione della profondità come numero di decisioni dalla radice alla foglia" reason="Figura raster della slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123215620.png)
+
 **Da un albero semplice a un albero molto profondo.** A profondità 2 l’albero è facile da ispezionare; **alberi più profondi possono essere molto più difficili da ispezionare e spiegare**.
 
 <!-- SOURCE_VISUAL id="IS12-V13" source="L12-web.pdf" page="20" type="figura" description="Confronto tra un albero di profondità 2 e un albero molto profondo" reason="Alberi visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215630.png)
 
 > 💡 **Perché la profondità controlla la complessità (nota didattica).** Un albero binario di profondità $D$ ha al massimo $2^D$ foglie, cioè $2^D$ regioni distinte. Con $D=3$ sono 8 regioni, con $D=10$ già 1024: abbastanza per isolare ogni singolo esempio di un piccolo dataset. È il collegamento con i gradi di libertà della Lezione 7: più foglie significa più parametri liberi (soglie e classi) rispetto ai dati.
 
@@ -224,8 +256,13 @@ $$G=1-\sum_{k=1}^{K}p_k^2.$$
 - **Miscela binaria 50/50**: $G=0{,}5$.
 - **CART** confronta l’**impurità pesata dei figli**.
 
+![](imgs/Pasted%20image%2020261123215648.png)
+
+
 <!-- SOURCE_VISUAL id="IS12-V14" source="L12-web.pdf" page="21" type="figura" description="Miscele di classi diverse con i corrispondenti valori dell'impurità di Gini" reason="Miscele illustrate visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215657.png)
 
 > 💡 **Che cosa significa $G$ (nota didattica).** $G$ è la probabilità di **sbagliare** se si prende un elemento a caso dal nodo e gli si assegna un’etichetta estratta a caso secondo le proporzioni del nodo: la probabilità di scegliere la classe $k$ e poi etichettarla con un’altra è $p_k(1-p_k)$, e $\sum_k p_k(1-p_k)=1-\sum_k p_k^2$. Verifiche: nodo puro, $1-1^2=0$; 50/50, $1-(0{,}5^2+0{,}5^2)=0{,}5$; tre classi equiprobabili, $1-3\cdot(1/3)^2\approx 0{,}667$. CART (*Classification and Regression Trees*) sceglie la divisione che minimizza $\sum_c \frac{n_c}{n}G(c)$, l’impurità media dei figli pesata per il numero di esempi.
 
@@ -268,6 +305,8 @@ Quindi $H(1/2)=1$ bit (massimo); $H(0)=H(1)=0$ per continuità (nodi puri).
 | **3 classi** | $1-3\cdot(1/3)^2\approx 0{,}667$ | $\log_2 3\approx 1{,}585$ bit |
 | **$K$ classi** | $1-1/K$ | $\log_2 K$ bit |
 
+![](imgs/Pasted%20image%2020261123215836.png)
+
 #### **2.6. Entropia e guadagno di informazione sono usati ovunque**
 
 Per una divisione in nodi figli $c$, ciascuno con $n_c$ dei $n$ esempi del padre:
@@ -287,6 +326,9 @@ $$IG=H(\text{padre})-\sum_{c}\frac{n_c}{n}H(c).$$
 > $$H(S)=-\tfrac{9}{14}\log_2\tfrac{9}{14}-\tfrac{5}{14}\log_2\tfrac{5}{14}\approx 0{,}940,\qquad G(S)=1-\left(\tfrac{9}{14}\right)^2-\left(\tfrac{5}{14}\right)^2\approx 0{,}459.$$
 > Dividendo per Outlook: soleggiato (2 sì, 3 no) e pioggia (3 sì, 2 no) hanno $H\approx 0{,}971$, nuvoloso (4 sì) ha $H=0$. Quindi
 > $$IG(S,\text{Outlook})\approx 0{,}940-\tfrac{5}{14}(0{,}971)-\tfrac{4}{14}(0)-\tfrac{5}{14}(0{,}971)\approx 0{,}247.$$
+
+![](imgs/Pasted%20image%2020261123215901.png)
+
 > È il guadagno più alto tra le feature: per questo Outlook è la radice. Il valore vale per la tabella classica; con l’umidità modificata delle slide i numeri dei nodi interni possono cambiare, non la scelta della radice (che dipende solo da Outlook e dalle etichette).
 
 > 💡 **L’entropia altrove nel ML (nota didattica).** La stessa quantità compare nella **funzione di perdita cross-entropy**, $L_{CE}=-\sum_i y_i\log\hat{y}_i$, che con un’etichetta one-hot si riduce a $-\log\hat{y}_k$ (grande quando il modello assegna poca probabilità alla classe giusta, Lezione 13), nella **mutua informazione** usata per valutare i cluster e nel **label smoothing**, che evita l’eccessiva confidenza.
@@ -297,6 +339,8 @@ Le tre misure hanno lo **stesso ordinamento di purezza**, ma **scale diverse**: 
 
 <!-- SOURCE_VISUAL id="IS12-V15" source="L12-web.pdf" page="26" type="grafico" description="Curve di Gini, entropia ed errore di classificazione in funzione della proporzione p per due classi" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123215919.png)
 
 > 💡 **L’errore di classificazione (nota didattica).** Per un nodo è $E=1-\max_k p_k$: la frazione di esempi sbagliati se si assegna al nodo la classe di maggioranza. Nel caso binario vale $\min(p,1-p)$, massimo $0{,}5$ a $p=0{,}5$, come Gini; l’entropia arriva a 1. Gini ed entropia sono curve **lisce e concave**, mentre l’errore è un triangolo: per questo sono preferite per scegliere le divisioni, perché premiano anche divisioni che rendono i figli più puri senza cambiarne la classe di maggioranza.
 
@@ -312,6 +356,8 @@ Le tre misure hanno lo **stesso ordinamento di purezza**, ma **scale diverse**: 
 - **non parametrico**: nessuna ipotesi gaussiana sulla distribuzione delle feature.
 
 > 💡 **Perché lo scaling non serve.** Ogni nodo confronta una feature con una soglia: moltiplicare la feature per 1000 sposta la soglia ma non cambia **quali** campioni vanno a destra o a sinistra (Lezione 10, §3.8).
+
+![](imgs/Pasted%20image%2020261123215936.png)
 
 #### **2.9. Alberi di decisione: svantaggi pratici**
 
@@ -331,6 +377,8 @@ Le tre misure hanno lo **stesso ordinamento di purezza**, ma **scale diverse**: 
 Alberi più piccoli possono essere più facili da spiegare, ma **la complessità va comunque validata**.
 
 > ⚠️ **Importante.** Si regola sui **dati di validation**, **non sul test set** finale tenuto da parte (Lezione 14).
+
+![](imgs/Pasted%20image%2020261123220033.png)
 
 ---
 
@@ -367,6 +415,8 @@ Ogni albero usa **7 estrazioni accoppiate con reinserimento** (si estrae la copp
 <!-- SOURCE_VISUAL id="IS12-V16" source="L12-web.pdf" page="31" type="schema" description="Training set originale, tre campioni bootstrap e i tre alberi con soglie diverse" reason="Schema grafico dei tre alberi" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123220112.png)
+
 > 💡 **Il voto su due campioni nuovi (nota didattica).** Per $x=3$ (classe vera 1): l’albero 1 dice 1 ($3>2$, $3\le 4$), l’albero 2 dice 1, l’albero 3 dice 0 ($3\le 3$): il voto di maggioranza dà **1**, corretto, anche se un albero sbaglia. Per $x=5$ (classe vera 2): alberi 1 e 2 dicono 2, l’albero 3 dice 1 ($5\le 5$): la foresta dice **2**. Gli errori dei singoli alberi cadono in punti diversi e il voto li compensa.
 
 > 📌 **Quanti esempi distinti in un bootstrap (nota didattica).** La probabilità che un esempio non venga mai estratto in $n$ estrazioni con reinserimento è $(1-1/n)^n$, che tende a $e^{-1}\approx 0{,}368$. Un campione bootstrap contiene quindi in media circa il **63,2%** di esempi distinti; il restante 36,8% (*out-of-bag*) può servire a stimare l’errore della foresta senza un validation set separato. Nell’esempio, il bootstrap 1 contiene 5 valori distinti su 7 (mancano 2 e 6).
@@ -384,6 +434,8 @@ Ogni albero usa **7 estrazioni accoppiate con reinserimento** (si estrae la copp
 <!-- SOURCE_VISUAL id="IS12-V17" source="L12-web.pdf" page="32" type="schema" description="Random forest: lo stesso input valutato da più alberi bootstrap e voto di maggioranza" reason="Schema della foresta visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123220127.png)
+
 > 📌 **Il prezzo della foresta.** Una foresta **scambia la trasparenza di un singolo percorso di decisione con previsioni aggregate**.
 
 > 📌 **In formula (nota didattica).** Con $B$ alberi $h_1,\dots,h_B$:
@@ -396,6 +448,8 @@ Dopo la definizione dell’architettura: **100 alberi randomizzati** addestrati 
 
 <!-- SOURCE_VISUAL id="IS12-V18" source="L12-web.pdf" page="33" type="grafico" description="Regioni di decisione di una random forest di 100 alberi sui 32 frutti simulati" reason="Regioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123220137.png)
 
 > 💡 **Che cosa cambia rispetto all’albero (nota didattica).** Ogni albero produce regioni rettangolari, ma con soglie leggermente diverse; il voto di 100 alberi crea frontiere ancora allineate agli assi ma con «gradini» più fini e una transizione più graduale tra le classi. Le zone in cui gli alberi non concordano corrispondono alle regioni più incerte.
 
@@ -490,6 +544,8 @@ Il vettore target $y$ contiene **un’etichetta di classe per campione**; la mat
 <!-- SOURCE_VISUAL id="IS12-V19" source="L12-web.pdf" page="43" type="schermata" description="Output Python del vettore y e delle prime righe della matrice X del dataset Wine" reason="Valori stampati visibili solo nella schermata" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123220350.png)
+
 > ✅ **Controllo.** $n$, $d$, **distribuzione delle etichette**, **unità**, **valori mancanti** e **strategia di divisione** appropriata (Lezione 10, §8.3).
 
 #### **4.7. Addestrare e disegnare un albero di decisione**
@@ -510,6 +566,8 @@ clf.fit(X, y)
 <!-- SOURCE_VISUAL id="IS12-V20" source="L12-web.pdf" page="45" type="schema" description="Albero di decisione Wine con profondità massima 3: soglie, Gini, numero di campioni e classi in ogni nodo" reason="Nodi, soglie e valori visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123220404.png)
+
 #### **4.8. Leggere l’albero addestrato**
 
 - **Seguire un campione** dalla radice valutando **ogni disuguaglianza**.
@@ -521,6 +579,8 @@ clf.fit(X, y)
 
 <!-- SOURCE_VISUAL id="IS12-V21" source="L12-web.pdf" page="47" type="schema" description="Albero di decisione Wine con profondità massima 5" reason="Nodi, soglie e valori visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123220506.png)
 
 > ⚠️ **Foglie pure sul training non sono una buona notizia.** Se l’albero più profondo arriva a Gini = 0 in ogni foglia, ha **memorizzato** gli esempi di training, compresi eventuali errori ed esempi anomali: è il rischio di overfitting del §2.3. Le prestazioni vere si misurano su dati **mai visti**.
 
@@ -573,6 +633,8 @@ print(export_text(clf,
 <!-- SOURCE_VISUAL id="IS12-V22" source="L12-web.pdf" page="52" type="schermata" description="Output di export_text con le regole if-then dell'albero Wine" reason="Regole stampate visibili solo nella schermata" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123220705.png)
+
 #### **4.11. Addestrare e ispezionare una random forest in Python**
 
 ```python
@@ -591,6 +653,8 @@ rf.fit(X, y)
 - `rf.feature_importances_` riassume l’**importanza delle divisioni a livello degli alberi** (**non la causalità**).
 - **Confrontare con un singolo albero su campioni tenuti da parte.**
 - Riportare **dimensione del campione**, **bilanciamento delle classi** e **incertezza**.
+
+![](imgs/Pasted%20image%2020261123220741.png)
 
 > 💡 **Che cosa misura `feature_importances_` (nota didattica).** È la riduzione totale di impurità (Gini) prodotta dalle divisioni su ciascuna feature, sommata su tutti i nodi e mediata sugli alberi, normalizzata a somma 1. Favorisce le feature con molti valori distinti e si divide tra feature correlate; la permutation importance della Lezione 11 (§6.5) è un controllo complementare, calcolato su dati tenuti da parte.
 

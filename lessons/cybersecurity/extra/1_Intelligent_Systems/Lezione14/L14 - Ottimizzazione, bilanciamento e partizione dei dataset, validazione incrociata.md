@@ -17,6 +17,8 @@ La trattazione si articola in sei temi:
 5. **valutazione dell’accuratezza**: regressori e classificatori;
 6. punti principali.
 
+![](imgs/Pasted%20image%2020261123234513.png)
+
 > 📌 **Molto importante per la qualità del proprio lavoro.** Le scelte di questa lezione decidono se il numero che si riporta alla fine descrive davvero il comportamento del sistema su dati nuovi.
 
 ---
@@ -39,11 +41,15 @@ Come visto nelle lezioni precedenti (Lezione 4, Domingos), ogni algoritmo di mac
 <!-- SOURCE_VISUAL id="IS14-V01" source="L14-web.pdf" page="4" type="schema" description="Flusso di lavoro del ML con i passi in cui intervengono rappresentazione, valutazione e ottimizzazione" reason="Schema del flusso visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123234628.png)
+
 #### **1.2. Rappresentazione**
 
 $$Y=\text{function}(X,\ \text{params}),$$
 
 **per un modello generale**. Le famiglie di modelli sono: **reti neurali**, **alberi di decisione**, **insiemi di regole / programmi logici**, **istanze** (come il $k$-NN), **modelli grafici** (reti bayesiane e di Markov), **macchine a vettori di supporto**, **ensemble di modelli**, eccetera. Lo schema vale per un mapping $X\to Y$ continuo o $X\to y$ (sì/no), e vale anche per un «**nuovo incredibile modello**»: per esempio $X$ = temperatura, $Y$ = la previsione.
+
+![](imgs/Pasted%20image%2020261123235148.png)
 
 #### **1.3. Valutazione (1/3): regressori e classificatori**
 
@@ -58,6 +64,8 @@ Nell’esempio del classificatore: **predetti malati 48**, **realmente malati 10
 
 <!-- SOURCE_VISUAL id="IS14-V02" source="L14-web.pdf" page="6" type="schema" description="Bersagli per giustezza e precisione di un regressore e insiemi dei predetti malati e dei malati veri per un classificatore" reason="Bersagli e insiemi visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123235211.png)
 
 > ⚠️ **Stessa parola, due significati.** La **precisione di un regressore** (misura) è la **dispersione degli errori**, nelle unità di $y$. La **precisione di un classificatore** è $TP/(TP+FP)$, una **frazione adimensionale** di allarmi corretti.
 
@@ -78,6 +86,8 @@ $$L=-\frac1N\sum_{i=1}^{N}\ln q(y_i\mid x_i),$$
 dove $y_i$ è la classe vera del campione $i$, $q(y_i\mid x_i)$ la probabilità assegnatale, $N$ il numero di campioni; l’unità è il **nat**, e **più basso è meglio**.
 
 **Esempio.** Il paziente è malato: con $q=0{,}9$ (modello A) la perdita è $-\ln 0{,}9=0{,}11$; con $0{,}6$ (B) è $0{,}51$; con $0{,}1$ (C) è $2{,}30$. **Gli errori sicuri costano di più.** Con il punteggio di Brier $(q-o)^2$ (dove $o=1$ è l’esito) i valori sono 0,01; 0,16; 0,81.
+
+![](imgs/Pasted%20image%2020261124002055.png)
 
 **Divergenza di Kullback-Leibler**:
 
@@ -108,12 +118,16 @@ per esempio 1 paziente mancato (FN, 500 €) + 1 falso allarme (FP, 10 €) = **
 <!-- SOURCE_VISUAL id="IS14-V03" source="L14-web.pdf" page="8" type="figura" description="Entropia di un nodo, margine e vettore degli errori pesati dai costi" reason="Illustrazioni visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124002222.png)
+
 #### **1.6. Valutazione: accuratezza contro margine**
 
 Le frontiere di decisione $H_2$ e $H_3$ hanno **entrambe accuratezza 100%** (errore 0), ma **valori di margine diversi**. Si vuole **aumentare il margine**: **si preferisce $H_3$**. A sinistra $H_1$ commette errori, $H_2$ e $H_3$ no; a destra i campioni cerchiati sono i **più vicini** alla frontiera (**vettori di supporto**).
 
 <!-- SOURCE_VISUAL id="IS14-V04" source="L14-web.pdf" page="9" type="grafico" description="Frontiere H1, H2, H3 tra classe A e classe B e margine di H3 con i vettori di supporto cerchiati" reason="Frontiere e margine visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124002439.png)
 
 > 💡 **Perché il margine conta (nota didattica).** Una frontiera che passa vicinissima a un campione di training classifica correttamente quel campione, ma basta un piccolo rumore su un campione nuovo simile per farlo cadere dall’altra parte. Un margine ampio lascia una «zona cuscinetto» e rende la classificazione più robusta: è il principio delle SVM (*Support Vector Machine*), il cui nome viene proprio dai vettori di supporto che definiscono il margine.
 
@@ -129,6 +143,8 @@ Le frontiere di decisione $H_2$ e $H_3$ hanno **entrambe accuratezza 100%** (err
 <!-- SOURCE_VISUAL id="IS14-V05" source="L14-web.pdf" page="10" type="figura" description="Quattro illustrazioni di ottimizzazione: combinatoria, convessa, non convessa, vincolata con regione ammissibile" reason="Illustrazioni visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124002504.png)
+
 > 💡 **Perché l’ottimo lineare sta su un vertice (nota didattica).** Una funzione lineare cresce sempre nella stessa direzione: spostandosi lungo quella direzione all’interno della regione ammissibile (un poligono, o poliedro) si arriva per forza al bordo, e poi lungo il bordo fino a un angolo. Per questo l’algoritmo del simplesso esplora solo i vertici.
 
 #### **1.8. Notazione: regressione e classificazione**
@@ -142,28 +158,47 @@ con $Y$ **vettore delle uscite**, $X$ **vettore degli input** (feature) e params
 | che cosa restituisce il modello | il **valore di $y$** stesso (per esempio kWh, °C): una **superficie** sopra le feature $x_1,x_2$ | una **classe** ($y=0$ buono, $y=1$ cattivo) |
 | che cosa si vede | $y=f(x_1,x_2)$ come altezza | solo la **frontiera** dove la decisione cambia |
 
+![](imgs/Pasted%20image%2020261124002517.png)
+
+
 <!-- SOURCE_VISUAL id="IS14-V06" source="L14-web.pdf" page="12" type="grafico" description="Regressione come superficie y = f(x1, x2) e classificazione come frontiera tra punti buoni e cattivi" reason="Grafici visibili solo nella figura (la p. 11 ne è la versione raster)" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124002700.png)
+
 **Visualizzare un regressore.** $y=\text{function}(X,\text{params})$, con $y$ singolo valore e $X=(x_1,x_2)$ vettore di feature, un asse per feature.
+
+![](imgs/Pasted%20image%2020261124002712.png)
+
 
 <!-- SOURCE_VISUAL id="IS14-V07" source="L14-web.pdf" page="13" type="grafico" description="Superficie di un regressore sopra il piano delle due feature (la p. 14 ne è la versione vettoriale)" reason="Superficie visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124002732.png)
 
 **Da 3D a 1D.** Servono **feature engineering** e le **migliori tecniche di visualizzazione** per ottenere intuizioni utili e **percepire il comportamento** del modello (Lezione 11).
 
 <!-- SOURCE_VISUAL id="IS14-V08" source="L14-web.pdf" page="15" type="grafico" description="Riduzione della visualizzazione di un regressore da 3D a 1D" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124002803.png)
+
 **Visualizzare un classificatore.** $y\in\{0,1\}$: buono ($y=0$) o cattivo ($y=1$); la **frontiera è dove cambia la decisione**.
+
+![](imgs/Pasted%20image%2020261124002822.png)
+
 
 <!-- SOURCE_VISUAL id="IS14-V09" source="L14-web.pdf" page="16" type="grafico" description="Classificatore nel piano delle feature con punti buoni e cattivi e frontiera di decisione (la p. 17 ne è la versione vettoriale)" reason="Punti e frontiera visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124002924.png)
 
 **Esempio con riduzione delle feature.** Anche per un classificatore, con molte feature, servono riduzione e buone tecniche di visualizzazione.
 
 <!-- SOURCE_VISUAL id="IS14-V10" source="L14-web.pdf" page="18" type="grafico" description="Visualizzazione di un classificatore dopo riduzione delle feature" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124003252.png)
 
 ---
 
@@ -179,6 +214,8 @@ Come gestire distribuzioni sbilanciate delle classi.
 <!-- SOURCE_VISUAL id="IS14-V11" source="L14-web.pdf" page="20" type="grafico" description="Distribuzioni bilanciate delle classi in MNIST e Food-101" reason="Istogrammi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124003319.png)
+
 **Molti dataset reali sono invece sbilanciati.** Esempi:
 
 - **visione medica**: la maggior parte dei pazienti è **sana**, solo una piccola frazione soffre di una certa malattia;
@@ -186,6 +223,8 @@ Come gestire distribuzioni sbilanciate delle classi.
 
 <!-- SOURCE_VISUAL id="IS14-V12" source="L14-web.pdf" page="21" type="grafico" description="Distribuzioni sbilanciate delle etichette in visione medica e credit scoring" reason="Istogrammi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124003457.png)
 
 > ⚠️ **L’accuratezza inganna con classi sbilanciate (nota didattica).** Con il 2% di insolventi, un classificatore che risponde **sempre** «restituirà il prestito» ha accuratezza del **98%** e non trova **nessun** insolvente. È il motivo della regola «**un errore dell’1% può essere buono o cattivo**» (§6.1).
 
@@ -209,6 +248,8 @@ A differenza di molti dataset accademici, in molti dataset reali sbilanciati **n
 <!-- SOURCE_VISUAL id="IS14-V13" source="L14-web.pdf" page="23" type="schema" description="Costi di errore diversi per le classi di un dataset sbilanciato" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124004301.png)
+
 #### **2.4. Soluzione 1: più dati!**
 
 - Bisogna **raccogliere più dati o immagini** per le **classi rare**.
@@ -217,6 +258,8 @@ A differenza di molti dataset accademici, in molti dataset reali sbilanciati **n
 <!-- SOURCE_VISUAL id="IS14-V14" source="L14-web.pdf" page="24" type="grafico" description="Raccolta di più dati per le classi rare" reason="Distribuzione visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124004346.png)
+
 #### **2.5. Soluzione 2: cambiare l’etichettatura**
 
 - **Raggruppare e unire** i casi rari.
@@ -224,6 +267,8 @@ A differenza di molti dataset accademici, in molti dataset reali sbilanciati **n
 
 <!-- SOURCE_VISUAL id="IS14-V15" source="L14-web.pdf" page="25" type="schema" description="Classificatore gerarchico: un primo classificatore separa la classe rara unita da quella frequente" reason="Gerarchia visibile solo nel diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124004410.png)
 
 > 💡 **Il prezzo della fusione (nota didattica).** Unire tre malattie rare in «patologico» rende la classe abbastanza numerosa da essere imparata, ma il primo classificatore non dice più *quale* malattia: si perde granularità (§2.10). Il secondo livello recupera il dettaglio, ma lavora con pochi esempi.
 
@@ -238,6 +283,8 @@ A differenza di molti dataset accademici, in molti dataset reali sbilanciati **n
 <!-- SOURCE_VISUAL id="IS14-V16" source="L14-web.pdf" page="26" type="grafico" description="Distribuzioni delle classi con campionamento uniforme, sottocampionamento e sovracampionamento" reason="Distribuzioni prima e dopo visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124004429.png)
+
 #### **2.7. SMOTE**
 
 > 📌 **SMOTE** (*Synthetic Minority Over-sampling Technique*, tecnica di sovracampionamento sintetico della minoranza). È una tecnica di campionamento a livello di dati che affronta lo sbilanciamento **generando campioni sintetici** della classe minoritaria, **invece di duplicare** quelli esistenti. Per ogni campione minoritario $x$:
@@ -248,6 +295,8 @@ A differenza di molti dataset accademici, in molti dataset reali sbilanciati **n
 
 <!-- SOURCE_VISUAL id="IS14-V17" source="L14-web.pdf" page="27" type="grafico" description="SMOTE: campioni sintetici generati sul segmento tra un campione minoritario e i suoi vicini" reason="Punti sintetici visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124004454.png)
 
 > 💡 **In formula (nota didattica).** Con $x_{nn}$ uno dei $k$ vicini scelto a caso e $\lambda$ estratto uniformemente in $[0,1]$:
 > $$x_{\text{nuovo}}=x+\lambda\,(x_{nn}-x).$$
@@ -265,10 +314,14 @@ Il sottocampionamento con **dataset condensato** riduce lo sbilanciamento **rimu
 <!-- SOURCE_VISUAL id="IS14-V18" source="L14-web.pdf" page="28" type="grafico" description="Sottocampionamento casuale contro dataset condensato che conserva i campioni maggioritari vicini alla frontiera" reason="Punti conservati visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124004544.png)
+
 Molti campioni vengono rimossi, ma **i vicinati locali che definiscono la frontiera del $k$-NN sono in gran parte conservati**. Una selezione informata dei campioni maggioritari può **preservare approssimativamente la frontiera di decisione**, a seconda del metodo di selezione e del classificatore. Confrontando le regioni corrispondenti, **piccole aree cambiano**.
 
 <!-- SOURCE_VISUAL id="IS14-V19" source="L14-web.pdf" page="29" type="grafico" description="Frontiera k-NN prima e dopo la condensazione del dataset, con le piccole aree che cambiano" reason="Frontiere a confronto visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124004603.png)
 
 > 💡 **L’algoritmo di Hart (1968) (nota didattica).** Si parte da un insieme con tutti i minoritari e un maggioritario; si scorrono i campioni maggioritari e se ne aggiunge uno all’insieme **solo se il classificatore 1-NN costruito sull’insieme corrente lo classifica male**. I campioni «facili», lontani dalla frontiera, sono già classificati bene dai loro vicini e non vengono aggiunti. Si ripete finché non si aggiunge più nulla.
 
@@ -288,6 +341,8 @@ Un campione malato riceve **circa 99 volte** il peso della perdita di uno sano.
 
 <!-- SOURCE_VISUAL id="IS14-V20" source="L14-web.pdf" page="30" type="figura" description="Pesatura della perdita per le classi rare" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124004640.png)
 
 > ⚠️ **Frequenze, non costi.** Questi pesi riflettono le **frequenze delle classi**, **non i costi reali** degli errori: se un paziente mancato costa davvero di più, si fissano i $w_c$ **dalla matrice dei costi** (§1.5).
 
@@ -317,6 +372,8 @@ La pipeline corretta è:
 <!-- SOURCE_VISUAL id="IS14-V21" source="L14-web.pdf" page="32" type="schema" description="Pipeline: divisione stratificata 800/200, bilanciamento del solo training, addestramento, valutazione unica sul test" reason="Schema a blocchi della pipeline" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124004804.png)
+
 - **Prima si partiziona il dataset.** Ricampionamento e bilanciamento delle classi si applicano **solo ai dati di training**. Validation e test restano **indipendenti** e **rappresentativi** dell’applicazione reale (**proporzioni reali delle classi**).
 - **Ordine sbagliato**: sovracampionamento o SMOTE **prima della divisione** mettono nel training **copie, o interpolazioni, dei campioni di test** → **data leakage** → **stima ottimistica**.
 - Con la **validazione incrociata**, il bilanciamento si **ripete dentro ogni fold**, sulla sua sola parte di training.
@@ -343,6 +400,8 @@ Come addestrare e testare i modelli in modo efficace.
 | … | … | … | … |
 | moderata | no | 78 | sì |
 
+![](imgs/Pasted%20image%2020261124005004.png)
+
 **Una riga = un campione** (un paziente). Le coppie note $X\to Y$ servono ad **addestrare e testare** il modello.
 
 #### **3.2. Partizione sbagliata 1: il bias ottimistico**
@@ -351,6 +410,8 @@ Come addestrare e testare i modelli in modo efficace.
 
 <!-- SOURCE_VISUAL id="IS14-V22" source="L14-web.pdf" page="35" type="figura" description="Bias ottimistico quando lo stesso dataset costruisce e valida il modello" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124005014.png)
 
 #### **3.3. Partizione sbagliata 2: underfitting e overfitting non rilevati**
 
@@ -364,6 +425,8 @@ Usando gli stessi dati per addestrare e valutare possono sorgere due problemi pr
 <!-- SOURCE_VISUAL id="IS14-V23" source="L14-web.pdf" page="36" type="figura" description="Underfitting e overfitting non rilevati usando gli stessi dati" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124005024.png)
+
 #### **3.4. Dataset e partizioni: che cosa si può e non si può fare**
 
 - L’obiettivo finale di qualunque sistema intelligente è essere **applicato a problemi reali**.
@@ -372,6 +435,8 @@ Usando gli stessi dati per addestrare e valutare possono sorgere due problemi pr
 
 <!-- SOURCE_VISUAL id="IS14-V24" source="L14-web.pdf" page="37" type="figura" description="Loghi di dataset e repository pubblici di benchmark" reason="Immagini visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124005034.png)
 
 #### **3.5. Partizione del dataset: un avvertimento critico!**
 
@@ -389,6 +454,8 @@ in letteratura esistono **diversi schemi di partizione**. **Come partizionare i 
 <!-- SOURCE_VISUAL id="IS14-V26" source="L14-web.pdf" page="39" type="figura" description="Slide di passaggio: concentrarsi ora su..." reason="Pagina con sola immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124005101.png)
+
 #### **3.6. E se… troppi parametri [richiamo]**
 
 Confronto tra un modello con **#Par eccessivo** e uno con **#Par corretto** dopo l’addestramento: il metodo di apprendimento **non è in grado di gestire tutti gli elementi o parametri** inseriti nel modello con il dataset dato! Il modello ottenuto **non è ottimale**: alcune sue parti sono **inutili**, o si ottiene persino un **cattivo comportamento** (Lezione 7: gradi di libertà contro dati).
@@ -396,9 +463,15 @@ Confronto tra un modello con **#Par eccessivo** e uno con **#Par corretto** dopo
 <!-- SOURCE_VISUAL id="IS14-V27" source="L14-web.pdf" page="40" type="figura" description="Modello con parametri eccessivi contro modello con parametri corretti dopo l'addestramento" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124005149.png)
+
 #### **3.7. L’overfitting in 1D e in 2D**
 
 **Overfitting 1D** (modello di regressione): una curva che passa per tutti i punti oscillando. **Overfitting 2D** (modello di classificazione): una frontiera tortuosa che circonda ogni punto.
+
+![](imgs/Pasted%20image%2020261124005201.png)
+![](imgs/Pasted%20image%2020261124005514.png)
+
 
 <!-- SOURCE_VISUAL id="IS14-V28" source="L14-web.pdf" page="41" type="grafico" description="Overfitting in 1D con un modello di regressione" reason="Curva e punti visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -408,6 +481,8 @@ Confronto tra un modello con **#Par eccessivo** e uno con **#Par corretto** dopo
 
 <!-- SOURCE_VISUAL id="IS14-V30" source="L14-web.pdf" page="43" type="grafico" description="Overfitting in 2D, secondo esempio" reason="Frontiera e punti visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124005444.png)
 
 #### **3.8. Partizione del dataset: tre casi**
 
@@ -419,6 +494,8 @@ Confronto tra un modello con **#Par eccessivo** e uno con **#Par corretto** dopo
 <!-- SOURCE_VISUAL id="IS14-V31" source="L14-web.pdf" page="44" type="grafico" description="Tre grafici: underfitting, mancanza di dati, overfitting" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124005533.png)
+
 > 📌 **L’errore di training rivela l’underfitting; solo i dati non usati per l’addestramento (validation/test) rivelano l’overfitting.**
 
 #### **3.9. Spazio di input ad alta dimensionalità**
@@ -429,6 +506,8 @@ Confronto tra un modello con **#Par eccessivo** e uno con **#Par corretto** dopo
 
 <!-- SOURCE_VISUAL id="IS14-V32" source="L14-web.pdf" page="45" type="grafico" description="Errore di training e di test al crescere dei gradi di libertà del modello" reason="Andamento delle curve visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124005741.png)
 
 > 📌 **Le due curve (nota didattica).** Al crescere dei gradi di libertà l’**errore di training** scende quasi sempre, mentre l’**errore di test** prima scende e poi **risale**: a sinistra del minimo dell’errore di test il modello è in **underfitting** (entrambi gli errori alti), a destra in **overfitting** (training basso, test in crescita); la complessità giusta è vicino al minimo dell’errore di test. Senza un insieme separato si vedrebbe solo la curva di training, che suggerisce sempre di aumentare la complessità.
 
@@ -444,7 +523,12 @@ Confronto tra un modello con **#Par eccessivo** e uno con **#Par corretto** dopo
 <!-- SOURCE_VISUAL id="IS14-V33" source="L14-web.pdf" page="46" type="figura" description="Il giudizio di Salomone come metafora della divisione tra training e test" reason="Illustrazione visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124005750.png)
+
 **Il dilemma training/test.** Il modello $Y=\text{function}(X,\text{params})$ si addestra sui dati di training e si valuta sui dati di test, che devono essere **materiale nuovo**. Con poco test ci si chiede: il risultato è **fortunato**? C’è **vera generalità**? C’è **confidenza statistica**? Con poco training ci si chiede: ci sono **abbastanza dati per imparare tutti i casi**? **Sto davvero sfruttando il mio dataset?**
+
+![](imgs/Pasted%20image%2020261124005817.png)
+
 
 <!-- SOURCE_VISUAL id="IS14-V34" source="L14-web.pdf" page="47" type="figura" description="Il dilemma: molti dati di training e pochi di test (risultato fortunato?)" reason="Illustrazione visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -452,12 +536,16 @@ Confronto tra un modello con **#Par eccessivo** e uno con **#Par corretto** dopo
 <!-- SOURCE_VISUAL id="IS14-V35" source="L14-web.pdf" page="48" type="figura" description="Il dilemma: molti dati di test e pochi di training (abbastanza dati per imparare?)" reason="Illustrazione visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124005834.png)
+
 #### **4.2. Due casi**
 
 | | **Molto training, poco test** | **Molto test, poco training** |
 |---|---|---|
 | **apprendimento** | **buono** | **scarso**: rischio di **underfitting** e di **pattern mancati** |
 | **valutazione** | stime **poco affidabili**, rischio di risultati «**fortunati**» | **affidabile** |
+
+![](imgs/Pasted%20image%2020261124005936.png)
 
 > 📌 **Il dilemma centrale**: **accuratezza dell’apprendimento** contro **affidabilità della valutazione**; **efficienza nell’uso dei dati** contro **confidenza statistica**.
 
@@ -477,6 +565,8 @@ dove $\hat{a}$ è l’accuratezza misurata sul test (adimensionale, 0–1), $n$ 
 <!-- SOURCE_VISUAL id="IS14-V36" source="L14-web.pdf" page="50" type="grafico" description="Divisioni 900/100 e 300/700 con gli intervalli al 95% dell'accuratezza (la p. 49 ne è la versione raster)" reason="Barre e intervalli visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124010043.png)
+
 > 💡 **Leggere l’intervallo (nota didattica).** Con 100 campioni di test, un modello che misura 90% potrebbe avere un’accuratezza vera tra circa 84% e 96%: due modelli che misurano 88% e 91% sullo stesso test piccolo non sono distinguibili. L’ampiezza scala come $1/\sqrt{n}$: per dimezzarla servono **quattro volte** più campioni di test. La formula è l’approssimazione normale della binomiale, valida quando $n\hat{a}$ e $n(1-\hat{a})$ non sono troppo piccoli.
 
 #### **4.3. Training / validation / test**
@@ -487,6 +577,8 @@ dove $\hat{a}$ è l’accuratezza misurata sul test (adimensionale, 0–1), $n$ 
 > - **Test**: **stimare la generalizzazione**.
 >
 > **Si addestra per imparare, si valida per scegliere, si testa per valutare.**
+
+![](imgs/Pasted%20image%2020261124010107.png)
 
 Esempio con $N=1000$:
 
@@ -499,6 +591,8 @@ Le percentuali (60/20/20) sono **solo un esempio**: dipendono da $N$ e dalla **c
 
 <!-- SOURCE_VISUAL id="IS14-V37" source="L14-web.pdf" page="52" type="schema" description="Divisione di 1000 campioni in 2 insiemi (800/200) e 3 insiemi (600/200/200) (la p. 51 ne è la versione raster)" reason="Barre delle divisioni visibili solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124010117.png)
 
 #### **4.4. La validation appartiene ai dati di sviluppo**
 
@@ -515,6 +609,8 @@ La validation si usa per:
 
 <!-- SOURCE_VISUAL id="IS14-V38" source="L14-web.pdf" page="53" type="schema" description="Dati di sviluppo divisi in fit e validation, più il test usato una volta" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124010152.png)
 
 > ⚠️ **Anche la validation è ottimistica.** Se si usa **l’intero dataset per la validazione**, si ottiene una stima affetta da **bias ottimistico**. Anche il **punteggio di validazione del modello scelto è ottimistico** (si è scelto il migliore): **si riporta il punteggio di test**.
 
@@ -545,6 +641,8 @@ Il modello $Y=\text{function}(X,\text{params})$ si costruisce sui dati di traini
 <!-- SOURCE_VISUAL id="IS14-V39" source="L14-web.pdf" page="55" type="schema" description="Tutte le attività di progetto sui dati di training, il test usato solo per l'errore di generalizzazione" reason="Schema presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124010630.png)
+
 #### **5.2. Ogni passo che impara dai dati si adatta solo sul training**
 
 I passi che **imparano qualcosa dai dati** fanno **parte del modello**:
@@ -559,6 +657,8 @@ I passi che **imparano qualcosa dai dati** fanno **parte del modello**:
 
 > ⚠️ **Sbagliato**: calcolare $\mu$, $\sigma$ (o la PCA, o SMOTE) **sull’intero dataset** fa **trapelare informazione del test** nel modello.
 
+![](imgs/Pasted%20image%2020261124010653.png)
+
 > 💡 **Esempi di violazione (nota didattica).** Calcolare lo z-score su tutto il dataset; scegliere le feature con la PCA calcolata su tutti i dati; provare dieci architetture e tenere quella con il miglior risultato **sul test** (il test diventa una validazione e la stima finale è ottimistica). In tutti i casi il rimedio è lo stesso: calcolare trasformazioni e scelte sul training e applicarle poi, invariate, al test. In scikit-learn l’oggetto `Pipeline` impone questa regola automaticamente dentro la validazione incrociata.
 
 ---
@@ -570,18 +670,29 @@ I passi che **imparano qualcosa dai dati** fanno **parte del modello**:
 
 La validazione incrociata: l’approccio generale e la sua forma più comune.
 
+![](imgs/Pasted%20image%2020261124010726.png)
+
+
 **L’approccio generale.** In **un round**, i gruppi 1–3 addestrano il modello; il gruppo 4 viene **predetto** e confrontato con i valori veri (A → B). Per un regressore, i punti vicini alla diagonale $\hat{y}=y$ sono buone previsioni. La **validazione incrociata ripete il round** in modo che **ogni gruppo sia usato una volta come test**; gli errori di test di tutti i round vengono poi **aggregati**.
 
 <!-- SOURCE_VISUAL id="IS14-V40" source="L14-web.pdf" page="58" type="schema" description="Approccio generale della validazione incrociata: gruppi di training e di test e grafico predetto contro vero (la p. 59 ne è la versione vettoriale)" reason="Schema e grafico visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124010857.png)
 
 > 📌 **k-FCV.** È lo schema più comune:
 > 1. il dataset originale viene **diviso a caso in $k$ fold** (partizioni) di **uguale dimensione**;
 > 2. dei $k$ fold, **uno** si tiene come dati di **validazione** per testare il modello, e i **restanti $k-1$** servono a **costruirlo**;
 > 3. con $k$ partizioni, il processo si **ripete $k$ volte**, usando **ogni fold esattamente una volta** come validazione.
 
+![](imgs/Pasted%20image%2020261124010930.png)
+
+
 <!-- SOURCE_VISUAL id="IS14-V41" source="L14-web.pdf" page="62" type="schema" description="k-FCV con 5 fold: 5 modelli, i rispettivi errori e[1..5], media e deviazione standard (la p. 61 ne è la versione raster)" reason="Rotazione dei fold visibile solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124010949.png)
+![](imgs/Pasted%20image%2020261124010958.png)
 
 - **Input**: $N$ campioni etichettati. **Output**: $k$ errori di test $e_1,\dots,e_k$ (ciascuno su circa $N/k$ campioni), riassunti da $\bar{e}$ e $s_e$.
 - **Ogni campione è testato esattamente una volta**; si addestrano $k$ modelli, ciascuno su circa $(k-1)N/k$ campioni.
@@ -592,6 +703,8 @@ Dalla k-FCV si ottengono $k$ modelli diversi, ciascuno con il suo errore. Quale 
 
 <!-- SOURCE_VISUAL id="IS14-V42" source="L14-web.pdf" page="63" type="figura" description="k modelli della k-FCV con i loro errori: quale rilasciare?" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124011016.png)
 
 > 📌 **Risposta: i modelli dei fold sono usa e getta.** La validazione incrociata **non sceglie uno di essi**: **stima la qualità di una procedura** (algoritmo + iperparametri) e permette di scegliere la **configurazione migliore**.
 
@@ -620,6 +733,8 @@ La procedura completa:
 | addestramenti | 5 su 800 campioni | 10 su 900 campioni |
 | fold di test | 200 campioni (circa 2 malati) | 100 campioni (circa 1 malato) |
 
+![](imgs/Pasted%20image%2020261124011046.png)
+
 > 💡 **Il compromesso su $k$ (nota didattica).** Con $k$ più grande ogni modello si addestra su più dati (stima meno pessimistica), ma i fold di test sono più piccoli e i training set si sovrappongono di più (le $k$ stime sono più correlate), e il costo cresce. Con 10 malati su 1000, un fold di 100 campioni ne contiene in media uno solo: il recall su quel fold può valere solo 0% o 100%.
 
 #### **6.4. k-FCV stratificata**
@@ -628,6 +743,8 @@ La procedura completa:
 - La **k-fold stratificata** **conserva approssimativamente le proporzioni originali** delle classi in ogni fold. **Non rende le classi ugualmente numerose.**
 
 **Esempio**: dataset con 990 sani + 10 malati, $k=5$: **ogni fold** contiene **198 + 2**, cioè mantiene l’**1% di malati**.
+
+![](imgs/Pasted%20image%2020261124011101.png)
 
 I **dati raggruppati** (più campioni per persona) richiedono **fold stratificati per gruppo**: si veda LOPO (§6.7).
 
@@ -641,8 +758,13 @@ Cinque ripetizioni di una divisione in due.
 > - Poi **si inverte**: l’altra metà diventa training e la prima test.
 > - Questa divisione in due (2CV) si **ripete 5 volte**, per un totale di **10 punteggi** di valutazione.
 
+![](imgs/Pasted%20image%2020261124011154.png)
+
+
 <!-- SOURCE_VISUAL id="IS14-V43" source="L14-web.pdf" page="69" type="schema" description="5x2 CV: cinque replicazioni di due metà scambiate e 10 punteggi (la p. 70 ne è la versione vettoriale)" reason="Schema delle partizioni visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124011212.png)
 
 In ogni replicazione c’è un **nuovo rimescolamento casuale** e due metà di $N/2$ campioni che si scambiano i ruoli (a, b): **10 modelli**, ciascuno addestrato su $N/2$ campioni, e 10 errori $e_{1,1},\dots,e_{5,2}$ riassunti da media e deviazione standard.
 
@@ -667,13 +789,21 @@ In ogni replicazione c’è un **nuovo rimescolamento casuale** e due metà di $
 <!-- SOURCE_VISUAL id="IS14-V44" source="L14-web.pdf" page="72" type="figura" description="Leave-one-out quando i dati sono molto scarsi" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124011233.png)
+
 > 📌 **LOO.** È il **caso estremo della k-FCV**: **$k$ è uguale al numero di esempi** del dataset. A ogni passo **un solo esempio** serve a **testare** il modello, mentre **tutti gli altri** servono a **impararlo**.
+
+![](imgs/Pasted%20image%2020261124011421.png)
+
 
 <!-- SOURCE_VISUAL id="IS14-V45" source="L14-web.pdf" page="73" type="figura" description="Leave-one-out come caso estremo della k-FCV" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 <!-- SOURCE_VISUAL id="IS14-V46" source="L14-web.pdf" page="74" type="schema" description="Leave-one-out: N iterazioni, ciascuna con un solo campione di test (la p. 75 ne è la versione vettoriale)" reason="Schema delle iterazioni visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124011432.png)
+![](imgs/Pasted%20image%2020261124011456.png)
 
 $$\bar{e}=\frac1N\sum_{i=1}^{N}e_i,$$
 
@@ -688,10 +818,14 @@ Si usa in **biometria**, **screening medico**, eccetera. **Critico per i modelli
 <!-- SOURCE_VISUAL id="IS14-V47" source="L14-web.pdf" page="76" type="schema" description="Leave-one-person-out in biometria e screening medico" reason="Schema delle partizioni per persona visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124011613.png)
+
 Confrontando LOPO e L(N)PO con una divisione mescolata: **ora è più difficile usare il colore dei capelli…**
 
 <!-- SOURCE_VISUAL id="IS14-V48" source="L14-web.pdf" page="77" type="schema" description="LOPO e L(NP)O contro divisione mescolata: più difficile usare il colore dei capelli" reason="Confronto visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124011646.png)
 
 > 💡 **Perché serve (nota didattica).** Se le foto della stessa persona stanno sia in training sia in test, un modello grande può riconoscere **la persona** (capelli, pelle, sfondo della sua sessione) invece di imparare il compito (per esempio l’emozione o la malattia). Il risultato è ottimo in validazione e pessimo su persone nuove: è il «déjà vu» della Lezione 7. LOPO garantisce che il modello sia sempre testato su **persone mai viste**.
 
@@ -711,6 +845,8 @@ $$\hat{\pi}=4\cdot\frac{7891}{10\,000}=3{,}1564\quad(\text{valore vero }3{,}1416
 <!-- SOURCE_VISUAL id="IS14-V49" source="L14-web.pdf" page="79" type="grafico" description="Stima di pi con 10000 punti casuali, 7891 dentro il cerchio inscritto" reason="Punti del grafico visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124011919.png)
+
 > 💡 **Perché il fattore 4 (nota didattica).** Un cerchio di raggio $r$ inscritto in un quadrato di lato $2r$ occupa la frazione $\pi r^2/(2r)^2=\pi/4$ dell’area. La frazione di punti casuali che cade nel cerchio stima quindi $\pi/4$. L’errore della stima cala come $1/\sqrt{n}$: con 10 000 punti l’errore tipico è circa 0,016, coerente con lo scarto osservato di 0,015.
 
 > 📌 **Validazione Monte Carlo.** Valuta i modelli **dividendo a caso il dataset più volte** in training e test:
@@ -719,8 +855,13 @@ $$\hat{\pi}=4\cdot\frac{7891}{10\,000}=3{,}1564\quad(\text{valore vero }3{,}1416
 > 3. il processo si **ripete più volte**, con una **nuova divisione casuale** a ogni iterazione;
 > 4. la prestazione finale è stimata come **media** dei risultati di tutte le iterazioni.
 
+![](imgs/Pasted%20image%2020261124012025.png)
+
+
 <!-- SOURCE_VISUAL id="IS14-V50" source="L14-web.pdf" page="80" type="schema" description="Validazione Monte Carlo: R iterazioni con divisione 80/20 nuova a ogni iterazione (la p. 81 ne è la versione vettoriale)" reason="Schema delle iterazioni visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124012219.png)
 
 $$\bar{e}=\frac1R\sum_{r=1}^{R}e_r,$$
 
@@ -759,6 +900,8 @@ $k$: numero di partizioni; $e_i$: errore sulla partizione di test $i$ (per esemp
 <!-- SOURCE_VISUAL id="IS14-V52" source="L14-web.pdf" page="86" type="grafico" description="Bias, varianza ed errore totale in funzione della complessità del modello" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124013201.png)
+
 > 📌 **La scomposizione (nota didattica).** Per la regressione con errore quadratico, l’errore atteso su un nuovo punto $x$ si scompone in
 > $$\mathbb{E}\big[(y-\hat{f}(x))^2\big]=\underbrace{\big(\mathbb{E}[\hat{f}(x)]-f(x)\big)^2}_{\text{bias}^2}+\underbrace{\mathbb{E}\big[(\hat{f}(x)-\mathbb{E}[\hat{f}(x)])^2\big]}_{\text{varianza}}+\underbrace{\sigma^2}_{\text{rumore}},$$
 > dove l’attesa è sui possibili training set. Il rumore $\sigma^2$ non si può eliminare; il progettista sposta l’equilibrio tra gli altri due termini scegliendo la complessità del modello (gli alberi profondi della Lezione 12 hanno varianza alta, e la random forest la riduce).
@@ -793,6 +936,8 @@ In biometria, screening medico, previsioni, mercati azionari, eccetera.
 <!-- SOURCE_VISUAL id="IS14-V53" source="L14-web.pdf" page="90" type="schema" description="Il problema classico della divisione nelle serie temporali" reason="Pagina con solo diagramma" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124013242.png)
+
 **Un compito complesso: la finestra mobile.**
 
 - Dividere una serie temporale in training e test è un problema **soggetto a errori**: si può osservare **data leakage**.
@@ -801,10 +946,14 @@ In biometria, screening medico, previsioni, mercati azionari, eccetera.
 <!-- SOURCE_VISUAL id="IS14-V54" source="L14-web.pdf" page="91" type="schema" description="Validazione a finestra mobile (rolling window)" reason="Posizione delle finestre visibile solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124013258.png)
+
 **Un compito complesso: la finestra espandibile in avanti.** Stessa simulazione del passare del tempo, ma la **dimensione delle partizioni di training è diversa**: **cresce a ogni divisione**.
 
 <!-- SOURCE_VISUAL id="IS14-V55" source="L14-web.pdf" page="92" type="schema" description="Validazione a finestra espandibile in avanti (expanding window)" reason="Posizione delle finestre visibile solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124013311.png)
 
 **Dividere le serie temporali per la validazione incrociata.**
 
@@ -813,6 +962,8 @@ In biometria, screening medico, previsioni, mercati azionari, eccetera.
 
 <!-- SOURCE_VISUAL id="IS14-V56" source="L14-web.pdf" page="93" type="schema" description="CV a blocchi contro forward chaining con gap: tre divisioni con training, gap e test nel tempo" reason="Disposizione delle partizioni visibile solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124013346.png)
 
 > 💡 **Perché il gap (nota didattica).** Campioni vicini nel tempo sono molto simili: se il test inizia subito dopo l’ultimo campione di training, il modello può «copiare» l’ultimo valore visto e sembrare bravo. Un intervallo vuoto obbliga il modello a prevedere davvero, e riduce il leakage dovuto all’autocorrelazione della serie (si ricordino le finestre sovrapposte della Lezione 10 e l’ACF della Lezione 11).
 
