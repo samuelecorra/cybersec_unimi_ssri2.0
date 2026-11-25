@@ -63,8 +63,6 @@ Definizione, esempi, agenti contro modelli, agenti contro workflow.
 
 La struttura: **obiettivo e contesto** → **controllore dell’agente** (modello + stato + scelta degli strumenti) → **chiamata a strumento** → **strumenti e ambiente autorizzati** (permessi, limiti, approvazione umana) → **osservazione**, che torna al controllore.
 
-<!-- SOURCE_VISUAL id="IS15-V01" source="L15-web.pdf" page="6" type="schema" description="Struttura dell'agente: obiettivo e contesto, controllore, chiamata a strumento, strumenti autorizzati, osservazione" reason="Schema del ciclo visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124015427.png)
 
@@ -80,8 +78,6 @@ La struttura: **obiettivo e contesto** → **controllore dell’agente** (modell
 | **agenti personali self-hosted** | installati su una macchina personale o un VPS, spesso collegati a e-mail, calendario, browser, file e messaggistica | OpenClaw, PI dev, Hermes, … |
 | **agenti fisici / incarnati** (*embodied*) | agiscono nel **mondo fisico** attraverso sensori, motori, navigazione e controllo | droni, robot, robot di magazzino, robot di ispezione, cani robot |
 
-<!-- SOURCE_VISUAL id="IS15-V02" source="L15-web.pdf" page="8" type="figura" description="Esempi di agenti personali self-hosted e di agenti fisici (droni, robot)" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124015836.png)
 ![](imgs/Pasted%20image%2020261124015900.png)
@@ -106,8 +102,6 @@ La struttura: **obiettivo e contesto** → **controllore dell’agente** (modell
 
 Da una parte ci sono i **modelli** (linguistico, visivo, di codice), dall’altra le **risorse** (documenti e log, immagini e sensori, strumenti e API autorizzati). In mezzo sta l’**agente**: un **controllore con stato**, **obiettivi e politiche**. I modelli forniscono **proposte**; l’agente le trasforma in **azioni** sulle risorse e riceve **osservazioni**, che alimentano il **contesto** dei modelli.
 
-<!-- SOURCE_VISUAL id="IS15-V03" source="L15-web.pdf" page="10" type="schema" description="L'agente tra i modelli (linguaggio, visione, codice) e le risorse (documenti, immagini, strumenti)" reason="Schema visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124020238.png)
 
@@ -123,8 +117,6 @@ Da una parte ci sono i **modelli** (linguistico, visivo, di codice), dall’altr
 ![](imgs/Pasted%20image%2020261124020724.png)
 
 
-<!-- SOURCE_VISUAL id="IS15-V04" source="L15-web.pdf" page="12" type="schema" description="Architettura dell'agente: modello al centro con interfaccia, strumenti, contesto e memoria, permessi e controlli" reason="Schema visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124020738.png)
 
@@ -136,8 +128,6 @@ Da una parte ci sono i **modelli** (linguistico, visivo, di codice), dall’altr
 
 Un **workflow** segue una **sequenza predefinita**: il suo percorso è più facile da **testare, verificare e riprodurre**. Un **agente** **sceglie strumenti e azioni successive** dalle osservazioni, ma richiede **limiti, validazioni e condizioni di arresto**.
 
-<!-- SOURCE_VISUAL id="IS15-V05" source="L15-web.pdf" page="13" type="figura" description="Workflow con sequenza predefinita contro agente che sceglie le azioni dalle osservazioni" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124020828.png)
 
@@ -167,8 +157,6 @@ Un **workflow** segue una **sequenza predefinita**: il suo percorso è più faci
 <!-- SOURCE_VISUAL id="IS15-V06" source="L15-web.pdf" page="16" type="figura" description="Interfaccia web o CLI davanti al controllore dell'agente e agli strumenti permessi, con chat web che spiega un comando" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS15-V07" source="L15-web.pdf" page="17" type="schermata" description="Interfaccia web e interfaccia a riga di comando di un agente" reason="Schermate visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124021451.png)
 
@@ -207,8 +195,6 @@ Una chiamata a strumento è un’**operazione reale**. Si definisce **l’azione
 
 Lo schema è: **percezione** dall’ambiente → **agente / LLM** → **azione** sull’ambiente.
 
-<!-- SOURCE_VISUAL id="IS15-V09" source="L15-web.pdf" page="20" type="schema" description="Ciclo percezione-agente-azione con l'ambiente, come per un robot esploratore" reason="Ciclo visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124021703.png)
 
@@ -221,8 +207,6 @@ Lo schema è: **percezione** dall’ambiente → **agente / LLM** → **azione**
 
 > 📌 **Il feedback cambia l’azione successiva; non riaddestra automaticamente i pesi del modello.**
 
-<!-- SOURCE_VISUAL id="IS15-V10" source="L15-web.pdf" page="21" type="schema" description="Ciclo agentico minimo: obiettivo umano, decisione del modello, azione con strumento, osservazione, STOP o approvazione" reason="Ciclo visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124021724.png)
 
@@ -279,8 +263,6 @@ La sovranità dei dati influenza **come e dove** un sistema di AI può elaborare
 | **giurisdizione** | gli obblighi legali dipendono dal **contesto di elaborazione**, non solo dalla sede pubblicizzata dal fornitore |
 | **controllo** | impegni contrattuali, permessi di accesso e registri di audit **per ogni servizio** |
 
-<!-- SOURCE_VISUAL id="IS15-V11" source="L15-web.pdf" page="25" type="figura" description="Sovranità dei dati: posizione, giurisdizione e controllo" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124022610.png)
 
@@ -343,8 +325,6 @@ Il **Regolamento (UE) 2026/1744** è in vigore **dal 27 luglio 2026** e **modifi
 
 > ⚠️ **In caso di dubbio**, contattare l’**ufficio legale** dell’azienda e il **DPO** **prima** di condividere o elaborare i dati.
 
-<!-- SOURCE_VISUAL id="IS15-V13" source="L15-web.pdf" page="30" type="figura" description="Dati che richiedono una cura particolare: personali, categorie particolari, usi ad alto rischio" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124024135.png)
 
@@ -381,8 +361,6 @@ La **pseudonimizzazione reversibile** può permettere una **modifica remota sele
 
 La **linea di confine dei dati** passa tra il gateway e il cloud.
 
-<!-- SOURCE_VISUAL id="IS15-V14" source="L15-web.pdf" page="33" type="schema" description="Gateway di privacy locale: pseudonimizzazione, elaborazione cloud del testo mascherato e ripristino locale" reason="Schema del flusso con confine dei dati visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124024308.png)
 
@@ -416,8 +394,6 @@ Per i dati industriali **altamente riservati**, l’**elaborazione dei documenti
 
 **Esempi**: dichiarazioni di invenzione, ricette, parametri industriali, codice sorgente e dataset proprietari.
 
-<!-- SOURCE_VISUAL id="IS15-V15" source="L15-web.pdf" page="36" type="schema" description="Flusso interamente locale: segreti aziendali, modello locale + RAG, storage on-premise, accesso negato al cloud" reason="Schema del perimetro visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124024354.png)
 
@@ -429,8 +405,6 @@ L’architettura segue gli **obblighi contrattuali** e una **valutazione del ris
 - **CONTROLLARE LE IMPOSTAZIONI DI PRIVACY** («usa i miei dati per addestrare i modelli»!).
 - **NON IMPROVVISARE.**
 
-<!-- SOURCE_VISUAL id="IS15-V16" source="L15-web.pdf" page="37" type="figura" description="Consigli: niente account gratuiti, controllare le impostazioni di privacy, non improvvisare" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124024509.png)
 
@@ -449,8 +423,6 @@ L’architettura segue gli **obblighi contrattuali** e una **valutazione del ris
 | cercare **parole magiche** | progettare la **pipeline dell’informazione** |
 | una formulazione astuta **sblocca capacità nascoste** («Sei un programmatore esperto che…») | **trattare i prompt come codice di produzione** |
 
-<!-- SOURCE_VISUAL id="IS15-V17" source="L15-web.pdf" page="39" type="figura" description="Il prompting nel 2023 e dal 2026 in poi" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124024559.png)
 
@@ -483,8 +455,6 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 - Comporta progettare **prompt di sistema strutturati** che definiscono **ruolo** (*persona*), **obiettivi**, **vincoli**, **uso degli strumenti** (API, MCP, …) e guidano **flussi autonomi a più passi** invece di singole interazioni.
 - Per un’uscita **coerente e di qualità**, il prompting degli agenti usa tecniche come **ReAct** (*Reasoning + Acting*) per l’efficienza del ciclo e **esempi few-shot** (positivi e negativi).
 
-<!-- SOURCE_VISUAL id="IS15-V18" source="L15-web.pdf" page="43" type="figura" description="Prompt di sistema strutturati con ruolo, obiettivi, vincoli e strumenti" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124024911.png)
 
@@ -500,8 +470,6 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 - **ReAct** è nato come **schema di prompting**: il prompt chiedeva esplicitamente al modello di **alternare passi di ragionamento, azioni con strumenti e osservazioni**.
 - Oggi la stessa idea è ancora molto usata, ma spesso è **implementata dentro il runtime dell’agente**: il modello può ragionare, chiamare strumenti, osservare i risultati e aggiornare il piano **senza esporre all’utente l’intera catena** dei passaggi intermedi.
 
-<!-- SOURCE_VISUAL id="IS15-V20" source="L15-web.pdf" page="45" type="figura" description="Lo schema ReAct: ragionamento, azione, osservazione in alternanza" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124025030.png)
 
@@ -532,8 +500,6 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 
 **Buona pratica**: le **istruzioni critiche vanno all’inizio e alla fine**, mai nel mezzo.
 
-<!-- SOURCE_VISUAL id="IS15-V21" source="L15-web.pdf" page="47" type="grafico" description="Curva schematica a U dell'accuratezza in funzione della posizione dell'informazione nel contesto" reason="Curva visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124025139.png)
 
@@ -546,8 +512,6 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 - Tenere **espliciti e compatti** l’obiettivo corrente, i vincoli e l’uscita attesa.
 - **Confrontare con baseline a contesto pieno**: anche la compressione può perdere informazione rilevante.
 
-<!-- SOURCE_VISUAL id="IS15-V22" source="L15-web.pdf" page="48" type="figura" description="Tenere il prompt di compito compatto: 150-300 parole" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124025338.png)
 
@@ -646,8 +610,6 @@ I modelli di ragionamento avanzati sono **già ottimizzati per scomporre i probl
 
 > 📌 **Meno allucinazioni per progetto: niente evidenze → niente conclusioni.**
 
-<!-- SOURCE_VISUAL id="IS15-V24" source="L15-web.pdf" page="54" type="figura" description="Architettura dei vincoli: auto-verifica, ancoraggio alle fonti, rifiuto esplicito" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124025718.png)
 
@@ -673,8 +635,6 @@ Un mito del 2024: «**più esempi = meglio**». Nel 2026: **esempi calibrati, te
 
 Sono tendenze, non garanzie per classe di modello: si confronta l’accuratezza zero-shot e few-shot su un **test set rappresentativo**.
 
-<!-- SOURCE_VISUAL id="IS15-V26" source="L15-web.pdf" page="56" type="figura" description="Few-shot che aiuta o danneggia la generalizzazione" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124025841.png)
 
@@ -684,8 +644,6 @@ Sono tendenze, non garanzie per classe di modello: si confronta l’accuratezza 
 
 Nei sistemi agentici un buon prompting **non riguarda solo la formulazione della richiesta**: consiste nel definire il **contratto operativo** che rende l’agente **controllabile, ispezionabile e sicuro da eseguire**.
 
-<!-- SOURCE_VISUAL id="IS15-V27" source="L15-web.pdf" page="57" type="figura" description="I quattro livelli aggiuntivi di un prompt agentico" reason="I quattro livelli sono visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124025906.png)
 
@@ -735,8 +693,6 @@ Un’istruzione nascosta in un documento **può aggirare un avvertimento testual
 
 **Sceglierne solo due!** Tre capacità ad alto impatto **non devono combinarsi senza salvaguardie indipendenti**. Se tutte e tre sono necessarie, si riprogettano i confini o si richiede una supervisione umana indipendente.
 
-<!-- SOURCE_VISUAL id="IS15-V28" source="L15-web.pdf" page="61" type="schema" description="Rule of Two: tre cerchi (input non fidati, dati e sistemi sensibili, azioni esterne) da non combinare tutti" reason="Diagramma a tre insiemi visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124030313.png)
 
@@ -825,8 +781,6 @@ Servono **contesto documentale o strumenti di recupero**: il **pre-addestramento
 
 **Recupero e generazione**: domanda dell’utente → **embedding della domanda** → **recupero** dei **top-K chunk** dal database vettoriale → **LLM** che **genera** la risposta.
 
-<!-- SOURCE_VISUAL id="IS15-V29" source="L15-web.pdf" page="69" type="schema" description="Pipeline RAG: indicizzazione (caricamento, divisione, embedding, memorizzazione) e recupero-generazione (domanda, top-K chunk, LLM)" reason="Schema della pipeline visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124030622.png)
 
@@ -866,8 +820,6 @@ Servono **contesto documentale o strumenti di recupero**: il **pre-addestramento
 
 Il **chunking** divide i documenti in **passaggi recuperabili** senza perdere il **contesto essenziale**. Nell’esempio, il testo «*This is the text I would like to chunk up. It is the example text for this exercise.*» viene diviso in tre chunk con **sovrapposizione** (*overlap*) tra chunk consecutivi.
 
-<!-- SOURCE_VISUAL id="IS15-V30" source="L15-web.pdf" page="72" type="schema" description="Un testo diviso in tre chunk con sovrapposizione tra chunk consecutivi" reason="Disposizione dei chunk e delle sovrapposizioni visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124031022.png)
 
@@ -893,8 +845,6 @@ dove $e$ è il **modello di embedding**. **Input**: il testo del chunk. **Output
 - Trova **parafrasi e significati correlati**, **anche quando le parole esatte differiscono**.
 - **Limite**: **codici di parti esatti e codici rari possono sfuggire**.
 
-<!-- SOURCE_VISUAL id="IS15-V31" source="L15-web.pdf" page="73" type="schema" description="Domanda e chunk trasformati dal modello di embedding in vettori dello stesso spazio, similarità coseno e top-k" reason="Schema visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124031159.png)
 
@@ -962,8 +912,6 @@ I **ranghi** si usano perché **BM25 e coseno hanno scale diverse**. I **top-$k$
 
 Il database vettoriale restituisce i **top-N chunk**; un **modello di reranking**, che riceve anche la domanda, li restituisce **nello stesso insieme ma in un ordine nuovo** (i numeri indicano la posizione prima del riordino). **Solo i primi $k$ chunk** (qui $k=2$) entrano nel prompt dell’LLM, insieme alla domanda.
 
-<!-- SOURCE_VISUAL id="IS15-V33" source="L15-web.pdf" page="76" type="schema" description="Top-N chunk dal database vettoriale, modello di reranking, top-k all'LLM e risposta" reason="Schema del riordino visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124031405.png)
 
@@ -984,8 +932,6 @@ Il modello (*cross-encoder*) riceve $N$ coppie (domanda, chunk):
 | 3. #04 worn bearings make the pump shake | 0,0164 | 3. #08 vibration trend, bearing wear | 0,40 | 2 ↓ |
 | 4. #31 fleet report, TS-999 once | 0,0161 | 4. #04 worn bearings make the pump shake | 0,12 | 3 ↓ |
 
-<!-- SOURCE_VISUAL id="IS15-V34" source="L15-web.pdf" page="77" type="schema" description="Reranking con cross-encoder: lista fusa prima e dopo, con i punteggi s e gli spostamenti" reason="Schema del reranker e delle liste visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124031421.png)
 
@@ -1006,8 +952,6 @@ $N$ = 20–100 chunk; punteggi spesso in $[0,1]$; i **top $k=5$** vanno all’LL
 | ibrido (+ BM25 contestuale) | 2,9% |
 | + reranking | **1,9%** |
 
-<!-- SOURCE_VISUAL id="IS15-V35" source="L15-web.pdf" page="78" type="grafico" description="Barre di failure@20 per baseline, contestuale, ibrido e reranked (5.7%, 3.7%, 2.9%, 1.9%)" reason="Grafico a barre visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124031455.png)
 
@@ -1043,8 +987,6 @@ $$\text{failure@20}=1-\text{Recall@20},\qquad \text{Recall@20}=\frac{\text{chunk
 | **costruire il contesto per l’LLM** | **chunk irrilevanti inquinano il contesto** | **fonte sbagliata / rumore** |
 | **generare la risposta** | risposta **non supportata dalle evidenze** | **sintesi non supportata** |
 
-<!-- SOURCE_VISUAL id="IS15-V36" source="L15-web.pdf" page="80" type="schema" description="I quattro stadi della pipeline RAG con il modo di guasto e l'etichetta di ciascuno" reason="Schema della pipeline con i guasti visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124031538.png)
 

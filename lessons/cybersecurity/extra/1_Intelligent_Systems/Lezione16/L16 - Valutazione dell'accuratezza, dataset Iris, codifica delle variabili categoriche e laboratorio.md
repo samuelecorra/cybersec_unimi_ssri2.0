@@ -62,8 +62,6 @@ $$R^2=1-\frac{\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}=1-
 - È la **quota della variazione dell’esito spiegata dai predittori**: **più alto è meglio**. Vale per **qualunque modello**, non solo per le rette.
 - Intervallo usuale $[0,1]$ ($(-\infty,1]$ per modelli cattivi); **adimensionale**. Esempio: $R^2=0{,}81\Rightarrow$ **81% spiegato**.
 
-<!-- SOURCE_VISUAL id="IS16-V01" source="L16-web.pdf" page="6" type="grafico" description="Dati osservati, retta del modello e media per illustrare la variazione spiegata e non spiegata in R^2" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124032946.png)
 
@@ -98,8 +96,6 @@ $$\text{MAE}=\frac{1+0+3}{3}=1{,}33\ \text{EUR},\qquad \text{RMSE}=1{,}83\ \text
 
 **Il singolo errore grande pesa di più nel RMSE.**
 
-<!-- SOURCE_VISUAL id="IS16-V02" source="L16-web.pdf" page="8" type="figura" description="Confronto tra errori assoluti e quadratici nel MAE e nel RMSE" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034017.png)
 
@@ -149,8 +145,6 @@ la **percentuale di risultati previsti che coincidono con quelli attesi**. Si ha
 ![](imgs/Pasted%20image%2020261124034051.png)
 
 
-<!-- SOURCE_VISUAL id="IS16-V03" source="L16-web.pdf" page="12" type="figura" description="Matrice di confusione illustrata con immagini di cani (credito narkhede_sarang)" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034101.png)
 
@@ -182,8 +176,6 @@ $$\text{accuratezza}=\frac{40+45}{100}=0{,}85,\quad \text{errore}=\frac{5+10}{10
 - **Riga $i$ = classe vera**, **colonna $j$ = classe prevista**; ogni elemento = **numero di immagini di test**.
 - **Ogni riga somma a 1000** immagini di test; accuratezza complessiva $=9024/10\,000=$ **90,2%** (test set di CIFAR-10, `Cifar10Labels.mat`).
 
-<!-- SOURCE_VISUAL id="IS16-V04" source="L16-web.pdf" page="14" type="grafico" description="Matrice di confusione 10x10 su CIFAR-10 con 9024 corretti su 10000" reason="Valori della matrice visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034324.png)
 
@@ -192,15 +184,11 @@ $$\text{accuratezza}=\frac{40+45}{100}=0{,}85,\quad \text{errore}=\frac{5+10}{10
 - La **diagonale** contiene i valori **corretti**.
 - **Tutto ciò che sta fuori dalla diagonale è un errore**: la sua **posizione** dice **quali due classi** vengono confuse.
 
-<!-- SOURCE_VISUAL id="IS16-V05" source="L16-web.pdf" page="15" type="grafico" description="Matrice CIFAR-10 con diagonale corretta ed errori fuori diagonale evidenziati" reason="Evidenziazioni visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034334.png)
 
 **Esempi**: **26 uccelli** reali sono stati confusi con **aerei**; **111 cani** reali sono stati confusi con **gatti**. Servono altri esempi? Si sceglie una cella qualunque fuori diagonale: **riga = classe vera**, **colonna = classe prevista**.
 
-<!-- SOURCE_VISUAL id="IS16-V06" source="L16-web.pdf" page="16" type="grafico" description="Matrice CIFAR-10 con le celle uccello-aereo (26) e cane-gatto (111) evidenziate" reason="Celle evidenziate visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034401.png)
 
@@ -216,8 +204,6 @@ $$\text{accuratezza}=\frac{40+45}{100}=0{,}85,\quad \text{errore}=\frac{5+10}{10
 $$\text{TPR}=\frac{TP}{TP+FN}\quad\text{contro}\quad \text{FPR}=\frac{FP}{FP+TN}.$$
 - **Esempio** ($N=100$): $\text{TPR}=40/50=0{,}80$, $\text{FPR}=5/50=0{,}10$.
 
-<!-- SOURCE_VISUAL id="IS16-V07" source="L16-web.pdf" page="17" type="schema e grafico" description="Rilevatore con somma pesata e soglia, e curva ROC con la diagonale del caso e la zona di miglioramento" reason="Schema e curva visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034429.png)
 
@@ -240,8 +226,6 @@ $$\text{TPR}=\frac{TP}{TP+FN}\quad\text{contro}\quad \text{FPR}=\frac{FP}{FP+TN}
 
 **Abbassando la soglia, TP e FP crescono insieme.** La riga 5 è l’esempio delle slide precedenti.
 
-<!-- SOURCE_VISUAL id="IS16-V08" source="L16-web.pdf" page="18" type="grafico" description="Curva ROC costruita dai 10 punti della tabella, con la soglia che scende da 1 a 10" reason="Punti numerati della curva visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034457.png)
 
@@ -274,8 +258,6 @@ Il machine learning si è arricchito di nuove capacità grazie a **foundation mo
 
 Sopra: si addestra, poi si fa la validazione incrociata. Sotto: si ancora e si adatta, poi si valida con le persone.
 
-<!-- SOURCE_VISUAL id="IS16-V09" source="L16-web.pdf" page="21" type="schema" description="Pipeline tradizionale e nuova a confronto nei quattro passi: dati, rappresentazione, adattamento, controllo" reason="Schema a due righe visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034549.png)
 
@@ -289,8 +271,6 @@ Sopra: si addestra, poi si fa la validazione incrociata. Sotto: si ancora e si a
 
 Un foundation model è addestrato **una volta** su **dati enormi e diversi** (testo, immagini, parlato, dati strutturati come tabelle e log, segnali di sensori come vibrazione e corrente) e poi **adattato** — con il **prompting**, il **fine-tuning** o lo **zero/few-shot** — a **molti compiti**: risposta a domande, analisi del sentiment, estrazione di informazioni, didascalie di immagini, riconoscimento di oggetti, esecuzione di istruzioni.
 
-<!-- SOURCE_VISUAL id="IS16-V10" source="L16-web.pdf" page="23" type="schema" description="Foundation model addestrato su dati diversi e adattato a molti compiti" reason="Schema dati-modello-compiti visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034646.png)
 
@@ -339,8 +319,6 @@ Un foundation model è addestrato **una volta** su **dati enormi e diversi** (te
 - **Zero-shot**: **nessun esempio**, solo i **nomi delle classi** (cane, gatto): un’immagine sconosciuta → «cane».
 - **Few-shot**: **pochi esempi etichettati** (immagine 1: cane; immagine 2: gatto): un’immagine sconosciuta → «cane».
 
-<!-- SOURCE_VISUAL id="IS16-V11" source="L16-web.pdf" page="26" type="schema" description="Zero-shot con i soli nomi delle classi e few-shot con due esempi etichettati" reason="Schema con immagini visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034818.png)
 
@@ -366,8 +344,6 @@ Un foundation model è addestrato **una volta** su **dati enormi e diversi** (te
 
 **Combinare attributi noti** (simile al cavallo + ali) corrisponde alla descrizione «**cavallo alato**»: una **classe mai vista in addestramento viene riconosciuta**.
 
-<!-- SOURCE_VISUAL id="IS16-V12" source="L16-web.pdf" page="28" type="schema" description="Zero-shot con gli animali: attributi di zebra, muflone e giraffa e riconoscimento del cavallo alato mai visto" reason="Schema con immagini degli animali visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124034844.png)
 
@@ -448,8 +424,6 @@ Prompt: «*Vedi un cane? Rispondi sì o no.*» Su un’immagine il foundation mo
 
 Corrette: $38+44=82$, **accuratezza** $=82/100=0{,}82$; errori: $6+12=18$ (FP e FN).
 
-<!-- SOURCE_VISUAL id="IS16-V13" source="L16-web.pdf" page="35" type="schema" description="Foundation model che risponde no su un'immagine con un cane e matrice di confusione su 100 immagini" reason="Schema con immagine visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035106.png)
 
@@ -483,8 +457,6 @@ $$\text{errore}=-\ln p.$$
 | **1** | il modello **ha ragione**, confidenza 0,67 | 0,67 | **0,40**: piccolo |
 | **2** | **sbagliato ma sicuro** («No», confidenza 0,95) | 0,05 | **3,00**: grande |
 
-<!-- SOURCE_VISUAL id="IS16-V14" source="L16-web.pdf" page="37" type="grafico" description="Curva dell'errore -ln p in funzione della confidenza data alla risposta corretta, con i due casi" reason="Curva visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035141.png)
 
@@ -515,8 +487,6 @@ $$\text{tasso di accordo}=\frac{17}{20}=0{,}85,\qquad \text{falsi allarmi}=\frac
 
 Una rete NN1 riconosce un cane con **0,95**. Inserendo nell’immagine un oggetto estraneo (una **teiera**), la rete NN2 lo riconosce con **0,89**. Modificare l’input in modo controllato è un **test di iniezione**: si osserva se e quanto la previsione dipende da elementi che non dovrebbero contare.
 
-<!-- SOURCE_VISUAL id="IS16-V15" source="L16-web.pdf" page="40" type="figura" description="Immagine del cane con e senza una teiera inserita e le confidenze 0.95 e 0.89" reason="Immagini visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035315.png)
 
@@ -529,8 +499,6 @@ Una rete NN1 riconosce un cane con **0,95**. Inserendo nell’immagine un oggett
 
 > ⚠️ **NN1: la previsione è corretta, ma guarda i pixel sbagliati!!** Ci si può fidare di un modello che **sembra accurato**? È lo stesso caso della Lezione 11 (§5.8.1): un’accuratezza alta ottenuta per la ragione sbagliata.
 
-<!-- SOURCE_VISUAL id="IS16-V16" source="L16-web.pdf" page="41" type="figura" description="Mappe di salienza di NN1 (pixel sbagliati) e NN2 (il cane)" reason="Mappe visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035338.png)
 
@@ -538,8 +506,6 @@ Una rete NN1 riconosce un cane con **0,95**. Inserendo nell’immagine un oggett
 
 **Analisi di sensibilità** di un modello: **stessa rete, stesso cane, cambia solo il rumore**. Senza rumore NN1 risponde **cane = 0,95**; con un po’ di rumore aggiunto all’immagine risponde **camion = 0,78**.
 
-<!-- SOURCE_VISUAL id="IS16-V17" source="L16-web.pdf" page="42" type="figura" description="Lo stesso cane classificato come cane 0.95 e, con rumore aggiunto, come camion 0.78" reason="Immagini visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035351.png)
 
@@ -557,8 +523,6 @@ Valuta quanto il modello è «sensibile»:
 | **perché**: un’altra divisione casuale mette **altri campioni difficili** nel test set | **perché**: i pesi `float32` **arrotondati a `int8`** cambiano ogni prodotto; l’uscita si sposta **al massimo di 0,003** |
 | divisione 0: 88,9%; divisione 1: 93,3%; divisione 2: 100,0% (arancione = campioni di test; stessi dati, cambia solo la divisione) | `float32`: −1,1842 → arrotondato al livello `int8` −56 = −1,1810: errore 0,0032 (livelli vicini: −57 = −1,2021; −55 = −1,1599) |
 
-<!-- SOURCE_VISUAL id="IS16-V18" source="L16-web.pdf" page="43" type="grafico" description="Tre divisioni train/test con accuratezze diverse e quantizzazione di un peso float32 sui livelli int8" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035433.png)
 
@@ -572,8 +536,6 @@ Valuta quanto il modello è «sensibile»:
 | **una divisione fortunata può lusingare** | probabilità di classe del campione 0: $(0{,}014;\ 0{,}181;\ 0{,}806)\to(0{,}014;\ 0{,}180;\ 0{,}807)$ |
 | | variazione massima della probabilità della classe vincente su tutti i campioni di test: **0,003** |
 
-<!-- SOURCE_VISUAL id="IS16-V19" source="L16-web.pdf" page="44" type="grafico" description="Istogramma delle accuratezze di 30 divisioni casuali e confronto delle probabilità float32 e int8" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035510.png)
 
@@ -606,15 +568,11 @@ Partire da qualcosa di noto ogni volta che si prova un nuovo strumento.
 
 **I dati.** Il dataset è stato introdotto dallo statistico e biologo britannico **Ronald Fisher** nel suo articolo del **1936** «*The use of multiple measurements in taxonomic problems*», per **quantificare la variazione morfologica** dei fiori di iris di **tre specie affini**. Fisher è descritto come «un genio che quasi da solo ha creato le fondamenta della scienza statistica moderna».
 
-<!-- SOURCE_VISUAL id="IS16-V21" source="L16-web.pdf" page="48" type="figura" description="Ritratto di Ronald Fisher" reason="Fotografia visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035634.png)
 
 **Le classi**: *Iris versicolor*, *Iris virginica*, *Iris setosa*.
 
-<!-- SOURCE_VISUAL id="IS16-V22" source="L16-web.pdf" page="49" type="figura" description="Fotografie delle tre specie: Iris versicolor, virginica e setosa" reason="Fotografie visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035618.png)
 
@@ -646,8 +604,6 @@ Per ogni dataset nel machine learning o in una toolbox, **tutto consiste nel cre
 
 Un boxplot riassume ogni feature con la **mediana**, i **quartili** (la scatola) e gli **outlier** (Lezione 10). **Input**: lunghezza del sepalo [cm] di 150 fiori (50 per specie). **Output**: 3 scatole, una per specie.
 
-<!-- SOURCE_VISUAL id="IS16-V23" source="L16-web.pdf" page="54" type="grafico" description="Boxplot della lunghezza del sepalo per le tre specie di iris" reason="Scatole visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035823.png)
 
@@ -655,15 +611,11 @@ Un boxplot riassume ogni feature con la **mediana**, i **quartili** (la scatola)
 
 **La visualizzazione è la chiave della comprensione!** (Un’immagine vale più di mille righe di tabella.) In un grafico a coordinate parallele ogni fiore è una linea spezzata che attraversa un asse verticale per ogni feature, colorata per specie (Lezione 11, §11.7).
 
-<!-- SOURCE_VISUAL id="IS16-V24" source="L16-web.pdf" page="55" type="grafico" description="Coordinate parallele delle quattro feature di Iris colorate per specie" reason="Linee visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035834.png)
 
 **Con un’altra toolbox.** Nota: qui servono **le stesse unità o una scala simile**!
 
-<!-- SOURCE_VISUAL id="IS16-V25" source="L16-web.pdf" page="56" type="grafico" description="Coordinate parallele di Iris prodotte con un'altra toolbox" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035900.png)
 
@@ -673,8 +625,6 @@ $$z=\frac{x-\mu}{\sigma},$$
 
 con $x$ valore grezzo [cm], $\mu$ media della feature [cm], $\sigma$ sua deviazione standard [cm], $z$ adimensionale. **Esempio**: $x=6{,}0$ cm, $\mu=5{,}8$ cm, $\sigma=0{,}8$ cm: $z=(6{,}0-5{,}8)/0{,}8=0{,}25$. Dopo la trasformazione la **media di tutti i valori è 0** e la **deviazione standard è 1**.
 
-<!-- SOURCE_VISUAL id="IS16-V26" source="L16-web.pdf" page="57" type="grafico" description="Coordinate parallele di Iris dopo lo z-score" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035914.png)
 
@@ -688,8 +638,6 @@ con $x$ valore grezzo [cm], $\mu$ media della feature [cm], $\sigma$ sua deviazi
 
 **Leggere i rapporti.** Il grafico mostra anche il **rapporto tra i valori (netti) delle feature**: la **larghezza di ogni banda è la quota di persone** che seguono quel percorso.
 
-<!-- SOURCE_VISUAL id="IS16-V28" source="L16-web.pdf" page="59" type="grafico" description="Grafico a categorie parallele del Titanic con bande proporzionali alle quote" reason="Bande visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124035947.png)
 
@@ -704,8 +652,6 @@ con $x$ valore grezzo [cm], $\mu$ media della feature [cm], $\sigma$ sua deviazi
 - Si comincia a capire le **correlazioni** tra le feature e **come i cluster (le classi) si sovrappongono**.
 - **Attenzione: la correlazione non è causalità.**
 
-<!-- SOURCE_VISUAL id="IS16-V30" source="L16-web.pdf" page="61" type="grafico" description="Matrice di scatter plot a coppie delle quattro feature di Iris" reason="Nuvole di punti visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124040127.png)
 
@@ -729,8 +675,6 @@ plt.show()
 
 **Input**: il dataset (150 righe × 5 colonne). **Output**: una griglia $4\times 4$ di grafici.
 
-<!-- SOURCE_VISUAL id="IS16-V31" source="L16-web.pdf" page="64" type="grafico" description="Pairplot seaborn di Iris con le densità sulla diagonale" reason="Griglia di grafici visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124040302.png)
 
@@ -758,8 +702,6 @@ Clustering e classificazione con dati categorici: apprendimento supervisionato e
 
 Nel machine learning classico si addestrano i modelli su **matrici numeriche** $X$ (input) e $Y$ (output). **Ma che cosa succede quando input e output non sono solo numeri?** I dataset industriali **raramente contengono solo valori numerici**: log ed eventi includono spesso **attributi categorici** che vanno gestiti con cura. **Input**: una colonna di etichette (testo). **Output**: una colonna di numeri utilizzabile da un modello.
 
-<!-- SOURCE_VISUAL id="IS16-V32" source="L16-web.pdf" page="68" type="figura" description="Una colonna di etichette categoriche trasformata in numeri" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124040342.png)
 
@@ -814,8 +756,6 @@ Il **label encoding** assegna **un intero univoco a ogni valore distinto**, **ne
 
 **Lo spazio degli IP** è gerarchico: rete (192.168, 10.0, 172.16) → sottorete (192.168.1, 10.0.0, 172.16.0) → host. **192.168.1.10 e 192.168.1.11 sono fratelli nell’albero**, ma ricevono le etichette **0 e 3**.
 
-<!-- SOURCE_VISUAL id="IS16-V34" source="L16-web.pdf" page="72" type="schema" description="Albero degli indirizzi IP (rete, sottorete, host) con le etichette del label encoding" reason="Albero visibile solo nello schema" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124040508.png)
 
@@ -908,8 +848,6 @@ Eliminando la colonna X=c:
 
 Esistono molte altre tecniche per codificare dati categorici: **one-hot**, **dummy**, **effect**, **label**, **ordinale**, **count** e **binaria**.
 
-<!-- SOURCE_VISUAL id="IS16-V35" source="L16-web.pdf" page="78" type="figura" description="Panoramica dei metodi di codifica dei dati categorici" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124040610.png)
 
@@ -1014,8 +952,6 @@ X_train, X_test, y_train, y_test = train_test_split(X_data, Y,
 
 **Lo stesso in Colab.**
 
-<!-- SOURCE_VISUAL id="IS16-V36" source="L16-web.pdf" page="85" type="schermata" description="Divisione train/test eseguita in Colab con l'output delle dimensioni" reason="Schermate visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124040918.png)
 
@@ -1071,8 +1007,6 @@ X_train, X_test, y_train, y_test = train_test_split(X_data, Y,
 
 **MATLAB**: **scaricare l’esempio e farlo girare!** L’esempio è commentato: esplorare il codice, provare a modificarlo e/o aggiungere nuovi grafici.
 
-<!-- SOURCE_VISUAL id="IS16-V37" source="L16-web.pdf" page="97" type="schermata" description="Script MATLAB d'esempio del laboratorio" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124041212.png)
 
@@ -1086,8 +1020,6 @@ X_train, X_test, y_train, y_test = train_test_split(X_data, Y,
 
 **Farlo girare**: 1) leggere i commenti; 2) cliccare su `[ ]` per eseguire la cella, oppure «*Run all*».
 
-<!-- SOURCE_VISUAL id="IS16-V38" source="L16-web.pdf" page="100" type="schermata" description="Esecuzione delle celle in Colab con il pulsante della cella e Run all" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124041300.png)
 
@@ -1208,8 +1140,6 @@ xNumpy_Norm = (xNumpy - np.min(xNumpy)) / (np.max(xNumpy) - np.min(xNumpy))
 
 **Prima e dopo.** `plt.hist(xNumpy[:,0])` e `plt.hist(xNumpy_Norm[:,0])`: **stessa forma, nuova scala orizzontale**, da 4,3–7,9 cm a circa **0,54–1** (il codice usa il minimo 0,1 e il massimo 7,9 dell’intera matrice).
 
-<!-- SOURCE_VISUAL id="IS16-V39" source="L16-web.pdf" page="111" type="grafico" description="Istogrammi della lunghezza del sepalo prima e dopo la normalizzazione globale" reason="Istogrammi visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124041904.png)
 
@@ -1231,8 +1161,6 @@ I dati di classe sono in **formato categorico** (testo); li si converte in **int
 
 Visualizzare feature e classi dà un **primo controllo visivo della capacità discriminante**. **Limite**: la visualizzazione è limitata a **2 o 3 dimensioni**. Anche un dataset semplice come Iris (4D) **non si può disegnare con tutte le sue feature sui propri assi**. (Provare a disegnare un quarto asse alla lavagna: il risultato somiglia all’immagine.)
 
-<!-- SOURCE_VISUAL id="IS16-V40" source="L16-web.pdf" page="113" type="figura" description="Tentativo umoristico di disegnare un quarto asse" reason="Illustrazione visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124041929.png)
 
@@ -1256,8 +1184,6 @@ Visualizzare feature e classi dà un **primo controllo visivo della capacità di
 <!-- SOURCE_VISUAL id="IS16-V41" source="L16-web.pdf" page="115" type="grafico" description="Scatter Feat0 contro Feat1: classe 0 separata, classi 1 e 2 mescolate" reason="Punti colorati visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS16-V42" source="L16-web.pdf" page="116" type="grafico" description="Scatter Feat2 contro Feat3: discriminazione migliore per tutte le classi" reason="Punti colorati visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261124042011.png)
 

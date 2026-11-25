@@ -1,0 +1,2 @@
+#!/bin/sh
+node scripts/sync-new-r2-images.mjs

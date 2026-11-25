@@ -103,14 +103,16 @@ Ogni push su `main` attiva la GitHub Action ([.github/workflows/deploy.yml](.git
 *Fatto con mesi di pazienza, da uno studente SSRI per gli studenti SSRI. Buono studio — e in bocca al lupo per il 30 e lode.*
 # External lesson assets (Cloudflare R2)
 
-Large lesson media is staged outside Git and served from the dedicated `cybersec-unimi-assets` R2 bucket. The generated `src/data/r2-assets.json` maps repository paths to immutable object keys; PNGs are converted to lossless WebP only when decoded pixels match exactly and the result is smaller. Other formats are copied byte-for-byte.
+Large lesson media is kept in the local Obsidian vault and served from the dedicated `cybersec-unimi-assets` R2 bucket; binary media is excluded from Git. `npm run assets:r2:hydrate` restores missing local images from the public bucket after a fresh clone, preserving the relative image paths used by Obsidian. The generated `src/data/r2-assets.json` maps repository paths to object keys; PNGs are converted to lossless WebP only when decoded pixels match exactly and the result is smaller. Other formats are copied byte-for-byte.
 
-To prepare and sync assets locally, set `CLOUDFLARE_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, and `R2_SECRET_ACCESS_KEY` in the process environment. Use an R2 token scoped to Object Read & Write for this bucket only; never commit credentials or put them in `.env` files tracked by Git.
+To prepare and sync assets locally, store `CLOUDFLARE_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, and `R2_SECRET_ACCESS_KEY` in the ignored local file `.env.r2.local` (or provide them in the process environment). Use an R2 token scoped to Object Read & Write for this bucket only; never commit credentials. The pre-commit hook and uploader read the local file without printing its values. Run `npm run assets:r2:install-hook` once per clone. The pre-commit hook detects newly pasted or changed lesson images (including files ignored by Git), uploads them before the commit, and stages the updated private/public manifests. It uses a local file-stat cache so ordinary commits do not rehash the whole image library. Thus a commit cannot reach a pull request without its images already present in R2. If no images changed, commits need no R2 credentials.
 
 ```sh
 npm run assets:r2:prepare
 npm run assets:r2:upload
 npm run assets:r2:detach
+npm run assets:r2:hydrate
+npm run assets:r2:install-hook
 ```
 
 The staging directory `.cache/r2-upload/` is ignored by Git. The detach step removes migrated tracked assets from the Git index while preserving local files; `.gitignore` prevents them from being re-added. The uploader skips objects whose stored SHA-256 metadata and size already match. Production builds use the bucket's public custom domain, `https://assets.samuelecorra.dev`, through `VITE_R2_PUBLIC_BASE_URL`.

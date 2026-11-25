@@ -33,8 +33,6 @@ Prima di modellare si **organizzano**, si **esplorano** e si **ingegnerizzano** 
 | **2b)** **analisi esplorativa dei dati** | capire che cosa c’è nei dati | **prima parte in questa lezione**, visualizzazione nella prossima |
 | **2c)** **feature engineering** | progettare la rappresentazione che il modello riceve | **questa lezione** |
 
-<!-- SOURCE_VISUAL id="IS10-V01" source="L10-web.pdf" page="4" type="schema" description="Flusso di lavoro del ML con il passo 2 suddiviso in 2a wrangling, 2b EDA e 2c feature engineering" reason="Schema del flusso visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123184623.png)
 
@@ -56,8 +54,6 @@ La slide organizza gli strumenti dell’EDA in due rami: i **metodi descrittivi*
 | | **2 dimensioni** | scatter plot | |
 | | **3 dimensioni** | grafici a bolle | |
 
-<!-- SOURCE_VISUAL id="IS10-V02" source="L10-web.pdf" page="5" type="mappa concettuale" description="Mappa dell'EDA per il ML: statistica descrittiva (tendenza centrale, variazione, forma) e visualizzazioni in 1, 2 e 3 dimensioni" reason="Mappa con grafici di esempio visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123184710.png)
 
@@ -96,8 +92,6 @@ La pipeline parte dal **segnale grezzo** $x(t)$ e lo divide in **finestre scorre
 
 I due gruppi si **uniscono** (*merge*) in un unico **vettore di feature** $f^{(k)}$: **un vettore per finestra**.
 
-<!-- SOURCE_VISUAL id="IS10-V03" source="L10-web.pdf" page="9" type="schema" description="Segnale grezzo, finestre scorrevoli, feature nel tempo e in frequenza unite in un vettore f(k) per finestra" reason="Schema della pipeline con i grafici dei due domini" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123185433.png)
 
@@ -119,8 +113,6 @@ Prima di calcolare qualunque feature bisogna sapere **da dove vengono i dati**:
 | **acquisizione** | timestamp, frequenza di campionamento, misure in streaming o memorizzate | campionamento a 10 kHz, registrato in raffiche memorizzate di 5 s |
 | **contesto** | lo stesso valore numerico può significare cose diverse in regimi operativi diversi | lo stesso livello di vibrazione è **normale a pieno carico** e **allarmante al minimo** |
 
-<!-- SOURCE_VISUAL id="IS10-V04" source="L10-web.pdf" page="10" type="figura" description="Sensore di vibrazione montato su un motore industriale" reason="Fotografie visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123190744.png)
 
@@ -168,8 +160,6 @@ $$F=\big[f^{(1)},\ f^{(2)},\ \dots,\ f^{(m)}\big],$$
 
 con $m$ finestre e un vettore $f^{(k)}$ per ciascuna (qui disegnati come **una colonna per finestra**).
 
-<!-- SOURCE_VISUAL id="IS10-V06" source="L10-web.pdf" page="12" type="schema" description="Matrice F con una colonna per finestra e righe RMS, ZCR, centroid, MFCC1..." reason="Disposizione della matrice visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123191147.png)
 
@@ -183,8 +173,6 @@ con $m$ finestre e un vettore $f^{(k)}$ per ciascuna (qui disegnati come **una c
 - Il **dominio della frequenza** rivela le **componenti periodiche** e la loro **intensità**.
 - Uno **spettro di potenza** mostra come la potenza del segnale si distribuisce tra le frequenze.
 
-<!-- SOURCE_VISUAL id="IS10-V07" source="L10-web.pdf" page="13" type="grafico" description="Lo stesso segnale nel dominio del tempo e nel dominio della frequenza" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123191216.png)
 
@@ -194,8 +182,6 @@ con $m$ finestre e un vettore $f^{(k)}$ per ciascuna (qui disegnati come **una c
 
 L’esempio confronta due segnali di vibrazione di un cuscinetto, uno sano e uno con un difetto. **Nel tempo i due segnali sembrano uguali**: RMS **1,16** contro **1,19**, curtosi **2,9** contro **3,0**. Nello **spettro dell’inviluppo** il difetto compare invece come **picchi alla frequenza BPFO e ai suoi multipli**. I segnali sono sintetici e illustrativi.
 
-<!-- SOURCE_VISUAL id="IS10-V08" source="L10-web.pdf" page="14" type="grafico" description="Due segnali di vibrazione simili nel tempo e i loro spettri dell'inviluppo, con i picchi del difetto alla BPFO e multipli" reason="Forme dei segnali e picchi spettrali visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123191316.png)
 
@@ -207,8 +193,6 @@ L’esempio confronta due segnali di vibrazione di un cuscinetto, uno sano e uno
 
 Uno **spettrogramma** visualizza l’ampiezza o la potenza del segnale **in funzione sia del tempo sia della frequenza**; **non è un unico spettro globale**. Si ottiene calcolando lo spettro di ogni finestra e affiancando gli spettri come colonne: l’asse orizzontale è il tempo (l’indice della finestra), quello verticale la frequenza, il colore la potenza.
 
-<!-- SOURCE_VISUAL id="IS10-V09" source="L10-web.pdf" page="15" type="grafico" description="Spettrogramma con potenza in funzione del tempo e della frequenza" reason="Spettrogramma visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123191331.png)
 
@@ -231,8 +215,6 @@ Uno **spettrogramma** visualizza l’ampiezza o la potenza del segnale **in funz
 | **campioni** | $N=1{,}407\ \text{s}\times 16\,000=22\,516$ numeri in $[-1,1]$ (circa 45 kB) |
 | **sorgente** | voce di sintesi vocale (*text-to-speech*), non una registrazione commerciale |
 
-<!-- SOURCE_VISUAL id="IS10-V10" source="L10-web.pdf" page="17" type="grafico" description="Forma d'onda della frase Everybody dance now" reason="Forma d'onda visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192108.png)
 
@@ -248,8 +230,6 @@ Uno **spettrogramma** visualizza l’ampiezza o la potenza del segnale **in funz
 | **DCT** | si tengono 12 coefficienti | $139\times 12$ (MFCC) |
 | **distanza** | si confrontano i vettori delle parole | $z=[c_1\ \dots\ c_{12}]^\top$ dalla parola di ogni finestra |
 
-<!-- SOURCE_VISUAL id="IS10-V11" source="L10-web.pdf" page="18" type="schema" description="Catena: segnale, finestratura 139x400, FFT e filtri mel 139x26, DCT 139x12, distanza tra vettori di parola" reason="Schema a blocchi della catena" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192123.png)
 
@@ -322,8 +302,6 @@ $$c_i=\sum_{m=1}^{26}L[m]\cos\!\left(\frac{\pi\,i\,(m-\tfrac12)}{26}\right),\qqu
 
 Per ogni finestra $t$ del segnale $x[n]$ (1,4 s, 16 kHz) si calcola $|\text{FFT}|^2/N$: lo **spettro** $P[k]$ di quella finestra (257 valori) è **una colonna** dello spettrogramma $P[k,t]$. Quella colonna passa per il **banco di 26 filtri triangolari** $H_m[k]$, che producono le 26 energie $E[m]=\sum_k H_m[k]\,P[k]$; poi per il logaritmo (26 valori $L[m]$) e per la DCT (26 valori, di cui si tengono i primi 13, $c_0\dots c_{12}$).
 
-<!-- SOURCE_VISUAL id="IS10-V12" source="L10-web.pdf" page="21" type="schema" description="Dalla finestra al suo spettro P[k] (colonna dello spettrogramma), banco di 26 filtri mel, logaritmo e DCT" reason="Schema con spettrogramma e filtri triangolari" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192305.png)
 
@@ -339,8 +317,6 @@ $$E[m]=\sum_k H_m[k]\,P[k].$$
 
 **Dalle barre agli MFCC.** Le **26 barre** $L[m]$ sono **un profilo dello spettro**. La DCT lo trasforma in $c_0\dots c_{12}$; si tengono $c_1\dots c_{12}$, cioè la **forma delle barre**.
 
-<!-- SOURCE_VISUAL id="IS10-V13" source="L10-web.pdf" page="22" type="grafico" description="Spettrogramma con una banda mel evidenziata, le 26 barre L[m] di una finestra e i coefficienti MFCC risultanti" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192322.png)
 
@@ -350,8 +326,6 @@ $$E[m]=\sum_k H_m[k]\,P[k].$$
 
 La slide affianca, sullo stesso asse dei tempi, la **forma d’onda**, lo **spettrogramma** e la **mappa degli MFCC** della frase: tre rappresentazioni dello stesso segnale.
 
-<!-- SOURCE_VISUAL id="IS10-V14" source="L10-web.pdf" page="23" type="grafico" description="Forma d'onda, spettrogramma e mappa MFCC allineati sugli stessi 1,4 secondi" reason="Tre grafici allineati visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192516.png)
 
@@ -365,8 +339,6 @@ Sull’estratto originale, tagliato al primo campione sonoro, le parole sono sep
 | everybody–now | 5,4 |
 | dance–now | 6,2 |
 
-<!-- SOURCE_VISUAL id="IS10-V15" source="L10-web.pdf" page="24" type="grafico" description="Estratto originale con i tagli tra le parole a 990 e 1480 ms e le distanze tra i vettori medi" reason="Grafici visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192530.png)
 
@@ -376,15 +348,11 @@ Sull’estratto originale, tagliato al primo campione sonoro, le parole sono sep
 
 La stessa frase viene analizzata in tre registrazioni diverse: il campione di sintesi, un’intervista e la versione musicale. Le clip sono tagliate al primo campione sonoro; l’intervista si ferma dove partono gli applausi (2,5 s). **Voce, musica e catena di registrazione cambiano i numeri**: bisogna confrontare il **pattern**. La scala degli MFCC è condivisa tra i pannelli.
 
-<!-- SOURCE_VISUAL id="IS10-V16" source="L10-web.pdf" page="25" type="grafico" description="Mappe MFCC di tre registrazioni della stessa frase con scala condivisa" reason="Mappe visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192544.png)
 
 **I tre spettrogrammi affiancati** usano la stessa scala di tempo e di dB in ogni pannello. Le linee tratteggiate segnano i tagli tra le parole; quelli dell’intervista sono le **due pause più lunghe**, nell’ipotesi che la frase sia la stessa.
 
-<!-- SOURCE_VISUAL id="IS10-V17" source="L10-web.pdf" page="26" type="grafico" description="Tre spettrogrammi affiancati con stessa scala di tempo e dB e tagli tratteggiati tra le parole" reason="Spettrogrammi visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192553.png)
 
@@ -392,8 +360,6 @@ La stessa frase viene analizzata in tre registrazioni diverse: il campione di si
 
 I 12 coefficienti $c_1\dots c_{12}$ di ogni finestra di 25 ms vengono proiettati sulle **prime due componenti principali**, stimate **separatamente per ogni clip**; le linee uniscono finestre consecutive. Nella clip originale e nell’intervista *now* si **separa** dal resto; nell’originale *everybody* e *dance* **si sovrappongono**.
 
-<!-- SOURCE_VISUAL id="IS10-V18" source="L10-web.pdf" page="27" type="grafico" description="Proiezione delle finestre MFCC sulle prime due componenti principali per le tre clip, con le traiettorie delle parole" reason="Proiezioni visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192602.png)
 
@@ -429,8 +395,6 @@ $$x(t)\ \xrightarrow{\text{finestratura}}\ x^{(k)}\ \xrightarrow{\text{estrazion
 - **Output da apprendere**: un **ID di classe per finestra** (per esempio *normale* / *usurato* / *guasto*).
 - **Domanda**: come trasformare le feature in input da cui un modello possa imparare?
 
-<!-- SOURCE_VISUAL id="IS10-V19" source="L10-web.pdf" page="30" type="schema" description="Pipeline finestratura, estrazione, feature engineering, scaling e modello con i sensori di vibrazione" reason="Schema con immagine del caso d'uso" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192636.png)
 
@@ -441,8 +405,6 @@ $$x(t)\ \xrightarrow{\text{finestratura}}\ x^{(k)}\ \xrightarrow{\text{estrazion
 <!-- SOURCE_VISUAL id="IS10-V20" source="L10-web.pdf" page="31" type="figura" description="Collocazione della feature engineering rispetto all'EDA" reason="Figura raster della slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
-<!-- SOURCE_VISUAL id="IS10-V21" source="L10-web.pdf" page="32" type="schema" description="Flusso di lavoro del ML con evidenziato il sottopasso 2c feature engineering" reason="Schema del flusso visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123192701.png)
 
@@ -568,8 +530,6 @@ Entrambe usano la statistica. L’**EDA verifica le ipotesi**; la **feature engi
 
 Il punto di contatto è la forma della distribuzione: nelle distribuzioni **asimmetriche** media, mediana e moda occupano **posizioni diverse**, in quelle **simmetriche coincidono**.
 
-<!-- SOURCE_VISUAL id="IS10-V22" source="L10-web.pdf" page="42" type="grafico" description="Distribuzioni con asimmetria a sinistra, simmetrica e a destra, con posizioni di media, mediana e moda" reason="Forme delle distribuzioni visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193046.png)
 
@@ -582,8 +542,6 @@ Il punto di contatto è la forma della distribuzione: nelle distribuzioni **asim
 
 Con la feature 1 in $[0,1000]$ e la feature 2 in $[0,1]$, in unità grezze la distanza dipende praticamente **solo dalla feature 1**; dopo lo scaling **contano entrambe**.
 
-<!-- SOURCE_VISUAL id="IS10-V23" source="L10-web.pdf" page="43" type="grafico" description="Punti in unità grezze (feature 1 in 0-1000, feature 2 in 0-1) e dopo lo scaling, con le distanze" reason="Geometria dei punti visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193106.png)
 
@@ -598,8 +556,6 @@ Con la feature 1 in $[0,1000]$ e la feature 2 in $[0,1]$, in unità grezze la di
 | **clipping** | limitare i valori fuori dai limiti | può **distruggere eventi rari veri** |
 | **logaritmo** | comprimere i valori positivi grandi | richiede un **trattamento definito** di zero e negativi |
 
-<!-- SOURCE_VISUAL id="IS10-V24" source="L10-web.pdf" page="44" type="grafico" description="Curve output contro input di min-max, z-score, clipping e logaritmo" reason="Forme delle curve visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193119.png)
 
@@ -634,8 +590,6 @@ La slide applica le quattro trasformazioni alla **stessa variabile asimmetrica**
 | **scaling logaritmico** | **comprime la coda**: la distribuzione diventa più simmetrica |
 | **z-score** | centra e scala: media 0, ma la **forma resta asimmetrica** (valori fino a circa 6) |
 
-<!-- SOURCE_VISUAL id="IS10-V25" source="L10-web.pdf" page="46" type="grafico" description="Quattro istogrammi della stessa variabile asimmetrica dopo scaling in intervallo, clipping, logaritmo e z-score" reason="Forme degli istogrammi visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193229.png)
 
@@ -649,8 +603,6 @@ La slide applica le quattro trasformazioni alla **stessa variabile asimmetrica**
 
 Nell’esempio la variabile grezza arriva fino a circa 25 e, dopo il clipping, è limitata al massimo di **4,0**: tutti i valori estremi si accumulano nell’ultimo bin.
 
-<!-- SOURCE_VISUAL id="IS10-V26" source="L10-web.pdf" page="47" type="grafico" description="Istogramma della feature grezza con outlier e della stessa feature limitata a 4.0" reason="Istogrammi visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193239.png)
 
@@ -666,8 +618,6 @@ Nell’esempio la variabile grezza arriva fino a circa 25 e, dopo il clipping, �
 
 L’esempio è il **numero di valutazioni per film**: la maggior parte dei film ne ha poche e pochi ne hanno moltissime (fino a circa 1400). Dopo il logaritmo la distribuzione si estende in modo più equilibrato tra 0 e 7.
 
-<!-- SOURCE_VISUAL id="IS10-V27" source="L10-web.pdf" page="48" type="grafico" description="Istogramma del numero di valutazioni per film e del suo logaritmo" reason="Istogrammi visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193250.png)
 
@@ -706,8 +656,6 @@ Anche una pipeline ben costruita — estrazione delle feature, scaling, regressi
 
 L’input $x$ è la feature osservata (asse orizzontale), il target $y$ l’etichetta numerica osservata (asse verticale). **Informazione mancante**: il **gruppo** $g$. I dati sono etichettati per la regressione, ma l’appartenenza al gruppo viene ignorata.
 
-<!-- SOURCE_VISUAL id="IS10-V28" source="L10-web.pdf" page="52" type="grafico" description="Paradosso di Simpson nella regressione: tendenza aggregata positiva e tendenze negative nei gruppi A e B" reason="Nuvole di punti e rette visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193333.png)
 
@@ -723,8 +671,6 @@ Un esempio industriale. Le due linee producono tre tipi di esiti:
 
 Nell’illustrazione la **linea A** supera il controllo con 7 biscotti su 10 ispezionati (tasso del 70%), la **linea B** con 8 su 10 (80%).
 
-<!-- SOURCE_VISUAL id="IS10-V29" source="L10-web.pdf" page="53" type="figura" description="Due linee di produzione di biscotti facili e difficili con controllo QA: 7/10 e 8/10" reason="Illustrazione visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193346.png)
 
@@ -753,8 +699,6 @@ $$\text{tasso di superamento}=\frac{\text{biscotti che superano il QA}}{\text{bi
 
 **A ha il tasso più alto in ciascun sottogruppo**, eppure **B ha il tasso complessivo più alto**. Possono essere vere entrambe le cose? I rapporti sono calcolati dai conteggi; le percentuali sono arrotondate a un decimale dove necessario.
 
-<!-- SOURCE_VISUAL id="IS10-V30" source="L10-web.pdf" page="56" type="grafico" description="Barre dei tassi QA: dentro i gruppi facile e difficile vince A, nell'aggregato vince B" reason="Diagramma a barre visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123193508.png)
 
@@ -833,8 +777,6 @@ Vettore di esempio: $x=[1,2,3,4,50]$.
 | **simmetrica** | media = mediana = moda |
 | **asimmetrica a destra** | moda < mediana < media |
 
-<!-- SOURCE_VISUAL id="IS10-V31" source="L10-web.pdf" page="62" type="grafico" description="Distribuzioni asimmetriche e simmetrica con media, mediana e moda, e illustrazione del camion sotto il ponte basso" reason="Grafici e illustrazione visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123194823.png)
 
@@ -851,8 +793,6 @@ Quattro distribuzioni con media quasi uguale e IQR simili:
 | lieve asimmetria a destra | +0,00 | 1,17 |
 | forte asimmetria a destra | −0,00 | 0,94 |
 
-<!-- SOURCE_VISUAL id="IS10-V32" source="L10-web.pdf" page="63" type="grafico" description="Quattro distribuzioni (uniforme, normale, lieve e forte asimmetria a destra) con media e IQR simili" reason="Forme delle distribuzioni visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123194841.png)
 
@@ -875,8 +815,6 @@ Per una distribuzione **normale standardizzata**, la slide mostra le probabilit�
 | tra $Q_3$ e il baffo superiore | 24,65% |
 | sopra $Q_3+1{,}5\cdot\text{IQR}$ (outlier) | 0,35% |
 
-<!-- SOURCE_VISUAL id="IS10-V33" source="L10-web.pdf" page="64" type="grafico" description="Boxplot allineato alla densità normale standard con le probabilità 0.35%, 24.65%, 50%" reason="Allineamento tra boxplot e densità visibile solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123194917.png)
 
@@ -886,8 +824,6 @@ Per una distribuzione **normale standardizzata**, la slide mostra le probabilit�
 
 Gli **stessi dati** di un sensore sono mostrati come istogramma e come boxplot. Nell’**istogramma** i valori rari sono **visivamente poco evidenti**; nel **boxplot** gli outlier potenziali sono **segnalati** come punti singoli. Gli outlier si vedono in entrambi i grafici?
 
-<!-- SOURCE_VISUAL id="IS10-V34" source="L10-web.pdf" page="65" type="grafico" description="Stessi dati di un sensore come istogramma (outlier poco visibili) e come boxplot (outlier segnalati)" reason="Confronto tra i due grafici visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123194945.png)
 
@@ -905,8 +841,6 @@ ylabel('Miles per Gallon (MPG)')
 
 `MPG` (miglia per gallone) è una feature numerica; `Origin` (il Paese di origine) definisce i **gruppi**: ogni scatola visualizza **una distribuzione condizionata**.
 
-<!-- SOURCE_VISUAL id="IS10-V35" source="L10-web.pdf" page="66" type="grafico" description="Boxplot MATLAB dei consumi MPG per Paese di origine del dataset carsmall, con l'outlier tedesco" reason="Grafico visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123195018.png)
 
@@ -926,8 +860,6 @@ L’analisi dei dati non riguarda solo gli input: supporta anche la diagnostica 
 3. **attivazioni** $Y_{ij}$ degli strati nascosti;
 4. **uscite ed errori** $O_{ij}$.
 
-<!-- SOURCE_VISUAL id="IS10-V36" source="L10-web.pdf" page="68" type="schema" description="Rete con strato di input, tre strati nascosti e strato di output, con i quattro punti di ispezione: input, pesi, attivazioni, uscite ed errori" reason="Posizione dei punti nella rete visibile solo nello schema (le slide 69-73 ripetono lo schema evidenziando un punto alla volta)" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123195047.png)
 
@@ -956,8 +888,6 @@ Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste
 - La discesa del gradiente può richiedere **più passi** o una scelta più accurata del **learning rate**.
 - Uno scaling ragionevole può **migliorare la convergenza**, ma **non garantisce l’accuratezza**.
 
-<!-- SOURCE_VISUAL id="IS10-V37" source="L10-web.pdf" page="70" type="grafico" description="Curve di livello dell'errore J nello spazio dei pesi con e senza scaling, e percorso della discesa del gradiente" reason="Percorsi della discesa visibili solo nel grafico" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123195148.png)
 
@@ -1035,8 +965,6 @@ Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste
 | **AI4I 2020 Predictive Maintenance** (UCI) | $10\,000\times$ circa 6 misure | temperatura dell’aria (K), temperatura di processo (K), velocità di rotazione (rpm), coppia (Nm), usura dell’utensile (min) | **guasti rari: non eliminarli con il clipping** |
 | **Air Quality** (UCI) | dati orari di sensori | concentrazione di CO (mg/m³), NOx (ppb), NO₂ (µg/m³), temperatura (°C), umidità relativa (%) | i valori **mancanti sono codificati come −200** |
 
-<!-- SOURCE_VISUAL id="IS10-V38" source="L10-web.pdf" page="75" type="grafico" description="Quattro pannelli con le scale delle feature dei dataset Breast Cancer, California Housing, AI4I 2020 e Air Quality su asse logaritmico" reason="Grafici delle scale visibili solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123195339.png)
 
@@ -1097,8 +1025,6 @@ for t in ("1", "2", None):
 | P2 (difficile) | $12/24=50\%$ | $4/6=67\%$ |
 | tutti i prodotti | $13/30=43\%$ | $9/30=30\%$ |
 
-<!-- SOURCE_VISUAL id="IS10-V39" source="L10-web.pdf" page="79" type="grafico" description="Barre dei tassi di errore delle linee A e B per prodotto facile, difficile e aggregato" reason="Diagramma a barre visibile solo nella figura" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ![](imgs/Pasted%20image%2020261123195751.png)
 
