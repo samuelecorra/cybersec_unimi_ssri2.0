@@ -1230,29 +1230,21 @@ Dettagli di supporto e materiale di laboratorio: A2–A4 k-NN e modelli classici
 
 Le slide sono schermate del notebook: preparazione di Colab, importazione dei dati e selezione delle feature, poi cinque passi di esplorazione.
 
+Setuppiamo:
+
 ![](imgs/Pasted%20image%2020261125021330.png)
 
+![](imgs/Pasted%20image%2020261125052353.png)
 
-<!-- SOURCE_VISUAL id="IS19-V68" source="L19-web.pdf" page="98" type="schermata" description="Preparazione di Colab per il clustering dei clienti" reason="Codice presente solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125052401.png)
 
+![](imgs/Pasted%20image%2020261125052411.png)
 
-![](imgs/Pasted%20image%2020261125021340.png)
+![](imgs/Pasted%20image%2020261125052422.png)
 
-<!-- SOURCE_VISUAL id="IS19-V70" source="L19-web.pdf" page="100" type="schermata" description="Esplorazione 1: .head della tabella dei clienti" reason="Codice e output presenti solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125052433.png)
 
-<!-- SOURCE_VISUAL id="IS19-V71" source="L19-web.pdf" page="101" type="schermata" description="Esplorazione 2: .shape della tabella dei clienti" reason="Codice e output presenti solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS19-V72" source="L19-web.pdf" page="102" type="schermata" description="Esplorazione 3: .info della tabella dei clienti" reason="Codice e output presenti solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS19-V73" source="L19-web.pdf" page="103" type="schermata" description="Esplorazione 4: .isnull della tabella dei clienti" reason="Codice e output presenti solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS19-V74" source="L19-web.pdf" page="104" type="schermata" description="Esplorazione 5: istogrammi con plt.hist" reason="Codice e grafici presenti solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125052444.png)
 
 > 💡 **Che cosa controlla ogni passo (nota didattica).** `.head()` le prime righe (i tipi di valore sono quelli attesi?); `.shape` le dimensioni (200 righe, 5 colonne); `.info()` tipi e valori non nulli per colonna; `.isnull().sum()` i valori mancanti; gli istogrammi le distribuzioni (asimmetrie, valori impossibili). È la checklist EDA della Lezione 11 (§3).
 
@@ -1261,6 +1253,8 @@ Le slide sono schermate del notebook: preparazione di Colab, importazione dei da
 **Il dataset UCI.** Non d’esame, ma un buon ripasso dell’intera lezione su un dataset pubblico famoso: ***Gas sensor array under dynamic gas mixtures*** (UCI Machine Learning Repository, J. Fonollosa, 2015, CC BY 4.0).
 
 **Miscela di gas** (metano + etilene) → **array di 16 sensori MOX** (16 letture/s) → $x\in\mathbb{R}^{16}$ → **k-means** (nessuna etichetta) → **indice di cluster**.
+
+![](imgs/Pasted%20image%2020261125052510.png)
 
 | tempo [s] | metano [ppm] | etilene [ppm] | S1 | S2 | S3 | … | S14 | S15 | S16 |
 |---:|---:|---:|---:|---:|---:|---|---:|---:|---:|
@@ -1271,20 +1265,15 @@ Le slide sono schermate del notebook: preparazione di Colab, importazione dei da
 
 (Ricostruzione dell’ordine delle colonne S1–S3 dal testo estratto.) Dalla pagina UCI: **16 sensori** (Figaro TGS-2600, -2602, -2610, -2620, 4 unità ciascuno); **circa 12 ore di registrazione a 100 Hz**; **4 178 504 righe × 19 colonne** (tempo, 2 set-point dei gas, 16 letture dei sensori); metano 0–300 ppm, etilene 0–20 ppm. L’esercizio usa un file ridotto, `ethylene_methane2_red.txt` (**una riga al secondo**).
 
-<!-- SOURCE_VISUAL id="IS19-V75" source="L19-web.pdf" page="105" type="schema" description="Catena miscela di gas, array di 16 sensori MOX, k-means e indice di cluster" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125052521.png)
 
 > 💡 **I numeri (nota didattica).** 12 ore a 100 Hz: $12\cdot 3600\cdot 100=4\,320\,000$ campioni, coerente con le 4 178 504 righe (circa 11,6 ore). Il file ridotto a una riga al secondo ne ha circa 42 000. MOX (*Metal Oxide*) indica sensori a ossido metallico, la cui resistenza cambia con la concentrazione del gas. Valori negativi o molto diversi tra i sensori (−42 contro 5000) mostrano che le unità grezze non sono confrontabili: da qui la standardizzazione del §11.2.
 
 **Il file dei dati e lo script.** Il dataset contiene le serie temporali acquisite da **16 sensori chimici** esposti a miscele di gas a concentrazioni variabili: **tempo** (secondi), **concentrazione di metano** (ppm), **concentrazione di etilene** (ppm), **letture dei sensori** (16 canali). **16 canali = spazio delle feature a 16 dimensioni.**
 
-<!-- SOURCE_VISUAL id="IS19-V76" source="L19-web.pdf" page="106" type="schermata" description="Il file dei dati dei sensori di gas e lo script" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 **EDA: tabella e box plot.** Il dataset è **non supervisionato**: non contiene variabili target esplicite. **Nessun valore mancante** (0,0% per ogni colonna).
 
-<!-- SOURCE_VISUAL id="IS19-V77" source="L19-web.pdf" page="107" type="schermata" description="Tabella descrittiva e box plot dei sensori di gas" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125052547.png)
 
 **EDA: il codice.**
 
@@ -1306,13 +1295,11 @@ data = data.drop(columns=features_to_drop)
 - **Distribuzioni bimodali o N-modali** sono un buon indizio di «**stati**» nel sistema.
 - Si deve esplorare uno spazio a 16 dimensioni…
 
-<!-- SOURCE_VISUAL id="IS19-V78" source="L19-web.pdf" page="109" type="grafico" description="Matrice di scatter dei sensori di gas con distribuzioni multimodali" reason="Griglia di grafici visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125052615.png)
 
 **EDA: la t-SNE mostra gli stati.** L’esistenza di «**stati**» nel sistema è confermata dalla visualizzazione t-SNE (**che potente trasformazione di embedding non supervisionata!**).
 
-<!-- SOURCE_VISUAL id="IS19-V79" source="L19-web.pdf" page="110" type="grafico" description="Mappa t-SNE dei sensori di gas con gruppi corrispondenti agli stati del sistema" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125052623.png)
 
 **Il codice del k-means.**
 
@@ -1329,8 +1316,7 @@ kmeans_labels = kmeans.fit_predict(data_scaled)
 
 **I cluster nello spazio dei sensori.** La figura mostra **centroidi e assegnazioni dei cluster nelle coordinate originali dei sensori**. Un embedding t-SNE è **una visualizzazione separata**; le sue distanze possono essere distorte, quindi **i cluster vanno validati nello spazio delle feature standardizzato originale**.
 
-<!-- SOURCE_VISUAL id="IS19-V80" source="L19-web.pdf" page="112" type="grafico" description="Centroidi e assegnazioni dei due cluster nelle coordinate dei sensori" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125052642.png)
 
 > 💡 **Una catena coerente (nota didattica).** EDA (nessun mancante, scale molto diverse, distribuzioni multimodali) → standardizzazione → t-SNE per **vedere** quanti stati ci sono → k-means per **assegnare** gli stati → validazione dei cluster nello spazio originale. La t-SNE suggerisce $k$, il k-means lo usa: nessuno dei due da solo basterebbe.
 

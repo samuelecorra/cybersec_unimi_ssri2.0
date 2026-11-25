@@ -39,7 +39,10 @@ for (const absolute of files) {
   if (!oldStat && full.assets[source]?.sourceSha256) continue;
   const bytes = await fs.readFile(absolute);
   const sourceSha256 = digest(bytes);
-  if (full.assets[source]?.sourceSha256 === sourceSha256) continue;
+  const existing = full.assets[source];
+  // Re-evaluate a changed PNG that is still stored under its original key: it
+  // may become losslessly compressible after the channel-safe pixel check.
+  if (existing?.sourceSha256 === sourceSha256 && (path.extname(source).toLowerCase() !== '.png' || existing.key !== source)) continue;
   let key = source;
   let data = bytes;
   if (path.extname(source).toLowerCase() === '.png') {
@@ -47,16 +50,18 @@ for (const absolute of files) {
     if ((!meta.pages || meta.pages === 1) && meta.depth === 'uchar') {
       const webp = await sharp(bytes, { limitInputPixels: false }).webp({ lossless: true, effort: 4, quality: 100 }).keepIccProfile().toBuffer();
       if (webp.length < bytes.length) {
-        const original = await sharp(bytes, { limitInputPixels: false }).raw().toBuffer({ resolveWithObject: true });
-        const converted = await sharp(webp, { limitInputPixels: false }).raw().toBuffer({ resolveWithObject: true });
+        const original = await sharp(bytes, { limitInputPixels: false }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+        const converted = await sharp(webp, { limitInputPixels: false }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
         if (original.info.width === converted.info.width && original.info.height === converted.info.height
-          && original.info.channels === converted.info.channels && original.data.equals(converted.data)) {
+          && original.data.equals(converted.data)) {
           key = `${source.slice(0, -4)}.webp`;
           data = webp;
         }
       }
     }
   }
+  if (existing?.sourceSha256 === sourceSha256 && existing.key === key
+    && existing.sha256 === digest(data)) continue;
   changed.push({ source, sourceSha256, key, data, originalSize: bytes.length, contentType: mime(key) });
 }
 
