@@ -13,6 +13,41 @@ const VIRTUAL_SEARCH = 'virtual:lesson-search';
 const RESOLVED_TREE = '\0' + VIRTUAL_TREE;
 const RESOLVED_SEARCH = '\0' + VIRTUAL_SEARCH;
 const PROGRAMMING_PREFIX = 'cybersecurity/anno1/3_Programmazione/';
+const ASSET_MANIFEST_PATH = path.resolve('src/data/r2-assets.json');
+
+function readAssetManifest() {
+  try { return JSON.parse(fs.readFileSync(ASSET_MANIFEST_PATH, 'utf8')); }
+  catch { return { assets: {} }; }
+}
+
+function withRemoteAssets(tree, manifest) {
+  const roots = tree;
+  for (const [filePath, asset] of Object.entries(manifest.assets ?? {})) {
+    if (!filePath.startsWith(`${LESSONS_DIR}/`)) continue;
+    const rel = filePath.slice(LESSONS_DIR.length + 1);
+    const parts = rel.split('/');
+    const fileName = parts.pop();
+    if (!isTreeFile(fileName, rel)) continue;
+    let children = roots;
+    let parentPath = '';
+    for (const name of parts) {
+      parentPath = parentPath ? `${parentPath}/${name}` : name;
+      let dir = children.find((node) => node.type === 'dir' && node.name === name);
+      if (!dir) { dir = { type: 'dir', name, path: parentPath, children: [] }; children.push(dir); }
+      children = dir.children;
+    }
+    if (!children.some((node) => node.name === fileName)) {
+      const sourceType = getSourceFileType(fileName);
+      children.push({ type: 'file', name: fileName, path: rel, size: asset.originalSize, kind: getFileKind(fileName), ...(sourceType ? { language: sourceType.language, category: sourceType.category } : {}) });
+    }
+  }
+  const sortTree = (nodes) => {
+    for (const node of nodes) if (node.children) sortTree(node.children);
+    nodes.sort((a, b) => (a.type === 'dir') !== (b.type === 'dir') ? (a.type === 'dir' ? -1 : 1) : compareNames(a.name, b.name));
+  };
+  sortTree(roots);
+  return roots;
+}
 
 // Matches module/unit/course "intro" files (e.g. "L0 - Intro UD1.md",
 // "Intro M3.md", "Intro_M1.md", "00 - Intro.md", "Lezione 0 - Intro
@@ -153,16 +188,16 @@ export function buildSearchIndex(lessonsPath, files) {
 }
 
 /** Recursively copy published lesson and support files from src to dest. */
-export function copyStaticFiles(srcDir, destDir, rootDir = srcDir) {
+export function copyStaticFiles(srcDir, destDir, rootDir = srcDir, remotePaths = new Set()) {
   const entries = fs.readdirSync(srcDir, { withFileTypes: true });
   for (const entry of entries) {
     const srcPath = path.join(srcDir, entry.name);
     const destPath = path.join(destDir, entry.name);
     if (entry.isDirectory()) {
-      copyStaticFiles(srcPath, destPath, rootDir);
+      copyStaticFiles(srcPath, destPath, rootDir, remotePaths);
     } else {
       const relativePath = path.relative(rootDir, srcPath);
-      if (isPublishedFile(entry.name, relativePath)) {
+      if (isPublishedFile(entry.name, relativePath) && !remotePaths.has(relativePath.split(path.sep).join('/'))) {
         fs.mkdirSync(path.dirname(destPath), { recursive: true });
         fs.copyFileSync(srcPath, destPath);
       }
@@ -189,11 +224,11 @@ export default function lessonsPlugin() {
 
     load(id) {
       if (id === RESOLVED_TREE) {
-        const tree = scanDir(lessonsPath);
+        const tree = withRemoteAssets(scanDir(lessonsPath), readAssetManifest());
         return `export default ${JSON.stringify(tree)};`;
       }
       if (id === RESOLVED_SEARCH) {
-        const tree = scanDir(lessonsPath);
+        const tree = withRemoteAssets(scanDir(lessonsPath), readAssetManifest());
         const files = flattenFiles(tree);
         const index = buildSearchIndex(lessonsPath, files);
         return `export default ${JSON.stringify(index)};`;
@@ -242,7 +277,11 @@ export default function lessonsPlugin() {
     closeBundle() {
       const destDir = path.join(outDir, 'lessons');
       console.log('Copying lesson files to dist/lessons/ ...');
-      copyStaticFiles(lessonsPath, destDir);
+      const manifest = readAssetManifest();
+      const remotePaths = process.env.VITE_R2_PUBLIC_BASE_URL
+        ? new Set(Object.keys(manifest.assets ?? {}).map((p) => p.startsWith('lessons/') ? p.slice('lessons/'.length) : p))
+        : new Set();
+      copyStaticFiles(lessonsPath, destDir, lessonsPath, remotePaths);
       // Count copied files
       let count = 0;
       (function countFiles(dir) {

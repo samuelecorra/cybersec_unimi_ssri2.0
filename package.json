@@ -11,7 +11,10 @@
     "test:hash-routing:e2e": "node scripts/run-hash-routing-e2e.mjs",
     "validate:source-renderer": "node scripts/validate-source-renderer.mjs",
     "validate:sort-names": "node scripts/validate-sort-names.mjs",
-    "test:source-renderer:e2e": "node scripts/run-source-renderer-e2e.mjs"
+    "test:source-renderer:e2e": "node scripts/run-source-renderer-e2e.mjs",
+    "assets:r2:prepare": "node scripts/prepare-r2-assets.mjs",
+    "assets:r2:upload": "node scripts/upload-r2-assets.mjs",
+    "assets:r2:detach": "node scripts/detach-r2-assets.mjs"
   },
   "dependencies": {
     "esbuild": "^0.28.2",
@@ -26,11 +29,13 @@
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1177.0",
     "@tailwindcss/vite": "^4.3.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "playwright": "^1.60.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4.3.0",
     "vite": "^6.4.3"
   }
