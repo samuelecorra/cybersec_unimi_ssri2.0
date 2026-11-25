@@ -15,6 +15,9 @@ Dopo la pulizia dei dati (Lezioni 6, 10 e 16) resta una domanda: **quali feature
 - **laboratorio dopo ogni blocco teorico** (RFE, PCA, t-SNE, Iris/Wine/MNIST, embedding) in Python/Colab;
 - punti principali.
 
+![](imgs/Pasted%20image%2020261125010653.png)
+
+
 <!-- SOURCE_VISUAL id="IS18-V01" source="L18-web.pdf" page="2" type="grafico" description="Mappe PCA e t-SNE delle cifre che accompagnano la panoramica" reason="Grafici visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
@@ -28,6 +31,8 @@ Dopo la pulizia dei dati (Lezioni 6, 10 e 16) resta una domanda: **quali feature
 <!-- SOURCE_VISUAL id="IS18-V02" source="L18-web.pdf" page="3" type="schema" description="A sinistra estrazione di feature nuove, a destra selezione di un sottoinsieme con le feature scartate barrate (da quantdare.com)" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125010913.png)
+
 #### **0.2. La feature engineering: dove si colloca la riduzione**
 
 La catena completa della feature engineering, già incontrata nelle lezioni precedenti, è:
@@ -37,10 +42,14 @@ omogeneizzazione → valori non validi → valori mancanti → coerenza → codi
 <!-- SOURCE_VISUAL id="IS18-V03" source="L18-web.pdf" page="4" type="schema" description="La catena della feature engineering che termina con la riduzione della dimensionalità" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125010924.png)
+
 **Un’applicazione tipica.** Un classificatore o regressore deve riconoscere una **vibrazione pericolosa**: l’ingresso $x$ è fatto di **6 segnali di sensori rumorosi**; i metodi di feature engineering li riducono a **3 feature più pulite** ($x_{\text{engineered}}$: per esempio livello filtrato, RMS, picco); l’uscita è una classe (o un valore). I segnali della figura sono sintetici e illustrativi.
 
 <!-- SOURCE_VISUAL id="IS18-V04" source="L18-web.pdf" page="5" type="figura" description="Sei canali grezzi rumorosi trasformati in tre feature ingegnerizzate e poi in una classe" reason="Segnali visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125010933.png)
 
 > 💡 **RMS (nota didattica).** Il valore efficace (*Root Mean Square*) di una finestra di $n$ campioni è $\text{RMS}=\sqrt{\frac1n\sum_i s_i^2}$: misura l’energia del segnale e cresce con l’ampiezza della vibrazione. È un esempio di feature del livello (A) della Lezione 10, calcolata dentro ogni frame.
 
@@ -56,6 +65,8 @@ omogeneizzazione → valori non validi → valori mancanti → coerenza → codi
 
 <!-- SOURCE_VISUAL id="IS18-V05" source="L18-web.pdf" page="6" type="schema" description="Mappa delle tecniche divise tra estrazione e selezione delle feature" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125010956.png)
 
 > 📌 **Embedding come estrazione.** L’embedding di un’immagine o di un testo produce in uscita un **vettore di feature ingegnerizzate**. Appartiene alla classe dei **sistemi di estrazione dell’informazione**: trasformano i dati grezzi (pixel, parole) in un vettore compatto di feature.
 
@@ -77,6 +88,8 @@ Le feature **irrilevanti** (nessuna informazione sull’uscita) e quelle **ridon
 <!-- SOURCE_VISUAL id="IS18-V06" source="L18-web.pdf" page="8" type="schema" description="Imbuto da tutte le feature alle feature finali che entrano nel sistema intelligente" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125011540.png)
+
 > 💡 **Il legame con la maledizione della dimensionalità (nota didattica).** Ogni feature in più aggiunge una dimensione allo spazio in cui il modello deve stimare le frontiere: con un numero fisso di esempi lo spazio diventa sempre più vuoto e le distanze sempre meno informative (Lezioni 19 e 20). Una feature irrilevante non solo non aiuta, ma aggiunge rumore alle distanze e gradi di libertà al modello.
 
 #### **1.2. Filtri, wrapper, metodi embedded**
@@ -85,6 +98,8 @@ Tre modi di selezionare le feature. **Filtro**: ordinare, poi tenere le prime. *
 
 <!-- SOURCE_VISUAL id="IS18-V07" source="L18-web.pdf" page="9" type="schema" description="I tre approcci di selezione: filtro, wrapper, embedded (da quantdare.com)" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125011549.png)
 
 ##### **1.2.1. Filtri**
 
@@ -97,6 +112,8 @@ Tre modi di selezionare le feature. **Filtro**: ordinare, poi tenere le prime. *
 - **valutazione**: **statistiche** (nessun modello viene addestrato).
 
 **Risultati**: sono (relativamente) **robusti contro l’overfitting**; **possono non selezionare** le feature più «utili».
+
+![](imgs/Pasted%20image%2020261125011603.png)
 
 **Esempi**: preferire le feature con **varianza alta** (confrontate **sulla stessa scala**); preferire feature con **correlazione bassa** tra loro (similarità → cross-correlazione, Lezioni 8–10). **Più feature molto correlate → tenerne una.**
 
@@ -117,6 +134,8 @@ Tre modi di selezionare le feature. **Filtro**: ordinare, poi tenere le prime. *
 - **in linea di principio** possono trovare le feature più «utili», **ma**
 - sono **soggetti a overfitting**;
 - sono **costosi**: un addestramento del modello (con validazione incrociata) **per ogni sottoinsieme**.
+
+![](imgs/Pasted%20image%2020261125011621.png)
 
 I modelli tipici sono **k-NN** o **reti neurali**.
 
@@ -139,6 +158,8 @@ Ogni nodo del reticolo è una **maschera**: 0 = feature non attiva, 1 = feature 
 <!-- SOURCE_VISUAL id="IS18-V08" source="L18-web.pdf" page="12" type="schema" description="Reticolo delle maschere di feature attive per d = 4, da m = 0 a m = 4" reason="Struttura del reticolo visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125011637.png)
+
 **Tutti i sottoinsiemi con $j$ feature** sono
 
 $$C(d,j)=\binom{d}{j}=\frac{d!}{j!\,(d-j)!}\qquad(d=\text{numero di feature},\ j=1,\dots,d).$$
@@ -154,6 +175,8 @@ Per $d=4$: $4+6+4+1=15$ sottoinsiemi; per $d=20$: **1 048 575**. La SFS ne prova
 <!-- SOURCE_VISUAL id="IS18-V09" source="L18-web.pdf" page="13" type="schema" description="Percorso greedy della SFS con i nodi scelti evidenziati in giallo" reason="Il percorso evidenziato è visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125011659.png)
+
 > ⚠️ **Il limite della ricerca greedy.** Una scelta presa al primo passo non viene più rimessa in discussione: se la coppia migliore è $\{x_2,x_3\}$ ma la feature migliore da sola è $x_1$, la SFS parte da $x_1$ e può non arrivare mai a $\{x_2,x_3\}$. Si scambia l’ottimalità con il costo.
 
 ##### **1.2.5. Sequential Backward Selection (SBS, wrapper)**
@@ -165,6 +188,8 @@ Circa $4+3+2$ valutazioni per $d=4$ se ci si ferma a una feature. Si seleziona i
 <!-- SOURCE_VISUAL id="IS18-V10" source="L18-web.pdf" page="14" type="schema" description="Percorso della SBS dal nodo 1111 verso il basso" reason="Il percorso è visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125011713.png)
+
 > 💡 **SFS o SBS? (nota didattica).** La SBS parte dal modello con tutte le feature, quindi vede subito le interazioni tra feature che la SFS scopre solo tardi; in compenso i primi addestramenti sono i più costosi (tante feature). Si sceglie la SFS quando ci si aspetta di tenere poche feature, la SBS quando se ne vogliono togliere poche.
 
 ##### **1.2.6. Metodi embedded**
@@ -174,6 +199,8 @@ Circa $4+3+2$ valutazioni per $d=4$ se ci si ferma a una feature. Si seleziona i
 **Metodi**: criterio = «utilità» del sottoinsieme; ricerca **guidata dal processo di apprendimento**; valutazione con la validazione incrociata.
 
 **Risultati**: **simili ai wrapper**, **meno costosi**, **meno soggetti a overfitting**.
+
+![](imgs/Pasted%20image%2020261125011724.png)
 
 I metodi embedded sono **specifici di una data macchina di apprendimento** e selezionano le variabili (implicitamente) durante l’addestramento. Esempi: **LASSO** (la regolarizzazione L1 porta pesi a 0), **importanza delle feature negli alberi**, **pesi d’ingresso delle reti neurali**.
 
@@ -188,6 +215,8 @@ Con **input normalizzati** (stesso intervallo), se durante l’addestramento i p
 
 <!-- SOURCE_VISUAL id="IS18-V11" source="L18-web.pdf" page="16" type="schema" description="Neurone con w4 che tende a zero e rete con i pesi uscenti dall'input 5 che tendono a zero" reason="Schema visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125011735.png)
 
 > ⚠️ **Perché «input normalizzati».** Se $x_4$ è misurato in millimetri e gli altri in metri, un peso piccolo su $x_4$ può avere lo stesso effetto di un peso grande sugli altri: la grandezza del peso dipende dall’unità di misura. Solo con input sulla stessa scala il peso misura l’importanza.
 
@@ -216,6 +245,8 @@ La figura mostra 40 dei 1800 campioni (4 per classe). Il dataset ha la **stessa 
 <!-- SOURCE_VISUAL id="IS18-V12" source="L18-web.pdf" page="18" type="figura" description="40 cifre sintetiche 8x8, quattro per classe" reason="Immagini delle cifre visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125013022.png)
+
 > 💡 **Il dataset reale (nota didattica).** Il vero `load_digits` di scikit-learn ha **1797** immagini (non esattamente 180 per classe): è il motivo per cui il laboratorio t-SNE del §5.2, eseguito sulle cifre reali, riporta 1797 campioni invece di 1800.
 
 #### **2.2. Riduzione della dimensionalità: selezione con RFE**
@@ -224,6 +255,8 @@ La figura mostra 40 dei 1800 campioni (4 per classe). Il dataset ha la **stessa 
 
 <!-- SOURCE_VISUAL id="IS18-V13" source="L18-web.pdf" page="19" type="figura" description="Le cifre sintetiche usate per la RFE" reason="Immagini visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125013606.png)
 
 > 📌 **Che cosa fa la RFE (nota didattica).** Si addestra il modello su tutte le feature, si elimina la feature con il peso (o l’importanza) più piccolo, si riaddestra sulle rimanenti, e si ripete. L’ordine di eliminazione dà un **ranking**: l’ultima feature sopravvissuta ha rango 1. È una SBS in cui il criterio non è la CV di ogni candidato, ma il peso che il modello assegna alle feature: molto più economica.
 
@@ -275,6 +308,8 @@ La matrice stampata (riga del pixel, colonna):
 | **6** | 40 | 16 | 52 | 18 | 59 | 32 | 53 | 14 |
 | **7** | 5 | 23 | 30 | 41 | 57 | 58 | 35 | 50 |
 
+![](imgs/Pasted%20image%2020261125013701.png)
+
 **Nota**: la SVM classifica la cifra; rango 1 = **pixel più importante (riga 3, colonna 0)**; rango 64 = **meno importante (riga 0, colonna 4)**.
 
 > 💡 **Leggere la matrice (nota didattica).** I ranghi bassi stanno spesso ai bordi sinistro e destro (colonne 0 e 7): in cifre sintetiche con spostamenti casuali, la presenza o assenza di inchiostro in quelle zone distingue bene alcune cifre (per esempio 1 contro 0). Ranghi molto alti nella riga 0 (63, 62, 64, 61) indicano pixel quasi sempre vuoti o uguali in tutte le classi: un filtro a varianza li avrebbe scartati subito. Il ranking dipende dal modello: con un k-NN o una LDA cambierebbe.
@@ -294,6 +329,8 @@ plt.show()
 <!-- SOURCE_VISUAL id="IS18-V14" source="L18-web.pdf" page="23" type="grafico" description="Mappa del ranking RFE dei pixel con scala di colori Blues" reason="Mappa di colori visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125013710.png)
+
 #### **2.7. RFE: di quanti pixel abbiamo bisogno?**
 
 **Input**: i 64 pixel ordinati dalla RFE. **Output**: l’**accuratezza 5-NN** (5-fold CV) usando **solo i primi $n$ pixel**, $n=2,5,10,20,64$.
@@ -304,6 +341,8 @@ plt.show()
 
 <!-- SOURCE_VISUAL id="IS18-V15" source="L18-web.pdf" page="24" type="grafico" description="Barre dell'accuratezza 5-NN al variare del numero di pixel scelti dalla RFE dentro ogni fold" reason="Grafico a barre visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125013720.png)
 
 **Nota**: ranking e accuratezza sono calcolati **dentro ogni fold** della validazione incrociata: **i pixel di test non influenzano mai la selezione**. **Risultato**: con **10 pixel** l’accuratezza è già **96%**, contro il 98,6% con tutti i 64: **la maggior parte dell’input viene rimossa a un costo piccolo**. (Cifre sintetiche, valori da rivedere.)
 
@@ -326,6 +365,8 @@ Costruire poche feature nuove da molte: PCA, LDA, ICA, mappe per la visualizzazi
 <!-- SOURCE_VISUAL id="IS18-V16" source="L18-web.pdf" page="26" type="figura" description="Esempi di dati industriali ad alta dimensionalità" reason="Immagini visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125013735.png)
+
 #### **3.2. L’analisi delle componenti principali (PCA)**
 
 - **Spazio originale: 3 geni**. Input: 3 feature = **attivazione del gene 1, del gene 2 e del gene 3** (sintetiche, unità arbitrarie), **240 cellule in 4 stati cellulari**. Le cellule stanno vicino a un **piano inclinato** (ombreggiato).
@@ -333,6 +374,8 @@ Costruire poche feature nuove da molte: PCA, LDA, ICA, mappe per la visualizzazi
 
 <!-- SOURCE_VISUAL id="IS18-V17" source="L18-web.pdf" page="27" type="grafico" description="240 cellule nello spazio dei 3 geni vicino a un piano inclinato e la loro proiezione su PC1 e PC2" reason="Grafici 3D e 2D visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125013744.png)
 
 > 📌 **L’idea.** Si tratta di **trovare un sottospazio opportunamente traslato e ruotato che descriva i dati**. Se le cellule stanno quasi su un piano, due coordinate su quel piano bastano: la terza (la distanza dal piano) è quasi rumore.
 
@@ -349,6 +392,8 @@ Costruire poche feature nuove da molte: PCA, LDA, ICA, mappe per la visualizzazi
 <!-- SOURCE_VISUAL id="IS18-V18" source="L18-web.pdf" page="28" type="figura" description="Strisce di colore della matrice centrata dei 3 geni e della matrice delle 3 componenti per 20 cellule" reason="Mappa di colori visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125013758.png)
+
 **Nota**: il cambiamento di colore attorno alla media è la varianza. In $X_c$ la variazione è **distribuita su tre righe**; in $Z$ sta in **PC1 (40,0) e PC2 (19,7)**, mentre **PC3 (0,8) è quasi un verde piatto**: eliminarla **perde poco**. **Controllo**: la **varianza totale è conservata**: $27{,}9+20{,}3+12{,}4=60{,}6=40{,}0+19{,}7+0{,}8$ (varianze su tutte le 240 cellule; $60{,}5$ per arrotondamento).
 
 > 💡 **Perché la varianza totale si conserva (nota didattica).** La PCA è una **rotazione** degli assi: le distanze dal centro non cambiano, quindi nemmeno la loro somma dei quadrati, cioè la varianza totale. In termini algebrici, la traccia della matrice di covarianza (somma delle varianze delle feature) è uguale alla somma degli autovalori, e la rotazione non cambia la traccia. La PCA non crea né distrugge varianza: la **concentra** nelle prime componenti.
@@ -364,6 +409,8 @@ Costruire poche feature nuove da molte: PCA, LDA, ICA, mappe per la visualizzazi
 <!-- SOURCE_VISUAL id="IS18-V19" source="L18-web.pdf" page="29" type="figura" description="Approssimazione planare di una nuvola 3D" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125013812.png)
+
 #### **3.5. L’idea della PCA (2): massima varianza = minimo errore**
 
 **Proiezione ortogonale** dei dati su uno spazio lineare di dimensione minore che:
@@ -374,6 +421,8 @@ Costruire poche feature nuove da molte: PCA, LDA, ICA, mappe per la visualizzazi
 
 <!-- SOURCE_VISUAL id="IS18-V20" source="L18-web.pdf" page="30" type="grafico" description="Direzione a varianza più alta e più bassa con le proiezioni e gli errori dei punti" reason="Geometria visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125013819.png)
 
 > 💡 **Pitagora (nota didattica).** Per un punto centrato $x$ e una direzione unitaria $u$, la proiezione ha lunghezza $u^\top x$ e l’errore è il vettore ortogonale $x-(u^\top x)u$. Il teorema di Pitagora dà $\|x\|^2=(u^\top x)^2+\|x-(u^\top x)u\|^2$. Sommando su tutti i punti, $\sum\|x_i\|^2$ non dipende da $u$: quindi rendere grande la somma delle proiezioni al quadrato (varianza) e rendere piccola la somma degli errori al quadrato sono **lo stesso problema**.
 
@@ -387,6 +436,8 @@ Costruire poche feature nuove da molte: PCA, LDA, ICA, mappe per la visualizzazi
 
 <!-- SOURCE_VISUAL id="IS18-V21" source="L18-web.pdf" page="31" type="grafico" description="Nuvola di punti con PC1 e PC2 che partono dal centro di massa" reason="Direzioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014046.png)
 
 #### **3.7. La PCA: definizione**
 
@@ -402,6 +453,8 @@ con $x\in\mathbb{R}^d$ un dato con $d$ feature (input); $\bar{x}$ la media di tu
 > ⚠️ **NOTA**: la PCA **non fa clustering** e **non usa le etichette**. I colori nei grafici vengono da etichette (o cluster) **calcolate altrove** e servono solo all’occhio.
 
 #### **3.8. La PCA come blocco**
+
+![](imgs/Pasted%20image%2020261125014058.png)
 
 $$X\ (N\times d,\ \text{es. }240\times 3)\ \xrightarrow{\ \text{PCA: autovettori di }C\ }\ Z\ (N\times k,\ \text{es. }240\times 2),$$
 
@@ -419,6 +472,8 @@ $X_c$ ($240\times 3$) → PCA, $W^\top$ ($3\times 3$) → $Y$ ($240\times 3$, tu
 
 <!-- SOURCE_VISUAL id="IS18-V22" source="L18-web.pdf" page="34" type="figura" description="Strisce di colore di Xc, Y e Z per 20 cellule nel blocco PCA" reason="Mappe di colori visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014134.png)
 
 **Una cellula** (colonna 1 delle strisce), unità arbitrarie:
 
@@ -450,6 +505,8 @@ $\mathbf{1}$ è una colonna di $N$ uni; $\lambda_j$ è la **varianza lungo $u_j$
 <!-- SOURCE_VISUAL id="IS18-V23" source="L18-web.pdf" page="36" type="grafico" description="Matrici Xc e Y di 400 punti, varianza spiegata per componente e mappa PC1-PC2 con quattro cluster" reason="Strisce, barre e scatter visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014149.png)
+
 **Output**: $Z$, $400\times 2$. **{PC1, PC2} tengono il 60% della varianza**; nella mappa **i cluster appaiono**. Le etichette colorano solo i punti.
 
 #### **3.12. Autovalori: quante componenti tenere?**
@@ -471,6 +528,8 @@ con $\sum_j\lambda_j=26{,}5$.
 <!-- SOURCE_VISUAL id="IS18-V24" source="L18-web.pdf" page="37" type="grafico" description="Autovalori a barre e curva della varianza cumulativa con gomito a k = 2" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014216.png)
+
 Le prime righe di $W^\top$ riportate dalla slide (le righe centrali sono omesse con «…»):
 
 | | $f_1$ | $f_2$ | $f_3$ | $f_4$ | $f_5$ | $f_6$ | $f_7$ | $f_8$ | $f_9$ | $f_{10}$ |
@@ -491,6 +550,8 @@ $X$ ($1800\times 64$) → **1. scalare** (`StandardScaler`) → **2. ridurre** (
 
 <!-- SOURCE_VISUAL id="IS18-V25" source="L18-web.pdf" page="38" type="schema" description="Pipeline scaler, PCA e 5-NN per classificare le cifre" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014224.png)
 
 ```python
 model = make_pipeline(StandardScaler(), PCA(10), KNeighborsClassifier(5))
@@ -564,6 +625,8 @@ plt.show()
 <!-- SOURCE_VISUAL id="IS18-V26" source="L18-web.pdf" page="42" type="figura" description="Immagine 8x8 della cifra 8 in scala di grigi con i valori dei pixel" reason="Immagine visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014251.png)
+
 > 💡 **Leggere la tabella (nota didattica).** Le righe 1–2 e 4–6 hanno due «picchi» (per esempio 13 e 16 nella riga 1): sono i due tratti laterali dei due anelli dell’8; la riga 3, con valori alti e continui al centro, è la strozzatura tra i due anelli. I valori vanno da 0 (bianco) a 16 (nero), con la mappa `gray_r` (scala di grigi invertita).
 
 #### **4.3. Due feature grezze: scatter plot**
@@ -581,6 +644,8 @@ plt.legend(*sc.legend_elements(), title='digit')
 
 <!-- SOURCE_VISUAL id="IS18-V27" source="L18-web.pdf" page="43" type="grafico" description="Scatter di due pixel arbitrari colorato per cifra senza struttura di classe" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014306.png)
 
 #### **4.4. Riduzione della dimensionalità con la PCA**
 
@@ -612,6 +677,8 @@ plt.legend(*sc.legend_elements(), title='digit')
 <!-- SOURCE_VISUAL id="IS18-V28" source="L18-web.pdf" page="45" type="grafico" description="Mappa PCA delle 1800 cifre colorata per classe" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014317.png)
+
 > 💡 **Un confronto con il §3.13 (nota didattica).** Con 2 componenti il 5-NN arriva al 67%, con 10 al 98%: 34% di varianza bastano a «vedere» la struttura, non a classificare bene. La mappa serve a esplorare; per decidere si usa un $k$ scelto sull’accuratezza.
 
 ---
@@ -627,8 +694,13 @@ Supervisionata, non lineare, separazione cieca delle sorgenti.
 - La combinazione risultante può essere usata come **classificatore lineare** o come **riduzione della dimensionalità** prima di un classificatore.
 - La LDA è **supervisionata**: usa le etichette (la PCA no).
 
+![](imgs/Pasted%20image%2020261125014340.png)
+
+
 <!-- SOURCE_VISUAL id="IS18-V29" source="L18-web.pdf" page="47" type="grafico" description="Rotazione sbagliata con classi sovrapposte e rotazione migliore della LDA" reason="Grafici visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014351.png)
 
 A sinistra: rotazione sbagliata, **sovrapposizione!** A destra: **la rotazione migliore**. Il codice della LDA di Fisher è in un’altra lezione del corso (Lezione 17, §4).
 
@@ -644,6 +716,8 @@ A sinistra: rotazione sbagliata, **sovrapposizione!** A destra: **la rotazione m
 
 #### **5.2. LDA: la rotazione di Fisher usa le classi**
 
+![](imgs/Pasted%20image%2020261125014426.png)
+
 $y$: etichette di classe (4 stati cellulari), 240 valori. $X_c$ ($240\times 3$) → LDA: $z=W_F^\top(x-\bar{x})$ → $Z$ ($240\times 2$; al più $C-1=3$).
 
 $$W_F^\top=\begin{bmatrix}0{,}66&0{,}58&0{,}48\\0{,}76&-0{,}57&-0{,}32\end{bmatrix}$$
@@ -654,6 +728,8 @@ $$x-\bar{x}=\begin{bmatrix}-4{,}1\\-15{,}1\\10{,}5\end{bmatrix},\qquad z=W_F^\to
 
 <!-- SOURCE_VISUAL id="IS18-V30" source="L18-web.pdf" page="48" type="grafico" description="Strisce di Xc e Z con la LDA e mappe PCA e LDA dei quattro stati cellulari" reason="Mappe e scatter visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014438.png)
 
 **Come si calcola $W_F$ (Fisher)**: (1) medie di classe $\mu_k$, dispersione intra-classe $S_W$, dispersione tra classi $S_B$; (2) autovettori di $S_W^{-1}S_B$: l’autovalore $J$ = **varianza tra / varianza dentro** lungo quella direzione, qui $J=9{,}5;\ 4{,}1;\ 0{,}0$ (la **terza direzione non porta nulla**); (3) $W_F$: le prime due, **normalizzate a lunghezza 1**.
 
@@ -671,6 +747,8 @@ $$Z=\text{tSNE}(X,k)\qquad(k=2\text{ o }3\text{ al massimo};\ X:N\times d,\ Z:N\
 <!-- SOURCE_VISUAL id="IS18-V31" source="L18-web.pdf" page="49" type="grafico" description="Confronto tra mappa PCA e mappa t-SNE delle stesse 1800 cifre" reason="Grafici visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014452.png)
+
 A sinistra la PCA, a destra la t-SNE, con una **separazione migliore delle classi** (stesse 1800 immagini). Cifre sintetiche 8×8: 1800 immagini, 64 feature, 10 classi (**MNIST**: 60 000 immagini, 784 feature).
 
 > 💡 **Che cosa ottimizza la t-SNE (nota didattica).** Per ogni coppia di punti calcola una probabilità di essere vicini nello spazio originale ($p_{ij}$, con una gaussiana la cui larghezza dipende dalla *perplexity*, circa il numero di vicini efficaci) e una nella mappa ($q_{ij}$, con una distribuzione t di Student a code pesanti); poi sposta i punti della mappa per minimizzare la divergenza KL tra le due (§6.2). Le code pesanti permettono di allontanare molto i gruppi diversi: per questo i cluster appaiono ben separati, ma le distanze tra cluster non sono quelle originali.
@@ -685,12 +763,16 @@ Spesso usata nell’**elaborazione dei segnali** e nelle **applicazioni industri
 <!-- SOURCE_VISUAL id="IS18-V32" source="L18-web.pdf" page="50" type="figura" description="Due scenari ICA: tre parlanti con quattro microfoni e due parlanti più martello pneumatico con tre microfoni" reason="Illustrazioni visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014500.png)
+
 #### **5.5. ICA: osservazioni, sorgenti e rumore**
 
 **Osservazioni (segnali mescolati) → ICA → sorgenti stimate.** **Ipotesi**: sorgenti **indipendenti e non gaussiane** e **miscelazione lineare**. Nell’esempio, **3 feature/segnali provengono da 2 sorgenti indipendenti + rumore**: la **componente di rumore si riconosce per ispezione**; poi si può **eliminare il terzo segnale trasformato**.
 
 <!-- SOURCE_VISUAL id="IS18-V33" source="L18-web.pdf" page="51" type="grafico" description="Tre segnali osservati mescolati e le tre sorgenti stimate dalla ICA, una delle quali è rumore" reason="Forme d'onda visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014507.png)
 
 > 📌 **Il modello dell’ICA (nota didattica).** Le osservazioni sono $x=As$, con $s$ le sorgenti indipendenti e $A$ la **matrice di miscelazione** (ignota): ogni microfono registra una somma pesata delle voci. L’ICA stima una matrice $W\approx A^{-1}$ tale che le componenti di $\hat{s}=Wx$ siano il più possibile **indipendenti**. Rispetto alla PCA, che rende le componenti solo **scorrelate** e le ordina per varianza, l’ICA chiede di più (l’indipendenza statistica) e non dà un ordine naturale: le sorgenti stimate escono in ordine e scala arbitrari, ed è per questo che il rumore va riconosciuto per ispezione.
 
@@ -740,6 +822,8 @@ plt.legend(*sc.legend_elements(), title='digit')
 <!-- SOURCE_VISUAL id="IS18-V34" source="L18-web.pdf" page="54" type="grafico" description="Mappa t-SNE delle 1797 cifre reali con dieci cluster etichettati" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014528.png)
+
 #### **6.4. Confronto: due pixel arbitrari, PCA, t-SNE**
 
 **Input**: le **stesse 1800 immagini**, sempre ridotte a **2 feature**.
@@ -750,6 +834,8 @@ plt.legend(*sc.legend_elements(), title='digit')
 
 <!-- SOURCE_VISUAL id="IS18-V35" source="L18-web.pdf" page="55" type="grafico" description="Tre mappe 2D delle stesse cifre: due pixel, PCA e t-SNE" reason="Grafici visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014540.png)
 
 **Nota**: PCA e t-SNE sono **stimate su tutte le 1800 immagini**, quindi i numeri **indicano solo quanto sono separate le classi**. **La t-SNE non può mappare campioni nuovi.**
 
@@ -778,6 +864,8 @@ Ogni dato $x_i\in\mathbb{R}^d$ (feature originali) passa per la riduzione della 
 <!-- SOURCE_VISUAL id="IS18-V36" source="L18-web.pdf" page="57" type="grafico" description="Schema della funzione di riduzione f e le due mappe PCA e t-SNE delle stesse cifre" reason="Grafici visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014626.png)
+
 > ⚠️ **Assi, scala e distanze globali** delle proiezioni **non sono direttamente confrontabili**. Una vista 2D conserva **relazioni selezionate**, **non la geometria completa**.
 
 #### **6.7. Immagini: visualizzare le feature, non necessariamente i pixel**
@@ -788,6 +876,8 @@ Il flusso tipico di **embedding delle immagini** usato nella visione artificiale
 
 <!-- SOURCE_VISUAL id="IS18-V37" source="L18-web.pdf" page="58" type="schema" description="Flusso immagini, estrazione delle feature, vettore e proiezione 2D" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014639.png)
 
 - **Feature classiche**: descrittori progettati a mano come **tessitura, intensità o gradienti dell’immagine** (Lezioni 8 e 21).
 - **Embedding appresi**: vettori d’uscita di **CNN, autoencoder, encoder di foundation model**.
@@ -810,6 +900,8 @@ PCA, t-SNE, UMAP, PaCMAP, TriMAP su dati reali.
 <!-- SOURCE_VISUAL id="IS18-V38" source="L18-web.pdf" page="60" type="grafico" description="Iris proiettato con PCA, t-SNE, UMAP, PaCMAP e TriMAP" reason="Cinque mappe visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014651.png)
+
 Iris: $N=150$ fiori, $d=4$ misure standardizzate, $C=3$ specie. **Stesse osservazioni in ogni pannello**; etichette solo per colorare, **non per imparare la proiezione**. **Regola di lettura**: gli assi sono indipendenti; **la separazione 2D non è accuratezza di classificazione**.
 
 #### **7.2. Wine: stesso input, cinque obiettivi diversi**
@@ -818,6 +910,8 @@ Iris: $N=150$ fiori, $d=4$ misure standardizzate, $C=3$ specie. **Stesse osserva
 
 <!-- SOURCE_VISUAL id="IS18-V39" source="L18-web.pdf" page="61" type="grafico" description="Wine proiettato con PCA, t-SNE, UMAP, PaCMAP e TriMAP" reason="Cinque mappe visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014703.png)
 
 Wine: $N=178$ vini, $d=13$ misure chimiche standardizzate, $C=3$ cultivar. **Stessa distribuzione delle classi in ogni pannello.** **Domanda**: gruppi 2D compatti garantiscono prestazioni predittive migliori? **No.**
 
@@ -830,6 +924,8 @@ Wine: $N=178$ vini, $d=13$ misure chimiche standardizzate, $C=3$ cultivar. **Ste
 <!-- SOURCE_VISUAL id="IS18-V40" source="L18-web.pdf" page="62" type="grafico" description="1000 immagini MNIST proiettate con cinque metodi dopo PCA(50), con l'8 del laboratorio 1 evidenziato" reason="Cinque mappe visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014716.png)
+
 MNIST: $N=1000$ **immagini reali** (100 per cifra), $28\times 28=784$ pixel → **PCA(50) condivisa** → cinque proiezioni 2D. Stessi campioni, **nessuna etichetta usata nella stima**. **A differenza delle cifre sintetiche 8×8 precedenti, queste sono osservazioni reali scritte a mano.**
 
 > 💡 **Perché PCA(50) prima (nota didattica).** t-SNE e UMAP calcolano distanze tra tutte le coppie di punti; in 784 dimensioni sono lente e dominate dal rumore dei pixel. Una PCA a 50 componenti tiene la gran parte della varianza utile, elimina il rumore e accelera il calcolo: è la combinazione standard «PCA per comprimere, metodo non lineare per visualizzare». Per questo l’intestazione dice «input $d=50$» anche se le immagini hanno 784 pixel.
@@ -840,6 +936,8 @@ MNIST: $N=1000$ **immagini reali** (100 per cifra), $28\times 28=784$ pixel → 
 
 <!-- SOURCE_VISUAL id="IS18-V41" source="L18-web.pdf" page="63" type="schema" description="Encoder multimodale EmbeddingGemma 2 con quattro modalità d'ingresso e un vettore da 768 valori" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014727.png)
 
 - **Che cosa**: un **encoder pre-addestrato** (circa **740M parametri**) che mappa **media diversi in un unico spazio vettoriale**: **contenuti simili finiscono vicini**.
 - **Input**: testo, immagine, video, audio (**un elemento alla volta**).
@@ -855,6 +953,8 @@ Immagine $x$ ($28\times 28\to 224\times 224$ RGB) → **EmbeddingGemma 2**, enco
 <!-- SOURCE_VISUAL id="IS18-V42" source="L18-web.pdf" page="64" type="schema" description="Un'immagine MNIST trasformata in un embedding da 768 valori e poi in un punto della mappa t-SNE" reason="Schema e mappa visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014741.png)
+
 - **Encoder (estrazione delle feature)**: ognuna delle $N=1000$ immagini diventa un vettore $z_i\in\mathbb{R}^{768}$; **le etichette non vengono usate**.
 - **Proiezione (visualizzazione)**: la matrice $Z$ $1000\times 768$ diventa $1000\times 2$; l’immagine d’esempio (un **8**, cerchiato) è **un punto della mappa**, con $z=(-0{,}05;\ -0{,}05;\ 0{,}05;\ \dots)$ nei suoi primi tre valori.
 - **Gli stessi due passi di prima**, con lo $z$ **appreso** al posto della PCA(50) sui pixel.
@@ -867,6 +967,8 @@ Immagine $x$ ($28\times 28\to 224\times 224$ RGB) → **EmbeddingGemma 2**, enco
 
 <!-- SOURCE_VISUAL id="IS18-V43" source="L18-web.pdf" page="65" type="grafico" description="Cinque proiezioni 2D degli embedding da 768 valori di 1000 immagini MNIST" reason="Cinque mappe visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014752.png)
 
 **Rappresentazione d’ingresso**: $N=1000$ immagini MNIST reali (100 per cifra). 28×28 in scala di grigi → 224×224 RGB → un **encoder locale di immagini** *embeddinggemma-2* → **vettori a 768 dimensioni**. I cinque metodi di proiezione usano **questi vettori, non i pixel grezzi**; le etichette servono solo a colorare.
 
@@ -917,6 +1019,8 @@ Immagine $x$ ($8\times 8=64$ valori) → **encoder $f_\theta$** (addestrato) →
 <!-- SOURCE_VISUAL id="IS18-V44" source="L18-web.pdf" page="69" type="schema" description="Encoder che produce un embedding usato per una mappa 2D o per un classificatore" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014809.png)
+
 - Un **embedding** è un **estrattore di feature appreso dai dati**: $z=f_\theta(x)\in\mathbb{R}^d$. **Input simili finiscono vicini.**
 - **Per guardare**: PCA (lineare, ha un `transform`) o t-SNE (vicinati, **solo un’immagine**).
 - **Per decidere**: una **piccola «testa»** su $z$. **Embedding + testa è la classica macchina System 1.**
@@ -957,6 +1061,8 @@ $z_a,z_b\in\mathbb{R}^d$: due embedding; numeratore: **prodotto scalare** (somma
 <!-- SOURCE_VISUAL id="IS18-V45" source="L18-web.pdf" page="72" type="figura" description="Copertina di Thinking, Fast and Slow di Daniel Kahneman" reason="Immagine visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125014933.png)
+
 **Daniel Kahneman**, premio Nobel per l’Economia (2002): *Thinking, Fast and Slow* (2011); copertina usata con permesso.
 
 > 💡 **Analogia per questa lezione** (sviluppata nelle slide successive): le feature **scelte e provate a mano** (wrapper, RFE) ≈ **System 2**, lento ed esplicito; una **rete addestrata che riconosce a colpo d’occhio** ≈ **System 1**, veloce, con feature apprese.
@@ -970,6 +1076,8 @@ $z_a,z_b\in\mathbb{R}^d$: due embedding; numeratore: **prodotto scalare** (somma
 
 <!-- SOURCE_VISUAL id="IS18-V46" source="L18-web.pdf" page="73" type="schema" description="Imbuto dall'ingresso sensoriale a 10^9 bit/s attraverso System 1 e System 2 fino al comportamento a 10 bit/s" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125014957.png)
 
 > ⚠️ **La teoria del doppio processo è dibattuta** (molti vi vedono un continuo): qui è una **metafora di progetto, non neuroscienza**.
 
@@ -1020,6 +1128,8 @@ $N$ = numero di campioni; $d$ = numero di feature originali; $k$ = numero di fea
 <!-- SOURCE_VISUAL id="IS18-V47" source="L18-web.pdf" page="77" type="schema" description="Stato e domande tipizzate valutate in parallelo da un modello System One, con risposte tipizzate consumate dal codice" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125015013.png)
+
 Si legge da sinistra a destra: **una richiesta porta lo stato e le domande**; ogni domanda è valutata **in parallelo** sullo stesso stato; **una risposta restituisce risposte tipizzate**; **il proprio codice, non il modello, agisce** su di esse. Choice e Score danno anche una confidenza; un Noul è una singola probabilità. Schema ispirato a zbrain.ai/system-one-models (ridisegnato).
 
 #### **8.9. La struttura di un modello System One**
@@ -1032,6 +1142,8 @@ con $z_c$ il **punteggio (logit) dell’opzione $c$**, $K$ il numero di opzioni 
 
 <!-- SOURCE_VISUAL id="IS18-V48" source="L18-web.pdf" page="78" type="schema" description="Un passo in avanti del modello System One contro T passi sequenziali di un LLM che genera testo libero" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125015028.png)
 
 **Stesso input**, a confronto: un **LLM** genera **testo libero** con **$T$ token = $T$ passi sequenziali**. **Forme**: in ingresso $\le N$ token; in uscita $K$ numeri (Choice), 1 (Noul), $L$ livelli (Score).
 
@@ -1064,6 +1176,8 @@ Gli esempi sono **illustrativi**, non l’uscita di un prodotto specifico. **Cho
 <!-- SOURCE_VISUAL id="IS18-V49" source="L18-web.pdf" page="80" type="grafico" description="Asse della probabilità da 0 a 1 con le zone sì, no e incerto" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125015044.png)
+
 **Esempio**: $x$ = e-mail, $q$ = «chiede un rimborso?» $\Rightarrow p=0{,}97$. «**Calibrato» è un obiettivo di progetto, non una garanzia sui propri dati** (vedi la slide sulla calibrazione).
 
 #### **8.12. Il Noul in pratica: una probabilità e due soglie**
@@ -1072,6 +1186,8 @@ Gli esempi sono **illustrativi**, non l’uscita di un prodotto specifico. **Cho
 
 <!-- SOURCE_VISUAL id="IS18-V50" source="L18-web.pdf" page="81" type="grafico" description="Probabilità 0,93 sull'asse con le soglie 0,1 e 0,9 e la zona di escalation" reason="Grafico visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125015100.png)
 
 **Supporto delle tre primitive nei modelli dei produttori** (lettura della tabella dal testo estratto):
 
@@ -1097,6 +1213,8 @@ Gli esempi sono **illustrativi**, non l’uscita di un prodotto specifico. **Cho
 <!-- SOURCE_VISUAL id="IS18-V51" source="L18-web.pdf" page="82" type="grafico" description="Barre di tempo per compito e costo per milione di compiti per un modello decisionale e due LLM" reason="Grafico a barre visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261125015139.png)
+
 **Misura indipendente** (Artificial Analysis): Jev 1.13 è circa $1{,}4/0{,}13\approx 11\times$ **più veloce** e $184/42\approx 4{,}4\times$ **più economico** di Claude Haiku 5.5 (Low), con un **indice di 58 contro 61**.
 
 **Latenze riportate dai produttori**: d1-3B 8 ms (RTX 4090); Clef-flash 39 ms (mediana); Microsoft 85 ms; OpenAI 100–180 ms; Jev 70–500 ms. **Non confrontabili**: hardware, prompt e reti diversi.
@@ -1116,8 +1234,13 @@ Gli esempi sono **illustrativi**, non l’uscita di un prodotto specifico. **Cho
 
 **Diagramma di affidabilità** (540 immagini di test): sull’asse orizzontale la **confidenza dichiarata** (media per intervallo), su quello verticale l’**accuratezza osservata** (per intervallo). **In distribuzione**: accuratezza 98%, **ECE = 0,008**; **dopo uno shift**: accuratezza 40%, **ECE = 0,466**. A destra: la **percentuale di casi accettati** al variare della **soglia di confidenza $\tau$**.
 
+![](imgs/Pasted%20image%2020261125015208.png)
+
+
 <!-- SOURCE_VISUAL id="IS18-V52" source="L18-web.pdf" page="84" type="grafico" description="Diagramma di affidabilità in distribuzione e dopo lo shift, curva dei casi accettati in funzione della soglia e due esempi di 8 originale e spostato" reason="Grafici e immagini visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125015216.png)
 
 **Shift**: i dati incontrati nell’uso **differiscono dai dati di addestramento**. Qui: le **stesse 540 cifre di test**, **spostate di 1 pixel più rumore aggiuntivo**; **nessun riaddestramento**. In distribuzione: accuratezza 98%, ECE 0,008. **Dopo lo shift: confidenza 86%, accuratezza 40%, ECE 0,47**; **anche $\tau=0{,}9$ lascia passare il 48%** dei casi. L’**8** dell’esempio (previsto 8 con confidenza 1,00, poi previsto 8 con confidenza 0,93 dopo lo shift) è ancora letto correttamente, **ma molti altri no, con confidenza simile**.
 
@@ -1133,6 +1256,8 @@ Caso $x$ → **System 1** (veloce, economico): etichetta e $p_{sel}$ → $p_{sel
 
 <!-- SOURCE_VISUAL id="IS18-V53" source="L18-web.pdf" page="85" type="schema" description="Cascata con System 1, soglia sulla confidenza ed escalation a System 2 o a una persona" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125015223.png)
 
 Qui $p_{sel}$ è la **confidenza della risposta selezionata** ($=\max(p,1-p)$ per un Noul). **Escalation quando**
 
@@ -1152,6 +1277,8 @@ Evento / stato (ticket, richiesta di risarcimento, sensore, immagine) → **pian
 
 <!-- SOURCE_VISUAL id="IS18-V54" source="L18-web.pdf" page="86" type="schema" description="Strato decisionale aziendale con piano decisionale, piano del ragionamento e piano di esecuzione" reason="Schema visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261125015234.png)
 
 **Densità decisionale**: le **decisioni semantiche necessarie per risultato di business**; è **alta per gli agenti**, quindi un modello lento per ogni decisione è costoso. **Concetto del lato produttori, non uno standard accademico.**
 

@@ -21,6 +21,8 @@ La trattazione si articola nei seguenti temi:
 7. **pratica**: un laboratorio facoltativo e quattro dataset;
 8. punti principali.
 
+![](imgs/Pasted%20image%2020261123184605.png)
+
 #### **0.1. Il passo 2 del flusso di lavoro: preparare i dati**
 
 Prima di modellare si **organizzano**, si **esplorano** e si **ingegnerizzano** i dati. Il passo 2 del flusso di lavoro del ML si divide in tre sottopassi:
@@ -33,6 +35,8 @@ Prima di modellare si **organizzano**, si **esplorano** e si **ingegnerizzano** 
 
 <!-- SOURCE_VISUAL id="IS10-V01" source="L10-web.pdf" page="4" type="schema" description="Flusso di lavoro del ML con il passo 2 suddiviso in 2a wrangling, 2b EDA e 2c feature engineering" reason="Schema del flusso visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123184623.png)
 
 #### **0.2. L’analisi esplorativa dei dati per il ML**
 
@@ -55,7 +59,11 @@ La slide organizza gli strumenti dell’EDA in due rami: i **metodi descrittivi*
 <!-- SOURCE_VISUAL id="IS10-V02" source="L10-web.pdf" page="5" type="mappa concettuale" description="Mappa dell'EDA per il ML: statistica descrittiva (tendenza centrale, variazione, forma) e visualizzazioni in 1, 2 e 3 dimensioni" reason="Mappa con grafici di esempio visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123184710.png)
+
 > 📌 **I metodi contano più della toolbox.** Lo stesso concetto statistico si può implementare in MATLAB, in Python o in un altro ambiente. Bisogna concentrarsi su **significato, ipotesi e interpretazione del risultato**, non sulla memorizzazione di un comando.
+
+![](imgs/Pasted%20image%2020261123184742.png)
 
 ---
 
@@ -77,6 +85,8 @@ preservando le **proprietà rilevanti** per il compito di classificazione o regr
 
 > 💡 **Lo stesso schema della Lezione 9.** $f=\phi(x)$ è la rappresentazione progettata $\phi_d$ della lezione precedente: qui il progettista sceglie quali statistiche calcolare su un segnale. Come lì, ciò che $\phi$ scarta non potrà essere recuperato dal modello.
 
+![](imgs/Pasted%20image%2020261123185420.png)
+
 #### **1.2. Da un segnale grezzo a un vettore di feature informativo**
 
 La pipeline parte dal **segnale grezzo** $x(t)$ e lo divide in **finestre scorrevoli** $x^{(k)}$. Da ogni finestra si calcolano, in parallelo:
@@ -88,6 +98,8 @@ I due gruppi si **uniscono** (*merge*) in un unico **vettore di feature** $f^{(k
 
 <!-- SOURCE_VISUAL id="IS10-V03" source="L10-web.pdf" page="9" type="schema" description="Segnale grezzo, finestre scorrevoli, feature nel tempo e in frequenza unite in un vettore f(k) per finestra" reason="Schema della pipeline con i grafici dei due domini" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123185433.png)
 
 > 📌 **La segmentazione è un passo comune.** I descrittori nel tempo e quelli in frequenza si calcolano **dalla stessa finestra**. Lo **scaling** si applica poi alle **feature numeriche estratte**, quando è appropriato, non al segnale grezzo.
 
@@ -110,6 +122,8 @@ Prima di calcolare qualunque feature bisogna sapere **da dove vengono i dati**:
 <!-- SOURCE_VISUAL id="IS10-V04" source="L10-web.pdf" page="10" type="figura" description="Sensore di vibrazione montato su un motore industriale" reason="Fotografie visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123190744.png)
+
 > ⚠️ **Il contesto fa parte del dato.** Un modello che riceve solo il numero, senza il regime operativo, non può distinguere i due casi dell’ultima riga. È lo stesso tema dei metadati delle etichette della Lezione 8: il valore da solo non basta, servono le informazioni che ne permettono l’interpretazione.
 
 #### **1.4. Le finestre scorrevoli producono feature per frame**
@@ -117,6 +131,8 @@ Prima di calcolare qualunque feature bisogna sapere **da dove vengono i dati**:
 Il segnale viene diviso in finestre (nella figura nove, da *window 1* a *window 9*), e da ciascuna si estrae un vettore di feature. Con $d=7$ feature **per canale**:
 
 $$\text{media}\cdot\text{deviazione standard}\cdot\text{RMS}\cdot\text{range}\cdot\text{attraversamenti dello zero}\cdot\text{frequenza dominante } f^*\cdot\text{energia spettrale}.$$
+
+![](imgs/Pasted%20image%2020261123190940.png)
 
 Il vettore della finestra $k$ è
 
@@ -155,6 +171,8 @@ con $m$ finestre e un vettore $f^{(k)}$ per ciascuna (qui disegnati come **una c
 <!-- SOURCE_VISUAL id="IS10-V06" source="L10-web.pdf" page="12" type="schema" description="Matrice F con una colonna per finestra e righe RMS, ZCR, centroid, MFCC1..." reason="Disposizione della matrice visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123191147.png)
+
 > 💡 **Il baricentro spettrale (nota didattica).** È la «frequenza media» pesata dalla potenza: $\text{Centroid}=\sum_k f_k\,P[k]\,/\sum_k P[k]$. Un suono «brillante» (molte alte frequenze) ha baricentro alto, uno «cupo» basso.
 
 > ⚠️ **Righe o colonne?** In questa slide ogni finestra è una **colonna**, nella precedente una **riga**. Le due convenzioni coesistono nel corso e nelle librerie (§3.2): bisogna sempre controllare quale si sta usando.
@@ -168,6 +186,8 @@ con $m$ finestre e un vettore $f^{(k)}$ per ciascuna (qui disegnati come **una c
 <!-- SOURCE_VISUAL id="IS10-V07" source="L10-web.pdf" page="13" type="grafico" description="Lo stesso segnale nel dominio del tempo e nel dominio della frequenza" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123191216.png)
+
 > ⚠️ **Spettro di ampiezza e spettro di potenza non sono la stessa cosa.** Uno **spettro di ampiezza** (*magnitude spectrum*) mostra il modulo $|X(f)|$ delle componenti; lo **spettro di potenza** ne mostra il quadrato, $|X(f)|^2$ (normalizzato). Il quadrato accentua le componenti forti e attenua le deboli, per cui i due grafici hanno forme diverse e vanno distinti. Lo spettro di una finestra di $N$ campioni a frequenza $f_s$ si calcola con la trasformata discreta di Fourier, $X[k]=\sum_{n=0}^{N-1}x[n]\,e^{-j2\pi kn/N}$, e il bin $k$ corrisponde alla frequenza $f_k=k\,f_s/N$.
 
 #### **1.7. Tempo contro frequenza: un segnale industriale periodico**
@@ -176,6 +196,8 @@ L’esempio confronta due segnali di vibrazione di un cuscinetto, uno sano e uno
 
 <!-- SOURCE_VISUAL id="IS10-V08" source="L10-web.pdf" page="14" type="grafico" description="Due segnali di vibrazione simili nel tempo e i loro spettri dell'inviluppo, con i picchi del difetto alla BPFO e multipli" reason="Forme dei segnali e picchi spettrali visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123191316.png)
 
 > 💡 **Che cos’è la BPFO (nota didattica).** BPFO (*Ball Pass Frequency, Outer race*, frequenza di passaggio delle sfere sull’anello esterno) è la frequenza con cui le sfere di un cuscinetto passano su un punto dell’anello esterno. Se lì c’è un difetto, ogni passaggio produce un piccolo urto: una serie di impulsi periodici. Gli urti sono deboli e si perdono nell’RMS complessivo, ma la loro **periodicità** si concentra in uno spettro a frequenze precise. L’**inviluppo** (l’andamento dell’ampiezza del segnale, ottenuto per demodulazione) mette in evidenza proprio la ripetizione degli urti.
 
@@ -187,6 +209,8 @@ Uno **spettrogramma** visualizza l’ampiezza o la potenza del segnale **in funz
 
 <!-- SOURCE_VISUAL id="IS10-V09" source="L10-web.pdf" page="15" type="grafico" description="Spettrogramma con potenza in funzione del tempo e della frequenza" reason="Spettrogramma visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123191331.png)
 
 > 💡 **Un esempio di periodicità (nota didattica).** Un movimento ripetuto 12 volte in 10 secondi ha frequenza $f=12/10\ \text{s}=1{,}2$ Hz: nello spettro compare un picco a 1,2 Hz anche quando, nel tempo, il segnale appare irregolare. Se la ripetizione rallenta a metà registrazione, uno spettro globale mostrerebbe due picchi senza dire quando; lo spettrogramma mostra lo **spostamento del picco nel tempo**.
 
@@ -210,6 +234,8 @@ Uno **spettrogramma** visualizza l’ampiezza o la potenza del segnale **in funz
 <!-- SOURCE_VISUAL id="IS10-V10" source="L10-web.pdf" page="17" type="grafico" description="Forma d'onda della frase Everybody dance now" reason="Forma d'onda visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123192108.png)
+
 > 💡 **Perché circa 45 kB (nota didattica).** 22 516 campioni a 16 bit = 2 byte ciascuno: $22\,516\times 2=45\,032$ byte, cioè circa 45 kB.
 
 #### **2.2. La catena di elaborazione**
@@ -224,6 +250,8 @@ Uno **spettrogramma** visualizza l’ampiezza o la potenza del segnale **in funz
 
 <!-- SOURCE_VISUAL id="IS10-V11" source="L10-web.pdf" page="18" type="schema" description="Catena: segnale, finestratura 139x400, FFT e filtri mel 139x26, DCT 139x12, distanza tra vettori di parola" reason="Schema a blocchi della catena" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123192123.png)
 
 Il numero di finestre si ricava dalla formula del §1.4 con $L=400$ e $H=160$ campioni: $N_w=\lfloor(22\,516-400)/160\rfloor+1=\lfloor 138{,}2\rfloor+1=139$.
 
@@ -297,6 +325,8 @@ Per ogni finestra $t$ del segnale $x[n]$ (1,4 s, 16 kHz) si calcola $|\text{FFT}
 <!-- SOURCE_VISUAL id="IS10-V12" source="L10-web.pdf" page="21" type="schema" description="Dalla finestra al suo spettro P[k] (colonna dello spettrogramma), banco di 26 filtri mel, logaritmo e DCT" reason="Schema con spettrogramma e filtri triangolari" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123192305.png)
+
 > 📌 **Una finestra, una colonna.** Una finestra dà **una colonna** dello spettrogramma; quella colonna è **un solo spettro** $P[k]$, l’input dell’estrazione delle feature. Gli MFCC sono quindi una compressione, colonna per colonna, dello spettrogramma.
 
 #### **2.6. I coefficienti cepstrali in scala mel (MFCC)**
@@ -312,6 +342,8 @@ $$E[m]=\sum_k H_m[k]\,P[k].$$
 <!-- SOURCE_VISUAL id="IS10-V13" source="L10-web.pdf" page="22" type="grafico" description="Spettrogramma con una banda mel evidenziata, le 26 barre L[m] di una finestra e i coefficienti MFCC risultanti" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123192322.png)
+
 > 💡 **Perché «cepstrali» (nota didattica).** Il *cepstrum* è lo «spettro del logaritmo dello spettro» (il nome inverte le prime sillabe di *spectrum*). Nella voce lo spettro è il prodotto tra la sorgente (le corde vocali, che fissano il pitch) e il filtro (il tratto vocale, che dà il timbro della vocale). Il logaritmo trasforma il prodotto in una somma; la DCT separa poi l’andamento lento (il filtro, nei primi coefficienti) dalle oscillazioni rapide (il pitch, nei coefficienti alti). Tenere solo 12 coefficienti significa tenere il **tratto vocale** e scartare il **pitch**.
 
 #### **2.7. Tre viste allineate degli stessi 1,4 secondi**
@@ -320,6 +352,8 @@ La slide affianca, sullo stesso asse dei tempi, la **forma d’onda**, lo **spet
 
 <!-- SOURCE_VISUAL id="IS10-V14" source="L10-web.pdf" page="23" type="grafico" description="Forma d'onda, spettrogramma e mappa MFCC allineati sugli stessi 1,4 secondi" reason="Tre grafici allineati visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123192516.png)
 
 #### **2.8. Dalle finestre alle parole: vettori e distanze**
 
@@ -334,6 +368,8 @@ Sull’estratto originale, tagliato al primo campione sonoro, le parole sono sep
 <!-- SOURCE_VISUAL id="IS10-V15" source="L10-web.pdf" page="24" type="grafico" description="Estratto originale con i tagli tra le parole a 990 e 1480 ms e le distanze tra i vettori medi" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123192530.png)
+
 > ⚠️ **Una dimostrazione, non una valutazione.** È un unico estratto, tagliato a mano dall’inviluppo dell’energia. Le distanze dicono che, in questa registrazione, *everybody* e *dance* sono le parole più simili e *now* la più diversa; non dicono nulla sulla capacità di riconoscere parole in generale.
 
 #### **2.9. Tre registrazioni a confronto**
@@ -343,10 +379,14 @@ La stessa frase viene analizzata in tre registrazioni diverse: il campione di si
 <!-- SOURCE_VISUAL id="IS10-V16" source="L10-web.pdf" page="25" type="grafico" description="Mappe MFCC di tre registrazioni della stessa frase con scala condivisa" reason="Mappe visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123192544.png)
+
 **I tre spettrogrammi affiancati** usano la stessa scala di tempo e di dB in ogni pannello. Le linee tratteggiate segnano i tagli tra le parole; quelli dell’intervista sono le **due pause più lunghe**, nell’ipotesi che la frase sia la stessa.
 
 <!-- SOURCE_VISUAL id="IS10-V17" source="L10-web.pdf" page="26" type="grafico" description="Tre spettrogrammi affiancati con stessa scala di tempo e dB e tagli tratteggiati tra le parole" reason="Spettrogrammi visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123192553.png)
 
 #### **2.10. Si possono distinguere le parole? Due componenti principali**
 
@@ -354,6 +394,8 @@ I 12 coefficienti $c_1\dots c_{12}$ di ogni finestra di 25 ms vengono proiettati
 
 <!-- SOURCE_VISUAL id="IS10-V18" source="L10-web.pdf" page="27" type="grafico" description="Proiezione delle finestre MFCC sulle prime due componenti principali per le tre clip, con le traiettorie delle parole" reason="Proiezioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123192602.png)
 
 > 💡 **Coerenza con le distanze (nota didattica).** La sovrapposizione di *everybody* e *dance* nel piano delle componenti principali concorda con la distanza più piccola del §2.8 (2,5), mentre *now* separato concorda con le due distanze maggiori (5,4 e 6,2). La PCA (Lezione 18) conserva le direzioni di massima varianza e permette di **vedere** in 2D una struttura che vive in 12 dimensioni; poiché è stimata separatamente per ogni clip, gli assi di clip diverse non sono confrontabili tra loro.
 
@@ -390,6 +432,8 @@ $$x(t)\ \xrightarrow{\text{finestratura}}\ x^{(k)}\ \xrightarrow{\text{estrazion
 <!-- SOURCE_VISUAL id="IS10-V19" source="L10-web.pdf" page="30" type="schema" description="Pipeline finestratura, estrazione, feature engineering, scaling e modello con i sensori di vibrazione" reason="Schema con immagine del caso d'uso" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123192636.png)
+
 #### **3.2. Dove si colloca la feature engineering**
 
 > 📌 **EDA e feature engineering hanno ruoli diversi.** L’EDA **descrive** i dati; la feature engineering **cambia la rappresentazione** usata da un modello. Nel passo 2 del flusso siamo ora al sottopasso **2c**.
@@ -400,6 +444,8 @@ $$x(t)\ \xrightarrow{\text{finestratura}}\ x^{(k)}\ \xrightarrow{\text{estrazion
 <!-- SOURCE_VISUAL id="IS10-V21" source="L10-web.pdf" page="32" type="schema" description="Flusso di lavoro del ML con evidenziato il sottopasso 2c feature engineering" reason="Schema del flusso visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123192701.png)
+
 **La feature engineering è iterativa**:
 
 1. identificare **che cosa il compito richiede** dai dati;
@@ -409,6 +455,8 @@ $$x(t)\ \xrightarrow{\text{finestratura}}\ x^{(k)}\ \xrightarrow{\text{estrazion
 5. **rivedere** la rappresentazione e iterare quando le evidenze lo giustificano.
 
 Si ispeziona, si rivede e si verifica di nuovo **finché la rappresentazione non diventa utile e affidabile**.
+
+![](imgs/Pasted%20image%2020261123192715.png)
 
 #### **3.3. La tabella di apprendimento: $X$ e $y$**
 
@@ -426,11 +474,15 @@ Si ispeziona, si rivede e si verifica di nuovo **finché la rappresentazione non
 
 Una **etichetta per campione**, allineata con la sua colonna di $X$.
 
+![](imgs/Pasted%20image%2020261123192736.png)
+
 > 📌 **Sapere sempre che cosa entra e che cosa si predice.** Bisogna sempre sapere **che cosa entra nel modello** e **qual è il target da predire**. Un errore di trasposizione (campioni scambiati con feature) produce un modello che «funziona» sintatticamente ma impara una cosa priva di senso.
 
 #### **3.4. Il modello di AI: $Y=\text{FUNC}(X)$**
 
 $$Y=\text{FUNC}(X)$$
+
+![](imgs/Pasted%20image%2020261123192752.png)
 
 - Per ogni dataset, nel machine learning o in una toolbox, **tutto consiste nel creare $X$ e $Y$**.
 - $X$: le feature di ogni campione. $Y$: l’ID di classe, o il valore da apprendere.
@@ -445,6 +497,8 @@ La feature engineering agisce su tre livelli crescenti della tabella: **(A)** un
 ##### **3.5.1. Livello (A): una sola feature alla volta**
 
 Si ottimizza **una singola feature** (una riga della tabella del §3.3) per volta. Operazioni tipiche: **conversione di unità**, **trattamento dei valori mancanti**, **scaling**. Anche una trasformazione di una sola feature può **cambiare le distanze** e quindi il comportamento successivo del modello. Esempio: convertire le unità di accelerazione in modo coerente **prima** di calcolare l’RMS.
+
+![](imgs/Pasted%20image%2020261123192807.png)
 
 | Operazione | Esempio |
 |---|---|
@@ -467,6 +521,8 @@ Si ottimizzano **tutte le feature contemporaneamente**:
 - esplorare le **interazioni** tra feature e i **sensori correlati**;
 - **non** rimuovere variabili **solo perché correlate**: la rilevanza **dipende dal compito**.
 
+![](imgs/Pasted%20image%2020261123193002.png)
+
 Le operazioni tipiche sono:
 
 - rimuovere feature **fortemente correlate** solo quando le evidenze del compito lo supportano;
@@ -481,6 +537,8 @@ Le operazioni tipiche sono:
 
 Si ottimizza **l’intero dataset usando le etichette**:
 
+![](imgs/Pasted%20image%2020261123193014.png)
+
 - la **selezione** e l’**ingegnerizzazione** delle feature vengono valutate **rispetto al target** $y$;
 - si confrontano le rappresentazioni candidate con una **validazione su dati tenuti da parte** (*held-out*), **non con la sola accuratezza di training**;
 - attenzione al **leakage** quando le etichette influenzano le decisioni di pre-elaborazione.
@@ -494,6 +552,8 @@ Si ottimizza **l’intero dataset usando le etichette**:
 | **selezione delle feature** | tenere un **sottoinsieme** delle variabili esistenti | tenere 4 descrittori su 20 candidati |
 | **estrazione delle feature** | trasformare le misure in una **nuova rappresentazione** | finestra → RMS (una nuova feature) |
 | **feature engineering** | progettazione **più ampia** di rappresentazioni e trasformazioni, che include estrazione e selezione dove appropriato | anche scaling, codifica, combinazioni |
+
+![](imgs/Pasted%20image%2020261123193035.png)
 
 Un valore RMS estratto da una finestra di vibrazione è una **nuova feature**; tenere solo 4 descrittori su 20 è **selezione**. Entrambe fanno parte della feature engineering.
 
@@ -511,6 +571,8 @@ Il punto di contatto è la forma della distribuzione: nelle distribuzioni **asim
 <!-- SOURCE_VISUAL id="IS10-V22" source="L10-web.pdf" page="42" type="grafico" description="Distribuzioni con asimmetria a sinistra, simmetrica e a destra, con posizioni di media, mediana e moda" reason="Forme delle distribuzioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123193046.png)
+
 #### **3.8. Scaling: imparare la forma, non solo la grandezza**
 
 - Un **grande intervallo numerico** non significa che una feature sia **più importante**.
@@ -522,6 +584,8 @@ Con la feature 1 in $[0,1000]$ e la feature 2 in $[0,1]$, in unità grezze la di
 
 <!-- SOURCE_VISUAL id="IS10-V23" source="L10-web.pdf" page="43" type="grafico" description="Punti in unità grezze (feature 1 in 0-1000, feature 2 in 0-1) e dopo lo scaling, con le distanze" reason="Geometria dei punti visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123193106.png)
 
 > 💡 **Perché gli alberi sono insensibili (nota didattica).** Un albero di decisione (Lezione 12) divide i dati con soglie del tipo $x_j\le t$. Una trasformazione monotona crescente $g$ conserva l’ordine dei valori, quindi la soglia $t$ diventa $g(t)$ e la partizione resta identica. Le distanze euclidee, invece, cambiano con la scala: è il caso del $k$-NN visto nella Lezione 9.
 
@@ -537,6 +601,8 @@ Con la feature 1 in $[0,1000]$ e la feature 2 in $[0,1]$, in unità grezze la di
 <!-- SOURCE_VISUAL id="IS10-V24" source="L10-web.pdf" page="44" type="grafico" description="Curve output contro input di min-max, z-score, clipping e logaritmo" reason="Forme delle curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123193119.png)
+
 > 📌 **Regola d’oro.** I parametri della pre-elaborazione stimata (minimo, massimo, media, deviazione standard, soglie) si **apprendono solo sui dati di training**, poi si applica **la stessa trasformazione** ai dati di validation e di test.
 
 #### **3.10. Min-max e z-score: invarianti diversi**
@@ -547,6 +613,11 @@ $$\text{min-max:}\quad x'=\frac{x-x_{\min}}{x_{\max}-x_{\min}},\qquad\qquad \tex
 |---|---|---|
 | **che cosa garantisce** | $x_{\min}\to 0$, $x_{\max}\to 1$: valori adattati in $[0,1]$ **sui dati di training** | la distribuzione di training ha **media circa 0** e **deviazione standard 1**, quando $\sigma_{\text{train}}>0$ |
 | **dati nuovi** | i valori tenuti da parte **possono cadere fuori** da $[0,1]$ | possono avere media e deviazione diverse da 0 e 1 |
+
+![](imgs/Pasted%20image%2020261123193205.png)
+
+
+![](imgs/Pasted%20image%2020261123193216.png)
 
 > ⚠️ **Le feature costanti vanno gestite esplicitamente.** Se una feature è costante sul training, $x_{\max}-x_{\min}=0$ e $\sigma_{\text{train}}=0$: la **divisione per zero** rende indefinite entrambe le espressioni. Una feature costante non porta informazione e di solito si rimuove; le librerie spesso la lasciano a 0 senza avvisare.
 
@@ -566,6 +637,8 @@ La slide applica le quattro trasformazioni alla **stessa variabile asimmetrica**
 <!-- SOURCE_VISUAL id="IS10-V25" source="L10-web.pdf" page="46" type="grafico" description="Quattro istogrammi della stessa variabile asimmetrica dopo scaling in intervallo, clipping, logaritmo e z-score" reason="Forme degli istogrammi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123193229.png)
+
 > 📌 **Scopi diversi.** Scaling in un intervallo, clipping e logaritmo hanno **scopi diversi**. Min-max e z-score sono **trasformazioni lineari**: spostano e allungano l’asse, ma **non cambiano la forma** della distribuzione. Solo le trasformazioni **non lineari** (logaritmo, clipping) la modificano. Bisogna ispezionare la distribuzione risultante invece di applicarle meccanicamente.
 
 #### **3.12. Il clipping è una politica, non un default**
@@ -578,6 +651,8 @@ Nell’esempio la variabile grezza arriva fino a circa 25 e, dopo il clipping, �
 
 <!-- SOURCE_VISUAL id="IS10-V26" source="L10-web.pdf" page="47" type="grafico" description="Istogramma della feature grezza con outlier e della stessa feature limitata a 4.0" reason="Istogrammi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123193239.png)
 
 > 💡 **Clipping sullo z-score (nota didattica).** La forma tipica limita i valori a $\pm 3\sigma$:
 > $$x'=\min\big(\max(x,\ \mu-3\sigma),\ \mu+3\sigma\big).$$
@@ -594,12 +669,16 @@ L’esempio è il **numero di valutazioni per film**: la maggior parte dei film 
 <!-- SOURCE_VISUAL id="IS10-V27" source="L10-web.pdf" page="48" type="grafico" description="Istogramma del numero di valutazioni per film e del suo logaritmo" reason="Istogrammi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123193250.png)
+
 > ⚠️ **Il logaritmo di zero.** $\log 0$ non è definito: se la feature può valere zero (un film senza valutazioni, un numero di acquisti) si usa $\log(1+x)$, ma la scelta va dichiarata, perché cambia l’interpretazione dei valori piccoli.
 
 #### **3.14. Riepilogo: dalle feature grezze agli input del modello**
 
 - **Input** (tabella adimensionale): $X$ di dimensione $d\times n$ più $y$ di dimensione $1\times n$.
 - **Output**: $X'$ con la **stessa dimensione** $d\times n$, più i **parametri memorizzati** (per esempio $\mu_{\text{train}}$, $\sigma_{\text{train}}$ per feature).
+
+![](imgs/Pasted%20image%2020261123193310.png)
 
 **Passi**:
 
@@ -630,6 +709,8 @@ L’input $x$ è la feature osservata (asse orizzontale), il target $y$ l’etic
 <!-- SOURCE_VISUAL id="IS10-V28" source="L10-web.pdf" page="52" type="grafico" description="Paradosso di Simpson nella regressione: tendenza aggregata positiva e tendenze negative nei gruppi A e B" reason="Nuvole di punti e rette visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123193333.png)
+
 > 💡 **Come nasce l’inversione (nota didattica).** Il gruppo B sta più in alto e più a destra del gruppo A. Dentro ciascun gruppo, all’aumentare di $x$, $y$ diminuisce; ma passando da A a B entrambe le variabili aumentano. Una sola retta su tutti i punti «unisce» i due gruppi e trova una pendenza positiva che non descrive nessuno dei due. Un modello addestrato senza la variabile $g$ impara proprio quella pendenza sbagliata.
 
 #### **4.3. Due linee di produzione, due tipi di biscotti**
@@ -644,6 +725,8 @@ Nell’illustrazione la **linea A** supera il controllo con 7 biscotti su 10 isp
 
 <!-- SOURCE_VISUAL id="IS10-V29" source="L10-web.pdf" page="53" type="figura" description="Due linee di produzione di biscotti facili e difficili con controllo QA: 7/10 e 8/10" reason="Illustrazione visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123193346.png)
 
 $$\text{tasso di superamento}=\frac{\text{biscotti che superano il QA}}{\text{biscotti ispezionati}}.$$
 
@@ -673,6 +756,8 @@ $$\text{tasso di superamento}=\frac{\text{biscotti che superano il QA}}{\text{bi
 <!-- SOURCE_VISUAL id="IS10-V30" source="L10-web.pdf" page="56" type="grafico" description="Barre dei tassi QA: dentro i gruppi facile e difficile vince A, nell'aggregato vince B" reason="Diagramma a barre visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123193508.png)
+
 **L’inversione.** Dentro i gruppi *facile* e *difficile*, A ha il tasso più alto (95% contro 90%, 72% contro 70%). Dopo l’aggregazione, B ha il tasso più alto (86,7% contro 75,8%), perché i **mix di prodotti differiscono**.
 
 #### **4.6. Perché accade: i pesi dei gruppi sono diversi**
@@ -688,6 +773,8 @@ $$p_B=\frac{100}{120}(0{,}90)+\frac{20}{120}(0{,}70)=0{,}7500+0{,}1167=0{,}8667.
 | A | 16,7% | **83,3%** |
 | B | **83,3%** | 16,7% |
 
+![](imgs/Pasted%20image%2020261123193558.png)
+
 > 📌 **L’inversione viene dalle proporzioni, non da un errore aritmetico.** La linea A produce soprattutto biscotti difficili, che passano meno spesso il controllo; la linea B soprattutto biscotti facili. Il tasso aggregato mescola due cose diverse: **quanto bene lavora la linea** e **che cosa le viene chiesto di produrre**.
 
 #### **4.7. Confrontare con un mix di prodotti comune**
@@ -697,6 +784,8 @@ Si supponga di confrontare le due linee sotto lo **stesso mix ipotetico**: 50% d
 $$p^{\text{standard}}_A=0{,}5(0{,}95)+0{,}5(0{,}72)=83{,}5\%,\qquad p^{\text{standard}}_B=0{,}5(0{,}90)+0{,}5(0{,}70)=80{,}0\%.$$
 
 Usare **pesi comuni** rimuove la differenza di composizione per tipo di prodotto in questo confronto descrittivo, e A torna a essere la linea migliore.
+
+![](imgs/Pasted%20image%2020261123193618.png)
 
 > ⚠️ **Standardizzare non è dimostrare.** La standardizzazione **non prova da sola un vantaggio causale né una significatività statistica**: con pochi campioni (20 prodotti in un gruppo) la differenza tra 72% e 70% può essere dovuta al caso, e il risultato dipende dal mix scelto come riferimento. Si ricordi la Lezione 7 (osservazioni rappresentative); più avanti, la Lezione 14 tratterà la validazione tra popolazioni diverse.
 
@@ -726,6 +815,8 @@ Vettore di esempio: $x=[1,2,3,4,50]$.
 | minimo | 1 |
 | massimo | 50 |
 
+![](imgs/Pasted%20image%2020261123194759.png)
+
 - **Media contro mediana**: il valore isolato 50 cambia la **media molto più della mediana**.
 - **Deviazione standard**: misura la dispersione; è usata nello **scaling z-score**.
 - **Minimo e massimo**: definiscono gli estremi osservati; lo **scaling min-max è sensibile agli estremi rari**.
@@ -745,6 +836,8 @@ Vettore di esempio: $x=[1,2,3,4,50]$.
 <!-- SOURCE_VISUAL id="IS10-V31" source="L10-web.pdf" page="62" type="grafico" description="Distribuzioni asimmetriche e simmetrica con media, mediana e moda, e illustrazione del camion sotto il ponte basso" reason="Grafici e illustrazione visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123194823.png)
+
 > 💡 **Il camion e il ponte.** L’**altezza media** dei camion non basta per evitare un **ponte basso**: contano i **valori estremi**. In applicazioni come questa **una delle due code dell’errore costa molto di più dell’altra**: sottostimare l’altezza di un camion è un incidente, sovrastimarla una deviazione di percorso. Lo stesso vale per l’errore di una regressione che prevede una scorta o un consumo.
 
 #### **5.3. Stesso riassunto, distribuzioni diverse**
@@ -760,6 +853,8 @@ Quattro distribuzioni con media quasi uguale e IQR simili:
 
 <!-- SOURCE_VISUAL id="IS10-V32" source="L10-web.pdf" page="63" type="grafico" description="Quattro distribuzioni (uniforme, normale, lieve e forte asimmetria a destra) con media e IQR simili" reason="Forme delle distribuzioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123194841.png)
 
 > 📌 **Stesso riassunto $\neq$ stessi dati.** Valori simili di media o IQR possono nascondere **code, cluster e osservazioni estreme** diverse. L’IQR, $Q_3-Q_1$, misura la dispersione del **50% centrale** dei dati: è robusto agli outlier proprio perché **non guarda le code**, e per lo stesso motivo non le vede. Servono i grafici.
 
@@ -783,6 +878,8 @@ Per una distribuzione **normale standardizzata**, la slide mostra le probabilit�
 <!-- SOURCE_VISUAL id="IS10-V33" source="L10-web.pdf" page="64" type="grafico" description="Boxplot allineato alla densità normale standard con le probabilità 0.35%, 24.65%, 50%" reason="Allineamento tra boxplot e densità visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123194917.png)
+
 > 💡 **Da dove vengono 0,35% e 24,65% (nota didattica).** Per una normale standard $Q_1\approx-0{,}674$ e $Q_3\approx+0{,}674$, quindi $\text{IQR}\approx 1{,}349$ e il baffo superiore è a $0{,}674+1{,}5\cdot 1{,}349\approx 2{,}698$. La probabilità di superarlo è $P(Z>2{,}698)\approx 0{,}35\%$. Tra $Q_3$ e il baffo resta $25\%-0{,}35\%=24{,}65\%$. In totale, per dati normali, solo lo 0,7% dei punti viene segnalato come outlier: chi vede molti più punti fuori dai baffi ha dati con code più pesanti della gaussiana.
 
 #### **5.5. Outlier: usare grafici complementari**
@@ -791,6 +888,8 @@ Gli **stessi dati** di un sensore sono mostrati come istogramma e come boxplot. 
 
 <!-- SOURCE_VISUAL id="IS10-V34" source="L10-web.pdf" page="65" type="grafico" description="Stessi dati di un sensore come istogramma (outlier poco visibili) e come boxplot (outlier segnalati)" reason="Confronto tra i due grafici visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123194945.png)
 
 > ⚠️ **Errore o evento raro?** I valori estremi possono **distorcere lo scaling min-max** e influire sull’addestramento successivo. Bisogna **verificare se sono errori o eventi rari significativi**: eliminare automaticamente un valore raro può cancellare proprio il guasto che si vuole rilevare (§3.12).
 
@@ -808,6 +907,8 @@ ylabel('Miles per Gallon (MPG)')
 
 <!-- SOURCE_VISUAL id="IS10-V35" source="L10-web.pdf" page="66" type="grafico" description="Boxplot MATLAB dei consumi MPG per Paese di origine del dataset carsmall, con l'outlier tedesco" reason="Grafico visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123195018.png)
 
 > 💡 **Che cosa mostra in più della media.** Un boxplot non mostra solo l’**efficienza media** per Paese, ma anche la **dispersione**, dove è **centrata** la distribuzione e gli **outlier** (sì, un *hypermiler* in Germania!). È anche lo strumento naturale contro il paradosso di Simpson: confrontare i gruppi uno per uno prima di aggregare.
 
@@ -828,6 +929,8 @@ L’analisi dei dati non riguarda solo gli input: supporta anche la diagnostica 
 <!-- SOURCE_VISUAL id="IS10-V36" source="L10-web.pdf" page="68" type="schema" description="Rete con strato di input, tre strati nascosti e strato di output, con i quattro punti di ispezione: input, pesi, attivazioni, uscite ed errori" reason="Posizione dei punti nella rete visibile solo nello schema (le slide 69-73 ripetono lo schema evidenziando un punto alla volta)" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123195047.png)
+
 Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste quattro fasi.
 
 #### **6.2. Analizzare gli input del modello**
@@ -836,6 +939,8 @@ Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste
 - **Dati mancanti**, **valori implausibili**, **sparsità** e **sbilanciamento tra classi**.
 - **Correlazioni**, **ridondanza** e **differenze tra sottogruppi**.
 - **Interpretazione**: i problemi negli input possono **compromettere l’apprendimento anche con un modello potente**.
+
+![](imgs/Pasted%20image%2020261123195131.png)
 
 **Strumenti**: istogrammi, boxplot, mappe dei valori mancanti, correlazioni.
 
@@ -854,6 +959,8 @@ Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste
 <!-- SOURCE_VISUAL id="IS10-V37" source="L10-web.pdf" page="70" type="grafico" description="Curve di livello dell'errore J nello spazio dei pesi con e senza scaling, e percorso della discesa del gradiente" reason="Percorsi della discesa visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123195148.png)
+
 > 💡 **Perché la scala allunga il percorso (nota didattica).** Se $x_1$ vale migliaia e $x_2$ decimi, le curve di livello dell’errore $J(w_1,w_2)$ sono **ellissi molto allungate**. L’aggiornamento $\mathbf{W}\leftarrow\mathbf{W}-\eta\,\nabla J(\mathbf{W})$ segue il gradiente, che è quasi perpendicolare alle curve di livello: la discesa **zigzaga** lungo l’asse stretto e avanza lentamente lungo quello lungo, e un passo $\eta$ adatto a una direzione è troppo grande o troppo piccolo per l’altra. Con feature sulla stessa scala le curve diventano quasi **circonferenze** e il gradiente punta direttamente verso il minimo.
 
 #### **6.3. Ispezionare pesi e gradienti**
@@ -862,6 +969,8 @@ Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste
 - Gradienti **estremamente grandi o minuscoli** possono indicare un **addestramento instabile** (gradienti che esplodono o svaniscono, Lezione 20).
 - La **sparsità dei pesi** può rivelare effetti della **regolarizzazione** od opportunità di **pruning**.
 - **Non** dedurre la qualità del modello **dal solo istogramma dei pesi**.
+
+![](imgs/Pasted%20image%2020261123195157.png)
 
 | Aspetto | Contenuto (integrazione dall’edizione precedente) |
 |---|---|
@@ -879,6 +988,8 @@ Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste
 - Una **sigmoide** vicina ai suoi estremi può diventare **satura** e avere **derivate piccole**.
 - I grafici delle attivazioni sono **diagnostica**, **non** una prova indipendente della correttezza delle previsioni.
 
+![](imgs/Pasted%20image%2020261123195232.png)
+
 > 💡 **Neuroni morti e saturazione (nota didattica).** $\text{ReLU}(z)=\max(0,z)$ ha derivata nulla per $z<0$: se un neurone riceve sempre input negativi, il suo gradiente è sempre zero e **non impara più**. La sigmoide $\sigma(z)=1/(1+e^{-z})$ ha derivata $\sigma(z)\big(1-\sigma(z)\big)$, che tende a 0 quando $\sigma(z)$ è vicina a 0 o a 1: il neurone **saturo** impara lentissimamente. Un istogramma delle attivazioni con tutti i valori a zero, o ammassati agli estremi, rivela subito il problema. Strumenti utili: istogrammi e heatmap delle attivazioni, violin plot, attivazione media per strato, entropia della distribuzione.
 
 #### **6.5. Ispezionare uscite ed errori di previsione**
@@ -887,6 +998,8 @@ Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste
 - Disegnare le **distribuzioni dei residui** e ispezionare i **pattern sistematici**.
 - Usare **misure di prestazione adatte al compito** su dati tenuti da parte.
 - Un **punteggio alto** o un valore di **confidenza grezzo** **non implica automaticamente la calibrazione**.
+
+![](imgs/Pasted%20image%2020261123195245.png)
 
 **Più avanti**: Lezione 11 (visualizzazione), 14 (validazione), 16 (calibrazione), 20 (addestramento).
 
@@ -924,6 +1037,8 @@ Nella prossima lezione si vedranno i **grafici corretti** per ciascuna di queste
 
 <!-- SOURCE_VISUAL id="IS10-V38" source="L10-web.pdf" page="75" type="grafico" description="Quattro pannelli con le scale delle feature dei dataset Breast Cancer, California Housing, AI4I 2020 e Air Quality su asse logaritmico" reason="Grafici delle scale visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123195339.png)
 
 > ⚠️ **Le trappole di ciascun dataset (nota didattica).** Il **troncamento** a 500 001 $ di California Housing significa che tutte le case di valore superiore hanno lo stesso target: un modello non può imparare nulla sopra quel valore, e l’istogramma mostra un picco artificiale all’estremo. Il **−200** di Air Quality è un valore sentinella: trattato come numero vero, sposta media e minimo e crea una falsa coda; va convertito in mancante (Lezione 6). Nell’**AI4I** i guasti sono pochi per natura: ogni clipping o rimozione di outlier rischia di cancellare proprio la classe da rilevare.
 
@@ -984,6 +1099,8 @@ for t in ("1", "2", None):
 
 <!-- SOURCE_VISUAL id="IS10-V39" source="L10-web.pdf" page="79" type="grafico" description="Barre dei tassi di errore delle linee A e B per prodotto facile, difficile e aggregato" reason="Diagramma a barre visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123195751.png)
 
 **Lettura del risultato.** La linea A ha il **tasso di errore più basso per entrambi i tipi di prodotto**, ma la linea B ha il **tasso complessivo più basso** perché lavora **soprattutto prodotti facili** (24 su 30, contro i 6 di A). **Confrontare il simile con il simile.**
 

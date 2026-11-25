@@ -17,6 +17,8 @@ La lezione si articola in sei parti:
 5. **sfidare**: un agente di AI crea quattro visualizzazioni di un dataset scelto da noi;
 6. **riflettere**: il progettista umano resta responsabile.
 
+![](imgs/Pasted%20image%2020261123200747.png)
+
 #### **0.1. Perché l’EDA prima del ML?**
 
 La sequenza corretta è **dati grezzi → EDA → conclusioni, poi ML**. L’analisi esplorativa serve a:
@@ -43,8 +45,13 @@ La sequenza corretta è **dati grezzi → EDA → conclusioni, poi ML**. L’ana
 | **4** testare | **II** | prestazioni, **che cosa guarda il modello** |
 | **5** migliorare | **III** | dopo il rilascio: **monitorare** dati, previsioni e prestazioni |
 
+![](imgs/Pasted%20image%2020261123200816.png)
+
+
 <!-- SOURCE_VISUAL id="IS11-V01" source="L11-web-v24.pdf" page="5" type="schema" description="Flusso di lavoro del ML in cinque passi con i tre momenti I, II, III della visualizzazione" reason="Schema del flusso visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123200926.png)
 
 #### **1.2. Un’immagine vale più di mille parole**
 
@@ -53,7 +60,11 @@ Il proverbio inglese (*a picture is worth a thousand words*) è illustrato da un
 <!-- SOURCE_VISUAL id="IS11-V02" source="L11-web-v24.pdf" page="6" type="grafico" description="Curva di 28 valori annuali che mostra a colpo d'occhio la tendenza nascosta nella tabella" reason="Curva visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123200938.png)
+
 Gli argomenti della parte classica sono: che cos’è la visualizzazione dei dati; come funziona (teoria dell’immagine, definizione di rappresentazione per immagini, usi attuali); quali sono i benefici; esempi.
+
+![](imgs/Pasted%20image%2020261123201020.png)
 
 #### **1.3. Perché (quasi) solo grafici 2D e 3D?**
 
@@ -64,6 +75,8 @@ Gli argomenti della parte classica sono: che cos’è la visualizzazione dei dat
 
 <!-- SOURCE_VISUAL id="IS11-V03" source="L11-web-v24.pdf" page="8" type="schema" description="PCA da 4 feature F1-F4 a 2 feature salienti F'1, F'2" reason="Schema presente solo come figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123201042.png)
 
 ##### **1.3.1. Oltre la PCA: t-SNE e UMAP sugli esempi della lezione**
 
@@ -85,6 +98,8 @@ Ogni metodo restituisce **2 coordinate** per campione. Due indicatori misurano q
 <!-- SOURCE_VISUAL id="IS11-V04" source="L11-web-v24.pdf" page="9" type="grafico" description="Proiezioni PCA, t-SNE e UMAP delle cifre e degli stati della macchina con kNN e trustworthiness" reason="Nuvole di punti colorate per classe visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201054.png)
+
 > ⚠️ **Leggere con cautela.** Gli **assi della PCA hanno un significato** (combinazioni lineari delle feature, ordinate per varianza); **t-SNE e UMAP conservano soltanto i vicinati, non le distanze**. Sulle cifre la PCA lineare non basta (60%), mentre i metodi non lineari separano bene le classi; sugli stati della macchina, caso facile, tutti i metodi funzionano. Se ne parlerà più a fondo in una lezione successiva (Lezione 18).
 
 > 💡 **Perché un 5-NN come metro di giudizio (nota didattica).** È il $k$-NN della Lezione 9 usato come «sonda»: se nella proiezione i punti della stessa classe stanno vicini, un classificatore che guarda solo i 5 vicini in 2D sbaglia poco. Un’accuratezza bassa dice che la proiezione ha mescolato le classi, anche se nello spazio originale erano separabili.
@@ -102,6 +117,8 @@ Ogni metodo restituisce **2 coordinate** per campione. Due indicatori misurano q
 <!-- SOURCE_VISUAL id="IS11-V05" source="L11-web-v24.pdf" page="10" type="grafico" description="Cluster di clienti giovani con spesa alta in un grafico età-spesa" reason="Cluster visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201121.png)
+
 > 💡 **Perché la metà casuale (nota didattica).** Se si mandano coupon solo ai giovani «alti spendenti» e questi comprano, non si sa se è merito del coupon: comprerebbero comunque molto. Dividendo il cluster **a caso**, le due metà sono statisticamente uguali in tutto tranne che nell’offerta, e la differenza negli acquisti misura l’effetto dell’offerta. È un esperimento controllato randomizzato (A/B test), lo strumento che separa correlazione e causalità.
 
 #### **1.5. Che cos’è la visualizzazione dei dati?**
@@ -113,12 +130,16 @@ All’inizio del Novecento gli psicologi della **Gestalt** osservarono che, quan
 <!-- SOURCE_VISUAL id="IS11-V06" source="L11-web-v24.pdf" page="11" type="figura" description="Illustrazione gestaltica: elementi riuniti in una figura con salienza superiore alla somma delle parti" reason="Figura raster della slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201135.png)
+
 **Dai dati a immagini facilmente comprensibili.** **Jacques Bertin**, autore del classico *Sémiologie graphique* (*Semiologia della grafica*), afferma che la «trasformazione dai numeri all’intuizione richiede **due fasi**»:
 
 $$\text{dati}\ \xrightarrow{\ \text{costruzione}\ }\ \text{immagine}\ \xrightarrow{\ \text{percezione}\ }\ \text{intuizione}.$$
 
 <!-- SOURCE_VISUAL id="IS11-V07" source="L11-web-v24.pdf" page="12" type="figura" description="Le due fasi di Bertin dai numeri all'intuizione e ritratto di Jacques Bertin" reason="Schema e fotografia visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123201156.png)
 
 #### **1.6. Le 7 variabili visive di Bertin**
 
@@ -134,12 +155,16 @@ Ogni grafico codifica i numeri con **indizi visivi** (*visual cues*): la **lungh
 <!-- SOURCE_VISUAL id="IS11-V09" source="L11-web-v24.pdf" page="14" type="infografica" description="Indizi visivi: lunghezza, pendenza, angolo, area, tinta e intensità del colore" reason="Esempi di codifica visibili solo nell'infografica" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201238.png)
+
 ##### **1.6.2. Non tutte le caratteristiche visive sono dello stesso tipo**
 
 Gli indizi si possono **ordinare**: dal più **preciso** (la **lunghezza allineata**, cioè barre con una base comune) al più **generico** (la **tinta**). Quando il lettore deve **confrontare valori con precisione**, si sceglie un indizio vicino alla **cima** della classifica.
 
 <!-- SOURCE_VISUAL id="IS11-V10" source="L11-web-v24.pdf" page="15" type="infografica" description="Classifica degli indizi visivi dal più preciso (lunghezza allineata) al più generico (tinta)" reason="Classifica visibile solo nell'infografica" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123201251.png)
 
 > 💡 **Da dove viene la classifica (nota didattica).** Gli esperimenti di Cleveland e McGill (1984) hanno misurato con quale precisione le persone confrontano quantità codificate in modi diversi: posizioni su una scala comune e lunghezze allineate sono lette meglio di angoli, aree, volumi e colori. Per questo un **grafico a barre** si legge meglio di un **grafico a torta**: le barre usano lunghezze allineate, la torta usa angoli e aree. Bertin distingue inoltre che cosa ogni variabile permette di leggere: posizione e dimensione mostrano **quantità e ordine**, il valore un **ordine**, tinta, forma e texture distinguono **categorie** ma non le ordinano.
 
@@ -153,6 +178,8 @@ L’elaborazione visiva avviene in tre passi:
 
 <!-- SOURCE_VISUAL id="IS11-V11" source="L11-web-v24.pdf" page="16" type="schema" description="I tre passi dell'elaborazione visiva dalla retina alla percezione degli oggetti" reason="Schema visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123201306.png)
 
 > 📌 **Perché conta per il progettista.** Il passo 2 avviene **prima che pensiamo**: lunghezza, posizione, orientamento, dimensione e colore vengono estratti **in parallelo**, in una frazione di secondo. Quindi l’indizio scelto decide **che cosa il lettore vede per primo** e **con quanta precisione**. Il messaggio principale va affidato agli indizi che l’occhio legge meglio (lunghezza allineata e posizione, classificati nel §1.6.2); la tinta va usata per **poche categorie**; e si tiene **un messaggio per grafico**.
 
@@ -170,15 +197,22 @@ L’elaborazione visiva avviene in tre passi:
 <!-- SOURCE_VISUAL id="IS11-V12" source="L11-web-v24.pdf" page="17" type="grafico" description="Tre dashboard del corso: curve di addestramento, matrice di confusione, dashboard di rilascio con AUC, PSI e allarmi" reason="Tre dashboard visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201324.png)
+
 #### **1.9. Quale grafico?**
 
 Si parte dal **messaggio**: **distribuzione**, **relazione**, **confronto**, **connessione**, **composizione** o **posizione geografica**. Poi si seguono i rami dalla domanda al tipo di grafico.
+
+![](imgs/Pasted%20image%2020261123201337.png)
+
 
 <!-- SOURCE_VISUAL id="IS11-V13" source="L11-web-v24.pdf" page="18" type="infografica" description="Guida alla scelta del grafico a partire dal messaggio" reason="Albero decisionale presente solo come infografica" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 <!-- SOURCE_VISUAL id="IS11-V14" source="L11-web-v24.pdf" page="19" type="infografica" description="Guida alla scelta del grafico (continua): rami dalla domanda al tipo di grafico" reason="Albero decisionale presente solo come infografica" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123201347.png)
 
 Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 reparti**, **12 mesi**.
 
@@ -193,6 +227,8 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 <!-- SOURCE_VISUAL id="IS11-V15" source="L11-web-v24.pdf" page="20" type="grafico" description="Colonne per fasce d'età, barre per 10 reparti, linea delle vendite su 12 mesi" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201405.png)
+
 > 📌 **Regola.** Confrontare **lunghezze su una base comune**; usare una **linea** quando l’asse orizzontale è il **tempo**.
 
 ##### **1.9.2. Distribuzione: come si distribuiscono i valori di una variabile**
@@ -205,6 +241,8 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 
 <!-- SOURCE_VISUAL id="IS11-V16" source="L11-web-v24.pdf" page="21" type="grafico" description="Istogramma bimodale delle età, curva di densità e scatter età-spesa" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123201435.png)
 
 > 📌 **Regola.** Prima di qualunque media, **guardare la forma**: le età dei 200 clienti sono **bimodali** (due gruppi, attorno a **28** e **48** anni) e una media da sola lo nasconderebbe, suggerendo un «cliente tipo» di 38 anni che quasi non esiste.
 
@@ -219,6 +257,8 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 <!-- SOURCE_VISUAL id="IS11-V17" source="L11-web-v24.pdf" page="22" type="grafico" description="Torta delle fasce d'età, cascata dai ricavi al profitto, aree impilate per canale" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201502.png)
+
 > 📌 **Regola.** Usare una **torta** solo per **poche parti che sommano al 100%**; una **cascata** per vedere **come si costruisce un totale**; le **aree impilate** per vedere **le parti e il totale nel tempo**. Verifica della cascata: $100-45-25-10=20$ k€ di profitto.
 
 ##### **1.9.4. Relazione: come due o tre variabili si muovono insieme**
@@ -232,6 +272,8 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 <!-- SOURCE_VISUAL id="IS11-V18" source="L11-web-v24.pdf" page="23" type="grafico" description="Scatter età-spesa, grafico a bolle con il reddito, scatter con retta di tendenza r = -0.60" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201519.png)
+
 > ⚠️ **Regola.** Età e punteggio di spesa sono **correlati** ($r=-0{,}60$ qui), ma **una correlazione non è una causa**. Il terzo grafico non è nella guida: è lo scatter con una **linea di tendenza**, la prima cosa che un progettista aggiunge.
 
 #### **1.10. Quali sono i benefici della visualizzazione?**
@@ -241,6 +283,8 @@ Le slide successive applicano la guida a dati sintetici: **200 clienti**, **10 r
 - Offre la capacità di **individuare le eccezioni**.
 - Permette di **analizzare pattern visivi**.
 - Permette di **esplorare tendenze** navigando i dati e riconoscendo i pattern direttamente.
+
+![](imgs/Pasted%20image%2020261123201540.png)
 
 **Benefici (2).**
 
@@ -252,6 +296,8 @@ L’esempio è un **diagramma di Sankey** dei flussi di materiale in tonnellate 
 
 <!-- SOURCE_VISUAL id="IS11-V19" source="L11-web-v24.pdf" page="25" type="grafico" description="Diagramma di Sankey dei flussi di materiale: fornitori, produzione, clienti UE ed extra-UE, scarto, riciclo e smaltimento" reason="Bande del Sankey visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123201552.png)
 
 #### **1.11. Conclusioni: un grafico dovrebbe…**
 
@@ -266,11 +312,16 @@ L’esempio è un **diagramma di Sankey** dei flussi di materiale in tonnellate 
 > - avere uno **scopo ragionevolmente chiaro**: descrizione, esplorazione, tabulazione o decorazione;
 > - essere **strettamente integrato** con le descrizioni **statistiche e verbali** del dataset.
 
+![](imgs/Pasted%20image%2020261123201610.png)
+
+
 <!-- SOURCE_VISUAL id="IS11-V20" source="L11-web-v24.pdf" page="26" type="figura" description="Esempio di grafico con troppo design grafico" reason="Esempio negativo visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 <!-- SOURCE_VISUAL id="IS11-V21" source="L11-web-v24.pdf" page="27" type="figura" description="Esempi di grafici che incoraggiano il confronto e mostrano più livelli di dettaglio" reason="Esempi visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123201625.png)
 
 > 💡 **La fonte e il nemico (nota didattica).** L’elenco riprende quasi alla lettera i principi di **Edward Tufte**, *The Visual Display of Quantitative Information* (1983). Il nemico indicato dalla slide è il **troppo design grafico**: decorazioni, effetti 3D e ornamenti che consumano attenzione senza portare dati (il *chartjunk* di Tufte).
 
@@ -290,6 +341,8 @@ La dashboard tipica affianca quattro pannelli: **prestazioni nel tempo** (AUC da
 <!-- SOURCE_VISUAL id="IS11-V22" source="L11-web-v24.pdf" page="29" type="schermata" description="Dashboard di rilascio: AUC nel tempo, PSI con soglia, densità training contro produzione, pannello allarmi" reason="Dashboard visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123201641.png)
+
 > 💡 **Data drift e concept drift (nota didattica).** Con il **data drift** cambia la distribuzione degli **input** $P(X)$: per esempio arrivano clienti più anziani o materiali di un nuovo fornitore. Con il **concept drift** cambia la **relazione** tra input e output $P(Y\mid X)$: a parità di caratteristiche, il risultato diventa diverso (lo stesso livello di vibrazione inizia a precedere un guasto). Il primo si vede guardando solo gli input; il secondo richiede le etichette vere, o almeno un segnale sulle uscite (§2.4).
 
 #### **2.2. Il Population Stability Index (PSI)**
@@ -302,6 +355,8 @@ La dashboard tipica affianca quattro pannelli: **prestazioni nel tempo** (AUC da
 | $B$ | numero di **bin** (intervalli) della feature; $i$ è l’indice del bin |
 | $p_i$ | quota dei campioni di **riferimento** (training) nel bin $i$ |
 | $q_i$ | quota dei campioni **attuali** (produzione) nel bin $i$ |
+
+![](imgs/Pasted%20image%2020261123202818.png)
 
 Ciascun insieme di quote **somma a 1**. **Ogni termine è $\ge 0$** ed è $0$ quando $p_i=q_i$. Esempio: $p_i=0{,}08$ e $q_i=0{,}04$ danno $(0{,}04)\ln 2=0{,}0277$ (una feature, un mese di produzione).
 
@@ -324,6 +379,8 @@ Una feature standardizzata (z-score) è divisa in 5 bin; si confrontano le quote
 
 <!-- SOURCE_VISUAL id="IS11-V23" source="L11-web-v24.pdf" page="31" type="grafico" description="Istogrammi a 5 bin della feature nel riferimento (training) e nella produzione" reason="Istogrammi a confronto visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123202831.png)
 
 **Regola pratica**:
 
@@ -349,6 +406,8 @@ La slide sintetizza: l’AI Act europeo impone un monitoraggio continuo e rigoro
 <!-- SOURCE_VISUAL id="IS11-V24" source="L11-web-v24.pdf" page="32" type="grafico" description="Miniature del PSI nel tempo (input) e della densità dei punteggi (output)" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123202913.png)
+
 > ⚠️ **Alto rischio e GPAI non hanno gli stessi obblighi.** Nel regolamento il **sistema di monitoraggio post-commercializzazione** è un obbligo specifico dei fornitori di sistemi **ad alto rischio** (art. 72); per i modelli GPAI gli obblighi riguardano soprattutto documentazione tecnica e, per quelli **a rischio sistemico**, valutazioni, gestione dei rischi e segnalazione degli incidenti gravi. Le date di applicazione sono state modificate dal Regolamento (UE) 2026/1744: gli obblighi per i sistemi ad alto rischio dell’Allegato III decorrono dal **2 dicembre 2027** e quelli per i prodotti regolamentati dell’Allegato I dal **2 agosto 2028**. [Testo del Regolamento 2026/1744](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744).
 
 #### **2.5. Il drift della distribuzione delle predizioni**
@@ -360,6 +419,8 @@ Il modello rilasciato riceve, per ogni richiesta, un input $X$ e produce un punt
 | **feature drift** | PSI su **ogni feature di input** | subito |
 | **etichette vere** | confronto con la *ground truth* | possono arrivare **molto più tardi** |
 | **prediction drift** | PSI sul **punteggio di uscita** | subito |
+
+![](imgs/Pasted%20image%2020261123202930.png)
 
 > 📌 **Il prediction drift non è il feature drift.**
 > - Il **feature drift** riguarda la distribuzione dei **dati di input**; il **prediction drift** la distribuzione delle **uscite** del modello.
@@ -374,6 +435,8 @@ La slide mostra la distribuzione dei punteggi $s=P(Y=1\mid X)$ nel **periodo di 
 <!-- SOURCE_VISUAL id="IS11-V25" source="L11-web-v24.pdf" page="34" type="grafico" description="Distribuzione dei punteggi del classificatore nel periodo di riferimento e in quello attuale, PSI = 0.96" reason="Istogrammi dei punteggi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123202942.png)
+
 > 📌 **Perché conta per il progettista.** I punteggi di un classificatore si possono **monitorare senza aspettare le etichette vere**. La formula è la stessa di prima, ora sull’uscita: qui $\text{PSI}=0{,}96>0{,}25$, un **drift significativo**. Gli input possono sembrare ancora familiari: **guardare entrambi**.
 
 #### **2.7. Controllare drift e prestazioni nel tempo**
@@ -383,6 +446,8 @@ La slide mostra la distribuzione dei punteggi $s=P(Y=1\mid X)$ nel **periodo di 
 
 <!-- SOURCE_VISUAL id="IS11-V26" source="L11-web-v24.pdf" page="35" type="grafico" description="PSI settimanale con soglie 0.1 e 0.25 e accuratezza su 52 settimane: il PSI sale prima che l'accuratezza cali" reason="Andamento delle due curve visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123203004.png)
 
 - **Perché in IS4**: un modello in un impianto o in un magazzino **cambia comportamento** quando cambiano **materiali, fornitori o stagioni**. **Allarmi**: PSI **0,1 = attenzione**, **0,25 = allarme**, oppure uno **spostamento della media oltre $2\sigma$** della finestra di riferimento.
 - **Errore tipico**: una **finestra di riferimento scadente**. Entrambe le regole di allarme sono **regole pratiche, non standard**.
@@ -407,12 +472,16 @@ Assenza di dati, vincitori, eventi: **i vuoti fanno parte della storia** (anni s
 <!-- SOURCE_VISUAL id="IS11-V27" source="L11-web-v24.pdf" page="37" type="grafico" description="Streamgraph delle medaglie olimpiche nel tempo con i vuoti delle guerre, i boicottaggi e le squadre che si dividono o fondono" reason="Grafico visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123203034.png)
+
 #### **3.2. Fenomeni complessi: dinamiche rese visibili**
 
 Le **equazioni di Navier–Stokes** governano il moto di un fluido. Una buona visualizzazione mostra i **vortici** e la **transizione dal moto laminare a quello turbolento**, che le equazioni da sole non lasciano vedere. Il colore porta la **quarta grandezza**, il modulo della velocità [m/s]. La stessa abilità aiuta a leggere le **superfici di decisione complesse** delle reti neurali e dei modelli di machine learning.
 
 <!-- SOURCE_VISUAL id="IS11-V28" source="L11-web-v24.pdf" page="38" type="grafico" description="Simulazione di un fluido con vortici e transizione laminare-turbolenta, colore = modulo della velocità" reason="Visualizzazione scientifica visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123203051.png)
 
 #### **3.3. Vaccino sì o no? Il morbillo**
 
@@ -421,11 +490,16 @@ Secondo l’**Organizzazione Mondiale della Sanità**, pur essendo disponibile u
 <!-- SOURCE_VISUAL id="IS11-V29" source="L11-web-v24.pdf" page="39" type="infografica" description="Infografica sul morbillo con i dati OMS 2000-2018 e ritratto di Maurice Hilleman" reason="Infografica visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123203110.png)
+
 #### **3.4. Superfici 3D, dati 3D nel tempo, fette e proiezioni**
 
 - **Superfici 3D**: le **decisioni** di un sistema intelligente si possono rappresentare come **superfici** negli spazi di input interni; un’**isosuperficie** è il luogo dei punti in cui una funzione vale una costante (per esempio la frontiera di decisione di un classificatore con tre feature, dove la probabilità vale 0,5).
 - **Dati 3D nel tempo**: il **monte Sant’Elena**, nello stato di Washington, **prima e dopo l’eruzione del 1980**.
 - **Fette e proiezioni**: è **molto difficile** disegnare una feature su **tre assi**, perché i **voxel si coprono a vicenda**; è spesso meglio preferire **proiezioni e fette**.
+
+![](imgs/Pasted%20image%2020261123203202.png)
+
 
 <!-- SOURCE_VISUAL id="IS11-V30" source="L11-web-v24.pdf" page="40" type="grafico" description="Superficie di decisione e isosuperficie in uno spazio di input 3D" reason="Superficie visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -436,9 +510,15 @@ Secondo l’**Organizzazione Mondiale della Sanità**, pur essendo disponibile u
 <!-- SOURCE_VISUAL id="IS11-V32" source="L11-web-v24.pdf" page="42" type="grafico" description="Fette e proiezioni di un volume 3D per evitare l'occlusione tra voxel" reason="Fette visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123203217.png)
+![](imgs/Pasted%20image%2020261123203225.png)
+
 #### **3.5. Risonanza magnetica e scelta del formato**
 
 La slide mostra una **risonanza magnetica** (MRI) rappresentata in 3D con superfici e fette; il codice è nell’appendice (§11.9). **A seconda dell’obiettivo della visualizzazione, la scelta del formato appropriato può cambiare moltissimo**: lo stesso volume si può mostrare come fette di contorno, come isosuperficie o come proiezione.
+
+![](imgs/Pasted%20image%2020261123203512.png)
+
 
 <!-- SOURCE_VISUAL id="IS11-V33" source="L11-web-v24.pdf" page="43" type="figura" description="Risonanza magnetica rappresentata in 3D" reason="Immagine della MRI visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
@@ -446,12 +526,16 @@ La slide mostra una **risonanza magnetica** (MRI) rappresentata in 3D con superf
 <!-- SOURCE_VISUAL id="IS11-V34" source="L11-web-v24.pdf" page="44" type="figura" description="Due formati diversi per lo stesso volume 3D a seconda dell'obiettivo" reason="Confronto dei formati visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123203520.png)
+
 #### **3.6. Galleria e che cosa c’è dietro un bel grafico**
 
 La galleria (dettagli in appendice) comprende: **observablehq.com** ed esempi interattivi, **ggplot2 in R**, l’**anatomia di un grafico**, il **grafico nel grafico** e i **vettori 3D**, la **heatmap del morbillo**.
 
 <!-- SOURCE_VISUAL id="IS11-V35" source="L11-web-v24.pdf" page="45" type="figura" description="Galleria di sei miniature: observablehq, esempi interattivi, ggplot2, anatomia di un grafico, grafico nel grafico, heatmap del morbillo" reason="Miniature visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123203531.png)
 
 **Che cosa c’è dietro un bel grafico?** Una catena di cinque passi: **idea** (il messaggio) → **dati** (pulire, unire) → **codifica** (segni, colore) → **codice** (libreria, API) → **iterazione** (molte versioni).
 
@@ -486,6 +570,8 @@ contour(P)
 <!-- SOURCE_VISUAL id="IS11-V36" source="L11-web-v24.pdf" page="47" type="grafico" description="Quattro viste della moneta: surf, mesh, pcolor, contour" reason="Grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123203609.png)
+
 > 💡 **Perché `flipud` (nota didattica).** Nelle matrici l’indice di riga cresce **verso il basso**, mentre l’asse $y$ di un grafico cresce **verso l’alto**: senza ribaltare la matrice (`flipud`, *flip up-down*) la moneta apparirebbe capovolta. `shading flat` toglie le linee nere tra le celle di `pcolor`.
 
 ---
@@ -515,6 +601,8 @@ Lungo il processo di progettazione la visualizzazione si usa in questa **sequenz
 <!-- SOURCE_VISUAL id="IS11-V37" source="L11-web-v24.pdf" page="50" type="grafico" description="Quattro viste esemplari: architettura del sistema, mappa del dataset, matrice dei costi, carta di controllo" reason="Quattro pannelli visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123203654.png)
+
 I quattro blocchi seguono nelle pagine successive, in ordine: dati, modello, prestazioni, funzionamento. **Caso guida**: la **manutenzione predittiva** di una macchina, con dati sintetici.
 
 #### **4.3. Un giro del sistema, componente per componente**
@@ -531,6 +619,8 @@ Dalla macchina al cloud e all’operatore: **ogni parte dell’architettura ha b
 <!-- SOURCE_VISUAL id="IS11-V38" source="L11-web-v24.pdf" page="52" type="schema e grafici" description="Architettura macchina, edge, cloud, operatore con un grafico dedicato sotto ciascun componente" reason="Architettura e grafici visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123203712.png)
+
 > 📌 **Ogni componente, la sua vista.** Non solo le funzioni (addestramento, modello, validazione): **ogni componente del sistema, perfino l’operatore**, ha bisogno di vedere cose diverse. Il machine learning sta in ogni parte, quindi ogni parte riceve la propria vista di ciò che sta accadendo.
 
 #### **4.4. Segnali multivariati dei sensori: disegnare i segnali**
@@ -540,6 +630,8 @@ Dalla macchina al cloud e all’operatore: **ogni parte dell’architettura ha b
 
 <!-- SOURCE_VISUAL id="IS11-V39" source="L11-web-v24.pdf" page="53" type="grafico" description="Vibrazione e temperatura su 240 minuti con doppio asse e intervallo anomalo 160-190 min evidenziato" reason="Segnali visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123203731.png)
 
 - **Primo controllo qualitativo**: dal minuto **160 al 190** entrambi i segnali **salgono insieme**. Si muovono insieme anche in generale? È il primo modo per vedere come si comportano i segnali; il numero arriva nella pagina successiva.
 - **Perché in IS4**: i segnali dei sensori sono la **materia prima** della manutenzione predittiva e dell’IoT.
@@ -565,6 +657,8 @@ dove $n$ è il numero di osservazioni, $x_i,y_i$ i valori dei due sensori all’
 | **V4** | −0,02 | −0,03 | −0,05 | 1,00 | 0,55 |
 | **V5** | −0,85 | −0,81 | −0,04 | 0,55 | 1,00 |
 
+![](imgs/Pasted%20image%2020261123203947.png)
+
 I nomi delle variabili V3 e V4 compaiono solo nella figura.
 
 <!-- SOURCE_VISUAL id="IS11-V40" source="L11-web-v24.pdf" page="54" type="grafico" description="Heatmap 5x5 della correlazione di Pearson tra le variabili del sensore, con i nomi delle variabili" reason="Nomi delle variabili e colori visibili solo nella heatmap" -->
@@ -581,6 +675,8 @@ I nomi delle variabili V3 e V4 compaiono solo nella figura.
 
 <!-- SOURCE_VISUAL id="IS11-V41" source="L11-web-v24.pdf" page="55" type="grafico" description="Proiezione PCA dei 360 campioni sui primi due componenti (68% e 15%) con i tre stati normale, usura, guasto" reason="Cluster visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123205105.png)
 
 - **Perché in IS4**: l’obiettivo è scoprire se i dati formano **cluster** (qui i tre stati della macchina). I **gruppi nascosti** possono invertire una tendenza, come nel **paradosso di Simpson** della lezione precedente, quindi si cercano **prima di fidarsi di qualunque media**; spiegano anche il comportamento della macchina.
 - **Errore tipico**: leggere le **distanze in 2D come distanze vere**: si veda l’avvertenza su t-SNE (§5.2).
@@ -613,6 +709,8 @@ Cifre scritte a mano, una rete minuscola, **una vista per ogni domanda**.
 <!-- SOURCE_VISUAL id="IS11-V42" source="L11-web-v24.pdf" page="57" type="figura e grafico" description="Esempi delle dieci cifre 8x8 e istogramma del numero di immagini per classe" reason="Immagini e istogramma visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123205119.png)
+
 > 💡 **Verifica dei parametri (nota didattica).** Una rete completamente connessa 64-16-10 ha $64\cdot 16+16=1040$ parametri nel primo strato (pesi più bias) e $16\cdot 10+10=170$ nel secondo: $1040+170=1210$, come dichiarato. Le etichette invertite di proposito servono a verificare se le visualizzazioni successive riescono a **trovarle** (§5.10).
 
 #### **5.2. Dati: le proiezioni sono immagini, non misure**
@@ -624,6 +722,8 @@ Le stesse **1797 immagini in 64 dimensioni** sono disegnate in 2D con tre metodi
 
 <!-- SOURCE_VISUAL id="IS11-V43" source="L11-web-v24.pdf" page="58" type="grafico" description="Le cifre proiettate con PCA, t-SNE perplexity 5 e t-SNE perplexity 50, colorate per classe" reason="Proiezioni visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123205136.png)
 
 > 📌 **La perplexity.** È il parametro di t-SNE che stabilisce **quanti vicini** ogni punto considera, all’incirca:
 > $$\text{perplexity}=2^{H(P_i)},$$
@@ -641,6 +741,8 @@ Le stesse **1797 immagini in 64 dimensioni** sono disegnate in 2D con tre metodi
 <!-- SOURCE_VISUAL id="IS11-V44" source="L11-web-v24.pdf" page="59" type="figura" description="Griglia di dieci immagini casuali per ciascuna delle dieci classi di CIFAR-10" reason="Immagini visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123205613.png)
+
 > 💡 **Perché le definizioni contano (nota didattica).** Un pickup è un’«automobile» o un «camion»? Se il dataset lo decide in un modo e l’applicazione nell’altro, il modello sembrerà sbagliare. Guardare gli esempi è il modo più rapido per scoprire queste convenzioni, che nessuna statistica riassuntiva rivela (si ricordi il controllo delle etichette della Lezione 8).
 
 #### **5.4. Facets: uno strumento open source per i dati di addestramento**
@@ -649,6 +751,8 @@ Le stesse **1797 immagini in 64 dimensioni** sono disegnate in 2D con tre metodi
 
 <!-- SOURCE_VISUAL id="IS11-V45" source="L11-web-v24.pdf" page="60" type="schermata" description="Facets Dive su CIFAR-10 raggruppato per classe e colore, Facets su dati di censimento, statistiche per feature training contro test" reason="Interfaccia visibile solo nella schermata" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123205631.png)
 
 > ⚠️ **Un rischio che Facets rende visibile.** Se gli aerei sono quasi sempre su sfondo di cielo, un modello può imparare «blu = aereo» invece della forma dell’aereo: una scorciatoia che funziona sul test (anch’esso pieno di cielo) e fallisce su un aereo in hangar. È il problema del modello che «guarda i pixel sbagliati» (§5.7).
 
@@ -662,6 +766,8 @@ Nella rete 64-16-10 completamente connessa, i **64 pesi di un’unità nascosta*
 <!-- SOURCE_VISUAL id="IS11-V46" source="L11-web-v24.pdf" page="61" type="grafico" description="Schema 64-16-10, i 16 pesi del primo strato come tessere 8x8 e gli istogrammi dei pesi dei due strati" reason="Tessere e istogrammi visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123205716.png)
+
 > 📌 **Perché conta per il progettista.** Si controlla la **salute di ogni strato**: tessere **vuote o sature** e istogrammi **estremi** rivelano **unità morte** o una **cattiva inizializzazione**, prima che si vedano nell’accuratezza. È la diagnostica dei pesi della Lezione 10 resa visibile.
 
 > 💡 **Perché la tessera ha senso (nota didattica).** L’input è un’immagine $8\times 8$ srotolata in 64 valori; il peso $w_{j}$ dell’unità moltiplica il pixel $j$. Rimettendo i 64 pesi nella griglia $8\times 8$ si vede **quale schema di pixel** fa attivare l’unità: la tessera è il «template» che l’unità cerca, esattamente come il kernel della NCC della Lezione 9.
@@ -672,6 +778,8 @@ I **quadrati grigi** sono i **kernel**; i **quadrati colorati** sono le **porzio
 
 <!-- SOURCE_VISUAL id="IS11-V47" source="L11-web-v24.pdf" page="62" type="figura" description="Kernel di una CNN (quadrati grigi) e porzioni di immagine che li attivano al massimo (quadrati colorati)" reason="Kernel e porzioni visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123205725.png)
 
 #### **5.7. Modello: attivazioni per classe**
 
@@ -688,6 +796,8 @@ $$5{,}6\quad 0{,}0\quad 0{,}3\quad 0{,}0\quad 0{,}7\quad 0{,}6\quad 2{,}2\quad 1
 <!-- SOURCE_VISUAL id="IS11-V48" source="L11-web-v24.pdf" page="63" type="grafico" description="Heatmap 16 unità x 10 classi delle attivazioni medie e attivazioni delle 16 unità per un'immagine di un 3" reason="Heatmap e cerchi delle unità visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123205934.png)
+
 > 📌 **Perché conta per il progettista.** Si verifica che le unità **si specializzino su classi diverse** e che **nessuna sia morta**: le unità morte **sprecano capacità** e suggeriscono una **rete più piccola**. Con 3 unità morte su 16, la rete usa di fatto 13 unità.
 
 #### **5.8. Mappe di salienza**
@@ -701,15 +811,21 @@ $$5{,}6\quad 0{,}0\quad 0{,}3\quad 0{,}0\quad 0{,}7\quad 0{,}6\quad 2{,}2\quad 1
 <!-- SOURCE_VISUAL id="IS11-V49" source="L11-web-v24.pdf" page="64" type="figura" description="Immagine e relativa mappa di salienza che evidenzia le regioni influenti" reason="Mappa visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123205953.png)
+
 **Esempio.** Ogni mappa è costruita dal **gradiente dell’uscita rispetto all’input**: mostra quali pixel sono stati rilevanti per la classe. **SmoothGrad** aggiunge **rumore gaussiano** pixel per pixel a **molte copie** dell’immagine e **fa la media dei gradienti** (dettagli nelle lezioni successive). Fonte: pair-code.github.io/saliency.
 
 <!-- SOURCE_VISUAL id="IS11-V50" source="L11-web-v24.pdf" page="65" type="figura" description="Mappe di salienza con gradiente semplice e SmoothGrad (PAIR)" reason="Mappe visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123210005.png)
+
 **Come si calcola.** Il **gradiente del punteggio della classe rispetto ai pixel di input** misura **quanto cambia il punteggio** quando ogni pixel viene **leggermente modificato**.
 
 <!-- SOURCE_VISUAL id="IS11-V51" source="L11-web-v24.pdf" page="66" type="schema" description="Calcolo della mappa di salienza come gradiente del punteggio di classe rispetto ai pixel" reason="Schema visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123210015.png)
 
 > 📌 **Gradiente e SmoothGrad (formule standard, nota didattica).** Per un’immagine $x$ e il punteggio $S_c(x)$ della classe $c$, la mappa di salienza è
 > $$M_c(x)=\left|\frac{\partial S_c(x)}{\partial x}\right|,$$
@@ -726,8 +842,13 @@ Due reti classificano la stessa immagine. **Qual è la rete migliore?**
 | **NN1** | cane = **0,95** | evidenzia pixel **sbagliati** (non il cane) |
 | **NN2** | cane = **0,92** | evidenzia **il cane** |
 
+![](imgs/Pasted%20image%2020261123210334.png)
+
+
 <!-- SOURCE_VISUAL id="IS11-V52" source="L11-web-v24.pdf" page="68" type="figura" description="Due reti NN1 (cane 0.95) e NN2 (cane 0.92) con le rispettive mappe di salienza: NN1 guarda i pixel sbagliati" reason="Immagini e mappe visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123210347.png)
 
 > ⚠️ **Corretta per la ragione sbagliata.** La previsione di NN1 è corretta, ma **il modello guarda i pixel sbagliati**. Ci si può fidare di un modello che **sembra accurato per la ragione sbagliata**? Probabilmente NN1 ha imparato una correlazione con lo sfondo o con un artefatto del dataset (il caso dei «cani gialli» e il dilemma M1/M2 delle Lezioni 5 e 7): funziona finché i dati assomigliano al training e fallisce appena cambiano. NN2, meno sicura, è la rete da preferire.
 
@@ -750,6 +871,8 @@ dove $Q$ è il **vettore query** di ogni token (che cosa cerca), $K$ il **vettor
 <!-- SOURCE_VISUAL id="IS11-V53" source="L11-web-v24.pdf" page="69" type="grafico" description="Blocco Transformer semplificato e heatmap 5x5 dell'attenzione sulla frase the pump is too hot" reason="Heatmap e schema del blocco visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123210434.png)
+
 **Esempio** (numeri giocattolo): la riga di «*hot*» mette **0,68** su se stessa, **0,15** su «*too*» e **0,13** su «*pump*». È una **diagnostica, non una prova di spiegazione**. Il blocco Transformer semplificato (Vaswani et al., 2017) è: embedding + posizione → attenzione multi-testa → *add & norm* → feed-forward → *add & norm*, ripetuto $N$ volte (Lezione 13).
 
 > 📌 **Perché conta per il progettista.** Si verifica che il modello **presti attenzione alle parti rilevanti** dell’input e non ad **artefatti** come la punteggiatura o la posizione. Qui «*pump*» guarda soprattutto «*hot*» (0,44): il modello collega l’oggetto alla sua condizione.
@@ -767,6 +890,8 @@ $\alpha$ (asse $x$) e $\beta$ (asse $y$) dicono **quanto ci si sposta** lungo ci
 <!-- SOURCE_VISUAL id="IS11-V54" source="L11-web-v24.pdf" page="70" type="grafico" description="Paesaggio della perdita di validation sul piano di due direzioni casuali attorno ai pesi addestrati, con la stella al minimo" reason="Mappa di colore del paesaggio visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123210644.png)
+
 > 📌 **Perché conta per il progettista.** Un **bacino piatto** significa che la soluzione **tollera piccole modifiche dei pesi** (rumore, pruning, quantizzazione) e di solito **generalizza meglio**; un **bacino stretto** indica una **soluzione fragile**. Si sceglie la configurazione di addestramento che dà il bacino più piatto.
 
 > 💡 **Perché «in unità della dimensione dei filtri» (nota didattica).** Le direzioni casuali vengono normalizzate strato per strato in modo che ogni loro componente abbia la stessa norma dei pesi corrispondenti della rete (*filter normalization*). Senza questa normalizzazione, uno spostamento $\alpha=1$ sarebbe enorme per uno strato con pesi piccoli e trascurabile per uno con pesi grandi, e confrontare la «piattezza» di reti diverse non avrebbe senso.
@@ -778,6 +903,8 @@ Un esempio di **discesa del gradiente stocastica** in un problema di ottimizzazi
 <!-- SOURCE_VISUAL id="IS11-V55" source="L11-web-v24.pdf" page="71" type="grafico" description="Percorso della discesa del gradiente stocastica su una superficie non convessa" reason="Percorso dell'ottimizzazione visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123210756.png)
+
 > 📌 **Perché conta per il progettista.** Il percorso mostra se la discesa **funziona** (passi regolari in discesa) o è **erratica** (oscillazioni, un plateau, una valle sbagliata): indica di cambiare il **learning rate**, la **dimensione del batch** o l’**ottimizzatore**.
 
 #### **5.12. Passi 3 e 4 del flusso: perché l’EDA dopo il ML?**
@@ -787,6 +914,8 @@ Un esempio di **discesa del gradiente stocastica** in un problema di ottimizzazi
 - **confronto** tra modelli e iperparametri;
 - analisi di **confidenza**, **calibrazione** e **incertezza**;
 - **dashboard** di rilascio e **monitoraggio del drift**.
+
+![](imgs/Pasted%20image%2020261123210819.png)
 
 #### **5.13. Prestazioni: le curve di addestramento**
 
@@ -799,6 +928,8 @@ Due grafici per epoca (0–80): la perdita *cross-entropy* e l’accuratezza.
 <!-- SOURCE_VISUAL id="IS11-V56" source="L11-web-v24.pdf" page="73" type="grafico" description="Curve di perdita cross-entropy e accuratezza: training con etichette rumorose, training con etichette vere, validation" reason="Andamento delle curve visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123210945.png)
+
 > 📌 **Perché conta per il progettista.** Il **divario tra le due curve** indica l’**overfitting**, e la **miglior epoca** dice **quando fermare** l’addestramento (*early stopping*); una curva dal comportamento strano indica **etichette sbagliate** o un **learning rate** inadatto.
 
 > 💡 **Perché la curva di training sta sopra (nota didattica).** Normalmente la perdita di training è più bassa di quella di validation, perché il modello ha visto quei dati. Qui il 5% delle etichette di training è sbagliato: la rete, che generalizza bene, assegna a quelle immagini la classe vera, e la perdita calcolata sull’etichetta sbagliata è alta. Valutando le stesse immagini con le etichette vere (curva tratteggiata) l’ordine consueto si ristabilisce.
@@ -809,6 +940,8 @@ La **mancanza di dati produce intervalli più ampi**: le bande si **allargano do
 
 <!-- SOURCE_VISUAL id="IS11-V57" source="L11-web-v24.pdf" page="74" type="grafico" description="Previsione di una rete con banda di confidenza che si allarga dove mancano i punti di training" reason="Bande e punti visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123210937.png)
 
 > 💡 **Perché gli intervalli si allargano (nota didattica).** Nelle regioni con molti esempi tutte le funzioni compatibili con i dati concordano; dove mancano dati, molte funzioni diverse spiegano ugualmente bene il training e divergono tra loro. Mostrare l’intervallo, e non solo la curva media, avverte l’utente di non fidarsi delle previsioni nelle zone scoperte (il «buco topologico» della Lezione 6).
 
@@ -836,6 +969,8 @@ $N$ è il numero di immagini; $\bar{e}$ l’**errore medio** (bias) [°C]; $\sig
 <!-- SOURCE_VISUAL id="IS11-V58" source="L11-web-v24.pdf" page="76" type="grafico" description="Errori dei 200 campioni del dataset A con bande +-1 sigma e +-2 sigma e istogramma a campana" reason="Errori, bande e istogramma visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211019.png)
+
 > 📌 **Perché conta per il progettista.** Dice all’utente **quanto ci si può fidare di un singolo valore previsto**, nella **stessa unità della misura**: «23,5 °C ± 3,7 °C al 95%» è un’informazione utilizzabile, «23,5 °C» da solo no.
 
 ##### **5.14.3. Da dove viene la confidenza di una singola immagine**
@@ -855,6 +990,8 @@ $h_j$ è l’attivazione dell’unità nascosta $j$; $w_{jk}$ e $b_k$ sono peso 
 
 <!-- SOURCE_VISUAL id="IS11-V59" source="L11-web-v24.pdf" page="77" type="schema e grafico" description="Rete 64-16-10 con punteggi zk e probabilità softmax pk per un 3, e curve di punteggio e probabilità per epoca" reason="Schema e curve visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123211053.png)
 
 **Leggere le curve**: all’epoca 1 la confidenza è **0,17**, all’epoca 10 **0,75**, all’epoca 80 **0,98**. La slide successiva segue questo numero, epoca per epoca, per ogni immagine di training.
 
@@ -883,6 +1020,8 @@ La mappa ha la **confidenza** sull’asse verticale e la **variabilità** (std) 
 <!-- SOURCE_VISUAL id="IS11-V60" source="L11-web-v24.pdf" page="78" type="grafico" description="Mappa del dataset: confidenza media contro deviazione standard per le 1000 immagini, etichette originali e 50 invertite" reason="Disposizione dei punti nelle tre regioni visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211135.png)
+
 > 📌 **Risultato.** **60 immagini** hanno confidenza sotto **0,25**, e **47 di queste** sono tra le **50 etichette invertite**: la mappa **trova le etichette sbagliate** (Swayamdipta et al., EMNLP 2020).
 
 > 💡 **I conti (nota didattica).** Per B: $\text{conf}=(0{,}2+0{,}5+0{,}8+0{,}9)/4=0{,}60$; scarti $-0{,}4;\,-0{,}1;\,0{,}2;\,0{,}3$, quadrati $0{,}16+0{,}01+0{,}04+0{,}09=0{,}30$, diviso 4 e radice: $\sqrt{0{,}075}=0{,}27$. Per il softmax: $e^2=7{,}39$, $e^1=2{,}72$, $e^{0{,}1}=1{,}11$, somma $11{,}21$, quindi $p=(0{,}66;\,0{,}24;\,0{,}10)$. In termini di metriche, la mappa recupera 47 delle 50 etichette sbagliate (recall $47/50=94\%$) segnalando 60 immagini (precisione $47/60\approx 78\%$): uno strumento efficace di pulizia del dataset (Lezione 8).
@@ -894,6 +1033,8 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 <!-- SOURCE_VISUAL id="IS11-V61" source="L11-web-v24.pdf" page="79" type="schermata" description="Interfaccia di TensorBoard con metriche di addestramento e grafo" reason="Interfaccia visibile solo nella schermata" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211145.png)
+
 #### **5.17. Prestazioni: la matrice di confusione**
 
 - **Righe**: classe vera. **Colonne**: classe prevista. **Diagonale**: previsioni corrette (**378 su 397**).
@@ -903,6 +1044,8 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 
 <!-- SOURCE_VISUAL id="IS11-V62" source="L11-web-v24.pdf" page="80" type="grafico" description="Matrice di confusione 10x10 delle cifre con 378 corretti in diagonale e 19 errori, tra cui tre 3 previsti come 8" reason="Valori e colori della matrice visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123211154.png)
 
 > 📌 **Perché conta per il progettista.** Dice **quali classi migliorare per prime**, con più dati o etichette migliori per quelle classi, invece di **regolare alla cieca l’intera rete**.
 
@@ -916,6 +1059,8 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 
 <!-- SOURCE_VISUAL id="IS11-V63" source="L11-web-v24.pdf" page="81" type="grafico" description="Diagramma di affidabilità con la diagonale di calibrazione perfetta e istogramma delle confidenze dei 397 test" reason="Punti e istogramma visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123211207.png)
 
 > 📌 **Come li legge il progettista.** Prima l’**istogramma** (dove sta la maggior parte delle immagini?), poi i **punti di quei bin** rispetto alla diagonale. Se stanno **sotto**, le probabilità sono **troppo ottimiste**: vanno **ricalibrate** (per esempio con il *temperature scaling*) prima di usarle in allarmi o costi.
 
@@ -933,6 +1078,8 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 <!-- SOURCE_VISUAL id="IS11-V64" source="L11-web-v24.pdf" page="82" type="grafico" description="Tasso di errore per classe vera con l'errore complessivo tratteggiato, e per quantità d'inchiostro leggera, media, pesante" reason="Barre visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211244.png)
+
 > 📌 **Come le usa il progettista.** Una slice è un’**ipotesi scelta con l’esperto di dominio** (quale classe? quale illuminazione? quale fornitore?); il grafico la **accetta o la rifiuta**. **La media nasconde i gruppi deboli**: una slice mostra **dove il sistema non va considerato affidabile**, prima che fallisca in produzione. È il paradosso di Simpson della Lezione 10 applicato agli errori.
 
 ---
@@ -947,6 +1094,8 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 
 <!-- SOURCE_VISUAL id="IS11-V65" source="L11-web-v24.pdf" page="84" type="grafico" description="Fan chart della domanda settimanale: dati reali passati, previsione futura con bande all'80% e al 95%" reason="Bande della previsione visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123211252.png)
 
 - **Perché in IS4**: a sinistra della linea tratteggiata (**oggi**) i dati sono **reali**; a destra sono **previsioni**, e il futuro è **incerto**: per questo si mostrano gli intervalli. **Scorte e ordini si decidono sull’intervallo, non sulla linea centrale.**
 - **Errore tipico**: mostrare **solo la linea centrale**, oppure bande **troppo strette** (la copertura va verificata: §11.3).
@@ -967,6 +1116,8 @@ TensorBoard fornisce una **suite di strumenti di visualizzazione** per rendere p
 |---|---:|---:|
 | **vero OK** | 0 | 215 |
 | **vero difetto** | 13 600 | 0 |
+
+![](imgs/Pasted%20image%2020261123211306.png)
 
 - **Perché in IS4**: **l’accuratezza da sola non decide nulla**: nell’ispezione di qualità un difetto mancato costa molto più di uno scarto inutile.
 - **Errore tipico**: i costi sono **ipotesi didattiche**: con dati reali bisogna **chiederli all’azienda e dichiararli**.
@@ -989,6 +1140,8 @@ $TP$: difetti trovati; $FN$: difetti mancati; $FP$: falsi allarmi; $TN$: pezzi b
 <!-- SOURCE_VISUAL id="IS11-V66" source="L11-web-v24.pdf" page="86" type="grafico" description="Curva ROC con AUC 0.89 e curva precision-recall con AP 0.70 e prevalenza 0.16" reason="Curve visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211319.png)
+
 > 📌 **Per il progettista.** Si sceglie $t$ dal **costo dei due errori** (un difetto mancato costa più di un falso allarme). Le curve saranno presentate in dettaglio nella lezione sulle prestazioni (Lezione 16).
 
 > 💡 **Perché servono due curve (nota didattica).** La prevalenza è 0,16 (coerente con i $261/1600=16\%$ di difetti del §6.2): i pezzi buoni sono la grande maggioranza. La ROC usa il FPR, che ha al denominatore tutti i pezzi buoni: anche molti falsi allarmi producono un FPR piccolo, e la curva può sembrare ottima (AUC 0,89). La curva precision-recall guarda invece quanti degli allarmi sono veri, ed è più severa quando la classe positiva è rara (AP 0,70). Un classificatore casuale avrebbe AUC 0,5 ma AP pari alla prevalenza, 0,16.
@@ -1006,6 +1159,8 @@ $TP$: difetti trovati; $FN$: difetti mancati; $FP$: falsi allarmi; $TN$: pezzi b
 <!-- SOURCE_VISUAL id="IS11-V67" source="L11-web-v24.pdf" page="87" type="grafico" description="Curve di calibrazione di un modello ben calibrato (ECE 0.032) e di uno sovraconfidente (ECE 0.108)" reason="Curve rispetto alla diagonale visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211337.png)
+
 - **Perché in IS4**: la **confidenza mostrata all’utente guida le decisioni**. Con il modello sovraconfidente l’operatore **accetta errori**. **Correzione**: **ricalibrare**.
 - **Errore tipico**: **leggere la calibrazione come accuratezza**: un modello calibrato può comunque **classificare male**.
 
@@ -1016,6 +1171,8 @@ $TP$: difetti trovati; $FN$: difetti mancati; $FP$: falsi allarmi; $TN$: pezzi b
 
 <!-- SOURCE_VISUAL id="IS11-V68" source="L11-web-v24.pdf" page="88" type="grafico" description="Barre di permutation importance per temperatura, pressione, velocità e umidità" reason="Lunghezze delle barre visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123211347.png)
 
 - **Spiegabilità per dati tabellari**: è **la stessa domanda delle mappe di salienza** (quali pixel?), ora posta sulle **variabili** (quali misure?). **Se rimescolare una variabile danneggia il modello, il modello la usa.**
 - **Perché conta per il progettista**: si verifica **con l’esperto di processo** che il modello si basi sulle **cause giuste** (qui **temperatura e pressione**), e si possono **eliminare le variabili che non fanno nulla**.
@@ -1036,6 +1193,8 @@ $TP$: difetti trovati; $FN$: difetti mancati; $FP$: falsi allarmi; $TN$: pezzi b
 <!-- SOURCE_VISUAL id="IS11-V69" source="L11-web-v24.pdf" page="90" type="grafico" description="Carta di controllo della vibrazione RMS con linea centrale, limiti +-3 sigma e punti di allarme" reason="Andamento e allarmi visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211400.png)
+
 - **Perché in IS4**: è la **base del monitoraggio delle condizioni**; permette di discutere il **costo di un falso allarme** contro un **guasto mancato**.
 - **Errore tipico**: **soglie senza legame con i costi**; il criterio $\pm 3\sigma$ **presuppone dati circa gaussiani e indipendenti**, spesso **falso per i sensori**.
 
@@ -1053,6 +1212,8 @@ con $\mu$ e $\sigma$ stimati sul periodo sano (formula standard, nota didattica)
 <!-- SOURCE_VISUAL id="IS11-V70" source="L11-web-v24.pdf" page="91" type="grafico" description="Traiettorie dell'indice di salute di 6 macchine per ciclo operativo con soglia di guasto a 0.2" reason="Traiettorie visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211425.png)
+
 - **Perché in IS4**: introduce la **manutenzione predittiva** e spiega perché servono **molte storie di guasto** per addestrare un modello di **RUL** (*Remaining Useful Life*, vita utile residua).
 - **Errore tipico**: **pochi guasti reali** nei dati; **macchine ancora in funzione** (**dati censurati**) trattate come se **non si fossero mai guastate**.
 
@@ -1065,6 +1226,8 @@ con $\mu$ e $\sigma$ stimati sul periodo sano (formula standard, nota didattica)
 
 <!-- SOURCE_VISUAL id="IS11-V71" source="L11-web-v24.pdf" page="92" type="grafico" description="Frontiera di Pareto tra latenza e qualità di 8 modelli edge e cloud, con i modelli dominati in grigio" reason="Posizione dei modelli visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123211436.png)
 
 - **Perché in IS4**: la **frontiera di Pareto** è l’insieme dei modelli per cui **nessun altro modello è migliore su entrambi gli assi contemporaneamente**. È il **luogo dei migliori compromessi**: muovendosi lungo di essa **si guadagna su un asse e si perde sull’altro**; i punti grigi sono **dominati** e si scartano. **Non è un metodo di machine learning**: si può calcolare automaticamente per **piani logistici** e per la **produzione su macchine diverse**.
 - **Errore tipico**: mostrare la frontiera senza dichiarare… (la frase è troncata nella slide; presumibilmente: senza dichiarare quale punto si sceglie e perché).
@@ -1086,6 +1249,8 @@ con $\mu$ e $\sigma$ stimati sul periodo sano (formula standard, nota didattica)
 <!-- SOURCE_VISUAL id="IS11-V72" source="L11-web-v24.pdf" page="93" type="grafico" description="Sankey dei flussi di materiale con fornitori A, B, C, produzione, scarto, clienti, riciclo e smaltimento" reason="Bande del Sankey visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211504.png)
+
 - **Perché in IS4**: i **bilanci di materiale, energia e CO₂** sono il **linguaggio comune** di industria, ambiente e supply chain.
 - **Errore tipico**: **unità e perimetro non dichiarati**; i flussi **devono bilanciarsi a ogni nodo** (qui $40+35+25=100=85+15$, $85=50+35$, $15=10+5$).
 
@@ -1096,6 +1261,8 @@ con $\mu$ e $\sigma$ stimati sul periodo sano (formula standard, nota didattica)
 
 <!-- SOURCE_VISUAL id="IS11-V73" source="L11-web-v24.pdf" page="94" type="grafico" description="Gantt di 7 ordini su 4 macchine con tempi morti e colli di bottiglia, circa 39 ore" reason="Barre del Gantt visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123211513.png)
 
 - **Perché in IS4**: lo stesso grafico mostra l’**output di un algoritmo di scheduling** o la **traccia di un agente che pianifica** (§8.3).
 - **Errore tipico**: **confrontare due pianificazioni senza dichiarare l’obiettivo**: tempo totale, ritardi, utilizzo delle macchine.
@@ -1119,6 +1286,8 @@ System prompt, codice Python, esecuzione, controllo e revisione.
 #### **8.1. Il ciclo: progettista, agente, figura**
 
 Il **progettista** invia all’**agente** un prompt e i dati; l’agente **scrive il codice**, il codice **viene eseguito** e produce la **figura**, che torna al progettista per essere **controllata e rivista**.
+
+![](imgs/Pasted%20image%2020261123211557.png)
 
 - **Input**: un **file di dati** (righe, colonne), una **frase con il messaggio**, dei **vincoli** (pubblico, colori, formato).
 - **Output**: uno **script** e una **figura**, **in pochi secondi**; il progettista **verifica** il risultato, **rivede il prompt** e chiede di nuovo.
@@ -1153,6 +1322,8 @@ La traccia d’esempio (esecuzione illustrativa, senza dati reali) mostra sei pa
 <!-- SOURCE_VISUAL id="IS11-V74" source="L11-web-v24.pdf" page="99" type="grafico" description="Traccia di un agente come Gantt: pianificazione, lettura sensori, recupero manuali, valutazione del rischio, approvazione umana, ordine di lavoro" reason="Barre temporali della traccia visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123211627.png)
+
 | Che cosa leggere (concetti, non numeri) | Che cosa progettare |
 |---|---|
 | **ordine e dipendenza**: un passo parte solo quando il precedente ha prodotto ciò che gli serve | il **punto di approvazione umana**, **prima delle azioni irreversibili** |
@@ -1183,6 +1354,8 @@ plt.savefig('grouped.pdf', bbox_inches='tight')
 
 <!-- SOURCE_VISUAL id="IS11-V75" source="L11-web-v24.pdf" page="100" type="grafico" description="Grafico a barre raggruppate prodotto dallo script: linee A e B per prodotti facili e difficili (95%, 90%, 72%, 70%)" reason="Grafico risultante visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123211700.png)
 
 > 📌 **Leggere il codice.** Il tasso è calcolato come **superati diviso totale dentro ciascun gruppo**. Se l’agente avesse **sommato prima i gruppi**, la figura sarebbe stata il **grafico a barre aggregato** — e avrebbe raccontato la storia opposta (§9).
 
@@ -1507,6 +1680,332 @@ dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il val
 <!-- SOURCE_VISUAL id="IS11-V101" source="L11-web-v24.pdf" page="140" type="grafico" description="Istogramma bivariato 3D delle corse del bike sharing di Boston per durata e anno di nascita" reason="Grafico 3D visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+| Tipo di prodotto | Linea A: superati / totale | Linea B: superati / totale |
+|---|---|---|
+| **facile** | 19/20 | 90/100 |
+| **difficile** | 72/100 | 14/20 |
+
+
+![](imgs/Pasted%20image%2020261123211736.png)
+
+**Prompt all’agente**: «*Ecco i conteggi di superamento di due linee di produzione per tipo di prodotto. Proponi quattro diverse visualizzazioni efficaci degli stessi dati, un messaggio ciascuna, e fornisci il codice.*»
+
+Sono gli **stessi dati sintetici dell’esempio di Simpson** della lezione precedente. **Otto numeri, quattro storie possibili.**
+
+#### **9.2. Quattro viste degli stessi otto numeri**
+
+| Vista | Che cosa mostra | Messaggio |
+|---|---|---|
+| **1. Aggregato** | un tasso per linea: A 75,8%, B 86,7% | **B è migliore** |
+| **2. Per tipo** | tasso per gruppo: facili 95% contro 90%, difficili 72% contro 70% | **A è migliore in entrambi** |
+| **3. Mix** | quota di prodotti facili e difficili: A 17%/83%, B 83%/17% (120 pezzi ciascuna) | **B produce soprattutto pezzi facili** |
+| **4. Punti** | tasso per gruppo e per «tutti», con l’area del punto = numero di pezzi | **tasso e numerosità insieme** |
+
+#### **9.3. Confrontare le quattro viste**
+
+| Vista | Correttezza | Informazione trasmessa | Possibile bias |
+|---|---|---|---|
+| **1 Aggregato** | numeri giusti, **confronto fuorviante** | un tasso per linea | **nasconde il mix di prodotti** (Simpson) |
+| **2 Per tipo** | giusta | il tasso in ogni gruppo | **nasconde la dimensione del campione** (20 contro 100 pezzi) |
+| **3 Mix** | giusta | **perché l’aggregato si inverte** | **non mostra alcun tasso**: spiega, non confronta |
+| **4 Punti** | giusta | tasso e dimensione insieme | l’**area si legge meno precisamente della lunghezza** (Bertin) |
+
+#### **9.4. Quale vista è quella giusta? Dipende dalla domanda**
+
+- La **vista 1** è **pulita e sbagliata** per una decisione sulle linee: nasconde che B produce l’**83% di pezzi facili** e A solo il **17%**.
+- La **vista 2** risponde a **quale linea è migliore, prodotto per prodotto**: A (95% contro 90%, 72% contro 70%).
+- La **vista 3** **spiega l’inversione**: il mix di pezzi facili e difficili, non la qualità della linea.
+- La **vista 4** mostra **tasso e dimensione del campione insieme**: le celle da **20 pezzi** sono le **meno affidabili**.
+- **Tutte e quattro sono grafici onesti degli stessi numeri**; solo **la domanda** decide quale mostrare.
+
+> 📌 **Il limite dell’agente.** L’agente può produrre le quattro viste **in un minuto**. **Non può sapere** che la decisione riguarda il **confronto tra linee a parità di difficoltà**.
+
+> 💡 **Perché le celle da 20 sono meno affidabili (nota didattica).** Con $n=20$ pezzi, un solo pezzo in più o in meno sposta il tasso di 5 punti percentuali; con $n=100$, di un punto. La differenza tra 72% (su 100) e 70% (su 20) è ben dentro questa incertezza: la vista 4 lo rende visibile, la vista 2 no.
+
+#### **9.5. Strumenti di BI e di monitoraggio con assistente AI**
+
+| Tipo | Strumenti | Uso tipico |
+|---|---|---|
+| **visualizzazione degli esperimenti ML** | TensorBoard, Weights & Biases, MLflow, Neptune, ClearML | curve di addestramento, perdita, accuratezza, iperparametri, confronto tra modelli |
+| **BI / dashboard con AI** | Tableau, Power BI, Zoho Analytics, Domo, ThoughtSpot | metriche di business, **query in linguaggio naturale**, monitoraggio dei KPI, report |
+| **osservabilità / monitoraggio operativo** (passo 5 del flusso) | Grafana, Datadog, Prometheus, Evidently AI, WhyLabs | sistemi in produzione, telemetria, drift, allarmi, affidabilità |
+
+> 📌 **Osservabilità.** Significa **monitorare un sistema rilasciato attraverso segnali misurabili**, per **capirne il comportamento**, **rilevare guasti** e **supportare azioni correttive**.
+
+**Esempio: Microsoft Power BI.** Si collega a dati di **molte sorgenti** e li visualizza su una **piattaforma unificata e scalabile** per la business intelligence **self-service e aziendale**.
+
+
+![](imgs/Pasted%20image%2020261123212443.png)
+
+---
+
+### **10. Il progettista resta responsabile**
+
+
+L’AI **automatizza la produzione**, non la **domanda** né l’**interpretazione**.
+
+#### **10.1. L’agente non sostituisce il progettista**
+
+1. **Prima il messaggio**: scrivere che cosa il lettore deve concludere **prima** di chiedere qualunque grafico.
+2. **Ricalcolare due numeri a mano**: 19/20 è il 95%; la figura dice 95%?
+3. **Chiedere i gruppi**: dividere per **ogni confondente noto** prima di aggregare (paradosso di Simpson).
+4. **Chiedere il grafico opposto**: «quale vista contraddirebbe questa?».
+5. **Controllare assi e omissioni**: base dell’asse, scala, colore, che cosa è lasciato fuori.
+6. **Conservare dati e codice**: **una figura che non si può rigenerare non è un’evidenza**.
+
+> ⚠️ **L’agente ha i propri bias.** Disegna **ciò che gli è stato chiesto e ciò che è comune**, e può disegnare **rumore** o un’**interpretazione sbagliata** con **totale sicurezza**. **Comprensione ed esperienza restano al progettista.**
+
+#### **10.2. Alcune slide divertenti prima di chiudere (non d’esame)**
+
+Le ultime slide **non sono d’esame**: si può confrontare i diversi 007? Si è creativi? Si possono confrontare stili di vita diversi?
+
+- **Uso eccessivo della visualizzazione** (umorismo): anche per «applicazioni» molto particolari, la scelta di uno **spazio di input** adeguato permette **confronti** e dà **intuizioni**.
+
+
+![](imgs/Pasted%20image%2020261123212553.png)
+
+- **Sei creativo?** Come trovare il creativo **più simile a te**?
+  1. decidere lo **spazio di input**;
+  2. decidere la **metrica** (distanza);
+  3. **scorrere** i candidati per trovare il creativo più vicino.
+
+  Così si trova il **primo vicino più prossimo** (*first nearest neighbour*), un metodo tipico di ML (Lezione 9). **L’allineamento qui è critico**: si provi a pensare questo grafico senza.
+
+
+![](imgs/Pasted%20image%2020261123212614.png)
+
+#### **10.3. Punti principali**
+
+> ✅ **Punti principali della lezione.**
+> - Monitorare il **drift con il PSI** (sotto 0,1 stabile, da 0,1 a 0,25 moderato, sopra 0,25 significativo) **sulle feature e sul punteggio di uscita**.
+> - **Visualizzazione classica**: scegliere la **variabile visiva** (la **lunghezza allineata** è la più precisa) e il **grafico a partire dal messaggio**; **mostrare l’incertezza**.
+> - In **3D** preferire **superfici, fette e proiezioni**; **un concetto in un’immagine potente**.
+> - **Visualizzare l’AI**: **dati** (griglie, mappe del dataset), **modello** (pesi, attivazioni, salienza), **prestazioni** (curve, confusione, calibrazione, slice).
+> - **Proiezioni, salienza e attenzione sono diagnostiche, non prove.**
+> - Un **agente scrive grafici in pochi secondi**, ma **il progettista possiede il messaggio, i gruppi e le verifiche** (Simpson).
+
+---
+
+### **11. Appendice: dettagli della visualizzazione**
+
+
+EDA in Python, dashboard, strumenti per i grafici, 3D con il codice, altre viste IS4.
+
+#### **11.1. Una pipeline di dati come grafo (DAG)**
+
+- **Input**: dati grezzi dei sensori e i passi **ingest** (acquisizione), **clean** (valori mancanti), **feature** (finestre), **train** (modello), **validate** (test set), **deploy** (servizio).
+- **Output**: le **dipendenze** tra i passi (**grafo aciclico diretto**, DAG, *Directed Acyclic Graph*).
+
+
+![](imgs/Pasted%20image%2020261123212647.png)
+
+- **Perché in IS4**: le pipeline devono essere **modulari e riproducibili**; **l’ordine decide che cosa il modello può vedere**.
+- **Errore tipico**: **data leakage**: normalizzare o costruire feature **sull’intero dataset prima della divisione** train/test (Lezioni 7 e 10).
+
+#### **11.2. Spazio e tempo: mappe di PM2.5**
+
+- **Input**: griglia $80\times 80$ su $10\times 10$ km, PM2.5 (µg/m³) alle **06:00**, **12:00** e **18:00**.
+- **Output**: **tre mappe con la stessa scala di colore**.
+
+
+![](imgs/Pasted%20image%2020261123212658.png)
+
+- **Perché in IS4**: le reti di sensori **ambientali e logistiche** producono dati con **coordinate**: bisogna scegliere **scala, interpolazione e istanti**.
+- **Errore tipico**: **scale di colore diverse tra le mappe**; **interpolazione che inventa valori** dove non ci sono sensori.
+
+#### **11.3. Controllare le bande: la copertura dell’intervallo di previsione**
+
+Nelle settimane di test $t$ i punti sono i valori reali $y_t$, la banda è $[L_t,U_t]$. La copertura è
+
+$$\text{PICP}=\frac{1}{N}\sum_{t=1}^{N}\mathbf{1}\big[y_t\in[L_t,U_t]\big],$$
+
+dove $N$ è il numero di punti di test (per esempio 100 settimane), $y_t$ il valore reale al tempo $t$ (pezzi/settimana), $L_t$ e $U_t$ gli estremi inferiore e superiore dell’intervallo previsto, e $\mathbf{1}[\cdot]$ vale 1 se la condizione è vera e 0 altrimenti.
+
+
+![](imgs/Pasted%20image%2020261123212715.png)
+
+**Esempio**: intervallo **nominale al 90%**, il valore reale cade dentro **82 volte su 100** settimane: $\text{PICP}=0{,}82$. Il modello è **troppo sicuro di sé** (**sottocopertura**): **allargare le bande o ricalibrare**. Nello schizzo, **8 settimane su 10** sono dentro: $\text{PICP}=0{,}8$.
+
+> 💡 **PICP (nota didattica).** La sigla sta per *Prediction Interval Coverage Probability*, probabilità di copertura dell’intervallo di previsione. È per gli intervalli ciò che la calibrazione è per le probabilità di classe: un intervallo al 90% è onesto se contiene il valore vero circa il 90% delle volte. Una copertura troppo alta indica invece bande inutilmente larghe.
+
+#### **11.4. Controllare la previsione: i residui**
+
+- **Input**: gli errori di previsione delle **52 settimane** di test (pezzi).
+- **Output**: tre pannelli: **errore nel tempo**, **autocorrelazione** (ACF), **istogramma**.
+
+
+![](imgs/Pasted%20image%2020261123212834.png)
+
+- **Perché in IS4**: un **RMSE basso non dice che il modello sia adatto**: i residui mostrano **bias**, **stagionalità dimenticata**, **code pesanti**.
+- **Errore tipico**: fermarsi alla **metrica riassuntiva**; **barre dell’ACF oltre le linee tratteggiate** indicano **struttura rimasta negli errori**.
+
+> 💡 **Che cosa dice l’ACF (nota didattica).** L’autocorrelazione al lag $k$ è la correlazione tra l’errore della settimana $t$ e quello della settimana $t-k$. Se il modello ha catturato tutta la struttura, i residui sono rumore e l’ACF resta entro le bande di confidenza (circa $\pm 2/\sqrt{N}$). Una barra alta al lag 52, per esempio, direbbe che il modello ha dimenticato la stagionalità annuale.
+
+#### **11.5. Curve di training e validation, attribuzione delle feature, calibrazione**
+
+**Curve di training e validation.**
+
+- **Input**: la perdita di una rete a ogni epoca, **80 epoche**. **Output**: perdita di training e di validation; **miglior epoca 45**.
+- **Perché in IS4**: **convergenza, overfitting e generalizzazione**.
+- **Errore tipico**: leggere il **rumore della curva di validation come segnale**; **una sola esecuzione**.
+
+
+![](imgs/Pasted%20image%2020261123213021.png)
+
+**Attribuzione delle feature (illustrativa).**
+
+- **Input**: **5 variabili di processo** e il loro contributo a **una previsione** (valori illustrativi).
+- **Output**: barre di contributi positivi e negativi: vibrazione RMS **+0,54**, temperatura **+0,37**, pressione **−0,21**, ore di utilizzo **+0,17**, velocità **−0,09** (unità arbitrarie).
+- **Perché in IS4**: esamina le **ragioni apparenti** di una previsione e le **scorciatoie**.
+- **Errore tipico**: **non sono valori SHAP reali**: per un esperimento vero si applica un metodo di attribuzione a un modello addestrato.
+
+
+![](imgs/Pasted%20image%2020261123213031.png)
+
+**Diagramma di calibrazione.**
+
+- **Input**: confidenza prevista e frequenza osservata, un modello. **Output**: curva di calibrazione ed **ECE = 0,123**: il modello è **sovraconfidente**.
+- **Perché in IS4**: una **probabilità di guasto dichiarata** deve essere **utilizzabile nelle decisioni**.
+- **Errore tipico**: **confondere accuratezza e calibrazione**.
+
+
+![](imgs/Pasted%20image%2020261123213045.png)
+
+#### **11.6. Dashboard di drift, matrice di confusione e ROC, salienza sintetica**
+
+**Dashboard di drift e monitoraggio.**
+
+- **Input**: **180 giorni sintetici**, PSI e punteggio F1. **Output**: PSI e F1 **prima e dopo il cambiamento dei dati al giorno 105**.
+- **Perché in IS4**: l’AI **si degrada in produzione**: monitoraggio, allarmi, procedure di aggiornamento.
+- **Errore tipico**: guardare **solo l’accuratezza** e non gli input.
+
+
+![](imgs/Pasted%20image%2020261123213053.png)
+
+**Matrice di confusione e curva ROC.**
+
+| | Previsto: nessun guasto | Previsto: guasto |
+|---|---:|---:|
+| **vero: nessun guasto** | 769 | 31 |
+| **vero: guasto** | 29 | 171 |
+
+- **Input**: **1000 esempi sintetici** con classe vera e prevista. **Output**: conteggi per cella e curva ROC (**AUC 0,98**).
+- **Perché in IS4**: **quanti falsi allarmi e guasti mancati sono accettabili**.
+- **Errore tipico**: **scegliere la soglia senza i costi**.
+
+
+![](imgs/Pasted%20image%2020261123213102.png)
+
+> 💡 **Le metriche della matrice (nota didattica).** Accuratezza $(769+171)/1000=94\%$; recall $171/(171+29)=85{,}5\%$; precisione $171/(171+31)=84{,}7\%$; FPR $31/800=3{,}9\%$. Un AUC di 0,98 convive con 29 guasti mancati: l’AUC riassume tutte le soglie, la matrice ne fotografa una sola.
+
+**Mappa di salienza su un’immagine sintetica.**
+
+- **Input**: un’immagine sintetica $64\times 64$ con un **graffio**; una mappa di importanza $64\times 64$. **Output**: una **sovrapposizione** che mostra **dove guarda il modello** (tre pannelli: superficie, mappa di salienza, sovrapposizione).
+- **Perché in IS4**: nel **controllo qualità visivo** il modello deve guardare il **difetto**, non il **bordo** o la **luce**.
+- **Errore tipico**: è **illustrativa**: la mappa è **costruita a mano**, non estratta da una rete addestrata; fidarsi solo delle mappe che superano i **test di sanità** (*sanity checks*).
+
+
+![](imgs/Pasted%20image%2020261123213118.png)
+
+#### **11.7. Frontiera di Pareto logistica, coordinate parallele e curve di apprendimento**
+
+**Frontiera di Pareto di 120 piani logistici.**
+
+- **Input**: 120 piani con **costo** (k€/mese), **emissioni** (t CO₂/mese) e **livello di servizio** (%). **Output**: i piani **non dominati** (la linea); il **colore** è il terzo obiettivo.
+- **Perché in IS4**: il **formato naturale** per decisioni con **obiettivi in conflitto**.
+- **Errore tipico**: qui la frontiera usa **solo due obiettivi**; la **scelta finale va motivata**.
+
+
+![](imgs/Pasted%20image%2020261123213144.png)
+
+**Coordinate parallele e curve di apprendimento.**
+
+- **Input**: **40 esperimenti** con **3 iperparametri** ($\log_{10}$ del learning rate, profondità, $\log_2$ della dimensione del batch) e un punteggio di validation; **5 addestramenti con semi diversi**, 60 epoche.
+- **Output**: le **regioni efficaci** della configurazione; curve di training e validation.
+- **Perché in IS4**: regolare un modello in modo **documentabile**, con **più semi**.
+- **Errore tipico**: mostrare **un solo addestramento**; **pochi tentativi** rendono le regioni **inaffidabili**.
+
+
+![](imgs/Pasted%20image%2020261123213220.png)
+
+> 💡 **Come si leggono le coordinate parallele (nota didattica).** Ogni esperimento è una linea spezzata che attraversa assi verticali paralleli, uno per iperparametro più quello del punteggio. Colorando le linee per punteggio si vede quali combinazioni di valori portano ai risultati migliori: è un modo per rappresentare in 2D punti di uno spazio a 4 dimensioni senza proiettarli.
+
+#### **11.8. Galleria: penny, immagine, fusione di metodi, confidenza, strumenti**
+
+- **La moneta 3D scansionata**: i dispositivi di imaging 3D producono una **matrice di altezze**, un numero $z$ per pixel $(x,y)$ (il codice è nel §3.7).
+
+
+![](imgs/Pasted%20image%2020261123213246.png)
+
+- **La visualizzazione nel ML** serve per: dati di training, prestazioni del modello, interpretabilità e ispezione del modello, dati ad alta dimensionalità, didattica e comunicazione. Ora si rivede come gestire dati strutturati e immagini.
+- **L’immagine** (Bertin): il concetto chiave di Bertin, da cui la teoria prende il nome, è l’**immagine**. Semplificando, un’immagine è l’**unità percettiva fondamentale** di una visualizzazione. Una visualizzazione **ideale contiene una sola immagine**, per ottimizzarne l’«**efficienza**»: la velocità con cui l’osservatore estrae l’informazione. **Dove si sta perdendo energia? Basta un’occhiata.**
+
+![](imgs/Pasted%20image%2020261123213259.png)
+
+
+
+
+
+![](imgs/Pasted%20image%2020261123213337.png)
+
+- **Una fusione di metodi per le proprie applicazioni**: la visualizzazione dell’informazione è una fusione importante di **grafica**, **visualizzazione scientifica**, **gestione dei database** e **interazione uomo-macchina**. Nelle proprie applicazioni va usata per comunicare **risultati complessi come immagini comprensibili**, migliorando l’**HMI** (*Human-Machine Interface*, interfaccia uomo-macchina).
+
+
+![](imgs/Pasted%20image%2020261123213427.png)
+
+- **Confidenza**: la banda è l’**intervallo di confidenza al 95%**: **stretta dove la popolazione è uniforme**, **larga dove non lo è**.
+
+
+![](imgs/Pasted%20image%2020261123213446.png)
+
+- **Annotazioni, mappe di colore e limiti** (galleria MATLAB, it.mathworks.com/products/matlab/plot-gallery.html).
+
+
+![](imgs/Pasted%20image%2020261123213459.png)
+
+- **La struttura di un grafico molto semplice ma completo**: ogni elemento ha un **nome** e uno **scopo**: **figura**, **assi**, **titolo**, **etichette**, **tacche**, **griglia**, **legenda**, **marcatori**, **linee** e **bordi** (*spines*).
+
+
+![](imgs/Pasted%20image%2020261123213525.png)
+
+- **Grafico nel grafico, vettori in linee 3D** (galleria MATLAB).
+
+
+![](imgs/Pasted%20image%2020261123213548.png)
+
+- **Strumenti interattivi online: observablehq.com**, con la sua galleria di visualizzazioni interattive, e altri esempi di visualizzazione interattiva.
+
+![](imgs/Pasted%20image%2020261123213557.png)
+
+
+
+
+![](imgs/Pasted%20image%2020261123213606.png)
+
+> ⚠️ **Grafici belli, dati sbagliati.** La potenza grafica di grafici e diagrammi è **inutile** se i dati:
+> - **non sono rappresentativi**;
+> - sono **corrotti**;
+> - **non sono pre-elaborati correttamente**;
+> - sono **falsi** (per esempio per una data augmentation **eccessiva o sbagliata**).
+>
+> Prima del grafico vanno verificate le quattro domande: rappresentativi? non corrotti? pre-elaborati correttamente? genuini?
+
+![](imgs/Pasted%20image%2020261123213620.png)
+
+
+
+
+- **La libreria ggplot2 di R.** **R** è un linguaggio di programmazione e un ambiente software **libero** per il **calcolo statistico** e la **grafica**, sostenuto dalla R Foundation for Statistical Computing; ggplot2 implementa la «grammatica della grafica» (dati, estetiche, geometrie, livelli).
+
+
+![](imgs/Pasted%20image%2020261123213705.png)
+
+#### **11.9. Grafici 3D con il codice MATLAB**
+
+##### **11.9.1. Istogramma 3D a barre**
+
+![](imgs/Pasted%20image%2020261123213733.png)
+
 ```matlab
 histogram2(rideData.Duration, rideData.birth_date, 'BinWidth',[2 2])
 xlabel('Length of Ride')
@@ -1523,6 +2022,8 @@ view(17,30)
 
 <!-- SOURCE_VISUAL id="IS11-V102" source="L11-web-v24.pdf" page="142" type="grafico" description="Superficie peaks con il massimo marcato da una stella verde" reason="Superficie e punto visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123213818.png)
 
 ```matlab
 Z = peaks;                              % superficie curva e liscia
@@ -1546,6 +2047,8 @@ hold off;
 <!-- SOURCE_VISUAL id="IS11-V103" source="L11-web-v24.pdf" page="144" type="grafico" description="Superficie z = x exp(-x^2-y^2) con i vettori normali in ogni punto della griglia" reason="Superficie e frecce visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123213902.png)
+
 ```matlab
 [x,y] = meshgrid(-2:.2:2, -1:.15:1);
 z = x .* exp(-x.^2 - y.^2);
@@ -1563,6 +2066,8 @@ Si disegnano i **vettori normali** di $z=x\,e^{-x^2-y^2}$.
 
 <!-- SOURCE_VISUAL id="IS11-V104" source="L11-web-v24.pdf" page="146" type="grafico" description="Superficie z = x exp(-x^2-y^2) colorata con la pendenza e barra dei colori" reason="Colorazione visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123213923.png)
 
 ```matlab
 [x,y] = meshgrid([-2:.1:2]);
@@ -1583,6 +2088,8 @@ Si mappa con una **tavolozza adatta** il **gradiente** di $z=x\,e^{-x^2-y^2}$.
 <!-- SOURCE_VISUAL id="IS11-V105" source="L11-web-v24.pdf" page="148" type="grafico" description="Superficie sin(r)/r illuminata con luce e riflessi Phong" reason="Effetto dell'illuminazione visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123214019.png)
+
 ```matlab
 ezsurf('sin(sqrt(x^2+y^2))/sqrt(x^2+y^2)',[-6*pi,6*pi])
 view(0,75); shading interp; lightangle(-45,30)
@@ -1601,6 +2108,8 @@ set(findobj(gca,'type','surface'), ...
 
 <!-- SOURCE_VISUAL id="IS11-V106" source="L11-web-v24.pdf" page="150" type="grafico" description="Tre fette ortogonali del volume flow colorate per velocità, in prospettiva con luce" reason="Fette del volume visibili solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123214055.png)
 
 ```matlab
 [x,y,z,v] = flow;                                   % dati di volume
@@ -1628,6 +2137,8 @@ patch(isocaps(D,5),'FaceColor','interp','EdgeColor','none');
 view(45,30); daspect([1,1,.4]); lightangle(45,30); lighting phong
 ```
 
+![](imgs/Pasted%20image%2020261123214109.png)
+
 | Riga | Ruolo |
 |---|---|
 | `squeeze(D)` | elimina la dimensione unitaria: `D` diventa un volume $128\times 128\times 27$ voxel |
@@ -1650,10 +2161,14 @@ view(45,30); daspect([1,1,.4]); lightangle(45,30); lighting phong
 <!-- SOURCE_VISUAL id="IS11-V107" source="L11-web-v24.pdf" page="153" type="grafico" description="Grafo Ball Mapper delle 397 immagini di test in 26 nodi colorati per tasso di errore" reason="Grafo visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261123214129.png)
+
 **La figura originale di Sankey**, con le sue molte biforcazioni, chiude l’appendice.
 
 <!-- SOURCE_VISUAL id="IS11-V108" source="L11-web-v24.pdf" page="154" type="figura" description="La figura originale di Sankey con molte biforcazioni" reason="Figura storica visibile solo nell'immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261123214142.png)
 
 > 💡 **Chi era Sankey (nota didattica).** Il diagramma prende il nome dal capitano irlandese Matthew H. P. R. Sankey, che nel 1898 lo usò per rappresentare il bilancio energetico di una macchina a vapore: la larghezza delle frecce era proporzionale ai flussi di energia, e si vedeva a colpo d’occhio dove l’energia andava perduta.
 

@@ -17,6 +17,8 @@ La «rivoluzione agentica» cambia l’unità di lavoro: non più un prompt che 
 7. **Retrieval-Augmented Generation**;
 8. punti principali.
 
+![](imgs/Pasted%20image%2020261124015149.png)
+
 #### **0.1. La rivoluzione agentica**
 
 **Da un sistema che risponde a un prompt a un sistema che completa un compito sotto controllo.**
@@ -64,6 +66,8 @@ La struttura: **obiettivo e contesto** → **controllore dell’agente** (modell
 <!-- SOURCE_VISUAL id="IS15-V01" source="L15-web.pdf" page="6" type="schema" description="Struttura dell'agente: obiettivo e contesto, controllore, chiamata a strumento, strumenti autorizzati, osservazione" reason="Schema del ciclo visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124015427.png)
+
 > 📌 **Il feedback guida le azioni, non aggiorna i pesi.** L’osservazione di un risultato cambia la **prossima azione** dell’agente, non il modello: i pesi restano quelli dell’addestramento. È la differenza tra il ciclo agentico e l’apprendimento per rinforzo della Lezione 3.
 
 #### **1.2. Esempi di agenti**
@@ -78,6 +82,9 @@ La struttura: **obiettivo e contesto** → **controllore dell’agente** (modell
 
 <!-- SOURCE_VISUAL id="IS15-V02" source="L15-web.pdf" page="8" type="figura" description="Esempi di agenti personali self-hosted e di agenti fisici (droni, robot)" reason="Immagini visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124015836.png)
+![](imgs/Pasted%20image%2020261124015900.png)
 
 > 💡 **Vibe coding (nota didattica).** È l’espressione informale per lo sviluppo in cui si descrive a parole che cosa si vuole e si lascia che un agente scriva il codice, accettandolo senza leggerlo riga per riga. Funziona per prototipi; in un progetto reale il codice prodotto va comunque letto, testato e versionato come qualunque altro (§3.12).
 
@@ -102,6 +109,8 @@ Da una parte ci sono i **modelli** (linguistico, visivo, di codice), dall’altr
 <!-- SOURCE_VISUAL id="IS15-V03" source="L15-web.pdf" page="10" type="schema" description="L'agente tra i modelli (linguaggio, visione, codice) e le risorse (documenti, immagini, strumenti)" reason="Schema visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124020238.png)
+
 > 📌 **Il modello genera previsioni; l’agente orchestra decisioni, strumenti, permessi e feedback.**
 
 **Claude Code e Codex non sono «i modelli».** Sono **applicazioni agentiche** costruite attorno a uno o più LLM.
@@ -111,8 +120,13 @@ Da una parte ci sono i **modelli** (linguistico, visivo, di codice), dall’altr
 
 **Architettura dell’agente.** **Un modello è un componente; un agente è il sistema controllato costruito attorno a esso.** Al centro c’è il modello (LLM o multimodale); attorno, l’**interfaccia utente**, gli **strumenti e le API**, il **contesto e la memoria**, i **permessi e i controlli**; il ciclo è *osservare i risultati → validare → passo successivo o arresto*.
 
+![](imgs/Pasted%20image%2020261124020724.png)
+
+
 <!-- SOURCE_VISUAL id="IS15-V04" source="L15-web.pdf" page="12" type="schema" description="Architettura dell'agente: modello al centro con interfaccia, strumenti, contesto e memoria, permessi e controlli" reason="Schema visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124020738.png)
 
 > 💡 **Perché la distinzione conta (nota didattica).** Lo stesso modello può diventare un agente sicuro o pericoloso a seconda dei **permessi** e degli **strumenti** che gli si danno. Valutare un sistema agentico significa quindi valutare anche che cosa può leggere, modificare o inviare, non solo quanto è bravo il modello a rispondere.
 
@@ -124,6 +138,8 @@ Un **workflow** segue una **sequenza predefinita**: il suo percorso è più faci
 
 <!-- SOURCE_VISUAL id="IS15-V05" source="L15-web.pdf" page="13" type="figura" description="Workflow con sequenza predefinita contro agente che sceglie le azioni dalle osservazioni" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124020828.png)
 
 | **Quando un agente?** — il percorso **non si può predefinire** | **Quando un workflow?** — il percorso di esecuzione **è noto** |
 |---|---|
@@ -145,11 +161,16 @@ Un **workflow** segue una **sequenza predefinita**: il suo percorso è più faci
 - **CLI** significa ***Command Line Interface***, interfaccia a riga di comando: un’interfaccia **testuale** in cui l’utente interagisce con il software **digitando comandi** invece di cliccare pulsanti.
 - Che l’interfaccia sia web o CLI, l’**idea agentica è la stessa**: l’utente dà un **obiettivo in linguaggio naturale** e il sistema lo **traduce in azioni, chiamate a strumenti o comandi**.
 
+![](imgs/Pasted%20image%2020261124021434.png)
+
+
 <!-- SOURCE_VISUAL id="IS15-V06" source="L15-web.pdf" page="16" type="figura" description="Interfaccia web o CLI davanti al controllore dell'agente e agli strumenti permessi, con chat web che spiega un comando" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 <!-- SOURCE_VISUAL id="IS15-V07" source="L15-web.pdf" page="17" type="schermata" description="Interfaccia web e interfaccia a riga di comando di un agente" reason="Schermate visibili solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124021451.png)
 
 #### **1.7. L’idea di base**
 
@@ -189,6 +210,8 @@ Lo schema è: **percezione** dall’ambiente → **agente / LLM** → **azione**
 <!-- SOURCE_VISUAL id="IS15-V09" source="L15-web.pdf" page="20" type="schema" description="Ciclo percezione-agente-azione con l'ambiente, come per un robot esploratore" reason="Ciclo visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124021703.png)
+
 **Gli agenti LLM: il ciclo agentico minimo.**
 
 1. Una **persona definisce** un compito e i vincoli.
@@ -200,6 +223,8 @@ Lo schema è: **percezione** dall’ambiente → **agente / LLM** → **azione**
 
 <!-- SOURCE_VISUAL id="IS15-V10" source="L15-web.pdf" page="21" type="schema" description="Ciclo agentico minimo: obiettivo umano, decisione del modello, azione con strumento, osservazione, STOP o approvazione" reason="Ciclo visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124021724.png)
 
 > 💡 **Il ciclo in pseudocodice (nota didattica).**
 > ```text
@@ -242,6 +267,8 @@ Privacy, riservatezza e sovranità dei dati definiscono i **confini** di un agen
 
 I **segreti industriali** e i **dati aziendali sensibili** (R&S, dati dei clienti, brevetti in corso di deposito, …) richiedono controlli più forti dei prompt ordinari: i sistemi agentici possono **leggere file, chiamare strumenti, interrogare database o eseguire comandi**, quindi devono essere vincolati da **permessi**, **log**, **elaborazione locale** quando serve e **approvazione umana** per le azioni rischiose.
 
+![](imgs/Pasted%20image%2020261124021812.png)
+
 #### **2.2. La sovranità dei dati**
 
 La sovranità dei dati influenza **come e dove** un sistema di AI può elaborare le informazioni.
@@ -254,6 +281,8 @@ La sovranità dei dati influenza **come e dove** un sistema di AI può elaborare
 
 <!-- SOURCE_VISUAL id="IS15-V11" source="L15-web.pdf" page="25" type="figura" description="Sovranità dei dati: posizione, giurisdizione e controllo" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124022610.png)
 
 #### **2.3. GDPR: tre vincoli per il progetto di un agente**
 
@@ -304,6 +333,36 @@ Il **Regolamento (UE) 2026/1744** è in vigore **dal 27 luglio 2026** e **modifi
 
 > 📌 **Regola di architettura.** Mantenere una **checklist di conformità datata**, non un’ipotesi legale codificata nel sistema. Le date si riferiscono a disposizioni specifiche; regole transitorie e settoriali possono differire (fonte: Reg. UE 2026/1744; AI Act, art. 113 consolidato; cronologia dell’AI Act Service Desk). Panoramica didattica, non consulenza legale.
 
+> 📌 **La posizione del data center non coincide con la giurisdizione sul fornitore.** È una panoramica didattica, non una consulenza legale: il caso concreto va verificato con l’ufficio legale e il DPO (*Data Protection Officer*, responsabile della protezione dei dati).
+
+> 💡 **Un esempio noto (nota didattica).** Il CLOUD Act statunitense (2018) permette alle autorità USA di chiedere a un fornitore americano i dati che controlla, anche se conservati all’estero. Un data center a Francoforte gestito da una società controllata da una capogruppo statunitense resta quindi esposto a questo tipo di richieste: è il conflitto di leggi che l’art. 48 del GDPR affronta.
+
+#### **2.5. Prima la sovranità dei dati**
+
+- Gli agenti di AI possono **spostare dati** attraverso prompt, file, recupero, strumenti, log e memoria.
+- Per le organizzazioni UE, **GDPR e AI Act** fanno di posizione, accesso e supervisione dei dati dei **vincoli di progetto**.
+
+**Domanda tecnica**: dove vengono **memorizzati, elaborati, trasferiti, registrati e conservati** i dati personali? **Esempio**: un agente di manutenzione può esporre **note dei lavoratori**, **log delle macchine**, **dati dei fornitori** o **rapporti di incidente**.
+
+> ⚠️ **L’adeguatezza degli USA è condizionata, non generale.** Copre le **organizzazioni certificate** nell’ambito dell’**EU-U.S. Data Privacy Framework**, non qualunque destinatario negli USA. Il quadro è stato confermato dal **Tribunale dell’UE il 3 settembre 2025**; è **pendente un ricorso** davanti alla Corte di giustizia (fonte: Commissione europea, verifica del 20 ottobre 2026).
+
+La sovranità viene introdotta **presto** perché **vincola l’architettura prima** di scegliere RAG, strumenti o un ciclo agentico.
+
+#### **2.6. AI Act: aggiornamento normativo 2026**
+
+Il **Regolamento (UE) 2026/1744** è in vigore **dal 27 luglio 2026** e **modifica il calendario di applicazione** dell’AI Act.
+
+| Data                | Disposizioni applicabili                                                                                                                  |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **2 febbraio 2025** | prime pratiche vietate e disposizioni generali (compresa l’**alfabetizzazione sull’AI**)                                                  |
+| **2 agosto 2025**   | obblighi per i **modelli di AI per finalità generali** e alcune disposizioni di governance                                                |
+| **2 agosto 2026**   | data di applicazione generale; **obblighi di trasparenza** e altre regole applicabili                                                     |
+| **2 dicembre 2026** | nuovi divieti sulla generazione di immagini intime non consensuali e di materiale pedopornografico; transizione specifica dell’art. 50(2) |
+| **2 dicembre 2027** | requisiti del capo III per i sistemi **ad alto rischio dell’Allegato III** (art. 6(2))                                                    |
+| **2 agosto 2028**   | requisiti del capo III per i sistemi ad alto rischio che sono **prodotti regolamentati dell’Allegato I** (art. 6(1))                      |
+
+> 📌 **Regola di architettura.** Mantenere una **checklist di conformità datata**, non un’ipotesi legale codificata nel sistema. Le date si riferiscono a disposizioni specifiche; regole transitorie e settoriali possono differire (fonte: Reg. UE 2026/1744; AI Act, art. 113 consolidato; cronologia dell’AI Act Service Desk). Panoramica didattica, non consulenza legale.
+
 **Aggiornamento normativo (20 novembre 2026).** Il Regolamento (UE) 2026/1744, in vigore dal 27 luglio 2026, ha modificato il calendario di applicazione dell’AI Act. Le scadenze dipendono dalle disposizioni e dalle categorie di sistema: tra le tappe indicate figurano il 2 dicembre 2026 per specifici divieti e transizioni, il 2 dicembre 2027 per requisiti di sistemi ad alto rischio dell’Allegato III e il 2 agosto 2028 per quelli relativi a prodotti regolamentati dell’Allegato I. Le regole transitorie e settoriali possono differire; occorre mantenere una verifica normativa datata. [Testo ufficiale del Regolamento 2026/1744](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32026R1744).
 
 #### **2.7. Quali dati richiedono una cura particolare?**
@@ -316,6 +375,8 @@ Il **Regolamento (UE) 2026/1744** è in vigore **dal 27 luglio 2026** e **modifi
 
 <!-- SOURCE_VISUAL id="IS15-V13" source="L15-web.pdf" page="30" type="figura" description="Dati che richiedono una cura particolare: personali, categorie particolari, usi ad alto rischio" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124024135.png)
 
 #### **2.8. Cloud sovrano: due esempi di implementazione**
 
@@ -353,6 +414,8 @@ La **linea di confine dei dati** passa tra il gateway e il cloud.
 <!-- SOURCE_VISUAL id="IS15-V14" source="L15-web.pdf" page="33" type="schema" description="Gateway di privacy locale: pseudonimizzazione, elaborazione cloud del testo mascherato e ripristino locale" reason="Schema del flusso con confine dei dati visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124024308.png)
+
 > ⚠️ **Token e tabelle di corrispondenza non lasciano mai l’ambiente fidato.** Il testo pseudonimizzato **può restare un dato personale**: i rischi residui di divulgazione vanno validati prima di qualunque trasferimento.
 
 #### **2.11. Anonimizzazione e pseudonimizzazione, in pratica**
@@ -386,6 +449,8 @@ Per i dati industriali **altamente riservati**, l’**elaborazione dei documenti
 <!-- SOURCE_VISUAL id="IS15-V15" source="L15-web.pdf" page="36" type="schema" description="Flusso interamente locale: segreti aziendali, modello locale + RAG, storage on-premise, accesso negato al cloud" reason="Schema del perimetro visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124024354.png)
+
 L’architettura segue gli **obblighi contrattuali** e una **valutazione del rischio documentata**; lo schema mostra una politica **deliberatamente solo locale**.
 
 #### **2.14. Alcuni consigli aggiuntivi**
@@ -396,6 +461,8 @@ L’architettura segue gli **obblighi contrattuali** e una **valutazione del ris
 
 <!-- SOURCE_VISUAL id="IS15-V16" source="L15-web.pdf" page="37" type="figura" description="Consigli: niente account gratuiti, controllare le impostazioni di privacy, non improvvisare" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124024509.png)
 
 > 📌 **La distinzione reale** è tra elaborazione **approvata** e **non approvata**, non tra gratuito e a pagamento. Vanno verificati contratti sui dati, uso per l’addestramento, conservazione, trasferimenti e politica dell’organizzazione.
 
@@ -414,6 +481,8 @@ L’architettura segue gli **obblighi contrattuali** e una **valutazione del ris
 
 <!-- SOURCE_VISUAL id="IS15-V17" source="L15-web.pdf" page="39" type="figura" description="Il prompting nel 2023 e dal 2026 in poi" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124024559.png)
 
 #### **3.2. L’interazione moderna con l’AI**
 
@@ -447,6 +516,8 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 <!-- SOURCE_VISUAL id="IS15-V18" source="L15-web.pdf" page="43" type="figura" description="Prompt di sistema strutturati con ruolo, obiettivi, vincoli e strumenti" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124024911.png)
+
 **Dal fare domande migliori al progettare il contesto di lavoro di un agente.** Un prompt è **solo una parte** di un sistema agentico. Per un agente bisogna progettare: **istruzioni**, **contesto**, **strumenti**, **permessi**, **memoria**, **formato di uscita**, **regole di validazione**, **comportamento in caso di fallimento**.
 
 > 📌 **L’obiettivo non è ottenere una bella risposta, ma un comportamento controllato, riproducibile e verificabile.** Nei chatbot semplici il prompt engineering significa scrivere un’istruzione migliore. Nei sistemi agentici il prompt diventa parte di un **contratto d’interfaccia** più ampio: l’agente può leggere file, chiamare strumenti, aggiornare uscite o avviare workflow. Per questo si progetta non solo che cosa si chiede, ma anche **che cosa l’agente può vedere, ricordare, usare e restituire**.
@@ -461,6 +532,8 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 
 <!-- SOURCE_VISUAL id="IS15-V20" source="L15-web.pdf" page="45" type="figura" description="Lo schema ReAct: ragionamento, azione, osservazione in alternanza" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124025030.png)
 
 > 💡 **Una traccia ReAct (nota didattica).**
 > ```text
@@ -492,6 +565,8 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 <!-- SOURCE_VISUAL id="IS15-V21" source="L15-web.pdf" page="47" type="grafico" description="Curva schematica a U dell'accuratezza in funzione della posizione dell'informazione nel contesto" reason="Curva visibile solo nel grafico" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124025139.png)
+
 > ⚠️ **La curva è un’illustrazione schematica, non dati misurati.** Lo studio misura l’**accuratezza della risposta in funzione della posizione del passaggio rilevante**, non l’attenzione. È un’**euristica pratica**, non una curva universale né un calo fisso del 30%: va valutata con i propri compiti a contesto lungo (fonte: Liu et al., «*Lost in the Middle: How Language Models Use Long Contexts*», TACL 2024).
 
 #### **3.8. Fondamentale #3: tenerlo compatto**
@@ -503,6 +578,8 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 
 <!-- SOURCE_VISUAL id="IS15-V22" source="L15-web.pdf" page="48" type="figura" description="Tenere il prompt di compito compatto: 150-300 parole" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124025338.png)
 
 **Il contesto è un budget, non un cestino.** Il **context rot** (degrado del contesto): input più lunghi e token di distrazione possono **ridurre la qualità di recupero e di decisione** su alcuni modelli e compiti.
 
@@ -571,6 +648,9 @@ I modelli di ragionamento avanzati sono **già ottimizzati per scomporre i probl
 
 **Buona pratica: usare i tag!**
 
+![](imgs/Pasted%20image%2020261124025629.png)
+
+
 <!-- SOURCE_VISUAL id="IS15-V23" source="L15-web.pdf" page="53" type="figura" description="Prompt strutturato con tag in stile XML" reason="Esempio presente solo come immagine" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
@@ -599,6 +679,8 @@ I modelli di ragionamento avanzati sono **già ottimizzati per scomporre i probl
 <!-- SOURCE_VISUAL id="IS15-V24" source="L15-web.pdf" page="54" type="figura" description="Architettura dei vincoli: auto-verifica, ancoraggio alle fonti, rifiuto esplicito" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124025718.png)
+
 ##### **3.11.2. Fondamentale #7: scomporre prima di concludere**
 
 Gli agenti affidabili passano **dalle affermazioni alle evidenze alla risposta**, non direttamente dal prompt alla conclusione. Si aggiunge questo passo al progetto.
@@ -624,6 +706,8 @@ Sono tendenze, non garanzie per classe di modello: si confronta l’accuratezza 
 <!-- SOURCE_VISUAL id="IS15-V26" source="L15-web.pdf" page="56" type="figura" description="Few-shot che aiuta o danneggia la generalizzazione" reason="Figura visibile solo nella slide" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124025841.png)
+
 > 💡 **Lo stesso problema dei dataset (nota didattica).** Pochi esempi tutti simili portano il modello a imitare dettagli irrilevanti, come un insieme di esempi che contiene solo cani gialli (Lezione 7): gli esempi di un prompt sono un piccolo dataset, e valgono le stesse regole di copertura e varietà.
 
 ##### **3.11.4. Fondamentale #9: i prompt agentici aggiungono quattro livelli**
@@ -632,6 +716,8 @@ Nei sistemi agentici un buon prompting **non riguarda solo la formulazione della
 
 <!-- SOURCE_VISUAL id="IS15-V27" source="L15-web.pdf" page="57" type="figura" description="I quattro livelli aggiuntivi di un prompt agentico" reason="I quattro livelli sono visibili solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124025906.png)
 
 ##### **3.11.5. Fondamentale #10: trattare i prompt come codice di produzione**
 
@@ -681,6 +767,8 @@ Un’istruzione nascosta in un documento **può aggirare un avvertimento testual
 
 <!-- SOURCE_VISUAL id="IS15-V28" source="L15-web.pdf" page="61" type="schema" description="Rule of Two: tre cerchi (input non fidati, dati e sistemi sensibili, azioni esterne) da non combinare tutti" reason="Diagramma a tre insiemi visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124030313.png)
 
 > ⚠️ **Un rapporto di manutenzione scansionato non deve autorizzare un comando d’impianto.** La Rule of Two **riduce** i rischi di prompt injection ad alto impatto, ma **non garantisce la sicurezza**: privilegio minimo, validazione e audit restano necessari indipendentemente dai prompt (fonti: Meta, «*Agents Rule of Two*», 31 ottobre 2025; Simon Willison, «*The lethal trifecta*», 2025).
 
@@ -770,6 +858,8 @@ Servono **contesto documentale o strumenti di recupero**: il **pre-addestramento
 <!-- SOURCE_VISUAL id="IS15-V29" source="L15-web.pdf" page="69" type="schema" description="Pipeline RAG: indicizzazione (caricamento, divisione, embedding, memorizzazione) e recupero-generazione (domanda, top-K chunk, LLM)" reason="Schema della pipeline visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124030622.png)
+
 > ⚠️ **Il recupero non è verifica**: una risposta può comunque **fraintendere le sue fonti**.
 
 #### **4.4. Prompt, RAG, strumenti o agenti?**
@@ -798,6 +888,8 @@ Servono **contesto documentale o strumenti di recupero**: il **pre-addestramento
 4. **embedding + indicizzazione lessicale**: calcolare gli embedding e costruire gli **indici di ricerca**;
 5. **regole** di aggiornamento, conservazione e accesso → **indici ricercabili** (consapevoli delle ACL).
 
+![](imgs/Pasted%20image%2020261124030943.png)
+
 > 📌 **La qualità della RAG comincia prima che l’utente faccia una domanda.** I **permessi a livello di documento** vanno applicati **al momento del recupero**, non delegati al prompt dell’LLM.
 
 #### **4.6. Il chunking**
@@ -806,6 +898,8 @@ Il **chunking** divide i documenti in **passaggi recuperabili** senza perdere il
 
 <!-- SOURCE_VISUAL id="IS15-V30" source="L15-web.pdf" page="72" type="schema" description="Un testo diviso in tre chunk con sovrapposizione tra chunk consecutivi" reason="Disposizione dei chunk e delle sovrapposizioni visibile solo nello schema" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124031022.png)
 
 - **abbastanza piccolo** per un **recupero preciso**;
 - **abbastanza grande** per **preservare il significato**;
@@ -831,6 +925,8 @@ dove $e$ è il **modello di embedding**. **Input**: il testo del chunk. **Output
 
 <!-- SOURCE_VISUAL id="IS15-V31" source="L15-web.pdf" page="73" type="schema" description="Domanda e chunk trasformati dal modello di embedding in vettori dello stesso spazio, similarità coseno e top-k" reason="Schema visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124031159.png)
 
 > 💡 **In formula (nota didattica).** Con $q$ l’embedding della domanda e $c_j$ quelli dei chunk, si recuperano i $k$ chunk con similarità coseno più alta, purché sopra una soglia $\tau$:
 > $$\mathcal{R}_k(q)=\operatorname{top\text{-}k}_j\ \{\cos(q,c_j)\ :\ \cos(q,c_j)\ge\tau\}.$$
@@ -870,6 +966,8 @@ La domanda «*alarm TS-999 vibration*» viene inviata a due indici:
 | **BM25** (lessicale) | #17 (11,12) | #31 (3,26) | #08 (1,60) |
 | **coseno** (semantica) | #04 (0,83) | #17 (0,78) | #08 (0,74) |
 
+![](imgs/Pasted%20image%2020261124031350.png)
+
 La **fusione dei ranking** (RRF, *Reciprocal Rank Fusion*) combina le due liste usando **i ranghi**, non i punteggi:
 
 $$\text{RRF}(d)=\sum_{\text{liste}}\frac{1}{60+\text{rango}(d)},$$
@@ -897,6 +995,8 @@ Il database vettoriale restituisce i **top-N chunk**; un **modello di reranking*
 <!-- SOURCE_VISUAL id="IS15-V33" source="L15-web.pdf" page="76" type="schema" description="Top-N chunk dal database vettoriale, modello di reranking, top-k all'LLM e risposta" reason="Schema del riordino visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124031405.png)
+
 #### **4.11. Il reranking**
 
 > 📌 **Reranking.** È un **modello di secondo stadio** che **ri-assegna un punteggio ai chunk candidati leggendo insieme domanda e chunk**, e li restituisce **in un nuovo ordine**.
@@ -917,6 +1017,8 @@ Il modello (*cross-encoder*) riceve $N$ coppie (domanda, chunk):
 <!-- SOURCE_VISUAL id="IS15-V34" source="L15-web.pdf" page="77" type="schema" description="Reranking con cross-encoder: lista fusa prima e dopo, con i punteggi s e gli spostamenti" reason="Schema del reranker e delle liste visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
+![](imgs/Pasted%20image%2020261124031421.png)
+
 $N$ = 20–100 chunk; punteggi spesso in $[0,1]$; i **top $k=5$** vanno all’LLM. Il chunk **#31 sale** (nomina *TS-999*); il chunk **#04 è in tema ma non risponde** alla domanda. Punteggi illustrativi. **Compromesso**: **precisione migliore**, ma **una chiamata al modello per coppia** (latenza, calcolo).
 
 > 💡 **Bi-encoder contro cross-encoder (nota didattica).** Il recupero semantico usa un *bi-encoder*: domanda e chunk sono codificati **separatamente**, e gli embedding dei chunk si precalcolano una volta. Il cross-encoder legge domanda e chunk **insieme**, con l’attenzione che collega direttamente le loro parole: capisce meglio la pertinenza, ma non si può precalcolare nulla. Per questo lo si usa solo sui pochi candidati del primo stadio.
@@ -936,6 +1038,8 @@ $N$ = 20–100 chunk; punteggi spesso in $[0,1]$; i **top $k=5$** vanno all’LL
 
 <!-- SOURCE_VISUAL id="IS15-V35" source="L15-web.pdf" page="78" type="grafico" description="Barre di failure@20 per baseline, contestuale, ibrido e reranked (5.7%, 3.7%, 2.9%, 1.9%)" reason="Grafico a barre visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124031455.png)
 
 **Come leggere il grafico.** **In**: domande su più corpora. **Out**: il **failure@20** di ogni configurazione. **Perché top 20?** I 20 chunk migliori sono ciò che l’LLM riceve. Anthropic ha provato 5, 10 e 20 chunk e ha trovato 20 il valore più efficace; più chunk aggiungono anche **rumore**, quindi va provato il proprio $k$.
 
@@ -971,6 +1075,8 @@ $$\text{failure@20}=1-\text{Recall@20},\qquad \text{Recall@20}=\frac{\text{chunk
 
 <!-- SOURCE_VISUAL id="IS15-V36" source="L15-web.pdf" page="80" type="schema" description="I quattro stadi della pipeline RAG con il modo di guasto e l'etichetta di ciascuno" reason="Schema della pipeline con i guasti visibile solo nella figura" -->
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+![](imgs/Pasted%20image%2020261124031538.png)
 
 **Diagnosi, in breve.** **Input**: domanda, fonte attesa, ID dei chunk recuperati, risposta finale. **Output**: **un’etichetta d’errore per ogni risposta sbagliata**, così la valutazione mostra **quale stadio correggere**.
 
@@ -1094,6 +1200,8 @@ Per ogni caso: obiettivo operativo, estratto del prompt, flusso, perché un chat
 - **Perché un chatbot solo testuale non basta**: una risposta in chat non può da sola garantire l’**esecuzione in batch**, file con l’**impaginazione conservata**, **terminologia controllata** e un’**approvazione tracciabile** su centinaia di documenti.
 - **Accettazione**: 300/300 file; nessuna avvertenza di sicurezza mancante; concordanza dei termini; log di QA firmato.
 
+![](imgs/Pasted%20image%2020261124032112.png)
+
 #### **6.2. Caso 2: riconciliare ordini, spedizioni e fatture**
 
 - **Obiettivo**: trovare le **discrepanze** tra **2000 ordini di acquisto**, avvisi di spedizione e fatture dei fornitori.
@@ -1103,6 +1211,8 @@ Per ogni caso: obiettivo operativo, estratto del prompt, flusso, perché un chat
 - **Accettazione**: elementi abbinati / totale; tasso di false discrepanze; valore non abbinato (EUR); tempo per caso.
 
 > 💡 **Le sigle (nota didattica).** ERP (*Enterprise Resource Planning*) è il gestionale aziendale; WMS (*Warehouse Management System*) il sistema di gestione del magazzino; SKU (*Stock Keeping Unit*) il codice univoco di un articolo.
+
+![](imgs/Pasted%20image%2020261124032124.png)
 
 #### **6.3. Caso 3: copilota di manutenzione che apre un ordine di lavoro reale**
 
@@ -1114,6 +1224,8 @@ Per ogni caso: obiettivo operativo, estratto del prompt, flusso, perché un chat
 
 > 💡 **CMMS e PLC (nota didattica).** CMMS (*Computerized Maintenance Management System*) è il software che gestisce gli ordini di lavoro di manutenzione; PLC (*Programmable Logic Controller*) è il controllore che comanda direttamente la macchina. Il prompt permette di scrivere nel primo (con approvazione) e vieta di toccare il secondo: è il livello «critico / irreversibile» della tabella dei permessi (§1.8).
 
+![](imgs/Pasted%20image%2020261124032142.png)
+
 #### **6.4. Caso 4: agente SOC che indaga un incidente di sicurezza**
 
 - **Obiettivo**: correlare **10 000 eventi/ora** tra log di identità, endpoint e rete; inoltrare le probabili compromissioni.
@@ -1124,6 +1236,8 @@ Per ogni caso: obiettivo operativo, estratto del prompt, flusso, perché un chat
 
 > 💡 **Le sigle (nota didattica).** SOC (*Security Operations Center*) è il centro operativo di sicurezza; SIEM (*Security Information and Event Management*) il sistema che raccoglie e correla i log di sicurezza.
 
+![](imgs/Pasted%20image%2020261124032151.png)
+
 #### **6.5. Caso 5: le immagini da drone diventano una mappa geografica di ispezione**
 
 - **Obiettivo**: elaborare **5000 immagini da drone** per mappare lo **stress della vegetazione** o le **infrastrutture danneggiate**.
@@ -1131,6 +1245,8 @@ Per ogni caso: obiettivo operativo, estratto del prompt, flusso, perché un chat
 - **Flusso**: 5000 foto + GPS / IMU → georeferenziazione + rimozione dei duplicati → modello di rilevamento / segmentazione → revisione dei rilevamenti incerti → poligoni GIS + mappa dei cambiamenti.
 - **Perché un chatbot non basta**: è una **pipeline geospaziale riproducibile**: elaborazione delle immagini, **allineamento spaziale**, generazione dei poligoni, **uscite versionate** e **QA umano sistematico**.
 - **Accettazione**: copertura dell’area (%); IoU dei poligoni; falsi allarmi / km²; validazione dell’esportazione GIS.
+
+![](imgs/Pasted%20image%2020261124032203.png)
 
 #### **6.6. Caso 6: contratti sensibili elaborati con un filtro di privacy locale**
 
@@ -1140,6 +1256,8 @@ Per ogni caso: obiettivo operativo, estratto del prompt, flusso, perché un chat
 - **Perché un chatbot non basta**: un prompt di chat non può **imporre la geografia**, le **restrizioni sui fornitori**, l’**archiviazione privata delle corrispondenze** o la **prevenzione della perdita di dati** senza controlli di implementazione fidati.
 - **Accettazione**: **trasferimenti non autorizzati = 0**; recall delle entità riservate; decisioni di politica tracciabili.
 
+![](imgs/Pasted%20image%2020261124032212.png)
+
 #### **6.7. Caso 7: aggiornare 40 repository e inviare pull request verificate**
 
 - **Obiettivo**: migrare un’**API deprecata** su **40 repository Python**, controllando ciascuno **in modo indipendente**.
@@ -1147,6 +1265,8 @@ Per ogni caso: obiettivo operativo, estratto del prompt, flusso, perché un chat
 - **Flusso**: 40 repository versionati → trova i punti di chiamata + crea i branch → patch → esegui test e linter (se falliscono: riprova) → gate di CI: passa ed è riproducibile? → PR + diff + evidenze dei test → **revisione obbligatoria prima del merge**.
 - **Perché un chatbot non basta**: una migrazione completa richiede **accesso ai repository**, **esecuzione del codice in sandbox**, **riparazione iterativa**, **evidenze di CI** e **modifiche revisionabili**, non solo un frammento di codice suggerito.
 - **Accettazione**: CI superata / 40 repository; **0 merge non revisionati**; copertura dei test; tempo di revisione umana.
+
+![](imgs/Pasted%20image%2020261124032229.png)
 
 #### **6.8. Appendice RAG – Caso 1: assistenza alla manutenzione**
 
