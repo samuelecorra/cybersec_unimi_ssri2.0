@@ -15,8 +15,7 @@ La lezione si apre con un problema: **perché più feature possono far male?** L
 - **il metodo generale**: reti multistrato e backpropagation;
 - **la pratica**: una prima rete in MATLAB; lo XOR a mano (appendice).
 
-<!-- SOURCE_VISUAL id="IS20-V01" source="L20-web.pdf" page="2" type="grafico" description="Miniature della panoramica: bin in 1D, 2D e 3D, epoche del perceptron sull'AND, sigmoide e sua derivata" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060352.png)
 
 ---
 
@@ -40,8 +39,7 @@ Le feature **irrilevanti o rumorose** **aumentano $d$ senza aggiungere informazi
 | + 100 feature casuali | **57,5%** |
 | (livello del caso) | 50% |
 
-<!-- SOURCE_VISUAL id="IS20-V02" source="L20-web.pdf" page="4" type="grafico" description="Due cluster densi in 2D e gli stessi dati con una feature casuale aggiunta in 3D" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060425.png)
 
 Dati sintetici (seme fisso): solo geometria, nessuna misura reale. **Richiamo dalla Lezione 19**: il 1-NN assegna la classe del campione di training più vicino: **dipende solo dalle distanze**.
 
@@ -51,8 +49,7 @@ Dati sintetici (seme fisso): solo geometria, nessuna misura reale. **Richiamo da
 
 Creare e aggiungere feature **può essere una buona idea**, ma con alcuni **inconvenienti rilevanti**.
 
-<!-- SOURCE_VISUAL id="IS20-V03" source="L20-web.pdf" page="5" type="figura" description="Illustrazione della maledizione della dimensionalità" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060449.png)
 
 #### **1.3. Definizione**
 
@@ -71,8 +68,7 @@ Nella data science e nel machine learning, **aggiungere attributi aiuta sempre c
 
 **Input**: training set $\{(x_i,y_i)\}_{i=1}^N$, $N=12$, **una feature** ($d=1$), **$b=3$ bin**. **Output**: $n_j$ = numero di campioni nel bin $j$: $n_1=4$, $n_2=5$, $n_3=3$.
 
-<!-- SOURCE_VISUAL id="IS20-V04" source="L20-web.pdf" page="7" type="grafico" description="Dodici campioni di tre classi su una feature divisa in tre bin" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060518.png)
 
 In media $N/b=12/3=4$ campioni per bin: **abbastanza per stimare la classe di maggioranza**.
 
@@ -88,8 +84,7 @@ con $N$ campioni, $b$ bin per feature, $d$ feature. **Ogni bin ha bisogno di cam
 | 2 | $3^2=9$ | $12/9\approx 1{,}3$ | 3 |
 | 3 | $3^3=27$ | $12/27\approx 0{,}44$ | 18 |
 
-<!-- SOURCE_VISUAL id="IS20-V05" source="L20-web.pdf" page="8" type="grafico" description="Gli stessi 12 campioni nei bin in 1D, 2D e 3D con i bin vuoti" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060546.png)
 
 > 📌 **Stiamo costruendo uno spazio quasi vuoto!** In un bin vuoto il classificatore non sa che cosa rispondere; in un bin con un solo campione la «maggioranza» è quel campione, rumore compreso.
 
@@ -106,8 +101,7 @@ con $N$ campioni, $b$ bin per feature, $d$ feature. **Ogni bin ha bisogno di cam
 
 **Numero stimato di atomi nell’universo: $10^{78}$–$10^{82}$. Nessun dataset può riempire $10^{1000}$ celle.**
 
-<!-- SOURCE_VISUAL id="IS20-V06" source="L20-web.pdf" page="9" type="grafico" description="Trenta frutti in una griglia 10x10 di larghezza e altezza con 82 celle vuote" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060612.png)
 
 > 💡 **Quanti dati servirebbero (nota didattica).** Per avere in media anche solo **un campione per cella** servono $10^d$ campioni: 100 in 2D, un milione in 6D, $10^{10}$ in 10D. Un dataset industriale di 100 000 campioni con 10 feature lascia quindi vuote almeno $10^{10}-10^5$ celle, cioè quasi tutte. Nessun metodo può «riempire» lo spazio: deve **sfruttare una struttura** dei dati (§1.8).
 
@@ -124,8 +118,7 @@ $$r=\frac{\text{dist}_{\max}-\text{dist}_{\min}}{\text{dist}_{\min}}$$
 | 100 | 0,39 | |
 | 1000 | 0,11 | **solo l’11% più lontano** |
 
-<!-- SOURCE_VISUAL id="IS20-V07" source="L20-web.pdf" page="10" type="grafico" description="Rapporto r tra vicino più lontano e più vicino al crescere di d in scala logaritmica" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060626.png)
 
 **Il vicino più prossimo e il più lontano si somigliano.** Richiamo dalla Lezione 19: **k-NN e k-means usano le distanze**: quando tutte le distanze si somigliano, **perdono contrasto**.
 
@@ -138,8 +131,7 @@ $$r=\frac{\text{dist}_{\max}-\text{dist}_{\min}}{\text{dist}_{\min}}$$
 
 $x\in\mathbb{R}^d$ ($d=1000$) → **selezione delle feature o PCA** → $z\in\mathbb{R}^{d'}$ ($d'=20$) → modello → $\hat{y}$ (classe).
 
-<!-- SOURCE_VISUAL id="IS20-V08" source="L20-web.pdf" page="11" type="schema" description="Riduzione da 1000 a 20 feature prima del modello" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060639.png)
 
 Richiamo dalla Lezione 18: filtri, wrapper, selezione embedded e PCA **riducono $d$ prima dell’apprendimento** ($d'\ll d$). **Molti classificatori possono essere o non essere significativamente colpiti dalla maledizione della dimensionalità: conoscere il proprio classificatore!**
 
@@ -196,8 +188,7 @@ Come funziona il cervello con le reti neurali.
 
 Neuroni: Azevedo et al., *J. Comp. Neurol.* 513 (2009), doi:10.1002/cne.21974; $n=4$. Sinapsi: stima dell’ordine di grandezza.
 
-<!-- SOURCE_VISUAL id="IS20-V09" source="L20-web.pdf" page="15" type="figura" description="Neuroni biologici e sinapsi" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060749.png)
 
 > ⚠️ **Le stime (nota didattica).** L’edizione precedente riportava cifre più basse riprese da testi classici; l’edizione 2026/27 usa la misura di Azevedo et al. con la sua incertezza. La Lezione 4 (§3.1) parlava di circa 100 000 miliardi di «parametri», coerente con $10^{14}$ sinapsi. Un campione di 4 cervelli è piccolo: la deviazione standard di 8,1 miliardi va letta come un ordine di variabilità, non come un intervallo di confidenza preciso.
 
@@ -205,8 +196,7 @@ Neuroni: Azevedo et al., *J. Comp. Neurol.* 513 (2009), doi:10.1002/cne.21974; $
 
 **Circa 86 miliardi di neuroni; sinapsi $\sim 10^{14}$** (stima approssimativa). **Consumo di potenza del cervello: circa 20 W.** È un confronto di scala **solo concettuale**: non carichi di lavoro né metriche di prestazione uguali.
 
-<!-- SOURCE_VISUAL id="IS20-V10" source="L20-web.pdf" page="16" type="figura" description="Confronto concettuale di scala e potenza tra cervello e calcolatore" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060919.png)
 
 > 💡 **Venti watt (nota didattica).** È la potenza di una lampadina a basso consumo, contro le centinaia di watt di una singola GPU da addestramento (Lezione 23) e i megawatt di un centro di calcolo. Il confronto è «solo concettuale» perché cervello e GPU non fanno lo stesso lavoro: ma dice che l’efficienza energetica del calcolo neurale artificiale è ancora lontanissima da quella biologica.
 
@@ -215,8 +205,7 @@ Neuroni: Azevedo et al., *J. Comp. Neurol.* 513 (2009), doi:10.1002/cne.21974; $
 - **Ogni neurone ha una struttura molto semplice**, ma **l’insieme di tali elementi costituisce una potenza di elaborazione enorme**.
 - Un neurone consiste in un **corpo cellulare (soma)**, un certo numero di **fibre (dendriti)** e una **singola fibra lunga (assone)**.
 
-<!-- SOURCE_VISUAL id="IS20-V11" source="L20-web.pdf" page="17" type="figura" description="Struttura del neurone: soma, dendriti, assone" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060934.png)
 
 #### **2.4. Analogia tra neuroni biologici e artificiali**
 
@@ -227,8 +216,7 @@ Neuroni: Azevedo et al., *J. Comp. Neurol.* 513 (2009), doi:10.1002/cne.21974; $
 | assone | uscita $\hat{y}$ |
 | sinapsi | peso $w_i$ |
 
-<!-- SOURCE_VISUAL id="IS20-V12" source="L20-web.pdf" page="18" type="schema" description="Neurone biologico accanto al neurone artificiale con cinque ingressi, pesi, somma e soglia" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125060945.png)
 
 > 📌 **La forza di una sinapsi diventa un numero, il peso: imparare significa cambiare i pesi.**
 
@@ -238,8 +226,7 @@ Neuroni: Azevedo et al., *J. Comp. Neurol.* 513 (2009), doi:10.1002/cne.21974; $
 
 **Input**: $x\in\mathbb{R}^5$ (5 feature) → segnali d’ingresso → **strato nascosto 1** → **strato nascosto 2** → **strato d’uscita** → **output** $\hat{y}$ (1 valore). **Ogni unità di uno strato è collegata a ogni unità dello strato successivo.**
 
-<!-- SOURCE_VISUAL id="IS20-V13" source="L20-web.pdf" page="19" type="schema" description="Rete con 5 ingressi, due strati nascosti e un'uscita, completamente connessa" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061004.png)
 
 #### **2.6. Caratteristiche delle reti neurali artificiali**
 
@@ -264,15 +251,13 @@ Reti feed-forward, addestramento, deep learning.
 - L’ispirazione originale era il **cervello umano**; l’enfasi oggi è sull’**utilità come strumento di calcolo**.
 - Esistono molti paradigmi utili di reti neurali; questa lezione si limita alla **rete feed-forward**, la più popolare.
 
-<!-- SOURCE_VISUAL id="IS20-V14" source="L20-web.pdf" page="22" type="figura" description="Applicazioni tipiche delle reti neurali" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061020.png)
 
 #### **3.2. Una rete feed-forward è una funzione**
 
 **Esempio**: temperatura 72 °C ($x_1$), vibrazione 4,1 mm/s ($x_2$), corrente 12,5 A ($x_3$), pressione 6,2 bar ($x_4$), velocità 1450 rpm ($x_5$) → rete → $\hat{y}=0{,}87$, **probabilità di guasto della pompa entro 7 giorni**.
 
-<!-- SOURCE_VISUAL id="IS20-V15" source="L20-web.pdf" page="23" type="schema" description="Rete feed-forward con cinque misure di una pompa e la probabilità di guasto in uscita" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061036.png)
 
 > 📌 **Rete feed-forward.** Una **struttura a strati** di elementi di elaborazione **omogenei, semplici ma non lineari**; **i segnali scorrono solo in avanti**, dagli ingressi alle uscite; **tutta l’elaborazione è locale a ciascun elemento**.
 
@@ -292,8 +277,7 @@ $$\hat{y}_j(x)=\sum_{i=1}^{k}w_{ij}\,g_i(x)=w_j^\top g(x),\qquad j=1,\dots,c,$$
 
 con $\hat{y}_j$ il **punteggio della categoria $j$**; $x=(x_1,\dots,x_d)^\top$ l’input; $g(x)=(g_1(x),\dots,g_k(x))^\top$ le risposte dei $k$ neuroni RBF; $w_j=(w_{1j},\dots,w_{kj})^\top$ i pesi dai neuroni alla categoria $j$.
 
-<!-- SOURCE_VISUAL id="IS20-V16" source="L20-web.pdf" page="24" type="schema" description="Rete RBF con unità nascoste gaussiane centrate sui prototipi" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061115.png)
 
 > ⚠️ **Richiamo dalla Lezione 19: una SVM con kernel RBF non è una rete neurale RBF.** Usano la stessa gaussiana, ma la SVM sceglie i «prototipi» tra i vettori di supporto e ottimizza il margine, mentre la rete RBF sceglie i prototipi (spesso con il k-means) e addestra i pesi d’uscita.
 
@@ -305,23 +289,20 @@ Durante l’addestramento la rete è **costretta ad aggiustare i suoi parametri 
 
 input $x$ → rete neurale (pesi $w$) → $\hat{y}$; uscita desiderata $y$; **errore** $e=y-\hat{y}$ → **aggiornamento dei pesi** $\Delta w$.
 
-<!-- SOURCE_VISUAL id="IS20-V17" source="L20-web.pdf" page="25" type="schema" description="Ciclo di addestramento: rete, uscita, confronto con l'uscita desiderata, errore e aggiornamento dei pesi" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061127.png)
 
 #### **3.5. Addestramento e inferenza**
 
 - **Addestramento**: molti campioni etichettati, **passo in avanti**, errore, **passo all’indietro** (i pesi cambiano).
 - **Inferenza**: campioni nuovi, **solo passo in avanti** (pesi fissi).
 
-<!-- SOURCE_VISUAL id="IS20-V18" source="L20-web.pdf" page="26" type="schema" description="Addestramento con passo avanti e indietro contro inferenza con solo passo avanti" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061137.png)
 
 #### **3.6. Le reti di deep learning**
 
 - **Rete semplice**: 2 strati nascosti. **Rete profonda**: 5 strati nascosti.
 
-<!-- SOURCE_VISUAL id="IS20-V19" source="L20-web.pdf" page="27" type="schema" description="Una rete con 2 strati nascosti e una rete profonda con 5 strati nascosti" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061157.png)
 
 > 📌 **Definizione.** Una **rete neurale profonda** è una rete neurale con **molti strati nascosti**; il **deep learning** addestra tali reti in modo che **imparino anche le feature dai dati grezzi**.
 
@@ -335,8 +316,7 @@ input $x$ → rete neurale (pesi $w$) → $\hat{y}$; uscita desiderata $y$; **er
 
 Nella pipeline classica illustrata, **le feature sono progettate separatamente**; il deep learning **può imparare feature e classificatore insieme**. Le curve delle prestazioni sono **illustrative, non una classifica universale**. Contano i dati e la scelta del modello.
 
-<!-- SOURCE_VISUAL id="IS20-V20" source="L20-web.pdf" page="28" type="grafico" description="Pipeline classica con feature progettate contro deep learning e curve delle prestazioni al crescere dei dati" reason="Schema e grafico visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061216.png)
 
 **Più avanti, Lezione 21**: lì si presentano le **reti neurali convoluzionali (CNN)**; qui si costruisce l’**unità di base, il neurone**.
 
@@ -355,8 +335,7 @@ Ingressi, pesi, soglia, funzione di attivazione.
 
 **Ingressi**: $d=5$ segnali $x_1,\dots,x_5$. **Parametri**: 5 pesi $w_1,\dots,w_5$ e la soglia $\theta$. **Uscita**: 1 segnale $\hat{y}$, inviato a **tutti i neuroni dello strato successivo**.
 
-<!-- SOURCE_VISUAL id="IS20-V21" source="L20-web.pdf" page="30" type="schema" description="Neurone con cinque ingressi pesati, somma, soglia e uscita" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061244.png)
 
 #### **4.2. Il modello di base del neurone**
 
@@ -389,8 +368,7 @@ $z=X-\theta$ è l’ingresso della funzione di attivazione.
 | **sigmoide** | $\sigma(z)=\dfrac{1}{1+e^{-z}}$ | $(0,1)$ | **liscia** |
 | **tangente iperbolica** | $\tanh(z)$ | $(-1,1)$ | **liscia** |
 
-<!-- SOURCE_VISUAL id="IS20-V22" source="L20-web.pdf" page="32" type="grafico" description="Grafici delle sei funzioni di attivazione: gradino, segno, lineare, lineare saturata, sigmoide e tangente iperbolica" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061258.png)
 
 > 📌 **Da ricordare**: $\sigma'(z)=\sigma(z)\,[1-\sigma(z)]$. In $z=0$: $\sigma=0{,}5$, $\sigma'=0{,}25$.
 
@@ -411,8 +389,7 @@ Un singolo neurone che impara.
 - **Ingressi**: $d$ feature; **uscita**: $\hat{y}\in\{0,1\}$ (classe $A_2$ o $A_1$).
 - **Gradino (0/1) invece di segno ($\pm 1$)**: **cambiano solo le etichette delle classi**.
 
-<!-- SOURCE_VISUAL id="IS20-V23" source="L20-web.pdf" page="34" type="schema" description="Perceptron a due ingressi con pesi, somma, soglia e gradino" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061322.png)
 
 #### **5.2. L’obiettivo del perceptron: la classificazione binaria**
 
@@ -426,8 +403,7 @@ $$x_2=mx_1+q,\qquad m=-\frac{w_1}{w_2},\qquad q=\frac{\theta}{w_2}.$$
 
 **Esempio**: $w=(0{,}3;\ -0{,}1)$, $\theta=0{,}2$: $m=-0{,}3/(-0{,}1)=3$, $q=0{,}2/(-0{,}1)=-2$. **Retta: $x_2=3x_1-2$.** Per $x=(1,0)$: $0{,}3-0-0{,}2=0{,}1\ge 0\Rightarrow A_1$.
 
-<!-- SOURCE_VISUAL id="IS20-V24" source="L20-web.pdf" page="35" type="grafico" description="Retta x2 = 3x1 - 2 che separa le regioni A1 e A2" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061333.png)
 
 > 💡 **Da dove viene la retta (nota didattica).** Da $w_1x_1+w_2x_2=\theta$ si isola $x_2$: $x_2=\frac{\theta-w_1x_1}{w_2}=-\frac{w_1}{w_2}x_1+\frac{\theta}{w_2}$. Il vettore dei pesi $w$ è **perpendicolare** alla retta e punta verso la regione $A_1$: aumentare un peso ruota la retta, cambiare la soglia la trasla. Se $w_2=0$ la retta è verticale ($x_1=\theta/w_1$) e la forma $x_2=mx_1+q$ non vale.
 
@@ -436,8 +412,7 @@ $$x_2=mx_1+q,\qquad m=-\frac{w_1}{w_2},\qquad q=\frac{\theta}{w_2}.$$
 - **2 ingressi**: una **retta**, $w_1x_1+w_2x_2-\theta=0$.
 - **3 ingressi**: un **piano**, $w_1x_1+w_2x_2+w_3x_3-\theta=0$.
 
-<!-- SOURCE_VISUAL id="IS20-V25" source="L20-web.pdf" page="36" type="grafico" description="Frontiera del perceptron come retta con 2 ingressi e come piano con 3 ingressi" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061344.png)
 
 > 📌 **Un perceptron risolve solo problemi linearmente separabili.**
 
@@ -473,8 +448,7 @@ con $w_i(p)$ il peso dell’ingresso $i$ all’iterazione $p$; $x_i(p)$ l’ingr
 
 Training set $\{(x,y)\}$, $\alpha$ → **1. inizializzare** ($w_i,\theta\in[-0{,}5;\ 0{,}5]$) → **2. attivare** (calcolare $\hat{y}(p)$) → **3. addestrare i pesi** ($\Delta w_i=\alpha x_ie$, $\Delta\theta=-\alpha e$) → **4. iterare** ($p\leftarrow p+1$, campione successivo, finché un’epoca non ha errori) → $w,\theta$ addestrati.
 
-<!-- SOURCE_VISUAL id="IS20-V26" source="L20-web.pdf" page="39" type="schema" description="I quattro passi dell'algoritmo del perceptron in sequenza" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061402.png)
 
 **Passo 1: inizializzazione.** Si impostano i pesi iniziali $w_1,\dots,w_d$ e la soglia $\theta$ a numeri casuali nell’intervallo $[-0{,}5;\ 0{,}5]$.
 
@@ -557,8 +531,7 @@ $y$: uscita desiderata; $\hat{y}$: uscita effettiva; $e=y-\hat{y}$. In grassetto
 | $w$ | $(0{,}3;\ -0{,}1)$ | $(0{,}3;\ 0{,}0)$ | $(0{,}2;\ 0{,}0)$ | $(0{,}2;\ 0{,}1)$ | $(0{,}1;\ 0{,}1)$ |
 | errori | | 2 | 1 | 2 | 1, 0 |
 
-<!-- SOURCE_VISUAL id="IS20-V27" source="L20-web.pdf" page="45" type="grafico" description="La retta di decisione del perceptron sull'AND dopo ogni epoca con le regioni colorate" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061526.png)
 
 **L’epoca 5 non ha errori: niente più aggiornamenti.** **Retta finale**: $0{,}1x_1+0{,}1x_2=0{,}2$, cioè $x_1+x_2=2$. **Il punto (1,1) sta sulla retta**: $X-\theta=0$, e il gradino dà $\hat{y}=1$ («$\ge$» nel gradino). Regione rosa: $\hat{y}=1$; regione blu: $\hat{y}=0$. **Ogni errore sposta la retta.** Epoca 5: 0 errori ⇒ stop.
 
@@ -571,8 +544,7 @@ $y$: uscita desiderata; $\hat{y}$: uscita effettiva; $e=y-\hat{y}$. In grassetto
 | separabilità | **una retta basta** | **una retta basta** | **nessuna retta** |
 | esito | apprendibile | apprendibile | **non apprendibile** |
 
-<!-- SOURCE_VISUAL id="IS20-V28" source="L20-web.pdf" page="46" type="grafico" description="AND e OR separabili da una retta, XOR non separabile" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061538.png)
 
 > ⚠️ **AND e OR sì, XOR no.** Un perceptron può imparare AND e OR, ma **non l’OR esclusivo**: la sua frontiera di decisione è una **retta**, e **nessuna retta mette (0,1), (1,0) da una parte e (0,0), (1,1) dall’altra**.
 
@@ -594,8 +566,7 @@ Il metodo della backpropagation.
 - **Uno strato d’uscita** di neuroni di calcolo.
 - **I segnali si propagano in avanti, strato per strato.**
 
-<!-- SOURCE_VISUAL id="IS20-V29" source="L20-web.pdf" page="48" type="schema" description="Perceptron multistrato con strato d'ingresso, strati nascosti e strato d'uscita" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061556.png)
 
 #### **6.2. Che cosa nasconde lo strato nascosto?**
 
@@ -605,8 +576,7 @@ Il metodo della backpropagation.
 - **Reti feed-forward commerciali**: tipicamente **1–2 strati nascosti**, da **10 a 1000 neuroni per strato**.
 - **Reti sperimentali**: **3+ strati nascosti** e **milioni di neuroni**.
 
-<!-- SOURCE_VISUAL id="IS20-V30" source="L20-web.pdf" page="49" type="schema" description="Rete con l'uscita nota e i neuroni nascosti con uscita desiderata ignota" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061607.png)
 
 **Più avanti, Lezione 21**: le reti convoluzionali hanno **molti più strati** (≫), e i loro strati **funzionano in modo piuttosto diverso**.
 
@@ -619,8 +589,7 @@ L’apprendimento procede **come per il perceptron**: si presentano i campioni, 
 1. **passo in avanti** (*forward pass*): l’ingresso viene propagato **strato per strato** finché lo strato d’uscita produce $\hat{y}$ (segnali d’ingresso, in avanti);
 2. **passo all’indietro** (*backward pass*): l’errore viene propagato **dallo strato d’uscita indietro verso l’ingresso**; **i pesi vengono modificati lungo il percorso** (segnali d’errore, all’indietro).
 
-<!-- SOURCE_VISUAL id="IS20-V31" source="L20-web.pdf" page="50" type="schema" description="Segnali d'ingresso in avanti e segnali d'errore all'indietro in una rete multistrato" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061706.png)
 
 #### **6.4. Notazione per la backpropagation**
 
@@ -639,8 +608,7 @@ L’apprendimento procede **come per il perceptron**: si presentano i campioni, 
 
 Qui: **1 strato nascosto** (rete a tre strati). Con 2 strati nascosti **le stesse regole si ripetono strato per strato**.
 
-<!-- SOURCE_VISUAL id="IS20-V32" source="L20-web.pdf" page="51" type="schema" description="Rete a tre strati con i simboli xi, hj, yk, wij, wjk" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061722.png)
 
 #### **6.5. Backpropagation, passo 1: inizializzazione**
 
@@ -655,8 +623,7 @@ con $F_i$ il **numero totale di ingressi del neurone $i$**.
 
 **Più ingressi, pesi più piccoli**: la somma pesata **non parte nella saturazione della sigmoide**.
 
-<!-- SOURCE_VISUAL id="IS20-V33" source="L20-web.pdf" page="52" type="schema" description="Rete con un neurone nascosto a 5 ingressi e il suo intervallo di inizializzazione" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061753.png)
 
 > 💡 **Perché dividere per il numero di ingressi (nota didattica).** La somma pesata di un neurone con molti ingressi è grande anche con pesi piccoli: se i pesi fossero nello stesso intervallo per tutti, i neuroni con molti ingressi partirebbero **saturi**, con la sigmoide già vicina a 0 o 1 e derivata quasi nulla (§6.11). Scalare l’intervallo con $1/F_i$ mantiene la somma in una zona in cui il neurone impara. Le inizializzazioni moderne (Xavier/Glorot, He) seguono la stessa idea, con un fattore $1/\sqrt{F_i}$.
 
@@ -674,8 +641,7 @@ $$\hat{y}_k(p)=\text{sigmoid}\left[\sum_{j=1}^{m}h_j(p)\,w_{jk}(p)-\theta_k\righ
 
 $d$: ingressi del neurone nascosto $j$; $m$: ingressi del neurone d’uscita $k$ (= neuroni nascosti); $l$: numero di uscite; $\text{sigmoid}(z)=1/(1+e^{-z})$.
 
-<!-- SOURCE_VISUAL id="IS20-V34" source="L20-web.pdf" page="53" type="schema" description="Passo in avanti: (a) strato nascosto, (b) strato d'uscita" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061829.png)
 
 #### **6.7. Imparare come scendere lungo l’errore**
 
@@ -691,8 +657,7 @@ $d$: ingressi del neurone nascosto $j$; $m$: ingressi del neurone d’uscita $k$
 | 0,4 | **buono** |
 | 0,95 | **oscilla** |
 
-<!-- SOURCE_VISUAL id="IS20-V35" source="L20-web.pdf" page="54" type="grafico" description="Discesa del gradiente sulla parabola dell'errore con learning rate 0,1, 0,4 e 0,95" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061841.png)
 
 > 💡 **I tre comportamenti in numeri (nota didattica).** Con $E=(w-2)^2+0{,}5$ l’aggiornamento è $w\leftarrow w-2\alpha(w-2)$, cioè la distanza dal minimo si moltiplica per $(1-2\alpha)$ a ogni passo. $\alpha=0{,}1$: fattore 0,8, la distanza si riduce del 20% per passo (lento). $\alpha=0{,}4$: fattore 0,2, quasi subito al minimo. $\alpha=0{,}95$: fattore $-0{,}9$, il peso salta da una parte all’altra del minimo e si avvicina lentamente (oscilla). Con $\alpha>1$ il fattore supera 1 in modulo e **diverge**: è il «troppo grande» della Lezione 17 (§6.6).
 
@@ -711,8 +676,7 @@ con $\delta_k(p)$ il **gradiente dell’errore** del neurone d’uscita $k$.
 
 > 📌 **La stessa equazione del perceptron**: l’ingresso $x_i$ diventa $h_j$, l’errore $e$ diventa $\delta_k$.
 
-<!-- SOURCE_VISUAL id="IS20-V36" source="L20-web.pdf" page="55" type="schema" description="Correzione dei pesi dello strato d'uscita" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061904.png)
 
 #### **6.9. Il gradiente dell’errore dello strato d’uscita**
 
@@ -738,8 +702,7 @@ Poi $\Delta w_{ij}(p)=\alpha\cdot x_i(p)\cdot\delta_j(p)$ e $w_{ij}(p+1)=w_{ij}(
 
 > ⚠️ **Non d’esame: la formula.** Stessa struttura di $\delta_k$: **pendenza della sigmoide × un errore**; qui l’«errore» del neurone nascosto $j$ è $\sum_k\delta_kw_{jk}$, **raccolto dallo strato dopo di esso**.
 
-<!-- SOURCE_VISUAL id="IS20-V37" source="L20-web.pdf" page="57" type="schema" description="Gradienti dello strato d'uscita che tornano allo strato nascosto attraverso i pesi" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061940.png)
 
 > 💡 **Da dove viene $h_j(1-h_j)$ (nota didattica).** È la **derivata della sigmoide** (§4.3). Il gradiente $\delta$ è l’errore moltiplicato per quanto il neurone è sensibile in quel punto: se la sigmoide è saturata ($h\approx 0$ o $h\approx 1$), $h(1-h)\approx 0$ e il neurone quasi non impara. Il termine $\sum_k\delta_kw_{jk}$ è l’errore «restituito» al neurone nascosto dai neuroni a cui è collegato: un neurone collegato all’uscita con un peso grande riceve molta della «colpa».
 
@@ -759,8 +722,7 @@ su $N$ campioni ($y_n$ desiderato, $\hat{y}_n$ effettivo).
 
 **Apprendimento dello XOR con backpropagation online riproducibile**: 4 campioni XOR, aggiornamenti online, $\alpha=0{,}1$, pesi iniziali della fonte: **56 346 epoche** (**225 384 aggiornamenti**) per raggiungere **SSE ≈ 0,001** (obiettivo SSE = 0,001). **Errore di training, non accuratezza di test.**
 
-<!-- SOURCE_VISUAL id="IS20-V38" source="L20-web.pdf" page="58" type="grafico" description="Curva di apprendimento dello XOR: SSE in scala logaritmica in funzione delle epoche fino a 56346" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125061951.png)
 
 > 💡 **Online, batch e mini-batch (nota didattica).** «Online» significa che i pesi si aggiornano dopo **ogni** campione: 4 aggiornamenti per epoca, $4\cdot 56\,346=225\,384$. In modalità *batch* si somma il gradiente su tutti i campioni e si aggiorna una volta per epoca; in *mini-batch* (il default delle librerie moderne) si aggiorna ogni $B$ campioni. 56 346 epoche per 4 punti sono tantissime: con $\alpha$ piccolo, sigmoide e partenza poco favorevole la discesa attraversa lunghi «altipiani» di errore quasi costante.
 
@@ -771,8 +733,7 @@ su $N$ campioni ($y_n$ desiderato, $\hat{y}_n$ effettivo).
 - **XOR = OR e non AND**: una **regione tra due rette**, impossibile per un singolo perceptron.
 - (0,1), (1,0) stanno **tra le rette** ⇒ rosso, uscita 1; (0,0), (1,1) stanno **fuori** ⇒ blu, uscita 0.
 
-<!-- SOURCE_VISUAL id="IS20-V39" source="L20-web.pdf" page="59" type="grafico" description="Le due rette dei neuroni nascosti e la regione XOR tra di esse" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125062016.png)
 
 > 💡 **Perché due neuroni nascosti bastano (nota didattica).** Ciascun neurone nascosto traccia una **retta** nel piano degli ingressi, come un perceptron. Il neurone d’uscita combina le due regioni: un neurone nascosto si attiva per «almeno un ingresso a 1» (OR) e l’altro per «entrambi a 1» (AND); l’uscita risponde 1 quando il primo è attivo e il secondo no, che è esattamente lo XOR. È il superamento del limite del §5.9, e il motivo per cui lo strato nascosto è la vera fonte di potenza delle reti: trasforma un problema non separabile in uno separabile (lo stesso principio delle feature polinomiali, §1.9, e degli embedding, Lezione 18).
 
@@ -783,15 +744,13 @@ su $N$ campioni ($y_n$ desiderato, $\hat{y}_n$ effettivo).
   - **gradiente che esplode** (*exploding gradient*).
 - **La scelta della funzione di attivazione è cruciale** per il comportamento del gradiente durante l’apprendimento.
 
-<!-- SOURCE_VISUAL id="IS20-V40" source="L20-web.pdf" page="60" type="figura" description="Illustrazione dei problemi del gradiente" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125062033.png)
 
 #### **6.14. Il gradiente che svanisce**
 
 **Il gradiente dell’errore rispetto ai pesi diventa molto piccolo e l’apprendimento si ferma**, soprattutto nei **primi strati delle reti profonde** con attivazioni **sigmoide o tanh**.
 
-<!-- SOURCE_VISUAL id="IS20-V41" source="L20-web.pdf" page="61" type="grafico" description="Sigmoide e sua derivata con le zone di saturazione e il massimo 0,25" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125062044.png)
 
 **Uno strato indietro**: il gradiente $\delta_j$ del neurone penultimo $j$ è il **prodotto di due gradienti**:
 
@@ -814,8 +773,7 @@ $$\delta_j=\underbrace{h_j(1-h_j)}_{\text{locale: pendenza di }j}\cdot\underbrac
 | 1,5 (**esplode**) | $1{,}5^{10}\approx 58$ |
 | 0,25 (**svanisce**) | $0{,}25^{10}\approx 10^{-6}$ |
 
-<!-- SOURCE_VISUAL id="IS20-V42" source="L20-web.pdf" page="62" type="grafico" description="Scala del gradiente in funzione del numero di strati attraversati per fattori 1,5 e 0,25" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125062053.png)
 
 > 💡 **I rimedi (nota didattica).** Con un fattore per strato di $0{,}25\cdot w$, il gradiente resta stabile solo se $|w|\approx 4$; con pesi dell’ordine di 1 svanisce, con pesi grandi (per esempio 6) esplode ($1{,}5^L$). Rimedi diffusi, che si vedranno nelle Lezioni 21 e 22: attivazioni **ReLU** (pendenza 1 per $z>0$), **inizializzazione** accurata (§6.5), **normalizzazione** degli strati (*batch normalization*), **clipping** del gradiente e **connessioni residue** (ResNet), che offrono al gradiente una «scorciatoia» che salta gli strati.
 
@@ -828,8 +786,7 @@ Molti tipi di reti; una prima rete in MATLAB.
 
 #### **7.1. Molti tipi di reti — oggi: perceptron, FF e RBF**
 
-<!-- SOURCE_VISUAL id="IS20-V43" source="L20-web.pdf" page="64" type="figura" description="Mappa dei tipi di reti neurali con perceptron, feed-forward e RBF evidenziati" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125062106.png)
 
 #### **7.2. Una prima rete feed-forward in MATLAB (codice)**
 
@@ -846,8 +803,7 @@ perf = perform(net,y,t)         % errore (mse)
 
 **Input**: $x$ (**1 feature, 94 campioni**), target $t$ (94 valori). **Output**: la rete addestrata `net`, le sue uscite $y$ e l’**errore quadratico medio** `perf`.
 
-<!-- SOURCE_VISUAL id="IS20-V44" source="L20-web.pdf" page="65" type="schermata" description="Struttura della rete feed-forward con 10 neuroni nascosti mostrata da view(net)" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125062116.png)
 
 In Colab l’**occultamento dell’informazione** è meno evidente… Ci saranno **sessioni di laboratorio dedicate**. Il codice completo sarà pubblicato più avanti sul sito del corso.
 
@@ -874,8 +830,7 @@ y_new = np.polyval(p, 2.5)                     # previsione
 
 **Input**: 6 coppie $(x,y)$, grado $M=3$. **Output**: $p=(p_0,p_1,p_2,p_3)$ di $y(x)=p_0x^3+p_1x^2+p_2x+p_3$, poi $\hat{y}(2{,}5)$. Risultato: $p\approx(0{,}123;\ -0{,}715;\ 1{,}537;\ -0{,}059)$, $\hat{y}(2{,}5)\approx 1{,}24$. MATLAB: `p = polyfit(x,y,3)`.
 
-<!-- SOURCE_VISUAL id="IS20-V45" source="L20-web.pdf" page="68" type="grafico" description="Sei punti di training, la cubica interpolata e la previsione in x = 2,5" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125062137.png)
 
 > 💡 **Verifica (nota didattica).** $0{,}123\cdot 15{,}625-0{,}715\cdot 6{,}25+1{,}537\cdot 2{,}5-0{,}059=1{,}922-4{,}469+3{,}843-0{,}059\approx 1{,}24$. Attenzione all’ordine: `np.polyfit` restituisce i coefficienti **dal grado più alto al più basso**, quindi $p_0$ è il coefficiente di $x^3$. Con 4 coefficienti e 6 punti la cubica non passa per tutti i punti (2 gradi di libertà «di riserva» per mediare il rumore).
 
@@ -911,8 +866,7 @@ Con $d=2$, $M=3$: $\binom{5}{3}=10$ colonne: $1,\ x_1,\ x_2,\ x_1^2,\ x_1x_2,\ x
 - **La soglia di un neurone è un peso $\theta$ su un ingresso fisso uguale a $-1$.**
 - **Valori iniziali**: $w_{13}=0{,}5$, $w_{14}=0{,}9$, $w_{23}=0{,}4$, $w_{24}=1{,}0$, $w_{35}=-1{,}2$, $w_{45}=1{,}1$, $\theta_3=0{,}8$, $\theta_4=-0{,}1$, $\theta_5=0{,}3$.
 
-<!-- SOURCE_VISUAL id="IS20-V46" source="L20-web.pdf" page="71" type="schema" description="Rete a tre strati per lo XOR con neuroni 3, 4, 5, pesi e soglie su ingressi fissi a -1" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125062149.png)
 
 **Passo in avanti.** Campione di training: $x_1=x_2=1$, uscita desiderata $y_5=0$.
 
@@ -923,6 +877,8 @@ $$h_4=\text{sigmoid}(1\cdot 0{,}9+1\cdot 1{,}0+1\cdot 0{,}1)=\text{sigmoid}(2{,}
 $$\hat{y}_5=\text{sigmoid}\big(0{,}5250\cdot(-1{,}2)+0{,}8808\cdot 1{,}1-1\cdot 0{,}3\big)=\text{sigmoid}(0{,}0389)=0{,}5097,$$
 
 $$e=y_5-\hat{y}_5=0-0{,}5097=-0{,}5097.$$
+
+![](imgs/Pasted%20image%2020261125062231.png)
 
 > 💡 **Il segno di $\theta_4$ (nota didattica).** La soglia entra come $-1\cdot\theta_4=-1\cdot(-0{,}1)=+0{,}1$: è il «$+1\cdot 0{,}1$» della seconda riga. Per $\hat{y}_5$: $-0{,}6300+0{,}9689-0{,}3=0{,}0389$.
 

@@ -16,6 +16,8 @@ La lezione riprende le reti della Lezione 20 e le scrive in **Keras**: il percep
 6. **casi d’uso**: classificare una foto; segnali, giochi e testi come immagini;
 7. punti principali.
 
+![](imgs/Pasted%20image%2020261125062319.png)
+
 ---
 
 ### **1. Strumenti: dal perceptron all’MLP in Keras**
@@ -54,6 +56,8 @@ for epoch in range(epochs):        # ripetere
 
 1. **avanti**: $\hat{y}$; 2. **errore**: $\text{loss}(\hat{y},y)$; 3. **gradienti** $\partial L/\partial w$; 4. **aggiornamento** $w\leftarrow w-\alpha\,\partial L/\partial w$; poi il batch successivo; dopo tutte le epoche: i pesi $w$ addestrati.
 
+![](imgs/Pasted%20image%2020261125124401.png)
+
 > ⚠️ **`compile()` in Keras non compila codice**: **configura soltanto l’addestramento**, cioè sceglie `loss_fn` = come si misura l’errore (per esempio la cross-entropy) e `opt` = come si aggiornano i pesi (per esempio SGD o Adam con learning rate $\alpha$), più le metriche da stampare (per esempio l’accuratezza).
 
 Richiamo dalla Lezione 20: **gli stessi passi della backpropagation**. **Un passaggio su tutti i batch è un’epoca.** $\alpha$: learning rate. Nelle slide successive si chiama solo `fit()`: questi quattro passi girano dentro di essa.
@@ -63,6 +67,9 @@ Richiamo dalla Lezione 20: **gli stessi passi della backpropagation**. **Un pass
 #### **1.3. Un perceptron in Keras (1): la rete e il training set**
 
 **Il training set: la funzione AND.**
+
+
+![](imgs/Pasted%20image%2020261125124419.png)
 
 | Campione | $x_1$ | $x_2$ | $y$ |
 |---:|---:|---:|---:|
@@ -157,8 +164,7 @@ model.compile(optimizer=keras.optimizers.Adam(0.1),
               metrics=["accuracy"])
 ```
 
-<!-- SOURCE_VISUAL id="IS21-V01" source="L21-web.pdf" page="10" type="schema" description="Rete XOR con neuroni 3, 4 e 5 e la corrispondenza con le due righe Dense" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125124453.png)
 
 **Una riga `Dense` per strato.** Parametri: strato nascosto $2\cdot 2$ pesi + 2 soglie = **6**; strato d’uscita $2+1=$ **3**; totale **9**: $w_{13},w_{14},w_{23},w_{24},w_{35},w_{45}$ e $\theta_3,\theta_4,\theta_5$. Richiamo dalla Lezione 20: **un perceptron non può imparare lo XOR; 2 neuroni nascosti sì**. Dentro ogni neurone: la sua soglia $\theta$.
 
@@ -166,6 +172,8 @@ model.compile(optimizer=keras.optimizers.Adam(0.1),
 
 - L’uscita della rete, di solito chiamata $\hat{y}$, qui si chiama **$p$**: con una sigmoide è un numero in $(0,1)$, letto come la **probabilità che il campione sia della classe 1** (spesso chiamata «**confidenza**», un termine ambiguo).
 - $y_i$: uscita desiderata del campione $i$; $p_i$: uscita della rete; $N$: numero di campioni.
+
+![](imgs/Pasted%20image%2020261125124509.png)
 
 **Due misure comuni dell’errore (loss), minimizzate dall’addestramento**:
 
@@ -234,8 +242,9 @@ plt.plot(hist.history["loss"])    # curva di apprendimento
 | 1 | 0 | 1 | 1,00 | 1 |
 | 1 | 1 | 0 | 0,00 | 0 |
 
-<!-- SOURCE_VISUAL id="IS21-V02" source="L21-web.pdf" page="14" type="grafico" description="Curve di loss e accuratezza dell'MLP XOR su 500 epoche e regioni di decisione della rete addestrata" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125124727.png)
+
+![](imgs/Pasted%20image%2020261125124735.png)
 
 **Controllo**: la loss scende, l’accuratezza è 1 **dall’epoca 25** (tratteggio). ⚠️ **Attenzione**: con 2 neuroni nascosti **solo 12 partenze casuali su 20 hanno risolto lo XOR in 500 epoche**; le altre **si sono bloccate in un minimo locale**. **Guardare sempre la curva.**
 
@@ -259,8 +268,7 @@ ax.plot_trisurf(x_new[:, 0], x_new[:, 1],
 - $p\approx 1$ (rosso) vicino a (0,1), (1,0); $p\approx 0$ (blu) **lungo la diagonale**.
 - La **linea scura sul pavimento**: la frontiera di decisione $p=0{,}5$, **due rette come nella Lezione 20**.
 
-<!-- SOURCE_VISUAL id="IS21-V03" source="L21-web.pdf" page="15" type="grafico" description="Superficie 3D dell'uscita p dell'MLP su 1000 ingressi casuali con la frontiera p = 0,5" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125124819.png)
 
 #### **1.13. La rete standard in Keras: una pompa che può guastarsi**
 
@@ -290,8 +298,7 @@ hist = model.fit(X_tr, y_tr, epochs=60,
 - **Input**: $x_1..x_5$ = temperatura (°C), vibrazione (mm/s), corrente (A), pressione (bar), velocità (rpm). **Output**: $\hat{y}\in[0,1]$, **probabilità di guasto**.
 - **Parametri**: $5\cdot 4+4$, $4\cdot 4+4$, $4+1$ = **49**. Dati: **2000 pompe sintetiche** (appendice, §9.1, e Laboratorio 1).
 
-<!-- SOURCE_VISUAL id="IS21-V04" source="L21-web.pdf" page="16" type="schema" description="Rete con cinque ingressi, due strati nascosti da 4 e un'uscita per il guasto della pompa" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125124837.png)
 
 Richiamo dalla Lezione 20: **una rete feed-forward è una funzione** (l’esempio della pompa).
 
@@ -299,8 +306,7 @@ Richiamo dalla Lezione 20: **una rete feed-forward è una funzione** (l’esempi
 
 #### **1.14. Addestrare e controllare: la curva di validazione**
 
-<!-- SOURCE_VISUAL id="IS21-V05" source="L21-web.pdf" page="17" type="grafico" description="Curve di loss e accuratezza di training e validazione per la rete della pompa su 60 epoche" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125124846.png)
 
 - **Classificazione, 2000 pompe sintetiche**: **1280 training, 320 validazione, 400 test** (dati: appendice).
 - **Validazione** = dati **non usati per aggiornare i pesi**.
@@ -323,8 +329,7 @@ Da dove viene, che cos’è, e perché funziona adesso.
 
 **Il deep learning è un sottoinsieme del machine learning, che è un sottoinsieme dell’intelligenza artificiale.** I suoi metodi sono **vecchi** (reti neurali, Lezione 20); il suo successo è **recente** (anni 2010).
 
-<!-- SOURCE_VISUAL id="IS21-V06" source="L21-web.pdf" page="19" type="figura" description="Insiemi annidati deep learning, machine learning, intelligenza artificiale" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125124913.png)
 
 #### **2.2. La tabella di marcia**
 
@@ -333,16 +338,14 @@ Da dove viene, che cos’è, e perché funziona adesso.
 - **2006–2012**: il gruppo di Hinton addestra reti profonde su **hardware parallelo (GPU)**.
 - **2012**: **AlexNet**: CNN profonda + GPU + ReLU + **1,2 milioni di immagini etichettate**.
 
-<!-- SOURCE_VISUAL id="IS21-V07" source="L21-web.pdf" page="20" type="figura" description="Linea del tempo del deep learning dal Neocognitron ad AlexNet" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125124921.png)
 
 #### **2.3. La rilevanza: due premi Nobel nel 2024**
 
 - **Fisica**: **Hopfield e Hinton**, «per scoperte e invenzioni fondamentali che rendono possibile il machine learning con le reti neurali artificiali». Hinton è coautore dell’articolo del 1986 sulla backpropagation (Lezione 20).
 - **Chimica**: **Baker** (progettazione di proteine); **Hassabis e Jumper** per **AlphaFold**, una rete profonda che **predice la struttura 3D di una proteina dalla sua sequenza di amminoacidi**.
 
-<!-- SOURCE_VISUAL id="IS21-V08" source="L21-web.pdf" page="21" type="figura" description="I premi Nobel 2024 per la fisica e per la chimica legati al deep learning" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125008.png)
 
 #### **2.4. Il deep learning: una definizione**
 
@@ -353,8 +356,7 @@ Da dove viene, che cos’è, e perché funziona adesso.
 - **Supervisionato** (classificatori, regressori) o **non supervisionato** (analisi di pattern).
 - Richiamo dalla Lezione 20: una rete profonda ha **molti strati nascosti** (3 o più).
 
-<!-- SOURCE_VISUAL id="IS21-V09" source="L21-web.pdf" page="22" type="figura" description="Illustrazione della definizione di deep learning" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125028.png)
 
 #### **2.5. Perché adesso? Calcolo, dati e interesse**
 
@@ -362,8 +364,7 @@ Da dove viene, che cos’è, e perché funziona adesso.
 - Un **inverno dell’AI** è un periodo di **ridotti finanziamenti e interesse** per la ricerca in AI: due inverni, **1974–1980** e **1987–1993**.
 - **Google Trends, Italia, 2004–oggi**: «deep learning» (blu) e «artificial intelligence» (rosso), 100 = interesse massimo. Il deep learning cresce **da circa il 2015**; entrambi **saltano dopo il 2022**.
 
-<!-- SOURCE_VISUAL id="IS21-V10" source="L21-web.pdf" page="23" type="grafico" description="Crescita della potenza di calcolo e Google Trends di deep learning e intelligenza artificiale in Italia" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125115.png)
 
 > 💡 **I numeri (nota didattica).** Da 1 GFLOPS a «decine di TFLOPS» è un fattore $10^4$ in trent’anni; oggi una GPU da centro di calcolo supera i petaFLOPS in bassa precisione (Lezione 23). Il salto dopo il 2022 è ChatGPT (novembre 2022): la stessa tecnologia, i transformer (Lezione 13), resa visibile al grande pubblico.
 
@@ -371,15 +372,13 @@ Da dove viene, che cos’è, e perché funziona adesso.
 
 Richiamo dalla Lezione 20: visto come «un primo sguardo». **Nel ML classico un ingegnere progetta l’estrazione delle feature**; nel deep learning **estrazione delle feature e classificazione sono un unico blocco**, appreso insieme dagli esempi. Le slide successive mostrano che cosa significava «progettato da un ingegnere» nella visione artificiale, e che aspetto hanno le feature apprese.
 
-<!-- SOURCE_VISUAL id="IS21-V11" source="L21-web.pdf" page="24" type="schema" description="Pipeline ML classica con estrazione delle feature progettata contro deep learning con un unico blocco appreso" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125128.png)
 
 #### **2.7. Prima del deep learning: il progettista estrae le feature**
 
 Gli **indizi di livello medio** (dai «*token*» di D. Marr) e le **parti degli oggetti** sono **difficili da progettare a mano**. Anni di ricerca hanno prodotto **descrittori fatti a mano** di bordi e gradienti (**SIFT, HoG, spin images, textons, SURF, LBP, istogrammi di colore**…). **Domanda**: e se si imparassero gli estrattori di feature **direttamente dai dati**? Adattato da © J. Hays, R. Fergus.
 
-<!-- SOURCE_VISUAL id="IS21-V12" source="L21-web.pdf" page="25" type="figura" description="Descrittori progettati a mano e indizi di livello medio difficili da progettare" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125152.png)
 
 #### **2.8. Un estrattore di feature classico: la convoluzione**
 
@@ -389,8 +388,7 @@ $$K=\begin{bmatrix}-1&0&1\\-2&0&2\\-1&0&1\end{bmatrix}$$
 
 **Input** $I$: immagine in scala di grigi $200\times 300$; **output**: feature map $198\times 298$ (arancio = bordo scuro→chiaro, blu = chiaro→scuro).
 
-<!-- SOURCE_VISUAL id="IS21-V13" source="L21-web.pdf" page="26" type="figura" description="Immagine del camion e la sua feature map con il filtro di Sobel verticale" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125202.png)
 
 > 📌 **Definizione.** Una **convoluzione** fa scorrere un **piccolo filtro $K$** (una griglia $3\times 3$ di numeri) sull’immagine $I$ e, in ogni posizione, **moltiplica la patch per il filtro e somma i prodotti**: il risultato è una **nuova immagine, la feature map**. Risponde alla domanda «**quanto questa patch somiglia al filtro?**». Qui un filtro di bordo verticale **progettato a mano** (Sobel): la cabina, le ruote e i bordi del rimorchio si illuminano. I progettisti usavano questi filtri per estrarre feature; **una CNN li imparerà**.
 
@@ -400,8 +398,7 @@ $$K=\begin{bmatrix}-1&0&1\\-2&0&2\\-1&0&1\end{bmatrix}$$
 |---|---|---|---|
 | $\begin{bmatrix}-1&0&1\\-2&0&2\\-1&0&1\end{bmatrix}$ | $\begin{bmatrix}-1&-2&-1\\0&0&0\\1&2&1\end{bmatrix}$ | $\begin{bmatrix}0&1&2\\-1&0&1\\-2&-1&0\end{bmatrix}$ | $\begin{bmatrix}1&1&1\\1&1&1\\1&1&1\end{bmatrix}$ |
 
-<!-- SOURCE_VISUAL id="IS21-V14" source="L21-web.pdf" page="27" type="figura" description="Le quattro feature map del camion ottenute con i quattro filtri" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125213.png)
 
 **Stesso input, quattro filtri $3\times 3$, quattro mappe.** Uno strato convolutivo **applica molti filtri in parallelo**; le loro uscite si **impilano come canali**. Qui i filtri sono fatti a mano; **in una CNN i 9 numeri di ogni filtro vengono appresi dall’addestramento**.
 
@@ -411,8 +408,7 @@ $$K=\begin{bmatrix}-1&0&1\\-2&0&2\\-1&0&1\end{bmatrix}$$
 
 **Immagine** (pixel) → **strato 1** (feature semplici, «bordi») → **strato 2** («parti di oggetti») → **strato 3** («oggetti») → **classificatore** («c’è un volto?»); **l’addestramento regola tutti gli strati insieme**.
 
-<!-- SOURCE_VISUAL id="IS21-V15" source="L21-web.pdf" page="28" type="figura" description="Gerarchia di feature da pixel a bordi, parti e oggetti" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125244.png)
 
 **Ogni strato estrae feature dall’uscita dello strato precedente. Si addestrano tutti gli strati insieme.** Adattato da © J. Hays, R. Fergus.
 
@@ -421,8 +417,7 @@ $$K=\begin{bmatrix}-1&0&1\\-2&0&2\\-1&0&1\end{bmatrix}$$
 - **Addestramento**: molti esempi etichettati; punteggi (per esempio gatto 0,62, tazza 0,30, razzo 0,08) contro l’etichetta «gatto» → errore $e$ → **all’indietro: l’errore cambia tutti i pesi** (convoluzioni + pooling, densi).
 - **Rilascio (inferenza)**: una foto nuova, **pesi fissi**, **solo in avanti** ⇒ gatto (0,91).
 
-<!-- SOURCE_VISUAL id="IS21-V16" source="L21-web.pdf" page="29" type="schema" description="Addestramento con passo avanti e indietro contro rilascio con solo passo avanti" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125259.png)
 
 **Addestramento**: avanti, errore, indietro; molti esempi, molte epoche (**lento, GPU**). **Rilascio**: pesi fissi, un passo in avanti (**veloce, anche su dispositivi piccoli**). Punteggi illustrativi; foto: dati d’esempio di scikit-image, pubblico dominio.
 
@@ -432,8 +427,7 @@ $$K=\begin{bmatrix}-1&0&1\\-2&0&2\\-1&0&1\end{bmatrix}$$
 - **Strato 2 (conv)**: 8 unità: le patch $8\times 8$ che le eccitano di più: **tratti, curve, angoli**.
 - **Strato 3 (denso)**: 8 unità: le cifre di test che le eccitano di più: **forme intere**.
 
-<!-- SOURCE_VISUAL id="IS21-V17" source="L21-web.pdf" page="30" type="figura" description="Filtri del primo strato, patch che eccitano il secondo e cifre che eccitano il terzo strato di CNN-A" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125315.png)
 
 Misurato su **CNN-A addestrata su MNIST**. Per ogni unità si ordinano gli ingressi per attivazione e si mostrano i primi (*maximally activating inputs*). **Dai bordi alle parti agli oggetti interi**: la stessa gerarchia vista sui volti (bordi → occhi, nasi → volti). **Nessuno ha progettato questi rilevatori.** Guardarli è **un primo passo verso la spiegabilità** (Lezione 2).
 
@@ -443,6 +437,8 @@ Misurato su **CNN-A addestrata su MNIST**. Per ogni unità si ordinano gli ingre
 - **Efficienza**: alcune funzioni richiedono **esponenzialmente più unità se si tolgono strati** (Håstad, 1986).
 - **Le sotto-feature di una rete profonda si possono condividere tra compiti** (la radice del transfer learning).
 
+![](imgs/Pasted%20image%2020261125125349.png)
+
 **Esempio: la parità di $n$ bit** ($\hat{y}=1$ se il numero di 1 è dispari, cioè lo XOR di tutti i bit), $n=4$: **profonda**: blocchi XOR in un albero; **superficiale**: 2 strati, 8 unità, una per ogni pattern dispari.
 
 | | strati | unità |
@@ -451,8 +447,7 @@ Misurato su **CNN-A addestrata su MNIST**. Per ogni unità si ordinano gli ingre
 | superficiale | 2 | $2^{n-1}+1$ |
 | $n=32$ | 5 contro 2 | 31 blocchi contro $\approx 2{,}1\cdot 10^9$ |
 
-<!-- SOURCE_VISUAL id="IS21-V18" source="L21-web.pdf" page="31" type="schema" description="Albero di blocchi XOR per la parità e rete superficiale con un'unità per ogni pattern dispari" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125125335.png)
 
 **Håstad**: per circuiti AND/OR con $k$ strati, la parità richiede $\approx e^{n^{1/(k-1)}}$ porte. Con neuroni a soglia il divario è minore, ma **la profondità fa comunque risparmiare unità**. Adattato da © T. Martinez.
 
@@ -469,8 +464,7 @@ Convoluzione, ReLU, pooling, softmax, e come si imparano i pesi.
 
 **Input**: immagine RGB $299\times 299\times 3=268\,203$ numeri → **CNN** (filtri appresi + classificatore: **InceptionV3**, addestrata su **ImageNet**, 1,28 milioni di foto) → **output**: **1000 probabilità** (una per classe), somma = 1.
 
-<!-- SOURCE_VISUAL id="IS21-V19" source="L21-web.pdf" page="33" type="schema" description="Dalla foto del camion alle 1000 probabilità di InceptionV3" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125130920.png)
 
 > 📌 **Definizione.** Una **rete neurale convoluzionale (CNN)** è una rete neurale in cui alcuni strati sono **convolutivi**: **ogni unità guarda una piccola patch dell’ingresso**, e **gli stessi pesi vengono riusati in ogni posizione**. Qui: immagine in ingresso, probabilità di classe in uscita («moving van» 0,44, «trailer truck» 0,42).
 
@@ -482,8 +476,7 @@ Convoluzione, ReLU, pooling, softmax, e come si imparano i pesi.
 | ingressi | $n=299\cdot 299\cdot 3=268\,203$ | foto RGB $299\times 299\times 3$, filtro $3\times 3\times 3$ |
 | primo strato | 1000 neuroni ⇒ $268\,203\cdot 1000\approx$ **268 milioni di pesi** | **32 filtri · 27 pesi = 864 pesi** (primo strato di InceptionV3), 32 feature map |
 
-<!-- SOURCE_VISUAL id="IS21-V20" source="L21-web.pdf" page="34" type="schema" description="Rete completamente connessa contro strato convolutivo sulla stessa foto" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125130938.png)
 
 **Stesso input, stesso primo compito** (estrarre feature). **Tre idee fanno la differenza**: **locale** (un pattern è piccolo), **condiviso** (lo stesso rilevatore è utile ovunque), **gerarchico** (pattern piccoli si combinano in pattern più grandi). Le slide successive mostrano le prime due con gli uccelli.
 
@@ -493,15 +486,13 @@ Convoluzione, ReLU, pooling, softmax, e come si imparano i pesi.
 
 Un neurone **non ha bisogno di vedere l’intera immagine per scoprire un becco**: basta una **piccola regione**, e una piccola regione richiede **pochi parametri**. È l’idea della **connettività locale**.
 
-<!-- SOURCE_VISUAL id="IS21-V21" source="L21-web.pdf" page="35" type="figura" description="Un becco rilevato guardando solo una piccola regione dell'immagine dell'uccello" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131007.png)
 
 #### **3.4. Lo stesso pattern compare in posti diversi**
 
 Due rilevatori che cercano lo **stesso becco in posti diversi** possono usare **gli stessi parametri**. **Idea**: addestrare molti piccoli rilevatori e lasciare che ognuno **si muova sull’immagine** (**condivisione dei pesi**, *weight sharing*).
 
-<!-- SOURCE_VISUAL id="IS21-V22" source="L21-web.pdf" page="36" type="figura" description="Due becchi in posizioni diverse rilevati dallo stesso filtro" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131018.png)
 
 #### **3.5. Uno strato convolutivo: filtri che scorrono**
 
@@ -512,14 +503,15 @@ Due rilevatori che cercano lo **stesso becco in posti diversi** possono usare **
 - L’uscita è **alta dove l’ingresso somiglia al filtro**.
 - In una CNN **i valori dei filtri sono pesi appresi dall’addestramento**.
 
-<!-- SOURCE_VISUAL id="IS21-V23" source="L21-web.pdf" page="37" type="figura" description="Filtri che scorrono sull'immagine in uno strato convolutivo" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131027.png)
 
 #### **3.6. La convoluzione passo per passo (1): un prodotto scalare**
 
 **Immagine $I$ ($6\times 6$)** e **filtro $K$ ($3\times 3$)**:
 
 $$I=\begin{bmatrix}1&0&0&0&0&1\\0&1&0&0&1&0\\0&0&1&1&0&0\\1&0&0&0&1&0\\0&1&0&0&1&0\\0&0&1&0&1&0\end{bmatrix},\qquad K=\begin{bmatrix}1&-1&-1\\-1&1&-1\\-1&-1&1\end{bmatrix}.$$
+
+![](imgs/Pasted%20image%2020261125131057.png)
 
 Si moltiplica la patch rossa (in alto a sinistra) per il filtro **elemento per elemento** e si sommano i 9 prodotti:
 
@@ -536,6 +528,8 @@ $$y_{i,j}=\sum_{u=1}^{3}\sum_{v=1}^{3}I_{i+u-1,\ j+v-1}\,K_{u,v}.$$
 
 Si sposta la patch **di un pixel a destra** (verde) e si ripete: $0\cdot 1+0\cdot(-1)+\dots=-1$. **Dopo tutte le 16 posizioni si ottiene una mappa $4\times 4$** (passo, *stride*, = 1):
 
+![](imgs/Pasted%20image%2020261125131121.png)
+
 $$y=\begin{bmatrix}3&-1&-3&-1\\-3&1&0&-3\\-3&-3&0&1\\3&-2&-2&-1\end{bmatrix}.$$
 
 Valori calcolati con `scripts/conv_numpy.py` (e MATLAB/Octave, identici).
@@ -543,6 +537,8 @@ Valori calcolati con `scripts/conv_numpy.py` (e MATLAB/Octave, identici).
 #### **3.8. Dove si accende il filtro?**
 
 **La mappa vale 3 solo dove la patch contiene la diagonale del filtro**: in alto a sinistra ($y_{1,1}$, arancio) e in basso a sinistra ($y_{4,1}$, verde acqua). **Uno strato convolutivo è un rilevatore di pattern; la mappa dice dove si trova il pattern.**
+
+![](imgs/Pasted%20image%2020261125131141.png)
 
 > 💡 **Verifica di $y_{4,1}$ (nota didattica).** La patch delle righe 4–6 e colonne 1–3 è $\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}$, la stessa diagonale di $y_{1,1}$: di nuovo $1+1+1=3$. Il massimo possibile è 3 (tre $+1$ allineati e nessun $-1$ attivo): la convoluzione con pesi $\pm 1$ conta le corrispondenze meno le discordanze.
 
@@ -554,8 +550,7 @@ Valori calcolati con `scripts/conv_numpy.py` (e MATLAB/Octave, identici).
 | (b) passo $S=2$ | la finestra salta 2 pixel: posizioni 1 e 3 ⇒ 2 per lato | $O=2$ |
 | (c) padding $P=1$ | una **cornice di zeri** (grigio): $6+2\cdot 1=8$; la dimensione si **conserva** («same») | $O=6$ |
 
-<!-- SOURCE_VISUAL id="IS21-V24" source="L21-web.pdf" page="41" type="schema" description="Tre esempi di dimensione d'uscita: passo 1, passo 2 e padding 1" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131157.png)
 
 Rosso = prima posizione del filtro $3\times 3$, verde = seconda posizione. **L’uscita ha un valore per ogni posizione in cui il filtro sta dentro l’ingresso (con padding)**: contare le posizioni lungo un lato.
 
@@ -587,8 +582,7 @@ $$O=\left\lfloor\frac{N+2P-k}{S}\right\rfloor+1$$
 
 $$K_2=\begin{bmatrix}-1&1&-1\\-1&1&-1\\-1&1&-1\end{bmatrix},\qquad y^{(2)}=\begin{bmatrix}-1&-1&-1&-1\\-1&-1&-2&1\\-1&-1&-2&1\\-1&0&-4&3\end{bmatrix}.$$
 
-<!-- SOURCE_VISUAL id="IS21-V25" source="L21-web.pdf" page="43" type="schema" description="Due filtri applicati alla stessa immagine 6x6 producono due canali 4x4" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131214.png)
 
 Il **filtro 1** (arancio) trova la **diagonale principale**, il **filtro 2** (verde acqua) una **barra verticale**: il suo valore più alto, **3, è in basso a destra**, dove l’immagine ha un tratto verticale. **Con $F$ filtri l’uscita ha $F$ canali**: il primo strato convolutivo della nostra CNN ha **25 filtri ⇒ $26\times 26\times 25$**.
 
@@ -603,8 +597,7 @@ $$\#\text{parametri}=\underbrace{F\,(k\cdot k\cdot C)}_{\text{pesi}}+\underbrace
 - **RGB, $F=2$ filtri $3\times 3$**: ognuno 27 pesi + 1 bias = 28; totale $2\cdot 27+2=56$.
 - **Primo strato**: $C=3$ (R, G, B). **Strati più profondi**: ogni feature map è un canale, ma ci sono tante mappe quanti erano i filtri prima: la **conv 2 di CNN-A vede 25 mappe** ⇒ filtri $3\times 3\times 25$, $50\,(3\cdot 3\cdot 25)+50=11\,300$.
 
-<!-- SOURCE_VISUAL id="IS21-V26" source="L21-web.pdf" page="44" type="figura" description="Il camion separato nei tre piani R, G, B e un filtro 3x3x3 che li attraversa" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131229.png)
 
 > 💡 **Il primo strato di InceptionV3 (nota didattica).** $32$ filtri $3\times 3\times 3$: $32\cdot 27=864$ pesi (§3.2), più 32 bias se presenti. Nelle architetture con batch normalization (§4.7) il bias si omette (`use_bias=False`), perché la normalizzazione successiva lo annullerebbe.
 
@@ -614,16 +607,14 @@ $$\#\text{parametri}=\underbrace{F\,(k\cdot k\cdot C)}_{\text{pesi}}+\underbrace
 - Lo strato completamente connesso vede l’immagine come **36 ingressi $x_1..x_{36}$**, ogni unità collegata a tutti.
 - **La convoluzione è uno strato completamente connesso speciale**: **la maggior parte dei pesi è 0 e gli altri sono condivisi**.
 
-<!-- SOURCE_VISUAL id="IS21-V27" source="L21-web.pdf" page="45" type="schema" description="L'immagine 6x6 vista come 36 ingressi di uno strato completamente connesso" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131241.png)
 
 #### **3.14. Meno parametri: connessioni locali e pesi condivisi**
 
 - L’uscita «3» è **collegata solo a 9 ingressi** (1, 2, 3, 7, 8, 9, 13, 14, 15), **non a tutti i 36**.
 - L’uscita «−1» usa **gli stessi 9 pesi** (stessi colori) sugli ingressi **spostati di un pixel**.
 
-<!-- SOURCE_VISUAL id="IS21-V28" source="L21-web.pdf" page="46" type="schema" description="Due uscite della convoluzione collegate a 9 ingressi ciascuna con gli stessi pesi" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131253.png)
 
 **Esempio**: 16 uscite di uno strato completamente connesso su 36 ingressi richiedono $16\cdot 36=576$ pesi; la convoluzione ne richiede **9** (un filtro), **riusati 16 volte**.
 
@@ -637,8 +628,7 @@ con $x$ un valore di una feature map. **Esempi**: $\text{ReLU}(3)=3$, $\text{ReL
 
 La **Rectified Linear Unit** è l’attivazione applicata a ogni valore **dopo ogni convoluzione**. È **economica**; per ingressi positivi la sua **derivata è 1** (**meno gradiente che svanisce**, Lezione 20), per ingressi negativi 0 (**l’unità può diventare inattiva**). Su questa mappa **il 56% dei valori diventa 0**.
 
-<!-- SOURCE_VISUAL id="IS21-V29" source="L21-web.pdf" page="47" type="figura" description="Grafico della ReLU e feature map prima e dopo la ReLU" reason="Grafico e mappe visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131307.png)
 
 > 💡 **«L’unità può diventare inattiva» (nota didattica).** Se i pesi di un neurone ReLU finiscono in una zona in cui la somma pesata è negativa per **tutti** gli ingressi, la sua uscita e il suo gradiente sono sempre 0 e non impara più: è una «ReLU morta» (Lezione 10, §8). Si mitiga con un learning rate non troppo alto e varianti come la Leaky ReLU ($0{,}01x$ per $x<0$).
 
@@ -650,8 +640,7 @@ La **Rectified Linear Unit** è l’attivazione applicata a ogni valore **dopo o
 4. **Rete feed-forward completamente connessa** (Lezione 20).
 5. **Output**: la classe (volto, corpo, cane, cavallo…).
 
-<!-- SOURCE_VISUAL id="IS21-V30" source="L21-web.pdf" page="48" type="schema" description="Architettura generale di una CNN: convoluzione e pooling ripetuti, flatten, strati densi, classe" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131533.png)
 
 **CNN-A: la CNN di questa lezione, con le sue forme.**
 
@@ -660,8 +649,7 @@ La **Rectified Linear Unit** è l’attivazione applicata a ogni valore **dopo o
 | $28\times 28\times 1$ | $26\times 26\times 25$ | $13\times 13\times 25$ | $11\times 11\times 50$ | $5\times 5\times 50$ | 1250 | 100 | 10 |
 | | ← **estrattore di feature (filtri appresi)** → | | | | ← **classificatore** → | | |
 
-<!-- SOURCE_VISUAL id="IS21-V31" source="L21-web.pdf" page="49" type="schema" description="Schema a blocchi di CNN-A con le forme di ogni strato" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131545.png)
 
 In questa lezione si usa una **rete piccola e semplificata che somiglia a LeNet (non ad AlexNet)**: la chiamiamo **CNN-A**. **Input**: una cifra grigia $28\times 28$ (784 numeri). **Output**: 10 probabilità (cifre 0–9). Ogni blocco è una **pila di feature map**: altezza = dimensione spaziale, profondità = numero di canali. **Le mappe diventano più piccole e più numerose.** Ritorna nella parte Keras come mappa.
 
@@ -669,8 +657,9 @@ In questa lezione si usa una **rete piccola e semplificata che somiglia a LeNet 
 
 $775\times 525$ pixel: un uccello → tenere 1 pixel su 4 per lato: $194\times 131$, ancora un uccello → di nuovo $\times 2$: $97\times 65$, **ancora un uccello**. Feature map $198\times 298$ → $99\times 149$ → $48\times 73$.
 
-<!-- SOURCE_VISUAL id="IS21-V32" source="L21-web.pdf" page="50" type="figura" description="Un uccello sottocampionato più volte resta riconoscibile, con le feature map ridotte" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131636.png)
+
+![](imgs/Pasted%20image%2020261125131645.png)
 
 - Il pooling **sottocampiona le feature map**: $2\times 2$ dà una compressione **4:1**, $3\times 3$ **9:1**.
 - **Conserva la posizione approssimativa, non quella esatta**: **robusto a piccoli spostamenti**.
@@ -680,6 +669,8 @@ $775\times 525$ pixel: un uccello → tenere 1 pixel su 4 per lato: $194\times 1
 
 $$\begin{bmatrix}1&1&2&4\\5&6&7&8\\3&2&1&0\\1&2&3&4\end{bmatrix}\ \xrightarrow{\ \text{max pooling }2\times 2,\ \text{passo }2\ }\ \begin{bmatrix}6&8\\3&4\end{bmatrix}$$
 
+![](imgs/Pasted%20image%2020261125131723.png)
+
 Ingresso: $4\times 4$ (16 valori); uscita: $2\times 2$ (4 valori). Ogni uscita è il **valore più grande di un blocco $2\times 2$**: $\max(1,1,5,6)=6$; $\max(2,4,7,8)=8$; $\max(3,2,1,2)=3$; $\max(1,0,3,4)=4$. **Nessun peso da imparare.** Applicato a **ogni canale separatamente**: $26\times 26\times 25\to 13\times 13\times 25$.
 
 #### **3.19. Dalle feature map alle classi: flatten e denso**
@@ -687,6 +678,8 @@ Ingresso: $4\times 4$ (16 valori); uscita: $2\times 2$ (4 valori). Ogni uscita �
 1. **Flatten**: le mappe $5\times 5\times 50$ diventano **un vettore di 1250 numeri**.
 2. **Strato denso** (completamente connesso): **100 neuroni** combinano le feature (l’MLP della Lezione 20).
 3. **Strato d’uscita**: **un punteggio per classe** (10 cifre), trasformato in probabilità dalla **softmax**.
+
+![](imgs/Pasted%20image%2020261125131836.png)
 
 > 💡 **Variante moderna: il global average pooling.** Sostituisce il flatten: **ogni mappa → la sua media**, $5\times 5\times 50\to 50$ numeri, **molti meno pesi nella testa**. Con 50 valori invece di 1250, il primo strato denso da 100 neuroni passerebbe da 125 100 a 5100 parametri.
 
@@ -698,8 +691,7 @@ $$p_c=\frac{e^{z_c}}{\sum_{j=1}^{C}e^{z_j}}$$
 - $C$: numero di classi; $p_c\in(0,1)$, $\sum_cp_c=1$.
 - **Esempio** ($C=3$): $z=(2{,}0;\ 1{,}0;\ 0{,}1)$, $e^z=(7{,}39;\ 2{,}72;\ 1{,}11)$, somma $=11{,}21$, $p=(0{,}66;\ 0{,}24;\ 0{,}10)$: «ok» 0,66, «graffio» 0,24, «ammaccatura» 0,10.
 
-<!-- SOURCE_VISUAL id="IS21-V33" source="L21-web.pdf" page="53" type="schema" description="Feature dello strato precedente, tre neuroni d'uscita con i logit e la softmax con le probabilità" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131848.png)
 
 > 📌 **Definizione.** La **softmax** trasforma i $C$ logit dell’ultimo strato in $C$ **punteggi positivi a somma 1**, **mantenendone l’ordine** (qui: ispezione con 3 classi). Spesso letti come probabilità, ma **non necessariamente calibrati**: una rete può essere «sicura» al 99% e sbagliare comunque (Lezione 18, §8.15).
 
@@ -731,8 +723,7 @@ Keras stampa questa tabella con `model.summary()`.
 
 **Batch di immagini + etichette vere** → **passo in avanti** (la CNN) → **probabilità** → **loss** $L=-\log p_{\text{vera}}$ → **backpropagation** (gradienti $\partial L/\partial w$) → **aggiornare tutti i pesi** $w\leftarrow w-\eta\,\partial L/\partial w$ → tutti i batch = 1 epoca; **ripetere per molte epoche** → pesi addestrati.
 
-<!-- SOURCE_VISUAL id="IS21-V34" source="L21-web.pdf" page="55" type="schema" description="Ciclo di addestramento di una CNN con loss, backpropagation e aggiornamento" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131906.png)
 
 - $L$: **loss di cross-entropy**; $p_{\text{vera}}$: probabilità data alla classe corretta. **Esempi**: $p_{\text{vera}}=0{,}66\Rightarrow L=0{,}42$; $p_{\text{vera}}=0{,}10\Rightarrow L=2{,}30$.
 - $w$: qualsiasi peso (anche **i 9 numeri di ogni filtro**); $\eta$: learning rate (per esempio $10^{-3}$). Richiamo dalla Lezione 20: **stessa backpropagation**; ottimizzatori come **Adam** adattano $\eta$.
@@ -781,8 +772,9 @@ model = keras.Sequential([
 ])
 ```
 
-<!-- SOURCE_VISUAL id="IS21-V35" source="L21-web.pdf" page="58" type="figura" description="Le prime 6 immagini di test MNIST con le loro etichette 7, 2, 1, 0, 4, 1" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125131943.png)
+
+![](imgs/Pasted%20image%2020261125131951.png)
 
 **Input**: un batch di immagini, forma `(batch, 28, 28, 1)`. **Keras mette il canale per ultimo**, come in un file d’immagine. **Scalare a 0..1 aiuta l’addestramento.** MNIST si scarica automaticamente (11 MB). Le prime 6 immagini di test `x_te[:6]` hanno etichette $y=7,2,1,0,4,1$.
 
@@ -851,8 +843,7 @@ p = model.predict(x_te[:6])          # (6, 10)
 print(p.argmax(axis=1))              # 6 cifre
 ```
 
-<!-- SOURCE_VISUAL id="IS21-V36" source="L21-web.pdf" page="62" type="grafico" description="Curve di loss e accuratezza di training e validazione di CNN-A su 5 epoche" reason="Grafici visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132026.png)
 
 **Esecuzione reale** (Keras 3, CPU, **circa 4 minuti**): **54 000 immagini per il training, 6000 per la validazione, 10 000 per il test**. **Accuratezza di test di CNN-A: 98,65%.** La loss di training continua a scendere mentre quella di validazione **si appiattisce**: più epoche aggiungerebbero poco.
 
@@ -870,8 +861,7 @@ print(p.argmax(axis=1))              # 6 cifre
 
 (Diagonale trascritta dalla matrice; le celle fuori diagonale sono nella figura.)
 
-<!-- SOURCE_VISUAL id="IS21-V37" source="L21-web.pdf" page="63" type="grafico" description="Matrice di confusione 10x10 di CNN-A sul test MNIST e le sei cifre sbagliate con il punteggio softmax più alto" reason="Matrice e immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132046.png)
 
 **Errori con il punteggio softmax più alto**: previsto (punteggio), cifra vera: 3 (1,00) vero 5; 0 (1,00) vero 5; 3 (1,00) vero 5; 8 (1,00) vero 5; 1 (1,00) vero 6; 3 (0,99) vero 5. **Nell’industria confondere «difetto» con «ok» costa di solito molto più del contrario.**
 
@@ -881,8 +871,9 @@ print(p.argmax(axis=1))              # 6 cifre
 
 I filtri mostrati sono i **pesi dello strato evidenziato**: la **prima convoluzione di CNN-A** (Conv $3\times 3$, 25 filtri). **I 25 filtri appresi** (arancio +, blu −): **diversi mostrano un’orientazione: rilevatori di bordi**; altri rispondono a **tratti chiari**. **Meno ordinati di quelli fatti a mano, ma funzionano per questi dati.** Si leggono con `model.layers[0].get_weights()[0]`, forma `(3, 3, 1, 25)`. Per confronto, i filtri di bordo fatti a mano (Sobel verticale e orizzontale) del §2.9.
 
-<!-- SOURCE_VISUAL id="IS21-V38" source="L21-web.pdf" page="64" type="figura" description="I 25 filtri 3x3 appresi dal primo strato di CNN-A accanto ai filtri di bordo fatti a mano" reason="Immagini dei filtri visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132127.png)
+
+![](imgs/Pasted%20image%2020261125132140.png)
 
 #### **4.8. CNN-B: una versione moderna di CNN-A**
 
@@ -920,8 +911,7 @@ model = keras.Sequential([
 
 **CNN Explainer** è una **visualizzazione interattiva di una piccola CNN che gira nel browser**: si fa clic su qualsiasi mappa per vedere la convoluzione, la ReLU e il pooling che l’hanno prodotta. https://poloclub.github.io/cnn-explainer/
 
-<!-- SOURCE_VISUAL id="IS21-V39" source="L21-web.pdf" page="66" type="schermata" description="Interfaccia di CNN Explainer" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132204.png)
 
 #### **4.10. Tocca a voi: il laboratorio di codice**
 
@@ -965,8 +955,7 @@ Non partire da zero: riusare ciò che milioni di immagini hanno insegnato.
 
 AlexNet: strati e parametri (max pooling dopo conv1, conv2, conv5).
 
-<!-- SOURCE_VISUAL id="IS21-V40" source="L21-web.pdf" page="69" type="schema" description="Architettura di AlexNet" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132253.png)
 
 > 💡 **Top-5 (nota didattica).** L’errore top-5 conta come corretta una previsione se la classe vera è tra le 5 più probabili: con 1000 classi molto simili (decine di razze di cane) è una misura più indulgente e più informativa della top-1. Da 26,2% a 15,3% è una riduzione relativa del 42% in un solo anno: è il risultato che ha convinto la comunità.
 
@@ -1007,10 +996,12 @@ Versione a una sola torre (senza convoluzioni raggruppate), input $227\times 227
 #### **5.3. LeNet-5 e VGG16: piccola e profonda**
 
 - **LeNet-5** (LeCun, 1998): **5 strati** (3 conv + 2 completamente connessi), cifre grigie $32\times 32$ → 10 classi; **leggeva gli assegni bancari**. **CNN-A ha lo stesso spirito.** Parametri: **circa 60 mila**.
+
+![](imgs/Pasted%20image%2020261125132357.png)
+
 - **VGG16** (Simonyan e Zisserman, Oxford, 2014): **16 strati** (13 conv + 3 completamente connessi), **solo filtri $3\times 3$**, $224\times 224\times 3$ → 1000 classi; **92,7% di accuratezza top-5 su ImageNet**. Parametri: **138 M** (138 357 544).
 
-<!-- SOURCE_VISUAL id="IS21-V41" source="L21-web.pdf" page="71" type="schema" description="Architetture di LeNet-5 e VGG16" reason="Schemi visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132405.png)
 
 Adattato da © T. Martinez e dagli articoli originali.
 
@@ -1041,8 +1032,7 @@ $$y=\text{ReLU}\big(F(x)+x\big)$$
 
 **Esempio**: $x=2$, $F(x)=0{,}3\Rightarrow y=\text{ReLU}(2{,}3)=2{,}3$.
 
-<!-- SOURCE_VISUAL id="IS21-V42" source="L21-web.pdf" page="73" type="schema" description="Blocco residuo con due convoluzioni e la scorciatoia che somma l'ingresso" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132433.png)
 
 > 💡 **Perché il gradiente non svanisce (nota didattica).** Derivando $y=F(x)+x$ rispetto a $x$ si ottiene $\frac{\partial y}{\partial x}=\frac{\partial F}{\partial x}+1$: anche se $\partial F/\partial x$ è piccolo, il «+1» della scorciatoia lascia passare il gradiente. Attraverso $L$ blocchi il prodotto delle derivate non scende come $0{,}25^L$ (Lezione 20, §6.14), perché ogni fattore è vicino a 1.
 
@@ -1050,8 +1040,7 @@ $$y=\text{ReLU}\big(F(x)+x\big)$$
 
 **Backbone**: la parte convolutiva (conv + ReLU + pooling, ripetuti: bordi → tessiture → parti), **pre-addestrata su ImageNet** (1,28 M immagini) → flatten / pool → feature → **testa**: l’ultima decisione (Dense + softmax → 1000 probabilità).
 
-<!-- SOURCE_VISUAL id="IS21-V43" source="L21-web.pdf" page="74" type="schema" description="Backbone convolutivo pre-addestrato e testa di decisione" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132443.png)
 
 > 📌 **Definizione.** Il **transfer learning** **riusa una rete addestrata su un grande compito sorgente** (per esempio ImageNet) come **punto di partenza per un nuovo compito obiettivo**; di solito **solo gli ultimi strati vengono addestrati sui dati nuovi**.
 
@@ -1062,8 +1051,7 @@ $$y=\text{ReLU}\big(F(x)+x\big)$$
 
 **Due immagini di volti** → **backbone VGG-Face, senza testa** (13 conv $3\times 3$ in 5 blocchi, poi FC; addestrato su **2,6 M immagini di volti**) → embedding $z\in\mathbb{R}^{4096}$ → **PCA** $W^\top(z-\bar{z})$ → $u\in\mathbb{R}^k$ (per esempio $k=128$) → **distanza**: stessa persona se $\text{dist}(u_1,u_2)<\tau$? → sì / no.
 
-<!-- SOURCE_VISUAL id="IS21-V44" source="L21-web.pdf" page="75" type="schema" description="Verifica di volti con backbone VGG-Face, PCA e distanza con soglia" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132451.png)
 
 **Input**: due immagini di volti. **Output**: stessa persona sì/no. **La CNN senza la testa dà un vettore di feature per ogni volto (un embedding)**; la PCA lo riduce; **una distanza sotto la soglia $\tau$ significa «stessa persona»**. Richiamo dalla Lezione 18: PCA ed embedding; dalla Lezione 19: distanza e soglia $\tau$. **Lo stesso schema funziona per i prodotti**: embedding + distanza per trovare **pezzi simili o anomalie**. Volti ritagliati dalla figura dell’articolo VGG-Face. https://www.robots.ox.ac.uk/~vgg/software/vgg_face/
 
@@ -1075,8 +1063,7 @@ $$y=\text{ReLU}\big(F(x)+x\big)$$
 2. **Congelare** i suoi pesi: **restano come imparati su ImageNet**.
 3. **Addestrare la nuova testa** sulle proprie classi; opzionalmente fare poi il **fine-tuning** degli ultimi strati del backbone **con un learning rate piccolo**.
 
-<!-- SOURCE_VISUAL id="IS21-V45" source="L21-web.pdf" page="76" type="schema" description="Backbone congelato e nuova testa addestrata per ok e difetto" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132500.png)
 
 > 📌 **Caso industriale tipico**: **ispezione visiva con 2 classi** (ok / difetto) e **200–500 foto etichettate per classe**. **Addestrare da zero farebbe overfitting**; il transfer learning funziona **in pochi minuti** su una GPU da portatile o su Colab.
 
@@ -1116,8 +1103,7 @@ Immagine $224\times 224\times 3$ → augmentation + pre-elaborazione → **backb
 
 **Immagine** $640\times 640\times 3$ → **backbone** (feature, CNN) → **neck** (fonde mappe di 3 dimensioni: oggetti piccoli, medi, grandi) → **head** (per ogni cella: box $(x,y,w,h)$, punteggio, classe) → **tenere i box migliori (NMS)** → uscita: box con classe (bicicletta, cane, camion).
 
-<!-- SOURCE_VISUAL id="IS21-V46" source="L21-web.pdf" page="78" type="schema" description="Struttura di YOLO con backbone, neck, head e NMS e l'immagine con i box di bicicletta, cane e camion" reason="Schema e immagine visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132535.png)
 
 **Input**: un’immagine. **Output**: un elenco di box, ognuno con **posizione** $(x,y)$, **dimensione** $(w,h)$, **classe e punteggio**. La testa predice qualche box candidato **in ogni cella della griglia di feature**; la **NMS** (*non-maximum suppression*) **rimuove i duplicati che si sovrappongono**. **Usi**: ispezione della qualità, sicurezza (caschi, persone vicino alle macchine), conteggio delle merci, droni, dispositivi edge. **Un passo in avanti ⇒ tempo reale.**
 
@@ -1129,8 +1115,7 @@ Immagine $224\times 224\times 3$ → augmentation + pre-elaborazione → **backb
 
 **Galleria dell’utente A** (foto ridimensionate a $224\times 224$) → **GoogLeNet pre-addestrata su Places365** (365 classi di luoghi, 7 M parametri) → «scogliera, montagna, nevaio…» → **contare le classi della galleria** → profilo: «**alpinista**». **Galleria dell’utente B** → «centro commerciale, negozio di abbigliamento…» → profilo: «**amante dello shopping**».
 
-<!-- SOURCE_VISUAL id="IS21-V47" source="L21-web.pdf" page="79" type="schema" description="Due gallerie di foto personali classificate per luogo e trasformate in due profili" reason="Schema e foto visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132602.png)
 
 **Input**: le foto di una galleria personale. **Modello**: una piccola CNN pre-addestrata su Places365, usata così com’è. **Output**: **una classe di luogo per foto ⇒ abitudini e interessi del proprietario**. La rete è **piccola ed economica** (millisecondi per foto su una CPU): **profilare migliaia di utenti costa poco**. **Pensarci prima di condividere dati.**
 
@@ -1141,8 +1126,7 @@ Immagine $224\times 224\times 3$ → augmentation + pre-elaborazione → **backb
 - **(A) Transfer learning: riaddestrare la testa** (questa lezione): foto → backbone CNN (pre-addestrato) → **nuova testa** Dense + softmax → le proprie classi: montagna, negozio, spiaggia…
 - **(B) Embedding + distanza** (Lezioni 18, 19): foto → backbone CNN (pre-addestrato) → embedding $z$ → **k-NN / k-means sui vettori** → foto simili, gruppi, foto insolite.
 
-<!-- SOURCE_VISUAL id="IS21-V48" source="L21-web.pdf" page="80" type="schema" description="Due pipeline sullo stesso backbone: nuova testa addestrata o embedding con k-NN e k-means" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132632.png)
 
 | | **(A) testa riaddestrata** | **(B) embedding + distanza** |
 |---|---|---|
@@ -1159,8 +1143,7 @@ Immagine $224\times 224\times 3$ → augmentation + pre-elaborazione → **backb
 - **Oggi anche**: architetture pre-addestrate, ottimizzazione degli iperparametri, **AutoML**, ***neural architecture search*** (Lezione 5).
 - **Agenti** (prospettiva, richiamo dalla Lezione 15): **AutoResearch** (A. Karpathy), un agente AI che **modifica il codice, esegue esperimenti, valuta la metrica di validazione e tiene solo i miglioramenti**.
 
-<!-- SOURCE_VISUAL id="IS21-V49" source="L21-web.pdf" page="81" type="figura" description="Progettazione delle CNN per tentativi, AutoML e agenti" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132652.png)
 
 Adattato da © T. Martinez.
 
@@ -1177,8 +1160,7 @@ InceptionV3 in Python (Colab) e GoogLeNet in MATLAB.
 
 **JPEG** $2048\times 1365\times 3$ → **ridimensionare** $299\times 299\times 3$ → **aggiungere l’asse del batch** $1\times 299\times 299\times 3$ → **pre-elaborare** (0..255 → −1..1) → **InceptionV3** → $1\times 1000$ → **decodificare** (i nomi delle prime 5) → «**moving van**» 0,44.
 
-<!-- SOURCE_VISUAL id="IS21-V50" source="L21-web.pdf" page="83" type="schema" description="Pipeline dal JPEG del camion alle 5 classi di InceptionV3 con le forme a ogni passo" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132741.png)
 
 Inception-v3: **48 strati, 23,9 M parametri**, input $299\times 299\times 3$.
 
@@ -1205,8 +1187,7 @@ for _, name, prob in iv3.decode_predictions(p, top=5)[0]:
 
 Uscita del notebook del corso (InceptionV3).
 
-<!-- SOURCE_VISUAL id="IS21-V51" source="L21-web.pdf" page="84" type="schermata" description="Foto del camion e uscita stampata delle 5 classi più probabili" reason="Immagine e output visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132754.png)
 
 > 💡 **`preprocess_input` di Inception (nota didattica).** Per InceptionV3 la funzione scala i pixel come $x/127{,}5-1$, da $[0,255]$ a $[-1,1]$; per VGG16 e ResNet50 invece sottrae le medie per canale di ImageNet. Usare la funzione di un altro modello non dà errori, ma degrada le previsioni in silenzio. 92 MB: $23{,}9$ M parametri × 4 byte ≈ 96 milioni di byte ≈ 91 MiB.
 
@@ -1219,8 +1200,7 @@ Uscita del notebook del corso (InceptionV3).
 
 Rango 1 come stampato dal notebook (0,438); rango 2 misurato dal suo grafico a barre; i ranghi 3–5 sono sotto 0,01.
 
-<!-- SOURCE_VISUAL id="IS21-V52" source="L21-web.pdf" page="85" type="grafico" description="Grafico a barre delle probabilità delle 5 classi più probabili per il camion" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132808.png)
 
 #### **6.4. Lo stesso in MATLAB: una webcam e GoogLeNet**
 
@@ -1240,8 +1220,7 @@ yticklabels(classNames(flip(idx)))
 
 **API aggiornata (R2024a+)**: sostituisce `googlenet` + `classify`. Deep Learning Toolbox + pacchetto di supporto per la webcam. Esempi: **banana** (punteggio 1); **tazza da caffè** 0,83, poi tazza.
 
-<!-- SOURCE_VISUAL id="IS21-V53" source="L21-web.pdf" page="86" type="figura" description="Foto da webcam di una banana e di una tazza con i punteggi di GoogLeNet" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132818.png)
 
 > 💡 **`flip(idx)` (nota didattica).** `maxk` restituisce i 5 indici in ordine **decrescente** di punteggio; `barh` disegna la prima barra in basso. Ribaltando l’ordine con `flip`, la classe più probabile finisce in cima al grafico. `single(...)` converte l’immagine `uint8` in virgola mobile, come vuole `predict`.
 
@@ -1260,8 +1239,7 @@ semilogy(sort(scores))                        % 1000 punteggi
 - «**Spotlight**» (riflettore) ottiene **0,50**: **la rete non dice mai «non lo so»**.
 - **Tempo di previsione**: circa **0,4 s** su una CPU da portatile.
 
-<!-- SOURCE_VISUAL id="IS21-V54" source="L21-web.pdf" page="87" type="grafico" description="Immagine di rumore casuale e i 1000 punteggi ordinati in scala logaritmica" reason="Immagine e grafico visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132830.png)
 
 > ⚠️ **Il rumore ha una classe (nota didattica).** La softmax distribuisce sempre una massa pari a 1 tra le 1000 classi, e qui ne dà metà a «spotlight». Per un’applicazione è proprio il problema della Lezione 5 (§1.6): una rete di classificazione **non sa dire «nessuna delle classi»**. Servono una soglia di confidenza, una classe «nessuno» addestrata o un rilevatore di input fuori distribuzione. Attenzione: `rand` produce valori in $[0,1]$, mentre la rete si aspetta pixel in $[0,255]$: l’immagine è quasi nera con un po’ di rumore, e la confidenza alta resta comunque ingiustificata.
 
@@ -1277,8 +1255,7 @@ Segnali, giochi e testi come immagini: spettrogrammi di macchine e voci, la scac
 - **Motore**: 2 s a 8 kHz = **16 000 campioni** → immagine $49\times 663$. Un **cuscinetto danneggiato** colpisce **12 volte al secondo**: **strisce verticali attorno a 2,6 kHz**. Dati sintetici (seme fisso).
 - **Voce**: una CNN legge una finestra dello spettrogramma e restituisce una **parola**.
 
-<!-- SOURCE_VISUAL id="IS21-V55" source="L21-web.pdf" page="89" type="figura" description="Spettrogramma di un motore con cuscinetto danneggiato e spettrogramma di un parlato letto da una CNN" reason="Spettrogrammi visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132904.png)
 
 **Input**: un segnale. **Spettrogramma**: energia per frequenza (righe) e tempo (colonne) (Lezione 10). **Output**: classe (sano / danneggiato; una parola). **Ancora una ricetta valida per suoni di macchine, vibrazioni, ECG**; il riconoscimento del parlato moderno usa spesso **transformer** o ibridi convoluzione-transformer (**Conformer**).
 
@@ -1288,8 +1265,7 @@ Segnali, giochi e testi come immagini: spettrogrammi di macchine e voci, la scac
 
 Dall’articolo di *Nature* su AlphaGo (Silver et al., 2016).
 
-<!-- SOURCE_VISUAL id="IS21-V56" source="L21-web.pdf" page="90" type="figura" description="Scacchiera del Go e la rete di AlphaGo che produce le probabilità della mossa successiva" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132919.png)
 
 **Input**: matrice $19\times 19$ (nero 1, bianco −1, nessuno 0; **48 piani di feature**). **Output**: **probabilità della mossa successiva** su ognuna delle $19\times 19$ posizioni. Si potrebbe usare una rete completamente connessa, ma **una CNN funziona molto meglio**: **i pattern locali di pietre contano ovunque**. **Nota: nessun max pooling, perché ogni posizione conta.**
 
@@ -1301,8 +1277,7 @@ Dall’articolo di *Nature* su AlphaGo (Silver et al., 2016).
 - **Il tweet → una matrice $d\times|s|$**: come uno «**spettrogramma**» di parole.
 - I **filtri scorrono lungo le parole**; pooling; softmax. **Output**: positivo / negativo.
 
-<!-- SOURCE_VISUAL id="IS21-V57" source="L21-web.pdf" page="91" type="schema" description="CNN su un tweet: matrice degli embedding delle parole, filtri, pooling e softmax" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125132956.png)
 
 > 📌 **Lo stato dell’arte oggi**: il testo è elaborato dai **transformer** (Lezione 13), **non dalle CNN**. L’esempio è conservato perché **mostra la potenza della convoluzione**: **trova pattern locali in qualsiasi dato disposto su una griglia**, non solo nelle immagini.
 
@@ -1441,8 +1416,7 @@ $$\frac{\partial L}{\partial k_1}=0{,}5\cdot 1+(-1)\cdot 2=-1{,}5,\qquad \frac{\
 
 Si copia ogni patch $3\times 3$ in **una riga** («**im2col**»): la matrice delle patch è **16 righe × 9 colonne**; moltiplicata per il filtro ($9\times 1$) dà $16\times 1$, rimodellato in $4\times 4$. **L’intera convoluzione è un solo prodotto matriciale**; con $F$ filtri il filtro diventa una matrice $9\times F$. **È così che la calcolano le GPU**, ed è ciò che fanno `sliding_window_view` + `einsum` nel nostro codice NumPy.
 
-<!-- SOURCE_VISUAL id="IS21-V58" source="L21-web.pdf" page="99" type="schema" description="Trasformazione im2col: patch dell'immagine come righe di una matrice moltiplicata per il filtro" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133042.png)
 
 #### **9.7. Reti pre-addestrate in PyTorch (torchvision)**
 
@@ -1555,33 +1529,27 @@ X = log10(abs(S).^2 + 1e-10);                    % immagine
 
 **Addestramento e rilascio (corso NVIDIA)**: addestramento con molte immagini etichettate (avanti + indietro); rilascio con una nuova immagine, solo in avanti, pesi fissi; «profondo» = molti strati, molti parametri, molti esempi. Fonte: corso NVIDIA Deep Learning; i numeri della figura di destra risalgono a circa il 2015.
 
-<!-- SOURCE_VISUAL id="IS21-V59" source="L21-web.pdf" page="104" type="figura" description="Figure originali NVIDIA su addestramento e rilascio" reason="Figure visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133112.png)
 
 **Unità apprese**: ogni quadrato mostra il pattern d’ingresso che **attiva di più** una delle 100 unità di uno strato appreso; **la maggior parte delle unità è diventata un rilevatore di bordi orientati: nessuno li ha progettati**. Adattato da © T. Martinez.
 
-<!-- SOURCE_VISUAL id="IS21-V60" source="L21-web.pdf" page="105" type="figura" description="Pattern d'ingresso che attivano di più 100 unità di uno strato appreso" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133135.png)
 
 **Una discussione «più profonda»: i campi collegati.**
 
-<!-- SOURCE_VISUAL id="IS21-V61" source="L21-web.pdf" page="106" type="figura" description="Mappa dei campi collegati al deep learning" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133150.png)
 
 **Tassonomia dei modelli di apprendimento** (fonte: corso NVIDIA Deep Learning; * esiste una versione supervisionata).
 
-<!-- SOURCE_VISUAL id="IS21-V62" source="L21-web.pdf" page="107" type="figura" description="Tassonomia dei modelli di apprendimento" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133159.png)
 
 **Word embedding (storico): parole convertite in numeri.**
 
-<!-- SOURCE_VISUAL id="IS21-V63" source="L21-web.pdf" page="108" type="figura" description="Parole convertite in vettori numerici con un word embedding" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133216.png)
 
 **Word2Vec (storico): un estrattore neurale di feature per le parole.**
 
-<!-- SOURCE_VISUAL id="IS21-V64" source="L21-web.pdf" page="109" type="figura" description="Architettura di Word2Vec" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125133226.png)
 
 > 💡 **Word2Vec (nota didattica, Lezione 13).** Word2Vec impara un vettore per ogni parola chiedendo a una rete poco profonda di prevedere le parole vicine (o la parola centrale dalle vicine): parole che compaiono negli stessi contesti finiscono vicine nello spazio, e alcune relazioni diventano differenze di vettori (re − uomo + donna ≈ regina). È l’antenato degli embedding dei token dei transformer.
 
