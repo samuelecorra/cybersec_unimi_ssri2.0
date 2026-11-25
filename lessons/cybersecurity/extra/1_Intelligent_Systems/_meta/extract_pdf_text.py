@@ -111,7 +111,10 @@ def main():
         cache = CACHE
         index_path = META / "page_index.json"
         report_path = META / "EXTRACTION_REPORT.md"
-        pdfs = sorted(COURSE.glob("Lezione*/**/*.pdf"))
+        pdfs = sorted(
+            pdf for pdf in COURSE.glob("Lezione*/**/*.pdf")
+            if not any(part.startswith("sources_") for part in pdf.relative_to(COURSE).parts[:-1])
+        )
     if target:
         pdfs = [p for p in pdfs if target in p.parts]
     if not pdfs:

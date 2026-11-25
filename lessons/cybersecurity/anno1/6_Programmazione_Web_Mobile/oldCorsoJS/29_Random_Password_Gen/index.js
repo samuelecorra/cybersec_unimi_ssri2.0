@@ -36,11 +36,23 @@ function generaPassword(lunghezza,
     if (caratteriPermessi.length === 0) {
         return `Non hai selezionato true alcun set di caratteri per la pw!`
     }
+    // Campionamento uniforme con il generatore crittografico del browser.
+    function indiceCasuale(max) {
+        const limite = Math.floor(0x100000000 / max) * max;
+        const buffer = new Uint32Array(1);
+        let valore;
+        do {
+            window.crypto.getRandomValues(buffer);
+            valore = buffer[0];
+        } while (valore >= limite);
+        return valore % max;
+    }
+
     // Se almeno un set di caratteri è flaggato a true, possiamo procedere:
     // Generiamo dei caratteri casuali dal set disponibile per ogni indice
     // di posizione della stringa-password finale con un ciclo for:
     for (let i = 0; i < lunghezza; i++) {
-        const indiceRandom = Math.floor(Math.random() * caratteriPermessi.length);
+        const indiceRandom = indiceCasuale(caratteriPermessi.length);
         // Ed ora possiamo iniziare a concatenare, indice dopo indice, a partire
         // dalla stringa vuota:
         password += caratteriPermessi[indiceRandom];
