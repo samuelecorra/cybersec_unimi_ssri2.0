@@ -1392,16 +1392,176 @@ $$\text{Var}(\text{PC}_j)=u_j^\top C\,u_j=\lambda_j=\sum_{i,l}w_{ij}\,w_{lj}\,C_
 
 ### **11. Approfondimento — il notebook Colab e l’edizione precedente**
 
+Il notebook `Lesson_18_Laboratory_COLAB_DimensionalityReduction.ipynb` conserva il laboratorio dell’edizione precedente, svolto sul dataset reale `sklearn.datasets.load_digits`. Per non perdere la sequenza didattica e gli esperimenti originali, ne ripristino qui i passaggi completi come appendice: caricamento ed esplorazione delle cifre, proiezioni PCA e t-SNE, quindi ranking dei pixel con RFE e SVM. Il materiale dell’edizione 2026/27 resta trattato nei capitoli principali.
 
-Il notebook della cartella, `Lesson_18_Laboratory_COLAB_DimensionalityReduction.ipynb` («*Dimensionality Reduction via PCA, t-SNE*»), contiene la versione precedente dei laboratori 1–3 sul **vero** `load_digits`. Le differenze rispetto alle slide 2026/27:
+#### **11.1. Laboratorio: riduzione della dimensionalità in Colab**
 
-- **RFE**: stessa chiamata, `RFE(estimator=svc, n_features_to_select=1, step=1)`, con il ranking disegnato con `matshow`.
-- **t-SNE**: `TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)`. Il log salvato riporta «*KL divergence after 250 iterations with early exaggeration: 61.485268*» e «*KL divergence after 300 iterations: 0.960238*».
-- **Colori**: `plt.cm.get_cmap('jet', 10)` per dieci classi.
+_(slide pp. 35–49)_
 
-> ⚠️ **Parametri e funzioni datati (nota didattica).** 1) `n_iter` è stato rinominato `max_iter` in scikit-learn 1.5 e poi rimosso: con le versioni attuali il notebook va aggiornato, come fa la slide del §6.1. 2) Con 300 iterazioni (di cui 250 di *early exaggeration*, la fase iniziale in cui le attrazioni sono amplificate per formare i gruppi) restano solo 50 iterazioni di ottimizzazione vera: la KL finale di 0,96 è più alta dello 0,71 ottenuto con 1000 iterazioni, e la mappa è meno rifinita. 3) Il valore 61,49 durante l’early exaggeration non è confrontabile con quello finale, perché in quella fase le $p_{ij}$ sono moltiplicate per un fattore. 4) `plt.cm.get_cmap` è deprecata in Matplotlib recente: si usa `matplotlib.colormaps['jet'].resampled(10)` oppure direttamente `cmap='tab10'`, come nelle slide (una mappa categoriale è anche più adatta di *jet* per classi senza ordine, Lezione 11).
+##### **11.1.1. Il dataset delle cifre**
 
-Il PDF dell’edizione precedente (`Lesson_18_FeatureEngineering…CodingExamples.pdf`) presentava gli stessi contenuti di selezione, PCA, LDA, t-SNE e ICA, senza la parte sugli embedding e sui modelli System One.
+Il laboratorio (p. 35) usa **codice Python in Colab** per estrazione e selezione delle feature, con il dataset **`sklearn.datasets.load_digits`** (p. 36): ogni esempio è un’**immagine 8 × 8** di una cifra scritta a mano, con **1797 campioni**, molti meno di MNIST.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_digits
+
+digits = load_digits()
+print(digits.data.shape)       # (1797, 64)
+print(digits.data[0].shape)    # (64,)
+print(digits.data[0])          # 64 livelli di grigio tra 0 e 16
+print(digits.target[0])        # 0
+
+plt.gray()
+plt.matshow(digits.images[0])
+plt.show()
+```
+
+`shape` è una **tupla** che indica il numero di dimensioni dell’array (p. 37): 1797 campioni con **64 feature**, i pixel dell’immagine 8 × 8 **srotolati** in un vettore. Il primo campione è uno **0**.
+
+Si disegnano poi **due sole feature** per vedere la loro correlazione:
+
+```python
+plt.scatter(digits.data[:, 1], digits.data[:, 2],
+            c=digits.target, edgecolor='none', alpha=0.5,
+            cmap=plt.cm.get_cmap('jet', 10))
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+plt.colorbar();
+```
+
+> 📌 **L’effetto della quantizzazione** (p. 39). I pixel hanno solo **17 livelli di grigio** (da 0 a 16): nello scatter plot di due feature i punti cadono su una **griglia** e si **sovrappongono**, e non si vedono **cluster**.
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V01" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="38" type="schermata" description="Caricamento del dataset delle cifre e visualizzazione di un’immagine 8x8" reason="Pagina senza testo estraibile" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V02" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="39" type="grafico" description="Scatter di due pixel: effetto della quantizzazione a 17 livelli e nessun cluster" reason="Griglia di punti visibile solo nel grafico" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+##### **11.1.2. PCA e t-SNE**
+
+_(slide pp. 40–44)_
+
+**Riduzione con la PCA** (pp. 37, 40–41), estrazione delle feature da 64 a 2 dimensioni:
+
+```python
+from sklearn.decomposition import PCA
+
+pca = PCA(2)                                  # project from 64 to 2 dimensions
+projected = pca.fit_transform(digits.data)
+print(digits.data.shape)                      # (1797, 64)
+print(projected.shape)                        # (1797, 2)
+
+# PCA is unsupervised --> no labels are used! (le etichette servono solo per il colore)
+plt.scatter(projected[:, 0], projected[:, 1],
+            c=digits.target, edgecolor='none', alpha=0.5,
+            cmap=plt.cm.get_cmap('jet', 10))
+plt.xlabel('component 1')
+plt.ylabel('component 2')
+plt.colorbar();
+```
+
+**Riduzione con la t-SNE** (pp. 42–44):
+
+```python
+from sklearn.manifold import TSNE
+
+tsne = TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)
+tsne_results = tsne.fit_transform(digits.data)   # no y labels
+
+plt.scatter(tsne_results[:,0], tsne_results[:,1],
+            c=digits.target, edgecolor='none', alpha=0.5,
+            cmap=plt.cm.get_cmap('jet', 10))
+plt.xlabel('tsne-2d-one')
+plt.ylabel('tsne-2d-one')
+plt.colorbar();
+```
+
+L’output salvato riporta, tra l’altro, i **121 vicini più prossimi** calcolati per i 1797 campioni, e una **divergenza KL** di 61,49 dopo 250 iterazioni con *early exaggeration* e di **0,96** dopo 300 iterazioni.
+
+| Metodo | Risultato (slide) |
+|---|---|
+| **PCA** (pp. 40–41) | le 10 cifre formano gruppi **parzialmente sovrapposti** |
+| **t-SNE** (pp. 43–44) | «per 1797 campioni **non è male**»; **buon risultato**: le cifre formano gruppi ben distinti, con lo stesso tipo di grafico della PCA |
+
+> 💡 **Perché la t-SNE separa meglio (nota didattica).** La PCA può solo **ruotare e proiettare** linearmente: se le cifre stanno su superfici curve nello spazio a 64 dimensioni, una proiezione piana le sovrappone. La t-SNE costruisce invece una mappa **non lineare** che cerca di mantenere vicini i punti che erano vicini, e minimizza la divergenza KL tra le distribuzioni dei vicinati nei due spazi: è il valore 0,96 stampato dal notebook.
+
+> ⚠️ **API cambiate (nota didattica).** Nelle versioni recenti di scikit-learn il parametro `n_iter` di `TSNE` si chiama `max_iter`, e in matplotlib `plt.cm.get_cmap` è stato sostituito da `plt.get_cmap` o `matplotlib.colormaps`. Nel grafico t-SNE entrambi gli assi sono etichettati «tsne-2d-one»: il secondo dovrebbe essere «tsne-2d-two».
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V03" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="40" type="grafico" description="Proiezione PCA delle cifre sulle prime due componenti" reason="Pagina senza testo estraibile" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V04" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="41" type="grafico" description="Proiezione PCA delle cifre colorata per classe" reason="Pagina senza testo estraibile" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V05" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="43" type="grafico" description="Proiezione t-SNE delle 1797 cifre" reason="Nuvole di punti visibili solo nel grafico" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V06" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="44" type="grafico" description="Confronto PCA e t-SNE sulle cifre" reason="Grafici a confronto visibili solo nella slide" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+##### **11.1.3. Selezione con l’eliminazione ricorsiva delle feature**
+
+_(slide pp. 45–49)_
+
+**Selezione delle feature con la Recursive Feature Elimination** (RFE, p. 45), con un **wrapper SVM** (si può provare anche con k-NN, LDA, reti neurali, …). La domanda: **quale pixel è più significativo per riconoscere la classe?**
+
+```python
+from sklearn.svm import SVC
+from sklearn.feature_selection import RFE
+
+X = digits.images.reshape((len(digits.images), -1))   # immagini srotolate in 64 valori (0-16)
+y = digits.target
+
+# Create the RFE object and rank each pixel
+svc = SVC(kernel="linear", C=1)
+rfe = RFE(estimator=svc, n_features_to_select=1, step=1)
+rfe.fit(X, y)
+ranking = rfe.ranking_.reshape(digits.images[0].shape)   # di nuovo come immagine 8x8
+
+print("ranking of the pixel w.r.t the classification capability")
+print(ranking)
+
+plt.matshow(ranking, cmap=plt.cm.Blues)
+plt.colorbar()
+plt.title("Ranking of pixels with RFE")
+plt.show()
+```
+
+Le pp. 46–47 mostrano l’immagine **srotolata** di una cifra (livelli di grigio 0–16), la **classifica** delle feature con RFE, la definizione del **classificatore wrapper** (SVM) e il **reshape** dei risultati nella forma delle immagini delle cifre.
+
+La classifica salvata nel notebook (1 = pixel più importante, 64 = meno importante):
+
+$$\text{ranking} = \begin{bmatrix}
+64 & 50 & 31 & 23 & 10 & 17 & 34 & 51 \\
+57 & 37 & 30 & 43 & 14 & 32 & 44 & 52 \\
+54 & 41 & 19 & 15 & 28 & 8 & 39 & 53 \\
+55 & 45 & 9 & 18 & 20 & 38 & 1 & 59 \\
+63 & 42 & 25 & 35 & 29 & 16 & 2 & 62 \\
+61 & 40 & 5 & 11 & 13 & 6 & 4 & 58 \\
+56 & 47 & 26 & 36 & 24 & 3 & 22 & 48 \\
+60 & 49 & 7 & 27 & 33 & 21 & 12 & 46
+\end{bmatrix}$$
+
+> 📌 **Pixel più e meno importanti** (pp. 48–49). Poiché il wrapper è una SVM che **classifica la cifra**, la classifica dice quali pixel servono di più a **distinguere le cifre**: il pixel con **rank = 1** è il più importante, i pixel con rank alto sono i meno importanti.
+
+> 💡 **Leggere la matrice (nota didattica).** I pixel più importanti (1, 2, 3, 4) stanno nella parte **centrale-destra** dell’immagine, dove le diverse cifre differiscono di più. I meno importanti (64, 63, 62, 61, …) stanno sulle **colonne esterne**, soprattutto gli **angoli**: in quasi tutte le cifre quei pixel sono sempre 0, quindi non portano informazione. Con `n_features_to_select=1` e `step=1` la RFE addestra la SVM **63 volte**, eliminando a ogni giro il pixel con il peso minore: è una **eliminazione all’indietro** (§1.3) guidata dai pesi del modello.
+
+> ⚠️ **Tutto il dataset.** Come negli esempi di laboratorio precedenti, la RFE è eseguita su **tutti** i 1797 campioni: per usare la classifica in un modello da valutare, la selezione andrebbe ripetuta **dentro** ogni fold di cross-validation, altrimenti la stima finale è ottimistica.
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V07" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="46" type="schermata" description="Immagine srotolata di una cifra e classifica delle feature con RFE" reason="Schermata del codice e dell’output" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V08" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="48" type="immagine" description="Mappa della classifica dei pixel: più importanti e meno importanti per la classificazione" reason="Mappa di colore visibile solo nell’immagine" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+<!-- SOURCE_VISUAL id="IS18-PREV-V09" source="Lesson_18_FeatureEngineeringDimensionalityReductionFeatureSelectionFeatureExtractionCodingExamples.pdf" page="49" type="immagine" description="Pixel con rank 1 e pixel meno importanti nell’immagine 8x8" reason="Mappa di colore visibile solo nell’immagine" -->
+<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+
+> ⚠️ **API e risultati del notebook precedente.** Il notebook usa `n_iter`, rinominato `max_iter` in scikit-learn 1.5, e `plt.cm.get_cmap`, deprecata in Matplotlib recente. Con 300 iterazioni (250 di *early exaggeration*) la KL finale è 0,96; con 1000 iterazioni l’output salvato scende a 0,71. Il valore 61,49 durante l’early exaggeration non è direttamente confrontabile con quello finale, perché in quella fase le probabilità dei vicinati sono amplificate. La t-SNE è esplorativa: la separazione visiva non misura l’accuratezza di un classificatore.
+
+Il PDF precedente (`Lesson_18_FeatureEngineering…CodingExamples.pdf`) copriva selezione, PCA, LDA, t-SNE e ICA, senza la parte su embedding e modelli System One.
 
 ---
 
