@@ -31,6 +31,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1177.0",
     "@emnapi/core": "^1.11.3",
+    "@emnapi/runtime": "^1.11.3",
     "@tailwindcss/vite": "^4.3.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
