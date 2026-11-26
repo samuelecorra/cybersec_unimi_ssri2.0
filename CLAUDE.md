@@ -31,6 +31,7 @@ Do not remove existing lesson content. At most correct inaccurate or poorly expl
   - `> ⚠️` for warnings, edge cases, or frequent exam pitfalls.
   - `> 💡` for intuitive insights or contextual analogies.
   - `> ✅` for concise section recaps.
+- When a fenced code block belongs inside a blockquote/callout, put an empty quote line (`>`) between the preceding paragraph and the fence. Prefix the opening fence, every code line, and the closing fence with `>` so Markdown parses it as a code block instead of inline code.
 - Video Diagrams/Images Handling: If the transcript explicitly implies the professor is pointing at a slide, diagram, or graph, NEVER attempt to recreate it using ASCII art, symbols, or code blocks. Instead, inject an empty placeholder line: `<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->` so the user can manually paste screenshots later.
 
 ## Automatic Lifecycle & State Management

@@ -45,6 +45,7 @@
   - `> 💡` for intuitive insights or contextual analogies.
   - `> ✅` for concise section recaps.
 - Keep callouts concise and directly tied to lesson content.
+- When a fenced code block belongs inside a blockquote/callout, put an empty quote line (`>`) between the preceding paragraph and the fence. Prefix the opening fence, every code line, and the closing fence with `>` so Markdown parses it as a code block instead of inline code.
 
 ## Visual Placeholder Policy
 

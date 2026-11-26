@@ -15,8 +15,7 @@ L’ultima lezione del corso parte da una domanda di progetto: **dove deve girar
 - **Applicazioni**: visione intelligente, logistica, trasporti, il Pirelli Cyber Tyre.
 - **Dall’Industria 4.0 alla 5.0**: sistemi di visione industriali e rilevamento di anomalie.
 
-<!-- SOURCE_VISUAL id="IS24-V01" source="L24-web.pdf" page="2" type="figura" description="Immagini della panoramica: ViT, AIoT, sicurezza e visione industriale" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125230323.png)
 
 ---
 
@@ -30,8 +29,7 @@ Un’immagine letta come una sequenza di patch.
 - **(a) CNN: guardare localmente, poi più largo.** Convoluzione + pooling: ogni unità vede una **piccola finestra** (il kernel $K(\cdot)$); le unità più profonde vedono **più largo** (il campo ricettivo).
 - **(b) ViT: tagliare in patch, ogni patch vede ogni patch.** Encoder transformer: **self-attention globale** + testa MLP; **già nel primo strato ogni patch viene confrontata con tutte le altre** (gli archi).
 
-<!-- SOURCE_VISUAL id="IS24-V02" source="L24-web.pdf" page="4" type="schema" description="La stessa immagine letta da una CNN con finestre locali e da un ViT con patch collegate tutte tra loro" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125232517.png)
 
 **Stesso ingresso, stessa uscita**: immagine $I(x,y)$ → classe $\hat{y}$ (uccello, palla, auto). **Cambia quanto lontano guarda ogni unità**: una CNN costruisce la vista globale **passo per passo**, un ViT ce l’ha **dall’inizio**. Le slide successive costruiscono il ViT pezzo per pezzo.
 
@@ -43,8 +41,7 @@ Un’immagine letta come una sequenza di patch.
   $$N=\frac{H\cdot W}{P^2}\qquad(P\text{: lato della patch in pixel}).$$
 - **Esempio**: $224\times 224\times 3$, $P=16\Rightarrow N=196$ patch, ognuna con $16\cdot 16\cdot 3=768$ valori.
 
-<!-- SOURCE_VISUAL id="IS24-V03" source="L24-web.pdf" page="5" type="schema" description="Architettura del ViT: patch, proiezione lineare, token class, embedding di posizione, encoder con self-attention e MLP, testa" reason="Schema visibile solo nella slide (ripetuto alle pp. 6, 8, 9 con parti diverse evidenziate)" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125232541.png)
 
 > 💡 **Il conto (nota didattica).** $224/16=14$ patch per lato, $14\cdot 14=196$. La figura della slide usa $N=9$ (una griglia $3\times 3$) per leggibilità. Una patch di 768 numeri è un «vettore di pixel» come quello della Lezione 18 (§2.3), che il ViT trasforma in un token come un LLM trasforma una parola (Lezione 13).
 
@@ -54,11 +51,15 @@ Un’immagine letta come una sequenza di patch.
 - Si aggiunge un **embedding di posizione** $(0,\dots,N)$: **l’attenzione ignora dove si trova una patch** (Lezione 13, §4.6).
 - Un **token [class] extra apprendibile** (∗) **raccoglie l’intera immagine**. **Output**: $(N+1)\times D$, per esempio $197\times 768$.
 
+![](imgs/Pasted%20image%2020261125232559.png)
+
 #### **1.4. Il patch embedding: da dove vengono le sue matrici**
 
 $$z_0=E\,x+b+E_{\text{pos}}[k],$$
 
 con $x$ la patch ($16\times 16\times 3$ = 768 numeri), $E$ una matrice $768\times 768$, $b$ il bias, $E_{\text{pos}}[k]$ l’embedding della posizione $k$ della patch, $z_0$ il token ($D=768$).
+
+![](imgs/Pasted%20image%2020261125232611.png)
 
 **Come si creano le matrici**:
 
@@ -76,9 +77,6 @@ con $x$ la patch ($16\times 16\times 3$ = 768 numeri), $E$ una matrice $768\time
 
 **Nessun vocabolario**: **qualsiasi patch, anche mai vista, ha il suo token.** In codice: `Conv2d(3, 768, kernel=16, stride=16)`, **la stessa $E$ fatta scorrere sull’immagine** (richiamo al primo strato delle CNN, Lezione 21).
 
-<!-- SOURCE_VISUAL id="IS24-V04" source="L24-web.pdf" page="7" type="schema" description="Patch embedding: patch per matrice E più bias più embedding di posizione" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
 > 💡 **Perché è una convoluzione (nota didattica).** Una convoluzione con kernel $16\times 16$, passo 16 e 768 filtri applica a ogni patch non sovrapposta lo stesso prodotto con una matrice $768\times(16\cdot 16\cdot 3)$: è esattamente $Ex+b$ per ogni patch. Con la formula della Lezione 21 (§3.10), $O=\lfloor(224-16)/16\rfloor+1=14$: una mappa $14\times 14\times 768$, cioè 196 token. A differenza di un LLM, che ha un vocabolario finito di token, il ViT trasforma qualsiasi patch in un vettore continuo. $589\,824+768+151\,296+768=742\,656$: lo 0,86% dei parametri del modello.
 
 #### **1.5. Vision Transformer (3/4): l’encoder transformer**
@@ -88,6 +86,8 @@ con $x$ la patch ($16\times 16\times 3$ = 768 numeri), $E$ una matrice $768\time
 - **Self-attention**: **ogni patch guarda ogni patch** (query, key, value, Lezione 13); i **+** sono **connessioni residue** (Lezione 22).
 - **Output**: **stessa forma** $(N+1)\times D$, ma **ogni token ora porta il contesto dell’intera immagine**.
 
+![](imgs/Pasted%20image%2020261125232703.png)
+
 > 💡 **Dove stanno gli 86,6 M parametri (nota didattica).** Per blocco: l’attenzione ha 4 matrici $768\times 768$ (Q, K, V e la proiezione d’uscita), $4\cdot 589\,824\approx 2{,}36$ M; l’MLP $768\cdot 3072+3072\cdot 768\approx 4{,}72$ M; in tutto circa 7,1 M per blocco, × 12 blocchi ≈ 85 M. Due terzi dei parametri sono nelle MLP, non nell’attenzione.
 
 #### **1.6. Vision Transformer (4/4): dai token alla risposta**
@@ -95,6 +95,8 @@ con $x$ la patch ($16\times 16\times 3$ = 768 numeri), $E$ una matrice $768\time
 - **Solo l’uscita del token [class] entra nella testa MLP** → previsione $\hat{y}$ (uccello, palla, auto…); nel **pre-addestramento** un’MLP con uno strato nascosto, nel **fine-tuning** **uno strato lineare $768\to$ numero di classi**.
 - **Togliendo la testa, i token sono un embedding $z$**, riusato da **DINOv2** e dall’**encoder d’immagine di SAM** (Lezione 23, §3.10).
 - **In pratica**: **backbone ViT pre-addestrato + la propria testa**, la stessa ricetta del transfer learning con le CNN (Lezione 21, §5.6).
+
+![](imgs/Pasted%20image%2020261125232714.png)
 
 #### **1.7. CNN o ViT? Bias induttivo, dati e costo**
 
@@ -114,8 +116,7 @@ con $x$ la patch ($16\times 16\times 3$ = 768 numeri), $E$ una matrice $768\time
 
 Immagine $I(x,y)$ ($224\times 224\times 3$) → **ViT pre-addestrato** (patch + encoder, **testa rimossa**) → uscita del **token [class]** → **embedding** $z\in\mathbb{R}^{768}$ → **classificatore semplice** (k-NN, SVM, lineare) → $\hat{y}$; oppure **ricerca per similarità** (coseno, Lezione 19) → immagini simili.
 
-<!-- SOURCE_VISUAL id="IS24-V05" source="L24-web.pdf" page="11" type="schema" description="ViT senza testa che produce un embedding da 768 usato da un classificatore o dalla ricerca per similarità" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125232732.png)
 
 **Sì, un ViT è un ottimo estrattore di feature**: si toglie la testa, si tiene l’uscita del token [class] (**o la media dei token delle patch**). Stessa idea di backbone + testa (Lezioni 21–22); **DINOv2/v3 sono progettati per questo**. **Input**: un’immagine $224\times 224\times 3$. **Output**: $z$, **un vettore di 768 numeri** (VGG16 ne dà 4096).
 
@@ -189,6 +190,8 @@ print("faulty" if s > tau else "good")
 
 Una nuova frontiera per le applicazioni.
 
+![](imgs/Pasted%20image%2020261125232832.png)
+
 #### **2.1. Definizione**
 
 > 📌 **Definizione.** L’**AIoT** combina l’**infrastruttura IoT** (sensori, dispositivi, reti) con i **modelli di AI**: i dispositivi **raccolgono dati dai processi fisici**, l’AI **trasforma i dati in previsioni, allarmi, azioni ottimizzate e supporto alle decisioni**.
@@ -198,8 +201,7 @@ Una nuova frontiera per le applicazioni.
 
 **Input**: segnali fisici ⇒ **Output**: decisioni e azioni.
 
-<!-- SOURCE_VISUAL id="IS24-V06" source="L24-web.pdf" page="15" type="figura" description="Sistema AIoT dai segnali fisici alle decisioni" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125232842.png)
 
 **Quattro obiettivi di progetto per un sistema AI+IoT**:
 
@@ -232,8 +234,7 @@ Una nuova frontiera per le applicazioni.
 | **gateway edge** | PC industriale, Raspberry Pi, Jetson; Hailo, Edge TPU | Linux embedded, container, AWS IoT Greengrass, ONNX Runtime |
 | **cloud** | server con GPU e TPU | hub IoT (AWS IoT Core, Azure IoT Hub), storage, servizi di ML (MLaaS) |
 
-<!-- SOURCE_VISUAL id="IS24-V07" source="L24-web.pdf" page="16" type="schema" description="Pila AIoT dispositivo, gateway edge e cloud con protocolli e aggiornamenti OTA" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125232917.png)
 
 Gli elenchi completi di sensori, schede, acceleratori, protocolli e runtime sono in appendice (§13.2, per riferimento, non d’esame).
 
@@ -244,8 +245,9 @@ Gli elenchi completi di sensori, schede, acceleratori, protocolli e runtime sono
 - **Approccio ibrido**: elaborazione locale → attivazione; elaborazione remota → NLP (oggi anche in parte locale).
 - **Il livello fog è quasi assente**: **senza connessione il dispositivo è fortemente limitato**.
 
-<!-- SOURCE_VISUAL id="IS24-V08" source="L24-web.pdf" page="17" type="figura" description="Altoparlanti intelligenti e flusso tra elaborazione locale e cloud" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233011.png)
+
+![](imgs/Pasted%20image%2020261125233000.png)
 
 > 💡 **Perché la parola di attivazione è locale (nota didattica).** Tre motivi in uno: **privacy** (nulla esce finché non si dice la parola), **banda** (non si trasmette audio continuo), **energia** (un modello minuscolo, tipo TinyML, §6, gira con pochi milliwatt). Il prezzo sono i falsi positivi: un modello piccolo a volte si attiva per una parola simile, ed è il motivo per cui la seconda verifica avviene nel cloud.
 
@@ -253,8 +255,7 @@ Gli elenchi completi di sensori, schede, acceleratori, protocolli e runtime sono
 
 **Dispositivi edge**: lampadine e interruttore. **Sorgente dei comandi**: NLP via cloud e **direttamente al bridge**.
 
-<!-- SOURCE_VISUAL id="IS24-V09" source="L24-web.pdf" page="18" type="figura" description="Illuminazione connessa con lampadine, interruttore, bridge e comandi vocali" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233026.png)
 
 ---
 
@@ -268,8 +269,9 @@ Una nuova frontiera per le applicazioni.
 - **Il numero dei dispositivi e la loro rilevanza pongono enormi problemi di sicurezza.** Si pensi a: **pacemaker**; **sistemi semaforici**; **sistemi di controllo e guida delle auto**.
 - **Interazioni complesse → più problemi di sicurezza.**
 
-<!-- SOURCE_VISUAL id="IS24-V10" source="L24-web.pdf" page="20" type="figura" description="Esempi di dispositivi IoT critici per la sicurezza" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233146.png)
+
+![](imgs/Pasted%20image%2020261125233139.png)
 
 #### **3.2. Sei principi della sicurezza IoT lungo la pila**
 
@@ -280,8 +282,7 @@ Una nuova frontiera per le applicazioni.
 | **C. Identità** | **un certificato per dispositivo**; **mai una password di default** (prima regola di ETSI EN 303 645) | 500 sensori, 500 certificati: **uno rubato viene revocato da solo** |
 | **D. Ciclo di vita** | **aggiornamenti firmati (OTA)**, revoca, **dismissione sicura** | un gateway dismesso viene **cancellato** e il suo certificato **revocato** |
 
-<!-- SOURCE_VISUAL id="IS24-V11" source="L24-web.pdf" page="21" type="figura" description="Illustrazione dei principi di sicurezza IoT lungo la pila" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233205.png)
 
 **I sei principi in dettaglio** (appendice, versione completa):
 
@@ -305,8 +306,7 @@ Una nuova frontiera per le applicazioni.
 
 **Auto**: nel **dicembre 2023 Tesla ha risolto un richiamo di circa 2 milioni di veicoli** (Autopilot) **con un solo aggiornamento OTA**. **Da luglio 2024 ogni auto nuova venduta nell’UE richiede un sistema di aggiornamento software certificato (UNECE R156)**: un aggiornamento non firmato a un’auto è un **rischio per la sicurezza**.
 
-<!-- SOURCE_VISUAL id="IS24-V12" source="L24-web.pdf" page="22" type="figura" description="Aggiornamento OTA firmato inviato ai dispositivi sul campo" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233247.png)
 
 **MQTT**: messaggistica **publish/subscribe leggera** per dispositivi con risorse limitate. **TLS**: **cifra i dati e autentica gli estremi**. **HTTPS**: HTTP su TLS.
 
@@ -316,6 +316,7 @@ Una nuova frontiera per le applicazioni.
 > - un meccanismo di **ripristino** (per esempio due partizioni A/B) se l’aggiornamento fallisce a metà.
 
 > 💡 **Un sensore che pubblica su MQTT con TLS (ricostruzione didattica, non trascritta dalle slide).**
+>
 > ```python
 > import json
 > import paho.mqtt.client as mqtt
@@ -335,8 +336,7 @@ Una nuova frontiera per le applicazioni.
 
 **Linea del tempo del Cyber Resilience Act (UE, obbligatorio, marchio CE)**: **10 dicembre 2024** entrata in vigore; **11 settembre 2026** obblighi di segnalazione (oggi); **11 dicembre 2027** applicazione completa. **NIST CSF 2.0** (USA, volontario).
 
-<!-- SOURCE_VISUAL id="IS24-V13" source="L24-web.pdf" page="23" type="schema" description="Linea del tempo del CRA e le sei funzioni del NIST CSF 2.0 con Govern al centro" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233330.png)
 
 **EU Cyber Resilience Act**:
 
@@ -345,6 +345,8 @@ Una nuova frontiera per le applicazioni.
 3. **Segnalare le vulnerabilità**: quelle sfruttate **a ENISA entro 24 h e 72 h**.
 
 **NIST CSF 2.0**: Govern (**nuova nella 2.0**: chi è responsabile, regole per i fornitori), Identify, Protect, Detect, Respond, Recover. **Auto**: **UNECE R155 e R156** (aggiornamenti software), su tutte le auto nuove nell’UE da luglio 2024. I dettagli (tutti i requisiti del CRA, l’esempio NIST su una fabbrica intelligente) sono qui sotto.
+
+![](imgs/Pasted%20image%2020261125233410.png)
 
 ##### **3.4.1. Il Cyber Resilience Act (UE) in dettaglio**
 
@@ -384,8 +386,7 @@ Una nuova frontiera per le applicazioni.
 
 **UE**: obbligatorio (CRA, marchio CE). **USA**: volontario (NIST); l’etichetta consumer «**Cyber Trust Mark**» è **ancora in fase di avvio nel 2026**.
 
-<!-- SOURCE_VISUAL id="IS24-V14" source="L24-web.pdf" page="88" type="figura" description="Le sei funzioni del NIST CSF 2.0 applicate a una fabbrica intelligente" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005202.png)
 
 > 💡 **Il «Detect» con il ML (nota didattica).** «Monitorare attività insolite dei sensori» è un rilevamento di anomalie sul traffico (frequenza dei messaggi, dimensioni, orari): la stessa tecnica del §9.8 applicata alla rete invece che alle immagini. Un sensore di vibrazione che comincia a inviare dati ogni 100 ms invece che ogni 10 s è un segnale di compromissione.
 
@@ -415,8 +416,7 @@ AWS, MATLAB ThingSpeak, Azure; FreeRTOS, ThreadX.
 
 **Dal dispositivo al cloud**: **FreeRTOS** sui microcontrollori, **Greengrass** su un gateway locale (edge), **servizi cloud** per dati e analisi.
 
-<!-- SOURCE_VISUAL id="IS24-V15" source="L24-web.pdf" page="25" type="figura" description="Architettura AWS IoT dal dispositivo con FreeRTOS al gateway Greengrass e al cloud" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233456.png)
 
 #### **4.2. FreeRTOS per i dispositivi AIoT embedded**
 
@@ -426,8 +426,9 @@ Sistema operativo in tempo reale per microcontrollori.
 - Un **microcontrollore** è un **processore semplice e con risorse limitate** che si trova in elettrodomestici, sensori, tracker, automazione industriale e auto. (O una Raspberry Pi 3B.)
 - **Libreria OTA**: **firmware firmato su TLS** (§3.3): **patch di sicurezza per tutto il periodo di supporto**, come richiede il CRA.
 
-<!-- SOURCE_VISUAL id="IS24-V16" source="L24-web.pdf" page="26" type="figura" description="Microcontrollori e schede su cui gira FreeRTOS" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233506.png)
+
+![](imgs/Pasted%20image%2020261125233514.png)
 
 #### **4.3. Come un RTOS rispetta una scadenza**
 
@@ -443,8 +444,7 @@ $$R=L_{\text{int}}+C_{\text{sw}}+E\le D,$$
 
 con $L_{\text{int}}$ la **latenza dell’interrupt**; $C_{\text{sw}}$ il **tempo di cambio di contesto**; $E$ il **tempo di esecuzione nel caso peggiore** del task.
 
-<!-- SOURCE_VISUAL id="IS24-V17" source="L24-web.pdf" page="27" type="grafico" description="Diagramma temporale con task a bassa priorità di logging interrotto dall'inferenza ad alta priorità e la scadenza" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233541.png)
 
 **Esempio**: l’interrupt a **2 ms** interrompe L (bassa priorità, logging); **H** (alta priorità, inferenza) gira per **$E=5$ ms** e **termina a 7 ms**, ben prima della **scadenza a 12 ms** ($D=10$ ms dall’interrupt); poi L riprende. **In questo caso i requisiti sono rispettati: $R\le D$.**
 
@@ -461,8 +461,7 @@ con $L_{\text{int}}$ la **latenza dell’interrupt**; $C_{\text{sw}}$ il **tempo
 
 **Il modello ci sta?** (richiamo dalla Lezione 23): $\text{Mem}\approx\#\text{Par}\times b/8$. Con **$\#\text{Par}=250\,000$** parametri, **$b=8$ bit (INT8) = 1 byte**: **Mem ≈ 250 kB**; **MCU con 1 MB di flash: ci sta**.
 
-<!-- SOURCE_VISUAL id="IS24-V18" source="L24-web.pdf" page="28" type="figura" description="Passi di progetto con RTOS e verifica della memoria del modello" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233702.png)
 
 > ⚠️ **Flash e RAM (nota didattica).** I 250 kB di pesi stanno nella **flash** (memoria del programma), ma durante l’inferenza servono anche le **attivazioni** in **RAM**, che su un MCU è spesso 10 volte più piccola della flash (§6.3). Uno strato con una feature map $32\times 32\times 32$ in INT8 occupa 32 kB di RAM: la verifica va fatta su entrambe le memorie.
 
@@ -470,23 +469,22 @@ con $L_{\text{int}}$ la **latenza dell’interrupt**; $C_{\text{sw}}$ il **tempo
 
 **Gateway edge su una macchina locale.** **Greengrass** (v2; **release 2.17 nell’aprile 2026**) esegue **componenti** (funzioni, container, inferenza di ML), **scambia messaggi con i dispositivi locali**, **continua a funzionare offline** e **si sincronizza con il cloud**. Un **nucleo più leggero** (*nucleus lite*) è pensato per dispositivi piccoli. Gli stessi dati raggiungono i servizi AWS, app di terze parti o software on-premise. **Piattaforma di ML**: Amazon SageMaker AI (servizi cloud, §7).
 
-<!-- SOURCE_VISUAL id="IS24-V19" source="L24-web.pdf" page="29" type="figura" description="AWS IoT Greengrass dalla lampada al gateway e all'app" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233713.png)
+
+![](imgs/Pasted%20image%2020261125233729.png)
 
 #### **4.6. MATLAB ThingSpeak: online e offline**
 
 **Dispositivi intelligenti connessi** → **ThingSpeak** (aggregazione e analisi dei dati) ↔ **MATLAB** (sviluppo di algoritmi, analisi dei sensori). (1) **Raccogliere i dati dei sensori mentre si è offline**; (2) **collegarsi periodicamente e inviare tutto insieme** con `bulk_update`; (3) **analizzare** con `thingSpeakRead` in MATLAB.
 
-<!-- SOURCE_VISUAL id="IS24-V20" source="L24-web.pdf" page="30" type="figura" description="Flusso tra dispositivi, ThingSpeak e MATLAB" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233742.png)
 
 #### **4.7. Microsoft Azure IoT ed Eclipse ThreadX (appendice)**
 
 - **L’architettura di riferimento è ancora valida come concetto**: **cose → gateway cloud → intuizioni → azione**. **Hot path**: elaborazione di flussi, **allarmi in secondi**. **Warm e cold path**: **storico memorizzato** per report e per **addestrare i modelli di ML**.
 - **Servizi nel 2026**: **IoT Hub con Device Provisioning Service**, **Azure Device Registry**, **Microsoft Fabric** per l’analisi. **IoT Central sarà ritirato il 20 settembre 2029.**
 
-<!-- SOURCE_VISUAL id="IS24-V21" source="L24-web.pdf" page="98" type="schema" description="Architettura di riferimento di Azure IoT con hot, warm e cold path" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005253.png)
 
 **Eclipse ThreadX, ex Azure RTOS**:
 
@@ -496,13 +494,11 @@ con $L_{\text{int}}$ la **latenza dell’interrupt**; $C_{\text{sw}}$ il **tempo
 - **sicuro (security)**: **IPsec** (livello IP), **TLS e DTLS** (livello socket); **aggiornamenti firmware OTA**;
 - **collaudato sul mercato**: **miliardi di dispositivi installati**; portabile sui microcontrollori a 32 bit più diffusi.
 
-<!-- SOURCE_VISUAL id="IS24-V22" source="L24-web.pdf" page="99" type="figura" description="Componenti di Eclipse ThreadX" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005304.png)
 
 **Un esempio: Microsoft Azure.** I dati dei dispositivi e dei sensori vengono **raccolti, elaborati e analizzati (ML) nel cloud**; **intuizioni e decisioni tornano** ad analisti e tecnici.
 
-<!-- SOURCE_VISUAL id="IS24-V23" source="L24-web.pdf" page="100" type="schema" description="Esempio di flusso di dati con Microsoft Azure" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005316.png)
 
 ---
 
@@ -515,8 +511,9 @@ Da un microcontrollore a 8 bit a un acceleratore neurale.
 
 **La scheda**: **CPU** (OS, app, pre-elaborazione), **memoria** (RAM + flash), **NPU** (coprocessore neurale, integrato nel chip o esterno: PCIe, M.2, USB). **Collegamenti**: telecamere (**MIPI CSI**, USB); sensori e pulsanti (**GPIO, I2C, SPI**); attuatori e relè (**GPIO, PWM**); rete e alimentazione (Ethernet, Wi-Fi, 5 V); risultati (MQTT verso il cloud).
 
-<!-- SOURCE_VISUAL id="IS24-V24" source="L24-web.pdf" page="32" type="schema" description="Blocchi di una scheda per l'edge AI e quattro esempi di formato: Pi 5 con AI HAT+, Coral USB, ESP32-CAM, Arduino MKR" reason="Schema e immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233814.png)
+
+![](imgs/Pasted%20image%2020261125233827.png)
 
 - **GPIO** (*General-Purpose Input/Output*): un **pin digitale impostato dal software** come ingresso (pulsante, sensore) o uscita (relè, LED).
 - **NPU**: coprocessore per le **moltiplicazioni-somme** delle reti neurali: **integrata** (più economica, meno potenza) o **acceleratore esterno** (più TOPS, aggiunto dopo).
@@ -537,6 +534,8 @@ Da un microcontrollore a 8 bit a un acceleratore neurale.
 - **I TOPS di picco non sono la velocità sulla propria rete**: **misurare latenza (ms) e fps sul proprio modello** (Lezione 23, §8.1).
 - **Ogni chip richiede una conversione della rete addestrata** (STM32Cube.AI, compilatore Edge TPU, compilatore Hailo, TensorRT): **addestrare → convertire → inferire sulla scheda** (toolchain ST).
 
+![](imgs/Pasted%20image%2020261125233939.png)
+
 > 💡 **Tre trappole nella tabella (nota didattica).** 1) I 40 TOPS del Hailo-10H sono **INT4**: alla stessa precisione dell’INT8 sarebbero circa la metà (§13.4). 2) I 67 TOPS del Jetson sono **«sparsi»**: valgono solo con reti potate con il pattern 2:4 (Lezione 23, §7.16); in denso sono circa la metà. 3) Per watt: 4 TOPS / 2 W = 2 TOPS/W per l’Edge TPU, 67 / 25 ≈ 2,7 TOPS/W per il Jetson, 3 TOPS/W dichiarati per l’NPU dell’STM32N6 (§6.3). Ridotte allo stesso denominatore, le differenze si assottigliano.
 
 ---
@@ -551,8 +550,7 @@ Machine learning per dispositivi piccolissimi.
 - Un **sottoinsieme del machine learning** che permette ai modelli di ML di girare su **dispositivi piccoli e a bassa potenza**, come i **microcontrollori**.
 - I modelli TinyML sono **addestrati tipicamente su potenti server cloud** e poi **rilasciati sui dispositivi edge**, dove eseguono l’**inferenza con bassa latenza e basso consumo**.
 
-<!-- SOURCE_VISUAL id="IS24-V25" source="L24-web.pdf" page="35" type="figura" description="Illustrazione del TinyML" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125233953.png)
 
 #### **6.2. TinyML: esempi e applicazioni**
 
@@ -560,8 +558,7 @@ Machine learning per dispositivi piccolissimi.
 
 **Aree applicative**: **dispositivi indossabili** (frequenza cardiaca, gesti); **IoT industriale** (**manutenzione predittiva, rilevamento di anomalie**); **casa intelligente** (movimento, voce, energia); agricoltura, sanità, trasporti.
 
-<!-- SOURCE_VISUAL id="IS24-V26" source="L24-web.pdf" page="36" type="figura" description="Esempi di dispositivi TinyML" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234000.png)
 
 #### **6.3. Tradizionale contro TinyML: ordini di grandezza**
 
@@ -584,10 +581,10 @@ Machine learning per dispositivi piccolissimi.
 
 Richiamo dalla Lezione 23: la pipeline della figura (**distillazione, quantizzazione, compilazione**) è la **toolchain edge**: quantizzazione, pruning e distillazione **fanno stare la rete nel dispositivo**.
 
-<!-- SOURCE_VISUAL id="IS24-V27" source="L24-web.pdf" page="38" type="schema" description="Pipeline LiteRT con distillazione, quantizzazione e compilazione verso il dispositivo" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234047.png)
 
 > 💡 **Dal modello Keras al file per il dispositivo (ricostruzione didattica, non trascritta dalle slide).**
+>
 > ```python
 > import tensorflow as tf
 >
@@ -616,6 +613,7 @@ Richiamo dalla Lezione 23: la pipeline della figura (**distillazione, quantizzaz
   - Un’**API REST** (*Representational State Transfer*) è un **insieme di regole** che permette ad applicazioni software diverse di **comunicare sul web** usando i **metodi HTTP standard** come **GET, POST, PUT e DELETE**.
 
 > 💡 **Chiamare un modello via REST (ricostruzione didattica, non trascritta dalle slide).**
+>
 > ```python
 > import requests
 >
@@ -639,13 +637,11 @@ Richiamo dalla Lezione 23: la pipeline della figura (**distillazione, quantizzaz
 
 **Da IaaS a SaaS: meno controllo, meno sforzo di gestione.**
 
-<!-- SOURCE_VISUAL id="IS24-V28" source="L24-web.pdf" page="41" type="schema" description="I tre modelli di servizio cloud IaaS, PaaS e SaaS" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234148.png)
 
 **Il modello a tre livelli (appendice)**: **nota, le cose cambiano in fretta…** I nomi dei fornitori illustrano i livelli: **SaaS in alto, PaaS in mezzo, IaaS alla base**.
 
-<!-- SOURCE_VISUAL id="IS24-V29" source="L24-web.pdf" page="101" type="schema" description="Il modello a tre livelli dei servizi cloud con i nomi dei fornitori" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005335.png)
 
 > 💡 **Chi gestisce che cosa (nota didattica).** Il criterio per non confondere i tre livelli è **fin dove arriva la responsabilità del cliente**:
 >
@@ -679,8 +675,7 @@ Visione, logistica, trasporti e il Pirelli Cyber Tyre.
 
 **Robotica, controllo, fabbrica intelligente, sorveglianza, ambiente intelligente, logistica.**
 
-<!-- SOURCE_VISUAL id="IS24-V30" source="L24-web.pdf" page="44" type="schema" description="Sei aree di applicazione dei sistemi di visione intelligenti" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234226.png)
 
 #### **8.2. Sistemi intelligenti per la robotica**
 
@@ -688,27 +683,27 @@ Visione, logistica, trasporti e il Pirelli Cyber Tyre.
 - **Componenti**: struttura del corpo, **attuatori**, fonte di energia, **sensori**, **controllore** (la parte basata sull’AI).
 - **Traiettorie, aptica, lavoro collaborativo**: molti usano **telecamere**.
 
-<!-- SOURCE_VISUAL id="IS24-V31" source="L24-web.pdf" page="45" type="figura" description="Robot generici e industriali" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234240.png)
+
+![](imgs/Pasted%20image%2020261125234249.png)
 
 #### **8.3. Metodi e applicazioni: il controllo**
 
 Applicazioni dei sistemi intelligenti per il **controllo di processi industriali**, l’**automazione industriale**, i **sistemi robotici**, i **prodotti complessi**, le **reti di distribuzione dell’energia**, i **sistemi automobilistici e di trasporto**. Controllo di un impianto; controllo di una posizione; controllo della stabilità.
 
-<!-- SOURCE_VISUAL id="IS24-V32" source="L24-web.pdf" page="46" type="figura" description="Esempi di controllo di impianto, di posizione e di stabilità" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234334.png)
+
+![](imgs/Pasted%20image%2020261125234343.png)
 
 #### **8.4. Visione per l’ispezione della produzione e per la sorveglianza**
 
 **Ispezione della produzione (fabbrica intelligente)**: **ingressi non ideali e cambiamenti nel tempo**.
 
-<!-- SOURCE_VISUAL id="IS24-V33" source="L24-web.pdf" page="47" type="figura" description="Ispezione della produzione con ingressi non ideali" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234403.png)
 
 **Sorveglianza e sicurezza**: **scenari complessi e diversi da gestire**.
 
-<!-- SOURCE_VISUAL id="IS24-V34" source="L24-web.pdf" page="48" type="figura" description="Scenari di videosorveglianza" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234438.png)
 
 > ⚠️ **Sorveglianza e AI Act (nota didattica).** I sistemi di visione per la sorveglianza ricadono spesso nelle categorie ad alto rischio dell’AI Act, e l’identificazione biometrica remota in tempo reale in spazi pubblici è vietata salvo eccezioni (Lezione 2; Lezione 23, §2.4). Il progetto parte dal compito (rilevare un comportamento) e dalla base giuridica, non dalla tecnologia disponibile.
 
@@ -722,37 +717,31 @@ Applicazioni dei sistemi intelligenti per il **controllo di processi industriali
 | **ambiente** | **fumo degli incendi boschivi**: luce visibile, fotogrammi di bassa qualità, hardware limitato; feature statiche e dinamiche; **impara ambienti nuovi** |
 | **logistica** | **lenti liquide**: la lente rimette a fuoco su scatole di altezze diverse, poi un **OCR di deep learning** legge il codice |
 
-<!-- SOURCE_VISUAL id="IS24-V35" source="L24-web.pdf" page="49" type="figura" description="Cinque aree: auto, case, città, ambiente, logistica" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234451.png)
 
 **In dettaglio (appendice)**:
 
 - **Auto intelligenti**: identificazione del conducente; assistenza alla guida e guida autonoma; sorveglianza dell’abitacolo (attenzione del conducente, passeggeri); impostazioni automatiche (sedile, specchi, luci).
 
-<!-- SOURCE_VISUAL id="IS24-V36" source="L24-web.pdf" page="107" type="figura" description="Visione intelligente per le auto" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005425.png)
 
 - **Case intelligenti e intrattenimento**: identificazione delle persone in casa; profilazione: adulto, bambino, cane, gatto; controllo con i gesti dei dispositivi (TV, giochi); sicurezza.
 
-<!-- SOURCE_VISUAL id="IS24-V37" source="L24-web.pdf" page="108" type="figura" description="Visione intelligente per la casa e l'intrattenimento" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005433.png)
 
 - **Città intelligente**: gestione del traffico; rilevamento di anomalie, prevenzione del crimine; **aiuto alle persone vulnerabili agli attraversamenti**: il semaforo dà **più tempo** a un bambino, a un anziano, a un cieco o a una persona in carrozzina.
 
-<!-- SOURCE_VISUAL id="IS24-V38" source="L24-web.pdf" page="109" type="figura" description="Visione intelligente per la città" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005442.png)
 
 - **Ambiente: il fumo degli incendi boschivi**: telecamere a luce visibile, fotogrammi di bassa qualità, hardware limitato. **Passo 1**: feature statiche e dinamiche **scelte dal progettista**; **passo 2**: **classificazione con una rete neurale**. **Il sistema impara ambienti nuovi.**
 
-<!-- SOURCE_VISUAL id="IS24-V39" source="L24-web.pdf" page="110" type="figura" description="Rilevamento del fumo degli incendi boschivi" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005453.png)
 
 > 💡 **Il fumo come sistema ibrido (nota didattica).** Feature progettate (il fumo si muove lentamente verso l’alto, ha bordi sfumati e colore grigiastro: feature dinamiche e statiche) più un classificatore neurale: è la terza via della Lezione 23 (§2.7), scelta perché l’hardware è limitato e i dati di fumo reale sono rari.
 
 - **Logistica: le lenti liquide**: scatole di altezze diverse passano sotto la stessa telecamera; **la lente liquida cambia il fuoco in millisecondi**; poi un **OCR di deep learning legge il codice**.
 
-<!-- SOURCE_VISUAL id="IS24-V40" source="L24-web.pdf" page="111" type="figura" description="Lenti liquide per leggere codici su scatole di altezze diverse" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005504.png)
 
 > 💡 **Perché una lente liquida (nota didattica).** Una lente fissa ha una profondità di campo limitata: una scatola alta 10 cm e una alta 60 cm non possono essere entrambe a fuoco. Una lente liquida cambia la curvatura di una goccia con una tensione elettrica, quindi la distanza di fuoco, in pochi millisecondi e senza parti meccaniche: un sensore di distanza misura l’altezza della scatola e la lente si regola prima dello scatto.
 
@@ -762,8 +751,7 @@ Applicazioni dei sistemi intelligenti per il **controllo di processi industriali
 - **Tracciamento intelligente degli asset** con il machine learning: **si può costruire un albero di decisione per il sensore senza scrivere una riga di codice**.
 - **Modulo inerziale a 6 assi LSM6DSOX** con **machine learning core**: passi semplici per costruire nel sensore la logica di tracciamento intelligente degli asset, per sviluppare in fretta e arrivare sul mercato prima.
 
-<!-- SOURCE_VISUAL id="IS24-V41" source="L24-web.pdf" page="50" type="figura" description="Il modulo LSM6DSOX con machine learning core per il tracciamento degli asset" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234520.png)
 
 > 💡 **Un albero di decisione dentro il sensore (nota didattica).** Il *machine learning core* esegue piccoli alberi di decisione (Lezione 12) su feature calcolate dall’accelerometro e dal giroscopio (media, varianza, picchi in una finestra): per esempio «pacco fermo / in movimento / caduto». Il microcontrollore principale resta addormentato e si sveglia solo quando l’albero segnala un evento: il consumo scende da milliwatt a microwatt. È il TinyML al suo estremo (§6).
 
@@ -773,8 +761,9 @@ Applicazioni dei sistemi intelligenti per il **controllo di processi industriali
 - **Esempio**: **Corvus Robotics** (Corvus One); **nel 2026 una versione per magazzini della catena del freddo sotto zero**. https://www.corvus-robotics.com/corvus-one
 - **Vedere, parlare e pensare le operazioni logistiche**: inventario basato sulla visione, veicoli autonomi, smistamento e ispezione.
 
-<!-- SOURCE_VISUAL id="IS24-V42" source="L24-web.pdf" page="51" type="figura" description="Drone per l'inventario in un magazzino e visione nelle operazioni logistiche" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234706.png)
+
+![](imgs/Pasted%20image%2020261125234718.png)
 
 #### **8.8. Vehicle to everything (V2X): quattro idee**
 
@@ -783,25 +772,21 @@ Applicazioni dei sistemi intelligenti per il **controllo di processi industriali
 3. **La latenza decide il percorso**: un **avviso di collisione** richiede **circa 100 ms**: **da auto ad auto**; un **avviso di ghiaccio** può aspettare **secondi**: **può passare per il cloud**.
 4. **Il platooning, una lezione di progetto**: camion a pochi metri, **un solo conducente**. **Funziona** (prove UE 2016–2022), eppure **nessun servizio commerciale**; **Daimler si è fermata nel 2019** (risparmio di carburante minore del previsto). **Costo, regole e responsabilità decidono, non solo la tecnologia.**
 
-<!-- SOURCE_VISUAL id="IS24-V43" source="L24-web.pdf" page="52" type="figura" description="Comunicazioni V2X e camion in platooning" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234750.png)
 
 > 💡 **Perché la latenza conta (nota didattica).** A 130 km/h un’auto percorre $\frac{130\ \text{km/h}}{3{,}6}\approx 36{,}1\ \text{m/s}$. Con 100 ms di latenza, un avviso arriva quando l’auto ha già percorso circa 3,6 m; con 10 ms, circa 36 cm. Per un avviso di frenata tra veicoli vicini la differenza è tra un tamponamento evitato e uno no. Un viaggio auto → cloud → auto su rete mobile può superare i 100 ms anche con il 5G: per questo le collisioni si gestiscono in comunicazione diretta.
 
 **In dettaglio (appendice).** Il **V2X** indica la comunicazione **ad alta banda, bassa latenza e alta affidabilità** tra una vasta gamma di sensori legati al trasporto e al traffico. Collegamenti radio per V2V e V2I: **C-V2X** (su LTE e 5G) e **IEEE 802.11p** (ITS-G5).
 
-<!-- SOURCE_VISUAL id="IS24-V44" source="L24-web.pdf" page="102" type="figura" description="Comunicazioni V2X" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005526.png)
 
 **Road map del V2X** (pensando alle auto elettriche/ibride): tassonomia **V2V, V2D, V2P, V2H, V2G e V2I** (veicolo verso veicolo, dispositivo, pedone, casa, rete elettrica, infrastruttura).
 
-<!-- SOURCE_VISUAL id="IS24-V45" source="L24-web.pdf" page="103" type="schema" description="Road map e tassonomia del V2X" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005535.png)
 
 **Funzioni del V2X**: un **pedone si avvicina alle strisce**; i semafori possono cambiare colore e **le auto vengono avvisate prima**. **Circolazione più fluida e sicura.**
 
-<!-- SOURCE_VISUAL id="IS24-V46" source="L24-web.pdf" page="104" type="figura" description="Pedone alle strisce con semafori e auto avvisati via V2X" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005545.png)
 
 **IoT: veicoli in platooning.**
 
@@ -809,8 +794,7 @@ Applicazioni dei sistemi intelligenti per il **controllo di processi industriali
 - **Promessa**: **meno consumo di carburante** (meno resistenza dell’aria) e **traffico più sicuro**. Prove di sei costruttori nella **European Truck Platooning Challenge (2016)**.
 - **Verifica con la realtà**: l’introduzione sul mercato prevista per il **2023–30 non è avvenuta su larga scala**. Nel **2019 Daimler ha fermato il platooning** (risparmi di carburante minori del previsto, limiti legali) ed è passata ai **singoli camion automatizzati**.
 
-<!-- SOURCE_VISUAL id="IS24-V47" source="L24-web.pdf" page="105" type="figura" description="Camion in platooning" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005559.png)
 
 > ⚠️ **Un aggiornamento rispetto all’edizione precedente (nota didattica).** La versione precedente della slide citava prototipi di Tesla, Volvo, Iveco e Scania e un’introduzione sul mercato prevista tra il 2023 e il 2030; l’edizione 2026/27 registra che quella previsione non si è avverata. È un caso utile da ricordare: una tecnologia che funziona nelle prove può non diventare un prodotto se costi, regole e responsabilità non tornano.
 
@@ -822,15 +806,13 @@ Applicazioni dei sistemi intelligenti per il **controllo di processi industriali
 - **Calcolo**: microcontrollori sui sensori e nei dispositivi dell’auto; **sensori virtuali** (per esempio la presenza di ghiaccio).
 - **Fusione di dati eterogenei**: sensori, telecamere di sorveglianza, smartphone, celle telefoniche; protocolli e AI diversi.
 
-<!-- SOURCE_VISUAL id="IS24-V48" source="L24-web.pdf" page="53" type="figura" description="Esempi di sistemi di trasporto intelligenti" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234812.png)
 
 #### **8.10. Volvo Slippery Road Alert: un sensore virtuale nel cloud**
 
 **Livello 1, edge**: velocità delle ruote, interventi di ABS e controllo della trazione, GPS → **ECU dell’auto** (sensore virtuale «**strada scivolosa**»). **Livello 2, nodo**: **unità telematica** → rete mobile (4G/5G). **Livello 3, cloud**: **cloud Volvo** (aggrega molte auto sulla mappa) → **avviso alle auto in avvicinamento**; amministrazione stradale: **manutenzione invernale**.
 
-<!-- SOURCE_VISUAL id="IS24-V49" source="L24-web.pdf" page="54" type="schema" description="Volvo Slippery Road Alert su tre livelli: edge, nodo, cloud" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234840.png)
 
 - Richiamo dalla Lezione 3: un **sensore virtuale** **fonde sensori reali in una grandezza che nessun sensore misura**: qui «**la strada è scivolosa**».
 - **2016**: Volvo serie 90 in Svezia e Norvegia, con le amministrazioni stradali; **2019**: tutta Europa; **2020**: USA, dati anche alle città e a Waze (Waycare).
@@ -845,22 +827,19 @@ Applicazioni dei sistemi intelligenti per il **controllo di processi industriali
 - **Sicurezza della città** (uno scenario futuro): **ogni auto diventa una sonda della strada**; avvisi di ghiaccio alle auto che seguono, **asfalto consumato e buche** per la manutenzione stradale.
 - **Business**: **servizi** (sostituzione proattiva, assistenza) e **dati**.
 
-<!-- SOURCE_VISUAL id="IS24-V50" source="L24-web.pdf" page="55" type="figura" description="Il Pirelli Cyber Tyre con il sensore nel pneumatico" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234850.png)
 
 #### **8.12. Pirelli Cyber Car: sensore, edge, fog e cloud**
 
 **Sensore** (pressione del pneumatico + informazioni) → **flusso di dati su Amazon AWS**.
 
-<!-- SOURCE_VISUAL id="IS24-V51" source="L24-web.pdf" page="56" type="schema" description="Flusso dei dati del Cyber Car dal sensore all'edge, al fog e ad AWS" reason="Schema e immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234905.png)
 
 **Oggi**: sulle **auto di fascia alta**, attraverso **partnership con i costruttori**; nel **maggio 2026 Pirelli ha annunciato la produzione nel suo stabilimento di Rome (Georgia, USA)**. **Sicurezza**: un pneumatico connesso **raccoglie dati del veicolo**, quindi è una **tecnologia sensibile**: l’Italia ha **limitato l’influenza dell’azionista cinese Sinochem** (**golden power**) prima della produzione e delle vendite negli USA.
 
 **Le opportunità di business** (appendice): https://www.pirelli.com/tyres/en-au/car/tech-and-knowledge/cyber-tyre e https://www.pirellicyberfleet.com/
 
-<!-- SOURCE_VISUAL id="IS24-V52" source="L24-web.pdf" page="106" type="figura" description="Le opportunità di business del Pirelli Cyber Tyre" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005637.png)
 
 > 💡 **Il Cyber Tyre sui livelli del corso (nota didattica).** **Sensore** nel pneumatico (misura e prima elaborazione, con energia minima: TinyML); **edge** nella centralina dell’auto (fusione con ABS e ESP, avviso al conducente in millisecondi); **fog** (nodi della rete mobile, raccolta dalle auto di una zona); **cloud** (mappa delle strade, servizi, addestramento dei modelli). È lo stesso schema del Volvo Slippery Road Alert, con un sensore diretto invece di un sensore virtuale. Il «golden power» mostra che un sensore che raccoglie dati di mobilità è anche una questione di sovranità dei dati (Lezione 15).
 
@@ -877,8 +856,7 @@ Le caratteristiche necessarie per creare applicazioni nell’Industria 4.0 e 5.0
 - Sono **gli occhi che catturano il processo** e danno un **feedback** attraverso il software di elaborazione delle immagini.
 - **Usate in tutte le fasi della produzione**: ispezione delle **materie prime**, **monitoraggio della produzione**, **ispezione finale** e **garanzia della qualità**; **indispensabili per l’efficienza e per standard di qualità elevati** (*). (*) White paper: *Industrial Cameras in Industry 4.0 for Efficient Production*, www.baslerweb.com.
 
-<!-- SOURCE_VISUAL id="IS24-V53" source="L24-web.pdf" page="58" type="figura" description="Telecamere industriali per l'Industria 4.0" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125234946.png)
 
 #### **9.2. La storia… oggi**
 
@@ -890,15 +868,15 @@ Le caratteristiche necessarie per creare applicazioni nell’Industria 4.0 e 5.0
 - tecniche avanzate di **OCR + QR + codici a barre**;
 - **nessun addestramento a bordo: solo inferenza!** La rete viene **addestrata offline**, poi **caricata sulla telecamera**.
 
-<!-- SOURCE_VISUAL id="IS24-V54" source="L24-web.pdf" page="59" type="figura" description="Evoluzione delle smart camera fino alle reti neurali a bordo" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125235026.png)
+
+![](imgs/Pasted%20image%2020261125235033.png)
 
 #### **9.3. I sistemi di visione industriali: sensori e smart camera**
 
 **Telecamera → elaborazione a bordo = smart camera**; **profilometro laser 3D**.
 
-<!-- SOURCE_VISUAL id="IS24-V55" source="L24-web.pdf" page="60" type="figura" description="Smart camera e profilometro laser 3D" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125235043.png)
 
 > 💡 **Il profilometro laser (nota didattica).** Una linea laser proiettata sul pezzo appare deformata vista da una telecamera inclinata: dalla deformazione si ricava per triangolazione l’altezza di ogni punto della linea. Facendo scorrere il pezzo sotto la linea si ottiene un profilo 3D completo, con risoluzioni di micrometri: è uno dei sensori 3D del bin picking (Lezione 23, §2.10).
 
@@ -906,22 +884,19 @@ Le caratteristiche necessarie per creare applicazioni nell’Industria 4.0 e 5.0
 
 **Qualità, ispezione, produzione, sicurezza**: automazione della produzione, ispezione visiva, controllo di processo, automazione dell’imballaggio.
 
-<!-- SOURCE_VISUAL id="IS24-V56" source="L24-web.pdf" page="61" type="figura" description="Visione industriale lungo la catena di produzione" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125235057.png)
 
 #### **9.5. La configurazione di base e la rete di automazione**
 
 **Sistemi di illuminazione e telecamera**; **HW+SW (+ modelli profondi)** per **classificazione, misure e valutazione della qualità**.
 
-<!-- SOURCE_VISUAL id="IS24-V57" source="L24-web.pdf" page="62" type="figura" description="Configurazione di base di un sistema di visione: illuminazione, telecamera, elaborazione" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125235109.png)
 
 > 💡 **L’illuminazione decide metà del problema (nota didattica).** Un graffio quasi invisibile con la luce diffusa diventa una linea brillante con una luce radente (a basso angolo); una superficie lucida si ispeziona con luce coassiale; un contorno si misura in controluce. Scegliere l’illuminazione giusta può rendere banale un problema che, con immagini mal illuminate, richiederebbe una rete profonda e migliaia di esempi.
 
 **La visione industriale nella rete di automazione.** Un sistema intelligente **scarta i pezzi difettosi da un nastro**; **protocolli fieldbus su Ethernet 10/100** con **sincronizzazione temporale IEEE 1588**. HMI, I/O distribuito, switch, azionamenti, smart camera, braccio pick-and-place, contenitori buono/scarto. **Le telecamere alimentano l’unità di elaborazione delle immagini**, che comanda **PLC, monitor, robot e nastri**.
 
-<!-- SOURCE_VISUAL id="IS24-V58" source="L24-web.pdf" page="63" type="schema" description="Rete di automazione con smart camera, PLC, robot, nastri e sincronizzazione IEEE 1588" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125235122.png)
 
 > 💡 **Perché serve IEEE 1588 (nota didattica).** La telecamera vede il pezzo in un punto, il braccio lo scarta **più avanti** sul nastro. Se il nastro scorre a 1 m/s e il braccio è 0,5 m dopo la telecamera, il braccio deve agire esattamente 500 ms dopo lo scatto. Un errore di **10 ms** tra gli orologi dei due dispositivi sposta il punto di presa di **1 cm**, abbastanza per mancare un pezzo piccolo. Il **Precision Time Protocol** (IEEE 1588) sincronizza gli orologi con precisione sotto il millisecondo, come visto per la sincronizzazione dei dati nella Lezione 6.
 
@@ -929,16 +904,14 @@ Le caratteristiche necessarie per creare applicazioni nell’Industria 4.0 e 5.0
 
 **Il relè da controllare**, **telecamere C-mount** (telecamera USB 1 e 2), **sensore di prossimità**, **attuatore e struttura di movimentazione**.
 
-<!-- SOURCE_VISUAL id="IS24-V59" source="L24-web.pdf" page="64" type="figura" description="Sistema di misura dei contatti di un relè con due telecamere USB C-mount" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125235135.png)
 
 #### **9.7. Dai sistemi completi ai piccoli budget**
 
 - **Cella d’ispezione completa**: **100 000 – 200 000 €** (ordine di grandezza: telecamere, illuminazione, meccanica, integrazione).
 - **Piccoli progetti**: una **scheda con telecamera da 2 MP a circa 8 USD**.
 
-<!-- SOURCE_VISUAL id="IS24-V60" source="L24-web.pdf" page="65" type="figura" description="Una cella d'ispezione completa e una scheda con telecamera da 8 dollari" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125235158.png)
 
 > 💡 **Da 8 dollari a 200 000 euro (nota didattica).** La differenza di prezzo non sta nel sensore. Un sistema industriale completo include **ottiche** e **illuminazione** progettate per il pezzo; **meccanica** e integrazione con robot e PLC; **sincronizzazione**; **validazione** su migliaia di pezzi; **certificazione** e **manutenzione** per anni. Un prototipo a 8 dollari dimostra che l’idea funziona; un sistema a 200 000 euro garantisce che funzioni **sempre**, su una linea che non può fermarsi. È la distanza tra «saper addestrare una rete» e «saper progettare un sistema intelligente» con cui il corso si era aperto (Lezione 1).
 
@@ -950,8 +923,7 @@ Le caratteristiche necessarie per creare applicazioni nell’Industria 4.0 e 5.0
 
 Richiamo dalle Lezioni 19 e 22: **punteggio di anomalia $s(x)$ e soglia $\tau$**: l’immagine $x$ viene segnalata quando $s(x)>\tau$. $s$ può essere la **distanza dai dati normali** (Lezione 19) o l’**errore di ricostruzione di un autoencoder addestrato solo sui pezzi buoni** (Lezione 22).
 
-<!-- SOURCE_VISUAL id="IS24-V61" source="L24-web.pdf" page="66" type="figura" description="Esempi di anomalie su pezzi industriali" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125235211.png)
 
 > 💡 **Come si fa senza esempi di difetti (nota didattica).** Il problema pratico è che i difetti sono **rari** e **tutti diversi**: non si può addestrare un classificatore con una classe «difetto» ben rappresentata (Lezione 14). Si addestra allora un modello **solo sui pezzi buoni**, per esempio un **autoencoder** (Lezione 22, §1.12), e si segnala come anomalia ciò che il modello **non sa ricostruire**:
 > $$\text{anomalia}\iff\|x-\hat{x}\|^2>\tau.$$
@@ -971,20 +943,17 @@ Le tecnologie 4.0 sono il ponte verso gli obiettivi 5.0.
 - **Quattro principi di progetto**: **interoperabilità, trasparenza dell’informazione, assistenza tecnica, decisioni decentralizzate** (§10.7).
 - **Oggi**: la **base tecnologica dell’Industria 5.0**.
 
-<!-- SOURCE_VISUAL id="IS24-V62" source="L24-web.pdf" page="68" type="figura" description="Illustrazioni dell'Industria 4.0 e dei sistemi cyber-fisici" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126004315.png)
 
 #### **10.2. L’ambiente I4.0 e le sue tecnologie digitali**
 
 **Smart factory** al centro, collegata a **Internet delle cose**, **Internet dei dati**, **Internet dei servizi**, **Internet delle persone**, e ai settori **smart grid, mobilità, logistica, edifici, case**. **Tecnologie digitali chiave**: cloud computing; sensori intelligenti, piattaforme IoT; **big data analytics, algoritmi**; sistemi cyber-fisici; realtà aumentata, HMI avanzate; dispositivi mobili; stampa 3D; autenticazione, rilevamento delle frodi. **Dati e analisi: la capacità centrale.**
 
-<!-- SOURCE_VISUAL id="IS24-V63" source="L24-web.pdf" page="69" type="schema" description="L'ambiente dell'Industria 4.0 con le reti di cose, dati, servizi e persone e le tecnologie digitali" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126004328.png)
 
 Dalla figura dell’ambiente IoP e dal rapporto PwC «*Building the digital enterprise*» (figure originali in appendice). L’**Internet delle persone** (IoP): le persone **comunicano con i propri dispositivi, direttamente, senza una terza parte fidata**.
 
-<!-- SOURCE_VISUAL id="IS24-V64" source="L24-web.pdf" page="113" type="figura" description="Figure originali dell'ambiente IoP e del rapporto PwC" reason="Figure visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005655.png)
 
 #### **10.3. Dall’Industria 4.0 all’Industria 5.0: un ponte**
 
@@ -994,8 +963,7 @@ Dalla figura dell’ambiente IoP e dal rapporto PwC «*Building the digital ente
 |---|---|
 | sistemi cyber-fisici; IoT, AI all’edge e nel cloud; visione, **digital twin** | **stesse tecnologie, obiettivi di progetto più ampi**: **centrata sull’uomo, sostenibile, resiliente** |
 
-<!-- SOURCE_VISUAL id="IS24-V65" source="L24-web.pdf" page="70" type="schema" description="Il ponte dalle tecnologie dell'Industria 4.0 agli obiettivi dell'Industria 5.0" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126004407.png)
 
 - **Commissione europea (2021)**: l’Industria 5.0 **completa ed estende** l’Industria 4.0; **non è né la sua continuazione cronologica né un’alternativa**.
 - La 4.0 chiede «**si può automatizzare e connettere?**» (produttività, qualità); la 5.0 aggiunge «**è un bene per l’operatore, per il pianeta e per la prossima crisi?**».
@@ -1013,13 +981,13 @@ Dalla figura dell’ambiente IoP e dal rapporto PwC «*Building the digital ente
 
 **Costruita sulla 4.0** (CPS, IoT, AI, visione); **giudicata su produttività e persone, energia, ripresa**. Commissione europea, *Industry 5.0: towards a sustainable, human-centric and resilient European industry*, 2021.
 
-<!-- SOURCE_VISUAL id="IS24-V66" source="L24-web.pdf" page="71" type="schema" description="Le cinque rivoluzioni industriali e i tre valori dell'Industria 5.0" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126004904.png)
 
 **In dettaglio (appendice)**: un **approccio centrato sull’uomo** alle tecnologie digitali, AI compresa; **aggiornamento e riqualificazione** delle competenze dei lavoratori, in particolare **digitali**; **industrie efficienti nelle risorse e sostenibili**, transizione a un’**economia circolare**; un’industria **competitiva e resiliente**, che investe in **ricerca e innovazione**.
 
-<!-- SOURCE_VISUAL id="IS24-V67" source="L24-web.pdf" page="116" type="figura" description="I valori dell'Industria 5.0 secondo la Commissione europea" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005708.png)
+
+![](imgs/Pasted%20image%2020261126005716.png)
 
 #### **10.5. L’Industria 5.0 in pratica: un progetto che si può proporre**
 
@@ -1032,8 +1000,7 @@ Dalla figura dell’ambiente IoP e dal rapporto PwC «*Building the digital ente
 | **controlli visivi manuali per turno** | 400 | 50 (**solo i pezzi segnalati**) | 5.0: centrata sull’uomo |
 | **tempo per adattarsi a un prodotto nuovo** | 2 giorni | 4 ore (**riaddestramento su poche immagini**) | 5.0: resiliente |
 
-<!-- SOURCE_VISUAL id="IS24-V68" source="L24-web.pdf" page="72" type="schema" description="Progetto Industria 5.0 con sensori, edge AI, livello decisionale e KPI" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126004921.png)
 
 **Obiettivi illustrativi**: **le stesse telecamere e gli stessi modelli di questa lezione, giudicati su quattro KPI, non uno.**
 
@@ -1052,8 +1019,7 @@ Dalla figura dell’ambiente IoP e dal rapporto PwC «*Building the digital ente
 
 **Linea 3, oggi**: **OEE 78%**, **scarto 1,2%**, **1,00 kWh/pezzo**, **fermo 42 min**; grafici di scarto al giorno [%] ed energia per pezzo. **Input**: sensori IoT, PLC, ERP ⇒ **Output**: **decisioni sulla linea**.
 
-<!-- SOURCE_VISUAL id="IS24-V69" source="L24-web.pdf" page="73" type="figura" description="Dashboard della linea 3 con OEE, scarto, energia per pezzo e fermi" reason="Dashboard visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126004944.png)
 
 **Nata per i manager delle multinazionali, la BI raggiunge ora ogni azienda, anche manifatturiera**: i dati vengono **dai sensori e dalle telecamere di questo corso**, e la dashboard **la legge il capoturno, non solo l’impiegato**.
 
@@ -1070,8 +1036,7 @@ Richiamo dalla Lezione 1: **il vostro valore, e il vostro stipendio, crescono co
 | **predittiva** | che cosa succederà? | questo cuscinetto si guasta tra circa 200 h | modelli di ML, punteggio di anomalia |
 | **prescrittiva** | come farla accadere? | rallentare la linea 3, manutenzione sabato | ottimizzazione, agenti |
 
-<!-- SOURCE_VISUAL id="IS24-V70" source="L24-web.pdf" page="74" type="grafico" description="La scala dell'analisi con valore e difficoltà crescenti dai quattro gradini" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126004955.png)
 
 **Questo corso vi ha dato gli strumenti per tutti e quattro i gradini.** Dal modello di Gartner dell’*analytic ascendancy* (2012).
 
@@ -1095,8 +1060,7 @@ Richiamo dalla Lezione 1: **il vostro valore, e il vostro stipendio, crescono co
 
 **Sensore del pneumatico, lampada connessa, altoparlante intelligente, anomalia su un dado, telecamera del traffico.** **Fabbriche e aziende stanno già trasmettendo dati: aspettano la vostra idea intelligente per usarli.**
 
-<!-- SOURCE_VISUAL id="IS24-V71" source="L24-web.pdf" page="75" type="figura" description="Cinque esempi: sensore del pneumatico, lampada, altoparlante, anomalia su un dado, telecamera del traffico" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005006.png)
 
 ---
 
@@ -1239,8 +1203,7 @@ Il software rende possibili **interoperabilità, rilascio dei modelli, monitorag
 
 La slide riporta anche un costo di «**1 euro**», riferito al microcontrollore più piccolo.
 
-<!-- SOURCE_VISUAL id="IS24-V72" source="L24-web.pdf" page="89" type="figura" description="Esempi di dispositivi IoT: ATmega328P, ATSAMW25, ESP32-CAM, FPGA" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005757.png)
 
 #### **13.4. Raspberry Pi AI HAT+: gli acceleratori Hailo**
 
@@ -1250,8 +1213,7 @@ La slide riporta anche un costo di «**1 euro**», riferito al microcontrollore 
 
 > ⚠️ **I TOPS in INT4 non sono confrontabili con i TOPS in INT8**: leggere sempre la precisione (Lezione 23, quantizzazione).
 
-<!-- SOURCE_VISUAL id="IS24-V73" source="L24-web.pdf" page="90" type="figura" description="Raspberry Pi 5 con AI HAT+ Hailo" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005809.png)
 
 #### **13.5. Google Coral**
 
@@ -1259,38 +1221,34 @@ La slide riporta anche un costo di «**1 euro**», riferito al microcontrollore 
 - È composta da **componenti hardware, strumenti software e modelli di ML pre-addestrati** progettati per un’elaborazione AI veloce ed efficiente **in locale** su sistemi embedded.
 - **2025**: Google ha rilasciato **Coral NPU come open source**: un **progetto di NPU basato su RISC-V** per dispositivi indossabili (circa **512 GOPS a pochi mW**); i primi chip sono prodotti da **Synaptics**.
 
-<!-- SOURCE_VISUAL id="IS24-V74" source="L24-web.pdf" page="91" type="figura" description="La piattaforma Google Coral" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005817.png)
 
 **Edge TPU e modelli pre-addestrati**:
 
 - **Componente centrale**: l’**Edge TPU**, **4 TOPS (INT8) a circa 2 W**, in moduli **da 25 a 130 USD**; **raffreddamento passivo** (senza ventole) nella maggior parte delle configurazioni.
 - **Un’ampia gamma di modelli pre-addestrati** da integrare nell’HW: **inferenza molto veloce**; **transfer learning sul dispositivo limitato a casi specifici**.
 
-<!-- SOURCE_VISUAL id="IS24-V75" source="L24-web.pdf" page="92" type="figura" description="Moduli Edge TPU di Coral e modelli pre-addestrati" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005857.png)
+
+![](imgs/Pasted%20image%2020261126005903.png)
 
 #### **13.6. Schede e AIoT**
 
 Tabelle comparative da https://qengineering.eu/deep-learning-with-raspberry-pi-and-alternatives.html.
 
-<!-- SOURCE_VISUAL id="IS24-V76" source="L24-web.pdf" page="93" type="tabella" description="Confronto delle schede per il deep learning embedded (qengineering.eu)" reason="Tabella presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005916.png)
 
-<!-- SOURCE_VISUAL id="IS24-V77" source="L24-web.pdf" page="94" type="tabella" description="Confronto delle schede per il deep learning embedded, seconda parte" reason="Tabella presente solo come immagine" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005923.png)
 
 **Un benchmark delle edizioni precedenti**: **FPS di modelli d’immagine** su schede delle edizioni precedenti del corso (RPi 4, Jetson Nano, Coral, NCS2). Fonte: qengineering.eu. Per le schede di oggi si veda la tabella del §5.2.
 
-<!-- SOURCE_VISUAL id="IS24-V78" source="L24-web.pdf" page="95" type="grafico" description="FPS di modelli d'immagine su RPi 4, Jetson Nano, Coral e NCS2" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005933.png)
 
 #### **13.7. Esempi di AIoT per il retail e i cartelloni pubblicitari**
 
 L’AIoT usa tipicamente **capacità di visione artificiale e sensori** per **raccogliere informazioni** su clienti, sensori, veicoli, ecc. **British Airways, Piccadilly Circus, campagna #LookUp**: la lampadina resta spenta finché un passante non le cammina sotto. Allora la lampadina, grazie ai **sensori di movimento**, si accende: a chi guarda il cartellone sembra che la persona che passa sotto abbia appena avuto **un’idea fantastica**, il «*light bulb moment*».
 
-<!-- SOURCE_VISUAL id="IS24-V79" source="L24-web.pdf" page="96" type="figura" description="Cartellone della campagna #LookUp di British Airways a Piccadilly Circus" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126005951.png)
 
 > 💡 **Il caso #LookUp (nota didattica).** Nella versione originale della campagna (2014) il cartellone mostrava un bambino che indicava gli aerei British Airways che passavano davvero sopra Piccadilly, con numero di volo e destinazione: un sistema di tracciamento degli aerei collegato in tempo reale. È un esempio di AIoT che crea valore senza raccogliere dati personali dei passanti.
 
@@ -1298,33 +1256,27 @@ L’AIoT usa tipicamente **capacità di visione artificiale e sensori** per **ra
 
 E molte altre!
 
-<!-- SOURCE_VISUAL id="IS24-V80" source="L24-web.pdf" page="97" type="figura" description="L'ecosistema MATLAB per il ML e l'IoT" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126010003.png)
 
 #### **13.9. Industria 4.0: le quattro caratteristiche sinergiche principali (non d’esame)**
 
-<!-- SOURCE_VISUAL id="IS24-V81" source="L24-web.pdf" page="117" type="figura" description="Le quattro caratteristiche sinergiche dell'Industria 4.0" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126010015.png)
 
 1. **Rete verticale dei sistemi di produzione intelligenti**: usa i **sistemi di produzione cyber-fisici** (CPPS) per permettere agli impianti di **reagire rapidamente ai cambiamenti di domanda o di scorte e ai guasti**. Le **fabbriche intelligenti si organizzano da sole** e permettono una produzione **specifica per il cliente e personalizzata** (clienti/mercato ↔ produzione).
 
-<!-- SOURCE_VISUAL id="IS24-V82" source="L24-web.pdf" page="118" type="figura" description="Rete verticale dei sistemi di produzione intelligenti" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126010025.png)
 
 2. **Integrazione orizzontale attraverso le reti globali della catena del valore**: reti locali e globali collegano via CPPS **logistica, magazzino, produzione, marketing e vendite**. Le reti sono **ottimizzate in tempo reale**: trasparenza e flessibilità per rispondere più rapidamente a problemi e guasti facilitano una migliore ottimizzazione globale. **La storia di ogni parte o prodotto è registrata** e accessibile in qualsiasi momento: **tracciabilità costante**.
 
-<!-- SOURCE_VISUAL id="IS24-V83" source="L24-web.pdf" page="119" type="figura" description="Integrazione orizzontale lungo la catena del valore" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126010050.png)
 
 3. **Ingegneria lungo l’intera catena del valore** (*through-engineering*): lo sviluppo e la produzione di **nuovi prodotti** e **sistemi di produzione** sono **integrati e coordinati con i cicli di vita dei prodotti**, creando nuove sinergie tra sviluppo del prodotto e sistemi di produzione.
 
-<!-- SOURCE_VISUAL id="IS24-V84" source="L24-web.pdf" page="120" type="figura" description="Ingegneria lungo l'intera catena del valore" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126010133.png)
 
 4. **Accelerazione attraverso le tecnologie esponenziali**: l’Industria 4.0 richiede già soluzioni di automazione **altamente cognitive** e **altamente autonome**; per aumentare ulteriormente l’autonomia e accelerare **personalizzazione e flessibilità**: **intelligenza artificiale**, **robotica avanzata**, **tecnologia dei sensori**.
 
-<!-- SOURCE_VISUAL id="IS24-V85" source="L24-web.pdf" page="121" type="figura" description="Accelerazione attraverso le tecnologie esponenziali" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261126010141.png)
 
 ---
 

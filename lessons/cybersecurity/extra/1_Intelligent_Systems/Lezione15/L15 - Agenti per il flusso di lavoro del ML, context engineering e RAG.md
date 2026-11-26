@@ -211,6 +211,7 @@ Lo schema è: **percezione** dall’ambiente → **agente / LLM** → **azione**
 ![](imgs/Pasted%20image%2020261124021724.png)
 
 > 💡 **Il ciclo in pseudocodice (nota didattica).**
+>
 > ```text
 > passi = 0
 > finché passi < MAX_PASSI e costo < BUDGET:
@@ -474,6 +475,7 @@ Prompt e contesto insieme determinano l’**uscita dell’AI**.
 ![](imgs/Pasted%20image%2020261124025030.png)
 
 > 💡 **Una traccia ReAct (nota didattica).**
+>
 > ```text
 > Pensiero: devo sapere se l'allarme A17 è già comparso sulla pompa P-12.
 > Azione: cerca_rapporti(query="A17 P-12")
@@ -589,6 +591,7 @@ I modelli di ragionamento avanzati sono **già ottimizzati per scomporre i probl
 <!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > 💡 **Un esempio di struttura (nota didattica).**
+>
 > ```xml
 > <istruzioni>Riassumi il rapporto in 5 punti, massimo 25 parole ciascuno.</istruzioni>
 > <documento>...testo del rapporto di manutenzione...</documento>
