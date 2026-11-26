@@ -15,8 +15,7 @@ La domanda di partenza è **che cosa può restituire un sistema di visione intel
 - **Tecnologia**: CPU, GPU, TPU, NPU, VPU; inferenza **cloud o locale**, **memoria e quantizzazione**.
 - **Rilascio**: dal modello addestrato al **dispositivo edge**; OpenVINO, Edge Impulse.
 
-<!-- SOURCE_VISUAL id="IS23-V01" source="L23-web.pdf" page="2" type="figura" description="Esempi di etichetta, box e maschera che accompagnano la panoramica" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175054.png)
 
 ---
 
@@ -31,35 +30,29 @@ Tre esempi: **ancora** (cane / gatto); **controllo qualità** (OK / difettoso); 
 
 **Input**: un’immagine $I(x,y)$, $H\times W\times 3$, dalla telecamera sopra la linea ⇒ **Output**: **un’etichetta per immagine** (OK/difettoso; o uno di $C=3$ materiali), **nessuna posizione**.
 
-<!-- SOURCE_VISUAL id="IS23-V02" source="L23-web.pdf" page="4" type="figura" description="Esempi di classificazione: cane e gatto, pezzo OK e difettoso, plastica metallo vetro" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175112.png)
 
 #### **1.2. I compiti della visione intelligente**
 
-<!-- SOURCE_VISUAL id="IS23-V03" source="L23-web.pdf" page="5" type="figura" description="I quattro compiti della visione intelligente sulla stessa immagine" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125174934.png)
 
 #### **1.3. Quattro test veloci**
 
 **Test 1**: che compito di visione intelligente è questo? → **SEGMENTAZIONE PER ISTANZE!** Ogni oggetto (1, 2, 3) ha **la propria maschera**.
 
-<!-- SOURCE_VISUAL id="IS23-V04" source="L23-web.pdf" page="7" type="figura" description="Pecore con una maschera diversa per ogni individuo: segmentazione per istanze" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175302.png)
 
 **Test 2**: a quale compito corrisponde? → **SEGMENTAZIONE SEMANTICA!** Tutte pecore qui… (**una classe, un colore**); l’area del cane (un’altra classe).
 
-<!-- SOURCE_VISUAL id="IS23-V05" source="L23-web.pdf" page="9" type="figura" description="Tutte le pecore dello stesso colore e il cane di un altro: segmentazione semantica" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175318.png)
 
 **Test 3**: che compito è? → **RILEVAMENTO DI OGGETTI** (*object detection*). Ci sono solo i cosiddetti **bounding box**: solo box.
 
-<!-- SOURCE_VISUAL id="IS23-V06" source="L23-web.pdf" page="11" type="figura" description="Pecore e cane con i soli bounding box: rilevamento di oggetti" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175334.png)
 
 **Test 4**: che compito è? → **CLASSIFICAZIONE DELL’IMMAGINE**. In uscita c’è **una sola classe = pecora**.
 
-<!-- SOURCE_VISUAL id="IS23-V07" source="L23-web.pdf" page="13" type="figura" description="La stessa immagine con una sola etichetta: classificazione" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175407.png)
 
 #### **1.4. Il compito è definito dalla sua uscita**
 
@@ -80,8 +73,7 @@ $C$ = numero di classi; $N$ = numero di oggetti trovati (**cambia da immagine a 
 
 **Input**: un’immagine $I(x,y)$, $224\times 224\times 3$ (RGB) → **classificatore d’immagini** $f(I)$, per esempio una CNN → **punteggi**: cane 0,92, gatto 0,05, volpe 0,02 → `out = rank(...)` = «**Cane**».
 
-<!-- SOURCE_VISUAL id="IS23-V08" source="L23-web.pdf" page="15" type="schema" description="Classificatore d'immagini che restituisce i punteggi e l'etichetta cane" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175434.png)
 
 **Nessun’altra informazione sull’oggetto**: dove si trova? quanto è grande? **Input**: un’immagine $H\times W\times 3$ ⇒ **Output**: vettore di punteggi $p\in[0,1]^C$ ($C$ classi) e **un’etichetta**: la classe con il punteggio più alto.
 
@@ -89,8 +81,7 @@ $C$ = numero di classi; $N$ = numero di oggetti trovati (**cambia da immagine a 
 
 **Input**: immagine RGB ridimensionata a $256\times 256\times 3$ (la rete legge un ritaglio $224\times 224$) ⇒ **Output**: vettore softmax $p\in[0,1]^{1000}$, $\sum_kp_k=1$; l’etichetta è $\arg\max_kp_k$. **AlexNet**: CNN con **5 strati convolutivi + 3 completamente connessi**, **≈ 60 M parametri** (Lezione 21, §5.1).
 
-<!-- SOURCE_VISUAL id="IS23-V09" source="L23-web.pdf" page="16" type="figura" description="AlexNet che classifica un'immagine nelle 1000 classi ImageNet" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175629.png)
 
 > ⚠️ **227 o 224? (nota didattica).** La Lezione 21 indica un ingresso $227\times 227$: l’articolo originale scrive 224, ma con il passo 4 e il filtro $11\times 11$ la formula $O=\lfloor(N-k)/S\rfloor+1$ dà 55 solo con $N=227$. È un’incongruenza nota dell’articolo; le implementazioni usano 227 (o 224 con padding).
 
@@ -98,8 +89,7 @@ $C$ = numero di classi; $N$ = numero di oggetti trovati (**cambia da immagine a 
 
 Lo si addestra su **dataset pubblici molto grandi**, soprattutto per i sistemi con molti parametri. **ImageNet Large-Scale Visual Recognition Challenge** (> 14 M immagini, 1000 classi diverse) — **insieme facile**:
 
-<!-- SOURCE_VISUAL id="IS23-V10" source="L23-web.pdf" page="17" type="figura" description="Esempi di classi facili di ImageNet" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175649.png)
 
 > ⚠️ **14 milioni o 1,28 milioni? (nota didattica).** ImageNet completo ha oltre 14 milioni di immagini in circa 21 000 categorie; la *challenge* ILSVRC ne usa un sottoinsieme di **1000 classi e 1,28 milioni di immagini di training** (le cifre delle Lezioni 21 e 22). La slide combina le due cifre.
 
@@ -114,8 +104,7 @@ Lo si addestra su **dataset pubblici molto grandi**, soprattutto per i sistemi c
 - **classi simili** (*fine-grained*);
 - **più oggetti, una sola etichetta**.
 
-<!-- SOURCE_VISUAL id="IS23-V11" source="L23-web.pdf" page="18" type="figura" description="Esempi di classi difficili di ImageNet" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175753.png)
 
 - **Utile per**: pre-addestramento e fine-tuning (dopo aver selezionato le classi che servono) e per imparare **feature generali** (bordi, tessiture, forme) che **si trasferiscono** ad altri compiti.
 - **Non per l’uso industriale diretto**: categorie web generiche, **non i pezzi o i difetti di una fabbrica**.
@@ -131,8 +120,7 @@ Dov’è l’oggetto? Il bounding box.
 
 **Oggetti sovrapposti**; **molti oggetti di classi diverse**. Negli ambienti reali gli oggetti **possono sovrapporsi**: il modello deve **riconoscere una forma anche da una sua parte** (si vedano le tecniche *masked* della lezione precedente, Lezione 22, §1.14).
 
-<!-- SOURCE_VISUAL id="IS23-V12" source="L23-web.pdf" page="20" type="figura" description="Scene con oggetti sovrapposti e molti oggetti di classi diverse" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175837.png)
 
 > 💡 **Il limite della NMS (nota didattica).** La NMS (*Non-Maximum Suppression*, Lezione 21, §5.10) elimina i box che si sovrappongono troppo al box con punteggio più alto. Con oggetti **davvero sovrapposti**, come due persone una davanti all’altra, i loro box hanno IoU alta e la NMS rischia di **eliminarne uno**: in scene affollate questa soppressione può cancellare un oggetto reale. Varianti come la Soft-NMS abbassano il punteggio invece di eliminare il box.
 
@@ -140,23 +128,20 @@ Dov’è l’oggetto? Il bounding box.
 
 **Input** $I(x,y)$ → **rilevatore di oggetti** (per esempio un rilevatore CNN) → **output**: $\{x_1,y_1,x_2,y_2\}$ + classe «cane» + punteggio. Il box ha **lati paralleli agli assi dell’immagine**, con vertici $(x_1,y_1)$ e $(x_2,y_2)$.
 
-<!-- SOURCE_VISUAL id="IS23-V13" source="L23-web.pdf" page="21" type="figura" description="Un cane dentro il suo bounding box con i vertici (x1, y1) e (x2, y2)" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175902.png)
 
 > ⚠️ **Il box contiene il cane e molto sfondo**: è **quasi impossibile ricavare misure** (lunghezza, area, contorno) da un box.
 
 #### **2.3. Il rilevamento non è la segmentazione!**
 
-<!-- SOURCE_VISUAL id="IS23-V14" source="L23-web.pdf" page="22" type="figura" description="La differenza tra il box di un rilevatore e la maschera di una segmentazione" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175911.png)
 
 #### **2.4. Un esempio di rilevamento: persone nelle immagini**
 
 - **Cantieri industriali**: **box gialli**: persone che indossano **gilet ad alta visibilità**.
 - **Sorveglianza**: **box verde**: rilevamento; **maschera rossa**: segmentazione.
 
-<!-- SOURCE_VISUAL id="IS23-V15" source="L23-web.pdf" page="23" type="figura" description="Rilevamento di persone con gilet in cantiere e in videosorveglianza con box e maschere" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125175927.png)
 
 > ⚠️ **Sorveglianza e AI Act (nota didattica).** Rilevare **persone** (contarle, verificare il gilet) è diverso dall’**identificarle**: il riconoscimento biometrico in tempo reale in spazi accessibili al pubblico è vietato dall’AI Act salvo eccezioni strette, e la videosorveglianza sul luogo di lavoro richiede accordi e garanzie per i lavoratori (Lezione 2; Tecniche biometriche, Lezione 18). Un sistema «gilet sì/no» si progetta senza memorizzare volti.
 
@@ -166,15 +151,13 @@ Dov’è l’oggetto? Il bounding box.
 
 **Input**: un’immagine RGB con diverse persone ⇒ **Output**: per persona, **$K$ punti chiave** $(x_k,y_k,\text{confidenza})$, per esempio $K=25$. github.com/CMU-Perceptual-Computing-Lab/openpose
 
-<!-- SOURCE_VISUAL id="IS23-V16" source="L23-web.pdf" page="24" type="figura" description="Scheletri OpenPose di più persone in un cantiere" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180002.png)
 
 > 💡 **Un uso di sicurezza (nota didattica).** Con 25 punti chiave per persona si può riconoscere una postura a rischio (schiena piegata mentre si solleva un carico) o una persona a terra, senza bisogno di identità: è un’uscita più ricca del box ma ancora molto compatta (75 numeri per persona).
 
 #### **2.6. Classificazione/rilevamento di oggetti: ML classico contro deep learning**
 
-<!-- SOURCE_VISUAL id="IS23-V17" source="L23-web.pdf" page="25" type="schema" description="Pipeline classica con feature progettate contro deep learning end-to-end per il rilevamento" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180053.png)
 
 #### **2.7. Una terza opzione: le soluzioni ibride**
 
@@ -183,8 +166,7 @@ Dov’è l’oggetto? Il bounding box.
 
 **EdgeAI molto compatta** (ibrida) contro **EdgeAI di medie dimensioni** (**solo la parte profonda**: la CNN impara da sé le feature).
 
-<!-- SOURCE_VISUAL id="IS23-V18" source="L23-web.pdf" page="26" type="schema" description="Soluzione ibrida: blob detector che propone candidati e classificatore su ciascuno, confrontata con la sola CNN" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180109.png)
 
 > 💡 **Perché l’ibrido è compatto (nota didattica).** Un rilevatore di blob è una convoluzione con un filtro fisso (per esempio un Laplaciano di gaussiana) seguita da una ricerca di massimi: costa poco e non ha pesi da imparare. La CNN, che è la parte costosa, guarda solo le poche regioni candidate invece di tutta l’immagine. Lo stesso principio torna nel caso d’uso del drone (§6).
 
@@ -192,8 +174,7 @@ Dov’è l’oggetto? Il bounding box.
 
 **1. Rilevamento dell’oggetto** (immagine $I(x,y)$ → box $(x_1,y_1,x_2,y_2)$) → **2. Segmentazione dell’oggetto** (maschera $M\in\{0,1\}^{H\times W}$) → **3. Misure** (lunghezza in mm).
 
-<!-- SOURCE_VISUAL id="IS23-V19" source="L23-web.pdf" page="27" type="figura" description="Una penna in diagonale con il bounding box giallo, la regione segmentata verde e la lunghezza misurata blu" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180153.png)
 
 **La penna giace in diagonale**: il suo box è **molto più grande della penna**, quindi **i lati del box non danno la sua lunghezza**. **La lunghezza viene dalla regione segmentata**: numero di pixel lungo l’oggetto × dimensione del pixel, **dopo la calibrazione della telecamera**. Per esempio $400\ \text{px}\times 0{,}25\ \text{mm/px}=100$ mm. Giallo: bounding box; verde: regione segmentata; blu: lunghezza misurata (2,9 in; 1,0 in).
 
@@ -203,15 +184,13 @@ Dov’è l’oggetto? Il bounding box.
 
 **Quando i pezzi non si possono collocare su uno sfondo adatto** (controllato, a contrasto) e **si toccano o si sovrappongono**, il **pattern matching tradizionale non basta**. Servono sistemi, **anche 3D**, che funzionino **anche da una parte di un’etichetta o da un modello dell’oggetto**.
 
-<!-- SOURCE_VISUAL id="IS23-V20" source="L23-web.pdf" page="28" type="figura" description="Pezzi industriali che si toccano e si sovrappongono su sfondo non controllato" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180233.png)
 
 #### **2.10. Segmentazione e misura: il bin picking**
 
 L’ambiente industriale ha **peculiarità non banali**… Tra i compiti **più difficili** della visione industriale moderna: il **bin picking di oggetti sovrapposti** per un robot: **deve capire la visibilità parziale e la forma 3D dell’oggetto per afferrarlo**.
 
-<!-- SOURCE_VISUAL id="IS23-V21" source="L23-web.pdf" page="29" type="figura" description="Robot che preleva pezzi sovrapposti da un contenitore" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180246.png)
 
 > 💡 **Perché 2D + 3D (nota didattica).** L’immagine 2D dice **che cosa** c’è (classificazione e segmentazione del pezzo visibile); un sensore 3D (luce strutturata, stereo, tempo di volo) dice **a che profondità** e con quale **orientamento**. Il robot ha bisogno della posa completa (6 gradi di libertà) per scegliere il punto di presa senza urtare gli altri pezzi.
 
@@ -224,34 +203,29 @@ Dal box alla regione: misure reali.
 
 #### **3.1. Segmentazioni generali**
 
-<!-- SOURCE_VISUAL id="IS23-V22" source="L23-web.pdf" page="31" type="figura" description="Esempi generali di segmentazione" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180325.png)
 
 #### **3.2. Esempi di applicazioni ambientali e veicolari**
 
 **Droni**: fotogrammi da UAV (input) → **segmentazione e misure**. **Diabrotica del mais** (larva e coleottero); **mappa della vegetazione: aree danneggiate**. Esempio di **un’infestazione di diabrotica del mais**: immagini statiche e video aiutano l’agricoltore o il fornitore di servizi per le colture a **individuare dove si verifica il danno**; i risultati vengono integrati nei **sistemi informativi geografici (GIS)**.
 
-<!-- SOURCE_VISUAL id="IS23-V23" source="L23-web.pdf" page="32" type="figura" description="Fotogrammi da drone di un campo di mais e mappa delle aree danneggiate dalla diabrotica" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180607.png)
 
 **Satelliti e aerei**: immagine satellitare **multibanda** $H\times W\times B$ (per esempio **Sentinel-2**: $B=13$ bande, 443–2190 nm, 10–60 m/pixel) → **sistema di visione intelligente** (segmentazione e misure) → **mappa al suolo**: campi segmentati e misurati (colore = valore misurato). **Sentinel-2 (ESA)**: 13 bande spettrali, larghezza dell’andata 290 km, rivisita ogni 5 giorni con due satelliti. Uscite tipiche: mappe di copertura del suolo e delle colture, confini e aree dei campi, mappe di alluvioni o di aree bruciate (prospettiva, non d’esame).
 
-<!-- SOURCE_VISUAL id="IS23-V24" source="L23-web.pdf" page="33" type="figura" description="Immagine multibanda Sentinel-2 e mappa dei campi segmentati" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180631.png)
 
 > 💡 **Il canale è una dimensione (nota didattica).** Una CNN per immagini multibanda è identica a quella per RGB, con $C=13$ canali d’ingresso invece di 3: il primo strato ha filtri $3\times 3\times 13$ (Lezione 21, §3.12). Le bande nell’infrarosso vicino distinguono la vegetazione sana (che lo riflette molto) da quella danneggiata meglio di qualsiasi canale visibile.
 
 **Veicoli autonomi: segmentazione semantica**: un attraversamento pedonale; persone, auto e strada ricevono **classi diverse**; **una classe per pixel**: strada, marciapiede, edificio, veicolo…
 
-<!-- SOURCE_VISUAL id="IS23-V25" source="L23-web.pdf" page="34" type="figura" description="Scena stradale con segmentazione semantica di strada, marciapiede, edifici, veicoli e persone" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180714.png)
 
 #### **3.3. Il veicolo autonomo: dall’immagine al freno**
 
 **Immagine della telecamera** $I(x,y)$ → **segmentazione semantica** (mappa $L(x,y)$: una classe per pixel) → **analisi delle aree** (area in pixel di ogni regione, per esempio i pedoni) → **riconoscimento di pedoni a distanza ravvicinata** (grande area di pedone ⇒ sono vicini) → **Frena!**
 
-<!-- SOURCE_VISUAL id="IS23-V26" source="L23-web.pdf" page="35" type="schema" description="Catena dalla telecamera alla segmentazione, all'analisi delle aree e alla frenata" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125180729.png)
 
 > ⚠️ **Un’euristica didattica (nota didattica).** «Area grande = vicino» funziona per oggetti di dimensione nota (una persona), ma un bambino vicino e un adulto lontano possono avere la stessa area. I sistemi reali stimano la distanza con radar, LiDAR o stereo e la combinano con la segmentazione: è la fusione multisensore.
 
@@ -259,8 +233,7 @@ Dal box alla regione: misure reali.
 
 **Magazzino industriale**: scaffale, scatola, pallet, carrello elevatore…
 
-<!-- SOURCE_VISUAL id="IS23-V27" source="L23-web.pdf" page="36" type="figura" description="Esempi di segmentazione, tra cui un magazzino con scaffali, scatole, pallet e carrelli" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125184745.png)
 
 **Altri esempi di applicazione**:
 
@@ -286,8 +259,9 @@ Dal box alla regione: misure reali.
 
 **Input**: un’immagine $I(x,y)$ ⇒ **Output**: una **partizione in regioni**: una mappa di etichette $L(x,y)\in\{1,\dots,R\}$ o un insieme di maschere.
 
-<!-- SOURCE_VISUAL id="IS23-V28" source="L23-web.pdf" page="38" type="figura" description="La stessa immagine segmentata a livelli di dettaglio diversi" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125184828.png)
+
+![](imgs/Pasted%20image%2020261125184837.png)
 
 > 📌 **Definizione.** La **segmentazione suddivide un’immagine nelle sue regioni o oggetti costitutivi**; **il livello di dettaglio dipende dal problema**.
 
@@ -295,11 +269,9 @@ Dal box alla regione: misure reali.
 
 **Due compiti vicini**; **tassonomia di base**:
 
-<!-- SOURCE_VISUAL id="IS23-V29" source="L23-web.pdf" page="39" type="figura" description="Due compiti vicini alla segmentazione" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125184848.png)
 
-<!-- SOURCE_VISUAL id="IS23-V30" source="L23-web.pdf" page="40" type="schema" description="Tassonomia di base dei metodi di segmentazione" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125184856.png)
 
 #### **3.6. Metodi classici e altri metodi (per riferimento)**
 
@@ -314,8 +286,7 @@ Dal box alla regione: misure reali.
 
 Un esempio di metodo region growing (Snake).
 
-<!-- SOURCE_VISUAL id="IS23-V31" source="L23-web.pdf" page="41" type="figura" description="Un contorno attivo (snake) che si adatta al bordo di un oggetto" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125184932.png)
 
 > 💡 **La soglia di Otsu (nota didattica).** Il più semplice metodo a «conoscenza globale» sceglie una soglia $t$ sull’istogramma dei livelli di grigio e divide i pixel in due classi. Il metodo di Otsu sceglie la $t$ che **massimizza la varianza tra le classi**:
 > $$\sigma_B^2(t)=\omega_0(t)\,\omega_1(t)\,\big[\mu_0(t)-\mu_1(t)\big]^2,$$
@@ -330,8 +301,7 @@ Un esempio di metodo region growing (Snake).
 
 **Input**: $N=H\cdot W$ vettori di pixel $x_i\in\mathbb{R}^3$ (R, G, B) e il numero di cluster $K$ (per esempio $K=5$) ⇒ **Output**: mappa di etichette $L(x,y)\in\{1,\dots,K\}$ e **$K$ colori centroide**.
 
-<!-- SOURCE_VISUAL id="IS23-V32" source="L23-web.pdf" page="42" type="figura" description="Un'immagine segmentata con il k-means sui colori dei pixel" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125185004.png)
 
 > ⚠️ **Il k-means ignora la posizione (nota didattica).** Due pixel dello stesso colore ai capi opposti dell’immagine finiscono nello stesso cluster: la «regione» può essere fatta di frammenti sparsi (sovra-segmentazione in senso spaziale). Aggiungere le coordinate $(x,y)$, scalate, al vettore di ogni pixel ($\mathbb{R}^5$) favorisce regioni compatte; è l’idea di Mean Shift e dei superpixel. Con $H=W=1000$ il k-means lavora su un milione di punti: il costo $O(tNKd)$ resta lineare (Lezione 19, §7.10).
 
@@ -347,22 +317,19 @@ Un esempio di metodo region growing (Snake).
 
 **Input**: un’immagine e un **prompt** (punto, box, maschera o testo) ⇒ **Output**: una o più **maschere valide** $M_j\in\{0,1\}^{H\times W}$ con un **punteggio di confidenza** ciascuna.
 
-<!-- SOURCE_VISUAL id="IS23-V33" source="L23-web.pdf" page="43" type="figura" description="Esempi di maschere prodotte da SAM" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125185019.png)
 
 #### **3.9. SAM: la segmentazione promptable**
 
 I ricercatori di Meta AI hanno addestrato SAM a **restituire una maschera di segmentazione valida per qualsiasi prompt**: **punti di primo piano/sfondo**, un **box** o una **maschera approssimativi**, **testo libero**, o in generale qualsiasi informazione che indichi **che cosa segmentare** in un’immagine. Qui il prompt d’ingresso è il **bounding box**.
 
-<!-- SOURCE_VISUAL id="IS23-V34" source="L23-web.pdf" page="44" type="figura" description="SAM con un bounding box come prompt e la maschera restituita" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125185044.png)
 
 > 💡 **Rilevamento + SAM = segmentazione per istanze (nota didattica).** Un rilevatore come YOLO dà i box; passando ogni box a SAM come prompt si ottiene una maschera per oggetto, cioè una segmentazione per istanze, senza addestrare un modello di segmentazione sui propri dati. È la catena «rilevamento → segmentazione → misura» del §2.8 resa automatica.
 
 **SAM: l’architettura della segmentazione promptable.**
 
-<!-- SOURCE_VISUAL id="IS23-V35" source="L23-web.pdf" page="45" type="schema" description="Architettura di SAM con encoder dell'immagine, encoder del prompt e decoder delle maschere" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125185116.png)
 
 #### **3.10. SAM = backbone pre-addestrato + testa leggera**
 
@@ -381,11 +348,9 @@ SAM: encoder dell’immagine **ViT-H pre-addestrato con MAE** (Lezione 22, §1.1
 
 **Input**: un file d’immagine (`puppies.jpg`), il tipo di modello (`vit_l`) e la **griglia di punti di prompt per lato** ⇒ **Output**: **una maschera per oggetto trovato**, salvata come immagine codificata a colori (`output.png`): un colore per maschera.
 
-<!-- SOURCE_VISUAL id="IS23-V36" source="L23-web.pdf" page="47" type="schermata" description="Codice Colab per eseguire SAM con la libreria metaseg" reason="Codice presente solo come schermata" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125185138.png)
 
-<!-- SOURCE_VISUAL id="IS23-V37" source="L23-web.pdf" page="48" type="figura" description="L'immagine dei cuccioli e la sua segmentazione automatica con un colore per maschera" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125185150.png)
 
 > 💡 **La «griglia di punti» (nota didattica).** In modalità automatica SAM non riceve un prompt dall’utente: lo si interroga con una griglia regolare di punti (per esempio $32\times 32=1024$ punti), e per ognuno restituisce le maschere candidate; poi si eliminano i duplicati (con una NMS sulle maschere) e quelle con punteggio basso. `vit_l` è l’encoder di dimensione intermedia, tra `vit_b` e `vit_h`.
 
@@ -395,8 +360,7 @@ SAM: encoder dell’immagine **ViT-H pre-addestrato con MAE** (Lezione 22, §1.1
 
 **Input**: un video (sequenza di fotogrammi) e un prompt su un fotogramma ⇒ **Output**: una ***masklet***: **la maschera dell’oggetto in ogni fotogramma**. Ravi et al., *SAM 2: Segment Anything in Images and Videos*, ICLR 2025 (arXiv:2408.00714).
 
-<!-- SOURCE_VISUAL id="IS23-V38" source="L23-web.pdf" page="49" type="figura" description="Un oggetto segmentato da SAM 2 in più fotogrammi di un video" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125185225.png)
 
 > 💡 **La memoria (nota didattica).** SAM 2 aggiunge a SAM una **memoria** dei fotogrammi precedenti: la maschera del fotogramma $t$ si calcola tenendo conto delle maschere già prodotte, così l’oggetto viene seguito anche se si gira, si sposta o viene coperto per un momento. È ciò che distingue il tracking (stesso oggetto nel tempo) dal rilevamento ripetuto fotogramma per fotogramma.
 
@@ -409,8 +373,7 @@ SAM: encoder dell’immagine **ViT-H pre-addestrato con MAE** (Lezione 22, §1.1
 
 **Input**: immagine o video + prompt (espressione nominale, box, punto, maschera) ⇒ **Output**: **una maschera per ogni istanza corrispondente**. Carion et al., SAM 3, arXiv:2511.16719, 2025; docs.ultralytics.com/models/sam-3. **Prospettiva**: le versioni cambiano in fretta, **l’idea durevole è prompt → maschera**.
 
-<!-- SOURCE_VISUAL id="IS23-V39" source="L23-web.pdf" page="50" type="figura" description="SAM 3 che segmenta tutte le istanze di un concetto testuale in un'immagine" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125185247.png)
 
 > 💡 **I numeri (nota didattica).** Con la regola del §7.10 i soli pesi occupano $474\cdot 10^6\times 4$ byte $\approx 1{,}9$ GB in FP32 (0,95 GB in FP16); i 3,4 GB dichiarati sono la dimensione del pacchetto distribuito, che può contenere più dei soli pesi. Con la regola del §7.10 un modello così non sta su una NPU da telefono. L’AP (*average precision*) di LVIS è una media su oltre 1000 categorie, molte rare: da 38,5 a 47,0 è un salto del 22% relativo.
 
@@ -428,13 +391,11 @@ Ogni pixel riceve un’etichetta di classe.
 - **Etichettare ogni pixel** dell’immagine con un’**etichetta di categoria**.
 - **Non distinguere le istanze**, interessano solo i pixel.
 
-<!-- SOURCE_VISUAL id="IS23-V40" source="L23-web.pdf" page="52" type="figura" description="Esempio di segmentazione semantica con etichette per pixel" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125190306.png)
 
 #### **4.2. Classificare ogni pixel è una buona idea ma… non è praticabile**
 
-<!-- SOURCE_VISUAL id="IS23-V41" source="L23-web.pdf" page="53" type="figura" description="Classificazione per pixel con finestre scorrevoli e rete a risoluzione piena (Fei-Fei Li, Johnson, Yeung)" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125190332.png)
 
 **Perché non è praticabile**: ogni convoluzione lavora **alla risoluzione piena $H\times W$ con $D$ canali**, quindi **memoria e calcolo crescono come $D\cdot H\cdot W$ in ogni strato**. Immagini da Fei-Fei Li, Justin Johnson e Serena Yeung (Stanford).
 
@@ -444,8 +405,7 @@ Ogni pixel riceve un’etichetta di classe.
 
 **Input**: $I(x,y)$, $3\times H\times W$ ⇒ **Output**: punteggi $C\times H\times W$; l’$\arg\max$ sulle $C$ classi dà la mappa di etichette $L(x,y)$, $H\times W$.
 
-<!-- SOURCE_VISUAL id="IS23-V42" source="L23-web.pdf" page="54" type="schema" description="Rete completamente convolutiva con encoder che riduce la risoluzione e decoder che la riporta" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125222758.png)
 
 > 📌 **Rete completamente convolutiva (FCN).** Solo strati di **convoluzione, pooling e upsampling**, così **l’uscita conserva la disposizione spaziale dell’ingresso**.
 
@@ -469,8 +429,7 @@ $$\text{ingresso}=\begin{bmatrix}0&1\\2&3\end{bmatrix},\quad K=\begin{bmatrix}4&
 
 **Input**: feature map $D_{\text{in}}\times H_{\text{in}}\times W_{\text{in}}$ e kernel appresi $K$ ⇒ **Output**: mappa più grande $D_{\text{out}}\times H_{\text{out}}\times W_{\text{out}}$.
 
-<!-- SOURCE_VISUAL id="IS23-V43" source="L23-web.pdf" page="55" type="figura" description="Copie colorate del kernel per ogni pixel d'ingresso nella convoluzione trasposta con passo 1" reason="Colori delle copie visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125222820.png)
 
 > 💡 **Verifica del valore centrale (nota didattica).** La cella centrale è coperta da tutte e quattro le copie: da $0\cdot K$ arriva 0; da $1\cdot K$ (collocata in alto a destra) l’elemento in basso a sinistra del kernel, $1\cdot 2=2$; da $2\cdot K$ (in basso a sinistra) l’elemento in alto a destra, $2\cdot 1=2$; da $3\cdot K$ (in basso a destra) l’elemento in alto a sinistra, $3\cdot 4=12$. Totale $0+2+2+12=16$.
 
@@ -486,8 +445,9 @@ $$H_{\text{out}}=(H_{\text{in}}-1)\,s-2p+k$$
 
 **Esempio**: $H_{\text{in}}=2$, $k=2$, $p=0$: con $s=1$, $H_{\text{out}}=(2-1)\cdot 1+2=3$; con $s=2$, $H_{\text{out}}=(2-1)\cdot 2+2=4$. **In un decoder, $k=2$, $s=2$ raddoppia la dimensione.**
 
-<!-- SOURCE_VISUAL id="IS23-V44" source="L23-web.pdf" page="56" type="figura" description="Convoluzione trasposta con passo 2 senza sovrapposizioni e un esempio con k = 4, s = 2, p = 1" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223153.png)
+
+![](imgs/Pasted%20image%2020261125223201.png)
 
 > 💡 **In PyTorch e il caso $k=4,s=2,p=1$ (nota didattica).** `nn.ConvTranspose2d(in_channels=64, out_channels=32, kernel_size=2, stride=2)` porta una mappa $64\times 28\times 28$ a $32\times 56\times 56$. Con $k=4$, $s=2$, $p=1$: $H_{\text{out}}=(H_{\text{in}}-1)\cdot 2-2+4=2H_{\text{in}}$: raddoppia anche questa, ma con copie che si sovrappongono (meno artefatti «a scacchiera» di $k=2$). È la formula della convoluzione della Lezione 21 (§3.10) invertita: $H_{\text{in}}=\frac{H_{\text{out}}+2p-k}{s}+1$.
 
@@ -500,6 +460,8 @@ Una rete molto usata, molte funzioni.
 
 #### **5.1. ResNet-50 per la classificazione**
 
+![](imgs/Pasted%20image%2020261125223253.png)
+
 La rete pre-addestrata può classificare le immagini in **1000 categorie di oggetti**, come tastiera, mouse, matita e molti animali. **50 strati con pesi (49 conv + 1 FC)**, **25,6 M parametri**, **$3{,}8\times 10^9$ FLOP per immagine**. Feature map $H\times W\times C$ (ingresso $224\times 224\times 3$):
 
 | conv1 | stadio 2 | stadio 3 | stadio 4 | stadio 5 | avg pool | FC |
@@ -507,8 +469,7 @@ La rete pre-addestrata può classificare le immagini in **1000 categorie di ogge
 | $112\times 112\times 64$ | $56\times 56\times 256$ | $28\times 28\times 512$ | $14\times 14\times 1024$ | $7\times 7\times 2048$ | $1\times 1\times 2048$ | 1000 |
 | | ×3 blocchi | ×4 | ×6 | ×3 | | |
 
-<!-- SOURCE_VISUAL id="IS23-V45" source="L23-web.pdf" page="58" type="schema" description="ResNet-50 con il blocco residuo y = x + F(x) e gli stadi" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223244.png)
 
 **Blocco residuo** (come nella Lezione 22): $y=x+F(x)$, **il gradiente ha un percorso diretto attraverso la scorciatoia**.
 
@@ -520,8 +481,7 @@ La rete pre-addestrata può classificare le immagini in **1000 categorie di ogge
 - **Arco continuo**: **scorciatoia identità, nessun peso**. **Arco tratteggiato**: **proiezione** (conv $1\times 1$, di solito con passo 2) perché $x$ e $F(x)$ abbiano **la stessa dimensione e si possano sommare**.
 - **16 blocchi × 3 conv = 48, più la prima conv e la FC: 50 strati** (FC: 1000 uscite per ImageNet).
 
-<!-- SOURCE_VISUAL id="IS23-V46" source="L23-web.pdf" page="59" type="schema" description="ResNet-50 disegnata con gli archi delle scorciatoie continue e tratteggiate" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223402.png)
 
 > 💡 **Il bottleneck (nota didattica).** Il primo $1\times 1$ riduce i canali (per esempio da 256 a 64), il $3\times 3$ lavora sui 64 canali, l’ultimo $1\times 1$ li riporta a 256: con 256 canali ovunque il $3\times 3$ costerebbe $9\cdot 256\cdot 256=589\,824$ pesi, con il bottleneck $256\cdot 64+9\cdot 64\cdot 64+64\cdot 256=69\,632$. È la stessa idea delle convoluzioni leggere di MobileNet (Lezione 21, §5.4).
 
@@ -531,15 +491,15 @@ Si può usare ResNet-50 per **elaborare le feature** e poi **il proprio classifi
 
 Immagine $I(x,y)$ ($224\times 224\times 3$) → **backbone ResNet-50 senza l’ultimo strato FC** (pre-addestrato, pesi congelati) → **vettore di feature** $z\in\mathbb{R}^{2048}$ → **nuovo classificatore** (per esempio SVM o piccolo FC, addestrato sulle proprie classi) → etichetta $\hat{y}$ (le proprie $C$ classi). **Dentro il backbone**: stadi 1–5, poi average pool e flatten danno il vettore di feature a 2048 dimensioni.
 
-<!-- SOURCE_VISUAL id="IS23-V47" source="L23-web.pdf" page="60" type="schema" description="ResNet-50 senza FC come estrattore di un vettore da 2048 e nuovo classificatore" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223419.png)
 
 #### **5.4. ResNet-50 → ResNet-50 + upscaling: la segmentazione**
 
+![](imgs/Pasted%20image%2020261125223438.png)
+
 **La convoluzione trasposta è un’operazione di upsampling apprendibile, non l’esatto inverso della convoluzione.** Con il **decoder** la rete diventa un’**architettura di segmentazione**: l’uscita è **una mappa simile a un’immagine, non un ID di classe**. «ResNet-50 con upscaling per la classificazione?» **NO!**
 
-<!-- SOURCE_VISUAL id="IS23-V48" source="L23-web.pdf" page="61" type="schema" description="ResNet-50 come encoder seguito da un decoder con convoluzioni trasposte per la segmentazione" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223452.png)
 
 > 💡 **Lo stesso backbone, tre usi (nota didattica).** Con la testa FC: classificazione (1000 classi). Senza testa: estrazione di feature (2048 numeri, Lezione 22, §4.8). Con un decoder: segmentazione ($C\times H\times W$). L’encoder porta $224\to 7$ (fattore 32); il decoder deve risalire con 5 raddoppi ($7\to 14\to 28\to 56\to 112\to 224$), possibilmente con le skip connection della U-Net per recuperare i dettagli.
 
@@ -573,11 +533,9 @@ Immagine $I(x,y)$ ($224\times 224\times 3$) → **backbone ResNet-50 senza l’u
 
 #### **6.1. I droni nelle applicazioni**
 
-<!-- SOURCE_VISUAL id="IS23-V49" source="L23-web.pdf" page="64" type="figura" description="Un drone UAV" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223616.png)
 
-<!-- SOURCE_VISUAL id="IS23-V50" source="L23-web.pdf" page="65" type="figura" description="Esempi di applicazioni dei droni" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223627.png)
 
 #### **6.2. Amazon Prime Air**
 
@@ -590,8 +548,7 @@ Immagine $I(x,y)$ ($224\times 224\times 3$) → **backbone ResNet-50 senza l’u
 
 aboutamazon.co.uk (12 gennaio 2026); thenextweb.com (19 agosto 2026).
 
-<!-- SOURCE_VISUAL id="IS23-V51" source="L23-web.pdf" page="66" type="figura" description="Il drone MK30 di Amazon Prime Air" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223637.png)
 
 #### **6.3. Il riconoscimento di oggetti da UAV: tre esempi**
 
@@ -601,8 +558,7 @@ aboutamazon.co.uk (12 gennaio 2026); thenextweb.com (19 agosto 2026).
 2. **Veicoli**: **rilevare ogni auto** a un incrocio (classe «Car»); seguirla fotogramma per fotogramma dà la sua **traiettoria**.
 3. **Folle**: **segmentare le regioni coperte da persone** (crowd_1, crowd_2): **una maschera per folla**, poi **stimarne la dimensione**.
 
-<!-- SOURCE_VISUAL id="IS23-V52" source="L23-web.pdf" page="67" type="figura" description="Tre esempi da drone: segno d'atterraggio, auto a un incrocio, regioni di folla" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223653.png)
 
 **Input**: un fotogramma aereo $I(x,y)$ dalla telecamera del drone ⇒ **Output**: per oggetto d’interesse, **una classe, una posizione** (box o maschera) e, nel tempo, **una traiettoria**.
 
@@ -612,15 +568,13 @@ aboutamazon.co.uk (12 gennaio 2026); thenextweb.com (19 agosto 2026).
 
 **Input**: fotogramma aereo $I(x,y)$ dalla telecamera del drone ⇒ **Output**: **le auto nel fotogramma**: **una regione (maschera) per auto rilevata**, pronta per essere **contata**.
 
-<!-- SOURCE_VISUAL id="IS23-V53" source="L23-web.pdf" page="68" type="figura" description="Fotogramma aereo di un parcheggio o di una strada con auto da contare" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223710.png)
 
 #### **6.5. Passo 1: la segmentazione**
 
 **Fotogramma aereo** → **segmentazione dell’immagine (mean shift)** → **regioni colorate** → **rimuovere le regioni grandi** → **auto candidate**.
 
-<!-- SOURCE_VISUAL id="IS23-V54" source="L23-web.pdf" page="69" type="figura" description="Fotogramma aereo, regioni del mean shift e regioni piccole candidate come auto" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223718.png)
 
 Si è già fatta una segmentazione simile nelle lezioni precedenti: il **mean shift** raggruppa i pixel **per colore e posizione** in regioni. Qui **le regioni grandi** (strada, tetti, erba) **vengono scartate** e **quelle piccole restano come auto candidate**.
 
@@ -632,8 +586,7 @@ Si può usare un **classificatore tradizionale come una SVM** o **modelli profon
 
 **Input**: regione candidata ridimensionata a $224\times 224\times 3$ ⇒ **Output**: **vettore di feature della CNN** (per esempio **4096 valori**) → **classificatore** → «auto» / «non auto». **SVM** (*support vector machine*): classificatore lineare a **margine massimo** sul vettore di feature. **VGG16**: CNN a 16 strati.
 
-<!-- SOURCE_VISUAL id="IS23-V55" source="L23-web.pdf" page="70" type="schema" description="VGG16 come estrattore di feature seguita da una SVM per auto o non auto" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223801.png)
 
 > 💡 **Perché l’ibrido (nota didattica).** Un fotogramma $1920\times 1080$ esaminato a finestre scorrevoli di $64\times 64$ pixel con passo 16 richiederebbe
 > $$\left(\frac{1920-64}{16}+1\right)\times\left(\frac{1080-64}{16}+1\right)=117\times 64=7488$$
@@ -643,8 +596,7 @@ Si può usare un **classificatore tradizionale come una SVM** o **modelli profon
 
 **AUTO** / **NON AUTO**: una parte delle patch etichettate. **Fine-tuning**: ogni regione della segmentazione viene etichettata **AUTO** o **NON AUTO**. **La CNN pre-addestrata tiene congelati i suoi strati convolutivi** e **si affina solo la parte completamente connessa** su queste patch (Lezione 22, §4.5, opzione 1–2).
 
-<!-- SOURCE_VISUAL id="IS23-V56" source="L23-web.pdf" page="71" type="figura" description="Patch etichettate come auto e non auto per il fine-tuning" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223853.png)
 
 **Input**: patch etichettate $224\times 224\times 3$ (AUTO / NON AUTO) ⇒ **Output**: una rete che **classifica una patch nuova** come AUTO o NON AUTO.
 
@@ -656,8 +608,7 @@ Si può usare un **classificatore tradizionale come una SVM** o **modelli profon
 
 **Input**: fotogramma aereo $I(x,y)$ dal drone ⇒ **Output**: auto marcate nel fotogramma, **pronte per essere contate**.
 
-<!-- SOURCE_VISUAL id="IS23-V57" source="L23-web.pdf" page="72" type="figura" description="Fotogramma aereo con le regioni classificate come auto e i pochi errori residui" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223908.png)
 
 > ⚠️ **Regioni con più auto (nota didattica).** Due auto parcheggiate a contatto possono finire nella stessa regione del mean shift: per contarle si stima il numero dall’area della regione divisa per l’area tipica di un’auto (a quella quota di volo), oppure si passa la regione a un rilevatore o a SAM (§3.9). Il numero dentro il contorno rosso è questa stima.
 
@@ -674,13 +625,11 @@ Dove gira il calcolo: CPU, GPU, TPU, NPU, VPU.
 - **Prestazioni più alte dei computer**: **memorie più grandi** per gestire i dati; **maggiore potenza di calcolo** per addestrare e perfino per l’**apprendimento online**.
 - **Esempi**: NVIDIA RTX / A100 / H100 / Jetson / B200; Apple Neural Engine / NPU degli Intel Core Ultra.
 
-<!-- SOURCE_VISUAL id="IS23-V58" source="L23-web.pdf" page="74" type="figura" description="NVIDIA HGX B200 e una Tensor Processing Unit" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125223936.png)
 
 #### **7.2. L’hardware: quando e dove è più rilevante?**
 
-<!-- SOURCE_VISUAL id="IS23-V59" source="L23-web.pdf" page="75" type="figura" description="Ruolo dell'hardware nelle fasi di addestramento e rilascio" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125224000.png)
 
 #### **7.3. CPU, GPU, TPU, NPU, VPU**
 
@@ -690,8 +639,7 @@ Dove gira il calcolo: CPU, GPU, TPU, NPU, VPU.
 - **NPU**: *Neural Processing Unit*, unità di elaborazione neurale;
 - **VPU**: *Vision Processing Unit*, unità di elaborazione della visione.
 
-<!-- SOURCE_VISUAL id="IS23-V60" source="L23-web.pdf" page="76" type="figura" description="I cinque tipi di processore per il ML" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125224018.png)
 
 | Unità | Caratteristiche | Uso tipico |
 |---|---|---|
@@ -700,15 +648,6 @@ Dove gira il calcolo: CPU, GPU, TPU, NPU, VPU.
 | **TPU** | acceleratore **specializzato per le operazioni tensoriali** | efficiente per addestramento/inferenza su **modelli standardizzati**; **flessibilità limitata**, tipicamente **orientata al cloud**; Google TPU v5e/v5p, Trillium (v6e), Ironwood (v7) in Google Cloud |
 | **NPU** | acceleratore per l’**inferenza neurale a bassa potenza** | ideale per la **biometria embedded e in tempo reale**; ottimizzata per **latenza, consumo e privacy sul dispositivo**; nei chip dei telefoni: Apple Neural Engine (iPhone), Qualcomm Hexagon (Snapdragon), Google Tensor (Pixel), Samsung Exynos, Huawei Kirin |
 | **VPU** | acceleratore **specializzato per l’elaborazione visiva** e la visione artificiale | ottimizzata per **pre-elaborazione, estrazione di feature e inferenza su video/immagini**; ideale per la **biometria visiva embedded**: volto, gesti, conteggio di persone; **compromesso tra GPU e NPU**: buona efficienza energetica e **pipeline video dedicate** |
-
-<!-- SOURCE_VISUAL id="IS23-V61" source="L23-web.pdf" page="77" type="figura" description="Immagini di una CPU e di una GPU" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS23-V62" source="L23-web.pdf" page="78" type="figura" description="Immagini di una TPU e di una NPU" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
-
-<!-- SOURCE_VISUAL id="IS23-V63" source="L23-web.pdf" page="79" type="figura" description="Immagine di una VPU" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 > ⚠️ **Gli esempi biometrici (nota didattica).** Le slide su CPU, GPU, NPU e VPU usano come esempio la **biometria** (riconoscimento di volti e impronte), un residuo del materiale condiviso con il corso di Tecniche biometriche: valgono per qualsiasi applicazione di visione (ispezione industriale, conteggio, sicurezza).
 
@@ -732,6 +671,8 @@ Dove gira il calcolo: CPU, GPU, TPU, NPU, VPU.
 
 AlexNet: arXiv 1709.05011, Tabella 8. ResNet-50: NVIDIA Deep Learning Examples (PyTorch), tempi di NVIDIA.
 
+![](imgs/Pasted%20image%2020261125224357.png)
+
 (\*) **Prestazioni**: lo speed-up delle GPU sui carichi AI molto paralleli va da poche volte a oltre 10 volte, a seconda di modello, dimensione del batch, precisione e trasferimento dei dati.
 
 (\*\*) **Efficienza energetica**: **meno energia per modello addestrato o per inferenza perché le GPU finiscono prima**, ma la **potenza assoluta è più alta**: **misurare le prestazioni per watt**.
@@ -746,8 +687,7 @@ AlexNet: arXiv 1709.05011, Tabella 8. ResNet-50: NVIDIA Deep Learning Examples (
 
 **NVIDIA HGX, 8 GPU A100**: **> 100 k€**; **server CPU**: **qualche k€**. Speed-up relativo a un server CPU (1,0×).
 
-<!-- SOURCE_VISUAL id="IS23-V64" source="L23-web.pdf" page="81" type="grafico" description="Speed-up di server GPU rispetto a un server CPU e i rispettivi costi" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125224425.png)
 
 **Lo stesso lavoro gira circa 10–20 volte più veloce sui server GPU che sui server CPU, ma il server GPU costa molto di più**: **confrontare le prestazioni per euro e per watt, non solo la velocità**.
 
@@ -757,13 +697,11 @@ AlexNet: arXiv 1709.05011, Tabella 8. ResNet-50: NVIDIA Deep Learning Examples (
 
 Amazon (AWS), Google, Facebook, Microsoft (AzureML), IBM… Server **Big Sur** nel data center di Facebook a Prineville.
 
-<!-- SOURCE_VISUAL id="IS23-V65" source="L23-web.pdf" page="82" type="figura" description="Data center per il ML di IBM, Facebook e Google" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125224511.png)
 
 #### **7.7. Le GPU: non sempre necessarie**
 
-<!-- SOURCE_VISUAL id="IS23-V66" source="L23-web.pdf" page="83" type="figura" description="Casi in cui la GPU non è necessaria" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125224526.png)
 
 **Il ML sulle CPU** offre vantaggi:
 
@@ -781,8 +719,7 @@ Amazon (AWS), Google, Facebook, Microsoft (AzureML), IBM… Server **Big Sur** n
 
 **Macchine d’esempio per l’inferenza locale** (prezzi indicativi da annunci al dettaglio, novembre 2026): Apple Mac mini, mini PC AMD; ThinkStation P5; **NVIDIA DGX Spark, 128 GB** (B0FWJ16CCH, ≈ 9400 €); **ThinkStation PGX, 128 GB** (30KL000FMW, ≈ 9350 €). Prezzi: amazon.it e un rivenditore Lenovo, 9 novembre 2026.
 
-<!-- SOURCE_VISUAL id="IS23-V67" source="L23-web.pdf" page="85" type="figura" description="Macchine d'esempio per l'inferenza locale" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225255.png)
 
 > 💡 **Il legame con la sovranità dei dati (nota didattica).** È la discussione della Lezione 15 (§2) vista dal lato dell’hardware: per i segreti industriali e i dati personali particolari l’inferenza locale elimina il trasferimento verso un fornitore esterno (e i problemi di giurisdizione del CLOUD Act). Il prezzo è l’investimento iniziale e la responsabilità di aggiornare e proteggere la macchina.
 
@@ -794,8 +731,7 @@ Amazon (AWS), Google, Facebook, Microsoft (AzureML), IBM… Server **Big Sur** n
 | banda | **256–546 GB/s** | **≈ 1000 GB/s** (VRAM) |
 | modello 70B a 4 bit (≈ 35–40 GB) | **il modello ci sta** | **non ci sta nella VRAM** |
 
-<!-- SOURCE_VISUAL id="IS23-V68" source="L23-web.pdf" page="86" type="schema" description="Memoria unificata condivisa da CPU, GPU e NPU contro GPU discreta con VRAM separata collegata via PCIe" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225353.png)
 
 1. **Capacità: il modello gira?** I pesi devono **stare nella memoria che il processore può leggere**. Un modello da **70 miliardi di parametri a 4 bit** richiede **≈ 35–40 GB**: **non sta in 24 GB di VRAM, sta in 128 GB di memoria unificata**.
 2. **Banda: quanto veloce?** Per generare **un token** il modello **legge tutti i suoi pesi una volta**:
@@ -840,8 +776,7 @@ con $S$ (reale) la **dimensione di un passo intero**; $Z$ (intero) il **codice d
 
 **Rete aziendale: nulla esce.** Prompt + documenti locali → **runtime locale** (llama.cpp / Ollama), che esegue un **modello quantizzato** (file **GGUF**, per esempio a 4 bit) → risposta.
 
-<!-- SOURCE_VISUAL id="IS23-V69" source="L23-web.pdf" page="88" type="schema" description="Runtime locale con modello quantizzato GGUF dentro la rete aziendale" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225432.png)
 
 - **llama.cpp**: motore **open source in C/C++** che esegue modelli linguistici su CPU e GPU. **Input**: file del modello + prompt; **output**: testo generato.
 - **GGUF**: **formato a file unico** di llama.cpp che memorizza i pesi (quantizzati) insieme ai metadati del modello.
@@ -853,8 +788,7 @@ github.com/ggml-org/llama.cpp; ollama.com; docs.openvino.ai (verificati l’8 no
 
 #### **7.12. Portare il ML all’«edge»**
 
-<!-- SOURCE_VISUAL id="IS23-V70" source="L23-web.pdf" page="89" type="figura" description="Il ML che si sposta dal cloud ai dispositivi edge" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225500.png)
 
 **Esempio: il ML su un processore ARM.**
 
@@ -877,8 +811,7 @@ Applicazioni di complessità crescente, prestazioni (operazioni/s) crescenti, po
 | **Lumex**: CPU C1 + SME2, GPU Mali G1 (fino a 5× AI sul dispositivo) | telefoni, tablet, PC: LLM sul dispositivo, sintesi vocale, denoising di telecamere 4K |
 | **Neoverse V3; Arm AGI CPU** (> 2× prestazioni per rack rispetto a x86) | AI nei data center: orchestrazione di agenti, gestione degli acceleratori |
 
-<!-- SOURCE_VISUAL id="IS23-V71" source="L23-web.pdf" page="91" type="grafico" description="Famiglie Arm disposte per prestazioni, potenza e complessità delle applicazioni" reason="Grafico visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225531.png)
 
 **Non solo CPU contro GPU**: i sistemi AI Arm sono **eterogenei**: **CPU per il controllo**, **GPU per i carichi paralleli**, **NPU (Ethos-U) per l’inferenza a bassa potenza**, **librerie ottimizzate** per mappare il modello sull’hardware. I numeri sono dichiarazioni di Arm. Arm Newsroom (Ethos-U85; Arm AGI CPU, 24 marzo 2026); Arm Lumex via Hackster.io.
 
@@ -893,8 +826,7 @@ Applicazioni di complessità crescente, prestazioni (operazioni/s) crescenti, po
 
 **Input**: tensori (attivazioni, pesi) ⇒ **Output**: risultati di grandi moltiplicazioni matriciali. blog.google, Ironwood (9 aprile 2025). Prospettiva, verificata l’8 novembre 2026.
 
-<!-- SOURCE_VISUAL id="IS23-V72" source="L23-web.pdf" page="92" type="figura" description="Il chip Trillium e un pod di TPU v5p" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225618.png)
 
 > 💡 **L’array sistolico (nota didattica).** Una griglia di unità moltiplica-e-somma in cui i dati «pulsano» da una cella alla vicina a ogni ciclo, come il sangue nel sistema circolatorio (da cui il nome): ogni peso viene letto dalla memoria una sola volta e riusato da tutta una riga di celle. È il modo più efficiente di fare il prodotto matriciale di un im2col (Lezione 21, §9.6), ed è il motivo per cui le TPU sono veloci su reti standard e meno flessibili sulle operazioni insolite. «Gratis in Colab» indica la disponibilità di runtime TPU nel livello gratuito, con limiti di tempo e disponibilità.
 
@@ -905,18 +837,17 @@ Applicazioni di complessità crescente, prestazioni (operazioni/s) crescenti, po
 - **Supercalcolatori su scala di exaflop**: Pichai presenta il supercalcolatore Google da **9 exaflop**. Le TPU sono collegate in supercalcolatori, detti **pod**, con **oltre 4000 chip**.
 - **Acceleratori neurali edge**: **Google Edge TPU**, un **ASIC progettato per eseguire l’AI all’edge**. Offre **alte prestazioni in un ingombro fisico e di potenza ridotto**, permettendo il rilascio di AI ad alta accuratezza all’edge (**matematica Int8**; esegue una **MobileNetV2 a 400 fotogrammi/s**).
 
-<!-- SOURCE_VISUAL id="IS23-V73" source="L23-web.pdf" page="93" type="figura" description="Pod di TPU da exaflop e chip Edge TPU" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225639.png)
 
 > 💡 **400 fotogrammi/s (nota didattica).** 2,5 ms per immagine. Con un Edge TPU da 4 TOPS dichiarati e 2 W tipici, l’energia per inferenza è circa $2\ \text{W}\times 0{,}0025\ \text{s}=5$ mJ: trenta volte meno dei 0,15 J dell’esempio del §8.1, con un modello più piccolo. Il confronto vale solo a parità di rete e precisione (§8.1).
 
 #### **7.16. Far stare una rete all’edge: tre strumenti**
 
-| Strumento | Idea | Input ⇒ output | Guadagno / prezzo |
-|---|---|---|---|
-| **quantizzazione** | **meno bit per peso e attivazione**, $w\approx S(q-Z)$ | modello FP32 ⇒ modello INT8 (o INT4) | memoria ÷4 (÷8), **matematica intera più veloce** / piccola perdita di accuratezza |
-| **pruning** | **rimuovere i pesi o i canali che contribuiscono meno** | modello addestrato ⇒ modello più piccolo (più sparso), poi fine-tuning | meno operazioni / **richiede riaddestramento**; speed-up **solo se l’hardware lo sfrutta** |
-| **distillazione** | un **piccolo studente impara a imitare le uscite morbide di un grande insegnante** | insegnante + dati ⇒ piccolo modello studente | modello piccolo e veloce / addestramento extra |
+| Strumento          | Idea                                                                               | Input ⇒ output                                                         | Guadagno / prezzo                                                                          |
+| ------------------ | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **quantizzazione** | **meno bit per peso e attivazione**, $w\approx S(q-Z)$                             | modello FP32 ⇒ modello INT8 (o INT4)                                   | memoria ÷4 (÷8), **matematica intera più veloce** / piccola perdita di accuratezza         |
+| **pruning**        | **rimuovere i pesi o i canali che contribuiscono meno**                            | modello addestrato ⇒ modello più piccolo (più sparso), poi fine-tuning | meno operazioni / **richiede riaddestramento**; speed-up **solo se l’hardware lo sfrutta** |
+| **distillazione**  | un **piccolo studente impara a imitare le uscite morbide di un grande insegnante** | insegnante + dati ⇒ piccolo modello studente                           | modello piccolo e veloce / addestramento extra                                             |
 
 Richiamo dalla Lezione 22: la **knowledge distillation** addestra lo studente sulla softmax dell’insegnante a **temperatura $T>1$**, che conserva l’informazione sulle classi simili. **Dopo uno qualsiasi dei tre: misurare di nuovo l’accuratezza sul validation set e sull’hardware di destinazione.**
 
@@ -926,8 +857,7 @@ Richiamo dalla Lezione 22: la **knowledge distillation** addestra lo studente su
 
 **Modello addestrato** (PyTorch, FP32) → **esportare in ONNX** → **builder TensorRT** (fusione di strati, **calibrazione INT8** con qualche centinaio di immagini di calibrazione) → **file del motore** (INT8) → **runtime sulla scheda** → rilevamenti + latenza (ms).
 
-<!-- SOURCE_VISUAL id="IS23-V74" source="L23-web.pdf" page="95" type="schema" description="Catena da PyTorch a ONNX, TensorRT con calibrazione INT8 e runtime sulla scheda" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225732.png)
 
 - **ONNX**: **formato di file aperto** che descrive una rete come un **grafo di operatori standard**, così che un modello addestrato in un framework possa essere ottimizzato da un altro strumento.
 - **TensorRT**: SDK NVIDIA che prende il grafo ONNX e **costruisce un motore per una GPU specifica**: **fonde gli strati**, **sceglie i kernel più veloci** e, con le immagini di calibrazione, **fissa le scale INT8 $S$ di ogni tensore**.
@@ -949,8 +879,7 @@ onnx.ai; NVIDIA TensorRT Developer Guide (docs.nvidia.com/deeplearning/tensorrt)
 - **Energia per inferenza** (J) = **potenza (W) × tempo (s)**. **Esempio**: $15\ \text{W}\times 0{,}010\ \text{s}=0{,}15$ J.
 - **Un confronto equo CPU / GPU / NPU** usa **la stessa rete, la stessa dimensione d’ingresso e la stessa precisione**, e riporta **fps e W**.
 
-<!-- SOURCE_VISUAL id="IS23-V75" source="L23-web.pdf" page="96" type="figura" description="Kit di sviluppo NVIDIA Jetson Orin Nano" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225751.png)
 
 **MLPerf Inference**: un **benchmark industriale** con **modelli, dataset, obiettivi di accuratezza e scenari fissati** (*single-stream* = latenza, *offline* = throughput). **Jetson AGX Orin, ResNet-50 (v3.1)**:
 
@@ -969,13 +898,13 @@ onnx.ai; NVIDIA TensorRT Developer Guide (docs.nvidia.com/deeplearning/tensorrt)
 - **È ora una piattaforma legacy**: Intel **ha interrotto il prodotto**, e le versioni recenti di OpenVINO **non supportano più i dispositivi Movidius/Myriad X**.
 - **L’edge AI moderna** si basa di solito su **NPU integrate, GPU embedded o acceleratori edge dedicati**.
 
-<!-- SOURCE_VISUAL id="IS23-V76" source="L23-web.pdf" page="97" type="figura" description="Intel Movidius Neural Compute Stick e la VPU Movidius" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225834.png)
+
+![](imgs/Pasted%20image%2020261125225845.png)
 
 #### **8.3. L’ambiente MATLAB (HW + SW)**
 
-<!-- SOURCE_VISUAL id="IS23-V77" source="L23-web.pdf" page="98" type="figura" description="Hardware e software supportati dall'ambiente MATLAB per il deep learning" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225907.png)
 
 ---
 
@@ -986,11 +915,9 @@ Una potente piattaforma di ottimizzazione per i modelli.
 
 #### **9.1. OpenVINO: introduzione e dispositivi supportati**
 
-<!-- SOURCE_VISUAL id="IS23-V78" source="L23-web.pdf" page="100" type="figura" description="Introduzione a OpenVINO" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125225942.png)
 
-<!-- SOURCE_VISUAL id="IS23-V79" source="L23-web.pdf" page="101" type="figura" description="Dispositivi supportati da OpenVINO" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125230009.png)
 
 #### **9.2. Un flusso di lavoro tipico con OpenVINO**
 
@@ -1044,14 +971,11 @@ Raccolta dei dati, addestramento, ottimizzazione e rilascio per l’edge AI.
 
 The Next Web, *Qualcomm acquires Edge Impulse* (10 marzo 2025); EdgeIR, 17 marzo 2025.
 
-<!-- SOURCE_VISUAL id="IS23-V80" source="L23-web.pdf" page="105" type="figura" description="Logo e flusso di lavoro di Edge Impulse" reason="Figura visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125230122.png)
 
-<!-- SOURCE_VISUAL id="IS23-V81" source="L23-web.pdf" page="106" type="schermata" description="Pagina iniziale della piattaforma Edge Impulse" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125230130.png)
 
-<!-- SOURCE_VISUAL id="IS23-V82" source="L23-web.pdf" page="107" type="schema" description="Edge Impulse dagli strumenti dell'utente al dispositivo" reason="Schema visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125230144.png)
 
 ---
 
@@ -1076,18 +1000,13 @@ Materiale di supporto: suggerimento di lettura, video e link a tutorial della le
 
 - **Leggere il breve ebook MATLAB sul deep learning** (non d’esame): riassume molti concetti discussi nella lezione e dà alcuni esempi di codice.
 
-<!-- SOURCE_VISUAL id="IS23-V83" source="L23-web.pdf" page="110" type="figura" description="Copertina dell'ebook MATLAB sul deep learning" reason="Immagine visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125230224.png)
 
 - **Video** (non d’esame): https://www.youtube.com/watch?v=kY9nZbX1DWM e https://www.youtube.com/watch?v=oK7Bum1x_dI (Vision Processing Units).
 
-<!-- SOURCE_VISUAL id="IS23-V84" source="L23-web.pdf" page="111" type="figura" description="Anteprime dei video sulle VPU" reason="Immagini visibili solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
+![](imgs/Pasted%20image%2020261125230236.png)
 
 - **Piattaforma Edge Impulse** (non d’esame). Tutorial: https://www.youtube.com/watch?v=0Uga3GVXgMw
-
-<!-- SOURCE_VISUAL id="IS23-V85" source="L23-web.pdf" page="112" type="schermata" description="Anteprima del tutorial di Edge Impulse" reason="Schermata visibile solo nella slide" -->
-<!-- INSERT INSTRUCTOR SLIDE/DIAGRAM HERE -->
 
 ---
 

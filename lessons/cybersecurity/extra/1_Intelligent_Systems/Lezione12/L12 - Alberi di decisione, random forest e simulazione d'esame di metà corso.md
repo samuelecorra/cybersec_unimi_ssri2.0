@@ -631,6 +631,7 @@ rf.fit(X, y)
 - Un **errore di training nullo** valuta solo la **memorizzazione** dei dati addestrati.
 
 > 💡 **Lo schema corretto (nota didattica, ricostruzione non presente nelle slide).**
+>
 > ```python
 > from sklearn.model_selection import cross_val_score, StratifiedKFold
 > cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
