@@ -5,6 +5,35 @@ export const topicOf = lesson => Math.floor((lesson - 1) / 3);
 export const lessonLabel = lesson => `Lezione ${String(lesson).padStart(2, '0')}`;
 export const examFormat = (course, id) => course.formats.find(format => format.id === id) ?? course.formats[0];
 
+const emptyRecord = { active: null, mistakes: null, history: [], reviews: [] };
+
+export function normalizeExamRecord(record) {
+  if (!Array.isArray(record?.history)) return emptyRecord;
+  const legacyReview = record.active?.mode === 'mistakes';
+  const legacyResults = record.history.filter(attempt => attempt?.mode === 'mistakes');
+  const reviews = Array.isArray(record.reviews) ? record.reviews : [];
+  return {
+    active: legacyReview ? null : record.active ?? null,
+    mistakes: record.mistakes ?? (legacyReview ? record.active : null),
+    history: legacyResults.length ? record.history.filter(attempt => attempt?.mode !== 'mistakes') : record.history,
+    reviews: legacyResults.length ? [...reviews, ...legacyResults] : reviews,
+  };
+}
+
+export function orderedActivity(history, reviews) {
+  return [...history, ...reviews].sort((a, b) => b.finishedAt - a.finishedAt);
+}
+
+export function completeAttempt(record, slot, attemptId, questions, reason, now) {
+  const attempt = record[slot];
+  if (!attempt || attempt.id !== attemptId) return record;
+  const expired = typeof attempt.deadline === 'number' && now >= attempt.deadline;
+  if (reason === 'timeout' && !expired) return record;
+  const result = gradeAttempt(attempt, questions, expired ? 'timeout' : reason, now);
+  const collection = slot === 'mistakes' ? 'reviews' : 'history';
+  return { ...record, [slot]: null, [collection]: [result, ...record[collection]].slice(0, HISTORY_LIMIT) };
+}
+
 function shuffled(items, random) {
   const result = [...items];
   for (let i = result.length - 1; i > 0; i--) {

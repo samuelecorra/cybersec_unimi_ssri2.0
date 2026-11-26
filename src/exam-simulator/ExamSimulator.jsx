@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createHashPath } from '../utils/hashRouting.js';
 import {
-  createAttempt, examFormat, gradeAttempt, HISTORY_LIMIT, lessonLabel, missedIds, PRACTICE_COUNT, topicOf,
+  completeAttempt, createAttempt, examFormat, lessonLabel, missedIds, orderedActivity, PRACTICE_COUNT, topicOf,
 } from './exam.js';
 import { useExamRecord } from './useExamRecord.js';
 import './exam.css';
@@ -15,12 +15,7 @@ const modeLabel = (course, attempt) => ({
 const gradeLabel = attempt => attempt.grade === 31 ? '30 e lode' : `${attempt.grade}/30`;
 const dateFormat = new Intl.DateTimeFormat('it-IT', { dateStyle: 'short', timeStyle: 'short' });
 
-function complete(record, questions, reason, now) {
-  const result = gradeAttempt(record.active, questions, reason, now);
-  return { active: null, history: [result, ...record.history].slice(0, HISTORY_LIMIT) };
-}
-
-function Setup({ course, bankSize, missed, history, active, onResume, onStart, onResult }) {
+function Setup({ course, bankSize, missed, history, active, mistakes, onResume, onStart, onResult }) {
   const [topic, setTopic] = useState(0);
   const [minutes, setMinutes] = useState(course.defaultMinutes);
   const [formatId, setFormatId] = useState(course.formats[0].id);
@@ -70,8 +65,13 @@ function Setup({ course, bankSize, missed, history, active, onResume, onStart, o
         </section>
         <section className="is-panel">
           <h3>Ripasso degli errori</h3>
-          <p>{missed ? `${missed} quesiti da recuperare tra errori e risposte omesse.` : 'Qui ritrovi le domande sbagliate o lasciate in bianco dopo una prova.'}</p>
-          <button className="is-button" disabled={!!active || !missed} onClick={() => onStart({ mode: 'mistakes' })}>Ripassa gli errori</button>
+          <p>{mistakes
+            ? `Ripasso salvato · ${Object.keys(mistakes.answers).length}/${mistakes.items.length} risposte.`
+            : missed ? `${missed} quesiti da recuperare tra errori e risposte omesse.`
+              : 'Qui ritrovi le domande sbagliate o lasciate in bianco dopo una prova.'}</p>
+          <button className="is-button" disabled={!mistakes && !missed} onClick={() => onStart({ mode: 'mistakes' })}>
+            {mistakes ? 'Riprendi il ripasso' : 'Ripassa gli errori'}
+          </button>
         </section>
       </div>
       <p className="is-exam-note">{course.formatNote} Il voto simulato è 31 × corrette / totale, arrotondato e limitato a 30. Il punteggio pieno vale 30 e lode.</p>
@@ -103,6 +103,8 @@ function QuestionView({ course, questions, attempt, onUpdate, onFinish, onPause 
   const heading = useRef(null);
   const keepTaking = useRef(null);
   const { position, answers, flags, deadline, items } = attempt;
+  const reviewing = attempt.mode === 'mistakes';
+  const finishLabel = reviewing ? 'Termina il ripasso' : 'Rivedi e consegna';
   const item = items[position];
   const question = questions.get(item.id);
   const selected = answers[item.id];
@@ -124,22 +126,18 @@ function QuestionView({ course, questions, attempt, onUpdate, onFinish, onPause 
   }, [deadline]);
 
   useEffect(() => {
-    if (remaining === 0) onFinish('timeout');
-  }, [remaining, onFinish]);
-
-  useEffect(() => {
     if (confirming) keepTaking.current?.focus();
     else heading.current?.focus();
   }, [position, confirming]);
 
   if (confirming) return (
     <section className="is-panel is-confirm" aria-labelledby="is-confirm-title">
-      <h2 id="is-confirm-title">Conferma la consegna</h2>
+      <h2 id="is-confirm-title">{reviewing ? 'Conferma la fine del ripasso' : 'Conferma la consegna'}</h2>
       <p>{answered} risposte, {items.length - answered} omesse. {Object.keys(flags).length} quesiti segnati per il controllo.</p>
       <div className="is-actions">
         {timerDisplay}
         <button ref={keepTaking} className="is-button" onClick={() => setConfirming(false)}>Torna alle domande</button>
-        <button className="is-button is-primary" onClick={() => onFinish('submitted')}>Consegna ora</button>
+        <button className="is-button is-primary" onClick={onFinish}>{reviewing ? 'Concludi il ripasso' : 'Consegna ora'}</button>
       </div>
     </section>
   );
@@ -189,7 +187,7 @@ function QuestionView({ course, questions, attempt, onUpdate, onFinish, onPause 
             <button className="is-button" disabled={position === 0} onClick={() => move(position - 1)}>← Precedente</button>
             {position + 1 < items.length
               ? <button className="is-button is-primary" onClick={() => move(position + 1)}>Successiva →</button>
-              : <button className="is-button is-primary" onClick={() => setConfirming(true)}>Rivedi e consegna</button>}
+              : <button className="is-button is-primary" onClick={() => setConfirming(true)}>{finishLabel}</button>}
           </div>
         </section>
         <aside className="is-panel is-question-map" aria-label="Navigazione domande">
@@ -204,7 +202,7 @@ function QuestionView({ course, questions, attempt, onUpdate, onFinish, onPause 
             ))}
           </div>
           <div className="is-map-legend"><span>● Con risposta</span><span>◆ Contrassegnata</span></div>
-          <button className="is-button" onClick={() => setConfirming(true)}>Rivedi e consegna</button>
+          <button className="is-button" onClick={() => setConfirming(true)}>{finishLabel}</button>
         </aside>
       </div>
     </>
@@ -214,10 +212,11 @@ function QuestionView({ course, questions, attempt, onUpdate, onFinish, onPause 
 const outcomeLabel = { correct: 'Corretta', wrong: 'Errata', blank: 'Omessa' };
 const filters = [['all', 'Tutte'], ['wrong', 'Errate'], ['blank', 'Omesse'], ['correct', 'Corrette'], ['flagged', 'Contrassegnate']];
 
-function Result({ course, questions, result, lessonPaths, onHome, onRetry }) {
+function Result({ course, questions, result, lessonPaths, onHome, onRetry, hasSavedReview }) {
   const [filter, setFilter] = useState('all');
   const heading = useRef(null);
   const target = result.mode === 'exam' ? examFormat(course, result.format).target : undefined;
+  const reviewing = result.mode === 'mistakes';
   const topicResults = new Map();
   for (const { id } of result.items) {
     const topic = topicOf(questions.get(id).lesson);
@@ -235,10 +234,10 @@ function Result({ course, questions, result, lessonPaths, onHome, onRetry }) {
     <>
       <section className="is-panel is-result" aria-labelledby="is-result-title">
         <div>
-          <h2 id="is-result-title" ref={heading} tabIndex={-1}>Risultato della prova</h2>
-          <p>{modeLabel(course, result)} · {result.reason === 'timeout' ? 'Consegnata allo scadere del tempo' : 'Prova consegnata'}</p>
+          <h2 id="is-result-title" ref={heading} tabIndex={-1}>{reviewing ? 'Riepilogo del ripasso' : 'Risultato della prova'}</h2>
+          {!reviewing && <p>{modeLabel(course, result)} · {result.reason === 'timeout' ? 'Consegnata allo scadere del tempo' : 'Prova consegnata'}</p>}
           <strong className="is-grade">{result.grade === null ? `${result.correct}/${result.total}` : gradeLabel(result)}</strong>
-          <p>{result.grade === null ? 'Punteggio dell’allenamento' : target ? 'Voto simulato' : result.grade >= 18 ? 'Voto simulato · Superato' : 'Voto simulato · Insufficiente'}</p>
+          {!reviewing && <p>{result.grade === null ? 'Punteggio dell’allenamento' : target ? 'Voto simulato' : result.grade >= 18 ? 'Voto simulato · Superato' : 'Voto simulato · Insufficiente'}</p>}
           {target && <p>Obiettivo della griglia {result.correct >= target ? 'raggiunto' : 'da raggiungere'} · {target} risposte corrette richieste</p>}
         </div>
         <dl className="is-result-counts">
@@ -248,7 +247,7 @@ function Result({ course, questions, result, lessonPaths, onHome, onRetry }) {
         </dl>
         <div className="is-actions">
           <button className="is-button is-primary" onClick={onHome}>Torna al simulatore</button>
-          {onRetry && <button className="is-button" onClick={onRetry}>Ripassa gli errori</button>}
+          {onRetry && <button className="is-button" onClick={onRetry}>{hasSavedReview ? 'Riprendi il ripasso' : 'Ripassa gli errori'}</button>}
         </div>
       </section>
       <section className="is-panel is-topic-results" aria-labelledby="is-topic-results-title">
@@ -299,13 +298,17 @@ export default function ExamSimulator({ course, bank, lessonPaths }) {
     && attempt.items.every(item => questions.has(item?.id)), [questions]);
   const [record, setRecord] = useExamRecord(course.storageKey);
   const [reviewId, setReviewId] = useState(null);
-  const [resuming, setResuming] = useState(true);
+  const [selectedSlot, setSelectedSlot] = useState('active');
   const view = useRef(null);
   const active = isKnownAttempt(record.active) ? record.active : null;
+  const mistakes = isKnownAttempt(record.mistakes) ? record.mistakes : null;
   const history = useMemo(() => record.history.filter(isKnownAttempt), [record.history, isKnownAttempt]);
-  const missed = useMemo(() => missedIds(history).size, [history]);
+  const activity = useMemo(() => orderedActivity(history, record.reviews.filter(isKnownAttempt)),
+    [history, record.reviews, isKnownAttempt]);
+  const missed = useMemo(() => missedIds(activity).size, [activity]);
   const activeId = active?.id;
   const deadline = active?.deadline;
+  const currentAttempt = selectedSlot === 'active' ? active : selectedSlot === 'mistakes' ? mistakes : null;
   const sourcePaths = useMemo(() => {
     const paths = new Map();
     for (const path of lessonPaths) {
@@ -316,49 +319,53 @@ export default function ExamSimulator({ course, bank, lessonPaths }) {
     return paths;
   }, [lessonPaths, course.path]);
 
-  const finish = useCallback(reason => {
-    if (!activeId) return;
-    setRecord(current => {
-      if (current.active?.id !== activeId) return current;
-      const now = Date.now();
-      const expired = deadline && now >= deadline;
-      if (reason === 'timeout' && !expired) return current;
-      return complete(current, questions, expired ? 'timeout' : reason, now);
-    });
-    setReviewId(activeId);
-  }, [activeId, deadline, questions, setRecord]);
+  const finish = useCallback((slot, id, reason) => {
+    void setRecord(current => completeAttempt(current, slot, id, questions, reason, Date.now()));
+  }, [questions, setRecord]);
 
   useEffect(() => {
-    if (!deadline || resuming) return;
+    if (!deadline) return;
     const checkDeadline = () => {
-      if (Date.now() >= deadline) finish('timeout');
+      if (Date.now() < deadline) return;
+      finish('active', activeId, 'timeout');
+      if (selectedSlot !== 'mistakes' && !reviewId) {
+        setReviewId(activeId);
+        setSelectedSlot(null);
+      }
     };
     checkDeadline();
     const timer = window.setInterval(checkDeadline, 1000);
     return () => window.clearInterval(timer);
-  }, [deadline, finish, resuming]);
+  }, [activeId, deadline, finish, reviewId, selectedSlot]);
 
   async function start(settings) {
+    const slot = settings.mode === 'mistakes' ? 'mistakes' : 'active';
     await setRecord(current => {
-      if (isKnownAttempt(current.active)) return current;
-      const knownHistory = current.history.filter(isKnownAttempt);
-      const attempt = createAttempt(course, bank, knownHistory, settings);
-      return attempt ? { active: attempt, history: knownHistory } : current;
+      if (isKnownAttempt(current[slot])) return current;
+      const recent = orderedActivity(current.history.filter(isKnownAttempt), current.reviews.filter(isKnownAttempt));
+      const attempt = createAttempt(course, bank, recent, settings);
+      return attempt ? { ...current, [slot]: attempt } : current;
     });
     setReviewId(null);
-    setResuming(true);
+    setSelectedSlot(slot);
   }
 
   function update(change) {
-    if (!active) return;
+    if (!currentAttempt) return;
     setRecord(current => {
-      if (current.active?.id !== activeId || (deadline && Date.now() >= deadline)) return current;
-      return { ...current, active: change(current.active) };
+      const attempt = current[selectedSlot];
+      if (attempt?.id !== currentAttempt.id || (attempt.deadline && Date.now() >= attempt.deadline)) return current;
+      return { ...current, [selectedSlot]: change(attempt) };
     });
   }
 
-  const result = history.find(entry => entry.id === reviewId);
-  const screen = result ? 'result' : active && resuming ? 'active' : 'setup';
+  function submit() {
+    finish(selectedSlot, currentAttempt.id, 'submitted');
+    setReviewId(currentAttempt.id);
+  }
+
+  const result = activity.find(entry => entry.id === reviewId);
+  const screen = result ? 'result' : currentAttempt ? selectedSlot : 'setup';
   useEffect(() => { view.current?.scrollTo(0, 0); }, [screen, reviewId]);
 
   return (
@@ -366,10 +373,11 @@ export default function ExamSimulator({ course, bank, lessonPaths }) {
       <div className="is-exam-inner">
         <a className="is-back-link" href={createHashPath(course.path)}>← {course.title}</a>
         {result ? <Result key={result.id} course={course} questions={questions} result={result} lessonPaths={sourcePaths}
-          onHome={() => { setReviewId(null); setResuming(false); }}
-          onRetry={!active && missed ? () => start({ mode: 'mistakes' }) : null} />
-          : active && resuming ? <QuestionView key={active.id} course={course} questions={questions} attempt={active} onUpdate={update} onFinish={finish} onPause={() => setResuming(false)} />
-          : <Setup course={course} bankSize={bank.length} missed={missed} history={history} active={active} onResume={() => setResuming(true)} onStart={start} onResult={setReviewId} />}
+          onHome={() => { setReviewId(null); setSelectedSlot(null); }}
+          hasSavedReview={!!mistakes} onRetry={mistakes || missed ? () => start({ mode: 'mistakes' }) : null} />
+          : currentAttempt ? <QuestionView key={currentAttempt.id} course={course} questions={questions} attempt={currentAttempt} onUpdate={update} onFinish={submit} onPause={() => setSelectedSlot(null)} />
+          : <Setup course={course} bankSize={bank.length} missed={missed} history={history} active={active} mistakes={mistakes}
+            onResume={() => { setReviewId(null); setSelectedSlot('active'); }} onStart={start} onResult={setReviewId} />}
       </div>
     </div>
   );
