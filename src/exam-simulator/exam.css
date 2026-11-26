@@ -172,5 +172,5 @@
 
 @media (max-width: 420px) {
   .is-review-item summary { flex-wrap: wrap; }
-  .is-review-item summary [lang='en'] { flex-basis: 100%; }
+  .is-review-prompt { flex-basis: 100%; }
 }

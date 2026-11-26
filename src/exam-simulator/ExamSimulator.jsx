@@ -1,54 +1,61 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createHashPath } from '../utils/hashRouting.js';
-import { COURSE_PATH } from './routes.js';
 import {
-  createAttempt, DEFAULT_MINUTES, DURATIONS, EXAM_COUNT, gradeAttempt, HISTORY_LIMIT,
-  lessonLabel, missedIds, PRACTICE_COUNT, topicOf, TOPICS,
+  createAttempt, examFormat, gradeAttempt, HISTORY_LIMIT, lessonLabel, missedIds, PRACTICE_COUNT, topicOf,
 } from './exam.js';
-import { bank } from './questions.js';
 import { useExamRecord } from './useExamRecord.js';
 import './exam.css';
 
-const questions = new Map(bank.map(q => [q.id, q]));
 const answerLetter = index => String.fromCharCode(65 + index);
-const isKnownAttempt = attempt => Array.isArray(attempt?.items) && attempt.items.length > 0
-  && attempt.items.every(item => questions.has(item?.id));
-const modeLabel = attempt => ({ exam: 'Simulazione', topic: TOPICS[attempt.topic], mistakes: 'Ripasso degli errori' })[attempt.mode];
+const modeLabel = (course, attempt) => ({
+  exam: examFormat(course, attempt.format).title ?? 'Simulazione',
+  topic: course.topics[attempt.topic],
+  mistakes: 'Ripasso degli errori',
+})[attempt.mode];
 const gradeLabel = attempt => attempt.grade === 31 ? '30 e lode' : `${attempt.grade}/30`;
 const dateFormat = new Intl.DateTimeFormat('it-IT', { dateStyle: 'short', timeStyle: 'short' });
 
-function complete(record, reason, now) {
+function complete(record, questions, reason, now) {
   const result = gradeAttempt(record.active, questions, reason, now);
   return { active: null, history: [result, ...record.history].slice(0, HISTORY_LIMIT) };
 }
 
-function Setup({ history, active, onResume, onStart, onResult }) {
+function Setup({ course, bankSize, missed, history, active, onResume, onStart, onResult }) {
   const [topic, setTopic] = useState(0);
-  const [minutes, setMinutes] = useState(DEFAULT_MINUTES);
-  const missed = [...missedIds(history)].filter(id => questions.has(id)).length;
+  const [minutes, setMinutes] = useState(course.defaultMinutes);
+  const [formatId, setFormatId] = useState(course.formats[0].id);
+  const format = examFormat(course, formatId);
   return (
     <>
       <div className="is-exam-intro">
         <h2>Simulatore d’esame</h2>
-        <p>Intelligent Systems · {bank.length} quesiti in inglese sulle 24 lezioni</p>
+        <p>{course.title} · {bankSize} quesiti in {course.language} sulle {course.topics.length * 3} lezioni</p>
       </div>
       {active && (
         <section className="is-panel is-resume">
-          <div><h3>Prova in corso</h3><p>{modeLabel(active)} · {Object.keys(active.answers).length}/{active.items.length} risposte</p></div>
+          <div><h3>Prova in corso</h3><p>{modeLabel(course, active)} · {Object.keys(active.answers).length}/{active.items.length} risposte</p></div>
           <button className="is-button is-primary" onClick={onResume}>Riprendi la prova</button>
         </section>
       )}
       <div className="is-setup-grid">
         <section className="is-panel is-exam-mode">
           <h3>Simulazione completa</h3>
-          <p>{EXAM_COUNT} domande, una sola risposta valida. +1 per ogni risposta corretta, 0 per errata o omessa. Soluzioni dopo la consegna.</p>
+          <p>{format.count} domande, una sola risposta valida. +1 per ogni risposta corretta, 0 per errata o omessa. Soluzioni dopo la consegna.</p>
+          {course.formats.length > 1 && (
+            <div className="is-picker">
+              <label htmlFor="is-format">Formato</label>
+              <select id="is-format" value={format.id} onChange={event => setFormatId(event.target.value)}>
+                {course.formats.map(option => <option key={option.id} value={option.id}>{option.label}</option>)}
+              </select>
+            </div>
+          )}
           <div className="is-picker">
             <label htmlFor="is-duration">Durata</label>
             <select id="is-duration" value={minutes} onChange={event => setMinutes(Number(event.target.value))}>
-              {DURATIONS.map(value => <option value={value} key={value}>{value} minuti</option>)}
+              {course.durations.map(value => <option value={value} key={value}>{value} minuti</option>)}
             </select>
           </div>
-          <button className="is-button is-primary" disabled={!!active} onClick={() => onStart({ mode: 'exam', minutes })}>Inizia la simulazione</button>
+          <button className="is-button is-primary" disabled={!!active} onClick={() => onStart({ mode: 'exam', minutes, format: format.id })}>Inizia la simulazione</button>
         </section>
         <section className="is-panel">
           <h3>Allenamento per argomento</h3>
@@ -56,7 +63,7 @@ function Setup({ history, active, onResume, onStart, onResult }) {
           <div className="is-picker">
             <label htmlFor="is-topic">Argomento</label>
             <select id="is-topic" value={topic} onChange={event => setTopic(Number(event.target.value))}>
-              {TOPICS.map((name, index) => <option key={name} value={index}>{name}</option>)}
+              {course.topics.map((name, index) => <option key={name} value={index}>{name}</option>)}
             </select>
           </div>
           <button className="is-button" disabled={!!active} onClick={() => onStart({ mode: 'topic', topic })}>Allenati</button>
@@ -67,26 +74,30 @@ function Setup({ history, active, onResume, onStart, onResult }) {
           <button className="is-button" disabled={!!active || !missed} onClick={() => onStart({ mode: 'mistakes' })}>Ripassa gli errori</button>
         </section>
       </div>
-      <p className="is-exam-note">Il gruppo del corso riporta 40 quesiti in 30 minuti per un appello. La scheda UniMi indica circa un’ora. Il voto simulato è 31 × corrette / totale, arrotondato e limitato a 30. Il punteggio pieno vale 30 e lode.</p>
+      <p className="is-exam-note">{course.formatNote} Il voto simulato è 31 × corrette / totale, arrotondato e limitato a 30. Il punteggio pieno vale 30 e lode.</p>
       <section className="is-panel is-history" aria-labelledby="is-history-title">
         <h3 id="is-history-title">Ultimi tentativi</h3>
         {history.length ? (
           <ul>{history.map(result => (
             <li key={result.id}>
               <button className="is-history-row" onClick={() => onResult(result.id)}>
-                <span>{modeLabel(result)} <small>{dateFormat.format(result.finishedAt)}</small></span>
+                <span>{modeLabel(course, result)} <small>{dateFormat.format(result.finishedAt)}</small></span>
                 <strong>{result.grade === null ? `${result.correct}/${result.total}` : gradeLabel(result)} <span aria-hidden="true">→</span></strong>
               </button>
             </li>
           ))}</ul>
         ) : <p>I tentativi conclusi vengono salvati in questo browser.</p>}
       </section>
-      <p className="is-exam-note">Quesiti e spiegazioni originali, basati sulle lezioni e sui temi del <a href="https://github.com/gorkembaslik/quiz-app">quiz della community</a>. <a href="https://www.unimi.it/it/corsi/insegnamenti-dei-corsi-di-laurea/2026/intelligent-systems-industry-supply-chain-and-environment-0">Scheda UniMi</a></p>
+      <p className="is-exam-note">Quesiti e spiegazioni originali, basati sulle lezioni e sui temi discussi dalla community.{' '}
+        {course.sources.map(([label, url], index) => (
+          <span key={url}>{index > 0 && ' · '}<a href={url}>{label}</a></span>
+        ))}
+      </p>
     </>
   );
 }
 
-function QuestionView({ attempt, onUpdate, onFinish, onPause }) {
+function QuestionView({ course, questions, attempt, onUpdate, onFinish, onPause }) {
   const [confirming, setConfirming] = useState(false);
   const [now, setNow] = useState(Date.now);
   const heading = useRef(null);
@@ -150,7 +161,7 @@ function QuestionView({ attempt, onUpdate, onFinish, onPause }) {
   return (
     <>
       <div className="is-exam-toolbar">
-        <div><h2>{modeLabel(attempt)}</h2><p>{answered} di {items.length} con risposta</p></div>
+        <div><h2>{modeLabel(course, attempt)}</h2><p>{answered} di {items.length} con risposta</p></div>
         <div className="is-actions">
           {timerDisplay}
           <button className="is-button" onClick={onPause}>{deadline ? 'Esci, il timer continua' : 'Salva ed esci'}</button>
@@ -163,8 +174,8 @@ function QuestionView({ attempt, onUpdate, onFinish, onPause }) {
             <span>Domanda {position + 1} / {items.length}</span>
             <button className="is-button is-flag" aria-pressed={!!flags[item.id]} onClick={flag}>{flags[item.id] ? 'Contrassegnata' : 'Contrassegna'}</button>
           </div>
-          <h3 ref={heading} tabIndex={-1} lang="en">{question.prompt}</h3>
-          <div className="is-options" role="radiogroup" aria-label="Risposte" lang="en">
+          <h3 ref={heading} tabIndex={-1} lang={course.lang}>{question.prompt}</h3>
+          <div className="is-options" role="radiogroup" aria-label="Risposte" lang={course.lang} key={item.id}>
             {item.order.map((option, index) => (
               <label className="is-option" key={option}>
                 <input type="radio" name={`answer-${item.id}`} checked={selected === option} onChange={() => choose(option)} />
@@ -203,9 +214,10 @@ function QuestionView({ attempt, onUpdate, onFinish, onPause }) {
 const outcomeLabel = { correct: 'Corretta', wrong: 'Errata', blank: 'Omessa' };
 const filters = [['all', 'Tutte'], ['wrong', 'Errate'], ['blank', 'Omesse'], ['correct', 'Corrette'], ['flagged', 'Contrassegnate']];
 
-function Result({ result, lessonPaths, onHome, onRetry }) {
+function Result({ course, questions, result, lessonPaths, onHome, onRetry }) {
   const [filter, setFilter] = useState('all');
   const heading = useRef(null);
+  const target = result.mode === 'exam' ? examFormat(course, result.format).target : undefined;
   const topicResults = new Map();
   for (const { id } of result.items) {
     const topic = topicOf(questions.get(id).lesson);
@@ -224,9 +236,10 @@ function Result({ result, lessonPaths, onHome, onRetry }) {
       <section className="is-panel is-result" aria-labelledby="is-result-title">
         <div>
           <h2 id="is-result-title" ref={heading} tabIndex={-1}>Risultato della prova</h2>
-          <p>{modeLabel(result)} · {result.reason === 'timeout' ? 'Consegnata allo scadere del tempo' : 'Prova consegnata'}</p>
+          <p>{modeLabel(course, result)} · {result.reason === 'timeout' ? 'Consegnata allo scadere del tempo' : 'Prova consegnata'}</p>
           <strong className="is-grade">{result.grade === null ? `${result.correct}/${result.total}` : gradeLabel(result)}</strong>
-          <p>{result.grade === null ? 'Punteggio dell’allenamento' : result.grade >= 18 ? 'Voto simulato · Superato' : 'Voto simulato · Insufficiente'}</p>
+          <p>{result.grade === null ? 'Punteggio dell’allenamento' : target ? 'Voto simulato' : result.grade >= 18 ? 'Voto simulato · Superato' : 'Voto simulato · Insufficiente'}</p>
+          {target && <p>Obiettivo della griglia {result.correct >= target ? 'raggiunto' : 'da raggiungere'} · {target} risposte corrette richieste</p>}
         </div>
         <dl className="is-result-counts">
           <div><dt>Corrette</dt><dd>{result.correct}</dd></div>
@@ -241,7 +254,7 @@ function Result({ result, lessonPaths, onHome, onRetry }) {
       <section className="is-panel is-topic-results" aria-labelledby="is-topic-results-title">
         <h3 id="is-topic-results-title">Risultati per argomento</h3>
         {Array.from(topicResults).sort(([a], [b]) => a - b).map(([topic, counts]) => (
-          <div key={topic}><span>{TOPICS[topic]}</span><progress value={counts.correct} max={counts.total} aria-label={TOPICS[topic]} /><strong>{counts.correct}/{counts.total}</strong></div>
+          <div key={topic}><span>{course.topics[topic]}</span><progress value={counts.correct} max={counts.total} aria-label={course.topics[topic]} /><strong>{counts.correct}/{counts.total}</strong></div>
         ))}
       </section>
       <section className="is-review" aria-labelledby="is-review-title">
@@ -258,9 +271,9 @@ function Result({ result, lessonPaths, onHome, onRetry }) {
           const position = result.items.findIndex(item => item.id === id) + 1;
           return (
             <details className="is-panel is-review-item" key={id}>
-              <summary><span className={`is-outcome is-${outcome}`}>{outcomeLabel[outcome]}</span><span lang="en">{position}. {question.prompt}</span></summary>
+              <summary><span className={`is-outcome is-${outcome}`}>{outcomeLabel[outcome]}</span><span className="is-review-prompt" lang={course.lang}>{position}. {question.prompt}</span></summary>
               <div className="is-review-body">
-                <ul className="is-review-options" lang="en">
+                <ul className="is-review-options" lang={course.lang}>
                   {order.map((option, index) => (
                     <li key={option} className={option === question.answer ? 'is-correct' : option === selected ? 'is-wrong' : undefined}>
                       <strong>{answerLetter(index)}.</strong> {question.options[option]}
@@ -269,7 +282,7 @@ function Result({ result, lessonPaths, onHome, onRetry }) {
                     </li>
                   ))}
                 </ul>
-                <p lang="en">{question.explanation}</p>
+                <p lang={course.lang}>{question.explanation}</p>
                 {source && <a href={createHashPath(source)}>Rileggi {lessonLabel(question.lesson).toLowerCase()} →</a>}
               </div>
             </details>
@@ -280,24 +293,28 @@ function Result({ result, lessonPaths, onHome, onRetry }) {
   );
 }
 
-export default function ExamSimulator({ lessonPaths }) {
-  const [record, setRecord] = useExamRecord();
+export default function ExamSimulator({ course, bank, lessonPaths }) {
+  const questions = useMemo(() => new Map(bank.map(q => [q.id, q])), [bank]);
+  const isKnownAttempt = useCallback(attempt => Array.isArray(attempt?.items) && attempt.items.length > 0
+    && attempt.items.every(item => questions.has(item?.id)), [questions]);
+  const [record, setRecord] = useExamRecord(course.storageKey);
   const [reviewId, setReviewId] = useState(null);
   const [resuming, setResuming] = useState(true);
   const view = useRef(null);
   const active = isKnownAttempt(record.active) ? record.active : null;
-  const history = useMemo(() => record.history.filter(isKnownAttempt), [record.history]);
+  const history = useMemo(() => record.history.filter(isKnownAttempt), [record.history, isKnownAttempt]);
+  const missed = useMemo(() => missedIds(history).size, [history]);
   const activeId = active?.id;
   const deadline = active?.deadline;
   const sourcePaths = useMemo(() => {
     const paths = new Map();
     for (const path of lessonPaths) {
-      if (!path.startsWith(`${COURSE_PATH}/`)) continue;
-      const match = /^Lezione(\d{2})\/L\d{2} .*\.md$/u.exec(path.slice(COURSE_PATH.length + 1));
+      if (!path.startsWith(`${course.path}/`)) continue;
+      const match = /^Lezione(\d{2})\/L\d{2} .*\.md$/u.exec(path.slice(course.path.length + 1));
       if (match) paths.set(Number(match[1]), path);
     }
     return paths;
-  }, [lessonPaths]);
+  }, [lessonPaths, course.path]);
 
   const finish = useCallback(reason => {
     if (!activeId) return;
@@ -306,10 +323,10 @@ export default function ExamSimulator({ lessonPaths }) {
       const now = Date.now();
       const expired = deadline && now >= deadline;
       if (reason === 'timeout' && !expired) return current;
-      return complete(current, expired ? 'timeout' : reason, now);
+      return complete(current, questions, expired ? 'timeout' : reason, now);
     });
     setReviewId(activeId);
-  }, [activeId, deadline, setRecord]);
+  }, [activeId, deadline, questions, setRecord]);
 
   useEffect(() => {
     if (!deadline || resuming) return;
@@ -325,7 +342,7 @@ export default function ExamSimulator({ lessonPaths }) {
     await setRecord(current => {
       if (isKnownAttempt(current.active)) return current;
       const knownHistory = current.history.filter(isKnownAttempt);
-      const attempt = createAttempt(bank, knownHistory, settings);
+      const attempt = createAttempt(course, bank, knownHistory, settings);
       return attempt ? { active: attempt, history: knownHistory } : current;
     });
     setReviewId(null);
@@ -347,12 +364,12 @@ export default function ExamSimulator({ lessonPaths }) {
   return (
     <div className="browse-view is-exam" ref={view}>
       <div className="is-exam-inner">
-        <a className="is-back-link" href={createHashPath(COURSE_PATH)}>← Intelligent Systems</a>
-        {result ? <Result key={result.id} result={result} lessonPaths={sourcePaths}
+        <a className="is-back-link" href={createHashPath(course.path)}>← {course.title}</a>
+        {result ? <Result key={result.id} course={course} questions={questions} result={result} lessonPaths={sourcePaths}
           onHome={() => { setReviewId(null); setResuming(false); }}
-          onRetry={!active && missedIds(history).size ? () => start({ mode: 'mistakes' }) : null} />
-          : active && resuming ? <QuestionView key={active.id} attempt={active} onUpdate={update} onFinish={finish} onPause={() => setResuming(false)} />
-          : <Setup history={history} active={active} onResume={() => setResuming(true)} onStart={start} onResult={setReviewId} />}
+          onRetry={!active && missed ? () => start({ mode: 'mistakes' }) : null} />
+          : active && resuming ? <QuestionView key={active.id} course={course} questions={questions} attempt={active} onUpdate={update} onFinish={finish} onPause={() => setResuming(false)} />
+          : <Setup course={course} bankSize={bank.length} missed={missed} history={history} active={active} onResume={() => setResuming(true)} onStart={start} onResult={setReviewId} />}
       </div>
     </div>
   );
