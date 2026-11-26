@@ -24,6 +24,7 @@ jobs:
       - run: npm run validate:hash-routing
       - run: npm run validate:source-renderer
       - run: npm run validate:sort-names
+      - run: npm run validate:intelligent-systems
       - run: npm run build
         env:
           GITHUB_ACTIONS: 'true'
