@@ -1,5 +1,8 @@
 import { memo, useMemo } from 'react';
 import { getDisplayFileType, isSourceFile } from '../utils/fileTypes.js';
+import { createHashPath } from '../utils/hashRouting.js';
+import { COURSE_PATH, EXAM_PATH, LESSONS_PATH } from '../intelligent-systems/routes.js';
+import '../intelligent-systems/course.css';
 
 /* ── SVG Icons ── */
 const BackArrow = () => (
@@ -81,6 +84,10 @@ function formatName(name) {
 }
 
 function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
+  const path = browsePath.join('/');
+  const isCourse = path === COURSE_PATH;
+  const isCourseLessons = path === LESSONS_PATH;
+  const insideCourse = path.startsWith(`${COURSE_PATH}/`);
 
   // Resolve current nodes from browsePath
   const { currentNodes, breadcrumbs, parentPath } = useMemo(() => {
@@ -95,9 +102,15 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
       nodes = found.children;
     }
 
-    const parent = browsePath.length > 0 ? browsePath.slice(0, -1) : null;
+    if (insideCourse) {
+      const courseDepth = COURSE_PATH.split('/').length;
+      crumbs.splice(courseDepth, 0, { name: 'Lezioni', path: LESSONS_PATH.split('/') });
+    }
+    const parent = insideCourse && !isCourseLessons && browsePath.length === COURSE_PATH.split('/').length + 1
+      ? LESSONS_PATH.split('/')
+      : browsePath.slice(0, -1);
     return { currentNodes: nodes, breadcrumbs: crumbs, parentPath: parent };
-  }, [tree, browsePath]);
+  }, [tree, browsePath, insideCourse, isCourseLessons]);
 
   const dirs = currentNodes.filter(n => n.type === 'dir');
   const files = currentNodes.filter(n => n.type === 'file' || n.type === 'web-lesson');
@@ -122,6 +135,10 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
     displayDirs.every(d => /^anno\d+$/i.test(d.name));
 
   const handleDirClick = (dirName) => {
+    if (isCourseLessons) {
+      onBrowse(`${COURSE_PATH}/${dirName}`.split('/'));
+      return;
+    }
     if (isRoot && effectiveRoot.autoSkip) {
       // We skipped the root dir (cybersecurity), include it in path
       onBrowse([effectiveRoot.skipName, dirName]);
@@ -136,7 +153,7 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
     if (effectiveRoot.autoSkip && browsePath.length <= 2) {
       onBrowse([]);
     } else {
-      onBrowse(browsePath.slice(0, -1));
+      onBrowse(parentPath);
     }
   };
 
@@ -207,7 +224,28 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
         </div>
       )}
 
-      {/* Grid cards */}
+      {isCourse && (
+        <section className="is-course" aria-labelledby="is-course-title">
+          <h2 id="is-course-title">Intelligent Systems</h2>
+          <p>For Industry, Supply Chain and Environment</p>
+          <div className="is-course-grid">
+            <a className="is-course-card" href={createHashPath(LESSONS_PATH)}>
+              <span className="is-course-icon" aria-hidden="true"><FolderIcon /></span>
+              <strong>Lezioni</strong>
+              <span>Appunti, slide e materiali del corso</span>
+              <span className="is-course-link" aria-hidden="true">Apri la cartella →</span>
+            </a>
+            <a className="is-course-card is-course-card--exam" href={createHashPath(EXAM_PATH)}>
+              <span className="is-course-icon" aria-hidden="true"><SubjectIcon /></span>
+              <strong>Simulatore d’esame</strong>
+              <span>Prova a tempo e ripasso degli errori</span>
+              <span className="is-course-link" aria-hidden="true">Vai al simulatore →</span>
+            </a>
+          </div>
+        </section>
+      )}
+
+      {!isCourse && (
       <div className={`browse-grid ${isYearsView ? 'browse-grid--years' : ''} ${displayFiles.length > 0 && displayDirs.length === 0 ? 'browse-grid--files' : ''}`}>
         {displayDirs.map((dir, i) => {
           const fileCount = countFilesInNode(dir);
@@ -282,6 +320,7 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
           );
         })}
       </div>
+      )}
     </div>
   );
 }

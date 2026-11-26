@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { lazy, Suspense, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import tree from 'virtual:lesson-tree';
 import searchIndex from 'virtual:lesson-search';
 import Sidebar from './components/Sidebar.jsx';
@@ -15,6 +15,9 @@ import { HashRouter, useHashRouter } from './components/HashRouter.jsx';
 import { flattenFiles } from './utils/tree.js';
 import { encodePathSegments, getFileKind, isTextViewerFile } from './utils/fileTypes.js';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
+import { COURSE_PATH, EXAM_PATH, LESSONS_PATH } from './intelligent-systems/routes.js';
+
+const ExamSimulator = lazy(() => import('./intelligent-systems/ExamSimulator.jsx'));
 
 function RoutedApp() {
   const {
@@ -143,7 +146,8 @@ function RoutedApp() {
   }, [navigateHome, navigateToDirectory]);
 
   const handleBackToBrowse = useCallback(() => {
-    navigateToDirectory(getParentDirectory(currentFile));
+    const parent = getParentDirectory(currentFile);
+    navigateToDirectory(parent.join('/') === COURSE_PATH ? LESSONS_PATH : parent);
   }, [currentFile, getParentDirectory, navigateToDirectory]);
 
   const handlePrev = useCallback(() => {
@@ -232,7 +236,11 @@ function RoutedApp() {
           />
         )}
         <div className={`content-area${isDualPage ? ' dual-page-active' : ''}`}>
-          {viewMode === 'viewer' && currentFile ? (
+          {route.kind === 'directory' && route.path === EXAM_PATH ? (
+            <Suspense fallback={<div className="browse-view" role="status">Caricamento del simulatore…</div>}>
+              <ExamSimulator lessonPaths={allFiles} />
+            </Suspense>
+          ) : viewMode === 'viewer' && currentFile ? (
             <>
               <div className="content-header">
                 <div className="content-header-left">
