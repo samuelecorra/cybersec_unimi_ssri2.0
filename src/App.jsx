@@ -15,9 +15,12 @@ import { HashRouter, useHashRouter } from './components/HashRouter.jsx';
 import { flattenFiles } from './utils/tree.js';
 import { encodePathSegments, getFileKind, isTextViewerFile } from './utils/fileTypes.js';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
-import { COURSE_PATH, EXAM_PATH, LESSONS_PATH } from './intelligent-systems/routes.js';
+import { biometrics, examPathFor, findExamCourse, intelligentSystems, lessonsPathFor } from './exam-simulator/courses.js';
 
-const ExamSimulator = lazy(() => import('./intelligent-systems/ExamSimulator.jsx'));
+const examSimulators = new Map([
+  [examPathFor(intelligentSystems), lazy(() => import('./intelligent-systems/Simulator.jsx'))],
+  [examPathFor(biometrics), lazy(() => import('./biometrics/Simulator.jsx'))],
+]);
 
 function RoutedApp() {
   const {
@@ -147,7 +150,9 @@ function RoutedApp() {
 
   const handleBackToBrowse = useCallback(() => {
     const parent = getParentDirectory(currentFile);
-    navigateToDirectory(parent.join('/') === COURSE_PATH ? LESSONS_PATH : parent);
+    const path = parent.join('/');
+    const course = findExamCourse(path);
+    navigateToDirectory(course?.path === path ? lessonsPathFor(course) : parent);
   }, [currentFile, getParentDirectory, navigateToDirectory]);
 
   const handlePrev = useCallback(() => {
@@ -174,6 +179,8 @@ function RoutedApp() {
       [dirPath]: !prev[dirPath],
     }));
   }, [setExpandedDirs]);
+
+  const ExamSimulator = route.kind === 'directory' ? examSimulators.get(route.path) : null;
 
   return (
     <div className="app">
@@ -236,7 +243,7 @@ function RoutedApp() {
           />
         )}
         <div className={`content-area${isDualPage ? ' dual-page-active' : ''}`}>
-          {route.kind === 'directory' && route.path === EXAM_PATH ? (
+          {ExamSimulator ? (
             <Suspense fallback={<div className="browse-view" role="status">Caricamento del simulatore…</div>}>
               <ExamSimulator lessonPaths={allFiles} />
             </Suspense>

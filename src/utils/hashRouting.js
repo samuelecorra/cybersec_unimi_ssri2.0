@@ -1,4 +1,4 @@
-import { COURSE_PATH, EXAM_PATH, LESSONS_PATH } from '../intelligent-systems/routes.js';
+import { examCourses, examPathFor, lessonsPathFor } from '../exam-simulator/courses.js';
 
 const MAX_HASH_LENGTH = 16_384;
 const FORBIDDEN_SEGMENT_CHARS = /[\\/\u0000-\u001f\u007f]/;
@@ -57,9 +57,10 @@ export function buildHashRouteIndex(tree) {
   }
 
   visit(tree);
-  if (directories.has(COURSE_PATH)) {
-    directories.add(LESSONS_PATH);
-    directories.add(EXAM_PATH);
+  for (const course of examCourses) {
+    if (!directories.has(course.path)) continue;
+    directories.add(lessonsPathFor(course));
+    directories.add(examPathFor(course));
   }
   return Object.freeze({ directories, files });
 }

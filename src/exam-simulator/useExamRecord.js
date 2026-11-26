@@ -1,12 +1,11 @@
-import { useMemo, useSyncExternalStore } from 'react';
+import { useCallback, useMemo, useSyncExternalStore } from 'react';
 
-const storageKey = 'cyberlocker:intelligent-systems:v1';
-const changeEvent = 'intelligent-systems:record';
+const changeEvent = 'exam-simulator:record';
 const initialRecord = { active: null, history: [] };
-let unsaved = null;
+const unsaved = new Map();
 
-function snapshot() {
-  if (unsaved !== null) return unsaved;
+function snapshot(storageKey) {
+  if (unsaved.has(storageKey)) return unsaved.get(storageKey);
   try { return window.localStorage.getItem(storageKey); }
   catch { return null; }
 }
@@ -19,7 +18,7 @@ function parse(raw) {
   return initialRecord;
 }
 
-function subscribe(listener) {
+function subscribe(storageKey, listener) {
   const onStorage = event => {
     if (event.key === storageKey || event.key === null) listener();
   };
@@ -31,24 +30,27 @@ function subscribe(listener) {
   };
 }
 
-function updateRecord(change) {
+function updateRecord(storageKey, change) {
   const write = () => {
-    const previous = parse(snapshot());
+    const previous = parse(snapshot(storageKey));
     const next = change(previous);
     if (next === previous) return;
     const raw = JSON.stringify(next);
     try {
       window.localStorage.setItem(storageKey, raw);
-      unsaved = null;
+      unsaved.delete(storageKey);
     } catch {
-      unsaved = raw;
+      unsaved.set(storageKey, raw);
     }
     window.dispatchEvent(new Event(changeEvent));
   };
   return navigator.locks ? navigator.locks.request(storageKey, write) : write();
 }
 
-export function useExamRecord() {
-  const raw = useSyncExternalStore(subscribe, snapshot);
-  return [useMemo(() => parse(raw), [raw]), updateRecord];
+export function useExamRecord(storageKey) {
+  const listen = useCallback(listener => subscribe(storageKey, listener), [storageKey]);
+  const read = useCallback(() => snapshot(storageKey), [storageKey]);
+  const update = useCallback(change => updateRecord(storageKey, change), [storageKey]);
+  const raw = useSyncExternalStore(listen, read);
+  return [useMemo(() => parse(raw), [raw]), update];
 }

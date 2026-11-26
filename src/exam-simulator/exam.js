@@ -1,22 +1,9 @@
-export const EXAM_COUNT = 40;
 export const PRACTICE_COUNT = 12;
-export const DEFAULT_MINUTES = 30;
-export const DURATIONS = [30, 40, 60];
 export const HISTORY_LIMIT = 20;
-
-export const TOPICS = [
-  'Fondamenti, regolamentazione e sensori',
-  'Progettazione e preparazione dei dati',
-  'Dataset, similarità e retrieval',
-  'Feature engineering, visualizzazione e alberi',
-  'LLM, validazione e agenti',
-  'Metriche, regressione e riduzione dimensionale',
-  'Classificatori, reti neurali e deep learning',
-  'Transfer learning, visione e AIoT',
-];
 
 export const topicOf = lesson => Math.floor((lesson - 1) / 3);
 export const lessonLabel = lesson => `Lezione ${String(lesson).padStart(2, '0')}`;
+export const examFormat = (course, id) => course.formats.find(format => format.id === id) ?? course.formats[0];
 
 function shuffled(items, random) {
   const result = [...items];
@@ -40,8 +27,9 @@ export function missedIds(history) {
   return missed;
 }
 
-export function createAttempt(bank, history, settings, now = Date.now(), random = Math.random) {
+export function createAttempt(course, bank, history, settings, now = Date.now(), random = Math.random) {
   const { mode, topic, minutes } = settings;
+  const format = mode === 'exam' ? examFormat(course, settings.format) : null;
   const lastUsed = new Map();
   for (const [index, attempt] of history.entries()) {
     for (const item of attempt.items) {
@@ -50,24 +38,27 @@ export function createAttempt(bank, history, settings, now = Date.now(), random 
   }
   const ranked = shuffled(bank, random).sort((a, b) => (lastUsed.get(a.id) ?? 0) - (lastUsed.get(b.id) ?? 0));
   let questions;
-  if (mode === 'exam') {
-    const chosen = new Map();
-    for (let topicIndex = 0; topicIndex < TOPICS.length; topicIndex++) {
+  if (format) {
+    const chosen = [];
+    const topicCount = course.topics.length;
+    const perTopic = Math.floor(format.count / topicCount);
+    const topics = shuffled(course.topics.keys(), random);
+    for (const [index, topicIndex] of topics.entries()) {
       const pool = ranked.filter(q => topicOf(q.lesson) === topicIndex);
       const lessons = shuffled([1, 2, 3], random).map(offset => topicIndex * 3 + offset);
+      const group = [];
       // Include every lesson and at least two applied questions in each topic.
-      for (const [index, lesson] of lessons.entries()) {
-        const question = pool.find(q => q.lesson === lesson && q.applied === (index < 2))
+      for (const [offset, lesson] of lessons.entries()) {
+        const question = pool.find(q => q.lesson === lesson && q.applied === (offset < 2))
           ?? pool.find(q => q.lesson === lesson);
-        if (question) chosen.set(question.id, question);
+        if (question) group.push(question);
       }
-      const families = new Set([...chosen.values()].map(q => q.family ?? q.id));
+      const families = new Set(group.map(q => q.family ?? q.id));
       const extra = pool.filter(q => !families.has(q.family ?? q.id));
-      for (const question of distinctFamilies(extra).slice(0, 2)) {
-        chosen.set(question.id, question);
-      }
+      const quota = perTopic + Number(index < format.count % topicCount);
+      chosen.push(...group, ...distinctFamilies(extra).slice(0, quota - group.length));
     }
-    questions = shuffled(chosen.values(), random).slice(0, EXAM_COUNT);
+    questions = shuffled(chosen, random);
   } else {
     const missed = mode === 'mistakes' ? missedIds(history) : null;
     const pool = missed ? ranked.filter(q => missed.has(q.id)) : ranked.filter(q => topicOf(q.lesson) === topic);
@@ -83,6 +74,7 @@ export function createAttempt(bank, history, settings, now = Date.now(), random 
     id: `${now}-${Math.floor(random() * Number.MAX_SAFE_INTEGER).toString(36)}`,
     mode,
     topic,
+    ...(format && { format: format.id }),
     startedAt: now,
     deadline: mode === 'exam' ? now + minutes * 60_000 : null,
     items: questions.map(q => ({ id: q.id, order: shuffled(q.options.map((_, index) => index), random) })),

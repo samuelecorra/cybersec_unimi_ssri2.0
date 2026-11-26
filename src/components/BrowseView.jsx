@@ -1,8 +1,8 @@
 import { memo, useMemo } from 'react';
 import { getDisplayFileType, isSourceFile } from '../utils/fileTypes.js';
 import { createHashPath } from '../utils/hashRouting.js';
-import { COURSE_PATH, EXAM_PATH, LESSONS_PATH } from '../intelligent-systems/routes.js';
-import '../intelligent-systems/course.css';
+import { examPathFor, findExamCourse, lessonsPathFor } from '../exam-simulator/courses.js';
+import '../exam-simulator/course.css';
 
 /* ── SVG Icons ── */
 const BackArrow = () => (
@@ -85,9 +85,10 @@ function formatName(name) {
 
 function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
   const path = browsePath.join('/');
-  const isCourse = path === COURSE_PATH;
-  const isCourseLessons = path === LESSONS_PATH;
-  const insideCourse = path.startsWith(`${COURSE_PATH}/`);
+  const course = findExamCourse(path);
+  const lessonsPath = course ? lessonsPathFor(course) : '';
+  const isCourse = path === course?.path;
+  const isCourseLessons = path === lessonsPath && !!course;
 
   // Resolve current nodes from browsePath
   const { currentNodes, breadcrumbs, parentPath } = useMemo(() => {
@@ -102,15 +103,15 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
       nodes = found.children;
     }
 
-    if (insideCourse) {
-      const courseDepth = COURSE_PATH.split('/').length;
-      crumbs.splice(courseDepth, 0, { name: 'Lezioni', path: LESSONS_PATH.split('/') });
+    if (course && !isCourse) {
+      const courseDepth = course.path.split('/').length;
+      crumbs.splice(courseDepth, 0, { name: 'Lezioni', path: lessonsPath.split('/') });
     }
-    const parent = insideCourse && !isCourseLessons && browsePath.length === COURSE_PATH.split('/').length + 1
-      ? LESSONS_PATH.split('/')
+    const parent = course && !isCourseLessons && browsePath.slice(0, -1).join('/') === course.path
+      ? lessonsPath.split('/')
       : browsePath.slice(0, -1);
     return { currentNodes: nodes, breadcrumbs: crumbs, parentPath: parent };
-  }, [tree, browsePath, insideCourse, isCourseLessons]);
+  }, [tree, browsePath, course, isCourse, isCourseLessons, lessonsPath]);
 
   const dirs = currentNodes.filter(n => n.type === 'dir');
   const files = currentNodes.filter(n => n.type === 'file' || n.type === 'web-lesson');
@@ -136,7 +137,7 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
 
   const handleDirClick = (dirName) => {
     if (isCourseLessons) {
-      onBrowse(`${COURSE_PATH}/${dirName}`.split('/'));
+      onBrowse(`${course.path}/${dirName}`.split('/'));
       return;
     }
     if (isRoot && effectiveRoot.autoSkip) {
@@ -226,16 +227,16 @@ function BrowseView({ tree, browsePath, onBrowse, onSelectFile, currentFile }) {
 
       {isCourse && (
         <section className="is-course" aria-labelledby="is-course-title">
-          <h2 id="is-course-title">Intelligent Systems</h2>
-          <p>For Industry, Supply Chain and Environment</p>
+          <h2 id="is-course-title">{course.title}</h2>
+          <p>{course.subtitle}</p>
           <div className="is-course-grid">
-            <a className="is-course-card" href={createHashPath(LESSONS_PATH)}>
+            <a className="is-course-card" href={createHashPath(lessonsPath)}>
               <span className="is-course-icon" aria-hidden="true"><FolderIcon /></span>
               <strong>Lezioni</strong>
               <span>Appunti, slide e materiali del corso</span>
               <span className="is-course-link" aria-hidden="true">Apri la cartella →</span>
             </a>
-            <a className="is-course-card is-course-card--exam" href={createHashPath(EXAM_PATH)}>
+            <a className="is-course-card is-course-card--exam" href={createHashPath(examPathFor(course))}>
               <span className="is-course-icon" aria-hidden="true"><SubjectIcon /></span>
               <strong>Simulatore d’esame</strong>
               <span>Prova a tempo e ripasso degli errori</span>
