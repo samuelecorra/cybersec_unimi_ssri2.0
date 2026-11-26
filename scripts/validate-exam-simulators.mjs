@@ -3,7 +3,8 @@ import { readdirSync } from 'node:fs';
 import { bank as biometricsBank } from '../src/biometrics/questions.js';
 import { bank as intelligentSystemsBank } from '../src/intelligent-systems/questions.js';
 import {
-  createAttempt, examFormat, gradeAttempt, missedIds, PRACTICE_COUNT, topicOf,
+  completeAttempt, createAttempt, examFormat, gradeAttempt, missedIds, normalizeExamRecord, orderedActivity,
+  PRACTICE_COUNT, topicOf,
 } from '../src/exam-simulator/exam.js';
 import { biometrics, examPathFor, intelligentSystems, lessonsPathFor } from '../src/exam-simulator/courses.js';
 import { buildHashRouteIndex, createHashPath, resolveHashRoute } from '../src/utils/hashRouting.js';
@@ -78,10 +79,30 @@ function validateBank(course, bank) {
     assert.equal(missedIds([perfect, mixed]).size, 0);
     assert.equal(createAttempt(course, bank, [perfect], { mode: 'mistakes' }), null);
 
-    const mistakes = createAttempt(course, bank, [mixed], { mode: 'mistakes' });
+    const mistakes = createAttempt(course, bank, [mixed], { mode: 'mistakes' }, startedAt + 3000);
     assert.deepEqual(new Set(mistakes.items.map(item => item.id)), new Set([wrong.id, omitted.id]));
     assert.equal(mistakes.deadline, null);
-    assert.equal(gradeAttempt(mistakes, byId, 'submitted').grade, null);
+    const legacyReview = gradeAttempt({ ...mistakes, id: 'legacy-review' }, byId, 'submitted', startedAt + 2500);
+    assert.equal(legacyReview.grade, null);
+    const saved = { ...mistakes, answers: { [wrong.id]: byId.get(wrong.id).answer } };
+    const migrated = normalizeExamRecord({ active: saved, history: [legacyReview, mixed] });
+    assert.equal(migrated.active, null);
+    assert.equal(migrated.mistakes, saved);
+    assert.deepEqual(migrated.history, [mixed]);
+    assert.deepEqual(migrated.reviews, [legacyReview]);
+
+    const concurrent = { ...migrated, active: exam };
+    assert.equal(completeAttempt(concurrent, 'active', exam.id, byId, 'timeout', exam.deadline - 1), concurrent);
+    assert.equal(completeAttempt(concurrent, 'mistakes', 'stale-id', byId, 'submitted', startedAt + 4000), concurrent);
+    const finishedReview = completeAttempt(concurrent, 'mistakes', saved.id, byId, 'submitted', startedAt + 4000);
+    assert.equal(finishedReview.mistakes, null);
+    assert.equal(finishedReview.active, exam);
+    assert.deepEqual(finishedReview.history, [mixed]);
+    assert.deepEqual(missedIds(orderedActivity(finishedReview.history, finishedReview.reviews)), new Set([omitted.id]));
+    const finishedExam = completeAttempt(concurrent, 'active', exam.id, byId, 'timeout', exam.deadline);
+    assert.equal(finishedExam.active, null);
+    assert.equal(finishedExam.mistakes, saved);
+    assert.equal(finishedExam.history[0].reason, 'timeout');
   }
 
   const topic = createAttempt(course, bank, [], { mode: 'topic', topic: 5 });

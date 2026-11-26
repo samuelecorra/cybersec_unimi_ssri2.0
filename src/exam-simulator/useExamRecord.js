@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
+import { normalizeExamRecord } from './exam.js';
 
 const changeEvent = 'exam-simulator:record';
-const initialRecord = { active: null, history: [] };
 const unsaved = new Map();
 
 function snapshot(storageKey) {
@@ -11,11 +11,8 @@ function snapshot(storageKey) {
 }
 
 function parse(raw) {
-  try {
-    const result = JSON.parse(raw);
-    if (Array.isArray(result?.history)) return result;
-  } catch { /* The stored value is invalid. */ }
-  return initialRecord;
+  try { return normalizeExamRecord(JSON.parse(raw)); }
+  catch { return normalizeExamRecord(null); }
 }
 
 function subscribe(storageKey, listener) {
