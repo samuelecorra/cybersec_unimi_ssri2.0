@@ -78,12 +78,8 @@
   }
 }
 
-/* Shared thin-neon scrollbar recipe, previously duplicated across 4 selectors
-   (file tree, search results list, viewer content, dual-page content-area)
-   as one repeated ::-webkit-scrollbar block. Used here by the file tree and
-   search results list; .viewer-content/.content-area.dual-page-active keep
-   their own copy in @layer legacy below (out of scope for this pass, not
-   worth the churn of touching Viewer.jsx just to dedupe four lines). */
+/* Shared thin-neon scrollbar for the file tree and search results.
+   The lesson viewer has its scrollbar styles in @layer legacy. */
 @utility neon-scrollbar {
   &::-webkit-scrollbar {
     width: 4px;
@@ -472,7 +468,7 @@ body::before {
 /* .breadcrumb* is authored directly in Tailwind utilities in
    Breadcrumb.jsx. */
 
-/* Navigation (.navigation, .nav-btn, .nav-counter*, .reading-mode-toggle) is
+/* Navigation (buttons and counter) is
    authored directly in Tailwind utilities in Navigation.jsx — see the
    glow-btn @utility near the top of this file for the shared hover recipe. */
 
@@ -609,75 +605,88 @@ body::before {
   word-break: break-word;
 }
 
-/* ── Dual-page reading mode ──
-   With no aside open, the centered 900px column leaves large idle gutters on
-   wide viewports. Dual-page widens the reading column and flows the markdown
-   into two CSS columns (browser-balanced, no JS pagination), so a screenful
-   shows roughly twice the material at the same font size — a "two pages open
-   side by side" reading mode rather than an actual zoom-out. */
-.viewer-content.dual-page {
-  max-width: 1680px;
-  column-count: 2;
-  column-gap: 64px;
-  column-rule: 1px solid var(--glass-border);
-  /* CSS multi-column balances columns within the container's own block-size;
-     .viewer-content normally gets a *constrained* height from flex:1 (it
-     fills the space below the sticky header and scrolls internally), which
-     makes the spec create extra columns sideways instead of growing taller —
-     silently hiding most of the lesson off-screen to the right. Freeing the
-     height here lets the columns balance to their natural (tall) size; the
-     resulting vertical scroll is handled one level up, on .content-area
-     (see .content-area.dual-page-active below). */
-  flex: 0 0 auto;
-  height: auto;
-  overflow-y: visible;
+/* Keep the source order when the reader is narrow or uses one column. */
+.lesson-figure-row,
+.lesson-figure-anchor,
+.lesson-figures,
+.lesson-figure-prose {
+  display: contents;
 }
 
-/* Promote .content-area to the scrolling box while dual-page is active, since
-   .viewer-content can no longer own its own scroll once its height is auto. */
-.content-area.dual-page-active {
-  overflow-y: auto;
-  overflow-x: hidden;
+.content-area {
+  container: lesson-reader / inline-size;
 }
 
-/* Block-level elements must not be sliced by a column break; text (p/li) is
-   fine to break, same as a newspaper column. */
-.viewer-content.dual-page h1,
-.viewer-content.dual-page h2,
-.viewer-content.dual-page h3,
-.viewer-content.dual-page h4,
-.viewer-content.dual-page h5,
-.viewer-content.dual-page h6,
-.viewer-content.dual-page img,
-.viewer-content.dual-page pre,
-.viewer-content.dual-page table,
-.viewer-content.dual-page .table-wrapper,
-.viewer-content.dual-page blockquote,
-.viewer-content.dual-page .callout,
-.viewer-content.dual-page .katex-display {
-  break-inside: avoid;
+.lesson-layout-toggle {
+  display: none;
 }
 
-/* Keep a heading attached to what follows it instead of stranding it alone
-   at the bottom of a column. */
-.viewer-content.dual-page h1,
-.viewer-content.dual-page h2,
-.viewer-content.dual-page h3,
-.viewer-content.dual-page h4,
-.viewer-content.dual-page h5,
-.viewer-content.dual-page h6 {
-  break-after: avoid;
-}
+@media (min-width: 768px) and (min-height: 500px), (min-width: 768px) and (pointer: fine) {
+  @container lesson-reader (min-width: 720px) {
+    .content-area:has(> .viewer-content > .lesson-figure-row) .lesson-layout-toggle {
+      display: flex;
+    }
 
-/* Below this width two legible columns don't fit — fall back to single
-   column regardless of the stored preference (the toggle itself is hidden
-   in the same breakpoint, see .reading-mode-toggle). */
-@media (max-width: 1100px) {
-  .viewer-content.dual-page {
-    max-width: 900px;
-    column-count: 1;
-    column-gap: normal;
-    column-rule: none;
+    .viewer-content.figures-beside-text:has(> .lesson-figure-row) {
+      --lesson-column-gap: clamp(22px, 3cqi, 52px);
+      max-width: 1720px;
+      padding-inline: clamp(20px, 3cqi, 48px);
+    }
+
+    .figures-beside-text:has(> .lesson-figure-row) > :not(.lesson-figure-row) {
+      width: calc((100% - var(--lesson-column-gap)) * 0.55);
+    }
+
+    .figures-beside-text .lesson-figure-row {
+      display: grid;
+      grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+      grid-template-rows: auto 1fr;
+      column-gap: var(--lesson-column-gap);
+      align-items: start;
+    }
+
+    .figures-beside-text .lesson-figure-anchor,
+    .figures-beside-text .lesson-figure-prose {
+      display: flow-root;
+      grid-column: 1;
+    }
+
+    .figures-beside-text .lesson-figure-anchor {
+      grid-row: 1;
+    }
+
+    .figures-beside-text .lesson-figure-prose {
+      grid-row: 2;
+    }
+
+    .figures-beside-text .lesson-figures {
+      display: grid;
+      grid-area: 1 / 2 / 3;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+      align-items: start;
+      gap: 12px;
+      padding-block: 0.75em;
+    }
+
+    .figures-beside-text .lesson-figures > p {
+      display: grid;
+      justify-items: start;
+      gap: 12px;
+      margin: 0;
+    }
+
+    .figures-beside-text .lesson-figures > p > br {
+      display: none;
+    }
+
+    .figures-beside-text .lesson-figures a {
+      min-width: 0;
+    }
+
+    .figures-beside-text .lesson-figures .md-image {
+      display: block;
+      margin: 0;
+    }
   }
 }
 
