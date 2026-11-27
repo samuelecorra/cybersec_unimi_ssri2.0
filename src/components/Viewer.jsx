@@ -1,4 +1,4 @@
-import { memo, useMemo, useState, useEffect, useRef, useCallback } from "react";
+import { memo, useMemo, useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -11,6 +11,7 @@ import { getParentPath } from "../utils/tree.js";
 import { colorizeMathVariables } from "../utils/colorizeMathVariables.js";
 import { getFileKind } from "../utils/fileTypes.js";
 import { getLessonAssetUrl } from "../utils/r2Assets.js";
+import { alignLessonFigures } from "../utils/alignLessonFigures.js";
 
 function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
   const dirPath = useMemo(() => (currentFile ? getParentPath(currentFile) : ""), [currentFile]);
@@ -150,6 +151,11 @@ function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
     if (loading || !articleRef.current) return undefined;
     return colorizeMathVariables(articleRef.current);
   }, [content, currentFile, loading]);
+
+  useLayoutEffect(() => {
+    if (loading || readingMode !== "figures" || !articleRef.current) return undefined;
+    return alignLessonFigures(articleRef.current);
+  }, [content, currentFile, loading, readingMode]);
 
   const components = useMemo(
     () => ({

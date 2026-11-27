@@ -629,49 +629,33 @@ body::before {
 
     .viewer-content.figures-beside-text:has(> .lesson-figure-row) {
       --lesson-column-gap: clamp(22px, 3cqi, 52px);
+      --lesson-padding-inline: clamp(20px, 3cqi, 48px);
+      position: relative;
       max-width: 1720px;
-      padding-inline: clamp(20px, 3cqi, 48px);
+      padding-inline: var(--lesson-padding-inline);
     }
 
-    .figures-beside-text:has(> .lesson-figure-row) > :not(.lesson-figure-row) {
+    .figures-beside-text:has(> .lesson-figure-row) > :not(.lesson-figure-row),
+    .figures-beside-text .lesson-figure-anchor > *,
+    .figures-beside-text .lesson-figure-prose > * {
       width: calc((100% - var(--lesson-column-gap)) * 0.55);
     }
 
-    .figures-beside-text .lesson-figure-row {
-      display: grid;
-      grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
-      grid-template-rows: auto 1fr;
-      column-gap: var(--lesson-column-gap);
-      align-items: start;
-    }
-
-    .figures-beside-text .lesson-figure-anchor,
-    .figures-beside-text .lesson-figure-prose {
-      display: flow-root;
-      grid-column: 1;
-    }
-
-    .figures-beside-text .lesson-figure-anchor {
-      grid-row: 1;
-    }
-
-    .figures-beside-text .lesson-figure-prose {
-      grid-row: 2;
-    }
-
     .figures-beside-text .lesson-figures {
+      position: absolute;
+      inset-block-start: var(--lesson-figure-top, auto);
+      inset-inline-end: var(--lesson-padding-inline);
+      width: calc((100% - 2 * var(--lesson-padding-inline) - var(--lesson-column-gap)) * 0.45);
       display: grid;
-      grid-area: 1 / 2 / 3;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-      align-items: start;
-      gap: 12px;
-      padding-block: 0.75em;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
     }
 
     .figures-beside-text .lesson-figures > p {
       display: grid;
-      justify-items: start;
-      gap: 12px;
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+      gap: 14px;
       margin: 0;
     }
 
@@ -686,6 +670,8 @@ body::before {
     .figures-beside-text .lesson-figures .md-image {
       display: block;
       margin: 0;
+      max-height: var(--lesson-figure-height, 350px);
+      object-fit: contain;
     }
   }
 }
