@@ -38,7 +38,7 @@ function RoutedApp() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [browsePath, setBrowsePath] = useState([]);
   const [viewMode, setViewMode] = useLocalStorage('cyberlocker:viewMode', 'browse'); // 'browse' | 'viewer'
-  const [readingMode, setReadingMode] = useLocalStorage('cyberlocker:readingMode', 'single'); // 'single' | 'dual'
+  const [readingMode, setReadingMode] = useLocalStorage('cyberlocker:lessonLayout', 'figures');
   const loadRequestId = useRef(0);
   const legacyState = useRef({ currentFile, viewMode });
 
@@ -168,10 +168,8 @@ function RoutedApp() {
   }, [currentIndex, allFiles, handleFileSelect]);
 
   const toggleReadingMode = useCallback(() => {
-    setReadingMode(m => (m === 'dual' ? 'single' : 'dual'));
+    setReadingMode(m => (m === 'figures' ? 'single' : 'figures'));
   }, [setReadingMode]);
-
-  const isDualPage = readingMode === 'dual' && viewMode === 'viewer' && getFileKind(currentFile) === 'markdown';
 
   const toggleDir = useCallback((dirPath) => {
     setExpandedDirs(prev => ({
@@ -242,7 +240,7 @@ function RoutedApp() {
             searchQuery={searchQuery}
           />
         )}
-        <div className={`content-area${isDualPage ? ' dual-page-active' : ''}`}>
+        <div className="content-area">
           {ExamSimulator ? (
             <Suspense fallback={<div className="browse-view" role="status">Caricamento del simulatore…</div>}>
               <ExamSimulator lessonPaths={allFiles} />

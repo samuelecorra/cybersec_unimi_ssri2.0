@@ -6,6 +6,7 @@ import remarkCallouts from "../utils/remarkCallouts.js";
 import remarkSourceComments from "../utils/remarkSourceComments.js";
 import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
+import rehypeLessonFigures from "../utils/rehypeLessonFigures.js";
 import { getParentPath } from "../utils/tree.js";
 import { colorizeMathVariables } from "../utils/colorizeMathVariables.js";
 import { getFileKind } from "../utils/fileTypes.js";
@@ -29,7 +30,7 @@ function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
   const pinchStartZoom = useRef(1);
 
   const openLightbox = useCallback((src, alt) => {
-    const container = articleRef.current?.parentElement;
+    const container = articleRef.current;
     scrollSaveRef.current = container?.scrollTop ?? 0;
     setLightboxSrc(src);
     setLightboxAlt(alt || "");
@@ -42,7 +43,7 @@ function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
     setZoom(1);
     zoomRef.current = 1;
     requestAnimationFrame(() => {
-      const container = articleRef.current?.parentElement;
+      const container = articleRef.current;
       if (container) container.scrollTop = scrollSaveRef.current;
     });
   }, []);
@@ -299,11 +300,11 @@ function Viewer({ content, currentFile, loading, onFileSelect, readingMode }) {
     <>
       <article
         ref={articleRef}
-        className={`viewer-content markdown-body${readingMode === 'dual' ? ' dual-page' : ''}`}
+        className={`viewer-content markdown-body${readingMode === 'figures' ? ' figures-beside-text' : ''}`}
       >
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath, remarkCallouts, remarkSourceComments]}
-          rehypePlugins={[rehypeKatex, rehypeHighlight]}
+          rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeLessonFigures]}
           components={components}>
           {content}
         </ReactMarkdown>

@@ -26,23 +26,23 @@ const DualPageIcon = () => (
 );
 
 const navBtn =
-  'glow-btn relative flex items-center gap-1 whitespace-nowrap rounded-md border border-border bg-glass-bg px-3 py-1 font-mono text-[0.8rem] text-neon-cyan';
+  'glow-btn relative items-center gap-1 whitespace-nowrap rounded-md border border-border bg-glass-bg px-3 py-1 font-mono text-[0.8rem] text-neon-cyan';
 
 function Navigation({ onPrev, onNext, hasPrev, hasNext, currentIndex, total, readingMode, onToggleReadingMode }) {
-  const isDual = readingMode === 'dual';
+  const figuresBesideText = readingMode === 'figures';
   return (
     <div className="flex shrink-0 items-center gap-2 max-[768px]:w-full max-[768px]:justify-between">
-      <button className={navBtn} onClick={onPrev} disabled={!hasPrev} title="File precedente">
+      <button className={`${navBtn} flex`} onClick={onPrev} disabled={!hasPrev} title="File precedente">
         <ArrowLeft /> Prec
       </button>
       {onToggleReadingMode && (
         <button
-          className={`${navBtn} max-[1100px]:hidden !px-2 aria-pressed:border-neon-magenta aria-pressed:text-neon-magenta aria-pressed:shadow-[0_0_12px_var(--glow-magenta)] aria-pressed:[--glow-color:var(--glow-magenta)]`}
+          className={`${navBtn} lesson-layout-toggle !px-2 aria-pressed:border-neon-magenta aria-pressed:text-neon-magenta aria-pressed:shadow-[0_0_12px_var(--glow-magenta)] aria-pressed:[--glow-color:var(--glow-magenta)]`}
           onClick={onToggleReadingMode}
-          title={isDual ? 'Vista a doppia pagina (clic per pagina singola)' : 'Vista a pagina singola (clic per doppia pagina)'}
-          aria-pressed={isDual}
+          title="Immagini affiancate al testo"
+          aria-pressed={figuresBesideText}
         >
-          {isDual ? <DualPageIcon /> : <SinglePageIcon />}
+          {figuresBesideText ? <DualPageIcon /> : <SinglePageIcon />}
         </button>
       )}
       <span className="flex items-center gap-[3px] whitespace-nowrap font-mono text-[0.75rem]">
@@ -50,7 +50,7 @@ function Navigation({ onPrev, onNext, hasPrev, hasNext, currentIndex, total, rea
         <span className="text-text-muted">/</span>
         <span className="text-text-muted">{total}</span>
       </span>
-      <button className={navBtn} onClick={onNext} disabled={!hasNext} title="File successivo">
+      <button className={`${navBtn} flex`} onClick={onNext} disabled={!hasNext} title="File successivo">
         Succ <ArrowRight />
       </button>
     </div>
